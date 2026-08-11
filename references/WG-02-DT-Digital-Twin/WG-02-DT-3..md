@@ -1,3 +1,4 @@
+# OXOT Cyber Digital Twin Series — Paper III: Cyber Digital Twin Architecture Brief
 ## _What Nassim Taleb Saw in Markets, Jim McKenney Sees Every Day in the Facilities the World Depends On_
 
 ---

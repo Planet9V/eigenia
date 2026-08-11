@@ -1,3 +1,4 @@
+# OXOT Cyber Digital Twin Series — Paper IV: Taleb on Wall Street vs. Physical Realities
 ## 3 Technical Deep Dive
 
 Author: jmckenney
@@ -45,11 +46,11 @@ In the Eigenia context, this matters for a very specific reason: the seven layer
 
 The prediction pipeline has three explicit phases:
 
-1. **Feature Extraction at T=0** — Extract the current state vector P(t)P(t)P(t) from Neo4j. Compute Super Label aggregate values across the graph. Calculate the instantaneous derivative dPdt\frac{dP}{dt}dtdP — the _rate of change_ of the security state, not just its current value.
+## 1. Feature Extraction at T=0 — Extract the current state vector P(t)P(t)P(t) from Neo4j. Compute Super Label aggregate values across the graph. Calculate the instantaneous derivative dPdt\frac{dP}{dt}dtdP — the _rate of change_ of the security state, not just its current value.
     
-2. **Trajectory Sampling (Simulation)** — Run 1,000 Monte Carlo simulations forward in time. Apply the **Shock Response Equation** (governing how the system responds to sudden perturbations — a new zero-day disclosure, a geopolitical event, a leadership change). Apply **Resilience Damping Factors** that encode organizational capacity to absorb shocks.
+## 2. Trajectory Sampling (Simulation) — Run 1,000 Monte Carlo simulations forward in time. Apply the Shock Response Equation (governing how the system responds to sudden perturbations — a new zero-day disclosure, a geopolitical event, a leadership change). Apply Resilience Damping Factors that encode organizational capacity to absorb shocks.
     
-3. **Ensemble Aggregation at T+Δt** — Compute the posterior probability distribution over future security states. Calculate **Entropy** H(t+Δt)H(t+\Delta t)H(t+Δt) — the Shannon information entropy of the predicted state distribution, which is a direct measure of how much uncertainty remains after the simulation. Generate 95% Confidence Intervals for actionable outputs.
+## 3. Ensemble Aggregation at T+Δt — Compute the posterior probability distribution over future security states. Calculate Entropy H(t+Δt)H(t+\Delta t)H(t+Δt) — the Shannon information entropy of the predicted state distribution, which is a direct measure of how much uncertainty remains after the simulation. Generate 95% Confidence Intervals for actionable outputs.
     
 
 This is Taleb's Monte Carlo engine, operationalized at facility scale with a living, multi-layer graph as its substrate.

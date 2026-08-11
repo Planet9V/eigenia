@@ -1,3 +1,4 @@
+# OXOT Cyber Digital Twin Series — Paper V: Graph Neural Networks & Psychometric Tensors
 ## 1 Fooled by Randomness → Fooled by Cybersecurity  
 
 Author: jmckenney
@@ -22,16 +23,16 @@ Most security programs are built, measured, and purchased on the *right side of 
 
 Taleb’s critique of financial markets isn’t “people are irrational” in the generic sense. It’s sharper:
 
-1. **Survivorship bias manufactures false expertise.**  
+## 1. Survivorship bias manufactures false expertise.
    We see the winning funds and the “great traders,” and we don’t see the thousands who used the same playbook and disappeared.[2][1]
 
-2. **Randomness produces streaks that look like skill.**  
+## 2. Randomness produces streaks that look like skill.
    In noisy domains, a meaningful fraction of “top performers” are simply the statistical winners of an underlying lottery.[1][4]
 
-3. **The fat tail is where reality lives.**  
+## 3. The fat tail is where reality lives.
    Most models, incentives, and human intuition overweight the normal day-to-day distribution and underweight rare events—yet rare events dominate real outcomes.[1][2]
 
-4. **Narratives replace probability.**  
+## 4. Narratives replace probability.
    After the fact, we explain success and failure as if they were inevitable—then we build our next strategy around that story.[1][2]
 
 In markets, this produces a specific pathology: **strategies that look stable right until they blow up**—small gains, long streaks, then one catastrophic loss. Taleb uses this to show that “success” can be the most dangerous evidence you can have, because it can be *evidence of exposure* to a hidden tail.[3][2]

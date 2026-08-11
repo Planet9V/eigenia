@@ -1,6 +1,4 @@
-2 May 2026
-j.mckenney
-
+# The COPE Framework: Advanced Methodologies in Physical Risk Assessment
 ## The COPE Framework: Advanced Methodologies in Physical Risk Assessment and Commercial Property Underwriting
 
 The discipline of commercial property underwriting relies on the meticulous quantification and modeling of risk. To transform chaotic, real-world variables—ranging from thermodynamics and structural mechanics to meteorological phenomena and human behavioral psychology—into precise, actuarial risk models, the global insurance and reinsurance industries utilize the COPE framework. Originating in the rudimentary property risk assessments that followed the catastrophic Great Fire of London in 1666, COPE has evolved over centuries into a highly sophisticated, standardized underwriting methodology. The acronym stands for Construction, Occupancy, Protection, and Exposure.

@@ -1,6 +1,4 @@
-4 May 2025
-j.mckenney
-
+# Articulating the Value Proposition to Global Underwriters & Brokers
 Eigenia Cyber Digital Twin (Cognitive)
 
 1. Translating Technical Metrics to Actuarial Language

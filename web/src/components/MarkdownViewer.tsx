@@ -131,7 +131,7 @@ export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content }) => {
       // Headings
       if (line.startsWith("# ")) {
         blocks.push(
-          <h1 key={`h1-${i}`} className="font-serif text-2xl sm:text-3xl text-primary font-normal tracking-tight mt-12 mb-6 pt-6 border-t border-hairline">
+          <h1 key={`h1-${i}`} className="font-serif text-2xl sm:text-3xl text-primary font-normal tracking-tight mt-8 mb-6 pb-4 border-b border-hairline">
             {renderFormattedText(line.replace("# ", ""))}
           </h1>
         );
@@ -161,6 +161,24 @@ export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content }) => {
           <h4 key={`h4-${i}`} className="font-sans text-base sm:text-lg text-primary font-medium tracking-tight mt-6 mb-2">
             {renderFormattedText(line.replace("#### ", ""))}
           </h4>
+        );
+        i++;
+        continue;
+      }
+      if (line.startsWith("##### ")) {
+        blocks.push(
+          <h5 key={`h5-${i}`} className="font-sans text-sm font-semibold tracking-tight mt-4 mb-2 text-secondary">
+            {renderFormattedText(line.replace("##### ", ""))}
+          </h5>
+        );
+        i++;
+        continue;
+      }
+      if (line.startsWith("###### ")) {
+        blocks.push(
+          <h6 key={`h6-${i}`} className="font-sans text-xs font-semibold uppercase tracking-wider text-muted mt-4 mb-2">
+            {renderFormattedText(line.replace("###### ", ""))}
+          </h6>
         );
         i++;
         continue;

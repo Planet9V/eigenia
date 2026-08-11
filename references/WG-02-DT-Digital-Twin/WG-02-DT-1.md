@@ -1,4 +1,5 @@
-## **2 Fooled by Cybersecurity**
+# OXOT Cyber Digital Twin Series — Paper I: Foundational Concepts
+## 2 Fooled by Cybersecurity
 
 Author: Jim Mckenney
 Date: 2026 FEB
@@ -163,25 +164,25 @@ Eigenia's AEON engine continuously estimates \( \mu \) from the seven-layer grap
 
 The conventional approach to OT/ICS cybersecurity rests on a set of assumptions that are, in Taleb's framework, epistemologically identical to the assumptions that destroyed Long-Term Capital Management and Lehman Brothers:
 
-1. **The past is representative of the future.** If your controls have prevented breaches for three years, they are working.
-2. **Risk is additive and linear.** If you add more controls, you get proportionally more security.
-3. **Compliance implies security.** If the audit says you meet the standard, you are protected.
-4. **The threat landscape is knowable.** If you monitor the right feeds and follow MITRE ATT&CK, you know what you're defending against.
-5. **Human behavior is a constant.** Your team will respond to the next incident the way they responded to the last tabletop exercise.
+## 1. The past is representative of the future. If your controls have prevented breaches for three years, they are working.
+## 2. Risk is additive and linear. If you add more controls, you get proportionally more security.
+## 3. Compliance implies security. If the audit says you meet the standard, you are protected.
+## 4. The threat landscape is knowable. If you monitor the right feeds and follow MITRE ATT&CK, you know what you're defending against.
+## 5. Human behavior is a constant. Your team will respond to the next incident the way they responded to the last tabletop exercise.
 
 Every one of these assumptions lives on the **right side of the table**.
 
 ### What Taleb — and Eigenia — Understand
 
-1. **The past is one sample path.** Your three years without a breach is a single trajectory through the probability space. The Monte Carlo shows you the other 999 trajectories. Many of them contain breaches. Some contain catastrophes. Your history tells you almost nothing about your future risk.
+## 1. The past is one sample path. Your three years without a breach is a single trajectory through the probability space. The Monte Carlo shows you the other 999 trajectories. Many of them contain breaches. Some contain catastrophes. Your history tells you almost nothing about your future risk.
 
-2. **Risk is nonlinear and correlated.** Adding a firewall that blocks one attack path may create a false sense of security that reduces vigilance on adjacent paths. The Ising dynamics model this explicitly: every control change shifts the organizational temperature, and there are phase transitions where adding complexity *increases* net risk.
+## 2. Risk is nonlinear and correlated. Adding a firewall that blocks one attack path may create a false sense of security that reduces vigilance on adjacent paths. The Ising dynamics model this explicitly: every control change shifts the organizational temperature, and there are phase transitions where adding complexity *increases* net risk.
 
-3. **Compliance is a map; the facility is the territory.** The L0/L1 gap in Eigenia is the measured distance between the compliance model and the operational reality. In most facilities, that distance is large, growing, and invisible to every compliance tool on the market.
+## 3. Compliance is a map; the facility is the territory. The L0/L1 gap in Eigenia is the measured distance between the compliance model and the operational reality. In most facilities, that distance is large, growing, and invisible to every compliance tool on the market.
 
-4. **The threat landscape includes threats you cannot yet imagine.** The Monte Carlo engine generates randomized attack sequences specifically to find paths that no human analyst would construct. The probability distribution of attack outcomes includes regions of the state space that are not in any threat intelligence feed — because they haven't happened yet.
+## 4. The threat landscape includes threats you cannot yet imagine. The Monte Carlo engine generates randomized attack sequences specifically to find paths that no human analyst would construct. The probability distribution of attack outcomes includes regions of the state space that are not in any threat intelligence feed — because they haven't happened yet.
 
-5. **Human behavior is a dynamical system with phase transitions.** The McKenney-Lacan calculus, the Psychometric Tensor, and the Interaction Hamiltonian model human response not as a constant but as a function of stress, organizational temperature, cognitive load, and interpersonal dynamics — variables that change *during the incident* in ways that are mathematically predictable at the population level.
+## 5. Human behavior is a dynamical system with phase transitions. The McKenney-Lacan calculus, the Psychometric Tensor, and the Interaction Hamiltonian model human response not as a constant but as a function of stress, organizational temperature, cognitive load, and interpersonal dynamics — variables that change *during the incident* in ways that are mathematically predictable at the population level.
 
 ---
 

