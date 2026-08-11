@@ -64,7 +64,7 @@ export const WORKING_GROUPS: WorkingGroupCategory[] = [
     number: "WG-01",
     badge: "ACTUARIAL 01–09",
     color: "emerald",
-    description: "Catastrophe-grade cyber-physical risk quantification, COPE framework adaptations, Lloyd’s Y5381 war exclusions, and actuarial premium modeling for critical infrastructure.",
+    description: "Eigenia’s Actuarial and Underwriting Working Group bridges the structural divide between physical asset risk and financial indemnification. By adapting the classic COPE framework to cyber-physical industrial assets, our research introduces dynamic premium calculations based on real-time operational telemetry. We rigorously quantify catastrophic tail-risk, non-linear business interruption, and systemic accumulation scenarios under Lloyd’s Y5381 war exclusions. This non-linear underwriting methodology transitions the insurance industry from static historical claims tables to forward-looking predictive risk pricing.",
     documents: [
       {
         id: "WG-01-UI-1-Overview",
@@ -173,7 +173,7 @@ export const WORKING_GROUPS: WorkingGroupCategory[] = [
     number: "WG-02",
     badge: "DIGITAL TWIN 01–07",
     color: "violet",
-    description: "Anti-fragile Cyber Digital Twin architecture, non-linear dynamics, Graph Neural Networks, psychometric tensors, and the Taleb probabilistic risk series.",
+    description: "The Digital Twin Working Group establishes the architectural and mathematical foundations for anti-fragile infrastructure networks. Drawing from Nassim Nicholas Taleb’s probabilistic epistemologies, our research demonstrates why traditional financial Value-at-Risk models fail when applied to physical industrial networks. We construct a 7-layer computational ontology that couples 3.2-million-node Graph Neural Networks with real-time psychometric threat tensors. This framework enables continuous spatial-temporal risk simulations across interconnected energy, water, and industrial control systems.",
     documents: [
       {
         id: "WG-02-DT-1",
@@ -255,7 +255,7 @@ export const WORKING_GROUPS: WorkingGroupCategory[] = [
     number: "WG-03",
     badge: "PSYCHOMETRICS 01",
     color: "rose",
-    description: "Application of Lacanian psychoanalytic theory and cognitive dissonance tensors to the behavioral classification and predictive modeling of threat actors.",
+    description: "The Behavioral Modeling Working Group applies Lacanian psychoanalytic theory and advanced psychometric tensor algebra to threat actor classification. By modeling the psychological structures, desire trajectories, and cognitive dissonance thresholds of human adversaries, we forecast attack campaigns before initial payload delivery. This framework maps adversary capability against ideological commitment to generate dynamic threat profiles across industrial control environments. The resulting psychohistory engine provides defensive teams with predictive intelligence on adversary behavior during high-stress operational escalations.",
     documents: [
       {
         id: "WG-03-ML-Mckenney-Lacanian",
@@ -276,7 +276,7 @@ export const WORKING_GROUPS: WorkingGroupCategory[] = [
     number: "WG-04",
     badge: "CASCADING FAILURES 01–02",
     color: "amber",
-    description: "Grid stability, frequency instability, BESS thermal runaway, death wobble analysis, and cyber-physical attack simulations on electricity transmission networks.",
+    description: "The Cascading Failures Working Group investigates systemic collapse mechanisms within large-scale interconnected energy grids and critical utilities. Our research models non-linear destabilization phenomena, including high-voltage grid "death wobble," battery energy storage system (BESS) thermal runaway, and synthetic inertia decay. By simulating targeted cyber-physical interdictions on transmission sub-stations, we quantify how localized equipment disruptions cascade into multi-state blackout events. These findings establish the mathematical boundaries for grid resilience and rapid islanding protocols.",
     documents: [
       {
         id: "WG-04-CF-Cascading-Failure-Hypothesis",
@@ -310,7 +310,7 @@ export const WORKING_GROUPS: WorkingGroupCategory[] = [
     number: "WG-05",
     badge: "CAD STANDARDS 01",
     color: "sky",
-    description: "Connecting plant P&ID design sheets directly to live physical assets using DEXPI 2.0 XML schemas and CycloneDX 1.6 4-BOM attestations.",
+    description: "The CAD Interoperability Working Group unifies static industrial plant engineering schematics with live operational security attestations. By parsing DEXPI 2.0 P&ID XML topologies alongside CycloneDX 1.6 4-BOM specifications, we create a continuous digital chain of custody from physical piping to software firmware. This architecture maps component-level dependencies across hardware, software, operational technology, and chemical process safety layers. Industrial operators gain instant visibility into how a vulnerability in a single valve or PLC impacts the broader process safety envelope.",
     documents: [
       {
         id: "WG-05-CAD-DEXPI-Introduction",
@@ -330,7 +330,7 @@ export const WORKING_GROUPS: WorkingGroupCategory[] = [
     number: "WG-07",
     badge: "THREAT MODELING 01–02",
     color: "orange",
-    description: "Spectral decomposition of threat actor capability & motivation across 77,279 data points, paired with the 12-factor Adversary Threat Quotient (ATQ).",
+    description: "The Threat Modeling Working Group develops quantitative frameworks for evaluating adversary capabilities and target selection dynamics. Anchored by the TACAM Matrix—built upon a spectral decomposition of 77,279 empirical threat data points—our research categorizes state-sponsored and criminal threat groups. We introduce the 12-factor Adversary Threat Quotient (ATQ) formula to score threat actor motivation, technical sophistication, and operational velocity in real time. This quantitative approach eliminates subjective risk scoring, replacing it with repeatable mathematical metrics.",
     documents: [
       {
         id: "WG-07-TM-TACAM",
@@ -364,7 +364,7 @@ export const WORKING_GROUPS: WorkingGroupCategory[] = [
     number: "WG-08",
     badge: "MONTE CARLO 01",
     color: "indigo",
-    description: "50,000-run importance sampling Monte Carlo simulation engine modeling non-linear failure cascades and Annualized Loss Expectancy (ALE).",
+    description: "The Monte Carlo Application Working Group delivers high-throughput stochastic simulation engines for complex industrial networks. Utilizing 50,000-run importance sampling and graph random walk algorithms, our engine models physical degradation pathways and Annualized Loss Expectancy (ALE). The platform simulates rare-event tail risks that standard deterministic risk assessments fail to detect. Insurance underwriters and facility owners receive precise probabilistic distributions of physical destruction and business interruption financial loss.",
     documents: [
       {
         id: "WG-08-MO-Monte-Carlo-Engine",
@@ -384,7 +384,7 @@ export const WORKING_GROUPS: WorkingGroupCategory[] = [
     number: "MP-MATH",
     badge: "PHYSICS 01–02",
     color: "cyan",
-    description: "Complete mathematical ontology of 40 governing equations and Kramers topological barrier escape model for Cyber Digital Twins.",
+    description: "The Mathematical Physics Working Group maintains the foundational mathematical ontology governing Eigenia’s Cyber Digital Twin ecosystem. This research codifies 40 fundamental governing equations spanning thermodynamic transport, electrical impedance, control loop stability, and topological risk escape. By applying Kramers escape rate theory to cyber-physical transition states, we calculate the exact probability of an operational asset crossing from stable equilibrium into catastrophic failure. This mathematical baseline ensures all higher-level simulations remain strictly bound to first-principles physics.",
     documents: [
       {
         id: "MP_Mathematical_Models",
