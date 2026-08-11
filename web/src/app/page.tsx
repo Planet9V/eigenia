@@ -9,6 +9,7 @@ import { Principles } from "@/components/Principles";
 import { EuComplianceFooter } from "@/components/EuComplianceFooter";
 import { ImpressumModal } from "@/components/ImpressumModal";
 import { CookieConsentBanner } from "@/components/CookieConsentBanner";
+import { FirstVisitSplash } from "@/components/FirstVisitSplash";
 import { ArrowRight, Compass, Layers, Cpu, Users } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -19,6 +20,9 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-[#0b0c0e] text-white transition-colors duration-300 relative font-sans selection:bg-dutchOrange selection:text-white">
+      {/* First Visit Atmospheric Splash Entrance Sequence */}
+      <FirstVisitSplash />
+
       {/* Top Navbar */}
       <Navbar
         onOpenImpressum={() => setImpressumOpen(true)}
