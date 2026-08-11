@@ -4,31 +4,75 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ==========================================================================
+   MASTER DUAL-THEME DESIGN TOKEN ARCHITECTURE
+   ========================================================================== */
+
 :root {
-  --bg-page: #0B0C0E;
+  /* LIGHT MODE (Warm Luxury Off-White Academic Monograph) */
+  --bg-canvas: #FAF8F5;
+  --bg-surface: #FFFFFF;
+  --bg-subtle: #F3F0EC;
+  --bg-input: #EFECE6;
+
+  --text-primary: #18181B;
+  --text-secondary: #52525B;
+  --text-muted: #71717A;
+
+  --border-hairline: #E8E3DA;
+  --border-subtle: #F0ECE4;
+
+  --shadow-card: 0 4px 20px -2px rgba(24, 24, 27, 0.05);
+  --shadow-dropdown: 0 10px 30px -5px rgba(24, 24, 27, 0.08);
+
+  --color-accent: #E05A10;
+  --color-accent-subtle: rgba(224, 90, 16, 0.08);
+  --color-accent-border: rgba(224, 90, 16, 0.3);
+}
+
+.dark,
+html.dark {
+  /* DARK MODE (Obsidian Cyber-Physical Command Center) */
+  --bg-canvas: #0B0C0E;
   --bg-surface: #131519;
-  --bg-subtle: #16181D;
+  --bg-subtle: #121417;
   --bg-input: #1C1F26;
+
   --text-primary: #FFFFFF;
   --text-secondary: #D4D4D8;
   --text-muted: #A1A1AA;
-  --border-color: #22252C;
+
+  --border-hairline: #22252C;
   --border-subtle: #1A1D24;
-  --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+
+  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  --shadow-dropdown: 0 20px 40px -10px rgba(0, 0, 0, 0.7);
+
+  --color-accent: #E05A10;
+  --color-accent-subtle: rgba(224, 90, 16, 0.15);
+  --color-accent-border: rgba(224, 90, 16, 0.4);
 }
 
 body {
-  background-color: #0B0C0E;
-  color: #FFFFFF;
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
   font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
   scroll-behavior: smooth;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-/* KaTeX Formula Dark Styling */
+/* Structural Element Overrides */
+html.light body,
+html.light main {
+  background-color: #FAF8F5;
+  color: #18181B;
+}
+
+/* KaTeX Formula Adaptive Styling */
 .katex,
 .katex-display {
-  color: #FFFFFF !important;
+  color: var(--text-primary) !important;
 }
 
 /* Scrollbar Custom Styling */
@@ -38,11 +82,11 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0B0C0E;
+  background: var(--bg-canvas);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #22252C;
+  background: var(--border-hairline);
   border-radius: 4px;
 }
 

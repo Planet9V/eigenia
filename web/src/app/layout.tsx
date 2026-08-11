@@ -110,6 +110,23 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/assets/logo_square_dark.svg" type="image/svg+xml" />
         <script
+          dangerouslySetInnerHTML={{
+            __html: `(function() {
+              try {
+                var saved = localStorage.getItem('eigenia_theme');
+                var prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+                if (saved === 'light' || (!saved && prefersLight)) {
+                  document.documentElement.classList.remove('dark');
+                  document.documentElement.classList.add('light');
+                } else {
+                  document.documentElement.classList.remove('light');
+                  document.documentElement.classList.add('dark');
+                }
+              } catch (e) {}
+            })();`,
+          }}
+        />
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />

@@ -11,8 +11,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        canvas: "var(--bg-canvas)",
+        surface: "var(--bg-surface)",
+        subtle: "var(--bg-subtle)",
+        primary: "var(--text-primary)",
+        secondary: "var(--text-secondary)",
+        muted: "var(--text-muted)",
+        hairline: "var(--border-hairline)",
+        background: "var(--bg-canvas)",
+        foreground: "var(--text-primary)",
         obsidian: "#0b0c0e",
         charcoalBand: "#121417",
         slateBand: "#16181d",

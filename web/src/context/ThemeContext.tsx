@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 
-export type Theme = "dark";
+export type Theme = "dark" | "light";
 
 interface ThemeContextType {
   theme: Theme;
@@ -13,16 +13,45 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [theme] = useState<Theme>("dark");
+  const [theme, setThemeState] = useState<Theme>("dark");
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    document.documentElement.classList.add("dark");
-    document.documentElement.classList.remove("light");
-    localStorage.removeItem("eigenia_theme");
+    setMounted(true);
+    const savedTheme = localStorage.getItem("eigenia_theme") as Theme | null;
+    if (savedTheme === "light" || savedTheme === "dark") {
+      setThemeState(savedTheme);
+      applyTheme(savedTheme);
+    } else {
+      // Check system preference
+      const systemPrefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+      const initialTheme: Theme = systemPrefersLight ? "light" : "dark";
+      setThemeState(initialTheme);
+      applyTheme(initialTheme);
+    }
   }, []);
 
-  const setTheme = () => {};
-  const toggleTheme = () => {};
+  const applyTheme = (newTheme: Theme) => {
+    const root = document.documentElement;
+    if (newTheme === "light") {
+      root.classList.remove("dark");
+      root.classList.add("light");
+    } else {
+      root.classList.remove("light");
+      root.classList.add("dark");
+    }
+  };
+
+  const setTheme = (newTheme: Theme) => {
+    setThemeState(newTheme);
+    localStorage.setItem("eigenia_theme", newTheme);
+    applyTheme(newTheme);
+  };
+
+  const toggleTheme = () => {
+    const nextTheme = theme === "dark" ? "light" : "dark";
+    setTheme(nextTheme);
+  };
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme, toggleTheme }}>

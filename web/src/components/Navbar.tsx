@@ -300,8 +300,22 @@ export const Navbar: React.FC<NavbarProps> = () => {
 
           </div>
 
-          {/* Right Section: Language Switcher + Primary CTA */}
+          {/* Right Section: Theme Toggle + Language Switcher + Primary CTA */}
           <div className="hidden lg:flex items-center gap-3 text-xs font-mono">
+
+            {/* Sun/Moon Theme Toggle Button */}
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-xl bg-zinc-950 light:bg-white border border-zinc-800 light:border-[#E8E3DA] text-dutchOrange hover:scale-105 transition-all flex items-center justify-center shadow-xs"
+              title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+              aria-label="Toggle theme"
+            >
+              {theme === "dark" ? (
+                <Sun className="w-4 h-4 text-dutchOrange" />
+              ) : (
+                <Moon className="w-4 h-4 text-dutchOrange" />
+              )}
+            </button>
 
             {/* Request Board Briefing Primary CTA Pill Button (OXOT Reference Style) */}
             <Link
@@ -413,6 +427,14 @@ export const Navbar: React.FC<NavbarProps> = () => {
                   NL
                 </button>
               </div>
+
+              <button
+                onClick={toggleTheme}
+                className="px-3 py-1.5 rounded-lg bg-zinc-900 light:bg-[#E8E3DA] text-dutchOrange text-xs font-semibold flex items-center gap-1.5"
+              >
+                {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                <span>{theme === "dark" ? "Light Mode" : "Dark Mode"}</span>
+              </button>
             </div>
           </motion.div>
         )}
