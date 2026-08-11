@@ -1,0 +1,19 @@
+{
+	"nodes":[
+		{"id":"5c77c237372843c5","type":"file","file":"10_KB_Seldon/5_Sector_Research/1_underwriter_insurance/102_OXOT_Underwriter_Cyber_Method.md","x":-2212,"y":-724,"width":1693,"height":1724},
+		{"id":"3223075e0eb15084","type":"file","file":"5_OXOT_Business_Development/OXOT_Cyber_Digital_Twin_Presentation/marketing/OXOT CDT Underwriters_Insurance.md","x":-628,"y":1215,"width":400,"height":400},
+		{"id":"2cd666b67a402f56","type":"file","file":"Pasted image 20260505104830.png","x":1219,"y":137,"width":957,"height":466},
+		{"id":"e26b62dc72090aac","type":"file","file":"Pasted image 20260505104854.png","x":1234,"y":668,"width":927,"height":537},
+		{"id":"d6cb159cd930402f","type":"file","file":"Pasted image 20260505105104.png","x":1219,"y":-460,"width":942,"height":537},
+		{"id":"8dac50a63659843a","type":"file","file":"Pasted image 20260505104951.png","x":1219,"y":1265,"width":954,"height":537},
+		{"id":"012c6d0c494b5959","type":"file","file":"5_OXOT_Business_Development/OXOT_Sales_AON_Use_case_Heinekin/OXOT_Zoeterwoude Industrial Complex.md","x":3555,"y":-460,"width":1262,"height":1724},
+		{"id":"8655d31ad5d52e18","type":"file","file":"5_OXOT_Business_Development/OXOT_Cyber_Digital_Twin_Presentation/marketing/09_ATQ_Deep_Dive.md","x":1288,"y":2004,"width":1473,"height":1582},
+		{"id":"0e11e31417e7c3c2","type":"file","file":"5_OXOT_Business_Development/OXOT_Cyber_Digital_Twin_Presentation/marketing/08_TACAM_Deep_Dive.md","x":2855,"y":2004,"width":1528,"height":1582},
+		{"id":"90bc4d39dc69cc7f","type":"file","file":"10_KB_Seldon/5_Sector_Research/1_underwriter_insurance/104_OXOT_Competitive_analysis.md","x":2158,"y":-460,"width":1287,"height":1724}
+	],
+	"edges":[],
+	"metadata":{
+		"version":"1.0-1.0",
+		"frontmatter":{}
+	}
+}

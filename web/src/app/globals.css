@@ -1,0 +1,203 @@
+@import "katex/dist/katex.min.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-page: #FAF8F5;
+  --bg-surface: #FFFFFF;
+  --bg-subtle: #F3F0EC;
+  --text-primary: #18181B;
+  --text-secondary: #52525B;
+  --border-color: #E8E3DA;
+}
+
+.dark {
+  --bg-page: #0B0C0E;
+  --bg-surface: #131519;
+  --bg-subtle: #16181D;
+  --text-primary: #FFFFFF;
+  --text-secondary: #D4D4D8;
+  --border-color: #22252C;
+}
+
+body {
+  background-color: #0b0c0e;
+  color: #ffffff;
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Light Theme Precision Overrides (Matching OXOT Design Baseline) */
+html.light body,
+html.light main {
+  background-color: #FAF8F5 !important;
+  color: #18181B !important;
+}
+
+html.light nav {
+  background-color: rgba(250, 248, 245, 0.95) !important;
+  border-bottom-color: #E8E3DA !important;
+  color: #18181B !important;
+}
+
+html.light section {
+  border-color: #E8E3DA !important;
+}
+
+/* Background Bands in Light Mode */
+html.light .bg-[#0b0c0e],
+html.light .bg-obsidian {
+  background-color: #FAF8F5 !important;
+  color: #18181B !important;
+}
+
+html.light .bg-[#121417],
+html.light .bg-charcoalBand {
+  background-color: #F3F0EC !important;
+  color: #18181B !important;
+}
+
+html.light .bg-[#16181d],
+html.light .bg-slateBand {
+  background-color: #EBE7E0 !important;
+  color: #18181B !important;
+}
+
+/* Card Surfaces in Light Mode */
+html.light .bg-[#131519],
+html.light .bg-[#090a0c],
+html.light .bg-[#0d0e11],
+html.light .bg-[#15171c],
+html.light .bg-zinc-950,
+html.light .bg-cardSurface {
+  background-color: #FFFFFF !important;
+  color: #18181B !important;
+  border-color: #E8E3DA !important;
+  box-shadow: 0 4px 20px -2px rgba(24, 24, 27, 0.05) !important;
+}
+
+html.light .bg-black,
+html.light .bg-black\/95 {
+  background-color: rgba(250, 248, 245, 0.96) !important;
+  color: #18181B !important;
+}
+
+/* Borders in Light Mode */
+html.light .border-[#22252c],
+html.light .border-zinc-900,
+html.light .border-zinc-800,
+html.light .border-zinc-900\/60,
+html.light .border-zinc-800\/60,
+html.light .border-cardBorder {
+  border-color: #E8E3DA !important;
+}
+
+/* Typography in Light Mode */
+html.light .text-white {
+  color: #18181B !important;
+}
+
+html.light .text-zinc-100,
+html.light .text-zinc-200,
+html.light .text-zinc-300 {
+  color: #3F3F46 !important;
+}
+
+html.light .text-zinc-400 {
+  color: #52525B !important;
+}
+
+html.light .text-zinc-500 {
+  color: #71717A !important;
+}
+
+/* Code & KaTeX Containers in Light Mode */
+html.light .bg-[#0b0c0e] {
+  background-color: #F4F0E8 !important;
+  border-color: #E2DDD5 !important;
+}
+
+html.light .bg-zinc-900,
+html.light .bg-zinc-900\/60,
+html.light .bg-zinc-900\/40 {
+  background-color: #EFEBE4 !important;
+}
+
+html.light .hover\:bg-zinc-900:hover {
+  background-color: #F4F0E8 !important;
+}
+
+html.light .hover\:bg-zinc-900\/60:hover {
+  background-color: #E5E0D8 !important;
+}
+
+html.light .bg-dutchOrange\/10 {
+  background-color: rgba(224, 90, 16, 0.12) !important;
+}
+
+/* Glassmorphism helpers */
+.glass-panel-dark {
+  background: rgba(19, 21, 25, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(224, 90, 16, 0.2);
+}
+
+.glass-panel-light {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(232, 227, 218, 0.8);
+}
+
+/* Grid background pattern */
+.bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(224, 90, 16, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(224, 90, 16, 0.05) 1px, transparent 1px);
+}
+
+.dark .bg-grid-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(255, 85, 0, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 85, 0, 0.06) 1px, transparent 1px);
+}
+
+/* Custom background band helper classes */
+.bg-obsidian {
+  background-color: #0b0c0e;
+}
+
+.bg-charcoalBand {
+  background-color: #121417;
+}
+
+.bg-slateBand {
+  background-color: #16181d;
+}
+
+.bg-cardSurface {
+  background-color: #131519;
+}
+
+.border-cardBorder {
+  border-color: #22252c;
+}
+
+/* KaTeX custom overrides */
+.katex-wrapper .katex {
+  color: #E05A10;
+  font-size: 1.05em;
+}
+
+.katex-display {
+  margin: 0.5em 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.25em 0;
+}

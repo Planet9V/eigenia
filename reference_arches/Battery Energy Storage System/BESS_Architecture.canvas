@@ -1,0 +1,38 @@
+{
+	"nodes":[
+		{"id":"bastion","type":"text","text":"## Bastion Host\n\nSecure remote access (Citrix).\n\n*Vendors must access via this host using MFA. Prevents direct unmanaged connections to the critical infrastructure.*","x":-480,"y":165,"width":250,"height":355,"color":"2"},
+		{"id":"historian","type":"text","text":"## Historian Cloud DB\n\nLong-term data storage.\n\n*Stores telemetry data (PostgreSQL/Timescale) for long-term analysis and \"Telemetry Assurance\" to verify performance.*","x":-480,"y":780,"width":250,"height":280,"color":"4"},
+		{"id":"ied","type":"text","text":"## Protection IEDs\n\nIntelligent Electronic Devices.\n\n*Circuit breakers and protection relays. Uses IEC 61850 for digital communication and GOOSE for fast tripping.*","x":-480,"y":1440,"width":250,"height":290,"color":"3"},
+		{"id":"batteries","type":"text","text":"## Battery Racks\n\nLi-Ion Modules.\n\n*The core storage medium. Arranged in racks, monitored by BMS. Requires strict HVAC control.*","x":760,"y":1450,"width":250,"height":280,"color":"5"},
+		{"id":"transformer","type":"text","text":"## Step-Up Transformer\n\nVoltage step-up.\n\n*Connects the lower voltage PCS output to the distribution network (e.g., 11kV).*","x":1240,"y":815,"width":250,"height":250,"color":"5"},
+		{"id":"pcs","type":"text","text":"## PCS (Inverter)\n\nPower Conversion System.\n\n*Converts DC (Battery) to AC (Grid). Critical for \"firming\" and frequency regulation.*","x":760,"y":780,"width":250,"height":280,"color":"5"},
+		{"id":"utilityServer","type":"text","text":"## Utility Server / Gateway\n\nProtocol Translator.\n\n*Acts as a gateway. Translates high-level commands into Modbus/DNP3. Polls the battery for telemetry.*","x":150,"y":780,"width":250,"height":285,"color":"3"},
+		{"id":"firewall","type":"text","text":"## Secure Edge / Firewall\n\nZone segmentation point.\n\n*Utility-controlled Secure Edge Device. Routes traffic via private APN. Enforces ACLs to prevent lateral movement. No direct internet access.*","x":150,"y":165,"width":250,"height":355,"color":"2"},
+		{"id":"bms","type":"text","text":"## Battery Management System\n\nMonitors cell health.\n\n*Tracks cell voltage, temperature, and SoC. Controls the racks and communicates with the PCS.*","x":-55,"y":1730,"width":455,"height":270,"color":"5"},
+		{"id":"derms","type":"text","text":"## DERMS\n\nDistributed Energy Resource Management.\n\n*Orchestrates the request. Checks grid constraints by querying the ADMS to ensure the network can handle the load/generation.*","x":150,"y":-400,"width":250,"height":360,"color":"4"},
+		{"id":"retailer","type":"text","text":"## Retailer / Operator\n\nInitiates dispatch requests.\n\n*Sends dispatch requests (e.g., \"Charge at 50% power\") via a RESTful JSON API. This is the commercial trigger for battery operation.*","x":-480,"y":-400,"width":250,"height":360,"color":"4"},
+		{"id":"adms","type":"text","text":"## ADMS\n\nAdvanced Distribution Management System.\n\n*Provides grid constraints (thermal limits, voltage profiles) to the DERMS to approve or deny dispatch requests.*","x":760,"y":-400,"width":250,"height":360,"color":"4"},
+		{"id":"aux","type":"text","text":"## Aux Systems\n\nHVAC & Fire Suppression.\n\n*Critical for safety. Prevents thermal runaway and manages environmental conditions.*","x":1240,"y":1210,"width":250,"height":240,"color":"5"}
+	],
+	"edges":[
+		{"id":"e1","fromNode":"retailer","fromSide":"right","toNode":"derms","toSide":"left","color":"#3b82f6","label":"API Dispatch Request"},
+		{"id":"e2","fromNode":"derms","fromSide":"right","toNode":"adms","toSide":"left","color":"#3b82f6","label":"Constraint Check"},
+		{"id":"e3","fromNode":"derms","fromSide":"bottom","toNode":"firewall","toSide":"top","color":"#3b82f6","label":"Approved Command"},
+		{"id":"e4","fromNode":"firewall","fromSide":"bottom","toNode":"utilityServer","toSide":"top","color":"#3b82f6","label":"Secure Tunnel"},
+		{"id":"e5","fromNode":"utilityServer","fromSide":"bottom","toNode":"bms","toSide":"top","color":"#3b82f6","label":"Modbus/DNP3 Command"},
+		{"id":"e6","fromNode":"bms","fromSide":"top","toNode":"utilityServer","toSide":"top","color":"#10b981","label":"SoC, Volts, Temp"},
+		{"id":"e7","fromNode":"utilityServer","fromSide":"right","toNode":"firewall","toSide":"right","color":"#10b981","label":"Polled Data"},
+		{"id":"e8","fromNode":"firewall","fromSide":"bottom","toNode":"historian","toSide":"top","color":"#10b981","label":"Archival Data"},
+		{"id":"e9","fromNode":"bastion","fromSide":"right","toNode":"firewall","toSide":"left","color":"#a855f7","label":"MFA Access"},
+		{"id":"e10","fromNode":"ied","fromSide":"top","toNode":"bms","toSide":"top","color":"#ef4444","label":"Hardwired Trip"},
+		{"id":"e11","fromNode":"ied","fromSide":"right","toNode":"pcs","toSide":"left","color":"#ef4444","label":"GOOSE Msg"},
+		{"id":"e12","fromNode":"batteries","fromSide":"left","toNode":"bms","toSide":"top","color":"#10b981","label":"Monitoring"},
+		{"id":"e13","fromNode":"batteries","fromSide":"top","toNode":"pcs","toSide":"bottom","color":"#f59e0b","label":"DC Power"},
+		{"id":"e14","fromNode":"pcs","fromSide":"right","toNode":"transformer","toSide":"left","color":"#f59e0b","label":"AC Power"},
+		{"id":"e15","fromNode":"aux","fromSide":"left","toNode":"bms","toSide":"top","color":"#10b981","label":"Env Status"}
+	],
+	"metadata":{
+		"version":"1.0-1.0",
+		"frontmatter":{}
+	}
+}

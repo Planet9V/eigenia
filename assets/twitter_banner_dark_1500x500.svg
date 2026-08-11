@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 500" width="1500" height="500">
+  <rect width="1500" height="500" fill="#111827"/>
+  <text x="120" y="230" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif" font-size="68" font-weight="800" letter-spacing="3px" fill="#FFFFFF">EIGENIA B.V.</text>
+  <text x="120" y="285" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif" font-size="32" font-weight="500" letter-spacing="1px" fill="#9CA3AF">Irreducible Truth in Complex Systems</text>
+  <g transform="translate(920, 20)">
+    <path d="M 300,180 C 240,100 160,100 120,140 C 70,180 70,240 120,280 C 160,320 240,320 300,240 C 360,160 440,160 480,200 C 510,230 510,270 480,300 C 440,330 380,310 320,250" fill="none" stroke="#FFFFFF" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 310,230 C 350,170 410,140 460,100 L 480,85" fill="none" stroke="#FF5500" stroke-width="26" stroke-linecap="round"/>
+    <polygon points="455,65 515,70 495,125" fill="#FF5500"/>
+  </g>
+</svg>
