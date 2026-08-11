@@ -276,7 +276,7 @@ export const WORKING_GROUPS: WorkingGroupCategory[] = [
     number: "WG-04",
     badge: "CASCADING FAILURES 01–02",
     color: "amber",
-    description: "The Cascading Failures Working Group investigates systemic collapse mechanisms within large-scale interconnected energy grids and critical utilities. Our research models non-linear destabilization phenomena, including high-voltage grid "death wobble," battery energy storage system (BESS) thermal runaway, and synthetic inertia decay. By simulating targeted cyber-physical interdictions on transmission sub-stations, we quantify how localized equipment disruptions cascade into multi-state blackout events. These findings establish the mathematical boundaries for grid resilience and rapid islanding protocols.",
+    description: "The Cascading Failures Working Group investigates systemic collapse mechanisms within large-scale interconnected energy grids and critical utilities. Our research models non-linear destabilization phenomena, including high-voltage grid 'death wobble,' battery energy storage system (BESS) thermal runaway, and synthetic inertia decay. By simulating targeted cyber-physical interdictions on transmission sub-stations, we quantify how localized equipment disruptions cascade into multi-state blackout events. These findings establish the mathematical boundaries for grid resilience and rapid islanding protocols.",
     documents: [
       {
         id: "WG-04-CF-Cascading-Failure-Hypothesis",
