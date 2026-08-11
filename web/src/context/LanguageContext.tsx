@@ -13,19 +13,48 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
+const detectSmartDefaultLanguage = (): Language => {
+  if (typeof window === "undefined") return "en";
+
+  // 1. Check explicit user preference in localStorage
+  const saved = localStorage.getItem("eigenia_lang") as Language;
+  if (saved === "en" || saved === "nl") return saved;
+
+  // 2. Check Browser Preferred Languages (navigator.languages array or navigator.language)
+  const navLangs = Array.from(navigator.languages || [navigator.language || ""]);
+  const hasDutchInLanguages = navLangs.some(
+    (l) => l.toLowerCase().startsWith("nl") || l.toLowerCase().includes("nl-")
+  );
+  if (hasDutchInLanguages) return "nl";
+
+  // 3. Check European & Dutch Timezones (Amsterdam, Brussels)
+  try {
+    const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+    const isDutchOrBelgianTimezone =
+      userTimezone.includes("Amsterdam") ||
+      userTimezone.includes("Brussels") ||
+      userTimezone === "Europe/Amsterdam" ||
+      userTimezone === "Europe/Brussels";
+
+    if (isDutchOrBelgianTimezone) return "nl";
+  } catch (e) {
+    // Fallback if Intl fails
+  }
+
+  // 4. Check domain extension (.nl)
+  if (window.location.hostname.endsWith(".nl")) {
+    return "nl";
+  }
+
+  return "en";
+};
+
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [lang, setLangState] = useState<Language>("en");
 
   useEffect(() => {
-    const saved = localStorage.getItem("eigenia_lang") as Language;
-    if (saved === "en" || saved === "nl") {
-      setLangState(saved);
-    } else {
-      const browserLang = navigator.language.slice(0, 2);
-      if (browserLang === "nl") {
-        setLangState("nl");
-      }
-    }
+    const detected = detectSmartDefaultLanguage();
+    setLangState(detected);
   }, []);
 
   const setLang = (newLang: Language) => {
