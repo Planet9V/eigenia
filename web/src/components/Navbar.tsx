@@ -47,7 +47,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
                 pathname === "/mission" ? "text-dutchOrange font-bold" : "hover:text-dutchOrange"
               }`}
             >
-              <span>Mission</span>
+              <span>{t("nav_mission")}</span>
               {pathname === "/mission" && (
                 <motion.div
                   layoutId="activeNav"
@@ -70,7 +70,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
                     : "hover:text-dutchOrange"
                 }`}
               >
-                <span>Research Tracks</span>
+                <span>{t("nav_tracks")}</span>
                 <ChevronDown className="w-3.5 h-3.5 text-dutchOrange" />
               </Link>
 
@@ -152,7 +152,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
                         href="/tracks"
                         className="text-[11px] text-dutchOrange font-bold hover:underline block py-1"
                       >
-                        View All 7 Research Tracks →
+                        {t("nav_view_all_tracks")}
                       </Link>
                     </div>
                   </motion.div>
@@ -174,7 +174,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
                     : "hover:text-dutchOrange"
                 }`}
               >
-                <span>Applied Physics</span>
+                <span>{t("nav_physics")}</span>
                 <ChevronDown className="w-3.5 h-3.5 text-dutchOrange" />
               </Link>
 
@@ -272,7 +272,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
                         href="/physics"
                         className="text-[11px] text-dutchOrange font-bold hover:underline block py-1"
                       >
-                        View All Applied Physics Models →
+                        {t("nav_view_all_models")}
                       </Link>
                     </div>
                   </motion.div>
@@ -287,7 +287,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
                 pathname === "/collaborate" ? "text-dutchOrange font-bold" : "hover:text-dutchOrange"
               }`}
             >
-              <span>Collaborate</span>
+              <span>{t("nav_collaborate")}</span>
               {pathname === "/collaborate" && (
                 <motion.div
                   layoutId="activeNav"
@@ -318,7 +318,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
               href="/collaborate"
               className="px-4 py-2 rounded-xl bg-dutchOrange hover:bg-dutchOrange/90 text-white font-sans text-xs font-bold transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5"
             >
-              Request Briefing
+              {t("nav_request_briefing")}
             </Link>
 
             {/* Language Selector */}
@@ -380,7 +380,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
               onClick={() => setMobileMenuOpen(false)}
               className="block py-2 text-primary font-medium hover:text-dutchOrange"
             >
-              Mission
+              {t("nav_mission")}
             </Link>
 
             <Link
@@ -388,7 +388,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
               onClick={() => setMobileMenuOpen(false)}
               className="block py-2 text-primary font-medium hover:text-dutchOrange"
             >
-              Research Tracks
+              {t("nav_tracks")}
             </Link>
 
             <Link
@@ -396,7 +396,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
               onClick={() => setMobileMenuOpen(false)}
               className="block py-2 text-primary font-medium hover:text-dutchOrange"
             >
-              Applied Physics
+              {t("nav_physics")}
             </Link>
 
             <Link
@@ -404,7 +404,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
               onClick={() => setMobileMenuOpen(false)}
               className="block py-2 text-primary font-medium hover:text-dutchOrange"
             >
-              Collaborate
+              {t("nav_collaborate")}
             </Link>
 
             <div className="pt-4 border-t border-hairline flex justify-between items-center font-mono">

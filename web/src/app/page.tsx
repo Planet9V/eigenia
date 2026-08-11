@@ -13,10 +13,12 @@ import { FirstVisitSplash } from "@/components/FirstVisitSplash";
 import { ArrowRight, Compass, Layers, Cpu, Users } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Home() {
   const [impressumOpen, setImpressumOpen] = useState(false);
   const [cookiesForceOpen, setCookiesForceOpen] = useState(false);
+  const { t } = useLanguage();
 
   return (
     <main className="min-h-screen bg-canvas text-primary transition-colors duration-300 relative font-sans selection:bg-dutchOrange selection:text-white">
@@ -37,13 +39,13 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <div className="max-w-3xl space-y-3">
             <span className="font-mono text-[10px] sm:text-xs tracking-[0.2em] uppercase text-dutchOrange font-medium inline-block">
-              Eigenia Labs Research Portals
+              {t("portals_tag")}
             </span>
             <h2 className="font-serif text-xl sm:text-2xl lg:text-3xl font-normal tracking-tight text-primary">
-              Scientific Domains & R&D Portals
+              {t("portals_title")}
             </h2>
             <p className="text-sm text-secondary font-light leading-relaxed">
-              Explore dedicated research routes across sovereign mission constitution, probabilistic tail-risk tracks, DEXPI open standards, and pro-bono defense partnerships.
+              {t("portals_desc")}
             </p>
           </div>
 
@@ -58,13 +60,13 @@ export default function Home() {
                   <Compass className="w-5 h-5" />
                 </div>
                 <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-dutchOrange font-medium block">
-                  Track 01 // Sovereign
+                  {t("portal_1_tag")}
                 </span>
                 <h3 className="font-sans text-lg font-semibold text-primary group-hover:text-dutchOrange transition-colors">
-                  Sovereign Mission
+                  {t("portal_1_title")}
                 </h3>
                 <p className="text-xs text-muted font-sans leading-relaxed">
-                  Clean Water, Healthy Food, and Sustainable Energy protection through mathematical physics and constitution.
+                  {t("portal_1_desc")}
                 </p>
               </div>
 
@@ -72,7 +74,7 @@ export default function Home() {
                 href="/mission"
                 className="pt-4 border-t border-hairline text-dutchOrange font-bold flex items-center justify-between group-hover:translate-x-1 transition-transform"
               >
-                <span>Explore Mission</span>
+                <span>{t("portal_1_cta")}</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </motion.div>
@@ -87,13 +89,13 @@ export default function Home() {
                   <Layers className="w-5 h-5" />
                 </div>
                 <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-dutchOrange font-medium block">
-                  Track 02 // Research
+                  {t("portal_2_tag")}
                 </span>
                 <h3 className="font-sans text-lg font-semibold text-primary group-hover:text-dutchOrange transition-colors">
-                  Research Tracks
+                  {t("portal_2_title")}
                 </h3>
                 <p className="text-xs text-muted font-sans leading-relaxed">
-                  3 Core Research Tracks: Taleb Probabilistic Risk Series, DEXPI 2.0 P&ID Topology, and Catastrophe Actuarial Engine.
+                  {t("portal_2_desc")}
                 </p>
               </div>
 
@@ -101,7 +103,7 @@ export default function Home() {
                 href="/tracks"
                 className="pt-4 border-t border-hairline text-dutchOrange font-bold flex items-center justify-between group-hover:translate-x-1 transition-transform"
               >
-                <span>Explore Tracks</span>
+                <span>{t("portal_2_cta")}</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </motion.div>
@@ -116,13 +118,13 @@ export default function Home() {
                   <Cpu className="w-5 h-5" />
                 </div>
                 <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-dutchOrange font-medium block">
-                  Track 03 // Models
+                  {t("portal_3_tag")}
                 </span>
                 <h3 className="font-sans text-lg font-semibold text-primary group-hover:text-dutchOrange transition-colors">
-                  Applied Physics
+                  {t("portal_3_title")}
                 </h3>
                 <p className="text-xs text-muted font-sans leading-relaxed">
-                  9 Applied Mathematical & Physical Models including GGNN Directed Graph Topology, L0/L1 Gap Calculus, and Psychometric Tensors.
+                  {t("portal_3_desc")}
                 </p>
               </div>
 
@@ -130,7 +132,7 @@ export default function Home() {
                 href="/physics"
                 className="pt-4 border-t border-hairline text-dutchOrange font-bold flex items-center justify-between group-hover:translate-x-1 transition-transform"
               >
-                <span>Explore Physics</span>
+                <span>{t("portal_3_cta")}</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </motion.div>
@@ -145,13 +147,13 @@ export default function Home() {
                   <Users className="w-5 h-5" />
                 </div>
                 <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-dutchOrange font-medium block">
-                  Track 04 // Defense
+                  {t("portal_4_tag")}
                 </span>
                 <h3 className="font-sans text-lg font-semibold text-primary group-hover:text-dutchOrange transition-colors">
-                  Collaborate
+                  {t("portal_4_title")}
                 </h3>
                 <p className="text-xs text-muted font-sans leading-relaxed">
-                  100% Pro-bono sovereign defense projects, academic fellowships, and commercial actuarial stress-testing.
+                  {t("portal_4_desc")}
                 </p>
               </div>
 
@@ -159,7 +161,7 @@ export default function Home() {
                 href="/collaborate"
                 className="pt-4 border-t border-hairline text-dutchOrange font-bold flex items-center justify-between group-hover:translate-x-1 transition-transform"
               >
-                <span>Apply to Labs</span>
+                <span>{t("portal_4_cta")}</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </motion.div>

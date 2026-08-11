@@ -9,10 +9,12 @@ import { EuComplianceFooter } from "@/components/EuComplianceFooter";
 import { ImpressumModal } from "@/components/ImpressumModal";
 import { CookieConsentBanner } from "@/components/CookieConsentBanner";
 import { Breadcrumb } from "@/components/Breadcrumb";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function MissionPage() {
   const [impressumOpen, setImpressumOpen] = useState(false);
   const [cookiesForceOpen, setCookiesForceOpen] = useState(false);
+  const { t } = useLanguage();
 
   return (
     <main className="min-h-screen bg-canvas text-primary relative font-sans selection:bg-dutchOrange selection:text-white transition-colors duration-300">
@@ -27,21 +29,21 @@ export default function MissionPage() {
           {/* Breadcrumb Navigation */}
           <Breadcrumb
             items={[
-              { label: "Mission", href: "/mission" },
-              { label: "Sovereign Infrastructure Protection Constitution" },
+              { label: t("nav_mission"), href: "/mission" },
+              { label: t("mission_title") },
             ]}
           />
 
           {/* Reconciled Single Page Header */}
           <div className="max-w-4xl space-y-4">
             <span className="font-mono text-[10px] sm:text-xs tracking-[0.2em] uppercase text-dutchOrange font-medium inline-block">
-              Dutch B.V. Applied Complexity Think Tank // Sovereign Infrastructure Constitution
+              {t("mission_page_tag")}
             </span>
             <h1 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal tracking-tight text-primary">
-              Sovereign Infrastructure Mission
+              {t("mission_page_title")}
             </h1>
             <p className="text-base sm:text-lg text-secondary font-light leading-relaxed max-w-3xl">
-              Replacing fragile compliance checklists with reproducible mathematical physics, open standards, and catastrophe-calibrated risk models to insulate vital societal assets.
+              {t("mission_page_desc")}
             </p>
           </div>
         </div>

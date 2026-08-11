@@ -10,10 +10,12 @@ import { CookieConsentBanner } from "@/components/CookieConsentBanner";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { ArrowDownRight, FileSpreadsheet, Binary } from "lucide-react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function AppliedPhysicsPage() {
   const [impressumOpen, setImpressumOpen] = useState(false);
   const [cookiesForceOpen, setCookiesForceOpen] = useState(false);
+  const { t } = useLanguage();
 
   return (
     <main className="min-h-screen bg-canvas text-primary relative font-sans selection:bg-dutchOrange selection:text-white transition-colors duration-300">
@@ -28,21 +30,21 @@ export default function AppliedPhysicsPage() {
           {/* Breadcrumb Navigation */}
           <Breadcrumb
             items={[
-              { label: "Applied Physics", href: "/physics" },
-              { label: "Actuarial Engine & Mathematical Physics Models" },
+              { label: t("nav_physics"), href: "/physics" },
+              { label: t("th_title") },
             ]}
           />
 
           {/* Page Header */}
           <div className="max-w-4xl space-y-4">
             <span className="font-mono text-[10px] sm:text-xs tracking-[0.2em] uppercase text-dutchOrange font-medium inline-block">
-              Applied Physics & Mathematical Frameworks
+              {t("physics_page_tag")}
             </span>
             <h1 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal tracking-tight text-primary">
-              Applied Physics Frameworks
+              {t("physics_page_title")}
             </h1>
             <p className="text-base sm:text-lg text-secondary font-light leading-relaxed max-w-3xl">
-              Nine mathematical models mapping physical control loops, thermodynamic phase transitions, epidemiological vulnerability spread, and heavy-tailed catastrophe risk.
+              {t("physics_page_desc")}
             </p>
           </div>
 
@@ -62,15 +64,15 @@ export default function AppliedPhysicsPage() {
               </div>
 
               <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-dutchOrange font-medium block">
-                Actuarial Risk Framework
+                {t("physics_card1_tag")}
               </span>
 
               <h2 className="font-sans text-xl font-semibold text-primary group-hover:text-dutchOrange transition-colors">
-                Actuarial Cyber Catastrophe Engine
+                {t("physics_card1_title")}
               </h2>
 
               <p className="text-sm text-secondary font-sans leading-relaxed font-light">
-                Portfolio risk modeling built on 4-module catastrophe frameworks, Exceedance Probability (EP) loss curves, Rotated 90° Clayton Copulas, and Lloyd's Market Bulletin Y5381 war exclusion filters.
+                {t("physics_card1_desc")}
               </p>
             </motion.a>
 
@@ -88,15 +90,15 @@ export default function AppliedPhysicsPage() {
               </div>
 
               <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-dutchOrange font-medium block">
-                9 Research Monographs
+                {t("physics_card2_tag")}
               </span>
 
               <h2 className="font-sans text-xl font-semibold text-primary group-hover:text-dutchOrange transition-colors">
-                9 Core Physics & Mathematical Frameworks
+                {t("physics_card2_title")}
               </h2>
 
               <p className="text-sm text-secondary font-sans leading-relaxed font-light">
-                Comprehensive catalogue of open-access physics papers, equations, and control loop equations spanning cyber-physical systems.
+                {t("physics_card2_desc")}
               </p>
             </motion.a>
           </div>
