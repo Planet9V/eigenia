@@ -2,7 +2,7 @@ import React from "react";
 import { Metadata } from "next";
 import { Navbar } from "@/components/Navbar";
 import { EuComplianceFooter } from "@/components/EuComplianceFooter";
-import { theoryModelsList, TheoryModel } from "@/components/TheoryCatalogue";
+import { theoryModelsList, TheoryModel } from "@/lib/theoryModels";
 import { ArrowLeft, Layers, Cpu, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/Breadcrumb";

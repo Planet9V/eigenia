@@ -1,6 +1,6 @@
 import { MetadataRoute } from "next";
 import { getAllPaperSlugs } from "@/lib/papers";
-import { theoryModelsList } from "@/components/TheoryCatalogue";
+import { theoryModelsList } from "@/lib/theoryModels";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://eigenia.com";
