@@ -22,26 +22,24 @@ export const Navbar: React.FC<NavbarProps> = () => {
   const [physicsOpen, setPhysicsOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0b0c0e]/95 dark:bg-[#0b0c0e]/95 light:bg-[#FAF8F5]/95 backdrop-blur-md border-b border-zinc-900 light:border-[#E8E3DA] transition-colors duration-300">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-canvas/95 backdrop-blur-md border-b border-hairline transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          
           {/* Brand Logo - Spaced out E I G E N I A   B. V. */}
           <Link href="/" className="flex flex-col group py-2">
-            <span className="font-bold text-sm tracking-[0.25em] text-white light:text-[#18181B] uppercase flex items-center gap-2 group-hover:text-dutchOrange transition-colors">
+            <span className="font-bold text-sm tracking-[0.25em] text-primary uppercase flex items-center gap-2 group-hover:text-dutchOrange transition-colors">
               E I G E N I A &nbsp; B.V.
               <span className="text-[9px] font-mono text-dutchOrange font-semibold tracking-normal">
                 NL
               </span>
             </span>
-            <span className="text-[9px] font-mono tracking-widest text-zinc-400 light:text-[#71717A]">
+            <span className="text-[9px] font-mono tracking-widest text-muted">
               Applied Complexity Science
             </span>
           </Link>
 
           {/* Desktop Navigation - 4 Standalone Route Links in Title Case */}
-          <div className="hidden lg:flex items-center gap-8 text-xs font-mono text-zinc-300 light:text-[#3F3F46] relative">
-            
+          <div className="hidden lg:flex items-center gap-8 text-xs font-mono text-secondary relative">
             {/* Category 1: Mission Route */}
             <Link
               href="/mission"
@@ -91,65 +89,65 @@ export const Navbar: React.FC<NavbarProps> = () => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 8 }}
                     transition={{ duration: 0.15 }}
-                    className="absolute top-full left-0 w-96 bg-zinc-950 light:bg-white rounded-2xl shadow-2xl p-4 space-y-1.5 z-50 font-mono text-xs max-h-[460px] overflow-y-auto border border-zinc-900 light:border-[#E8E3DA]"
+                    className="absolute top-full left-0 w-96 bg-surface rounded-2xl shadow-2xl p-4 space-y-1.5 z-50 font-mono text-xs max-h-[460px] overflow-y-auto border border-hairline"
                   >
                     <Link
                       href="/papers/taleb-fooled-by-randomness"
-                      className="block p-2.5 rounded-xl hover:bg-zinc-900 light:hover:bg-[#F4F0E8] transition-colors"
+                      className="block p-2.5 rounded-xl hover:bg-subtle transition-colors"
                     >
                       <span className="text-dutchOrange font-bold block text-[11px]">Track 1 // Probabilistic Risk</span>
-                      <span className="text-white light:text-[#18181B] block font-sans text-xs">Taleb 5-Paper Series</span>
+                      <span className="text-primary block font-sans text-xs">Taleb 5-Paper Series</span>
                     </Link>
 
                     <Link
                       href="/physics#dexpi"
-                      className="block p-2.5 rounded-xl hover:bg-zinc-900 light:hover:bg-[#F4F0E8] transition-colors"
+                      className="block p-2.5 rounded-xl hover:bg-subtle transition-colors"
                     >
                       <span className="text-dutchOrange font-bold block text-[11px]">Track 2 // Cyber-Physical Standards</span>
-                      <span className="text-white light:text-[#18181B] block font-sans text-xs">DEXPI 2.0 & CycloneDX 4-BOM</span>
+                      <span className="text-primary block font-sans text-xs">DEXPI 2.0 & CycloneDX 4-BOM</span>
                     </Link>
 
                     <Link
                       href="/papers/4-underwriter-cyber-risk-underwriting"
-                      className="block p-2.5 rounded-xl hover:bg-zinc-900 light:hover:bg-[#F4F0E8] transition-colors"
+                      className="block p-2.5 rounded-xl hover:bg-subtle transition-colors"
                     >
                       <span className="text-dutchOrange font-bold block text-[11px]">Track 3 // Actuarial Re-Invention</span>
-                      <span className="text-white light:text-[#18181B] block font-sans text-xs">11 Treatises: COPE, Paradigm, Lacan & Kramers</span>
+                      <span className="text-primary block font-sans text-xs">11 Treatises: COPE, Paradigm, Lacan & Kramers</span>
                     </Link>
 
                     <Link
                       href="/papers/tacam-deep-dive"
-                      className="block p-2.5 rounded-xl hover:bg-zinc-900 light:hover:bg-[#F4F0E8] transition-colors"
+                      className="block p-2.5 rounded-xl hover:bg-subtle transition-colors"
                     >
                       <span className="text-dutchOrange font-bold block text-[11px]">Track 4 // TACAM Matrix</span>
-                      <span className="text-white light:text-[#18181B] block font-sans text-xs">7D Threat Actor Matrix (77,279 Points)</span>
+                      <span className="text-primary block font-sans text-xs">7D Threat Actor Matrix (77,279 Points)</span>
                     </Link>
 
                     <Link
                       href="/papers/atq-deep-dive"
-                      className="block p-2.5 rounded-xl hover:bg-zinc-900 light:hover:bg-[#F4F0E8] transition-colors"
+                      className="block p-2.5 rounded-xl hover:bg-subtle transition-colors"
                     >
                       <span className="text-dutchOrange font-bold block text-[11px]">Track 5 // Threat Scoring</span>
-                      <span className="text-white light:text-[#18181B] block font-sans text-xs">Adversary Threat Quotient (ATQ) 12-Factor</span>
+                      <span className="text-primary block font-sans text-xs">Adversary Threat Quotient (ATQ) 12-Factor</span>
                     </Link>
 
                     <Link
                       href="/papers/monte-carlo-engine"
-                      className="block p-2.5 rounded-xl hover:bg-zinc-900 light:hover:bg-[#F4F0E8] transition-colors"
+                      className="block p-2.5 rounded-xl hover:bg-subtle transition-colors"
                     >
                       <span className="text-dutchOrange font-bold block text-[11px]">Track 6 // Monte Carlo Engine</span>
-                      <span className="text-white light:text-[#18181B] block font-sans text-xs">Importance BFS & Softmax Walk</span>
+                      <span className="text-primary block font-sans text-xs">Importance BFS & Softmax Walk</span>
                     </Link>
 
                     <Link
                       href="/papers/death-wobble-frequency-instability"
-                      className="block p-2.5 rounded-xl hover:bg-zinc-900 light:hover:bg-[#F4F0E8] transition-colors"
+                      className="block p-2.5 rounded-xl hover:bg-subtle transition-colors"
                     >
                       <span className="text-dutchOrange font-bold block text-[11px]">Track 7 // Cascading Failures</span>
-                      <span className="text-white light:text-[#18181B] block font-sans text-xs">Death Wobble & Grid Pulse Instability</span>
+                      <span className="text-primary block font-sans text-xs">Death Wobble & Grid Pulse Instability</span>
                     </Link>
 
-                    <div className="pt-2 border-t border-zinc-900 light:border-[#E8E3DA] text-center">
+                    <div className="pt-2 border-t border-hairline text-center">
                       <Link
                         href="/tracks"
                         className="text-[11px] text-dutchOrange font-bold hover:underline block py-1"
@@ -195,81 +193,81 @@ export const Navbar: React.FC<NavbarProps> = () => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 8 }}
                     transition={{ duration: 0.15 }}
-                    className="absolute top-full left-0 w-96 bg-zinc-950 light:bg-white rounded-2xl shadow-2xl p-4 space-y-1.5 z-50 font-mono text-xs max-h-[480px] overflow-y-auto border border-zinc-900 light:border-[#E8E3DA]"
+                    className="absolute top-full left-0 w-96 bg-surface rounded-2xl shadow-2xl p-4 space-y-1.5 z-50 font-mono text-xs max-h-[480px] overflow-y-auto border border-hairline"
                   >
                     <Link
                       href="/theory/aeon-ggnn-gated-graph"
-                      className="block p-2 rounded-xl hover:bg-zinc-900 light:hover:bg-[#F4F0E8] transition-colors"
+                      className="block p-2 rounded-xl hover:bg-subtle transition-colors"
                     >
                       <span className="text-dutchOrange font-bold block text-[11px]">Model 01 // GGNN Directed Graph</span>
-                      <span className="text-white light:text-[#18181B] block font-sans text-xs">Gated Graph Topology</span>
+                      <span className="text-primary block font-sans text-xs">Gated Graph Topology</span>
                     </Link>
 
                     <Link
                       href="/theory/l0-l1-gap-calculus"
-                      className="block p-2 rounded-xl hover:bg-zinc-900 light:hover:bg-[#F4F0E8] transition-colors"
+                      className="block p-2 rounded-xl hover:bg-subtle transition-colors"
                     >
                       <span className="text-dutchOrange font-bold block text-[11px]">Model 02 // L0/L1 Gap Calculus</span>
-                      <span className="text-white light:text-[#18181B] block font-sans text-xs">Information Divergence</span>
+                      <span className="text-primary block font-sans text-xs">Information Divergence</span>
                     </Link>
 
                     <Link
                       href="/theory/mckenney-lacan-psychometric-tensor"
-                      className="block p-2 rounded-xl hover:bg-zinc-900 light:hover:bg-[#F4F0E8] transition-colors"
+                      className="block p-2 rounded-xl hover:bg-subtle transition-colors"
                     >
                       <span className="text-dutchOrange font-bold block text-[11px]">Model 03 // Psychometric Tensor</span>
-                      <span className="text-white light:text-[#18181B] block font-sans text-xs">Lacanian Four Discourses</span>
+                      <span className="text-primary block font-sans text-xs">Lacanian Four Discourses</span>
                     </Link>
 
                     <Link
                       href="/theory/interaction-hamiltonian"
-                      className="block p-2 rounded-xl hover:bg-zinc-900 light:hover:bg-[#F4F0E8] transition-colors"
+                      className="block p-2 rounded-xl hover:bg-subtle transition-colors"
                     >
                       <span className="text-dutchOrange font-bold block text-[11px]">Model 04 // Interaction Hamiltonian</span>
-                      <span className="text-white light:text-[#18181B] block font-sans text-xs">Ising Phase Transition</span>
+                      <span className="text-primary block font-sans text-xs">Ising Phase Transition</span>
                     </Link>
 
                     <Link
                       href="/theory/kramers-barrier-escape"
-                      className="block p-2 rounded-xl hover:bg-zinc-900 light:hover:bg-[#F4F0E8] transition-colors"
+                      className="block p-2 rounded-xl hover:bg-subtle transition-colors"
                     >
                       <span className="text-dutchOrange font-bold block text-[11px]">Model 05 // Kramers Escape Model</span>
-                      <span className="text-white light:text-[#18181B] block font-sans text-xs">MTTC Topological Barrier</span>
+                      <span className="text-primary block font-sans text-xs">MTTC Topological Barrier</span>
                     </Link>
 
                     <Link
                       href="/theory/sir-compartmental-model"
-                      className="block p-2 rounded-xl hover:bg-zinc-900 light:hover:bg-[#F4F0E8] transition-colors"
+                      className="block p-2 rounded-xl hover:bg-subtle transition-colors"
                     >
                       <span className="text-dutchOrange font-bold block text-[11px]">Model 06 // SIR Compartmental</span>
-                      <span className="text-white light:text-[#18181B] block font-sans text-xs">Epidemic Contagion R0</span>
+                      <span className="text-primary block font-sans text-xs">Epidemic Contagion R0</span>
                     </Link>
 
                     <Link
                       href="/theory/clayton-copula-actuarial"
-                      className="block p-2 rounded-xl hover:bg-zinc-900 light:hover:bg-[#F4F0E8] transition-colors"
+                      className="block p-2 rounded-xl hover:bg-subtle transition-colors"
                     >
                       <span className="text-dutchOrange font-bold block text-[11px]">Model 07 // Clayton Copula</span>
-                      <span className="text-white light:text-[#18181B] block font-sans text-xs">Tail Dependence & ALE</span>
+                      <span className="text-primary block font-sans text-xs">Tail Dependence & ALE</span>
                     </Link>
 
                     <Link
                       href="/theory/hawkes-self-exciting-process"
-                      className="block p-2 rounded-xl hover:bg-zinc-900 light:hover:bg-[#F4F0E8] transition-colors"
+                      className="block p-2 rounded-xl hover:bg-subtle transition-colors"
                     >
                       <span className="text-dutchOrange font-bold block text-[11px]">Model 08 // Hawkes Process</span>
-                      <span className="text-white light:text-[#18181B] block font-sans text-xs">Self-Exciting Cascades</span>
+                      <span className="text-primary block font-sans text-xs">Self-Exciting Cascades</span>
                     </Link>
 
                     <Link
                       href="/theory/pareto-pot-evt-model"
-                      className="block p-2 rounded-xl hover:bg-zinc-900 light:hover:bg-[#F4F0E8] transition-colors"
+                      className="block p-2 rounded-xl hover:bg-subtle transition-colors"
                     >
                       <span className="text-dutchOrange font-bold block text-[11px]">Model 09 // Pareto POT EVT</span>
-                      <span className="text-white light:text-[#18181B] block font-sans text-xs">Black Swan Extreme Values</span>
+                      <span className="text-primary block font-sans text-xs">Black Swan Extreme Values</span>
                     </Link>
 
-                    <div className="pt-2 border-t border-zinc-900 light:border-[#E8E3DA] text-center">
+                    <div className="pt-2 border-t border-hairline text-center">
                       <Link
                         href="/physics"
                         className="text-[11px] text-dutchOrange font-bold hover:underline block py-1"
@@ -297,16 +295,14 @@ export const Navbar: React.FC<NavbarProps> = () => {
                 />
               )}
             </Link>
-
           </div>
 
           {/* Right Section: Theme Toggle + Language Switcher + Primary CTA */}
           <div className="hidden lg:flex items-center gap-3 text-xs font-mono">
-
             {/* Sun/Moon Theme Toggle Button */}
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-xl bg-zinc-950 light:bg-white border border-zinc-800 light:border-[#E8E3DA] text-dutchOrange hover:scale-105 transition-all flex items-center justify-center shadow-xs"
+              className="p-2 rounded-xl bg-surface border border-hairline text-dutchOrange hover:scale-105 transition-all flex items-center justify-center shadow-xs"
               title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
               aria-label="Toggle theme"
             >
@@ -317,7 +313,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
               )}
             </button>
 
-            {/* Request Board Briefing Primary CTA Pill Button (OXOT Reference Style) */}
+            {/* Request Board Briefing Primary CTA Pill Button */}
             <Link
               href="/collaborate"
               className="px-4 py-2 rounded-xl bg-dutchOrange hover:bg-dutchOrange/90 text-white font-sans text-xs font-bold transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5"
@@ -325,14 +321,14 @@ export const Navbar: React.FC<NavbarProps> = () => {
               Request Briefing
             </Link>
 
-            {/* Language Selector (EN / NL font size perfectly matching navbar text-xs) */}
-            <div className="flex items-center gap-0.5 bg-zinc-950 light:bg-[#EBE5DC] p-1 rounded-xl border border-zinc-800 light:border-[#E0D5C5]">
+            {/* Language Selector */}
+            <div className="flex items-center gap-0.5 bg-subtle p-1 rounded-xl border border-hairline">
               <button
                 onClick={() => setLanguage("en")}
                 className={`px-2.5 py-1 rounded-lg text-xs font-mono font-medium transition-colors ${
                   language === "en"
-                    ? "bg-dutchOrange light:bg-[#E0D5C5] text-white light:text-[#18181B] font-bold shadow-xs"
-                    : "text-zinc-400 light:text-[#71717A] hover:text-white light:hover:text-[#18181B]"
+                    ? "bg-dutchOrange text-white font-bold shadow-xs"
+                    : "text-muted hover:text-primary"
                 }`}
               >
                 EN
@@ -341,8 +337,8 @@ export const Navbar: React.FC<NavbarProps> = () => {
                 onClick={() => setLanguage("nl")}
                 className={`px-2.5 py-1 rounded-lg text-xs font-mono font-medium transition-colors ${
                   language === "nl"
-                    ? "bg-dutchOrange light:bg-[#E0D5C5] text-white light:text-[#18181B] font-bold shadow-xs"
-                    : "text-zinc-400 light:text-[#71717A] hover:text-white light:hover:text-[#18181B]"
+                    ? "bg-dutchOrange text-white font-bold shadow-xs"
+                    : "text-muted hover:text-primary"
                 }`}
               >
                 NL
@@ -354,7 +350,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
           <div className="flex lg:hidden items-center gap-2">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-xl bg-zinc-950 light:bg-white text-dutchOrange border border-zinc-800 light:border-[#E8E3DA]"
+              className="p-2 rounded-xl bg-surface text-dutchOrange border border-hairline"
               title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
             >
               {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
@@ -362,12 +358,11 @@ export const Navbar: React.FC<NavbarProps> = () => {
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-xl bg-zinc-950 light:bg-white text-zinc-300 light:text-[#18181B] hover:text-white border border-zinc-800 light:border-[#E8E3DA]"
+              className="p-2 rounded-xl bg-surface text-secondary hover:text-primary border border-hairline"
             >
               {mobileMenuOpen ? <X className="w-6 h-6 text-dutchOrange" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
-
         </div>
       </div>
 
@@ -378,12 +373,12 @@ export const Navbar: React.FC<NavbarProps> = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-black light:bg-[#FAF8F5] font-sans text-xs p-6 space-y-4 shadow-2xl border-b border-zinc-900 light:border-[#E8E3DA]"
+            className="lg:hidden bg-canvas font-sans text-xs p-6 space-y-4 shadow-2xl border-b border-hairline"
           >
             <Link
               href="/mission"
               onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-white light:text-[#18181B] font-medium hover:text-dutchOrange"
+              className="block py-2 text-primary font-medium hover:text-dutchOrange"
             >
               Mission
             </Link>
@@ -391,7 +386,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
             <Link
               href="/tracks"
               onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-white light:text-[#18181B] font-medium hover:text-dutchOrange"
+              className="block py-2 text-primary font-medium hover:text-dutchOrange"
             >
               Research Tracks
             </Link>
@@ -399,7 +394,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
             <Link
               href="/physics"
               onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-white light:text-[#18181B] font-medium hover:text-dutchOrange"
+              className="block py-2 text-primary font-medium hover:text-dutchOrange"
             >
               Applied Physics
             </Link>
@@ -407,22 +402,22 @@ export const Navbar: React.FC<NavbarProps> = () => {
             <Link
               href="/collaborate"
               onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-white light:text-[#18181B] font-medium hover:text-dutchOrange"
+              className="block py-2 text-primary font-medium hover:text-dutchOrange"
             >
               Collaborate
             </Link>
 
-            <div className="pt-4 border-t border-zinc-900 light:border-[#E8E3DA] flex justify-between items-center font-mono">
+            <div className="pt-4 border-t border-hairline flex justify-between items-center font-mono">
               <div className="flex items-center gap-1">
                 <button
                   onClick={() => setLanguage("en")}
-                  className={`px-2.5 py-1 rounded-lg text-xs font-mono font-medium ${language === "en" ? "bg-dutchOrange light:bg-[#E0D5C5] text-white light:text-[#18181B] font-bold" : "text-zinc-400 light:text-[#71717A]"}`}
+                  className={`px-2.5 py-1 rounded-lg text-xs font-mono font-medium ${language === "en" ? "bg-dutchOrange text-white font-bold" : "text-muted"}`}
                 >
                   EN
                 </button>
                 <button
                   onClick={() => setLanguage("nl")}
-                  className={`px-2.5 py-1 rounded-lg text-xs font-mono font-medium ${language === "nl" ? "bg-dutchOrange light:bg-[#E0D5C5] text-white light:text-[#18181B] font-bold" : "text-zinc-400 light:text-[#71717A]"}`}
+                  className={`px-2.5 py-1 rounded-lg text-xs font-mono font-medium ${language === "nl" ? "bg-dutchOrange text-white font-bold" : "text-muted"}`}
                 >
                   NL
                 </button>
@@ -430,7 +425,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
 
               <button
                 onClick={toggleTheme}
-                className="px-3 py-1.5 rounded-lg bg-zinc-900 light:bg-[#E8E3DA] text-dutchOrange text-xs font-semibold flex items-center gap-1.5"
+                className="px-3 py-1.5 rounded-lg bg-subtle text-dutchOrange text-xs font-semibold flex items-center gap-1.5 border border-hairline"
               >
                 {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
                 <span>{theme === "dark" ? "Light Mode" : "Dark Mode"}</span>

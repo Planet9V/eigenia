@@ -17,31 +17,29 @@ export const EuComplianceFooter: React.FC<EuComplianceFooterProps> = ({
   const { t } = useLanguage();
 
   return (
-    <footer className="bg-black light:bg-[#FAF8F5] text-zinc-300 light:text-[#3F3F46] border-t border-zinc-900 light:border-[#E8E3DA] font-sans text-xs selection:bg-dutchOrange selection:text-white transition-colors duration-300">
+    <footer className="bg-canvas text-secondary border-t border-hairline font-sans text-xs selection:bg-dutchOrange selection:text-white transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        
         {/* Main Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-12">
-          
           {/* Column 1: Brand & Sovereign Mission Statement */}
           <div className="md:col-span-6 space-y-4">
             <div className="flex flex-col">
-              <span className="font-bold text-sm tracking-[0.25em] text-white light:text-[#18181B] uppercase flex items-center gap-2 font-sans">
+              <span className="font-bold text-sm tracking-[0.25em] text-primary uppercase flex items-center gap-2 font-sans">
                 E I G E N I A &nbsp; B.V.
                 <span className="text-xs font-mono text-dutchOrange font-semibold tracking-normal">
                   NL
                 </span>
               </span>
-              <span className="text-[10px] font-mono tracking-widest text-zinc-400 light:text-[#71717A] uppercase mt-0.5">
+              <span className="text-[10px] font-mono tracking-widest text-muted uppercase mt-0.5">
                 Applied Complexity Science Think Tank & Labs
               </span>
             </div>
 
-            <p className="text-xs text-zinc-300 light:text-[#52525B] leading-relaxed font-light max-w-lg">
+            <p className="text-xs text-secondary leading-relaxed font-light max-w-lg">
               Eigenia B.V. and Eigenia Labs conduct open research into nonlinear dynamics, digital twin models, and physical plant safety to protect energy grids, water systems, and agricultural logistics. Replacing fragile compliance checklists with reproducible mathematical physics, open standards, and catastrophe-calibrated risk models.
             </p>
 
-            <div className="pt-2 font-mono text-[11px] text-zinc-400 light:text-[#52525B] flex items-center gap-2">
+            <div className="pt-2 font-mono text-[11px] text-muted flex items-center gap-2">
               <Mail className="w-3.5 h-3.5 text-dutchOrange" />
               <span>Direct Board & Research Intake:</span>
               <a href="mailto:jim@eigenia.nl" className="text-dutchOrange font-bold hover:underline">
@@ -52,7 +50,7 @@ export const EuComplianceFooter: React.FC<EuComplianceFooterProps> = ({
 
           {/* Column 2: Navigation Links */}
           <div className="md:col-span-3 space-y-4">
-            <h3 className="font-mono text-xs font-bold text-white light:text-[#18181B] uppercase tracking-wider">
+            <h3 className="font-mono text-xs font-bold text-primary uppercase tracking-wider">
               Navigation
             </h3>
             <ul className="space-y-2 text-xs font-light">
@@ -63,102 +61,67 @@ export const EuComplianceFooter: React.FC<EuComplianceFooterProps> = ({
               </li>
               <li>
                 <Link href="/tracks" className="hover:text-dutchOrange transition-colors">
-                  Research Tracks & Treatises
+                  Research Tracks & DEXPI
                 </Link>
               </li>
               <li>
                 <Link href="/physics" className="hover:text-dutchOrange transition-colors">
-                  Applied Physics & Models
-                </Link>
-              </li>
-              <li>
-                <Link href="/physics#dexpi" className="hover:text-dutchOrange transition-colors">
-                  DEXPI 2.0 + CycloneDX
+                  Applied Physics Catalogue
                 </Link>
               </li>
               <li>
                 <Link href="/collaborate" className="hover:text-dutchOrange transition-colors">
-                  Apply for Briefings
+                  Pro-Bono Defense & Partnerships
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Column 3: Connect & Social Media Links */}
+          {/* Column 3: Corporate & Legal Information */}
           <div className="md:col-span-3 space-y-4">
-            <h3 className="font-mono text-xs font-bold text-white light:text-[#18181B] uppercase tracking-wider">
-              Connect
+            <h3 className="font-mono text-xs font-bold text-primary uppercase tracking-wider">
+              Legal & EU Compliance
             </h3>
             <ul className="space-y-2 text-xs font-light">
               <li>
-                <a
-                  href="mailto:jim@eigenia.nl"
-                  className="hover:text-dutchOrange transition-colors inline-flex items-center gap-1.5 text-dutchOrange font-mono font-medium"
+                <button
+                  type="button"
+                  onClick={onOpenImpressum}
+                  className="hover:text-dutchOrange transition-colors text-left"
                 >
-                  <span>jim@eigenia.nl</span>
-                  <span className="text-[10px]">↗</span>
-                </a>
+                  Legal Impressum (Art. 5 DSA)
+                </button>
               </li>
               <li>
-                <a
-                  href="https://www.linkedin.com/company/eigenia-b-v"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-dutchOrange transition-colors inline-flex items-center gap-1.5"
+                <button
+                  type="button"
+                  onClick={onOpenCookies}
+                  className="hover:text-dutchOrange transition-colors text-left"
                 >
-                  <span>LinkedIn</span>
-                  <span className="text-[10px] text-zinc-300 light:text-[#71717A]">↗</span>
-                </a>
+                  Privacy & Cookie Preferences
+                </button>
               </li>
-              <li>
-                <a
-                  href="https://x.com/eigenia_bv"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-dutchOrange transition-colors inline-flex items-center gap-1.5"
-                >
-                  <span>X (Twitter)</span>
-                  <span className="text-[10px] text-zinc-300 light:text-[#71717A]">↗</span>
-                </a>
+              <li className="pt-2 font-mono text-[10px] text-muted">
+                KVK (Dutch Chamber): Registered B.V.
               </li>
-              <li>
-                <a
-                  href="https://github.com/eigenia-labs"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-dutchOrange transition-colors inline-flex items-center gap-1.5"
-                >
-                  <span>GitHub (Open Science)</span>
-                  <span className="text-[10px] text-zinc-300 light:text-[#71717A]">↗</span>
-                </a>
+              <li className="font-mono text-[10px] text-muted">
+                Jurisdiction: Kingdom of the Netherlands / EU
               </li>
             </ul>
           </div>
-
         </div>
 
-        {/* Bottom Legal Bar */}
-        <div className="pt-8 border-t border-zinc-900 light:border-[#E8E3DA] flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] text-zinc-400 light:text-[#71717A] font-light">
+        {/* Bottom Bar: Copyright & NIS2 Notice */}
+        <div className="border-t border-hairline pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-[10px] text-muted">
           <div>
             &copy; {new Date().getFullYear()} Eigenia B.V. & Eigenia Labs. All rights reserved.
           </div>
-
-          <div className="flex flex-wrap items-center gap-6 font-mono text-[11px]">
-            <button
-              onClick={onOpenImpressum}
-              className="hover:text-dutchOrange transition-colors"
-            >
-              EU Impressum
-            </button>
-            <button
-              onClick={onOpenCookies}
-              className="hover:text-dutchOrange transition-colors"
-            >
-              Cookie Settings
-            </button>
+          <div className="flex items-center gap-4">
+            <span>NIS2 / CER Compliant Policy</span>
+            <span className="text-dutchOrange font-bold">&bull;</span>
+            <span>Open Science Research</span>
           </div>
         </div>
-
       </div>
     </footer>
   );

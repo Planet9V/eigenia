@@ -15,14 +15,13 @@ interface BreadcrumbProps {
 
 export const Breadcrumb: React.FC<BreadcrumbProps> = ({ items }) => {
   return (
-    <nav aria-label="Breadcrumb" className="font-mono text-xs text-slate-500 dark:text-slate-400">
+    <nav aria-label="Breadcrumb" className="font-mono text-xs text-muted">
       <ol className="flex items-center flex-wrap gap-1.5">
-        
         {/* Home Root */}
         <li className="flex items-center gap-1.5">
           <Link
             href="/"
-            className="flex items-center gap-1 hover:text-dutchOrange transition-colors font-medium"
+            className="flex items-center gap-1 hover:text-dutchOrange transition-colors font-medium text-secondary"
           >
             <Home className="w-3.5 h-3.5" />
             <span>Home</span>
@@ -35,23 +34,22 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({ items }) => {
 
           return (
             <li key={index} className="flex items-center gap-1.5">
-              <ChevronRight className="w-3.5 h-3.5 text-slate-400 dark:text-slate-600 flex-shrink-0" />
+              <ChevronRight className="w-3.5 h-3.5 text-muted flex-shrink-0" />
               {item.href && !isLast ? (
                 <Link
                   href={item.href}
-                  className="hover:text-dutchOrange transition-colors font-medium"
+                  className="hover:text-dutchOrange transition-colors font-medium text-secondary"
                 >
                   {item.label}
                 </Link>
               ) : (
-                <span className={`font-semibold ${isLast ? "text-dutchOrange font-bold" : "text-slate-700 dark:text-slate-300"}`}>
+                <span className={`font-semibold ${isLast ? "text-dutchOrange font-bold" : "text-primary"}`}>
                   {item.label}
                 </span>
               )}
             </li>
           );
         })}
-
       </ol>
     </nav>
   );

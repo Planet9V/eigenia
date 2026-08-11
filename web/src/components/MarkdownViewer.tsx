@@ -23,7 +23,7 @@ export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content }) => {
           return (
             <span
               key={idx}
-              className="my-3 block overflow-x-auto text-center font-mono py-2 text-zinc-100"
+              className="my-3 block overflow-x-auto text-center font-mono py-2 text-primary"
               dangerouslySetInnerHTML={{ __html: html }}
             />
           );
@@ -39,7 +39,7 @@ export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content }) => {
           return (
             <span
               key={idx}
-              className="inline-block px-1 font-mono text-zinc-100"
+              className="inline-block px-1 font-mono text-primary"
               dangerouslySetInnerHTML={{ __html: html }}
             />
           );
@@ -69,7 +69,7 @@ export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content }) => {
         tokens.push(current.substring(lastIndex, match.index));
       }
       tokens.push(
-        <strong key={`${keyPrefix}-b-${counter++}`} className="font-semibold text-white">
+        <strong key={`${keyPrefix}-b-${counter++}`} className="font-semibold text-primary">
           {match[1]}
         </strong>
       );
@@ -91,7 +91,7 @@ export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content }) => {
     while (i < lines.length) {
       const line = lines[i];
 
-      // Code blocks (```)
+      // Code blocks (```) - Intentionally dark terminal container in both modes matching Stripe/GitHub docs
       if (line.trim().startsWith("```")) {
         const lang = line.trim().replace("```", "");
         const codeLines: string[] = [];
@@ -112,7 +112,7 @@ export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content }) => {
 
       // Horizontal Rule (--- or ***)
       if (line.trim() === "---" || line.trim() === "***") {
-        blocks.push(<hr key={`hr-${i}`} className="my-10 border-zinc-900" />);
+        blocks.push(<hr key={`hr-${i}`} className="my-10 border-hairline" />);
         i++;
         continue;
       }
@@ -120,7 +120,7 @@ export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content }) => {
       // Headings
       if (line.startsWith("# ")) {
         blocks.push(
-          <h1 key={`h1-${i}`} className="font-serif text-2xl sm:text-3xl text-white font-normal tracking-tight mt-12 mb-6 pt-6 border-t border-zinc-900/60">
+          <h1 key={`h1-${i}`} className="font-serif text-2xl sm:text-3xl text-primary font-normal tracking-tight mt-12 mb-6 pt-6 border-t border-hairline">
             {renderFormattedText(line.replace("# ", ""))}
           </h1>
         );
@@ -129,7 +129,7 @@ export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content }) => {
       }
       if (line.startsWith("## ")) {
         blocks.push(
-          <h2 key={`h2-${i}`} className="font-serif text-xl sm:text-2xl text-white font-normal tracking-tight mt-10 mb-4 pt-6 border-t border-zinc-900/60">
+          <h2 key={`h2-${i}`} className="font-serif text-xl sm:text-2xl text-primary font-normal tracking-tight mt-10 mb-4 pt-6 border-t border-hairline">
             {renderFormattedText(line.replace("## ", ""))}
           </h2>
         );
@@ -138,7 +138,7 @@ export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content }) => {
       }
       if (line.startsWith("### ")) {
         blocks.push(
-          <h3 key={`h3-${i}`} className="font-sans text-lg sm:text-xl text-white font-semibold tracking-tight mt-8 mb-3">
+          <h3 key={`h3-${i}`} className="font-sans text-lg sm:text-xl text-primary font-semibold tracking-tight mt-8 mb-3">
             {renderFormattedText(line.replace("### ", ""))}
           </h3>
         );
@@ -147,7 +147,7 @@ export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content }) => {
       }
       if (line.startsWith("#### ")) {
         blocks.push(
-          <h4 key={`h4-${i}`} className="font-sans text-base sm:text-lg text-white font-medium tracking-tight mt-6 mb-2">
+          <h4 key={`h4-${i}`} className="font-sans text-base sm:text-lg text-primary font-medium tracking-tight mt-6 mb-2">
             {renderFormattedText(line.replace("#### ", ""))}
           </h4>
         );
@@ -174,22 +174,22 @@ export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content }) => {
           const body = rows.slice(1).filter(r => !r.every(c => c.replace(/[:\-]/g, "").length === 0));
 
           blocks.push(
-            <div key={`table-${i}`} className="my-8 overflow-x-auto rounded-xl border border-[#22252c] bg-[#0d0e11] shadow-lg">
+            <div key={`table-${i}`} className="my-8 overflow-x-auto rounded-xl border border-hairline bg-surface shadow-lg">
               <table className="w-full text-left border-collapse text-xs">
                 <thead>
-                  <tr className="bg-[#15171c] border-b border-zinc-800 text-white font-mono uppercase tracking-wider">
+                  <tr className="bg-subtle border-b border-hairline text-primary font-mono uppercase tracking-wider">
                     {header.map((col, cIdx) => (
-                      <th key={cIdx} className="p-3 font-semibold border-r border-zinc-800 last:border-r-0">
+                      <th key={cIdx} className="p-3 font-semibold border-r border-hairline last:border-r-0">
                         {renderFormattedText(col)}
                       </th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-zinc-900 text-zinc-300">
+                <tbody className="divide-y divide-hairline text-secondary">
                   {body.map((row, rIdx) => (
-                    <tr key={rIdx} className="hover:bg-zinc-900/40 transition-colors">
+                    <tr key={rIdx} className="hover:bg-subtle/50 transition-colors">
                       {row.map((cell, cIdx) => (
-                        <td key={cIdx} className="p-3 border-r border-zinc-900 last:border-r-0">
+                        <td key={cIdx} className="p-3 border-r border-hairline last:border-r-0">
                           {renderFormattedText(cell)}
                         </td>
                       ))}
@@ -211,7 +211,7 @@ export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content }) => {
           i++;
         }
         blocks.push(
-          <blockquote key={`quote-${i}`} className="my-6 pl-4 border-l-2 border-dutchOrange text-zinc-300 text-base font-sans bg-dutchOrange/5 py-3 rounded-r-xl">
+          <blockquote key={`quote-${i}`} className="my-6 pl-4 border-l-2 border-dutchOrange text-secondary text-base font-sans bg-dutchOrange/5 py-3 rounded-r-xl">
             {renderFormattedText(quoteLines.join(" "))}
           </blockquote>
         );
@@ -229,7 +229,7 @@ export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content }) => {
           i++;
         }
         blocks.push(
-          <ul key={`ul-${i}`} className="my-4 space-y-2 pl-6 list-disc list-outside text-zinc-300">
+          <ul key={`ul-${i}`} className="my-4 space-y-2 pl-6 list-disc list-outside text-secondary">
             {listItems.map((item, lIdx) => (
               <li key={lIdx} className="leading-relaxed">
                 {renderFormattedText(item)}
@@ -248,7 +248,7 @@ export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content }) => {
           i++;
         }
         blocks.push(
-          <ol key={`ol-${i}`} className="my-4 space-y-2 pl-6 list-decimal list-outside text-zinc-300">
+          <ol key={`ol-${i}`} className="my-4 space-y-2 pl-6 list-decimal list-outside text-secondary">
             {listItems.map((item, lIdx) => (
               <li key={lIdx} className="leading-relaxed">
                 {renderFormattedText(item)}
@@ -267,13 +267,13 @@ export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content }) => {
           blocks.push(
             <div
               key={`math-${i}`}
-              className="my-6 p-4 rounded-xl bg-[#0b0c0e] border border-zinc-800/80 font-mono text-sm overflow-x-auto flex items-center justify-center shadow-inner"
+              className="my-6 p-4 rounded-xl bg-subtle border border-hairline font-mono text-sm overflow-x-auto flex items-center justify-center shadow-inner text-primary"
               dangerouslySetInnerHTML={{ __html: html }}
             />
           );
         } catch {
           blocks.push(
-            <pre key={`math-err-${i}`} className="my-4 p-3 rounded bg-zinc-900 font-mono text-xs text-dutchOrange">
+            <pre key={`math-err-${i}`} className="my-4 p-3 rounded bg-subtle font-mono text-xs text-dutchOrange">
               {line}
             </pre>
           );
@@ -309,7 +309,7 @@ export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content }) => {
 
       if (paraLines.length > 0) {
         blocks.push(
-          <p key={`p-${i}`} className="my-4 leading-relaxed font-light text-zinc-300">
+          <p key={`p-${i}`} className="my-4 leading-relaxed font-light text-secondary">
             {renderFormattedText(paraLines.join(" "))}
           </p>
         );

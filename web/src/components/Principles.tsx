@@ -35,20 +35,22 @@ export const Principles: React.FC = () => {
   ];
 
   return (
-    <section id="principles" className="py-20 bg-[#121417] text-white relative font-sans selection:bg-dutchOrange selection:text-white border-b border-zinc-900/60">
+    <section
+      id="principles"
+      className="py-20 bg-canvas text-primary relative font-sans selection:bg-dutchOrange selection:text-white border-b border-hairline transition-colors duration-300"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        
         {/* Header */}
         <div className="max-w-3xl space-y-3">
           <span className="font-mono text-[10px] sm:text-xs tracking-[0.2em] uppercase text-dutchOrange font-medium inline-block">
             {t("pr_tag" as any)}
           </span>
 
-          <h2 className="font-serif text-xl sm:text-2xl lg:text-3xl font-normal tracking-tight text-white">
+          <h2 className="font-serif text-xl sm:text-2xl lg:text-3xl font-normal tracking-tight text-primary">
             {t("pr_title" as any)}
           </h2>
 
-          <p className="text-sm sm:text-base text-zinc-300 font-light leading-relaxed">
+          <p className="text-sm sm:text-base text-secondary font-light leading-relaxed">
             {t("pr_desc" as any)}
           </p>
         </div>
@@ -60,7 +62,7 @@ export const Principles: React.FC = () => {
             return (
               <div
                 key={pr.number}
-                className="p-8 sm:p-10 rounded-2xl bg-[#131519] border border-[#22252c] hover:border-zinc-700/60 transition-all shadow-xl space-y-5 flex flex-col justify-between group"
+                className="p-8 rounded-2xl bg-surface border border-hairline transition-all shadow-xl space-y-5 flex flex-col justify-between group"
               >
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
@@ -68,15 +70,15 @@ export const Principles: React.FC = () => {
                       <IconComponent className="w-5 h-5 text-dutchOrange" />
                     </div>
                     <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-dutchOrange font-medium inline-block">
-                      AXIOM {pr.number}
+                      PILLAR {pr.number}
                     </span>
                   </div>
 
-                  <h3 className="font-sans text-xl sm:text-2xl font-semibold text-white group-hover:text-dutchOrange transition-colors">
+                  <h3 className="font-sans text-xl font-semibold text-primary group-hover:text-dutchOrange transition-colors">
                     {t(pr.titleKey as any)}
                   </h3>
 
-                  <p className="text-sm text-zinc-300 font-sans leading-relaxed font-light">
+                  <p className="text-sm text-secondary font-sans leading-relaxed font-light">
                     {t(pr.descKey as any)}
                   </p>
                 </div>
@@ -84,7 +86,6 @@ export const Principles: React.FC = () => {
             );
           })}
         </div>
-
       </div>
     </section>
   );

@@ -109,7 +109,7 @@ export default async function TheoryDetailPage({ params }: PageProps) {
   };
 
   return (
-    <main className="min-h-screen bg-[#0b0c0e] text-white relative font-sans selection:bg-dutchOrange selection:text-white">
+    <main className="min-h-screen bg-canvas text-primary relative font-sans selection:bg-dutchOrange selection:text-white transition-colors duration-300">
       {/* Schema.org Structured Data Script for AI Crawlers */}
       <script
         type="application/ld+json"
@@ -118,8 +118,8 @@ export default async function TheoryDetailPage({ params }: PageProps) {
 
       <Navbar />
 
-      {/* Hero Header Band (#0b0c0e) */}
-      <section className="bg-[#0b0c0e] pt-28 pb-12 border-b border-zinc-900/60">
+      {/* Hero Header Band */}
+      <section className="bg-canvas pt-28 pb-12 border-b border-hairline transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
           <Breadcrumb
             items={[
@@ -133,14 +133,14 @@ export default async function TheoryDetailPage({ params }: PageProps) {
               <span className="font-mono text-[10px] sm:text-xs tracking-[0.2em] uppercase text-dutchOrange font-medium inline-block">
                 {model.number} // {model.tag}
               </span>
-              <h1 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal tracking-tight text-white leading-tight">
+              <h1 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal tracking-tight text-primary leading-tight">
                 {model.name}
               </h1>
             </div>
 
             <Link
               href="/physics#theory"
-              className="px-4 py-2 rounded-xl bg-[#131519] border border-zinc-800 text-xs font-mono font-medium text-zinc-300 hover:text-dutchOrange hover:border-dutchOrange transition-all flex items-center gap-2 flex-shrink-0"
+              className="px-4 py-2 rounded-xl bg-surface border border-hairline text-xs font-mono font-medium text-secondary hover:text-dutchOrange hover:border-dutchOrange transition-all flex items-center gap-2 flex-shrink-0"
             >
               <ArrowLeft className="w-4 h-4 text-dutchOrange" /> Applied Physics Catalogue
             </Link>
@@ -148,52 +148,45 @@ export default async function TheoryDetailPage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* Main Content Section (#121417) */}
-      <section className="bg-[#121417] py-16 border-b border-zinc-900/60">
+      {/* Main Content Section */}
+      <section className="bg-subtle py-16 border-b border-hairline transition-colors duration-300">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-          <div className="p-8 sm:p-10 rounded-2xl bg-[#131519] border border-[#22252c] shadow-xl space-y-8">
+          <div className="p-8 sm:p-10 rounded-2xl bg-surface border border-hairline shadow-xl space-y-8">
             {/* Formula Callout with KaTeX Typesetting */}
-            <div className="p-6 rounded-xl bg-[#0b0c0e] border border-zinc-800/60 space-y-4 shadow-inner">
+            <div className="p-6 rounded-xl bg-subtle border border-hairline space-y-4 shadow-inner">
               <div className="flex items-center justify-between text-xs font-mono text-dutchOrange uppercase tracking-wider">
                 <span>Governing Mathematical Equation</span>
                 <Cpu className="w-4 h-4 text-dutchOrange" />
               </div>
-              <div className="py-4 text-center overflow-x-auto">
+              <div className="py-4 text-center overflow-x-auto text-primary">
                 <MathFormula formula={model.formula} />
               </div>
             </div>
 
             {/* Core Description */}
-            <div className="space-y-4 text-zinc-300 font-sans text-base sm:text-lg leading-relaxed font-light">
-              <h2 className="text-lg font-bold text-white uppercase font-mono tracking-wider text-dutchOrange">
+            <div className="space-y-4 text-secondary font-sans text-base sm:text-lg leading-relaxed font-light">
+              <h2 className="text-lg font-bold text-primary uppercase font-mono tracking-wider text-dutchOrange">
                 Systemic Risk Mechanism & Physics Formulation
               </h2>
               <p>{model.description}</p>
             </div>
 
             {/* Deliverables & Technical Proofs */}
-            <div className="space-y-4 pt-6 border-t border-zinc-900 font-sans">
-              <h2 className="text-base font-bold text-white uppercase font-mono tracking-wider flex items-center gap-2">
+            <div className="space-y-4 pt-6 border-t border-hairline font-sans">
+              <h2 className="text-base font-bold text-primary uppercase font-mono tracking-wider flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-dutchOrange" /> Key Technical Deliverables
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 font-mono text-xs pt-2">
                 {model.deliverables.map((item, idx) => (
-                  <div key={idx} className="p-4 rounded-xl bg-[#0b0c0e] border border-zinc-800/60 text-zinc-300 flex items-start gap-2">
-                    <span className="text-dutchOrange font-bold mt-0.5">&bull;</span>
+                  <div
+                    key={idx}
+                    className="p-3 rounded-xl bg-subtle border border-hairline text-secondary flex items-start gap-2"
+                  >
+                    <span className="text-dutchOrange font-bold flex-shrink-0">&gt;</span>
                     <span>{item}</span>
                   </div>
                 ))}
               </div>
-            </div>
-
-            {/* Physical Application */}
-            <div className="space-y-4 pt-6 border-t border-zinc-900">
-              <h2 className="text-base font-bold text-white uppercase font-mono tracking-wider flex items-center gap-2">
-                <Layers className="w-4 h-4 text-dutchOrange" /> Applied Sovereign Defense Integration
-              </h2>
-              <p className="text-zinc-300 text-sm leading-relaxed font-light">
-                This mathematical framework is integrated into Eigenia's Digital Twin Engine to replace fragile compliance checklists with continuous physical safety proofs for critical energy, water, and food networks.
-              </p>
             </div>
           </div>
         </div>

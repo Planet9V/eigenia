@@ -16,16 +16,15 @@ export default function AppliedPhysicsPage() {
   const [cookiesForceOpen, setCookiesForceOpen] = useState(false);
 
   return (
-    <main className="min-h-screen bg-[#0b0c0e] text-white relative font-sans selection:bg-dutchOrange selection:text-white">
+    <main className="min-h-screen bg-canvas text-primary relative font-sans selection:bg-dutchOrange selection:text-white transition-colors duration-300">
       <Navbar
         onOpenImpressum={() => setImpressumOpen(true)}
         onOpenCookies={() => setCookiesForceOpen(true)}
       />
 
-      {/* Main Header Container (Obsidian Hero Band #0b0c0e) */}
-      <section className="bg-[#0b0c0e] pt-28 pb-12 border-b border-zinc-900/60">
+      {/* Main Header Container */}
+      <section className="bg-canvas pt-28 pb-12 border-b border-hairline transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-          
           {/* Breadcrumb Navigation */}
           <Breadcrumb
             items={[
@@ -39,78 +38,75 @@ export default function AppliedPhysicsPage() {
             <span className="font-mono text-[10px] sm:text-xs tracking-[0.2em] uppercase text-dutchOrange font-medium inline-block">
               Applied Physics & Mathematical Frameworks
             </span>
-            <h1 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal tracking-tight text-white">
+            <h1 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal tracking-tight text-primary">
               Applied Physics Frameworks
             </h1>
-            <p className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed max-w-3xl">
+            <p className="text-base sm:text-lg text-secondary font-light leading-relaxed max-w-3xl">
               Nine mathematical models mapping physical control loops, thermodynamic phase transitions, epidemiological vulnerability spread, and heavy-tailed catastrophe risk.
             </p>
           </div>
 
           {/* Intro Summary Bento Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 font-mono text-xs pt-4">
-            
             {/* Card 1: Catastrophe Cyber Actuarial Engine */}
             <motion.a
               href="#actuarial"
               whileHover={{ y: -4, scale: 1.01 }}
-              className="p-8 rounded-2xl bg-[#131519] border border-[#22252c] hover:border-zinc-700/60 transition-all space-y-4 shadow-xl block group border-l-4 border-l-dutchOrange"
+              className="p-8 rounded-2xl bg-surface border border-hairline hover:border-dutchOrange/50 transition-all space-y-4 shadow-xl block group border-l-4 border-l-dutchOrange"
             >
               <div className="flex items-center justify-between">
                 <div className="w-9 h-9 rounded-xl bg-dutchOrange/10 text-dutchOrange flex items-center justify-center">
                   <FileSpreadsheet className="w-5 h-5 text-dutchOrange" />
                 </div>
-                <span className="font-mono text-[10px] tracking-[0.2em] text-dutchOrange uppercase font-medium">
-                  TRACK 03 // ACTUARIAL SCIENCE
-                </span>
+                <ArrowDownRight className="w-5 h-5 text-muted group-hover:text-dutchOrange transition-colors" />
               </div>
-              <h3 className="font-sans text-xl font-semibold text-white group-hover:text-dutchOrange transition-colors">
-                Cyber Actuarial Engine
-              </h3>
-              <p className="text-xs text-zinc-300 font-sans font-light leading-relaxed">
-                Clayton copula tail dependence models, Exceedance Probability (EP) loss curves, and automated Lloyd's Market Bulletin Y5381 war exclusion filters.
+
+              <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-dutchOrange font-medium block">
+                Actuarial Risk Framework
+              </span>
+
+              <h2 className="font-sans text-xl font-semibold text-primary group-hover:text-dutchOrange transition-colors">
+                Actuarial Cyber Catastrophe Engine
+              </h2>
+
+              <p className="text-sm text-secondary font-sans leading-relaxed font-light">
+                Portfolio risk modeling built on 4-module catastrophe frameworks, Exceedance Probability (EP) loss curves, Rotated 90° Clayton Copulas, and Lloyd's Market Bulletin Y5381 war exclusion filters.
               </p>
-              <div className="flex items-center gap-1.5 text-dutchOrange text-xs font-semibold pt-2 border-t border-zinc-900">
-                <span>Inspect Actuarial Specification</span>
-                <ArrowDownRight className="w-4 h-4" />
-              </div>
             </motion.a>
 
-            {/* Card 2: Mathematical Physics Catalogue */}
+            {/* Card 2: 9 Core Mathematical Physics Frameworks */}
             <motion.a
-              href="#theory"
+              href="#catalogue"
               whileHover={{ y: -4, scale: 1.01 }}
-              className="p-8 rounded-2xl bg-[#131519] border border-[#22252c] hover:border-zinc-700/60 transition-all space-y-4 shadow-xl block group border-l-4 border-l-dutchOrange"
+              className="p-8 rounded-2xl bg-surface border border-hairline hover:border-dutchOrange/50 transition-all space-y-4 shadow-xl block group border-l-4 border-l-dutchOrange"
             >
               <div className="flex items-center justify-between">
                 <div className="w-9 h-9 rounded-xl bg-dutchOrange/10 text-dutchOrange flex items-center justify-center">
                   <Binary className="w-5 h-5 text-dutchOrange" />
                 </div>
-                <span className="font-mono text-[10px] tracking-[0.2em] text-dutchOrange uppercase font-medium">
-                  RESEARCH // 9 THEORY MODELS
-                </span>
+                <ArrowDownRight className="w-5 h-5 text-muted group-hover:text-dutchOrange transition-colors" />
               </div>
-              <h3 className="font-sans text-xl font-semibold text-white group-hover:text-dutchOrange transition-colors">
-                Physics Catalogue
-              </h3>
-              <p className="text-xs text-zinc-300 font-sans font-light leading-relaxed">
-                Gated Graph Neural Networks, KL divergence asset drift, Lacanian psychometrics, Kramers escape rates, and thermodynamic phase transition proofs.
+
+              <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-dutchOrange font-medium block">
+                9 Research Monographs
+              </span>
+
+              <h2 className="font-sans text-xl font-semibold text-primary group-hover:text-dutchOrange transition-colors">
+                9 Core Physics & Mathematical Frameworks
+              </h2>
+
+              <p className="text-sm text-secondary font-sans leading-relaxed font-light">
+                Comprehensive catalogue of open-access physics papers, equations, and control loop equations spanning cyber-physical systems.
               </p>
-              <div className="flex items-center gap-1.5 text-dutchOrange text-xs font-semibold pt-2 border-t border-zinc-900">
-                <span>Inspect Mathematical Models</span>
-                <ArrowDownRight className="w-4 h-4" />
-              </div>
             </motion.a>
-
           </div>
-
         </div>
       </section>
 
-      {/* Track 3: Cyber Actuarial Component */}
+      {/* Actuarial Engine Specification Section */}
       <ActuarialEngineSection />
 
-      {/* Applied Physics & Mathematical Frameworks Catalogue Component */}
+      {/* Theory Catalogue Section */}
       <TheoryCatalogue />
 
       <EuComplianceFooter
@@ -118,8 +114,12 @@ export default function AppliedPhysicsPage() {
         onOpenCookies={() => setCookiesForceOpen(true)}
       />
 
-      <ImpressumModal isOpen={impressumOpen} onClose={() => setImpressumOpen(false)} />
-      <CookieConsentBanner forceOpen={cookiesForceOpen} onCloseForceOpen={() => setCookiesForceOpen(false)} />
+      <ImpressumModal
+        isOpen={impressumOpen}
+        onClose={() => setImpressumOpen(false)}
+      />
+
+      <CookieConsentBanner forceOpen={cookiesForceOpen} />
     </main>
   );
 }
