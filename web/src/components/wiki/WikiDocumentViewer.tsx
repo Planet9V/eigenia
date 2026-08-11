@@ -13,7 +13,7 @@ import {
   ShieldAlert,
 } from "lucide-react";
 import { WikiDocumentData, WorkingGroupCategory } from "@/lib/wiki";
-import MarkdownViewer from "@/components/MarkdownViewer";
+import { MarkdownViewer } from "@/components/MarkdownViewer";
 
 interface WikiDocumentViewerProps {
   docData: WikiDocumentData | null;
