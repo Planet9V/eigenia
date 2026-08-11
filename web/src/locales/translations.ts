@@ -199,6 +199,23 @@ export const translations = {
     cookie_banner_desc: "Eigenia B.V. uses strictly necessary session tokens and privacy-friendly telemetry to ensure fast loading speeds and compliance under Dutch KvK and EU ePrivacy standards.",
     cookie_manage_prefs: "Manage Preferences",
     cookie_accept_all: "Accept All",
+
+    // Wiki & Paper UI Keys
+    wiki_title: "Sovereign Research Wiki Dashboard",
+    wiki_subtitle: "All 25 Treatises across 8 Working Groups",
+    wiki_search_placeholder: "Search 25 treatises, formulas, copulas, TACAM...",
+    wiki_no_doc_selected: "No Treatise Selected",
+    wiki_select_doc_desc: "Select a Working Group treatise from the left table of contents sidebar to begin reading.",
+    wiki_share_link: "Share Link",
+    wiki_copied: "Copied",
+    wiki_author: "Author",
+    wiki_words: "Words",
+    wiki_lines: "Lines",
+    wiki_chars: "Characters",
+    wiki_prev_doc: "Previous Treatise",
+    wiki_next_doc: "Next Treatise",
+    wiki_return_tracks: "Return to Research Tracks",
+    footer_rights: "All rights reserved. Applied Complexity Science Think Tank.",
   },
 
   nl: {
@@ -399,5 +416,22 @@ export const translations = {
     cookie_banner_desc: "Eigenia B.V. gebruikt uitsluitend strikt noodzakelijke sessietokens en privacyvriendelijke telemetrie om snelle laadsnelheden en naleving onder de Nederlandse KvK en EU ePrivacy-normen te garanderen.",
     cookie_manage_prefs: "Beheer Voorkeuren",
     cookie_accept_all: "Accepteer Alles",
+
+    // Wiki & Paper UI Keys
+    wiki_title: "Soeverein Onderzoeks-Wiki Dashboard",
+    wiki_subtitle: "Alle 25 Verhandelingen over 8 Werkgroepen",
+    wiki_search_placeholder: "Doorzoek 25 verhandelingen, formules, copula's, TACAM...",
+    wiki_no_doc_selected: "Geen Verhandeling Geselecteerd",
+    wiki_select_doc_desc: "Selecteer een verhandeling uit de linker inhoudsopgave om te lezen.",
+    wiki_share_link: "Link Delen",
+    wiki_copied: "Gekopieerd",
+    wiki_author: "Auteur",
+    wiki_words: "Woorden",
+    wiki_lines: "Regels",
+    wiki_chars: "Tekens",
+    wiki_prev_doc: "Vorige Verhandeling",
+    wiki_next_doc: "Volgende Verhandeling",
+    wiki_return_tracks: "Terug naar Onderzoekstracks",
+    footer_rights: "Alle rechten voorbehouden. Denktank voor Toegepaste Complexiteitswetenschap.",
   },
 };

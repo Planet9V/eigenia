@@ -22,7 +22,8 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { WORKING_GROUPS, WorkingGroupCategory } from "@/lib/wiki";
+import { getAllWorkingGroups, WorkingGroupCategory } from "@/lib/wiki";
+import { useLanguage } from "@/context/LanguageContext";
 
 const WG_ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   "WG-01-UI": ShieldAlert,
@@ -36,11 +37,13 @@ const WG_ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> =
 };
 
 export default function TracksPage() {
+  const { language, t } = useLanguage();
   const [impressumOpen, setImpressumOpen] = useState(false);
   const [cookiesForceOpen, setCookiesForceOpen] = useState(false);
   const [viewMode, setViewMode] = useState<"bento" | "lines">("bento");
 
-  const totalDocuments = WORKING_GROUPS.reduce(
+  const workingGroups = getAllWorkingGroups(language);
+  const totalDocuments = workingGroups.reduce(
     (acc, wg) => acc + wg.documents.length,
     0
   );
@@ -110,7 +113,7 @@ export default function TracksPage() {
           {viewMode === "bento" ? (
             /* Uniform Bento Grid Layout (Master Dutch Orange Design System) */
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {WORKING_GROUPS.map((wg: WorkingGroupCategory, idx: number) => {
+              {workingGroups.map((wg: WorkingGroupCategory, idx: number) => {
                 const Icon = WG_ICON_MAP[wg.id] || Layers;
 
                 return (
@@ -152,7 +155,7 @@ export default function TracksPage() {
                     {/* Footer Action Link */}
                     <div className="pt-4 border-t border-hairline flex items-center justify-between mt-auto">
                       <span className="font-mono text-[11px] text-muted font-medium">
-                        {wg.documents.length} treatise{wg.documents.length === 1 ? "" : "s"}
+                        {wg.documents.length} {language === "nl" ? "verhandeling(en)" : "treatise(s)"}
                       </span>
 
                       <Link
@@ -170,7 +173,7 @@ export default function TracksPage() {
           ) : (
             /* Lines / List View Layout */
             <div className="space-y-4">
-              {WORKING_GROUPS.map((wg: WorkingGroupCategory) => {
+              {workingGroups.map((wg: WorkingGroupCategory) => {
                 const Icon = WG_ICON_MAP[wg.id] || Layers;
 
                 return (
@@ -202,7 +205,7 @@ export default function TracksPage() {
                         href={`/wiki?wg=${encodeURIComponent(wg.id)}`}
                         className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-dutchOrange/10 text-dutchOrange border border-dutchOrange/30 hover:bg-dutchOrange/20 transition-all shrink-0"
                       >
-                        <span>Open Wiki ({wg.documents.length} Treatises)</span>
+                        <span>Open Wiki ({wg.documents.length} {language === "nl" ? "Verhandelingen" : "Treatises"})</span>
                         <ArrowRight className="h-3.5 w-3.5" />
                       </Link>
                     </div>

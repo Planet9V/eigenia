@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { WikiDocumentData, WorkingGroupCategory } from "@/lib/wiki";
 import { MarkdownViewer } from "@/components/MarkdownViewer";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface WikiDocumentViewerProps {
   docData: WikiDocumentData | null;
@@ -32,6 +33,7 @@ export default function WikiDocumentViewer({
   hasPrev,
   hasNext,
 }: WikiDocumentViewerProps) {
+  const { language, t } = useLanguage();
   const [copied, setCopied] = useState(false);
 
   if (!docData) {
@@ -39,14 +41,21 @@ export default function WikiDocumentViewer({
       <div className="flex h-full flex-col items-center justify-center p-8 text-center text-muted">
         <ShieldAlert className="mb-4 h-12 w-12 text-muted" />
         <h3 className="text-base font-semibold text-primary">
-          No Treatise Selected
+          {t("wiki_no_doc_selected")}
         </h3>
         <p className="mt-1 max-w-sm text-xs text-muted">
-          Select a Working Group treatise from the left table of contents sidebar to begin reading.
+          {t("wiki_select_doc_desc")}
         </p>
       </div>
     );
   }
+
+  const isNl = language === "nl";
+  const displayTitle = isNl ? (docData.titleNl || docData.title) : docData.title;
+  const displaySubtitle = isNl ? (docData.subtitleNl || docData.subtitle) : docData.subtitle;
+  const displayBadge = isNl ? (docData.badgeNl || docData.badge) : docData.badge;
+  const displayWgTitle = isNl ? (workingGroup?.titleNl || workingGroup?.title) : workingGroup?.title;
+  const displayContent = isNl ? (docData.contentNl || docData.content) : docData.content;
 
   const handleCopyLink = () => {
     if (typeof window !== "undefined") {
@@ -66,10 +75,10 @@ export default function WikiDocumentViewer({
           </span>
           <span>/</span>
           <span className="truncate max-w-[200px] sm:max-w-[300px] text-primary font-medium">
-            {workingGroup?.title}
+            {displayWgTitle}
           </span>
           <span>/</span>
-          <span className="font-mono text-[10px] text-muted">{docData.badge || "Treatise"}</span>
+          <span className="font-mono text-[10px] text-muted">{displayBadge || "Treatise"}</span>
         </div>
 
         <div className="flex items-center gap-2">
@@ -81,12 +90,12 @@ export default function WikiDocumentViewer({
             {copied ? (
               <>
                 <Check className="h-3.5 w-3.5 text-dutchOrange" />
-                <span className="text-dutchOrange">Copied</span>
+                <span className="text-dutchOrange">{t("wiki_copied")}</span>
               </>
             ) : (
               <>
                 <Share2 className="h-3.5 w-3.5" />
-                <span>Share Link</span>
+                <span>{t("wiki_share_link")}</span>
               </>
             )}
           </button>
@@ -101,20 +110,20 @@ export default function WikiDocumentViewer({
             <span className="inline-flex items-center rounded-full border border-dutchOrange/30 bg-dutchOrange/10 px-3 py-0.5 text-xs font-mono font-semibold text-dutchOrange">
               {docData.workingGroupId}
             </span>
-            {docData.badge && (
+            {displayBadge && (
               <span className="inline-flex items-center rounded-full border border-hairline bg-subtle px-3 py-0.5 text-xs font-mono font-medium text-secondary">
-                {docData.badge}
+                {displayBadge}
               </span>
             )}
           </div>
 
           <h1 className="text-2xl font-bold tracking-tight text-primary sm:text-3xl">
-            {docData.title}
+            {displayTitle}
           </h1>
 
-          {docData.subtitle && (
+          {displaySubtitle && (
             <p className="mt-2 text-sm text-secondary leading-relaxed">
-              {docData.subtitle}
+              {displaySubtitle}
             </p>
           )}
 
@@ -137,15 +146,15 @@ export default function WikiDocumentViewer({
 
             <div className="flex items-center gap-3 text-[11px]">
               <span title="Character Count">
-                {docData.charCount.toLocaleString()} chars
+                {docData.charCount.toLocaleString()} {t("wiki_chars")}
               </span>
               <span>•</span>
               <span title="Word Count">
-                {docData.wordCount.toLocaleString()} words
+                {docData.wordCount.toLocaleString()} {t("wiki_words")}
               </span>
               <span>•</span>
               <span title="Line Count">
-                {docData.lineCount.toLocaleString()} lines
+                {docData.lineCount.toLocaleString()} {t("wiki_lines")}
               </span>
             </div>
           </div>
@@ -153,7 +162,7 @@ export default function WikiDocumentViewer({
 
         {/* Markdown & KaTeX Rendered Body */}
         <article className="prose dark:prose-invert max-w-none text-primary">
-          <MarkdownViewer content={docData.content} />
+          <MarkdownViewer content={displayContent} />
         </article>
 
         {/* Bottom Pagination Footer */}
@@ -164,7 +173,7 @@ export default function WikiDocumentViewer({
               className="flex items-center gap-2 rounded-xl border border-hairline bg-surface px-4 py-2 text-xs font-medium text-primary hover:border-dutchOrange/40 hover:text-dutchOrange transition-all"
             >
               <ChevronLeft className="h-4 w-4" />
-              <span>Previous Treatise</span>
+              <span>{t("wiki_prev_doc")}</span>
             </button>
           ) : (
             <div />
@@ -175,7 +184,7 @@ export default function WikiDocumentViewer({
               onClick={onNavigateNext}
               className="flex items-center gap-2 rounded-xl border border-hairline bg-surface px-4 py-2 text-xs font-medium text-primary hover:border-dutchOrange/40 hover:text-dutchOrange transition-all"
             >
-              <span>Next Treatise</span>
+              <span>{t("wiki_next_doc")}</span>
               <ChevronRight className="h-4 w-4" />
             </button>
           ) : (

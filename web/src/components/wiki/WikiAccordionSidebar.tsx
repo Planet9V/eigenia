@@ -17,11 +17,12 @@ import {
   X,
 } from "lucide-react";
 import {
-  WORKING_GROUPS,
+  getAllWorkingGroups,
   WorkingGroupCategory,
   WikiDocumentMeta,
   searchWikiDocuments,
 } from "@/lib/wiki";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface WikiAccordionSidebarProps {
   activeDocId: string;
@@ -49,10 +50,15 @@ export default function WikiAccordionSidebar({
   isMobileOpen,
   onCloseMobile,
 }: WikiAccordionSidebarProps) {
+  const { language, t } = useLanguage();
   const [searchQuery, setSearchQuery] = useState("");
   const [expandedWgs, setExpandedWgs] = useState<Set<string>>(() => {
     return new Set([activeWgId || "WG-01-UI", "WG-02-DT", "MP-MATH"]);
   });
+
+  const workingGroups = useMemo(() => {
+    return getAllWorkingGroups(language);
+  }, [language]);
 
   const toggleWg = (wgId: string) => {
     setExpandedWgs((prev) => {
@@ -67,8 +73,8 @@ export default function WikiAccordionSidebar({
   };
 
   const searchResults = useMemo(() => {
-    return searchWikiDocuments(searchQuery);
-  }, [searchQuery]);
+    return searchWikiDocuments(searchQuery, language);
+  }, [searchQuery, language]);
 
   const isSearching = searchQuery.trim().length > 0;
 
@@ -89,7 +95,7 @@ export default function WikiAccordionSidebar({
               E I G E N I A &nbsp; L A B S
             </h2>
             <p className="text-[10px] font-mono text-muted">
-              Sovereign Research Wiki
+              {t("wiki_title")}
             </p>
           </div>
         </div>
@@ -111,7 +117,7 @@ export default function WikiAccordionSidebar({
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Instant search across 25 treatises..."
+            placeholder={t("wiki_search_placeholder")}
             className="w-full rounded-xl border border-hairline bg-input py-2 pl-9 pr-3 text-xs text-primary placeholder-muted transition-colors focus:border-dutchOrange/60 focus:outline-none"
           />
         </div>
@@ -161,7 +167,7 @@ export default function WikiAccordionSidebar({
           </div>
         ) : (
           /* Accordion Working Groups View (Standardized Master Brand Dutch Orange Theme) */
-          WORKING_GROUPS.map((wg: WorkingGroupCategory) => {
+          workingGroups.map((wg: WorkingGroupCategory) => {
             const isExpanded = expandedWgs.has(wg.id);
             const Icon = WG_ICON_MAP[wg.id] || Layers;
             const isCategoryActive = activeWgId === wg.id;

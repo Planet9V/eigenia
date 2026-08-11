@@ -13,8 +13,10 @@ import {
 } from "@/lib/wiki";
 import WikiAccordionSidebar from "@/components/wiki/WikiAccordionSidebar";
 import WikiDocumentViewer from "@/components/wiki/WikiDocumentViewer";
+import { useLanguage } from "@/context/LanguageContext";
 
 function WikiContent() {
+  const { language, t } = useLanguage();
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -32,18 +34,18 @@ function WikiContent() {
     if (doc) setActiveDocId(doc);
   }, [searchParams]);
 
-  const allDocs = useMemo(() => getAllWikiDocuments(), []);
+  const allDocs = useMemo(() => getAllWikiDocuments(language), [language]);
 
   const activeDocData: WikiDocumentData | null = useMemo(() => {
-    return getWikiDocumentById(activeDocId);
-  }, [activeDocId]);
+    return getWikiDocumentById(activeDocId, language);
+  }, [activeDocId, language]);
 
   const currentWg = useMemo(() => {
     if (activeDocData) {
-      return getWorkingGroupById(activeDocData.workingGroupId);
+      return getWorkingGroupById(activeDocData.workingGroupId, language);
     }
-    return getWorkingGroupById(activeWgId) || WORKING_GROUPS[0];
-  }, [activeDocData, activeWgId]);
+    return getWorkingGroupById(activeWgId, language) || WORKING_GROUPS[0];
+  }, [activeDocData, activeWgId, language]);
 
   const activeIndex = useMemo(() => {
     return allDocs.findIndex(

@@ -51,27 +51,27 @@ export const EuComplianceFooter: React.FC<EuComplianceFooterProps> = ({
           {/* Column 2: Navigation Links */}
           <div className="md:col-span-3 space-y-4">
             <h3 className="font-mono text-xs font-bold text-primary uppercase tracking-wider">
-              Navigation
+              {t("nav_tracks")}
             </h3>
             <ul className="space-y-2 text-xs font-light">
               <li>
                 <Link href="/mission" className="hover:text-dutchOrange transition-colors">
-                  Sovereign Mission
+                  {t("nav_mission")}
                 </Link>
               </li>
               <li>
                 <Link href="/tracks" className="hover:text-dutchOrange transition-colors">
-                  Research Tracks & DEXPI
+                  {t("nav_tracks")}
                 </Link>
               </li>
               <li>
                 <Link href="/physics" className="hover:text-dutchOrange transition-colors">
-                  Applied Physics Catalogue
+                  {t("nav_physics")}
                 </Link>
               </li>
               <li>
                 <Link href="/collaborate" className="hover:text-dutchOrange transition-colors">
-                  Pro-Bono Defense & Partnerships
+                  {t("nav_collaborate")}
                 </Link>
               </li>
             </ul>
@@ -114,7 +114,7 @@ export const EuComplianceFooter: React.FC<EuComplianceFooterProps> = ({
         {/* Bottom Bar: Copyright & NIS2 Notice */}
         <div className="border-t border-hairline pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-[10px] text-muted">
           <div>
-            &copy; {new Date().getFullYear()} Eigenia B.V. & Eigenia Labs. All rights reserved.
+            &copy; {new Date().getFullYear()} Eigenia B.V. & Eigenia Labs. {t("footer_rights")}
           </div>
           <div className="flex items-center gap-4">
             <span>NIS2 / CER Compliant Policy</span>
