@@ -5,22 +5,22 @@ Implement a complete, zero-omission Research Wiki Engine based on `howto_wiki.md
 
 ## Phases
 - [x] Phase 1: Complete Inventory & Data Registry (`web/src/lib/wiki.ts`)
-- [ ] Phase 2: Wiki Engine UI Stack (`web/src/app/wiki/page.tsx`, `web/src/components/wiki/*`)
-- [ ] Phase 3: Working Group Bento Hub (`web/src/app/tracks/page.tsx`)
-- [ ] Phase 4: KaTeX & Untruncated Article Rendering Engine
-- [ ] Phase 5: Build Verification & Deployment Test
+- [x] Phase 2: Wiki Engine UI Stack (`web/src/app/wiki/page.tsx`, `web/src/components/wiki/*`)
+- [x] Phase 3: Working Group Bento Hub (`web/src/app/tracks/page.tsx`)
+- [x] Phase 4: KaTeX & Untruncated Article Rendering Engine
+- [x] Phase 5: Build Verification & Deployment Test
 
 ## Audit Matrix (25 Documents / 8 Working Groups)
-| Working Group ID | Working Group Name | Document Count | Color Token |
-| :--- | :--- | :--- | :--- |
-| `MP-MATH` | Mathematical Physics Models | 2 | `cyan` |
-| `WG-01-UI` | Actuarial & Underwriting | 9 | `emerald` |
-| `WG-02-DT` | Digital Twin & Taleb Series | 7 | `violet` |
-| `WG-03-ML` | Psychometrics & Behavioral Modeling | 1 | `rose` |
-| `WG-04-CF` | Cascading Failures | 2 | `amber` |
-| `WG-05-CAD` | DEXPI 2.0 & CAD Interoperability | 1 | `sky` |
-| `WG-07-TM` | Threat Modeling & TACAM Matrix | 2 | `orange` |
-| `WG-08-MO` | Monte Carlo Engine Application | 1 | `indigo` |
+| Working Group ID | Working Group Name | Document Count | Color Token | Status |
+| :--- | :--- | :--- | :--- | :--- |
+| `MP-MATH` | Mathematical Physics Models | 2 | `cyan` | Complete |
+| `WG-01-UI` | Actuarial & Underwriting | 9 | `emerald` | Complete |
+| `WG-02-DT` | Digital Twin & Taleb Series | 7 | `violet` | Complete |
+| `WG-03-ML` | Psychometrics & Behavioral Modeling | 1 | `rose` | Complete |
+| `WG-04-CF` | Cascading Failures | 2 | `amber` | Complete |
+| `WG-05-CAD` | DEXPI 2.0 & CAD Interoperability | 1 | `sky` | Complete |
+| `WG-07-TM` | Threat Modeling & TACAM Matrix | 2 | `orange` | Complete |
+| `WG-08-MO` | Monte Carlo Engine Application | 1 | `indigo` | Complete |
 
 ## Errors Encountered
 | Error | Attempt | Resolution |
