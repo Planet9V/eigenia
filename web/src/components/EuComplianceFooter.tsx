@@ -6,8 +6,8 @@ import { useLanguage } from "@/context/LanguageContext";
 import { Mail } from "lucide-react";
 
 interface EuComplianceFooterProps {
-  onOpenImpressum: () => void;
-  onOpenCookies: () => void;
+  onOpenImpressum?: () => void;
+  onOpenCookies?: () => void;
 }
 
 export const EuComplianceFooter: React.FC<EuComplianceFooterProps> = ({

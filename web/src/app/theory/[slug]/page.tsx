@@ -1,35 +1,122 @@
-"use client";
-
-import React, { useState, use } from "react";
+import React from "react";
+import { Metadata } from "next";
 import { Navbar } from "@/components/Navbar";
 import { EuComplianceFooter } from "@/components/EuComplianceFooter";
-import { ImpressumModal } from "@/components/ImpressumModal";
-import { CookieConsentBanner } from "@/components/CookieConsentBanner";
 import { theoryModelsList, TheoryModel } from "@/components/TheoryCatalogue";
 import { ArrowLeft, Layers, Cpu, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { MathFormula } from "@/components/MathFormula";
+import { notFound } from "next/navigation";
 
-interface PageParams {
-  slug: string;
+export async function generateStaticParams() {
+  return theoryModelsList.map((model) => ({
+    slug: model.slug,
+  }));
 }
 
-export default function TheoryDetailPage({ params }: { params: Promise<PageParams> }) {
-  const resolvedParams = use(params);
-  const [impressumOpen, setImpressumOpen] = useState(false);
-  const [cookiesForceOpen, setCookiesForceOpen] = useState(false);
+interface PageProps {
+  params: Promise<{ slug: string }>;
+}
 
-  const model: TheoryModel = theoryModelsList.find(
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const resolvedParams = await params;
+  const model: TheoryModel | undefined = theoryModelsList.find(
     (item) => item.slug === resolvedParams.slug
-  ) || theoryModelsList[0];
+  );
+
+  if (!model) {
+    return {
+      title: "Model Not Found | Eigenia Applied Physics",
+    };
+  }
+
+  const modelUrl = `https://eigenia.com/theory/${model.slug}`;
+
+  return {
+    title: `${model.name} | Eigenia Applied Physics Catalogue`,
+    description: model.description.slice(0, 160),
+    keywords: [
+      "Eigenia Applied Physics",
+      model.name,
+      model.tag,
+      "Cyber Digital Twin",
+      "Non-Linear Dynamics",
+      "OT Cybersecurity",
+      "Industrial Control Systems",
+      "Complex Systems Physics",
+    ],
+    authors: [{ name: "J. McKenney", url: "https://eigenia.com" }],
+    creator: "Eigenia B.V.",
+    publisher: "Eigenia Labs",
+    alternates: {
+      canonical: modelUrl,
+    },
+    openGraph: {
+      title: `${model.name} — Eigenia Applied Physics`,
+      description: model.description.slice(0, 160),
+      url: modelUrl,
+      siteName: "Eigenia B.V. & Eigenia Labs",
+      locale: "en_US",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${model.name} — Eigenia Applied Physics`,
+      description: model.description.slice(0, 160),
+      creator: "@eigenia_bv",
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
+}
+
+export default async function TheoryDetailPage({ params }: PageProps) {
+  const resolvedParams = await params;
+  const model: TheoryModel | undefined = theoryModelsList.find(
+    (item) => item.slug === resolvedParams.slug
+  );
+
+  if (!model) {
+    notFound();
+  }
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    headline: model.name,
+    name: model.name,
+    articleSection: "Applied Physics & Cyber-Physical Dynamics",
+    description: model.description,
+    author: {
+      "@type": "Person",
+      name: "J. McKenney",
+      affiliation: {
+        "@type": "Organization",
+        name: "Eigenia B.V.",
+        url: "https://eigenia.com",
+      },
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Eigenia B.V. & Eigenia Labs",
+      url: "https://eigenia.com",
+    },
+    url: `https://eigenia.com/theory/${model.slug}`,
+    inLanguage: "en-US",
+  };
 
   return (
     <main className="min-h-screen bg-[#0b0c0e] text-white relative font-sans selection:bg-dutchOrange selection:text-white">
-      <Navbar
-        onOpenImpressum={() => setImpressumOpen(true)}
-        onOpenCookies={() => setCookiesForceOpen(true)}
+      {/* Schema.org Structured Data Script for AI Crawlers */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+
+      <Navbar />
 
       {/* Hero Header Band (#0b0c0e) */}
       <section className="bg-[#0b0c0e] pt-28 pb-12 border-b border-zinc-900/60">
@@ -64,9 +151,7 @@ export default function TheoryDetailPage({ params }: { params: Promise<PageParam
       {/* Main Content Section (#121417) */}
       <section className="bg-[#121417] py-16 border-b border-zinc-900/60">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-          
           <div className="p-8 sm:p-10 rounded-2xl bg-[#131519] border border-[#22252c] shadow-xl space-y-8">
-            
             {/* Formula Callout with KaTeX Typesetting */}
             <div className="p-6 rounded-xl bg-[#0b0c0e] border border-zinc-800/60 space-y-4 shadow-inner">
               <div className="flex items-center justify-between text-xs font-mono text-dutchOrange uppercase tracking-wider">
@@ -110,19 +195,11 @@ export default function TheoryDetailPage({ params }: { params: Promise<PageParam
                 This mathematical framework is integrated into Eigenia's Digital Twin Engine to replace fragile compliance checklists with continuous physical safety proofs for critical energy, water, and food networks.
               </p>
             </div>
-
           </div>
-
         </div>
       </section>
 
-      <EuComplianceFooter
-        onOpenImpressum={() => setImpressumOpen(true)}
-        onOpenCookies={() => setCookiesForceOpen(true)}
-      />
-
-      <ImpressumModal isOpen={impressumOpen} onClose={() => setImpressumOpen(false)} />
-      <CookieConsentBanner forceOpen={cookiesForceOpen} onCloseForceOpen={() => setCookiesForceOpen(false)} />
+      <EuComplianceFooter />
     </main>
   );
 }
