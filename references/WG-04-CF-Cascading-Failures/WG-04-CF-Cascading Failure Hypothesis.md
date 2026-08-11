@@ -1,4 +1,3 @@
-
 ## Cyber-Physical Attack Impact on NSW Electricity Network
 
 

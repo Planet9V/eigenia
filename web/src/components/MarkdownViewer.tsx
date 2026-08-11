@@ -8,7 +8,18 @@ interface MarkdownViewerProps {
   content: string;
 }
 
+const sanitizeMarkdownContent = (raw: string): string => {
+  if (!raw) return "";
+  let c = raw;
+  c = c.replace(/^---[\s\S]*?---\s*/g, "");
+  c = c.replace(/^(date|audience|source-code-refs|prs|memory-keys|verified-by|confidence|title|domain|tags|status|created|updated|related):\s*.*$/gm, "");
+  c = c.replace(/^(\s*-\s*("\[\[.*?\]\]"|\[\[.*?\]\]|\*\*[^*]+\*\*|physics|cdt|kramers|lacan|risk-modeling|sir|epss|granovetter|ising|spectral)\s*)+/gm, "");
+  c = c.replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g, (_, p1, p2) => p2 || p1.replace(/_/g, " "));
+  return c.trim();
+};
+
 export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content }) => {
+  const sanitizedContent = sanitizeMarkdownContent(content);
   // Helper to render inline text with KaTeX formulas and bold/italic/links
   const renderFormattedText = (text: string): React.ReactNode[] => {
     // Split text by inline math ($...$) and block math ($$...$$)
@@ -84,7 +95,7 @@ export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content }) => {
 
   // Parse lines into blocks (Headings, Paragraphs, Lists, Tables, CodeBlocks, Blockquotes, HR)
   const renderBlocks = () => {
-    const lines = content.split("\n");
+    const lines = sanitizedContent.split("\n");
     const blocks: React.ReactNode[] = [];
     let i = 0;
 

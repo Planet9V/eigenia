@@ -11,8 +11,7 @@ Insurance companies and underwriters approach cyber insurance by moving away fro
 3. **Systemic Accumulation Risk Modeling** 
 4. **Cyber Business Interruption (CBI)** 
 5. **Inside-Out OT Risk Auditing (Captive Models)**
-6. **Premium Modification and Liability Caps** 
-
+6. **Premium Modification and Liability Caps**
 
 ### **1. Continuous Telemetry and Outside-In Assessment** 
 Underwriters now utilize platforms like BitSight, SecurityScorecard, and CyberCube to conduct continuous, non-intrusive "outside-in" scans of an applicant's digital footprint. They map the attack surface by evaluating internet-facing assets, exposed vulnerabilities (CVEs), the enforcement of Multi-Factor Authentication (MFA), and Endpoint Detection and Response (EDR) software. This allows insurers to monitor emerging vulnerabilities mid-policy, transitioning their role from pure risk transfer to active risk mitigation partners. Additionally, third-party penetration testing has become a strict prerequisite to validate controls against threats like SQL injections, and underwriters heavily weight an organization's adherence to frameworks like NIST 800-53 or ISO/IEC 27001.

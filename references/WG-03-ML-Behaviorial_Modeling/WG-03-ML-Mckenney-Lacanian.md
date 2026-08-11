@@ -1,25 +1,8 @@
----
-date: 2026-05-15
-audience: [engineer, architect]
-source-code-refs: []
-prs: []
-memory-keys: []
-verified-by: ai-asserted
-confidence: low
-title: "Lacanian Psychohistory Framework — Behavioral Modeling"
-domain: engine
-tags: 
-status: complete
----
-  - lacan
-  - psychohistory
+- psychohistory
   - behavioral-analytics
   - seldon
-related:
-  - "**Threat_Actor_Profiles** <!-- ORPHAN-WAS: [[Threat_Actor_Profiles]] --> <!-- ORPHAN: 2026-05-15 unresolved -->"
-  - "[[ATQ_Threat_Actor_Models]]"
-created: 2026-05-09
-updated: 2026-05-09
+
+  - "**Threat_Actor_Profiles** <!-- ORPHAN-WAS: Threat Actor Profiles --> <!-- ORPHAN: 2026-05-15 unresolved -->"
 
 # Lacanian Psychohistory Framework
 

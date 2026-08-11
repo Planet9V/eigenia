@@ -1,26 +1,3 @@
----
-date: 2026-05-15
-audience: [engineer, architect]
-source-code-refs: []
-prs: []
-memory-keys: []
-verified-by: ai-asserted
-confidence: low
-title: "CDT Mathematical Models — Complete Formula Reference"
-layer: L0-L7
-domain: engine
-tags: [cdt, mathematics, physics, formulas, models, monte-carlo, ale, atq]
-status: complete
-created: 2026-04-30
-updated: 2026-04-30
-related: 
----
-  - "[[MOC]]"
-  - "[[Monte_Carlo_Engine]]"
-  - "[[Physics_Models]]"
-  - "[[Insurance_Underwriting_Technical]]"
-  - "[[ATQ_Threat_Actor_Models]]"
-
 # CDT Mathematical Models — Complete Formula Reference
 
 ## 1. Overview

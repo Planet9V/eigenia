@@ -1,11 +1,3 @@
-
-Background
-
-Author: jmckenney
-Date: 2026 FEB
-
-_A technical architecture brief for the CBER Eigenia Cyber Digital Twin, authored by J. McKenney_
-
 ## _What Nassim Taleb Saw in Markets, Jim McKenney Sees Every Day in the Facilities the World Depends On_
 
 ---

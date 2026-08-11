@@ -1,4 +1,3 @@
-
 # Eigenia CDT Monte Carlo Engine: Technical Investigation
 
 The Eigenia CDT Monte Carlo Engine is a sophisticated simulation system designed to model attack paths across the 7-layer Cyber-Digital-Twin (CDT). It moves beyond synthetic data to perform real-time, weighted random walks on live Neo4j graph data, enriched by temporal signals from Postgres.

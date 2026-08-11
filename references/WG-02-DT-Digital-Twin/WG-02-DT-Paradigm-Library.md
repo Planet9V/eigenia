@@ -1,14 +1,3 @@
----
-title: "Engine: Paradigm Suite"
-date: 2026-05-15
-audience: [engineer, architect]
-status: complete
-source-code-refs: []
-prs: []
-memory-keys: []
-verified-by: ai-asserted
-confidence: low
----
 # Engine: Paradigm Suite
 
 ## Overview

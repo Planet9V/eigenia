@@ -1,26 +1,3 @@
----
-date: 2026-05-15
-audience: [engineer, architect]
-source-code-refs: []
-prs: []
-memory-keys: []
-verified-by: ai-asserted
-confidence: low
-title: "Kramers Escape Model — Topological Risk Theory"
-domain: engine
-tags: 
-status: complete
----
-  - physics
-  - risk-modeling
-  - cdt
-  - kramers
-related:
-  - "[[CDT_Mathematical_Models]]"
-  - "[[Seldon_Rating_System]]"
-created: 2026-05-09
-updated: 2026-05-09
-
 # Kramers Escape Model: Topological Risk Theory
 
 > **A physics-based approach to modeling the probability of transition from a 'Secure' state to a 'Compromised' state across topological energy barriers.**

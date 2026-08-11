@@ -1,4 +1,3 @@
-
 ## 1 Fooled by Randomness → Fooled by Cybersecurity  
 
 Author: jmckenney

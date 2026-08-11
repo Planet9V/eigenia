@@ -1,4 +1,3 @@
-
 ## Taleb Fooled by Randomness
 
 

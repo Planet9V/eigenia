@@ -103,7 +103,6 @@ Beyond preventing failures, ensuring rapid recovery from a potential total grid 
 * **Developing New Solutions:** Recognizing this vulnerability, grid operators like the UK's National Grid are actively working to develop new Black Start procurement processes and technologies involving renewables, battery storage, and distributed resources.97 Pilot projects are underway, but ensuring reliable Black Start from these new sources is an ongoing challenge.97  
 * **Restoration Timelines:** While operators aim for rapid restoration (e.g., National Grid targets restoring 60% demand within 24 hours post-Black Start), official planning acknowledges it could take days (5-7 days or longer) for full restoration, especially if infrastructure is damaged or during challenging conditions like winter with low renewable output.97 This underscores the critical need for robust and diverse Black Start resources.
 
-
 #### Citations
 
 1. 5th EV Charging Infrastructure Summit \- North America 2024 \- Smart Grid Observer, accessed April 28, 2025, [https://smartgridobserver.com/EV-Summit-Chicago/](https://smartgridobserver.com/EV-Summit-Chicago/)  

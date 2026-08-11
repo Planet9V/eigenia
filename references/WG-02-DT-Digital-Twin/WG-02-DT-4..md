@@ -1,4 +1,3 @@
-
 ## 3 Technical Deep Dive
 
 Author: jmckenney
