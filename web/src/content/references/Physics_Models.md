@@ -1,32 +1,4 @@
----
-title: "Physics Models — 6 Seldon Indicators"
-date: 2026-05-15
-audience: [engineer, architect]
-status: complete
-source-code-refs: []
-prs: []
-memory-keys: []
-verified-by: ai-asserted
-confidence: low
----
-  - cdt
-  - physics
-  - sir
-  - kramers
-  - epss
-  - granovetter
-  - ising
-  - spectral
-status: complete
-created: 2026-04-30
-updated: 2026-04-30
-related:
-  - "[[MOC]]"
-  - "[[CDT_7_Layer_Architecture]]"
-  - "[[Monte_Carlo_Engine]]"
-  - "[[Seldon_Rating_System]]"
-  - "**WebSocket_Live_Data** <!-- ORPHAN-WAS: [[WebSocket_Live_Data]] --> <!-- ORPHAN: 2026-05-15 unresolved -->"
-  - "[[CDT_Mathematical_Models]]"
+- "**WebSocket_Live_Data** <!-- ORPHAN-WAS: WebSocket Live Data --> <!-- ORPHAN: 2026-05-15 unresolved -->"
 
 # Physics Models — 6 Seldon Indicators
 
@@ -79,7 +51,7 @@ FROM seldon.psychohistory_state
 WHERE computed_at > NOW() - INTERVAL '90 days'
 ```
 
-The Kramers barrier is also used in the ATQ scoring pipeline via `seldon.kramers_barriers` (per-actor barrier heights), queried by the `atq_c8_kramers()` stored procedure. See [[CDT_Mathematical_Models]] for the full barrier formula.
+The Kramers barrier is also used in the ATQ scoring pipeline via `seldon.kramers_barriers` (per-actor barrier heights), queried by the `atq_c8_kramers()` stored procedure. See CDT Mathematical Models for the full barrier formula.
 
 **Dashboard mapping:** `modelRisk("kramers") = min(1, kramers / 0.5)`, weight 0.20. Threshold: 0.40.
 

@@ -1,4 +1,3 @@
-
 # Advanced Cyber Risk Underwriting for Critical Infrastructure: Mathematical Models, Telemetry, and Premium Development
 
 3 May 2026

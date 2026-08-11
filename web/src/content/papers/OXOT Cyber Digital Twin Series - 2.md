@@ -1,4 +1,3 @@
-
 ## **2 Fooled by Cybersecurity**
 
 Author: Jim Mckenney

@@ -216,6 +216,11 @@ export function getPaperBySlug(slug: string): PaperData | null {
     return null;
   }
 
+  // Sanitize rawContent to remove any remaining YAML frontmatter or orphan header metadata
+  rawContent = rawContent.replace(/^---[\s\S]*?---\s*/g, "");
+  rawContent = rawContent.replace(/^(Background|Author:|Date:|date:|audience:|source-code-refs:|prs:|memory-keys:|verified-by:|confidence:|title:|domain:|tags:|status:|created:|updated:|related:|layer:).*/gm, "");
+  rawContent = rawContent.replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g, (m, p1, p2) => p2 || p1.replace(/_/g, " ")).trim();
+
   const lines = rawContent.split(/\r?\n/);
 
   return {

@@ -1,14 +1,3 @@
----
-title: "Engine: Graph Universe Visualizer"
-date: 2026-05-15
-audience: [engineer, architect]
-status: complete
-source-code-refs: []
-prs: []
-memory-keys: []
-verified-by: ai-asserted
-confidence: low
----
 # Engine: Graph Universe Visualizer
 
 ## Overview
