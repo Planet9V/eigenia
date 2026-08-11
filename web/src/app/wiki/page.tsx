@@ -76,7 +76,7 @@ function WikiContent() {
   };
 
   return (
-    <div className="flex h-screen w-full overflow-hidden bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 font-sans">
+    <div className="flex h-screen w-full overflow-hidden bg-canvas text-primary font-sans">
       {/* Left Accordion Table of Contents Sidebar */}
       <WikiAccordionSidebar
         activeDocId={activeDocId}
@@ -89,11 +89,11 @@ function WikiContent() {
       {/* Main Content Area */}
       <div className="flex flex-1 flex-col overflow-hidden min-w-0">
         {/* Top Navbar Header */}
-        <header className="flex h-14 items-center justify-between border-b border-slate-200 bg-white px-4 dark:border-white/10 dark:bg-slate-950 shrink-0">
+        <header className="flex h-14 items-center justify-between border-b border-hairline bg-surface px-4 shrink-0">
           <div className="flex items-center gap-3">
             <button
               onClick={() => setIsMobileSidebarOpen(true)}
-              className="p-1.5 text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white lg:hidden"
+              className="p-1.5 text-muted hover:text-primary transition-colors lg:hidden"
               aria-label="Open navigation menu"
             >
               <Menu className="h-5 w-5" />
@@ -101,7 +101,7 @@ function WikiContent() {
 
             <Link
               href="/tracks"
-              className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors"
+              className="flex items-center gap-1.5 text-xs text-muted hover:text-dutchOrange transition-colors"
             >
               <ArrowLeft className="h-3.5 w-3.5" />
               <span>Back to Research Tracks</span>
@@ -109,11 +109,11 @@ function WikiContent() {
           </div>
 
           <div className="flex items-center gap-3 text-xs">
-            <span className="hidden sm:inline-block font-mono text-[11px] text-slate-500 dark:text-slate-400">
+            <span className="hidden sm:inline-block font-mono text-[11px] text-muted">
               Eigenia Applied Complexity Think Tank
             </span>
-            <div className="h-4 w-px bg-slate-200 dark:bg-white/10 hidden sm:block" />
-            <span className="inline-flex items-center gap-1 font-mono text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+            <div className="h-4 w-px bg-hairline hidden sm:block" />
+            <span className="inline-flex items-center gap-1 font-mono text-xs font-semibold text-dutchOrange">
               <BookOpen className="h-3.5 w-3.5" />
               Wiki Engine
             </span>
@@ -140,9 +140,9 @@ export default function WikiPage() {
   return (
     <Suspense
       fallback={
-        <div className="flex h-screen w-full items-center justify-center bg-slate-950 text-white font-mono text-xs">
+        <div className="flex h-screen w-full items-center justify-center bg-canvas text-primary font-mono text-xs">
           <div className="flex items-center gap-2">
-            <Layers className="h-4 w-4 animate-spin text-emerald-400" />
+            <Layers className="h-4 w-4 animate-spin text-dutchOrange" />
             <span>Loading Sovereign Research Wiki...</span>
           </div>
         </div>
