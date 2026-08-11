@@ -131,6 +131,20 @@ export default async function PaperDetailPage({ params }: PageProps) {
 
       <Navbar />
 
+      {/* Top Research Wiki Dashboard Invitation Banner */}
+      <div className="pt-20 bg-dutchOrange/10 border-b border-dutchOrange/30 px-4 py-2 text-center text-xs font-mono text-dutchOrange">
+        <div className="max-w-7xl mx-auto flex items-center justify-center gap-2">
+          <BookOpen className="h-4 w-4 shrink-0" />
+          <span>Reading in standalone mode. Open this treatise in the complete 2-Column Sovereign Research Wiki Engine:</span>
+          <Link
+            href={`/wiki?doc=${encodeURIComponent(paper.slug)}`}
+            className="underline font-bold hover:text-white transition-colors"
+          >
+            Open Wiki Dashboard (25 Treatises) →
+          </Link>
+        </div>
+      </div>
+
       {/* Hero Header Band */}
       <section className="bg-canvas pt-28 pb-12 border-b border-hairline transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">

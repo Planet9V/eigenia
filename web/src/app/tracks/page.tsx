@@ -12,293 +12,338 @@ import {
   Cpu,
   ShieldAlert,
   Activity,
-  Network,
   Zap,
   ArrowRight,
   LayoutGrid,
   List,
   CheckCircle2,
+  Boxes,
+  Sparkles,
+  FileText,
+  ArrowUpRight,
 } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { WORKING_GROUPS, WorkingGroupCategory } from "@/lib/wiki";
+
+const WG_ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
+  "WG-01-UI": ShieldAlert,
+  "WG-02-DT": Layers,
+  "WG-03-ML": Activity,
+  "WG-04-CF": Zap,
+  "WG-05-CAD": Cpu,
+  "WG-07-TM": Boxes,
+  "WG-08-MO": Sparkles,
+  "MP-MATH": FileText,
+};
+
+const COLOR_ACCENTS: Record<
+  string,
+  { border: string; bg: string; text: string; badge: string; glow: string }
+> = {
+  cyan: {
+    border: "border-cyan-500/30 dark:border-cyan-500/20",
+    bg: "bg-cyan-500/10 dark:bg-cyan-500/5",
+    text: "text-cyan-700 dark:text-cyan-400",
+    badge: "bg-cyan-500/20 text-cyan-800 dark:text-cyan-300 border-cyan-500/30",
+    glow: "hover:shadow-[0_0_30px_rgba(6,182,212,0.15)]",
+  },
+  emerald: {
+    border: "border-emerald-500/30 dark:border-emerald-500/20",
+    bg: "bg-emerald-500/10 dark:bg-emerald-500/5",
+    text: "text-emerald-700 dark:text-emerald-400",
+    badge: "bg-emerald-500/20 text-emerald-800 dark:text-emerald-300 border-emerald-500/30",
+    glow: "hover:shadow-[0_0_30px_rgba(16,185,129,0.15)]",
+  },
+  violet: {
+    border: "border-violet-500/30 dark:border-violet-500/20",
+    bg: "bg-violet-500/10 dark:bg-violet-500/5",
+    text: "text-violet-700 dark:text-violet-400",
+    badge: "bg-violet-500/20 text-violet-800 dark:text-violet-300 border-violet-500/30",
+    glow: "hover:shadow-[0_0_30px_rgba(139,92,246,0.15)]",
+  },
+  rose: {
+    border: "border-rose-500/30 dark:border-rose-500/20",
+    bg: "bg-rose-500/10 dark:bg-rose-500/5",
+    text: "text-rose-700 dark:text-rose-400",
+    badge: "bg-rose-500/20 text-rose-800 dark:text-rose-300 border-rose-500/30",
+    glow: "hover:shadow-[0_0_30px_rgba(244,63,94,0.15)]",
+  },
+  amber: {
+    border: "border-amber-500/30 dark:border-amber-500/20",
+    bg: "bg-amber-500/10 dark:bg-amber-500/5",
+    text: "text-amber-700 dark:text-amber-400",
+    badge: "bg-amber-500/20 text-amber-800 dark:text-amber-300 border-amber-500/30",
+    glow: "hover:shadow-[0_0_30px_rgba(245,158,11,0.15)]",
+  },
+  sky: {
+    border: "border-sky-500/30 dark:border-sky-500/20",
+    bg: "bg-sky-500/10 dark:bg-sky-500/5",
+    text: "text-sky-700 dark:text-sky-400",
+    badge: "bg-sky-500/20 text-sky-800 dark:text-sky-300 border-sky-500/30",
+    glow: "hover:shadow-[0_0_30px_rgba(14,165,233,0.15)]",
+  },
+  orange: {
+    border: "border-orange-500/30 dark:border-orange-500/20",
+    bg: "bg-orange-500/10 dark:bg-orange-500/5",
+    text: "text-orange-700 dark:text-orange-400",
+    badge: "bg-orange-500/20 text-orange-800 dark:text-orange-300 border-orange-500/30",
+    glow: "hover:shadow-[0_0_30px_rgba(249,115,22,0.15)]",
+  },
+  indigo: {
+    border: "border-indigo-500/30 dark:border-indigo-500/20",
+    bg: "bg-indigo-500/10 dark:bg-indigo-500/5",
+    text: "text-indigo-700 dark:text-indigo-400",
+    badge: "bg-indigo-500/20 text-indigo-800 dark:text-indigo-300 border-indigo-500/30",
+    glow: "hover:shadow-[0_0_30px_rgba(99,102,241,0.15)]",
+  },
+};
 
 export default function TracksPage() {
   const [impressumOpen, setImpressumOpen] = useState(false);
   const [cookiesForceOpen, setCookiesForceOpen] = useState(false);
-  const [viewMode, setViewMode] = useState<"bento" | "grid">("grid");
+  const [viewMode, setViewMode] = useState<"bento" | "lines">("bento");
 
-  const researchTracks = [
-    {
-      id: "track-1",
-      number: "TRACK 01 // TALEB SERIES",
-      title: "Fooled by Randomness: Probabilistic Risk Series",
-      tag: "Heavy-Tailed Pareto Dynamics & Extreme Value Mechanics",
-      icon: BookOpen,
-      featured: true,
-      description:
-        "Standard risk models assume Gaussian normal distribution curves where extreme events sit six standard deviations out and get treated as impossible. In physical plants and connected power grids, breaches follow fat-tailed Pareto distributions where 80% of aggregate financial loss stems from 1% of Black Swan events.",
-      deliverables: [
-        "5 long-form treatises by J. McKenney applying Nassim Taleb's framework to OT",
-        "Peak-Over-Threshold (POT) asymptotic exceedance calculations",
-        "L0/L1 information divergence and survival bias proofs",
-      ],
-      href: "/papers/taleb-fooled-by-randomness",
-      buttonText: "Read Taleb Treatises (TOC Reader)",
-    },
-    {
-      id: "track-2",
-      number: "TRACK 02 // OPEN STANDARDS",
-      title: "DEXPI 2.0 P&ID Topology & CycloneDX 4-BOM",
-      tag: "Cyber-Physical Open Standards // Hardware, Software, OT & Component BOM",
-      icon: Layers,
-      featured: false,
-      description:
-        "Connecting plant P&ID design sheets directly to live physical assets. Integrates DEXPI 2.0 XML equipment schemas with CycloneDX 1.6 4-BOM attestations (Software, Hardware, OT, Component) to enforce Minimum Operational Requirements (MOR) on the plant floor.",
-      deliverables: [
-        "DEXPI 2.0 P&ID XML equipment schema parser and graph pipeline",
-        "CycloneDX 1.6 4-BOM attestation across software, hardware, and OT assets",
-        "Minimum Operational Requirements (MOR) compliance tracking",
-      ],
-      href: "/physics#dexpi",
-      buttonText: "Explore DEXPI Open Standards",
-    },
-    {
-      id: "track-3",
-      number: "TRACK 03 // ACTUARIAL",
-      title: "Catastrophe-Grade Cyber-Physical Actuarial Engine",
-      tag: "Actuarial Frameworks // Clayton Copulas & ALE",
-      icon: Cpu,
-      featured: false,
-      description:
-        "Catastrophe modeling built for physical infrastructure. Replaces static self-reported questionnaires with Clayton Copula tail dependence matrices, Aggregate Loss Exceedance (ALE) curves, Paradigm Suite risk modules, Lacanian psychohistory behavioral models, Kramers Escape barrier mechanics, and Lloyd's Y5381 war exclusion filtering.",
-      deliverables: [
-        "11 actuarial and risk engineering treatises covering COPE, Paradigm Suite, Lacanian & Kramers models",
-        "Clayton Copula lower tail dependence loss matrix",
-        "Aggregate Loss Exceedance (ALE) catastrophe loss curve",
-        "Lloyd's Y5381 physical war exclusion filtering",
-      ],
-      href: "/papers/4-underwriter-cyber-risk-underwriting",
-      buttonText: "Read Actuarial Underwriter Series (11 Treatises)",
-    },
-    {
-      id: "track-4",
-      number: "TRACK 04 // TACAM MATRIX",
-      title: "Threat Actor Capability & Motivation Quantification (TACAM)",
-      tag: "7-Dimensional Threat Actor Fingerprinting // 77,279 Data Points",
-      icon: ShieldAlert,
-      featured: false,
-      description:
-        "Analytical matrix profiling 389 threat actor groups across 77,279 data points, indexing TTPs, targeted industrial sectors, CPE hardware footprints, CWE weaknesses, OT protocols, state alignment, and campaign velocity.",
-      deliverables: [
-        "7-dimensional threat actor matrix across 77,279 data points",
-        "Cross-dimensional CPE exposure and hardware procurement queries",
-        "Real-time EPSS velocity and active campaign tracking",
-      ],
-      href: "/papers/tacam-deep-dive",
-      buttonText: "Read Deep Dive Paper (TACAM)",
-    },
-    {
-      id: "track-5",
-      number: "TRACK 05 // THREAT SCORING",
-      title: "Threat Actor Scoring: Adversary Threat Quotient (ATQ)",
-      tag: "12-Factor Materialized SQL View Scoring // 0-100 Rating",
-      icon: Activity,
-      featured: false,
-      description:
-        "A composite score (0–100) measuring real-time adversary danger. Materialized in Postgres (seldon.seldon_score_v2), the calculation combines TACAM vectors, EPSS exploit rates, and ACLED geopolitical tension metrics.",
-      deliverables: [
-        "12-factor materialized SQL view scoring formula (0–100 scale)",
-        "Calibrated saturation thresholds yielding 3.7x discriminatory gain",
-        "Continuous snapshot epochs with 90-day trajectory forecasts",
-      ],
-      href: "/papers/atq-deep-dive",
-      buttonText: "Read Deep Dive Paper (ATQ)",
-    },
-    {
-      id: "track-6",
-      number: "TRACK 06 // MONTE CARLO",
-      title: "Subgraph Building & Monte Carlo Walk Simulation",
-      tag: "Importance-Weighted BFS & Boltzmann Random Walks",
-      icon: Network,
-      featured: false,
-      description:
-        "A simulation engine running importance-weighted BFS and Boltzmann random walks on Neo4j/pgvector graph data, powered by Mulberry32 PRNG and SSE live streaming.",
-      deliverables: [
-        "Importance-weighted BFS subgraph extraction (mc-importance-bfs.ts)",
-        "Boltzmann softmax edge selection with temperature parameter T",
-        "Fat-tailed Pareto loss sampling with CVaR and TVaR risk calculations",
-      ],
-      href: "/papers/monte-carlo-engine",
-      buttonText: "Read Deep Dive Paper (Monte Carlo)",
-    },
-    {
-      id: "track-7",
-      number: "TRACK 07 // CASCADING FAILURES",
-      title: "Cascading Failure Hypothesis & Grid Frequency Instability",
-      tag: "Death Wobble Dynamics & Low-Inertia RoCoF Exceedance (>1.0 Hz/s)",
-      icon: Zap,
-      featured: false,
-      description:
-        "Modeling frequency oscillations ('Death Wobble'), Rate of Change of Frequency (RoCoF) exceedances (>1.0 Hz/s), and cascading relay trips across power grids operating with reduced rotational inertia.",
-      deliverables: [
-        "The Grid's Precarious Pulse: Frequency Instability Treatise (J. McKenney)",
-        "Cyber-physical attack impact hypothesis on the NSW 1.2M customer network",
-        "RoCoF exceedance (>1.0 Hz/s) and domino protection relay mechanics",
-      ],
-      href: "/papers/death-wobble-frequency-instability",
-      buttonText: "Read Death Wobble & Cascading Failure Papers",
-    },
-  ];
+  const totalDocuments = WORKING_GROUPS.reduce(
+    (acc, wg) => acc + wg.documents.length,
+    0
+  );
 
   return (
-    <main className="min-h-screen bg-[#0b0c0e] light:bg-[#FAF8F5] text-white light:text-[#18181B] relative font-sans selection:bg-dutchOrange selection:text-white transition-colors duration-300">
-      <Navbar
-        onOpenImpressum={() => setImpressumOpen(true)}
-        onOpenCookies={() => setCookiesForceOpen(true)}
-      />
+    <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 font-sans transition-colors duration-300">
+      <Navbar onOpenImpressum={() => setImpressumOpen(true)} />
 
-      {/* Main Header Container (Obsidian Hero Band #0b0c0e) */}
-      <section className="bg-[#0b0c0e] light:bg-[#FAF8F5] pt-28 pb-12 border-b border-zinc-900/60 light:border-[#E8E3DA]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-          {/* Breadcrumb Navigation */}
-          <Breadcrumb
-            items={[
-              { label: "Research Tracks", href: "/tracks" },
-              { label: "7 Core R&D Domains & Treatises" },
-            ]}
-          />
+      <main className="pt-24 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <Breadcrumb items={[{ label: "Research Tracks" }]} />
 
-          {/* Page Header & View Switcher */}
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
-            <div className="max-w-3xl space-y-4">
-              <span className="font-mono text-[10px] sm:text-xs tracking-[0.2em] uppercase text-dutchOrange font-medium inline-block">
-                Eigenia Labs Research Catalogue
+        {/* Page Header */}
+        <div className="mt-6 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-slate-200 dark:border-white/10 pb-8">
+          <div>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="font-mono text-xs uppercase tracking-wider font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20">
+                Eigenia Lab Working Groups
               </span>
-              <h1 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal tracking-tight text-white light:text-[#18181B]">
-                Scientific Research Tracks
-              </h1>
-              <p className="text-base sm:text-lg text-zinc-300 light:text-[#52525B] font-light leading-relaxed">
-                Seven operational research tracks covering fat-tailed risk distributions, DEXPI/CycloneDX open topology standards, catastrophe actuarial modeling, TACAM threat fingerprinting, ATQ threat scoring, Monte Carlo subgraph walks, and grid frequency collapse.
-              </p>
             </div>
+            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+              Sovereign Research Tracks & Treatises
+            </h1>
+            <p className="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-3xl leading-relaxed">
+              Explore all 8 Eigenia Lab Working Groups across 25 published treatises. Select any Working Group or paper below to open the complete 2-column Research Wiki Engine.
+            </p>
+          </div>
 
-            {/* View Mode Toggle Switcher */}
-            <div className="flex items-center gap-1 bg-[#131519] light:bg-white p-1.5 rounded-xl border border-zinc-800/60 light:border-[#E8E3DA] font-mono text-xs font-medium flex-shrink-0 shadow-sm">
+          {/* View Switcher Controls */}
+          <div className="flex items-center gap-3">
+            <Link
+              href="/wiki"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-xs shadow-md shadow-emerald-600/20 transition-colors"
+            >
+              <BookOpen className="h-4 w-4" />
+              <span>Open Full Research Wiki ({totalDocuments} Treatises)</span>
+            </Link>
+
+            <div className="flex items-center rounded-lg border border-slate-200 bg-white dark:border-white/10 dark:bg-slate-900 p-1">
               <button
                 onClick={() => setViewMode("bento")}
-                className={`px-3.5 py-1.5 rounded-lg transition-all flex items-center gap-1.5 ${
+                className={`p-1.5 rounded-md text-xs font-medium transition-colors ${
                   viewMode === "bento"
-                    ? "bg-dutchOrange text-white shadow-sm font-semibold"
-                    : "text-zinc-400 light:text-[#71717A] hover:text-white light:hover:text-[#18181B]"
+                    ? "bg-slate-100 text-slate-900 dark:bg-white/10 dark:text-white"
+                    : "text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
                 }`}
+                title="Bento Grid View"
               >
-                <LayoutGrid className="w-3.5 h-3.5" /> Bento Grid (2 Col)
+                <LayoutGrid className="h-4 w-4" />
               </button>
-
               <button
-                onClick={() => setViewMode("grid")}
-                className={`px-3.5 py-1.5 rounded-lg transition-all flex items-center gap-1.5 ${
-                  viewMode === "grid"
-                    ? "bg-dutchOrange text-white shadow-sm font-semibold"
-                    : "text-zinc-400 light:text-[#71717A] hover:text-white light:hover:text-[#18181B]"
+                onClick={() => setViewMode("lines")}
+                className={`p-1.5 rounded-md text-xs font-medium transition-colors ${
+                  viewMode === "lines"
+                    ? "bg-slate-100 text-slate-900 dark:bg-white/10 dark:text-white"
+                    : "text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
                 }`}
+                title="Lines / List View"
               >
-                <List className="w-3.5 h-3.5" /> Compact Grid (3 Col)
+                <List className="h-4 w-4" />
               </button>
             </div>
           </div>
         </div>
-      </section>
 
-      {/* 7 Core Research Tracks Cards (Charcoal Band #121417) */}
-      <section className="bg-[#121417] light:bg-[#F3F0EC] py-20 border-b border-zinc-900/60 light:border-[#E8E3DA]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          <div
-            className={`grid gap-6 font-mono text-xs ${
-              viewMode === "bento"
-                ? "grid-cols-1 md:grid-cols-2"
-                : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-            }`}
-          >
-            {researchTracks.map((track) => {
-              const IconComponent = track.icon;
-              return (
-                <motion.div
-                  key={track.id}
-                  whileHover={{ y: -4, scale: 1.01 }}
-                  className={`rounded-2xl bg-[#131519] light:bg-white space-y-6 shadow-xl flex flex-col justify-between group ${
-                    track.featured
-                      ? "border-2 border-dutchOrange shadow-2xl relative"
-                      : "border border-[#22252c] light:border-[#E8E3DA] hover:border-zinc-700/60"
-                  } ${viewMode === "grid" ? "p-6 space-y-4" : "p-8 space-y-6"}`}
-                >
-                  {track.featured && (
-                    <span className="absolute -top-3 left-6 px-3 py-0.5 rounded-full bg-dutchOrange text-white font-mono text-[9px] font-bold uppercase tracking-wider">
-                      Featured Series
-                    </span>
-                  )}
+        {/* Working Groups Display Grid */}
+        <div className="mt-8">
+          {viewMode === "bento" ? (
+            /* Bento Grid Layout */
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {WORKING_GROUPS.map((wg: WorkingGroupCategory, idx: number) => {
+                const Icon = WG_ICON_MAP[wg.id] || Layers;
+                const theme = COLOR_ACCENTS[wg.color] || COLOR_ACCENTS.emerald;
+                const isFeatured = wg.id === "WG-01-UI" || wg.id === "WG-02-DT";
 
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <div className="w-9 h-9 rounded-xl bg-dutchOrange/10 text-dutchOrange flex items-center justify-center">
-                        <IconComponent className="w-5 h-5 text-dutchOrange" />
+                return (
+                  <motion.div
+                    key={wg.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: idx * 0.05 }}
+                    className={`group relative flex flex-col justify-between rounded-2xl border bg-white p-6 shadow-sm transition-all duration-300 dark:bg-slate-900/60 backdrop-blur-md ${theme.border} ${theme.glow} ${
+                      isFeatured ? "md:col-span-2 lg:col-span-2" : ""
+                    }`}
+                  >
+                    <div>
+                      {/* Top Header */}
+                      <div className="flex items-center justify-between gap-2 mb-4">
+                        <div className="flex items-center gap-2.5">
+                          <div
+                            className={`flex h-9 w-9 items-center justify-center rounded-xl ${theme.bg} ${theme.text}`}
+                          >
+                            <Icon className="h-5 w-5" />
+                          </div>
+                          <div>
+                            <span className="font-mono text-xs font-semibold tracking-wider text-slate-500 dark:text-slate-400 block">
+                              {wg.number}
+                            </span>
+                            <h3 className="text-lg font-bold text-slate-900 dark:text-white">
+                              {wg.title}
+                            </h3>
+                          </div>
+                        </div>
+                        <span
+                          className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-mono font-medium ${theme.badge}`}
+                        >
+                          {wg.badge}
+                        </span>
                       </div>
-                      <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-dutchOrange font-medium block">
-                        {track.number}
-                      </span>
+
+                      <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
+                        {wg.description}
+                      </p>
+
+                      {/* Deliverables Treatises List */}
+                      <div className="space-y-2 mb-6">
+                        <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                          Published Treatises ({wg.documents.length}):
+                        </h4>
+                        <div className="grid grid-cols-1 gap-1.5">
+                          {wg.documents.map((doc) => (
+                            <Link
+                              key={doc.id}
+                              href={`/wiki?wg=${encodeURIComponent(wg.id)}&doc=${encodeURIComponent(doc.id)}`}
+                              className="group/item flex items-start gap-2 p-2 rounded-lg bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/50 dark:hover:bg-white/5 border border-slate-200/50 dark:border-white/5 transition-colors"
+                            >
+                              <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500 shrink-0 mt-0.5" />
+                              <div className="min-w-0 flex-1">
+                                <span className="text-xs font-medium text-slate-800 dark:text-slate-200 group-hover/item:text-emerald-600 dark:group-hover/item:text-emerald-400 line-clamp-1">
+                                  {doc.title}
+                                </span>
+                              </div>
+                              <ArrowUpRight className="h-3 w-3 text-slate-400 opacity-0 group-hover/item:opacity-100 transition-opacity shrink-0" />
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
                     </div>
 
-                    <div className="space-y-1">
-                      <h2 className="font-sans text-xl font-semibold text-white light:text-[#18181B] group-hover:text-dutchOrange transition-colors leading-tight">
-                        {track.title}
-                      </h2>
-                      <span className="text-[10px] font-mono text-zinc-400 light:text-[#71717A] block pt-1">
-                        {track.tag}
+                    {/* Action Link Button */}
+                    <div className="pt-4 border-t border-slate-100 dark:border-white/5 flex items-center justify-between">
+                      <span className="font-mono text-xs text-slate-500 dark:text-slate-400">
+                        {wg.documents.length} treatise{wg.documents.length === 1 ? "" : "s"} indexed
                       </span>
+
+                      <Link
+                        href={`/wiki?wg=${encodeURIComponent(wg.id)}`}
+                        className={`inline-flex items-center gap-1.5 text-xs font-semibold ${theme.text} hover:underline`}
+                      >
+                        <span>Open Working Group Wiki</span>
+                        <ArrowRight className="h-3.5 w-3.5" />
+                      </Link>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          ) : (
+            /* Lines / List View Layout */
+            <div className="space-y-4">
+              {WORKING_GROUPS.map((wg: WorkingGroupCategory) => {
+                const Icon = WG_ICON_MAP[wg.id] || Layers;
+                const theme = COLOR_ACCENTS[wg.color] || COLOR_ACCENTS.emerald;
+
+                return (
+                  <div
+                    key={wg.id}
+                    className={`rounded-xl border bg-white p-5 dark:bg-slate-900/60 shadow-sm transition-all ${theme.border}`}
+                  >
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 dark:border-white/5 pb-4">
+                      <div className="flex items-center gap-3">
+                        <div
+                          className={`flex h-8 w-8 items-center justify-center rounded-lg ${theme.bg} ${theme.text}`}
+                        >
+                          <Icon className="h-4 w-4" />
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <span className="font-mono text-xs font-bold text-slate-500 dark:text-slate-400">
+                              {wg.number}
+                            </span>
+                            <span
+                              className={`inline-flex items-center rounded-full border px-2 py-0.5 text-[10px] font-mono font-medium ${theme.badge}`}
+                            >
+                              {wg.badge}
+                            </span>
+                          </div>
+                          <h3 className="text-base font-bold text-slate-900 dark:text-white">
+                            {wg.title}
+                          </h3>
+                        </div>
+                      </div>
+
+                      <Link
+                        href={`/wiki?wg=${encodeURIComponent(wg.id)}`}
+                        className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold ${theme.bg} ${theme.text} border ${theme.border} hover:opacity-90 transition-opacity`}
+                      >
+                        <span>Open Wiki ({wg.documents.length} Docs)</span>
+                        <ArrowRight className="h-3.5 w-3.5" />
+                      </Link>
                     </div>
 
-                    <p className="text-sm text-zinc-300 light:text-[#52525B] font-sans leading-relaxed font-light">
-                      {track.description}
+                    <p className="mt-3 text-xs text-slate-600 dark:text-slate-400">
+                      {wg.description}
                     </p>
 
-                    <div className="space-y-2 pt-3 border-t border-zinc-900 light:border-[#E8E3DA] font-sans">
-                      <span className="font-mono text-[10px] tracking-[0.2em] text-dutchOrange uppercase font-medium block">
-                        Deliverables & Schemas:
-                      </span>
-                      {track.deliverables.map((item, idx) => (
-                        <div key={idx} className="flex items-start gap-2 text-xs text-zinc-300 light:text-[#3F3F46]">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-dutchOrange flex-shrink-0 mt-0.5" />
-                          <span>{item}</span>
-                        </div>
+                    <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+                      {wg.documents.map((doc) => (
+                        <Link
+                          key={doc.id}
+                          href={`/wiki?wg=${encodeURIComponent(wg.id)}&doc=${encodeURIComponent(doc.id)}`}
+                          className="flex items-center justify-between p-2 rounded-lg border border-slate-200/60 bg-slate-50 hover:bg-slate-100 dark:border-white/5 dark:bg-slate-950/40 dark:hover:bg-white/5 text-xs text-slate-700 dark:text-slate-300 transition-colors"
+                        >
+                          <span className="truncate font-medium">{doc.title}</span>
+                          <ArrowRight className="h-3 w-3 text-slate-400 shrink-0 ml-1" />
+                        </Link>
                       ))}
                     </div>
                   </div>
-
-                  <Link
-                    href={track.href}
-                    className={`pt-4 border-t border-zinc-900 light:border-[#E8E3DA] font-sans text-xs font-semibold flex items-center justify-between group-hover:translate-x-1 transition-transform ${
-                      track.featured ? "text-dutchOrange" : "text-white light:text-[#18181B] hover:text-dutchOrange"
-                    }`}
-                  >
-                    <span className="flex items-center gap-1.5">
-                      {track.buttonText}
-                    </span>
-                    <ArrowRight className="w-4 h-4 text-dutchOrange" />
-                  </Link>
-                </motion.div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+          )}
         </div>
-      </section>
+      </main>
 
       <EuComplianceFooter
         onOpenImpressum={() => setImpressumOpen(true)}
         onOpenCookies={() => setCookiesForceOpen(true)}
       />
 
-      <ImpressumModal isOpen={impressumOpen} onClose={() => setImpressumOpen(false)} />
-      <CookieConsentBanner forceOpen={cookiesForceOpen} onCloseForceOpen={() => setCookiesForceOpen(false)} />
-    </main>
+      <ImpressumModal
+        isOpen={impressumOpen}
+        onClose={() => setImpressumOpen(false)}
+      />
+
+      <CookieConsentBanner
+        forceOpen={cookiesForceOpen}
+        onCloseForce={() => setCookiesForceOpen(false)}
+      />
+    </div>
   );
 }

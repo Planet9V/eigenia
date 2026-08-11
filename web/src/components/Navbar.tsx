@@ -92,70 +92,57 @@ export const Navbar: React.FC<NavbarProps> = () => {
                     className="absolute top-full left-0 w-96 bg-surface rounded-2xl shadow-2xl p-4 space-y-1.5 z-50 font-mono text-xs max-h-[460px] overflow-y-auto border border-hairline"
                   >
                     <Link
-                      href="/papers/taleb-fooled-by-randomness"
-                      className="block p-2.5 rounded-xl hover:bg-subtle transition-colors"
+                      href="/wiki"
+                      className="block p-2.5 rounded-xl bg-dutchOrange/10 border border-dutchOrange/30 hover:bg-dutchOrange/20 transition-colors"
                     >
-                      <span className="text-dutchOrange font-bold block text-[11px]">Track 1 // Probabilistic Risk</span>
-                      <span className="text-primary block font-sans text-xs">Taleb 5-Paper Series</span>
+                      <span className="text-dutchOrange font-bold block text-[11px]">Sovereign Research Wiki Dashboard</span>
+                      <span className="text-primary block font-sans text-xs">All 25 Treatises across 8 Working Groups (Sliding TOC)</span>
                     </Link>
 
                     <Link
-                      href="/physics#dexpi"
+                      href="/wiki?wg=WG-01-UI"
                       className="block p-2.5 rounded-xl hover:bg-subtle transition-colors"
                     >
-                      <span className="text-dutchOrange font-bold block text-[11px]">Track 2 // Cyber-Physical Standards</span>
-                      <span className="text-primary block font-sans text-xs">DEXPI 2.0 & CycloneDX 4-BOM</span>
+                      <span className="text-dutchOrange font-bold block text-[11px]">WG-01 // Actuarial & Underwriting</span>
+                      <span className="text-primary block font-sans text-xs">9 Treatises: COPE, Clayton Copulas, War Exclusions</span>
                     </Link>
 
                     <Link
-                      href="/papers/4-underwriter-cyber-risk-underwriting"
+                      href="/wiki?wg=WG-02-DT"
                       className="block p-2.5 rounded-xl hover:bg-subtle transition-colors"
                     >
-                      <span className="text-dutchOrange font-bold block text-[11px]">Track 3 // Actuarial Re-Invention</span>
-                      <span className="text-primary block font-sans text-xs">11 Treatises: COPE, Paradigm, Lacan & Kramers</span>
+                      <span className="text-dutchOrange font-bold block text-[11px]">WG-02 // Digital Twin & Taleb Series</span>
+                      <span className="text-primary block font-sans text-xs">7 Treatises: Taleb Series I-V, 3.2M Graph Topology</span>
                     </Link>
 
                     <Link
-                      href="/papers/tacam-deep-dive"
+                      href="/wiki?wg=WG-07-TM"
                       className="block p-2.5 rounded-xl hover:bg-subtle transition-colors"
                     >
-                      <span className="text-dutchOrange font-bold block text-[11px]">Track 4 // TACAM Matrix</span>
-                      <span className="text-primary block font-sans text-xs">7D Threat Actor Matrix (77,279 Points)</span>
+                      <span className="text-dutchOrange font-bold block text-[11px]">WG-07 // Threat Modeling & TACAM</span>
+                      <span className="text-primary block font-sans text-xs">TACAM 7D Matrix & ATQ 12-Factor Scoring</span>
                     </Link>
 
                     <Link
-                      href="/papers/atq-deep-dive"
+                      href="/wiki?wg=WG-04-CF"
                       className="block p-2.5 rounded-xl hover:bg-subtle transition-colors"
                     >
-                      <span className="text-dutchOrange font-bold block text-[11px]">Track 5 // Threat Scoring</span>
-                      <span className="text-primary block font-sans text-xs">Adversary Threat Quotient (ATQ) 12-Factor</span>
-                    </Link>
-
-                    <Link
-                      href="/papers/monte-carlo-engine"
-                      className="block p-2.5 rounded-xl hover:bg-subtle transition-colors"
-                    >
-                      <span className="text-dutchOrange font-bold block text-[11px]">Track 6 // Monte Carlo Engine</span>
-                      <span className="text-primary block font-sans text-xs">Importance BFS & Softmax Walk</span>
-                    </Link>
-
-                    <Link
-                      href="/papers/death-wobble-frequency-instability"
-                      className="block p-2.5 rounded-xl hover:bg-subtle transition-colors"
-                    >
-                      <span className="text-dutchOrange font-bold block text-[11px]">Track 7 // Cascading Failures</span>
-                      <span className="text-primary block font-sans text-xs">Death Wobble & Grid Pulse Instability</span>
+                      <span className="text-dutchOrange font-bold block text-[11px]">WG-04 // Cascading Failures</span>
+                      <span className="text-primary block font-sans text-xs">Death Wobble & Energy Grid Instability</span>
                     </Link>
 
                     <div className="pt-2 border-t border-hairline text-center">
                       <Link
-                        href="/tracks"
+                        href="/wiki"
                         className="text-[11px] text-dutchOrange font-bold hover:underline block py-1"
                       >
-                        {t("nav_view_all_tracks")}
+                        Open Sovereign Research Wiki Dashboard (25 Treatises) →
                       </Link>
                     </div>
                   </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
                 )}
               </AnimatePresence>
             </div>
