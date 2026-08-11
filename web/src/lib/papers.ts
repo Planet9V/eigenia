@@ -216,7 +216,7 @@ export function getPaperBySlug(slug: string): PaperData | null {
     return null;
   }
 
-  const lines = rawContent.splitlines ? rawContent.splitlines() : rawContent.split(/\r?\n/);
+  const lines = rawContent.split(/\r?\n/);
 
   return {
     slug,
