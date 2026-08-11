@@ -14,33 +14,35 @@ export const TheoryCatalogue: React.FC = () => {
   const [viewMode, setViewMode] = useState<"bento" | "grid">("grid");
 
   return (
-    <section id="theory" className="py-20 bg-[#16181d] text-white relative font-sans selection:bg-dutchOrange selection:text-white scroll-mt-24 border-b border-zinc-900/60">
+    <section
+      id="theory"
+      className="py-20 bg-[#16181d] light:bg-[#FAF8F5] text-white light:text-[#18181B] relative font-sans selection:bg-dutchOrange selection:text-white scroll-mt-24 border-b border-zinc-900/60 light:border-[#E8E3DA] transition-colors duration-300"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        
         {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 border-b border-zinc-900 pb-8">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 border-b border-zinc-900 light:border-[#E8E3DA] pb-8">
           <div className="max-w-3xl space-y-3">
             <span className="font-mono text-[10px] sm:text-xs tracking-[0.2em] uppercase text-dutchOrange font-medium inline-block">
               Open Scientific Research Catalogue
             </span>
 
-            <h2 className="font-serif text-xl sm:text-2xl lg:text-3xl font-normal tracking-tight text-white">
+            <h2 className="font-serif text-xl sm:text-2xl lg:text-3xl font-normal tracking-tight text-white light:text-[#18181B]">
               Applied Physics & Mathematical Frameworks
             </h2>
 
-            <p className="text-sm sm:text-base text-zinc-300 font-light leading-relaxed">
+            <p className="text-sm sm:text-base text-zinc-300 light:text-[#52525B] font-light leading-relaxed">
               9 non-linear physical risk models, algebraic topology frameworks, and statistical thermodynamics algorithms implemented across the Eigenia digital twin engine.
             </p>
           </div>
 
           {/* View Mode Toggle Switcher */}
-          <div className="flex items-center gap-1 bg-[#0b0c0e] p-1.5 rounded-xl border border-zinc-800/60 font-mono text-xs font-medium flex-shrink-0">
+          <div className="flex items-center gap-1 bg-[#0b0c0e] light:bg-white p-1.5 rounded-xl border border-zinc-800/60 light:border-[#E8E3DA] font-mono text-xs font-medium flex-shrink-0 shadow-sm">
             <button
               onClick={() => setViewMode("bento")}
               className={`px-3.5 py-1.5 rounded-lg transition-all flex items-center gap-1.5 ${
                 viewMode === "bento"
                   ? "bg-dutchOrange text-white shadow-sm font-semibold"
-                  : "text-zinc-400 hover:text-white"
+                  : "text-zinc-400 light:text-[#71717A] hover:text-white light:hover:text-[#18181B]"
               }`}
             >
               <LayoutGrid className="w-3.5 h-3.5" /> Bento Grid (2 Col)
@@ -51,7 +53,7 @@ export const TheoryCatalogue: React.FC = () => {
               className={`px-3.5 py-1.5 rounded-lg transition-all flex items-center gap-1.5 ${
                 viewMode === "grid"
                   ? "bg-dutchOrange text-white shadow-sm font-semibold"
-                  : "text-zinc-400 hover:text-white"
+                  : "text-zinc-400 light:text-[#71717A] hover:text-white light:hover:text-[#18181B]"
               }`}
             >
               <List className="w-3.5 h-3.5" /> Compact Grid (3 Col)
@@ -59,7 +61,7 @@ export const TheoryCatalogue: React.FC = () => {
           </div>
         </div>
 
-        {/* 9 Models Grid (Dynamic Grid Class for Bento vs Compact) */}
+        {/* 9 Models Grid */}
         <div
           className={`grid gap-6 font-mono text-xs ${
             viewMode === "bento"
@@ -71,7 +73,7 @@ export const TheoryCatalogue: React.FC = () => {
             <motion.div
               key={model.id}
               whileHover={{ y: -4, scale: 1.01 }}
-              className={`rounded-2xl bg-[#131519] border border-[#22252c] hover:border-zinc-700/60 transition-all shadow-xl flex flex-col justify-between group ${
+              className={`rounded-2xl bg-[#131519] light:bg-white border border-[#22252c] light:border-[#E8E3DA] hover:border-zinc-700/60 transition-all shadow-xl flex flex-col justify-between group ${
                 viewMode === "grid" ? "p-6 space-y-4" : "p-8 space-y-6"
               }`}
             >
@@ -86,29 +88,29 @@ export const TheoryCatalogue: React.FC = () => {
                 </div>
 
                 <div className="space-y-1">
-                  <h3 className="font-sans text-xl font-semibold text-white group-hover:text-dutchOrange transition-colors">
+                  <h3 className="font-sans text-xl font-semibold text-white light:text-[#18181B] group-hover:text-dutchOrange transition-colors">
                     {model.name}
                   </h3>
-                  <span className="text-[10px] font-mono text-zinc-400 block pt-0.5">
+                  <span className="text-[10px] font-mono text-zinc-400 light:text-[#71717A] block pt-0.5">
                     {model.tag}
                   </span>
                 </div>
 
                 {/* KaTeX Rendered Mathematical Formula Box */}
-                <div className="p-4 rounded-xl bg-[#0b0c0e] border border-zinc-800/60 font-mono text-xs overflow-x-auto min-h-[60px] flex items-center justify-center">
+                <div className="p-4 rounded-xl bg-[#0b0c0e] light:bg-[#F3F0EC] border border-zinc-800/60 light:border-[#E8E3DA] font-mono text-xs overflow-x-auto min-h-[60px] flex items-center justify-center">
                   <MathFormula formula={model.formula} />
                 </div>
 
-                <p className="text-sm text-zinc-300 font-sans leading-relaxed font-light">
+                <p className="text-sm text-zinc-300 light:text-[#52525B] font-sans leading-relaxed font-light">
                   {model.description}
                 </p>
 
-                <div className="space-y-2 pt-3 border-t border-zinc-900 font-sans">
+                <div className="space-y-2 pt-3 border-t border-zinc-900 light:border-[#E8E3DA] font-sans">
                   <span className="font-mono text-[10px] tracking-[0.2em] text-dutchOrange uppercase font-medium block">
                     Deliverables & Proofs:
                   </span>
                   {model.deliverables.map((item, idx) => (
-                    <div key={idx} className="flex items-center gap-2 text-xs text-zinc-300">
+                    <div key={idx} className="flex items-center gap-2 text-xs text-zinc-300 light:text-[#3F3F46]">
                       <span className="text-dutchOrange font-bold">&bull;</span>
                       <span>{item}</span>
                     </div>
@@ -118,7 +120,7 @@ export const TheoryCatalogue: React.FC = () => {
 
               <Link
                 href={`/theory/${model.slug}`}
-                className="pt-4 border-t border-zinc-900 text-dutchOrange font-sans text-xs font-semibold flex items-center justify-between group-hover:translate-x-1 transition-transform"
+                className="pt-4 border-t border-zinc-900 light:border-[#E8E3DA] text-dutchOrange font-sans text-xs font-semibold flex items-center justify-between group-hover:translate-x-1 transition-transform"
               >
                 <span className="flex items-center gap-1.5">
                   Read Mathematical Specification
@@ -128,7 +130,6 @@ export const TheoryCatalogue: React.FC = () => {
             </motion.div>
           ))}
         </div>
-
       </div>
     </section>
   );

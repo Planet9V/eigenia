@@ -60,6 +60,20 @@ export const researchTracksList: ResearchTrack[] = [
       "Lloyd's Y5381 Physical State Exclusion Validation",
     ],
   },
+  {
+    id: "track-4",
+    tag: "Track 4 // Sovereign Defense Protocols",
+    titleKey: "track4_title",
+    descKey: "track4_desc",
+    badge: "PRO-BONO ADVISORY",
+    bentoSpan: "col-span-1 md:col-span-1",
+    href: "/collaborate",
+    deliverables: [
+      "100% Pro-Bono Sovereign Defense Assessments",
+      "Zero-Trust Industrial Plant Architecture Review",
+      "Continuous Cyber-Physical Digital Twin Telemetry",
+    ],
+  },
 ];
 
 export const LabsShowcase: React.FC = () => {
@@ -67,34 +81,35 @@ export const LabsShowcase: React.FC = () => {
   const [viewMode, setViewMode] = useState<"bento" | "grid">("grid");
 
   return (
-    <section id="labs" className="py-20 bg-black text-white relative font-sans selection:bg-dutchOrange selection:text-white">
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-        
-        {/* Header & Controls Bar */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 border-b border-zinc-900/60 pb-6">
+    <section
+      id="labs"
+      className="py-20 bg-[#121417] light:bg-[#F3F0EC] text-white light:text-[#18181B] transition-colors duration-300 border-b border-zinc-900/60 light:border-[#E8E3DA]"
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        {/* Header */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 border-b border-zinc-900 light:border-[#E8E3DA] pb-8">
           <div className="max-w-3xl space-y-3">
-            <span className="text-xs font-mono text-dutchOrange font-normal inline-block">
-              {t("labs_tag" as any)}
+            <span className="font-mono text-[10px] sm:text-xs tracking-[0.2em] uppercase text-dutchOrange font-medium inline-block">
+              {t("labs_badge" as any)}
             </span>
 
-            <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-white uppercase font-mono">
+            <h2 className="font-serif text-xl sm:text-2xl lg:text-3xl font-normal tracking-tight text-white light:text-[#18181B] leading-tight">
               {t("labs_title" as any)}
             </h2>
 
-            <p className="text-sm sm:text-base text-zinc-300 font-light leading-relaxed">
+            <p className="text-sm sm:text-base text-zinc-300 light:text-[#52525B] font-light leading-relaxed">
               {t("labs_desc" as any)}
             </p>
           </div>
 
           {/* View Mode Toggle Switcher */}
-          <div className="flex items-center gap-1 bg-zinc-950 p-1.5 rounded-xl font-mono text-xs font-bold shadow-xs">
+          <div className="flex items-center gap-1 bg-zinc-950 light:bg-white p-1.5 rounded-xl border border-zinc-800 light:border-[#E8E3DA] font-mono text-xs font-medium shadow-sm">
             <button
               onClick={() => setViewMode("bento")}
               className={`px-3.5 py-1.5 rounded-lg transition-all flex items-center gap-1.5 ${
                 viewMode === "bento"
                   ? "bg-dutchOrange text-white shadow-sm font-bold"
-                  : "text-zinc-400 hover:text-white font-medium"
+                  : "text-zinc-400 light:text-[#71717A] hover:text-white light:hover:text-[#18181B]"
               }`}
             >
               <LayoutGrid className="w-3.5 h-3.5" /> Bento Grid
@@ -105,7 +120,7 @@ export const LabsShowcase: React.FC = () => {
               className={`px-3.5 py-1.5 rounded-lg transition-all flex items-center gap-1.5 ${
                 viewMode === "grid"
                   ? "bg-dutchOrange text-white shadow-sm font-bold"
-                  : "text-zinc-400 hover:text-white font-medium"
+                  : "text-zinc-400 light:text-[#71717A] hover:text-white light:hover:text-[#18181B]"
               }`}
             >
               <List className="w-3.5 h-3.5" /> Compact Grid
@@ -113,41 +128,45 @@ export const LabsShowcase: React.FC = () => {
           </div>
         </div>
 
-        {/* Bento Cards (Frameless Pure Dark Cards) */}
-        <div className={`grid gap-6 font-mono text-xs ${viewMode === "bento" ? "grid-cols-1 md:grid-cols-3" : "grid-cols-1 md:grid-cols-3"}`}>
+        {/* Bento Cards */}
+        <div
+          className={`grid gap-6 font-mono text-xs ${
+            viewMode === "bento" ? "grid-cols-1 md:grid-cols-3" : "grid-cols-1 md:grid-cols-3"
+          }`}
+        >
           {researchTracksList.map((track) => {
             const spanClass = viewMode === "bento" ? track.bentoSpan : "col-span-1";
             return (
               <motion.div
                 key={track.id}
                 whileHover={{ y: -4, scale: 1.01 }}
-                className={`${spanClass} p-6 sm:p-8 rounded-3xl bg-zinc-950/60 hover:bg-zinc-900/50 transition-all shadow-2xl flex flex-col justify-between space-y-6 group`}
+                className={`${spanClass} p-6 sm:p-8 rounded-3xl bg-zinc-950/60 light:bg-white hover:bg-zinc-900/50 light:hover:bg-[#FAF8F5] border border-zinc-900/60 light:border-[#E8E3DA] transition-all shadow-xl flex flex-col justify-between space-y-6 group`}
               >
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-mono text-dutchOrange font-normal inline-block">
                       {track.tag}
                     </span>
-                    <span className="text-[10px] font-mono text-zinc-400 uppercase">
+                    <span className="text-[10px] font-mono text-zinc-400 light:text-[#71717A] uppercase">
                       {track.badge}
                     </span>
                   </div>
 
-                  <h3 className="text-xl sm:text-2xl font-bold text-white uppercase group-hover:text-dutchOrange transition-colors">
+                  <h3 className="text-xl sm:text-2xl font-normal font-serif text-white light:text-[#18181B] group-hover:text-dutchOrange transition-colors">
                     {t(track.titleKey as any)}
                   </h3>
 
-                  <p className="text-xs sm:text-sm text-zinc-300 font-sans leading-relaxed font-light">
+                  <p className="text-xs sm:text-sm text-zinc-300 light:text-[#52525B] font-sans leading-relaxed font-light">
                     {t(track.descKey as any)}
                   </p>
 
                   {/* Core Deliverables Bullet List */}
-                  <div className="space-y-2 pt-2 border-t border-zinc-900/60 font-sans">
+                  <div className="space-y-2 pt-2 border-t border-zinc-900/60 light:border-[#E8E3DA] font-sans">
                     <span className="text-xs font-mono text-dutchOrange font-normal block uppercase">
                       Deliverables & Schemas:
                     </span>
                     {track.deliverables.map((item, idx) => (
-                      <div key={idx} className="flex items-center gap-2 text-xs text-zinc-300">
+                      <div key={idx} className="flex items-center gap-2 text-xs text-zinc-300 light:text-[#3F3F46]">
                         <span className="text-dutchOrange font-bold">&bull;</span>
                         <span>{item}</span>
                       </div>
@@ -157,7 +176,7 @@ export const LabsShowcase: React.FC = () => {
 
                 <Link
                   href={track.href}
-                  className="pt-4 border-t border-zinc-900/60 text-dutchOrange font-bold text-xs flex items-center justify-between group-hover:translate-x-1 transition-transform uppercase tracking-wider"
+                  className="pt-4 border-t border-zinc-900/60 light:border-[#E8E3DA] text-dutchOrange font-bold text-xs flex items-center justify-between group-hover:translate-x-1 transition-transform uppercase tracking-wider"
                 >
                   <span>Explore Research Track</span>
                   <ArrowRight className="w-4 h-4" />
@@ -166,7 +185,6 @@ export const LabsShowcase: React.FC = () => {
             );
           })}
         </div>
-
       </div>
     </section>
   );

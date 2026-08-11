@@ -6,11 +6,23 @@ import { EuComplianceFooter } from "@/components/EuComplianceFooter";
 import { ImpressumModal } from "@/components/ImpressumModal";
 import { CookieConsentBanner } from "@/components/CookieConsentBanner";
 import { Breadcrumb } from "@/components/Breadcrumb";
-import { ArrowRight, CheckCircle2, BookOpen, Layers, Cpu, ShieldAlert, Activity, Network, Zap, LayoutGrid, List } from "lucide-react";
+import {
+  BookOpen,
+  Layers,
+  Cpu,
+  ShieldAlert,
+  Activity,
+  Network,
+  Zap,
+  ArrowRight,
+  LayoutGrid,
+  List,
+  CheckCircle2,
+} from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-export default function ResearchTracksPage() {
+export default function TracksPage() {
   const [impressumOpen, setImpressumOpen] = useState(false);
   const [cookiesForceOpen, setCookiesForceOpen] = useState(false);
   const [viewMode, setViewMode] = useState<"bento" | "grid">("grid");
@@ -139,16 +151,15 @@ export default function ResearchTracksPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-[#0b0c0e] text-white relative font-sans selection:bg-dutchOrange selection:text-white">
+    <main className="min-h-screen bg-[#0b0c0e] light:bg-[#FAF8F5] text-white light:text-[#18181B] relative font-sans selection:bg-dutchOrange selection:text-white transition-colors duration-300">
       <Navbar
         onOpenImpressum={() => setImpressumOpen(true)}
         onOpenCookies={() => setCookiesForceOpen(true)}
       />
 
       {/* Main Header Container (Obsidian Hero Band #0b0c0e) */}
-      <section className="bg-[#0b0c0e] pt-28 pb-12 border-b border-zinc-900/60">
+      <section className="bg-[#0b0c0e] light:bg-[#FAF8F5] pt-28 pb-12 border-b border-zinc-900/60 light:border-[#E8E3DA]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-          
           {/* Breadcrumb Navigation */}
           <Breadcrumb
             items={[
@@ -163,22 +174,22 @@ export default function ResearchTracksPage() {
               <span className="font-mono text-[10px] sm:text-xs tracking-[0.2em] uppercase text-dutchOrange font-medium inline-block">
                 Eigenia Labs Research Catalogue
               </span>
-              <h1 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal tracking-tight text-white">
+              <h1 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal tracking-tight text-white light:text-[#18181B]">
                 Scientific Research Tracks
               </h1>
-              <p className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed">
+              <p className="text-base sm:text-lg text-zinc-300 light:text-[#52525B] font-light leading-relaxed">
                 Seven operational research tracks covering fat-tailed risk distributions, DEXPI/CycloneDX open topology standards, catastrophe actuarial modeling, TACAM threat fingerprinting, ATQ threat scoring, Monte Carlo subgraph walks, and grid frequency collapse.
               </p>
             </div>
 
             {/* View Mode Toggle Switcher */}
-            <div className="flex items-center gap-1 bg-[#131519] p-1.5 rounded-xl border border-zinc-800/60 font-mono text-xs font-medium flex-shrink-0">
+            <div className="flex items-center gap-1 bg-[#131519] light:bg-white p-1.5 rounded-xl border border-zinc-800/60 light:border-[#E8E3DA] font-mono text-xs font-medium flex-shrink-0 shadow-sm">
               <button
                 onClick={() => setViewMode("bento")}
                 className={`px-3.5 py-1.5 rounded-lg transition-all flex items-center gap-1.5 ${
                   viewMode === "bento"
                     ? "bg-dutchOrange text-white shadow-sm font-semibold"
-                    : "text-zinc-400 hover:text-white"
+                    : "text-zinc-400 light:text-[#71717A] hover:text-white light:hover:text-[#18181B]"
                 }`}
               >
                 <LayoutGrid className="w-3.5 h-3.5" /> Bento Grid (2 Col)
@@ -189,19 +200,18 @@ export default function ResearchTracksPage() {
                 className={`px-3.5 py-1.5 rounded-lg transition-all flex items-center gap-1.5 ${
                   viewMode === "grid"
                     ? "bg-dutchOrange text-white shadow-sm font-semibold"
-                    : "text-zinc-400 hover:text-white"
+                    : "text-zinc-400 light:text-[#71717A] hover:text-white light:hover:text-[#18181B]"
                 }`}
               >
                 <List className="w-3.5 h-3.5" /> Compact Grid (3 Col)
               </button>
             </div>
           </div>
-
         </div>
       </section>
 
       {/* 7 Core Research Tracks Cards (Charcoal Band #121417) */}
-      <section className="bg-[#121417] py-20 border-b border-zinc-900/60">
+      <section className="bg-[#121417] light:bg-[#F3F0EC] py-20 border-b border-zinc-900/60 light:border-[#E8E3DA]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <div
             className={`grid gap-6 font-mono text-xs ${
@@ -216,10 +226,10 @@ export default function ResearchTracksPage() {
                 <motion.div
                   key={track.id}
                   whileHover={{ y: -4, scale: 1.01 }}
-                  className={`rounded-2xl bg-[#131519] space-y-6 shadow-xl flex flex-col justify-between group ${
+                  className={`rounded-2xl bg-[#131519] light:bg-white space-y-6 shadow-xl flex flex-col justify-between group ${
                     track.featured
                       ? "border-2 border-dutchOrange shadow-2xl relative"
-                      : "border border-[#22252c] hover:border-zinc-700/60"
+                      : "border border-[#22252c] light:border-[#E8E3DA] hover:border-zinc-700/60"
                   } ${viewMode === "grid" ? "p-6 space-y-4" : "p-8 space-y-6"}`}
                 >
                   {track.featured && (
@@ -239,24 +249,24 @@ export default function ResearchTracksPage() {
                     </div>
 
                     <div className="space-y-1">
-                      <h2 className="font-sans text-xl font-semibold text-white group-hover:text-dutchOrange transition-colors leading-tight">
+                      <h2 className="font-sans text-xl font-semibold text-white light:text-[#18181B] group-hover:text-dutchOrange transition-colors leading-tight">
                         {track.title}
                       </h2>
-                      <span className="text-[10px] font-mono text-zinc-400 block pt-1">
+                      <span className="text-[10px] font-mono text-zinc-400 light:text-[#71717A] block pt-1">
                         {track.tag}
                       </span>
                     </div>
 
-                    <p className="text-sm text-zinc-300 font-sans leading-relaxed font-light">
+                    <p className="text-sm text-zinc-300 light:text-[#52525B] font-sans leading-relaxed font-light">
                       {track.description}
                     </p>
 
-                    <div className="space-y-2 pt-3 border-t border-zinc-900 font-sans">
+                    <div className="space-y-2 pt-3 border-t border-zinc-900 light:border-[#E8E3DA] font-sans">
                       <span className="font-mono text-[10px] tracking-[0.2em] text-dutchOrange uppercase font-medium block">
                         Deliverables & Schemas:
                       </span>
                       {track.deliverables.map((item, idx) => (
-                        <div key={idx} className="flex items-start gap-2 text-xs text-zinc-300">
+                        <div key={idx} className="flex items-start gap-2 text-xs text-zinc-300 light:text-[#3F3F46]">
                           <CheckCircle2 className="w-3.5 h-3.5 text-dutchOrange flex-shrink-0 mt-0.5" />
                           <span>{item}</span>
                         </div>
@@ -266,8 +276,8 @@ export default function ResearchTracksPage() {
 
                   <Link
                     href={track.href}
-                    className={`pt-4 border-t border-zinc-900 font-sans text-xs font-semibold flex items-center justify-between group-hover:translate-x-1 transition-transform ${
-                      track.featured ? "text-dutchOrange" : "text-white hover:text-dutchOrange"
+                    className={`pt-4 border-t border-zinc-900 light:border-[#E8E3DA] font-sans text-xs font-semibold flex items-center justify-between group-hover:translate-x-1 transition-transform ${
+                      track.featured ? "text-dutchOrange" : "text-white light:text-[#18181B] hover:text-dutchOrange"
                     }`}
                   >
                     <span className="flex items-center gap-1.5">
