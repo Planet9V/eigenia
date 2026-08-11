@@ -1,12 +1,8 @@
-# OXOT Cyber Digital Twin Series — Paper I: Foundational Concepts
-## 2 Fooled by Cybersecurity
+# Fooled by Best Practice
 
-Author: Jim Mckenney
-Date: 2026 FEB
+Lab Sponsor Resident,  j.mckenney
 
-A technical architecture brief for the CYBER Eigenia Cyber Digital Twin
-
-#### *Nassim Taleb Exposed the Illusions of Wall Street. The Eigenia Cyber Digital Twin Exposes the Same Illusions in the World That Keeps the Lights On.*
+Nassim Taleb Exposed the Illusions of Wall Street. The Eigenia Cyber Digital Twin Exposes the Same Illusions in the World That Keeps the Lights On.
 
 ---
 
