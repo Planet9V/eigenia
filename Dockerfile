@@ -16,7 +16,6 @@ FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY web ./
-COPY papers ./papers
 COPY references ./references
 
 ENV NEXT_TELEMETRY_DISABLED=1
