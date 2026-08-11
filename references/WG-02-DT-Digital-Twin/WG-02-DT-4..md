@@ -1,11 +1,6 @@
-# OXOT Cyber Digital Twin Series — Paper IV: Taleb on Wall Street vs. Physical Realities
-## 3 Technical Deep Dive
+# McKenney-Lacan Calculus, and the Seven-Layer Graph
 
-Author: jmckenney
-Date: 2026 FEB
-
-A technical architecture brief for the CYBER Eigenia Cyber Digital Twin
-### The AEON Engine, the McKenney-Lacan Calculus, and the Seven-Layer Graph
+Lab Sponsor Resident,  j.mckenney
 
 
 

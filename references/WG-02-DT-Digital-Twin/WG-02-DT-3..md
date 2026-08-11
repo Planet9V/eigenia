@@ -1,9 +1,8 @@
-# OXOT Cyber Digital Twin Series — Paper III: Cyber Digital Twin Architecture Brief
-## _What Nassim Taleb Saw in Markets, Jim McKenney Sees Every Day in the Facilities the World Depends On_
+# The Moment of Recognition
 
----
+Lab Sponsor Resident,  j.mckenney
 
-## The Moment of Recognition
+_What Nassim Taleb Saw in Markets, We See Every Day in the Facilities the World Depends On_
 
 There is a particular kind of clarity that comes from spending decades inside facilities where the stakes are not financial — where the wrong call does not cost money but costs lives, power, water, safety, and the invisible infrastructure that modern civilization takes entirely for granted.
 

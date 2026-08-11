@@ -1,4 +1,4 @@
-# The Grid’s Precarious Pulse: Death Wobble & Frequency Instability Analysis
+# The Grid’s Precarious Pulse: Death Wobble & Frequency Instability
 **The Grid's Precarious Pulse: Frequency Instability and the Looming Threat of Cascading Failure**
 
 J.McKenney

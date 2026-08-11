@@ -4,7 +4,7 @@
 
   - "**Threat_Actor_Profiles** <!-- ORPHAN-WAS: Threat Actor Profiles --> <!-- ORPHAN: 2026-05-15 unresolved -->"
 
-# Lacanian Psychohistory Framework
+# Mckenney-Lacanian Psychohistory Framework
 
 > **A systematic application of Lacanian psychoanalytic theory to the behavioral classification and predictive modeling of threat actors within the Seldon Cyber Digital Twin.**
 

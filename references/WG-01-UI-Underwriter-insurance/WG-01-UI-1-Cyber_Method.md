@@ -1,4 +1,4 @@
-# The Cyber Digital Twin Paradigm: Redefining Critical Infrastructure Risk Transfer and Underwriting
+# The Cyber Digital Twin Paradigm: Redefining Critical Infrastructure Risk Transfer
 
 4-May-2026
 j.mckenney

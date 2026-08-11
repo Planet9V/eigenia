@@ -1,4 +1,4 @@
-# DEXPI 2.0 P&ID Topology & CycloneDX 4-BOM
+# DEXPI 2.0 P&ID Topology & CycloneDX 4-BOM Standards
 
 Lab Sponsor Resident, j.mckenney  
 Working Group: WG-05-CAD (CAD Interoperability & Open Standards)

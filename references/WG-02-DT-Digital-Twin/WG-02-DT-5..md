@@ -1,12 +1,6 @@
-# OXOT Cyber Digital Twin Series — Paper V: Graph Neural Networks & Psychometric Tensors
-## 1 Fooled by Randomness → Fooled by Cybersecurity  
+# Fooled by Randomness → Fooled by Cybersecurity
 
-Author: jmckenney
-Date: 2026 FEB
-
-A technical architecture brief for the CYBER Eigenia Cyber Digital Twin, 
-
-## Fooled by Randomness → Fooled by Cybersecurity  
+Lab Sponsor Resident,  j.mckenney  
 ### Why Taleb’s view of markets is the missing lens for OT/ICS defense—and why Eigenia is built to operate on the “left side of the table”
 
 Taleb’s *Fooled by Randomness* is a book about markets, but its real target is something broader: **the human tendency to confuse outcomes with skill, and stories with truth**.[1][2] In finance, this confusion manufactures “geniuses” out of survivors and turns luck into a business model—right up until the day a rare event wipes out the strategy and everyone acts surprised.[1][3]
