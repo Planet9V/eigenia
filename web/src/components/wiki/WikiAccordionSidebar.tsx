@@ -315,7 +315,7 @@ export default function WikiAccordionSidebar({
                 )}
               </div>
             );
-          })}
+          })
         )}
       </div>
 

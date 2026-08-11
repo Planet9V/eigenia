@@ -143,9 +143,6 @@ export const Navbar: React.FC<NavbarProps> = () => {
                 )}
               </AnimatePresence>
             </div>
-                )}
-              </AnimatePresence>
-            </div>
 
             {/* Category 3: Applied Physics Frameworks Dropdown */}
             <div
