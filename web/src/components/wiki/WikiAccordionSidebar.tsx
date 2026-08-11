@@ -42,68 +42,6 @@ const WG_ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> =
   "MP-MATH": FileText,
 };
 
-const COLOR_THEMES: Record<
-  string,
-  { border: string; bg: string; text: string; badge: string; glow: string }
-> = {
-  emerald: {
-    border: "border-emerald-500/30",
-    bg: "bg-emerald-500/10",
-    text: "text-emerald-600 dark:text-emerald-400",
-    badge: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-500/30",
-    glow: "shadow-[0_0_15px_rgba(16,185,129,0.15)]",
-  },
-  violet: {
-    border: "border-violet-500/30",
-    bg: "bg-violet-500/10",
-    text: "text-violet-600 dark:text-violet-400",
-    badge: "bg-violet-500/15 text-violet-700 dark:text-violet-300 border-violet-500/30",
-    glow: "shadow-[0_0_15px_rgba(139,92,246,0.15)]",
-  },
-  rose: {
-    border: "border-rose-500/30",
-    bg: "bg-rose-500/10",
-    text: "text-rose-600 dark:text-rose-400",
-    badge: "bg-rose-500/15 text-rose-700 dark:text-rose-300 border-rose-500/30",
-    glow: "shadow-[0_0_15px_rgba(244,63,94,0.15)]",
-  },
-  amber: {
-    border: "border-amber-500/30",
-    bg: "bg-amber-500/10",
-    text: "text-amber-600 dark:text-amber-400",
-    badge: "bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/30",
-    glow: "shadow-[0_0_15px_rgba(245,158,11,0.15)]",
-  },
-  sky: {
-    border: "border-sky-500/30",
-    bg: "bg-sky-500/10",
-    text: "text-sky-600 dark:text-sky-400",
-    badge: "bg-sky-500/15 text-sky-700 dark:text-sky-300 border-sky-500/30",
-    glow: "shadow-[0_0_15px_rgba(14,165,233,0.15)]",
-  },
-  orange: {
-    border: "border-dutchOrange/40",
-    bg: "bg-dutchOrange/10",
-    text: "text-dutchOrange",
-    badge: "bg-dutchOrange/15 text-dutchOrange border-dutchOrange/40",
-    glow: "shadow-[0_0_15px_rgba(224,90,16,0.2)]",
-  },
-  indigo: {
-    border: "border-indigo-500/30",
-    bg: "bg-indigo-500/10",
-    text: "text-indigo-600 dark:text-indigo-400",
-    badge: "bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 border-indigo-500/30",
-    glow: "shadow-[0_0_15px_rgba(99,102,241,0.15)]",
-  },
-  cyan: {
-    border: "border-cyan-500/30",
-    bg: "bg-cyan-500/10",
-    text: "text-cyan-600 dark:text-cyan-400",
-    badge: "bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border-cyan-500/30",
-    glow: "shadow-[0_0_15px_rgba(6,182,212,0.15)]",
-  },
-};
-
 export default function WikiAccordionSidebar({
   activeDocId,
   activeWgId,
@@ -222,11 +160,10 @@ export default function WikiAccordionSidebar({
             )}
           </div>
         ) : (
-          /* Accordion Working Groups View */
+          /* Accordion Working Groups View (Standardized Master Brand Dutch Orange Theme) */
           WORKING_GROUPS.map((wg: WorkingGroupCategory) => {
             const isExpanded = expandedWgs.has(wg.id);
             const Icon = WG_ICON_MAP[wg.id] || Layers;
-            const theme = COLOR_THEMES[wg.color] || COLOR_THEMES.emerald;
             const isCategoryActive = activeWgId === wg.id;
 
             return (
@@ -234,8 +171,8 @@ export default function WikiAccordionSidebar({
                 key={wg.id}
                 className={`rounded-2xl border transition-all ${
                   isCategoryActive
-                    ? `${theme.border} ${theme.bg}`
-                    : "border-hairline bg-subtle"
+                    ? "border-dutchOrange/40 bg-dutchOrange/10"
+                    : "border-hairline bg-subtle hover:border-hairline/80"
                 }`}
               >
                 {/* Working Group Header */}
@@ -244,9 +181,7 @@ export default function WikiAccordionSidebar({
                   className="w-full flex items-center justify-between p-3 text-left transition-colors"
                 >
                   <div className="flex items-center gap-2.5 min-w-0">
-                    <div
-                      className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg ${theme.bg} ${theme.text}`}
-                    >
+                    <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-dutchOrange/10 text-dutchOrange border border-dutchOrange/20">
                       <Icon className="h-3.5 w-3.5" />
                     </div>
                     <div className="min-w-0">
@@ -259,9 +194,7 @@ export default function WikiAccordionSidebar({
                     </div>
                   </div>
                   <div className="flex items-center gap-1.5 shrink-0">
-                    <span
-                      className={`inline-flex items-center rounded-full border px-2 py-0.5 text-[9px] font-mono font-medium ${theme.badge}`}
-                    >
+                    <span className="inline-flex items-center rounded-full border border-dutchOrange/30 bg-dutchOrange/15 px-2 py-0.5 text-[9px] font-mono font-medium text-dutchOrange">
                       {wg.documents.length}
                     </span>
                     {isExpanded ? (
@@ -289,7 +222,7 @@ export default function WikiAccordionSidebar({
                           }}
                           className={`w-full flex items-start gap-2.5 p-2 rounded-xl text-left text-xs transition-all ${
                             isDocActive
-                              ? `bg-surface font-semibold text-primary border border-dutchOrange/50 shadow-sm ${theme.glow}`
+                              ? "bg-surface font-semibold text-primary border border-dutchOrange/50 shadow-sm shadow-dutchOrange/10"
                               : "text-secondary hover:text-primary hover:bg-surface/60"
                           }`}
                         >

@@ -35,68 +35,6 @@ const WG_ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> =
   "MP-MATH": FileText,
 };
 
-const COLOR_ACCENTS: Record<
-  string,
-  { border: string; bg: string; text: string; badge: string; glow: string }
-> = {
-  emerald: {
-    border: "border-emerald-500/30 hover:border-emerald-500/60",
-    bg: "bg-emerald-500/10",
-    text: "text-emerald-500 dark:text-emerald-400",
-    badge: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-500/30",
-    glow: "hover:shadow-[0_0_20px_rgba(16,185,129,0.12)]",
-  },
-  violet: {
-    border: "border-violet-500/30 hover:border-violet-500/60",
-    bg: "bg-violet-500/10",
-    text: "text-violet-600 dark:text-violet-400",
-    badge: "bg-violet-500/15 text-violet-700 dark:text-violet-300 border-violet-500/30",
-    glow: "hover:shadow-[0_0_20px_rgba(139,92,246,0.12)]",
-  },
-  rose: {
-    border: "border-rose-500/30 hover:border-rose-500/60",
-    bg: "bg-rose-500/10",
-    text: "text-rose-600 dark:text-rose-400",
-    badge: "bg-rose-500/15 text-rose-700 dark:text-rose-300 border-rose-500/30",
-    glow: "hover:shadow-[0_0_20px_rgba(244,63,94,0.12)]",
-  },
-  amber: {
-    border: "border-amber-500/30 hover:border-amber-500/60",
-    bg: "bg-amber-500/10",
-    text: "text-amber-600 dark:text-amber-400",
-    badge: "bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/30",
-    glow: "hover:shadow-[0_0_20px_rgba(245,158,11,0.12)]",
-  },
-  sky: {
-    border: "border-sky-500/30 hover:border-sky-500/60",
-    bg: "bg-sky-500/10",
-    text: "text-sky-600 dark:text-sky-400",
-    badge: "bg-sky-500/15 text-sky-700 dark:text-sky-300 border-sky-500/30",
-    glow: "hover:shadow-[0_0_20px_rgba(14,165,233,0.12)]",
-  },
-  orange: {
-    border: "border-dutchOrange/40 hover:border-dutchOrange/70",
-    bg: "bg-dutchOrange/10",
-    text: "text-dutchOrange",
-    badge: "bg-dutchOrange/15 text-dutchOrange border-dutchOrange/40",
-    glow: "hover:shadow-[0_0_20px_rgba(224,90,16,0.15)]",
-  },
-  indigo: {
-    border: "border-indigo-500/30 hover:border-indigo-500/60",
-    bg: "bg-indigo-500/10",
-    text: "text-indigo-600 dark:text-indigo-400",
-    badge: "bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 border-indigo-500/30",
-    glow: "hover:shadow-[0_0_20px_rgba(99,102,241,0.12)]",
-  },
-  cyan: {
-    border: "border-cyan-500/30 hover:border-cyan-500/60",
-    bg: "bg-cyan-500/10",
-    text: "text-cyan-600 dark:text-cyan-400",
-    badge: "bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border-cyan-500/30",
-    glow: "hover:shadow-[0_0_20px_rgba(6,182,212,0.12)]",
-  },
-};
-
 export default function TracksPage() {
   const [impressumOpen, setImpressumOpen] = useState(false);
   const [cookiesForceOpen, setCookiesForceOpen] = useState(false);
@@ -170,11 +108,10 @@ export default function TracksPage() {
         {/* Working Groups Display Grid */}
         <div className="mt-8">
           {viewMode === "bento" ? (
-            /* Uniform Bento Grid Layout (Equal Heights, 3-Column Desktop Grid) */
+            /* Uniform Bento Grid Layout (Master Dutch Orange Design System) */
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {WORKING_GROUPS.map((wg: WorkingGroupCategory, idx: number) => {
                 const Icon = WG_ICON_MAP[wg.id] || Layers;
-                const theme = COLOR_ACCENTS[wg.color] || COLOR_ACCENTS.emerald;
 
                 return (
                   <motion.div
@@ -182,15 +119,13 @@ export default function TracksPage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3, delay: idx * 0.04 }}
-                    className={`group relative flex flex-col justify-between rounded-2xl border bg-surface p-6 shadow-sm transition-all duration-300 ${theme.border} ${theme.glow}`}
+                    className="group relative flex flex-col justify-between rounded-2xl border border-hairline bg-surface p-6 shadow-sm transition-all duration-300 hover:border-dutchOrange/40 hover:shadow-[0_0_20px_rgba(224,90,16,0.15)]"
                   >
                     <div>
                       {/* Top Header */}
                       <div className="flex items-start justify-between gap-3 mb-4">
                         <div className="flex items-center gap-3">
-                          <div
-                            className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${theme.bg} ${theme.text}`}
-                          >
+                          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-dutchOrange/10 text-dutchOrange border border-dutchOrange/20">
                             <Icon className="h-5 w-5" />
                           </div>
                           <div>
@@ -203,9 +138,7 @@ export default function TracksPage() {
                           </div>
                         </div>
 
-                        <span
-                          className={`inline-flex shrink-0 items-center rounded-full border px-2.5 py-0.5 text-[10px] font-mono font-medium ${theme.badge}`}
-                        >
+                        <span className="inline-flex shrink-0 items-center rounded-full border border-dutchOrange/30 bg-dutchOrange/10 px-2.5 py-0.5 text-[10px] font-mono font-medium text-dutchOrange">
                           {wg.badge}
                         </span>
                       </div>
@@ -224,7 +157,7 @@ export default function TracksPage() {
 
                       <Link
                         href={`/wiki?wg=${encodeURIComponent(wg.id)}`}
-                        className={`inline-flex items-center gap-1.5 text-xs font-semibold ${theme.text} group-hover:translate-x-0.5 transition-transform`}
+                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-dutchOrange group-hover:translate-x-0.5 transition-transform"
                       >
                         <span>Open Wiki</span>
                         <ArrowRight className="h-3.5 w-3.5" />
@@ -239,18 +172,15 @@ export default function TracksPage() {
             <div className="space-y-4">
               {WORKING_GROUPS.map((wg: WorkingGroupCategory) => {
                 const Icon = WG_ICON_MAP[wg.id] || Layers;
-                const theme = COLOR_ACCENTS[wg.color] || COLOR_ACCENTS.emerald;
 
                 return (
                   <div
                     key={wg.id}
-                    className={`rounded-2xl border bg-surface p-6 shadow-sm transition-all ${theme.border}`}
+                    className="rounded-2xl border border-hairline bg-surface p-6 shadow-sm transition-all hover:border-dutchOrange/40"
                   >
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-hairline pb-4">
                       <div className="flex items-center gap-3">
-                        <div
-                          className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${theme.bg} ${theme.text}`}
-                        >
+                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-dutchOrange/10 text-dutchOrange border border-dutchOrange/20">
                           <Icon className="h-4.5 w-4.5" />
                         </div>
                         <div>
@@ -258,9 +188,7 @@ export default function TracksPage() {
                             <span className="font-mono text-xs font-bold text-muted">
                               {wg.number}
                             </span>
-                            <span
-                              className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-[10px] font-mono font-medium ${theme.badge}`}
-                            >
+                            <span className="inline-flex items-center rounded-full border border-dutchOrange/30 bg-dutchOrange/10 px-2.5 py-0.5 text-[10px] font-mono font-medium text-dutchOrange">
                               {wg.badge}
                             </span>
                           </div>
@@ -272,7 +200,7 @@ export default function TracksPage() {
 
                       <Link
                         href={`/wiki?wg=${encodeURIComponent(wg.id)}`}
-                        className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold ${theme.bg} ${theme.text} border ${theme.border} hover:opacity-90 transition-opacity shrink-0`}
+                        className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-dutchOrange/10 text-dutchOrange border border-dutchOrange/30 hover:bg-dutchOrange/20 transition-all shrink-0"
                       >
                         <span>Open Wiki ({wg.documents.length} Treatises)</span>
                         <ArrowRight className="h-3.5 w-3.5" />
