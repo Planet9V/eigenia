@@ -342,7 +342,7 @@ export default function TracksPage() {
 
       <CookieConsentBanner
         forceOpen={cookiesForceOpen}
-        onCloseForce={() => setCookiesForceOpen(false)}
+        onCloseForceOpen={() => setCookiesForceOpen(false)}
       />
     </div>
   );
