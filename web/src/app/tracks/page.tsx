@@ -49,12 +49,14 @@ export default function TracksPage() {
       {/* Hero Band: Digital Twin Graph Topology Background */}
       <section className="dark relative overflow-hidden border-b border-hairline">
         <div className="absolute inset-0 bg-[#0B0C0E]">
-          <img
-            src="/assets/wg-graph-topology.png"
-            alt="Eigenia digital twin graph topology"
-            className="absolute inset-0 h-full w-full object-cover object-[center_58%] opacity-90"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0B0C0E] via-[#0B0C0E]/55 to-[#0B0C0E]/10" />
+          <div className="hidden lg:block">
+            <img
+              src="/assets/wg-graph-topology.png"
+              alt="Eigenia digital twin graph topology"
+              className="absolute inset-0 h-full w-full object-cover object-[center_58%] opacity-90"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0B0C0E] via-[#0B0C0E]/55 to-[#0B0C0E]/10" />
+          </div>
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16">

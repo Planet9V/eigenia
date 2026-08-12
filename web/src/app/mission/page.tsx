@@ -14,9 +14,21 @@ export default function MissionPage() {
   return (
     <main className="min-h-screen bg-canvas text-primary relative font-sans selection:bg-dutchOrange selection:text-white transition-colors duration-300">
       <SiteChrome>
-        {/* Main Header Container */}
-        <section className="bg-canvas pt-28 pb-12 border-b border-hairline transition-colors duration-300">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        {/* Main Header Container: Relief Surface Background */}
+        <section className="dark relative overflow-hidden border-b border-hairline">
+          <div className="absolute inset-0 bg-[#0B0C0E]">
+            <div className="hidden lg:block">
+              <img
+                src="/assets/hero-relief-surface.webp"
+                alt=""
+                aria-hidden="true"
+                className="absolute inset-0 h-full w-full object-cover object-center opacity-80"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0B0C0E] via-[#0B0C0E]/55 to-[#0B0C0E]/25" />
+            </div>
+          </div>
+
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12 space-y-6">
             {/* Breadcrumb Navigation */}
             <Breadcrumb
               items={[
