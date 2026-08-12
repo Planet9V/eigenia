@@ -1,29 +1,20 @@
 "use client";
 
-import React, { useState } from "react";
-import { Navbar } from "@/components/Navbar";
+import React from "react";
+import { SiteChrome } from "@/components/SiteChrome";
 import { ActuarialEngineSection } from "@/components/ActuarialEngineSection";
 import { TheoryCatalogue } from "@/components/TheoryCatalogue";
-import { EuComplianceFooter } from "@/components/EuComplianceFooter";
-import { ImpressumModal } from "@/components/ImpressumModal";
-import { CookieConsentBanner } from "@/components/CookieConsentBanner";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { ArrowDownRight, FileSpreadsheet, Binary } from "lucide-react";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 
 export default function AppliedPhysicsPage() {
-  const [impressumOpen, setImpressumOpen] = useState(false);
-  const [cookiesForceOpen, setCookiesForceOpen] = useState(false);
   const { t } = useLanguage();
 
   return (
     <main className="min-h-screen bg-canvas text-primary relative font-sans selection:bg-dutchOrange selection:text-white transition-colors duration-300">
-      <Navbar
-        onOpenImpressum={() => setImpressumOpen(true)}
-        onOpenCookies={() => setCookiesForceOpen(true)}
-      />
-
+      <SiteChrome>
       {/* Main Header Container */}
       <section className="bg-canvas pt-28 pb-12 border-b border-hairline transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
@@ -110,18 +101,7 @@ export default function AppliedPhysicsPage() {
 
       {/* Theory Catalogue Section */}
       <TheoryCatalogue />
-
-      <EuComplianceFooter
-        onOpenImpressum={() => setImpressumOpen(true)}
-        onOpenCookies={() => setCookiesForceOpen(true)}
-      />
-
-      <ImpressumModal
-        isOpen={impressumOpen}
-        onClose={() => setImpressumOpen(false)}
-      />
-
-      <CookieConsentBanner forceOpen={cookiesForceOpen} />
+      </SiteChrome>
     </main>
   );
 }

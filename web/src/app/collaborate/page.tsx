@@ -1,23 +1,18 @@
 "use client";
 
 import React, { useState } from "react";
-import { Navbar } from "@/components/Navbar";
+import { SiteChrome } from "@/components/SiteChrome";
 import { Breadcrumb } from "@/components/Breadcrumb";
-import { EuComplianceFooter } from "@/components/EuComplianceFooter";
-import { ImpressumModal } from "@/components/ImpressumModal";
-import { CookieConsentBanner } from "@/components/CookieConsentBanner";
 import { CheckCircle2, Send, ShieldCheck, FileSpreadsheet, GraduationCap, Mail } from "lucide-react";
-import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
+import { useContactForm } from "@/lib/useContactForm";
 
 export default function CollaboratePage() {
-  const [impressumOpen, setImpressumOpen] = useState(false);
-  const [cookiesForceOpen, setCookiesForceOpen] = useState(false);
   const { t } = useLanguage();
+  const { submitted, error, submit } = useContactForm();
 
   const [selectedType, setSelectedType] = useState<string>("probono");
   const [selectedTrack, setSelectedTrack] = useState<string>("risk");
-  const [submitted, setSubmitted] = useState(false);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -27,43 +22,25 @@ export default function CollaboratePage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Post to API endpoint targeted for jim@eigenia.nl
-    try {
-      await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name,
-          email,
-          company,
-          type: selectedType,
-          track: selectedTrack,
-          message,
-          recipient: "jim@eigenia.nl",
-        }),
-      });
-    } catch (err) {
-      console.warn("API route failed, falling back to mailto", err);
-    }
-
-    // Trigger direct mailto dispatch pre-filled to jim@eigenia.nl
-    const subject = encodeURIComponent(`[Eigenia Collaboration Proposal] ${selectedType.toUpperCase()} - ${company || name}`);
-    const body = encodeURIComponent(
-      `Full Name: ${name}\nEmail: ${email}\nOrganization: ${company}\nPathway: ${selectedType}\nTrack: ${selectedTrack}\n\nProposal Details:\n${message}`
+    await submit(
+      {
+        name,
+        email,
+        company,
+        type: selectedType,
+        track: selectedTrack,
+        message,
+      },
+      {
+        subject: `[Eigenia Collaboration Proposal] ${selectedType.toUpperCase()} - ${company || name}`,
+        body: `Full Name: ${name}\nEmail: ${email}\nOrganization: ${company}\nPathway: ${selectedType}\nTrack: ${selectedTrack}\n\nProposal Details:\n${message}`,
+      }
     );
-    window.location.href = `mailto:jim@eigenia.nl?subject=${subject}&body=${body}`;
-
-    setSubmitted(true);
   };
 
   return (
     <main className="min-h-screen bg-canvas text-primary transition-colors duration-300 relative font-sans selection:bg-dutchOrange selection:text-white">
-      {/* Top Navbar */}
-      <Navbar
-        onOpenImpressum={() => setImpressumOpen(true)}
-        onOpenCookies={() => setCookiesForceOpen(true)}
-      />
-
+      <SiteChrome>
       {/* Main Header Container */}
       <section className="bg-canvas pt-28 pb-12 border-b border-hairline transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
@@ -107,10 +84,7 @@ export default function CollaboratePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Track 1: Pro-Bono Defense Audit */}
-            <motion.div
-              whileHover={{ y: -4 }}
-              className="p-8 rounded-2xl bg-surface border border-hairline shadow-xl space-y-6 flex flex-col justify-between"
-            >
+            <div className="p-8 rounded-2xl bg-surface border border-hairline shadow-xl space-y-6 flex flex-col justify-between">
               <div className="space-y-4">
                 <div className="w-12 h-12 rounded-xl bg-dutchOrange/10 border border-dutchOrange/30 flex items-center justify-center text-dutchOrange">
                   <ShieldCheck className="w-6 h-6" />
@@ -134,13 +108,10 @@ export default function CollaboratePage() {
                   </li>
                 </ul>
               </div>
-            </motion.div>
+            </div>
 
             {/* Track 2: Academic & Scientific Research */}
-            <motion.div
-              whileHover={{ y: -4 }}
-              className="p-8 rounded-2xl bg-surface border border-hairline shadow-xl space-y-6 flex flex-col justify-between"
-            >
+            <div className="p-8 rounded-2xl bg-surface border border-hairline shadow-xl space-y-6 flex flex-col justify-between">
               <div className="space-y-4">
                 <div className="w-12 h-12 rounded-xl bg-dutchOrange/10 border border-dutchOrange/30 flex items-center justify-center text-dutchOrange">
                   <GraduationCap className="w-6 h-6" />
@@ -164,13 +135,10 @@ export default function CollaboratePage() {
                   </li>
                 </ul>
               </div>
-            </motion.div>
+            </div>
 
             {/* Track 3: Commercial & Actuarial Validation */}
-            <motion.div
-              whileHover={{ y: -4 }}
-              className="p-8 rounded-2xl bg-surface border border-hairline shadow-xl space-y-6 flex flex-col justify-between"
-            >
+            <div className="p-8 rounded-2xl bg-surface border border-hairline shadow-xl space-y-6 flex flex-col justify-between">
               <div className="space-y-4">
                 <div className="w-12 h-12 rounded-xl bg-dutchOrange/10 border border-dutchOrange/30 flex items-center justify-center text-dutchOrange">
                   <FileSpreadsheet className="w-6 h-6" />
@@ -194,7 +162,7 @@ export default function CollaboratePage() {
                   </li>
                 </ul>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -223,6 +191,11 @@ export default function CollaboratePage() {
                 <p className="text-xs text-secondary font-sans max-w-md mx-auto leading-relaxed">
                   {t("collab_form_success_msg")}
                 </p>
+                {error && (
+                  <p className="text-xs text-amber-600 font-sans max-w-md mx-auto leading-relaxed bg-amber-500/10 border border-amber-500/30 rounded-xl px-4 py-3">
+                    {error}
+                  </p>
+                )}
                 <div className="pt-2">
                   <a
                     href={`mailto:jim@eigenia.nl?subject=[Eigenia Proposal] ${selectedType.toUpperCase()}&body=Name: ${encodeURIComponent(name)}%0ACompany: ${encodeURIComponent(company)}%0A%0A${encodeURIComponent(message)}`}
@@ -348,14 +321,7 @@ export default function CollaboratePage() {
           </div>
         </div>
       </section>
-
-      <EuComplianceFooter
-        onOpenImpressum={() => setImpressumOpen(true)}
-        onOpenCookies={() => setCookiesForceOpen(true)}
-      />
-
-      <ImpressumModal isOpen={impressumOpen} onClose={() => setImpressumOpen(false)} />
-      <CookieConsentBanner forceOpen={cookiesForceOpen} onCloseForceOpen={() => setCookiesForceOpen(false)} />
+      </SiteChrome>
     </main>
   );
 }

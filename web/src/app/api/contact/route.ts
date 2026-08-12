@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { sendContactEmail } from "@/lib/mailer";
 
 export async function POST(request: Request) {
   try {
@@ -8,15 +9,7 @@ export async function POST(request: Request) {
     const recipient = "jim@eigenia.nl";
     const timestamp = new Date().toISOString();
 
-    console.log(`[CONTACT INTAKE ${timestamp}] Submission for ${recipient}:`, {
-      name,
-      email,
-      company,
-      type,
-      track,
-      capacity,
-      message,
-    });
+    await sendContactEmail({ name, email, company, type, track, message, capacity });
 
     return NextResponse.json({
       success: true,

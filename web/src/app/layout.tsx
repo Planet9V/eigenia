@@ -106,7 +106,11 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className={`dark scroll-smooth ${playfair.variable} ${inter.variable} ${mono.variable}`}>
+    <html
+      lang="en"
+      className={`dark scroll-smooth ${playfair.variable} ${inter.variable} ${mono.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <link rel="icon" href="/assets/logo_square_dark.svg" type="image/svg+xml" />
         <script

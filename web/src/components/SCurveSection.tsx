@@ -4,6 +4,8 @@ import React from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import { TrendingUp } from "lucide-react";
 import { MathFormula } from "@/components/MathFormula";
+import { SCurveDiagram } from "@/components/theory-diagrams/SCurveDiagram";
+import { DiagramBadge } from "@/components/theory-diagrams";
 
 export const SCurveSection: React.FC = () => {
   const { t } = useLanguage();
@@ -55,13 +57,10 @@ export const SCurveSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: S-Curve Image */}
-          <div className="lg:col-span-5 relative">
-            <img
-              src="/assets/Eigenia_2.png"
-              alt="Sigmoidal Phase Transition Visual"
-              className="rounded-2xl border border-hairline shadow-2xl object-cover w-full h-auto"
-            />
+          {/* Right Column: S-Curve Diagram */}
+          <div className="lg:col-span-5 relative h-[280px] rounded-2xl overflow-hidden border border-hairline shadow-2xl bg-[#0B0C0E]">
+            <SCurveDiagram />
+            <DiagramBadge line1="S-CURVE · phase transition" line2="x_c critical threshold" />
           </div>
         </div>
       </div>

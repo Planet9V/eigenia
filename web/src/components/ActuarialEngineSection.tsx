@@ -4,6 +4,8 @@ import React from "react";
 import { FileSpreadsheet } from "lucide-react";
 import { MathFormula } from "@/components/MathFormula";
 import { useLanguage } from "@/context/LanguageContext";
+import { AleDiagram } from "@/components/theory-diagrams/AleDiagram";
+import { DiagramBadge } from "@/components/theory-diagrams";
 
 export const ActuarialEngineSection: React.FC = () => {
   const { t } = useLanguage();
@@ -72,6 +74,11 @@ export const ActuarialEngineSection: React.FC = () => {
 
           {/* Right Column: Actuarial Diagram Card */}
           <div className="lg:col-span-5 relative p-8 rounded-2xl bg-surface border border-hairline space-y-5 shadow-xl">
+            <div className="relative h-[150px] rounded-xl overflow-hidden border border-hairline bg-[#0B0C0E]">
+              <AleDiagram />
+              <DiagramBadge line1="ALE · exceedance curve" line2="EP loss vs. attachment" />
+            </div>
+
             <h4 className="font-mono text-xs uppercase tracking-[0.2em] text-dutchOrange font-semibold">
               {t("act_sec_arch_title")}
             </h4>

@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { X, TrendingUp, CheckCircle, Upload, ArrowRight, ShieldCheck, Mail, Building } from "lucide-react";
+import { useContactForm } from "@/lib/useContactForm";
 
 interface PretotypeExperimentModalProps {
   isOpen: boolean;
@@ -14,7 +15,7 @@ export const PretotypeExperimentModal: React.FC<PretotypeExperimentModalProps> =
   onClose,
   type,
 }) => {
-  const [submitted, setSubmitted] = useState(false);
+  const { submitted, error, submit, reset } = useContactForm();
   const [email, setEmail] = useState("");
   const [company, setCompany] = useState("");
   const [plantCapacity, setPlantCapacity] = useState("100");
@@ -22,47 +23,34 @@ export const PretotypeExperimentModal: React.FC<PretotypeExperimentModalProps> =
 
   if (!isOpen) return null;
 
+  const subjectTitle =
+    type === "scurve"
+      ? "S-Curve Position Audit Request"
+      : type === "telemetry"
+      ? "Telemetry Sandbox Access Request"
+      : "Executive Board Risk Briefing Request";
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const subjectTitle =
-      type === "scurve"
-        ? "S-Curve Position Audit Request"
-        : type === "telemetry"
-        ? "Telemetry Sandbox Access Request"
-        : "Executive Board Risk Briefing Request";
-
-    // Post to API endpoint targeted for jim@eigenia.nl
-    try {
-      await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: email,
-          email,
-          company,
-          capacity: plantCapacity,
-          type: subjectTitle,
-          message,
-          recipient: "jim@eigenia.nl",
-        }),
-      });
-    } catch (err) {
-      console.warn("API contact POST failed, proceeding to mailto fallback", err);
-    }
-
-    // Trigger direct mailto dispatch pre-filled to jim@eigenia.nl
-    const subject = encodeURIComponent(`[Eigenia Labs] ${subjectTitle} - ${company}`);
-    const body = encodeURIComponent(
-      `Request Type: ${subjectTitle}\nEmail: ${email}\nCompany/Entity: ${company}\nCapacity (MW/MGD): ${plantCapacity}\n\nMessage/Details:\n${message}`
+    await submit(
+      {
+        name: email,
+        email,
+        company,
+        capacity: plantCapacity,
+        type: subjectTitle,
+        message,
+      },
+      {
+        subject: `[Eigenia Labs] ${subjectTitle} - ${company}`,
+        body: `Request Type: ${subjectTitle}\nEmail: ${email}\nCompany/Entity: ${company}\nCapacity (MW/MGD): ${plantCapacity}\n\nMessage/Details:\n${message}`,
+      }
     );
-    window.location.href = `mailto:jim@eigenia.nl?subject=${subject}&body=${body}`;
-
-    setSubmitted(true);
   };
 
   const handleReset = () => {
-    setSubmitted(false);
+    reset();
     onClose();
   };
 
@@ -188,6 +176,11 @@ export const PretotypeExperimentModal: React.FC<PretotypeExperimentModalProps> =
             <p className="text-xs text-zinc-300 light:text-[#52525B] font-sans max-w-sm mx-auto leading-relaxed">
               Thank you, <strong className="text-dutchOrange">{email}</strong>. Your request for <strong className="text-white light:text-[#18181B]">{company}</strong> has been routed to <strong className="text-dutchOrange">jim@eigenia.nl</strong>.
             </p>
+            {error && (
+              <p className="text-xs text-amber-500 font-sans max-w-sm mx-auto leading-relaxed bg-amber-500/10 border border-amber-500/30 rounded-xl px-4 py-3">
+                {error}
+              </p>
+            )}
             <div className="pt-2">
               <button
                 onClick={handleReset}

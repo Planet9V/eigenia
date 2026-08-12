@@ -1,10 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Navbar } from "@/components/Navbar";
-import { EuComplianceFooter } from "@/components/EuComplianceFooter";
-import { ImpressumModal } from "@/components/ImpressumModal";
-import { CookieConsentBanner } from "@/components/CookieConsentBanner";
+import { SiteChrome } from "@/components/SiteChrome";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import {
   BookOpen,
@@ -38,8 +35,6 @@ const WG_ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> =
 
 export default function TracksPage() {
   const { language, t } = useLanguage();
-  const [impressumOpen, setImpressumOpen] = useState(false);
-  const [cookiesForceOpen, setCookiesForceOpen] = useState(false);
   const [viewMode, setViewMode] = useState<"bento" | "lines">("bento");
 
   const workingGroups = getAllWorkingGroups(language);
@@ -50,66 +45,74 @@ export default function TracksPage() {
 
   return (
     <div className="min-h-screen bg-canvas text-primary font-sans transition-colors duration-300">
-      <Navbar onOpenImpressum={() => setImpressumOpen(true)} />
+      <SiteChrome>
+      {/* Hero Band: Digital Twin Graph Topology Background */}
+      <section className="dark relative overflow-hidden border-b border-hairline">
+        <div className="absolute inset-0 bg-[#0B0C0E]">
+          <img
+            src="/assets/wg-graph-topology.png"
+            alt="Eigenia digital twin graph topology"
+            className="absolute inset-0 h-full w-full object-cover object-[center_58%] opacity-90"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0B0C0E] via-[#0B0C0E]/55 to-[#0B0C0E]/10" />
+        </div>
 
-      <main className="pt-24 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <Breadcrumb items={[{ label: "Research Tracks" }]} />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16">
+          <Breadcrumb items={[{ label: "Research Tracks" }]} />
 
-        {/* Page Header */}
-        <div className="mt-6 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-hairline pb-8">
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <span className="font-mono text-xs uppercase tracking-wider font-semibold text-dutchOrange bg-dutchOrange/10 px-3 py-1 rounded-full border border-dutchOrange/30">
-                Eigenia Lab Working Groups
-              </span>
-            </div>
+          <div className="mt-6 max-w-3xl space-y-3">
+            <span className="font-mono text-xs uppercase tracking-wider font-semibold text-dutchOrange bg-dutchOrange/10 px-3 py-1 rounded-full border border-dutchOrange/30 inline-block">
+              Eigenia Lab Working Groups
+            </span>
             <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-primary">
               Sovereign Research Tracks
             </h1>
-            <p className="mt-2 text-sm sm:text-base text-secondary max-w-3xl leading-relaxed">
+            <p className="text-sm sm:text-base text-secondary max-w-3xl leading-relaxed">
               Explore all 8 Eigenia Lab Working Groups spanning {totalDocuments} published treatises. Select any Working Group card below to open the complete Research Wiki Engine.
             </p>
           </div>
+        </div>
+      </section>
 
-          {/* View Switcher & Action Controls */}
-          <div className="flex items-center gap-3 shrink-0">
-            <Link
-              href="/wiki"
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-dutchOrange hover:bg-dutchOrange-600 text-white font-medium text-xs shadow-md shadow-dutchOrange/20 transition-all"
+      <main className="pt-8 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        {/* View Switcher & Action Controls */}
+        <div className="flex items-center justify-end gap-3 mb-8">
+          <Link
+            href="/wiki"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-dutchOrange hover:bg-dutchOrange-600 text-white font-medium text-xs shadow-md shadow-dutchOrange/20 transition-all"
+          >
+            <BookOpen className="h-4 w-4" />
+            <span>Open Research Wiki ({totalDocuments} Treatises)</span>
+          </Link>
+
+          <div className="flex items-center rounded-xl border border-hairline bg-surface p-1 shadow-sm">
+            <button
+              onClick={() => setViewMode("bento")}
+              className={`p-2 rounded-lg text-xs font-medium transition-colors ${
+                viewMode === "bento"
+                  ? "bg-dutchOrange/15 text-dutchOrange border border-dutchOrange/30"
+                  : "text-muted hover:text-primary"
+              }`}
+              title="Bento Grid View"
             >
-              <BookOpen className="h-4 w-4" />
-              <span>Open Research Wiki ({totalDocuments} Treatises)</span>
-            </Link>
-
-            <div className="flex items-center rounded-xl border border-hairline bg-surface p-1 shadow-sm">
-              <button
-                onClick={() => setViewMode("bento")}
-                className={`p-2 rounded-lg text-xs font-medium transition-colors ${
-                  viewMode === "bento"
-                    ? "bg-dutchOrange/15 text-dutchOrange border border-dutchOrange/30"
-                    : "text-muted hover:text-primary"
-                }`}
-                title="Bento Grid View"
-              >
-                <LayoutGrid className="h-4 w-4" />
-              </button>
-              <button
-                onClick={() => setViewMode("lines")}
-                className={`p-2 rounded-lg text-xs font-medium transition-colors ${
-                  viewMode === "lines"
-                    ? "bg-dutchOrange/15 text-dutchOrange border border-dutchOrange/30"
-                    : "text-muted hover:text-primary"
-                }`}
-                title="Lines / List View"
-              >
-                <List className="h-4 w-4" />
-              </button>
-            </div>
+              <LayoutGrid className="h-4 w-4" />
+            </button>
+            <button
+              onClick={() => setViewMode("lines")}
+              className={`p-2 rounded-lg text-xs font-medium transition-colors ${
+                viewMode === "lines"
+                  ? "bg-dutchOrange/15 text-dutchOrange border border-dutchOrange/30"
+                  : "text-muted hover:text-primary"
+              }`}
+              title="Lines / List View"
+            >
+              <List className="h-4 w-4" />
+            </button>
           </div>
         </div>
 
         {/* Working Groups Display Grid */}
-        <div className="mt-8">
+        <div>
           {viewMode === "bento" ? (
             /* Uniform Bento Grid Layout (Master Dutch Orange Design System) */
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -220,21 +223,7 @@ export default function TracksPage() {
           )}
         </div>
       </main>
-
-      <EuComplianceFooter
-        onOpenImpressum={() => setImpressumOpen(true)}
-        onOpenCookies={() => setCookiesForceOpen(true)}
-      />
-
-      <ImpressumModal
-        isOpen={impressumOpen}
-        onClose={() => setImpressumOpen(false)}
-      />
-
-      <CookieConsentBanner
-        forceOpen={cookiesForceOpen}
-        onCloseForceOpen={() => setCookiesForceOpen(false)}
-      />
+      </SiteChrome>
     </div>
   );
 }

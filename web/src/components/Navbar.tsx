@@ -8,12 +8,7 @@ import { useTheme } from "@/context/ThemeContext";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-interface NavbarProps {
-  onOpenImpressum?: () => void;
-  onOpenCookies?: () => void;
-}
-
-export const Navbar: React.FC<NavbarProps> = () => {
+export const Navbar: React.FC = () => {
   const { language, setLanguage, t } = useLanguage();
   const { theme, toggleTheme } = useTheme();
   const pathname = usePathname();

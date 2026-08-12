@@ -1,14 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
-import { Navbar } from "@/components/Navbar";
+import React from "react";
+import { SiteChrome } from "@/components/SiteChrome";
 import { Hero } from "@/components/Hero";
 import { KnowledgeTransfer } from "@/components/KnowledgeTransfer";
 import { SCurveSection } from "@/components/SCurveSection";
 import { Principles } from "@/components/Principles";
-import { EuComplianceFooter } from "@/components/EuComplianceFooter";
-import { ImpressumModal } from "@/components/ImpressumModal";
-import { CookieConsentBanner } from "@/components/CookieConsentBanner";
 import { FirstVisitSplash } from "@/components/FirstVisitSplash";
 import { ArrowRight, Compass, Layers, Cpu, Users } from "lucide-react";
 import Link from "next/link";
@@ -16,8 +13,6 @@ import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 
 export default function Home() {
-  const [impressumOpen, setImpressumOpen] = useState(false);
-  const [cookiesForceOpen, setCookiesForceOpen] = useState(false);
   const { t } = useLanguage();
 
   return (
@@ -25,12 +20,7 @@ export default function Home() {
       {/* First Visit Atmospheric Splash Entrance Sequence */}
       <FirstVisitSplash />
 
-      {/* Top Navbar */}
-      <Navbar
-        onOpenImpressum={() => setImpressumOpen(true)}
-        onOpenCookies={() => setCookiesForceOpen(true)}
-      />
-
+      <SiteChrome>
       {/* Hero Section */}
       <Hero />
 
@@ -177,16 +167,7 @@ export default function Home() {
 
       {/* Knowledge Transfer Pipeline Section */}
       <KnowledgeTransfer />
-
-      {/* Footer */}
-      <EuComplianceFooter
-        onOpenImpressum={() => setImpressumOpen(true)}
-        onOpenCookies={() => setCookiesForceOpen(true)}
-      />
-
-      {/* Modals & Banners */}
-      <ImpressumModal isOpen={impressumOpen} onClose={() => setImpressumOpen(false)} />
-      <CookieConsentBanner forceOpen={cookiesForceOpen} onCloseForceOpen={() => setCookiesForceOpen(false)} />
+      </SiteChrome>
     </main>
   );
 }

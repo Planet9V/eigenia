@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 import { ArrowRight, BookOpen, LayoutGrid, List } from "lucide-react";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { MathFormula } from "@/components/MathFormula";
+import { THEORY_DIAGRAMS, DiagramBadge } from "@/components/theory-diagrams";
 
 import { theoryModelsList, TheoryModel } from "@/lib/theoryModels";
 export type { TheoryModel };
@@ -69,10 +69,12 @@ export const TheoryCatalogue: React.FC = () => {
               : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
           }`}
         >
-          {theoryModelsList.map((model) => (
-            <motion.div
+          {theoryModelsList.map((model) => {
+            const diagramEntry = THEORY_DIAGRAMS[model.slug];
+
+            return (
+            <div
               key={model.id}
-              whileHover={{ y: -4, scale: 1.01 }}
               className={`rounded-2xl bg-surface border border-hairline transition-all shadow-xl flex flex-col justify-between group ${
                 viewMode === "grid" ? "p-6 space-y-4" : "p-8 space-y-6"
               }`}
@@ -95,6 +97,13 @@ export const TheoryCatalogue: React.FC = () => {
                     {model.tag}
                   </span>
                 </div>
+
+                {diagramEntry && (
+                  <div className="relative h-[160px] rounded-xl overflow-hidden border border-hairline bg-[#0B0C0E]">
+                    <diagramEntry.Diagram />
+                    <DiagramBadge line1={diagramEntry.badgeLine1} line2={diagramEntry.badgeLine2} />
+                  </div>
+                )}
 
                 {/* KaTeX Rendered Mathematical Formula Box */}
                 <div className="p-4 rounded-xl bg-subtle border border-hairline font-mono text-xs overflow-x-auto min-h-[60px] flex items-center justify-center">
@@ -127,8 +136,9 @@ export const TheoryCatalogue: React.FC = () => {
                 </span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
-            </motion.div>
-          ))}
+            </div>
+            );
+          })}
         </div>
       </div>
     </section>
