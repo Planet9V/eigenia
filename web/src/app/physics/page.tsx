@@ -16,7 +16,7 @@ export default function AppliedPhysicsPage() {
     <main className="min-h-screen bg-canvas text-primary relative font-sans selection:bg-dutchOrange selection:text-white transition-colors duration-300">
       <SiteChrome>
       {/* Main Header Container: Scalar Field Background */}
-      <section className="dark relative overflow-hidden border-b border-hairline">
+      <section className="dark relative overflow-hidden border-b border-hairline min-h-[480px] sm:min-h-[540px] lg:min-h-[620px] flex items-center">
         <div className="absolute inset-0 bg-[#0B0C0E]">
           <div className="hidden lg:block">
             <img
