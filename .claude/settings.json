@@ -27,12 +27,5 @@
       "mcp__serena__find_symbol",
       "mcp__serena__find_referencing_symbols"
     ]
-  },
-  "enabledMcpServers": [
-    "super-intelligence",
-    "serena",
-    "github",
-    "railway",
-    "context7"
-  ]
+  }
 }
