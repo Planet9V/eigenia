@@ -31,8 +31,7 @@
 
 ## 🛡️ The 5 Non-Negotiable Rules
 
-1. **Safety is a Way of Life:** No test a plant cannot absorb; if a process is threatened, the work stops immediately.
-2. **Starts with Truth:** We bill what you need. *"You do not need this"* is a binding answer.
-3. **Senior Expertise:** The experts who walk your plant author your report. No junior handoffs.
-4. **Fact-Based Evidence:** An assertion you cannot check is not a finding.
-5. **Ethical Alignment:** We gladly deliver findings that shrink our own scope of work.
+1. **Safety First, Always:** Our commitment to safety is absolute and non-negotiable, guiding every decision and action we take.
+2. **People Make the Differnce:** We recognize that our success is driven by the talent, dedication, and contributions of our people.
+4. **Fact-Based Decisions:** We rely on data, evidence, and rigorous analysis to inform our decisions and ensure the best possible outcomes.
+5. **Right Results, Right Way:** We are committed to achieving excellence while upholding the highest standards of integrity, ethics, and professionalism.
