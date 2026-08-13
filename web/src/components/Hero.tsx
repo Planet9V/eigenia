@@ -1,6 +1,8 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
 export const Hero: React.FC = () => {
@@ -43,6 +45,23 @@ export const Hero: React.FC = () => {
           <p className="font-sans text-base sm:text-lg text-secondary font-light leading-relaxed max-w-3xl">
             {t("hero_subtitle" as any)}
           </p>
+
+          <div className="pt-2 flex flex-wrap items-center gap-4">
+            <Link
+              href="/collaborate"
+              className="px-6 py-3 rounded-xl bg-dutchOrange hover:bg-dutchOrange/90 text-white font-sans text-sm font-bold transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 inline-flex items-center gap-2"
+            >
+              {t("hero_cta_briefing" as any)}
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+
+            <a
+              href="#research-portals"
+              className="px-6 py-3 rounded-xl border border-hairline bg-white/[0.02] text-primary font-sans text-sm font-semibold hover:border-dutchOrange hover:text-dutchOrange transition-all"
+            >
+              {t("hero_cta_labs" as any)}
+            </a>
+          </div>
 
           <div className="pt-2 font-mono text-xs text-muted flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-dutchOrange inline-block animate-pulse"></span>

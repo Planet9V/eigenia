@@ -25,7 +25,7 @@ export default function Home() {
       <Hero />
 
       {/* Standalone Route Navigation Portals Showcase */}
-      <section className="py-20 bg-subtle border-b border-hairline transition-colors duration-300">
+      <section id="research-portals" className="py-20 bg-subtle border-b border-hairline transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <div className="max-w-3xl space-y-3">
             <span className="font-mono text-[10px] sm:text-xs tracking-[0.2em] uppercase text-dutchOrange font-medium inline-block">
