@@ -16,7 +16,9 @@ backgrounds" below).
 ├── /mission
 ├── /tracks                    Research tracks catalogue
 ├── /physics                   9-model Applied Physics catalogue (bento/compact grid toggle)
-├── /collaborate                Proposal intake — the contact form
+├── /collaborate                Proposal intake — 4 pathways (pro-bono audit,
+│                               academic fellowship, actuarial/commercial,
+│                               sponsor), trust signals, contact form
 ├── /wiki                      Sovereign Research Wiki — 25 treatises across 8 Working Groups
 ├── /theory/[slug]              9 dynamic routes, one per physics model
 └── /papers/[slug]              Dynamic routes, one per long-form paper
@@ -134,6 +136,31 @@ diagram geometry and captions out of that zone — this has bitten multiple
 diagrams (GGNN's redundant caption, Lacan's original triangle) and is the
 first thing to check if a new diagram looks fine in isolation but wrong on
 the actual `/physics` grid.
+
+### Collaborate page — 4 engagement pathways
+
+`web/src/app/collaborate/page.tsx` drives everything off a single
+`Pathway` union (`"probono" | "academic" | "commercial" | "sponsor"`) held
+in `selectedType` state. Adding a 5th pathway means updating, in one
+place each:
+- The `tracks` array (pathway card content — tag/title/desc/features/CTA)
+- `TRACK_SELECTOR_PATHWAYS` — whether the Risk/DEXPI/Actuarial research-
+  track selector should show for that pathway (currently hidden only for
+  `sponsor`, which has no research track to select)
+- The `submitLabelKey`/email/org/message label+placeholder maps — each
+  pathway gets its own submit-button microcopy and, where it matters
+  (sponsor's email/org/message fields read differently from the other
+  three), its own field labels/placeholders
+- Both `en` and `nl` blocks in `web/src/locales/translations.ts`
+  (`collab_t*_*` keys) — this page has no fallback for a missing
+  translation key beyond silently printing the raw key string (see
+  [KNOWN_ISSUES.md](./KNOWN_ISSUES.md#joinresearchcta-references-translation-keys-that-dont-exist)
+  for what that looks like when it happens), so a new pathway without
+  matching `nl` keys will render literal key names in Dutch.
+
+Pathway cards use the shared `Card`/`SectionBand` components (see
+`web/src/components/ui/`), not hand-rolled divs — reuse them for any new
+section on this page rather than reintroducing bespoke markup.
 
 ### Contact form (`useContactForm`)
 
