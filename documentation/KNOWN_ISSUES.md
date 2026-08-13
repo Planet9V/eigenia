@@ -44,6 +44,24 @@ introduced by any specific recent change. Not triaged yet — check
 `https://github.com/Planet9V/eigenia/security/dependabot` for current
 detail before assuming they're still the same 5.
 
+## `JoinResearchCTA` references translation keys that don't exist
+
+`web/src/components/JoinResearchCTA.tsx` calls `t("join_tag" as any)`,
+`t("join_title" as any)`, `t("join_desc" as any)`, and
+`t("join_btn_apply" as any)` — none of those keys exist anywhere in
+`web/src/locales/translations.ts` (`en` or `nl`). `LanguageContext`'s
+`t()` has no build-time key checking (it's typed `(key: string) =>
+string`) and falls back to printing the raw key string when a lookup
+misses in both languages, so if this component were ever rendered it
+would show literal text like "join_title" instead of real copy. As of
+this writing, `JoinResearchCTA` is also not imported by any other file in
+the codebase — it's dead code, not a live bug, but it's a landmine for
+whoever imports it next expecting it to just work. Found while auditing
+`/collaborate` (2026-08-12); left unfixed since wiring it in was outside
+that task's scope. Fix is either: delete the component if it's genuinely
+unused, or add the missing `join_*` keys (both languages) and hook it up
+somewhere.
+
 ## Mobile-viewport visual testing is unreliable in this dev environment
 
 The browser-automation tooling used in Claude Code sessions here

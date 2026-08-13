@@ -120,23 +120,28 @@ instead of them — they solve different problems:
 
 | Need | Call |
 |---|---|
-| How does X work / what calls Y (structural) | `graph_query(project="eigenia", question="...")` |
+| How does X work / what calls Y (structural, exact symbol name) | `graph_query(project="eigenia", question="...")` |
+| You know roughly what you want but not the exact symbol name | `graph_semantic_query(project="eigenia", phrase="...")` — resolves a fuzzy phrase to the nearest symbol by meaning, then explains it structurally |
 | Shortest dependency path between two symbols | `graph_path(project="eigenia", source, target)` |
 | Explain one symbol + its neighbours | `graph_explain(project="eigenia", symbol)` |
-| Recall a decision from a *different* past session | `memory_search(query, namespace="eigenia")` |
-| Persist a decision so a *future* session can recall it | `memory_store(key, value, namespace="eigenia")` |
+| Recall a decision from a *different* past session | `memory_search(query, project="eigenia")` |
+| Persist a decision so a *future* session can recall it | `memory_store(key, value, namespace="decisions", project="eigenia")` |
 
 Skill lookup is deliberately **not** routed through the gateway —
 `skills_search`/`suggest` would just be a second path to the same skill
 catalogue superpowers already puts in front of you every turn. Use the
 `Skill` tool directly for that.
 
-**Always pass `namespace="eigenia"`** on every `memory_search`/
-`memory_store` call — never the default namespace. This is one shared
-database across every project the gateway knows about (this repo,
-super-intelligence-framework, podcast_notebookllm); the namespace string is
-the only thing keeping them apart, and nothing enforces it but you typing
-it.
+**Always pass `project="eigenia"`** on every `memory_search`/`memory_store`
+call (not a hand-typed `namespace="eigenia"` string — that was this
+section's original guidance and still works, but `project=` is the
+correct one now: it's validated against the gateway's own project
+registry, so a typo raises `UnknownProject` instead of silently creating a
+disconnected namespace nothing will ever search again). This is one
+shared database across every project the gateway knows about (this repo,
+super-intelligence-framework, podcast_notebookllm); `project=` is what
+keeps them apart, structurally, not a convention you have to remember to
+type correctly every time.
 
 **Trust, but verify — this tool can be wrong or out of date:**
 
