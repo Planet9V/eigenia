@@ -15,6 +15,12 @@ Eigenia's digital twin platform combines **Gated Graph Neural Networks (GGNN)**,
 
 ---
 
+## Documentation
+
+Developer and support documentation lives in [`documentation/`](./documentation/README.md) — architecture, deployment, content-authoring guide, and known issues. Start there for anything beyond this overview.
+
+---
+
 ## Tech Stack & Architecture
 
 The application is engineered for ultra-high performance, dark/light theme flexibility, KaTeX mathematical rendering, and containerized deployment:
@@ -41,6 +47,7 @@ The application is engineered for ultra-high performance, dark/light theme flexi
 ├── /tracks                         [Standalone Route: 7 Research Tracks Catalogue]
 ├── /physics                        [Standalone Route: 9 Applied Physics Models Catalogue]
 ├── /collaborate                    [Standalone Route: Proposal Intake & Board Briefings]
+├── /wiki                           [Standalone Route: Sovereign Research Wiki — 25 Treatises, 8 Working Groups]
 │
 ├── /theory/[slug]                  [Dynamic Route: Applied Physics Deep Dives]
 │   ├── /theory/aeon-ggnn-gated-graph
@@ -70,9 +77,9 @@ The application is engineered for ultra-high performance, dark/light theme flexi
 All contact forms, pretotype modals (S-Curve Audit, Telemetry Sandbox, Executive Briefings), and CTA buttons route directly to **`jim@eigenia.nl`**.
 
 ### Submission Flow:
-1. **Client Intake (`/collaborate` & `PretotypeExperimentModal`):** Captures user inputs (Name, Institutional Email, Entity Name, Engagement Pathway, Target Track, and Technical Overview).
-2. **Server-Side Intake Endpoint (`/api/contact`):** Next.js API route handler receives POST requests, validates fields, and records log entries targeted for `jim@eigenia.nl`.
-3. **Mailto Dispatching & Fallback:** Client automatically dispatches a pre-filled mailto draft to `jim@eigenia.nl?subject=...&body=...` and displays a direct backup intake link to `jim@eigenia.nl`.
+1. **Client Intake (`/collaborate` & `PretotypeExperimentModal`):** Captures user inputs (Name, Institutional Email, Entity Name, Engagement Pathway, Target Track, and Technical Overview) via the shared `useContactForm` hook.
+2. **Server-Side Intake Endpoint (`/api/contact`):** Next.js API route handler receives POST requests and dispatches real email via Hostinger SMTP (`web/src/lib/mailer.ts`) to `jim@eigenia.nl`.
+3. **Mailto Fallback:** The client also dispatches a pre-filled mailto draft to `jim@eigenia.nl?subject=...&body=...` regardless of send outcome; if the SMTP send fails, a visible error banner shows so the failure isn't silent.
 
 ---
 
@@ -80,46 +87,49 @@ All contact forms, pretotype modals (S-Curve Audit, Telemetry Sandbox, Executive
 
 ```
 eigenia/
-├── README.md                          # Master project documentation
-├── DEPLOYMENT.md                      # Step-by-step Docker & Railway deployment guide
+├── README.md                          # This file — project overview
+├── documentation/                     # Developer & support docs — see documentation/README.md
 ├── .gitignore                         # Git exclusion configuration
 │
-├── papers/                            # Raw scientific treatises and research papers
-│   ├── Cascading Failure Hypothesis.md
-│   ├── Death Wobble-The Grids Precarious Pulse Frequency Instability.md
-│   ├── 12_Monte Carlo Engine.md
-│   └── OXOT Cyber Digital Twin Series - *.md
-│
-├── references/                        # Insurance, underwriter, and mathematical models
-│   ├── 1_underwriter_insurance/
-│   ├── Kramers_Escape_Model.md
-│   ├── Lacanian_Psychohistory_Framework.md
-│   └── Paradigm_Suite.md
+├── references/                        # Working-group treatises & sourced external research (load-bearing — see documentation/ARCHITECTURE.md)
+│   ├── WG-01-UI-Underwriter-insurance/
+│   ├── WG-02-DT-.../
+│   ├── external-research/             # Sourced-but-not-WG-authored material, one file per source
+│   └── ... (8 working groups, 25 treatises total)
 │
 └── web/                               # Next.js 15 Web Application
-    ├── Dockerfile                     # Multi-stage production build container
-    ├── docker-compose.yml             # Docker compose service configuration
+    ├── Dockerfile                     # Local-only container build — NOT what Railway uses, see documentation/DEPLOYMENT.md
+    ├── docker-compose.yml             # Docker compose service configuration (local-only)
     ├── package.json                   # Node dependencies and scripts
     ├── next.config.ts                 # Next.js configuration
     │
     └── src/
         ├── app/                       # App Router page routes & API endpoints
-        │   ├── api/contact/route.ts   # Intake API route for jim@eigenia.nl
+        │   ├── api/contact/route.ts   # Intake API route, sends via Hostinger SMTP
         │   ├── collaborate/page.tsx   # Proposal intake page
         │   ├── mission/page.tsx       # Sovereign mission page
         │   ├── physics/page.tsx       # Applied physics catalogue
         │   ├── tracks/page.tsx        # Research tracks catalogue
+        │   ├── wiki/page.tsx          # Sovereign Research Wiki dashboard
         │   ├── theory/[slug]/page.tsx # Applied physics deep dives
         │   └── papers/[slug]/page.tsx # Long-form treatises viewer
         │
         ├── components/                # React UI components & modals
+        │   ├── SiteChrome.tsx         # Shared Navbar/Footer/Modal wrapper — see documentation/ARCHITECTURE.md
         │   ├── Navbar.tsx             # Title Case top navbar & light/dark toggle
+        │   ├── Hero.tsx               # Homepage hero — scoped-dark background pattern
         │   ├── MarkdownViewer.tsx     # Full markdown & KaTeX formula renderer
         │   ├── TheoryCatalogue.tsx    # Applied physics models registry
-        │   ├── LabsShowcase.tsx       # R&D showcase component
+        │   ├── theory-diagrams/       # Inline SVG diagram per physics model
         │   ├── PretotypeExperimentModal.tsx # Interactive audit & briefing modal
         │   ├── ImpressumModal.tsx     # EU statutory legal disclosure
         │   └── EuComplianceFooter.tsx # EU compliance footer with intake links
+        │
+        ├── lib/
+        │   ├── papers.ts              # Slug → references/*.md path lookup for /papers
+        │   ├── wiki.ts                # Slug → references/*.md path lookup for /wiki
+        │   ├── mailer.ts              # Hostinger SMTP transporter
+        │   └── useContactForm.ts      # Shared contact-form submit/error-state hook
         │
         ├── context/                   # Global React state context
         │   ├── ThemeContext.tsx       # Light & Dark mode switcher
@@ -142,7 +152,7 @@ eigenia/
 
 ```bash
 # 1. Clone repository
-git clone https://github.com/planet9v/eigenia.git
+git clone https://github.com/Planet9V/eigenia.git
 cd eigenia/web
 
 # 2. Install dependencies
@@ -169,7 +179,7 @@ npm run start
 
 ## Deployment Guides
 
-For step-by-step instructions on deploying with **Docker Containerization** or **Railway Edge Deployment**, please see [DEPLOYMENT.md](file:///Users/jimmcknney/jim_private/eigenia/DEPLOYMENT.md).
+For step-by-step instructions on local Docker setup, required environment variables, and how production deploys on Railway, see [documentation/DEPLOYMENT.md](./documentation/DEPLOYMENT.md).
 
 ---
 
