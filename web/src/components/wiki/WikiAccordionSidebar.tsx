@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import {
   BookOpen,
   ChevronDown,
@@ -55,6 +55,12 @@ export default function WikiAccordionSidebar({
   const [expandedWgs, setExpandedWgs] = useState<Set<string>>(() => {
     return new Set([activeWgId || "WG-01-UI", "WG-02-DT", "MP-MATH"]);
   });
+
+  useEffect(() => {
+    if (activeWgId) {
+      setExpandedWgs((prev) => new Set([...prev, activeWgId]));
+    }
+  }, [activeWgId]);
 
   const workingGroups = useMemo(() => {
     return getAllWorkingGroups(language);

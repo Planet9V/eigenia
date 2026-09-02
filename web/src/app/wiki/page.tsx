@@ -20,19 +20,38 @@ function WikiContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const paramWg = searchParams.get("wg") || "WG-01-UI";
-  const paramDoc = searchParams.get("doc") || searchParams.get("slug") || "WG-01-UI-1-Overview";
+  const paramWg = searchParams.get("wg");
+  const paramDoc = searchParams.get("doc") || searchParams.get("slug");
 
-  const [activeWgId, setActiveWgId] = useState<string>(paramWg);
-  const [activeDocId, setActiveDocId] = useState<string>(paramDoc);
+  const resolveInitialDocId = () => {
+    if (paramDoc) return paramDoc;
+    if (paramWg) {
+      const targetWg = getWorkingGroupById(paramWg, language);
+      if (targetWg && targetWg.documents.length > 0) {
+        return targetWg.documents[0].id;
+      }
+    }
+    return "WG-01-UI-1-Overview";
+  };
+
+  const [activeWgId, setActiveWgId] = useState<string>(() => paramWg || "WG-01-UI");
+  const [activeDocId, setActiveDocId] = useState<string>(resolveInitialDocId);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   useEffect(() => {
     const wg = searchParams.get("wg");
     const doc = searchParams.get("doc") || searchParams.get("slug");
-    if (wg) setActiveWgId(wg);
+    if (wg) {
+      setActiveWgId(wg);
+      if (!doc) {
+        const targetWg = getWorkingGroupById(wg, language);
+        if (targetWg && targetWg.documents.length > 0) {
+          setActiveDocId(targetWg.documents[0].id);
+        }
+      }
+    }
     if (doc) setActiveDocId(doc);
-  }, [searchParams]);
+  }, [searchParams, language]);
 
   const allDocs = useMemo(() => getAllWikiDocuments(language), [language]);
 

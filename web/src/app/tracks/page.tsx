@@ -71,7 +71,7 @@ export default function TracksPage() {
               Sovereign Research Tracks
             </h1>
             <p className="text-sm sm:text-base text-secondary max-w-3xl leading-relaxed">
-              Explore all 8 Eigenia Lab Working Groups spanning {totalDocuments} published treatises. Select any Working Group card below to open the complete Research Wiki Engine.
+              Explore all {workingGroups.length} Eigenia Lab Working Groups spanning {totalDocuments} published treatises. Select any Working Group card below to open the complete Research Wiki Engine.
             </p>
           </div>
         </div>
@@ -153,9 +153,36 @@ export default function TracksPage() {
                       </div>
 
                       {/* 4-5 Sentence Copywriting Synopsis */}
-                      <p className="text-xs text-secondary leading-relaxed mb-6 font-normal">
+                      <p className="text-xs text-secondary leading-relaxed mb-4 font-normal">
                         {wg.description}
                       </p>
+
+                      {/* Treatise Preview Chips */}
+                      <div className="mb-6 pt-3 border-t border-hairline/60">
+                        <span className="font-mono text-[10px] uppercase tracking-wider text-muted font-semibold block mb-2">
+                          {language === "nl" ? "Inbegrepen Verhandelingen" : "Published Treatises"}:
+                        </span>
+                        <div className="flex flex-wrap gap-1.5">
+                          {wg.documents.slice(0, 3).map((doc) => (
+                            <Link
+                              key={doc.id}
+                              href={`/wiki?wg=${encodeURIComponent(wg.id)}&doc=${encodeURIComponent(doc.id)}`}
+                              className="inline-block text-[11px] font-medium px-2 py-0.5 rounded-md bg-canvas border border-hairline text-secondary hover:text-dutchOrange hover:border-dutchOrange/40 transition-colors truncate max-w-full"
+                              title={language === "nl" ? (doc.titleNl || doc.title) : doc.title}
+                            >
+                              {doc.badge || (language === "nl" ? (doc.titleNl || doc.title) : doc.title)}
+                            </Link>
+                          ))}
+                          {wg.documents.length > 3 && (
+                            <Link
+                              href={`/wiki?wg=${encodeURIComponent(wg.id)}&doc=${encodeURIComponent(wg.documents[0]?.id || "")}`}
+                              className="inline-block text-[10px] font-mono font-medium px-1.5 py-0.5 rounded-md bg-dutchOrange/5 border border-dutchOrange/20 text-dutchOrange hover:bg-dutchOrange/10 transition-colors"
+                            >
+                              +{wg.documents.length - 3} {language === "nl" ? "meer" : "more"}
+                            </Link>
+                          )}
+                        </div>
+                      </div>
                     </div>
 
                     {/* Footer Action Link */}
@@ -165,7 +192,7 @@ export default function TracksPage() {
                       </span>
 
                       <Link
-                        href={`/wiki?wg=${encodeURIComponent(wg.id)}`}
+                        href={`/wiki?wg=${encodeURIComponent(wg.id)}&doc=${encodeURIComponent(wg.documents[0]?.id || "")}`}
                         className="inline-flex items-center gap-1.5 text-xs font-semibold text-dutchOrange group-hover:translate-x-0.5 transition-transform"
                       >
                         <span>Open Wiki</span>
@@ -208,7 +235,7 @@ export default function TracksPage() {
                       </div>
 
                       <Link
-                        href={`/wiki?wg=${encodeURIComponent(wg.id)}`}
+                        href={`/wiki?wg=${encodeURIComponent(wg.id)}&doc=${encodeURIComponent(wg.documents[0]?.id || "")}`}
                         className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-dutchOrange/10 text-dutchOrange border border-dutchOrange/30 hover:bg-dutchOrange/20 transition-all shrink-0"
                       >
                         <span>Open Wiki ({wg.documents.length} {language === "nl" ? "Verhandelingen" : "Treatises"})</span>
@@ -219,6 +246,22 @@ export default function TracksPage() {
                     <p className="mt-3 text-xs text-secondary leading-relaxed">
                       {wg.description}
                     </p>
+
+                    {/* All Treatises direct pills in List View */}
+                    <div className="mt-4 pt-3 border-t border-hairline/60 flex flex-wrap items-center gap-1.5">
+                      <span className="font-mono text-[10px] uppercase tracking-wider text-muted font-semibold mr-1">
+                        {language === "nl" ? "Verhandelingen" : "Treatises"}:
+                      </span>
+                      {wg.documents.map((doc) => (
+                        <Link
+                          key={doc.id}
+                          href={`/wiki?wg=${encodeURIComponent(wg.id)}&doc=${encodeURIComponent(doc.id)}`}
+                          className="inline-block text-[11px] font-medium px-2 py-0.5 rounded-md bg-canvas border border-hairline text-secondary hover:text-dutchOrange hover:border-dutchOrange/40 transition-colors"
+                        >
+                          {doc.badge || (language === "nl" ? (doc.titleNl || doc.title) : doc.title)}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 );
               })}
