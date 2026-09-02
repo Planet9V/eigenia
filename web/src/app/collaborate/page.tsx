@@ -157,19 +157,25 @@ export default function CollaboratePage() {
   return (
     <main className="min-h-screen bg-canvas text-primary transition-colors duration-300 relative font-sans selection:bg-dutchOrange selection:text-white">
       <SiteChrome>
-        {/* Main Header Container */}
-        <section className="bg-canvas pt-28 pb-12 border-b border-hairline transition-colors duration-300">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        {/* Main Header Container: Sovereign Vector Field Background */}
+        <section className="dark relative overflow-hidden border-b border-hairline min-h-[480px] sm:min-h-[540px] lg:min-h-[620px] flex items-center">
+          <div className="absolute inset-0 bg-[#0B0C0E]">
+            <div className="hidden lg:block">
+              <img
+                src="/assets/hero-vector-field.webp"
+                alt=""
+                aria-hidden="true"
+                className="absolute inset-0 h-full w-full object-cover object-[center_62%] opacity-70"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0B0C0E] via-[#0B0C0E]/60 to-[#0B0C0E]/20" />
+            </div>
+          </div>
+
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12 space-y-6">
             <Breadcrumb items={[{ label: t("nav_collaborate"), href: "/collaborate" }]} />
 
-            <motion.div
-              initial="hidden"
-              animate="show"
-              variants={fadeUp}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              className="max-w-3xl space-y-4"
-            >
-              <span className="font-mono text-xs text-dutchOrange uppercase tracking-widest font-semibold block">
+            <div className="max-w-4xl space-y-4">
+              <span className="font-mono text-[10px] sm:text-xs tracking-[0.2em] uppercase text-dutchOrange font-medium inline-block">
                 {t("collab_header_tag")}
               </span>
 
@@ -177,10 +183,10 @@ export default function CollaboratePage() {
                 {t("collab_header_title")}
               </h1>
 
-              <p className="text-base sm:text-lg text-secondary font-light leading-relaxed">
+              <p className="text-base sm:text-lg text-secondary font-light leading-relaxed max-w-3xl">
                 {t("collab_header_desc")}
               </p>
-            </motion.div>
+            </div>
           </div>
         </section>
 
@@ -197,21 +203,17 @@ export default function CollaboratePage() {
             </h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {trustPoints.map((point, i) => (
-              <motion.div
+            {trustPoints.map((point) => (
+              <div
                 key={point.title}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.4, delay: i * 0.08 }}
-                className="flex flex-col gap-3 p-6 rounded-2xl bg-subtle border border-hairline"
+                className="flex flex-col gap-3 p-6 rounded-2xl bg-subtle border border-hairline transition-all"
               >
                 <div className="w-9 h-9 rounded-lg bg-dutchOrange/10 border border-dutchOrange/30 flex items-center justify-center text-dutchOrange">
                   {point.icon}
                 </div>
                 <h3 className="font-sans text-sm font-semibold text-primary">{point.title}</h3>
                 <p className="text-xs text-secondary font-light leading-relaxed">{point.desc}</p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </SectionBand>
@@ -229,14 +231,10 @@ export default function CollaboratePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {tracks.map((track, i) => (
+            {tracks.map((track) => (
               <Card
                 key={track.id}
                 variant="elevated"
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.4, delay: i * 0.08 }}
                 className="p-7 space-y-5 flex flex-col justify-between"
               >
                 <div className="space-y-4">
@@ -278,13 +276,7 @@ export default function CollaboratePage() {
         {/* Application Form Section */}
         <section id="collab-form" className="bg-canvas py-20 border-b border-hairline transition-colors duration-300">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5 }}
-              className="p-8 sm:p-12 rounded-2xl bg-surface border border-hairline shadow-2xl space-y-8"
-            >
+            <div className="p-8 sm:p-12 rounded-2xl bg-surface border border-hairline shadow-2xl space-y-8">
               <div className="space-y-3 border-b border-hairline pb-6">
                 <span className="font-mono text-[10px] sm:text-xs tracking-[0.2em] uppercase text-dutchOrange font-medium inline-block">
                   {t("collab_form_tag")}
@@ -436,7 +428,7 @@ export default function CollaboratePage() {
                   </button>
                 </form>
               )}
-            </motion.div>
+            </div>
           </div>
         </section>
       </SiteChrome>

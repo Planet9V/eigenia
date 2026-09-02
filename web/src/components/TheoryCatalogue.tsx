@@ -18,6 +18,7 @@ export const TheoryCatalogue: React.FC = () => {
       id="theory"
       className="py-20 bg-canvas text-primary relative font-sans selection:bg-dutchOrange selection:text-white scroll-mt-24 border-b border-hairline transition-colors duration-300"
     >
+      <div id="catalogue" className="scroll-mt-24" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 border-b border-hairline pb-8">

@@ -50,9 +50,13 @@ export default function AppliedPhysicsPage() {
               {t("physics_page_desc")}
             </p>
           </div>
+        </div>
+      </section>
 
-          {/* Intro Summary Bento Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 font-mono text-xs pt-4">
+      {/* Navigation Quick Jump Cards */}
+      <section className="py-10 bg-canvas border-b border-hairline transition-colors duration-300">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 font-mono text-xs">
             {/* Card 1: Catastrophe Cyber Actuarial Engine */}
             <motion.a
               href="#actuarial"
@@ -81,7 +85,7 @@ export default function AppliedPhysicsPage() {
 
             {/* Card 2: 9 Core Mathematical Physics Frameworks */}
             <motion.a
-              href="#catalogue"
+              href="#theory"
               whileHover={{ y: -4, scale: 1.01 }}
               className="p-8 rounded-2xl bg-surface border border-hairline hover:border-dutchOrange/50 transition-all space-y-4 shadow-xl block group border-l-4 border-l-dutchOrange"
             >
