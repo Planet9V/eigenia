@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import { HeroCanvasBackground } from "@/components/canvas/HeroCanvasBackground";
 
 export const Hero: React.FC = () => {
   const { t } = useLanguage();
@@ -13,17 +14,14 @@ export const Hero: React.FC = () => {
       id="hero"
       className="dark relative overflow-hidden pt-28 pb-16 min-h-[480px] sm:min-h-[540px] lg:min-h-[620px] flex items-center selection:bg-dutchOrange selection:text-white border-b border-hairline"
     >
-      {/* Vector Field Background — desktop/laptop only; phones & tablets get flat background color */}
+      {/* Dynamic Vector Field Canvas Background */}
       <div className="absolute inset-0 bg-[#0B0C0E]">
-        <div className="hidden lg:block">
-          <img
-            src="/assets/hero-vector-field.webp"
-            alt=""
-            aria-hidden="true"
-            className="absolute inset-0 h-full w-full object-cover object-[65%_35%] opacity-55"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0B0C0E]/35 via-[#0B0C0E]/55 to-[#0B0C0E]" />
-        </div>
+        <HeroCanvasBackground
+          variant="streamlines"
+          fallbackSrc="/assets/hero-vector-field.webp"
+          fallbackClassName="object-cover object-[65%_35%]"
+          opacity={0.8}
+        />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

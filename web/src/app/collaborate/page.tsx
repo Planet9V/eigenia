@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { useContactForm } from "@/lib/useContactForm";
+import { HeroCanvasBackground } from "@/components/canvas/HeroCanvasBackground";
 
 type Pathway = "probono" | "academic" | "commercial" | "sponsor";
 
@@ -160,15 +161,12 @@ export default function CollaboratePage() {
         {/* Main Header Container: Sovereign Vector Field Background */}
         <section className="dark relative overflow-hidden border-b border-hairline min-h-[480px] sm:min-h-[540px] lg:min-h-[620px] flex items-center">
           <div className="absolute inset-0 bg-[#0B0C0E]">
-            <div className="hidden lg:block">
-              <img
-                src="/assets/hero-vector-field.webp"
-                alt=""
-                aria-hidden="true"
-                className="absolute inset-0 h-full w-full object-cover object-[center_62%] opacity-70"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0B0C0E] via-[#0B0C0E]/60 to-[#0B0C0E]/20" />
-            </div>
+            <HeroCanvasBackground
+              variant="streamlines"
+              fallbackSrc="/assets/hero-vector-field.webp"
+              fallbackClassName="object-cover object-[center_62%]"
+              opacity={0.8}
+            />
           </div>
 
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12 space-y-6">

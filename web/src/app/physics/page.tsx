@@ -8,6 +8,7 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { ArrowDownRight, FileSpreadsheet, Binary } from "lucide-react";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
+import { HeroCanvasBackground } from "@/components/canvas/HeroCanvasBackground";
 
 export default function AppliedPhysicsPage() {
   const { t } = useLanguage();
@@ -18,15 +19,12 @@ export default function AppliedPhysicsPage() {
       {/* Main Header Container: Scalar Field Background */}
       <section className="dark relative overflow-hidden border-b border-hairline min-h-[480px] sm:min-h-[540px] lg:min-h-[620px] flex items-center">
         <div className="absolute inset-0 bg-[#0B0C0E]">
-          <div className="hidden lg:block">
-            <img
-              src="/assets/hero-scalar-field.webp"
-              alt=""
-              aria-hidden="true"
-              className="absolute inset-0 h-full w-full object-cover object-[60%_40%] opacity-70"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0B0C0E] via-[#0B0C0E]/60 to-[#0B0C0E]/20" />
-          </div>
+          <HeroCanvasBackground
+            variant="isolines"
+            fallbackSrc="/assets/hero-scalar-field.webp"
+            fallbackClassName="object-cover object-[60%_40%]"
+            opacity={0.85}
+          />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12 space-y-6">
