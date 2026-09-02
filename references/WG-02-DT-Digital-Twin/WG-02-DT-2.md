@@ -1,13 +1,12 @@
 # First Principles and Taleb's Fooled by Randomness
 
-Lab Sponsor Resident,  j.mckenney
+Lab Sponsor Resident  j.mckenney
 
 
 Nassim Nicholas Taleb’s _Fooled by Randomness_ is less a finance book than a _philosophy of uncertainty_ aimed at the human mind itself. At its core, the book argues that randomness—luck, noise, statistical flukes—plays a far larger role in life than we like to admit, and that we consistently mis‑attribute random outcomes to skill, narrative, or causality. In a world enamored with stories of “master of the universe” traders and overnight successes, Taleb forces you to confront an uncomfortable truth: **success can be a poor indicator of skill, and failure can be a poor indicator of ineptitude**. The book is a meditation on probability, asymmetry, survivorship bias, and the limits of human reasoning, all wrapped in the vivid language of markets, casinos, and everyday life.
 
 Below is a structured, analytic overview that moves from big‑picture insights, through the “two sides of the table,” and then into probability and the Monte Carlo engine as Taleb uses them.
 
----
 
 ## Core thesis and worldview
 

@@ -140,7 +140,7 @@ export default async function PaperDetailPage({ params }: PageProps) {
             href={`/wiki?doc=${encodeURIComponent(paper.slug)}`}
             className="underline font-bold hover:text-white transition-colors"
           >
-            Open Wiki Dashboard (25 Treatises) →
+            Open Wiki Dashboard (26 Treatises) →
           </Link>
         </div>
       </div>

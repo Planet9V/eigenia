@@ -1,12 +1,10 @@
 # The Moment of Recognition
 
-Lab Sponsor Resident,  j.mckenney
-
-_What Nassim Taleb Saw in Markets, We See Every Day in the Facilities the World Depends On_
+Lab Sponsor Resident  j.mckenney
 
 There is a particular kind of clarity that comes from spending decades inside facilities where the stakes are not financial — where the wrong call does not cost money but costs lives, power, water, safety, and the invisible infrastructure that modern civilization takes entirely for granted.
 
-Jim McKenney has that clarity.
+## What Nassim Taleb Saw in Markets, We See Every Day in the Facilities the World Depends On
 
 It is the clarity of someone who has stood in substations and battery storage facilities and rail control rooms and water treatment plants across multiple continents and watched smart, well-intentioned people manage systems of extraordinary complexity with mental models that are — at a foundational level — broken. Not because the people are incompetent. Not because they haven't tried. But because the entire industry handed them a map drawn for the wrong territory and told them, with great confidence, that it was accurate.
 

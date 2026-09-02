@@ -1,27 +1,14 @@
 # The Actor Threat Quotient (ATQ)
-## Eigenia's 12-Factor Formula That Scores Every Threat Actor on Earth
 
----
-
-*Your firewall doesn't care who's attacking. Your board does.*
-
-*The ATQ tells them.*
-
----
-
-### A Number That Means Something
+Lab Sponsor J.McKenney
 
 Cybersecurity has a measurement problem. Ask a CISO to rank their top five threat actors and you'll get a list sorted by brand recognition — Lazarus Group sounds scarier than Ember Bear. Ask them to quantify *how much* scarier, and the conversation collapses into adjectives: "sophisticated," "persistent," "well-resourced."
 
-Adjectives don't survive a board meeting. Numbers do.
-
-The **Actor Threat Quotient (ATQ)** is a single composite score, 0 to 100, that measures how dangerous a specific threat actor is right now. It is computed from a materialized view against live data (`seldon.seldon_score_v2`), fed by 77,279 TACAM rows, 555,556 EPSS trajectory records, 79,376 knowledge graph edges, and 35,341 geopolitical events.
+The **Actor Threat Quotient (ATQ)** is a single composite score, 0 to 100, that measures how dangerous a specific threat actor is right now. It is computed from a materialized view against live data (`seldon.seldon_score_v2`), fed by over 100,000 TACAM rows, over 600,000 EPSS trajectory records, over 80,000 knowledge graph edges, and over 35,000 geopolitical events.The data is updated and re-calculated daily.
 
 When Volt Typhoon scores 78.6 and Kimsuky scores 68.0, the 10.6-point gap isn't an opinion. It's a measurement. You can decompose it into twelve weights, check it against source data, and compare it across time via snapshot epochs.
 
----
-
-### The Twelve Dimensions
+## ATQ's Twelve Dimensions
 
 The ATQ is not a black box. Every point is traceable to a specific component, a specific weight, and a specific data source. Here is the formula that runs in production:
 
@@ -41,8 +28,6 @@ The ATQ is not a black box. Every point is traceable to a specific component, a 
 | 12 | **Geopolitical Tension** | 5% | Is this actor backed by a state currently engaged in conflict or under sanctions? | `seldon.geopolitical_field` + ACLED | MAX(geo_field_value), cap 1.0 |
 
 **Total weight**: 100% = ATQ score (0–100)
-
----
 
 ### Why Twelve — Not Three
 
@@ -72,8 +57,6 @@ Notice that Volt Typhoon **overtook** Lazarus Group after the reform. The old EI
 
 That's the difference between a threat intelligence score and a threat intelligence *prediction*.
 
----
-
 ### The Art of Saturation Thresholds
 
 The design decision that matters most in the ATQ isn't the weights. It's the **saturation thresholds**. A threshold defines where a component stops adding score.
@@ -95,8 +78,6 @@ The V2 reform raised this to ÷ 20. Now:
 The same logic was applied across every dimension: Vendor Exposure raised from ÷ 15 to ÷ 50. Technique Reach from ÷ 80 to ÷ 120. EPSS multiplier halved from 10× to 5×. Each adjustment was set against the actual data distribution to get the most information out of each component.
 
 **The principle**: A scoring system that saturates on most inputs produces a ceiling effect. A scoring system that never saturates produces noise. The ATQ is tuned to the empirical distribution of real threat actor capabilities — not to theoretical ideals.
-
----
 
 ### How ATQ Feeds the Kill Chain
 
@@ -130,8 +111,6 @@ The financial model that prescribes *how much to invest* in cybersecurity uses t
 
 That sentence is generated from data, not intuition.
 
----
-
 ### The Snapshot Architecture: Scores That Move
 
 Unlike static threat intelligence reports, the ATQ changes as the world changes. The system captures point-in-time snapshots in `seldon.seldon_score_snapshots`, tagged by epoch:
@@ -145,8 +124,6 @@ Unlike static threat intelligence reports, the ATQ changes as the world changes.
 This enables **temporal analysis**: "How has APT41's ATQ changed since the AUKUS submarine deal was announced?" Answer: ATQ rose 2.3 points in the 90 days following, driven by geo_tension (+1.4 points), EPSS velocity (+0.6 points), and campaign recency (+0.3 points).
 
 Delta tracking turns the ATQ from a static ranking into a threat **trajectory**. Not just "who is dangerous" but "who is *getting* more dangerous."
-
----
 
 ### What Makes This Unique
 
@@ -165,8 +142,6 @@ Every major threat intelligence vendor (Mandiant, CrowdStrike, Recorded Future) 
 | **Saturation calibration** | Unknown internal models | Published thresholds tuned to empirical distributions |
 
 The practical difference: other vendors give you a threat actor *profile*. Eigenia gives you a threat actor *measurement* that feeds into a financial model telling your board exactly how much to spend.
-
----
 
 ### Reading an ATQ Decomposition
 
@@ -209,8 +184,6 @@ Here is what a fully decomposed ATQ looks like in the platform. When a security 
 
 Every bar, every number, every delta is computed from source data. Nothing is imputed. Nothing is subjective.
 
----
-
 ### The Bottom Line
 
 The ATQ is not a marketing label. It is a **materialized SQL view** running against live data — twelve components, twelve auditable weights, twelve saturation thresholds tuned to empirical threat actor distributions, feeding a Monte Carlo simulation that produces dollar-denominated risk for your board.
@@ -218,8 +191,3 @@ The ATQ is not a marketing label. It is a **materialized SQL view** running agai
 Other platforms tell you an actor is "dangerous." The ATQ tells you *how dangerous*, *why*, *compared to whom*, *trending in which direction*, and *what it costs you*.
 
 That is the difference between threat intelligence and threat *measurement*.
-
----
-
-*Eigenia CDT — Endeavour Energy B.V.*
-*"Every threat actor on earth, scored across twelve dimensions, updated continuously, priced in dollars."*

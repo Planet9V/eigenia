@@ -1,9 +1,10 @@
-# The COPE framework 
+# The COPE Framework: Underwriting's Site-Specific Assessment Tool
 
- Lab Sponsor Resident,  j.mckenney
+Lab Sponsor Resident j.mckenney
 
-The COPE framework is a fundamental site-specific assessment tool used by insurance underwriters to evaluate the physical risks associated with a specific building or facility. COPE is an acronym that stands for **Construction, Occupancy, Protection, and Exposure**.
+The COPE framework is a fundamental site-specific assessment tool used by insurance underwriters to evaluate the physical risks associated with a specific building or facility. COPE is an acronym that stands for Construction, Occupancy, Protection, and Exposure
 
+## The COPE Framework: Underwriting's Site-Specific Assessment Tool
 
 - **Construction:** This metric evaluates the physical building materials and structural integrity of a facility. Underwriters assess how resistant the building materials are to perils like fire or collapse. For example, a modern facility built with fire-resistive steel and concrete poses a significantly lower structural risk compared to a heritage site that may still feature older, highly combustible timber elements.
 

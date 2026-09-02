@@ -1,10 +1,29 @@
-- "**WebSocket_Live_Data** <!-- ORPHAN-WAS: WebSocket Live Data --> <!-- ORPHAN: 2026-05-15 unresolved -->"
-
 # Physics Models — 6 Seldon Indicators
 
-> The Eigenia CDT uses **6 physics-inspired indicators** derived from the `seldon.psychohistory_state` PostgreSQL table. These values are read by the Seldon Score endpoint and the L6 globe layer to produce risk gauges on the CDT dashboard.
+Lab Sponsor Resident  j.mckenney
 
-## Implementation Status Summary
+The Cyber Digital Twin uses **6 physics-inspired indicators** derived from the SeldonPSYCH database. These values are read by the Seldon Score endpoint and the L6 globe layer to produce risk gauges on the CDT dashboard.
+
+## 1. SIR Compartmental Model (Epidemic Spreading)
+
+**Physics analogy:** Susceptible-Infected-Recovered epidemic model applied to vulnerability propagation.
+
+**What it measures:** How fast a vulnerability "infects" connected systems across the OT/IT network. R0 > 15 triggers a "TIPPING" status.
+
+**Implementation:** Data display only — no SIR computation in the application layer. The `sir_r0` and `sir_beta` columns in `seldon.psychohistory_state` are populated by an external pipeline. The application reads them via SQL aggregation:
+
+```sql
+-- From demo.ts (Seldon Score endpoint)
+SELECT AVG(sir_r0) AS sir_r0
+FROM seldon.psychohistory_state
+WHERE computed_at > NOW() - INTERVAL '90 days'
+```
+
+**Dashboard mapping:** `modelRisk("sir_r0") = min(1, sir_r0 / 50.0)`, weight 0.20.
+
+**Database columns:** `psychohistory_state.sir_r0`, `psychohistory_state.sir_beta`
+
+
 
 | Indicator | Where Computed | Node.js Computation | Data Source |
 |-----------|---------------|---------------------|-------------|
@@ -158,29 +177,6 @@ The spectral boost is cached for 15 minutes and applied during MC random walk st
 **Database:** `seldon.spectral_analysis` (columns: `node_id`, `node_type`, `eigen_rank`, `spectral_gap`), `psychohistory_state.spectral_eigen_rank`
 
 
-## WebSocket Broadcast
-
-The WebSocket at `/ws/cdt` broadcasts a `physics_update` message every 30 seconds, but it does **not** send the 6 indicator values. It sends:
-
-```json
-{
-  "type": "physics_update",
-  "epoch": 234,
-  "seldon": {
-    "epoch": "Q2-2026",
-    "score": 0.82,
-    "status": "TIPPING"
-  },
-  "incident_count": 14,
-  "ts": 1746000000000
-}
-```
-
-The `seldon` field comes from `seldon_gpr_temporal_signals` (GPR leading indicator), not from the 6 physics indicators. The `incident_count` comes from `cdt_sec8k_events` (SEC 8-K filings in the last 7 days). Max 200 concurrent WebSocket connections enforced.
-
-The 6 physics indicator values are fetched on-demand by the dashboard via REST endpoints (see below), not streamed.
-
-
 ## API Endpoints (Actual)
 
 | Endpoint | Method | Description |
@@ -215,5 +211,3 @@ This is the central table for all 6 physics indicators. Key columns:
 | `geo_stability` | numeric | Geopolitical stability |
 | `eic_net` | numeric | EIC net score |
 | `psych_pressure` | numeric | Psychographic pressure |
-
-Rows are populated by an external pipeline (not by the Node.js application). The application only reads this table.

@@ -1,10 +1,11 @@
-# Eigenia CDT Monte Carlo Engine: Technical Investigation
+# CDT Monte Carlo Engine: Technical Investigation
+
+Lab Sponsor J.McKenney
+
 
 The Eigenia CDT Monte Carlo Engine is a sophisticated simulation system designed to model attack paths across the 7-layer Cyber-Digital-Twin (CDT). It moves beyond synthetic data to perform real-time, weighted random walks on live Neo4j graph data, enriched by temporal signals from Postgres.
 
-## 1. Subgraph Building (Importance-Weighted BFS)
-
-Located in mc-importance-bfs.ts.
+## Subgraph Building (Importance-Weighted BFS)
 
 Instead of a uniform BFS, the engine uses an **Importance-Weighted BFS** to extract the most relevant subgraph for simulation.
 
@@ -22,9 +23,7 @@ export function computeImportanceScore(degree: number, epssScore: number = 0, sp
 
 }
 
-## 2. Weighting Engine (Boltzmann & Spectral)
-
-Located in mc-weights.ts and mc-engine.ts.
+## Weighting Engine (Boltzmann & Spectral)
 
 The engine assigns weights to edges based on relationship types and node properties, then uses these weights to drive path selection.
 
@@ -56,13 +55,11 @@ function boltzmannSelect(edges: WeightedEdge[], temperature: number, visited: Se
 
 ### Temporal & Risk Modifiers:
 
-- **EPSS Velocity**: Multipliers for CVEs whose exploitability probability is rapidly increasing.
-- **TACAM Recency**: Boosts for active threat actor campaigns.
-- **SL-T Protection**: Reduces the probability of traversing edges leading to high-security zones (IEC 62443).
+- **EPSS**: Modifiers for CVEs whose exploitability probability is rapidly increasing.
+- **TACAM Recency**: Modifiers for active threat actor campaigns.
+- **SL-T Protection**: Modifiers for high-security zones (IEC 62443).
 
-## 3. Live Streaming (SSE & Generators)
-
-Located in mc-live.ts.
+## Live Streaming (SSE & Generators)
 
 The simulation is exposed via a Server-Sent Events (SSE) endpoint at `/api/mc-real/simulate/stream`, enabling real-time visualization in the frontend.
 
@@ -73,8 +70,6 @@ The simulation is exposed via a Server-Sent Events (SSE) endpoint at `/api/mc-r
 - **Data Richness**: Each step includes cumulative cost, cumulative probability, zone crossing events, and detection events.
 
 typescript
-
-// From mc-live.ts
 
 const gen = sampleWalkSteps(graph, seedId, targetId, maxHops, temperature, ...);
 
@@ -90,9 +85,7 @@ while (true) {
 
 }
 
-## 4. Risk & Taleb Metrics
-
-Located in mc-engine.ts.
+## Risk Metrics
 
 The engine doesn't just calculate mean cost; it analyzes the **fat-tail** of the distribution.
 
@@ -100,9 +93,5 @@ The engine doesn't just calculate mean cost; it analyzes the **fat-tail** of t
 - **Gaussian vs Pareto**: A ratio comparing standard predictions to fat-tail reality.
 - **Antifragility**: Scoring nodes based on how they respond to increased simulation temperature.
 - **Barbell Score**: Measures the efficiency of defense budget concentration.
-
----
-
-NOTE
 
 The engine uses **Mulberry32** for deterministic PRNG, allowing researchers to reproduce "Black Swan" events by sharing the `rngSeed`.

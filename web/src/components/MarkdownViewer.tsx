@@ -11,16 +11,16 @@ interface MarkdownViewerProps {
 const sanitizeMarkdownContent = (raw: string): string => {
   if (!raw) return "";
   let c = raw;
-  c = c.replace(/^---[\s\S]*?---\s*/g, "");
-  c = c.replace(/^(date|audience|source-code-refs|prs|memory-keys|verified-by|confidence|title|domain|tags|status|created|updated|related):\s*.*$/gm, "");
-  c = c.replace(/^(\s*-\s*("\[\[.*?\]\]"|\[\[.*?\]\]|\*\*[^*]+\*\*|physics|cdt|kramers|lacan|risk-modeling|sir|epss|granovetter|ising|spectral)\s*)+/gm, "");
+  // Strip YAML frontmatter strictly
+  c = c.replace(/^---[\s\S]*?---\r?\n?/g, "");
+  // Convert Obsidian [[target|label]] to label, or [[target]] to target
   c = c.replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g, (_, p1, p2) => p2 || p1.replace(/_/g, " "));
   return c.trim();
 };
 
 export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content }) => {
   const sanitizedContent = sanitizeMarkdownContent(content);
-  // Helper to render inline text with KaTeX formulas and bold/italic/links
+  // Helper to render inline text with KaTeX formulas and bold/italic/links/code
   const renderFormattedText = (text: string): React.ReactNode[] => {
     // Split text by inline math ($...$) and block math ($$...$$)
     const mathRegex = /(\$\$.*?\$\$|\$.*?\$)/g;
@@ -65,32 +65,70 @@ export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content }) => {
   };
 
   const renderInlineMarkdown = (text: string, keyPrefix: number | string): React.ReactNode => {
-    // Process markdown formatting: bold (**), italic (*), code (`), links ([text](url))
-    const tokens: React.ReactNode[] = [];
-    let current = text;
-    let counter = 0;
+    // Match links [text](url), inline code `code`, bold **text**, and italic *text*
+    const tokenRegex = /(\[.*?\]\(.*?\)|\`.*?\`|\*\*.*?\*\*|\*[^*]+?\*)/g;
+    const parts = text.split(tokenRegex);
 
-    // Replace bold text **bold**
-    const boldRegex = /\*\*(.*?)\*\*/g;
-    let match: RegExpExecArray | null;
-    let lastIndex = 0;
+    return (
+      <React.Fragment key={keyPrefix}>
+        {parts.map((p, idx) => {
+          if (!p) return null;
+          const k = `${keyPrefix}-${idx}`;
 
-    while ((match = boldRegex.exec(current)) !== null) {
-      if (match.index > lastIndex) {
-        tokens.push(current.substring(lastIndex, match.index));
-      }
-      tokens.push(
-        <strong key={`${keyPrefix}-b-${counter++}`} className="font-semibold text-primary">
-          {match[1]}
-        </strong>
-      );
-      lastIndex = boldRegex.lastIndex;
-    }
-    if (lastIndex < current.length) {
-      tokens.push(current.substring(lastIndex));
-    }
+          // Links [text](url)
+          if (p.startsWith("[") && p.includes("](") && p.endsWith(")")) {
+            const linkMatch = p.match(/^\[(.*?)\]\((.*?)\)$/);
+            if (linkMatch) {
+              const [, label, url] = linkMatch;
+              const isExternal = url.startsWith("http://") || url.startsWith("https://");
+              return (
+                <a
+                  key={k}
+                  href={url}
+                  target={isExternal ? "_blank" : undefined}
+                  rel={isExternal ? "noopener noreferrer" : undefined}
+                  className="text-dutchOrange hover:underline font-medium"
+                >
+                  {label}
+                </a>
+              );
+            }
+          }
 
-    return <React.Fragment key={keyPrefix}>{tokens}</React.Fragment>;
+          // Inline code `code`
+          if (p.startsWith("`") && p.endsWith("`") && p.length >= 2) {
+            return (
+              <code
+                key={k}
+                className="px-1.5 py-0.5 rounded bg-subtle text-primary border border-hairline font-mono text-xs text-dutchOrange"
+              >
+                {p.slice(1, -1)}
+              </code>
+            );
+          }
+
+          // Bold **text**
+          if (p.startsWith("**") && p.endsWith("**") && p.length >= 4) {
+            return (
+              <strong key={k} className="font-semibold text-primary">
+                {p.slice(2, -2)}
+              </strong>
+            );
+          }
+
+          // Italic *text*
+          if (p.startsWith("*") && p.endsWith("*") && p.length >= 2) {
+            return (
+              <em key={k} className="italic text-primary/90">
+                {p.slice(1, -1)}
+              </em>
+            );
+          }
+
+          return p;
+        })}
+      </React.Fragment>
+    );
   };
 
   // Parse lines into blocks (Headings, Paragraphs, Lists, Tables, CodeBlocks, Blockquotes, HR)
@@ -239,11 +277,37 @@ export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content }) => {
           quoteLines.push(lines[i].trim().replace(/^>\s?/, ""));
           i++;
         }
-        blocks.push(
-          <blockquote key={`quote-${i}`} className="my-6 pl-4 border-l-2 border-dutchOrange text-secondary text-base font-sans bg-dutchOrange/5 py-3 rounded-r-xl">
-            {renderFormattedText(quoteLines.join(" "))}
-          </blockquote>
-        );
+        const quoteText = quoteLines.join(" ");
+        // Check for GitHub alerts: [!NOTE], [!WARNING], [!IMPORTANT], [!TIP], [!CAUTION]
+        const alertMatch = quoteText.match(/^\[!(NOTE|WARNING|IMPORTANT|TIP|CAUTION)\]\s*(.*)$/i);
+        if (alertMatch) {
+          const alertType = alertMatch[1].toUpperCase();
+          const alertBody = alertMatch[2];
+          const alertStyles: Record<string, { border: string; bg: string; titleColor: string }> = {
+            NOTE: { border: "border-blue-500", bg: "bg-blue-500/10", titleColor: "text-blue-500" },
+            TIP: { border: "border-emerald-500", bg: "bg-emerald-500/10", titleColor: "text-emerald-500" },
+            IMPORTANT: { border: "border-violet-500", bg: "bg-violet-500/10", titleColor: "text-violet-500" },
+            WARNING: { border: "border-amber-500", bg: "bg-amber-500/10", titleColor: "text-amber-500" },
+            CAUTION: { border: "border-rose-500", bg: "bg-rose-500/10", titleColor: "text-rose-500" },
+          };
+          const style = alertStyles[alertType] || alertStyles.NOTE;
+          blocks.push(
+            <div key={`alert-${i}`} className={`my-6 pl-4 pr-4 py-3 border-l-4 ${style.border} ${style.bg} rounded-r-xl`}>
+              <div className={`text-xs font-mono font-bold uppercase tracking-wider ${style.titleColor} mb-1`}>
+                {alertType}
+              </div>
+              <div className="text-secondary text-sm font-sans leading-relaxed">
+                {renderFormattedText(alertBody)}
+              </div>
+            </div>
+          );
+        } else {
+          blocks.push(
+            <blockquote key={`quote-${i}`} className="my-6 pl-4 border-l-2 border-dutchOrange text-secondary text-base font-sans bg-dutchOrange/5 py-3 rounded-r-xl">
+              {renderFormattedText(quoteText)}
+            </blockquote>
+          );
+        }
         continue;
       }
 
@@ -288,9 +352,25 @@ export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content }) => {
         continue;
       }
 
-      // Standalone Display Math ($$ ... $$)
-      if (line.trim().startsWith("$$") && line.trim().endsWith("$$") && line.trim().length > 4) {
-        const mathStr = line.trim().slice(2, -2).trim();
+      // Standalone Display Math ($$ ... $$) - single line or multi-line
+      if (line.trim().startsWith("$$")) {
+        let mathStr = "";
+        if (line.trim().endsWith("$$") && line.trim().length > 2) {
+          mathStr = line.trim().slice(2, -2).trim();
+          i++;
+        } else {
+          i++;
+          const mathLines: string[] = [];
+          while (i < lines.length && !lines[i].trim().startsWith("$$")) {
+            mathLines.push(lines[i]);
+            i++;
+          }
+          if (i < lines.length && lines[i].trim().startsWith("$$")) {
+            i++;
+          }
+          mathStr = mathLines.join("\n").trim();
+        }
+
         try {
           const html = katex.renderToString(mathStr, { displayMode: true, throwOnError: false });
           blocks.push(
@@ -303,11 +383,10 @@ export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content }) => {
         } catch {
           blocks.push(
             <pre key={`math-err-${i}`} className="my-4 p-3 rounded bg-subtle font-mono text-xs text-dutchOrange">
-              {line}
+              {mathStr}
             </pre>
           );
         }
-        i++;
         continue;
       }
 

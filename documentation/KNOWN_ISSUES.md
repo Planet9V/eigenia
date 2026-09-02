@@ -11,17 +11,13 @@ configured as a custom domain on the Railway service. Either register/wire
 up `eigenia.com` or scrub the references to it — as of this writing,
 neither has been done.
 
-## Stale wiki embedded copy
+## [RESOLVED] Stale wiki embedded copy
 
-`web/src/lib/wiki.ts` stores a static `RAW_DOC_CONTENT` /
-`RAW_DOC_CONTENT_NL` string per document, separate from the source `.md`
-file it's meant to mirror. A user edit to
-`references/WG-01-UI-Underwriter-insurance/WG-01-UI-1-7-Industry-Value-Prop.md`
-was made directly to the `.md` file; the embedded copy in `wiki.ts` was
-not updated to match. The `/wiki` view for that document is currently out
-of sync with `/papers/[slug]` for the same content. Needs a manual resync
-(diff the `.md` against the embedded string, update the string) — not
-something that self-heals.
+Resolved via `scripts/sync-publications.js` and lifecycle hooks (`npm run prebuild`,
+`npm run predev`). All 26 markdown publications in `references/` are automatically
+synchronized into `web/src/lib/generatedReferencesContent.ts` at build time and dev time.
+The audit agent `scripts/audit-publications.js` verifies 100% word-for-word fidelity on
+every build, preventing any drift between `references/`, `/papers/[slug]`, and `/wiki`.
 
 ## `web/Dockerfile` / `web/docker-compose.yml` can't build `references/`
 

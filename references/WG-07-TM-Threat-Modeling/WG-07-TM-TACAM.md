@@ -1,15 +1,11 @@
 # The TACAM Matrix
-## How Eigenia Fingerprints Every Threat Actor on Earth — Across 77,279 Data Points
 
----
+Lab Sponsor J.McKenney
 
-*In intelligence work, the question is never "are we being targeted?" The question is "by whom, with what, and why now?"*
+In intelligence work, the question is never "are we being targeted?" The question is "by whom, with what, and why now?"
+TACAM answers all three.
 
-*TACAM answers all three.*
-
----
-
-### The Problem With Threat Intelligence Today
+## The Problem With Threat Intelligence Today
 
 Every major cybersecurity vendor sells "threat intelligence." What they actually sell is a feed — a river of CVEs, IOCs, and STIX bundles flowing past your SOC at 10,000 alerts per day. Your analysts drown in data that tells them *everything is dangerous* and *nothing is prioritised.*
 
@@ -19,9 +15,7 @@ This is like profiling a criminal by listing every tool they've ever touched wit
 
 TACAM is different. TACAM is not a list. It is a **seven-dimensional fingerprint**.
 
----
-
-### What TACAM Actually Is
+## What TACAM Actually Is
 
 **TACAM** — Threat Actor Capability & Motivation Matrix — is a proprietary analytical framework that profiles every known threat actor across seven independent dimensions simultaneously. Each dimension is stored as a cluster table in the Eigenia knowledge graph, producing a combined matrix of **77,279 data points** covering 389 threat actor groups.
 
@@ -37,9 +31,8 @@ Think of it as a spectral decomposition of threat actor behaviour. Just as a pri
 | **CPE** (Products)                         | *What they break* — which specific vendor products their exploits target, by Common Platform Enumeration                | 62,965 actor-product clusters  |
 | **CWE** (Weaknesses)                       | *How they break it* — which weakness families their exploits target, by Common Weakness Enumeration                     | 8,583 actor-weakness clusters  |
 
----
 
-### The Power of Cross-Dimensional Queries
+## The Power of Cross-Dimensional Queries
 
 Each dimension alone is useful. Crossed together, they answer questions that no single dimension can.
 
@@ -51,9 +44,7 @@ Each dimension alone is useful. Crossed together, they answer questions that no 
 
 **The difference**: The first tells you to be worried. The second tells you exactly which PLC firmware version to patch, in which quarter, against which exploit technique, from which geographic origin.
 
----
-
-### Three Questions TACAM Answers That Nobody Else Can
+## Three Questions TACAM Answers That Nobody Else Can
 
 #### 1. "Which actors target MY sector with MY vendor's products?"
 
@@ -72,7 +63,7 @@ TACAM returns:
 
 This query takes milliseconds. It draws from 62,965 CPE rows, 2,278 sector rows, and 1,579 TTP rows, all pre-computed, pre-clustered, and kept current.
 
-#### 2. "If we deploy a new vendor, what threat exposure do we inherit?"
+## 2. "If we deploy a new vendor, what threat exposure do we inherit?"
 
 **Cross-query**: CPE × ATQ ranking → Vendor Blast Radius
 
@@ -91,7 +82,7 @@ TACAM computes:
 
 No other platform can compute a procurement risk increment from a vendor name in under one second.
 
-#### 3. "Which actors are converging on our sector this quarter?"
+## 3. "Which actors are converging on our sector this quarter?"
 
 **Cross-query**: Temporal × Sector trend analysis
 
@@ -107,8 +98,6 @@ TACAM temporal analysis reveals:
 >
 > **Diverging actors**:
 > - APT33: Energy sector affinity declining (shifting to aerospace), temporal threat score down 0.18
-
----
 
 ### Why 62,965 CPE Rows Changes Everything
 
@@ -135,9 +124,7 @@ ALE increment: +$1.4M annually
 
 This is procurement intelligence. It turns a technical decision into a financial one, with actor attribution attached.
 
----
-
-### The Analytical Moat
+## The Analytical Moat
 
 Building a TACAM matrix from scratch requires:
 
@@ -150,9 +137,7 @@ Building a TACAM matrix from scratch requires:
 
 This is not a dataset you download. It is a knowledge graph built over years of ingestion, enrichment, and cross-correlation. The TACAM matrix is the hardest part of Eigenia to replicate.
 
----
-
-### From TACAM to Action
+## From TACAM to Action
 
 TACAM is not an academic exercise. Every dimension feeds directly into three platform outputs:
 
@@ -163,8 +148,3 @@ TACAM is not an academic exercise. Every dimension feeds directly into three pla
 The chain: TACAM fingerprints the actor. ATQ scores the danger. Monte Carlo simulates the attack. ALE puts a dollar figure on it. Gordon-Loeb tells you what to spend. The board decides.
 
 Seven dimensions. One decision.
-
----
-
-*Eigenia CDT — Endeavour Energy B.V.*
-*"Know thy enemy — across seven dimensions simultaneously."*

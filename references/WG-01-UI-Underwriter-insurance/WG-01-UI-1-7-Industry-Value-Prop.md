@@ -1,9 +1,8 @@
-
-
-# Eigenia Labs - Application of predcitive intelligence and behavioral modeling to financial risk evaluation and transfer in the insurance and reinsurance industry.
+# Application of Predcitive Intelligence and behavioral modeling to financial risk evaluation and transfer in the insurance and reinsurance industry.
 
  Lab Sponsor Resident,  j.mckenney
 
+Included topics 
 1. Translating Technical Metrics to Actuarial Language
 2. Predictive Intelligence and Behavioral Modeling
 3. Mapping the Strategic Underwriting Roadmap
@@ -13,11 +12,11 @@
 
 ## 1. Translating Technical Metrics to Actuarial Language
 
-A significant focus is bridging the gap between technical infrastructure data and the financial language of global insurance underwriters. I am exploring how a 'cyber credit rating' based on probabilistic outcomes and 'fat tail' risk models can provide a more accurate picture of resilience than static assessments. By treating facility telemetry similarly to automotive telematics, OXOT is investigating how continuous monitoring can be used to justify dynamic premium adjustments and better capital allocation for brokers like Aon.
+A significant focus is bridging the gap between technical infrastructure data and the financial language of global insurance underwriters. We are exploring how a 'cyber credit rating' based on probabilistic outcomes and 'fat tail' risk models can provide a more accurate picture of resilience than static assessments. By treating facility telemetry similarly to automotive telematics, OXOT is investigating how continuous monitoring can be used to justify dynamic premium adjustments and better capital allocation for brokers like Aon.
 
 ## 2. Predictive Intelligence and Behavioral Modeling
 
-We are evaluating the feasibility of predicting targeted attacks within a 90-day window by deconstructing threat actor psychometrics and macroeconomic indicators. This involves assessing how external vulnerabilities and the specific techniques of adversaries can be correlated with the internal state of a facility to provide a proactive defense posture. We aer particularly interested in how deconstructing past cyber incidents can inform a predictive score for both the potential target and the capability of the threat actor.
+We are evaluating the feasibility of predicting targeted attacks within a 90-day window by deconstructing threat actor psychometrics and macroeconomic indicators. This involves assessing how external vulnerabilities and the specific techniques of adversaries can be correlated with the internal state of a facility to provide a proactive defense posture. We are particularly interested in how deconstructing past cyber incidents can inform a predictive score for both the potential target and the capability of the threat actor.
 
 ### 3. Mapping the Strategic Underwriting Roadmap
 
@@ -32,5 +31,3 @@ I am observing a significant shift in the insurance industry toward a continuous
 ### 5. Refining the Predictive and Actuarial Roadmap
 
 My next phase of work involves a deep dive into the psychological and behavioral modeling of threat actors to determine how their motivations can be coupled with external indicators to predict targeting within a 90-day window. I am also focusing on refining the 'Cyber Credit Rating' concept by mapping engineering-level data—like safety logs and equipment configurations—to specific actuarial terms such as Probable Maximum Loss and indemnity. This will allow me to build a strategic proposal for underwriters that positions the digital twin as a tool for active risk engineering rather than just a passive monitoring system.
-
-![](https://www.gstatic.com/lamda/images/immersives/google_logo_icon_2380fba942c84387f09cf.svg)

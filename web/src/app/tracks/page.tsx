@@ -31,6 +31,7 @@ const WG_ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> =
   "WG-07-TM": Boxes,
   "WG-08-MO": Sparkles,
   "MP-MATH": FileText,
+  "GOV-RES": BookOpen,
 };
 
 export default function TracksPage() {

@@ -1,15 +1,12 @@
 # Advanced Cyber Risk Underwriting for Critical Infrastructure
 
-3 May 2026
-j.mckenney
+Lab Sponsor Resident  j.mckenney
 
+The underwriting of cyber risk for critical infrastructure represents one of the most complex challenges in modern actuarial science and enterprise risk management. Critical infrastructure, defined by the Cybersecurity and Infrastructure Security Agency (CISA) as sectors whose incapacitation would have debilitating effects on national security, economic stability, or public health, encompasses a wide array of industries including global manufacturing, energy, hyperscale datacenters, communications, and government facilities.
 
-1. The Paradigm Shift in Critical Infrastructure Cyber Insurance
-2. Telemetry, Assessment, and Information Gathering Mechanisms
+## Cyber Risk Insurance for Critical Infrastructure
 
-## 1. The Paradigm Shift in Critical Infrastructure Cyber Insurance
-
-The underwriting of cyber risk for critical infrastructure represents one of the most complex challenges in modern actuarial science and enterprise risk management. Critical infrastructure, defined by the Cybersecurity and Infrastructure Security Agency (CISA) as sectors whose incapacitation would have debilitating effects on national security, economic stability, or public health, encompasses a wide array of industries including global manufacturing, energy, hyperscale datacenters, communications, and government facilities. Historically, the insurance industry treated cyber risk as an extension of standard commercial general liability or property casualty policies, which were primarily triggered by bodily injury or physical property damage. However, the rapid convergence of Information Technology (IT) and Operational Technology (OT), the proliferation of state-sponsored threat actors, and the increasing frequency of software supply chain compromises have necessitated a highly specialized, quantitative approach to underwriting cyber risk for critical infrastructure.
+Historically, the insurance industry treated cyber risk as an extension of standard commercial general liability or property casualty policies, which were primarily triggered by bodily injury or physical property damage. However, the rapid convergence of Information Technology (IT) and Operational Technology (OT), the proliferation of state-sponsored threat actors, and the increasing frequency of software supply chain compromises have necessitated a highly specialized, quantitative approach to underwriting cyber risk for critical infrastructure.
 
 The primary differentiator in underwriting critical infrastructure compared to standard enterprise IT is the magnitude, physical nature, and interconnectedness of the risk. While conventional enterprise cyber incidents predominantly result in data breaches, privacy liability, and notification costs, critical infrastructure cyber incidents frequently manifest as physical equipment damage, extended operational downtime, contingent business interruption (CBI), and systemic cascading failures. Consequently, insurers, reinsurers, and independent catastrophe modeling agencies have transitioned away from static, questionnaire-based risk assessments toward dynamic, continuous underwriting models. These modern underwriting frameworks are powered by predictive analytics, external telemetry, and advanced mathematical distributions.
 

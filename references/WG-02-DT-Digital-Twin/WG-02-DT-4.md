@@ -1,51 +1,44 @@
-# McKenney-Lacan Calculus, and the Seven-Layer Graph
+# McKenney-Lacan Calculus, and the Seven-Layer Ontological Graph
 
-Lab Sponsor Resident,  j.mckenney
+Lab Sponsor Resident j.mckenney
 
+The Cyber Digital Twin is not a security tool. It is a **physics engine for organizational risk** — a system that treats a facility, its software, its people, and its geopolitical context as a single dynamical system, then runs the mathematics of physics, epidemiology, statistical mechanics, and psychoanalytic topology against that system to find where it breaks before an adversary does.​
 
+The Cyber Digital Twin, the McKenney-Lacan calculus, the psychometric tensor, the Ising dynamics, the Granovetter thresholds, and the bifurcation detector are the **mathematical machinery of epistemic honesty** — the formal apparatus for refusing to be fooled by IT security.
 
-
-
----
-
-## Overview: What This System Actually Is
-
-The Eigenia Cyber Digital Twin is not a security tool. It is a **physics engine for organizational risk** — a system that treats a facility, its software, its people, and its geopolitical context as a single dynamical system, then runs the mathematics of physics, epidemiology, statistical mechanics, and psychoanalytic topology against that system to find where it breaks before an adversary does.​
-
-At its core is the **AEON engine** — a Gated Graph Neural Network (GGNN) framework that operates over the seven-layer graph and executes the McKenney-Lacan calculus: a fusion of fluid dynamics, psychometric tensor mathematics, and Lacanian topological psychology built to model the most difficult variable in any security system — the _human being embedded in an organization embedded in a culture embedded in a geopolitical moment_.[[
-This is not metaphor. The mathematics are precise, and each equation maps to a real, computable property of the system.
-
----
 
 ## The Seven-Layer Architecture: From Platonic Blueprint to Socioeconomic Reality
 
-The seven layers form a directed, multi-relational graph in Neo4j, where edges across layers carry probabilistic weights that the AEON engine updates in real time. Each layer answers a distinct ontological question about the facility.​
+The Cyber Digital Twin is a Gated Graph Neural Network (GGNN) framework that operates over the seven-layer graph and executes the McKenney-Lacan calculus: a fusion of fluid dynamics, psychometric tensor mathematics, and Lacanian topological psychology built to model the most difficult variable in any security system — the _human being embedded in an organization embedded in a culture  embedded in a geopolitical moment. This is not metaphor. The mathematics are precise, and each equation maps to a real, computable property of the system.
+
+
+The seven layers form a directed, multi-relational graph in where edges across layers carry probabilistic weights that the "Cyber Digital Twin" updates in real time. Each layer answers a distinct ontological question about the facility.
 
 | Layer | Name                | Core Question                                                               | Key Mechanism                                                                                                                                                                                                                                                          |
 | ----- | ------------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| L0    | Equipment Catalog   | _What should exist?_                                                        | DEXPI 2.0 reference blueprints; vulnerability inheritance from CVE to all instances [[ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/12239403/ee9d682f-e5da-4f79-8542-68d84c0c6510/Cyber-DT.md)]​           |
-| L1    | Customer Equipment  | _What actually exists, where, and in what state?_                           | CMDB integration, serial-number-level geo-spatial mapping, cross-sector interdependency graph [[ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/12239403/ee9d682f-e5da-4f79-8542-68d84c0c6510/Cyber-DT.md)]​ |
-| L2    | Software SBOM       | _What software is running and how deep does the dependency tree go?_        | SPDX/CycloneDX transitive analysis to 5+ levels; EPSS-enriched CVE scoring [[ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/12239403/ee9d682f-e5da-4f79-8542-68d84c0c6510/Cyber-DT.md)]​                    |
-| L3    | Threat Intelligence | _Who is actively trying to attack this specific configuration?_             | Kill chain modeling, Volt Typhoon-style attribution engine, live campaign tracking [[ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/12239403/ee9d682f-e5da-4f79-8542-68d84c0c6510/Cyber-DT.md)]​            |
-| L4    | Psychology          | _How will humans behave and misbehave?_                                     | McKenney-Lacan topology; Psychometric Tensor; Bias Cascade simulation [[ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/12239403/ee9d682f-e5da-4f79-8542-68d84c0c6510/Cyber-DT.md)]​                         |
-| L5    | Information Streams | _What is happening in the world right now that changes the risk landscape?_ | Sub-second geopolitical correlation; BERT sentiment; echo chamber detection [[ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/12239403/ee9d682f-e5da-4f79-8542-68d84c0c6510/Cyber-DT.md)]​                   |
-| L6    | Predictions         | _What happens next, with what probability, and what should we do about it?_ | Psychohistory-grade forecasting; Breach probability; Remediation Lag; ROI simulation [[ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/12239403/ee9d682f-e5da-4f79-8542-68d84c0c6510/Cyber-DT.md)]​          |
+| L0    | Equipment Catalog   | _What should exist?_                                                        | DEXPI 2.0 reference blueprints; vulnerability inheritance from CVE to all instances​           |
+| L1    | Customer Equipment  | _What actually exists, where, and in what state?_                           | CMDB integration, serial-number-level geo-spatial mapping, cross-sector interdependency graph​ |
+| L2    | Software SBOM       | _What software is running and how deep does the dependency tree go?_        | SPDX/CycloneDX transitive analysis to 5+ levels; EPSS-enriched CVE scoring​                    |
+| L3    | Threat Intelligence | _Who is actively trying to attack this specific configuration?_             | Kill chain modeling, Volt Typhoon-style attribution engine, live campaign tracking​            |
+| L4    | Psychology          | _How will humans behave and misbehave?_                                     | McKenney-Lacan topology; Psychometric Tensor; Bias Cascade simulation ​                         |
+| L5    | Information Streams | _What is happening in the world right now that changes the risk landscape?_ | Sub-second geopolitical correlation; BERT sentiment; echo chamber detection ​                   |
+| L6    | Predictions         | _What happens next, with what probability, and what should we do about it?_ | Psychohistory-grade forecasting; Breach probability; Remediation Lag; ROI simulation          |
 
 The profound architectural insight is that **L0 and L1 represent Taleb's two sides of the table made concrete**. L0 is the Platonic ideal — the reference model, the design specification, the world the vendor sold you. L1 is the real world — the delta, the drift, the undocumented change, the asset that was never patched, the firmware that was substituted in a maintenance window. Every attack that has ever succeeded in a hardened OT facility exploited the gap between L0 and L1. The CBER model _is_ that gap, mapped, quantified, and alive  
 
-## The AEON Engine — Gated Graph Neural Networks Over a Living Graph
+## The Cyber Digital Twin Engine — Gated Graph Neural Networks Over a Living Graph
 
 A standard Graph Neural Network propagates information across the graph by aggregating neighbor node features iteratively. A **Gated** GNN adds a gating mechanism — analogous to LSTM gates in sequential models — that controls which information is relevant to propagate at each step, and which should be suppressed.
 
-In the Eigenia context, this matters for a very specific reason: the seven layers have radically different temporal dynamics. L2 (SBOM/CVE data) can change when a new CVE is published hourly. L3 (active campaigns) shifts day-to-day as threat actors pivot. L4 (human psychology) shifts over weeks and months as teams experience stress, success, and leadership changes. L5 (geopolitical events) spikes unpredictably. The AEON gating mechanism allows the GNN to propagate the _appropriate_ signal across layers at the _appropriate_ temporal resolution, without L5 geopolitical noise contaminating the slowly-evolving L4 psychometric state, and without stable L0 reference data being overwritten by L1 operational drift.​
+In the Cyber Digital Twin context, this matters for a very specific reason: the seven layers have radically different temporal dynamics. L2 (SBOM/CVE data) can change when a new CVE is published hourly. L3 (active campaigns) shifts day-to-day as threat actors pivot. L4 (human psychology) shifts over weeks and months as teams experience stress, success, and leadership changes. L5 (geopolitical events) spikes unpredictably. The Cyber Digital Twin gating mechanism allows the GNN to propagate the _appropriate_ signal across layers at the _appropriate_ temporal resolution, without L5 geopolitical noise contaminating the slowly-evolving L4 psychometric state, and without stable L0 reference data being overwritten by L1 operational drift.
 
 The prediction pipeline has three explicit phases:
 
-## 1. Feature Extraction at T=0 — Extract the current state vector P(t)P(t)P(t) from Neo4j. Compute Super Label aggregate values across the graph. Calculate the instantaneous derivative dPdt\frac{dP}{dt}dtdP — the _rate of change_ of the security state, not just its current value.
+## 1. Feature Extraction at T=0 — Extract the current state vector P(t) from the Graph. Compute Super Label aggregate values across the graph. Calculate the instantaneous derivative dPdt — the rate of change of the security state, not just its current value.
     
 ## 2. Trajectory Sampling (Simulation) — Run 1,000 Monte Carlo simulations forward in time. Apply the Shock Response Equation (governing how the system responds to sudden perturbations — a new zero-day disclosure, a geopolitical event, a leadership change). Apply Resilience Damping Factors that encode organizational capacity to absorb shocks.
     
-## 3. Ensemble Aggregation at T+Δt — Compute the posterior probability distribution over future security states. Calculate Entropy H(t+Δt)H(t+\Delta t)H(t+Δt) — the Shannon information entropy of the predicted state distribution, which is a direct measure of how much uncertainty remains after the simulation. Generate 95% Confidence Intervals for actionable outputs.
+## 3. Ensemble Aggregation at T+Δt — Compute the posterior probability distribution over future security states. Calculate Entropy H(t+Δt) — the Shannon information entropy of the predicted state distribution, which is a direct measure of how much uncertainty remains after the simulation. Generate 95% Confidence Intervals for actionable outputs.
     
 
 This is Taleb's Monte Carlo engine, operationalized at facility scale with a living, multi-layer graph as its substrate.
@@ -106,7 +99,7 @@ The first term ∑i12mivi2\sum_i \frac{1}{2} m_i v_i^2∑i21mivi2 is the **kinet
 
 The second term ∑i,jVij(xi,xj)\sum_{i,j} V_{ij}(x_i, x_j)∑i,jVij(xi,xj) is the **potential energy** of pairwise interactions — the **Dissonance** (friction, conflict, miscommunication, incompatible mental models) and **Consonance** (flow, trust, shared understanding) between every pair of actors iii and jjj in the response team.​
 
-The Hamiltonian is conserved: total "energy" is neither created nor destroyed, only transformed. An organization with high internal dissonance does not expend less total energy — it converts more of its response energy into friction heat rather than effective action. The AEON engine computes HHH in real time and flags when the dissonance potential is high enough to predict coordination failure before it happens.
+The Hamiltonian is conserved: total "energy" is neither created nor destroyed, only transformed. An organization with high internal dissonance does not expend less total energy — it converts more of its response energy into friction heat rather than effective action. The Cyber Digital Twin engine computes HHH in real time and flags when the dissonance potential is high enough to predict coordination failure before it happens.
 
 ---
 
@@ -114,38 +107,39 @@ The Hamiltonian is conserved: total "energy" is neither created nor destroyed, o
 
 ## Epidemic Threshold — R₀ for Malware Propagation
 
-R0=βγ×λmax⁡(A)R_0 = \frac{\beta}{\gamma} \times \lambda_{\max}(A)R0=γβ×λmax(A)
+R0=βγ×λmax⁡(A)
 
-Where β\betaβ is the transmission rate (probability of lateral movement success per connection per unit time), γ\gammaγ is the recovery rate (patching, isolation, detection speed), and λmax⁡(A)\lambda_{\max}(A)λmax(A) is the **spectral radius** — the largest eigenvalue — of the network adjacency matrix AAA​
+Where β is the transmission rate (probability of lateral movement success per connection per unit time), γ is the recovery rate (patching, isolation, detection speed), and λmax(A) is the **spectral radius** — the largest eigenvalue — of the network adjacency matrix AAA​
 
-This is the epidemiological **basic reproduction number**, mapped to malware propagation. The critical insight is λmax⁡(A)\lambda_{\max}(A)λmax(A): it means that the topology of the network itself — not just the vulnerability of individual nodes — determines epidemic risk. A highly connected network with low individual vulnerability can still have a high R0R_0R0 if λmax⁡(A)\lambda_{\max}(A)λmax(A) is large. **Network segmentation** directly reduces λmax⁡(A)\lambda_{\max}(A)λmax(A) by decomposing the adjacency matrix into disconnected subgraphs.
+This is the epidemiological **basic reproduction number**, mapped to malware propagation. The critical insight is λmax⁡(A): it means that the topology of the network itself — not just the vulnerability of individual nodes — determines epidemic risk. A highly connected network with low individual vulnerability can still have a high R0 if λmax⁡(A) is large. **Network segmentation** directly reduces λmax⁡(A) by decomposing the adjacency matrix into disconnected subgraphs.
 
-The AEON engine computes R0R_0R0 continuously over the L1 network graph and identifies which segmentation cuts would most efficiently reduce the spectral radius — a mathematically grounded answer to "where should we segment?" that no compliance framework provides.
+The Cyber Digital Twin computes R0R_0R0 continuously over the L1 network graph and identifies which segmentation cuts would most efficiently reduce the spectral radius — a mathematically grounded answer to "where should we segment?" that no compliance framework provides.
+
 ## Ising Dynamics — Security Culture as a Phase Transition
 
-dmdt=−m+tanh⁡(β(Jzm+h))\frac{dm}{dt} = -m + \tanh\left(\beta(Jzm + h)\right)dtdm=−m+tanh(β(Jzm+h))
+dmdt=−m+tanh⁡(β(Jzm+h))
 
-This is the **mean-field Ising equation** from statistical physics, where mmm is the net organizational "magnetization" (the degree to which the security culture is coherently oriented toward good security behavior), JJJ is the interaction strength between individuals (peer influence), zzz is the average number of peers in contact, hhh is the external field (leadership mandate, regulatory pressure), and β=1/T\beta = 1/Tβ=1/T is the inverse organizational temperature (inversely related to noise and chaos).
+This is the **mean-field Ising equation** from statistical physics, where m is the net organizational "magnetization" (the degree to which the security culture is coherently oriented toward good security behavior), J is the interaction strength between individuals (peer influence), z is the average number of peers in contact, h is the external field (leadership mandate, regulatory pressure), and β=1/T is the inverse organizational temperature (inversely related to noise and chaos).
 
-The Ising model predicts a **phase transition** at a critical temperature TcT_cTc. Below TcT_cTc — in a calm, well-led, coherent organization — the system "magnetizes": security culture spontaneously locks into a high-compliance, high-vigilance state. Above TcT_cTc — in a stressed, understaffed, chaotic organization — the magnetization breaks down, individuals act inconsistently, and the organization cannot sustain a coherent security posture regardless of how many controls are technically deployed.
+The Ising model predicts a **phase transition** at a critical temperature Tc. Below Tc, in a calm, well-led, coherent organization, the system "magnetizes": security culture spontaneously locks into a high-compliance, high-vigilance state. Above Tc, in a stressed, understaffed, chaotic organization, the magnetization breaks down, individuals act inconsistently, and the organization cannot sustain a coherent security posture regardless of how many controls are technically deployed.
 
 This is why a mature organization can survive an incident that destroys an equally well-resourced but culturally fragmented one. It is a mathematical property of the organizational temperature, not a function of the technology stack.
 
 ## Granovetter Thresholds — Attack Cascades and Critical Mass
 
-r(t+1)=N×F ⁣(r(t)N)r(t+1) = N \times F\!\left(\frac{r(t)}{N}\right)r(t+1)=N×F(Nr(t))
+r(t+1)=N×F(r(t)N)
 
-Where r(t)r(t)r(t) is the number of compromised nodes at time ttt, NNN is the total network size, and F(⋅)F(\cdot)F(⋅) is the **cumulative distribution function of individual compromise thresholds** across the network population.​
+Where r(t) is the number of compromised nodes at time t, N is the total network size, and F(⋅) is the **cumulative distribution function of individual compromise thresholds** across the network population.​
 
-The cascade condition — self-sustaining attack propagation — occurs when the curve y=F(x)y = F(x)y=F(x) crosses y=xy = xy=x from above. Below this intersection, the attack dies out naturally. Above it, it becomes self-sustaining with no further adversary input required. The AEON engine identifies where in the current network topology this intersection occurs and which **high-threshold nodes** (firewalls, air gaps, network breaks) could be inserted to move the intersection point such that no cascade is geometrically possible below a chosen contamination fraction.
+The cascade condition — self-sustaining attack propagation — occurs when the curve y=F(x) crosses y=x from above. Below this intersection, the attack dies out naturally. Above it, it becomes self-sustaining with no further adversary input required. The Cyber Digital Twin identifies where in the current network topology this intersection occurs and which **high-threshold nodes** (firewalls, air gaps, network breaks) could be inserted to move the intersection point such that no cascade is geometrically possible below a chosen contamination fraction.
 
 ## Bifurcation — Seldon Crisis Detection
 
-dxdt=μ+x2\frac{dx}{dt} = \mu + x^2dtdx=μ+x2
+dxdt=μ+x2
 
-This is the **saddle-node bifurcation** normal form — the simplest mathematical description of a system approaching catastrophic collapse. The parameter μ\muμ represents the "distance from crisis": when μ<0\mu < 0μ<0, two fixed points exist (one stable, one unstable), and the system has a safe attractor. As μ→0\mu \to 0μ→0, the two fixed points approach each other. At μ=0\mu = 0μ=0, they collide and annihilate — the system has no stable state. For μ>0\mu > 0μ>0, the system undergoes runaway growth: collapse.
+This is the **saddle-node bifurcation** normal form — the simplest mathematical description of a system approaching catastrophic collapse. The parameter μ represents the "distance from crisis": when μ<0, two fixed points exist (one stable, one unstable), and the system has a safe attractor. As μ→0, the two fixed points approach each other. At μ=0, they collide and annihilate — the system has no stable state. For μ>0, the system undergoes runaway growth: collapse.
 
-The architecture names this the **Seldon Crisis** — a deliberate invocation of Asimov's psychohistory, where a "Seldon Crisis" is a historical bifurcation point at which the accumulated pressures on a civilization force a discontinuous, irrevocable transition. The distance to the bifurcation point is proportional to ∣μ∣\sqrt{|\mu|}∣μ∣, which means the system gives **diminishing warning time** as it approaches the crisis. The AEON engine continuously estimates μ\muμ from the current graph state and flags when the system is within a critical window.
+The architecture names this the **Seldon Crisis** — a deliberate invocation of Asimov's psychohistory, where a "Seldon Crisis" is a historical bifurcation point at which the accumulated pressures on a civilization force a discontinuous, irrevocable transition. The distance to the bifurcation point is proportional to √|μ|, which means the system gives **diminishing warning time** as it approaches the crisis. The Cyber Digital Twin continuously estimates μ from the current graph state and flags when the system is within a critical window.
 
 ---
 
@@ -181,6 +175,5 @@ Taleb's core demand is that you live on the _left side of the table_ — that yo
 - **L6 psychohistory-grade forecasting** produces explicit probability distributions with confidence intervals — the intellectual antithesis of the binary "compliant / non-compliant" verdict that the security industry sells as risk management
     
 
-The Monte Carlo engine does not look for the most _likely_ attack path. It maps the full distribution. It finds the **Black Swan paths** — the low-probability, high-consequence chains that every point-control solution misses precisely because they are individually improbable. That is the system doing exactly what Taleb argues the financial industry should do and never does: running the full simulation, not the expected-value calculation.wikipedia
+The Monte Carlo engine does not look for the most _likely_ attack path. It maps the full distribution. It finds the **Black Swan paths** — the low-probability, high-consequence chains that every point-control solution misses precisely because they are individually improbable. That is the system doing exactly what Taleb argues the financial industry should do and never does: running the full simulation, not the expected-value calculation.                                                                                                                       
 
-The AEON engine, the McKenney-Lacan calculus, the psychometric tensor, the Ising dynamics, the Granovetter thresholds, and the bifurcation detector are not decorations. They are the **mathematical machinery of epistemic honesty** — the formal apparatus for refusing to be fooled by IT security.

@@ -1,10 +1,12 @@
 # CDT Mathematical Models — Complete Formula Reference
 
-## 1. Overview
+ Lab Sponsor Resident,  j.mckenney
 
-The Eigenia Cyber Digital Twin (CDT) implements 40 mathematical formulas across six computational engines. These models span the full 7-layer ontology (L0 Physical through L7 Temporal), connecting physical process dynamics to economic quantification and predictive forecasting.
+ The Cyber Digital Twin (CDT) implements 40 mathematical formulas across six computational engines. These models span the full 7-layer ontology (L0 Physical through L7 Temporal), connecting physical process dynamics to economic quantification and predictive forecasting.
 
-The engines and their roles:
+## Monte Carlo Walk Engine
+
+The engines and their  roles:
 
 | Engine | Source File | Purpose |
 |--------|-----------|---------|
