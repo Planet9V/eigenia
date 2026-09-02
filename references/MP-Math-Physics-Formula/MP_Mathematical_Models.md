@@ -589,7 +589,7 @@ Fraction of ultimate loss reported at each development year, by sector.
 
 Sources: Advisen cyber loss data, NetDiligence claims studies (2020-2025).
 
-### F37. xoshiro128** PRNG (ALE Engine)
+### F37. `xoshiro128**` PRNG (ALE Engine)
 
 Seeded PRNG for the ALE engine (different from Mulberry32 in mc-engine).
 

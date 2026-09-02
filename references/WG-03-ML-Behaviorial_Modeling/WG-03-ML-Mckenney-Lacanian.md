@@ -15,7 +15,7 @@ The Cyber Digital Twin project utilizes Jacques Lacan's theory of the **Four Dis
 |-----------|-------|-------|------|-----------------------|
 | **Master** | Command ($S_1$) | Power | Obedience / Recognition | **State Warfare (Sandworm, Lazarus)** |
 | **University** | Knowledge ($S_2$) | Technicality | Universality / Extraction | **Espionage (Volt Typhoon, APT33)** |
-| **Hysteric** | Symptom ($$) | Protest | Questioning the Other | **Hacktivism / High-Ego (Scattered Spider)** |
+| **Hysteric** | Symptom ($\cancel{S}$) | Protest | Questioning the Other | **Hacktivism / High-Ego (Scattered Spider)** |
 | **Analyst** | Object ($a$) | Lack | Revelation of Structure | **Quiet Recon / Insider (Dragonfly 2.0)** |
 
 ## The Three Registers

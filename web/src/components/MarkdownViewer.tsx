@@ -133,7 +133,7 @@ export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content }) => {
 
   // Parse lines into blocks (Headings, Paragraphs, Lists, Tables, CodeBlocks, Blockquotes, HR)
   const renderBlocks = () => {
-    const lines = sanitizedContent.split("\n");
+    const lines = sanitizedContent.split(/\r?\n/);
     const blocks: React.ReactNode[] = [];
     let i = 0;
 

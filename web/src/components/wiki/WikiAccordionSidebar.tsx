@@ -60,6 +60,10 @@ export default function WikiAccordionSidebar({
     return getAllWorkingGroups(language);
   }, [language]);
 
+  const totalTreatises = useMemo(() => {
+    return workingGroups.reduce((acc, wg) => acc + wg.documents.length, 0);
+  }, [workingGroups]);
+
   const toggleWg = (wgId: string) => {
     setExpandedWgs((prev) => {
       const next = new Set(prev);
@@ -261,7 +265,7 @@ export default function WikiAccordionSidebar({
       {/* Footer Total Audit Counter */}
       <div className="border-t border-hairline p-3 text-center">
         <span className="font-mono text-[10px] text-muted">
-          25 Treatises • 8 Working Groups • Zero Omissions
+          {totalTreatises} Treatises • {workingGroups.length} Working Groups • Zero Omissions
         </span>
       </div>
     </aside>

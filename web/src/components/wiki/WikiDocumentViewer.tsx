@@ -55,7 +55,8 @@ export default function WikiDocumentViewer({
   const displaySubtitle = isNl ? (docData.subtitleNl || docData.subtitle) : docData.subtitle;
   const displayBadge = isNl ? (docData.badgeNl || docData.badge) : docData.badge;
   const displayWgTitle = isNl ? (workingGroup?.titleNl || workingGroup?.title) : workingGroup?.title;
-  const displayContent = isNl ? (docData.contentNl || docData.content) : docData.content;
+  // All scientific publications are rendered in whole with 100% fidelity from the authoritative source
+  const displayContent = docData.content;
 
   const handleCopyLink = () => {
     if (typeof window !== "undefined") {

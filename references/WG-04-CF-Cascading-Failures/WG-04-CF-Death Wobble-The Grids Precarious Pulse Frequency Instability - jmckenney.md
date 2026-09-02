@@ -49,11 +49,11 @@ Declining inertia acts as an accelerant for cascading failures:
 * **Faster Escalation:** Emergency measures like UFLS or generator trips activate more quickly, potentially in an uncoordinated or excessive manner, further destabilizing the system.55  
 * **Increased Complexity:** The combination of faster dynamics, new resource types (like IBRs and large, sensitive loads 52), and legacy systems creates a more volatile environment where interactions are harder to predict and control.7
 
-### Historical Precedents:**
+### Historical Precedents
 
 The 2003 Northeast Blackout, affecting 50 million people, serves as a stark reminder.6 Triggered by transmission lines contacting trees, it cascaded due to inadequate situational awareness and subsequent protection system actions.6 Other major events in 1965, 1977, 1996, 2009, 2011, and 2012 underscore the persistent threat.6 These events highlight that while initiating causes vary, the *propagation* mechanism often involves the complex interplay of system stress, power rerouting, and protection system responses – all factors exacerbated by low inertia.6
 
-### Interconnections Under Stress: Vulnerabilities in the US and Europe**
+### Interconnections Under Stress: Vulnerabilities in the US and Europe
 
 The challenge of maintaining stability manifests differently across interconnected systems, reflecting variations in generation mix, load growth, infrastructure, and regulatory environments.
 

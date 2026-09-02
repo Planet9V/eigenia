@@ -23,5 +23,3 @@ Underwriters face massive regulatory burdens that Eigenia can automate directly 
 ### 5. IT/OT Convergence and Standardized Data Ingestion
 
 To fit seamlessly into an underwriter's existing workflow, Eigenia cannot exist in a vacuum.
-
--

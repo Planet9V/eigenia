@@ -156,7 +156,7 @@ Formally, a Monte Carlo simulation follows this structure:
     - Variance, Value‑at‑Risk, expected shortfall, etc.magnusross.github+1
         
 
-Taleb’s use of the Monte Carlo engine is to **manufacture randomness on demand** so that you can see what pure luck looks like. For instance, if you simulate 10,000 traders each with a 50% chance of winning or losing $10,000\$10{,}000$10,000 per year, you will find that some of them appear to be “star managers” purely by chance over, say, five years.tylerdevries+1
+Taleb’s use of the Monte Carlo engine is to **manufacture randomness on demand** so that you can see what pure luck looks like. For instance, if you simulate 10,000 traders each with a 50% chance of winning or losing $10,000 per year, you will find that some of them appear to be “star managers” purely by chance over, say, five years.
 
 In this way, the Monte Carlo engine exposes the **illusion of skill** in high‑noise environments. It also shows how easily the “two sides of the table” can be confused: the observer sees the survivor (the lucky trader), while the simulation reveals the full cemetery of losers that were never visible.acquirersmultiple+1
 
