@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eigenia ATQ | Threat Actor Quotient Interactive Terminal</title>
+  
+  <!-- Fonts: Outfit (Display) & JetBrains Mono (Telemetry) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            obsidian: '#0B0C0E',
+            surface: '#131519',
+            surfaceElevated: '#1A1D24',
+            hairline: '#22252C',
+            dutchOrange: {
+              DEFAULT: '#E05A10',
+              glow: 'rgba(224, 90, 16, 0.45)',
+              subtle: 'rgba(224, 90, 16, 0.12)',
+              light: '#FFA370'
+            },
+            cyanGlow: '#00F0FF',
+            emeraldGlow: '#10B981',
+            amberGlow: '#F59E0B'
+          },
+          fontFamily: {
+            mono: ['"JetBrains Mono"', 'monospace'],
+            sans: ['"Outfit"', 'sans-serif'],
+            serif: ['"Playfair Display"', 'serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    :root {
+      --bg-page: #07080a;
+      --bg-card: #0d0f13;
+      --border-card: #1f232b;
+      --text-main: #f3f4f6;
+      --text-dim: #9ca3af;
+      --accent: #E05A10;
+    }
+
+    html.light {
+      --bg-page: #FAF8F5;
+      --bg-card: #FFFFFF;
+      --border-card: #E8E3DA;
+      --text-main: #18181B;
+      --text-dim: #71717A;
+      --accent: #E05A10;
+    }
+
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      font-family: 'Outfit', sans-serif;
+      min-height: 100vh;
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(224, 90, 16, 0.08) 0%, transparent 60%),
+        linear-gradient(to right, rgba(255,255,255,0.015) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 100% 100%, 32px 32px, 32px 32px;
+    }
+
+    /* Scanline overlay for cyber-physical feel */
+    .scanlines {
+      background: linear-gradient(
+        rgba(18, 16, 16, 0) 50%, 
+        rgba(0, 0, 0, 0.25) 50%
+      ), linear-gradient(
+        90deg,
+        rgba(255, 0, 0, 0.02),
+        rgba(0, 255, 0, 0.01),
+        rgba(0, 0, 255, 0.02)
+      );
+      background-size: 100% 3px, 6px 100%;
+      pointer-events: none;
+    }
+
+    /* Glow utilities */
+    .glow-orange {
+      box-shadow: 0 0 20px rgba(224, 90, 16, 0.35);
+    }
+    
+    .glow-text-orange {
+      text-shadow: 0 0 10px rgba(224, 90, 16, 0.6);
+    }
+
+    /* Segmented Bar Animation */
+    .led-segment {
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .led-segment:hover {
+      transform: scaleY(1.35);
+      filter: brightness(1.3);
+    }
+
+    /* Custom Scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(0,0,0,0.2);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #22252C;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #E05A10;
+    }
+  </style>
+</head>
+<body class="p-4 sm:p-8 flex flex-col items-center justify-start min-h-screen">
+
+  <!-- Header Branding -->
+  <header class="w-full max-w-5xl mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-[#22252C] pb-4">
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-8 rounded-lg bg-[#E05A10]/15 border border-[#E05A10]/40 flex items-center justify-center text-[#E05A10] font-mono font-bold text-sm glow-orange">
+        E
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="font-mono text-[11px] uppercase tracking-[0.25em] text-[#E05A10] font-semibold">EIGENIA LABS · WG-07-TM</span>
+          <span class="px-1.5 py-0.5 rounded bg-[#22252C] text-[10px] font-mono text-zinc-400">EPOCH 234 LIVE</span>
+        </div>
+        <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+          Actor Threat Quotient <span class="text-zinc-500 font-light font-mono text-base">(ATQ)</span>
+        </h1>
+      </div>
+    </div>
+
+    <!-- Controls: Actor Switcher & Mode Toggle -->
+    <div class="flex flex-wrap items-center gap-2 font-mono text-xs">
+      <!-- Dark/Light Mode Switcher -->
+      <button id="themeToggle" class="px-3 py-1.5 rounded-lg border border-hairline bg-surface hover:bg-surfaceElevated text-zinc-300 transition-colors flex items-center gap-1.5">
+        <span id="themeIcon">☀️</span>
+        <span id="themeLabel">Light</span>
+      </button>
+
+      <!-- View Mode Buttons -->
+      <div class="inline-flex rounded-lg border border-hairline bg-surface p-0.5" role="group">
+        <button id="btnHudView" class="px-3 py-1 rounded-md bg-[#E05A10] text-white font-medium shadow-sm transition-all">
+          HUD View
+        </button>
+        <button id="btnAsciiView" class="px-3 py-1 rounded-md text-zinc-400 hover:text-white transition-all">
+          ASCII Raw
+        </button>
+        <button id="btnSpecView" class="px-3 py-1 rounded-md text-zinc-400 hover:text-white transition-all">
+          Formula Spec
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Threat Actor Quick Selector Bar -->
+  <div class="w-full max-w-5xl mb-6">
+    <div class="flex items-center justify-between gap-2 overflow-x-auto pb-2 scrollbar-none">
+      <span class="text-[11px] font-mono uppercase tracking-wider text-zinc-500 shrink-0">Profiled Actors:</span>
+      <div class="flex items-center gap-1.5 shrink-0" id="actorSelector">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN VIEWPORT CONTAINER -->
+  <main class="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+    
+    <!-- LEFT / MAIN: THE ATQ CARD (COL 8) -->
+    <div class="lg:col-span-8 space-y-4">
+      
+      <!-- 1. HUD VIEW (High-Assurance OT Console) -->
+      <div id="hudCard" class="relative rounded-2xl bg-surface border border-hairline p-6 sm:p-7 shadow-2xl overflow-hidden transition-all duration-300">
+        
+        <!-- Ambient corner accents -->
+        <div class="absolute -top-16 -right-16 w-36 h-36 bg-[#E05A10]/10 rounded-full blur-2xl pointer-events-none"></div>
+        <div class="absolute top-0 left-0 w-24 h-1 bg-gradient-to-r from-[#E05A10] to-transparent"></div>
+        
+        <!-- Card Header: Actor Identity & Composite Gauge -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-hairline">
+          <div class="space-y-1">
+            <div class="flex items-center gap-2">
+              <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span id="actorState" class="font-mono text-[10px] tracking-[0.2em] uppercase text-zinc-400 font-medium">CHINA · APT</span>
+              <span class="px-2 py-0.5 text-[9px] font-mono rounded bg-red-950/60 border border-red-800/60 text-red-300 font-semibold tracking-wide">
+                CRITICAL THREAT
+              </span>
+            </div>
+            <h2 id="actorName" class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white font-mono flex items-center gap-3">
+              VOLT TYPHOON
+            </h2>
+            <p id="actorMeta" class="text-xs text-zinc-400 font-sans">
+              Attribution: <span class="text-zinc-200 font-medium">People's Republic of China</span> · Posture: <span class="text-amber-400 font-mono">Pre-positioned in US Critical Infrastructure</span>
+            </p>
+          </div>
+
+          <!-- Composite ATQ Score Ring/Box -->
+          <div class="flex items-center gap-3 bg-obsidian/70 border border-hairline rounded-xl p-3 sm:px-4 shrink-0 shadow-inner">
+            <div class="text-right">
+              <div class="text-[10px] font-mono uppercase tracking-widest text-zinc-500">Composite ATQ</div>
+              <div class="text-[11px] font-mono text-emerald-400 flex items-center justify-end gap-1">
+                <span>▲ +2.3</span>
+                <span class="text-[9px] text-zinc-500">90d</span>
+              </div>
+            </div>
+            <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-[#E05A10]/20 to-[#E05A10]/5 border border-[#E05A10]/50 flex flex-col items-center justify-center text-center glow-orange">
+              <span id="actorScore" class="text-2xl font-black font-mono text-[#E05A10] leading-none">78.6</span>
+              <span class="text-[9px] font-mono text-zinc-400 mt-0.5">/ 100</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section: 12 Auditable Component Decomposition -->
+        <div class="py-5 border-b border-hairline">
+          <div class="flex items-center justify-between mb-3.5">
+            <div class="flex items-center gap-2">
+              <span class="font-mono text-xs uppercase tracking-[0.2em] text-[#E05A10] font-semibold">12-Weight Decomposition</span>
+              <span class="text-[10px] font-mono text-zinc-500">(materialized view: seldon.seldon_score_v2)</span>
+            </div>
+            <span class="text-[11px] font-mono text-zinc-400">Sum: <span id="weightSum" class="text-emerald-400 font-bold">78.5</span>/100</span>
+          </div>
+
+          <!-- Micro-Segmented LED Bars Grid -->
+          <div id="componentsContainer" class="space-y-2.5">
+            <!-- 12 components generated dynamically via JS with exact math and 20-segment bars -->
+          </div>
+        </div>
+
+        <!-- Section: TACAM 7D Cross-Match Matrix -->
+        <div class="py-5 border-b border-hairline space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="font-mono text-xs uppercase tracking-[0.2em] text-[#E05A10] font-semibold">
+              TACAM 7D Cross-Match Affinity
+            </h3>
+            <span class="text-[10px] font-mono text-zinc-500">77,279 Knowledge Graph Edges</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            
+            <!-- Target Sectors Affinity -->
+            <div class="p-3.5 rounded-xl bg-obsidian/60 border border-hairline space-y-2">
+              <span class="text-[11px] font-mono uppercase tracking-wider text-zinc-400 block">Sector Targeting (Weights)</span>
+              <div id="sectorBars" class="space-y-1.5 font-mono text-xs">
+                <!-- Filled via JS -->
+              </div>
+            </div>
+
+            <!-- Target Protocols & CPE Targets -->
+            <div class="p-3.5 rounded-xl bg-obsidian/60 border border-hairline space-y-2.5">
+              <div>
+                <span class="text-[11px] font-mono uppercase tracking-wider text-zinc-400 block mb-1.5">OT/ICS Protocols</span>
+                <div id="protocolPills" class="flex flex-wrap gap-1.5">
+                  <!-- Pills via JS -->
+                </div>
+              </div>
+              <div class="pt-1 border-t border-[#22252C]">
+                <span class="text-[11px] font-mono uppercase tracking-wider text-zinc-400 block mb-1.5">Top CPE Targets</span>
+                <div id="cpePills" class="flex flex-wrap gap-1.5">
+                  <!-- Pills via JS -->
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 14-Stage MITRE ATT&CK Kill Chain Completeness Matrix -->
+          <div class="p-3.5 rounded-xl bg-obsidian/60 border border-hairline space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-mono uppercase tracking-wider text-zinc-400">
+                MITRE ATT&CK Kill Chain (12/14 Tactics Present)
+              </span>
+              <span class="text-[10px] font-mono text-amber-400 font-medium">Missing: Exfiltration, Impact</span>
+            </div>
+            <div id="killChainGrid" class="grid grid-cols-7 sm:grid-cols-14 gap-1 pt-1">
+              <!-- 14 Tactics pills via JS -->
+            </div>
+            <p class="text-[10px] text-zinc-500 font-mono italic pt-1">
+              * Note: Volt Typhoon deliberately foregoes exfiltration & disruption until instructed, optimizing for persistent dormant pre-positioning.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Section: 90-Day Trajectory & Forecast -->
+        <div class="pt-5 space-y-3">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="font-mono text-xs uppercase tracking-[0.2em] text-[#E05A10] font-semibold">Trajectory & Forecast</span>
+              <span class="text-[10px] font-mono text-zinc-500">Epoch 228 → 234 (+2.3 pts)</span>
+            </div>
+            <span class="px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[10px] font-mono font-medium">
+              Confidence: 87%
+            </span>
+          </div>
+
+          <!-- Trajectory Sparkline & Drivers -->
+          <div class="p-4 rounded-xl bg-obsidian/80 border border-hairline flex flex-col sm:flex-row items-center justify-between gap-4">
+            
+            <!-- SVG Sparkline -->
+            <div class="w-full sm:w-1/2 h-20 relative">
+              <svg viewBox="0 0 260 70" preserveAspectRatio="none" class="w-full h-full">
+                <defs>
+                  <linearGradient id="sparklineGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#E05A10" stop-opacity="0.4"/>
+                    <stop offset="100%" stop-color="#E05A10" stop-opacity="0.0"/>
+                  </linearGradient>
+                </defs>
+                <!-- Grid lines -->
+                <line x1="0" y1="20" x2="260" y2="20" stroke="#1f232b" stroke-dasharray="2,2" />
+                <line x1="0" y1="45" x2="260" y2="45" stroke="#1f232b" stroke-dasharray="2,2" />
+                
+                <!-- Area Fill -->
+                <path d="M 10 52 Q 60 48, 100 42 T 180 30 T 250 16 L 250 68 L 10 68 Z" fill="url(#sparklineGrad)" />
+                
+                <!-- Line -->
+                <path d="M 10 52 Q 60 48, 100 42 T 180 30 T 250 16" fill="none" stroke="#E05A10" stroke-width="2.5" stroke-linecap="round" />
+                
+                <!-- Historical dots -->
+                <circle cx="10" cy="52" r="3" fill="#9ca3af" />
+                <circle cx="100" cy="42" r="3" fill="#9ca3af" />
+                <circle cx="180" cy="30" r="3" fill="#E05A10" />
+                <circle cx="250" cy="16" r="4.5" fill="#E05A10" stroke="#fff" stroke-width="1.5" class="animate-pulse" />
+                
+                <!-- Text labels -->
+                <text x="10" y="65" fill="#6b7280" font-size="8" font-family="monospace">Epoch 228 (76.3)</text>
+                <text x="195" y="12" fill="#E05A10" font-size="9" font-weight="bold" font-family="monospace">234 (78.6)</text>
+              </svg>
+            </div>
+
+            <!-- Drivers breakdown tags -->
+            <div class="w-full sm:w-1/2 space-y-2 font-mono text-xs">
+              <span class="text-[10px] text-zinc-500 uppercase tracking-wider block">90-Day Delta Drivers</span>
+              <div class="grid grid-cols-3 gap-2">
+                <div class="p-2 rounded bg-surface border border-hairline text-center">
+                  <div class="text-[#E05A10] font-bold">+1.4</div>
+                  <div class="text-[9px] text-zinc-400">Temporal</div>
+                </div>
+                <div class="p-2 rounded bg-surface border border-hairline text-center">
+                  <div class="text-[#E05A10] font-bold">+0.6</div>
+                  <div class="text-[9px] text-zinc-400">EPSS vel</div>
+                </div>
+                <div class="p-2 rounded bg-surface border border-hairline text-center">
+                  <div class="text-[#E05A10] font-bold">+0.3</div>
+                  <div class="text-[9px] text-zinc-400">Recency</div>
+                </div>
+              </div>
+              <p class="text-[10px] text-zinc-400">
+                Forecast: <span class="text-amber-400 font-semibold">Elevated through Q3 2026</span> (Simulation walk multiplier: 1.48x)
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 2. RAW ASCII VIEW (The Exact Markdown Box from lines 149-183) -->
+      <div id="asciiCard" class="hidden rounded-2xl bg-[#08090C] border border-[#22252C] p-6 shadow-2xl relative">
+        <div class="flex items-center justify-between pb-3 border-b border-[#22252C] mb-4">
+          <div class="flex items-center gap-2 font-mono text-xs text-zinc-400">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#E05A10]"></span>
+            <span>WG-07-TM-ATQ.md (Lines 149–183)</span>
+          </div>
+          <button id="btnCopyAscii" class="px-2.5 py-1 rounded bg-[#131519] border border-hairline text-zinc-300 hover:text-white text-xs font-mono flex items-center gap-1.5 transition-colors">
+            <span>📋</span> Copy Box
+          </button>
+        </div>
+        <pre id="rawAsciiContent" class="font-mono text-xs sm:text-sm text-[#FFA370] leading-relaxed overflow-x-auto p-3 bg-black/60 rounded-xl border border-[#1f232b] select-all">
+┌──────────────────────────────────────────────────────────┐
+│  VOLT TYPHOON                              ATQ: 78.6     │
+│  Attribution: China / People's Republic of China         │
+│  Sophistication: Advanced Persistent Threat              │
+├──────────────────────────────────────────────────────────┤
+│  COMPONENT BREAKDOWN                                      │
+│                                                           │
+│  ████████████████░░░░  EIC Score (18%)        ▸ 14.7/18  │
+│  ██████████████░░░░░░  Kill Chain (14%)       ▸ 12.0/14  │
+│  █████████████░░░░░░░  Temporal (13%)         ▸ 12.4/13  │
+│  ████████░░░░░░░░░░░░  EPSS Base (10%)        ▸  7.3/10  │
+│  ████████░░░░░░░░░░░░  Technique Reach (10%)  ▸  6.8/10  │
+│  ████████░░░░░░░░░░░░  Vendor Exposure (10%)  ▸  8.0/10  │
+│  ████░░░░░░░░░░░░░░░░  Sector Reach (5%)      ▸  4.2/ 5  │
+│  ███░░░░░░░░░░░░░░░░░  Protocol Reach (5%)    ▸  3.4/ 5  │
+│  ████░░░░░░░░░░░░░░░░  Incident Count (5%)    ▸  4.2/ 5  │
+│  ████░░░░░░░░░░░░░░░░  Campaign Recency (5%)  ▸  4.8/ 5  │
+│  ██░░░░░░░░░░░░░░░░░░  EPSS Velocity (5%)     ▸  0.4/ 5  │
+│  ██░░░░░░░░░░░░░░░░░░  Geo Tension (5%)       ▸  0.3/ 5  │
+├──────────────────────────────────────────────────────────┤
+│  TACAM CROSS-MATCH                                        │
+│  Sector: Energy (0.94), Water (0.71), Comms (0.83)       │
+│  Protocols: OPC-UA, Modbus, DNP3                          │
+│  Top CPE Targets: Siemens SIMATIC, Cisco IOS, Fortinet   │
+│  Campaign Recency: Active (last 30 days)                  │
+│  Kill Chain: 12/14 tactics (missing: Exfiltration, Impact)│
+├──────────────────────────────────────────────────────────┤
+│  TRAJECTORY (90-DAY)                                      │
+│  ATQ Δ: +2.3 points ↑  (Epoch 228 → 234)                │
+│  Driven by: Temporal +1.4, EPSS vel +0.6, Recency +0.3  │
+│  Forecast: Elevated through Q3 2026 (87% confidence)     │
+└──────────────────────────────────────────────────────────┘</pre>
+      </div>
+
+      <!-- 3. FORMULA SPEC VIEW -->
+      <div id="specCard" class="hidden rounded-2xl bg-surface border border-hairline p-6 shadow-2xl space-y-4">
+        <h3 class="font-mono text-sm uppercase tracking-wider text-[#E05A10] font-bold">
+          Production 12-Weight Mathematical Formula
+        </h3>
+        <p class="text-xs text-zinc-400 leading-relaxed font-sans">
+          The ATQ measures current operational capability and strategic threat pressure rather than historical volume. Every point is auditable against live PostgreSQL views.
+        </p>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left font-mono text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-hairline text-zinc-400">
+                <th class="py-2 px-2">#</th>
+                <th class="py-2 px-2">Component</th>
+                <th class="py-2 px-2">Weight</th>
+                <th class="py-2 px-2">Saturation Rule</th>
+                <th class="py-2 px-2">Data Source</th>
+              </tr>
+            </thead>
+            <tbody id="specTableBody" class="divide-y divide-hairline text-zinc-300">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: LIVE METRICS & DETAIL INSPECTOR PANEL (COL 4) -->
+    <div class="lg:col-span-4 space-y-4">
+      
+      <!-- Component Inspector Card (Dynamically updates on hover/click) -->
+      <div class="p-5 rounded-2xl bg-surface border border-hairline shadow-xl space-y-4 sticky top-6">
+        <div class="flex items-center justify-between border-b border-hairline pb-3">
+          <span class="font-mono text-[10px] tracking-[0.2em] uppercase text-[#E05A10] font-semibold">
+            Telemetry Inspector
+          </span>
+          <span id="inspectorStatus" class="px-2 py-0.5 rounded text-[9px] font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+            HOVER COMPONENT
+          </span>
+        </div>
+
+        <div id="inspectorContent" class="space-y-3 font-mono text-xs">
+          <div>
+            <span class="text-[10px] text-zinc-500 uppercase block">Selected Metric</span>
+            <div id="inspName" class="text-sm font-bold text-white">EIC Score</div>
+          </div>
+
+          <div class="p-3 rounded-lg bg-obsidian/70 border border-hairline space-y-1.5">
+            <div class="flex justify-between text-zinc-400 text-[11px]">
+              <span>Contribution:</span>
+              <span id="inspScore" class="text-[#E05A10] font-bold">14.7 / 18.0 pts</span>
+            </div>
+            <div class="flex justify-between text-zinc-400 text-[11px]">
+              <span>Weight Allocation:</span>
+              <span id="inspWeight" class="text-zinc-200">18% of composite</span>
+            </div>
+            <div class="flex justify-between text-zinc-400 text-[11px]">
+              <span>Saturation Ratio:</span>
+              <span id="inspRatio" class="text-emerald-400 font-bold">81.6%</span>
+            </div>
+          </div>
+
+          <div class="space-y-1">
+            <span class="text-[10px] text-zinc-500 uppercase block">Mathematical Saturation Formula</span>
+            <div id="inspFormula" class="p-2 rounded bg-black/40 border border-hairline text-zinc-300 text-[11px]">
+              PERCENT_RANK(intent, cap, opp)
+            </div>
+          </div>
+
+          <div class="space-y-1">
+            <span class="text-[10px] text-zinc-500 uppercase block">Database Origin</span>
+            <div id="inspSource" class="text-[11px] text-[#FFA370]">
+              seldon.actor_eic (178 profiled actors)
+            </div>
+          </div>
+
+          <div class="pt-2 border-t border-hairline">
+            <span class="text-[10px] text-zinc-500 uppercase block mb-1">Downstream Impact</span>
+            <p id="inspImpact" class="text-[11px] text-zinc-300 font-sans leading-relaxed">
+              Feeds edge weight multipliers in the Boltzmann random walk for Monte Carlo facility breach simulation.
+            </p>
+          </div>
+        </div>
+
+        <!-- Download / Export Widget -->
+        <div class="pt-3 border-t border-hairline flex flex-col gap-2">
+          <button id="btnExportJson" class="w-full py-2 rounded-lg bg-[#E05A10]/15 hover:bg-[#E05A10]/25 border border-[#E05A10]/40 text-[#FFA370] text-xs font-mono font-medium transition-colors flex items-center justify-center gap-2">
+            <span>📥</span> Export Threat Actor JSON
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footnote citation -->
+  <footer class="w-full max-w-5xl mt-10 pt-4 border-t border-hairline text-center text-zinc-500 font-mono text-[11px]">
+    Source: <a href="file:///Users/jimmcknney/jim_private/eigenia/references/WG-07-TM-Threat-Modeling/WG-07-TM-ATQ.md" class="text-[#E05A10] hover:underline">WG-07-TM-ATQ.md</a> · Lab Sponsor J. McKenney · Eigenia Cyber Digital Twin (CDT) Actuarial Platform
+  </footer>
+
+  <!-- DATA & SCRIPT LOGIC -->
+  <script>
+    // 1. Data Store for Threat Actors
+    const threatActors = {
+      volt_typhoon: {
+        id: "volt_typhoon",
+        name: "VOLT TYPHOON",
+        atq: 78.6,
+        attribution: "China / People's Republic of China",
+        state: "CHINA · STATE ACTOR",
+        sophistication: "Advanced Persistent Threat (APT)",
+        posture: "Pre-positioned in US Critical Infrastructure (Living-off-the-land)",
+        delta: "+2.3",
+        deltaDays: "90d",
+        epochFrom: 228,
+        epochTo: 234,
+        confidence: "87%",
+        trajectoryForecast: "Elevated through Q3 2026",
+        walkMultiplier: "1.48x",
+        components: [
+          { name: "EIC Score", weight: 18, score: 14.7, formula: "Percentile-ranked (PERCENT_RANK)", source: "seldon.actor_eic (178 profiled actors)", impact: "Base threat actor assessment quantifying Intent, Capability, and Opportunity." },
+          { name: "Kill Chain Completeness", weight: 14, score: 12.0, formula: "tactic_count ÷ 14", source: "tacam_ttp_clusters (1,579 rows)", impact: "Measures coverage across 14 MITRE ATT&CK enterprise tactics." },
+          { name: "Temporal Threat Score", weight: 13, score: 12.4, formula: "0–1 (pre-normalised)", source: "tacam_temporal_clusters (173 profiles)", impact: "Operational tempo, campaign recency, and dormancy emergence detection." },
+          { name: "EPSS Base", weight: 10, score: 7.3, formula: "mean_epss × 5, cap 1.0", source: "EPSS daily feed (341,000+ CVEs)", impact: "Average exploit probability across this actor's known CVE catalog." },
+          { name: "Technique Reach", weight: 10, score: 6.8, formula: "technique_reach ÷ 120", source: "KG USES_TECHNIQUE (4,413 edges)", impact: "Breadth of MITRE technique arsenal deployed in historical campaigns." },
+          { name: "Vendor Exposure", weight: 10, score: 8.0, formula: "vendor_count ÷ 50", source: "tacam_cpe_clusters (62,965 rows)", impact: "Number of distinct OT and IT vendor products compromised." },
+          { name: "Sector Reach", weight: 5, score: 4.2, formula: "sector_reach ÷ 15", source: "KG TARGETS_SECTOR (2,278 edges)", impact: "Cross-sector reach across 16 CISA critical infrastructure sectors." },
+          { name: "Protocol Reach", weight: 5, score: 3.4, formula: "protocol_reach ÷ 10", source: "KG TARGETS_PROTOCOL (627 edges)", impact: "Mastery of industrial OT protocols (Modbus, OPC-UA, DNP3, etc.)." },
+          { name: "Incident Count", weight: 5, score: 4.2, formula: "incident_count ÷ 20", source: "Curated incidents (2,305 events)", impact: "Empirical record of attributed high-consequence cyber incidents." },
+          { name: "Campaign Recency", weight: 5, score: 4.8, formula: "0–1 (pre-normalised)", source: "tacam_temporal_clusters", impact: "Recency window of active operations (active within last 30 days)." },
+          { name: "EPSS Velocity", weight: 5, score: 0.4, formula: "epss_velocity × 100, cap 1.0", source: "EPSS trajectory (555,556 records)", impact: "First derivative (d/dt) of exploit probability across known CVEs." },
+          { name: "Geopolitical Tension", weight: 5, score: 0.3, formula: "MAX(geo_field_value), cap 1.0", source: "seldon.geopolitical_field + ACLED", impact: "State sponsor active geopolitical tension and conflict proxy level." }
+        ],
+        sectors: [
+          { name: "Energy", affinity: 0.94 },
+          { name: "Water & Wastewater", affinity: 0.71 },
+          { name: "Communications", affinity: 0.83 }
+        ],
+        protocols: ["OPC-UA", "Modbus", "DNP3"],
+        cpeTargets: ["Siemens SIMATIC", "Cisco IOS", "Fortinet FortiOS"],
+        killChainMissing: ["Exfiltration", "Impact"],
+        drivers: [
+          { name: "Temporal", delta: "+1.4" },
+          { name: "EPSS vel", delta: "+0.6" },
+          { name: "Recency", delta: "+0.3" }
+        ]
+      },
+
+      dragonfly: {
+        id: "dragonfly",
+        name: "DRAGONFLY 2.0",
+        atq: 76.2,
+        attribution: "Russia / FSB Center 16 (Energetic Bear)",
+        state: "RUSSIA · STATE SPONSORED",
+        sophistication: "Advanced Persistent Threat (APT)",
+        posture: "Industrial sabotage & power grid access operations",
+        delta: "+1.1",
+        deltaDays: "90d",
+        epochFrom: 228,
+        epochTo: 234,
+        confidence: "84%",
+        trajectoryForecast: "Sustained high through Q4 2026",
+        walkMultiplier: "1.41x",
+        components: [
+          { name: "EIC Score", weight: 18, score: 14.2, formula: "Percentile-ranked", source: "seldon.actor_eic", impact: "High capability in electric grid infiltration and turbine telemetry." },
+          { name: "Kill Chain Completeness", weight: 14, score: 13.0, formula: "tactic_count ÷ 14", source: "tacam_ttp_clusters", impact: "Comprehensive execution across 13/14 ATT&CK tactics." },
+          { name: "Temporal Threat Score", weight: 13, score: 11.5, formula: "0–1", source: "tacam_temporal_clusters", impact: "Recurring seasonal reconnaissance bursts." },
+          { name: "EPSS Base", weight: 10, score: 8.1, formula: "mean_epss × 5", source: "EPSS daily feed", impact: "Heavy reliance on unpatched remote access CVEs." },
+          { name: "Technique Reach", weight: 10, score: 7.2, formula: "reach ÷ 120", source: "KG USES_TECHNIQUE", impact: "Specialized in firmware extraction and credential dumping." },
+          { name: "Vendor Exposure", weight: 10, score: 7.5, formula: "vendors ÷ 50", source: "tacam_cpe_clusters", impact: "Targets GE Mark VIe, Schneider Electric, Siemens." },
+          { name: "Sector Reach", weight: 5, score: 3.8, formula: "sectors ÷ 15", source: "KG TARGETS_SECTOR", impact: "Primarily Energy, Nuclear, and Defense." },
+          { name: "Protocol Reach", weight: 5, score: 4.0, formula: "protocols ÷ 10", source: "KG TARGETS_PROTOCOL", impact: "Deep mastery of IEC 60870-5-104, Modbus, OPC-DA." },
+          { name: "Incident Count", weight: 5, score: 5.0, formula: "incidents ÷ 20", source: "Curated incidents", impact: "68 attributed historical incidents (saturated)." },
+          { name: "Campaign Recency", weight: 5, score: 4.1, formula: "0–1", source: "tacam_temporal_clusters", impact: "Recent telemetry probing US and European grids." },
+          { name: "EPSS Velocity", weight: 5, score: 0.3, formula: "vel × 100", source: "EPSS trajectory", impact: "Moderate acceleration on VPN vulnerabilities." },
+          { name: "Geopolitical Tension", weight: 5, score: 0.5, formula: "geo_field", source: "seldon.geopolitical_field", impact: "Elevated regional conflict tension." }
+        ],
+        sectors: [
+          { name: "Energy & Grid", affinity: 0.98 },
+          { name: "Nuclear", affinity: 0.85 },
+          { name: "Defense Industrial", affinity: 0.76 }
+        ],
+        protocols: ["IEC 60870-5-104", "Modbus TCP", "OPC-DA"],
+        cpeTargets: ["Schneider Modicon", "GE Mark VIe", "Cisco ASA"],
+        killChainMissing: ["Exfiltration"],
+        drivers: [
+          { name: "Temporal", delta: "+0.7" },
+          { name: "Geo Tension", delta: "+0.3" },
+          { name: "EPSS vel", delta: "+0.1" }
+        ]
+      },
+
+      lazarus: {
+        id: "lazarus",
+        name: "LAZARUS GROUP",
+        atq: 76.0,
+        attribution: "North Korea / RGB 121",
+        state: "DPRK · RECONNAISSANCE GENERAL BUREAU",
+        sophistication: "Advanced Persistent Threat (APT)",
+        posture: "Financial extortion, cryptocurrency theft & dual destructive ops",
+        delta: "-0.4",
+        deltaDays: "90d",
+        epochFrom: 228,
+        epochTo: 234,
+        confidence: "89%",
+        trajectoryForecast: "Plateaued (financial pivot)",
+        walkMultiplier: "1.39x",
+        components: [
+          { name: "EIC Score", weight: 18, score: 15.1, formula: "Percentile-ranked", source: "seldon.actor_eic", impact: "Extreme intent and proven destructive capabilities." },
+          { name: "Kill Chain Completeness", weight: 14, score: 14.0, formula: "tactic_count ÷ 14", source: "tacam_ttp_clusters", impact: "Full 14/14 kill-chain execution including wipers & ransom." },
+          { name: "Temporal Threat Score", weight: 13, score: 10.2, formula: "0–1", source: "tacam_temporal_clusters", impact: "Shift towards web3 and defense supply chain." },
+          { name: "EPSS Base", weight: 10, score: 6.9, formula: "mean_epss × 5", source: "EPSS daily feed", impact: "Uses zero-days combined with trojanized open-source." },
+          { name: "Technique Reach", weight: 10, score: 8.5, formula: "reach ÷ 120", source: "KG USES_TECHNIQUE", impact: "Expansive toolset from macOS malware to bootkits." },
+          { name: "Vendor Exposure", weight: 10, score: 6.8, formula: "vendors ÷ 50", source: "tacam_cpe_clusters", impact: "Broad IT targets, moderate OT hardware exposure." },
+          { name: "Sector Reach", weight: 5, score: 4.5, formula: "sectors ÷ 15", source: "KG TARGETS_SECTOR", impact: "Financial, Aerospace, Defense, Crypto." },
+          { name: "Protocol Reach", weight: 5, score: 2.1, formula: "protocols ÷ 10", source: "KG TARGETS_PROTOCOL", impact: "Limited native ICS protocol manipulation." },
+          { name: "Incident Count", weight: 5, score: 5.0, formula: "incidents ÷ 20", source: "Curated incidents", impact: "120 attributed incidents (extreme historical volume)." },
+          { name: "Campaign Recency", weight: 5, score: 4.4, formula: "0–1", source: "tacam_temporal_clusters", impact: "Continuously active DeFi campaigns." },
+          { name: "EPSS Velocity", weight: 5, score: 0.1, formula: "vel × 100", source: "EPSS trajectory", impact: "Low velocity on older known CVEs." },
+          { name: "Geopolitical Tension", weight: 5, score: 0.4, formula: "geo_field", source: "seldon.geopolitical_field", impact: "Sanctions evasion posture." }
+        ],
+        sectors: [
+          { name: "Financial Services", affinity: 0.99 },
+          { name: "Aerospace & Defense", affinity: 0.88 },
+          { name: "Cryptocurrency", affinity: 0.96 }
+        ],
+        protocols: ["HTTP/S C2", "SMB", "Custom TLS"],
+        cpeTargets: ["Windows Server", "JetBrains TeamCity", "Log4j"],
+        killChainMissing: [],
+        drivers: [
+          { name: "EPSS vel", delta: "-0.2" },
+          { name: "Temporal", delta: "-0.3" },
+          { name: "Recency", delta: "+0.1" }
+        ]
+      }
+    };
+
+    // All 14 MITRE Enterprise Tactics
+    const allTactics = [
+      "Recon", "Resource", "Initial", "Execution", "Persistence", "PrivEsc", 
+      "DefEvasion", "CredAccess", "Discovery", "LatMove", "Collect", "C2", "Exfil", "Impact"
+    ];
+
+    let currentActor = threatActors.volt_typhoon;
+
+    // Render Actor Selector Buttons
+    function renderActorSelector() {
+      const container = document.getElementById('actorSelector');
+      container.innerHTML = '';
+      Object.values(threatActors).forEach(act => {
+        const btn = document.createElement('button');
+        const isSelected = act.id === currentActor.id;
+        btn.className = `px-3 py-1 rounded-lg font-mono text-xs font-medium border transition-all ${
+          isSelected 
+            ? 'bg-[#E05A10] border-[#E05A10] text-white glow-orange' 
+            : 'bg-surface border-hairline text-zinc-400 hover:text-white hover:border-zinc-600'
+        }`;
+        btn.innerHTML = `${act.name} <span class="opacity-75 font-normal">(${act.atq})</span>`;
+        btn.onclick = () => {
+          currentActor = act;
+          updateDashboard();
+        };
+        container.appendChild(btn);
+      });
+    }
+
+    // Render 20-segment LED bar
+    function createLedSegments(ratio, componentName) {
+      const total = 20;
+      const filled = Math.round(ratio * total);
+      let html = '<div class="flex items-center gap-[2.5px]">';
+      for (let i = 0; i < total; i++) {
+        const isFilled = i < filled;
+        const colorClass = isFilled 
+          ? 'bg-[#E05A10] shadow-[0_0_6px_rgba(224,90,16,0.65)]' 
+          : 'bg-zinc-800/40 border border-zinc-700/20';
+        html += `<div class="led-segment w-2 sm:w-2.5 h-3.5 rounded-[1.5px] ${colorClass}"></div>`;
+      }
+      html += '</div>';
+      return html;
+    }
+
+    // Update Dashboard Elements
+    function updateDashboard() {
+      renderActorSelector();
+
+      // Header Info
+      document.getElementById('actorName').innerText = currentActor.name;
+      document.getElementById('actorScore').innerText = currentActor.atq.toFixed(1);
+      document.getElementById('actorMeta').innerHTML = `Attribution: <span class="text-zinc-200 font-medium">${currentActor.attribution}</span> · Posture: <span class="text-amber-400 font-mono">${currentActor.posture}</span>`;
+      document.getElementById('actorState').innerText = currentActor.state;
+
+      // 12 Components
+      const container = document.getElementById('componentsContainer');
+      container.innerHTML = '';
+      let sum = 0;
+
+      currentActor.components.forEach((c, idx) => {
+        sum += c.score;
+        const ratio = c.score / c.weight;
+        const row = document.createElement('div');
+        row.className = 'group p-2 rounded-lg hover:bg-surfaceElevated border border-transparent hover:border-hairline transition-all cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-2';
+        
+        row.innerHTML = `
+          <div class="flex items-center gap-3 w-full sm:w-72">
+            ${createLedSegments(ratio, c.name)}
+            <div class="flex items-center justify-between flex-1">
+              <span class="font-mono text-xs text-zinc-300 group-hover:text-white">${c.name}</span>
+              <span class="font-mono text-[10px] text-zinc-500">(${c.weight}%)</span>
+            </div>
+          </div>
+          <div class="flex items-center justify-between sm:justify-end gap-3 font-mono text-xs">
+            <span class="text-zinc-500">▸</span>
+            <span class="text-white font-bold w-16 text-right">${c.score.toFixed(1)} <span class="text-zinc-500 font-normal">/ ${c.weight}</span></span>
+          </div>
+        `;
+
+        // Hover inspection
+        row.onmouseenter = () => inspectComponent(c, ratio);
+        container.appendChild(row);
+      });
+
+      document.getElementById('weightSum').innerText = sum.toFixed(1);
+
+      // Sectors
+      const sectorContainer = document.getElementById('sectorBars');
+      sectorContainer.innerHTML = '';
+      currentActor.sectors.forEach(s => {
+        const pct = Math.round(s.affinity * 100);
+        sectorContainer.innerHTML += `
+          <div>
+            <div class="flex justify-between text-[11px] text-zinc-300 mb-0.5">
+              <span>${s.name}</span>
+              <span class="text-[#E05A10] font-bold">${s.affinity.toFixed(2)}</span>
+            </div>
+            <div class="w-full h-1.5 rounded-full bg-zinc-800 overflow-hidden">
+              <div class="h-full bg-gradient-to-r from-amber-500 to-[#E05A10] rounded-full" style="width: ${pct}%"></div>
+            </div>
+          </div>
+        `;
+      });
+
+      // Protocols & CPE Targets
+      const protocolPills = document.getElementById('protocolPills');
+      protocolPills.innerHTML = currentActor.protocols.map(p => 
+        `<span class="px-2 py-0.5 rounded bg-zinc-800 text-zinc-200 font-mono text-[10px] border border-zinc-700">${p}</span>`
+      ).join('');
+
+      const cpePills = document.getElementById('cpePills');
+      cpePills.innerHTML = currentActor.cpeTargets.map(c => 
+        `<span class="px-2 py-0.5 rounded bg-[#E05A10]/15 text-[#FFA370] font-mono text-[10px] border border-[#E05A10]/30">${c}</span>`
+      ).join('');
+
+      // 14 Tactics Kill Chain
+      const kcGrid = document.getElementById('killChainGrid');
+      kcGrid.innerHTML = '';
+      allTactics.forEach(t => {
+        const isMissing = currentActor.killChainMissing.some(m => m.toLowerCase().startsWith(t.toLowerCase()));
+        const pill = document.createElement('div');
+        pill.className = `p-1 rounded text-center font-mono text-[9px] border transition-all ${
+          isMissing 
+            ? 'bg-red-950/40 border-red-800/40 text-red-400 opacity-60' 
+            : 'bg-[#E05A10]/15 border-[#E05A10]/40 text-[#FFA370] font-semibold'
+        }`;
+        pill.innerText = t;
+        pill.title = isMissing ? `${t}: Missing/Inactive` : `${t}: Active Capability`;
+        kcGrid.appendChild(pill);
+      });
+
+      // Populate Formula Spec Table
+      const specBody = document.getElementById('specTableBody');
+      specBody.innerHTML = currentActor.components.map((c, i) => `
+        <tr class="hover:bg-surfaceElevated transition-colors">
+          <td class="py-2 px-2 text-zinc-500">${i + 1}</td>
+          <td class="py-2 px-2 font-bold text-white">${c.name}</td>
+          <td class="py-2 px-2 text-[#E05A10]">${c.weight}%</td>
+          <td class="py-2 px-2 text-zinc-400">${c.formula}</td>
+          <td class="py-2 px-2 text-zinc-400 font-mono text-[11px]">${c.source}</td>
+        </tr>
+      `).join('');
+
+      // Default inspector to first component
+      inspectComponent(currentActor.components[0], currentActor.components[0].score / currentActor.components[0].weight);
+    }
+
+    // Inspect Component details in right panel
+    function inspectComponent(c, ratio) {
+      document.getElementById('inspectorStatus').innerText = 'ACTIVE INSPECT';
+      document.getElementById('inspName').innerText = c.name;
+      document.getElementById('inspScore').innerText = `${c.score.toFixed(1)} / ${c.weight}.0 pts`;
+      document.getElementById('inspWeight').innerText = `${c.weight}% of composite`;
+      document.getElementById('inspRatio').innerText = `${(ratio * 100).toFixed(1)}% Saturation`;
+      document.getElementById('inspFormula').innerText = c.formula;
+      document.getElementById('inspSource').innerText = c.source;
+      document.getElementById('inspImpact').innerText = c.impact;
+    }
+
+    // View Mode Switching
+    const hudCard = document.getElementById('hudCard');
+    const asciiCard = document.getElementById('asciiCard');
+    const specCard = document.getElementById('specCard');
+    const btnHud = document.getElementById('btnHudView');
+    const btnAscii = document.getElementById('btnAsciiView');
+    const btnSpec = document.getElementById('btnSpecView');
+
+    function setActiveTab(btn) {
+      [btnHud, btnAscii, btnSpec].forEach(b => {
+        b.className = 'px-3 py-1 rounded-md text-zinc-400 hover:text-white transition-all';
+      });
+      btn.className = 'px-3 py-1 rounded-md bg-[#E05A10] text-white font-medium shadow-sm transition-all';
+    }
+
+    btnHud.onclick = () => {
+      setActiveTab(btnHud);
+      hudCard.classList.remove('hidden');
+      asciiCard.classList.add('hidden');
+      specCard.classList.add('hidden');
+    };
+
+    btnAscii.onclick = () => {
+      setActiveTab(btnAscii);
+      hudCard.classList.add('hidden');
+      asciiCard.classList.remove('hidden');
+      specCard.classList.add('hidden');
+    };
+
+    btnSpec.onclick = () => {
+      setActiveTab(btnSpec);
+      hudCard.classList.add('hidden');
+      asciiCard.classList.add('hidden');
+      specCard.classList.remove('hidden');
+    };
+
+    // Dark/Light Mode Switcher
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const themeLabel = document.getElementById('themeLabel');
+    themeToggle.onclick = () => {
+      const html = document.documentElement;
+      if (html.classList.contains('dark')) {
+        html.classList.remove('dark');
+        html.classList.add('light');
+        themeIcon.innerText = '🌙';
+        themeLabel.innerText = 'Dark';
+      } else {
+        html.classList.remove('light');
+        html.classList.add('dark');
+        themeIcon.innerText = '☀️';
+        themeLabel.innerText = 'Light';
+      }
+    };
+
+    // Copy ASCII Button
+    document.getElementById('btnCopyAscii').onclick = () => {
+      const text = document.getElementById('rawAsciiContent').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('btnCopyAscii');
+        btn.innerHTML = '<span>✅</span> Copied!';
+        setTimeout(() => btn.innerHTML = '<span>📋</span> Copy Box', 2000);
+      });
+    };
+
+    // Export JSON Button
+    document.getElementById('btnExportJson').onclick = () => {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(currentActor, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", `${currentActor.id}_atq_profile.json`);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+    };
+
+    // Initial Render
+    updateDashboard();
+  </script>
+</body>
+</html>

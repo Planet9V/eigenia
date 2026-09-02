@@ -1,4 +1,7 @@
 # Actuarial Engine Ecosystem Competitive Analysis & Market Positioning
+
+ Lab Sponsor Resident,  j.mckenney
+
 To fully understand where **Eigenia** fits within the cyber insurance ecosystem, it helps to categorize the market into distinct layers:
 - "Outside-In" Scanners, Catastrophe (Cat) Modelers
 - OT Risk Quantifiers
@@ -7,9 +10,8 @@ To fully understand where **Eigenia** fits within the cyber insurance ecosystem,
 
 While many providers focus heavily on traditional IT networks and external vulnerabilities, Eigenia differentiates itself by quantifying the complex, internal physical risks associated with **Operational Technology (OT)** environments.
 
-Here is a comprehensive comparison of Eigenia against its peers, comparables, and other ecosystem players:
 
-## 1. "Outside-In" IT Scanners (BitSight, SecurityScorecard, UpGuard)
+## "Outside-In" IT Scanners (BitSight, SecurityScorecard, UpGuard)
 
 - **What they do:** These firms conduct continuous, non-intrusive scans of a company’s external-facing IT footprint (e.g., exposed ports, DNS, email security, endpoint configuration) to generate a letter-grade or numeric security score.
 - **Their Ecosystem/Partners:** They partner heavily with brokers and insurers. For example, SecurityScorecard is integrated directly into Aon’s CyQu platform.

@@ -1,7 +1,9 @@
 # Engine: Paradigm Suite
 
-## Overview
+Lab Sponsor Resident  j.mckenney
+
 The **Paradigm Suite** is the platform's specialized module library for risk quantification and predictive analytics. It integrates raw technical data (CVEs, Telemetry) into high-level strategic forecasts and actuarial models.
+
 
 ## Core Paradigm Modules
 

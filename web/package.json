@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "sync": "node scripts/sync-publications.js",
+    "audit": "node scripts/audit-publications.js",
+    "predev": "node scripts/sync-publications.js",
+    "prebuild": "node scripts/sync-publications.js && node scripts/audit-publications.js",
     "dev": "next dev -p 4500",
     "build": "next build",
     "start": "next start -p 4500",

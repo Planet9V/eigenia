@@ -1,3 +1,5 @@
+import { GENERATED_DOC_CONTENT } from "./generatedReferencesContent";
+
 export interface WikiDocumentMeta {
   id: string;
   slug: string;
@@ -299,7 +301,7 @@ export const WORKING_GROUPS: WorkingGroupCategory[] = [
         workingGroupId: "WG-02-DT",
         workingGroupName: "Digital Twin & Taleb Series",
         workingGroupNameNl: "Digitale Tweeling & Taleb-reeks",
-        relativePath: "references/WG-02-DT-Digital-Twin/WG-02-DT-2..md",
+        relativePath: "references/WG-02-DT-Digital-Twin/WG-02-DT-2.md",
         badge: "Taleb II",
         badgeNl: "Taleb II",
       },
@@ -313,7 +315,7 @@ export const WORKING_GROUPS: WorkingGroupCategory[] = [
         workingGroupId: "WG-02-DT",
         workingGroupName: "Digital Twin & Taleb Series",
         workingGroupNameNl: "Digitale Tweeling & Taleb-reeks",
-        relativePath: "references/WG-02-DT-Digital-Twin/WG-02-DT-3..md",
+        relativePath: "references/WG-02-DT-Digital-Twin/WG-02-DT-3.md",
         badge: "Taleb III",
         badgeNl: "Taleb III",
       },
@@ -327,7 +329,7 @@ export const WORKING_GROUPS: WorkingGroupCategory[] = [
         workingGroupId: "WG-02-DT",
         workingGroupName: "Digital Twin & Taleb Series",
         workingGroupNameNl: "Digitale Tweeling & Taleb-reeks",
-        relativePath: "references/WG-02-DT-Digital-Twin/WG-02-DT-4..md",
+        relativePath: "references/WG-02-DT-Digital-Twin/WG-02-DT-4.md",
         badge: "Taleb IV",
         badgeNl: "Taleb IV",
       },
@@ -341,7 +343,7 @@ export const WORKING_GROUPS: WorkingGroupCategory[] = [
         workingGroupId: "WG-02-DT",
         workingGroupName: "Digital Twin & Taleb Series",
         workingGroupNameNl: "Digitale Tweeling & Taleb-reeks",
-        relativePath: "references/WG-02-DT-Digital-Twin/WG-02-DT-5..md",
+        relativePath: "references/WG-02-DT-Digital-Twin/WG-02-DT-5.md",
         badge: "Taleb V",
         badgeNl: "Taleb V",
       },
@@ -586,6 +588,33 @@ export const WORKING_GROUPS: WorkingGroupCategory[] = [
       },
     ],
   },
+  {
+    id: "GOV-RES",
+    title: "Research Governance & Sourcing Methodology",
+    titleNl: "Onderzoeksgovernance & Bronvermeldingsmethodologie",
+    number: "GOV-01",
+    badge: "GOVERNANCE",
+    badgeNl: "GOVERNANCE",
+    description: "Standard operating procedures and peer-attribution protocols for Eigenia Labs publications. All external claims, academic literature validations, and external empirical datasets (e.g. Clayton Copulas, Kramers escape models) are cross-referenced and catalogued via valyu searches into references/external-research.",
+    descriptionNl: "Standaard operationele procedures en peer-attributieprotocollen voor publicaties van Eigenia Labs. Alle externe claims, academische literatuurvalidaties en externe empirische datasets worden gecatalogiseerd via valyu-onderzoek in references/external-research.",
+    documents: [
+      {
+        id: "README",
+        slug: "research-sourcing-governance",
+        title: "External Research Sourcing & Attribution Protocol",
+        titleNl: "Protocol voor Externe Onderzoeksbronnen & Attributie",
+        subtitle: "Traceable claim sourcing, valyu integration, and working group attribution standards",
+        subtitleNl: "Traceerbare claimbronvermelding, valyu-integratie en werkgroepattributiestandaarden",
+        workingGroupId: "GOV-RES",
+        workingGroupName: "Research Governance",
+        workingGroupNameNl: "Onderzoeksgovernance",
+        relativePath: "references/external-research/README.md",
+        author: "Eigenia Labs Governance",
+        badge: "Governance",
+        badgeNl: "Governance",
+      },
+    ],
+  },
 ];
 
 export function getAllWorkingGroups(lang: "en" | "nl" = "en"): WorkingGroupCategory[] {
@@ -630,9 +659,21 @@ export function getWikiDocumentById(docId: string, lang: "en" | "nl" = "en"): Wi
 
   if (!docMeta) return null;
 
+  // 1. Resolve live English content from generatedReferencesContent (authoritative from eigenia/references/)
+  const liveEnContent =
+    GENERATED_DOC_CONTENT[docMeta.relativePath] ||
+    GENERATED_DOC_CONTENT[docMeta.id] ||
+    GENERATED_DOC_CONTENT[docMeta.slug] ||
+    RAW_DOC_CONTENT[docMeta.id] ||
+    RAW_DOC_CONTENT[docMeta.slug] ||
+    RAW_DOC_CONTENT[docMeta.workingGroupId] ||
+    RAW_DOC_CONTENT[docId] ||
+    "";
+
+  // 2. Select appropriate language content
   const rawContent = lang === "nl"
-    ? (RAW_DOC_CONTENT_NL[docMeta.id] || RAW_DOC_CONTENT_NL[docMeta.slug] || RAW_DOC_CONTENT_NL[docMeta.workingGroupId] || RAW_DOC_CONTENT_NL[docId] || RAW_DOC_CONTENT[docMeta.id] || RAW_DOC_CONTENT[docMeta.slug] || RAW_DOC_CONTENT[docId] || "")
-    : (RAW_DOC_CONTENT[docMeta.id] || RAW_DOC_CONTENT[docMeta.slug] || RAW_DOC_CONTENT[docMeta.workingGroupId] || RAW_DOC_CONTENT[docId] || "");
+    ? (RAW_DOC_CONTENT_NL[docMeta.id] || RAW_DOC_CONTENT_NL[docMeta.slug] || RAW_DOC_CONTENT_NL[docMeta.workingGroupId] || RAW_DOC_CONTENT_NL[docId] || liveEnContent)
+    : liveEnContent;
 
   if (!rawContent) {
     console.error(`Wiki document content not found for ${docMeta.id}`);

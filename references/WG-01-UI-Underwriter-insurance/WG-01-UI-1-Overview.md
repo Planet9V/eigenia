@@ -1,5 +1,17 @@
 # Actuarial & Underwriting Foundations for Industrial Property & Cyber Risk
+
+Lab Sponsor Resident  j.mckenney    
+
+
 The insurance and actuarial sector functions by transforming the uncertainty of risk into a measurable, transferable price known as a premium. At its core, the industry relies on a rigorous integration of probability theory, financial mathematics, and specialized underwriting heuristics to balance the expected costs of claims against operational overhead and the required cost of capital.
+
+The industry is segmented, with global brokers orchestrating risk placement, lead underwriters assuming the actual risk, captive insurers managing corporate self-insurance, and reinsurers assuming tail risk.
+
+The underwriting process for critical infrastructure is shifting from traditional questionnaires toward dynamic, continuous modeling powered by predictive analytics and telemetry.
+
+Modern risk assessment relies on sophisticated models to calculate the Probable Maximum Loss (PML) and Maximum Foreseeable Loss (MFL), and employs catastrophe models that integrate hazard, vulnerability, financial, and portfolio modules to assess systemic threats.
+
+For cyber risks, which follow fat-tailed power law distributions, underwriters use Monte Carlo simulations and Annualized Loss Expectancy (ALE) calculations to price volatile events, increasingly leveraging AI and digital twins for real-time risk monitoring.
 
 ## How the Actuarial and Insurance Sector Works
 

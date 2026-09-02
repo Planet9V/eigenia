@@ -1,19 +1,12 @@
 # Cascading Failure Hypothesis: Non-Linear Energy Grid Instability
 
+Lab Sponsor Resident  j.mckenney
 
-Eigenia
-**Cybersecurity Intelligence
-February 12, 2026
-Author:** J. McKenney
-**Document ID:** EE-Eigenia-OTCE 1 HYPOTHESIS  Cascading Failure Scenarios
+This assessment models cascading failure propagation from coordinated cyber-physical attacks targeting a refernce modelled electrical utility distribution network (see [reference to ACME Inc.](file:///Users/jimmcknney/jim_private/eigenia/references/WG-04-CF-Cascading-Failures/WG-04-CF-ACME_Inc._Security_Assessment.md)), the analysis integrates findings from the BESS Architecture Vulnerability Assessment and the DERMS Security Architecture Review to quantify systemic risk across the modelled NSW electricity network and its dependent critical infrastructure.
 
----
+## Cascading Failure Hypothesis
 
-## Executive Summary
-
-This assessment models cascading failure propagation from coordinated cyber-physical attacks targeting ACME Inc.'s distributed energy resource (DER) infrastructure. The analysis integrates findings from the BESS Architecture Vulnerability Assessment and the DERMS Security Architecture Review to quantify systemic risk across the NSW electricity network and its dependent critical infrastructure.
-
-The central finding is that a coordinated "Death Wobble" oscillation attack (See j,mckenney's Death Wobble-The Grids Precarious Pulse Frequency Instability - jmckenney" a phenomenon extensively documented by McKenney (2024, 2025) in analysis of the South Australia 2016 blackout (6.1 Hz/s RoCoF), UK 2019 blackout (0.135 Hz/s relay trips), and Iberian Peninsula 2025 event (inter-area oscillations) -- executed through the Retailer API supply chain, can induce Rate of Change of Frequency (RoCoF) exceedances greater than 1.0 Hz/s under reduced-inertia grid conditions. This triggers protection relay cascades that propagate from a localized 8,000-customer outage to a regional blackout affecting 1.2 million customers within 120 minutes. Six interdependent critical infrastructure systems -- water, hospitals, telecommunications, transport, military, and financial services -- amplify the consequences into a multi-domain crisis with estimated economic impact between [investment required] million and [investment required] billion.
+The central finding is that a coordinated "Death Wobble" oscillation attack (see [j,mckenney's Death Wobble-The Grids Precarious Pulse Frequency Instability - jmckenney](file:///Users/jimmcknney/jim_private/eigenia/references/WG-04-CF-Cascading-Failures/WG-04-CF-Death-Wobble.md), a phenomenon extensively documented by McKenney (2024, 2025) in analysis of the South Australia 2016 blackout (6.1 Hz/s RoCoF), UK 2019 blackout (0.135 Hz/s relay trips), and Iberian Peninsula 2025 event (inter-area oscillations), executed through the Retailer API supply chain, can induce Rate of Change of Frequency (RoCoF) exceedances greater than 1.0 Hz/s under reduced-inertia grid conditions. This triggers protection relay cascades that propagate from a localized 8,000-customer outage to a regional blackout affecting 1.2 million customers within 120 minutes. Six interdependent critical infrastructure systems -- water, hospitals, telecommunications, transport, military, and financial services -- amplify the consequences into a multi-domain crisis with estimated economic impact between [investment required] million and [investment required] billion.
 
 The probability of such an attack materializing within a 10-year horizon is assessed at 15-30% (MEDIUM), based on the convergence of vulnerable DERMS/API architecture, inadequate ICS protocol security, reduced grid inertia from renewable penetration, and demonstrated nation-state capability against energy infrastructure. Physical safety consequences range from 5 to 25 fatalities and 40 to 120 serious injuries, arising from thermal runaway events, traffic signal failures, medical infrastructure collapse, and delayed emergency services.
 
@@ -218,7 +211,7 @@ The coordinated oscillation attack requires precise synchronization across all 5
 
 **Technical Implementation via Retailer API:**
 
-The mPrest DERMS Retailer API (documented in EE-CTI-007) provides RESTful endpoints for third-party control of DER assets. A compromised retailer account with OAuth 2.0 credentials can issue mass dispatch commands:
+A DERMS Retailer API provides RESTful endpoints for third-party control of DER assets. A compromised retailer account with OAuth 2.0 credentials can issue mass dispatch commands:
 
 ```json
 POST /api/v1/dispatch/bulk
@@ -242,7 +235,7 @@ Content-Type: application/json
 
 **Current Control Gaps Enabling Attack:**
 
-According to EE-CTI-007 (DERMS Security Architecture Review), the following controls are **absent**:
+According to the DERMS Security Architecture Review, the following controls are typically **absent**:
 
 1. **No rate limiting on bulk dispatch commands** -- attacker can issue unlimited commands at maximum API bandwidth
 2. **No behavioral analytics** -- no detection of unusual oscillation patterns or rapid charge/discharge cycling

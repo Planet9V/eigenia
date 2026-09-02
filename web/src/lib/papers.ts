@@ -183,6 +183,12 @@ export const PAPERS_REGISTRY: Record<string, { title: string; category: string; 
     number: "MODEL GRAPH",
     relativePath: "references/WG-02-DT-Digital-Twin/WG-02-DT-Applied-Physics.md",
   },
+  "research-sourcing-governance": {
+    title: "External Research Sourcing & Attribution Methodology",
+    category: "Research Governance",
+    number: "GOV-01",
+    relativePath: "references/external-research/README.md",
+  },
 };
 
 export function getAllPaperSlugs(): string[] {
@@ -193,11 +199,11 @@ export function getPaperBySlug(slug: string): PaperData | null {
   const meta = PAPERS_REGISTRY[slug];
   if (!meta) return null;
 
-  // Search paths for file (web/src/content or root papers/references)
+  // Search paths for authoritative file in project root references/
   const possiblePaths = [
-    path.join(process.cwd(), "src/content", meta.relativePath),
     path.join(process.cwd(), "..", meta.relativePath),
     path.join(process.cwd(), meta.relativePath),
+    path.join(process.cwd(), "src/content", meta.relativePath),
   ];
 
   let rawContent = "";
@@ -216,9 +222,8 @@ export function getPaperBySlug(slug: string): PaperData | null {
     return null;
   }
 
-  // Sanitize rawContent to remove any remaining YAML frontmatter or orphan header metadata
-  rawContent = rawContent.replace(/^---[\s\S]*?---\s*/g, "");
-  rawContent = rawContent.replace(/^(Background|Author:|Date:|date:|audience:|source-code-refs:|prs:|memory-keys:|verified-by:|confidence:|title:|domain:|tags:|status:|created:|updated:|related:|layer:).*/gm, "");
+  // Sanitize rawContent to remove only YAML frontmatter strictly between --- boundaries
+  rawContent = rawContent.replace(/^---[\s\S]*?---\r?\n?/g, "");
   rawContent = rawContent.replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g, (m, p1, p2) => p2 || p1.replace(/_/g, " ")).trim();
 
   const lines = rawContent.split(/\r?\n/);
