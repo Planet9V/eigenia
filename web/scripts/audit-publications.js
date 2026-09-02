@@ -57,8 +57,9 @@ function run() {
   const repoRoot = path.resolve(refDir, "..");
   const mdFiles = getAllMarkdownFiles(refDir);
 
-  const genContentModule = require("../src/lib/generatedReferencesContent.ts");
-  const genContent = genContentModule.GENERATED_DOC_CONTENT || {};
+  const jsonPath = path.resolve(__dirname, "../src/lib/generatedReferencesContent.json");
+  const genData = JSON.parse(fs.readFileSync(jsonPath, "utf-8"));
+  const genContent = genData.content || {};
 
   console.log(`\n================================================================================`);
   console.log(`EIGENIA PUBLICATIONS FIDELITY AUDIT AGENT`);
