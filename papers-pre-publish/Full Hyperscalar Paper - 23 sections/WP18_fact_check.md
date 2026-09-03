@@ -1,0 +1,38 @@
+# Fact-Check Report: WP18
+Model: xiaomi/mimo-v2.5
+Date: 2026-06-15T08:36:33.180240
+
+# Fact-Check Report: WP18 Chapter 18
+
+## CONFIRMED
+1.  **Standards Framework Mapping:** The chapter's mapping of IEC 62443-3-2 ZCR steps to datacenter application (Section 1, Table 18.3 "Stage F — Find") aligns with the ZCR Process in Research Brief Section 2. The research confirms the sequence: ZCR1 (Define SuC), ZCR2 (Risk Assessment), ZCR3 (Partition Zones/Conduits), ZCR4 (Assign SL-T), ZCR5 (Document Requirements).
+2.  **SL-T Definitions:** The Security Level definitions in the chapter's "Practitioner's Note" (e.g., SL 1 for casual violation, SL 4 for state-level) are consistent with the definitions in Research Brief Section 2 ("Security Level Definitions").
+3.  **ISASecure Certification Types:** The chapter's reference to ISASecure certification (Table 18.4, Input) is validated by Research Brief Section 1, which lists CSA, SSA, and SDLA certifications.
+4.  **ASHRAE TC 9.9 Thermal Envelopes:** The recommended and allowable thermal envelopes cited in the chapter's abstract (referencing Chapter 17) align with the detailed data in Research Brief Section 4. Specific values (e.g., 18°C–27°C recommended dry-bulb) are correct.
+5.  **EN 50600 Availability Classes:** The chapter's implied link between facility tiering and security aligns with Research Brief Section 5, which maps EN 50600-2-2/-2-3 Availability Classes (1-4) to infrastructure redundancy (N to 2N).
+6.  **NFPA 75/76 Fire Protection Scope:** The chapter's consolidation of hazard logs from Chapters 9, 11, 12, 13 is supported by Research Brief Section 6, which details specific requirements for fire detection (VESDA), suppression, and Emergency Power-Off (EPO) relevant to OT systems.
+7.  **IEC 61850 in Datacenters:** The research confirms the use of IEC 61850 for datacenter substations (Research Brief Section 8), including GOOSE for fast fault reaction, validating the chapter's inclusion of this standard in hazard mapping.
+8.  **Component Security Requirements:** The chapter's reference to foundational requirements (FR1-FR7) for asset hardening (implied in Table 18.5 Activities) is supported by the detailed FR/SR to Datacenter Asset Type Mapping in Research Brief Section 3.
+
+## CONTRADICTIONS
+1.  **SIL-to-SL Convergence Framework Source:** The chapter states the SIL-to-SL convergence framework originates from "ISA TR 84.00.09 and TS 50701 practice." The research brief contains no information on ISA TR 84.00.09 or a mathematical framework linking SIL to SL. This claim is not verifiable from the provided research data and may be a fabrication or misattribution.
+2.  **ISASecure Certification for Datacenter OT:** The chapter's Table 18.4 lists "ISASecure certification registry" as a direct input for the SL-T vs. SL-A gap analysis. Research Brief Section 1, "Gap Analysis," explicitly states that critical datacenter OT products (UPS NMCs, CDU PLCs, EPMS meters, protection relays) are **not** commonly ISASecure certified. This creates a contradiction: the chapter presents the registry as a readily available input, while the research indicates a significant gap that would hinder its use.
+
+## GAPS
+1.  **Master Hazard Register Structure:** The chapter describes consolidating hazard logs into a "Master Hazard Register" and mapping entries to EMB3D and MITRE ATT&CK. The research brief provides the MITRE ATT&CK for ICS mapping (Research Brief Section 1, Activities), but contains no data on the "EMB3D threat property" model. This framework is not referenced or explained anywhere in the research.
+2.  **Third-Party Programme Director Role:** The chapter defines this role but provides no standards-based or industry-standard authority for it. The research brief does not reference any requirement for an independent "Programme Director" in the standards it covers (IEC 62443, EN 50600, etc.).
+3.  **Financial Risk Quantification (ALE/ROSI):** The chapter's Stage A (Assess) activities include "ALE/ROSI financial quantification (Ch. 10)." The research brief contains no data on financial risk methodologies (ALE, ROSI) or their application to datacenter OT.
+4.  **CDU Controller as "Safety-Critical":** The "Practitioner's Note" claims the CDU controller is "both a safety-critical and a security-critical item." The research brief (Section 7, Table 18.18) lists BESS components in Zone 6 and fire suppression as safety-critical. It does not explicitly classify CDU controllers as safety-critical (SIL-rated) items. The link to Chapter 17's "SCIL items" is unverified here.
+5.  **Vendor-Specific Procurement Details:** The chapter's Stage I (Implement) lists "SecRACS specifications" and "procurement scorecards." The research brief provides generic procurement requirements (e.g., require ISASecure evidence) but no details on the format, content, or scoring of "SecRACS specifications" or "scorecards."
+
+## UNVERIFIABLE
+1.  **SFAIR Process Origin:** The chapter states SFAIR is "the implementation process I have refined across 30+ engagements." This is a personal claim of authorship and experience. The research data contains no third-party validation or references to the SFAIR framework.
+2.  **SecRACS as a Standard Instrument:** The chapter presents SecRACS as a defined negotiation instrument. The research brief contains no reference to "SecRACS." Its existence and methodology are unverified by the provided research.
+3.  **Gordon-Loeb Model Application:** Table 18.2 references "budget envelope per Gordon-Loeb (Ch. 10)." The research brief contains no information on the Gordon-Loeb model or its application to OT security budgeting.
+4.  **"Hyperscale Facility" Specifics:** The chapter uses the term "hyperscale facility" as context but provides no specific architectural or operational details that distinguish it from a generic large datacenter, making technical claims about component convergence (CDU controller) difficult to place.
+
+## CORRECTIONS
+1.  **Standards Clause Reference Error (IEC 62443-3-2):** Chapter Table 18.3 states the zone/conduit partitioning is "per IEC 62443-3-2 (Ch. 4)." Research Brief Section 2 confirms the standard is IEC 62443-3-2, but places the zone/conduit requirements in **Clause 5** (see "Zone & Conduit Requirements (ZCR) Process" and "Conduit Requirements (IEC 62443-3-2, Clause 5.4)"). The reference to "Ch. 4" is incorrect.
+2.  **Vendor Certification Status Oversimplification:** Chapter Table 18.4 implies "ISASecure certification registry" is a comprehensive input. As noted in CONTRADICTION #2, Research Brief Section 1 demonstrates this is false for key datacenter OT assets. The chapter must correct this to reflect the significant certification gap.
+3.  **Missing Conduit Definitions:** The chapter's Stage F (Find) outputs include a "zone/conduit architecture diagram." The research brief (Section 2) provides a recommended datacenter OT zone model with **five defined conduits (C0-1, C0-2, C1-3, C2-4, C5-0)** and specific security controls for each. The chapter does not incorporate these concrete conduit definitions, which are critical for the gap analysis in Stage A.
+4.  **FR/SR Application:** The chapter's activities reference "SL-T vs. SL-A gap analysis" and "SL-A certified components." The research brief (Section 3) details the specific IEC 62443-4-2 Component Requirements (CR 1.1, etc.) that constitute SL-A compliance at the component level. The chapter does not link the gap analysis to these specific FR/CR requirements, which is the mechanism for compliance verification.

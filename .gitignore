@@ -32,3 +32,9 @@ Thumbs.db
 # Docker build cache
 .docker/
 *.tsbuildinfo
+
+# Local Agent Caches & Databases
+.claude/
+.claude-flow/
+.swarm/
+*.db

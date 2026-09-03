@@ -1,0 +1,223 @@
+{
+  "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:7f3b890a-5c12-4d9e-9988-12ab34cd56ef",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-09-02T20:00:00Z",
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "name": "Eigenia Cyber Digital Twin Engine",
+          "version": "2.4.0",
+          "supplier": {
+            "name": "Eigenia B.V."
+          }
+        }
+      ]
+    },
+    "component": {
+      "type": "device",
+      "bom-ref": "ai-rack-envelope-r04",
+      "name": "120kW High-Density Liquid-Cooled AI Compute Rack Envelope",
+      "version": "Gen-6-OCP-ORV3",
+      "description": "Unified cyber-physical rack assembly bridging physical DEXPI 2.0 hydronic/electrical infrastructure with CycloneDX 1.6 multi-tier silicon and firmware.",
+      "properties": [
+        {
+          "name": "dexpi:plant:equipmentId",
+          "value": "EQUIP-RACK-04"
+        },
+        {
+          "name": "dexpi:facility:roomLocation",
+          "value": "Data-Hall-2B-Pod-01"
+        },
+        {
+          "name": "dexpi:facility:maxHeatDissipationKw",
+          "value": "120.0"
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "type": "device",
+      "bom-ref": "tray-r04-t02-hbom",
+      "name": "Frontier AI 8x Multi-Chiplet Accelerator Compute Tray",
+      "version": "Rev-3B",
+      "supplier": {
+        "name": "Frontier ODM Solutions"
+      },
+      "description": "HBOM: Compute tray hosting 8x Frontier OAM Accelerators, 2x Host Server CPUs, and 2x Hardware DPUs.",
+      "properties": [
+        {
+          "name": "dexpi:plant:equipmentId",
+          "value": "EQUIP-TRAY-R04-T02"
+        },
+        {
+          "name": "dexpi:cooling:supplyNozzle",
+          "value": "NOZZLE-QD-IN-R04-02"
+        },
+        {
+          "name": "dexpi:cooling:returnNozzle",
+          "value": "NOZZLE-QD-OUT-R04-02"
+        },
+        {
+          "name": "dexpi:cooling:designFlowRateLpm",
+          "value": "38.5"
+        },
+        {
+          "name": "dexpi:cooling:fluidType",
+          "value": "PG25-PropyleneGlycol"
+        },
+        {
+          "name": "dexpi:cooling:maxInletTempC",
+          "value": "32.0"
+        },
+        {
+          "name": "dexpi:power:busbarInfeed",
+          "value": "BUSBAR-48V-R04-TAP02"
+        },
+        {
+          "name": "dexpi:power:ratedKw",
+          "value": "10.5"
+        },
+        {
+          "name": "dexpi:zone:purdueLevel",
+          "value": "Zone-1"
+        }
+      ]
+    },
+    {
+      "type": "device",
+      "bom-ref": "caliptra-silicon-rot",
+      "name": "Caliptra 2.0 Open-Source Silicon Root of Trust",
+      "version": "2.0.1",
+      "supplier": {
+        "name": "CHIPS Alliance"
+      },
+      "description": "HBOM: Dedicated hardware cryptographic subsystem integrated into accelerator die.",
+      "properties": [
+        {
+          "name": "cdx:hardware:secureBootEnforced",
+          "value": "true"
+        },
+        {
+          "name": "cdx:hardware:fuseLockState",
+          "value": "blown-production"
+        }
+      ]
+    },
+    {
+      "type": "firmware",
+      "bom-ref": "caliptra-rom-firmware",
+      "name": "Caliptra ROM & First Mutable Code (FMC)",
+      "version": "2.0.1",
+      "description": "SBOM: Immutable ROM firmware and signed mutable code executing on the silicon root of trust.",
+      "hashes": [
+        {
+          "alg": "SHA-384",
+          "content": "8b5d3fe27e69829f0e3d23192f7a93a8d46e3d2f939e6a2b1c4e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c"
+        }
+      ]
+    },
+    {
+      "type": "firmware",
+      "bom-ref": "opensil-coreboot",
+      "name": "OpenSIL Silicon Initialization Library on coreboot",
+      "version": "1.2.0",
+      "description": "SBOM: Open-source silicon initialization replacing legacy proprietary AGESA binary blobs.",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "dice-device-identity",
+      "name": "Caliptra DICE Device Identity Certificate (UDS/CDI)",
+      "cryptoProperties": {
+        "assetType": "certificate",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "algorithmFamily": "ML-DSA",
+          "curve": "ML-DSA-87",
+          "classicalSecurityLevel": 256,
+          "nistQuantumSecurityLevel": 5
+        },
+        "description": "CBOM: Post-quantum device identity key injected during factory manufacturing HSM audit."
+      }
+    },
+    {
+      "type": "service",
+      "bom-ref": "redfish-bmc-telemetry",
+      "name": "OpenBMC Redfish Sensor & Thermal Telemetry Service",
+      "version": "2.14.0",
+      "endpoints": [
+        "https://bmc-tray-r04-t02.mgmt.local/redfish/v1/Chassis/Tray02/Thermal"
+      ],
+      "description": "SaaSBOM: Out-of-band HTTPS/Redfish endpoint publishing real-time junction temperatures and pump tachometer data."
+    },
+    {
+      "type": "data",
+      "bom-ref": "egress-throttling-policy",
+      "name": "Non-Token Egress Rate Limiting Hardware Policy",
+      "version": "Policy-1.1",
+      "description": "OBOM: Operational hardware constraint enforcing line-rate throttling on PCIe/USB sideband channels (max 64 kbps) to block covert model weight exfiltration."
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "ai-rack-envelope-r04",
+      "dependsOn": [
+        "tray-r04-t02-hbom"
+      ]
+    },
+    {
+      "ref": "tray-r04-t02-hbom",
+      "dependsOn": [
+        "caliptra-silicon-rot",
+        "opensil-coreboot",
+        "redfish-bmc-telemetry",
+        "egress-throttling-policy"
+      ]
+    },
+    {
+      "ref": "caliptra-silicon-rot",
+      "provides": [
+        "dice-device-identity"
+      ],
+      "dependsOn": [
+        "caliptra-rom-firmware"
+      ]
+    }
+  ],
+  "vulnerabilities": [
+    {
+      "bom-ref": "VEX-2026-001",
+      "id": "CVE-2026-38102",
+      "source": {
+        "name": "NVD",
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-38102"
+      },
+      "description": "Unauthenticated Modbus register override in legacy secondary manifold flow sensor.",
+      "analysis": {
+        "state": "in_triage",
+        "justification": "mitigation_implemented",
+        "response": [
+          "workaround_available"
+        ],
+        "detail": "NetFPGA hardware egress filters and Caliptra junction throttling mitigate thermal runaway within 4.2 seconds."
+      },
+      "affects": [
+        {
+          "ref": "tray-r04-t02-hbom"
+        }
+      ]
+    }
+  ]
+}

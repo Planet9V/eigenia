@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="f520af04-c484-4a3d-911f-bb7bf4825b03"></script>
+
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<style>/* cyrillic-ext */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("d97306f1-dd89-488a-9c88-a7b67d992299") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("90d197b2-05d0-4f7f-aab8-02e39444d792") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("441bdbcc-b816-4032-9f0d-c7f1399e45f8") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("17d457ca-4fc8-4f79-a191-fe718ff9b922") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("53013580-e139-44e2-936e-0b46514a8637") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("1b6254f4-3e9a-4168-93bb-864062bf9fb0") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("d97306f1-dd89-488a-9c88-a7b67d992299") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("90d197b2-05d0-4f7f-aab8-02e39444d792") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("441bdbcc-b816-4032-9f0d-c7f1399e45f8") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("17d457ca-4fc8-4f79-a191-fe718ff9b922") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("53013580-e139-44e2-936e-0b46514a8637") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("1b6254f4-3e9a-4168-93bb-864062bf9fb0") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("d97306f1-dd89-488a-9c88-a7b67d992299") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("90d197b2-05d0-4f7f-aab8-02e39444d792") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("441bdbcc-b816-4032-9f0d-c7f1399e45f8") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("17d457ca-4fc8-4f79-a191-fe718ff9b922") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("53013580-e139-44e2-936e-0b46514a8637") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url("1b6254f4-3e9a-4168-93bb-864062bf9fb0") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("92836055-39f3-4324-840f-cbd2143a9abc") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("ced66536-70be-47d3-9354-becab8652aac") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("8475d84c-39ea-41dd-8c70-185adfffef1b") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("9f1616d6-889a-4c42-ac79-db6adefe1825") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("23813ca0-ebd4-4fe0-806d-1ba634c57350") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("2666e471-eb39-4101-bd13-a36ed0aff981") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("92836055-39f3-4324-840f-cbd2143a9abc") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("ced66536-70be-47d3-9354-becab8652aac") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("8475d84c-39ea-41dd-8c70-185adfffef1b") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("9f1616d6-889a-4c42-ac79-db6adefe1825") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("23813ca0-ebd4-4fe0-806d-1ba634c57350") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("2666e471-eb39-4101-bd13-a36ed0aff981") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<style>
+  body { margin:0; background:#0a0b0d; }
+  a { color:#E05A10; text-decoration:none; }
+  a:hover { color:#F07A32; }
+</style>
+</helmet>
+
+<section style="display:flex; flex-direction:column; gap:32px; padding:56px; background:#0a0b0d; font-family:'IBM Plex Sans',system-ui,sans-serif;">
+  <div style="display:flex; align-items:baseline; gap:18px; color:#6b6f76; font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.14em; text-transform:uppercase;">
+    <span style="color:#E05A10;">Looping plates</span>
+    <span>Seamless {{ durStr }} s cycles — every parameter is periodic in loop phase</span>
+  </div>
+
+  <div style="display:flex; flex-direction:column; gap:32px;">
+
+    <div style="width:1440px; background:#101216; border:1px solid #23262c;">
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:16px 24px; border-bottom:1px solid #23262c;">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <span style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#0B0C0E; background:#E05A10; padding:3px 7px;">L1</span>
+          <span style="color:#e8e4dc; font-size:15px; font-weight:600;">Digital twin — search sweep</span>
+          <span style="color:#6b6f76; font-family:'JetBrains Mono',monospace; font-size:11.5px;">drifting field · spotlight searches five clusters: traverse, dwell, analyse, move on</span>
+        </div>
+        <span style="color:#4A4E55; font-family:'JetBrains Mono',monospace; font-size:11px;">φ {{ phaseStr }}</span>
+      </div>
+      <canvas ref="{{ twinRef }}" width="2880" height="1120" style="width:1440px; height:560px; display:block; background:#0B0C0E;"></canvas>
+    </div>
+
+    <div style="width:1440px; background:#101216; border:1px solid #23262c;">
+      <div style="display:flex; align-items:center; gap:12px; padding:16px 24px; border-bottom:1px solid #23262c;">
+        <span style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#0B0C0E; background:#E05A10; padding:3px 7px;">L2</span>
+        <span style="color:#e8e4dc; font-size:15px; font-weight:600;">Isoline field — drifting levels</span>
+        <span style="color:#6b6f76; font-family:'JetBrains Mono',monospace; font-size:11.5px;">level thresholds advance exactly one band per cycle, so the loop is invisible</span>
+      </div>
+      <canvas ref="{{ isoRef }}" width="2880" height="1120" style="width:1440px; height:560px; display:block; background:#0B0C0E;"></canvas>
+    </div>
+
+    <div style="width:1440px; background:#101216; border:1px solid #23262c;">
+      <div style="display:flex; align-items:center; gap:12px; padding:16px 24px; border-bottom:1px solid #23262c;">
+        <span style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#0B0C0E; background:#E05A10; padding:3px 7px;">L3</span>
+        <span style="color:#e8e4dc; font-size:15px; font-weight:600;">Streamlines — comets along fixed paths</span>
+        <span style="color:#6b6f76; font-family:'JetBrains Mono',monospace; font-size:11.5px;">paths precomputed once; a bright head travels each path with a per-path offset</span>
+      </div>
+      <canvas ref="{{ cometRef }}" width="2880" height="1120" style="width:1440px; height:560px; display:block; background:#0B0C0E;"></canvas>
+    </div>
+
+  </div>
+
+  <div style="color:#6b6f76; font-family:'JetBrains Mono',monospace; font-size:11.5px; line-height:1.7; max-width:1100px;">
+    Loop length, spotlight reach and motion amount are props — the Tweaks panel drives them. For a video file, screen-record one full cycle: at φ 0.00 the frame is identical to φ 1.00.
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{&quot;loopSeconds&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:12,&quot;min&quot;:6,&quot;max&quot;:24,&quot;step&quot;:1,&quot;unit&quot;:&quot;s&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Loop&quot;},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#E05A10&quot;,&quot;options&quot;:[&quot;#E05A10&quot;,&quot;#5FB8C9&quot;,&quot;#D9A441&quot;,&quot;#C9584F&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Look&quot;},&quot;spotlightReach&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:9,&quot;min&quot;:6,&quot;max&quot;:60,&quot;step&quot;:1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Look&quot;},&quot;motion&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:7,&quot;min&quot;:0,&quot;max&quot;:18,&quot;step&quot;:0.5,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Loop&quot;}}">
+class Component extends DCLogic {
+  constructor(p) {
+    super(p);
+    this.twinRef = React.createRef();
+    this.isoRef = React.createRef();
+    this.cometRef = React.createRef();
+    this.state = { phase: 0 };
+  }
+
+  get dur() { return Math.max(3, this.props.loopSeconds ?? 12); }
+  get accent() { return this.props.accent ?? '#E05A10'; }
+
+  componentDidMount() {
+    this.t0 = performance.now();
+    this.build();
+    this.loop = () => {
+      this.raf = requestAnimationFrame(this.loop);
+      try {
+        const ph = ((performance.now() - this.t0) / 1000 / this.dur) % 1;
+        this.ph = ph;
+        this.drawTwin(ph); this.drawIso(ph); this.drawComet(ph);
+        if (!this.last || Math.abs(ph - this.last) > 0.02) { this.last = ph; this.setState({ phase: ph }); }
+      } catch (e) { }
+    };
+    this.raf = requestAnimationFrame(this.loop);
+  }
+
+  componentWillUnmount() { cancelAnimationFrame(this.raf); }
+
+  rng(seed) {
+    let s = seed;
+    return () => (s = (s * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
+  }
+
+  vnoise(x, y, seed) {
+    const hh = (a, b) => { const n = Math.sin(a * 127.1 + b * 311.7 + seed * 47.3) * 43758.5453; return n - Math.floor(n); };
+    const xi = Math.floor(x), yi = Math.floor(y), xf = x - xi, yf = y - yi;
+    const u = xf * xf * (3 - 2 * xf), v = yf * yf * (3 - 2 * yf);
+    return (hh(xi, yi) * (1 - u) + hh(xi + 1, yi) * u) * (1 - v) + (hh(xi, yi + 1) * (1 - u) + hh(xi + 1, yi + 1) * u) * v;
+  }
+
+  fbm(x, y, seed) {
+    let v = 0, a = 0.5, f = 1;
+    for (let i = 0; i < 4; i++) { v += a * this.vnoise(x * f, y * f, seed + i * 11); a *= 0.5; f *= 2; }
+    return v;
+  }
+
+  build() {
+    const W = 1440, H = 560;
+    const r = this.rng(20260812);
+    this.pts = [];
+    this.centers = [];
+    for (let c = 0; c < 54; c++) {
+      const cx = 60 + r() * (W - 120), cy = 40 + r() * (H - 80);
+      this.centers.push([cx, cy]);
+      const n = 8 + (r() * 18) | 0;
+      for (let i = 0; i < n; i++) {
+        const a = r() * 6.283, rad = Math.pow(r(), 0.6) * (24 + r() * 40);
+        this.pts.push({ x: cx + Math.cos(a) * rad, y: cy + Math.sin(a) * rad * 0.8, w: r() * 6.283 });
+      }
+    }
+    this.pairs = [];
+    for (let i = 0; i < this.pts.length; i++)
+      for (let j = i + 1; j < Math.min(this.pts.length, i + 24); j++) {
+        const d = Math.hypot(this.pts[j].x - this.pts[i].x, this.pts[j].y - this.pts[i].y);
+        if (d < 56) this.pairs.push([i, j, d]);
+      }
+    const inner = this.centers.filter(c => c[0] > 150 && c[0] < W - 150 && c[1] > 100 && c[1] < H - 100);
+    const spread = [];
+    for (let minD = 380; minD >= 120 && spread.length < 5; minD -= 40) {
+      spread.length = 0;
+      for (const c of inner) {
+        if (spread.every(s => Math.hypot(s[0] - c[0], s[1] - c[1]) > minD)) spread.push(c);
+        if (spread.length === 5) break;
+      }
+    }
+    while (spread.length < 5 && inner.length) spread.push(inner[spread.length % inner.length]);
+    this.stops = spread.slice(0, 5);
+    const r2 = this.rng(7717);
+    this.paths = [];
+    for (let p = 0; p < 620; p++) {
+      let x = r2() * W, y = r2() * H;
+      const pts = [[x, y]];
+      for (let k = 0; k < 54; k++) {
+        const a = this.fbm(x / W * 2.1, y / H * 1.5, 12) * Math.PI * 3;
+        x += Math.cos(a) * 5; y += Math.sin(a) * 5;
+        if (x < -20 || x > W + 20 || y < -20 || y > H + 20) break;
+        pts.push([x, y]);
+      }
+      if (pts.length > 14) this.paths.push({ pts, off: r2() });
+    }
+  }
+
+  pane(ref, W, H) {
+    const c = ref.current; if (!c) return null;
+    const ctx = c.getContext('2d');
+    ctx.setTransform(c.width / W, 0, 0, c.height / H, 0, 0);
+    ctx.fillStyle = '#0B0C0E'; ctx.fillRect(0, 0, W, H);
+    ctx.font = '11px "JetBrains Mono", monospace';
+    return ctx;
+  }
+
+  vignette(ctx, W, H, inner) {
+    const g = ctx.createRadialGradient(W / 2, H / 2, H * inner, W / 2, H / 2, H * 1.02);
+    g.addColorStop(0, 'rgba(11,12,14,0)'); g.addColorStop(1, 'rgba(11,12,14,1)');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  }
+
+  rgba(hex, a) {
+    const n = parseInt(hex.slice(1), 16);
+    return 'rgba(' + (n >> 16) + ',' + ((n >> 8) & 255) + ',' + (n & 255) + ',' + a + ')';
+  }
+
+  drawTwin(ph) {
+    const W = 1440, H = 560;
+    const ctx = this.pane(this.twinRef, W, H); if (!ctx) return;
+    const th = ph * 6.283, acc = this.accent;
+    const S = this.stops, n = S.length;
+    const seg = ph * n, k = Math.floor(seg), u = seg - k;
+    const from = S[k % n], to = S[(k + 1) % n];
+    const travel = 0.45;
+    const moving = u < travel;
+    const e = moving ? (t => t * t * (3 - 2 * t))(u / travel) : 1;
+    const dwell = moving ? 0 : (u - travel) / (1 - travel);
+    const sx = from[0] + (to[0] - from[0]) * e, sy = from[1] + (to[1] - from[1]) * e;
+    const base = this.props.spotlightReach ?? 9;
+    const reach = base * (moving ? 0.72 : 1 + 0.1 * Math.sin(dwell * 12.566));
+    const drift = (this.props.motion ?? 7);
+    const P = this.pts.map(p => {
+      const s1 = th + p.w, s2 = th + p.x * 0.006 + p.y * 0.004;
+      const x = p.x + drift * Math.sin(s1) + drift * 0.8 * Math.sin(s2);
+      const y = p.y + drift * 0.7 * Math.cos(s1) + drift * 0.6 * Math.cos(s2 * 1.0 + 1.1);
+      return { x, y, g: Math.max(0, 1 - Math.hypot(x - sx, y - sy) / reach) };
+    });
+    const linkR = 48 + 7 * Math.sin(th);
+    ctx.lineWidth = 0.6;
+    for (const [i, j] of this.pairs) {
+      const a = P[i], b = P[j];
+      const d = Math.hypot(b.x - a.x, b.y - a.y);
+      if (d > linkR) continue;
+      const g = Math.max(a.g, b.g);
+      ctx.strokeStyle = g > 0.02 ? this.rgba(acc, 0.06 + 0.6 * g * g) : 'rgba(150,156,166,' + (0.045 + 0.08 * (1 - d / linkR)) + ')';
+      ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+    }
+    for (const p of P) {
+      ctx.fillStyle = p.g > 0.02 ? this.rgba(acc, 0.35 + 0.65 * p.g) : 'rgba(190,195,203,.42)';
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.g > 0.3 ? 1.5 + p.g : 1.1, 0, 6.3); ctx.fill();
+    }
+    const halo = ctx.createRadialGradient(sx, sy, 0, sx, sy, reach);
+    halo.addColorStop(0, this.rgba(acc, 0.1)); halo.addColorStop(1, this.rgba(acc, 0));
+    ctx.fillStyle = halo; ctx.fillRect(0, 0, W, H);
+    this.vignette(ctx, W, H, 0.34);
+    const R = reach * 0.86;
+    ctx.strokeStyle = this.rgba(acc, moving ? 0.3 : 0.6); ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.arc(sx, sy, R, 0, 6.3); ctx.stroke();
+    const br = R + 9;
+    ctx.strokeStyle = this.rgba(acc, moving ? 0.25 : 0.75); ctx.lineWidth = 1.4;
+    for (const [dx, dy] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) {
+      ctx.beginPath();
+      ctx.moveTo(sx + dx * br, sy + dy * br - dy * 9);
+      ctx.lineTo(sx + dx * br, sy + dy * br);
+      ctx.lineTo(sx + dx * br - dx * 9, sy + dy * br);
+      ctx.stroke();
+    }
+    if (moving) {
+      ctx.strokeStyle = this.rgba(acc, 0.22); ctx.setLineDash([5, 7]); ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(from[0], from[1]); ctx.lineTo(to[0], to[1]); ctx.stroke(); ctx.setLineDash([]);
+    } else {
+      for (const p of [0, 0.5]) {
+        const t = (dwell + p) % 1;
+        ctx.strokeStyle = this.rgba(acc, 0.45 * (1 - t));
+        ctx.lineWidth = 1.2;
+        ctx.beginPath(); ctx.arc(sx, sy, R * (0.2 + 1.5 * t), 0, 6.3); ctx.stroke();
+      }
+      const sweep = -1.571 + dwell * 6.283;
+      ctx.strokeStyle = this.rgba(acc, 0.5); ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(sx, sy); ctx.lineTo(sx + Math.cos(sweep) * R, sy + Math.sin(sweep) * R); ctx.stroke();
+      ctx.fillStyle = this.rgba(acc, 0.85);
+      ctx.fillText('ANALYSING  SUB-' + (100 + (k % n) * 7), sx + br + 12, sy - br + 12);
+      ctx.fillStyle = '#6B6F76';
+      ctx.fillText(Math.round(dwell * 100) + '%', sx + br + 12, sy - br + 30);
+    }
+    ctx.fillStyle = '#4A4E55';
+    ctx.fillText('fragment: 3.2 × 10⁶ nodes · sweep ' + ((k % n) + 1) + '/' + n, 22, H - 18);
+  }
+
+  drawIso(ph) {
+    const W = 1440, H = 560, step = 6;
+    const ctx = this.pane(this.isoRef, W, H); if (!ctx) return;
+    const levels = 20, th = ph * 6.283;
+    const cols = Math.ceil(W / step), rows = Math.ceil(H / step);
+    if (!this.field) {
+      this.field = new Float32Array((cols + 1) * (rows + 1));
+      for (let j = 0; j <= rows; j++) for (let i = 0; i <= cols; i++)
+        this.field[j * (cols + 1) + i] = this.fbm(i * step / W * 3.1, j * step / H * 1.9, 9);
+    }
+    const at = (i, j) => this.field[j * (cols + 1) + i];
+    const acc = this.accent;
+    for (let l = 0; l < levels; l++) {
+      const t = ((l + ph) % levels) / levels;
+      const hot = Math.abs(t - 0.55) < 0.03;
+      ctx.strokeStyle = hot ? this.rgba(acc, 0.85) : 'rgba(186,192,201,' + (0.09 + 0.15 * (1 - Math.abs(t - 0.5) * 2)) + ')';
+      ctx.lineWidth = hot ? 1.6 : 0.7;
+      ctx.beginPath();
+      for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) {
+        const a = at(i, j), b = at(i + 1, j), c = at(i + 1, j + 1), d = at(i, j + 1);
+        const x0 = i * step, y0 = j * step, sg = [];
+        if ((a < t) !== (b < t)) sg.push([x0 + step * (t - a) / (b - a), y0]);
+        if ((b < t) !== (c < t)) sg.push([x0 + step, y0 + step * (t - b) / (c - b)]);
+        if ((c < t) !== (d < t)) sg.push([x0 + step * (1 - (t - d) / (c - d)), y0 + step]);
+        if ((d < t) !== (a < t)) sg.push([x0, y0 + step * (t - a) / (d - a)]);
+        if (sg.length >= 2) { ctx.moveTo(sg[0][0], sg[0][1]); ctx.lineTo(sg[1][0], sg[1][1]); }
+      }
+      ctx.stroke();
+    }
+    const sx = W / 2 + W * 0.3 * Math.cos(th), sy = H / 2 + H * 0.24 * Math.sin(2 * th);
+    const halo = ctx.createRadialGradient(sx, sy, 0, sx, sy, 260);
+    halo.addColorStop(0, this.rgba(acc, 0.07)); halo.addColorStop(1, this.rgba(acc, 0));
+    ctx.fillStyle = halo; ctx.fillRect(0, 0, W, H);
+    this.vignette(ctx, W, H, 0.36);
+    ctx.fillStyle = '#4A4E55';
+    ctx.fillText('scalar field · ' + levels + ' isolines', 22, H - 18);
+  }
+
+  drawComet(ph) {
+    const W = 1440, H = 560;
+    const ctx = this.pane(this.cometRef, W, H); if (!ctx) return;
+    const acc = this.accent;
+    ctx.lineWidth = 0.6; ctx.strokeStyle = 'rgba(186,192,201,.11)';
+    ctx.beginPath();
+    for (const p of this.paths) {
+      p.pts.forEach((q, i) => i ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1]));
+    }
+    ctx.stroke();
+    const tail = 9;
+    for (const p of this.paths) {
+      const n = p.pts.length;
+      const head = ((ph + p.off) % 1) * (n - 1);
+      for (let k = 0; k < tail; k++) {
+        const i = Math.floor(head) - k;
+        if (i < 1) continue;
+        const a = (1 - k / tail) * 0.75;
+        ctx.strokeStyle = this.rgba(acc, a * 0.9);
+        ctx.lineWidth = 1.5 * (1 - k / tail) + 0.4;
+        ctx.beginPath(); ctx.moveTo(p.pts[i - 1][0], p.pts[i - 1][1]); ctx.lineTo(p.pts[i][0], p.pts[i][1]); ctx.stroke();
+      }
+    }
+    this.vignette(ctx, W, H, 0.3);
+    ctx.fillStyle = '#4A4E55';
+    ctx.fillText('vector field · ' + this.paths.length + ' streamlines', 22, H - 18);
+  }
+
+  renderVals() {
+    return {
+      twinRef: this.twinRef, isoRef: this.isoRef, cometRef: this.cometRef,
+      durStr: String(this.dur),
+      phaseStr: this.state.phase.toFixed(2)
+    };
+  }
+}
+</script>
+
+
+</body></html>

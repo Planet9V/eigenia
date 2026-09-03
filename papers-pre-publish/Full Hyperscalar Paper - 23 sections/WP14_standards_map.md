@@ -1,0 +1,55 @@
+# Standards Mapping: WP14
+Model: xiaomi/mimo-v2.5
+Date: 2026-06-15T08:24:43.582141
+
+# IEC 62443 Standards Mapping for WP14: The People Problem
+
+## Table 1: Asset → Zone → SL-T → IEC 62443-4-2 FR/SR Requirements
+
+| Asset/Subsystem | Reference Zone (IEC 62443-3-2) | Target Security Level (SL-T) | IEC 62443-4-2 Foundational Requirements & System Requirements Mapping | Normative Clause References |
+| :--- | :--- | :--- | :--- | :--- |
+| Building Management System (BMS) | Z2 - Facility Control Zone | SL-T3 | FR1 (Identification & Authentication Control): SR 1.13 (Unique User Identification) <br> FR2 (Use Control): SR 2.1 (Authorization Enforcement) <br> FR3 (System Integrity): SR 3.4 (Software Integrity Verification) <br> FR4 (Data Confidentiality): SR 4.1 (Data at Rest Confidentiality) <br> FR5 (Restricted Data Flow): SR 5.2 (Network Segmentation) <br> FR6 (Timely Response to Events): SR 6.1 (Audit Log Accessibility) | IEC 62443-3-2:2020, Table 6, Zone Z2 definition <br> IEC 62443-4-2:2019, SR 1.13, 2.1, 3.4, 4.1, 5.2, 6.1 |
+| Cooling Distribution Unit (CDU) Controller | Z3 - Process Control Zone | SL-T3 | FR1: SR 1.15 (Password-Based Authentication) <br> FR2: SR 2.2 (Authorization Enforcement for Least Privilege) <br> FR3: SR 3.12 (Malicious Code Protection) <br> FR5: SR 5.4 (Network Segmentation by Component) <br> FR6: SR 6.1 (Audit Log Accessibility) | IEC 62443-3-2:2020, Table 6, Zone Z3 definition <br> IEC 62443-4-2:2019, SR 1.15, 2.2, 3.12, 5.4, 6.1 |
+| Emergency Power Off (EPMS) System | Z4 - Safety & Critical Control Zone | SL-T4 | FR1: SR 1.13, SR 1.15 (Dual Authentication Mechanism) <br> FR2: SR 2.7 (Role-Based Access Control) <br> FR3: SR 3.5 (Repair/Maintenance Mode Access Control) <br> FR5: SR 5.1 (Communication Channel Protection) <br> FR6: SR 6.1 | IEC 62443-3-2:2020, Table 6, Zone Z4 definition <br> IEC 62443-4-2:2019, SR 1.13, 1.15, 2.7, 3.5, 5.1, 6.1 |
+| UPS Network Management Card (NMC) | Z2 - Facility Control Zone | SL-T3 | FR1: SR 1.11 (Password Management) <br> FR2: SR 2.8 (Security Function Parameterization) <br> FR3: SR 3.11 (Error Handling) <br> FR4: SR 4.2 (Data in Transit Confidentiality) <br> FR5: SR 5.2 | IEC 62443-3-2:2020, Table 6, Zone Z2 definition <br> IEC 62443-4-2:2019, SR 1.11, 2.8, 3.11, 4.2, 5.2 |
+| Fire Alarm Control Panel | Z4 - Safety & Critical Control Zone | SL-T4 | FR1: SR 1.13 <br> FR2: SR 2.2 <br> FR3: SR 3.3 (Input Validation) <br> FR5: SR 5.1 <br> FR6: SR 6.1 | IEC 62443-3-2:2020, Table 6, Zone Z4 definition <br> IEC 62443-4-2:2019, SR 1.13, 2.2, 3.3, 5.1, 6.1 |
+| Physical Access Control System (PACS) | Z4 - Safety & Critical Control Zone | SL-T4 | FR1: SR 1.13, SR 1.14 (Credential Management) <br> FR2: SR 2.1 <br> FR3: SR 3.5 <br> FR4: SR 4.2 <br> FR5: SR 5.1 | IEC 62443-3-2:2020, Table 6, Zone Z4 definition <br> IEC 62443-4-2:2019, SR 1.13, 1.14, 2.1, 3.5, 4.2, 5.1 |
+| OT Monitoring Platform (OT IDS/NTA) | Z5 - Security Management Zone | SL-T3 | FR1: SR 1.13 <br> FR2: SR 2.7 <br> FR3: SR 3.4 <br> FR5: SR 5.2 <br> FR6: SR 6.1, SR 6.2 (Audit Log Protection) | IEC 62443-3-2:2020, Table 6, Zone Z5 definition <br> IEC 62443-4-2:2019, SR 1.13, 2.7, 3.4, 5.2, 6.1, 6.2 |
+| Unified IT/OT SIEM & SOAR Platform | Z5 - Security Management Zone | SL-T3 | FR1: SR 1.13 <br> FR2: SR 2.1 <br> FR3: SR 3.1 (File Integrity Check) <br> FR4: SR 4.1 <br> FR6: SR 6.1 | IEC 62443-3-2:2020, Table 6, Zone Z5 definition <br> IEC 62443-4-2:2019, SR 1.13, 2.1, 3.1, 4.1, 6.1 |
+| OT Security Lead Function | N/A (Organizational) | N/A | Supports implementation of IEC 62443-2-1 (Security Management System requirements) | IEC 62443-2-1:2024, Clause 5 (Security Program), Clause 6 (Security Risk Management) |
+| OT SOC Analyst Function | N/A (Process) | N/A | Supports implementation of IEC 62443-2-1 Clause 8 (Incident Response) | IEC 62443-2-1:2024, Clause 8.2 (Incident Response Plan & Procedures) |
+
+## Table 2: Asset → Certification Status → Gap Description
+
+| Asset/Subsystem | ISASecure / Relevant Certification Status | Gap Description (Relative to SL-3/SL-4 Requirements) |
+| :--- | :--- | :--- |
+| BMS (e.g., Johnson Controls Metasys) | **Gap** - Typically uncertified or certified to EDSA (basic) level. | **Critical Gap in FR1 & FR2:** Lacks centralized identity management and role-based access control (RBAC) aligned with IEC 62443-4-2 SR 2.1/SR 2.7. Vulnerability patch management process absent, failing FR3 system integrity requirements. **Gap to SL-3:** No certified secure development lifecycle evidence per IEC 62443-4-1. |
+| CDU Controller (e.g., Schneider Electric, Vertiv) | **Gap** - Industrial PLCs may have ISASecure embedded device certification, but CDU-specific controllers often lack it. | **Critical Gap in FR3 & FR5:** Lack of secure boot and firmware integrity verification (SR 3.4). Network segmentation enforcement (SR 5.2/5.4) not implemented on device, reliant solely on external network architecture. **Gap to SL-3:** No certified cryptographic protection for Modbus TCP communications (SR 4.1). |
+| EPMS System | **Certified (Partial)** - Components may be ISASecure certified to SSDA level. | **Gap to SL-4:** While components may be certified, system-level integration often fails FR1 dual authentication (SR 1.15) and FR3 safe-state failure (SR 3.5) requirements. System security policy documentation per IEC 62443-2-1 is typically absent. |
+| UPS NMC | **Certified (Partial)** - Vendor may hold UL 2900-2-2 or similar, but not full ISASecure SSA. | **Gap to SL-3:** Lacks certified secure update mechanism (SR 3.4). Logging is insufficient for forensic analysis (SR 6.1). Authentication is typically password-only, lacking SR 1.13 strong password policy enforcement. |
+| Fire Alarm Panel | **Certified** - Often UL 864 / EN 54 compliant. | **Gap to SL-3/4 (Cyber):** Physical safety certification does not address cyber resilience requirements (FR3 malicious code protection SR 3.12, FR5 confidentiality SR 5.1). Network interface, if present, is a critical unprotected gap. |
+| PACS | **Gap** - Physical security certified (UL 294), but cybersecurity certification absent. | **Critical Gap to SL-4:** Lacks all foundational requirements for cyber-secure operation (FR1-FR7). Systems are not designed per IEC 62443-4-1 secure development lifecycle, making them vulnerable to compromise with physical security implications. |
+| OT Monitoring Platform (e.g., Nozomi, Claroty) | **Certified** - Leading platforms are ISASecure SSA certified. | **Operational Gap:** Platform is certified, but deployment and configuration may not achieve certified security level. Gap lies in organizational process (Table 1, OT SOC Analyst) for achieving certified monitoring capability per IEC 62443-2-1. |
+
+## Table 3: Asset → Non-IEC Standards Applicability
+
+| Asset/Subsystem | Applicable Non-IEC Standard | Specific Requirements & Normative References |
+| :--- | :--- | :--- |
+| **BMS** | ASHRAE Standard 90.1-2022, Section 4 (Building Systems) | Mandates energy efficiency controls; security must not impede mandated shutdown sequences for energy conservation. <br> **UL 916 (Energy Management Equipment):** Safety requirements for control relays and interfaces. |
+| **CDU Controller** | ASHRAE TC 9.9 (Thermal Guidelines for Data Processing Environments), A2 Class Environment | Defines operational environment parameters (temp, humidity). Security controls (e.g., device hardening) must ensure controller operates within ASHRAE A2 Class limits (max 24°C). <br> **ASHRAE Standard 15 (Safety Standard for Refrigeration Systems):** Safety interlock integrity requirements for CDU. |
+| **EPMS** | NFPA 110 (Standard for Emergency and Standby Power Systems), Chapter 8 | **Clause 8.4 (Maintenance & Testing):** Cybersecurity controls must not prevent required weekly/monthly load bank testing and inspections. Incident response plan must align with NFPA 110 restoration priorities. <br> **IEEE 1547 (Standard for Interconnection and Interoperability):** Grid tie-in security requirements for DER. |
+| **Fire Alarm Panel** | NFPA 72 (National Fire Alarm and Signaling Code), Chapter 12 | **Clause 12.3 (System Performance):** Security monitoring must not add latency to fire alarm transmission (max 90 sec for central station signaling). Cyber incident response must prioritize life safety per NFPA 72 Chapter 10. <br> **EN 54-2:** European standard for fire detection components; defines communication protocols. |
+| **PACS** | EN 50600-4-2 (Information technology - Data centre facilities and infrastructures - Part 4-2: Physical security) | **Clause 6 (Security Systems):** Defines requirements for access control, CCTV, and intrusion detection integration with BMS/EPMS. Mandates redundant monitoring pathways. <br> **UL 294 (Standard for Access Control System Units):** Physical robustness and fail-safe requirements. |
+| **OT Monitoring Platform** | NIST SP 800-82 Rev. 3 (Guide to OT Security) | **Section 3.1.3 (Asset Inventory & Configuration Management):** Requirements for passive discovery and inventory of OT assets, aligning with IEC 62443-3-2 SR 2.8 (Security Capability for OT Asset Inventory). <br> **MITRE ATT&CK for ICS:** Framework for validating detection of tactics, techniques, and procedures (TTPs) specific to OT. |
+
+## Architectural Recommendations for Closing Gaps
+
+1.  **Establish Formal OT Security Zone Design (IEC 62443-3-2 Clause 6):** Implement the zone/conduit model depicted in Figure 14.2 with explicit security level targets. The OT Security Lead (RACI: Responsible) must document this design, with accountability residing with the CISO (RACI: Accountable).
+
+2.  **Mandate ISASecure/IEC 62443-4-2 Certification for New Procurements:** All new OT components (BMS, CDU, EPMS, PACS) must possess valid IEC 62443-4-2 certification at the target SL-T3/SL-T4 level. The Vendor Security Evaluation process (RACI: OT Security Lead) must be a mandatory gate in the procurement lifecycle per IEC 62443-2-1 Clause 7.
+
+3.  **Implement Passive OT Network Monitoring:** As per Figure 14.2, deploy network TAPs/SPAN ports at zone boundaries (Z2/Z3, Z3/Z4) to feed an ISASecure-certified OT IDS/NTA platform. This addresses the monitoring gap for BACnet, Modbus, and DNP3 traffic, enabling compliance with IEC 62443-2-1 Clause 8.2.4 (Security Monitoring & Detection).
+
+4.  **Integrate Cyber-Physical Incident Response (IEC 62443-2-1 Clause 8):** Develop and exercise a unified playbook that bridges IT IR (data breach), Facilities emergency (fire/flood), and OT security (attacker manipulating systems) responses. The OT Security Lead (RACI: Responsible) and VP Facilities (RACI: Responsible) share ownership of this process.
+
+5.  **Close the Training & Competency Gap (IEC 62443-2-1 Clause 5.2):** Implement cross-training modules. Facility Systems Specialists (embedded from Facilities) must receive training on OT network security fundamentals. SOC Analysts must receive training on OT protocol analysis (BACnet/Modbus) and the ASHRAE A2 environmental constraints. This fulfills the personnel competency requirements of IEC 62443-2-1.
