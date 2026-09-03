@@ -39,7 +39,7 @@ This metric provides a temporal forecast of how long a specific actor (given the
 
 1.  **Actor Ranking**: Actors are ranked by their ability to "tunnel" through high barriers (High $k_B T$).
 2.  **Topological Hardening**: Seldon identifies "thin" barriers where $\Delta E$ is critically low and recommends edge deletions (e.g., "Delete cross-segment service account") to increase the barrier height.
-3.  **Monte Carlo Validation**: Our Monte Carlo walks are "biased" by these escape rates—higher $k$ values increase the transition probability of a walk moving from a source node to a target node.
+3.  **Monte Carlo Validation**: Our Monte Carlo walks are "biased" by these escape rates; higher $k$ values increase the transition probability of a walk moving from a source node to a target node.
 
 ## Research & Citations
 

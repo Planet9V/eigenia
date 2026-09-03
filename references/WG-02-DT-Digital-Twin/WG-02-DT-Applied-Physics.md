@@ -1,4 +1,4 @@
-# Physics Models — 6 Seldon Indicators
+# Physics Models; 6 Seldon Indicators
 
 Lab Sponsor Resident  j.mckenney
 
@@ -10,7 +10,7 @@ The Cyber Digital Twin uses **6 physics-inspired indicators** derived from the S
 
 **What it measures:** How fast a vulnerability "infects" connected systems across the OT/IT network. R0 > 15 triggers a "TIPPING" status.
 
-**Implementation:** Data display only — no SIR computation in the application layer. The `sir_r0` and `sir_beta` columns in `seldon.psychohistory_state` are populated by an external pipeline. The application reads them via SQL aggregation:
+**Implementation:** Data display only; no SIR computation in the application layer. The `sir_r0` and `sir_beta` columns in `seldon.psychohistory_state` are populated by an external pipeline. The application reads them via SQL aggregation:
 
 ```sql
 -- From demo.ts (Seldon Score endpoint)
@@ -26,13 +26,13 @@ WHERE computed_at > NOW() - INTERVAL '90 days'
 
 
 | Indicator | Where Computed | Node.js Computation | Data Source |
-|-----------|---------------|---------------------|-------------|
+| :--- | :--- | :--- | :--- |
 | SIR R0 | External pipeline → PG | **Data display only** | `psychohistory_state.sir_r0` |
 | Kramers | External pipeline → PG | **Data display only** | `psychohistory_state.kramers_mttc_epochs`, `kramers_barrier` |
 | EPSS Velocity | **Node.js (mc-weights.ts)** | Boost formula applied to MC walks | `seldon.epss_trajectory` (555K rows) |
 | Granovetter | External pipeline → PG | **Data display only** | `psychohistory_state.granovetter_tau` |
 | Ising | External pipeline → PG | **Data display only** | `psychohistory_state.ising_spin`, `ising_h_field` |
-| Spectral | **Node.js (mc-engine.ts)** — boost only | Eigenvector boost for MC walks | `seldon.spectral_analysis` |
+| Spectral | **Node.js (mc-engine.ts)**; boost only | Eigenvector boost for MC walks | `seldon.spectral_analysis` |
 
 
 ## 1. SIR Compartmental Model (Epidemic Spreading)
@@ -41,7 +41,7 @@ WHERE computed_at > NOW() - INTERVAL '90 days'
 
 **What it measures:** How fast a vulnerability "infects" connected systems across the OT/IT network. R0 > 15 triggers a "TIPPING" status.
 
-**Implementation:** Data display only — no SIR computation in the application layer. The `sir_r0` and `sir_beta` columns in `seldon.psychohistory_state` are populated by an external pipeline. The application reads them via SQL aggregation:
+**Implementation:** Data display only; no SIR computation in the application layer. The `sir_r0` and `sir_beta` columns in `seldon.psychohistory_state` are populated by an external pipeline. The application reads them via SQL aggregation:
 
 ```sql
 -- From demo.ts (Seldon Score endpoint)
@@ -57,11 +57,11 @@ WHERE computed_at > NOW() - INTERVAL '90 days'
 
 ## 2. Kramers Barrier Escape (Time-to-Exploit)
 
-**Physics analogy:** Kramers escape rate from a potential well — the probability of a "particle" (attacker) overcoming an energy barrier (defensive control).
+**Physics analogy:** Kramers escape rate from a potential well; the probability of a "particle" (attacker) overcoming an energy barrier (defensive control).
 
 **What it measures:** Expected time for a known vulnerability to be exploited, given current defenses.
 
-**Implementation:** Data display only — no Kramers computation in the application layer. The `kramers_mttc_epochs` (mean time to compromise in epochs) and `kramers_barrier` columns are populated by an external pipeline. The application reads them via:
+**Implementation:** Data display only; no Kramers computation in the application layer. The `kramers_mttc_epochs` (mean time to compromise in epochs) and `kramers_barrier` columns are populated by an external pipeline. The application reads them via:
 
 ```sql
 -- From demo.ts (Seldon Score endpoint)
@@ -79,13 +79,13 @@ The Kramers barrier is also used in the ATQ scoring pipeline via `seldon.kramers
 
 ## 3. EPSS Velocity (Exploitation Prediction)
 
-**Physics analogy:** Velocity of a moving object — rate of change in exploitation probability.
+**Physics analogy:** Velocity of a moving object; rate of change in exploitation probability.
 
 **What it measures:** How rapidly CVEs are approaching active exploitation, based on `delta_30d` from `seldon.epss_trajectory`.
 
 **Implementation: Computed in Node.js (mc-weights.ts).** This is the only indicator with real-time application-layer computation. Two code paths use it:
 
-**Path 1 — MC Edge Weight Modifier (mc-weights.ts `computeEdgeWeight()`):**
+**Path 1; MC Edge Weight Modifier (mc-weights.ts `computeEdgeWeight()`):**
 
 ```typescript
 // OPT-5: EPSS trending up = more likely to be exploited soon
@@ -94,7 +94,7 @@ if (targetProps.epss_delta_30d != null && targetProps.epss_delta_30d > 0.02) {
 }
 ```
 
-**Path 2 — MC Walk Boost Map (mc-weights.ts `getEpssVelocityMap()`):**
+**Path 2; MC Walk Boost Map (mc-weights.ts `getEpssVelocityMap()`):**
 
 ```typescript
 // Fetches top 100 CVEs with delta_30d > 0.05 from seldon.epss_trajectory
@@ -113,11 +113,11 @@ The boost map is cached for 10 minutes and applied during every Monte Carlo rand
 
 ## 4. Granovetter Cascade Threshold
 
-**Physics analogy:** Granovetter's threshold model of collective behavior — how many "neighbors" need to adopt a behavior before cascade occurs.
+**Physics analogy:** Granovetter's threshold model of collective behavior; how many "neighbors" need to adopt a behavior before cascade occurs.
 
-**What it measures:** The cascade probability — whether a breach at one facility will cascade to connected facilities.
+**What it measures:** The cascade probability; whether a breach at one facility will cascade to connected facilities.
 
-**Implementation:** Data display only — no Granovetter computation in the application layer. The `granovetter_tau` column in `seldon.psychohistory_state` is populated by an external pipeline. The application reads it directly:
+**Implementation:** Data display only; no Granovetter computation in the application layer. The `granovetter_tau` column in `seldon.psychohistory_state` is populated by an external pipeline. The application reads it directly:
 
 ```sql
 -- From demo.ts (L6 globe layer)
@@ -134,11 +134,11 @@ The Granovetter value also comes from the `seldon_score_v2` table via the `casca
 
 ## 5. Ising Model (System Criticality)
 
-**Physics analogy:** Ising model of ferromagnetism — binary spin states (secure/compromised) with nearest-neighbor coupling.
+**Physics analogy:** Ising model of ferromagnetism; binary spin states (secure/compromised) with nearest-neighbor coupling.
 
-**What it measures:** The "phase transition" proximity — how close the system is to a critical point where correlated failure becomes likely.
+**What it measures:** The "phase transition" proximity; how close the system is to a critical point where correlated failure becomes likely.
 
-**Implementation:** Data display only — no Ising computation in the application layer. The `ising_spin` (binary 0/1) and `ising_h_field` columns are populated by an external pipeline. The application reads them via:
+**Implementation:** Data display only; no Ising computation in the application layer. The `ising_spin` (binary 0/1) and `ising_h_field` columns are populated by an external pipeline. The application reads them via:
 
 ```sql
 -- From demo.ts (Seldon Score endpoint)
@@ -156,14 +156,14 @@ WHERE computed_at > NOW() - INTERVAL '90 days'
 
 ## 6. Spectral Gap (Network Resilience)
 
-**Physics analogy:** Spectral gap of the graph Laplacian — the difference between the first two eigenvalues of the adjacency matrix.
+**Physics analogy:** Spectral gap of the graph Laplacian; the difference between the first two eigenvalues of the adjacency matrix.
 
-**What it measures:** Network connectivity resilience — a larger spectral gap means the network is more robust to node removal.
+**What it measures:** Network connectivity resilience; a larger spectral gap means the network is more robust to node removal.
 
-**Implementation: Partially computed in Node.js (mc-engine.ts) — boost map only.** The eigenvector centrality computation itself (populating `seldon.spectral_analysis`) is performed by an external pipeline. The application reads the results and applies a boost to Monte Carlo walk edge weights:
+**Implementation: Partially computed in Node.js (mc-engine.ts); boost map only.** The eigenvector centrality computation itself (populating `seldon.spectral_analysis`) is performed by an external pipeline. The application reads the results and applies a boost to Monte Carlo walk edge weights:
 
 ```typescript
-// mc-engine.ts — getSpectralBoostMap()
+// mc-engine.ts; getSpectralBoostMap()
 // Top 50 nodes with eigen_rank < 0.1 (top 10% eigenvector centrality)
 // Linear mapping: eigen_rank 0 => 1.8x boost, eigen_rank 0.1 => 1.1x boost
 const boost = 1.8 - (n.eigen_rank * 7.0);
@@ -180,7 +180,7 @@ The spectral boost is cached for 15 minutes and applied during MC random walk st
 ## API Endpoints (Actual)
 
 | Endpoint | Method | Description |
-|----------|--------|-------------|
+| :--- | :--- | :--- |
 | `/api/seldon/score` | GET | Seldon Score with all 6 physics gauges aggregated from `psychohistory_state` (demo.ts) |
 | `/api/mc-real/reasoning/psychohistory-state` | GET | Raw `psychohistory_state` rows, optional `?customer=` filter, top 50 by attack probability (mc-reasoning.ts) |
 | `/api/demo/globe-features?layer=l6` | GET | Physics per customer, geo-joined with `customer_facilities` for globe overlay (demo.ts) |
@@ -192,7 +192,7 @@ The spectral boost is cached for 15 minutes and applied during MC random walk st
 This is the central table for all 6 physics indicators. Key columns:
 
 | Column | Type | Indicator |
-|--------|------|-----------|
+| :--- | :--- | :--- |
 | `sir_r0` | numeric | SIR R0 |
 | `sir_beta` | numeric | SIR transmission rate |
 | `kramers_mttc_epochs` | numeric | Kramers mean-time-to-compromise |

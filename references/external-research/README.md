@@ -2,7 +2,7 @@
 
 Sources found via `valyu` (or other external search) to back a claim in a
 working-group paper, when the working group's own material in `references/`
-didn't already cover it — not the working group's own analysis.
+didn't already cover it; not the working group's own analysis.
 
 ## Naming
 

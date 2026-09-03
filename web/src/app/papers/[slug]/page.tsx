@@ -195,7 +195,7 @@ export default async function PaperDetailPage({ params }: PageProps) {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           <div className="p-8 sm:p-12 rounded-3xl bg-surface border border-hairline shadow-2xl space-y-8">
             {/* Markdown & KaTeX Typeset Document Renderer */}
-            <MarkdownViewer content={paper.content} />
+            <MarkdownViewer content={paper.content} suppressLeadingTitle={true} />
 
             {/* Document Verification Footer */}
             <div className="pt-8 border-t border-hairline flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-mono text-muted">

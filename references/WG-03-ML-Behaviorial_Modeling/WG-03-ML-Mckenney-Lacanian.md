@@ -7,24 +7,24 @@ A systematic application of Lacanian psychoanalytic theory to the behavioral cla
 
 ## Theoretical Foundation
 
-The Cyber Digital Twin project utilizes Jacques Lacan's theory of the **Four Discourses** (Seminar XVII) to categorize the "social bond" and underlying motivations of threat actors. We move beyond simple "motivation" (Financial, Geopolitical) to analyze the **discursive structure** of the attack—how the actor relates to the "Other" (the victim/the state/the technology).
+The Cyber Digital Twin project uses Jacques Lacan's theory of the **Four Discourses** (Seminar XVII) to categorize the "social bond" and underlying motivations of threat actors. We move beyond simple "motivation" (Financial, Geopolitical) to analyze the **discursive structure** of the attack; how the actor relates to the "Other" (the victim/the state/the technology).
 
-## The McKenney-Lacan Calculus — The Mathematical Core of L4
+## The McKenney-Lacan Calculus; The Mathematical Core of L4
 
 ## Why Lacan?
 
-Jacques Lacan's contribution to psychology was topological: he argued that the human subject is organized not as a simple mind, but as a structure across three registers — the **Real** (what is actually threatening but cannot be fully symbolized), the **Imaginary** (the mental model, the story the mind tells itself), and the **Symbolic** (the social language, rules, and roles that organize behavior).​
+Jacques Lacan's contribution to psychology was topological: he argued that the human subject is organized not as a simple mind, but as a structure across three registers; the **Real** (what is actually threatening but cannot be fully symbolized), the **Imaginary** (the mental model, the story the mind tells itself), and the **Symbolic** (the social language, rules, and roles that organize behavior).​
 
 In security terms, this maps with brutal precision:
 
-- The **Real** threat is the actual attack surface — the vulnerabilities in L2, the active adversary in L3, the organizational weakness in L4 — most of which the defender has _never fully perceived_.
+- The **Real** threat is the actual attack surface; the vulnerabilities in L2, the active adversary in L3, the organizational weakness in L4; most of which the defender has _never fully perceived_.
     
-- The **Imaginary** is the CISO's threat model — the PowerPoint, the risk register, the compliance score — which is always a partial, idealized, and self-serving representation of the Real.
+- The **Imaginary** is the CISO's threat model; the PowerPoint, the risk register, the compliance score; which is always a partial, idealized, and self-serving representation of the Real.
     
-- The **Symbolic** is the vendor market, the compliance frameworks, the industry "best practices" — the shared social language that determines what counts as "doing security right," independent of whether it actually reduces risk.
+- The **Symbolic** is the vendor market, the compliance frameworks, the industry "best practices"; the shared social language that determines what counts as "doing security right," independent of whether it actually reduces risk.
     
 
-The **McKenney-Lacan topology** in L4 formally models the _gap_ between the Real threat and the Imaginary fear — quantifying the systematic distortions that cause security teams to over-invest in visible, narratively satisfying controls while remaining blind to real, mathematically significant attack paths. This is Taleb's "right side of the table" rendered as a measurable psychological variable.​
+The **McKenney-Lacan topology** in L4 formally models the _gap_ between the Real threat and the Imaginary fear; quantifying the systematic distortions that cause security teams to over-invest in visible, narratively satisfying controls while remaining blind to real, mathematically significant attack paths. This is Taleb's "right side of the table" rendered as a measurable psychological variable.​
 
 ---
 
@@ -36,11 +36,11 @@ $$P_i = [\text{DISC}] \otimes [\text{OCEAN}] = \begin{bmatrix} D & I \\ S & C \e
 
 This is the **Kronecker product** of two psychological measurement frameworks:
 
-- **DISC** (Dominance, Influence, Steadiness, Conscientiousness) — a behavioral assessment that captures _how_ a person acts under normal and pressure conditions
+- **DISC** (Dominance, Influence, Steadiness, Conscientiousness); a behavioral assessment that captures _how_ a person acts under normal and pressure conditions
     
-- **OCEAN / Big Five** (Openness, Conscientiousness, Extraversion, Agreeableness, Neuroticism) — the dominant structural model of personality in psychometric science
+- **OCEAN / Big Five** (Openness, Conscientiousness, Extraversion, Agreeableness, Neuroticism); the dominant structural model of personality in psychometric science
     
-The tensor product $\otimes$ does not just combine these — it creates a _new mathematical space_ in which every combination of DISC behavioral tendency and Big Five trait becomes a distinct dimension. The resulting tensor $P_i$ for individual $i$ is a 20-dimensional object living in a topological space.
+The tensor product $\otimes$ does not just combine these; it creates a _new mathematical space_ in which every combination of DISC behavioral tendency and Big Five trait becomes a distinct dimension. The resulting tensor $P_i$ for individual $i$ is a 20-dimensional object living in a topological space.
 
 Why does this matter? Because it allows human behavior to be treated with the same mathematical rigor as physical system behavior. You can compute:
 
@@ -54,7 +54,7 @@ Why does this matter? Because it allows human behavior to be treated with the sa
 ## The Four Discourses in Threat Modeling
 
 | Discourse | Agent | Truth | Goal | Threat Actor Typology |
-|-----------|-------|-------|------|-----------------------|
+| :--- | :--- | :--- | :--- | :--- |
 | **Master** | Command ($S_1$) | Power | Obedience / Recognition | **State Warfare (Sandworm, Lazarus)** |
 | **University** | Knowledge ($S_2$) | Technicality | Universality / Extraction | **Espionage (Volt Typhoon, APT33)** |
 | **Hysteric** | Symptom ($\cancel{S}$) | Protest | Questioning the Other | **Hacktivism / High-Ego (Scattered Spider)** |

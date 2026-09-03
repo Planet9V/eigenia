@@ -161,3 +161,49 @@ type correctly every time.
 - Memory entries carry `created_at`/`updated_at` — an old entry is a
   decision as of that date, not necessarily still true. Skim it, don't
   cite it blindly, especially for anything that could have changed since.
+
+<!-- BEGIN academic-publication-formatting-rules (managed) -->
+## Academic Publication Formatting & Front-Matter Invariants
+
+### 1. Zero-Redundancy Front Matter Rule
+- The Next.js web application renders an authoritative Hero Card containing the Working Group, Document ID, Title, Subtitle, Author, and Word Count.
+- Markdown documents in `references/` MUST NOT duplicate the title as a leading `# H1` or the subtitle as a leading `## H2`.
+- Loose administrative lines (e.g., `Lab Sponsor Resident j.mckenney`, `Working Group: WG-XX-...`) are strictly forbidden in Markdown bodies.
+- Documents must transition cleanly from the UI header into numbered technical sections:
+  ```markdown
+  ## 1. Executive Summary & Scope
+  ```
+- If standalone normative metadata is required for offline export, it must be formatted as a compact Markdown table, never as loose unformatted text:
+  ```markdown
+  | Document ID | Working Group | Normative Standards | Classification |
+  | :--- | :--- | :--- | :--- |
+  | EIGENIA-WG05-CAD-01 | WG-05-CAD | ISO 15926 / CycloneDX 1.6 | Open Technical Specification |
+  ```
+
+### 2. Heading and Body Decoupling Rule
+- Headings (`#`, `##`, `###`, `####`) MUST be concise titles (strictly under 90 characters).
+- NEVER place narrative sentences or multi-sentence body paragraphs on the same line as a heading.
+- Any text following a colon in a section header must be placed on the next line as a standard body paragraph (`<p>`):
+  * **INCORRECT:**
+    ```markdown
+    ### 1. Protection System Misoperation: This is perhaps the most insidious aspect...
+    ```
+  * **CORRECT:**
+    ```markdown
+    ### 1. Protection System Misoperation (The Domino Effect Trigger)
+
+    This is perhaps the most insidious aspect...
+    ```
+
+### 3. IEEE/ISO Bracket Citation Standard
+- Footnote references must NEVER be concatenated onto trailing punctuation or words (`decreases.5`, `conditions.46`, `collapse.21`).
+- All citations must be formatted using clean brackets:
+  * **INCORRECT:** `system inertia decreases.5 This isn't a minor adjustment...`
+  * **CORRECT:** `system inertia decreases [5]. This is not a minor adjustment...`
+  * **INCORRECT:** `fault conditions.46`
+  * **CORRECT:** `fault conditions [46].`
+
+### 4. Continuous Style Invariants
+- **Zero em dashes:** Strictly replace all `—` and `--` with semicolons, colons, commas, or parentheses.
+- **Zero prohibited AI filler words:** No `leverage`, `utilize`, `pivotal`, `testament to`, `foster`, `streamline`, `at its core`, `landscape`, `beacon`, `game-changing`, `harness`, `furthermore`, `robust`.
+<!-- END academic-publication-formatting-rules (managed) -->

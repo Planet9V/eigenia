@@ -27,7 +27,7 @@ While many providers focus heavily on traditional IT networks and external vulne
 
 - **What they do:** DeNexus (via its DeRISK platform) is Eigenia's closest direct competitor. It focuses specifically on OT cyber risk quantification for insurers by collecting non-intrusive data from OT networks to calculate ALE.
 - **Their Ecosystem/Partners:** A small but growing presence, targeting energy and critical infrastructure operators.
-- **Comparison to Eigenia:** While both focus on OT risk quantification, Eigenia holds a significant advantage through its **3.2 million node knowledge graph**, predictive 90-day KRONOS forecasts, and **Adversarial Threat Quotient (ATQ)** psychometric profiling. Furthermore, Eigenia features an automated capability to separate state-backed vs. non-state expected losses, directly answering compliance requirements for **Lloyd's Y5381 War Exclusion clause**—something competitors currently lack.
+- **Comparison to Eigenia:** While both focus on OT risk quantification, Eigenia holds a significant advantage through its **3.2 million node knowledge graph**, predictive 90-day KRONOS forecasts, and **Adversarial Threat Quotient (ATQ)** psychometric profiling. In addition, Eigenia features an automated capability to separate state-backed vs. non-state expected losses, directly answering compliance requirements for **Lloyd's Y5381 War Exclusion clause**; something competitors currently lack.
 
 ## 4. Tech-Enabled MGAs and Broker Platforms (Coalition, CFC, Aon CyQu)
 
@@ -39,7 +39,7 @@ While many providers focus heavily on traditional IT networks and external vulne
 
 The insurtech market is increasingly crowded with specialized AI startups that solve specific slices of the underwriting and risk management puzzle:
 
-- **Pricing & Underwriting AI:** **Akur8** builds transparent, regulatory-compliant pricing models utilizing machine learning, partnering with AXA and Munich Re. **Gradient AI** uses a vast data lake for underwriting precision in Property & Casualty, partnering with MassMutual and Socotra. **Sixfold** provides an AI assistant exclusively for underwriters to speed up risk triaging, partnering with Zurich and CyberCube.
+- **Pricing & Underwriting AI:** **Akur8** builds transparent, regulatory-compliant pricing models using machine learning, partnering with AXA and Munich Re. **Gradient AI** uses a vast data lake for underwriting precision in Property & Casualty, partnering with MassMutual and Socotra. **Sixfold** provides an AI assistant exclusively for underwriters to speed up risk triaging, partnering with Zurich and CyberCube.
 - **Supply Chain Risk:** **Altana** delivers granular insights into global supply chain vulnerabilities, partnering with Tokio Marine to underwrite trade disruption risks.
 - **Cloud Security:** **Sweet Security** cuts Mean-Time-to-Resolve (MTTR) by mapping runtime activities in the cloud, backed by Munich Re Ventures.
 

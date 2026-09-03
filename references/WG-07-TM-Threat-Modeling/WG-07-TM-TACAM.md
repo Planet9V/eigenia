@@ -7,7 +7,7 @@ TACAM answers all three.
 
 ## The Problem With Threat Intelligence Today
 
-Every major cybersecurity vendor sells "threat intelligence." What they actually sell is a feed — a river of CVEs, IOCs, and STIX bundles flowing past your SOC at 10,000 alerts per day. Your analysts drown in data that tells them *everything is dangerous* and *nothing is prioritised.*
+Every major cybersecurity vendor sells "threat intelligence." What they actually sell is a feed; a river of CVEs, IOCs, and STIX bundles flowing past your SOC at 10,000 alerts per day. Your analysts drown in data that tells them *everything is dangerous* and *nothing is prioritised.*
 
 The root cause is architectural. Traditional threat intelligence is **flat**. It maps actors to techniques and techniques to vulnerabilities in simple two-dimensional tables. APT28 uses T1566 (Phishing). T1566 exploits CVE-2023-XXXX. Your firewall has rule X.
 
@@ -17,19 +17,19 @@ TACAM is different. TACAM is not a list. It is a **seven-dimensional fingerprint
 
 ## What TACAM Actually Is
 
-**TACAM** — Threat Actor Capability & Motivation Matrix — is a proprietary analytical framework that profiles every known threat actor across seven independent dimensions simultaneously. Each dimension is stored as a cluster table in the Eigenia knowledge graph, producing a combined matrix of **77,279 data points** covering 389 threat actor groups.
+**TACAM**; Threat Actor Capability & Motivation Matrix; is a proprietary analytical framework that profiles every known threat actor across seven independent dimensions simultaneously. Each dimension is stored as a cluster table in the Eigenia knowledge graph, producing a combined matrix of **77,279 data points** covering 389 threat actor groups.
 
 Think of it as a spectral decomposition of threat actor behaviour. Just as a prism separates white light into its constituent wavelengths, TACAM separates a threat actor's observable activity into seven independent analytical spectra:
 
 | Dimension                                  | What It Reveals                                                                                                         | Scale                          |
-| ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
-| **TTP** (Tactics, Techniques & Procedures) | *How* they attack — which of the 27 MITRE ATT&CK enterprise tactics they prefer                                         | 1,579 actor-tactic clusters    |
-| **Sector Targeting**                       | *Whom* they attack — which of the 17 CISA critical infrastructure sectors they preferentially target                    | 2,278 actor-sector clusters    |
-| **Geography**                              | *Where* they operate — origin regions and target geographies                                                            | 1,074 actor-geography clusters |
-| **Protocol**                               | *What they speak* — which OT/ICS protocols they can exploit (Modbus, OPC-UA, DNP3, PROFINET, BACnet, MQTT, EtherNet/IP) | 627 actor-protocol clusters    |
-| **Temporal**                               | *When* they strike — campaign recency, operational tempo, dormancy windows, seasonal patterns                           | 173 actor-temporal profiles    |
-| **CPE** (Products)                         | *What they break* — which specific vendor products their exploits target, by Common Platform Enumeration                | 62,965 actor-product clusters  |
-| **CWE** (Weaknesses)                       | *How they break it* — which weakness families their exploits target, by Common Weakness Enumeration                     | 8,583 actor-weakness clusters  |
+| :--- | :--- | :--- |
+| **TTP** (Tactics, Techniques & Procedures) | *How* they attack; which of the 27 MITRE ATT&CK enterprise tactics they prefer                                         | 1,579 actor-tactic clusters    |
+| **Sector Targeting**                       | *Whom* they attack; which of the 17 CISA critical infrastructure sectors they preferentially target                    | 2,278 actor-sector clusters    |
+| **Geography**                              | *Where* they operate; origin regions and target geographies                                                            | 1,074 actor-geography clusters |
+| **Protocol**                               | *What they speak*; which OT/ICS protocols they can exploit (Modbus, OPC-UA, DNP3, PROFINET, BACnet, MQTT, EtherNet/IP) | 627 actor-protocol clusters    |
+| **Temporal**                               | *When* they strike; campaign recency, operational tempo, dormancy windows, seasonal patterns                           | 173 actor-temporal profiles    |
+| **CPE** (Products)                         | *What they break*; which specific vendor products their exploits target, by Common Platform Enumeration                | 62,965 actor-product clusters  |
+| **CWE** (Weaknesses)                       | *How they break it*; which weakness families their exploits target, by Common Weakness Enumeration                     | 8,583 actor-weakness clusters  |
 
 
 ## The Power of Cross-Dimensional Queries
@@ -55,7 +55,7 @@ A CISO at a European energy utility asks: *"I run Siemens SIMATIC and Schneider 
 TACAM returns:
 
 | Actor | ATQ | Sector Affinity | CPE Match | Kill Chain Coverage |
-|-------|-----|-----------------|-----------|-------------------|
+| :--- | :--- | :--- | :--- | :--- |
 | Volt Typhoon | 82.9 | Energy: 0.94 | SIMATIC S7: ✅ | 12/14 tactics |
 | Dragonfly | 79.7 | Energy: 0.97 | Modicon M340: ✅ | 9/14 tactics |
 | Sandworm | 77.2 | Energy: 0.91 | Both: ✅ | 14/14 tactics |
@@ -74,9 +74,9 @@ TACAM computes:
 > **ABB Ability Vendor Blast Radius**: 7 threat actors with ATQ > 60 can exploit ABB Ability products.
 > 
 > - Aggregate actor ATQ: 73.4 (weighted average)
-> - Most dangerous: Lazarus Group (ATQ 83.2) — 3 known CVEs in ABB Ability Symphony Plus
+> - Most dangerous: Lazarus Group (ATQ 83.2); 3 known CVEs in ABB Ability Symphony Plus
 > - CWE concentration: CWE-787 (Out-of-bounds Write), CWE-22 (Path Traversal)
-> - Kill chain gap: No actor has full 14-tactic coverage for ABB — cooperation required for complete compromise
+> - Kill chain gap: No actor has full 14-tactic coverage for ABB; cooperation required for complete compromise
 > 
 > **Risk increment**: Adding ABB Ability increases estimated fleet ALE by $2.1M (+4.4%)
 

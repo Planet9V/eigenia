@@ -1,4 +1,4 @@
-# CDT Mathematical Models — Complete Formula Reference
+# CDT Mathematical Models; Complete Formula Reference
 
  Lab Sponsor Resident,  j.mckenney
 
@@ -9,7 +9,7 @@
 The engines and their  roles:
 
 | Engine | Source File | Purpose |
-|--------|-----------|---------|
+| :--- | :--- | :--- |
 | Monte Carlo Walk | `mc-engine.ts` | Boltzmann-weighted random walks on attack graphs |
 | Edge Weight Composition | `mc-weights.ts` | 14-dimension edge weight calculation |
 | Hawkes Cascade | `mc-hawkes.ts` | Self-exciting point process for correlated losses |
@@ -205,7 +205,7 @@ $$w = w_{base}(relType) \times M_{EPSS} \times M_{CVSS} \times M_{KEV} \times M_
 Clamped to `[0.01, 1.0]`.
 
 | # | Dimension | Formula | Range |
-|---|-----------|---------|-------|
+| :--- | :--- | :--- | :--- |
 | 1 | Base weight | `BASE_WEIGHTS[relType]` (96 predicates mapped) | 0.10 -- 0.90 |
 | 2 | EPSS score | `0.3 + 0.7 * epss_score` | 0.3 -- 1.0 |
 | 3 | CVSS v3 | `0.5 + 0.5 * (cvss / 10)` | 0.5 -- 1.0 |
@@ -487,7 +487,7 @@ Default: 50,000 simulations. 17 sector-specific frequency calibrations.
 $$\lambda_{adj} = \lambda_{sector} \times (1 - SL\text{-}T \times 0.15) \times (1 - \text{posture} \times 0.6)$$
 
 | SL-T | Factor | Posture | Factor |
-|------|--------|---------|--------|
+| :--- | :--- | :--- | :--- |
 | 1 | 0.85 | 0.0 | 1.00 |
 | 2 | 0.70 | 0.5 | 0.70 |
 | 3 | 0.55 | 1.0 | 0.40 |
@@ -580,7 +580,7 @@ Fraction of ultimate loss reported at each development year, by sector.
 **File:** `ale-engine.ts:283-299`
 
 | Sector | Year 1 | Year 2 | Year 3 | Ultimate |
-|--------|--------|--------|--------|----------|
+| :--- | :--- | :--- | :--- | :--- |
 | Energy | 0.60 | 0.85 | 0.95 | 1.00 |
 | Healthcare | 0.45 | 0.75 | 0.90 | 1.00 |
 | Financial Services | 0.50 | 0.80 | 0.92 | 1.00 |
@@ -728,7 +728,7 @@ $$C_8 = \max\left(0, \ 1 - \frac{\bar{h} \times f_{adj}}{h_{max}}\right)$$
 Where `h` = barrier height, `h_max` = global max, and `f_adj` is a discourse-adjusted factor:
 
 | Discourse | Adjustment |
-|-----------|-----------|
+| :--- | :--- |
 | Hysteric | `1.0 - 0.15 * (1 - beta)` |
 | University | `1.0 + 0.10 * beta` |
 | Analyst | `0.95` |
@@ -773,7 +773,7 @@ See F11 above. EPSS velocity data is sourced from `seldon.epss_trajectory` (555,
 ## 11. Formula Index
 
 | # | Formula | File | Line | Layer |
-|---|---------|------|------|-------|
+| :--- | :--- | :--- | :--- | :--- |
 | F1 | Mulberry32 PRNG | `mc-engine.ts` | 27 | -- |
 | F2 | Boltzmann Distribution | `mc-engine.ts` | 320 | L1-L2 |
 | F3 | Pareto Sampling | `mc-engine.ts` | 348 | L5 |

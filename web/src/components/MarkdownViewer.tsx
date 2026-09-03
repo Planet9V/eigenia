@@ -6,20 +6,64 @@ import "katex/dist/katex.min.css";
 
 interface MarkdownViewerProps {
   content: string;
+  suppressLeadingTitle?: boolean;
 }
 
-const sanitizeMarkdownContent = (raw: string): string => {
+const splitRunInHeading = (rawHeading: string): { title: string; bodyParagraph?: string } => {
+  const trimmed = rawHeading.trim();
+  // Match "Title: Long narrative paragraph..." e.g. "1. Protection System Misoperation: This is perhaps..."
+  const colonMatch = trimmed.match(/^([^:]+):\s+(.+)$/);
+  if (colonMatch && colonMatch[2].length > 40) {
+    return { title: colonMatch[1].trim(), bodyParagraph: colonMatch[2].trim() };
+  }
+  // Match "1. The past is one sample path. Your three years without a breach..."
+  const periodMatch = trimmed.match(/^(\d+\.?\s+[^.]+?\.)\s+([A-Z].{40,})$/);
+  if (periodMatch) {
+    return { title: periodMatch[1].trim(), bodyParagraph: periodMatch[2].trim() };
+  }
+  return { title: trimmed };
+};
+
+const sanitizeMarkdownContent = (raw: string, suppressLeadingTitle?: boolean): string => {
   if (!raw) return "";
   let c = raw;
   // Strip YAML frontmatter strictly
   c = c.replace(/^---[\s\S]*?---\r?\n?/g, "");
   // Convert Obsidian [[target|label]] to label, or [[target]] to target
   c = c.replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g, (_, p1, p2) => p2 || p1.replace(/_/g, " "));
+
+  if (suppressLeadingTitle) {
+    const lines = c.split(/\r?\n/);
+    let startIdx = 0;
+    while (startIdx < lines.length && !lines[startIdx].trim()) {
+      startIdx++;
+    }
+    // If first non-empty line is an H1, suppress it to prevent visual duplication
+    if (startIdx < lines.length && lines[startIdx].trim().startsWith("# ")) {
+      startIdx++;
+      while (startIdx < lines.length && !lines[startIdx].trim()) {
+        startIdx++;
+      }
+      // Also suppress horizontal rules or loose metadata immediately under title
+      while (
+        startIdx < lines.length &&
+        (lines[startIdx].trim() === "---" ||
+         lines[startIdx].trim() === "***" ||
+         lines[startIdx].trim().startsWith("Lab Sponsor") ||
+         lines[startIdx].trim().startsWith("Working Group:") ||
+         !lines[startIdx].trim())
+      ) {
+        startIdx++;
+      }
+      c = lines.slice(startIdx).join("\n");
+    }
+  }
+
   return c.trim();
 };
 
-export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content }) => {
-  const sanitizedContent = sanitizeMarkdownContent(content);
+export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content, suppressLeadingTitle = false }) => {
+  const sanitizedContent = sanitizeMarkdownContent(content, suppressLeadingTitle);
   // Helper to render inline text with KaTeX formulas and bold/italic/links/code
   const renderFormattedText = (text: string): React.ReactNode[] => {
     // Split text by inline math ($...$) and block math ($$...$$)
@@ -168,38 +212,70 @@ export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content }) => {
 
       // Headings
       if (line.startsWith("# ")) {
+        const { title, bodyParagraph } = splitRunInHeading(line.replace("# ", ""));
         blocks.push(
           <h1 key={`h1-${i}`} className="font-sans text-2xl sm:text-3xl text-primary font-semibold tracking-tight mt-8 mb-6 pb-4 border-b border-hairline">
-            {renderFormattedText(line.replace("# ", ""))}
+            {renderFormattedText(title)}
           </h1>
         );
+        if (bodyParagraph) {
+          blocks.push(
+            <p key={`h1-p-${i}`} className="my-4 text-sm sm:text-base leading-relaxed text-secondary">
+              {renderFormattedText(bodyParagraph)}
+            </p>
+          );
+        }
         i++;
         continue;
       }
       if (line.startsWith("## ")) {
+        const { title, bodyParagraph } = splitRunInHeading(line.replace("## ", ""));
         blocks.push(
           <h2 key={`h2-${i}`} className="font-sans text-xl sm:text-2xl text-primary font-semibold tracking-tight mt-10 mb-4 pt-6 border-t border-hairline">
-            {renderFormattedText(line.replace("## ", ""))}
+            {renderFormattedText(title)}
           </h2>
         );
+        if (bodyParagraph) {
+          blocks.push(
+            <p key={`h2-p-${i}`} className="my-4 text-sm sm:text-base leading-relaxed text-secondary">
+              {renderFormattedText(bodyParagraph)}
+            </p>
+          );
+        }
         i++;
         continue;
       }
       if (line.startsWith("### ")) {
+        const { title, bodyParagraph } = splitRunInHeading(line.replace("### ", ""));
         blocks.push(
           <h3 key={`h3-${i}`} className="font-sans text-lg sm:text-xl text-primary font-semibold tracking-tight mt-8 mb-3">
-            {renderFormattedText(line.replace("### ", ""))}
+            {renderFormattedText(title)}
           </h3>
         );
+        if (bodyParagraph) {
+          blocks.push(
+            <p key={`h3-p-${i}`} className="my-4 text-sm sm:text-base leading-relaxed text-secondary">
+              {renderFormattedText(bodyParagraph)}
+            </p>
+          );
+        }
         i++;
         continue;
       }
       if (line.startsWith("#### ")) {
+        const { title, bodyParagraph } = splitRunInHeading(line.replace("#### ", ""));
         blocks.push(
           <h4 key={`h4-${i}`} className="font-sans text-base sm:text-lg text-primary font-medium tracking-tight mt-6 mb-2">
-            {renderFormattedText(line.replace("#### ", ""))}
+            {renderFormattedText(title)}
           </h4>
         );
+        if (bodyParagraph) {
+          blocks.push(
+            <p key={`h4-p-${i}`} className="my-4 text-sm sm:text-base leading-relaxed text-secondary">
+              {renderFormattedText(bodyParagraph)}
+            </p>
+          );
+        }
         i++;
         continue;
       }

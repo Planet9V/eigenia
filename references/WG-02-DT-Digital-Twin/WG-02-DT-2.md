@@ -3,7 +3,7 @@
 Lab Sponsor Resident  j.mckenney
 
 
-Nassim Nicholas Taleb’s _Fooled by Randomness_ is less a finance book than a _philosophy of uncertainty_ aimed at the human mind itself. At its core, the book argues that randomness—luck, noise, statistical flukes—plays a far larger role in life than we like to admit, and that we consistently mis‑attribute random outcomes to skill, narrative, or causality. In a world enamored with stories of “master of the universe” traders and overnight successes, Taleb forces you to confront an uncomfortable truth: **success can be a poor indicator of skill, and failure can be a poor indicator of ineptitude**. The book is a meditation on probability, asymmetry, survivorship bias, and the limits of human reasoning, all wrapped in the vivid language of markets, casinos, and everyday life.
+Nassim Nicholas Taleb’s _Fooled by Randomness_ is less a finance book than a _philosophy of uncertainty_ aimed at the human mind itself. Fundamentally, the book argues that randomness; luck, noise, statistical flukes; plays a far larger role in life than we like to admit, and that we consistently mis‑attribute random outcomes to skill, narrative, or causality. In a world enamored with stories of “master of the universe” traders and overnight successes, Taleb forces you to confront an uncomfortable truth: **success can be a poor indicator of skill, and failure can be a poor indicator of ineptitude**. The book is a meditation on probability, asymmetry, survivorship bias, and the limits of human reasoning, all wrapped in the vivid language of markets, casinos, and everyday life.
 
 Below is a structured, analytic overview that moves from big‑picture insights, through the “two sides of the table,” and then into probability and the Monte Carlo engine as Taleb uses them.
 
@@ -47,7 +47,7 @@ Several big ideas thread through the book:
 
 ## The “two sides of the table”: a foundational idea
 
-Taleb structures much of the book around a metaphor he calls the **“two sides of the table”**—or, as it is often paraphrased, the difference between the _left side_ and the _right side_ of probability. In plain language, this means:martinaf+1
+Taleb structures much of the book around a metaphor he calls the **“two sides of the table”**; or, as it is often paraphrased, the difference between the _left side_ and the _right side_ of probability. In plain language, this means:martinaf+1
 
 - **One side of the table** is where the world actually operates: full of randomness, fat‑tailed distributions, hidden risks, and events that are hard, or impossible, to predict.
     
@@ -76,7 +76,7 @@ In probabilistic terms, the “two sides of the table” correspond to:
 - **The perceived probability space** (the right side): the simplified, often Gaussian‑like model people carry in their heads, which ignores tail risk and assumes that averages are representative.
     
 
-Formally, let XXX be a random variable representing the outcome of a decision (e.g., a year’s profit‑and‑loss for a trader). The “real” side of the table is the full distribution P(X)P(X)P(X), which may be heavy‑tailed or skewed. The “illusion” side is a truncated, smoothed version of P(X)P(X)P(X) that people act on—often just the mean and standard deviation.wikipedia+1
+Formally, let XXX be a random variable representing the outcome of a decision (e.g., a year’s profit‑and‑loss for a trader). The “real” side of the table is the full distribution P(X)P(X)P(X), which may be heavy‑tailed or skewed. The “illusion” side is a truncated, smoothed version of P(X)P(X)P(X) that people act on; often just the mean and standard deviation.wikipedia+1
 
 Taleb’s warning is that **living on the right side of the table while exposed to the left** is a recipe for catastrophic error. You can be making a series of decisions that look rational in expectation yet contain embedded, rare blow‑up events that will eventually destroy you.acquirersmultiple+1
 
@@ -109,7 +109,7 @@ Humans struggle with this because:
 - We are **emotionally averse to small losses** and **overly euphoric about small wins**, which distorts how we interpret probabilistic feedback.tylerdevries+1
     
 
-Taleb’s deeper claim is that **epistemic humility**—recognizing the limits of what probability can tell us—is the first step toward rational decision‑making.
+Taleb’s deeper claim is that **epistemic humility**; recognizing the limits of what probability can tell us; is the first step toward rational decision‑making.
 
 ---
 
@@ -177,4 +177,4 @@ Taleb’s normative message is not that you should give up on decision‑making,
     Favor bets where bad outcomes are bounded but upside is open‑ended (optionality), and avoid environments where small, frequent gains mask the risk of catastrophic loss.thepowermoves+1
     
 
-In essence, _Fooled by Randomness_ is a manual for probabilistic humility: once you truly grasp the “two sides of the table,” the Monte Carlo lens, and the limits of probability, you can begin to design a life—and a career—that is not shattered by the first rare event that doesn’t fit your story.wikipedia+1
+In essence, _Fooled by Randomness_ is a manual for probabilistic humility: once you truly grasp the “two sides of the table,” the Monte Carlo lens, and the limits of probability, you can begin to design a life; and a career; that is not shattered by the first rare event that doesn’t fit your story.wikipedia+1

@@ -7,9 +7,7 @@
 **Standard Equivalents:** IEC 62443-3-2 / ISO 15926 / DEXPI 2.0 / CycloneDX 1.6 / EU CRA / EN 50126  
 **Author:** J. McKenney (Systems Assurance Lead)  
 **Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
-
-; -
-
+---
 ## Abstract
 
 When critical industrial infrastructure undergoes cyber-physical interdiction, the initial point of structural failure is rarely purely mechanical or digital; it is human. In control room environments, human operators facing unprecedented telemetry anomalies exhibit structured psychodynamic defense mechanisms: denial, rationalization, and parameter re-framing. These psychological dynamics delay emergency trip procedures, allowing localized equipment excursions to cascade into catastrophic plant destruction.
@@ -17,70 +15,64 @@ When critical industrial infrastructure undergoes cyber-physical interdiction, t
 This paper formalizes the **Loman Operator** ($\hat{\mathcal{L}}$); a mathematical differential operator acting across the Borromean registers of psychoanalysis (the Real, the Symbolic, and the Imaginary). Drawing upon the structural breakdown dramatized in Arthur Miller's *Death of a Salesman*, we generalize the collapse of Willy Loman into an engineering paradigm for industrial plant operators under unendurable cognitive dissonance. Using a Recursive Gated Graph Neural Network (L-gGNN) continuous manifold, we demonstrate that operator denial is not random ignorance, but a deterministic Taylor series approximation applied to an un-symbolizable singularity.
 
 We formulate the polyphonic phase space of the three staves, derive the coupled differential equations governing the damped harmonic decay of human operational competence, model the 45-second thermal trip cliff where operator hesitation causes irreversible silicon damage, and establish actuarial loss parameters for property catastrophe and business interruption reinsurance under Lloyd's Y5381.
-
-; -
-
+---
 ## 1. Introduction: The Human Operator as Critical Failure Vector
 
 Modern high-density data campuses, nuclear generation facilities, and regional transmission substations operate under intense supervisory automation. Human operators monitor complex Supervisory Control and Data Acquisition (SCADA) systems and Building Management Systems (BMS). When sophisticated cyber attacks manipulate sensory telemetry; such as injecting false temperature offsets or blinding safety alarms; operators enter an acute state of psychological entropy ($\Delta H 	o 	ext{MAX}$).
 
 ```
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 |                  THE PSYCHODYNAMIC BREAKDOWN CYCLE                      |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 | STAGE 1: INTRUSION OF THE REAL (Telemetry Anomaly)                      |
 | Raw sensor variance spikes. Unexplained pressure and frequency drift.   |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
                                     |
                                     v
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 | STAGE 2: THE SYMBOLIC GAP (Signifier Fails to Name the Event)           |
 | Standard operating procedures provide no matching runbook.              |
 | The operator encounters the void: limit of comprehension.               |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
                                     |
                                     v
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 | STAGE 3: THE IMAGINARY PROSTHETIC (Denial & Re-Parameterization)        |
 | Operator attributes failure to faulty sensor or trivial local variable. |
 | Time is lost; physical equipment crosses the irreversible damage point. |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 ```
 
 Traditional engineering reliability models (e.g., MIL-HDBK-217F) model humans as static error probabilities ($	ext{HEPs}$). This assumption is fatally flawed. Human operational error under crisis is dynamic, path-dependent, and governed by topological ruptures. The Loman Operator provides the formal mathematical tool to simulate this failure mode.
-
-; -
-
+---
 ## 2. Multi-BOM and DEXPI Process Topology Integration
 
 To ground behavioral phase space simulations in physical reality, the operator's decision envelope is cross-referenced with the plant's DEXPI 2.0 (ISO 15926) piping schematic and CycloneDX 1.6+ multi-BOM specification:
 
 ```
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 |            DEXPI-CYCLONEDX OPERATIONAL TOPOLOGY GRAPH                   |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 | DEXPI 2.0 PIPING & HYDRAULIC NETWORK:                                   |
 | - Plant Subsystem: Secondary Coolant Loop, Chiller Compressors, BESS   |
 | - Physical Sensors: PT-101 (Pressure), TT-204 (Temperature), Flowmeter |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
                                     |
                     CROSS-DOMAIN DIGITAL TWIN BINDING
                                     |
                                     v
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 | CYCLONEDX 1.6+ MULTI-BOM SPECIFICATION:                                 |
 | - HBOM: Silicon ASICs, Actuator Solenoids, Pump VFD Drives              |
 | - SBOM: PLC RTOS Firmware, Modbus Stack, Safety Interlock Logic         |
 | - CBOM: Mutual TLS Certificates, DICE Attestation Keys                  |
 | - OBOM: Operational Envelope Bounds (Flow >= 35 L/min, Temp <= 45°C)    |
 | - VEX:  Exploit Tracking Streams (CISA Advisories on SCADA Tampering)   |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 ```
 
 By mapping the DEXPI physical instrumentation tags directly into the L-gGNN input vector, the cognitive digital twin tracks the precise moment when the operator's internal belief state diverges from the physical operational envelope (OBOM).
-
-; -
-
+---
 ## 3. The Architecture of the Loman Operator ($\hat{\mathcal{L}}$)
 
 The Loman Operator acts on the three-dimensional psychodynamic state vector $\Psi(t) \in \mathcal{H}_{R} \otimes \mathcal{H}_{S} \otimes \mathcal{H}_{I}$, corresponding to the three registers of the Borromean knot:
@@ -88,27 +80,27 @@ The Loman Operator acts on the three-dimensional psychodynamic state vector $\Ps
 $$\hat{\mathcal{L}} \Psi(t) = egin{bmatrix} \hat{\mathcal{L}}_{R} \, \psi_{R}(t) \ \hat{\mathcal{L}}_{S} \, \psi_{S}(t) \ \hat{\mathcal{L}}_{I} \, \psi_{I}(t) \end{bmatrix}$$
 
 ```
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 |              THE THREE STAVES OF THE LOMAN OPERATOR                     |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 | TOP STAFF (Real - R):                                                   |
 | - Continuous acoustic waveforms, thermal entropy, physical vibrations.  |
 | - Mathematical Form: Stochastic differential equations & Dirac deltas.  |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
                                     |
                                     v
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 | MIDDLE STAFF (Symbolic - S):                                            |
 | - Discrete signifiers, procedural alarms, legal codes, ladder logic.   |
 | - Mathematical Form: Boolean lattices, algebraic knots, Suture logic.   |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
                                     |
                                     v
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 | BOTTOM STAFF (Imaginary - I):                                           |
 | - Operator ego identity, mental models, specular illusions of safety.   |
 | - Mathematical Form: Euclidean geometry, projective coordinates.        |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 ```
 
 ### 3.1 The Clefs: Governing Discourses
@@ -121,21 +113,19 @@ The operator functions under three distinct operational clefs, corresponding to 
 The state of the control room is tracked via two scalar potentials:
 - **Entropy ($\Delta H$):** The divergence between perceived plant state and actual sensor telemetry.
 - **The Jouissance Vector ($ec{J}$):** The compulsive repetition of ineffective diagnostic routines (the death drive of the operator).
-
-; -
-
+---
 ## 4. Phase Space Simulation: The Five Sequences of Breakdown
 
 To demonstrate the mathematical execution of the Loman Operator, we analyze the five canonical sequences of operational breakdown:
 
 ```
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 |          TABLE 4.1: THE FIVE SEQUENCES OF PSYCHODYNAMIC BREAKDOWN       |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 ```
 
 | Sequence | Operational Phase | Real Register ($R$) | Symbolic Register ($S$) | Imaginary Register ($I$) | Cognitive State |
-|:; -:|:; -|:; -|:; -|:; -|:; -|
+| :--- | :--- | :--- | :--- | :--- | :--- |
 | **Seq 0** | Baseline Stability | Harmonic Sine Wave ($440	ext{ Hz}$) | Smooth Integral $\int 	ext{Telemetry} \, dt$ | Perfect Circle (Ego intact) | Low Entropy ($\Delta H 	o 0$) |
 | **Seq 1** | Catastrophic Intrusion | Dirac Delta $\delta(t)$ (Shock) | Derivative $rac{d}{dt} 	o -\infty$ | Triangle Inversion (Fatigue) | Cusp Bifurcation |
 | **Seq 2** | Attempted Suture | Tremolo (Anxiety) | False Identity ($x^2 
@@ -181,9 +171,7 @@ When silicon temperature breaches $85.0^\circ	ext{C}$, the operator enters acute
 $$rac{d^2 \psi_S(t)}{dt^2} \ll 0$$
 
 The operator is caught in the circular loop of the death drive; frantically refreshing dead dashboards, cycling identical non-functional reset commands, and failing to execute physical breaker trips.
-
-; -
-
+---
 ## 5. Mathematical Modeling of the Damped Oscillator
 
 The physical and psychological decline of the operator is rigorously modeled as a coupled second-order non-linear differential equation:
@@ -225,9 +213,7 @@ $$	au_{	ext{escape}} = rac{2\pi}{\sqrt{U_{	ext{cog}}''(x_1) \cdot |U_{	ext{cog}
 ight)$$
 
 As alarm volume escalates, the barrier height $\Delta U_{	ext{cog}}$ is eroded by sensory saturation, causing $	au_{	ext{escape}}$ to collapse from twenty minutes down to less than eighteen seconds. Once the operator crosses $x_{	ext{barrier}}$, no amount of textual instruction or supervisory prompting can restore rational procedural execution without an external hard reset.
-
-; -
-
+---
 ## 6. The 45-Second Thermal Cliff and Operator Delay
 
 In high-density liquid-cooled data facilities operating at $120	ext{ kW}$ per rack, fluid stagnation causes silicon junction temperature $T_j(t)$ to rise catastrophically:
@@ -241,51 +227,47 @@ Where:
 - Operating pressure is $6.0	ext{ bar}$ with $38.5	ext{ L/min}$ PG25 coolant.
 
 ```
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 |                  THE 45-SECOND OPERATOR ACTION CLIFF                    |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 | T = 0.0s: Primary pump trips. Volumetric flow collapses to zero.        |
 | T = 12.0s: Die temperature rate of change exceeds 4.2°C/s.             |
 | T = 20.0s: Operator notices alarm; attempts manual dashboard refresh.   |
 | T = 38.0s: Thermal throttling threshold (85°C) breached.                |
 | T = 45.0s: Irreversible silicon package delamination (> 94°C).         |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 ```
 
 If the operator spends even thirty seconds rationalizing alarms or attempting software workarounds, the silicon package delaminates permanently. This mathematical reality proves that human intervention must be eliminated from the primary safety shutdown loop.
-
-; -
-
+---
 ## 7. Systems Assurance: Engineering Remediations
 
 To counteract the failure modes modeled by the Loman Operator, systems assurance mandates three deterministic safeguards:
 
 ```
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 |               DETERMINISTIC CONTROL ROOM SAFEGUARDS                     |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 | SAFEGUARD 1: HARDWIRED ANALOG SIL-3 TRIP LOOPS                          |
 | Snap-action thermal switches and pressure burst discs wired directly to |
 | main breaker shunt trips, bypassing the operator entirely.              |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
                                     |
                                     v
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 | SAFEGUARD 2: IEC 62443 CONDUIT RATE-OF-CHANGE CLAMPS                    |
 | Programmable Logic Controllers reject setpoint writes that demand rate- |
 | of-change shifts exceeding safe thermodynamic envelopes.                |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
                                     |
                                     v
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 | SAFEGUARD 3: OPTICAL UNIDIRECTIONAL DATA DIODES                         |
 | Real-time telemetry passes to external monitoring via optical Tx-only  |
 | diodes (C_rev = 0.000 bps), preventing remote override of safety loops. |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 ```
-
-; -
-
+---
 ## 8. Actuarial Risk Engineering and Reinsurance Treaty Structuring
 
 Modeling operator cognitive failure enables precise structuring of property catastrophe and business interruption reinsurance treaties under Lloyd's Y5381:
@@ -304,9 +286,7 @@ Deploying deterministic hardwired SIL-3 interlocks ($C_{	ext{controls}} = 220,00
 $$	ext{ROSI} = rac{(	ext{ALE}_{	ext{unmitigated}} - 	ext{ALE}_{	ext{hardened}}) - C_{	ext{controls}}}{C_{	ext{controls}}} 	imes 100\% = rac{\$9,540,000 - \$220,000}{\$220,000} 	imes 100\% = 4,236\%$$
 
 Compliance with SFAIRP (So Far As Is Reasonably Practicable) principles eliminates allegations of operator gross negligence, secures lower insurance deductibles, removes restrictive sub-limit caps, and eliminates portfolio accumulation loading across global syndicates.
-
-; -
-
+---
 ## 9. Summary of Engineering Principles
 
 1. **Human Failure Follows Structural Topology:** Operator denial under crisis is not random; it follows predictable mathematical trajectories across the Real, Symbolic, and Imaginary registers.

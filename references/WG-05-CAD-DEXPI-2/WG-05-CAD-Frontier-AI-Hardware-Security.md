@@ -7,7 +7,7 @@
 **Author:** J. McKenney (Systems Assurance Lead)  
 **Affiliation:** Applied Complexity & Critical Infrastructure Security
 
-# This document is an informal follow-up to the late August 2026 workshop during the technical workshop. It captures my core observations, key takeaways, and critical commercial and engineering success factors, then proposes a concrete program of work.
+This document is an informal follow-up to the late August 2026 workshop during the technical workshop. It captures my core observations, key takeaways, and critical commercial and engineering success factors, then proposes a concrete program of work.
 
 Challenge: Frontier AI model weights are $500500M+ USD assets that must be defended against sovereign-tier extraction. Frontier AI Labs require hardware-enforced zero trust that protects weights even if the host CPU or facility network is compromised. Semiconductor Manufacturer needs a structured way to deliver trusted silicon and rack architectures without derailing multi-year tape-out schedules.
 
@@ -159,7 +159,9 @@ To address these vulnerabilities, the ecosystem of software and hardware support
 
 # 2. Proposed Strategic Program & Approach
 
-## Strategic Partnership between Frontier AI Model Operators and Semiconductor Silicon Manufacturers requires a framework that bridges platform firmware, accelerator silicon and physical datacenter engineering into a unified zero-trust architecture. A unified view that ensures consolidation of all current-state audits, platform baselines, and verification protocols in a single authoritative source of truth for all parties to reference.
+## Strategic Partnership Framework
+
+Strategic partnership between Frontier AI model operators and semiconductor silicon manufacturers requires a framework that bridges platform firmware, accelerator silicon, and physical datacenter engineering into a unified zero-trust architecture. This unified view ensures consolidation of all current-state audits, platform baselines, and verification protocols in a single authoritative source of truth for all parties to reference.
 
 ## 2.1 Proposed Primary artifact
 
@@ -205,7 +207,7 @@ Management of Change (MOC) & Verification Protocols (VP-01 to VP-05): Verifiable
 
 
 | APPROACH 1: DUAL-PACING V-MODEL |
-|; - |
+| :--- |
 | Horizon | Timeframe | Q1-Q2 | Q3-Q4 | Year 2 | Years 3-6 |
 | Horizon 1 (Fast) | 6 Months | [ConOps] ──► [Annex 7] |  |  |  |
 | Horizon 2 (Medium) | 18 Months | [CRA Mandate] | [DEXPI Schema] | [OpenSIL/Autonomous Agentic System HIL] |  |
@@ -306,7 +308,7 @@ BMS-to-FACP Kinetic Safety Cascades: Attackers traversing unauthenticated BMS-to
 
 
 | AI RACK ENVELOPE ZONE MODEL (REFERENCE) |
-|; - |
+| :--- |
 | Zone | SL-T | Components & Conduits |
 | Zone 4: Facility & Mechanical OT | 3 | CDU, Secondary Manifolds, 48V Busbars, Leak Detection. Linked via Conduit C-43 (Isolated Gateways). |
 | Zone 3: Scale-Up / Scale-Out Fabric | 4 | Infinity Fabric, UA-Link, 800G RoCE NICs, DPUs, Switches. Linked via Conduit C-32 (PCIe/CXL/SPDM). |
@@ -334,7 +336,7 @@ Recommendations
 
 LLM-Driven Exploit Hypothesis Generation: Deploy frontier models (such as Fable ) to continuously generate, refine, and simulate exploit hypotheses against hardware interface specifications, register transfer level (RTL) models, and firmware source repositories
 
-Hardware-in-the-Loop Testbenches: Pair automated hypothesis generation with dedicated hardware-in-the-loop (HIL) test harnesses and NetFPGA-style emulation testbeds to validate or falsify vulnerabilities at machine speed
+Hardware-in-the-Loop Testbenches: Pair automated hypothesis generation with dedicated hardware-in-the-loop (HIL) test channels and NetFPGA-style emulation testbeds to validate or falsify vulnerabilities at machine speed
 
 Cross-Business Unit PSIRT Integration: Modernize vendor PSIRT pipelines to intake automated telemetry, score threat impact programmatically, and deliver verified remediations within strict service-level agreements (SLAs)
 
@@ -356,7 +358,7 @@ Adopting this framework will structure Silicon-Provider/AI-Lab engineering, proc
 
 
 | THE 3-HORIZON EXECUTION MATRIX |
-|; - |
+| :--- |
 | Horizon | Timeframe | Q1-Q2 | Q3-Q4 | Year 2 | Years 3-6 |
 | Horizon 1 | Near-Term: Q1 - Q2 | UPSD v1.0, 6-Site HSM Survey, AI Rack Threat Model, Annex 7 Terms |  |  |  |
 | Horizon 2 | Mid-Term: Q3 - Q6 |  | EU CRA Compliance, DEXPI 2.0/CycloneDX, Open Coordinator, Autonomous Agentic System Exploit Engine, OpenSIL/Coreboot |  |
@@ -411,14 +413,14 @@ Significant risks exist in reconciling multi-year silicon tape-out cycles (3–5
 
 
 | DUAL-PACING V-MODEL LIFECYCLE |
-|; - |
+| :--- |
 | Gate 1: Definition | Gate 2: Derivation | Gate 3: Verification | Gate 4: Acceptance |
 | ● Charter & Cadence ● Scope & ConOps ● SuC Definition ● Asset Intake ● Provenance of artifacts | ● Minimum Requirements Alignment (Safety/Reliability/Operations/Security) & Threat Modeling ● SL-T Derivation (Minimum Security Requirements per Zone (component) and Interfaces | ● HIL Test Protocols ● Emulation & Fuzzing ● Fault Injection ● Independent Reviews ● Verification & Validation (V-Model) | ● UPSD Release v1.x ● SecRAC Allocation  ● Risk Acceptance & Enterprise Risk Ledger ● SOW Close & Handover |
 
 
 
 | Gate | Engineering Milestone | Technical Deliverable & Verification Output | Commercial SOW Action |
-|; - |; - |; - |; - |
+| :--- | :--- | :--- | :--- |
 | Gate 1: Definition | Scope, ConOps, and Asset Intake | System under Consideration (SuC) definition and baseline asset register | Authorizes quarterly SOW scope and commits engineering hours |
 | Gate 2: Derivation | Minimum Operation,, Safety & Reliability Requirements, Threat modeling and Security Requirements | FMECA, Target Security Level (SL-T) calibration, and M2M schemas, ALARP to lower requirements to SL-C (defensible) | Authorizes technical build and prototype development |
 | Gate 3: Verification | Hardware-in-the-loop (HIL) testing | Automated test apply logs and protocol validation reports (HVP-01 to HVP-04), Facilities and Hardware adopt their assurance disciplines and methods. | Triggers technical sign-off by joint security leads |
@@ -441,7 +443,7 @@ Third-Party Systems Assurance Advisors (Tetrel, etc.): Maintain master V-Model g
 
 
 | Gate | Engineering Milestone | Technical Deliverable & Verification Output | Commercial SOW Action |
-|; - |; - |; - |; - |
+| :--- | :--- | :--- | :--- |
 | Gate 1: Definition | Scope, ConOps, and Asset Intake | System under Consideration (SuC) definition and baseline asset register | Authorizes quarterly SOW scope and commits engineering hours |
 | Gate 2: Derivation | Threat modeling and Requirements:  In Rack (AI Rack Envelope) and outside: Facility, Suppliers & Value Chain | (Safety (FMECA.SCRIL)),Reliability /RCIL) Operations (MOR), Target Security Level (SL-T) calibration, and M2M schemas | Aligns Threats, Hazards and Minimum Requirements. Authorizes technical build and prototype development |
 | Gate 3: Verification | Hardware-in-the-loop (HIL) testing | Automated test apply logs and protocol validation reports (HVP-01 to HVP-04) | Triggers technical sign-off by joint security leads |
@@ -452,7 +454,7 @@ Third-Party Systems Assurance Advisors (Tetrel, etc.): Maintain master V-Model g
 
 
 | 90-DAY EXECUTION TIMELINE (Q1) |
-|; - |
+| :--- |
 | Phase / Month | September (Month 1) | October (Month 2) | November (Month 3) |
 | Strategic Alignment | Lock Annex 7 Terms | 6-Site HSM Factory Survey | Deliver AI Rack Threat Model |
 | Technical Foundation | Stand Up M2M Repo | Telemetry Throttling Baseline | Publish Authoritative UPSD v1.0 |
@@ -463,7 +465,7 @@ Third-Party Systems Assurance Advisors (Tetrel, etc.): Maintain master V-Model g
 
 
 | Milestone Code | Core Objective & Deliverable | Target Date | Gate Alignment & Success Criteria | RACI |
-|; - |; - |; - |; - |; - |
+| :--- | :--- | :--- | :--- | :--- |
 | M1-Q1: Annex 7 Lock | Finalize Binding Security Terms (Annex 7) Incorporate mandatory technical requirements (kernel execution locks, non-token egress throttling, and machine-readable BOM deliverables) directly into active volume procurement purchase agreements. | Sept 15, 2026 | Gate 1 (Definition):  Signed contractual annex attached to Q4 2026 / Q1 2027 hardware purchase orders. |  |
 | M2-Q1: M2M Coordinator | Deploy Open M2M Coordinator Repository Establish the shared Git repository parser for DEXPI 2.0 (cooling/P&ID models) and CycloneDX 1.6 (HBOM/SBOM/DICE hierarchies) to satisfy initial EU Cyber Resilience Act (CRA) obligations. | Sept 30, 2026 | Gate 2 (Derivation):  Automated schema ingestion pipeline live with sample N-1 Reference System Gen 6 AI Accelerator tray records. |  |
 | M3-Q1: HSM Site Survey | Execute AMD6-Site Manufacturing Key Survey Complete an engineering survey across the semiconductor manufacturer's global Enterprise Distribution Server (EDS) HSM sites to document current-state key injection flows, fuse burning, and factory test mode deactivation to provide a baseline of processes, value and supplier participation. | Oct 31, 2026 | Gate 2 (Derivation):  Verified current-state assessment report delivered and folded into the UPSD baseline. |  |
@@ -495,7 +497,7 @@ Instrumentation & Control Loops: Tagged sensors (temperature, flow, pressure tra
 
 
 | Engineering Domain | Standard / Equivalent | What It Encodes |
-|; - |; - |; - |
+| :--- | :--- | :--- |
 | Mechanical & Process Plant (Liquid) | DEXPI 2.0 (ISO 15926) | Hydronic topology, CDUs, P&ID graph |
 | Building & Civil Architecture (AEC) | IFC (ISO 16739 / OpenBIM) | Structural walls, ductwork, 3D space |
 | Electronic Design & PCB (EDA) | IPC-2581 / ODB++ / Netlist | Trace routes, IC footprints, pin wiring |

@@ -163,7 +163,7 @@ export default function WikiDocumentViewer({
 
         {/* Markdown & KaTeX Rendered Body */}
         <article className="prose dark:prose-invert max-w-none text-primary">
-          <MarkdownViewer content={displayContent} />
+          <MarkdownViewer content={displayContent} suppressLeadingTitle={true} />
         </article>
 
         {/* Bottom Pagination Footer */}

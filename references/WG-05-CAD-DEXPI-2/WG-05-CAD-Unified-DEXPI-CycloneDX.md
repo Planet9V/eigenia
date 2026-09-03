@@ -6,9 +6,7 @@
 **Standard Equivalents:** DEXPI 2.0 (ISO 15926) / CycloneDX 1.6+ (ISO/IEC 5962 / ECMA-424) / IEC 62443-4-2 / EU CRA (Reg 2024/2847)  
 **Author:** J. McKenney (Systems Assurance Lead)  
 **Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
-
-; -
-
+---
 ## Abstract
 
 Modern high-density compute facilities and critical industrial plants suffer from a severe semantic disconnect between physical plant engineering and platform cybersecurity. Plant operators design facility infrastructure using Piping and Instrumentation Diagrams (P&IDs) under the DEXPI 2.0 (ISO 15926) data exchange standard. This standard captures pump curves, pipe diameters, manifold topologies, fluid chemistry (such as 25% propylene glycol), volumetric flow rates, and delta-T thermal dissipation limits. 
@@ -18,9 +16,7 @@ Conversely, cybersecurity and platform security engineers operate through Bills 
 Because these two engineering domains rely on disjoint data models, facility engineers provide cybersecurity teams with static two-dimensional PDF drawings, while security teams provide facility engineers with qualitative compliance checklists. When an operational technology conduit is manipulated; such as an unauthenticated Modbus TCP command throttling a secondary cooling distribution manifold; neither team possesses an automated data structure to compute the physical-to-digital blast radius. 
 
 This paper formalizes the Unified DEXPI 2.0 and CycloneDX 1.6+ Semantic Bridge. By embedding deterministic property namespaces (`dexpi:*`) within CycloneDX component graphs, we establish an unbroken, bidirectional topological multigraph. This paper provides the mathematical formulations governing hydraulic head loss, heat exchanger logarithmic mean temperature differences, Reynolds turbulence numbers, pump affinity laws, and graph-theoretic blast radius propagation. We demonstrate how this unified schema enables the Cyber Digital Twin to execute automated fault falsification, support EU Cyber Resilience Act compliance, and quantify catastrophe losses for insurance underwriters.
-
-; -
-
+---
 ## 1. Problem Formulation: The Cyber-Physical Semantic Divide
 
 Industrial plants, water treatment facilities, and liquid-cooled data center facilities operate as tightly coupled cyber-physical systems. Despite their physical interdependence, the engineering tools used to design, operate, and insure these assets remain completely isolated.
@@ -85,17 +81,15 @@ In practice, facility engineers hand security teams static PDF drawings of cooli
 *If Modbus Valve V-102 is throttled to 20% flow, which specific accelerator compute trays will exceed junction thermal trip limits, what software workloads will crash, what cryptographic secrets are exposed to side-channel analysis, and what is the resulting financial business interruption loss?*
 
 Without a machine-readable bridge connecting DEXPI plant objects to CycloneDX component references, automated digital twins cannot compute this cascade. The system remains brittle, unverified, and uninsurable.
-
-; -
-
+---
 ## 2. Multi-BOM Architectural Convergence
 
 CycloneDX 1.6+ provides a unified, extensible data format capable of encoding multiple dimensions of an infrastructure asset within a single document. In the Eigenia Cyber Digital Twin, we integrate six distinct BOM layers to establish full-stack provenance.
 
 ```
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 |                    EIGENIA MULTI-BOM ARCHITECTURE                       |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 |  HBOM: Silicon Packages, Compute Trays, DPUs, Connectors (type: device) |
 |  SBOM: Caliptra RoT, OpenSIL, OpenBMC, Linux Kernel (type: firmware)   |
 |  CBOM: DICE Certificates, Asymmetric Keys, PQC Algorithms (type: crypto)|
@@ -103,17 +97,17 @@ CycloneDX 1.6+ provides a unified, extensible data format capable of encoding mu
 |  OBOM: Power Caps, Egress Rate Limits, Thermal Polices (type: data)     |
 |  SaaS: Redfish BMC APIs, Modbus Endpoints, Telemetry (type: service)    |
 |  VEX:  Real-Time Exploitability & Remediation State (type: vulnerability)|
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
                                     |
                     UNIFIED SEMANTIC BRIDGE (dexpi:*)
                                     |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 |                  DEXPI 2.0 PHYSICAL PLANT ONTOLOGY                      |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 |  Cooling Distribution Units, Heat Exchangers, Pumps (ISO 15926 XML)     |
 |  Secondary Manifolds, Quick-Disconnect Ports, Flow Meters, Valves       |
 |  Fluid Dynamics: PG25 Volumetric Delivery, ΔT, Hydraulic Head Loss     |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 ```
 
 ### 2.1 The Six BOM Layers Defined
@@ -121,7 +115,7 @@ CycloneDX 1.6+ provides a unified, extensible data format capable of encoding mu
 The following table summarizes how each BOM layer operates within the converged Cyber Digital Twin:
 
 | BOM Type | CycloneDX 1.6 Component `type` | Encoded Technical Properties | Verification Standard |
-|:; -|:; -|:; -|:; -|
+| :--- | :--- | :--- | :--- |
 | **HBOM** | `device`, `hardware` | Physical part numbers, Samtec connector specifications, OCP ORV3 rack slot positions, ASIC silicon revisions, and fuse-blown states. | OCP SAFE, IEEE 1680 |
 | **SBOM** | `firmware`, `library`, `application` | Cryptographic hashes of immutable Caliptra ROM, First Mutable Code (FMC), OpenSIL initialization drivers, and OpenBMC runtimes. | CycloneDX 1.6, SPDX |
 | **CBOM** | `cryptographic-asset` | Unique Device Secrets (UDS), Compound Device Identifiers (CDI), DICE certificate chains, and post-quantum LMS / ML-DSA-87 keys. | NIST SP 800-208, CNSA 2.0 |
@@ -151,9 +145,7 @@ To prevent ambiguous definitions during digital twin ingestion, each BOM tier en
 
 6. **Service Bill of Materials (SaaSBOM):**
    Captures all remote management interfaces. Each service declares its URI endpoints, authentication requirements (such as mTLS or session tokens), supported protocols (HTTPS, Modbus TCP, Redfish REST), and data flow classifications.
-
-; -
-
+---
 ## 3. The Concrete DEXPI to CycloneDX Linkage Specification
 
 To bind the physical plant model to the cybersecurity component hierarchy, CycloneDX hardware components (`type: device`) are augmented with standardized attributes under the `dexpi:` property namespace.
@@ -261,9 +253,7 @@ The following concrete JSON listing demonstrates an audited CycloneDX 1.6 docume
   ]
 }
 ```
-
-; -
-
+---
 ## 4. Quantitative Engineering Physics Governing the Bridge
 
 To ensure the Cyber Digital Twin operates with physical fidelity rather than qualitative approximation, the semantic bridge is governed by five mathematical formulations across fluid dynamics, thermodynamics, graph theory, and financial loss economics.
@@ -344,9 +334,7 @@ Where:
 - $\text{ALE}$ is the Annualised Loss Expectancy, and $\text{ARO}$ is the Annualised Rate of Occurrence.
 
 Under Lloyd's Y5381 war exclusions, underwriters require verified attestation that state-sponsored cyber attacks cannot exploit facility OT to cause unhedged business interruption. The DEXPI-CycloneDX bridge provides this deterministic proof.
-
-; -
-
+---
 ## 5. Industrial Threat Modeling: A Step-by-Step Failure Cascade
 
 To illustrate how the Cyber Digital Twin executes cross-domain simulation, we trace a complete seven-stage failure cascade bridging facility operational technology to accelerator silicon:
@@ -387,9 +375,7 @@ Actuarial engine registers $4.2M direct damage and $18,500/hour SLA penalty.
 ```
 
 By traversing the unified data model, the Eigenia Cyber Digital Twin detects Phase 2 within 180 milliseconds, triggering an out-of-band serial bypass command to restore valve position before Phase 5 junction trip limits are reached.
-
-; -
-
+---
 ## 6. Verification and Regulatory Audit Conformance
 
 The Unified DEXPI 2.0 and CycloneDX 1.6+ Semantic Bridge directly satisfies mandatory compliance requirements across three international regulatory frameworks:
@@ -404,59 +390,55 @@ The Unified DEXPI 2.0 and CycloneDX 1.6+ Semantic Bridge directly satisfies mand
 
 ### 6.3 EN 50126 RAMS Engineering (Reliability, Availability, Maintainability, Safety)
 - Incorporating physical failure rates ($h_f$, $\Delta T$) alongside cryptographic work factors allows systems assurance leads to conduct formal Failure Modes, Effects, and Criticality Analyses (FMECA) with closed mathematical models.
-
-; -
-
+---
 ## 7. Actuarial Valuation: Property & Cyber Treaty Restructuring
 
 Connecting physical P&ID data directly to digital BOM schemas fundamentally alters the economics of property catastrophe and cyber insurance underwriting:
 
 | Insurance Underwriting Dimension | Traditional Qualitative Method | DEXPI + CycloneDX Digital Twin Method | Underwriting Consequence |
-|:; -|:; -|:; -|:; -|
+| :--- | :--- | :--- | :--- |
 | **PML / MPL Calculation** | Subjective engineer site visits, manual building surveys, static occupancy estimates. | Deterministic graph traversal calculating worst-case hydraulic and electrical failure cascades. | Reinsurance syndicates eliminate uncertainty buffers; premium rates decrease by 18% to 32%. |
 | **Business Interruption (BI)** | Historical claims averages, broad industry downtime tables (days to weeks). | Supply-chain-linked restoration curves calculated from verified RCIL lead times. | BI sub-limits expanded; parametric triggers calibrated to physical sensor thresholds. |
 | **Common Cause Accumulation** | Unknown. Redundant cooling loops assumed to be independent. | Automated multi-BOM graph identifies shared PLC firmware or common manifold supply lines. | Eliminates hidden systemic tail-risk across multi-facility regional portfolios. |
 | **War Exclusion (Lloyd's Y5381)** | Disputed claims during state-backed attacks; extensive legal litigation. | Attested hardware zero trust (Caliptra RoT, DICE) proves state-sponsored exploit containment. | Clear indemnification certainty; waiver of sovereign attack exclusions for certified assets. |
 | **Policy Deductibles** | Fixed high deductibles ($5M to $25M) to protect insurers against moral hazard. | Dynamic deductibles indexed to real-time digital twin compliance and maintenance telemetry. | Lower working capital lockup for facility operators; risk-aligned capital reserves. |
-
-; -
-
+---
 ## 8. Implementation Blueprint: Ingestion Pipeline Architecture
 
 To deploy this semantic bridge within production facilities, organizations follow a four-stage ingestion pipeline:
 
 ```
-+; ; ; ; ; ; ; ; ; ; -+      +; ; ; ; ; ; ; ; ; ; -+
++---------------------+------+---------------------+
 | DEXPI 2.0 P&ID XML  |      | CycloneDX 1.6+ JSON |
 | (Mechanical CAD)    |      | (Multi-BOM Catalog) |
-+; ; ; ; ; ; ; ; ; ; -+      +; ; ; ; ; ; ; ; ; ; -+
++---------------------+------+---------------------+
            |                            |
-           +; ; ; ; ; ; +  +; ; ; ; ; ; +
+           +------------+  +------------+
                         |  |
                         v  v
-        +; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
+        +-----------------------------------+
         |  Semantic Normalization Engine     |
         |  - Extract Equipment IDs & Nozzles|
         |  - Extract PURLs, Hashes, & Keys  |
         |  - Join via dexpi:plant:* mapping |
-        +; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
+        +-----------------------------------+
                         |
                         v
-        +; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
+        +-----------------------------------+
         |  Eigenia Cyber Digital Twin Graph |
         |  - 3.2M Multigraph Network        |
         |  - Real-Time Telemetry Ingestion  |
         |  - Physics Simulation (KaTeX Core)|
-        +; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
+        +-----------------------------------+
                         |
-            +; ; ; ; ; -+; ; ; ; ; -+
+            +-------------------------+
             |                       |
             v                       v
-+; ; ; ; ; ; ; ; ; ; ; -+ +; ; ; ; ; ; ; ; ; ; ; -+
++-----------------------+-+-----------------------+
 | Operational Security  | | Actuarial Engine      |
 | - Machine-Speed VEX   | | - Dynamic Premiums    |
 | - Out-of-Band Defense | | - Lloyd's Y5381 Proof |
-+; ; ; ; ; ; ; ; ; ; ; -+ +; ; ; ; ; ; ; ; ; ; ; -+
++-----------------------+-+-----------------------+
 ```
 
 ### 8.1 Automated Ingestion Steps
@@ -464,9 +446,7 @@ To deploy this semantic bridge within production facilities, organizations follo
 2. **BOM Synthesis:** Generate the CycloneDX 1.6+ JSON document containing HBOM hardware components for racks, trays, processors, and DPUs, populating the `dexpi:plant:equipmentId` and `dexpi:cooling:*` attributes.
 3. **Graph Union:** The Digital Twin loader performs an exact join on `dexpi:plant:equipmentId == Equipment.ID`. Hydraulic fluid conduits in the DEXPI model are merged with network and power conduits in the CycloneDX model.
 4. **Validation and Attestation:** The digital twin executes automated consistency checks, verifying that every physical liquid supply nozzle connects to an existing compute tray, and that total rated electrical power does not exceed busbar capacity.
-
-; -
-
+---
 ## 9. Summary of Engineering Principles
 
 The Unified DEXPI 2.0 and CycloneDX 1.6+ Semantic Bridge establishes five non-negotiable engineering principles for critical infrastructure:

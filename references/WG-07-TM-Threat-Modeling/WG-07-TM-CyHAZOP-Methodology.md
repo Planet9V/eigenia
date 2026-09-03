@@ -6,9 +6,7 @@
 **Standard Equivalents:** IEC 61882 / IEC 62443-3-2 / IEC 61508 / IEC 61511 / DEXPI 2.0 (ISO 15926) / CycloneDX 1.6 / EU CRA / EN 50126  
 **Author:** J. McKenney (Systems Assurance Lead)  
 **Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
-
-; -
-
+---
 ## Abstract
 
 In petrochemical refineries, nuclear power plants, and rail transport networks, systems engineers never commission physical infrastructure without conducting a formal Hazard and Operability (HAZOP) study under IEC 61882 and the EN 50126 RAMS lifecycle. Process safety teams systematically apply standardised guide words; NO, LESS, MORE, REVERSE, AS WELL AS, PART OF, OTHER THAN; to identify how deviations in pressure, flow, temperature, and electrical voltage induce physical catastrophe. 
@@ -16,9 +14,7 @@ In petrochemical refineries, nuclear power plants, and rail transport networks, 
 Conversely, modern hyperscale data centers and megawatt AI facilities have historically treated cybersecurity as an IT perimeter discipline, completely divorced from process safety engineering. Facilities deploy hundreds of networked programmable logic controllers (PLCs), variable frequency drives (VFDs), coolant distribution units (CDUs), and automatic transfer switches (ATS) across 400V power trains and liquid cooling loops. Each device runs firmware. Each presents an operational technology (OT) network interface. A compromised cooling controller commands the exact same physical failure as a sheared pump shaft, but executes across multiple redundant nodes simultaneously within sub-second timescales.
 
 This paper formalizes the CyHAZOP methodology: the systematic extension of IEC 61882 process safety hazard analysis to cyber-physical operational technology environments. By linking DEXPI 2.0 (ISO 15926) piping schematics directly to CycloneDX 1.6+ multi-BOM catalogs (HBOM, SBOM, CBOM, OBOM), CyHAZOP provides the mathematical bridge between digital exploits and physical damage. We analyze four critical hyperscale nodes: the CDU Secondary Liquid Cooling Loop, the Distributed Block UPS Power Train, the Building Management System (BMS) Supervisory Bus, and the Out-of-Band BMC Fabric. We formulate the mathematical transfer functions mapping cyber command injections to thermodynamic and hydraulic excursions, model Safety Instrumented System (SIS) probability of failure on demand under cyber stress, and present actuarial loss formulations for insurance treaty structuring, Probable Maximum Loss (PML), and Lloyd's Y5381 war exclusions.
-
-; -
-
+---
 ## 1. The Methodological Void in Megawatt Compute Facilities
 
 Over forty years of industrial safety practice have proven that high-reliability mechanical engineering is insufficient to guarantee physical survival when control planes are networked.
@@ -41,85 +37,81 @@ A cyber-induced deviation is the deliberate or accidental manipulation of a sens
 2. **Telemetry Spoofing (Silent Drift):** While mechanical failures trigger physical alarms on monitoring screens, a cyber exploit can spoof sensor telemetry registers (such as transmitting nominal $32^\circ	ext{C}$ temperature reports while throttling flow valves), blinding operators until physical damage occurs.
 3. **Speed of Propagation:** Network commands propagate at line rate across Ethernet conduits (sub-millisecond latency), vastly outpacing manual human operator reaction times or facility shift inspection rounds.
 4. **Geographic Distribution:** A single remote access vulnerability or compromised firmware update server allows an adversary to execute simultaneous physical sabotage across multiple campuses worldwide.
-
-; -
-
+---
 ## 2. Integrating DEXPI 2.0 and CycloneDX Multi-BOM into CyHAZOP
 
 Traditional HAZOP fails in computing environments because engineers lack a unified data structure connecting physical piping to digital silicon. CyHAZOP resolves this by binding DEXPI 2.0 (ISO 15926) plant piping models with CycloneDX 1.6+ multi-BOM catalogs:
 
 ```
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 |                  CYHAZOP UNIFIED ASSET DELINEATION                      |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 | DEXPI 2.0 P&ID NODES: Heat Exchanger HEX-201, Pump P-101, Manifolds     |
 | (ISO 15926 Fluid Properties: PG25 Coolant, Volumetric Flow Rate, Bar)   |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
                                     |
                     CROSS-DOMAIN CONDUIT BINDING
                                     |
                                     v
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 | CYCLONEDX 1.6+ MULTI-BOM SPECIFICATION                                  |
 | - HBOM: OCP ORV3 Trays, Samtec Connectors, ASIC Silicon Dies            |
 | - SBOM: Caliptra Silicon RoT, OpenSIL Initializers, Linux Kernels       |
 | - CBOM: DICE Cryptographic Certificates, Post-Quantum ML-DSA Keys       |
 | - OBOM: Operational Limits, Voltage Setpoints, Line-Rate Egress Caps    |
 | - VEX:  Real-Time Vulnerability Exploitability eXchange Feeds           |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 ```
 
 By cross-referencing CycloneDX VEX vulnerability feeds with DEXPI mechanical equipment tags, CyHAZOP teams immediately determine whether a newly disclosed CVE in an operational technology controller can induce a physical hydraulic cavitation or electrical arc flash hazard.
-
-; -
-
+---
 ## 3. The Standardized CyHAZOP Workflow
 
 The CyHAZOP study is executed by a multidisciplinary team; mechanical process engineers, electrical systems leads, industrial control engineers, and cybersecurity assurance architects; through an 18-step structured lifecycle governed by the EN 50126 V-model:
 
 ```
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 |                       CYHAZOP LIFECYCLE PHASES                          |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 | PHASE 1: SYSTEM DEFINITION & NODE DELINEATION                           |
 | 1. Ingest P&ID Schematics (DEXPI 2.0) & Single-Line Electrical Diagrams |
 | 2. Partition System into Physical Nodes (Process Fluid / Power Infeed)  |
 | 3. Define Exact Design Intent & Quantitative Operational Envelopes      |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
                                     |
                                     v
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 | PHASE 2: PARAMETER & GUIDE WORD MATRIX EXECUTION                        |
 | 4. Select Node Parameter (Flow, Temp, Pressure, Voltage, Frequency)     |
 | 5. Apply Guide Word (NO, LESS, MORE, REVERSE, AS WELL AS, OTHER THAN)   |
 | 6. Identify Mechanical & Electrical Root Causes                         |
 | 7. Identify Cyber-Induced Conduits, Protocols, & Attack Vectors         |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
                                     |
                                     v
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 | PHASE 3: CONSEQUENCE & SAFEGUARD EVALUATION                             |
 | 8. Model Physical Consequence (Thermodynamics, Heat Flux, Cavitation)   |
 | 9. Identify Existing Protective Safeguards (Alarms, BMCs, Trips)        |
 | 10. Evaluate Safeguard Integrity under Cyber Stress (Common-Mode Fail)  |
 | 11. Assign Quantitative Hazard Severity Index (Catastrophic / Critical) |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
                                     |
                                     v
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 | PHASE 4: REMEDIATION, SIS HARDENING & VERIFICATION                      |
 | 12. Specify Safety Instrumented Systems (Hardwired Interlocks, SIL)     |
 | 13. Map Conduits to IEC 62443 Security Level Targets (SL-T 1 to SL-T 4) |
 | 14. Establish Physical Verification & Proof Testing Intervals           |
 | 15. Generate Formal CyHAZOP Ledger for Underwriting & Regulatory Proof  |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 ```
 
 ### 3.1 The Guide Word Lexicon
 In CyHAZOP, the classical IEC 61882 guide words are mapped directly to physical parameters and cyber command primitives:
 
 | Guide Word | Physical Deviation Meaning | Cyber-Physical Attack Mechanism |
-|:; -|:; -|:; -|
+| :--- | :--- | :--- |
 | **NO / NONE** | Complete cessation of flow, voltage, or telemetry signal. | Command injection: pump stop, breaker trip, interface shutdown, power cutoff. |
 | **MORE** | Quantitative elevation of pressure, temperature, speed, or voltage. | Register manipulation: VFD overspeed, chiller setpoint inflation, voltage spike. |
 | **LESS** | Quantitative reduction of flow, pressure, cooling, or power capacity. | Flow throttling: valve restriction to 15%, fan speed reduction, power capping. |
@@ -127,9 +119,7 @@ In CyHAZOP, the classical IEC 61882 guide words are mapped directly to physical 
 | **AS WELL AS** | Introduction of foreign elements, contaminants, or harmonic noise. | Sensor packet injection, dirty power harmonics, disabling water treatment. |
 | **PART OF** | Incomplete execution of an essential multi-step safety sequence. | Suppressing interlock verification during bus transfer, partial shutdown. |
 | **OTHER THAN** | Unintended operation, incorrect destination, or spoofed status report. | Telemetry deception: reporting nominal temperature while physical fire burns. |
-
-; -
-
+---
 ## 4. Node Analysis: Four Critical Hyperscale Nodes
 
 To demonstrate the rigorous application of CyHAZOP, we present detailed analysis tables for four essential nodes of a 100 MW high-density AI campus.
@@ -139,13 +129,13 @@ To demonstrate the rigorous application of CyHAZOP, we present detailed analysis
 - **Node Boundary:** CDU secondary heat exchanger discharge nozzle $	o$ distribution manifold $	o$ flexible stainless steel braided hose $	o$ quick-disconnect dry-break couplings $	o$ microchannel cold plates $	o$ return manifold $	o$ CDU suction inlet.
 
 ```
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 |           NODE 1: SECONDARY COOLING LOOP CYHAZOP MATRIX                 |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 ```
 
 | Guide Word | Parameter | Deviation | Physical Consequence | Cyber Attack Vector | Severity | Recommended Safeguard |
-|:; -|:; -|:; -|:; -|:; -|:; -|:; -|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **NO** | Flow | Complete loss of coolant flow ($0	ext{ L/min}$). | Convective dissipation collapses. Silicon junction $T_j$ surges at $4.5^\circ	ext{C/s}$, exceeding $94^\circ	ext{C}$ in $< 14.8	ext{ s}$. Irreversible die warpage. | Modbus TCP function code 05/06 injected to PLC register 40012, asserting pump emergency stop. | **Catastrophic** | Hardwired pneumatic pressure relief and independent bi-metallic thermal interlock cutting server power. |
 | **LESS** | Flow | Throttled coolant flow ($5.8	ext{ L/min}$). | Fluid velocity drops below critical Reynolds number ($	ext{Re} < 2,300$). Heat transfer coefficient drops $78\%$. Accelerators throttle inference $60\%$. | Attacker overwrites VFD speed reference register from $60	ext{ Hz}$ to $12	ext{ Hz}$ via unauthenticated BACnet conduit. | **Major** | Cryptographically authenticated VFD command signing (IEC 62443-4-2 SL-3) and minimum speed hardware jumper. |
 | **MORE** | Temperature | Supply coolant exceeds $42.0^\circ	ext{C}$. | Loss of thermal logarithmic mean temperature difference ($\Delta T_{	ext{lm}}$). Chiller compressor stalls. Rack thermal trip engaged within 180 seconds. | Attacker tampers with primary plate heat exchanger proportional valve setpoint via BMS Redfish API. | **Major** | Out-of-band analog thermocouple loop bypassing the IP network, wired directly to chiller local control. |
@@ -156,13 +146,13 @@ To demonstrate the rigorous application of CyHAZOP, we present detailed analysis
 - **Node Boundary:** 11 kV switchgear output $	o$ unit substation step-down transformer $	o$ Static Transfer Switch (STS) $	o$ distributed block UPS modules (1.25 MW each) $	o$ power distribution unit (PDU) $	o$ busway tap-off boxes.
 
 ```
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 |             NODE 2: POWER DISTRIBUTION CYHAZOP MATRIX                   |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 ```
 
 | Guide Word | Parameter | Deviation | Physical Consequence | Cyber Attack Vector | Severity | Recommended Safeguard |
-|:; -|:; -|:; -|:; -|:; -|:; -|:; -|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **NO** | Voltage | Instantaneous bus drop to $0	ext{ V}$. | Uncontrolled server drop. Data loss in DRAM buffers, corrupted database state, storage array crash. | Remote exploitation of SNMP/web interface on LayerZero STS, commanding force-open on both feeds. | **Catastrophic** | Hardwired mechanical interlock preventing simultaneous open commands; disable remote firmware updates on STS. |
 | **MORE** | Frequency | AC frequency surge to $65	ext{ Hz}$. | Core saturation in facility transformers, overheating magnetics, harmonic resonance causing capacitor bank explosion. | Tampering with inverter DSP control firmware via compromised JTAG or optical maintenance port. | **Catastrophic** | Hardware-calibrated over-frequency protection relay (IEC 61850 SIPROTEC) tripping within $16	ext{ ms}$. |
 | **AS WELL AS** | Harmonics | Severe harmonic distortion ($> 15\%	ext{ THD}$). | Neutral conductor overheating, eddy current losses, erratic tripping of downstream electronic circuit breakers. | Modulating load patterns via synchronized GPU kernel execution, matching the resonant frequency of power filters. | **Major** | Active power factor correction filters with autonomous analog feedback, isolated from host OS control. |
@@ -173,13 +163,13 @@ To demonstrate the rigorous application of CyHAZOP, we present detailed analysis
 - **Node Boundary:** BMS BACnet/IP Ethernet backbone $	o$ field programmable controllers (JCI, Schneider, Honeywell) $	o$ pre-action sprinkler valves, clean-agent (NOVEC 1230 / Inergen) release solenoids, smoke purge dampers.
 
 ```
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 |             NODE 3: BMS & LIFE SAFETY CYHAZOP MATRIX                    |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 ```
 
 | Guide Word | Parameter | Deviation | Physical Consequence | Cyber Attack Vector | Severity | Recommended Safeguard |
-|:; -|:; -|:; -|:; -|:; -|:; -|:; -|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **OTHER THAN** | State | False gas discharge into populated data hall. | Full Emergency Power Off (EPO) tripped. High-pressure acoustic shock from discharge nozzles shatters spinning hard drives. | Exploiting CVE in BMS supervisory server (such as default BACnet broadcast credentials) to force solenoid trigger. | **Catastrophic** | Dual-custody, hardwired cross-zoned optical smoke and ionization detection requiring manual physical abort switch. |
 | **NO** | Ventilation | Total shutdown of data hall air economizers. | Heat accumulation in upper rack exhaust zones. Ambient hall temperature rises to $55^\circ	ext{C}$, degrading power supplies. | Ransomware encrypts BMS central controller, forcing all damper actuators into fail-closed default state. | **Major** | Spring-return mechanical damper actuators that fail open on loss of signal; dedicated local thermostat loops. |
 
@@ -188,18 +178,16 @@ To demonstrate the rigorous application of CyHAZOP, we present detailed analysis
 - **Node Boundary:** Dedicated 1 GbE management switch fabric $	o$ ASPEED AST2600 BMC chip $	o$ PCIe sideband (MCTP over SMBus) $	o$ host processor power rail and voltage regulators.
 
 ```
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 |             NODE 4: OUT-OF-BAND BMC CYHAZOP MATRIX                      |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 ```
 
 | Guide Word | Parameter | Deviation | Physical Consequence | Cyber Attack Vector | Severity | Recommended Safeguard |
-|:; -|:; -|:; -|:; -|:; -|:; -|:; -|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **MORE** | Voltage | Over-voltage command injected to VRM ($+30\%$). | Electrical overstress across silicon gate oxides. Instantaneous hardware destruction across 8x accelerator packages. | Exploiting unauthenticated BMC Redfish endpoint to flash modified OpenBMC kernel that disables I2C VRM limits. | **Catastrophic** | Hardware voltage clamping circuit (crowbar diode) on compute tray motherboard that shunts over-voltage to ground. |
 | **NO** | Boot | Permanent bricking of host firmware (Denial of Service). | Entire compute tray rendered non-bootable. Physical board replacement or desoldering required; weeks of downtime. | Attacker transmits corrupted SPI flash image via BMC web interface without cryptographically validating RoT. | **Catastrophic** | Dual-flash Caliptra 2.0 Silicon Root of Trust enforcing recovery from immutable golden image on SPI failure. |
-
-; -
-
+---
 ## 5. Quantitative Physics: The Cyber-Physical Transfer Function
 
 To move beyond qualitative hazard checklists, CyHAZOP formalizes the exact physical response of an infrastructure node to digital command manipulation.
@@ -285,9 +273,7 @@ The financial justification for retrofitting hardwired physical interlocks to pr
 $$	ext{ROSI}_{	ext{SIS}} = rac{(	ext{ALE}_{	ext{software\_only}} - 	ext{ALE}_{	ext{hardwired\_SIS}}) - C_{	ext{hardware\_interlock}}}{C_{	ext{hardware\_interlock}}}$$
 
 Where replacing software BACnet trips with hardwired dry-contact interlocks ($C_{	ext{interlock}} = 15,000	ext{ USD}$) reduces unmitigated catastrophe loss expectancy from $	ext{ALE} = 1,850,000	ext{ USD}$ to $	ext{ALE} = 22,000	ext{ USD}$, achieving a $	ext{ROSI} > 12,000\%$.
-
-; -
-
+---
 ## 6. Industrial Proof: Case Studies of Physical-Digital Sabotage
 
 The failure scenarios modeled in CyHAZOP are not theoretical possibilities; they reflect documented exploitation mechanics observed in real-world critical infrastructure:
@@ -300,9 +286,7 @@ Security researchers demonstrated that Schneider Electric APC Smart-UPS units fe
 
 ### 6.3 Stuxnet: The Archetype of Physical Resonance Manipulation
 The physical destruction of uranium centrifuges at Natanz demonstrated the quintessential CyHAZOP deviation: guide word MORE applied to VFD frequency, alternating between $1,410	ext{ Hz}$, nominal $1,064	ext{ Hz}$, and $2	ext{ Hz}$. The attack deliberately excited the mechanical harmonic resonance frequencies of the rotor shafts while spoofing nominal telemetry back to supervisory SCADA monitors, causing physical rotor disintegration.
-
-; -
-
+---
 ## 7. Systems Assurance: Integrating CyHAZOP with IEC 62443 & Caliptra RoT
 
 To translate CyHAZOP findings into engineering defenses, each identified hazard is mapped directly to the IEC 62443 industrial cybersecurity standard and modern open silicon roots of trust.
@@ -316,40 +300,38 @@ CyHAZOP provides the empirical justification for zone boundaries:
 - **Zone 3 (Enterprise Facility Network):** Central BMS server, EPMS database, DCIM telemetry collectors. Security Level Target: **SL-T 2**. Enforces multifactor authentication, role-based access control, and machine-readable CycloneDX VEX monitoring.
 
 ```
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 |                  IEC 62443 ZONE & CONDUIT PARTITIONING                  |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 |  ZONE 3: Enterprise BMS / DCIM Supervisory (SL-T 2)                     |
 |  - CycloneDX VEX Continuous Vulnerability Feeds                         |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
                                     |
                     CONDUIT: Unidirectional Data Diode
                                     |
                                     v
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 |  ZONE 2: Facility OT / CDU Master PLCs / Switchgear Relays (SL-T 3)     |
 |  - OpenSIL Attested Firmware, Immutable Syslog Conduits                 |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
                                     |
                     CONDUIT: Encrypted mTLS / Signed Modbus
                                     |
                                     v
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 |  ZONE 1: Field Actuators / VFD Motor Controllers / Cold Plates (SL-T 3) |
 |  - Hardwired Proof-Tested Interlocks (SIL-3)                            |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
                                     |
                     HARDWIRED ANALOG SAFETY LOOP (SIL-3)
                                     |
                                     v
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 |  ZONE 0: Physical Silicon / Heat Flux / Busbars (SL-T 4)                |
 |  - Caliptra 2.0 RoT, DICE Identity, Dual-Flash Gold Recovery           |
-+; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; -+
++-------------------------------------------------------------------------+
 ```
-
-; -
-
+---
 ## 8. Actuarial and Reinsurance Treaty Implications: Catastrophe Risk & PML
 
 The application of CyHAZOP provides reinsurance syndicates and catastrophe modelers with the first mathematically defensible basis for underwriting cyber-physical infrastructure risk.
@@ -358,15 +340,13 @@ The application of CyHAZOP provides reinsurance syndicates and catastrophe model
 Under Lloyd's Market Association Bulletin Y5381, underwriters require verified attestation that state-sponsored cyber attacks cannot exploit facility OT to cause unhedged business interruption. CyHAZOP delivers this attestation:
 
 | Insurance Underwriting Dimension | Traditional Datacenter Underwriting | CyHAZOP-Audited Facility | Actuarial & Financial Benefit |
-|:; -|:; -|:; -|:; -|
+| :--- | :--- | :--- | :--- |
 | **Common-Cause Failures** | Assumed independent based on N+1 pump or chiller counts. | Identifies shared PLC firmware and unauthenticated Modbus conduits across parallel loops. | Eliminates hidden systemic tail-risk; prevents correlated portfolio insolvency. |
 | **Probable Maximum Loss (PML)** | Unconstrained subjective estimates exceeding 150,000,000 USD. | Mathematically bounded by proven hardwired safety interlocks and physical isolation times. | Probable Maximum Loss reduced by 35% to 50%; capital release for underwriters. |
 | **War Exclusion Waivers** | Disputed claims during sovereign cyber warfare events; protracted litigation. | Verified SIL-3 physical safety interlocks prove exploit containment regardless of attack origin. | Affirmative cyber-physical coverage granted with clear indemnity triggers. |
 | **Legal Due Diligence (SFAIRP)** | Vulnerable to gross negligence lawsuits following physical facility destruction. | Formal CyHAZOP ledger demonstrates risks were reduced So Far As Is Reasonably Practicable. | Absolute statutory and tort liability defense for executive leadership. |
 | **Deductible Optimization** | Rigid, punitive deductibles ($15M to $50M) imposed on high-density facilities. | Parametric deductible schedules keyed to continuous CyHAZOP digital twin telemetry. | Working capital unlocked; premium credits up to 32% secured. |
-
-; -
-
+---
 ## 9. Summary of Engineering Principles
 
 The CyHAZOP methodology establishes five non-negotiable engineering principles for megawatt AI compute facilities:
