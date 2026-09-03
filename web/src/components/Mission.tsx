@@ -25,7 +25,7 @@ export const Mission: React.FC = () => {
                   : "Dutch B.V. Applied Complexity Think Tank"}
               </span>
 
-              <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal tracking-tight text-primary">
+              <h2 className="font-sans text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-primary">
                 {t("mission_title")}
               </h2>
 

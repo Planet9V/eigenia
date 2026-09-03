@@ -93,7 +93,7 @@ export const LabsShowcase: React.FC = () => {
               {t("labs_badge" as any)}
             </span>
 
-            <h2 className="font-serif text-xl sm:text-2xl lg:text-3xl font-normal tracking-tight text-white light:text-[#18181B] leading-tight">
+            <h2 className="font-sans text-xl sm:text-2xl lg:text-3xl font-semibold tracking-tight text-white light:text-[#18181B] leading-tight">
               {t("labs_title" as any)}
             </h2>
 
@@ -152,7 +152,7 @@ export const LabsShowcase: React.FC = () => {
                     </span>
                   </div>
 
-                  <h3 className="text-xl sm:text-2xl font-normal font-serif text-white light:text-[#18181B] group-hover:text-dutchOrange transition-colors">
+                  <h3 className="text-xl sm:text-2xl font-semibold font-sans text-white light:text-[#18181B] group-hover:text-dutchOrange transition-colors">
                     {t(track.titleKey as any)}
                   </h3>
 

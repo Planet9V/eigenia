@@ -27,7 +27,7 @@ export const TheoryCatalogue: React.FC = () => {
               Open Scientific Research Catalogue
             </span>
 
-            <h2 className="font-serif text-xl sm:text-2xl lg:text-3xl font-normal tracking-tight text-primary">
+            <h2 className="font-sans text-xl sm:text-2xl lg:text-3xl font-semibold tracking-tight text-primary">
               Applied Physics & Mathematical Frameworks
             </h2>
 

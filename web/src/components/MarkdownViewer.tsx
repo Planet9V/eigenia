@@ -169,7 +169,7 @@ export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content }) => {
       // Headings
       if (line.startsWith("# ")) {
         blocks.push(
-          <h1 key={`h1-${i}`} className="font-serif text-2xl sm:text-3xl text-primary font-normal tracking-tight mt-8 mb-6 pb-4 border-b border-hairline">
+          <h1 key={`h1-${i}`} className="font-sans text-2xl sm:text-3xl text-primary font-semibold tracking-tight mt-8 mb-6 pb-4 border-b border-hairline">
             {renderFormattedText(line.replace("# ", ""))}
           </h1>
         );
@@ -178,7 +178,7 @@ export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content }) => {
       }
       if (line.startsWith("## ")) {
         blocks.push(
-          <h2 key={`h2-${i}`} className="font-serif text-xl sm:text-2xl text-primary font-normal tracking-tight mt-10 mb-4 pt-6 border-t border-hairline">
+          <h2 key={`h2-${i}`} className="font-sans text-xl sm:text-2xl text-primary font-semibold tracking-tight mt-10 mb-4 pt-6 border-t border-hairline">
             {renderFormattedText(line.replace("## ", ""))}
           </h2>
         );

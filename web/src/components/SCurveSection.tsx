@@ -22,7 +22,7 @@ export const SCurveSection: React.FC = () => {
             {t("scurve_tag" as any)}
           </span>
 
-          <h2 className="font-serif text-xl sm:text-2xl lg:text-3xl font-normal tracking-tight text-primary">
+          <h2 className="font-sans text-xl sm:text-2xl lg:text-3xl font-semibold tracking-tight text-primary">
             {t("scurve_title" as any)}
           </h2>
 

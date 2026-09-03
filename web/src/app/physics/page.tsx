@@ -41,7 +41,7 @@ export default function AppliedPhysicsPage() {
             <span className="font-mono text-[10px] sm:text-xs tracking-[0.2em] uppercase text-dutchOrange font-medium inline-block">
               {t("physics_page_tag")}
             </span>
-            <h1 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal tracking-tight text-primary">
+            <h1 className="font-sans text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-primary">
               {t("physics_page_title")}
             </h1>
             <p className="text-base sm:text-lg text-secondary font-light leading-relaxed max-w-3xl">

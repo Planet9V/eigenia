@@ -177,7 +177,7 @@ export default function CollaboratePage() {
                 {t("collab_header_tag")}
               </span>
 
-              <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal tracking-tight text-primary leading-tight">
+              <h1 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-primary leading-tight">
                 {t("collab_header_title")}
               </h1>
 
@@ -196,7 +196,7 @@ export default function CollaboratePage() {
             <span className="font-mono text-xs text-dutchOrange uppercase tracking-widest font-semibold block">
               {t("collab_trust_tag")}
             </span>
-            <h2 className="font-serif text-2xl sm:text-3xl font-normal tracking-tight text-primary">
+            <h2 className="font-sans text-2xl sm:text-3xl font-semibold tracking-tight text-primary">
               {t("collab_trust_title")}
             </h2>
           </div>
@@ -222,7 +222,7 @@ export default function CollaboratePage() {
             <span className="font-mono text-xs text-dutchOrange uppercase tracking-widest font-semibold block">
               {t("collab_tracks_tag")}
             </span>
-            <h2 className="font-serif text-2xl sm:text-3xl font-normal tracking-tight text-primary">
+            <h2 className="font-sans text-2xl sm:text-3xl font-semibold tracking-tight text-primary">
               {t("collab_tracks_title")}
             </h2>
             <p className="text-sm text-secondary font-light leading-relaxed">{t("collab_tracks_desc")}</p>
@@ -279,7 +279,7 @@ export default function CollaboratePage() {
                 <span className="font-mono text-[10px] sm:text-xs tracking-[0.2em] uppercase text-dutchOrange font-medium inline-block">
                   {t("collab_form_tag")}
                 </span>
-                <h2 className="font-serif text-xl sm:text-2xl lg:text-3xl font-normal tracking-tight text-primary">
+                <h2 className="font-sans text-xl sm:text-2xl lg:text-3xl font-semibold tracking-tight text-primary">
                   {t("collab_form_title")}
                 </h2>
                 <p className="text-sm text-secondary font-light leading-relaxed">{t("collab_form_desc")}</p>

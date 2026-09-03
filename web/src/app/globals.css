@@ -53,6 +53,10 @@ html.dark {
   --color-accent-border: rgba(224, 90, 16, 0.4);
 }
 
+:root {
+  --font-serif: var(--font-sans);
+}
+
 body {
   background-color: var(--bg-canvas);
   color: var(--text-primary);
@@ -60,6 +64,12 @@ body {
   overflow-x: hidden;
   scroll-behavior: smooth;
   transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Unified Typography: Consistent Sans (Inter) for all Headers & Text */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  letter-spacing: -0.025em;
 }
 
 /* Structural Element Overrides */

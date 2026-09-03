@@ -33,7 +33,7 @@ export const Hero: React.FC = () => {
             </span>
           </div>
 
-          <h1 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal text-primary tracking-tight leading-[1.15]">
+          <h1 className="font-sans text-2xl sm:text-3xl lg:text-4xl font-semibold text-primary tracking-tight leading-[1.15]">
             {t("hero_title_pre" as any)}{" "}
             <span className="text-dutchOrange">
               {t("hero_title_accent" as any)}

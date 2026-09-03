@@ -31,7 +31,7 @@ export default function Home() {
             <span className="font-mono text-[10px] sm:text-xs tracking-[0.2em] uppercase text-dutchOrange font-medium inline-block">
               {t("portals_tag")}
             </span>
-            <h2 className="font-serif text-xl sm:text-2xl lg:text-3xl font-normal tracking-tight text-primary">
+            <h2 className="font-sans text-xl sm:text-2xl lg:text-3xl font-semibold tracking-tight text-primary">
               {t("portals_title")}
             </h2>
             <p className="text-sm text-secondary font-light leading-relaxed">

@@ -1,13 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "@/components/Providers";
-import { Playfair_Display, Inter, JetBrains_Mono } from "next/font/google";
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-serif",
-  display: "swap",
-});
+import { Inter, JetBrains_Mono } from "next/font/google";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -108,7 +102,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`dark scroll-smooth ${playfair.variable} ${inter.variable} ${mono.variable}`}
+      className={`dark scroll-smooth ${inter.variable} ${mono.variable}`}
       suppressHydrationWarning
     >
       <head>

@@ -133,7 +133,7 @@ export default async function TheoryDetailPage({ params }: PageProps) {
               <span className="font-mono text-[10px] sm:text-xs tracking-[0.2em] uppercase text-dutchOrange font-medium inline-block">
                 {model.number} // {model.tag}
               </span>
-              <h1 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal tracking-tight text-primary leading-tight">
+              <h1 className="font-sans text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-primary leading-tight">
                 {model.name}
               </h1>
             </div>
