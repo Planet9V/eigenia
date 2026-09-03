@@ -144,6 +144,7 @@ function WikiContent() {
         {/* Viewport for Active Treatise */}
         <main className="flex-1 overflow-hidden min-w-0">
           <WikiDocumentViewer
+            key={activeDocId}
             docData={activeDocData}
             workingGroup={currentWg}
             onNavigatePrev={handleNavigatePrev}
