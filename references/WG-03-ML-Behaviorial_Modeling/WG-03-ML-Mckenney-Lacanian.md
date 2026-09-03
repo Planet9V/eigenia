@@ -30,9 +30,9 @@ The **McKenney-Lacan topology** in L4 formally models the _gap_ between the Real
 
 ## The Psychometric Tensor
 
-The foundational mathematical object of L4 is the **Psychometric Tensor**​
+The foundational mathematical object of L4 is the **Psychometric Tensor**:
 
-Pi=[DISC]⊗[OCEAN]P_i = \begin{bmatrix} D & I \\ S & C \end{bmatrix} \otimes \begin{bmatrix} O & C & E & A & N \end{bmatrix}Pi=[DSIC]⊗[OCEAN]
+$$P_i = [\text{DISC}] \otimes [\text{OCEAN}] = \begin{bmatrix} D & I \\ S & C \end{bmatrix} \otimes \begin{bmatrix} O & C & E & A & N \end{bmatrix}$$
 
 This is the **Kronecker product** of two psychological measurement frameworks:
 
@@ -40,7 +40,7 @@ This is the **Kronecker product** of two psychological measurement frameworks:
     
 - **OCEAN / Big Five** (Openness, Conscientiousness, Extraversion, Agreeableness, Neuroticism) — the dominant structural model of personality in psychometric science
     
-The tensor product ⊗\otimes⊗ does not just combine these — it creates a _new mathematical space_ in which every combination of DISC behavioral tendency and Big Five trait becomes a distinct dimension. The resulting tensor PiP_iPi for individual iii is a 20-dimensional object living in a topological space.​
+The tensor product $\otimes$ does not just combine these — it creates a _new mathematical space_ in which every combination of DISC behavioral tendency and Big Five trait becomes a distinct dimension. The resulting tensor $P_i$ for individual $i$ is a 20-dimensional object living in a topological space.
 
 Why does this matter? Because it allows human behavior to be treated with the same mathematical rigor as physical system behavior. You can compute:
 

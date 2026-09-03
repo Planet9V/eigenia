@@ -44,8 +44,8 @@ export const theoryModelsList: TheoryModel[] = [
     number: "MODEL 03",
     name: "McKenney-Lacan Psychometric Tensor",
     tag: "Lacanian Four Discourses & RSI Triad",
-    formula: "\\mathbf{T}_{\\text{adversary}} = \\mathbf{P}_{\\text{OCEAN}} \\otimes \\mathbf{V}_{\\text{capabilities}} \\otimes \\mathbf{G}_{\\text{geopolitical}}",
-    description: "Integrates Jacques Lacan's Four Discourses (Master, University, Hysteric, Analyst) and RSI Triad (Real, Symbolic, Imaginary) with OCEAN psychometrics to predict threat actor targeting logic.",
+    formula: "P_i = [\\text{DISC}] \\otimes [\\text{OCEAN}] = \\begin{bmatrix} D & I \\\\ S & C \\end{bmatrix} \\otimes \\begin{bmatrix} O & C & E & A & N \\end{bmatrix}",
+    description: "The McKenney-Lacan Calculus forms the mathematical core of L4, mapping topological cognitive dissonance across Real, Symbolic, and Imaginary registers via a 20-dimensional Kronecker psychometric tensor.",
     deliverables: [
       "Lacanian Four Discourses Threat Typology Profiling",
       "Real/Symbolic/Imaginary Structural Target Prediction",
