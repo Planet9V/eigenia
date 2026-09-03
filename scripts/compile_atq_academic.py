@@ -255,6 +255,8 @@ Under this formulation, an actor with an ATQ of $78.6$ (Volt Typhoon) exhibits a
 | Transition Probability: P(DMZ -> SCADA) = 0.684 (Breach imminent)       |
 +-------------------------------------------------------------------------+
 ```
+
+```
 +-------------------------------------------------------------------------+
 |                  BOLTZMANN PROPAGATION TRAJECTORY                       |
 +-------------------------------------------------------------------------+
