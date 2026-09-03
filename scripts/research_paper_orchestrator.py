@@ -98,11 +98,22 @@ def audit_style_contract(text: str) -> dict:
     """
     findings = []
     
-    # Check em dashes
-    for dash_pat in BANNED_EM_DASHES:
-        matches = re.findall(dash_pat, text)
-        if matches:
-            findings.append(f"NON-CONFORMANCE: Found {len(matches)} prohibited em-dashes ('{dash_pat}').")
+    # Strip markdown syntax that contains legitimate hyphens/dashes:
+    # 1. code blocks
+    clean_text = re.sub(r'```[\s\S]*?```', '', text)
+    # 2. horizontal rules
+    clean_text = re.sub(r'^\s*---+\s*$', '', clean_text, flags=re.MULTILINE)
+    # 3. markdown table formatting lines (| :--- | :--- |)
+    clean_text = re.sub(r'\|[\s\-:]+\|', '', clean_text)
+    
+    # Check em dashes (Unicode em-dash, en-dash, or prose double-dash)
+    unicode_dashes = re.findall(r'[—–]', clean_text)
+    if unicode_dashes:
+        findings.append(f"NON-CONFORMANCE: Found {len(unicode_dashes)} prohibited Unicode em/en-dashes.")
+        
+    text_double_dashes = re.findall(r'(\s+--\s+|\b--\b)', clean_text)
+    if text_double_dashes:
+        findings.append(f"NON-CONFORMANCE: Found {len(text_double_dashes)} prohibited text em-dashes ('--').")
             
     # Check banned AI words
     for ai_pat in BANNED_AI_WORDS:
