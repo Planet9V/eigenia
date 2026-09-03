@@ -61,29 +61,21 @@ const sanitizeMarkdownContent = (raw: string, suppressLeadingTitle?: boolean): s
       startIdx++;
     }
 
-    // Check if what follows is a legacy raw bold metadata block (**Document Identifier:** ...)
-    // If so, parse it into an academic specification table
-    const remainingLines = lines.slice(startIdx);
-    const metaBlockMatch = remainingLines.slice(0, 10).join("\n").match(/\*\*Document Identifier:\*\*\s*(.+?)(?:\r?\n|\s+)\*\*Classification:\*\*\s*(.+?)(?:\r?\n|\s+)\*\*Standard Equivalents:\*\*\s*(.+?)(?:\r?\n|\s+)\*\*Author:\*\*\s*(.+?)(?:\r?\n|\s+)\*\*Affiliation:\*\*\s*(.+?)(?:\r?\n|$)/i);
-    if (metaBlockMatch) {
-      const [fullMatch, docId, classification, standards, author, affiliation] = metaBlockMatch;
-      const wgMatch = docId.match(/WG-?(\d+-[A-Z]+)/i) || docId.match(/WG(\d+)-([A-Z]+)/i);
-      const wg = wgMatch ? `WG-${wgMatch[1]}` : "WG-05-CAD";
-      const tableHeader = [
-        `| Document ID | Working Group | Normative Equivalents | Classification |`,
-        `| :--- | :--- | :--- | :--- |`,
-        `| ${docId.trim()} | ${wg} | ${standards.trim()} | ${classification.trim()} |`,
-        ``,
-        `**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  `,
-        `**Lead Systems Assurance Architect:** ${author.trim()}  `,
-        `**Affiliation:** ${affiliation.trim()}  `,
-        ``
-      ].join("\n");
-      const textAfterMeta = remainingLines.join("\n").replace(fullMatch, "").replace(/^\s*---\s*\r?\n/m, "");
-      c = tableHeader + textAfterMeta.trim();
-    } else {
-      c = lines.slice(startIdx).join("\n");
-    }
+    // Strip any legacy raw bold metadata block (**Document Identifier:** ...)
+    const remainingText = lines.slice(startIdx).join("\n");
+    const cleanedText = remainingText
+      // Strip markdown metadata table if present at the start of the body
+      .replace(/^\|\s*Document ID\s*\|[^\n]+\n\|(?:\s*:?---+:?\s*\|)+\n\|[^\n]+\n+/i, "")
+      // Strip author/panel/affiliation lines
+      .replace(/^\*\*Authors?:\*\*[^\n]+\n+/im, "")
+      .replace(/^\*\*Lead Systems Assurance Architect:\*\*[^\n]+\n+/im, "")
+      .replace(/^\*\*Affiliation:\*\*[^\n]+\n+/im, "")
+      // Strip legacy raw metadata block
+      .replace(/^\*\*Document Identifier:\*\*[\s\S]*?\*\*Affiliation:\*\*[^\n]+(?:\r?\n|$)/i, "")
+      // Strip any leftover leading horizontal rules
+      .replace(/^(?:---\s*\r?\n|\*\*\*\s*\r?\n)+/, "");
+
+    c = cleanedText;
   }
 
   return c.trim();

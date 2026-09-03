@@ -1,11 +1,3 @@
-| Document ID | Working Group | Normative Equivalents | Classification |
-| :--- | :--- | :--- | :--- |
-| EIGENIA-WG02-DT-06 | WG-02-DT | ASHRAE TC 9.9 (5th Ed.) / IEC 62443-3-2 / IEC 62443-4-2 / DEXPI 2.0 / CycloneDX 1.6 / EN 50126 | Open Thermodynamic & Cyber-Physical Systems Specification |
-
-**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
-**Lead Systems Assurance Architect:** J. McKenney (Systems Assurance Lead)  
-**Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
-
 ## Abstract
 
 Modern artificial intelligence compute accelerators have permanently broken the thermodynamic limits of air cooling. While legacy enterprise compute rarely exceeded 15 kW per rack, modern accelerator clusters; such as the NVIDIA GB200 NVL72 and dense AMD Instinct architectures; generate thermal heat loads between 120 kW and 142 kW within a single rack footprint. At these extreme densities, liquid cooling is an absolute physical necessity. Water possesses a thermal conductivity over 23x greater than air and stores approximately 3,000x more heat per unit volume.

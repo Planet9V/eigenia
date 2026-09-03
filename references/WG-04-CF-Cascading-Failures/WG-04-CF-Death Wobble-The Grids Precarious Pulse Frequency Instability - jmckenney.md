@@ -1,6 +1,5 @@
 # The Grid’s Precarious Pulse: Death Wobble & Frequency Instability
 
-
 I am returning from recent industry discussions, such as the utility and grid technology forums in Chicago, one is struck by the sheer scale of the transformation underway in our energy systems. The focus is squarely on integrating renewables, managing electric vehicle charging [1], deploying storage, and building smarter infrastructure [2]. These are necessary, ambitious goals, reminiscent of earlier technological revolutions - like the development of complex banking systems such as ERMA - where success depended not just on the technology itself, but on understanding and managing its integration into existing operational and social contexts.
 
 ## Lessons from the Changing Grid Infrastructure and the Management of Technological Disruption

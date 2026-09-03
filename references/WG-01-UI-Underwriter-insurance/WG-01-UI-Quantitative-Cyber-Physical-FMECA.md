@@ -1,11 +1,3 @@
-| Document ID | Working Group | Normative Equivalents | Classification |
-| :--- | :--- | :--- | :--- |
-| EIGENIA-WG01-UI-08 | WG-01-UI | IEC 60812 (FMEA/FMECA) / IEC 62443-3-2 / DEXPI 2.0 (ISO 15926) / CycloneDX 1.6 / MIL-STD-1629A / EN 50126 | Open Actuarial & Reliability Engineering Technical Specification |
-
-**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
-**Lead Systems Assurance Architect:** J. McKenney (Systems Assurance Lead)  
-**Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
-
 ## Abstract
 
 Failure Mode, Effects, and Criticality Analysis (FMECA) under IEC 60812 is the foundational methodology of industrial reliability engineering. For decades, mechanical and plant engineers have calculated Risk Priority Numbers (RPN) as the product of Severity, Occurrence, and Detection to prioritize maintenance budgets and capital equipment replacement. Traditional FMECA assumes that physical components fail through predictable stochastic mechanisms: mechanical bearing fatigue, thermal cycling degradation, corrosion, and seal wear. Under these assumptions, Occurrence is low and Detection is high, producing modest Risk Priority Numbers.

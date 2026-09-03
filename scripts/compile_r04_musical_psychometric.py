@@ -51,14 +51,7 @@ cleaned = re.sub(r'\bat its core\b', 'fundamentally', cleaned, flags=re.IGNORECA
 cleaned = re.sub(r'\bin today\'s world\b', 'in contemporary operations', cleaned, flags=re.IGNORECASE)
 cleaned = re.sub(r'\bharness\b', 'channel', cleaned, flags=re.IGNORECASE)
 
-# Format header block with authoritative Jim McKenney systems assurance framing
-header = """| Document ID | Working Group | Normative Equivalents | Classification |
-| :--- | :--- | :--- | :--- |
-| EIGENIA-WG03-ML-06 | WG-03-ML | IEC 62443-3-2 / ISO 15926 / DEXPI 2.0 / CycloneDX 1.6 / EU CRA / EN 50126 | Open Theoretical & Behavioral Modeling Specification |
-
-**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
-**Lead Systems Assurance Architect:** J. McKenney (Systems Assurance Lead)  
-**Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
+header = """# Musical Psychometric Notation (MPN): Formal Specification for Security State Sonification
 
 ## Executive Abstract
 
@@ -73,11 +66,12 @@ MPN establishes a rigorous mathematical grammar:
 
 By computing real-time harmonic dissonance integrals across the musical score, MPN provides defensive teams with a 15 to 30 minute early warning of organizational collapse; a mathematical formulation of Isaac Asimov's "Seldon Crisis." When coupled with physical plant telemetry through DEXPI 2.0 (ISO 15926) piping models and CycloneDX 1.6+ multi-BOM streams, MPN prevents cascading cyber-physical failure and establishes deterministic actuarial loss mitigation under Lloyd's Y5381.
 
----
 """
 
 # Strip out old title/meta if present
 body = cleaned
+body = re.sub(r'^#\s+Musical Psychometric Notation[\s\S]*?---\s*\n+', '', body, flags=re.IGNORECASE)
+body = re.sub(r'^\*\*Date:\*\*[\s\S]*?---\s*\n+', '', body, flags=re.IGNORECASE)
 body = re.sub(r'^#\s+RSCH-39:.*?\n', '', body, flags=re.DOTALL)
 body = re.sub(r'^\*\*Status:\*\*.*?\n---\n', '', body, flags=re.DOTALL)
 

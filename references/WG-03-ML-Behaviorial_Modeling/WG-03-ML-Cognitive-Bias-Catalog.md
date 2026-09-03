@@ -1,11 +1,3 @@
-| Document ID | Working Group | Normative Equivalents | Classification |
-| :--- | :--- | :--- | :--- |
-| EIGENIA-WG03-ML-07 | WG-03-ML (Psychometrics & Behavioral Modeling) | IEC 62443-3-2 / ISO 15926 / DEXPI 2.0 / CycloneDX 1.6 / EU CRA / EN 50126 | Open Theoretical & Behavioral Modeling Specification |
-
-**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
-**Lead Systems Assurance Architect:** J. McKenney (Systems Assurance Lead)  
-**Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
-
 ## Executive Abstract
 
 In high-consequence operational technology (OT) and mission-critical data center operations, security architectures are designed to withstand hardware component failures and cryptographic attacks. Yet the most vulnerable attack vector remains the human decision loop. Under operational stress and sensory alert flooding, control room operators, systems engineers, and incident responders systematically abandon slow, analytical System 2 deliberation in favor of rapid, heuristic System 1 cognitive shortcuts.

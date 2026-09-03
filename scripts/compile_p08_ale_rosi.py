@@ -7,15 +7,7 @@ meeting all PAAI gate criteria and zero-tolerance style prohibitions.
 
 dest_path = 'references/WG-01-UI-Underwriter-insurance/WG-01-UI-ALE-ROSI-Decision-Framework.md'
 
-content = """| Document ID | Working Group | Normative Equivalents | Classification |
-| :--- | :--- | :--- | :--- |
-| EIGENIA-WG01-UI-09 | WG-01-UI | NIST SP 800-30 Rev. 1 / Open FAIR (ISO/IEC 27005) / IEC 62443-3-2 / DEXPI 2.0 / CycloneDX 1.6 / EN 50126 | Open Actuarial & CFO Advisory Technical Specification |
-
-**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
-**Lead Systems Assurance Architect:** J. McKenney (Systems Assurance Lead)  
-**Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
-
-## Abstract
+content = """## Abstract
 
 Engineering risk frameworks such as Failure Mode, Effects, and Criticality Analysis (FMECA) and Hazard and Operability studies (HAZOP) tell facility teams *what* can fail and *how severe* the physical breakdown will be. However, engineering risk metrics; such as Risk Priority Numbers (RPN); fail to answer the primary question asked by Chief Financial Officers, insurance underwriters, and corporate boards of directors: *How much capital is exposed to loss, and what is the optimal financial return on mitigating that exposure?*
 

@@ -10,15 +10,7 @@ import re
 
 dest_path = 'references/WG-02-DT-Digital-Twin/WG-02-DT-Seven-Staff-Fugue.md'
 
-content = """| Document ID | Working Group | Normative Equivalents | Classification |
-| :--- | :--- | :--- | :--- |
-| EIGENIA-WG02-DT-09 | WG-02-DT (Digital Twin & Applied Physics) | IEC 62443-3-2 / ISO 15926 / DEXPI 2.0 / CycloneDX 1.6 / EU CRA / EN 50126 | Open Architecture & Digital Twin Specification |
-
-**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
-**Lead Systems Assurance Architect:** J. McKenney (Systems Assurance Lead)  
-**Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
-
-## Executive Abstract
+content = """## Executive Abstract
 
 Classical engineering representations of cyber-physical systems rely on static structural diagrams, relational tables, and disconnected time-series charts. These disjoint models obscure the essential nature of modern infrastructure: continuous, polyphonic, multi-layered temporal evolution. A failure in an industrial facility or hyperscale data center is never an isolated event; it is a dissonant counterpoint that echoes across silicon, thermodynamic fluids, network packets, human psychology, and reinsurance balance sheets.
 

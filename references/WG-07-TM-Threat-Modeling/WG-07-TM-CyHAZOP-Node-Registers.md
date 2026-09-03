@@ -1,11 +1,3 @@
-| Document ID | Working Group | Normative Equivalents | Classification |
-| :--- | :--- | :--- | :--- |
-| EIGENIA-WG07-TM-04 | WG-07-TM | IEC 61882 / IEC 62443-4-2 / DEXPI 2.0 (ISO 15926) / CycloneDX 1.6 / Modbus Application Protocol v1.1b3 / BACnet ANSI/ASHRAE 135 | Open Architecture Technical Specification |
-
-**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
-**Lead Systems Assurance Architect:** J. McKenney (Systems Assurance Lead)  
-**Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
-
 ## Abstract
 
 While high-level hazard analyses establish the conceptual framework for cyber-physical safety, real-world industrial sabotage executes at the register and byte level. In megawatt AI data centers and mission-critical plants, physical equipment; Variable Frequency Drives (VFDs), Coolant Distribution Units (CDUs), Static Transfer Switches (STS), and Baseboard Management Controllers (BMCs); exposes its physical operating envelope across legacy operational technology (OT) network protocols. Modbus TCP holding registers, BACnet/IP analog output objects, and Redfish JSON schema payloads directly govern physical motor speeds, valve positions, trip thresholds, and electrical power capping.

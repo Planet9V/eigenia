@@ -7,15 +7,7 @@ meeting all PAAI gate criteria and zero-tolerance style prohibitions.
 
 dest_path = 'references/WG-05-CAD-DEXPI-2/WG-05-CAD-IEC62443-SFAIRP-SecRACS.md'
 
-content = """| Document ID | Working Group | Normative Equivalents | Classification |
-| :--- | :--- | :--- | :--- |
-| EIGENIA-WG05-CAD-05 | WG-05-CAD | IEC 62443-3-2 / IEC 62443-3-3 / IEC 62443-4-2 / IEC 61508 / ISA TR 84.00.09 / DEXPI 2.0 / CycloneDX 1.6 / EU CRA / EN 50126 | Open Architecture & Industrial Assurance Specification |
-
-**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
-**Lead Systems Assurance Architect:** J. McKenney (Systems Assurance Lead)  
-**Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
-
-## Abstract
+content = """## Abstract
 
 The international standard IEC 62443 establishes the foundational requirements for securing Industrial Automation and Control Systems (IACS). It defines security levels (SL 1 to SL 4), zone and conduit segmentations, and foundational technical requirements. However, the published standard suffers from a critical delivery void: it dictates *what* technical deliverables must exist, but provides zero guidance on *how* to execute an engineering programme across the twenty-year facility lifecycle. In mission-critical environments, organisations routinely produce zone diagrams, declare compliance, and discover that security requirements never translated into procurement contracts or field commissioning tests.
 

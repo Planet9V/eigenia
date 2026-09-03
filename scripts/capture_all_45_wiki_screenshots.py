@@ -62,16 +62,20 @@ def main():
                     const prose = document.querySelector('.prose');
                     const proseText = prose ? prose.innerText : '';
 
-                    const hasTable = !!prose.querySelector('table');
+                    // Check that the body does NOT start with a metadata table
+                    const firstChildTag = prose && prose.firstElementChild ? prose.firstElementChild.tagName.toLowerCase() : '';
+                    const hasTopTable = firstChildTag === 'table';
                     const hasRawBoldMeta = proseText.includes('**Document Identifier:**') || proseText.includes('Document Identifier: EIGENIA');
                     const hasLooseSponsor = /Lab Sponsor\\s*(Resident)?/i.test(proseText);
+                    const hasAuthorMeta = /Multi-Agent Deliberation/i.test(proseText) || /Lead Systems Assurance Architect/i.test(proseText);
 
                     return {
                         heroTitle,
                         heroSubtitle,
-                        hasTable,
+                        hasTopTable,
                         hasRawBoldMeta,
                         hasLooseSponsor,
+                        hasAuthorMeta,
                         proseCharCount: proseText.length
                     };
                 }""")
@@ -81,13 +85,15 @@ def main():
 
                 is_ok = (
                     bool(audit_info["heroTitle"]) and
+                    not audit_info["hasTopTable"] and
                     not audit_info["hasRawBoldMeta"] and
                     not audit_info["hasLooseSponsor"] and
+                    not audit_info["hasAuthorMeta"] and
                     audit_info["proseCharCount"] > 50
                 )
 
                 status = "✅ CONFIRMED" if is_ok else "❌ DEFECT"
-                layout_type = "Spec Table" if audit_info["hasTable"] else "Clean Prose"
+                layout_type = "Clean Direct Prose"
                 print(f"[{idx:02d}/{total}] {base_name[:38]:<38} -> {status} [{layout_type}] ('{audit_info['heroTitle'][:24]}...')")
 
                 confirmation_records.append({

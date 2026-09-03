@@ -7,15 +7,7 @@ meeting all PAAI gate criteria and zero-tolerance style prohibitions.
 
 dest_path = 'references/WG-04-CF-Cascading-Failures/WG-04-CF-Emerging-Power-Topologies.md'
 
-content = """| Document ID | Working Group | Normative Equivalents | Classification |
-| :--- | :--- | :--- | :--- |
-| EIGENIA-WG04-CF-03 | WG-04-CF | NFPA 855:2026 / UL 9540A / IEC 61850 / IEC 62443-3-2 / DEXPI 2.0 / CycloneDX 1.6 / IEEE 1547 / EN 50126 | Open Critical Energy Infrastructure Technical Specification |
-
-**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
-**Lead Systems Assurance Architect:** J. McKenney (Systems Assurance Lead)  
-**Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
-
-## Abstract
+content = """## Abstract
 
 Hyperscale compute campuses require vast electrical power, with single facilities scaling beyond 100 MW and gigawatt-scale clusters entering active development. To bypass multi-year regional transmission queue bottlenecks, operators are deploying decentralized on-site microgrids. These advanced energy topologies incorporate utility-scale Battery Energy Storage Systems (BESS, 100 to 400 MWh), behind-the-meter Small Modular Reactors (SMRs), hydrogen fuel cell banks, and fast-starting reciprocating generators. 
 

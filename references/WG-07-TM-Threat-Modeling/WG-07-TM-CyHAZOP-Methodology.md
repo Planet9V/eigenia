@@ -1,11 +1,3 @@
-| Document ID | Working Group | Normative Equivalents | Classification |
-| :--- | :--- | :--- | :--- |
-| EIGENIA-WG07-TM-03 | WG-07-TM | IEC 61882 / IEC 62443-3-2 / IEC 61508 / IEC 61511 / DEXPI 2.0 (ISO 15926) / CycloneDX 1.6 / EU CRA / EN 50126 | Open Architecture Technical Specification |
-
-**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
-**Lead Systems Assurance Architect:** J. McKenney (Systems Assurance Lead)  
-**Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
-
 ## Abstract
 
 In petrochemical refineries, nuclear power plants, and rail transport networks, systems engineers never commission physical infrastructure without conducting a formal Hazard and Operability (HAZOP) study under IEC 61882 and the EN 50126 RAMS lifecycle. Process safety teams systematically apply standardised guide words; NO, LESS, MORE, REVERSE, AS WELL AS, PART OF, OTHER THAN; to identify how deviations in pressure, flow, temperature, and electrical voltage induce physical catastrophe. 

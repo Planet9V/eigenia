@@ -73,20 +73,16 @@ def audit_document(file_path: str) -> dict:
     words = len(text.split())
     chars = len(text)
     
-    # 1. Gate 1: Front-Matter Compliance
+    # 1. Gate 1: Front-Matter Compliance (Strict: Zero metadata tables, zero author blocks, zero loose sponsor lines)
     head_lines = text.split("\n")[:25]
     head_text = "\n".join(head_lines)
     
     has_loose_sponsor = bool(re.search(r"^\s*Lab Sponsor", head_text, re.MULTILINE | re.IGNORECASE))
     has_raw_bold_meta = bool(re.search(r"^\*\*Document Identifier:\*\*", head_text, re.MULTILINE))
     has_table_meta = bool(re.search(r"^\s*\|\s*Document ID\s*\|", head_text, re.MULTILINE))
+    has_author_meta = bool(re.search(r"^\*\*Authors?:", head_text, re.MULTILINE | re.IGNORECASE)) or bool(re.search(r"Multi-Agent Deliberation Panel", head_text))
     
-    # Is it a formal specification or a monograph?
-    is_formal_spec = bool(re.search(r"EIGENIA-WG", text))
-    
-    frontmatter_ok = not has_loose_sponsor and not has_raw_bold_meta
-    if is_formal_spec and not has_table_meta:
-        frontmatter_ok = False
+    frontmatter_ok = not has_loose_sponsor and not has_raw_bold_meta and not has_table_meta and not has_author_meta
 
     # 2. Gate 2: Prohibited AI Filler Words
     ai_word_findings = []
@@ -117,6 +113,7 @@ def audit_document(file_path: str) -> dict:
     paai = evaluate_paai(text)
 
     # Grade calculation
+    is_formal_spec = bool(re.search(r"EIGENIA-WG", text))
     all_gates_pass = (
         frontmatter_ok and
         len(ai_word_findings) == 0 and
