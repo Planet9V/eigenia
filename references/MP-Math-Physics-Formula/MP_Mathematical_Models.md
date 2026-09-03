@@ -1,7 +1,4 @@
 # CDT Mathematical Models; Complete Formula Reference
-
- Lab Sponsor Resident,  j.mckenney
-
  The Cyber Digital Twin (CDT) implements 40 mathematical formulas across six computational engines. These models span the full 7-layer ontology (L0 Physical through L7 Temporal), connecting physical process dynamics to economic quantification and predictive forecasting.
 
 ## Monte Carlo Walk Engine
@@ -206,20 +203,20 @@ Clamped to `[0.01, 1.0]`.
 
 | # | Dimension | Formula | Range |
 | :--- | :--- | :--- | :--- |
-| 1 | Base weight | `BASE_WEIGHTS[relType]` (96 predicates mapped) | 0.10 -- 0.90 |
-| 2 | EPSS score | `0.3 + 0.7 * epss_score` | 0.3 -- 1.0 |
-| 3 | CVSS v3 | `0.5 + 0.5 * (cvss / 10)` | 0.5 -- 1.0 |
+| 1 | Base weight | `BASE_WEIGHTS[relType]` (96 predicates mapped) | 0.10 ; 0.90 |
+| 2 | EPSS score | `0.3 + 0.7 * epss_score` | 0.3 ; 1.0 |
+| 3 | CVSS v3 | `0.5 + 0.5 * (cvss / 10)` | 0.5 ; 1.0 |
 | 4 | KEV listed | `* 1.5` if actively exploited | 1.0 or 1.5 |
-| 5 | SL-T defense | `1 - sl_target * 0.18` | 0.28 -- 1.0 |
-| 6 | TACAM affinity | `0.5 + 0.5 * tacam_score` | 0.5 -- 1.0 |
-| 7 | ERIKA activation | `max(0.2, erika_activation)` | 0.2 -- 1.0 |
-| 8 | EPSS delta 30d | `1.0 + min(delta_30d * 3.0, 0.5)` (if > 0.02) | 1.0 -- 1.5 |
-| 9 | TACAM CMS | `min(cms_multiplier, 2.0)` (if > 1.0) | 1.0 -- 2.0 |
-| 10 | GPR amplifier | `1.0 + gpr_ale_modifier * 0.15` | 1.0 -- ~1.15 |
-| 11 | Born probability | `max(0.3, born_prob_active)` | 0.3 -- 1.0 |
-| 12 | Layer CPT | `CPT[srcLayer -> tgtLayer]` | 0.15 -- 0.90 |
-| 13 | EPSS velocity boost (B1) | `1.0 + min(delta_30d * 3.0, 0.5)` | 1.15 -- 1.5 |
-| 14 | Spectral boost (B3) | `1.8 - eigen_rank * 7.0` | 1.1 -- 1.8 |
+| 5 | SL-T defense | `1 - sl_target * 0.18` | 0.28 ; 1.0 |
+| 6 | TACAM affinity | `0.5 + 0.5 * tacam_score` | 0.5 ; 1.0 |
+| 7 | ERIKA activation | `max(0.2, erika_activation)` | 0.2 ; 1.0 |
+| 8 | EPSS delta 30d | `1.0 + min(delta_30d * 3.0, 0.5)` (if > 0.02) | 1.0 ; 1.5 |
+| 9 | TACAM CMS | `min(cms_multiplier, 2.0)` (if > 1.0) | 1.0 ; 2.0 |
+| 10 | GPR amplifier | `1.0 + gpr_ale_modifier * 0.15` | 1.0 ; ~1.15 |
+| 11 | Born probability | `max(0.3, born_prob_active)` | 0.3 ; 1.0 |
+| 12 | Layer CPT | `CPT[srcLayer -> tgtLayer]` | 0.15 ; 0.90 |
+| 13 | EPSS velocity boost (B1) | `1.0 + min(delta_30d * 3.0, 0.5)` | 1.15 ; 1.5 |
+| 14 | Spectral boost (B3) | `1.8 - eigen_rank * 7.0` | 1.1 ; 1.8 |
 
 ```typescript
 export function computeEdgeWeight(relType: string, sourceProps: NodeProps, targetProps: NodeProps): number {
@@ -308,7 +305,7 @@ The expected number of secondary infections per primary infection. If R0 > 1, th
 
 $$R_0 = \frac{\alpha}{\beta}$$
 
-Default: `0.8 / 0.3 = 2.67` (supercritical -- cascades grow).
+Default: `0.8 / 0.3 = 2.67` (supercritical ; cascades grow).
 
 ### F16. Generalized Pareto Distribution (GPD) Severity
 
@@ -369,7 +366,7 @@ $$P(\text{recover by time } t) = 1 - \exp\left(-\frac{t - t_{infected}}{72}\righ
 
 Pearl's do-calculus implemented as layer-specific causal mechanisms. Each layer receives upstream variables and propagates downstream with exogenous noise `U ~ Uniform(0,1)`.
 
-### F20. L0 -- Physical Process (Bernoulli Flow)
+### F20. L0 ; Physical Process (Bernoulli Flow)
 
 **File:** `mc-scm.ts:50-69`
 
@@ -378,7 +375,7 @@ $$Q = v_{pos} \times 95$$
 $$\Delta T = \begin{cases} \Delta P \times 0.3 & \text{if } |\Delta P| > 50 \\ 0 & \text{otherwise} \end{cases}$$
 $$\text{interlock} = \begin{cases} 1 & \text{if } \Delta P > 80 \\ 0 & \text{otherwise} \end{cases}$$
 
-### F21. L1 -- Cyber Detection (EPSS-Calibrated)
+### F21. L1 ; Cyber Detection (EPSS-Calibrated)
 
 **File:** `mc-scm.ts:71-93`
 
@@ -386,7 +383,7 @@ $$P_{alarm} = \min\left(1, \ \frac{|\Delta P|}{100} \times 0.8 + U \times 0.1\ri
 $$P_{exploit} = EPSS_{base} \times \left(1 + \frac{|\Delta P|}{200}\right)$$
 $$t_{response} = \begin{cases} 2\text{ min} & \text{if interlock triggered} \\ 15 + U \times 30 & \text{otherwise} \end{cases}$$
 
-### F22. L2 -- OT/ICS Isolation (IEC 62443 Zone Model)
+### F22. L2 ; OT/ICS Isolation (IEC 62443 Zone Model)
 
 **File:** `mc-scm.ts:95-116`
 
@@ -395,7 +392,7 @@ $$\text{conduit\_blocked} = P_{isolate} > 0.6$$
 $$P_{lateral} = \begin{cases} 0.1 & \text{if blocked} \\ P_{exploit} \times 0.7 & \text{otherwise} \end{cases}$$
 $$\text{defense\_effectiveness} = \frac{SL\text{-}T}{4}$$
 
-### F23. L3 -- Organizational Impact (Business Continuity)
+### F23. L3 ; Organizational Impact (Business Continuity)
 
 **File:** `mc-scm.ts:118-142`
 
@@ -403,7 +400,7 @@ $$t_{down} = \begin{cases} \max(2, \ t_{contain} \times 0.3) & \text{if isolated
 $$\text{production\_loss\_\%} = \min(100, \ t_{down} \times 2 + P_{lateral} \times 30)$$
 $$\text{workforce\_impact} = \begin{cases} 0.8 & t_{down} > 48\text{h} \\ 0.3 & t_{down} > 8\text{h} \\ 0.05 & \text{otherwise} \end{cases}$$
 
-### F24. L4 -- Geopolitical Propagation (Leontief Input-Output)
+### F24. L4 ; Geopolitical Propagation (Leontief Input-Output)
 
 **File:** `mc-scm.ts:144-174`
 
@@ -412,7 +409,7 @@ $$\text{geo\_amplifier} = g_{risk} \times (1 + P_{cascade} \times 0.5)$$
 
 Where `g_risk` is the mean `g_risk_multiplier` from `public.governance_risk`.
 
-### F25. L5 -- Economic Quantification (ALE Model)
+### F25. L5 ; Economic Quantification (ALE Model)
 
 **File:** `mc-scm.ts:176-207`
 
@@ -424,7 +421,7 @@ $$\text{total\_impact} = \text{breach} + \text{BI} + \text{fine} + \text{supply}
 
 All values in $M. Premium multiplier: `1.3 + P_cascade * 0.7`. Insurance coverage: 60% typical.
 
-### F26. L6 -- Psychographic Shift (ERIKA Quantum State)
+### F26. L6 ; Psychographic Shift (ERIKA Quantum State)
 
 **File:** `mc-scm.ts:209-230`
 
@@ -432,7 +429,7 @@ $$\Delta_{activation} = \begin{cases} 0.3 + U \times 0.2 & \text{if impact > \$2
 $$P_{copycat} = \begin{cases} 0.4 + U \times 0.3 & \text{if impact > \$30M} \\ 0.1 & \text{otherwise} \end{cases}$$
 $$\text{SE\_boost} = \begin{cases} 1.3 & \text{if } \Delta_{act} > 0.2 \\ 1.0 & \text{otherwise} \end{cases}$$
 
-### F27. L7 -- Temporal Forecast (Seldon Prediction)
+### F27. L7 ; Temporal Forecast (Seldon Prediction)
 
 **File:** `mc-scm.ts:232-254`
 
@@ -491,7 +488,7 @@ $$\lambda_{adj} = \lambda_{sector} \times (1 - SL\text{-}T \times 0.15) \times (
 | 1 | 0.85 | 0.0 | 1.00 |
 | 2 | 0.70 | 0.5 | 0.70 |
 | 3 | 0.55 | 1.0 | 0.40 |
-| 4 | 0.40 | -- | -- |
+| 4 | 0.40 | ; | ; |
 
 ### F30. Percentile-Based Tail Shape Estimator (Pareto Alpha)
 
@@ -774,7 +771,7 @@ See F11 above. EPSS velocity data is sourced from `seldon.epss_trajectory` (555,
 
 | # | Formula | File | Line | Layer |
 | :--- | :--- | :--- | :--- | :--- |
-| F1 | Mulberry32 PRNG | `mc-engine.ts` | 27 | -- |
+| F1 | Mulberry32 PRNG | `mc-engine.ts` | 27 | ; |
 | F2 | Boltzmann Distribution | `mc-engine.ts` | 320 | L1-L2 |
 | F3 | Pareto Sampling | `mc-engine.ts` | 348 | L5 |
 | F4 | Hill Estimator | `mc-engine.ts` | 355 | L5 |
@@ -810,9 +807,9 @@ See F11 above. EPSS velocity data is sourced from `seldon.epss_trajectory` (555,
 | F34 | Premium Calculation | `ale-engine.ts` | 967 | L5 |
 | F35 | Y5381 Attribution | `ale-engine.ts` | 706 | L4-L5 |
 | F36 | Loss Development Factors | `ale-engine.ts` | 283 | L5 |
-| F37 | xoshiro128** PRNG | `ale-engine.ts` | 366 | -- |
+| F37 | xoshiro128** PRNG | `ale-engine.ts` | 366 | ; |
 | F38 | ATQ Sigmoid + Weights | `atq-migration.sql` | 598 | L0-L7 |
-| F38a | ATQ Confidence Interval | `atq-migration.sql` | 614 | -- |
+| F38a | ATQ Confidence Interval | `atq-migration.sql` | 614 | ; |
 | F39 | Detection Probability | `mc-engine.ts` | 598 | L2 |
 | C1 | EIC Composite | `atq-migration.sql` | 178 | L6 |
 | C2 | TACAM Affinity | `atq-migration.sql` | 213 | L1-L2 |

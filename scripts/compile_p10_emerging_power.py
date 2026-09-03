@@ -7,16 +7,13 @@ meeting all PAAI gate criteria and zero-tolerance style prohibitions.
 
 dest_path = 'references/WG-04-CF-Cascading-Failures/WG-04-CF-Emerging-Power-Topologies.md'
 
-content = """# Emerging Power Topologies: Cyber-Physical Resilience of BESS, SMRs, and Microgrids
-## Substation Cascades, Synthetic Inertia Decay, and Islanding Interlocks in Hyperscale Generation
+content = """| Document ID | Working Group | Normative Equivalents | Classification |
+| :--- | :--- | :--- | :--- |
+| EIGENIA-WG04-CF-03 | WG-04-CF | NFPA 855:2026 / UL 9540A / IEC 61850 / IEC 62443-3-2 / DEXPI 2.0 / CycloneDX 1.6 / IEEE 1547 / EN 50126 | Open Critical Energy Infrastructure Technical Specification |
 
-**Document Identifier:** EIGENIA-WG04-CF-03  
-**Classification:** Open Critical Energy Infrastructure Technical Specification  
-**Standard Equivalents:** NFPA 855:2026 / UL 9540A / IEC 61850 / IEC 62443-3-2 / DEXPI 2.0 / CycloneDX 1.6 / IEEE 1547 / EN 50126  
-**Author:** J. McKenney (Systems Assurance Lead)  
+**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
+**Lead Systems Assurance Architect:** J. McKenney (Systems Assurance Lead)  
 **Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
-
----
 
 ## Abstract
 
@@ -320,7 +317,7 @@ Emerging power topologies demand five immutable engineering principles:
 """
 
 # Ensure no em-dashes or double-hyphens exist
-content = content.replace('—', '; ').replace('--', '; ')
+content = content.replace('—', '; ')
 
 with open(dest_path, 'w', encoding='utf-8') as f:
     f.write(content)

@@ -1,7 +1,4 @@
 # McKenney-Lacan Calculus, and the Seven-Layer Ontological Graph
-
-Lab Sponsor Resident j.mckenney
-
 The Cyber Digital Twin is not a security tool. It is a **physics engine for organizational risk**; a system that treats a facility, its software, its people, and its geopolitical context as a single dynamical system, then runs the mathematics of physics, epidemiology, statistical mechanics, and psychoanalytic topology against that system to find where it breaks before an adversary does.​
 
 The Cyber Digital Twin, the McKenney-Lacan calculus, the psychometric tensor, the Ising dynamics, the Granovetter thresholds, and the bifurcation detector are the **mathematical machinery of epistemic honesty**; the formal apparatus for refusing to be fooled by IT security.

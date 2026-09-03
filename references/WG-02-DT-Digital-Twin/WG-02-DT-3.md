@@ -1,7 +1,4 @@
 # The Moment of Recognition
-
-Lab Sponsor Resident  j.mckenney
-
 There is a particular kind of clarity that comes from spending decades inside facilities where the stakes are not financial; where the wrong call does not cost money but costs lives, power, water, safety, and the invisible infrastructure that modern civilization takes entirely for granted.
 
 ## What Nassim Taleb Saw in Markets, We See Every Day in the Facilities the World Depends On

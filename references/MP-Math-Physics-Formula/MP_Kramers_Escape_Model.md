@@ -1,7 +1,4 @@
 # Kramers Escape Model: Topological Risk Theory
-
- Lab Sponsor Resident,  j.mckenney
-
 A physics-based approach to modeling the probability of transition from a 'Secure' state to a 'Compromised' state across topological energy barriers.**
 
 ## Theoretical Foundation

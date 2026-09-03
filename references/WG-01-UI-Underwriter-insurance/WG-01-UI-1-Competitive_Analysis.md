@@ -1,7 +1,4 @@
 # Actuarial Engine Ecosystem Competitive Analysis & Market Positioning
-
- Lab Sponsor Resident,  j.mckenney
-
 To fully understand where **Eigenia** fits within the cyber insurance ecosystem, it helps to categorize the market into distinct layers:
 - "Outside-In" Scanners, Catastrophe (Cat) Modelers
 - OT Risk Quantifiers

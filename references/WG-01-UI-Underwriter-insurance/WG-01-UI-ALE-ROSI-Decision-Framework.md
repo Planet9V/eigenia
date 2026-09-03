@@ -1,12 +1,11 @@
-# Annualised Loss Expectancy (ALE) & Return on Security Investment for OT
-## Financial Risk Quantification, Gordon-Loeb Ceilings, and Fat-Tailed Loss Corrections for Datacenter Infrastructure
+| Document ID | Working Group | Normative Equivalents | Classification |
+| :--- | :--- | :--- | :--- |
+| EIGENIA-WG01-UI-09 | WG-01-UI | NIST SP 800-30 Rev. 1 / Open FAIR (ISO/IEC 27005) / IEC 62443-3-2 / DEXPI 2.0 / CycloneDX 1.6 / EN 50126 | Open Actuarial & CFO Advisory Technical Specification |
 
-**Document Identifier:** EIGENIA-WG01-UI-09  
-**Classification:** Open Actuarial & CFO Advisory Technical Specification  
-**Standard Equivalents:** NIST SP 800-30 Rev. 1 / Open FAIR (ISO/IEC 27005) / IEC 62443-3-2 / DEXPI 2.0 / CycloneDX 1.6 / EN 50126  
-**Author:** J. McKenney (Systems Assurance Lead)  
+**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
+**Lead Systems Assurance Architect:** J. McKenney (Systems Assurance Lead)  
 **Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
----
+
 ## Abstract
 
 Engineering risk frameworks such as Failure Mode, Effects, and Criticality Analysis (FMECA) and Hazard and Operability studies (HAZOP) tell facility teams *what* can fail and *how severe* the physical breakdown will be. However, engineering risk metrics; such as Risk Priority Numbers (RPN); fail to answer the primary question asked by Chief Financial Officers, insurance underwriters, and corporate boards of directors: *How much capital is exposed to loss, and what is the optimal financial return on mitigating that exposure?*
@@ -14,7 +13,9 @@ Engineering risk frameworks such as Failure Mode, Effects, and Criticality Analy
 This paper translates the cyber-physical CyHAZOP and dual-RPN engineering methodologies into the formal financial risk quantification frameworks required for capital allocation: Annualised Loss Expectancy (ALE) per NIST SP 800-30, the Gordon-Loeb optimal information security investment model, and the Open FAIR probabilistic taxonomy. Using a fully worked, empirical reference case of a 100 MW high-density compute facility, we prove that a targeted 1.60M USD operational technology security programme mitigates 15.07M USD in annual expected losses; delivering a verified programme-level Return on Security Investment (ROSI) of 842%. The programme operates at 49% of the Gordon-Loeb investment ceiling, preserving financial efficiency while closing critical vulnerability vectors.
 
 Crucially, this paper demonstrates that standard ALE, Gordon-Loeb, and Gaussian Value-at-Risk (VaR) models systematically underestimate catastrophic tail-risk because they assume thin-tailed Mediocristan distributions. By introducing Nassim Nicholas Taleb fat-tail power-law corrections, we prove that for Table B (Extremistan) cyber-physical catastrophes; such as simultaneous multi-megawatt cooling collapse; traditional actuarial models underestimate single-event probable maximum loss by an order of magnitude. We formalize the actuarial equations required to price property catastrophe policies, establish dynamic retention deductibles, and structure affirmative cyber-physical reinsurance treaties under Lloyd's Y5381.
+
 ---
+
 ## 1. The Executive Capital Allocation Problem
 
 In hyperscale mission-critical environments, a severe disconnect exists between operational engineering teams and the executive suite:
@@ -46,7 +47,9 @@ Without rigorous financial quantification, cybersecurity requests are treated as
 | - Taleb Fat-Tail Power-Law Correction (Alpha < 2.0 Extremistan Scale)   |
 +-------------------------------------------------------------------------+
 ```
+
 ---
+
 ## 2. Multi-BOM and DEXPI Asset Valuation Topology
 
 Accurately calculating Asset Value (AV) and Exposure Factor (EF) requires synchronizing physical piping models with silicon inventories across the DEXPI 2.0 (ISO 15926) and CycloneDX 1.6+ specifications:
@@ -85,7 +88,9 @@ Accurately calculating Asset Value (AV) and Exposure Factor (EF) requires synchr
 ```
 
 By joining the physical DEXPI asset graph with the CycloneDX silicon bill of materials, the financial model evaluates not merely the replacement cost of an industrial pump ($45,000	ext{ USD}$), but the total dependent compute payload ($375,000,000	ext{ USD}$) that crashes when that pump is commanded to stop.
+
 ---
+
 ## 3. The Core Financial Risk Frameworks
 
 ### 3.1 Annualised Loss Expectancy (NIST SP 800-30 Rev. 1)
@@ -118,7 +123,9 @@ The financial return on security controls is evaluated by dividing the net mitig
 $$	ext{ROSI} = rac{\Delta 	ext{ALE} - C_{	ext{control}}}{C_{	ext{control}}} 	imes 100\% = rac{(	ext{ALE}_{	ext{unmitigated}} - 	ext{ALE}_{	ext{hardened}}) - C_{	ext{control}}}{C_{	ext{control}}} 	imes 100\%$$
 
 Where $C_{	ext{control}}$ includes capital expenditure (hardware firewalls, optical diodes, FPGA gateways), implementation labor, annual software licensing, and operational testing.
+
 ---
+
 ## 4. Empirical 100 MW Hyperscale Worked Case Study
 
 The following worked financial analysis evaluates the six high-consequence CyHAZOP nodes of a 100 MW high-density compute facility. Asset values reflect empirical replacement costs and unserved SLA revenue losses derived from commercial hyperscale operations:
@@ -130,7 +137,7 @@ The following worked financial analysis evaluates the six high-consequence CyHAZ
 ```
 
 | Node | Failure Scenario | Asset Value (AV) | EF | Single Loss (SLE) | ARO (Cyber) | Pre-Mitigation ALE |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|:---|:---|:---:|:---:|:---:|:---:|:---:|
 | **N2: Block UPS** | Coordinated NMC ransomware trips all inverters; 4-hour outage | $50,000,000 | 0.80 | $40,000,000 | 0.05 | **$2,000,000** |
 | **N5: Central Chiller** | Modbus setpoint manipulation locks supply temp at $22^\circ	ext{C}$; 8-hour thermal trip | $36,000,000 | 0.60 | $21,600,000 | 0.15 | **$3,240,000** |
 | **N6: CDU Secondary** | Pump stop with spoofed flow telemetry; silicon thermal destruction | $75,000,000 | 0.85 | $63,750,000 | 0.10 | **$6,375,000** |
@@ -138,7 +145,9 @@ The following worked financial analysis evaluates the six high-consequence CyHAZ
 | **N10: Fire Suppression** | Inadvertent clean-agent release and HVAC emergency shutdown | $15,000,000 | 0.40 | $6,000,000 | 0.10 | **$600,000** |
 | **N12: Server BMC** | Supply chain firmware backdoor kills 2,000 accelerator nodes | $48,000,000 | 0.70 | $33,600,000 | 0.08 | **$2,688,000** |
 | **TOTALS** | **Baseline 100 MW Hyperscale Infrastructure** | **; ** | **; ** | **; ** | **; ** | **$17,403,000** |
+
 ---
+
 ## 5. Security Programme Capital Allocation and ROSI Analysis
 
 To mitigate the $17.40	ext{M USD}$ annual loss exposure, the facility deploys an integrated operational technology security programme totaling $1.60	ext{M USD}$ in Year 1 capital and operational expenditure:
@@ -150,7 +159,7 @@ To mitigate the $17.40	ext{M USD}$ annual loss exposure, the facility deploys an
 ```
 
 | Node | Engineered Safeguard Deployed | Control Cost | Residual ARO | Post-Mitigation ALE | Net Loss Mitigated ($\Delta	ext{ALE}$) | Node ROSI |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|:---|:---|:---:|:---:|:---:|:---:|:---:|
 | **N2: Block UPS** | Isolated VLAN, physical console login, disabled cloud NMC interface | $180,000 | 0.005 | $200,000 | $1,800,000 | **900%** |
 | **N5: Chiller** | BACnet deep packet inspection firewall, PLC setpoint clamping | $220,000 | 0.010 | $216,000 | $3,024,000 | **1,275%** |
 | **N6: CDU** | Optical data diode, hardwired SIL-3 bi-metallic cutout switches | $450,000 | 0.005 | $318,750 | $6,056,250 | **1,246%** |
@@ -167,7 +176,9 @@ $$	ext{Gordon-Loeb Investment Ceiling} = 0.3679 	imes 	ext{ALE}_{	ext{unmitigate
 $$	ext{Budget Utilization Ratio} = rac{	ext{Programme Cost}}{	ext{Gordon-Loeb Ceiling}} = rac{\$1,600,000}{\$6,402,564} = 24.99\%$$
 
 The $1.60	ext{M USD}$ investment operates at only $25\%$ of the maximum rational spending ceiling, providing exceptional capital efficiency while eliminating $88.2\%$ of total annualized cyber-physical financial risk.
+
 ---
+
 ## 6. The Nassim Taleb Fat-Tail Correction: Table A vs. Table B
 
 While standard ALE and Gordon-Loeb formulations provide vital capital allocation guidance, they suffer from a fatal structural flaw: **they assume thin-tailed, Gaussian distributions.**
@@ -221,7 +232,9 @@ However, empirical cyber-physical catastrophe claims exhibit a power-law tail wi
 $$	ext{ES}_{0.99}^{	ext{Fat-Tail}} = rac{1.25}{1.25 - 1} \cdot \$25,000,000 = 5.0 	imes \$25,000,000 = \$125,000,000$$
 
 The standard Gaussian model underestimates the catastrophic tail exposure by **96,500,000 USD (a 4.38x undercount)**. When common-cause cyber interdictions trigger simultaneous multi-hall cooling collapse, the physical loss wipes out thin-tailed insurance reserves, causing unhedged carrier insolvencies.
+
 ---
+
 ## 7. Governing Physical and Actuarial Formulations
 
 To unify applied physics with financial risk management, the quantitative framework is governed by five core equations:
@@ -247,9 +260,7 @@ Where fluid flow collapses from $38.5	ext{ L/min}$ PG25 to zero, intense silicon
 ### 7.3 Probable Maximum Loss (PML) under Table B Regimes
 For underwriting capital reserve determination, the Probable Maximum Loss under Extremistan tail regimes is formulated as:
 
-$$	ext{PML}_{	ext{Extremistan}} = \left( rac{lpha}{lpha - 1} 
-ight) \cdot \left[ \sum_{j=1}^{N_{	ext{halls}}} 	ext{SLE}(j) \cdot \mathbf{1}_{\{	ext{shared\_SCADA}\}} 
-ight]$$
+$$	ext{PML}_{	ext{Extremistan}} = \left( rac{lpha}{lpha - 1} ight) \cdot \left[ \sum_{j=1}^{N_{	ext{halls}}} 	ext{SLE}(j) \cdot \mathbf{1}_{\{	ext{shared\_SCADA}\}} ight]$$
 
 ### 7.4 Net Present Value of Continuous Security Assurance
 The multi-year capital justification for operational technology resilience is expressed through discounted Net Present Value:
@@ -257,18 +268,22 @@ The multi-year capital justification for operational technology resilience is ex
 $$	ext{NPV}_{	ext{security}} = \sum_{t=1}^N rac{\Delta 	ext{ALE}_t - 	ext{OPEX}_t}{(1 + r)^t} - 	ext{CAPEX}_0$$
 
 For the worked 100 MW case study at a discount rate of $r = 8.5\%$, over a 5-year operational lifecycle, the net present value exceeds $48,200,000	ext{ USD}$.
+
 ---
+
 ## 8. Actuarial and Reinsurance Treaty Structuring
 
 Structuring affirmative cyber-physical reinsurance treaties requires aligning policy terms directly with empirical FMECA and ALE metrics:
 
 | Underwriting Parameter | Unmitigated Facility (Legacy OT) | Hardened Facility (Eigenia Assured) | Actuarial Justification |
-| :--- | :--- | :--- | :--- |
+|:---|:---|:---|:---|
 | **Primary Property Retention (Deductible)** | $25,000,000 to $50,000,000 punitive deductible. | $2,500,000 retention indexed to verified digital twin compliance. | Hardwired SIL-3 interlocks physically truncate catastrophic loss tails. |
 | **Business Interruption Sub-Limits** | Strict 7-day waiting period; sub-limits capped at $10,000,000. | Full affirmative BI coverage up to $50,000,000; 12-hour waiting period. | Unidirectional optical data diodes eliminate remote supervisory hijacking. |
 | **Lloyd's Y5381 War Exclusion** | Total claim denial during suspected nation-state state-sponsored events. | Full affirmative coverage granted without unhedged sovereign exclusions. | Attested hardware roots of trust (Caliptra 2.0) provide forensic certainty. |
 | **Portfolio Accumulation Loading** | 45% capital surcharge to protect against correlated multi-site blackout. | 0% accumulation surcharge; risks treated as decoupled independent risks. | Diversity of controller firmware and network air-gapping verified via CycloneDX SBOM. |
+
 ---
+
 ## 9. Summary of Engineering Principles
 
 Financial risk quantification for critical operational technology establishes five immutable principles:

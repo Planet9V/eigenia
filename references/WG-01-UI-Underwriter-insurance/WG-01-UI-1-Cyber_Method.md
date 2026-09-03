@@ -1,7 +1,4 @@
 # The Cyber Digital Twin Paradigm: Redefining Critical Infrastructure Risk Transfer
-
-Lab Sponsor Resident  j.mckenney
-
 By fusing deterministic physics models, real-time telemetry, traditional safety engineering, and psychometric predictive intelligence, this architecture eliminates the opacity that has historically plagued the underwriting of critical infrastructure. It acknowledges and addresses the mathematical reality of fat-tail systemic risk, using continuous observation to flatten exposure curves. Ultimately, by establishing a telematics-like paradigm for cyber insurance, the digital twin empowers global brokers and underwriters to move beyond static, defensive posturing, advancing a resilient, dynamic, and sustainable market for digital risk capital.
 
 ## Table of Contents

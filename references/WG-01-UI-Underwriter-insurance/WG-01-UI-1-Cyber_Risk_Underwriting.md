@@ -1,7 +1,4 @@
 # Advanced Cyber Risk Underwriting for Critical Infrastructure
-
-Lab Sponsor Resident  j.mckenney
-
 The underwriting of cyber risk for critical infrastructure represents one of the most complex challenges in modern actuarial science and enterprise risk management. Critical infrastructure, defined by the Cybersecurity and Infrastructure Security Agency (CISA) as sectors whose incapacitation would have debilitating effects on national security, economic stability, or public health, encompasses a wide array of industries including global manufacturing, energy, hyperscale datacenters, communications, and government facilities.
 
 ## Cyber Risk Insurance for Critical Infrastructure

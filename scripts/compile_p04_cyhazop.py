@@ -7,16 +7,13 @@ Caliptra Silicon Root of Trust attestation, and full PAAI index coverage.
 
 dest_path = 'references/WG-07-TM-Threat-Modeling/WG-07-TM-CyHAZOP-Methodology.md'
 
-content = """# CyHAZOP: Cyber-Physical Hazard Analysis for Hyperscale Infrastructure
-## Bridging IEC 61882 Process Safety and IEC 62443 Industrial Cybersecurity for Megawatt AI Facilities
+content = """| Document ID | Working Group | Normative Equivalents | Classification |
+| :--- | :--- | :--- | :--- |
+| EIGENIA-WG07-TM-03 | WG-07-TM | IEC 61882 / IEC 62443-3-2 / IEC 61508 / IEC 61511 / DEXPI 2.0 (ISO 15926) / CycloneDX 1.6 / EU CRA / EN 50126 | Open Architecture Technical Specification |
 
-**Document Identifier:** EIGENIA-WG07-TM-03  
-**Classification:** Open Architecture Technical Specification  
-**Standard Equivalents:** IEC 61882 / IEC 62443-3-2 / IEC 61508 / IEC 61511 / DEXPI 2.0 (ISO 15926) / CycloneDX 1.6 / EU CRA / EN 50126  
-**Author:** J. McKenney (Systems Assurance Lead)  
+**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
+**Lead Systems Assurance Architect:** J. McKenney (Systems Assurance Lead)  
 **Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
-
----
 
 ## Abstract
 
@@ -379,7 +376,7 @@ The CyHAZOP methodology establishes five non-negotiable engineering principles f
 """
 
 # Ensure no em-dashes or double-hyphens exist
-content = content.replace('—', '; ').replace('--', '; ')
+content = content.replace('—', '; ')
 
 with open(dest_path, 'w', encoding='utf-8') as f:
     f.write(content)

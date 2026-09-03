@@ -7,16 +7,13 @@ CycloneDX 1.6 JSON schemas, fluid mechanics derivations, and actuarial tables.
 
 dest_path = 'references/WG-05-CAD-DEXPI-2/WG-05-CAD-Unified-DEXPI-CycloneDX.md'
 
-content = """# Unified DEXPI 2.0 & CycloneDX 1.6+ Semantic Bridge
-## Bridging Physical Plant Hydronics (ISO 15926) and Multi-Tier Cybersecurity Architecture (ISO/IEC 5962) for the Cyber Digital Twin
+content = """| Document ID | Working Group | Normative Equivalents | Classification |
+| :--- | :--- | :--- | :--- |
+| EIGENIA-WG05-CAD-02 | WG-05-CAD | DEXPI 2.0 (ISO 15926) / CycloneDX 1.6+ (ISO/IEC 5962 / ECMA-424) / IEC 62443-4-2 / EU CRA (Reg 2024/2847) | Open Architecture Technical Specification |
 
-**Document Identifier:** EIGENIA-WG05-CAD-02  
-**Classification:** Open Architecture Technical Specification  
-**Standard Equivalents:** DEXPI 2.0 (ISO 15926) / CycloneDX 1.6+ (ISO/IEC 5962 / ECMA-424) / IEC 62443-4-2 / EU CRA (Reg 2024/2847)  
-**Author:** J. McKenney (Systems Assurance Lead)  
+**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
+**Lead Systems Assurance Architect:** J. McKenney (Systems Assurance Lead)  
 **Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
-
----
 
 ## Abstract
 
@@ -435,12 +432,12 @@ Connecting physical P&ID data directly to digital BOM schemas fundamentally alte
 To deploy this semantic bridge within production facilities, organizations follow a four-stage ingestion pipeline:
 
 ```
-+---------------------+      +---------------------+
++---------------------+------+---------------------+
 | DEXPI 2.0 P&ID XML  |      | CycloneDX 1.6+ JSON |
 | (Mechanical CAD)    |      | (Multi-BOM Catalog) |
-+---------------------+      +---------------------+
++---------------------+------+---------------------+
            |                            |
-           +------------+  +------------+
+           +------------+--+------------+
                         |  |
                         v  v
         +-----------------------------------+
@@ -461,11 +458,11 @@ To deploy this semantic bridge within production facilities, organizations follo
             +-----------+-----------+
             |                       |
             v                       v
-+-----------------------+ +-----------------------+
++-----------------------+-+-----------------------+
 | Operational Security  | | Actuarial Engine      |
 | - Machine-Speed VEX   | | - Dynamic Premiums    |
 | - Out-of-Band Defense | | - Lloyd's Y5381 Proof |
-+-----------------------+ +-----------------------+
++-----------------------+-+-----------------------+
 ```
 
 ### 8.1 Automated Ingestion Steps
@@ -488,7 +485,7 @@ The Unified DEXPI 2.0 and CycloneDX 1.6+ Semantic Bridge establishes five non-ne
 """
 
 # Clean any surviving em-dashes and AI words
-content = content.replace('—', '; ').replace('--', '; ')
+content = content.replace('—', '; ')
 
 with open(dest_path, 'w', encoding='utf-8') as f:
     f.write(content)

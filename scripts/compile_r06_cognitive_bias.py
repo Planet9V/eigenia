@@ -10,17 +10,13 @@ import re
 
 dest_path = 'references/WG-03-ML-Behaviorial_Modeling/WG-03-ML-Cognitive-Bias-Catalog.md'
 
-content = """# Cognitive Bias Catalog: Exploiting Human Heuristics in Security Decisions
-## Dual-Process Heuristics, Bias Susceptibility Scoring, and Adversary Exploitation Vectors in Industrial Control Environments
+content = """| Document ID | Working Group | Normative Equivalents | Classification |
+| :--- | :--- | :--- | :--- |
+| EIGENIA-WG03-ML-07 | WG-03-ML (Psychometrics & Behavioral Modeling) | IEC 62443-3-2 / ISO 15926 / DEXPI 2.0 / CycloneDX 1.6 / EU CRA / EN 50126 | Open Theoretical & Behavioral Modeling Specification |
 
-**Document Identifier:** EIGENIA-WG03-ML-07  
-**Classification:** Open Theoretical & Behavioral Modeling Specification  
-**Working Group:** WG-03-ML (Psychometrics & Behavioral Modeling)  
-**Standard Equivalents:** IEC 62443-3-2 / ISO 15926 / DEXPI 2.0 / CycloneDX 1.6 / EU CRA / EN 50126  
-**Author:** J. McKenney (Systems Assurance Lead)  
+**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
+**Lead Systems Assurance Architect:** J. McKenney (Systems Assurance Lead)  
 **Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
-
----
 
 ## Executive Abstract
 
@@ -331,7 +327,7 @@ Underwriters operating under the Lloyd's Y5381 cyber war and state-backed attack
 """
 
 # Final verification: eliminate any lingering em-dashes
-content = content.replace('—', '; ').replace('--', '; ')
+content = content.replace('—', '; ')
 
 # Ensure directory exists
 os.makedirs(os.path.dirname(dest_path), exist_ok=True)

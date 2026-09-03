@@ -7,16 +7,13 @@ meeting all PAAI gate criteria and zero-tolerance style prohibitions.
 
 dest_path = 'references/WG-01-UI-Underwriter-insurance/WG-01-UI-Quantitative-Cyber-Physical-FMECA.md'
 
-content = """# Quantitative Cyber-Physical FMECA: Failure Mode Analysis for Underwriting
-## Why Cyber-Induced Failure Modes Carry Risk Priority Numbers 3x to 13x Higher Than Mechanical Wear
+content = """| Document ID | Working Group | Normative Equivalents | Classification |
+| :--- | :--- | :--- | :--- |
+| EIGENIA-WG01-UI-08 | WG-01-UI | IEC 60812 (FMEA/FMECA) / IEC 62443-3-2 / DEXPI 2.0 (ISO 15926) / CycloneDX 1.6 / MIL-STD-1629A / EN 50126 | Open Actuarial & Reliability Engineering Technical Specification |
 
-**Document Identifier:** EIGENIA-WG01-UI-08  
-**Classification:** Open Actuarial & Reliability Engineering Technical Specification  
-**Standard Equivalents:** IEC 60812 (FMEA/FMECA) / IEC 62443-3-2 / DEXPI 2.0 (ISO 15926) / CycloneDX 1.6 / MIL-STD-1629A / EN 50126  
-**Author:** J. McKenney (Systems Assurance Lead)  
+**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
+**Lead Systems Assurance Architect:** J. McKenney (Systems Assurance Lead)  
 **Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
-
----
 
 ## Abstract
 
@@ -270,7 +267,7 @@ Quantitative cyber-physical FMECA establishes five immutable engineering princip
 """
 
 # Ensure no em-dashes or double-hyphens exist
-content = content.replace('—', '; ').replace('--', '; ')
+content = content.replace('—', '; ')
 
 with open(dest_path, 'w', encoding='utf-8') as f:
     f.write(content)

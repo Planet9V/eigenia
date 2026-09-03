@@ -7,16 +7,13 @@ meeting all PAAI gate criteria and zero-tolerance style prohibitions.
 
 dest_path = 'references/WG-01-UI-Underwriter-insurance/WG-01-UI-RCIL-SCIL-Reinsurance.md'
 
-content = """# Reliability & Safety Critical Items Lists (RCIL / SCIL) for Reinsurance
-## Quantifying Lead-Time Exposure, Single-Source Vulnerabilities, and Cyber-Physical Spares Optimization
+content = """| Document ID | Working Group | Normative Equivalents | Classification |
+| :--- | :--- | :--- | :--- |
+| EIGENIA-WG01-UI-10 | WG-01-UI | IEC 60812 / IEC 62443-3-2 / IEC 61508 (SIL) / DEXPI 2.0 (ISO 15926) / CycloneDX 1.6 / EN 50126 | Open Actuarial & Critical Spares Engineering Specification |
 
-**Document Identifier:** EIGENIA-WG01-UI-10  
-**Classification:** Open Actuarial & Critical Spares Engineering Specification  
-**Standard Equivalents:** IEC 60812 / IEC 62443-3-2 / IEC 61508 (SIL) / DEXPI 2.0 (ISO 15926) / CycloneDX 1.6 / EN 50126  
-**Author:** J. McKenney (Systems Assurance Lead)  
+**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
+**Lead Systems Assurance Architect:** J. McKenney (Systems Assurance Lead)  
 **Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
-
----
 
 ## Abstract
 
@@ -287,7 +284,7 @@ Reliability and Safety Critical Items management establishes five immutable engi
 """
 
 # Ensure no em-dashes or double-hyphens exist
-content = content.replace('—', '; ').replace('--', '; ')
+content = content.replace('—', '; ')
 
 with open(dest_path, 'w', encoding='utf-8') as f:
     f.write(content)
