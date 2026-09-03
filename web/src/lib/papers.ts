@@ -250,7 +250,7 @@ export const PAPERS_REGISTRY: Record<string, { title: string; category: string; 
 
   // Track 5: Threat Scoring
   "atq-deep-dive": {
-    title: "Adversary Threat Quotient (ATQ): 12-Factor Threat Actor Scoring Formula",
+    title: "Adversary Threat Quotient (ATQ): A Twelve-Factor Quantitative Threat Actor Scoring Model",
     category: "Threat Scoring Engine",
     number: "TRACK 05",
     relativePath: "references/WG-07-TM-Threat-Modeling/WG-07-TM-ATQ.md",
