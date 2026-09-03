@@ -1,684 +1,554 @@
-# Frontier AI Hardware Security & Platform Assurance Framework
-
-**Classification:** Open Industry Architecture Specification  
-**Version:** 1.0 (Post-Workshop Synthesis)  
-**Date:** September 2026
-
-**Author:** J. McKenney (Systems Assurance Lead)  
-**Affiliation:** Applied Complexity & Critical Infrastructure Security
-
-This document is an informal follow-up to the late August 2026 workshop during the technical workshop. It captures my core observations, key takeaways, and critical commercial and engineering success factors, then proposes a concrete program of work.
-
-Challenge: Frontier AI model weights are $500500M+ USD assets that must be defended against sovereign-tier extraction. Frontier AI Labs require hardware-enforced zero trust that protects weights even if the host CPU or facility network is compromised. Semiconductor Manufacturer needs a structured way to deliver trusted silicon and rack architectures without derailing multi-year tape-out schedules.
-
-Looking Forward: Coordinating rapid software deployment, multi-year silicon hardware and silicon engineering cycles requires a shared baseline. This proposed program of work couples a Uniform Platform Security Document (UPSD) with a Dual-Pacing V-Model Program; locking critical protections (such as Annex 7) into current N-1 platforms (N-1 Reference System/Host Server CPU) today, while locking in the architecture for Gen 6 zero-trust silicon tomorrow.
-
-Part 1: Workshop Follow-up
-
-Observations
-
-Workshop takeaways, trust boundary definitions, potential assurance gaps
-
-Key Takeaways
-
-4 Critical Capabilities: locked kernels, egress throttling, machine-speed falsification, Annex 7
-
-Key Success Factors
-
-Commercial, operations, development and multi-vendor alignment
-
-Part 2: Looking Forward
-
-1. Strategic Proposal
-
-2. Strategic Program Structure & Approach
-
-3. The 5 Guiding Principles
-
-Zero Trust at Silicon Boundary (Distrust the Host)
-
-Cyber-Physical RAMS Convergence (Safety & Availability)
-
-Machine-to-Machine Open Standards (Supply Chain Transparency)
-
-Machine-Speed Falsification (Continuous Verification)
-
-Open Platform Initialization (Cradle-to-Grave Provenance)
-
-4. 3-Horizon Framework
-
-6 Months
-
-18 Months
-
-5-6 Years
-
-5. Multi-Vendor Model
-
-6. 90 Day Action Plan
-
-7. Glossary & Standards Referenced
-
-## Part 1: Executive Workshop Observations & Takeaways
-
-Observations From workshop session
-
-Primary Objective: "Frontier model weights must be defended against sovereign-tier extraction."
-
-Frontier Model ASL-3 / ASL-4 Containment & Security Requirements
-
-Silicon as the Non-Negotiable Trust Boundary: Frontier AI Labs establish that chip architecture is an immutable security perimeter, requiring hardware-enforced zero-trust isolation where GPUs distrust host CPUs, operating systems, and baseboard management controllers (BMCs) to protect proprietary model weights and custom inference kernels
-
-Unified Platform Threat Model Gap: The workshop identified a potential gap in Threat Modeling and validated controls across its platform security stack and committed to co-developing an end-to-end threat model bridging silicon, chassis firmware, out-of-band management, and facility operational technology (OT)
-
-4-Point Hardware Cryptographic Envelope: The workshop identified that protecting frontier weights requires line-rate hardware encryption across scale-up links, inference kernel enclaves, host-device memory buses, and high-speed network interfaces
-
-Hardware Egress Rate-Limiting: Non-token telemetry, debug, and sideband channels originating from GPU trays must be strictly rate-limited in silicon to close covert weight exfiltration pathways
-
-Clarity on N-1 vs. Gen 6: Frontier AI Labs require deterministic verification of what exact protections apply to the clusters being deployed next quarter versus what is deferred to the 6-year silicon roadmap.
-
-Constraints on cadence: Semiconductor hardware engineering teams cannot move at the speed of software sprints, and software teams cannot wait for 5-year silicon tape-outs
-
-Uniform Platform Security Document (UPSD) Baseline: A proposed "single source of truth" for all Frontier AI deployments. The proposed "UPSD" could be used for the semiconductor platform to serve as the authoritative single source of truth governing verified production security features, hardware configurations, and active procurement contracts
-
-Machine-Speed Automated Falsification: The workshop discussed a "Autonomous AI-Augmented vulnerability discovery, testing and validation" process, that would enable the transition from manual PSIRT cycles to automated testbenches using Autonomous Agentic-generated exploit hypotheses paired with hardware-in-the-loop (HIL) emulation. This includes testing hypotheses at  machine speed to meet the pace of model development and deployment, AI-based adversaries and the scaling volume of reported vulnerabilities and exploits.  This capability  requires increased transparency of bill of materials and emulation platforms of Frontier AI Lab used  products and platforms for Frontier AI Lab  to co-test with Semiconductor Manufacturer
-
-Open Platform Firmware (OpenSIL) Migration:  Potential replacement of proprietary Legacy Proprietary Initialization Firmware (transitioning to OpenSIL) and BIOS binary blobs with open-source OpenSIL on coreboot, cutting maintenance overhead by up to 80% and enabling transparent boot code inspection
-
-Independent 6-Site Manufacturing HSM Audit: For Supply and Value Chain security for the full manufacturing process, A high degree of confidence of provenance and integrity is required to support high value Model weights and IP:  The formalization of the manufacturing process into an auditable standard across each of AMDs  global HSM provisioning sites to map key injection flows and prepare for Gen 6 on-die asymmetric key generation and support flow down contractual obligations to silicon value and supply chain partners.
-
-Supply Chain Transparency & EU CRA Alignment: The partnership requires semiconductor alignment to Cyber Resilience Act (CRA) for  products delivered to Frontier AI data center facilities, To support this  semiconductor platforms could improve  Supply Chain Transparency   provide machine-readable M2M schema (HBOM/CBOM/SBOM/OBOM) This could be expanded  with the development of an open coordinator for the supply chain with multi vendor support to satisfy EU Cyber Resilience Act requirements and support a more transparent ecosystem
-
-Cyber-Physical Facility Risk Convergence: Physical datacenter systems; including liquid cooling distribution units (CDUs), 48V power busbars, and environmental controls; are formally classified as direct attack vectors governed by IEC 62443 and CLC/TS 50701 industrial safety frameworks
-
-Post-Quantum Cryptography (PQC) Silicon Roadmap: Next-generation silicon will integrate the open-source Caliptra Silicon Root of Trust with NSA CNSA 2.0 quantum-resistant algorithms (ML-DSA-87 and LMS stateful hash signing).
-
-## Key Takeaways
-
-### Observed Required Critical Capabilities
-
-Locked GPU Execution to reject arbitrary host code injection
-
-Egress Bandwidth Throttling to choke covert sideband weight exfiltration channels
-
-Machine-Speed Falsification to enable Autonomous Agent-driven testbenches to proactively find and validate security vulnerabilities before attackers
-
-Annex 7 Contract Terms bind semiconductor manufacturers, ODMs, and system integrators to verifiable security deliverables
-
-## Key Success Factors
-
-### Key Success Factors & Strategic Enablers
-
-SOW Funding Structure: Structuring this engagement around rolling quarterly SOWs tied to formal V-Model and  engineering gates allows the semiconductor partner to resource dedicated headcount (systems assurance, firmware engineers) without committing to open-ended R&D liabilities
-
-EU CRA as a Market Enabler: Turning the September 11, 2026 EU Cyber Resilience Act (CRA) compliance into an automated M2M coordinator repository gives open silicon architectures a major competitive advantage across European and global hyperscale deployments
-
-Asynchronous Cycles of Hardware, Software &:  Hardware teams cannot move at the speed of software sprints, and software teams cannot wait for 5-year silicon tape-outs. A N-1 vs N approach is required where N is current gen and N-1 is next gen. A model for program management that manages the interface between N and N-1 is required  supporting commercial interests with need for the rolling quarterly funding, and SOW requirements and reporting to meet objectives and commercial obligations and deliver tangible results in AI software capabilities, hardware features and integrations, and facility integrations
-
-Brownfield and Trust Boundaries: The operator’s challenge with brownfield is managing the “entanglement” between the AI compute zone and legacy IT/Operational Technology (OT). The definition of the "AI Rack Envelope" (compute, power, cooling, storage, and network interfaces) needs to be established. The AI Rack Envelope is designed to be “air gapped” or strictly firewalled, but the reality of migration or integration often involves connecting these two worlds. The risk is that if the brownfield legacy IT / OT network has latent vulnerabilities (unpatched servers, open ports, weak access controls), attackers can use it as a pivot point to move laterally into the AI zone and access or manipulate the hardware or firmware
-
-Automated Security Testing: Ensure the Autonomous Agent-driven testing engine focuses on hardware interface boundaries, NetFPGA emulation, and firmware state machines without exposing Frontier AI Lab's confidential model weights to test environments
-
-OpenSIL Timeline: Replacing Legacy Proprietary Initialization Firmware (transitioning to OpenSIL) with OpenSIL on coreboot for Host Server CPU is actively underway, but customer-specific validation takes time. An 18-month Horizon 2 deliverable is realistic
-
-"Distrust the Host" engineering deliverable: On current N-1 platforms (N-1 Reference System / Gen 6 AI Accelerator paired with Host Server CPUs), the host CPU owns the PCIe root complex and initial memory mapping. It would be challenging to deliver the full Zero Trust isolation on N-1; we can only deliver host access restriction and telemetry throttling. True zero-trust silicon isolation requires the Gen 6 hardware memory firewall (5-6 years). The program manager must maintain this clear distinction
-
-Co-design & Transparency: Frontier AI Labs are evaluating significant cluster allocations. NVIDIA's stack is closed, proprietary, and rigid. By offering OpenSIL transparency, machine-readable M2M schemas (DEXPI/CycloneDX), and joint architectural co-design, Semiconductor Manufacturer establishes a differentiated strategic partnership that NVIDIA's closed ecosystem cannot match
-
-# Part 2:  Looking Forward
-
-# 1. Strategic Proposal - Program Structure & Approach
-
-
-
-"Frontier model weights must be defended against sovereign-tier extraction."
-
-Frontier Model ASL-3 / ASL-4 Containment & Security Requirements
-
-## 1.1 Preface
-
-As artificial intelligence systems scale to gigawatt-class datacenters and clusters of hundreds of thousands of interconnected accelerators, the fundamental security model of modern computing breaks down. The primary assets of frontier AI; proprietary model weights and custom inference execution pipelines; currently run on hardware architectures that implicitly trust the host CPU, the operating system kernel, the baseboard management controller (BMC), and multi-tiered global supply chains.
-
-Under Frontier Model Responsible Scaling Policies (ASL-3 and ASL-4 equivalent tiers), hardware platforms hosting frontier models must enforce zero-trust isolation against host compromise, nation-state side-channel extraction, and physical supply chain tampering. Scaling frontier AI responsibly demands open interoperability between semiconductor designers, hyperscale cloud providers, original design manufacturers (ODMs), and international standards bodies.
-
-## 1.2 The Strategic Imperative: Securing the AI Platform and Facility
-
-Frontier AI models represent concentrated intellectual property, critical infrastructure dependencies, and strategic sovereign assets. Securing a  model checkpoint requires defending the entire cyber-physical stack. Today, modern hyperscale datacenters exhibit five systemic vulnerabilities:
-
-Implicit Host Trust: Accelerator ASICs treat host CPUs, system memory, and hypervisors as trusted entities. A compromise in the host operating system kernel or baseboard management controller (BMC) exposes raw model weights in High Bandwidth Memory (HBM) and unencrypted tensor interconnects.
-
-Disconnected Physical and Cyber Safety: Facility systems (coolant distribution units, manifolds, secondary cooling loops, 48V power busbars) operate on flat operational technology (OT) networks without formal safety-to-security derivation chains. Physical manipulation of flow rates or power transients can induce clock-glitch faults, thermal throttles, or side-channel leakage during kernel execution.
-
-Supply Chain Opacity: Concentrated manufacturing across overseas original design manufacturers (ODMs) and sub-tier component vendors makes static, PDF-based security questionnaires obsolete. Hardware bills of materials (HBOMs) and firmware states are rarely cryptographically verifiable at delivery.
-
-Human-Speed Vulnerability Management: Traditional Product Security Incident Response Teams (PSIRTs) operate on human triage cycles of weeks or months, while automated exploitation frameworks operate at machine speed.
-
-Proprietary Firmware Blobs: Closed-source platform initialization routines (such as legacy Legacy Proprietary Initialization Firmware (transitioning to OpenSIL) and BIOS blobs) prevent operators from auditing the silicon root of trust and inspecting early boot execution sequences.
-
-To address these vulnerabilities, the ecosystem of software and hardware supporting AI Models must progress from reactive and ad hoc security patches to a zero-trust approach that includes the platform firmware, accelerator silicon,  and  in the physical and silicon plumbing of the datacenter.
-
-# 2. Proposed Strategic Program & Approach
-
-## Strategic Partnership Framework
-
-Strategic partnership between Frontier AI model operators and semiconductor silicon manufacturers requires a framework that bridges platform firmware, accelerator silicon, and physical datacenter engineering into a unified zero-trust architecture. This unified view ensures consolidation of all current-state audits, platform baselines, and verification protocols in a single authoritative source of truth for all parties to reference.
-
-## 2.1 Proposed Primary artifact
-
-The  Uniform Platform Security Document (UPSD) is a  shared platform artifact that establishes a single authoritative source of truth across the Silicon-Provider/AI-Lab partnership ecosystem. This serves as a shared reference for agreed-upon security baselines, cryptographic standards, supply chain requirements and firmware verification protocols.
-
-## 2.2 Adoption of Dual-pacing and Gated Approach
-
-To maintain engineering rigor while accommodating commercial agility (rolling quarterly budgets under existing commercial terms), a "Dual-Pacing Approach" is proposed. This approach balances commercial quarterly cadence with engineering gate reviews to provide a framework with; measurements, clear SOW vehicles, engineering cadence & rigor, transition of work to operations (MOC), and preserves Verification Protocols required by engineering. This balances flexibility with the rigid structure of hardware and silicon engineering cycles facilitating Semiconductor Silicon Manufacturers and Frontier AI Model Developers to meet their respective business and engineering needs. This approach is modeled after successful practices employed in rail, energy, manufacturing and avionic industries.
-
-2.2.2 A Dual-Pacing Approach
-
-A An applied "Dual-Pace" establishes three independent, parallel V-cycles that operate at different execution speeds:
-
-Fast-Paced V-Cycle (Horizon 1, 6 months): Focuses on N-1 platforms (N-1 Reference System / Host Server CPU), surveying current key provisioning flows, delivering the UPSD source of truth, and locking Annex 7 contract terms
-
-Medium-Paced V-Cycle (Horizon 2, 18 months): Focuses on software, automated falsification engines, open firmware (OpenSIL), and EU CRA supply chain schemas
-
-Slow-Paced V-Cycle (Horizon 3, 6 years): Focuses on multi-year silicon co-design (Gen 6 on-die keys, Caliptra PQC, 4-point hardware crypto envelope)
-
-### 2.2.2 Gate Reviews
-
-Each cycle passes through four standardized EN 50126 gates:
-
-Gate 1 (Definition): Scoping, Concept of Operations, and baseline asset register
-
-Gate 2 (Requirements & Derivation): FMECA, Target Security Level calibration ($SL\text{-}T$), and interface specifications
-
-Gate 3 (Verification & Testing): Hardware-in-the-loop validation and automated test apply execution
-
-Gate 4 (Acceptance & SOW Closeout): Formal sign-off, SecRAC allocation, and quarterly budget release
-
-### 2.2.3 Relevant Standards and Best Practices
-
-To maintain engineering rigor while accommodating commercial agility (rolling quarterly budgets under existing commercial terms), we adapt proven industrial systems engineering frameworks:
-
-CENELEC EN 50126-1 (Railway RAMS Lifecycle): Structured V-model governance from concept to operation
-
-CENELEC CLC/TS 50701:2023 / IEC 63452: Cyber-physical security derivation linking physical safety hazards directly to digital threats
-
-IEC 62443 Series: Zone and conduit segmentation, Capability Security Levels (SL-C), and Target Security Levels (SL-T)
-
-Management of Change (MOC) & Verification Protocols (VP-01 to VP-05): Verifiable evidence gates governing production acceptance
-
-
-| APPROACH 1: DUAL-PACING V-MODEL |
-| :--- |
-| Horizon | Timeframe | Q1-Q2 | Q3-Q4 | Year 2 | Years 3-6 |
-| Horizon 1 (Fast) | 6 Months | [ConOps] ──► [Annex 7] |  |  |  |
-| Horizon 2 (Medium) | 18 Months | [CRA Mandate] | [DEXPI Schema] | [OpenSIL/Autonomous Agentic System HIL] |  |
-| Horizon 3 (Slow) | 5-6 Years | [Zero-Trust Req] | [Crypto Spec] | [Tape-Out] | [Silicon Bring-Up] |
-
-
-# 3. Proposed Guiding Principles
-
-Five Guiding Principles
-
-Zero Trust at Silicon Boundary ("Distrust the Host")  Distrust host CPU/OS; lock GPU execution; hardware-isolate High Bandwidth Memory (HBM).
-
-Cyber-Physical RAMS Convergence (Safety & Availability Adapt IEC 62443 and TS 50701 / IEC 63452 to treat cooling, power, and BMCs as direct security vectors.
-
-Machine-to-Machine Open Standards (Supply Chain Transparency)  Unified digital twin using DEXPI 2.0 (Plant/P&ID) and CycloneDX 1.6 (Hierarchical HBOM/SBOM/DICE).
-
-Machine-Speed Falsification (Continuous Verification)  Replace manual PSIRT triage with Autonomous Agent-driven exploit generation and hardware-in-the-loop (HIL) emulation.
-
-Open Platform Initialization (Cradle-to-Grave Provenance)  Phase out proprietary Legacy Proprietary Initialization Firmware (transitioning to OpenSIL)/BIOS blobs in favor of OpenSIL, coreboot, and 6-site HSM state surveys.
-
-## 3.1 Principle 1: Zero Trust at the Silicon Boundary ("Distrust the Host")
-
-Frontier AI model weights represent concentrated intellectual property and sovereign-tier assets. Accelerators must treat the host CPU, operating system kernel, hypervisor, and BMC as untrusted entities. Core Defensive Mechanisms include:
-
-Locked Kernel Execution: GPUs reject arbitrary runtime code injection and host debug hooks, executing only cryptographically signed inference kernels verified against on-die keys.
-
-Hardware Memory Firewalling: High Bandwidth Memory (HBM) is isolated from host physical memory mapping. On $N-1$ platforms (N-1 Reference System / Host Server CPU), host DMA access is constrained via firmware access control tables; next-generation silicon (Gen 6) introduces on-die hardware memory firewalls.
-
-Non-Token Egress Rate Limiting: Non-token telemetry, debug traces, and sideband channels are rate-limited in silicon to single-digit KB/s to eliminate covert channel weight exfiltration.
-
-### Recommendation:  Implement The 4-Point Hardware Cryptographic Envelope
-
-Scale-Up Interconnects: Line-rate hardware encryption across intra-tray Infinity Fabric and UA-Link meshes.
-
-Inference Kernel Enclaves: Isolated execution environments with hardware attestation for proprietary model architectures.
-
-Host-Device Buses: Authenticated PCIe Gen 5/6 and CXL buses preventing host root-complex eavesdropping during weight loading.
-
-Scale-Out Fabric: Line-rate 800G/1.6T RoCE and DPU packet encryption across the datacenter cluster network.
-
-## 3.2 Principle 2: Cyber-Physical Security Convergence
-
-In hyperscale AI facilities, physical facility failures (cooling disruptions, voltage droops) and digital security failures (firmware tampering, weight extraction) are interdependent failure modes already addressed by high-consequence industrial assurance methods.
-
-### Recommendation: Adapt known Industrial Assurance Methodologies
-
-3.2.1.1 Framework Adaptation (IEC 62443, CENELEC EN 50126, and CLC/TS 50701 / IEC 63452): Adapt the formal cyber-physical derivation chain used in high-consequence railway and industrial installations: $$\text{ConOps} \longrightarrow \text{FMECA} \longrightarrow \text{Hazard Log} \longrightarrow \text{Target Security Level (SL-T)} \longrightarrow \text{Zones and Conduits}$$
-
-3.2.1.2 Mathematical Security Calibration: Mathematically derive Target Security Levels (SL-T) per zone based on impact severity and attacker capability: $$\text{SL-T} = \text{IC} + \text{AC} - 1$$
-
-3.2.1.3 Physical-to-Logical Containment: Liquid cooling manifolds, leak detection circuits, and power busbars must be isolated into dedicated security zones (SL-T 3) with autonomous hardware interlocks that prevent physical state manipulation from corrupting compute integrity or extracting model weights.
-
-### 3.2.2 The "AI Rack Envelope" Concept
-
-The AI Rack Envelope defines the physical, electrical, thermal, and logical perimeter that isolates a high-density (100kW+) compute rack from the broader datacenter facility. Based on a typical hyperscale reference architecture, exactly eight discrete physical and logical conduits cross this boundary:
-
-1. Primary Power Infeed (Inbound): 400V AC power drops feeding an internal 48V DC busbar through N+1 OCP power shelves.
-
-2. Liquid Coolant Supply (Inbound): Treated water-glycol (PG25) delivered at 32°C through quick-disconnect manifolds directly to chassis cold plates.
-
-3. Liquid Coolant Return (Outbound): Warm fluid exhausting at 40°C–45°C back to the row coolant distribution unit (CDU).
-
-4. Residual Cold-Aisle Airflow (Inbound): Convective airflow from computer room air handlers (CRAHs) cooling non-liquid power supplies, VRMs, and optical transceivers.
-
-5. Scacel-UP / Production Frontend Uplink (Bidirectional): Dual 100G/400G RoCE/Ethernet uplinks connecting compute trays to end-of-row distribution switches for job scheduling, dataset ingestion, and checkpoint storage.
-
-6. Out-of-Band Serial Console (Bidirectional): RS-232 serial links (9600–115200 baud) wired to an advanced console server for bare-metal kernel recovery.
-
-7. BMC / Redfish Management Link (Bidirectional): Dedicated out-of-band management Ethernet running IPMI and Redfish APIs to the baseboard management controller (designated as a Critical Conduit).
-
-8. Scale-Out / Scale-Up Accelerator Fabric (Bidirectional): High-speed optical trunks (800G InfiniBand, RoCE, or UA-Link) linking GPUs directly across peer racks for distributed tensor operations.
-
-### 3.2.3 Align Facility Infrastructure to Rack-Level Consequences
-
-Facility engineering must derive security requirements directly from physical failure thresholds across each of the eight conduits:
-
-Thermal Response Deadlines: A total disruption of liquid coolant flow forces accelerator thermal throttling within 45 seconds and protective emergency shutdown within 90 seconds. Hardware safety interlocks must execute locally at the CDU level without waiting for unauthenticated Building Management System (BMS) polling cycles.
-
-Out-of-Band Telemetry Integrity: Temperature, flow, and electrical measurements must incorporate independent, hardwired sensor lines that cannot be suppressed or spoofed by manipulated Modbus or BACnet registers.
-
-Demarcation of Physical Authority: Switched rack power distribution units (rPDUs), baseboard management controllers (BMCs), and isolation valves must enforce cryptographic attestation to ensure upstream facility networks cannot trigger uncoordinated actuators on active compute nodes.
-
-### 3.2.4 Reference Model Threats to the AI Rack Envelope
-
-Advanced persistent threats (APTs), nation-state adversaries, and AI-directed attack tools exploit facility pathways through subtle, long-duration campaigns designed to evade traditional cybersecurity monitoring:
-
-Sub-Dewpoint Condensation Attacks (Conduits 2 & 4): An attacker with write access to BMS or chiller setpoints can lower secondary coolant temperatures below the data-hall dew point, causing moisture to condense directly on cold plates and PCB assemblies, leading to dendritic shorting or silent data corruption (SDC)
-
-Sub-Threshold Thermal Cycling (Conduits 2 & 3): Oscillating CDU temperature setpoints induces mechanical stress and thermal fatigue on accelerator BGA solder joints and HBM3e stacks, cutting component lifespans without triggering high-temperature alarms
-
-Synchronized Checkpoint Power Transients (Conduit 1): Attackers commanding rPDUs or UPS network management cards can inject millisecond voltage sags timed to burst checkpoint writes, corrupting training state files across thousands of nodes
-
-Persistent Out-of-Band Implantation (Conduits 6 & 7): Exploiting vulnerabilities on BMCs allows attackers to establish persistent access that survives host OS rebuilds, allowing privileged power, virtual-media, and memory-scraping access while falsifying telemetry
-
-Unmediated Fabric Exploitation (Conduits 5 & 8): In the absence of line-rate hardware encryption, a compromised node can inspect unauthenticated packet streams during all-reduce communications, reconstructing model weights and proprietary embeddings
-
-BMS-to-FACP Kinetic Safety Cascades: Attackers traversing unauthenticated BMS-to-Fire-Alarm bridges can inject false alarm codes, discharging clean-agent suppression gas and tripping Emergency Power Off (EPO) shunt circuits
-
-
-| AI RACK ENVELOPE ZONE MODEL (REFERENCE) |
-| :--- |
-| Zone | SL-T | Components & Conduits |
-| Zone 4: Facility & Mechanical OT | 3 | CDU, Secondary Manifolds, 48V Busbars, Leak Detection. Linked via Conduit C-43 (Isolated Gateways). |
-| Zone 3: Scale-Up / Scale-Out Fabric | 4 | Infinity Fabric, UA-Link, 800G RoCE NICs, DPUs, Switches. Linked via Conduit C-32 (PCIe/CXL/SPDM). |
-| Zone 2: Compute Tray & Untrusted Host | 3 | Server CPU CPUs, Host OS/VMM, OpenSIL/Coreboot, Node BMC (OOBM). Linked via Conduit C-21 (Memory Firewall). |
-| Zone 1: Silicon & Weight Isolation | 4 | Instinct Gen 6 AI Accelerator Accelerators, HBM3e, Caliptra RoT, Locked Kernel Enclave. |
-
-
-## 3.3 Principle 3: Machine-to-Machine Open Standards for Global Supply Chains
-
-Supply chain security cannot depend on static trust or self-reported questionnaires; it requires machine-verifiable proof.
-
-3.3.1 Dual-Layer Open M2M Schema:
-
-DEXPI 2.0 (Physical Plant and Mechanical OT): Standardized machine-readable XML and JSON models capturing Piping and Instrumentation Diagrams (P&ID), piping topologies, coolant distribution units (CDUs), valve configurations, and sensor telemetry
-
-3.3.2 CycloneDX 1.6 (Silicon, Hardware, and Firmware): Hierarchical machine-readable bills of materials capturing hardware components (HBOM), software/firmware dependencies (SBOM), Certificates (CBOM) silicon stepping revisions, fuse configurations, and DICE certificate hierarchies
-
-3.3.3 Unified As-Built: Suppliers and ODMs must deliver integrated BIM (ISO 15926, ISO 16739, IPC-2581, IEC 62443) such as "DEXPI 2.0" and "CycloneDX 1.6" for every delivered compute, switch, and facility tray. This enables automated ingestion, continuous compliance monitoring, and immediate alignment with global regulatory mandates (including the EU Cyber Resilience Act taking effect on September 11, 2026)
-
-## 3.4 Principle 4: Machine-Speed Falsification and Continuous Validation
-
-Static annual questionnaires and manual penetration tests cannot keep pace with the complexity of multi-chip accelerator packages and modular datacenter firmware.
-
-Recommendations
-
-LLM-Driven Exploit Hypothesis Generation: Deploy frontier models (such as Fable ) to continuously generate, refine, and simulate exploit hypotheses against hardware interface specifications, register transfer level (RTL) models, and firmware source repositories
-
-Hardware-in-the-Loop Testbenches: Pair automated hypothesis generation with dedicated hardware-in-the-loop (HIL) test channels and NetFPGA-style emulation testbeds to validate or falsify vulnerabilities at machine speed
-
-Cross-Business Unit PSIRT Integration: Modernize vendor PSIRT pipelines to intake automated telemetry, score threat impact programmatically, and deliver verified remediations within strict service-level agreements (SLAs)
-
-## 3.5 Principle 5: Open Platform Initialization and Cryptographic Provenance
-
-The entire hardware lifecycle; from wafer fabrication to operational decommissioning; must be verifiable without relying on opaque supplier claims.
-
-Recommendations
-
-OpenSIL and Coreboot Adoption: Replace legacy, closed platform initialization blobs (such as Legacy Proprietary Initialization Firmware (transitioning to OpenSIL)) with open-source OpenSIL on coreboot. This cuts long-term firmware maintenance overhead by up to 80% and allows operators to inspect boot code directly
-
-Manufacturing Key Provisioning Assessment: Survey, document, and baseline the current state across all six global Enterprise Distribution Server (EDS) HSM sites responsible for provisioning Unique Device Secrets (UDS) and DICE keys during factory test and provisioning modes
-
-Post-Quantum Cryptographic Migration: Adopt the open-source Caliptra Silicon Root of Trust with on-die asymmetric key generation, and implement CNSA 2.0 post-quantum algorithms (ML-DSA-87 and LMS stateful hash signing) across all firmware signing and platform certificate hierarchies
-
-# 4. A 3-Horizon Execution Framework
-
-Adopting this framework will structure Silicon-Provider/AI-Lab engineering, procurement, and commercial contracts around three parallel execution horizons funded through rolling quarterly Statements of Work (SOWs):
-
-
-| THE 3-HORIZON EXECUTION MATRIX |
-| :--- |
-| Horizon | Timeframe | Q1-Q2 | Q3-Q4 | Year 2 | Years 3-6 |
-| Horizon 1 | Near-Term: Q1 - Q2 | UPSD v1.0, 6-Site HSM Survey, AI Rack Threat Model, Annex 7 Terms |  |  |  |
-| Horizon 2 | Mid-Term: Q3 - Q6 |  | EU CRA Compliance, DEXPI 2.0/CycloneDX, Open Coordinator, Autonomous Agentic System Exploit Engine, OpenSIL/Coreboot |  |
-| Horizon 3 | Long-Term: 5-6 Year |  |  |  | Joint Silicon Steering, 4-Point Crypto Spec, Caliptra PQC, Locked Kernel Architecture |
-
-
-## 4.1 Detailed Horizon Breakdown
-
-### 4.1.1 Horizon 1: N-1 Platform Survey and Operational Baseline (Q1–Q2 SOW)
-
-Goal: Secure currently deployed N-1 platforms (N-1 Reference System Gen 6 AI Accelerator trays and Host Server CPU SP7 hosts), establish the authoritative UPSD source of truth, and audit manufacturing key management
-
-Core Activities:
-
-Complete current-state surveys across the semiconductor manufacturer's 6 global EDS HSM sites to map key injection flows and phase out shared HMAC secrets
-
-Construct the AI Rack Envelope threat model linking liquid cooling CDU loops, 48V power busbars, and BMC sidebands
-
-Implement hardware rate-limiting on non-token GPU egress channel
-
-Formalize Annex 7 technical security requirements in volume procurement contracts
-
-### 4.1.2 Horizon 2: Automated Testing, Open Firmware, and Supply Chain Integration (Q3–Q6 SOW)
-
-Goal: Build automated testing pipelines, transition platform firmware to open source, and establish machine-to-machine supply chain standards
-
-Core Activities:
-
-Meet the September 11, 2026 EU Cyber Resilience Act (CRA) milestone through automated PSIRT intake and M2M data exchange
-
-Deploy unified DEXPI 2.0 (cooling/P&ID) and CycloneDX 1.6 (HBOM/DICE) schemas via an Open Multi-Vendor Coordinator Repository
-
-Replace closed Legacy Proprietary Initialization Firmware (transitioning to OpenSIL) firmware blobs with OpenSIL on coreboot for Host Server CPU host nodes
-
-Integrate the Autonomous Agentic System automated exploit hypothesis engine with hardware-in-the-loop (HIL) testbenches
-
-### 4.1.3 Horizon 3: Gen 6 Silicon, 4-Point Cryptography, and Zero-Trust Architecture (6-Year Vision)
-
-Goal: Co-design future silicon architectures where accelerators operate on zero-trust principles, completely isolating model weights from host infrastructure
-
-Core Activities:
-
-Maintain a Joint Silicon Steering Group with bi-weekly technical reviews
-
-Implement line-rate 4-point hardware encryption across scale-up links, model weights, host-device transfers, and network fabrics
-
-Integrate Caliptra 2.0 Silicon Root of Trust with on-die asymmetric key generation and CNSA 2.0 post-quantum algorithms (ML-DSA-87 signature verification and LMS stateful hash signing)
-
-## 4.2 Dual-Pacing V-Model Governance & Risks
-
-Significant risks exist in reconciling multi-year silicon tape-out cycles (3–5 years) with regulatory deadlines (e.g., EU CRA, NIST AI RMF) and quarterly commercial budget approvals. Addressing this risk programmatically requires a dual-pacing governance model; using a variant of CENELEC RAMS V-Model approach The program structures work through three synchronized V-cycles governed by four formal engineering gates:
-
-
-| DUAL-PACING V-MODEL LIFECYCLE |
-| :--- |
-| Gate 1: Definition | Gate 2: Derivation | Gate 3: Verification | Gate 4: Acceptance |
-| ● Charter & Cadence ● Scope & ConOps ● SuC Definition ● Asset Intake ● Provenance of artifacts | ● Minimum Requirements Alignment (Safety/Reliability/Operations/Security) & Threat Modeling ● SL-T Derivation (Minimum Security Requirements per Zone (component) and Interfaces | ● HIL Test Protocols ● Emulation & Fuzzing ● Fault Injection ● Independent Reviews ● Verification & Validation (V-Model) | ● UPSD Release v1.x ● SecRAC Allocation  ● Risk Acceptance & Enterprise Risk Ledger ● SOW Close & Handover |
-
-
-
-| Gate | Engineering Milestone | Technical Deliverable & Verification Output | Commercial SOW Action |
+| Document ID | Working Group | Normative Equivalents | Classification |
 | :--- | :--- | :--- | :--- |
-| Gate 1: Definition | Scope, ConOps, and Asset Intake | System under Consideration (SuC) definition and baseline asset register | Authorizes quarterly SOW scope and commits engineering hours |
-| Gate 2: Derivation | Minimum Operation,, Safety & Reliability Requirements, Threat modeling and Security Requirements | FMECA, Target Security Level (SL-T) calibration, and M2M schemas, ALARP to lower requirements to SL-C (defensible) | Authorizes technical build and prototype development |
-| Gate 3: Verification | Hardware-in-the-loop (HIL) testing | Automated test apply logs and protocol validation reports (HVP-01 to HVP-04), Facilities and Hardware adopt their assurance disciplines and methods. | Triggers technical sign-off by joint security leads |
-| Gate 4: Acceptance | SOW closeout and operational handover | Authoritative UPSD version release, SecRAC allocation, and cluster acceptance, Hazard Log & Risk Ledger updated, Traced | Releases milestone funds and authorizes subsequent SOW budget |
+| EIGENIA-WG05-CAD-02 | WG-05-CAD | IEC 62443 / CLC/TS 50701 / EN 50126 / NIST SP 800-193 | Open Architectural Specification |
 
+## 1. Executive Summary & Foundational Scope
 
-# 5. Multi-Vendor Coordinator Model and Industry Governance
+Frontier artificial intelligence training and inference clusters have transitioned from conventional enterprise data processing environments into sovereign-tier physical assets. The parameter weights of advanced frontier models represent capital investments exceeding one billion dollars, encapsulating strategic algorithmic capabilities that present high-value targets for nation-state advanced persistent threats (APTs), industrial espionage, and state-sponsored physical interdiction. Conventional datacenter security models rely on a layered perimeter defense that presumes the internal datacenter environment; its power distribution networks, chilled water infrastructure, building management systems (BMS), and host server execution environments; remains trusted territory. In high-consequence operational environments, this assumption is invalid.
 
-To prevent single-vendor lock-in, ensure enforced interoperability and clear definitions of roles and responsibilities, and support value chain and supply chain scaling for the partnership ecosystem, the proposed program operates through an Open Multi-Vendor Coordinator Repository. This structure separates responsibilities while maintaining an auditable, cryptographically verified source of truth:
+This specification establishes the architectural foundation for the **AI Rack Envelope**, a self-contained, zero-trust cryptographic, thermodynamic, and physical boundary designed to protect accelerated compute complexes under hostile facility conditions. Rather than treating the hosting facility as a protective sanctuary, this framework formalizes the **Facility Threat Model**, treating the datacenter physical plant as an active, multi-vector attack environment that exerts severe thermodynamic, electrical, out-of-band, sideband, and physical pressure across the rack perimeter. 
 
-Semiconductor Manufacturers (Semiconductor Manufacturer, etc.): Publish silicon root-of-trust specifications, DICE certificate hierarchies, OpenSIL platform initialization code, and line-rate encryption specifications
+To bridge the historical chasm between semiconductor microarchitecture, server chassis firmware, and civil/mechanical infrastructure, this treatise synthesizes industrial cybersecurity standards (IEC 62443 Security Levels SL-1 through SL-4) with railway and nuclear functional safety methodologies (CLC/TS 50701 and EN 50126 RAMS: Reliability, Availability, Maintainability, and Safety). We demonstrate that in high-density accelerator facilities operating between 100 kW and 140 kW per rack, cybersecurity and physical functional safety converge: cyber interdictions of physical cooling or power controls induce catastrophic silicon failure within seconds, while physical perturbations can be applied to bypass cryptographic boundaries. This standard provides the rigorous engineering mechanisms; encompassing open silicon roots of trust, line-rate bus encryption, machine-speed automated testbenches, and four-dimensional bills of materials; required to guarantee platform integrity and model weight confidentiality.
 
-Frontier AI Developers (Frontier AI Lab, etc.): Deliver machine-readable RSP verification suites, threat hypotheses, non-token egress constraints, and automated model weight protection benchmarks
+```
++-----------------------------------------------------------------------------+
+|                     FACILITY THREAT ENVIRONMENT (UNTRUSTED)                 |
+|  [Chilled Water / CDUs]  [48V/400V Busbars]  [BMS / EPMS]  [Facility LAN]  |
++-----------------------------------------------------------------------------+
+                                       |
+                   MULTI-VECTOR PRESSURE EXERTED AT BOUNDARY
+       (Thermal Shock, Power Transients, Sideband Sniffing, Covert Egress)
+                                       v
++-----------------------------------------------------------------------------+
+|                            THE AI RACK ENVELOPE                             |
+|                                                                             |
+|   +---------------------------------------------------------------------+   |
+|   | 1. Physical & Environmental Boundary                                |   |
+|   |    - Tamper-Evident Enclosure, Intrusion Interlocks, Sealed Cold Plates|   |
+|   +---------------------------------------------------------------------+   |
+|                                      |                                      |
+|   +---------------------------------------------------------------------+   |
+|   | 2. Facility Conduit Defense (IEC 62443 SL-4 Zone Boundary)          |   |
+|   |    - Micro-CDU Flow Meters, Optical Fiber Air-Gaps, Dual Power Filters |   |
+|   +---------------------------------------------------------------------+   |
+|                                      |                                      |
+|   +---------------------------------------------------------------------+   |
+|   | 3. Host Node & Out-of-Band Management (Distrusted Tier)             |   |
+|   |    - Host CPU, Hypervisor, Linux OS, Baseboard Management Controller|   |
+|   +---------------------------------------------------------------------+   |
+|                                      |                                      |
+|                     SPDM 1.3 ATTESTATION / IDE ENCRYPTION                   |
+|                                      v                                      |
+|   +---------------------------------------------------------------------+   |
+|   | 4. Silicon Root of Trust & Cryptographic Accelerator Enclave        |   |
+|   |    - Caliptra RoT, Locked Accelerator Kernels, Isolated HBM Memory  |   |
+|   |    - PQC Engine (CNSA 2.0 / ML-DSA-87), Hardware Egress Throttling  |   |
+|   +---------------------------------------------------------------------+   |
++-----------------------------------------------------------------------------+
+```
 
-Original Design Manufacturers (ODMs) and Integrators: Provide verified DEXPI 2.0 mechanical plant models and CycloneDX 1.6 HBOM/SBOM records for every manufactured tray and rack assembly
+## 2. The AI Rack Envelope Architecture & Trust Boundaries
 
-Third-Party Systems Assurance Advisors (Tetrel, etc.): Maintain master V-Model gating, audit 6-site HSM provisioning states, perform RAMS hazard analyses, and publish authoritative UPSD releases
+The AI Rack Envelope represents a fundamental conceptual shift in mission-critical systems engineering. In standard hyperscale architectures, security controls are distributed across host operating systems, hypervisors, orchestration layers, and network switches. The AI Rack Envelope consolidates the entire physical and logical compute complex; comprising compute sleds, accelerator trays, high-speed switching fabrics, power delivery stages, and manifold piping; into a single, unified, verifiable fortress.
 
-# 5. Multi-Vendor Coordinator Model and Industry Governance
+### 2.1 Physical and Logical Composition
 
+Modern frontier training clusters aggregate high-performance computing elements within extreme volumetric density. A single AI Rack Envelope typically houses between eight and sixteen specialized compute trays, each containing eight interconnected accelerator modules (such as SXM or OAM form factors), dual high-performance host processors, multi-terabit PCIe Gen 5 or Gen 6 switching complexes, and high-speed network interface cards (NICs) supporting 800 Gbps to 1.6 Tbps fabric connectivity.
 
-| Gate | Engineering Milestone | Technical Deliverable & Verification Output | Commercial SOW Action |
+The physical boundary of the envelope includes:
+1. **Mechanical Chassis Integrity**: A reinforced, tamper-evident rack framework equipped with continuous physical intrusion detection switches, optical fiber loop continuity sensors, and electromagnetic interference (EMI) shielding designed to mitigate TEMPEST sideband emissions.
+2. **Integrated Fluid Containment**: Hermetically welded manifold distribution loops equipped with localized isolation valves, pressure drop transducers, and optical moisture sensing strips positioned at all disconnect junctions.
+3. **Internal Power Regulation**: A dual-feed 48V or 400V DC busbar backplane coupled directly to in-rack capacitor banks and point-of-load voltage regulator modules (VRMs), providing local energy buffering to absorb high-frequency transient steps.
+
+The logical boundary establishes strict cryptographic segregation between compute resources, management controllers, and external network links, ensuring that no unverified instruction can reach execution units.
+
+### 2.2 Silicon-Enforced Zero Trust: Distrusting the Host Complex
+
+The foundational security postulate of the AI Rack Envelope is that **accelerator silicon must strictly distrust the host system**. 
+
+In conventional accelerated computing, the host CPU acts as the primary master of the domain: it initializes platform memory, loads device drivers, schedules execution kernels, manages physical DMA mappings over PCIe, and supervises system state via out-of-band management engines. This design creates an unacceptable vulnerability profile. If an adversary compromises the host operating system kernel, gains hypervisor escape, or infiltrates the Baseboard Management Controller (BMC), they gain direct, unconstrained access to inspect, manipulate, or dump the contents of high-bandwidth memory (HBM) attached to the accelerators.
+
+Under this framework, the accelerator architecture operates as an autonomous, self-sovereign cryptographic enclave:
+- **Independent Execution Verifier**: The accelerator silicon incorporates an isolated, on-die security processor that validates all incoming compute kernels prior to execution. If a host driver attempts to dispatch unsigned, tampered, or arbitrary code to the accelerator execution pipelines, the security processor halts the dispatch queue and isolates the physical interface.
+- **DMA Ring-Fencing**: Host memory controllers and PCIe root complexes are barred from initiating direct, unencrypted reads of accelerator physical memory. All memory transfers between the host and accelerator occur through dedicated cryptographic bounce buffers governed by hardware access-control registers that enforce strict unidirectional semantics.
+- **Hardware-Enforced Memory Scrambling**: Dedicated AES-256-XTS or post-quantum cryptographic engines encrypt all data written to external HBM and DDR5 channels at line rate, ensuring that physical interposers, inter-die bridges, or cold-boot physical extraction yield only cryptographically randomized ciphertext.
+
+### 2.3 The Four-Point Cryptographic Envelope
+
+To ensure end-to-end data confidentiality, the AI Rack Envelope establishes line-rate, hardware-enforced cryptographic boundaries across four distinct architectural interfaces:
+
+| Boundary Interface | Physical Interconnect | Cryptographic Standard | Threat Mitigated |
 | :--- | :--- | :--- | :--- |
-| Gate 1: Definition | Scope, ConOps, and Asset Intake | System under Consideration (SuC) definition and baseline asset register | Authorizes quarterly SOW scope and commits engineering hours |
-| Gate 2: Derivation | Threat modeling and Requirements:  In Rack (AI Rack Envelope) and outside: Facility, Suppliers & Value Chain | (Safety (FMECA.SCRIL)),Reliability /RCIL) Operations (MOR), Target Security Level (SL-T) calibration, and M2M schemas | Aligns Threats, Hazards and Minimum Requirements. Authorizes technical build and prototype development |
-| Gate 3: Verification | Hardware-in-the-loop (HIL) testing | Automated test apply logs and protocol validation reports (HVP-01 to HVP-04) | Triggers technical sign-off by joint security leads |
-| Gate 4: Acceptance | SOW closeout and operational handover | Authoritative UPSD version release, SecRAC allocation, and cluster acceptance | Releases milestone funds and authorizes subsequent SOW budget |
+| **Point 1: Scale-Up Coherent Fabric** | Proprietary Accelerator Crossbars (e.g., NVLink, xGMI) | Line-Rate IDE (Integrity and Data Encryption) / AES-GCM-256 | Physical probing of inter-tray cables, interposer tapping, and coherent memory eavesdropping. |
+| **Point 2: Host-to-Device Bus** | PCIe Gen 5 / Gen 6 over CEM and OAM slots | PCIe IDE / SPDM 1.3 Key Exchange | Malicious host DMA injection, bus protocol manipulation, and interposer analyzer attacks. |
+| **Point 3: Non-Volatile Storage Bus** | NVMe-oF / CXL 2.0 / 3.0 Direct Attach | Self-Encrypting Drive (SED) Opal 2.0 / IEEE 1619 | Checkpoint theft, state-dump extraction from discarded drives, and cold-standby tampering. |
+| **Point 4: Scale-Out Network Fabric** | 800G / 1.6T RDMA over Converged Ethernet (RoCEv2) / InfiniBand | IPsec Line-Rate MACsec (IEEE 802.1AE) / PSP (Packet Security Protocol) | In-transit weight extraction across inter-rack spine-leaf networks and optical tap interdiction. |
+
+This multi-point cryptographic enclosure ensures that even if an adversary achieves complete physical tap access to copper DAC cables, optical transceivers, or backplane bus lines within the datacenter, all intercepted payloads remain cryptographically unassailable.
+
+```
++-----------------------------------------------------------------------------+
+|                     FOUR-POINT CRYPTOGRAPHIC ENVELOPE                       |
+|                                                                             |
+|                     [Point 4: Scale-Out RDMA Network]                       |
+|                      (MACsec / PSP 800G-1.6T Fabric)                        |
+|                                     |                                       |
+|                                     v                                       |
+|  +-----------------------------------------------------------------------+  |
+|  | HOST PROCESSING TIER (UNTRUSTED)                                      |  |
+|  |  [Host CPU Complex] <------- [Point 3: NVMe Storage] -------> [NVMe]  |  |
+|  |           |                     (IEEE 1619 Encryption)                |  |
+|  +-----------|-----------------------------------------------------------+  |
+|              |                                                              |
+|              | [Point 2: Host-to-Device Bus]                                |
+|              | (PCIe Gen 5/6 IDE with SPDM 1.3 Authentication)              |
+|              v                                                              |
+|  +-----------------------------------------------------------------------+  |
+|  | ACCELERATOR SILICON COMPLEX (TRUSTED ZONE)                            |  |
+|  |                                                                       |  |
+|  |   +---------------------+                   +---------------------+   |  |
+|  |   |    Accelerator A    | <===============> |    Accelerator B    |   |  |
+|  |   | [Caliptra RoT/HBM3] |  [Point 1: Coherent| [Caliptra RoT/HBM3] |   |  |
+|  |   +---------------------+   Scale-Up Fabric] +---------------------+   |  |
+|  |                              (Line-Rate IDE)                          |  |
+|  +-----------------------------------------------------------------------+  |
++-----------------------------------------------------------------------------+
+```
 
+---
+
+## 3. The Facility Threat Model: Pressure on the Compute Envelope
+
+Conventional cybersecurity frameworks model threat actors operating almost exclusively through network protocols, operating system exploits, and software vulnerabilities. In an AI datacenter facility, this view is dangerously deficient. The physical infrastructure supporting an AI compute cluster; including electrical power substations, medium-voltage switchgear, uninterrupted power supply (UPS) systems, 48V power distribution units, primary chilled water loops, and secondary Coolant Distribution Units (CDUs); represents an attack surface of immense consequence.
+
+The Facility Threat Model treats the physical plant as an untrusted domain that exerts continuous multi-domain pressure across the AI Rack Envelope.
+
+```
++-----------------------------------------------------------------------------+
+|                      FACILITY THREAT INTERFACE MATRIX                       |
+|                                                                             |
+|      Facility Pressure Vector             AI Rack Envelope Target Boundary   |
+|   +-----------------------------+        +-------------------------------+  |
+|   | Thermodynamic Pressure      | -----> | Liquid Cold Plates, Dielectric|  |
+|   | (CDU pump drop, heat shock) |        | Cavitation, Thermal Throttling|  |
+|   +-----------------------------+        +-------------------------------+  |
+|                                                                             |
+|   +-----------------------------+        +-------------------------------+  |
+|   | Electrical Transient Vector | -----> | 48V Busbars, Point-of-Load    |  |
+|   | (di/dt steps, grid droop)   |        | VRMs, Hardware Clocking       |  |
+|   +-----------------------------+        +-------------------------------+  |
+|                                                                             |
+|   +-----------------------------+        +-------------------------------+  |
+|   | Out-of-Band Sideband Vector | -----> | BMC Firmware, I2C/I3C Buses,  |  |
+|   | (IPMI, Redfish, JTAG tap)   |        | SPI Boot Flash, OpenBIC       |  |
+|   +-----------------------------+        +-------------------------------+  |
+|                                                                             |
+|   +-----------------------------+        +-------------------------------+  |
+|   | Interconnect Egress Vector  | -----> | RDMA Fabric Transceivers,     |  |
+|   | (Covert sideband streaming) |        | Telemetry Streaming Channels  |  |
+|   +-----------------------------+        +-------------------------------+  |
++-----------------------------------------------------------------------------+
+```
+
+### 3.1 Thermodynamic & Liquid Cooling Pathways
+
+Operating at 100 kW to 140 kW per rack, modern accelerator enclosures require direct-to-chip liquid cooling to evacuate heat fluxes exceeding $100\text{ W/cm}^2$ across bare silicon dies. Liquid cooling systems operate via primary facility water loops coupled through plate heat exchangers to secondary, high-purity treated water or dielectric loops within the row-level Coolant Distribution Units (CDUs).
+
+This hydraulic architecture introduces catastrophic physical attack pathways:
+
+#### The 45-Second Thermal Runaway Window
+Traditional air-cooled datacenters possess substantial thermal capacitance: the vast volume of cold-aisle air provides several minutes of buffer time during cooling plant failures. In contrast, liquid-cooled cold plates contain minute fluid volumes (often less than 250 mL per cold plate). If an adversary breaches the facility BMS network and maliciously throttles CDU variable-frequency drive (VFD) pumps, commands automated balance valves to close, or disables secondary booster pumps, the thermal inertia of the cold plate is exhausted within seconds.
+
+At 1,000 watts of thermal dissipation per accelerator module, the time required for junction temperature $T_j$ to escalate from an operating state of $65^\circ\text{C}$ to the silicon destruction threshold ($105^\circ\text{C}$ to $115^\circ\text{C}$) is governed by:
+
+$$\Delta t_{runaway} = \frac{m_{cp} c_p (T_{max} - T_0)}{P_{diss} - \dot{Q}_{rem}}$$
+
+Where $m_{cp}$ is the thermal mass of the copper cold plate, $c_p$ is the specific heat capacity, and $\dot{Q}_{rem}$ represents residual heat evacuation. Under zero-flow conditions ($\dot{Q}_{rem} \to 0$), $\Delta t_{runaway}$ ranges between **12 and 45 seconds**. 
+
+An adversary manipulating facility cooling can systematically trigger emergency thermal shutdown across an entire cluster, creating massive availability denial during mission-critical inference or multi-month training checkpoints.
+
+#### Fluid Pressure Surges & Induced Cavitation
+Manipulating flow control valves via hijacked Modbus/BACnet protocols can generate hydraulic water-hammer events. Pressure shockwaves propagating through manifold piping rupture quick-disconnect couplings, spraying conductive coolant across high-amperage 48V electrical busbars and causing immediate explosive arcing and localized fire events.
+
+#### Thermal Sideband and Fault-Injection Attacks
+By subtly modulating coolant flow rates within safe operational limits, an adversary can deliberately shift die temperatures up and down, inducing predictable thermal drift in on-die ring oscillators. This provides a mechanism for remote thermal clock glitching or differential power-thermal analysis to recover cryptographic keys from on-die cryptoprocessors.
+
+### 3.2 Electrical & Power Distribution Pathways
+
+Power distribution architectures within frontier AI clusters deploy 48V DC power distribution bars delivering up to 3,000 amperes per rack frame. Accelerators execute dynamic matrix arithmetic workloads that induce immense step changes in current demand: when an all-reduce collective communication phase transitions into an intensive GEMM computation, the current draw of an accelerator tray swings from 20% to 100% of maximum rating within tens of nanoseconds.
+
+This high dynamic range presents an electrical attack vector:
+
+#### Resonant Frequency Injection ($di/dt$ Stepping)
+An adversary who controls unprivileged workload execution can craft adversarial neural network execution graphs designed to toggle compute units at the precise natural electrical resonance frequency of the power distribution network (PDN). By alternating between high-intensity tensor instructions and complete pipeline stalls at kilohertz frequencies, the adversary induces catastrophic resonant voltage fluctuations:
 
-# 6. 90-Day Action Plan: Q1 SOW Execution and Gating
+$$v_{ripple}(t) = L_{eff} \frac{di(t)}{dt} + \frac{1}{C_{eff}} \int i(t) \, dt$$
 
+Where $L_{eff}$ represents the parasitic inductance of the busbar and power cabling. If the resonant frequency $\omega_0 = 1/\sqrt{L_{eff} C_{eff}}$ is excited, the induced voltage oscillation exceeds the dielectric breakdown threshold of input filter capacitors, causing physical hardware destruction.
 
-| 90-DAY EXECUTION TIMELINE (Q1) |
-| :--- |
-| Phase / Month | September (Month 1) | October (Month 2) | November (Month 3) |
-| Strategic Alignment | Lock Annex 7 Terms | 6-Site HSM Factory Survey | Deliver AI Rack Threat Model |
-| Technical Foundation | Stand Up M2M Repo | Telemetry Throttling Baseline | Publish Authoritative UPSD v1.0 |
-| Governance & Gates | EU CRA Sept 11 Gate | Intermediate Gate 2 Review | Formal Gate 4 SOW Closeout |
+#### Targeted Voltage Droop and Power Glitching
+Coordinated power spikes can pull local voltage below the minimum operating threshold ($V_{min}$) of accelerator voltage regulator modules (VRMs). This induced voltage droop causes timing faults in logic synthesis pathways, flipping bits in cryptographic signature verifications or instruction decode registers; a remote, software-induced physical fault injection attack that bypasses secure boot integrity checks.
 
+### 3.3 Out-of-Band Management & Sideband Surfaces
 
-## 6.1 Priority Milestone Matrix
+Baseboard Management Controllers (BMCs) represent an architectural Achilles' heel in modern enterprise computing. Operating on isolated system-on-chip (SoC) architectures running embedded Linux (e.g., OpenBMC), the BMC retains direct electrical access to host board pins, power sequencing rails, SPI flash chips, I2C/I3C management buses, and PCIe sideband interfaces.
 
+The facility network frequently interfaces directly with BMCs via IPMI, Redfish, or SNMP protocols:
+- **Firmware Flashing Vulnerabilities**: Compromising the BMC allows an attacker to overwrite host BIOS or accelerator microcode stored in SPI NOR flash chips, establishing persistent, undetectable firmware rootkits that survive full operating system reinstalls.
+- **Inter-Integrated Circuit (I2C/I3C) Bus Sniffing**: Platform telemetry (temperatures, voltages, clock states) and cryptographic key initialization sequences traverse low-speed board-level buses. An unauthenticated BMC can passively eavesdrop on these traces or inject falsified voltage reports that trigger premature emergency shutdowns.
+- **PCIe Sideband Exploitation (MCTP / JTAG)**: Management Component Transport Protocol (MCTP) over PCIe or SMBus enables BMCs to inspect internal device state registers. If sideband access is not cryptographically locked in silicon, the BMC can be subverted into a covert hardware probe to read out memory pointers and sensitive weights.
+
+### 3.4 Scale-Out Fabric Egress & Covert Weight Exfiltration
+
+Frontier model weights are distributed across thousands of accelerators using high-bandwidth RDMA networks. To prevent weight exfiltration, traditional defenses inspect host network egress interfaces. However, high-speed scale-out fabrics feature dedicated network engines that bypass host CPUs entirely:
+- **Covert RDMA Exfiltration**: An adversary with root execution on an individual node can schedule low-priority, asynchronous RDMA Read operations targeting remote accelerator HBM over unoccupied fabric virtual lanes. Because RDMA operations bypass kernel protocol stacks and OS logging, telemetry monitors frequently fail to detect the exfiltration.
+- **Hardware Telemetry Sidebands**: Accelerators export hardware diagnostic telemetry over dedicated fabric channels. If these telemetry streams are unconstrained, an adversary can encode model weight tensors into the low-order bits of diagnostic performance counters, streaming intellectual property out of the cluster beneath the noise floor of standard monitoring tools.
+
+---
+
+## 4. Systems Assurance Convergence: Safety, Reliability & Industrial Cybersecurity
+
+Mitigating the facility threat model requires ending the separation between information technology (IT) cybersecurity and operational technology (OT) functional safety. In high-density AI infrastructure, cyber threats directly induce physical equipment failure, and physical plant disturbances compromise cryptographic boundaries.
+
+To construct a defensible architecture, this framework integrates **IEC 62443** (Security for Industrial Automation and Control Systems) with **CLC/TS 50701** and **EN 50126** (Railway and Industrial Safety RAMS Engineering).
+
+```
++-----------------------------------------------------------------------------+
+|               IEC 62443 ZONES & CONDUITS ARCHITECTURE MATRIX                |
+|                                                                             |
+|  [ZONE 1: Facility Plant]  ---(Conduit A: SL-2)--->  [ZONE 2: Chassis Mgmt] |
+|   - Chilled Water / CDUs                              - BMC / OpenBIC       |
+|   - 48V DC Power Switchgear                           - ePDUs / Sensors     |
+|   - BMS / EPMS Controllers                            - Environmental Relays|
+|                                                               |             |
+|                                                     (Conduit B: SL-3)       |
+|                                                               v             |
+|  [ZONE 4: Silicon Cryptographic Core] <--(Conduit C)-- [ZONE 3: Host OS]    |
+|   - Caliptra Silicon RoT                  (SL-4)       - Host Kernel        |
+|   - Model Weight Registers                             - Device Drivers     |
+|   - Coherent Tensor Execution                          - Orchestration Pods |
++-----------------------------------------------------------------------------+
+```
 
-| Milestone Code | Core Objective & Deliverable | Target Date | Gate Alignment & Success Criteria | RACI |
-| :--- | :--- | :--- | :--- | :--- |
-| M1-Q1: Annex 7 Lock | Finalize Binding Security Terms (Annex 7) Incorporate mandatory technical requirements (kernel execution locks, non-token egress throttling, and machine-readable BOM deliverables) directly into active volume procurement purchase agreements. | Sept 15, 2026 | Gate 1 (Definition):  Signed contractual annex attached to Q4 2026 / Q1 2027 hardware purchase orders. |  |
-| M2-Q1: M2M Coordinator | Deploy Open M2M Coordinator Repository Establish the shared Git repository parser for DEXPI 2.0 (cooling/P&ID models) and CycloneDX 1.6 (HBOM/SBOM/DICE hierarchies) to satisfy initial EU Cyber Resilience Act (CRA) obligations. | Sept 30, 2026 | Gate 2 (Derivation):  Automated schema ingestion pipeline live with sample N-1 Reference System Gen 6 AI Accelerator tray records. |  |
-| M3-Q1: HSM Site Survey | Execute AMD6-Site Manufacturing Key Survey Complete an engineering survey across the semiconductor manufacturer's global Enterprise Distribution Server (EDS) HSM sites to document current-state key injection flows, fuse burning, and factory test mode deactivation to provide a baseline of processes, value and supplier participation. | Oct 31, 2026 | Gate 2 (Derivation):  Verified current-state assessment report delivered and folded into the UPSD baseline. |  |
-| M4-Q1: Facility Threat Model | Deliver AI Rack Envelope Cyber-Physical Threat Model Construct formal IEC 62443 / CLC/TS 50701 ConOps, FMECA, and SL-T derivation covering all eight conduits crossing the 100kW+ rack boundary (liquid cooling loops, 48V power busbars, BMC sidebands). | Nov 15, 2026 | Gate 3 (Verification):  Quantified failure envelopes, thermal response deadlines, and derivation chains established. |  |
-| M5-Q1: UPSD Baseline v1.0 | Publish Authoritative UPSD Baseline v1.0 Issue the definitive single source of truth documenting verified N-1 platform capabilities, cryptographic baselines, factory test deactivations, and procurement standards. | Nov 30, 2026 | Gate 4 (Acceptance):  Formal technical acceptance, SecRAC allocation, and approval of Q2 SOW budget release. |  |
+### 4.1 IEC 62443 Zones and Conduits Applied to AI Facilities
 
+IEC 62443 establishes a formal methodology for segmenting complex physical environments into discrete **Zones** possessing shared security requirements, interconnected via monitored, access-controlled **Conduits**.
 
-## 6.2 Operational Governance Cadence
+We establish four mandatory operational zones:
 
-Bi-Weekly Technical Syncs (Silicon Vendor / Frontier AI Lab / Independent Assurance Lead): Review interface boundaries, hardware telemetry limits, and open-source OpenSIL bring-up progress
+#### Zone 1: Facility Physical Plant & Industrial Automation (Target: SL-2)
+- **Scope**: Central chilled water plants, cooling towers, primary pumps, utility transformers, medium-voltage switchgear, and centralized BMS/SCADA servers.
+- **Security Posture**: Physical access control, isolated VLANs, mutual TLS for Modbus/BACnet telemetry, and read-only monitoring interfaces to external networks.
 
-Monthly SOW Steering Reviews: Track milestone completion, budget burn, and deliverables against EN 50126 verification gates
+#### Zone 2: Rack-Level Out-of-Band Management (Target: SL-3)
+- **Scope**: Rack management controllers, chassis BMCs, OpenBIC microcontrollers, smart ePDUs, and manifold flow monitoring nodes.
+- **Security Posture**: Hardware-authenticated firmware signing, disabled legacy IPMI protocols, mandatory Redfish HTTPS authentication with short-lived certificates, and strict physical separation from compute data networks.
 
-Immediate Action Item: Formalize the Q1 SOW advisory retainer for J. McKenney (Tetrel) to act as neutral Systems Assurance Lead and release manager for the UPSD
+#### Zone 3: Host Compute & Virtualization Layer (Target: SL-3)
+- **Scope**: Host x86/ARM CPUs, system DDR5 memory, Linux kernel, Kubernetes container runtimes, and local PCIe root complexes.
+- **Security Posture**: Measured boot via TPM 2.0, immutable root filesystems, kernel lockdown enforcement, and hardware-enforced hypervisor isolation.
 
-# 7. Glossary of Terms and Abbreviations
+#### Zone 4: The Silicon Cryptographic Compute Enclave (Target: SL-4)
+- **Scope**: Accelerator execution dies, on-package High-Bandwidth Memory (HBM3e/HBM4), on-die SRAM, and coherent scale-up crossbars.
+- **Security Posture**: The highest protection tier defined by IEC 62443-3-3. Protection against sovereign-tier adversaries armed with physical laboratory equipment. Silicon Root of Trust enforcement, cryptographic bus encryption, line-rate memory scrambling, and autonomous kernel verification.
 
-## DEXPI
+#### Conduit Enforcement Rules
+All conduits crossing zone boundaries must enforce deterministic security policies:
+1. **Conduit A (Zone 1 to Zone 2)**: All cooling and electrical commands flowing from the facility BMS to rack-level BMCs must pass through a hardware unidirectional data diode or a proxy enforcing strict schema validation. Write operations are restricted to non-destructive setpoints; commands requesting emergency fluid shutoff or power cutoff require dual cryptographic authorization.
+2. **Conduit B (Zone 2 to Zone 3)**: Communication between the BMC and the host CPU occurs exclusively over MCTP-over-PCIe or SMBus. The host processor treats the BMC as untrusted: all configuration updates dispatched by the BMC must be validated against local cryptographic policies.
+3. **Conduit C (Zone 3 to Zone 4)**: The interface between the host operating system and the accelerator silicon is an uncompromising SL-4 conduit. Unencrypted direct memory access (DMA) is structurally impossible. All data transfers traverse SPDM 1.3 authenticated and encrypted PCIe IDE channels.
 
-DEXPI is a semantic machine-to-machine data exchange standard that treats the P&ID as an object-oriented, machine-readable dataset. It explicitly defines:
+### 4.2 CLC/TS 50701 & EN 50126 RAMS Engineering
 
-Equipment Objects: Component class (e.g., Variable-Speed Centrifugal Pump P-101, Plate Heat Exchanger HEX-201, Quick-Disconnect Manifold M-301).
+CLC/TS 50701 and EN 50126 govern the engineering of Safety-Critical and Cybersecurity systems in environments where failure induces loss of life or catastrophic infrastructure collapse. Applying these standards to frontier AI datacenters ensures that **Reliability, Availability, Maintainability, and Safety (RAMS)** parameters are mathematically proven rather than empirically hoped for.
 
-Topology & Connectivity: Source, destination, flow direction, and pipe branch hierarchies (e.g., Line L-102 connects Nozzle N1 of CDU-1 to Inflow Port P2 of Compute Tray Rack 4).
+#### Hazard Identification & Safety Instrumented Systems (SIS)
+Under EN 50126, every potential failure mode within the AI Rack Envelope is categorized into a Safety Integrity Level (SIL):
+- **Thermal Runaway Mitigation (SIL-2 / SIL-3)**: If manifold differential pressure drops below safe operational limits ($P_{manifold} < P_{crit}$), an autonomous, hardware-wired Safety Instrumented Function (SIF) triggers an orderly execution pause and progressive power derate within 500 milliseconds, long before silicon approaches thermal destruction. This SIF is implemented using hardwired, analog comparator logic completely decoupled from the software BMC or OS.
+- **Overcurrent Busbar Protection (SIL-3)**: Electronic circuit breakers (eFuses) located directly on the 48V power sled monitor current derivative ($di/dt$). If abnormal current transients exceeding design baselines are detected (indicating a resonant frequency attack or hard short), the eFuse severs the bus connection within 5 microseconds, preserving silicon health.
 
-Engineering Parameters: Design flow rates ($\text{L/min}$), fluid chemistry (e.g., 25% Propylene Glycol / PG25), design pressure limits ($\text{bar}$), and delta-$T$ thermal envelopes ($32^\circ\text{C} \to 45^\circ\text{C}$).
+#### Reconciling Safety Interlocks with Security Mandates
+A central challenge in critical infrastructure engineering is resolving fundamental conflicts between safety systems and security controls:
+- **The Conflict**: Traditional industrial safety systems default to a "fail-open" or "de-energize to safe state" posture to preserve physical human life and mechanical equipment. Conversely, high-assurance security systems default to "fail-closed" or "quarantine and lock" to prevent unauthorized exfiltration or tampering.
+- **The Resolution**: Within the AI Rack Envelope, the safety interlock (e.g., thermal power cutoff) triggers an atomic **Cryptographic Zeroization Primitive** before power rails collapse. When an emergency shutdown signal is asserted by the hardwired SIL-3 safety system:
+  1. The accelerator security processor captures a 5-millisecond reserve power window provided by dedicated on-board holdup capacitors.
+  2. The processor instantly overwrites all internal HBM symmetric decryption keys stored in battery-backed SRAM with randomized bit patterns ($K_{AES} \oplus \text{PRNG}$).
+  3. This action instantaneously renders the billions of dollars of model weights residing in physical memory completely undecryptable, fulfilling the security requirement without delaying the safety-critical power de-energization.
+
+---
+
+## 5. Hardware Root of Trust (RoT) & Platform Firmware Integrity
+
+To ensure that silicon components within the AI Rack Envelope execute exclusively authentic, unmodified firmware from the initial millisecond of power application, the platform architecture incorporates an immutable, open-source Hardware Root of Trust.
+
+```
++-----------------------------------------------------------------------------+
+|                  CALIPTRA SILICON ROOT OF TRUST (RoT) ARCHITECTURE          |
+|                                                                             |
+|  +-----------------------------------------------------------------------+  |
+|  | HARDWARE IMMUTABLE CORE (Silicon Die)                                 |  |
+|  |  +------------------------+  +--------------------+  +--------------+  |  |
+|  |  | Mask ROM (128 KB)      |  | Cryptographic Accel|  | Key Vault    |  |  |
+|  |  | Immutable First-Stage  |  | SHA384 / ECC384 /  |  | Unique Die ID|  |  |
+|  |  | Bootloader (ROM Code)  |  | ML-DSA-87 / LMS    |  | (UDS / CDI)  |  |  |
+|  |  +------------------------+  +--------------------+  +--------------+  |  |
+|  +-----------------------------------------------------------------------+  |
+|                                      |                                      |
+|                       DICE MEASURED BOOT TRANSITION                         |
+|                                      v                                      |
+|  +-----------------------------------------------------------------------+  |
+|  | MUTABLE ACTIVE PLATFORM FIRMWARE                                      |  |
+|  |  +------------------------+  +--------------------+  +--------------+  |  |
+|  |  | Firmware Engine (FMC)  |  | Runtime Engine(RT) |  | SPDM 1.3 Core|  |  |
+|  |  | Validates OS / Drivers |  | Monitors Bus State |  | Attestation   |  |  |
+|  |  +------------------------+  +--------------------+  +--------------+  |  |
+|  +-----------------------------------------------------------------------+  |
++-----------------------------------------------------------------------------+
+```
+
+### 5.1 Open-Source Silicon RoT: The Caliptra Specification
+
+Proprietary vendor roots of trust introduce opaque security implementations that resist comprehensive independent security auditing. The AI Rack Envelope mandates integration of the open-source **Caliptra Silicon Root of Trust** specification directly into accelerator ASIC dies, host processors, and switching chips.
+
+Caliptra provides:
+1. **Immutable Silicon Core**: An integrated micro-controller containing 128 KB of mask ROM, physically etched during semiconductor fabrication. This ROM contains the non-modifiable primary bootloader, establishing the root of the verification chain.
+2. **Deterministic Cryptographic Identity (DICE)**: Device Identifier Composition Engine (DICE) architecture generates an asymmetric cryptographic identity derived from an immutable Unique Device Secret (UDS) fused into silicon registers during wafer manufacturing. Every firmware update produces a new Compound Device Identifier (CDI):
+
+$$CDI = \text{HMAC-SHA384}(UDS, \text{Hash}(Firmware_{Layer}))$$
+
+If an adversary modifies a single byte of firmware code, the resulting device private key completely shifts, preventing the compromised firmware from decrypting authorized platform secrets or establishing validated network sessions.
+
+### 5.2 SPDM 1.3 Component Authentication & Attestation
+
+Before any compute tray within the AI Rack Envelope is admitted into the distributed training fabric, it must undergo formal mutual attestation using the **Security Protocol and Data Model (SPDM) version 1.3** standard:
+- **Cryptographic Measurement Exchange**: The central cluster control plane dispatches a cryptographically randomized nonce challenge to each accelerator module over the management bus.
+- **Hardware-Signed Evidence**: The Caliptra RoT generates an SPDM Certificate Chain response, signing the nonce alongside the current contents of its internal Platform Configuration Registers (PCRs), which record the exact cryptographic hashes of all active firmware, microcode patches, board strapping resistor configurations, and initialization tables.
+- **Automated Admission Decision**: The cluster orchestrator verifies the attestation signature against the semiconductor manufacturer's public certificate authority. If a node exhibits an unrecognized PCR measurement, it is isolated by hardware fabric switches and prevented from receiving model weight parameters.
+
+### 5.3 Post-Quantum Cryptographic (PQC) Silicon Roadmap
+
+Frontier model weights represent assets with operational lifetimes spanning multiple decades. Consequently, platform integrity mechanisms must defend against adversaries operating under the "Harvest Now, Decrypt Later" doctrine. The AI Rack Envelope mandates alignment with the National Security Agency's **Commercial National Security Algorithm Suite 2.0 (CNSA 2.0)**:
+- **Stateful Hash-Based Signatures (LMS / XMSS)**: Primary firmware images and boot stages are signed using Leighton-Micali Signatures (LMS) in compliance with NIST SP 800-208. Because hash-based signatures rely strictly on collision-resistant hash functions rather than discrete logarithms or elliptic curves, they are inherently immune to Shor's algorithm on quantum computers.
+- **Module-Lattice-Based Digital Signatures (ML-DSA-87 / Dilithium)**: Runtime SPDM device attestation and ephemeral inter-tray session handshakes execute using ML-DSA-87, ensuring quantum-resistant mutual authentication across the coherent compute fabric.
 
-Instrumentation & Control Loops: Tagged sensors (temperature, flow, pressure transmitters), actuator types, interlocks, and Modbus/BACnet signal mappings. Engineering Counterparts
+---
 
+## 6. Machine-Speed Autonomous Verification & Platform Falsification
 
-| Engineering Domain | Standard / Equivalent | What It Encodes |
-| :--- | :--- | :--- |
-| Mechanical & Process Plant (Liquid) | DEXPI 2.0 (ISO 15926) | Hydronic topology, CDUs, P&ID graph |
-| Building & Civil Architecture (AEC) | IFC (ISO 16739 / OpenBIM) | Structural walls, ductwork, 3D space |
-| Electronic Design & PCB (EDA) | IPC-2581 / ODB++ / Netlist | Trace routes, IC footprints, pin wiring |
-| Industrial Automation & Manufacturing | AutomationML (IEC 62714) / AAS | PLC logic, kinematic robot cells |
-| Software Architecture & Supply Chain | CycloneDX 1.6 / SPDX (ISO/IEC 5962) | HBOM/SBOM components and dependencies |
+The scale and complexity of frontier AI hardware configurations render traditional vulnerability management frameworks obsolete.
 
+### 6.1 Limitations of Human-Speed Security Incident Response
 
-Relevance to Program In a 100kW+ liquid-cooled AI cluster, facility teams currently hand software/security teams static PDF drawings of cooling loops, electricity, data, control and etc. with several different parties and teams; supply chain, value chain; security, engineering, facilities, and etc. and trying to get everyone to agree on what the drawings represent. The complex relationships of the datacenter with so many different systems and teams breaks automated verification.
+Traditional hardware vulnerability management relies on Product Security Incident Response Teams (PSIRTs). When a security researcher reports a silicon vulnerability (such as a transient execution bug, sideband leakage, or firmware flaw), the vendor initiates a triage process involving manual human analysis, architectural review, microcode simulation, patch generation, and physical validation. This process consumes an average of **60 to 180 days**.
 
-Using DEXPI Promotes
+In frontier AI environments, threat actors deploy autonomous agentic exploit generation tools capable of synthesizing novel microarchitectural attack variants within minutes. Pitting human-speed PSIRT workflows against machine-speed automated exploitation guarantees systemic platform compromise.
 
-Automate Ingestion of physical cooling loops and energy systems directly into simulation engines (such as the proposed "Autonomous AI-Assisted Automated Exploit & Falsification Engine"  without manual redrawing or fixed release packages.
+### 6.2 Autonomous Agent-Driven Testbenches & Hardware-in-the-Loop (HIL) Emulation
 
-Execute Cyber-Physical Threat Modeling: Programmatically trace fault propagation (e.g., "If Modbus Valve V-12 is manipulated, which specific GPU trays reach critical thermal throttling within 45 seconds?").
+The AI Rack Envelope incorporates a continuous, machine-speed automated falsification architecture. Rather than treating security validation as an annual compliance milestone, the platform establishes a closed-loop verification pipeline coupling autonomous security test agents with high-fidelity Hardware-in-the-Loop (HIL) digital twin emulators:
 
-Satisfy EU CRA Machine-to-Machine Compliance: Pair DEXPI (physical mechanical BOM) with CycloneDX (silicon/software BOM) to provide an unbroken, machine-verifiable record of the entire datacenter stack.
+```
++-----------------------------------------------------------------------------+
+|             MACHINE-SPEED AUTONOMOUS FALSIFICATION PIPELINE                 |
+|                                                                             |
+|   +---------------------------------------------------------------------+   |
+|   | 1. Autonomous Agentic Exploit Generation                            |   |
+|   |    - Hypothesizes microarchitectural race conditions                |   |
+|   |    - Synthesizes fault injection patterns (di/dt, thermal cycles)   |   |
+|   |    - Generates novel SPDM/PCIe IDE fuzzing payloads                 |   |
+|   +---------------------------------------------------------------------+   |
+|                                      |                                      |
+|                       HIGH-SPEED CO-SIMULATION DISPATCH                     |
+|                                      v                                      |
+|   +---------------------------------------------------------------------+   |
+|   | 2. Hardware-in-the-Loop (HIL) & FPGA Digital Twin Emulation         |   |
+|   |    - Executes attack hypothesis against cycle-accurate silicon model|   |
+|   |    - Physical testbed applies thermal/electrical stress in real time|   |
+|   +---------------------------------------------------------------------+   |
+|                                      |                                      |
+|                       FORMAL FALSIFICATION VERIFICATION                     |
+|                                      v                                      |
+|   +---------------------------------------------------------------------+   |
+|   | 3. Automated Mitigation Synthesis & Firmware Lockout                |   |
+|   |    - Generates microcode patch or isolates vulnerable execution lane|   |
+|   |    - Updates IEC 62443 conduit firewall rules in < 500 ms           |   |
+|   +---------------------------------------------------------------------+   |
++-----------------------------------------------------------------------------+
+```
 
-General Terms
+1. **Automated Exploit Hypothesis Generation**: Machine-speed agentic models ingest hardware register descriptions, Verilog RTL code, and platform firmware binaries. The models analyze race conditions, sideband leakage vectors, and thermal vulnerability windows, generating thousands of concrete, executable exploit candidates per hour.
+2. **Cycle-Accurate HIL Execution**: Candidate exploits are immediately dispatched to parallelized FPGA-based silicon emulators and instrumented physical test racks. The testbed monitors bus telemetry, power supply noise, and register state transitions, verifying whether the candidate exploit successfully violates security invariants.
+3. **Automated Microcode Synthesis**: When a vulnerability is proven viable, the verification pipeline automatically synthesizes candidate microcode mitigations (e.g., pipeline serialization fences, disabled branch predictors, or rate-limited sidebands), validates that the fix neutralizes the exploit without violating functional safety parameters, and distributes the cryptographically signed patch across the production cluster.
 
-AC: Attacker Capability; Numeric rating (1–4) representing adversary resources, expertise, and motivation in IEC 62443 SL-T mathematical derivation.
+---
 
-Legacy Proprietary Initialization Firmware (transitioning to OpenSIL): Proprietary Encapsulated Silicon Architecture; Legacy closed-source initialization library for Semiconductor Manufacturer processors, being phased out in favor of open-source OpenSIL.
+## 7. Supply Chain Provenance & The 4-BOM Architecture
 
-ASL-3 / ASL-4: AI Safety Level 3 / 4; Frontier AI Lab Responsible Scaling Policy tiers requiring hardware-enforced protection against state-sponsored model weight theft and CBRN capability misuse.
+Hardware security within the AI Rack Envelope is fundamentally contingent upon verifiable provenance across the global semiconductor and system integration supply chain. An adversary who intercepts a compute tray during manufacturing, transit, or rack assembly can embed microscopic hardware trojans; such as rogue interposers, malicious passive components, or tampered SPI flash chips; that bypass all subsequent logical security controls.
 
-BMC: Baseboard Management Controller; Specialized service processor providing out-of-band management; treated as an untrusted threat vector under zero-trust silicon architecture.
+### 7.1 The Unified 4-BOM Provenance Architecture
 
-Caliptra: Caliptra Silicon Root of Trust; Open-source hardware Root of Trust (RoT) integrated directly into silicon to provide cryptographic attestation and identity (DICE) at power-on.
+To eliminate supply chain ambiguity, the platform mandates integration of the **CycloneDX 1.6+ Four-Dimensional Bill of Materials (4-BOM)** standard, providing a machine-readable, cryptographically verifiable attestation of every element residing within the physical envelope:
 
-CDU: Coolant Distribution Unit; Datacenter mechanical system managing fluid flow, temperature, and heat exchange across liquid-cooled compute racks; classified under OT Zone 4.
+```
++-----------------------------------------------------------------------------+
+|                      THE 4-BOM ARCHITECTURE MATRIX                          |
+|                                                                             |
+|  [1. SOFTWARE BOM (SBOM)]                 [2. HARDWARE BOM (HBOM)]          |
+|   - Host Linux Kernel Modules              - Silicon Die Revisions & Steppings|
+|   - ROCm / CUDA Runtime Drivers            - Interposer & Substrate Lots     |
+|   - OpenBMC Embedded Linux Tree            - Board Layout & Passive Bill     |
+|   - Cryptographic Microcode                - Silicon Foundry Provenance IDs  |
+|                                                                             |
+|  [3. OPERATIONAL TECHNOLOGY BOM (OTBOM)]   [4. COMPONENT BOM (CBOM)]         |
+|   - CDU Programmable Logic Firmware        - Liquid Cold Plate Alloys        |
+|   - Smart ePDU Microcontrollers            - Quick-Disconnect Seals (EPDM/FKM)|
+|   - Modbus/BACnet Gateway Firmware         - Manifold Welds & Piping Metals  |
+|   - Optical Leak Sensor Firmware           - 48V Busbar Copper Certifications|
++-----------------------------------------------------------------------------+
+```
 
-CLC/TS 50701: CENELEC Technical Specification 50701; Standard for railway cybersecurity, defining the systematic ConOps-to-Zones derivation chain adapted for AI cyber-physical security.
+1. **Software Bill of Materials (SBOM)**: Enumerates all active host software, container layers, device drivers, and firmware blobs. Cryptographic hashes of all binaries are cross-referenced continuously against known vulnerability databases (NVD) and National Vulnerability Databases.
+2. **Hardware Bill of Materials (HBOM)**: Extends BOM transparency into silicon and circuit board components. Captures exact die steppings, silicon fabrication foundry IDs, packaging substrate lot numbers, wafer serializations, and vendor manufacturing runs for all discrete silicon components (accelerators, NICs, PCIe switches, VRM controllers).
+3. **Operational Technology Bill of Materials (OTBOM)**: Details the firmware, logic configurations, and control software operating within row-level CDUs, power supply units, busbar monitor controllers, and environmental sensor microcontrollers.
+4. **Component Bill of Materials (CBOM)**: Catalogs physical, mechanical, and hydraulic materials; including copper cold plate metallurgy, ethylene-propylene-diene-monomer (EPDM) seal formulations, and dielectric fluid chemical specifications; ensuring that counterfeit mechanical elements that degrade thermal safety are identified prior to operational energization.
 
-CNSA 2.0: Commercial National Security Algorithm Suite 2.0; NSA-mandated quantum-resistant algorithms, requiring ML-DSA-87 (asymmetric signatures) and LMS (stateful hash-based signatures) for firmware signing.
+### 7.2 Open Platform Initialization Architecture (OpenSIL Migration)
 
-ConOps: Concept of Operations; High-level engineering document defining operational boundaries, mission profiles, and functional failure envelopes of the System under Consideration.
+A critical requirement for hardware supply chain transparency is the total elimination of proprietary, closed-source binary initialization blobs in host CPUs and accelerators. Historically, platform boot sequences rely on proprietary Unified Extensible Firmware Interface (UEFI) initialization blobs that execute at highest CPU privilege levels (Ring -2 / System Management Mode) prior to operating system initialization. These binary blobs represent massive, un-auditable security risks.
 
-CycloneDX: OWASP CycloneDX Standard (v1.6); Machine-readable bill-of-materials standard supporting hierarchical Hardware (HBOM), Software (SBOM), firmware, and DICE certificate representations.
+The AI Rack Envelope enforces migration to open-source platform initialization:
+- **OpenSIL Integration**: Platform boot firmware integrates the Open Silicon Initialization Library (OpenSIL), stripping monolithic firmware into modular, open-source execution libraries written in memory-safe paradigms.
+- **Transparent Coreboot Payload**: OpenSIL executes within an open-source coreboot environment, enabling platform operators to audit every line of code executed during silicon reset, memory training, and PCIe link negotiation.
+- **Supply Chain Cryptographic Ledger**: Every build artifact, binary image, and configuration script is anchored into a public, tamper-proof transparency log (e.g., Sigstore Rekor), enabling cryptographically irrefutable verification that deployed hardware matches the open-source reference standard.
 
-DEXPI 2.0: Data Exchange in the Process Industry; Standardized XML/JSON schema for Piping and Instrumentation Diagrams (P&ID), capturing physical topologies, CDU loops, valves, and mechanical sensors.
+---
 
-DICE: Device Identifier Composition Engine; TCG standard that cryptographically derives layered
+## 8. Mathematical Formulations & Thermodynamic Hazard Calculus
 
-device identity certificates from a Unique Device Secret (UDS) burned into silicon during fabrication.
+To ground this architectural framework in empirical rigor, we formalize the physical and operational hazard dynamics governing the AI Rack Envelope.
 
-DPU: Data Processing Unit; Programmable network accelerator (e.g., Hardware DPU / SmartNIC (Line-Rate Packet Filter)) providing line-rate hardware packet filtering, encryption, and telemetry enforcement.
+### 8.1 Thermodynamic Heat Balance & Silicon Thermal Runaway
 
-EDS: Enterprise Distribution Server; Semiconductor Manufacturer manufacturing key provisioning system distributed across six global factory Hardware Security Module (HSM) sites.
+The thermal state of an accelerator die within the AI Rack Envelope is governed by the dynamic energy conservation equation:
 
-EN 50126: CENELEC European Standard 50126; Specification for the systematic management of Reliability, Availability, Maintainability, and Safety (RAMS) throughout the engineering lifecycle.
-
-EU CRA: EU Cyber Resilience Act (Reg. 2024/2847); European regulation imposing binding cybersecurity and vulnerability reporting requirements across digital hardware products, taking effect September 11, 2026.
-
-FMECA: Failure Modes, Effects, and Criticality Analysis; Systematic inductive analysis method evaluating potential component failure modes, operational consequences, and severity rankings.
-
-FRA: Failure Root-cause Analysis; Factory test mode allowing diagnostic inspection; requires permanent cryptographic deactivation before production platform delivery.
-
-HBM / HBM3e: High Bandwidth Memory; 3D-stacked DRAM integrated directly on the accelerator interposer; isolated via hardware firewalls from unauthorized host CPU read access.
-
-HBOM: Hardware Bill of Materials; Hierarchical, machine-readable inventory of every physical integrated circuit, passive component, printed circuit board, and mechanical assembly.
-
-HIL: Hardware-in-the-Loop; Emulation and validation architecture connecting simulated automated exploit engines directly to physical server trays and NetFPGA testbeds.
-
-HSM: Hardware Security Module; Tamper-resistant cryptographic appliance used to store root keys and perform high-assurance cryptographic operations during manufacturing.
-
-IC: Impact Category; Numeric rating (1–4) representing the operational, financial, and safety severity of a compromised system under IEC 62443.
-
-IEC 62443: IEC 62443 Standard Series; International standard defining cybersecurity for industrial automation and control systems, establishing the foundational Zones and Conduits architecture.
-
-IEC 63452: IEC 63452 / ISO Standards; Emerging international standard establishing cybersecurity requirements and assurance lifecycles for complex cyber-physical infrastructures.
-
-JTAG: Joint Test Action Group (IEEE 1149.1); Dedicated boundary-scan and hardware debug interface; must be cryptographically locked down post-manufacturing to prevent physical memory tampering.
-
-LMS: Leighton-Micali Signatures; Stateful hash-based signature scheme approved under CNSA 2.0 and NIST SP 800-208 for high-assurance firmware and bootloader verification.
-
-M2M: Machine-to-Machine; Automated, standardized data exchange between software systems without manual human translation (e.g., DEXPI 2.0 and CycloneDX parsers).
-
-Gen 6 AI Accelerator: Next-Generation Multi-Chiplet AI Accelerator (OAM / PCIe); Semiconductor Manufacturer frontier accelerator packaging multi-chiplet GPUs and High Bandwidth Memory on an advanced packaging interposer.
-
-ML-DSA-87: Module-Lattice-Based Digital Signature Algorithm; NIST-standardized (FIPS 204) post-quantum digital signature algorithm mandated under CNSA 2.0 for asymmetric identity and certificate chains.
-
-MOC: Management of Change; Formal engineering discipline ensuring that hardware, firmware, and facility modifications do not compromise the established baseline safety case.
-
-ODM: Original Design Manufacturer; Overseas engineering and manufacturing firms (e.g., Foxconn, Quanta, Wistron) that build compute, switch, and facility trays to hyperscale specifications.
-
-OpenSIL: Open-Source Silicon Initialization Library; Semiconductor Manufacturer open-source architecture that decouples silicon initialization from host firmware, allowing transparent auditability and native integration with coreboot.
-
-OT: Operational Technology; Hardware and software that detects or causes changes in physical processes (valves, pumps, cooling loops, electrical switchgear).
-
-P&ID: Piping and Instrumentation Diagram; Detailed schematic showing piping, valves, instrumentation, sensors, and control loops within the datacenter liquid cooling infrastructure.
-
-PQC: Post-Quantum Cryptography; Cryptographic algorithms resistant to cryptanalytic attacks executed on cryptanalytically relevant quantum computers (CRQCs).
-
-PSIRT: Product Security Incident Response Team; Organizational team responsible for managing the intake, investigation, and coordinated disclosure of hardware and software security vulnerabilities.
-
-RAMS: Reliability, Availability, Maintainability, Safety; Quantitative systems engineering discipline governing operational dependability across complex cyber-physical installations (EN 50126).
-
-RoCE: RDMA over Converged Ethernet; Network protocol enabling direct memory access across accelerators over Ethernet fabrics without host CPU operating system intervention.
-
-Open Acceleration Compute Stack & Runtime: Radeon Open Compute Platform; Semiconductor Manufacturer open-source software development platform and runtime for GPU-accelerated computing and machine learning.
-
-RoT: Root of Trust; Fundamental hardware component that is inherently trusted to perform security-critical operations, such as measuring and validating boot code.
-
-RSP: Responsible Scaling Policy; Frontier AI Lab operational framework specifying strict safety, security, and containment thresholds (ASL levels) as AI model capabilities scale.
-
-SBOM: Software Bill of Materials; Machine-readable manifest tracking all software packages, libraries, dependencies, and licensing across platform firmware and host operating systems.
-
-SecRAC: Security Requirements Allocation Table; Formal matrix mapping derived Target Security Levels (SL-T) and safety requirements to specific hardware, firmware, and organizational controls.
-
-SL-T: Target Security Level; Quantitative security tier (SL-T 1 to SL-T 4) derived per IEC 62443 representing the required defensive posture of a specific zone against adversary capabilities.
-
-SOW: Statement of Work; Quarterly commercial agreement defining specific engineering deliverables, verification milestones, and funding allocations under existing master contracts.
-
-SPDM: Security Protocol and Data Model; DMTF standard defining protocols for hardware device authentication, attestation, and key exchange over PCIe and CXL buses.
-
-SuC: System under Consideration; Formally bounded hardware, software, and physical envelope being evaluated during threat modeling and RAMS hazard analyses.
-
-UA-Link: Ultra Accelerator Link; Open industry standard for high-bandwidth, low-latency scale-up communication between AI accelerators across compute trays.
-
-UDS: Unique Device Secret; Secret cryptographic seed burned into non-volatile silicon fuses during fabrication, forming the base of the DICE identity chain.
-
-UPSD: Uniform Platform Security Document; Authoritative, version-controlled source of truth detailing baseline security capabilities, verified configurations, and procurement standards across organizations.
-
-Host Server CPUs (N-1 / Gen 6): Enterprise Server Host Processors; Next-generation Semiconductor Manufacturer server CPUs hosting compute node hypervisors, memory controllers, and PCIe root complexes.
-
-## 8. Quantitative Engineering Physics & Actuarial Loss Formulations
-
-To satisfy the technical requirements of the Cyber Digital Twin and enable catastrophe underwriter certification, the platform security envelope is governed by four deterministic mathematical formulations.
-
-### 8.1 Thermodynamic Dissipation and Junction Temperature Rise
-When liquid cooling supply flow is throttled or interrupted through operational technology manipulation (such as Modbus valve tampering), the silicon junction temperature rise $\Delta T(t)$ over time $t$ follows the first-order transient thermal response:
-
-$$\Delta T(t) = \frac{P_{\text{tray}}}{\dot{m} \cdot C_p} \left(1 - \exp\left(-\frac{t}{\tau_{\text{th}}}\right)\right)$$
+$$C_{th} \frac{dT_j(t)}{dt} = P_{diss}(t) - \dot{Q}_{rem}(t)$$
 
 Where:
-- $P_{\text{tray}}$ is the total electrical power infeed to the compute tray ($10.5\text{ kW}$ rated peak).
-- $\dot{m}$ is the mass flow rate of the liquid coolant ($\text{kg/s}$), corresponding to nominal volumetric delivery of $38.5\text{ L/min}$ of PG25 water-glycol.
-- $C_p$ is the specific heat capacity of 25% propylene glycol ($3.85\text{ kJ/(kg}\cdot\text{K)}$).
-- $\tau_{\text{th}}$ is the thermal time constant of the cold plate and heat sink assembly ($\tau_{\text{th}} \approx 4.2\text{ seconds}$).
+- $T_j(t)$ is the junction temperature of the silicon die ($^\circ\text{C}$).
+- $C_{th}$ is the lumped effective thermal capacitance of the silicon die, thermal interface material (TIM), and copper cold plate ($\text{J/}^\circ\text{C}$).
+- $P_{diss}(t)$ is the instantaneous electrical power dissipation of the tensor compute units ($\text{W}$).
+- $\dot{Q}_{rem}(t)$ is the instantaneous convective heat evacuation rate delivered by the liquid cooling loop ($\text{W}$).
 
-If mass flow rate $\dot{m}$ collapses to less than $8.0\text{ L/min}$, $\Delta T(t)$ exceeds the critical silicon trip threshold ($T_j \ge 94^\circ\text{C}$) in $t < 14.8\text{ seconds}$, initiating automatic hardware thermal shutdown.
+The convective heat transfer rate $\dot{Q}_{rem}(t)$ is defined by:
 
-### 8.2 Line-Rate Egress Rate-Limiting Formulation
-To prevent sovereign-tier adversaries from extracting model weights across covert sideband channels, physical hardware filters enforce an upper bound on non-token exfiltration bandwidth:
+$$\dot{Q}_{rem}(t) = \dot{m}(t) c_p \left(T_{out}(t) - T_{in}(t)\right) = U A_{eff} \left(T_j(t) - T_{fluid}(t)\right)$$
 
-$$R_{\text{egress}} = \min\left(C_{\text{physical}}, \; \beta_{\text{filter}}\right) \le R_{\text{threshold}}$$
+Where $\dot{m}(t)$ represents the mass flow rate of the coolant ($\text{kg/s}$), $c_p$ is the specific heat capacity of the fluid ($\text{J/(kg}\cdot\text{K)}$), $U$ is the overall heat transfer coefficient, and $A_{eff}$ is the microchannel contact surface area.
+
+Under a malicious facility-level cooling interdiction, an adversary commands the CDU valves to close, causing mass flow rate to decay exponentially:
+
+$$\dot{m}(t) = \dot{m}_0 e^{-\frac{t}{\tau_{valve}}}$$
+
+Substituting into the heat balance equation yields the differential equation for junction temperature escalation:
+
+$$\frac{dT_j(t)}{dt} = \frac{1}{C_{th}} \left( P_{diss}(t) - U(t) A_{eff} \left(T_j(t) - T_{fluid}(t)\right) \right)$$
+
+As $U(t) \to 0$, the system enters adiabatic runaway:
+
+$$T_j(t) = T_0 + \frac{1}{C_{th}} \int_0^t P_{diss}(\tau) \, d\tau$$
+
+For an accelerator consuming $P_{diss} = 1,200\text{ W}$ with a typical cold plate thermal capacitance $C_{th} \approx 450\text{ J/}^\circ\text{C}$:
+
+$$\frac{dT_j}{dt} = \frac{1200\text{ W}}{450\text{ J/}^\circ\text{C}} \approx 2.67^\circ\text{C/second}$$
+
+Starting from an operating temperature of $T_0 = 70^\circ\text{C}$, the critical destruction threshold ($T_{crit} = 115^\circ\text{C}$) is breached in:
+
+$$\Delta t_{failure} = \frac{115 - 70}{2.67} \approx 16.85\text{ seconds}$$
+
+This proves mathematically that software-based, human-speed alerting is entirely incapable of preventing physical damage; autonomous, hardware-level SIL-3 safety interlocks must execute within sub-second timescales.
+
+### 8.2 Power Distribution Transient Response & Resonant Voltage Perturbation
+
+The power distribution network (PDN) feeding the accelerator tray is modeled as an equivalent RLC circuit:
+
+$$\Delta V(t) = - \left( R_{eff} \cdot i(t) + L_{eff} \frac{di(t)}{dt} + \frac{1}{C_{eff}} \int_0^t i(\tau) \, d\tau \right)$$
+
+Under an adversarial step-frequency attack, an attacker modulates computational activity at frequency $\omega = 2\pi f$:
+
+$$i(t) = I_{base} + \Delta I \cdot \text{sgn}(\sin(\omega t))$$
+
+The second-order differential equation governing voltage response across the accelerator die power pins is:
+
+$$\frac{d^2 v(t)}{dt^2} + 2\zeta\omega_0 \frac{dv(t)}{dt} + \omega_0^2 v(t) = -\frac{1}{C_{eff}} \frac{di(t)}{dt}$$
+
+Where the natural resonant frequency $\omega_0$ and damping ratio $\zeta$ are:
+
+$$\omega_0 = \frac{1}{\sqrt{L_{eff} C_{eff}}}, \quad \zeta = \frac{R_{eff}}{2} \sqrt{\frac{C_{eff}}{L_{eff}}}$$
+
+When the attacker tunes the workload toggling frequency to match the natural resonant frequency ($\omega \to \omega_0$), the steady-state voltage fluctuation is amplified by the circuit quality factor $Q = 1 / (2\zeta)$:
+
+$$v_{peak} = \frac{\Delta I \cdot \omega_0 L_{eff}}{2\zeta}$$
+
+For high-current 48V distribution bars where $L_{eff} \approx 12\text{ nH}$, $C_{eff} \approx 800\text{ }\mu\text{F}$, and $\Delta I \approx 1,500\text{ A}$, the induced resonance creates voltage spikes exceeding $\pm 18\text{ V}$, destroying point-of-load VRMs and inducing physical gate-oxide breakdown in silicon compute cores.
+
+### 8.3 Markov Reliability & Cyber-Physical Hazard Formulation
+
+The operational reliability of the AI Rack Envelope under continuous cyber-physical stress is formalized via a multi-state continuous-time Markov chain (CTMC). We define four discrete operational states:
+
+1. **State $S_0$ (Nominal Secure)**: All zones operating within normative parameters; cryptographic envelopes validated; cooling and power steady-state.
+2. **State $S_1$ (Degraded / Stressed)**: Facility threat pressure detected (e.g., elevated cooling temperatures, unusual $di/dt$ transient noise, unverified SPDM challenge); autonomous safety throttling active.
+3. **State $S_2$ (Interdiction Containment)**: Safety Instrumented System (SIS) triggered; cryptographic keys zeroized; physical compute isolated.
+4. **State $S_3$ (Catastrophic Failure)**: Boundary breached; model weights compromised or silicon physically destroyed through thermal/electrical runaway.
+
+The state probability transition vector $\mathbf{P}(t) = [P_0(t), P_1(t), P_2(t), P_3(t)]$ satisfies the Chapman-Kolmogorov forward differential equation:
+
+$$\frac{d\mathbf{P}(t)}{dt} = \mathbf{P}(t) \mathbf{Q}$$
+
+Where the transition rate generator matrix $\mathbf{Q}$ is defined as:
+
+$$\mathbf{Q} = \begin{bmatrix}
+-(\lambda_p + \lambda_c) & \lambda_p + \lambda_c & 0 & 0 \\
+\mu_r & -(\mu_r + \lambda_{sis} + \lambda_{fail}) & \lambda_{sis} & \lambda_{fail} \\
+0 & 0 & -\mu_{rec} & 0 \\
+0 & 0 & 0 & 0
+\end{bmatrix}$$
 
 Where:
-- $C_{\text{physical}}$ represents the raw physical channel capacity of PCIe sideband, USB, or I2C management conduits ($> 10\text{ Mbps}$).
-- $\beta_{\text{filter}}$ is the hardware-enforced packet gate enforced by the on-die Root of Trust.
-- $R_{\text{threshold}}$ is set to $64\text{ kbps}$ for non-token telemetry.
+- $\lambda_p$ is the physical stress arrival rate (cooling disturbances, power grid fluctuations).
+- $\lambda_c$ is the cyber threat arrival rate (BMC exploits, sideband attacks, fabric scans).
+- $\mu_r$ is the autonomous self-healing recovery rate of platform control loops.
+- $\lambda_{sis}$ is the activation rate of hardwired SIL-3 Safety Instrumented Functions.
+- $\lambda_{fail}$ is the rate of boundary collapse leading to catastrophic asset loss.
+- $\mu_{rec}$ is the facility recovery rate from safe zeroized state back to operational baseline.
 
-At $R_{\text{threshold}} = 64\text{ kbps}$, exfiltrating a 70-billion parameter quantized model weight checkpoint ($140\text{ GB}$) requires:
+The hazard rate $h(t)$, defining the instantaneous failure probability given survival up to time $t$, is expressed as:
 
-$$t_{\text{exfil}} = \frac{140 \times 10^9 \times 8\text{ bits}}{64 \times 10^3\text{ bits/s}} \approx 1.75 \times 10^7\text{ seconds} \approx 202.5\text{ days}$$
+$$h(t) = \frac{-\frac{d R(t)}{dt}}{R(t)} = \frac{\mathbf{P}(t) \mathbf{Q}_{fail}}{1 - P_3(t)}$$
 
-This mathematically closes the covert exfiltration attack vector, converting rapid weight theft into an operationally detectable anomaly.
+By enforcing the AI Rack Envelope controls (sub-second hardware SIF interlocks, Caliptra RoT, and line-rate IDE bus encryption), the failure transition rate is reduced to near-zero ($\lambda_{fail} \to 10^{-9}\text{ hr}^{-1}$), ensuring that even under persistent, sovereign-tier facility attacks, the system transitions deterministically to the contained zeroized state $S_2$ rather than the catastrophic failure state $S_3$.
 
-### 8.3 Actuarial Loss Quantification: SLE, ALE, PML, and Underwriting Economics
-Underwriters writing property catastrophe, cyber business interruption, and systemic risk treaties price high-density compute facilities using the Single Loss Expectancy (SLE) and Annualised Loss Expectancy (ALE) formulations:
+---
 
-$$\text{SLE} = V_{\text{weights}} + L_{\text{hardware}} + \int_0^{T_{\text{outage}}} \dot{C}_{\text{SLA}}(t) \, dt$$
+## 9. Normative Standards, References & IEEE Bibliographic Register
 
-$$\text{ALE} = \text{SLE} \times \text{ARO}$$
-
-Where:
-- $V_{\text{weights}}$ is the intrinsic replacement cost valuation of the model checkpoint ($V_{\text{weights}} \ge 500\text{M USD}$).
-- $L_{\text{hardware}}$ is the direct physical plant loss, evaluated under Probable Maximum Loss (PML) scenarios ($4.2\text{M USD}$ per row).
-- $\dot{C}_{\text{SLA}}(t)$ is the consequential loss and business interruption rate per hour of unserved cluster inference capacity.
-- $T_{\text{outage}}$ is the recovery time constant, governing accumulation across client SLAs.
-- $\text{ARO}$ is the Annualised Rate of Occurrence calibrated via threat actor scoring (ATQ matrix).
-
-Return on Security Investment (ROSI) for hardware zero-trust controls is calculated as:
-
-$$\text{ROSI} = \frac{\Delta \text{ALE} - C_{\text{controls}}}{C_{\text{controls}}} = \frac{(\text{ALE}_{\text{baseline}} - \text{ALE}_{\text{hardened}}) - C_{\text{controls}}}{C_{\text{controls}}}$$
-
-Under Lloyd's Y5381 war exclusion mandates, state-backed cyber attacks trigger total exclusion from reinsurance treaties unless policyholders enforce hardware-attested zero-trust boundaries. By demonstrating hardware-enforced line-rate filtering and Caliptra silicon verification, facility operators eliminate systemic accumulation risk, qualifying for substantial deductible reductions and policy sub-limit waivers.
-
-### 8.4 Cryptographic Barrier Escape Probability
-The likelihood $P_{\text{breach}}$ of an adversary defeating on-die hardware security over a multi-year deployment horizon is modeled via the Kramers-type activation rate across the cryptographic work factor barrier $\Delta U$:
-
-$$P_{\text{breach}}(\Delta U, \tau) = 1 - \exp\left(-\nu_0 \cdot \tau \cdot \exp\left(-\frac{\Delta U}{k_B T_{\text{eff}}}\right)\right)$$
-
-Transitioning from classical RSA-4096 / ECC-384 to NSA CNSA 2.0 post-quantum algorithms (ML-DSA-87 and LMS stateful hash signing) raises the effective work factor barrier $\Delta U$ from 128 bits of classical security to 256 bits of quantum-resistant security, driving $P_{\text{breach}} \to 0$ across the 20-year infrastructure lifecycle.
+1. **International Electrotechnical Commission (IEC).** *IEC 62443-3-3: Industrial communication networks - Network and system security - Part 3-3: System security requirements and security levels.* International Standard, 2018.
+2. **European Committee for Electrotechnical Standardization (CENELEC).** *CLC/TS 50701: Railway applications - Cybersecurity.* Technical Specification, 2021.
+3. **European Committee for Electrotechnical Standardization (CENELEC).** *EN 50126-1: Railway applications - The specification and demonstration of Reliability, Availability, Maintainability and Safety (RAMS).* European Standard, 2017.
+4. **National Institute of Standards and Technology (NIST).** *NIST SP 800-193: Platform Firmware Resiliency Guidelines.* Special Publication, U.S. Department of Commerce, 2018.
+5. **Open Compute Project (OCP).** *Caliptra: Open Source Silicon Root of Trust Specification.* Version 1.0, OCP Security Project, 2023.
+6. **Distributed Management Task Force (DMTF).** *Security Protocol and Data Model (SPDM) Specification.* DSP0274, Version 1.3.0, 2023.
+7. **PCI-SIG.** *PCIe Integrity and Data Encryption (IDE) Specification.* Version 1.0, Peripheral Component Interconnect Special Interest Group, 2020.
+8. **National Institute of Standards and Technology (NIST).** *NIST SP 800-208: Recommendation for Stateful Hash-Based Signature Schemes.* Special Publication, U.S. Department of Commerce, 2020.
+9. **National Security Agency (NSA).** *Announcing the Commercial National Security Algorithm Suite 2.0 (CNSA 2.0).* Cybersecurity Advisory, Fort Meade, MD, 2022.
+10. **European Commission.** *Regulation of the European Parliament and of the Council on horizontal cybersecurity requirements for products with digital elements (Cyber Resilience Act).* COM(2022) 454 final, Brussels, 2022.
+11. **OWASP Foundation.** *CycloneDX v1.6: Modern Full-Stack Attestation Standard for Software, Hardware, and Operational Technology.* 2024.
+12. **Ashok, A., et al.** *Cyber-Physical Threat Analysis for Critical Liquid-Cooled Infrastructure.* IEEE Transactions on Industrial Informatics, vol. 19, no. 4, pp. 4120-4131, 2023.
+13. **McKenney, J.** *Systems Assurance in High-Entropy Industrial Complexes: Mathematical Modeling of Boundary Failures and Cognitive Distortion.* Eigenia Labs Monograph Series, WG-05-CAD, 2026.
+14. **Taleb, N. N.** *Antifragile: Things That Gain from Disorder.* Random House, New York, 2012.
+15. **Sethi, P., et al.** *Power Glitch and Resonant Induction Vulnerabilities in Modern Accelerator Silicon.* Proceedings of the IEEE Symposium on Security and Privacy (S&P), pp. 1024-1039, 2024.
+16. **Cisco Systems.** *Line-Rate Media Access Control Security (MACsec) across Megawatt Infrastructure.* Technical White Paper, 2022.
+17. **Open Compute Project & OpenSIL Consortium** *Open Silicon Initialization Library (OpenSIL) Architecture and Implementation Guide.* Industry Consortium Standard, 2024.
+18. **Granovetter, M.** *Threshold Models of Collective Behavior.* American Journal of Sociology, vol. 83, no. 6, pp. 1420-1443, 1978.
+19. **Kramers, H. A.** *Brownian motion in a field of force and the diffusion model of chemical reactions.* Physica, vol. 7, no. 4, pp. 284-304, 1940.
+20. **IEC.** *IEC 61508: Functional safety of electrical/electronic/programmable electronic safety-related systems.* Parts 1-7, International Standard, 2010.
