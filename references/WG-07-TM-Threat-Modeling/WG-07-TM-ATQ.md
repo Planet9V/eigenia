@@ -345,7 +345,7 @@ The ATQ model enforces full end-to-end normative systems assurance across cyber-
 
 ## 8. Interactive Console & Telemetry Terminal: ATQ Card
 
-To enable real-time operator inspection and dynamic adversary re-scoring, the complete twelve-factor mathematical model is rendered through the **ATQ Interactive Card Terminal**; accessible at [`/terminals/atq-card-terminal.html`](file:///Users/jimmcknney/jim_private/eigenia/web/public/terminals/atq-card-terminal.html).
+To enable real-time operator inspection and dynamic adversary re-scoring, the complete twelve-factor mathematical model is rendered through the **ATQ Interactive Card Terminal**; accessible at [`/terminals/atq-card-terminal.html`](/terminals/atq-card-terminal.html).
 
 ```
 +-------------------------------------------------------------------------+
