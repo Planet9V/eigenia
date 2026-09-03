@@ -7,6 +7,13 @@ import { useLanguage } from "@/context/LanguageContext";
 import { useTheme } from "@/context/ThemeContext";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { getAllWikiDocuments, getAllWorkingGroups, getWorkingGroupById } from "@/lib/wiki";
+
+// Derived from the wiki registry so these can never drift out of sync with the
+// published corpus, the way the previous hardcoded counts did.
+const TOTAL_TREATISES = getAllWikiDocuments().length;
+const TOTAL_WORKING_GROUPS = getAllWorkingGroups().length;
+const wgCount = (id: string) => getWorkingGroupById(id)?.documents.length ?? 0;
 
 export const Navbar: React.FC = () => {
   const { language, setLanguage, t } = useLanguage();
@@ -91,7 +98,7 @@ export const Navbar: React.FC = () => {
                       className="block p-2.5 rounded-xl bg-dutchOrange/10 border border-dutchOrange/30 hover:bg-dutchOrange/20 transition-colors"
                     >
                       <span className="text-dutchOrange font-bold block text-[11px]">Sovereign Research Wiki Dashboard</span>
-                      <span className="text-primary block font-sans text-xs">All 25 Treatises across 8 Working Groups (Sliding TOC)</span>
+                      <span className="text-primary block font-sans text-xs">All {TOTAL_TREATISES} Treatises across {TOTAL_WORKING_GROUPS} Working Groups (Sliding TOC)</span>
                     </Link>
 
                     <Link
@@ -99,7 +106,7 @@ export const Navbar: React.FC = () => {
                       className="block p-2.5 rounded-xl hover:bg-subtle transition-colors"
                     >
                       <span className="text-dutchOrange font-bold block text-[11px]">WG-01 // Actuarial & Underwriting</span>
-                      <span className="text-primary block font-sans text-xs">9 Treatises: COPE, Clayton Copulas, War Exclusions</span>
+                      <span className="text-primary block font-sans text-xs">{wgCount("WG-01-UI")} Treatises: COPE, Clayton Copulas, War Exclusions</span>
                     </Link>
 
                     <Link
@@ -107,7 +114,7 @@ export const Navbar: React.FC = () => {
                       className="block p-2.5 rounded-xl hover:bg-subtle transition-colors"
                     >
                       <span className="text-dutchOrange font-bold block text-[11px]">WG-02 // Digital Twin & Taleb Series</span>
-                      <span className="text-primary block font-sans text-xs">7 Treatises: Taleb Series I-V, 3.2M Graph Topology</span>
+                      <span className="text-primary block font-sans text-xs">{wgCount("WG-02-DT")} Treatises: Taleb Series I-V, 3.2M Graph Topology</span>
                     </Link>
 
                     <Link
@@ -131,7 +138,7 @@ export const Navbar: React.FC = () => {
                         href="/wiki"
                         className="text-[11px] text-dutchOrange font-bold hover:underline block py-1"
                       >
-                        Open Sovereign Research Wiki Dashboard (25 Treatises) →
+                        Open Sovereign Research Wiki Dashboard ({TOTAL_TREATISES} Treatises) →
                       </Link>
                     </div>
                   </motion.div>
