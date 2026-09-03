@@ -16,7 +16,11 @@ import {
   Scale, 
   Compass, 
   Mail,
-  Zap
+  Zap,
+  Pause,
+  Play,
+  ChevronLeft,
+  ChevronRight
 } from "lucide-react";
 import { SiteChrome } from "@/components/SiteChrome";
 import { Breadcrumb } from "@/components/Breadcrumb";
@@ -25,6 +29,7 @@ import { motion } from "framer-motion";
 
 export default function UnifiedStandardPage() {
   const [activeTier, setActiveTier] = useState<1 | 2 | 3>(1);
+  const [isSlidePaused, setIsSlidePaused] = useState(false);
 
   return (
     <main className="min-h-screen bg-canvas text-primary relative font-sans selection:bg-dutchOrange selection:text-white transition-colors duration-300">
@@ -188,9 +193,9 @@ export default function UnifiedStandardPage() {
         </section>
 
         {/* =========================================================================
-            SECTION 2: The Multi-Advisor Board (Buffett, Jobs, Musk)
+            SECTION 2: The Multi-Advisor Strategic Council
         ========================================================================= */}
-        <section className="py-20 bg-canvas text-primary relative font-sans border-b border-hairline">
+        <section className="py-20 bg-canvas text-primary relative font-sans border-b border-hairline transition-colors duration-300">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
             <div className="max-w-3xl space-y-2">
               <span className="font-mono text-[10px] sm:text-xs tracking-[0.2em] uppercase text-dutchOrange font-semibold block">
@@ -200,7 +205,7 @@ export default function UnifiedStandardPage() {
                 Why Open Interoperability Inevitably Triumphs
               </h2>
               <p className="text-sm sm:text-base text-secondary font-light leading-relaxed">
-                Evaluating the unified standard through the lenses of long-term economic moats, radical design simplicity, and first-principles thermodynamics.
+                Evaluating the unified standard through long-term economic moats, radical design clarity, and first-principles thermodynamics.
               </p>
             </div>
 
@@ -213,20 +218,20 @@ export default function UnifiedStandardPage() {
                       <Scale className="w-5 h-5" />
                     </div>
                     <div>
-                      <h3 className="font-sans text-base font-semibold text-primary">Chief Investment Officer & Chairman</h3>
-                      <span className="font-mono text-[10px] text-muted block uppercase">Sector: Catastrophe Reinsurance & Capital Allocation</span>
+                      <h3 className="font-sans text-base font-semibold text-primary">Chief Investment Officer</h3>
+                      <span className="font-mono text-[10px] text-muted block uppercase">Sector: Catastrophe Reinsurance</span>
                     </div>
                   </div>
                   <blockquote className="text-xs sm:text-sm text-secondary font-light leading-relaxed italic border-l-2 border-dutchOrange/40 pl-3">
-                    "The most dangerous illusion in corporate risk is believing that buying a closed, proprietary system transfers your liability. Proprietary CAD ecosystems build a moat around their own license fees, not around your plant. When an unhedged cyber-physical catastrophe strikes, the asset owner pays 100% of the cost. The true economic moat belongs to open, interoperable standards where capital compounds without friction, and risk is measured by empirical physics."
+                    &ldquo;Buying a closed proprietary system does not transfer your liability. Proprietary CAD vendors protect their license margins, not your plant. When a physical catastrophe halts operations, the asset owner absorbs every dollar of loss. Open, inspectable data standards build the only real economic moat: capital compounds without vendor lock-in, and risk rests on empirical physics.&rdquo;
                   </blockquote>
                 </div>
                 <div className="pt-3 border-t border-hairline font-mono text-[11px] text-muted">
-                  <span className="text-dutchOrange font-semibold">Actuarial Reality:</span> Eliminates trapped capital and unhedged accumulation risk under Lloyd's Y5381.
+                  <span className="text-dutchOrange font-semibold">Actuarial Grounding:</span> Eliminates unhedged accumulation risk under Lloyd&apos;s Y5381.
                 </div>
               </div>
 
-              {/* Advisor 2: Design & Human Integration */}
+              {/* Advisor 2: Design & Human-Machine Interfaces */}
               <div className="p-8 rounded-2xl bg-surface border border-hairline space-y-4 shadow-xl flex flex-col justify-between">
                 <div className="space-y-3">
                   <div className="flex items-center gap-3">
@@ -234,16 +239,16 @@ export default function UnifiedStandardPage() {
                       <Compass className="w-5 h-5" />
                     </div>
                     <div>
-                      <h3 className="font-sans text-base font-semibold text-primary">Chief Design Executive & Co-Founder</h3>
-                      <span className="font-mono text-[10px] text-muted block uppercase">Sector: Computing Systems & Human-Machine Interfaces</span>
+                      <h3 className="font-sans text-base font-semibold text-primary">Chief Design Officer</h3>
+                      <span className="font-mono text-[10px] text-muted block uppercase">Sector: Human-Machine Interfaces (HMI)</span>
                     </div>
                   </div>
                   <blockquote className="text-xs sm:text-sm text-secondary font-light leading-relaxed italic border-l-2 border-dutchOrange/40 pl-3">
-                    "Simplicity isn't just a visual style; it's what happens when you tear down artificial walls. For thirty years, industry forced mechanical engineers to live in one room looking at piping drawings, and software architects in another looking at code. That isn't engineering, that's bureaucratic surrender. When you unify physical topology and digital components into one seamless, computable canvas, complexity disappears, and true elegance emerges."
+                    &ldquo;Simplicity comes from removing artificial boundaries. For decades, plants forced mechanical engineers to work in isolated piping diagrams while software teams looked at code elsewhere. That division makes no sense. When you place physical piping and digital components on the same computable canvas, the interface gets out of the way, and operators can finally see how the whole machine behaves.&rdquo;
                   </blockquote>
                 </div>
                 <div className="pt-3 border-t border-hairline font-mono text-[11px] text-muted">
-                  <span className="text-dutchOrange font-semibold">Human Interface:</span> Seamless dual-view architecture eliminating cross-disciplinary silos.
+                  <span className="text-dutchOrange font-semibold">Operator Interface:</span> Unifies piping topology and digital telemetry on one screen.
                 </div>
               </div>
 
@@ -255,16 +260,16 @@ export default function UnifiedStandardPage() {
                       <Flame className="w-5 h-5" />
                     </div>
                     <div>
-                      <h3 className="font-sans text-base font-semibold text-primary">Chief Engineer & Chief Executive</h3>
-                      <span className="font-mono text-[10px] text-muted block uppercase">Sector: Aerospace, Electric Mobility & AI Infrastructure</span>
+                      <h3 className="font-sans text-base font-semibold text-primary">Chief Engineer</h3>
+                      <span className="font-mono text-[10px] text-muted block uppercase">Sector: Autonomous Physical Systems</span>
                     </div>
                   </div>
                   <blockquote className="text-xs sm:text-sm text-secondary font-light leading-relaxed italic border-l-2 border-dutchOrange/40 pl-3">
-                    "Boil things down to the fundamental truths and reason up from there. If the laws of thermodynamics say that 140 kW of compute heat will melt your silicon dies in twelve seconds if cooling stops, then any cybersecurity compliance checklist that ignores fluid physics is completely useless. Ground your twin in real physics: mass flow, pressure differentials, and silicon gates."
+                    &ldquo;Start from first principles. If cooling stops, 140 kilowatts of rack heat will destroy silicon packaging in twelve seconds. A cybersecurity compliance checklist that ignores fluid dynamics protects nothing. Build the digital twin around physical ground truth: mass flow, pump curves, pressure limits, and silicon temperatures.&rdquo;
                   </blockquote>
                 </div>
                 <div className="pt-3 border-t border-hairline font-mono text-[11px] text-muted">
-                  <span className="text-dutchOrange font-semibold">Physical Truth:</span> Firmware exploits coupled directly to Navier-Stokes fluid transients and thermal shock.
+                  <span className="text-dutchOrange font-semibold">Physical Grounding:</span> Couples firmware exploits to Navier-Stokes fluid transients.
                 </div>
               </div>
             </div>
@@ -272,78 +277,165 @@ export default function UnifiedStandardPage() {
         </section>
 
         {/* =========================================================================
-            SECTION 3: The Deliberation Panel (5 Full Expert Quotes)
+            SECTION 3: The Deliberation Panel (Smooth Horizontal Sliding Rail)
         ========================================================================= */}
-        <section className="py-20 bg-subtle text-primary relative font-sans border-b border-hairline">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-            <div className="max-w-3xl space-y-2">
-              <span className="font-mono text-[10px] sm:text-xs tracking-[0.2em] uppercase text-dutchOrange font-semibold block">
-                Cross-Disciplinary Deliberation // Peer Review Panel
-              </span>
-              <h2 className="font-sans text-2xl sm:text-3xl font-semibold tracking-tight text-primary">
-                The Voices of Industrial Operations
-              </h2>
-              <p className="text-sm sm:text-base text-secondary font-light leading-relaxed">
-                Real-world perspectives spanning mechanical piping, cybersecurity engineering, digital twin architecture, plant operations, and catastrophe underwriting.
-              </p>
-            </div>
-
-            <div className="space-y-6">
-              {/* Quote 1: Mechanical Engineer */}
-              <div className="p-8 rounded-2xl bg-surface border border-hairline space-y-3 shadow-md border-l-2 border-l-dutchOrange">
-                <blockquote className="text-xs sm:text-sm text-primary font-sans leading-relaxed italic">
-                  &ldquo;Plant design in AutoCAD Plant 3D and Revit has crippled cross-discipline collaboration for twenty years. When we design a 140 kW liquid-cooled AI cluster, our P&IDs contain vital hydraulic information: pipe schedules, glycol-water ratios (PG25), valve Cv ratings, pump head curves, and fail-safe orientations (fail-open vs fail-closed). In Revit, that data is trapped in proprietary geometry blobs. DEXPI 2.0 (ISO 15926 / Proteus XML) breaks this lock by serializing the plant as a machine-readable directed graph. If we can map DEXPI's 3-tier catalog (Requirements → Manufacturer Cut-Sheet → As-Built Asset) to digital twins, plant engineers can simulate failure modes without expensive CAD licenses.&rdquo;
-                </blockquote>
-                <div className="flex items-center justify-between pt-2 text-[11px] font-mono text-muted border-t border-hairline/60">
-                  <span className="text-dutchOrange font-semibold">Lead Mechanical &amp; Piping Engineer</span>
-                  <span>Sector: Industrial Fluid &amp; Hyperscale Cooling • Papers #1 &amp; #4</span>
-                </div>
+        <section className="py-20 bg-subtle text-primary relative font-sans border-b border-hairline overflow-hidden transition-colors duration-300">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+              <div className="max-w-2xl space-y-2">
+                <span className="font-mono text-[10px] sm:text-xs tracking-[0.2em] uppercase text-dutchOrange font-semibold block">
+                  Cross-Disciplinary Deliberation // Peer Review Panel
+                </span>
+                <h2 className="font-sans text-2xl sm:text-3xl font-semibold tracking-tight text-primary">
+                  The Voices of Industrial Operations
+                </h2>
+                <p className="text-sm sm:text-base text-secondary font-light leading-relaxed">
+                  Real-world operational perspectives from mechanical piping, operational technology, cyber-physical modeling, plant operations, and catastrophe underwriting.
+                </p>
               </div>
 
-              {/* Quote 2: OT Cybersecurity */}
-              <div className="p-8 rounded-2xl bg-surface border border-hairline space-y-3 shadow-md border-l-2 border-l-dutchOrange">
-                <blockquote className="text-xs sm:text-sm text-primary font-sans leading-relaxed italic">
-                  &ldquo;SPDX is insufficient for industrial cyber-physical systems because it was built for software licensing. CycloneDX 1.6+ is cybersecurity-first. To defend critical infrastructure under EU CRA and IEC 62443, we need all five BOM classes: HBOM for silicon roots of trust (Caliptra, BMCs, ASICs), SBOM for real-time OS and control firmware, OBOM for Modbus/BACnet network configurations and setpoints, CBOM for cryptographic certificates and PQC readiness, and SaaSBOM for remote telemetry. Crucially, CycloneDX enables 100% offline analysis via VEX/VDR, allowing air-gapped industrial facilities to trace supply chain vulnerabilities without cloud connectivity.&rdquo;
-                </blockquote>
-                <div className="flex items-center justify-between pt-2 text-[11px] font-mono text-muted border-t border-hairline/60">
-                  <span className="text-dutchOrange font-semibold">Principal OT Cybersecurity Architect</span>
-                  <span>Sector: Critical Infrastructure &amp; Industrial Automation • Papers #2 &amp; #3</span>
-                </div>
-              </div>
-
-              {/* Quote 3: Cyber Digital Twin Architect */}
-              <div className="p-8 rounded-2xl bg-surface border border-hairline space-y-3 shadow-md border-l-2 border-l-dutchOrange">
-                <blockquote className="text-xs sm:text-sm text-primary font-sans leading-relaxed italic">
-                  &ldquo;Neither model is sufficient alone. A P&amp;ID knows that tripping valve FCV-201 starves Manifold A, but has no visibility into the firmware running its digital actuator. A CycloneDX SBOM knows that CVE-2024-XXXX exists in the actuator&apos;s embedded TCP stack, but cannot calculate that exploiting it spikes GPU junction temperature T_j &gt; 105°C in 12 seconds. By linking DEXPI equipment tags (Equipment Tag=&quot;PMP-101A&quot;) directly to CycloneDX bom-ref identifiers, we achieve the holy grail: a cyber-physical graph where cyber exploitability directly drives physical thermodynamic catastrophe simulation.&rdquo;
-                </blockquote>
-                <div className="flex items-center justify-between pt-2 text-[11px] font-mono text-muted border-t border-hairline/60">
-                  <span className="text-dutchOrange font-semibold">Chief Digital Twin Architect</span>
-                  <span>Sector: Cyber-Physical Systems &amp; Multi-Physics Modeling • Papers #2, #3, &amp; #5</span>
-                </div>
-              </div>
-
-              {/* Quote 4: Plant Operations Lead */}
-              <div className="p-8 rounded-2xl bg-surface border border-hairline space-y-3 shadow-md border-l-2 border-l-dutchOrange">
-                <blockquote className="text-xs sm:text-sm text-primary font-sans leading-relaxed italic">
-                  &ldquo;Operators don't have time to parse software dependency trees during a thermal excursion. The unified model must respect the Purdue Model and IEC 62443 zone boundaries. Mechanical engineers must be able to view their familiar P&ID schematics, while security personnel view vulnerability blast radiuses. Above all, the digital twin must enforce the hard write-access trust boundary: AI and optimization models may observe and simulate, but analog safety instrumented systems (IEC 61511) must hold final physical authority.&rdquo;
-                </blockquote>
-                <div className="flex items-center justify-between pt-2 text-[11px] font-mono text-muted border-t border-hairline/60">
-                  <span className="text-dutchOrange font-semibold">Head of Industrial Operations</span>
-                  <span>Sector: Critical Utilities &amp; Real-Time SCADA Control • Papers #1, #4, &amp; #7</span>
-                </div>
-              </div>
-
-              {/* Quote 5: Chief Financial / Actuarial Risk Officer */}
-              <div className="p-8 rounded-2xl bg-surface border border-hairline space-y-3 shadow-md border-l-2 border-l-dutchOrange">
-                <blockquote className="text-xs sm:text-sm text-primary font-sans leading-relaxed italic">
-                  &ldquo;Subjective cybersecurity questionnaires are obsolete. When insuring a $1.2B AI datacenter, underwriters under Lloyd's Market Association Y5381 covenants require quantitative proof of risk accumulation. By joining BIM and BOM, the digital twin can run Monte Carlo simulations to compute empirical Single Loss Expectancy (SLE) and Annualised Loss Expectancy (ALE). This allows CFOs to scientifically justify security capital investments (ROSI) and set actuarially sound captive insurance retention layers.&rdquo;
-                </blockquote>
-                <div className="flex items-center justify-between pt-2 text-[11px] font-mono text-muted border-t border-hairline/60">
-                  <span className="text-dutchOrange font-semibold">Chief Financial &amp; Actuarial Officer</span>
-                  <span>Sector: Reinsurance Syndicates &amp; Catastrophe Underwriting • Papers #1, #4, #6, &amp; #7</span>
+              {/* Sliding Controls */}
+              <div className="flex items-center gap-3 font-mono text-xs">
+                <button
+                  type="button"
+                  onClick={() => setIsSlidePaused(!isSlidePaused)}
+                  className="px-3.5 py-1.5 rounded-xl border border-hairline bg-surface hover:border-dutchOrange text-secondary hover:text-primary transition-colors flex items-center gap-2"
+                  title={isSlidePaused ? "Resume auto-slide" : "Pause auto-slide"}
+                >
+                  {isSlidePaused ? (
+                    <>
+                      <Play className="w-3.5 h-3.5 text-dutchOrange" />
+                      <span>Resume Slide</span>
+                    </>
+                  ) : (
+                    <>
+                      <Pause className="w-3.5 h-3.5 text-dutchOrange" />
+                      <span>Pause on Hover</span>
+                    </>
+                  )}
+                </button>
+                <div className="flex items-center gap-1.5 text-[10px] text-muted">
+                  <span className={`w-2 h-2 rounded-full ${isSlidePaused ? "bg-muted" : "bg-dutchOrange animate-pulse"}`} />
+                  <span>{isSlidePaused ? "Paused" : "Live Glide"}</span>
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Full-Bleed Horizontal Sliding Rail with Edge Vignettes */}
+          <div 
+            className="relative mt-8 w-full overflow-hidden py-4"
+            onMouseEnter={() => setIsSlidePaused(true)}
+            onMouseLeave={() => setIsSlidePaused(false)}
+            onTouchStart={() => setIsSlidePaused(true)}
+            onTouchEnd={() => setIsSlidePaused(false)}
+          >
+            {/* Soft Edge Fade Overlays */}
+            <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-28 bg-gradient-to-r from-subtle via-subtle/80 to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-28 bg-gradient-to-l from-subtle via-subtle/80 to-transparent z-10 pointer-events-none" />
+
+            <motion.div
+              animate={isSlidePaused ? {} : { x: ["0%", "-50%"] }}
+              transition={{
+                ease: "linear",
+                duration: 42,
+                repeat: Infinity,
+              }}
+              className="flex gap-6 w-max pl-4 sm:pl-8"
+            >
+              {[
+                {
+                  id: "mechanical",
+                  title: "Lead Mechanical Engineer",
+                  sector: "Industrial Cooling Systems",
+                  quote: "Proprietary CAD files trap engineering intent inside closed geometry. When we engineer a 140 kW liquid cooling loop, our P&IDs hold critical data: pipe schedules, glycol mixtures (PG25), valve flow coefficients, and pump head curves. In traditional CAD tools, that hydraulic data is locked away. DEXPI 2.0 serializes the piping schematic into an open directed graph. Mapping DEXPI equipment tags straight to the digital twin lets us test flow failures and valve trips without paying CAD seat licenses.",
+                  note: "Proteus XML directed graph export • Papers #1 & #4"
+                },
+                {
+                  id: "security",
+                  title: "Principal Cybersecurity Architect",
+                  sector: "Operational Technology & Automation",
+                  quote: "SPDX was created for open source software licenses, not physical plants. Under IEC 62443 and the EU Cyber Resilience Act, security requires tracking five distinct layers: hardware roots of trust (HBOM), operating firmware (SBOM), network register setpoints (OBOM), cryptographic keys (CBOM), and cloud telemetry endpoints (SaaSBOM). CycloneDX 1.6+ supports every layer and evaluates VEX exploitability offline, so air-gapped control rooms can check vulnerabilities without external network connections.",
+                  note: "Five-layer BOM coverage with offline VEX validation • Papers #2 & #3"
+                },
+                {
+                  id: "twin",
+                  title: "Lead Digital Twin Architect",
+                  sector: "Cyber-Physical Systems",
+                  quote: "Neither model works in isolation. A piping schematic shows that closing valve FCV-201 starves supply manifold A, but says nothing about the microcontroller controlling the actuator. An SBOM flags a vulnerability in that actuator's TCP stack, but cannot tell you that exploiting it drives GPU junction temperature above 105°C within 12 seconds. Binding DEXPI equipment tags directly to CycloneDX component references connects the vulnerability to the physical consequence.",
+                  note: "Topological edge binding: DEXPI tag to CycloneDX bom-ref • Papers #2, #3, & #5"
+                },
+                {
+                  id: "operations",
+                  title: "Head of Plant Operations",
+                  sector: "Critical Power & SCADA",
+                  quote: "In an alarm state, operators need actionable physical insight, not a list of software packages. The digital twin must respect Purdue Model boundaries. Facility staff need to see their familiar piping schematics, while security teams track vulnerability blast radius. Most importantly, the model must maintain an unbreachable safety boundary: software agents can observe and run simulations, but hardwired safety instrumented systems retain sole control over physical trips.",
+                  note: "Enforces Purdue Model boundaries and analog trip authority • Papers #1, #4, & #7"
+                },
+                {
+                  id: "actuary",
+                  title: "Chief Actuary",
+                  sector: "Industrial Risk Underwriting",
+                  quote: "Self-attestation spreadsheets cannot underwrite a billion-dollar facility. Under Lloyd's Market Association Y5381 requirements, syndicates demand measurable proof of risk accumulation. Joining BIM piping topology with BOM component catalogs lets us run Monte Carlo simulations to calculate Single Loss Expectancy and Annualised Loss Expectancy based on actual physical damage. Insurers get defensible exposure numbers, and facility owners can price captive retention layers accurately.",
+                  note: "Derives empirical SLE and ALE from physical failure blast radius • Papers #1, #4, #6, & #7"
+                },
+                // Duplicated set for seamless continuous horizontal gliding loop
+                {
+                  id: "mechanical-dup",
+                  title: "Lead Mechanical Engineer",
+                  sector: "Industrial Cooling Systems",
+                  quote: "Proprietary CAD files trap engineering intent inside closed geometry. When we engineer a 140 kW liquid cooling loop, our P&IDs hold critical data: pipe schedules, glycol mixtures (PG25), valve flow coefficients, and pump head curves. In traditional CAD tools, that hydraulic data is locked away. DEXPI 2.0 serializes the piping schematic into an open directed graph. Mapping DEXPI equipment tags straight to the digital twin lets us test flow failures and valve trips without paying CAD seat licenses.",
+                  note: "Proteus XML directed graph export • Papers #1 & #4"
+                },
+                {
+                  id: "security-dup",
+                  title: "Principal Cybersecurity Architect",
+                  sector: "Operational Technology & Automation",
+                  quote: "SPDX was created for open source software licenses, not physical plants. Under IEC 62443 and the EU Cyber Resilience Act, security requires tracking five distinct layers: hardware roots of trust (HBOM), operating firmware (SBOM), network register setpoints (OBOM), cryptographic keys (CBOM), and cloud telemetry endpoints (SaaSBOM). CycloneDX 1.6+ supports every layer and evaluates VEX exploitability offline, so air-gapped control rooms can check vulnerabilities without external network connections.",
+                  note: "Five-layer BOM coverage with offline VEX validation • Papers #2 & #3"
+                },
+                {
+                  id: "twin-dup",
+                  title: "Lead Digital Twin Architect",
+                  sector: "Cyber-Physical Systems",
+                  quote: "Neither model works in isolation. A piping schematic shows that closing valve FCV-201 starves supply manifold A, but says nothing about the microcontroller controlling the actuator. An SBOM flags a vulnerability in that actuator's TCP stack, but cannot tell you that exploiting it drives GPU junction temperature above 105°C within 12 seconds. Binding DEXPI equipment tags directly to CycloneDX component references connects the vulnerability to the physical consequence.",
+                  note: "Topological edge binding: DEXPI tag to CycloneDX bom-ref • Papers #2, #3, & #5"
+                },
+                {
+                  id: "operations-dup",
+                  title: "Head of Plant Operations",
+                  sector: "Critical Power & SCADA",
+                  quote: "In an alarm state, operators need actionable physical insight, not a list of software packages. The digital twin must respect Purdue Model boundaries. Facility staff need to see their familiar piping schematics, while security teams track vulnerability blast radius. Most importantly, the model must maintain an unbreachable safety boundary: software agents can observe and run simulations, but hardwired safety instrumented systems retain sole control over physical trips.",
+                  note: "Enforces Purdue Model boundaries and analog trip authority • Papers #1, #4, & #7"
+                },
+                {
+                  id: "actuary-dup",
+                  title: "Chief Actuary",
+                  sector: "Industrial Risk Underwriting",
+                  quote: "Self-attestation spreadsheets cannot underwrite a billion-dollar facility. Under Lloyd's Market Association Y5381 requirements, syndicates demand measurable proof of risk accumulation. Joining BIM piping topology with BOM component catalogs lets us run Monte Carlo simulations to calculate Single Loss Expectancy and Annualised Loss Expectancy based on actual physical damage. Insurers get defensible exposure numbers, and facility owners can price captive retention layers accurately.",
+                  note: "Derives empirical SLE and ALE from physical failure blast radius • Papers #1, #4, #6, & #7"
+                }
+              ].map((item) => (
+                <div
+                  key={item.id}
+                  className="w-[360px] sm:w-[480px] lg:w-[520px] shrink-0 p-8 rounded-2xl bg-surface border border-hairline shadow-lg flex flex-col justify-between border-l-2 border-l-dutchOrange hover:border-dutchOrange/70 transition-all duration-300 group"
+                >
+                  <blockquote className="text-xs sm:text-sm text-primary font-sans leading-relaxed italic">
+                    &ldquo;{item.quote}&rdquo;
+                  </blockquote>
+
+                  <div className="mt-6 space-y-2 pt-3 border-t border-hairline/60">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-[11px] font-mono">
+                      <span className="text-dutchOrange font-semibold">{item.title}</span>
+                      <span className="text-muted">Sector: {item.sector}</span>
+                    </div>
+                    <div className="text-[10px] font-mono text-muted">
+                      {item.note}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </motion.div>
           </div>
         </section>
 
