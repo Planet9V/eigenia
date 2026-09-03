@@ -30,33 +30,23 @@ export default function UnifiedStandardPage() {
     <main className="min-h-screen bg-canvas text-primary relative font-sans selection:bg-dutchOrange selection:text-white transition-colors duration-300">
       <SiteChrome>
         {/* =========================================================================
-            HERO SECTION: Total Black Background with Moving Digital Twin Canvas
+            HERO SECTION: Total Black Background with Dynamic Background Video & Digital Twin Canvas
         ========================================================================= */}
-        <section className="dark relative overflow-hidden border-b border-hairline pt-28 pb-16 min-h-[480px] sm:min-h-[540px] lg:min-h-[600px] flex items-center selection:bg-dutchOrange selection:text-white">
-          {/* Authentic Total Black Background with Moving Subtle Graphic Base */}
+        <section className="dark relative overflow-hidden border-b border-hairline min-h-[480px] sm:min-h-[540px] lg:min-h-[620px] flex items-center selection:bg-dutchOrange selection:text-white">
+          {/* Authentic Total Black Background with Dynamic Background Video + Live Digital Twin Canvas */}
           <div className="absolute inset-0 bg-[#0B0C0E] overflow-hidden">
-            {/* Subtle moving graphical base */}
-            <motion.div
-              animate={{ 
-                scale: [1.02, 1.08, 1.02],
-                x: [0, -12, 0],
-                y: [0, -6, 0]
-              }}
-              transition={{ 
-                duration: 26, 
-                repeat: Infinity, 
-                ease: "easeInOut" 
-              }}
-              className="absolute inset-0 opacity-25 mix-blend-luminosity pointer-events-none"
+            {/* Dynamic Looping Background Video */}
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              poster="/assets/grand_unification_hero.png"
+              className="absolute inset-0 w-full h-full object-cover object-center opacity-35 mix-blend-luminosity pointer-events-none"
             >
-              <Image
-                src="/assets/grand_unification_hero.png"
-                alt="Unified BIM &amp; BOM Graph Background"
-                fill
-                priority
-                className="object-cover object-[70%_center]"
-              />
-            </motion.div>
+              <source src="/assets/hero-unified-standard.webm" type="video/webm" />
+              <source src="/assets/hero-unified-standard.mp4" type="video/mp4" />
+            </video>
 
             {/* Live Procedural Vector Streamline Canvas Overlay */}
             <HeroCanvasBackground
@@ -71,7 +61,7 @@ export default function UnifiedStandardPage() {
             <div className="absolute inset-0 bg-gradient-to-t from-[#0B0C0E] via-transparent to-[#0B0C0E]/60 pointer-events-none" />
           </div>
 
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-6">
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12 space-y-6">
             <Breadcrumb
               items={[
                 { label: "Home", href: "/" },
@@ -81,45 +71,50 @@ export default function UnifiedStandardPage() {
             />
 
             <div className="max-w-4xl space-y-4">
-              <div>
-                <span className="font-mono text-[10px] sm:text-xs tracking-[0.2em] uppercase text-dutchOrange font-medium inline-block mb-1">
-                  Open Standard // DEXPI 2.0 &amp; CycloneDX 1.6+
-                </span>
-              </div>
+              <span className="font-mono text-[10px] sm:text-xs tracking-[0.2em] uppercase text-dutchOrange font-medium inline-block">
+                Open Standard // DEXPI 2.0 &amp; CycloneDX 1.6+
+              </span>
 
-              <h1 className="font-sans text-2xl sm:text-3xl lg:text-4xl font-semibold text-primary tracking-tight leading-[1.15]">
+              <h1 className="font-sans text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-primary">
                 The Unified Standard:{" "}
                 <span className="text-dutchOrange">
                   Topological BIM &amp; Hierarchical BOM
                 </span>.
               </h1>
 
-              <p className="font-sans text-base sm:text-lg text-secondary font-light leading-relaxed max-w-3xl">
+              <p className="text-base sm:text-lg text-secondary font-light leading-relaxed max-w-3xl">
                 A single computable graph schema reconciling physical process engineering topology (ISO 15926 / DEXPI 2.0) with full-spectrum supply chain multi-BOM transparency (OWASP CycloneDX 1.6+). Breaking proprietary CAD monopolies through sovereign applied complexity science.
               </p>
+            </div>
+          </div>
+        </section>
 
-              <div className="pt-2 flex flex-wrap items-center gap-4">
-                <a
-                  href="#papers-suite"
-                  className="px-6 py-3 rounded-xl bg-dutchOrange hover:bg-dutchOrange/90 text-white font-sans text-sm font-bold transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 inline-flex items-center gap-2"
-                >
-                  <span>Explore 7-Paper Suite</span>
-                  <ArrowRight className="w-4 h-4" />
-                </a>
+        {/* Quick Jump & Metadata Sub-Bar */}
+        <section className="py-4 sm:py-5 bg-canvas border-b border-hairline transition-colors duration-300">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between gap-4 font-mono text-xs">
+            <div className="flex items-center gap-2.5 sm:gap-3">
+              <span className="w-2 h-2 rounded-full bg-dutchOrange animate-pulse" />
+              <span className="text-secondary font-medium">Schema G_CPDT • ISO 15926 &amp; CycloneDX 1.6+</span>
+              <span className="hidden sm:inline text-hairline">|</span>
+              <span className="hidden sm:inline text-muted">100% Air-Gapped Offline Operation</span>
+            </div>
 
-                <Link
-                  href="/wiki?wg=WG-05-CAD"
-                  className="px-6 py-3 rounded-xl border border-hairline bg-white/[0.02] text-primary font-sans text-sm font-semibold hover:border-dutchOrange hover:text-dutchOrange transition-all inline-flex items-center gap-2"
-                >
-                  <FileText className="w-4 h-4 text-dutchOrange" />
-                  <span>WG-05 Wiki Treatises</span>
-                </Link>
-              </div>
-
-              <div className="pt-2 font-mono text-xs text-muted flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-dutchOrange inline-block animate-pulse" />
-                <span>100% Air-Gapped Offline Operation • ISO 15926 &amp; OWASP Compliant</span>
-              </div>
+            <div className="flex items-center gap-3">
+              <a
+                href="#papers-suite"
+                className="text-dutchOrange hover:underline font-semibold flex items-center gap-1"
+              >
+                <span>7-Paper Suite</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </a>
+              <span className="text-hairline">|</span>
+              <Link
+                href="/wiki?wg=WG-05-CAD"
+                className="text-secondary hover:text-primary transition-colors flex items-center gap-1"
+              >
+                <FileText className="w-3.5 h-3.5 text-dutchOrange" />
+                <span>WG-05 Wiki Treatises</span>
+              </Link>
             </div>
           </div>
         </section>
@@ -717,37 +712,37 @@ export default function UnifiedStandardPage() {
         </section>
 
         {/* =========================================================================
-            SECTION 6: Join Research CTA (Modeled directly on JoinResearchCTA.tsx)
+            SECTION 6: Think Tank Collaboration CTA
         ========================================================================= */}
-        <section id="join" className="py-20 bg-black text-white relative font-sans selection:bg-dutchOrange selection:text-white">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="rounded-3xl bg-zinc-950/60 p-8 sm:p-12 shadow-2xl text-center space-y-6 border border-zinc-900">
-              <span className="text-xs font-mono text-dutchOrange font-normal inline-block">
-                Eigenia Foundation // Open Working Group Consortium
+        <section id="join" className="py-20 bg-canvas text-primary relative font-sans border-b border-hairline transition-colors duration-300">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="rounded-2xl bg-surface border border-hairline p-8 sm:p-12 text-center space-y-6 shadow-xl">
+              <span className="font-mono text-[10px] sm:text-xs tracking-[0.2em] uppercase text-dutchOrange font-medium inline-block">
+                Open Working Group Consortium // Eigenia Foundation
               </span>
 
-              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-white uppercase font-mono">
-                Join the Sovereign Cyber Digital Twin Working Group
+              <h2 className="font-sans text-2xl sm:text-3xl font-semibold tracking-tight text-primary">
+                Participate in the Sovereign Digital Twin Working Group
               </h2>
 
-              <p className="text-sm sm:text-base text-zinc-300 font-light max-w-2xl mx-auto leading-relaxed">
-                Whether you are an industrial plant operator, a mechanical engineer, a firmware architect, or a reinsurance underwriter, contribute your domain expertise to build the open, mathematical future of critical infrastructure defense.
+              <p className="text-sm sm:text-base text-secondary font-light max-w-2xl mx-auto leading-relaxed">
+                Whether you are an industrial plant operator, a process piping engineer, an embedded firmware architect, or a catastrophe reinsurance underwriter, contribute your domain expertise to build the open, mathematical future of sovereign infrastructure defense.
               </p>
 
-              <div className="flex flex-wrap items-center justify-center gap-4 pt-4 font-mono text-xs">
+              <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
                 <Link
                   href="/collaborate"
-                  className="py-3 px-6 rounded-xl bg-dutchOrange text-white font-bold hover:bg-dutchOrange/90 transition-all shadow-lg flex items-center gap-2"
+                  className="px-6 py-3 rounded-xl bg-dutchOrange hover:bg-dutchOrange/90 text-white font-sans text-xs font-semibold transition-all shadow-md inline-flex items-center gap-2"
                 >
                   <span>Request Working Group Briefing</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
 
                 <a
                   href="mailto:jim@eigenia.nl"
-                  className="py-3 px-6 rounded-xl bg-black text-zinc-300 border border-zinc-800 hover:text-white transition-colors flex items-center gap-2"
+                  className="px-6 py-3 rounded-xl bg-subtle hover:bg-surface text-secondary hover:text-primary border border-hairline font-mono text-xs transition-colors inline-flex items-center gap-2"
                 >
-                  <Mail className="w-4 h-4 text-dutchOrange" />
+                  <Mail className="w-3.5 h-3.5 text-dutchOrange" />
                   <span>jim@eigenia.nl</span>
                 </a>
               </div>
