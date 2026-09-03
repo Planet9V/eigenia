@@ -1,7 +1,4 @@
 # The TACAM Matrix
-
-Lab Sponsor J.McKenney
-
 In intelligence work, the question is never "are we being targeted?" The question is "by whom, with what, and why now?"
 TACAM answers all three.
 

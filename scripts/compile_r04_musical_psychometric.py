@@ -24,7 +24,7 @@ cleaned = cleaned.replace(r'\-', '-')
 
 # Replace em dashes and double hyphens
 cleaned = cleaned.replace('—', '; ')
-cleaned = cleaned.replace('--', '; ')
+cleaned = cleaned
 
 # Replace prohibited AI filler words
 cleaned = re.sub(r'\bFurthermore\b', 'In addition', cleaned)
@@ -52,17 +52,13 @@ cleaned = re.sub(r'\bin today\'s world\b', 'in contemporary operations', cleaned
 cleaned = re.sub(r'\bharness\b', 'channel', cleaned, flags=re.IGNORECASE)
 
 # Format header block with authoritative Jim McKenney systems assurance framing
-header = """# Musical Psychometric Notation (MPN): Formal Specification for Security State Sonification
-## Auditory Telemetry, Harmonic Dissonance Metrics, and Predictive Seldon Crisis Detection
+header = """| Document ID | Working Group | Normative Equivalents | Classification |
+| :--- | :--- | :--- | :--- |
+| EIGENIA-WG03-ML-06 | WG-03-ML | IEC 62443-3-2 / ISO 15926 / DEXPI 2.0 / CycloneDX 1.6 / EU CRA / EN 50126 | Open Theoretical & Behavioral Modeling Specification |
 
-**Document Identifier:** EIGENIA-WG03-ML-06  
-**Classification:** Open Theoretical & Behavioral Modeling Specification  
-**Working Group:** WG-03-ML (Psychometrics & Behavioral Modeling)  
-**Standard Equivalents:** IEC 62443-3-2 / ISO 15926 / DEXPI 2.0 / CycloneDX 1.6 / EU CRA / EN 50126  
-**Author:** J. McKenney (Systems Assurance Lead)  
+**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
+**Lead Systems Assurance Architect:** J. McKenney (Systems Assurance Lead)  
 **Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
-
----
 
 ## Executive Abstract
 
@@ -153,7 +149,7 @@ Compliance with SFAIRP (So Far As Is Reasonably Practicable) standards underpins
 final_content = header + body + grounding_section
 
 # Final verification: eliminate any lingering em-dashes
-final_content = final_content.replace('—', '; ').replace('--', '; ')
+final_content = final_content.replace('—', '; ')
 
 # Ensure directory exists
 os.makedirs(os.path.dirname(dest_path), exist_ok=True)

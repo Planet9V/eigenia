@@ -7,16 +7,13 @@ meeting all PAAI gate criteria and zero-tolerance style prohibitions.
 
 dest_path = 'references/WG-02-DT-Digital-Twin/WG-02-DT-High-Density-Liquid-Cooling.md'
 
-content = """# High-Density Liquid Cooling Architecture & Thermal Catastrophe Dynamics
-## Navigating 120 kW/Rack Densities: Direct-to-Chip vs. Immersion and the 45-Second Thermal Trip Cliff
+content = """| Document ID | Working Group | Normative Equivalents | Classification |
+| :--- | :--- | :--- | :--- |
+| EIGENIA-WG02-DT-06 | WG-02-DT | ASHRAE TC 9.9 (5th Ed.) / IEC 62443-3-2 / IEC 62443-4-2 / DEXPI 2.0 / CycloneDX 1.6 / EN 50126 | Open Thermodynamic & Cyber-Physical Systems Specification |
 
-**Document Identifier:** EIGENIA-WG02-DT-06  
-**Classification:** Open Thermodynamic & Cyber-Physical Systems Specification  
-**Standard Equivalents:** ASHRAE TC 9.9 (5th Ed.) / IEC 62443-3-2 / IEC 62443-4-2 / DEXPI 2.0 / CycloneDX 1.6 / EN 50126  
-**Author:** J. McKenney (Systems Assurance Lead)  
+**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
+**Lead Systems Assurance Architect:** J. McKenney (Systems Assurance Lead)  
 **Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
-
----
 
 ## Abstract
 
@@ -315,7 +312,7 @@ High-density liquid cooling demands five immutable engineering principles:
 """
 
 # Ensure no em-dashes or double-hyphens exist
-content = content.replace('—', '; ').replace('--', '; ')
+content = content.replace('—', '; ')
 
 with open(dest_path, 'w', encoding='utf-8') as f:
     f.write(content)

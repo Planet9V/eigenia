@@ -1,8 +1,4 @@
 # Actuarial & Underwriting Foundations for Industrial Property & Cyber Risk
-
-Lab Sponsor Resident  j.mckenney    
-
-
 The insurance and actuarial sector functions by transforming the uncertainty of risk into a measurable, transferable price known as a premium. Fundamentally, the industry relies on a rigorous integration of probability theory, financial mathematics, and specialized underwriting heuristics to balance the expected costs of claims against operational overhead and the required cost of capital.
 
 The industry is segmented, with global brokers orchestrating risk placement, lead underwriters assuming the actual risk, captive insurers managing corporate self-insurance, and reinsurers assuming tail risk.

@@ -1,7 +1,4 @@
 # Fooled by Best Practice
-
-Lab Sponsor Resident  j.mckenney
-
 Nassim Taleb Exposed the Illusions of Wall Street. The Eigenia Cyber Digital Twin Exposes the Same Illusions in the World That Keeps the Lights On.
 
 ## The Parallel Nobody Sees

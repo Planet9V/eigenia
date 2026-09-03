@@ -1,7 +1,4 @@
 # Reinsurance Layering & Lloyd’s Y5381 War Exclusion Compliance
-
-Lab Sponsor Resident j.mckenney
-
 To serve the underwriter market we need to dramatically improve and re-think the Eigenia Portfolio Risk Dashboard for the underwriter market, the platform must transition from being primarily a facility-level risk tool into a comprehensive, actuarial-grade catastrophe modeling platform. Based on the latest industry frameworks, the dashboard must address the "Portfolio Module gap" and directly integrate advanced actuarial mathematics, regulatory compliance automation, and systemic risk aggregation.
 
 ## 1. Cyber-Portfolio Aggregate Risk Management (Building the "4th Module")

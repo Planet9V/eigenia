@@ -1,13 +1,11 @@
-# Cognitive Bias Catalog: Exploiting Human Heuristics in Security Decisions
-## Dual-Process Heuristics, Bias Susceptibility Scoring, and Adversary Exploitation Vectors in Industrial Control Environments
+| Document ID | Working Group | Normative Equivalents | Classification |
+| :--- | :--- | :--- | :--- |
+| EIGENIA-WG03-ML-07 | WG-03-ML (Psychometrics & Behavioral Modeling) | IEC 62443-3-2 / ISO 15926 / DEXPI 2.0 / CycloneDX 1.6 / EU CRA / EN 50126 | Open Theoretical & Behavioral Modeling Specification |
 
-**Document Identifier:** EIGENIA-WG03-ML-07  
-**Classification:** Open Theoretical & Behavioral Modeling Specification  
-**Working Group:** WG-03-ML (Psychometrics & Behavioral Modeling)  
-**Standard Equivalents:** IEC 62443-3-2 / ISO 15926 / DEXPI 2.0 / CycloneDX 1.6 / EU CRA / EN 50126  
-**Author:** J. McKenney (Systems Assurance Lead)  
+**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
+**Lead Systems Assurance Architect:** J. McKenney (Systems Assurance Lead)  
 **Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
----
+
 ## Executive Abstract
 
 In high-consequence operational technology (OT) and mission-critical data center operations, security architectures are designed to withstand hardware component failures and cryptographic attacks. Yet the most vulnerable attack vector remains the human decision loop. Under operational stress and sensory alert flooding, control room operators, systems engineers, and incident responders systematically abandon slow, analytical System 2 deliberation in favor of rapid, heuristic System 1 cognitive shortcuts.
@@ -18,7 +16,9 @@ This catalog establishes the definitive taxonomy of cognitive biases exploited b
 - We demonstrate how cognitive bias creates predictable decision latency, transforming brief software-induced cooling trips into catastrophic, permanent hardware destruction.
 
 Coupled to physical infrastructure through DEXPI 2.0 (ISO 15926) piping schematics and CycloneDX 1.6+ multi-BOM specifications, this treatise provides the quantitative foundation for human defender simulation in the AEON digital twin and establishes affirmative actuarial loss hedging under Lloyd's Y5381.
+
 ---
+
 ## 1. Dual-Process Cognition in Mission-Critical Operations
 
 Human cognitive architecture is divided into two distinct modes of information processing (Kahneman & Tversky, 1974; Stanovich & West, 2000):
@@ -47,7 +47,9 @@ Human cognitive architecture is divided into two distinct modes of information p
 When an industrial facility operates within nominal parameters, personnel maintain supervisory control using analytical System 2 reasoning. However, when an adversary executes a coordinated cyber-physical assault; combining falsified SCADA alarms, spoofed management communications, and hydraulic valve manipulations; the incoming information rate exceeds human working memory capacity ($7 \pm 2$ chunks). 
 
 The brain experiences cognitive overload, automatically shifting decision-making to System 1 heuristics. Threat actors deliberately induce this shift, exploiting predictable cognitive biases to bypass logical security interlocks.
+
 ---
+
 ## 2. Multi-BOM and DEXPI Process Topology Grounding
 
 To model the physical impact of cognitive bias exploitation, operator decision vectors are mapped to plant piping and multi-BOM specifications:
@@ -75,13 +77,14 @@ To model the physical impact of cognitive bias exploitation, operator decision v
 ```
 
 When an adversary manipulates the human operator through cognitive bias, the operator issues unauthorized manual overrides that violate OBOM constraints, forcing physical equipment past its thermodynamic destruction limits.
+
 ---
+
 ## 3. Mathematical Formulation of the Bias Susceptibility Score (BSS)
 
 The vulnerability of an operational team member to cognitive manipulation is quantified by the Bias Susceptibility Score ($BSS_i(t)$):
 
-$$BSS_i(t) = \sum_{b \in \mathcal{B}} w_b \cdot S_{i,b} \cdot \left[ 1 + \gamma \cdot 	ext{Stress}_i(t) 
-ight]$$
+$$BSS_i(t) = \sum_{b \in \mathcal{B}} w_b \cdot S_{i,b} \cdot \left[ 1 + \gamma \cdot 	ext{Stress}_i(t) ight]$$
 
 Where:
 - $\mathcal{B}$ is the set of all documented cognitive biases.
@@ -97,7 +100,7 @@ Where:
 ```
 
 | Bias Code | Cognitive Bias | Baseline Mechanism | Operational ICS Manifestation | Threat Weight ($w_b$) |
-| :--- | :--- | :--- | :--- | :--- |
+|:---:|:---|:---|:---|:---:|
 | **CB-01** | **Authority Bias** | Unquestioning compliance with perceived superiors | Executing urgent configuration overrides from spoofed executive emails | 0.20 |
 | **CB-02** | **Scarcity / Urgency** | Fear of loss overriding logical verification | Skipping dual-authorization protocols to prevent immediate SLA penalties | 0.18 |
 | **CB-03** | **Anchoring Bias** | Fixation on the initial piece of data | Interpreting all subsequent alarms through the lens of a "known sensor fault" | 0.16 |
@@ -105,7 +108,9 @@ Where:
 | **CB-05** | **Availability Heuristic**| Estimating likelihood based on recall ease | Diagnosing a targeted cyber attack as routine thermal throttling | 0.12 |
 | **CB-06** | **Social Proof** | Conforming to actions of peer group | Operators ignoring secondary alarms because neighboring consoles did not react | 0.10 |
 | **CB-07** | **Escalation of Commitment**| Sunk-cost persistence in failed courses | Continuing manual pump cycling rather than initiating hard facility trip | 0.09 |
+
 ---
+
 ## 4. Deep-Dive Taxonomy of Critical Cognitive Biases
 
 ### 4.1 CB-01: Authority Bias (Milgram Effect in Industrial Ops)
@@ -209,15 +214,16 @@ class CognitiveBiasEngine:
 ```
 
 This computational engine allows the AEON digital twin to simulate thousands of stochastic variations of human defender behavior under varying alarm volumes, identifying precisely which operators require automated fallback interlocks.
+
 ---
+
 ## 5. Mathematical Modeling of Decision Latency and the Thermal Cliff
 
 The primary consequence of cognitive bias exploitation is **Decision Latency** ($	au_{	ext{delay}}$); the time lost while the operator rationalizes false hypotheses instead of executing emergency procedures.
 
 We model decision latency as an exponential function of the Bias Susceptibility Score:
 
-$$	au_{	ext{delay}}(BSS) = 	au_0 \cdot \exp\left( \kappa \cdot BSS_i(t) 
-ight)$$
+$$	au_{	ext{delay}}(BSS) = 	au_0 \cdot \exp\left( \kappa \cdot BSS_i(t) ight)$$
 
 Where:
 - $	au_0 = 8.5	ext{ seconds}$ is the baseline reaction time of an alert, unbiased operator.
@@ -246,7 +252,9 @@ Where:
 ```
 
 If cognitive bias induces a decision latency $	au_{	ext{delay}} > 35	ext{ seconds}$, the physical facility crosses the 45-second thermal trip cliff. The silicon packages experience irreversible thermal delamination before human operators execute manual breaker cutouts.
+
 ---
+
 ## 6. Systems Assurance: Engineering Remediations
 
 To eliminate the systemic failure modes introduced by cognitive bias, systems assurance mandates three deterministic architectural remediations:
@@ -268,13 +276,14 @@ To eliminate the systemic failure modes introduced by cognitive bias, systems as
 | (MPN), preventing visual anchoring and cognitive tunnel vision.         |
 +-------------------------------------------------------------------------+
 ```
+
 ---
+
 ## 7. Actuarial Risk Engineering and Reinsurance Treaty Structuring
 
 Quantifying cognitive bias susceptibility allows insurers and corporate risk officers to calculate Annualised Loss Expectancy ($	ext{ALE}$) for affirmative cyber property catastrophe policies under Lloyd's Y5381:
 
-$$	ext{ALE}_{	ext{bias}} = 	ext{SLE}_{	ext{physical}} 	imes 	ext{ARO}_{	ext{exploit}} = 	ext{PML}_{	ext{hall}} 	imes \left( 	ext{ARO}_{	ext{baseline}} \cdot \overline{BSS} 
-ight)$$
+$$	ext{ALE}_{	ext{bias}} = 	ext{SLE}_{	ext{physical}} 	imes 	ext{ARO}_{	ext{exploit}} = 	ext{PML}_{	ext{hall}} 	imes \left( 	ext{ARO}_{	ext{baseline}} \cdot \overline{BSS} ight)$$
 
 $$	ext{SLE}_{	ext{physical}} = \sum_{k=1}^{N_{	ext{racks}}} C_{	ext{replacement}}(k) + \int_0^{T_{	ext{restore}}} \dot{L}_{	ext{BI}}(t) \, dt + \Phi_{	ext{regulatory}}$$
 
@@ -293,7 +302,9 @@ Compliance with SFAIRP (So Far As Is Reasonably Practicable) standards protects 
 In hyperscale campus environments containing 800 liquid-cooled racks across four contiguous halls, human cognitive failure introduces severe correlation risk across reinsurance treaties. If an operations team succumbs to social proof and confirmation bias, a single adversary exploit can compromise all four halls simultaneously. The Probable Maximum Loss ($	ext{PML}$) escalates from $14,400,000	ext{ USD}$ for a single hall to $57,600,000	ext{ USD}$ in hardware damage, plus $115,000,000	ext{ USD}$ in consequential business interruption and cloud provider SLA penalties.
 
 Underwriters operating under the Lloyd's Y5381 cyber war and state-backed attack exclusions require proof that cognitive bias cannot induce cross-hall correlated failure. By enforcing automated Two-Person Integrity (TPI) and isolated SIL-3 physical trip interlocks, facility operators prove independent failure domains, allowing reinsurers to eliminate punitive co-insurance penalties, structure realistic attachment points ($5,000,000	ext{ USD}$ primary retention), and underwrite affirmative cyber property limits up to $100,000,000	ext{ USD}$.
+
 ---
+
 ## 8. Summary of Engineering Principles
 
 1. **Humans Shift to Heuristics Under Stress:** In crisis conditions, analytical System 2 reasoning collapses into predictable System 1 cognitive shortcuts.

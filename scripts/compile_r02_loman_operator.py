@@ -10,17 +10,13 @@ import re
 
 dest_path = 'references/WG-03-ML-Behaviorial_Modeling/WG-03-ML-Loman-Operator-Topology-of-an-Act.md'
 
-content = """# The Loman Operator & Topology of an Act: Dynamic Phase Space Simulation of Psychodynamic Collapse
-## Modeling Operator Denial, Damped Harmonic Oscillations, and Catastrophic Failure in Mission-Critical Control Rooms
+content = """| Document ID | Working Group | Normative Equivalents | Classification |
+| :--- | :--- | :--- | :--- |
+| EIGENIA-WG03-ML-04 | WG-03-ML (Psychometrics & Behavioral Modeling) | IEC 62443-3-2 / ISO 15926 / DEXPI 2.0 / CycloneDX 1.6 / EU CRA / EN 50126 | Open Theoretical & Behavioral Modeling Specification |
 
-**Document Identifier:** EIGENIA-WG03-ML-04  
-**Classification:** Open Theoretical & Behavioral Modeling Specification  
-**Working Group:** WG-03-ML (Psychometrics & Behavioral Modeling)  
-**Standard Equivalents:** IEC 62443-3-2 / ISO 15926 / DEXPI 2.0 / CycloneDX 1.6 / EU CRA / EN 50126  
-**Author:** J. McKenney (Systems Assurance Lead)  
+**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
+**Lead Systems Assurance Architect:** J. McKenney (Systems Assurance Lead)  
 **Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
-
----
 
 ## Abstract
 
@@ -324,7 +320,7 @@ Compliance with SFAIRP (So Far As Is Reasonably Practicable) principles eliminat
 """
 
 # Final verification: eliminate any lingering em-dashes
-content = content.replace('—', '; ').replace('--', '; ')
+content = content.replace('—', '; ')
 
 # Ensure directory exists
 os.makedirs(os.path.dirname(dest_path), exist_ok=True)

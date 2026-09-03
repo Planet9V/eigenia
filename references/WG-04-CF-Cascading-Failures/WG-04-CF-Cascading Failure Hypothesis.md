@@ -1,12 +1,9 @@
 # Cascading Failure Hypothesis: Non-Linear Energy Grid Instability
-
-Lab Sponsor Resident  j.mckenney
-
 This assessment models cascading failure propagation from coordinated cyber-physical attacks targeting a refernce modelled electrical utility distribution network (see [reference to ACME Inc.](file:///Users/jimmcknney/jim_private/eigenia/references/WG-04-CF-Cascading-Failures/WG-04-CF-ACME_Inc._Security_Assessment.md)), the analysis integrates findings from the BESS Architecture Vulnerability Assessment and the DERMS Security Architecture Review to quantify systemic risk across the modelled NSW electricity network and its dependent critical infrastructure.
 
 ## Cascading Failure Hypothesis
 
-The central finding is that a coordinated "Death Wobble" oscillation attack (see [j,mckenney's Death Wobble-The Grids Precarious Pulse Frequency Instability - jmckenney](file:///Users/jimmcknney/jim_private/eigenia/references/WG-04-CF-Cascading-Failures/WG-04-CF-Death-Wobble.md), a phenomenon extensively documented by McKenney (2024, 2025) in analysis of the South Australia 2016 blackout (6.1 Hz/s RoCoF), UK 2019 blackout (0.135 Hz/s relay trips), and Iberian Peninsula 2025 event (inter-area oscillations), executed through the Retailer API supply chain, can induce Rate of Change of Frequency (RoCoF) exceedances greater than 1.0 Hz/s under reduced-inertia grid conditions. This triggers protection relay cascades that propagate from a localized 8,000-customer outage to a regional blackout affecting 1.2 million customers within 120 minutes. Six interdependent critical infrastructure systems -- water, hospitals, telecommunications, transport, military, and financial services -- amplify the consequences into a multi-domain crisis with estimated economic impact between [investment required] million and [investment required] billion.
+The central finding is that a coordinated "Death Wobble" oscillation attack (see [j,mckenney's Death Wobble-The Grids Precarious Pulse Frequency Instability - jmckenney](file:///Users/jimmcknney/jim_private/eigenia/references/WG-04-CF-Cascading-Failures/WG-04-CF-Death-Wobble.md), a phenomenon extensively documented by McKenney (2024, 2025) in analysis of the South Australia 2016 blackout (6.1 Hz/s RoCoF), UK 2019 blackout (0.135 Hz/s relay trips), and Iberian Peninsula 2025 event (inter-area oscillations), executed through the Retailer API supply chain, can induce Rate of Change of Frequency (RoCoF) exceedances greater than 1.0 Hz/s under reduced-inertia grid conditions. This triggers protection relay cascades that propagate from a localized 8,000-customer outage to a regional blackout affecting 1.2 million customers within 120 minutes. Six interdependent critical infrastructure systems ; water, hospitals, telecommunications, transport, military, and financial services ; amplify the consequences into a multi-domain crisis with estimated economic impact between [investment required] million and [investment required] billion.
 
 The probability of such an attack materializing within a 10-year horizon is assessed at 15-30% (MEDIUM), based on the convergence of vulnerable DERMS/API architecture, inadequate ICS protocol security, reduced grid inertia from renewable penetration, and demonstrated nation-state capability against energy infrastructure. Physical safety consequences range from 5 to 25 fatalities and 40 to 120 serious injuries, arising from thermal runaway events, traffic signal failures, medical infrastructure collapse, and delayed emergency services.
 
@@ -42,9 +39,9 @@ The scope encompasses the full ACME Inc. distribution network, including 54 comm
 
 The Australian Energy Market Operator (AEMO) identifies grid frequency stability as the primary operational risk during the transition to high-renewable-penetration generation portfolios. As synchronous generation retires, system inertia declines from a historical constant of 4-6 seconds to 2-3 seconds during high-renewable periods. This reduction doubles the grid's sensitivity to rapid power imbalances, creating conditions where cyber-physical attacks against battery energy storage systems can trigger cascading failures that were physically impossible under the legacy generation mix.
 
-McKenney's (2024, 2025) research across Australian, UK, European, and US interconnections establishes that this vulnerability is not theoretical but empirically demonstrated. His analysis of ERCOT (Texas) -- operating at 43% inverter-based resource capacity with peak renewable penetration >75% -- notes: "ERCOT's experience serves as a potential preview for other regions, demonstrating the intense interplay between resource adequacy, operational reliability under stress (especially weather extremes), and the critical need for robust performance from new technologies" (McKenney, 2024). The Western Interconnection (WECC) faces similar challenges with interconnection queue times averaging 5 years (up from <2 years in 2008) and "unexpected tripping of inverter-based resources during faults" documented in NERC alerts (McKenney, 2024).
+McKenney's (2024, 2025) research across Australian, UK, European, and US interconnections establishes that this vulnerability is not theoretical but empirically demonstrated. His analysis of ERCOT (Texas) ; operating at 43% inverter-based resource capacity with peak renewable penetration >75% ; notes: "ERCOT's experience serves as a potential preview for other regions, demonstrating the intense interplay between resource adequacy, operational reliability under stress (especially weather extremes), and the critical need for robust performance from new technologies" (McKenney, 2024). The Western Interconnection (WECC) faces similar challenges with interconnection queue times averaging 5 years (up from <2 years in 2008) and "unexpected tripping of inverter-based resources during faults" documented in NERC alerts (McKenney, 2024).
 
-Concurrent vulnerability assessments have identified an attack surface score of 8.7/10 across the BESS infrastructure and a DERMS risk score of 21/25 (CATASTROPHIC). The Retailer API, which provides third-party control of DER assets through the mPrest DERMS platform, lacks behavioral analytics, oscillation detection, and physics-based command validation -- the three controls that would prevent the "Death Wobble" attack scenario detailed in this document.
+Concurrent vulnerability assessments have identified an attack surface score of 8.7/10 across the BESS infrastructure and a DERMS risk score of 21/25 (CATASTROPHIC). The Retailer API, which provides third-party control of DER assets through the mPrest DERMS platform, lacks behavioral analytics, oscillation detection, and physics-based command validation ; the three controls that would prevent the "Death Wobble" attack scenario detailed in this document.
 
 ### 1.3 Regulatory Framework
 
@@ -95,11 +92,11 @@ Where:
 - H = time (seconds) a generator could supply rated power from stored kinetic energy
 ```
 
-Under traditional synchronous generation, H ranges from 4-6 seconds, providing substantial resistance to frequency disturbances. Under high-renewable conditions (30%+ inverter-based generation), H drops to 2-3 seconds -- a 50% reduction that doubles the RoCoF for any given power imbalance. As McKenney notes: "In a low-inertia system, the *same* disturbance (e.g., a large power plant loss) causes the frequency to change *much faster* than in a high-inertia system. This rapid frequency change *is* the dangerous 'wobble.'" (McKenney, 2024).
+Under traditional synchronous generation, H ranges from 4-6 seconds, providing substantial resistance to frequency disturbances. Under high-renewable conditions (30%+ inverter-based generation), H drops to 2-3 seconds ; a 50% reduction that doubles the RoCoF for any given power imbalance. As McKenney notes: "In a low-inertia system, the *same* disturbance (e.g., a large power plant loss) causes the frequency to change *much faster* than in a high-inertia system. This rapid frequency change *is* the dangerous 'wobble.'" (McKenney, 2024).
 
 ### 2.1.1 Grid Inertia Depletion Mechanics
 
-The transition from synchronous generation to inverter-based resources fundamentally alters the grid's physical response to disturbances. Traditional synchronous generators provide inertia through massive rotating turbines and generators -- physical momentum that resists changes in rotational speed (and thus frequency). A 500 MW coal-fired generator with an H constant of 5.0 seconds stores approximately 2,500 MWh of kinetic energy in its rotating mass.
+The transition from synchronous generation to inverter-based resources fundamentally alters the grid's physical response to disturbances. Traditional synchronous generators provide inertia through massive rotating turbines and generators ; physical momentum that resists changes in rotational speed (and thus frequency). A 500 MW coal-fired generator with an H constant of 5.0 seconds stores approximately 2,500 MWh of kinetic energy in its rotating mass.
 
 In contrast, inverter-based resources (solar PV, wind with full-power converters, battery energy storage systems) have **zero inherent inertia**. These devices use power electronics to convert DC power to AC, with no rotating mass coupled to the grid. While "synthetic inertia" or "virtual inertia" control algorithms can emulate inertial response through rapid power injection, this is fundamentally different from physical momentum:
 
@@ -237,11 +234,11 @@ Content-Type: application/json
 
 According to the DERMS Security Architecture Review, the following controls are typically **absent**:
 
-1. **No rate limiting on bulk dispatch commands** -- attacker can issue unlimited commands at maximum API bandwidth
-2. **No behavioral analytics** -- no detection of unusual oscillation patterns or rapid charge/discharge cycling
-3. **No physics-based validation** -- DERMS does not verify that commanded power changes are grid-safe based on current inertia and frequency conditions
-4. **No dual authorization for large commands** -- single OAuth token sufficient to control entire 270 MW fleet
-5. **No oscillation detection algorithm** -- no mathematical analysis of command frequency signatures
+1. **No rate limiting on bulk dispatch commands** ; attacker can issue unlimited commands at maximum API bandwidth
+2. **No behavioral analytics** ; no detection of unusual oscillation patterns or rapid charge/discharge cycling
+3. **No physics-based validation** ; DERMS does not verify that commanded power changes are grid-safe based on current inertia and frequency conditions
+4. **No dual authorization for large commands** ; single OAuth token sufficient to control entire 270 MW fleet
+5. **No oscillation detection algorithm** ; no mathematical analysis of command frequency signatures
 
 **Oscillation Waveform Mathematics:**
 
@@ -398,8 +395,8 @@ The grid does not need to be at minimum inertia for the attack to succeed. Any p
 
 McKenney's (2024, 2025) comprehensive analysis of three major blackouts demonstrates how declining inertia transforms grid vulnerability:
 
-1. **South Australia (September 28, 2016)**: 48.36% inverter-based resource penetration, 445 MW wind generation loss, **peak RoCoF of 6.1 Hz/s** (design assumption: 3 Hz/s) -- demonstrating that actual RoCoF can exceed design assumptions by 2x. McKenney notes: "This incident demonstrated the potential for extreme instability in very low inertia conditions... highlighting the direct impact of RoCoF sensitivity in a system with significant wind penetration."
-2. **UK Blackout (August 9, 2019)**: Lightning strike triggered cascading losses (660 MW gas + 740 MW wind). **345 MW of distributed generation tripped spuriously** when RoCoF reached 0.135 Hz/s (relay threshold: 0.125 Hz/s) -- demonstrating protection system maloperation even at moderate RoCoF. System inertia: 210 GW·s at ~30% wind penetration.
+1. **South Australia (September 28, 2016)**: 48.36% inverter-based resource penetration, 445 MW wind generation loss, **peak RoCoF of 6.1 Hz/s** (design assumption: 3 Hz/s) ; demonstrating that actual RoCoF can exceed design assumptions by 2x. McKenney notes: "This incident demonstrated the potential for extreme instability in very low inertia conditions... highlighting the direct impact of RoCoF sensitivity in a system with significant wind penetration."
+2. **UK Blackout (August 9, 2019)**: Lightning strike triggered cascading losses (660 MW gas + 740 MW wind). **345 MW of distributed generation tripped spuriously** when RoCoF reached 0.135 Hz/s (relay threshold: 0.125 Hz/s) ; demonstrating protection system maloperation even at moderate RoCoF. System inertia: 210 GW·s at ~30% wind penetration.
 3. **Iberian Peninsula (April 28, 2025)**: 60 million people affected (Spain + Portugal), up to 10 hours outage, 56% renewable penetration. Suspected inter-area oscillations between Iberia and Continental Europe due to weak interconnection (~2,800 MW, only 6% of Spanish capacity). McKenney observed: "Two significant inter-area oscillations in 30 minutes pre-blackout" and noted the event validated his warnings from the Chicago Conference on Grid Stability earlier that year.
 
 ### 2.3 BESS Thermal Runaway Cascading Scenarios
@@ -610,7 +607,7 @@ This creates a **secondary cascading failure** where fires at sites 16-54 burn u
 
 ### 3.1 Four-Tier Cascade Model
 
-The cascading failure propagates through four tiers, each amplifying the affected customer base by an order of magnitude. This multi-tier cascade pattern is consistent with McKenney's (2024) analysis of European Network of Transmission System Operators for Electricity (ENTSO-E) system split risks: "ENTSO-E studies confirm that declining inertia significantly increases the risk of system splits leading to high RoCoF (>1 Hz/s) and potential widespread blackouts in future scenarios." McKenney documents that ENTSO-E "Project Inertia" studies for 2030-2040 scenarios identify an increasing number of "global severe splits" where both separated systems collapse due to uncontrollable RoCoF -- precisely the multi-tier cascade pattern modeled here.
+The cascading failure propagates through four tiers, each amplifying the affected customer base by an order of magnitude. This multi-tier cascade pattern is consistent with McKenney's (2024) analysis of European Network of Transmission System Operators for Electricity (ENTSO-E) system split risks: "ENTSO-E studies confirm that declining inertia significantly increases the risk of system splits leading to high RoCoF (>1 Hz/s) and potential widespread blackouts in future scenarios." McKenney documents that ENTSO-E "Project Inertia" studies for 2030-2040 scenarios identify an increasing number of "global severe splits" where both separated systems collapse due to uncontrollable RoCoF ; precisely the multi-tier cascade pattern modeled here.
 
 The following diagram models the complete propagation chain from initial attack execution to system-wide collapse:
 
@@ -659,28 +656,28 @@ graph TB
 
 ### 3.2 Tier-by-Tier Impact Quantification
 
-**Tier 1 -- Immediate Impact Zone (T+0 to T+15 minutes):**
+**Tier 1 ; Immediate Impact Zone (T+0 to T+15 minutes):**
 
 - Geographic Area: 5 km radius around targeted substation cluster
 - Customers Affected: 8,000-12,000 residential, 200-400 commercial
 - Duration: 2-4 hours with priority restoration
 - Economic Impact: [investment required] million
 
-**Tier 2 -- Local Cascade Zone (T+15 to T+30 minutes):**
+**Tier 2 ; Local Cascade Zone (T+15 to T+30 minutes):**
 
 - Geographic Area: 3 adjacent substations, 15 km radius
 - Customers Affected: 80,000-120,000 residential, 2,000-3,500 commercial
 - Duration: 8-16 hours with sequential restoration
 - Economic Impact: [investment required] million
 
-**Tier 3 -- Regional Cascade Zone (T+30 to T+60 minutes):**
+**Tier 3 ; Regional Cascade Zone (T+30 to T+60 minutes):**
 
 - Geographic Area: 8 additional substations, 40 km radius
 - Customers Affected: 400,000-600,000 residential, 8,000-15,000 commercial
 - Duration: 16-36 hours
 - Economic Impact: [investment required] million
 
-**Tier 4 -- System-Wide Collapse (T+60 to T+120 minutes, worst case):**
+**Tier 4 ; System-Wide Collapse (T+60 to T+120 minutes, worst case):**
 
 - Geographic Area: Full ACME Inc. network plus adjacent DNSPs
 - Customers Affected: 1.0-1.5 million residential, 25,000-40,000 commercial
@@ -898,7 +895,7 @@ The ACME Inc. scenario represents a **6x escalation** in substation count compar
 
 ### 3.5 Grid Island Formation and Collapse Mechanics
 
-When major portions of an interconnected grid lose synchronization, the system fragments into isolated "islands" -- electrically separated regions that must each maintain their own generation-load balance independently.
+When major portions of an interconnected grid lose synchronization, the system fragments into isolated "islands" ; electrically separated regions that must each maintain their own generation-load balance independently.
 
 **NSW Grid Island Formation Triggers:**
 
@@ -1059,8 +1056,8 @@ Mobile network failure creates a secondary crisis by severing the population fro
 
 - 420 cell towers with 2-8 hour battery backup reach zero coverage between T+2 and T+8 hours
 - 70% of emergency 000 calls originate from mobile networks; landline capacity covers only 30% of normal call volume
-- Ambulance response time increases from 12 minutes (normal) to 45 minutes (incident) -- a 275% degradation
-- Hospital emergency department presentations surge from 3,500 per day (normal) to 8,500 per day (incident) -- a 243% increase
+- Ambulance response time increases from 12 minutes (normal) to 45 minutes (incident) ; a 275% degradation
+- Hospital emergency department presentations surge from 3,500 per day (normal) to 8,500 per day (incident) ; a 243% increase
 
 ### 4.5 Transport System Cascade
 
@@ -1343,8 +1340,8 @@ Equipment replacement and emergency restoration costs are driven by transformer 
 | Switchgear (11 kV)               | 8-20%               | 162 bays          | [investment required] | [investment required] | [investment required] |
 | BESS Battery Modules             | 2-8% (thermal)      | 54 systems        | [investment required] | [investment required] | [investment required] |
 | BESS Inverters/PCS               | 5-12%               | 54 units          | [investment required] | [investment required] | [investment required] |
-| Emergency Restoration Labour     | 100%                | 72-hour operation | --                    | [investment required] | [investment required] |
-| Replacement Equipment Expediting | 100%                | Air freight, OEM  | --                    | [investment required] | [investment required] |
+| Emergency Restoration Labour     | 100%                | 72-hour operation | ;                    | [investment required] | [investment required] |
+| Replacement Equipment Expediting | 100%                | Air freight, OEM  | ;                    | [investment required] | [investment required] |
 
 Transformer lead times under normal procurement are implementation period required. Emergency procurement via air freight requires 3-5 times normal cost, placing the per-unit expedited cost at [investment required] million.
 
@@ -1662,7 +1659,7 @@ The following actions provide maximum risk reduction for minimum investment and 
 
 ### 9.2 Investment Roadmap
 
-**Phase 1 -- Immediate (targeted timeframe): [investment required] million**
+**Phase 1 ; Immediate (targeted timeframe): [investment required] million**
 
 | Action                                     | Cost                       | Timeline                       | Risk Addressed         |
 | :--- | :--- | :--- | :--- |
@@ -1672,7 +1669,7 @@ The following actions provide maximum risk reduction for minimum investment and 
 | 24/7 OT SOC Establishment (8 analysts)     | [investment required]/year | implementation period required | All vectors            |
 | OT Incident Response Retainer (Dragos)     | [investment required]/year | implementation period          | Response capability    |
 
-**Phase 2 -- Short-Term (implementation period required): [investment required] million**
+**Phase 2 ; Short-Term (implementation period required): [investment required] million**
 
 | Action                                     | Cost                  | Timeline                       | Risk Addressed              |
 | :--- | :--- | :--- | :--- |
@@ -1683,7 +1680,7 @@ The following actions provide maximum risk reduction for minimum investment and 
 | Supply Chain Risk Management Program       | [investment required] | implementation period required | Vendor compromise           |
 | Zero-Trust Microsegmentation               | [investment required] | implementation period required | Lateral movement            |
 
-**Phase 3 -- Ongoing: [investment required] million per year**
+**Phase 3 ; Ongoing: [investment required] million per year**
 
 - Continuous monitoring and threat hunting
 - Quarterly OT penetration testing
@@ -2232,7 +2229,7 @@ ACME Inc.'s distributed energy infrastructure faces systemic cascading failure r
 3. **Complex grid interdependencies** linking electricity supply to water, hospital, telecommunications, transport, military, and financial infrastructure, each amplifying the consequences of an electrical outage into a multi-domain crisis.
 4. **Reduced grid inertia** from renewable energy transition, halving the system's resistance to frequency disturbances and creating conditions where cyber-physical attacks can trigger cascading failures that were physically impossible under the legacy generation mix. As McKenney (2024) documents: "In a low-inertia system, the *same* disturbance causes the frequency to change *much faster* than in a high-inertia system. This rapid frequency change *is* the dangerous 'wobble.'" Historical precedents (South Australia 2016: 6.1 Hz/s, UK 2019: 0.135 Hz/s relay trips, Iberian Peninsula 2025: inter-area oscillations) establish that this vulnerability has already materialized in comparable grids worldwide (McKenney, 2024, 2025).
 
-The most likely attack scenario -- Retailer API compromise leading to 54 BESS oscillation -- produces a local cascade affecting 100,000-500,000 customers with an 8-24 hour outage and [investment required] million economic damage. The worst case scenario -- system-wide collapse -- affects 1.2 million customers for 24-72 hours with [investment required] million-[investment required] billion damage and 5-25 fatalities.
+The most likely attack scenario ; Retailer API compromise leading to 54 BESS oscillation ; produces a local cascade affecting 100,000-500,000 customers with an 8-24 hour outage and [investment required] million economic damage. The worst case scenario ; system-wide collapse ; affects 1.2 million customers for 24-72 hours with [investment required] million-[investment required] billion damage and 5-25 fatalities.
 
 The [investment required] million investment required for comprehensive mitigation is not discretionary. It is a regulatory necessity under the SOCI Act and AESCSF, a fiduciary obligation given the 43.9:1 return on investment, and a social licence imperative for the continued expansion of community battery programs. Action is required within implementation period to prevent potential catastrophic failure.
 
@@ -2636,7 +2633,7 @@ Casualties:
 This assessment employs **prospective modeling** of cascading failure scenarios that have not yet occurred in the Australian context. The methodology combines:
 
 1. **Physics-Based Foundation**: Grid frequency dynamics, RoCoF calculations, and protection system behavior are derived from established power systems engineering (AEMO standards, IEC 60255 relay specifications) and validated against McKenney's (2024, 2025) analysis of international blackouts.
-2. **International Precedent Analysis**: South Australia 2016 (6.1 Hz/s RoCoF), UK 2019 (0.135 Hz/s relay cascade), and Iberian Peninsula 2025 (inter-area oscillations) provide empirical validation of Death Wobble physics in comparable grids. However, none of these events resulted from coordinated cyber-physical attacks -- they were natural disturbances (weather, equipment failure, lightning strikes).
+2. **International Precedent Analysis**: South Australia 2016 (6.1 Hz/s RoCoF), UK 2019 (0.135 Hz/s relay cascade), and Iberian Peninsula 2025 (inter-area oscillations) provide empirical validation of Death Wobble physics in comparable grids. However, none of these events resulted from coordinated cyber-physical attacks ; they were natural disturbances (weather, equipment failure, lightning strikes).
 3. **Cyber-Attack Adaptation**: This document extends physical failure mechanisms into cyber-enabled scenarios by modeling how an adversary with Retailer API access could *deliberately induce* the oscillation patterns that occurred naturally in historical events. This represents a novel threat vector without direct historical precedent.
 4. **Consequence Modeling Uncertainty**:
 
@@ -3362,8 +3359,8 @@ After any P0 or P1 incident, ACME Inc. must conduct formal lessons learned revie
 
 **Related Documents:**
 
-- EE-CTI-004: BESS Architecture Vulnerability Assessment -- Bawley Point Community Battery
-- EE-CTI-005: DERMS Security Architecture Review -- mPrest Platform
+- EE-CTI-004: BESS Architecture Vulnerability Assessment ; Bawley Point Community Battery
+- EE-CTI-005: DERMS Security Architecture Review ; mPrest Platform
 - EE-CTI-003: Comprehensive Threat Assessment 2026
 - ACME Inc. DERMS High Level Architecture (HLD)
 - AEMO Power System Frequency Risk Review 2024
@@ -3944,9 +3941,9 @@ Australian Energy Market Operator (AEMO). (2024). *Power System Frequency Risk R
 
 Australian Energy Sector Cyber Security Framework (AESCSF). (2023). *Security Profile 2 (SP2) Requirements for Distribution Networks*. Canberra: Department of Home Affairs.
 
-IEC 62443-3-3:2013. *Industrial communication networks -- Network and system security -- Part 3-3: System security requirements and security levels*. Geneva: International Electrotechnical Commission.
+IEC 62443-3-3:2013. *Industrial communication networks ; Network and system security ; Part 3-3: System security requirements and security levels*. Geneva: International Electrotechnical Commission.
 
-NERC CIP-014-3. *Physical Security -- Transmission Stations and Transmission Substations*. Atlanta: North American Electric Reliability Corporation.
+NERC CIP-014-3. *Physical Security ; Transmission Stations and Transmission Substations*. Atlanta: North American Electric Reliability Corporation.
 
 Security of Critical Infrastructure Act 2018 (SOCI Act). *Risk Management Program Requirements for Electricity Sector Assets*. Canberra: Australian Government.
 
@@ -3966,11 +3963,11 @@ CERT-UA. (2022). *Technical Analysis: INDUSTROYER2 Malware Targeting ICS Protoco
 
 Kundur, P., Balu, N. J., & Lauby, M. G. (1994). *Power System Stability and Control*. New York: McGraw-Hill. (Classic reference for frequency dynamics)
 
-Miller, N. W., Shao, M., Pajic, S., & D'Aquila, R. (2014). "Western Wind and Solar Integration Study Phase 3 -- Frequency Response and Transient Stability." *NREL Technical Report* NREL/SR-5D00-62906. Golden, CO: National Renewable Energy Laboratory.
+Miller, N. W., Shao, M., Pajic, S., & D'Aquila, R. (2014). "Western Wind and Solar Integration Study Phase 3 ; Frequency Response and Transient Stability." *NREL Technical Report* NREL/SR-5D00-62906. Golden, CO: National Renewable Energy Laboratory.
 
 Ulbig, A., Borsche, T. S., & Andersson, G. (2014). "Impact of Low Rotational Inertia on Power System Stability and Operation." *IFAC Proceedings Volumes*, 47(3), 7290-7297. DOI: 10.3182/20140824-6-ZA-1003.02615
 
-Australian Energy Market Operator (AEMO). (2019). *Transfer Limit Advice -- System Strength in South Australia*. Melbourne: AEMO. (Analysis of 2016 blackout)
+Australian Energy Market Operator (AEMO). (2019). *Transfer Limit Advice ; System Strength in South Australia*. Melbourne: AEMO. (Analysis of 2016 blackout)
 
 National Grid ESO. (2019). *Technical Report on the events of 9 August 2019*. Warwick, UK: National Grid. (UK blackout investigation)
 
@@ -4010,12 +4007,12 @@ Zimmerman, R., & Restrepo, C. E. (2006). "The Next Step: Quantifying Infrastruct
 
 #### ACME Inc. Internal Documents
 
-ACME Inc.. (2025). *DERMS High Level Architecture (HLD) -- mPrest Platform Deployment*.  : ACME Inc..
+ACME Inc.. (2025). *DERMS High Level Architecture (HLD) ; mPrest Platform Deployment*.  : ACME Inc..
 
 ACME Inc.. (2025). *BESS Deployment Standard Operating Procedures*.  : ACME Inc..
 
-ACME Inc.. (2024). *Cybersecurity Incident Response Plan -- Version 2.3*.  : ACME Inc..
+ACME Inc.. (2024). *Cybersecurity Incident Response Plan ; Version 2.3*.  : ACME Inc..
 
-ACME Inc.. (2025). *EE-CTI-004: BESS Architecture Vulnerability Assessment --   Community Battery*.  : ACME Inc. Cybersecurity Intelligence.
+ACME Inc.. (2025). *EE-CTI-004: BESS Architecture Vulnerability Assessment ;   Community Battery*.  : ACME Inc. Cybersecurity Intelligence.
 
-ACME Inc.. (2025). *EE-CTI-007: DERMS Security Architecture Review -- Cloud Integration Risks and Mitigations*.: ACME Inc. Cybersecurity Intelligence.
+ACME Inc.. (2025). *EE-CTI-007: DERMS Security Architecture Review ; Cloud Integration Risks and Mitigations*.: ACME Inc. Cybersecurity Intelligence.

@@ -11,18 +11,14 @@ import os
 
 dest_path = 'references/WG-07-TM-Threat-Modeling/WG-07-TM-ATQ.md'
 
-content = r"""# Adversary Threat Quotient (ATQ): A Twelve-Factor Quantitative Threat Actor Scoring Model
-## Production Materialized View Formulation, Empirical Saturation Thresholds, and Stochastic Boltzmann Random-Walk Multipliers in Critical Infrastructure Defense
+content = r"""| Document ID | Working Group | Normative Equivalents | Classification |
+| :--- | :--- | :--- | :--- |
+| EIGENIA-WG07-TM-03 | WG-07-TM (Threat Modeling & Cyber-Physical Hazard Analysis) | IEC 62443-3-2 / ISO 15926 / MITRE ATT&CK v14.1 / FIRST EPSS v3 / Lloyd's Y5381 | Quantitative Threat Intelligence Specification |
 
-**Document Identifier:** EIGENIA-WG07-TM-03  
-**Classification:** Quantitative Threat Intelligence Specification  
-**Working Group:** WG-07-TM (Threat Modeling & Cyber-Physical Hazard Analysis)  
-**Standard Equivalents:** IEC 62443-3-2 / ISO 15926 / MITRE ATT&CK v14.1 / FIRST EPSS v3 / Lloyd's Y5381  
-**Author:** J. McKenney (Systems Assurance Lead)  
+**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
+**Lead Systems Assurance Architect:** J. McKenney (Systems Assurance Lead)  
 **Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
 **Interactive Reference:** `/terminals/atq-card-terminal.html` (ATQ Interactive Card Terminal)  
-
----
 
 ## Executive Abstract
 
@@ -452,7 +448,7 @@ When coupled to physical facility digital twins through DEXPI 2.0 piping schemat
 """
 
 # Final verification: eliminate any lingering em-dashes
-content = content.replace('—', '; ').replace('--', '; ')
+content = content.replace('—', '; ')
 
 os.makedirs(os.path.dirname(dest_path), exist_ok=True)
 

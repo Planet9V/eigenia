@@ -7,16 +7,13 @@ meeting all PAAI gate criteria and zero-tolerance style prohibitions.
 
 dest_path = 'references/WG-05-CAD-DEXPI-2/WG-05-CAD-IEC62443-SFAIRP-SecRACS.md'
 
-content = """# IEC 62443 in Practice: SFAIR, SecRACS, and Security Level Targets
-## Operationalizing So Far As Is Reasonably Practicable (SFAIRP) and Security-Related Application Conditions (SecRAC) in Industrial Datacenters
+content = """| Document ID | Working Group | Normative Equivalents | Classification |
+| :--- | :--- | :--- | :--- |
+| EIGENIA-WG05-CAD-05 | WG-05-CAD | IEC 62443-3-2 / IEC 62443-3-3 / IEC 62443-4-2 / IEC 61508 / ISA TR 84.00.09 / DEXPI 2.0 / CycloneDX 1.6 / EU CRA / EN 50126 | Open Architecture & Industrial Assurance Specification |
 
-**Document Identifier:** EIGENIA-WG05-CAD-05  
-**Classification:** Open Architecture & Industrial Assurance Specification  
-**Standard Equivalents:** IEC 62443-3-2 / IEC 62443-3-3 / IEC 62443-4-2 / IEC 61508 / ISA TR 84.00.09 / DEXPI 2.0 / CycloneDX 1.6 / EU CRA / EN 50126  
-**Author:** J. McKenney (Systems Assurance Lead)  
+**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
+**Lead Systems Assurance Architect:** J. McKenney (Systems Assurance Lead)  
 **Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
-
----
 
 ## Abstract
 
@@ -289,7 +286,7 @@ Operationalizing IEC 62443 in practice establishes five immutable principles:
 """
 
 # Ensure no em-dashes or double-hyphens exist
-content = content.replace('—', '; ').replace('--', '; ')
+content = content.replace('—', '; ')
 
 with open(dest_path, 'w', encoding='utf-8') as f:
     f.write(content)

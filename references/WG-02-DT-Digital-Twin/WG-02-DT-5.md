@@ -1,8 +1,5 @@
 
 # Fooled by Randomness → Fooled by Cybersecurity  
-
-Lab Sponsor Resident  j.mckenney
-
 Why Taleb’s view of markets is the missing lens for OT/ICS defense; and why Cyber Digital Twins (CDTs) are built to operate on the “left side of the table”
 
 Taleb’s *Fooled by Randomness* is a book about markets, but its real target is something broader: the human tendency to confuse outcomes with skill, and stories with truth. In finance, this confusion manufactures “geniuses” out of survivors and turns luck into a business model; right up until the day a rare event wipes out the strategy and everyone acts surprised. This is why Taleb is such a crucial voice in the world of Cyber Digital Twins: he explains why the tools we currently use in cybersecurity are not just inadequate; they actively make us more vulnerable.
@@ -97,7 +94,7 @@ CDTs are not “data categories.” They are a model of **how uncertainty propag
 - **L1 Customer Equipment (deployed truth)**: what exists, where it is, and its operational state; includes geo-spatial mapping and cross-sector interdependencies.  
 - **L2 SBOM (software reality)**: deep dependency tracking, transitive analysis, SPDX/CycloneDX support, and EPSS enrichment for exploit probability context.  
 - **L3 Threat Intelligence (active adversary reality)**: kill-chain modeling, attribution, campaign tracking against sectors and asset types.  
-- **L4 Psychology (the Taleb “human error engine”)**: cognitive bias cascades and the McKenney–Lacan topology modeling the gap between Real threats and Imaginary fears.  
+- **L4 Psychology (the Taleb “human error engine”)**: cognitive bias cascades and the McKenney, Lacan topology modeling the gap between Real threats and Imaginary fears.  
 - **L5 Information Streams (the NOW layer)**: real-time event processing, echo chamber detection, sentiment and geopolitical correlation.  
 - **L6 Predictions (psychohistory + forecasting)**: breach likelihood, remediation lag, ROI simulation; outputs drive NOW/NEXT/NEVER prioritization.
 
@@ -121,13 +118,13 @@ AEON’s prediction pipeline explicitly:
 This is Taleb’s method operationalized: **don’t argue about what might happen; simulate the space of what can happen, and look for the tails.**
 
 
-## The McKenney–Lacan calculus: why “psychology” is not a soft add-on but a tail generator
+## The McKenney, Lacan calculus: why “psychology” is not a soft add-on but a tail generator
 
 Taleb’s deepest point is that randomness is not just “out there.” It’s **in us**: in how we perceive, rationalize, overfit patterns, and tell ourselves stories.[1][2]
 
 L4 is where that insight becomes engineering:
 
-- The **McKenney–Lacan topology** models the gap between “Real threats” and “Imaginary fears.” This is a direct mechanism for explaining why organizations over-invest in visible controls and under-invest in structural risk reduction.
+- The **McKenney, Lacan topology** models the gap between “Real threats” and “Imaginary fears.” This is a direct mechanism for explaining why organizations over-invest in visible controls and under-invest in structural risk reduction.
 - The **Psychometric Tensor** formalizes people as mathematical objects (DISC ⊗ OCEAN) to model reaction to stress, authority, and risk.
 - The **Interaction Hamiltonian** treats incident response as an energy system; capturing dissonance (friction) and consonance (flow) between human tensors under fog-of-war conditions.
 

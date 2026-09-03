@@ -1,7 +1,4 @@
 # Empirical Cyber Insurance Market Observations & Underwriting Telemetry
-
-Lab Sponsor Resident j.mckenney
-
 Insurance companies and underwriters approach cyber insurance by moving away from traditional, static questionnaires in favor of dynamic, highly quantitative models driven by continuous telemetry, advanced actuarial mathematics, and systemic risk modeling.
 
 ## 1. Continuous Telemetry and Outside-In Assessment

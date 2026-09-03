@@ -1,7 +1,4 @@
 # Physics Models; 6 Seldon Indicators
-
-Lab Sponsor Resident  j.mckenney
-
 The Cyber Digital Twin uses **6 physics-inspired indicators** derived from the SeldonPSYCH database. These values are read by the Seldon Score endpoint and the L6 globe layer to produce risk gauges on the CDT dashboard.
 
 ## 1. SIR Compartmental Model (Epidemic Spreading)

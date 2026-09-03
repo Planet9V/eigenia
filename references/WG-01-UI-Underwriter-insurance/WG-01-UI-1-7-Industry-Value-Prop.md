@@ -1,7 +1,4 @@
 # Application of Predcitive Intelligence and behavioral modeling to financial risk evaluation and transfer in the insurance and reinsurance industry.
-
- Lab Sponsor Resident,  j.mckenney
-
 Included topics 
 1. Translating Technical Metrics to Actuarial Language
 2. Predictive Intelligence and Behavioral Modeling

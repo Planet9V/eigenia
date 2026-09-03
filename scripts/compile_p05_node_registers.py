@@ -7,16 +7,13 @@ meeting all PAAI gate criteria and zero-tolerance style prohibitions.
 
 dest_path = 'references/WG-07-TM-Threat-Modeling/WG-07-TM-CyHAZOP-Node-Registers.md'
 
-content = """# CyHAZOP System Drill-Down: Node Registers for Power, Cooling, and Safety
-## Empirical Register-Level Threat Models for Modbus, BACnet, and Redfish Operational Conduits
+content = """| Document ID | Working Group | Normative Equivalents | Classification |
+| :--- | :--- | :--- | :--- |
+| EIGENIA-WG07-TM-04 | WG-07-TM | IEC 61882 / IEC 62443-4-2 / DEXPI 2.0 (ISO 15926) / CycloneDX 1.6 / Modbus Application Protocol v1.1b3 / BACnet ANSI/ASHRAE 135 | Open Architecture Technical Specification |
 
-**Document Identifier:** EIGENIA-WG07-TM-04  
-**Classification:** Open Architecture Technical Specification  
-**Standard Equivalents:** IEC 61882 / IEC 62443-4-2 / DEXPI 2.0 (ISO 15926) / CycloneDX 1.6 / Modbus Application Protocol v1.1b3 / BACnet ANSI/ASHRAE 135  
-**Author:** J. McKenney (Systems Assurance Lead)  
+**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
+**Lead Systems Assurance Architect:** J. McKenney (Systems Assurance Lead)  
 **Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
-
----
 
 ## Abstract
 
@@ -287,7 +284,7 @@ Securing operational technology registers against cyber-physical sabotage demand
 """
 
 # Clean any surviving em-dashes
-content = content.replace('—', '; ').replace('--', '; ')
+content = content.replace('—', '; ')
 
 with open(dest_path, 'w', encoding='utf-8') as f:
     f.write(content)

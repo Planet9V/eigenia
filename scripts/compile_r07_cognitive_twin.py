@@ -10,17 +10,13 @@ import re
 
 dest_path = 'references/WG-02-DT-Digital-Twin/WG-02-DT-Cognitive-Digital-Twin.md'
 
-content = r"""# Cognitive Digital Twin: Defender Simulation for Incident Response Optimization
-## Simulating Human-in-the-Loop Performance, Yerkes-Dodson Arousal Dynamics, and Stochastic Decision Latency in Critical Infrastructure Defense
+content = r"""| Document ID | Working Group | Normative Equivalents | Classification |
+| :--- | :--- | :--- | :--- |
+| EIGENIA-WG02-DT-10 | WG-02-DT (Digital Twin & Applied Physics) | IEC 62443-3-2 / ISO 15926 / DEXPI 2.0 / CycloneDX 1.6 / EU CRA / EN 50126 | Open Architecture & Digital Twin Specification |
 
-**Document Identifier:** EIGENIA-WG02-DT-10  
-**Classification:** Open Architecture & Digital Twin Specification  
-**Working Group:** WG-02-DT (Digital Twin & Applied Physics)  
-**Standard Equivalents:** IEC 62443-3-2 / ISO 15926 / DEXPI 2.0 / CycloneDX 1.6 / EU CRA / EN 50126  
-**Author:** J. McKenney (Systems Assurance Lead)  
+**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
+**Lead Systems Assurance Architect:** J. McKenney (Systems Assurance Lead)  
 **Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
-
----
 
 ## Executive Abstract
 
@@ -162,11 +158,11 @@ Under time-pressured emergency conditions, defenders do not evaluate competing a
        |                                           |
     [MATCH]                                     [NO MATCH]
        v                                           v
-+-----------------------------------+     +-------------------------------+
++-----------------------------------+-----+-------------------------------+
 | SIMPLE RPD EXECUTION              |     | MENTAL SIMULATION & DRIFT     |
 | Immediately execute standard      |     | Defender attempts to construct|
 | procedural playbook. Delay: 8-12s.|     | novel explanation. Delay: >45s|
-+-----------------------------------+     +-------------------------------+
++-----------------------------------+-----+-------------------------------+
 ```
 
 When an adversary executes a novel, multi-stage attack that violates standard operational templates, the defender cannot find a matching prototype. The defender enters mental simulation mode, attempting to construct a coherent narrative. 
@@ -365,7 +361,7 @@ The Cognitive Digital Twin bridges the critical gap between technical infrastruc
 """
 
 # Final verification: eliminate any lingering em-dashes
-content = content.replace('—', '; ').replace('--', '; ')
+content = content.replace('—', '; ')
 
 # Ensure directory exists
 os.makedirs(os.path.dirname(dest_path), exist_ok=True)

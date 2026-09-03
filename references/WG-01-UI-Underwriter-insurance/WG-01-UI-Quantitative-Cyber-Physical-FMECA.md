@@ -1,12 +1,11 @@
-# Quantitative Cyber-Physical FMECA: Failure Mode Analysis for Underwriting
-## Why Cyber-Induced Failure Modes Carry Risk Priority Numbers 3x to 13x Higher Than Mechanical Wear
+| Document ID | Working Group | Normative Equivalents | Classification |
+| :--- | :--- | :--- | :--- |
+| EIGENIA-WG01-UI-08 | WG-01-UI | IEC 60812 (FMEA/FMECA) / IEC 62443-3-2 / DEXPI 2.0 (ISO 15926) / CycloneDX 1.6 / MIL-STD-1629A / EN 50126 | Open Actuarial & Reliability Engineering Technical Specification |
 
-**Document Identifier:** EIGENIA-WG01-UI-08  
-**Classification:** Open Actuarial & Reliability Engineering Technical Specification  
-**Standard Equivalents:** IEC 60812 (FMEA/FMECA) / IEC 62443-3-2 / DEXPI 2.0 (ISO 15926) / CycloneDX 1.6 / MIL-STD-1629A / EN 50126  
-**Author:** J. McKenney (Systems Assurance Lead)  
+**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
+**Lead Systems Assurance Architect:** J. McKenney (Systems Assurance Lead)  
 **Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
----
+
 ## Abstract
 
 Failure Mode, Effects, and Criticality Analysis (FMECA) under IEC 60812 is the foundational methodology of industrial reliability engineering. For decades, mechanical and plant engineers have calculated Risk Priority Numbers (RPN) as the product of Severity, Occurrence, and Detection to prioritize maintenance budgets and capital equipment replacement. Traditional FMECA assumes that physical components fail through predictable stochastic mechanisms: mechanical bearing fatigue, thermal cycling degradation, corrosion, and seal wear. Under these assumptions, Occurrence is low and Detection is high, producing modest Risk Priority Numbers.
@@ -14,7 +13,9 @@ Failure Mode, Effects, and Criticality Analysis (FMECA) under IEC 60812 is the f
 This paper establishes the Cyber-Physical Extension to FMECA. When industrial assets; Coolant Distribution Unit (CDU) pumps, motorized isolation valves, building management controllers, and automatic transfer switches; are connected to operational technology networks, they become susceptible to deliberate digital manipulation. An adversary commanding a pump stop or valve closure via unauthenticated Modbus TCP executes the failure instantaneously, independently of component operating age. In parallel, because adversaries spoof telemetry registers to report nominal states, Detection drops catastrophically.
 
 Across an empirical eighteen-component audit of a 100 MW high-density compute facility, we demonstrate that cyber-induced failure modes carry Risk Priority Numbers 3.2x to 13.5x higher than their mechanical equivalents. The CDU isolation valve, for example, escalates from an RPN of 36 (mechanical binding) to an RPN of 486 (remote Modbus command injection with spoofed telemetry). We formulate the mathematical dynamics of the Cyber Multiplier Gap, model adversarial Poisson injection failure densities, and provide CFOs, reinsurance syndicates, and catastrophe underwriters with an actuarial bridge linking component RPNs directly to Annualised Loss Expectancy (ALE), Probable Maximum Loss (PML), and Return on Security Investment (ROSI).
+
 ---
+
 ## 1. The Methodological Limits of Classical FMECA
 
 Reliability engineers have used FMECA to design offshore oil platforms, aerospace flight control systems, and high-speed rail corridors. The methodology assigns quantitative ratings from 1 to 10 across three independent dimensions:
@@ -34,7 +35,9 @@ When the same centrifugal pump is orchestrated by a Variable Frequency Drive con
 - **Occurrence Inversion:** The failure is no longer constrained by mechanical wear physics. A remote threat actor with network access can command the pump to stop at any arbitrary second ($O 	o 7$).
 - **Detection Blindness:** A skilled adversary does not simply send a stop command; they exploit the two-way nature of the industrial protocol to overwrite holding registers, spoofing nominal rotational speed and normal fluid flow back to the operator console ($D 	o 9$).
 - **Common-Cause Synchronicity:** While mechanical bearing seizures are uncorrelated stochastic events, a single malicious script can command all redundant CDU pumps across an entire data hall to trip simultaneously, completely defeating parallel N+1 and 2N redundancy architectures.
+
 ---
+
 ## 2. Multi-BOM and DEXPI Structural Mapping
 
 To execute automated cyber-physical FMECA within the Cyber Digital Twin, every failure mode is cross-referenced between the DEXPI 2.0 (ISO 15926) plant schematic and the CycloneDX 1.6+ multi-BOM catalog:
@@ -69,7 +72,9 @@ To execute automated cyber-physical FMECA within the Cyber Digital Twin, every f
 ```
 
 By linking active CycloneDX VEX vulnerability feeds to physical DEXPI asset nodes, the digital twin automatically recalculates component RPNs when a new unpatched remote code execution vulnerability is discovered in an operational technology controller.
+
 ---
+
 ## 3. The Quantitative Cyber-Physical FMECA Matrix
 
 The following comprehensive table documents eighteen critical infrastructure components across cooling, electrical distribution, building management, and compute silicon. It compares traditional mechanical failure modes against cyber-induced vectors, exposing the massive Cyber Multiplier Gap:
@@ -81,7 +86,7 @@ The following comprehensive table documents eighteen critical infrastructure com
 ```
 
 | Component | Physical Failure Mode | Traditional Mechanical Cause | Cyber-Physical Attack Vector | S | $O_m$ | $O_c$ | $D_m$ | $D_c$ | $	ext{RPN}_m$ | $	ext{RPN}_c$ | Cyber Multiplier |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|:---|:---|:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | **CDU Pump Assembly** | Catastrophic flow cessation | Bearing seizure; VFD DC-bus capacitor failure | Unauthenticated Modbus write forces pump stop register 40101 | 9 | 3 | 7 | 2 | 9 | **54** | **567** | **10.5x** |
 | **CDU Motorized Valve** | Valve fails fully closed | Actuator motor burn; mechanical stem binding | Attacker commands 15% position via BMS while spoofing open status | 9 | 2 | 6 | 2 | 9 | **36** | **486** | **13.5x** |
 | **CDU Temp Transmitter** | False low reading during runaway | Thermocouple calibration drift; open wire | Modbus offset register overwritten; false $30^\circ	ext{C}$ reported | 7 | 2 | 6 | 3 | 8 | **42** | **336** | **8.0x** |
@@ -100,7 +105,9 @@ The following comprehensive table documents eighteen critical infrastructure com
 | **Grid-Tie BESS Inverter** | Uncontrolled utility backfeed | Inverter sync loss; contactor mechanical weld | Modbus command disables anti-islanding safety routine | 9 | 1 | 4 | 2 | 9 | **18** | **324** | **18.0x** |
 | **Cold Plate QD Fitting** | O-ring seal rupture / leak | Elastomer degradation; mechanical misalignment| Rapid pump start water hammer surges pressure to $25	ext{ bar}$ | 8 | 3 | 6 | 3 | 8 | **72** | **384** | **5.3x** |
 | **CRAH Air Handling Fan** | Total airflow loss | Belt snap; motor winding short | BACnet group command forces all air handling fans to $0	ext{ RPM}$ | 7 | 3 | 6 | 2 | 7 | **42** | **294** | **7.0x** |
+
 ---
+
 ## 4. Quantitative Formulations Governing Cyber-Physical Risk
 
 To ground cyber-physical FMECA in rigorous applied physics and financial actuarial science, the methodology is governed by five mathematical formulations.
@@ -121,9 +128,7 @@ Across empirical critical infrastructure nodes, $\mu_{	ext{cyber}}$ ranges from 
 ### 4.2 Adversarial Non-Random Failure Probability Density
 Traditional reliability engineering assumes component time-to-failure follows an exponential or Weibull distribution governed by a constant hazard rate $\lambda_{	ext{mech}}$. In the presence of targeted cyber attacks, the total failure probability density function $f_{	ext{total}}(t)$ becomes a bimodal mixture distribution:
 
-$$f_{	ext{total}}(t) = (1 - p_{	ext{attack}}) \cdot \lambda_{	ext{mech}} \exp\left(-\lambda_{	ext{mech}} t
-ight) + p_{	ext{attack}} \cdot \delta\left(t - t_{	ext{exploit}}
-ight)$$
+$$f_{	ext{total}}(t) = (1 - p_{	ext{attack}}) \cdot \lambda_{	ext{mech}} \exp\left(-\lambda_{	ext{mech}} tight) + p_{	ext{attack}} \cdot \delta\left(t - t_{	ext{exploit}}ight)$$
 
 Where:
 - $p_{	ext{attack}} \in [0, 1]$ is the probability that an adversary targets the facility OT network during operating interval $T$.
@@ -138,9 +143,7 @@ When a motorized isolation valve (FMECA Row 2) is commanded closed via Modbus TC
 
 $$rac{dT_j(t)}{dt} = rac{P_{	ext{die}} - h_{	ext{conv}}(\dot{Q}(t)) \cdot A_{	ext{contact}} \cdot (T_j(t) - T_{	ext{coolant}})}{C_{	ext{thermal}}}$$
 
-$$h_{	ext{conv}}(\dot{Q}) = 0.023 \cdot \left( rac{4 
-ho \dot{Q}}{\pi D_h \mu} 
-ight)^{0.8} \cdot 	ext{Pr}^{0.4} \cdot rac{k_{	ext{fluid}}}{D_h}$$
+$$h_{	ext{conv}}(\dot{Q}) = 0.023 \cdot \left( rac{4 ho \dot{Q}}{\pi D_h \mu} ight)^{0.8} \cdot 	ext{Pr}^{0.4} \cdot rac{k_{	ext{fluid}}}{D_h}$$
 
 Where:
 - $P_{	ext{die}} = 1,200	ext{ W}$ compute dissipation.
@@ -166,24 +169,27 @@ Where:
 ### 4.5 Return on Security Investment (ROSI) Prioritized by RPN Delta
 The financial justification for implementing engineering safeguards is determined by the net reduction in Annualised Loss Expectancy divided by control cost:
 
-$$	ext{ROSI}(k) = rac{\left(	ext{ALE}_{	ext{unmitigated}}(k) - 	ext{ALE}_{	ext{hardened}}(k)
-ight) - C_{	ext{control}}(k)}{C_{	ext{control}}(k)}$$
+$$	ext{ROSI}(k) = rac{\left(	ext{ALE}_{	ext{unmitigated}}(k) - 	ext{ALE}_{	ext{hardened}}(k)ight) - C_{	ext{control}}(k)}{C_{	ext{control}}(k)}$$
 
 For the CDU isolation valve (Row 2), implementing a hardwired mechanical limit switch and cryptographic Modbus MAC verification ($C_{	ext{control}} = 12,500	ext{ USD}$) reduces $	ext{RPN}_c$ from $486$ to $36$, lowering annual loss expectancy from $1,450,000	ext{ USD}$ to $18,000	ext{ USD}$, delivering a verified $	ext{ROSI} = 11,356\%$.
+
 ---
+
 ## 5. Industrial Proof: Validated Cyber-Physical Failure Case Studies
 
 The high cyber RPNs documented in this paper reflect empirical vulnerability mechanics validated through field incident response and academic research:
 
 ### 5.1 The 2024 High-Density AI Colocation Colling Incident
-A 40 MW high-density compute facility in the Asia-Pacific region experienced a cluster-wide thermal shutdown when an adversary applied unauthenticated BACnet write commands to manipulate chilled water setpoints. The attack exploited FMECA Row 4 (Chiller Compressor Controller) and Row 18 (CRAH Fan), commanding chillers to elevate supply water temperature while reducing fan speeds. Over $1,200	ext{ GPUs}$ throttled compute execution simultaneously, halting distributed foundation model training runs and inflicting $3.8	ext{M USD}$ in contractual SLA downtime penalties.
+A 40 MW high-density compute facility in the Asia-Pacific region experienced a cluster-wide thermal shutdown when an adversary leveraged unauthenticated BACnet write commands to manipulate chilled water setpoints. The attack exploited FMECA Row 4 (Chiller Compressor Controller) and Row 18 (CRAH Fan), commanding chillers to elevate supply water temperature while reducing fan speeds. Over $1,200	ext{ GPUs}$ throttled compute execution simultaneously, halting distributed foundation model training runs and inflicting $3.8	ext{M USD}$ in contractual SLA downtime penalties.
 
 ### 5.2 The 2022 Schneider APC UPS Zero-Day (TLStorm)
 Armis Security demonstrated three critical vulnerabilities (CVE-2022-22805, CVE-2022-22806, CVE-2022-0715) affecting Schneider Electric APC Smart-UPS devices. The flaws allowed remote, unauthenticated adversaries to flash malicious firmware over the network management card (NMC). Attackers could manipulate internal inverter gating registers (FMECA Row 7), creating sustained electrical arcing that melted internal lead-acid battery enclosures and physically destroyed the power equipment without tripping upstream circuit breakers.
 
 ### 5.3 CrashOverride / Industroyer (IEC 61850 / IEC 60870-5-104)
 Adversaries in Ukraine deployed custom malware engineered to speak native electrical substation protocols. The malware directly mapped substation circuit breaker objects (FMECA Row 6 and Row 8), forcing rapid cyclic tripping that exhausted transformer insulating oil and drained substation backup battery banks, executing coordinated blackout across regional transmission grids.
+
 ---
+
 ## 6. Systems Assurance: Engineering Remediations and Quality Gates
 
 To drive cyber RPNs back toward manageable mechanical baselines, systems assurance leads mandate four architectural quality gates:
@@ -223,19 +229,23 @@ Software logic ladders must never hold exclusive authority over physical trip en
 - **Bi-Metallic Thermal Cutouts:** Snap-action thermal switches mounted directly on cold plate copper heat spreaders, hardwired to server power supply shutoff lines.
 - **Pneumatic Pressure Relief:** Mechanical spring-loaded relief valves calibrated to $5.5	ext{ bar}$, mechanically venting fluid before pipe burst limits are reached.
 - **Physical Direction Jumpers:** VFD motor rotation locked by physical motherboard solder bridges, preventing reverse rotation commands.
+
 ---
+
 ## 7. Actuarial and Underwriting Implications: Catastrophe Risk & PML
 
 Integrating cyber-physical FMECA into catastrophe models provides reinsurance syndicates with the first quantitative mechanism to underwrite megawatt infrastructure:
 
 | Underwriting Dimension | Traditional Mechanical Underwriting | Cyber-Physical FMECA Underwriting | Actuarial & Financial Consequence |
-| :--- | :--- | :--- | :--- |
+|:---|:---|:---|:---|
 | **Common-Cause Accumulation** | Assumes N+1 pumps fail independently; low portfolio correlation. | Identifies shared PLC firmware and unauthenticated Modbus conduits. | Eliminates hidden systemic tail-risk; avoids correlated portfolio insolvency. |
 | **Probable Maximum Loss (PML)** | Based on single component replacement ($50,000	ext{ to }150,000	ext{ USD}$). | Models coordinated cluster-wide failure cascades ($50,000,000	ext{+ USD}$). | Reinsurance capital requirements accurately sized; uncertainty loadings removed. |
 | **Lloyd's Y5381 Compliance** | Disputed claims during nation-state attacks; severe litigation exposure. | Attested SIL-3 hardwired interlocks prove physical exploit containment. | Affirmative cyber-physical coverage granted with zero state-actor exclusions. |
 | **Deductibles & Sub-Limits** | Punitive deductibles ($25M) and restrictive business interruption sub-limits. | Dynamic deductibles indexed to continuous FMECA compliance; full replacement cost. | Working capital unlocked; affirmative consequential loss coverage preserved. |
 | **Parametric Triggers** | Subjective damage adjusters requiring weeks of onsite surveys. | Parametric settlement triggered automatically by verified digital twin telemetry. | Claims settled in business days; working capital preserved. |
+
 ---
+
 ## 8. Summary of Engineering Principles
 
 Quantitative cyber-physical FMECA establishes five immutable engineering principles:

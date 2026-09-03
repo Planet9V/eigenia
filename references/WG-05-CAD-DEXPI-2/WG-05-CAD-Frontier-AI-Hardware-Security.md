@@ -110,7 +110,7 @@ This multi-point cryptographic enclosure ensures that even if an adversary achie
 |  +-----------------------------------------------------------------------+  |
 |  | ACCELERATOR SILICON COMPLEX (TRUSTED ZONE)                            |  |
 |  |                                                                       |  |
-|  |   +---------------------+                   +---------------------+   |  |
+|  |   +---------------------+-------------------+---------------------+   |  |
 |  |   |    Accelerator A    | <===============> |    Accelerator B    |   |  |
 |  |   | [Caliptra RoT/HBM3] |  [Point 1: Coherent| [Caliptra RoT/HBM3] |   |  |
 |  |   +---------------------+   Scale-Up Fabric] +---------------------+   |  |
@@ -130,25 +130,25 @@ The Facility Threat Model treats the physical plant as an untrusted domain that 
 |                      FACILITY THREAT INTERFACE MATRIX                       |
 |                                                                             |
 |      Facility Pressure Vector             AI Rack Envelope Target Boundary   |
-|   +-----------------------------+        +-------------------------------+  |
+|   +-----------------------------+--------+-------------------------------+  |
 |   | Thermodynamic Pressure      | -----> | Liquid Cold Plates, Dielectric|  |
 |   | (CDU pump drop, heat shock) |        | Cavitation, Thermal Throttling|  |
-|   +-----------------------------+        +-------------------------------+  |
+|   +-----------------------------+--------+-------------------------------+  |
 |                                                                             |
-|   +-----------------------------+        +-------------------------------+  |
+|   +-----------------------------+--------+-------------------------------+  |
 |   | Electrical Transient Vector | -----> | 48V Busbars, Point-of-Load    |  |
 |   | (di/dt steps, grid droop)   |        | VRMs, Hardware Clocking       |  |
-|   +-----------------------------+        +-------------------------------+  |
+|   +-----------------------------+--------+-------------------------------+  |
 |                                                                             |
-|   +-----------------------------+        +-------------------------------+  |
+|   +-----------------------------+--------+-------------------------------+  |
 |   | Out-of-Band Sideband Vector | -----> | BMC Firmware, I2C/I3C Buses,  |  |
 |   | (IPMI, Redfish, JTAG tap)   |        | SPI Boot Flash, OpenBIC       |  |
-|   +-----------------------------+        +-------------------------------+  |
+|   +-----------------------------+--------+-------------------------------+  |
 |                                                                             |
-|   +-----------------------------+        +-------------------------------+  |
+|   +-----------------------------+--------+-------------------------------+  |
 |   | Interconnect Egress Vector  | -----> | RDMA Fabric Transceivers,     |  |
 |   | (Covert sideband streaming) |        | Telemetry Streaming Channels  |  |
-|   +-----------------------------+        +-------------------------------+  |
+|   +-----------------------------+--------+-------------------------------+  |
 +-----------------------------------------------------------------------------+
 ```
 
@@ -285,21 +285,21 @@ To ensure that silicon components within the AI Rack Envelope execute exclusivel
 |                                                                             |
 |  +-----------------------------------------------------------------------+  |
 |  | HARDWARE IMMUTABLE CORE (Silicon Die)                                 |  |
-|  |  +------------------------+  +--------------------+  +--------------+  |  |
+|  |  +------------------------+--+--------------------+--+--------------+  |  |
 |  |  | Mask ROM (128 KB)      |  | Cryptographic Accel|  | Key Vault    |  |  |
 |  |  | Immutable First-Stage  |  | SHA384 / ECC384 /  |  | Unique Die ID|  |  |
 |  |  | Bootloader (ROM Code)  |  | ML-DSA-87 / LMS    |  | (UDS / CDI)  |  |  |
-|  |  +------------------------+  +--------------------+  +--------------+  |  |
+|  |  +------------------------+--+--------------------+--+--------------+  |  |
 |  +-----------------------------------------------------------------------+  |
 |                                      |                                      |
 |                       DICE MEASURED BOOT TRANSITION                         |
 |                                      v                                      |
 |  +-----------------------------------------------------------------------+  |
 |  | MUTABLE ACTIVE PLATFORM FIRMWARE                                      |  |
-|  |  +------------------------+  +--------------------+  +--------------+  |  |
+|  |  +------------------------+--+--------------------+--+--------------+  |  |
 |  |  | Firmware Engine (FMC)  |  | Runtime Engine(RT) |  | SPDM 1.3 Core|  |  |
 |  |  | Validates OS / Drivers |  | Monitors Bus State |  | Attestation   |  |  |
-|  |  +------------------------+  +--------------------+  +--------------+  |  |
+|  |  +------------------------+--+--------------------+--+--------------+  |  |
 |  +-----------------------------------------------------------------------+  |
 +-----------------------------------------------------------------------------+
 ```
@@ -434,9 +434,7 @@ Where:
 
 The convective heat transfer rate $\dot{Q}_{rem}(t)$ is defined by:
 
-$$\dot{Q}_{rem}(t) = \dot{m}(t) c_p \left(T_{out}(t) - T_{in}(t)
-ight) = U A_{eff} \left(T_j(t) - T_{fluid}(t)
-ight)$$
+$$\dot{Q}_{rem}(t) = \dot{m}(t) c_p \left(T_{out}(t) - T_{in}(t)ight) = U A_{eff} \left(T_j(t) - T_{fluid}(t)ight)$$
 
 Where $\dot{m}(t)$ represents the mass flow rate of the coolant ($	ext{kg/s}$), $c_p$ is the specific heat capacity of the fluid ($	ext{J/(kg}\cdot	ext{K)}$), $U$ is the overall heat transfer coefficient, and $A_{eff}$ is the microchannel contact surface area. In high-density racks, coolant is delivered via Propylene Glycol 25% (PG25) dielectric mixtures at volumetric flow rates between 40 L/min and 80 L/min per rack under a nominal operating pressure of 3.0 bar to 4.0 bar across the manifold distribution blocks.
 
@@ -446,9 +444,7 @@ $$\dot{m}(t) = \dot{m}_0 e^{-rac{t}{	au_{valve}}}$$
 
 Substituting into the heat balance equation yields the differential equation for junction temperature rate of change:
 
-$$rac{dT_j(t)}{dt} = rac{1}{C_{th}} \left( P_{diss}(t) - U(t) A_{eff} \left(T_j(t) - T_{fluid}(t)
-ight) 
-ight)$$
+$$rac{dT_j(t)}{dt} = rac{1}{C_{th}} \left( P_{diss}(t) - U(t) A_{eff} \left(T_j(t) - T_{fluid}(t)ight) ight)$$
 
 As $U(t) 	o 0$, the system enters adiabatic runaway:
 
@@ -468,8 +464,7 @@ This proves mathematically that software-based, human-speed alerting is entirely
 
 The power distribution network (PDN) feeding the accelerator tray is modeled as an equivalent RLC circuit:
 
-$$\Delta V(t) = - \left( R_{eff} \cdot i(t) + L_{eff} rac{di(t)}{dt} + rac{1}{C_{eff}} \int_0^t i(	au) \, d	au 
-ight)$$
+$$\Delta V(t) = - \left( R_{eff} \cdot i(t) + L_{eff} rac{di(t)}{dt} + rac{1}{C_{eff}} \int_0^t i(	au) \, d	au ight)$$
 
 Under an adversarial step-frequency attack, an attacker modulates computational activity at frequency $\omega = 2\pi f$:
 

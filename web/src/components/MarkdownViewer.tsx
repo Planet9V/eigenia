@@ -38,23 +38,50 @@ const sanitizeMarkdownContent = (raw: string, suppressLeadingTitle?: boolean): s
     while (startIdx < lines.length && !lines[startIdx].trim()) {
       startIdx++;
     }
-    // If first non-empty line is an H1, suppress it to prevent visual duplication
+    // Suppress leading H1 title if present
     if (startIdx < lines.length && lines[startIdx].trim().startsWith("# ")) {
       startIdx++;
-      while (startIdx < lines.length && !lines[startIdx].trim()) {
-        startIdx++;
-      }
-      // Also suppress horizontal rules or loose metadata immediately under title
-      while (
-        startIdx < lines.length &&
-        (lines[startIdx].trim() === "---" ||
-         lines[startIdx].trim() === "***" ||
-         lines[startIdx].trim().startsWith("Lab Sponsor") ||
-         lines[startIdx].trim().startsWith("Working Group:") ||
-         !lines[startIdx].trim())
-      ) {
-        startIdx++;
-      }
+    }
+    while (startIdx < lines.length && !lines[startIdx].trim()) {
+      startIdx++;
+    }
+    // Suppress immediately following H2 subtitle if present (duplicated by Hero Card)
+    if (startIdx < lines.length && lines[startIdx].trim().startsWith("## ") && !lines[startIdx].trim().match(/^##\s+(\d+|Abstract|Executive)/i)) {
+      startIdx++;
+    }
+    // Suppress loose front-matter lines (Lab Sponsor, Working Group, horizontal rules)
+    while (
+      startIdx < lines.length &&
+      (lines[startIdx].trim() === "---" ||
+       lines[startIdx].trim() === "***" ||
+       lines[startIdx].trim().toLowerCase().startsWith("lab sponsor") ||
+       lines[startIdx].trim().toLowerCase().startsWith("working group:") ||
+       !lines[startIdx].trim())
+    ) {
+      startIdx++;
+    }
+
+    // Check if what follows is a legacy raw bold metadata block (**Document Identifier:** ...)
+    // If so, parse it into an academic specification table
+    const remainingLines = lines.slice(startIdx);
+    const metaBlockMatch = remainingLines.slice(0, 10).join("\n").match(/\*\*Document Identifier:\*\*\s*(.+?)(?:\r?\n|\s+)\*\*Classification:\*\*\s*(.+?)(?:\r?\n|\s+)\*\*Standard Equivalents:\*\*\s*(.+?)(?:\r?\n|\s+)\*\*Author:\*\*\s*(.+?)(?:\r?\n|\s+)\*\*Affiliation:\*\*\s*(.+?)(?:\r?\n|$)/i);
+    if (metaBlockMatch) {
+      const [fullMatch, docId, classification, standards, author, affiliation] = metaBlockMatch;
+      const wgMatch = docId.match(/WG-?(\d+-[A-Z]+)/i) || docId.match(/WG(\d+)-([A-Z]+)/i);
+      const wg = wgMatch ? `WG-${wgMatch[1]}` : "WG-05-CAD";
+      const tableHeader = [
+        `| Document ID | Working Group | Normative Equivalents | Classification |`,
+        `| :--- | :--- | :--- | :--- |`,
+        `| ${docId.trim()} | ${wg} | ${standards.trim()} | ${classification.trim()} |`,
+        ``,
+        `**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  `,
+        `**Lead Systems Assurance Architect:** ${author.trim()}  `,
+        `**Affiliation:** ${affiliation.trim()}  `,
+        ``
+      ].join("\n");
+      const textAfterMeta = remainingLines.join("\n").replace(fullMatch, "").replace(/^\s*---\s*\r?\n/m, "");
+      c = tableHeader + textAfterMeta.trim();
+    } else {
       c = lines.slice(startIdx).join("\n");
     }
   }

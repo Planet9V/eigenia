@@ -1,8 +1,5 @@
 
 # Mckenney-Lacanian Psychohistory Framework
-
-Lab Sponsor Resident  j.mckenney
-
 A systematic application of Lacanian psychoanalytic theory to the behavioral classification and predictive modeling of threat actors within the Cyber Digital Twin.
 
 ## Theoretical Foundation

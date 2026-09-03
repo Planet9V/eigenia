@@ -7,16 +7,13 @@ actuarial accumulation equations, and full PAAI index coverage.
 
 dest_path = 'references/WG-05-CAD-DEXPI-2/WG-05-CAD-Supply-Chain-EU-CRA.md'
 
-content = """# Supply Chain Transparency & EU CRA Regulatory Enforcement
-## Implementing Machine-to-Machine Bills of Materials, 6-Site HSM Provenance, and ALARP Risk Justification under Regulation (EU) 2024/2847
+content = """| Document ID | Working Group | Normative Equivalents | Classification |
+| :--- | :--- | :--- | :--- |
+| EIGENIA-WG05-CAD-03 | WG-05-CAD | EU Cyber Resilience Act (Reg 2024/2847) / IEC 62443-4-1 / IEC 62443-4-2 / ISO/IEC 5962 / NIST SP 800-161 | Open Regulatory & Systems Assurance Technical Specification |
 
-**Document Identifier:** EIGENIA-WG05-CAD-03  
-**Classification:** Open Regulatory & Systems Assurance Technical Specification  
-**Standard Equivalents:** EU Cyber Resilience Act (Reg 2024/2847) / IEC 62443-4-1 / IEC 62443-4-2 / ISO/IEC 5962 / NIST SP 800-161  
-**Author:** J. McKenney (Systems Assurance Lead)  
+**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
+**Lead Systems Assurance Architect:** J. McKenney (Systems Assurance Lead)  
 **Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
-
----
 
 ## Abstract
 
@@ -88,12 +85,12 @@ The supply chain operates across four distinct tiers:
 - **Tier 3 (System Integrator and Data Center Facility):** Rack integration, fluid connection, 400V power hookup, and commissioning onto the operational technology network.
 
 ```
-+---------------+     +---------------+     +---------------+     +---------------+
++---------------+-----+---------------+-----+---------------+-----+---------------+
 | TIER 0:       | --> | TIER 1:       | --> | TIER 2:       | --> | TIER 3:       |
 | Silicon Found |     | Silicon Mfr   |     | ODM Assembly  |     | Facility Site |
 | - Wafer Fab   |     | - Key Inject  |     | - Board SMT   |     | - Rack Deploy |
 | - Package Sub |     | - RoT Mask    |     | - BMC Flashing|     | - Fluid Hookup|
-+---------------+     +---------------+     +---------------+     +---------------+
++---------------+-----+---------------+-----+---------------+-----+---------------+
 ```
 
 ### 2.2 Physical Failure Coupling Induced by Supply Chain Tampering
@@ -250,12 +247,12 @@ Article 14 of the Cyber Resilience Act mandates that manufacturers report active
 Under the unified framework, vulnerability tracking transitions to an automated machine-to-machine loop:
 
 ```
-+---------------------+      +---------------------+
++---------------------+------+---------------------+
 | Upstream Threat /   |      | In-House Automated  |
 | NVD / CVE Stream    |      | Falsification Engine|
-+---------------------+      +---------------------+
++---------------------+------+---------------------+
            |                            |
-           +------------+  +------------+
+           +------------+--+------------+
                         |  |
                         v  v
         +-----------------------------------+
@@ -276,11 +273,11 @@ Under the unified framework, vulnerability tracking transitions to an automated 
             +-----------+-----------+
             |                       |
             v                       v
-+-----------------------+ +-----------------------+
++-----------------------+-+-----------------------+
 | Operational DT Loader | | ENISA / CSIRT Portal  |
 | - Adjusts SL-T Bounds | | - Automated CRA 24-hr |
 | - Deploys Mitigation  | |   Notification Stream |
-+-----------------------+ +-----------------------+
++-----------------------+-+-----------------------+
 ```
 
 ### 5.2 Concrete VEX Machine-Readable Implementation
@@ -380,7 +377,7 @@ Implementing supply chain transparency under EU Regulation 2024/2847 establishes
 """
 
 # Clean any accidental em-dashes
-content = content.replace('—', '; ').replace('--', '; ')
+content = content.replace('—', '; ')
 
 with open(dest_path, 'w', encoding='utf-8') as f:
     f.write(content)

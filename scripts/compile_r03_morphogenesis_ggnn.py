@@ -16,6 +16,7 @@ with open(source_path, 'r', encoding='utf-8') as f:
 
 # Clean up broken escape artifacts
 cleaned = raw
+cleaned = re.sub(r"([a-zA-Z]{3,})\*{0,2}\.(\d{1,3})\b", r"\1 [\2]", cleaned)
 cleaned = cleaned.replace(r'\=', '=')
 cleaned = cleaned.replace(r'\_', '_')
 cleaned = cleaned.replace(r'\$', '$')
@@ -31,7 +32,7 @@ cleaned = cleaned.replace(r'\?', '?')
 
 # Replace em dashes and double hyphens
 cleaned = cleaned.replace('—', '; ')
-cleaned = cleaned.replace('--', '; ')
+cleaned = cleaned
 
 # Replace prohibited AI filler words
 # 'furthermore'
@@ -80,17 +81,13 @@ cleaned = cleaned.replace(r'\\mathcal{R}', r'\mathcal{R}')
 cleaned = cleaned.replace(r'\\mathcal{N}', r'\mathcal{N}')
 
 # Format header block with authoritative Jim McKenney systems assurance framing
-header = """# The Morphogenesis of the Signifying Chain: Computational Simulation of the Lacanian Subject via Gated Graph Neural Networks
-## L-gGNN Architecture, Cybernetic Big Five Theory, and Multi-Relational Psychodynamic Graph Convolutions
+header = """| Document ID | Working Group | Normative Equivalents | Classification |
+| :--- | :--- | :--- | :--- |
+| EIGENIA-WG03-ML-05 | WG-03-ML | IEC 62443-3-2 / ISO 15926 / DEXPI 2.0 / CycloneDX 1.6 / EU CRA / EN 50126 | Open Theoretical & Behavioral Modeling Specification |
 
-**Document Identifier:** EIGENIA-WG03-ML-05  
-**Classification:** Open Theoretical & Behavioral Modeling Specification  
-**Working Group:** WG-03-ML (Psychometrics & Behavioral Modeling)  
-**Standard Equivalents:** IEC 62443-3-2 / ISO 15926 / DEXPI 2.0 / CycloneDX 1.6 / EU CRA / EN 50126  
-**Author:** J. McKenney (Systems Assurance Lead)  
+**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
+**Lead Systems Assurance Architect:** J. McKenney (Systems Assurance Lead)  
 **Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
-
----
 
 ## Executive Abstract
 
@@ -112,6 +109,7 @@ body = re.sub(r'^##\s+\*\*1\\?\.\s+Introduction:.*?\n', '## 1. Introduction: Fro
 body = re.sub(r'##\s+\*\*\d\\?\.\s+', '## ', body)
 body = re.sub(r'###\s+\*\*\d\.\d\s*', '### ', body)
 body = re.sub(r'\*\*', '', body)  # clean remaining raw bold stars in headers
+body = re.sub(r"([a-zA-Z]{3,})\.(\d{1,3})\b", r"\1 [\2]", body)
 
 # Systems Assurance and Actuarial Section to guarantee full PAAI compliance
 grounding_section = """
@@ -161,7 +159,7 @@ Adherence to SFAIRP (So Far As Is Reasonably Practicable) standards underpins un
 final_content = header + body + grounding_section
 
 # Final verification: eliminate any lingering em-dashes
-final_content = final_content.replace('—', '; ').replace('--', '; ')
+final_content = final_content.replace('—', '; ').replace('–', ' - ')
 
 # Ensure directory exists
 os.makedirs(os.path.dirname(dest_path), exist_ok=True)

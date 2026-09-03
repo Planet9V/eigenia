@@ -1,12 +1,11 @@
-# IEC 62443 in Practice: SFAIR, SecRACS, and Security Level Targets
-## Operationalizing So Far As Is Reasonably Practicable (SFAIRP) and Security-Related Application Conditions (SecRAC) in Industrial Datacenters
+| Document ID | Working Group | Normative Equivalents | Classification |
+| :--- | :--- | :--- | :--- |
+| EIGENIA-WG05-CAD-05 | WG-05-CAD | IEC 62443-3-2 / IEC 62443-3-3 / IEC 62443-4-2 / IEC 61508 / ISA TR 84.00.09 / DEXPI 2.0 / CycloneDX 1.6 / EU CRA / EN 50126 | Open Architecture & Industrial Assurance Specification |
 
-**Document Identifier:** EIGENIA-WG05-CAD-05  
-**Classification:** Open Architecture & Industrial Assurance Specification  
-**Standard Equivalents:** IEC 62443-3-2 / IEC 62443-3-3 / IEC 62443-4-2 / IEC 61508 / ISA TR 84.00.09 / DEXPI 2.0 / CycloneDX 1.6 / EU CRA / EN 50126  
-**Author:** J. McKenney (Systems Assurance Lead)  
+**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
+**Lead Systems Assurance Architect:** J. McKenney (Systems Assurance Lead)  
 **Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
----
+
 ## Abstract
 
 The international standard IEC 62443 establishes the foundational requirements for securing Industrial Automation and Control Systems (IACS). It defines security levels (SL 1 to SL 4), zone and conduit segmentations, and foundational technical requirements. However, the published standard suffers from a critical delivery void: it dictates *what* technical deliverables must exist, but provides zero guidance on *how* to execute an engineering programme across the twenty-year facility lifecycle. In mission-critical environments, organisations routinely produce zone diagrams, declare compliance, and discover that security requirements never translated into procurement contracts or field commissioning tests.
@@ -18,7 +17,9 @@ This paper operationalizes IEC 62443 for high-density compute facilities by intr
 3. **SIL-to-SL Convergence:** A mathematical formulation; adapted from ISA TR 84.00.09 and CENELEC TS 50701; that formally couples Safety Integrity Levels (IEC 61508) to Cybersecurity Security Levels (IEC 62443), ensuring that safety-critical assets receive proportionate cyber hardening.
 
 In addition, this paper establishes the legal and actuarial mechanics of "So Far As Is Reasonably Practicable" (SFAIRP) and As Low As Reasonably Practicable (ALARP). We formulate the quantitative disproportionate cost test under EU Cyber Resilience Act (Reg 2024/2847) enforcement, integrate DEXPI 2.0 plant graphs with CycloneDX 1.6+ multi-BOM manifests, and establish underwriting criteria for affirmative cyber-physical reinsurance treaties under Lloyd's Y5381.
+
 ---
+
 ## 1. The Execution Gap in Industrial Cybersecurity
 
 In industrial infrastructure, a profound disconnect separates theoretical standards compliance from physical plant security:
@@ -32,7 +33,7 @@ In industrial infrastructure, a profound disconnect separates theoretical standa
 |                  THE IEC 62443 DELIVERY PARADOX                         |
 +-------------------------------------------------------------------------+
 | THE STANDARD AS PUBLISHED:                                              |
-| IEC 62443-3-2 (Risk Assessment) --> IEC 62443-3-3 (System Specs)       |
+| IEC 62443-3-2 (Risk Assessment) ---> IEC 62443-3-3 (System Specs)       |
 | (Defines Deliverables, but No Project Management Delivery Framework)    |
 +-------------------------------------------------------------------------+
                                     |
@@ -41,16 +42,18 @@ In industrial infrastructure, a profound disconnect separates theoretical standa
                                     v
 +-------------------------------------------------------------------------+
 | THE SFAIR OPERATIONALIZED FRAMEWORK:                                    |
-| Stage S (Scope) --> Stage F (Find) --> Stage A (Assess)               |
+| Stage S (Scope) ---> Stage F (Find) ---> Stage A (Assess)               |
 |      |                    |                   |                         |
 |    ZCR-1                ZCR-2/3             ZCR-4                       |
 |      v                    v                   v                         |
-| Stage I (Implement) --> Stage R (Review) --> Continuous Re-Audit      |
+| Stage I (Implement) ---> Stage R (Review) ---> Continuous Re-Audit      |
 |      |                    |                                             |
 |    ZCR-5/6              ZCR-7 (Third-Party Director Acceptance Gate)    |
 +-------------------------------------------------------------------------+
 ```
+
 ---
+
 ## 2. Multi-BOM and DEXPI Process Topology Integration
 
 To enforce IEC 62443 requirements systematically, the cyber-physical architecture couples the DEXPI 2.0 (ISO 15926) plant schematic with the CycloneDX 1.6+ multi-BOM specification:
@@ -88,7 +91,9 @@ To enforce IEC 62443 requirements systematically, the cyber-physical architectur
 ```
 
 By binding DEXPI physical tags to CycloneDX multi-BOM manifests, the digital twin automatically verifies whether a delivered physical component satisfies the specific IEC 62443-4-2 component security requirements (CRs) demanded by its zone conduit assignment.
+
 ---
+
 ## 3. The Seven Stages of SFAIR Implementation
 
 The SFAIR methodology structures IEC 62443 delivery into seven stage-gated phases, each concluding with a formal Zone Completion Review (ZCR):
@@ -100,7 +105,7 @@ The SFAIR methodology structures IEC 62443 delivery into seven stage-gated phase
 ```
 
 | Stage | Name | Key Engineering Activities | Primary Deliverables | Stage Gate |
-| :--- | :--- | :--- | :--- | :--- |
+|:---|:---|:---|:---|:---:|
 | **Stage 1** | **Scope (S)** | Establish facility boundary; inventory physical assets from DEXPI P&IDs; identify safety-critical nodes. | System Architecture Definition; Criticality Register | **ZCR-1** |
 | **Stage 2** | **Find (F1)** | Network topology discovery; passive OT network capture; protocol inventory (Modbus, BACnet, DNP3). | Asset Inventory Matrix; Communication Flow Graph | **ZCR-2** |
 | **Stage 3** | **Find (F2)** | Zone and conduit partitioning; identify trust boundaries; classify external connectivity vectors. | IEC 62443-3-2 Zone & Conduit Diagram | **ZCR-3** |
@@ -108,7 +113,9 @@ The SFAIR methodology structures IEC 62443 delivery into seven stage-gated phase
 | **Stage 5** | **Implement (I1)** | Author SecRACS contracts; mandate CycloneDX multi-BOM in RFPs; vendor design reviews. | SecRACS Specification; Procurement Contract Addenda| **ZCR-5** |
 | **Stage 6** | **Implement (I2)** | Factory Acceptance Testing (FAT); Site Acceptance Testing (SAT); verify optical data diodes. | FAT/SAT Test Reports; SL-A Verification Matrix | **ZCR-6** |
 | **Stage 7** | **Review (R)** | Third-Party Programme Director audit; annual penetration testing; continuous VEX monitoring. | Certificate of Compliance; Reinsurance Warranty | **ZCR-7** |
+
 ---
+
 ## 4. SecRACS: The Contractual Negotiation Instrument
 
 Security Level Targets (SL-T) assigned during risk assessments are useless if system integrators and equipment vendors do not build them into physical equipment. SecRACS (Security Requirements Allocation and Compliance Specification) converts IEC 62443 requirements into binding legal contract addenda:
@@ -145,7 +152,9 @@ Derived from functional safety practice (EN 50126 / IEC 61508), Security-Related
 - **SecRAC-01:** The CDU controller network interface must be connected exclusively to a dedicated, port-isolated switch port within Zone 1.
 - **SecRAC-02:** Remote engineering access is permanently prohibited across wireless or cellular interfaces; access requires physical key-switch activation at the local panel.
 - **SecRAC-03:** All setpoint recommendations from enterprise optimization algorithms must pass through a hardwired, rate-of-change clamping ladder logic PLC before reaching actuators.
+
 ---
+
 ## 5. SIL-to-SL Convergence: Mathematical Rigor
 
 In critical infrastructure, functional safety engineers speak in Safety Integrity Levels (SIL 1 to SIL 4 per IEC 61508), while cybersecurity leads speak in Security Levels (SL 1 to SL 4 per IEC 62443). The two disciplines must converge on a unified mathematical formulation.
@@ -153,11 +162,7 @@ In critical infrastructure, functional safety engineers speak in Safety Integrit
 ### 5.1 The Mathematical Convergence Formulation
 Under ISA TR 84.00.09 and CENELEC TS 50701, a safety-critical component cannot maintain its functional safety rating if its cyber attack surface is undefended. The required Security Level Target $	ext{SL-T}(k)$ for component $k$ is formulated as a function of its Safety Integrity Level $	ext{SIL}(k)$ and its cyber Risk Priority Number $	ext{RPN}_c(k)$:
 
-$$	ext{SL-T}(k) = \min\left(4, \; \max\left(1, \; 	ext{SIL}(k) + \left\lfloor rac{	ext{RPN}_c(k) - 100}{150} 
-ight
-floor 
-ight)
-ight)$$
+$$	ext{SL-T}(k) = \min\left(4, \; \max\left(1, \; 	ext{SIL}(k) + \left\lfloor rac{	ext{RPN}_c(k) - 100}{150} ightfloor ight)ight)$$
 
 Where:
 - $	ext{SIL}(k) \in \{0, 1, 2, 3, 4\}$ is the baseline functional safety integrity level.
@@ -167,22 +172,14 @@ For the Coolant Distribution Unit (CDU) secondary pump assembly:
 - $	ext{SIL} = 2$ (loss of cooling produces catastrophic silicon destruction).
 - $	ext{RPN}_c = 567$ (Severity 9, Occurrence 7, Detection 9).
 
-$$	ext{SL-T}_{	ext{CDU}} = \min\left(4, \; \max\left(1, \; 2 + \left\lfloor rac{567 - 100}{150} 
-ight
-floor 
-ight)
-ight) = \min\left(4, \; 2 + \lfloor 3.11 
-floor
-ight) = \min(4, \; 5) = \mathbf{4}$$
+$$	ext{SL-T}_{	ext{CDU}} = \min\left(4, \; \max\left(1, \; 2 + \left\lfloor rac{567 - 100}{150} ightfloor ight)ight) = \min\left(4, \; 2 + \lfloor 3.11 flooright) = \min(4, \; 5) = \mathbf{4}$$
 
 Because the cyber RPN is extreme, the target security level escalates from SL-2 to **SL-4** (protection against sophisticated state-sponsored threat actors with significant resources).
 
 ### 5.2 Probability of Failure on Demand (PFD) under Cyber Attack
 Classical functional safety models component failure as random hardware degradation, calculating Probability of Failure on Demand ($	ext{PFD}_{	ext{avg}}$). In the presence of cyber attacks, the total effective failure probability $	ext{PFD}_{	ext{total}}(t)$ becomes:
 
-$$	ext{PFD}_{	ext{total}}(t) = 1 - \left(1 - 	ext{PFD}_{	ext{mech}}(t)
-ight) \cdot \left(1 - P_{	ext{cyber\_exploit}}(t)
-ight)$$
+$$	ext{PFD}_{	ext{total}}(t) = 1 - \left(1 - 	ext{PFD}_{	ext{mech}}(t)ight) \cdot \left(1 - P_{	ext{cyber\_exploit}}(t)ight)$$
 
 Where:
 - $	ext{PFD}_{	ext{mech}} \le 10^{-3}$ for SIL-3 safety loops.
@@ -218,7 +215,9 @@ The programme-level financial return on implementing the SFAIR methodology acros
 $$	ext{ROSI} = rac{(	ext{ALE}_{	ext{unmitigated}} - 	ext{ALE}_{	ext{SFAIR}}) - C_{	ext{programme}}}{C_{	ext{programme}}} 	imes 100\%$$
 
 Where a comprehensive SFAIR implementation ($C_{	ext{programme}} = 1,600,000	ext{ USD}$) reduces annualized loss expectancy from $17,403,000	ext{ USD}$ to $1,850,000	ext{ USD}$, delivering a verified $	ext{ROSI} = 872\%$.
+
 ---
+
 ## 6. The Master Hazard Register: Consolidated Facility Tracking
 
 The authoritative output of Stage 4 (Assess) is the Consolidated Master Hazard Register, mapping every facility node across CyHAZOP guide words, EMB3D threat properties, and MITRE ATT&CK for ICS techniques:
@@ -230,7 +229,7 @@ The authoritative output of Stage 4 (Assess) is the Consolidated Master Hazard R
 ```
 
 | Hazard ID | Node | Component | Deviation Mode | MITRE ATT&CK | EMB3D Property | SL-T | S | $O_c$ | $D_c$ | $	ext{RPN}_c$ | Table |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|:---|:---|:---|:---|:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|
 | **HAZ-001** | N6 | CDU Pump Assembly | **NO (Stop)** | T0814 (Denial of Service) | Flow Tampering | **SL-4** | 9 | 7 | 9 | **567** | B |
 | **HAZ-002** | N6 | CDU Motorized Valve | **LESS (Throttle)** | T0836 (Modify Parameter) | Valve State Tampering | **SL-4** | 9 | 6 | 9 | **486** | B |
 | **HAZ-003** | N2 | Block UPS Inverter | **NO (Trip)** | T0858 (Change Operating Mode)| Power Gating Override | **SL-3** | 9 | 6 | 8 | **432** | B |
@@ -239,7 +238,9 @@ The authoritative output of Stage 4 (Assess) is the Consolidated Master Hazard R
 | **HAZ-006** | N8 | BMS Supervisory | **CORRUPTED** | T0869 (Manipulate State) | SCADA Ransomware | **SL-2** | 8 | 7 | 6 | **336** | B |
 | **HAZ-007** | N10 | Gas Suppression | **MORE (Discharge)**| T0814 (Denial of Service) | Actuator Force-Trip | **SL-3** | 9 | 5 | 7 | **315** | B |
 | **HAZ-008** | N15 | BESS Battery Pack | **POISONED** | T0836 (Modify Parameter) | Thermal Overcharge | **SL-3** | 10 | 3 | 7 | **210** | B |
+
 ---
+
 ## 7. The Role of the Third-Party Programme Director
 
 The final stage of SFAIR (Review, ZCR-7) mandates an independent, certified Third-Party Programme Director:
@@ -247,19 +248,23 @@ The final stage of SFAIR (Review, ZCR-7) mandates an independent, certified Thir
 - **Organizational Independence:** The Programme Director reports directly to the Board Audit Committee and reinsurers, completely isolated from project schedule and budget pressures.
 - **Physical Verification Authority:** The Director verifies that every SecRAC condition is satisfied in the physical plant, witnesses Factory Acceptance Tests (FAT), and verifies cryptographic firmware hashes against CycloneDX manifests.
 - **Issuance of Certificate of SFAIRP Due Diligence:** The formal certificate issued by the Director provides the legal defense against gross negligence claims under EU CRA Article 64 and satisfies underwriter requirements under Lloyd's Y5381.
+
 ---
+
 ## 8. Actuarial and Reinsurance Treaty Structuring
 
 Operationalizing IEC 62443 through SFAIR and SecRACS transforms the facility's risk profile under international reinsurance treaties:
 
 | Underwriting Parameter | Legacy Ad-Hoc Facility | SFAIR / SecRACS Assured Facility | Actuarial Consequence |
-| :--- | :--- | :--- | :--- |
+|:---|:---|:---|:---|
 | **Property Catastrophe Deductible** | Punitive $25,000,000 deductible; mandatory thermal sub-limits. | $2,500,000 deductible; full affirmative replacement cost coverage. | Working capital released; retention points optimized. |
 | **Business Interruption (BI) Sub-Limits** | Restrictive $15,000,000 sub-limit; 7-day waiting period. | Full affirmative BI coverage up to $75,000,000; 12-hour waiting period. | Protection against multi-month equipment replacement queues. |
 | **Lloyd's Y5381 War Exclusion** | Total claim denial during state-sponsored cyber campaigns. | Affirmative cyber-physical coverage granted; war exclusion waived. | Verified physical air gaps provide forensic proof of containment. |
 | **Portfolio Accumulation Loading** | 40% capital surcharge to protect against correlated cluster-wide blackout. | 0% accumulation surcharge; zones verified as decoupled and independent. | Eliminates systemic capital loadings across multi-campus portfolios. |
 | **Consequential Loss Protection** | Excluded under standard mechanical breakdown policies. | Affirmatively underwritten; full consequential loss indemnification. | Statutory board liability completely hedged. |
+
 ---
+
 ## 9. Summary of Engineering Principles
 
 Operationalizing IEC 62443 in practice establishes five immutable principles:
