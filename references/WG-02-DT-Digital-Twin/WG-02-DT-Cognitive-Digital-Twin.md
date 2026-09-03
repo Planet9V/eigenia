@@ -1,11 +1,3 @@
-| Document ID | Working Group | Normative Equivalents | Classification |
-| :--- | :--- | :--- | :--- |
-| EIGENIA-WG02-DT-10 | WG-02-DT (Digital Twin & Applied Physics) | IEC 62443-3-2 / ISO 15926 / DEXPI 2.0 / CycloneDX 1.6 / EU CRA / EN 50126 | Open Architecture & Digital Twin Specification |
-
-**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
-**Lead Systems Assurance Architect:** J. McKenney (Systems Assurance Lead)  
-**Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
-
 ## Executive Abstract
 
 Digital twin architectures in industrial and data center environments traditionally simulate thermodynamics, fluid hydraulics, power distribution, and network packet flows. However, during acute cyber-physical crises, the ultimate point of failure is almost invariably the human decision-maker. Control room operators and Security Operations Center (SOC) defenders face extreme cognitive saturation, leading to misdiagnoses, alert abandonment, and fatal decision latency.

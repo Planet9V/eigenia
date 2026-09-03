@@ -7,15 +7,7 @@ CycloneDX 1.6 JSON schemas, fluid mechanics derivations, and actuarial tables.
 
 dest_path = 'references/WG-05-CAD-DEXPI-2/WG-05-CAD-Unified-DEXPI-CycloneDX.md'
 
-content = """| Document ID | Working Group | Normative Equivalents | Classification |
-| :--- | :--- | :--- | :--- |
-| EIGENIA-WG05-CAD-02 | WG-05-CAD | DEXPI 2.0 (ISO 15926) / CycloneDX 1.6+ (ISO/IEC 5962 / ECMA-424) / IEC 62443-4-2 / EU CRA (Reg 2024/2847) | Open Architecture Technical Specification |
-
-**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
-**Lead Systems Assurance Architect:** J. McKenney (Systems Assurance Lead)  
-**Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
-
-## Abstract
+content = """## Abstract
 
 Modern high-density compute facilities and critical industrial plants suffer from a severe semantic disconnect between physical plant engineering and platform cybersecurity. Plant operators design facility infrastructure using Piping and Instrumentation Diagrams (P&IDs) under the DEXPI 2.0 (ISO 15926) data exchange standard. This standard captures pump curves, pipe diameters, manifold topologies, fluid chemistry (such as 25% propylene glycol), volumetric flow rates, and delta-T thermal dissipation limits. 
 

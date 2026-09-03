@@ -7,15 +7,7 @@ meeting all PAAI gate criteria and zero-tolerance style prohibitions.
 
 dest_path = 'references/WG-03-ML-Behaviorial_Modeling/WG-03-ML-Autonomous-OT-Trust-Boundary.md'
 
-content = """| Document ID | Working Group | Normative Equivalents | Classification |
-| :--- | :--- | :--- | :--- |
-| EIGENIA-WG03-ML-02 | WG-03-ML | IEC 62443-3-2 / IEC 62443-4-2 / IEC 61508 / DEXPI 2.0 (ISO 15926) / CycloneDX 1.6 / EU CRA / EN 50126 | Open Architecture Technical Specification |
-
-**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
-**Lead Systems Assurance Architect:** J. McKenney (Systems Assurance Lead)  
-**Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
-
-## Abstract
+content = """## Abstract
 
 In 2016, landmark demonstrations revealed that reinforcement learning algorithms could reduce data center cooling energy by up to 40% when granted real-time write access to chiller setpoints and pump speeds. Today, the global hyperscale sector is racing toward autonomous, lights-out facility operations. Machine learning agents are increasingly tasked with dynamic Power Usage Effectiveness (PUE) optimization, real-time demand response, predictive maintenance, and electrical load balancing across megawatt infrastructure.
 

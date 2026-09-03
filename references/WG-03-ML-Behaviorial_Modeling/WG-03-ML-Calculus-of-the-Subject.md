@@ -1,11 +1,3 @@
-| Document ID | Working Group | Normative Equivalents | Classification |
-| :--- | :--- | :--- | :--- |
-| EIGENIA-WG03-ML-03 | WG-03-ML | IEC 62443-3-2 / ISO 15926 / DEXPI 2.0 / CycloneDX 1.6 / EU CRA / EN 50126 | Open Theoretical & Behavioral Modeling Specification |
-
-**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
-**Lead Systems Assurance Architect:** J. McKenney (Systems Assurance Lead)  
-**Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
-
 ## Executive Abstract
 
 The trajectory of Jacques Lacan's teaching is marked by a rigorous and progressively intensifying engagement with the formal sciences. While early psychoanalytic formulations were rooted in phenomenological and dialectical traditions; drawing on Hegel, Kojeve, and Heidegger; later Lacanian theory executes a decisive turn toward the "matheme." This turn is not merely a pedagogical convenience or a metaphor. It represents a fundamental epistemological claim: that psychoanalysis, if it is to transmit the Real of the subject without falling into imaginary semantic drift, must align itself with the formalization characteristic of modern science. Central to this project is the concept of the "calculus," appearing across multiple registers: from the "calculus of the subject" to the "infinitesimal calculus" of the unconscious, and finally to the "predicate calculus" of sexuation.

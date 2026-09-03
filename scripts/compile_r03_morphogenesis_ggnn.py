@@ -81,15 +81,7 @@ cleaned = cleaned.replace(r'\\mathcal{R}', r'\mathcal{R}')
 cleaned = cleaned.replace(r'\\mathcal{N}', r'\mathcal{N}')
 
 # Format header block with authoritative Jim McKenney systems assurance framing
-header = """| Document ID | Working Group | Normative Equivalents | Classification |
-| :--- | :--- | :--- | :--- |
-| EIGENIA-WG03-ML-05 | WG-03-ML | IEC 62443-3-2 / ISO 15926 / DEXPI 2.0 / CycloneDX 1.6 / EU CRA / EN 50126 | Open Theoretical & Behavioral Modeling Specification |
-
-**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
-**Lead Systems Assurance Architect:** J. McKenney (Systems Assurance Lead)  
-**Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
-
-## Executive Abstract
+header = """## Executive Abstract
 
 The formalization of the Lacanian subject has historically remained constrained to conceptual and topological formulations; specifically the mathemes, the Borromean knot, and the four discourses. While mathematically evocative, these models have resisted dynamic computational implementation capable of processing continuous time-series behavioral data. This treatise establishes the **Lacanian Gated Graph Neural Network (L-gGNN)**; a deep learning architecture that translates the algebraic logic of Suture, the retroactive temporality of the *point de capiton* (quilting point), and the four discourses into a differentiable, multi-relational graph convolution engine.
 

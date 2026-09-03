@@ -3346,8 +3346,7 @@ After any P0 or P1 incident, ACME Inc. must conduct formal lessons learned revie
 **Document Control:**
 
 - **Version:** 1.0
-- **Author:** J. McKenney
-- **Date:** February 12, 2026
+- - **Date:** February 12, 2026
 - **Classification:** CONFIDENTIAL - CRITICAL INFRASTRUCTURE SECURITY
 - **Review Cycle:** Quarterly
 - **Next Review:** May 12, 2026

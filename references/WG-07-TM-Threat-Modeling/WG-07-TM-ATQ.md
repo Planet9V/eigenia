@@ -1,12 +1,3 @@
-| Document ID | Working Group | Normative Equivalents | Classification |
-| :--- | :--- | :--- | :--- |
-| EIGENIA-WG07-TM-03 | WG-07-TM (Threat Modeling & Cyber-Physical Hazard Analysis) | IEC 62443-3-2 / ISO 15926 / MITRE ATT&CK v14.1 / FIRST EPSS v3 / Lloyd's Y5381 | Quantitative Threat Intelligence Specification |
-
-**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
-**Lead Systems Assurance Architect:** J. McKenney (Systems Assurance Lead)  
-**Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
-**Interactive Reference:** `/terminals/atq-card-terminal.html` (ATQ Interactive Card Terminal)  
-
 ## Executive Abstract
 
 Contemporary cyber threat intelligence suffers from an acute measurement deficiency. Threat actor profiling across industrial enterprises is predominantly qualitative, relying on nominal categorical labels (e.g., "Advanced Persistent Threat", "Sophisticated", "State-Sponsored") or ordinal risk matrices (High, Medium, Low) that exhibit profound ceiling effects. These qualitative taxonomies fail to distinguish between historical incident volume and current operational threat pressure, obscuring critical variance between threat groups and preventing quantitative capital allocation.

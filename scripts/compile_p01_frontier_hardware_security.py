@@ -7,13 +7,7 @@ meeting all PAAI gate criteria and zero-tolerance style prohibitions.
 
 dest_path = 'references/WG-05-CAD-DEXPI-2/WG-05-CAD-Frontier-AI-Hardware-Security.md'
 
-content = """| Document ID | Working Group | Normative Equivalents | Classification |
-| :--- | :--- | :--- | :--- |
-| EIGENIA-WG05-CAD-02 | WG-05-CAD | IEC 62443 / CLC/TS 50701 / EN 50126 / NIST SP 800-193 / ISO 15926 / Lloyd's Y5381 | Open Architectural Specification |
-
-**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
-**Lead Systems Assurance Architect:** J. McKenney  
-**Affiliation:** Eigenia Labs / Critical Infrastructure Cyber-Physical Working Group  
+content = """# Frontier AI Hardware Security & Platform Assurance Framework
 
 ## 1. Executive Summary & Foundational Scope
 

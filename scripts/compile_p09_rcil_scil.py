@@ -7,15 +7,7 @@ meeting all PAAI gate criteria and zero-tolerance style prohibitions.
 
 dest_path = 'references/WG-01-UI-Underwriter-insurance/WG-01-UI-RCIL-SCIL-Reinsurance.md'
 
-content = """| Document ID | Working Group | Normative Equivalents | Classification |
-| :--- | :--- | :--- | :--- |
-| EIGENIA-WG01-UI-10 | WG-01-UI | IEC 60812 / IEC 62443-3-2 / IEC 61508 (SIL) / DEXPI 2.0 (ISO 15926) / CycloneDX 1.6 / EN 50126 | Open Actuarial & Critical Spares Engineering Specification |
-
-**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
-**Lead Systems Assurance Architect:** J. McKenney (Systems Assurance Lead)  
-**Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
-
-## Abstract
+content = """## Abstract
 
 In mission-critical industrial facilities, risk assessment frameworks such as FMECA and HAZOP identify failure modes, but they do not procure physical equipment, establish inventory buffers, or underwrite business interruption insurance policies. The bridge between engineering risk analysis and balance-sheet resilience is the formal classification of components into the Reliability Critical Items List (RCIL) and the Safety Critical Items List (SCIL). 
 

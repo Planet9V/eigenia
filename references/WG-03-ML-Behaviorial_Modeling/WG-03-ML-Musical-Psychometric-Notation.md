@@ -1,10 +1,4 @@
-| Document ID | Working Group | Normative Equivalents | Classification |
-| :--- | :--- | :--- | :--- |
-| EIGENIA-WG03-ML-06 | WG-03-ML | IEC 62443-3-2 / ISO 15926 / DEXPI 2.0 / CycloneDX 1.6 / EU CRA / EN 50126 | Open Theoretical & Behavioral Modeling Specification |
-
-**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
-**Lead Systems Assurance Architect:** J. McKenney (Systems Assurance Lead)  
-**Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
+# Musical Psychometric Notation (MPN): Formal Specification for Security State Sonification
 
 ## Executive Abstract
 
@@ -18,17 +12,6 @@ MPN establishes a rigorous mathematical grammar:
 - **Dynamic Markings** reflect OCEAN psychometric stress states.
 
 By computing real-time harmonic dissonance integrals across the musical score, MPN provides defensive teams with a 15 to 30 minute early warning of organizational collapse; a mathematical formulation of Isaac Asimov's "Seldon Crisis." When coupled with physical plant telemetry through DEXPI 2.0 (ISO 15926) piping models and CycloneDX 1.6+ multi-BOM streams, MPN prevents cascading cyber-physical failure and establishes deterministic actuarial loss mitigation under Lloyd's Y5381.
-
----
-# Musical Psychometric Notation (MPN): Formal Specification for Security State Sonification
-## A Complete Notation System for the Dialectic of Cyber-Social Dynamics
-
-**Date:** December 29, 2025  
-**Document ID:** RSCH-39-MUSICAL_PSYCHOMETRIC_NOTATION  
-**Classification:** AEON CORE INTERNAL // TIER 1  
-**Authors:** Multi-Agent Panel (Music Theory Agent, Psychometrics Agent, Signal Processing Specialist)
-
----
 
 ## Abstract
 

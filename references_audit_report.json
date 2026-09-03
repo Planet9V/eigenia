@@ -68,7 +68,7 @@
   {
     "file": "WG-01-UI-Underwriter-insurance/WG-01-UI-1-COPE_detail.md",
     "words": 6407,
-    "chars": 47891,
+    "chars": 47890,
     "is_formal_spec": false,
     "frontmatter_ok": true,
     "has_table_meta": false,
@@ -221,11 +221,11 @@
   },
   {
     "file": "WG-01-UI-Underwriter-insurance/WG-01-UI-ALE-ROSI-Decision-Framework.md",
-    "words": 2845,
-    "chars": 22573,
-    "is_formal_spec": true,
+    "words": 2762,
+    "chars": 21978,
+    "is_formal_spec": false,
     "frontmatter_ok": true,
-    "has_table_meta": true,
+    "has_table_meta": false,
     "ai_words_count": 0,
     "ai_word_findings": [],
     "dash_count": 0,
@@ -239,7 +239,7 @@
       "equations": 16
     },
     "all_gates_pass": true,
-    "grade": "A+ (Exemplary)"
+    "grade": "A (Clean Monograph)"
   },
   {
     "file": "WG-01-UI-Underwriter-insurance/WG-01-UI-Cyber_Observations.md",
@@ -265,11 +265,11 @@
   },
   {
     "file": "WG-01-UI-Underwriter-insurance/WG-01-UI-Quantitative-Cyber-Physical-FMECA.md",
-    "words": 3298,
-    "chars": 24819,
-    "is_formal_spec": true,
+    "words": 3218,
+    "chars": 24212,
+    "is_formal_spec": false,
     "frontmatter_ok": true,
-    "has_table_meta": true,
+    "has_table_meta": false,
     "ai_words_count": 0,
     "ai_word_findings": [],
     "dash_count": 0,
@@ -283,15 +283,15 @@
       "equations": 11
     },
     "all_gates_pass": true,
-    "grade": "A+ (Exemplary)"
+    "grade": "A (Clean Monograph)"
   },
   {
     "file": "WG-01-UI-Underwriter-insurance/WG-01-UI-RCIL-SCIL-Reinsurance.md",
-    "words": 2859,
-    "chars": 23237,
-    "is_formal_spec": true,
+    "words": 2778,
+    "chars": 22647,
+    "is_formal_spec": false,
     "frontmatter_ok": true,
-    "has_table_meta": true,
+    "has_table_meta": false,
     "ai_words_count": 0,
     "ai_word_findings": [],
     "dash_count": 0,
@@ -305,7 +305,7 @@
       "equations": 8
     },
     "all_gates_pass": true,
-    "grade": "A+ (Exemplary)"
+    "grade": "A (Clean Monograph)"
   },
   {
     "file": "WG-02-DT-Digital-Twin/WG-02-DT-1.md",
@@ -441,11 +441,11 @@
   },
   {
     "file": "WG-02-DT-Digital-Twin/WG-02-DT-Cognitive-Digital-Twin.md",
-    "words": 2494,
-    "chars": 22694,
-    "is_formal_spec": true,
+    "words": 2412,
+    "chars": 22104,
+    "is_formal_spec": false,
     "frontmatter_ok": true,
-    "has_table_meta": true,
+    "has_table_meta": false,
     "ai_words_count": 0,
     "ai_word_findings": [],
     "dash_count": 0,
@@ -454,20 +454,20 @@
     "paai": {
       "physics": 10.0,
       "actuarial": 10.0,
-      "assurance": 10.0,
-      "composite": 10.0,
+      "assurance": 9.2,
+      "composite": 9.8,
       "equations": 12
     },
     "all_gates_pass": true,
-    "grade": "A+ (Exemplary)"
+    "grade": "A (Clean Monograph)"
   },
   {
     "file": "WG-02-DT-Digital-Twin/WG-02-DT-High-Density-Liquid-Cooling.md",
-    "words": 2855,
-    "chars": 23818,
-    "is_formal_spec": true,
+    "words": 2775,
+    "chars": 23229,
+    "is_formal_spec": false,
     "frontmatter_ok": true,
-    "has_table_meta": true,
+    "has_table_meta": false,
     "ai_words_count": 0,
     "ai_word_findings": [],
     "dash_count": 0,
@@ -481,7 +481,7 @@
       "equations": 8
     },
     "all_gates_pass": true,
-    "grade": "A+ (Exemplary)"
+    "grade": "A (Clean Monograph)"
   },
   {
     "file": "WG-02-DT-Digital-Twin/WG-02-DT-Paradigm-Library.md",
@@ -507,11 +507,11 @@
   },
   {
     "file": "WG-02-DT-Digital-Twin/WG-02-DT-Seven-Staff-Fugue.md",
-    "words": 2497,
-    "chars": 21432,
-    "is_formal_spec": true,
+    "words": 2415,
+    "chars": 20842,
+    "is_formal_spec": false,
     "frontmatter_ok": true,
-    "has_table_meta": true,
+    "has_table_meta": false,
     "ai_words_count": 0,
     "ai_word_findings": [],
     "dash_count": 0,
@@ -520,20 +520,20 @@
     "paai": {
       "physics": 10.0,
       "actuarial": 10.0,
-      "assurance": 10.0,
-      "composite": 10.0,
+      "assurance": 9.6,
+      "composite": 9.91,
       "equations": 9
     },
     "all_gates_pass": true,
-    "grade": "A+ (Exemplary)"
+    "grade": "A (Clean Monograph)"
   },
   {
     "file": "WG-03-ML-Behaviorial_Modeling/WG-03-ML-Autonomous-OT-Trust-Boundary.md",
-    "words": 3156,
-    "chars": 26061,
-    "is_formal_spec": true,
+    "words": 3076,
+    "chars": 25481,
+    "is_formal_spec": false,
     "frontmatter_ok": true,
-    "has_table_meta": true,
+    "has_table_meta": false,
     "ai_words_count": 0,
     "ai_word_findings": [],
     "dash_count": 0,
@@ -547,15 +547,15 @@
       "equations": 10
     },
     "all_gates_pass": true,
-    "grade": "A+ (Exemplary)"
+    "grade": "A (Clean Monograph)"
   },
   {
     "file": "WG-03-ML-Behaviorial_Modeling/WG-03-ML-Calculus-of-the-Subject.md",
-    "words": 6147,
-    "chars": 45522,
-    "is_formal_spec": true,
+    "words": 6070,
+    "chars": 44959,
+    "is_formal_spec": false,
     "frontmatter_ok": true,
-    "has_table_meta": true,
+    "has_table_meta": false,
     "ai_words_count": 0,
     "ai_word_findings": [],
     "dash_count": 0,
@@ -569,15 +569,15 @@
       "equations": 7
     },
     "all_gates_pass": true,
-    "grade": "A+ (Exemplary)"
+    "grade": "A (Clean Monograph)"
   },
   {
     "file": "WG-03-ML-Behaviorial_Modeling/WG-03-ML-Cognitive-Bias-Catalog.md",
-    "words": 2849,
-    "chars": 23614,
-    "is_formal_spec": true,
+    "words": 2768,
+    "chars": 23013,
+    "is_formal_spec": false,
     "frontmatter_ok": true,
-    "has_table_meta": true,
+    "has_table_meta": false,
     "ai_words_count": 0,
     "ai_word_findings": [],
     "dash_count": 0,
@@ -586,20 +586,20 @@
     "paai": {
       "physics": 10.0,
       "actuarial": 10.0,
-      "assurance": 10.0,
-      "composite": 10.0,
+      "assurance": 9.2,
+      "composite": 9.8,
       "equations": 6
     },
     "all_gates_pass": true,
-    "grade": "A+ (Exemplary)"
+    "grade": "A (Clean Monograph)"
   },
   {
     "file": "WG-03-ML-Behaviorial_Modeling/WG-03-ML-Loman-Operator-Topology-of-an-Act.md",
-    "words": 2508,
-    "chars": 21336,
-    "is_formal_spec": true,
+    "words": 2427,
+    "chars": 20735,
+    "is_formal_spec": false,
     "frontmatter_ok": true,
-    "has_table_meta": true,
+    "has_table_meta": false,
     "ai_words_count": 0,
     "ai_word_findings": [],
     "dash_count": 0,
@@ -608,12 +608,12 @@
     "paai": {
       "physics": 10.0,
       "actuarial": 10.0,
-      "assurance": 10.0,
-      "composite": 10.0,
+      "assurance": 9.6,
+      "composite": 9.91,
       "equations": 15
     },
     "all_gates_pass": true,
-    "grade": "A+ (Exemplary)"
+    "grade": "A (Clean Monograph)"
   },
   {
     "file": "WG-03-ML-Behaviorial_Modeling/WG-03-ML-Mckenney-Lacanian.md",
@@ -639,11 +639,11 @@
   },
   {
     "file": "WG-03-ML-Behaviorial_Modeling/WG-03-ML-Morphogenesis-Signifying-Chain-gGNN.md",
-    "words": 5124,
-    "chars": 38428,
-    "is_formal_spec": true,
+    "words": 5047,
+    "chars": 37865,
+    "is_formal_spec": false,
     "frontmatter_ok": true,
-    "has_table_meta": true,
+    "has_table_meta": false,
     "ai_words_count": 0,
     "ai_word_findings": [],
     "dash_count": 0,
@@ -657,15 +657,15 @@
       "equations": 22
     },
     "all_gates_pass": true,
-    "grade": "A+ (Exemplary)"
+    "grade": "A (Clean Monograph)"
   },
   {
     "file": "WG-03-ML-Behaviorial_Modeling/WG-03-ML-Musical-Psychometric-Notation.md",
-    "words": 3290,
-    "chars": 27263,
-    "is_formal_spec": true,
+    "words": 3175,
+    "chars": 26376,
+    "is_formal_spec": false,
     "frontmatter_ok": true,
-    "has_table_meta": true,
+    "has_table_meta": false,
     "ai_words_count": 0,
     "ai_word_findings": [],
     "dash_count": 0,
@@ -679,12 +679,12 @@
       "equations": 11
     },
     "all_gates_pass": true,
-    "grade": "A+ (Exemplary)"
+    "grade": "A (Clean Monograph)"
   },
   {
     "file": "WG-04-CF-Cascading-Failures/WG-04-CF-Cascading Failure Hypothesis.md",
-    "words": 29993,
-    "chars": 238880,
+    "words": 29990,
+    "chars": 238856,
     "is_formal_spec": false,
     "frontmatter_ok": true,
     "has_table_meta": false,
@@ -706,7 +706,7 @@
   {
     "file": "WG-04-CF-Cascading-Failures/WG-04-CF-Death Wobble-The Grids Precarious Pulse Frequency Instability - jmckenney.md",
     "words": 3180,
-    "chars": 23592,
+    "chars": 23591,
     "is_formal_spec": false,
     "frontmatter_ok": true,
     "has_table_meta": false,
@@ -727,11 +727,11 @@
   },
   {
     "file": "WG-04-CF-Cascading-Failures/WG-04-CF-Emerging-Power-Topologies.md",
-    "words": 2705,
-    "chars": 23834,
-    "is_formal_spec": true,
+    "words": 2622,
+    "chars": 23234,
+    "is_formal_spec": false,
     "frontmatter_ok": true,
-    "has_table_meta": true,
+    "has_table_meta": false,
     "ai_words_count": 0,
     "ai_word_findings": [],
     "dash_count": 0,
@@ -740,12 +740,12 @@
     "paai": {
       "physics": 10.0,
       "actuarial": 10.0,
-      "assurance": 10.0,
-      "composite": 10.0,
+      "assurance": 9.6,
+      "composite": 9.91,
       "equations": 10
     },
     "all_gates_pass": true,
-    "grade": "A+ (Exemplary)"
+    "grade": "A (Clean Monograph)"
   },
   {
     "file": "WG-05-CAD-DEXPI-2/WG-05-CAD-DEXPI-Introduction.md",
@@ -771,11 +771,11 @@
   },
   {
     "file": "WG-05-CAD-DEXPI-2/WG-05-CAD-Frontier-AI-Hardware-Security.md",
-    "words": 7750,
-    "chars": 64317,
-    "is_formal_spec": true,
+    "words": 7686,
+    "chars": 63848,
+    "is_formal_spec": false,
     "frontmatter_ok": true,
-    "has_table_meta": true,
+    "has_table_meta": false,
     "ai_words_count": 0,
     "ai_word_findings": [],
     "dash_count": 0,
@@ -789,15 +789,15 @@
       "equations": 27
     },
     "all_gates_pass": true,
-    "grade": "A+ (Exemplary)"
+    "grade": "A (Clean Monograph)"
   },
   {
     "file": "WG-05-CAD-DEXPI-2/WG-05-CAD-IEC62443-SFAIRP-SecRACS.md",
-    "words": 2891,
-    "chars": 22850,
-    "is_formal_spec": true,
+    "words": 2804,
+    "chars": 22233,
+    "is_formal_spec": false,
     "frontmatter_ok": true,
-    "has_table_meta": true,
+    "has_table_meta": false,
     "ai_words_count": 0,
     "ai_word_findings": [],
     "dash_count": 0,
@@ -811,15 +811,15 @@
       "equations": 7
     },
     "all_gates_pass": true,
-    "grade": "A+ (Exemplary)"
+    "grade": "A (Clean Monograph)"
   },
   {
     "file": "WG-05-CAD-DEXPI-2/WG-05-CAD-Supply-Chain-EU-CRA.md",
-    "words": 3749,
-    "chars": 31560,
-    "is_formal_spec": true,
+    "words": 3669,
+    "chars": 30957,
+    "is_formal_spec": false,
     "frontmatter_ok": true,
-    "has_table_meta": true,
+    "has_table_meta": false,
     "ai_words_count": 0,
     "ai_word_findings": [],
     "dash_count": 0,
@@ -833,15 +833,15 @@
       "equations": 10
     },
     "all_gates_pass": true,
-    "grade": "A+ (Exemplary)"
+    "grade": "A (Clean Monograph)"
   },
   {
     "file": "WG-05-CAD-DEXPI-2/WG-05-CAD-Unified-DEXPI-CycloneDX.md",
-    "words": 4170,
-    "chars": 35408,
-    "is_formal_spec": true,
+    "words": 4093,
+    "chars": 34822,
+    "is_formal_spec": false,
     "frontmatter_ok": true,
-    "has_table_meta": true,
+    "has_table_meta": false,
     "ai_words_count": 0,
     "ai_word_findings": [],
     "dash_count": 0,
@@ -855,15 +855,15 @@
       "equations": 8
     },
     "all_gates_pass": true,
-    "grade": "A+ (Exemplary)"
+    "grade": "A (Clean Monograph)"
   },
   {
     "file": "WG-07-TM-Threat-Modeling/WG-07-TM-ATQ.md",
-    "words": 3866,
-    "chars": 32708,
-    "is_formal_spec": true,
+    "words": 3779,
+    "chars": 31998,
+    "is_formal_spec": false,
     "frontmatter_ok": true,
-    "has_table_meta": true,
+    "has_table_meta": false,
     "ai_words_count": 0,
     "ai_word_findings": [],
     "dash_count": 0,
@@ -877,15 +877,15 @@
       "equations": 16
     },
     "all_gates_pass": true,
-    "grade": "A+ (Exemplary)"
+    "grade": "A (Clean Monograph)"
   },
   {
     "file": "WG-07-TM-Threat-Modeling/WG-07-TM-CyHAZOP-Methodology.md",
-    "words": 4596,
-    "chars": 36748,
-    "is_formal_spec": true,
+    "words": 4513,
+    "chars": 36160,
+    "is_formal_spec": false,
     "frontmatter_ok": true,
-    "has_table_meta": true,
+    "has_table_meta": false,
     "ai_words_count": 0,
     "ai_word_findings": [],
     "dash_count": 0,
@@ -899,15 +899,15 @@
       "equations": 11
     },
     "all_gates_pass": true,
-    "grade": "A+ (Exemplary)"
+    "grade": "A (Clean Monograph)"
   },
   {
     "file": "WG-07-TM-Threat-Modeling/WG-07-TM-CyHAZOP-Node-Registers.md",
-    "words": 3468,
-    "chars": 26768,
-    "is_formal_spec": true,
+    "words": 3388,
+    "chars": 26162,
+    "is_formal_spec": false,
     "frontmatter_ok": true,
-    "has_table_meta": true,
+    "has_table_meta": false,
     "ai_words_count": 0,
     "ai_word_findings": [],
     "dash_count": 0,
@@ -921,7 +921,7 @@
       "equations": 11
     },
     "all_gates_pass": true,
-    "grade": "A+ (Exemplary)"
+    "grade": "A (Clean Monograph)"
   },
   {
     "file": "WG-07-TM-Threat-Modeling/WG-07-TM-TACAM.md",

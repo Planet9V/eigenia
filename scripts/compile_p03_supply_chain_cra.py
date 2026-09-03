@@ -7,15 +7,7 @@ actuarial accumulation equations, and full PAAI index coverage.
 
 dest_path = 'references/WG-05-CAD-DEXPI-2/WG-05-CAD-Supply-Chain-EU-CRA.md'
 
-content = """| Document ID | Working Group | Normative Equivalents | Classification |
-| :--- | :--- | :--- | :--- |
-| EIGENIA-WG05-CAD-03 | WG-05-CAD | EU Cyber Resilience Act (Reg 2024/2847) / IEC 62443-4-1 / IEC 62443-4-2 / ISO/IEC 5962 / NIST SP 800-161 | Open Regulatory & Systems Assurance Technical Specification |
-
-**Authors:** Multi-Agent Deliberation Panel (Alpha-Physics, Beta-Assurance, Gamma-Actuarial, Delta-Agentic, Epsilon-Implementation)  
-**Lead Systems Assurance Architect:** J. McKenney (Systems Assurance Lead)  
-**Affiliation:** Applied Complexity & Critical Infrastructure Systems Assurance  
-
-## Abstract
+content = """## Abstract
 
 On September 13, 2024, the European Union published Regulation (EU) 2024/2847, the Cyber Resilience Act (CRA), establishing mandatory cybersecurity requirements for products with digital elements placed on the Single Market. With full enforcement commencing on September 11, 2026, the era of voluntary cybersecurity questionnaires and qualitative vendor self-attestations is definitively closed. Article 13, Article 14, and Annex I mandate machine-readable Software Bills of Materials (SBOMs), Hardware Bills of Materials (HBOMs), 24-hour vulnerability notification cadences, and verified supply chain provenance. Violations trigger severe statutory penalties under Article 64: administrative fines up to 15,000,000 EUR or 2.5% of worldwide annual turnover.
 

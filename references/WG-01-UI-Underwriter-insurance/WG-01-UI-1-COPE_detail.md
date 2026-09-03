@@ -3,7 +3,6 @@ The discipline of commercial property underwriting relies on the meticulous quan
 
 ## Construction, Occupancy, Protection, and Exposure.
 
-
 Through these four interconnected analytical pillars, actuaries, risk engineers, and underwriters evaluate the physical structural integrity of a building, the specific operations occurring within its footprint, the active and passive mechanical systems designed to mitigate loss, and the exogenous environmental and geographic threats posed by the surrounding area. When captured accurately and comprehensively, COPE data allows underwriters to construct sophisticated risk profiles, model the Probable Maximum Loss (PML), optimize premium pricing, structure coverage deductibles, and facilitate proactive loss-control partnerships with insured entities. In addition, the COPE methodology provides the quantitative data inputs necessary to populate organizational risk assessment matrices, shifting the industry from purely reactive financial indemnification toward proactive hazard avoidance.
 
 ## Theoretical Foundations: Risk Matrices and Alternatives Assessment
