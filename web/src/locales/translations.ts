@@ -5,6 +5,7 @@ export const translations = {
     // Navbar
     nav_mission: "Mission",
     nav_tracks: "Research Tracks",
+    nav_unified_standard: "Unified Standard",
     nav_physics: "Applied Physics",
     nav_collaborate: "Collaborate",
     nav_request_briefing: "Request Briefing",
@@ -248,6 +249,7 @@ export const translations = {
     // Navbar
     nav_mission: "Missie",
     nav_tracks: "Onderzoekstracks",
+    nav_unified_standard: "Uniforme Standaard",
     nav_physics: "Toegepaste Fysica",
     nav_collaborate: "Samenwerken",
     nav_request_briefing: "Vraag Briefing Aan",

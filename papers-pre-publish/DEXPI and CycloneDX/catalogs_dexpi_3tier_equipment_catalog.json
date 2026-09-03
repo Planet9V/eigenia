@@ -1,0 +1,105 @@
+{
+  "catalogMetadata": {
+    "catalogName": "Eigenia 3-Tier Cyber-Physical Equipment Catalog",
+    "version": "2.0.0",
+    "standardCompliance": ["DEXPI 2.0 (ISO 15926)", "CycloneDX 1.6 (OWASP)", "IEC 62443", "IEC 61511"],
+    "description": "Standardized three-tier catalog abstracting functional engineering requirements, commercial vendor specifications, and as-built operational instances."
+  },
+  "tiers": {
+    "tier1_requirements": [
+      {
+        "requirementId": "REQ-CDU-PUMP-01",
+        "functionalRole": "Secondary Loop Coolant Circulation Pump",
+        "processService": "Hyperscale AI Direct-to-Chip Liquid Cooling",
+        "fluidMedium": "Propylene Glycol 25% Aqueous Solution (PG25)",
+        "designParameters": {
+          "nominalFlowRateM3h": { "min": 32.0, "nominal": 35.0, "max": 40.0 },
+          "headMeters": { "min": 25.0, "nominal": 28.0 },
+          "designPressureBar": 16.0,
+          "fluidTemperatureEnvelopeC": { "min": 20.0, "max": 65.0 }
+        },
+        "safetyIntegrityLevel": "SIL-2 (IEC 61508)",
+        "requiredSecurityLevelTarget": "SL-3 (IEC 62443-3-3)",
+        "failSafePipingPosition": "FailOpen"
+      },
+      {
+        "requirementId": "REQ-CDU-BYPASS-VALVE-01",
+        "functionalRole": "Differential Pressure Fast-Acting Bypass Control Valve",
+        "processService": "Hydronic Pressure Balancing across Rack Manifolds",
+        "fluidMedium": "PG25 Coolant",
+        "designParameters": {
+          "flowCoefficientCv": 45.0,
+          "actuationSpeedSeconds": 1.5,
+          "designPressureBar": 16.0
+        },
+        "safetyIntegrityLevel": "SIL-2",
+        "requiredSecurityLevelTarget": "SL-3",
+        "failSafePipingPosition": "FailOpen_FullCooling"
+      }
+    ],
+    "tier2_vendor_catalogs": [
+      {
+        "vendorId": "VEND-WILO-01",
+        "manufacturer": "Wilo SE",
+        "modelNumber": "Stratos MAXO 65/0.5-12 PN16",
+        "satisfiesRequirement": "REQ-CDU-PUMP-01",
+        "mechanicalSpecifications": {
+          "impellerDiameterMm": 142.0,
+          "flangeConnection": "DN 65 PN 16",
+          "pumpCasingMaterial": "Cast Iron with Cataphoretic Coating",
+          "motorPowerKW": 1.45,
+          "energyEfficiencyIndexEEI": 0.17
+        },
+        "cyberSpecifications": {
+          "cycloneDxHbomPurl": "pkg:hardware/wilo/stratos-maxo-65-0.5-12@rev2.1",
+          "firmwareVersionBaseline": "v02.14.08",
+          "embeddedMicrocontroller": "ARM Cortex-M4 (STM32F407)",
+          "communicationInterfaces": ["Modbus TCP (RJ45)", "BACnet IP", "0-10V Analog"],
+          "hardwareRootOfTrust": "None (Legacy Flash) - Mitigation Required: Caliptra or External Firewall Conduit"
+        }
+      },
+      {
+        "vendorId": "VEND-BELIMO-01",
+        "manufacturer": "Belimo Aircontrols",
+        "modelNumber": "EV050+BAC-MOD",
+        "satisfiesRequirement": "REQ-CDU-BYPASS-VALVE-01",
+        "mechanicalSpecifications": {
+          "nominalDiameter": "DN 50",
+          "pressureRating": "PN 16",
+          "flowCharacteristic": "Equal Percentage",
+          "kvsM3h": 40.0
+        },
+        "cyberSpecifications": {
+          "cycloneDxHbomPurl": "pkg:hardware/belimo/ev050-bac-mod@rev3.0",
+          "firmwareVersionBaseline": "v3.0.4",
+          "embeddedMicrocontroller": "Microchip PIC32MZ",
+          "communicationInterfaces": ["BACnet MS/TP (RS-485)", "Modbus RTU"],
+          "hardwareRootOfTrust": "Hardware Secure Element ATECC608A"
+        }
+      }
+    ],
+    "tier3_configured_assets": [
+      {
+        "assetId": "ASSET-AMSTERDAM-CDU01-PMP01A",
+        "plantTag": "PMP-SEC-01A",
+        "facilityLocation": "Amsterdam-01 Hyperscale Campus, Data Hall 3, CDU Bay 01",
+        "instantiatesVendorModel": "VEND-WILO-01",
+        "dexpiEquipmentTag": "EQ-PMP-101A",
+        "operationalParameters": {
+          "controlMode": "Constant Differential Pressure Delta_P = 220 kPa",
+          "assignedVlan": 402,
+          "ipAddress": "10.14.22.105",
+          "macAddress": "00:80:A3:9F:14:2A",
+          "serialNumber": "WLO-2024-NL-8849201"
+        },
+        "activeSecurityPosture": {
+          "cycloneDxBomRef": "pmp-101a-vfd-assembly",
+          "verifiedFirmwareSha256": "4b92a10ef3c8d9e2a1b74c89201f9e8a7b6c5d4e3f2a1b0c9d8e7f6a5b4c3d2e",
+          "activeVexStatus": "not_affected",
+          "mitigationConduit": "Physical Unidirectional Data Diode for Telemetry + Air-Gapped Modbus Bridge",
+          "analogSafetyInterlockStatus": "Hardwired Bimetallic Thermal Shunt Trip Active on PDU Breaker"
+        }
+      }
+    ]
+  }
+}

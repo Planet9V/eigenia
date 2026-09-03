@@ -139,7 +139,23 @@ export const Navbar: React.FC = () => {
               </AnimatePresence>
             </div>
 
-            {/* Category 3: Applied Physics Frameworks Dropdown */}
+            {/* Category 3: Unified Standard Route */}
+            <Link
+              href="/unified-standard"
+              className={`relative py-5 transition-colors ${
+                pathname === "/unified-standard" ? "text-dutchOrange font-bold" : "hover:text-dutchOrange"
+              }`}
+            >
+              <span>{t("nav_unified_standard")}</span>
+              {pathname === "/unified-standard" && (
+                <motion.div
+                  layoutId="activeNav"
+                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-dutchOrange"
+                />
+              )}
+            </Link>
+
+            {/* Category 4: Applied Physics Frameworks Dropdown */}
             <div
               className="relative py-5 cursor-pointer"
               onMouseEnter={() => setPhysicsOpen(true)}
@@ -368,6 +384,14 @@ export const Navbar: React.FC = () => {
               className="block py-2 text-primary font-medium hover:text-dutchOrange"
             >
               {t("nav_tracks")}
+            </Link>
+
+            <Link
+              href="/unified-standard"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block py-2 text-primary font-medium hover:text-dutchOrange"
+            >
+              {t("nav_unified_standard")}
             </Link>
 
             <Link
