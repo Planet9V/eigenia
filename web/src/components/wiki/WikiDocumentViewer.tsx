@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   FileText,
   Clock,
@@ -35,6 +35,24 @@ export default function WikiDocumentViewer({
 }: WikiDocumentViewerProps) {
   const { language, t } = useLanguage();
   const [copied, setCopied] = useState(false);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  // Karpathy Rule: Scroll to the beginning/top of the article whenever a document is opened or visited
+  useEffect(() => {
+    const resetScroll = () => {
+      if (scrollContainerRef.current) {
+        scrollContainerRef.current.scrollTop = 0;
+        scrollContainerRef.current.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      }
+      if (typeof window !== "undefined") {
+        window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      }
+    };
+
+    resetScroll();
+    const rafId = requestAnimationFrame(resetScroll);
+    return () => cancelAnimationFrame(rafId);
+  }, [docData?.id]);
 
   if (!docData) {
     return (
@@ -67,7 +85,11 @@ export default function WikiDocumentViewer({
   };
 
   return (
-    <div className="flex flex-col h-full overflow-y-auto scrollbar-thin bg-canvas">
+    <div 
+      id="wiki-document-viewer-scroll-container"
+      ref={scrollContainerRef}
+      className="flex flex-col h-full overflow-y-auto scrollbar-thin bg-canvas"
+    >
       {/* Top Header & Breadcrumbs Toolbar */}
       <div className="sticky top-0 z-30 flex items-center justify-between border-b border-hairline bg-surface/90 px-6 py-3.5 backdrop-blur-md">
         <div className="flex items-center gap-2 text-xs text-muted">
@@ -170,7 +192,12 @@ export default function WikiDocumentViewer({
         <div className="mt-12 flex items-center justify-between border-t border-hairline pt-6">
           {hasPrev && onNavigatePrev ? (
             <button
-              onClick={onNavigatePrev}
+              onClick={() => {
+                if (scrollContainerRef.current) {
+                  scrollContainerRef.current.scrollTop = 0;
+                }
+                onNavigatePrev?.();
+              }}
               className="flex items-center gap-2 rounded-xl border border-hairline bg-surface px-4 py-2 text-xs font-medium text-primary hover:border-dutchOrange/40 hover:text-dutchOrange transition-all"
             >
               <ChevronLeft className="h-4 w-4" />
@@ -182,7 +209,12 @@ export default function WikiDocumentViewer({
 
           {hasNext && onNavigateNext ? (
             <button
-              onClick={onNavigateNext}
+              onClick={() => {
+                if (scrollContainerRef.current) {
+                  scrollContainerRef.current.scrollTop = 0;
+                }
+                onNavigateNext?.();
+              }}
               className="flex items-center gap-2 rounded-xl border border-hairline bg-surface px-4 py-2 text-xs font-medium text-primary hover:border-dutchOrange/40 hover:text-dutchOrange transition-all"
             >
               <span>{t("wiki_next_doc")}</span>
