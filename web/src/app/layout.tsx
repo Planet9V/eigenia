@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "@/components/Providers";
+import { SITE_URL } from "@/lib/site";
 import { Inter, JetBrains_Mono } from "next/font/google";
 
 const inter = Inter({
@@ -16,7 +17,7 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://eigenia.com"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Eigenia B.V. — Applied Complexity Science Think Tank & Labs",
     template: "%s | Eigenia B.V.",
@@ -37,14 +38,14 @@ export const metadata: Metadata = {
     "Clean Water",
     "Sustainable Energy",
   ],
-  authors: [{ name: "J. McKenney", url: "https://eigenia.com" }],
+  authors: [{ name: "J. McKenney", url: SITE_URL }],
   creator: "Eigenia B.V.",
   publisher: "Eigenia Labs",
   openGraph: {
     title: "Eigenia B.V. — Applied Complexity Science & Labs",
     description:
       "Securing clean water, healthy food, and sustainable energy through open scientific research and physical digital twins.",
-    url: "https://eigenia.com",
+    url: SITE_URL,
     siteName: "Eigenia B.V.",
     locale: "en_EU",
     type: "website",
@@ -78,8 +79,8 @@ export default function RootLayout({
     "@type": "Organization",
     name: "Eigenia B.V.",
     alternateName: "Eigenia Labs",
-    url: "https://eigenia.com",
-    logo: "https://eigenia.com/assets/logo_square_dark.svg",
+    url: SITE_URL,
+    logo: `${SITE_URL}/assets/logo_square_dark.svg`,
     contactPoint: {
       "@type": "ContactPoint",
       email: "jim@eigenia.nl",

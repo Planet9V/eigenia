@@ -1,9 +1,10 @@
 import { MetadataRoute } from "next";
 import { getAllPaperSlugs } from "@/lib/papers";
 import { theoryModelsList } from "@/lib/theoryModels";
+import { SITE_URL } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://eigenia.com";
+  const baseUrl = SITE_URL;
 
   // Static Routes
   const staticRoutes = [
@@ -12,6 +13,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tracks",
     "/physics",
     "/collaborate",
+    "/unified-standard",
+    "/wiki",
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),

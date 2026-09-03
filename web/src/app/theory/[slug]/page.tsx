@@ -8,6 +8,7 @@ import Link from "next/link";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { MathFormula } from "@/components/MathFormula";
 import { notFound } from "next/navigation";
+import { SITE_URL } from "@/lib/site";
 
 export async function generateStaticParams() {
   return theoryModelsList.map((model) => ({
@@ -31,7 +32,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const modelUrl = `https://eigenia.com/theory/${model.slug}`;
+  const modelUrl = `${SITE_URL}/theory/${model.slug}`;
 
   return {
     title: `${model.name} | Eigenia Applied Physics Catalogue`,
@@ -46,7 +47,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       "Industrial Control Systems",
       "Complex Systems Physics",
     ],
-    authors: [{ name: "J. McKenney", url: "https://eigenia.com" }],
+    authors: [{ name: "J. McKenney", url: SITE_URL }],
     creator: "Eigenia B.V.",
     publisher: "Eigenia Labs",
     alternates: {
@@ -96,15 +97,15 @@ export default async function TheoryDetailPage({ params }: PageProps) {
       affiliation: {
         "@type": "Organization",
         name: "Eigenia B.V.",
-        url: "https://eigenia.com",
+        url: SITE_URL,
       },
     },
     publisher: {
       "@type": "Organization",
       name: "Eigenia B.V. & Eigenia Labs",
-      url: "https://eigenia.com",
+      url: SITE_URL,
     },
-    url: `https://eigenia.com/theory/${model.slug}`,
+    url: `${SITE_URL}/theory/${model.slug}`,
     inLanguage: "en-US",
   };
 

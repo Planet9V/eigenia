@@ -8,6 +8,7 @@ import { getAllWikiDocuments } from "@/lib/wiki";
 import { ArrowLeft, BookOpen, FileText, CheckCircle2, ShieldCheck, Hash } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { SITE_URL } from "@/lib/site";
 
 export async function generateStaticParams() {
   const slugs = getAllPaperSlugs();
@@ -34,7 +35,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     .slice(0, 160)
     .trim();
 
-  const paperUrl = `https://eigenia.com/papers/${paper.slug}`;
+  const paperUrl = `${SITE_URL}/papers/${paper.slug}`;
 
   return {
     title: `${paper.title} | Eigenia Research & Actuarial Treatises`,
@@ -51,7 +52,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       paper.category,
       paper.number,
     ],
-    authors: [{ name: "J. McKenney", url: "https://eigenia.com" }],
+    authors: [{ name: "J. McKenney", url: SITE_URL }],
     creator: "Eigenia B.V.",
     publisher: "Eigenia Labs",
     alternates: {
@@ -107,16 +108,16 @@ export default async function PaperDetailPage({ params }: PageProps) {
       affiliation: {
         "@type": "Organization",
         name: "Eigenia B.V.",
-        url: "https://eigenia.com",
+        url: SITE_URL,
       },
     },
     publisher: {
       "@type": "Organization",
       name: "Eigenia B.V. & Eigenia Labs",
-      url: "https://eigenia.com",
-      logo: "https://eigenia.com/logo.png",
+      url: SITE_URL,
+      logo: `${SITE_URL}/assets/logo_square_dark.svg`,
     },
-    url: `https://eigenia.com/papers/${paper.slug}`,
+    url: `${SITE_URL}/papers/${paper.slug}`,
     description: paper.content.slice(0, 200).replace(/[#*`_]/g, "").trim(),
     wordCount: paper.wordCount,
     inLanguage: "en-US",

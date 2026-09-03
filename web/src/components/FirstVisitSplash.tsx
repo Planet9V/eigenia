@@ -63,7 +63,7 @@ export const FirstVisitSplash: React.FC<{ onComplete?: () => void }> = ({ onComp
             className="absolute inset-0 z-0 pointer-events-none"
           >
             <Image
-              src="https://eigenia.nl/assets/Eigenia_2.png"
+              src="/assets/Eigenia_2.png"
               alt="Eigenia Digital Twin Field"
               fill
               priority
