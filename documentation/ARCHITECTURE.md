@@ -2,9 +2,16 @@
 
 ## Stack
 
-Next.js 15 (App Router), TypeScript 5, Tailwind CSS v4, KaTeX
-(`remark-math` / `rehype-katex`) for math rendering, Framer Motion,
-bilingual EN/NL via a custom `LanguageContext`. `images.unoptimized: true`
+Next.js 15 (App Router), TypeScript 5, Tailwind CSS v3.4, KaTeX for math
+rendering, Framer Motion, bilingual EN/NL via a custom `LanguageContext`.
+
+Math is rendered by calling `katex.renderToString()` directly from
+`MarkdownViewer.tsx`, a hand-written block/inline parser — there is no
+`remark`/`rehype` pipeline and neither package is a dependency. Markdown
+constructs the parser does not recognise fall through as plain paragraphs,
+so new syntax needs parser support, not a plugin.
+
+`images.unoptimized: true`
 in `next.config.ts` — `next/image` gets zero automatic optimization, so all
 responsive image handling in this project is manual (see "Hero
 backgrounds" below).
@@ -19,10 +26,16 @@ backgrounds" below).
 ├── /collaborate                Proposal intake — 4 pathways (pro-bono audit,
 │                               academic fellowship, actuarial/commercial,
 │                               sponsor), trust signals, contact form
-├── /wiki                      Sovereign Research Wiki — 25 treatises across 8 Working Groups
+├── /unified-standard          DEXPI 2.0 + CycloneDX 1.6 standard, 3-tier catalog
+│                               tabs, sliding quote rail, 7-paper suite
+├── /wiki                      Sovereign Research Wiki — 46 treatises across 9 Working Groups
 ├── /theory/[slug]              9 dynamic routes, one per physics model
-└── /papers/[slug]              Dynamic routes, one per long-form paper
+└── /papers/[slug]              46 dynamic routes, one per long-form paper
 ```
+
+Treatise/working-group counts above are descriptive. In the UI they are
+always derived from `getAllWikiDocuments()` / `getAllWorkingGroups()` — never
+hardcode them in a component.
 
 (The root README's site map has historically drifted from this — `/wiki`
 in particular has been missing from it. This file is the one to trust.)

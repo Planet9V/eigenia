@@ -38,7 +38,7 @@ current known-stale instance.
 ## Sourcing external claims
 
 Quick version (full policy in root `CLAUDE.md`): content under
-`web/src/content/papers/` is Eigenia Labs' own working-group synthesis,
+`references/` is Eigenia Labs' own working-group synthesis,
 not peer review — original framing is fine. What's not fine is naming an
 external method/model/dataset (Clayton Copulas, GGNNs, Kramers escape
 models, etc.) without a traceable source.

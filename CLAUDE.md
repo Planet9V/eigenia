@@ -1,8 +1,9 @@
 # Eigenia — Agent Rules
 
 Eigenia B.V. / Eigenia Labs — an applied-complexity-science think tank site.
-Next.js 15 (App Router) + TypeScript 5 + Tailwind CSS v4, KaTeX for math
-rendering, Framer Motion, bilingual EN/NL. Public repo: `Planet9V/eigenia`.
+Next.js 15 (App Router) + TypeScript 5 + Tailwind CSS v3.4, KaTeX for math
+rendering (called directly from `MarkdownViewer.tsx`, no remark/rehype
+pipeline), Framer Motion, bilingual EN/NL. Public repo: `Planet9V/eigenia`.
 
 The core work here is two things, not one: publishing the think tank's
 working-group output as a polished public site, and keeping that output
@@ -28,10 +29,32 @@ inside `web/` and confirm it succeeds locally before it ever reaches
 Railway. Don't treat a passing `next build` as optional — it's the only
 thing standing between a bad path and a broken production deploy.
 
+## Some `references/*.md` files are BUILD ARTIFACTS — check before you edit
+
+`scripts/compile_*.py` (23 scripts) each **overwrite** a specific file under
+`references/`. Two families:
+
+- **p-series** (`compile_p01`…`compile_p12`, `compile_atq_academic`) embed the
+  entire paper as a Python string literal and write it out wholesale.
+- **r-series** (`compile_r01`…`compile_r07`) read a source manuscript from
+  `papers-pre-publish/Research_equations/`, run regex cleanup over it (em
+  dashes, banned filler words, KaTeX normalisation) and write the result.
+
+**Before editing anything under `references/`, check whether a compiler owns
+it:** `grep -rln "<filename>" scripts/`. If one does, apply the fix to the
+`.py` as well — otherwise the next compiler run silently reverts your work.
+If nothing matches, the `.md` is hand-maintained and safe to edit directly.
+
+`papers-pre-publish/` is **not** an unused draft gate — it holds 169 files and
+is the live input to the r-series. Don't route new work through it, but don't
+treat it as dead either.
+
 ## Sourcing — working-group output, not peer review, but still traceable
 
-Content under `web/src/content/papers/` is **Eigenia Labs' working-group
-synthesis** — not a claim of peer-reviewed publication. It's fine for it to
+Published content lives in `references/<WG-code>-.../` and is **Eigenia Labs'
+working-group synthesis** — not a claim of peer-reviewed publication.
+(`web/src/content/` is a deprecated legacy archive; its own README says so.
+Do not add or edit anything there.) It's fine for it to
 present original framing and models. What it can't do is cite or invoke a
 named external method, model, or dataset (Clayton Copulas, GGNNs, Kramers
 escape models, etc.) without that reference existing somewhere traceable.
@@ -82,11 +105,12 @@ tells a later session which set is current. Fix:
 
 ## Style, rendering, and polish — this is what gets enforced, not a pre-publish gate
 
-There is no draft → review → publish gate here (the empty
-`papers-pre-publish/` folder implied one; it's unused — don't route through
-it). What actually matters for a public-facing site is that it looks right:
+There is no draft → review → publish gate here — don't invent one. (Note
+`papers-pre-publish/` is not that gate despite the name; see the build-artifact
+section above for what it actually feeds.) What matters for a public-facing
+site is that it looks right:
 
-- Match the existing design system — the Tailwind v4 tokens in
+- Match the existing design system — the Tailwind v3.4 tokens in
   `web/tailwind.config.ts`, the light (`#FAF8F5`) / dark (`#0B0C0E`) theme
   variables. Reuse existing components before inventing new ad hoc styles.
 - Any new or edited math must actually render — verify KaTeX output, not

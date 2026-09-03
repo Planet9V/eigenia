@@ -29,8 +29,8 @@ The application is engineered for ultra-high performance, dark/light theme flexi
 | :--- | :--- | :--- |
 | **Framework** | Next.js 15 (App Router) | React 19 Server & Client Components with Standalone Build output |
 | **Language** | TypeScript 5 | Strict type checking across components, routes, and translations |
-| **Styling** | Tailwind CSS v4 | Custom design system with light (`#FAF8F5`) and dark (`#0B0C0E`) theme variables |
-| **Typesetting** | KaTeX (`remark-math`, `rehype-katex`) | Native LaTeX mathematical formula rendering for equations |
+| **Styling** | Tailwind CSS v3.4 | Custom design system with light (`#FAF8F5`) and dark (`#0B0C0E`) theme variables |
+| **Typesetting** | KaTeX (called directly) | `MarkdownViewer.tsx` is a hand-written parser calling `katex.renderToString()`. There is no `remark`/`rehype` pipeline; those packages are not dependencies |
 | **Animations** | Framer Motion & Lucide Icons | Smooth micro-interactions, layout transitions, and icon UI |
 | **Intake API** | Next.js App Router (`/api/contact`) | Direct JSON intake & mailto dispatching to `jim@eigenia.nl` |
 | **Localization** | Custom Context (`LanguageContext`) | Full English (EN) and Dutch (NL) bilingual support |
@@ -77,7 +77,7 @@ The application is engineered for ultra-high performance, dark/light theme flexi
 All contact forms, pretotype modals (S-Curve Audit, Telemetry Sandbox, Executive Briefings), and CTA buttons route directly to **`jim@eigenia.nl`**.
 
 ### Submission Flow:
-1. **Client Intake (`/collaborate` & `PretotypeExperimentModal`):** Captures user inputs (Name, Institutional Email, Entity Name, Engagement Pathway, Target Track, and Technical Overview) via the shared `useContactForm` hook.
+1. **Client Intake (`/collaborate`):** Captures user inputs (Name, Institutional Email, Entity Name, Engagement Pathway, Target Track, and Technical Overview) via the shared `useContactForm` hook. `PretotypeExperimentModal` uses the same hook and is ready to go, but is **not currently imported by any page** — see [documentation/KNOWN_ISSUES.md](./documentation/KNOWN_ISSUES.md).
 2. **Server-Side Intake Endpoint (`/api/contact`):** Next.js API route handler receives POST requests and dispatches real email via Hostinger SMTP (`web/src/lib/mailer.ts`) to `jim@eigenia.nl`.
 3. **Mailto Fallback:** The client also dispatches a pre-filled mailto draft to `jim@eigenia.nl?subject=...&body=...` regardless of send outcome; if the SMTP send fails, a visible error banner shows so the failure isn't silent.
 

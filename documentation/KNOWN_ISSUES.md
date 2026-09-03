@@ -3,13 +3,75 @@
 Things that are flagged and understood but not yet fixed. Check here
 before assuming something you just noticed is a fresh bug.
 
-## `eigenia.com` is not a configured domain
+## [RESOLVED] `eigenia.com` in site metadata
 
-Site metadata and copy reference both `eigenia.com` and `eigenia.nl`
-(README, `DEPLOYMENT.md`, on-page copy). Only `eigenia.nl` is actually
-configured as a custom domain on the Railway service. Either register/wire
-up `eigenia.com` or scrub the references to it — as of this writing,
-neither has been done.
+All metadata URLs (metadataBase, canonicals, OpenGraph, sitemap, robots,
+JSON-LD) now derive from `SITE_URL` in `web/src/lib/site.ts`, which defaults
+to `https://eigenia.nl` — the domain actually configured on Railway. If
+`eigenia.com` is registered and wired up later, set `NEXT_PUBLIC_SITE_URL`
+rather than editing call sites.
+
+`ImpressumModal.tsx` still names both domains, deliberately: that is a
+statutory ownership statement, not a link.
+
+## [RESOLVED] `papers-pre-publish/` is empty and unused
+
+It was never empty — it holds 169 files and is the live input to the seven
+`scripts/compile_r*.py` compilers. See the build-artifact section in the root
+`CLAUDE.md`: some files under `references/` are generated, and editing them
+directly gets reverted on the next compiler run.
+
+## Seven components are unreferenced, and their translation keys do not exist
+
+None of these is imported anywhere: `Pillars`, `Subsidiaries`,
+`SystemSimulator`, `DexpiCycloneSection`, `LabsShowcase`,
+`TalebPapersSection`, `JoinResearchCTA`. Each calls `t()` on keys that exist
+in **neither** `en` nor `nl` — `pil_*`, `sim_*`, `dexpi_*`, `labs_*`,
+`taleb_*`, `join_*` (roughly 26 keys total).
+
+`LanguageContext`'s `t()` is typed `(key: string) => string` with no
+build-time checking and falls back to printing the raw key, so wiring any of
+these in renders literal text like `join_title`. Three of them (`Pillars`,
+`Subsidiaries`, `SystemSimulator`) also still use the pre-token hardcoded
+`bg-black`/`zinc` styling instead of the theme variables.
+
+`PretotypeExperimentModal` is a separate case: also unimported, but correctly
+wired to the real `useContactForm` hook, and the root README describes it as a
+live intake path. It needs wiring, not deletion.
+
+Kept rather than deleted by explicit decision. The fix is either to delete
+them or to add the missing keys in both languages before importing one.
+
+Aside from these, `en` and `nl` are exactly in sync: 211 keys each, zero drift.
+
+## Dutch wiki pages serve English bodies
+
+`getWikiDocumentById()` in `web/src/lib/wiki.ts` sets
+`contentNl = authoritativeContent` deliberately, so switching to NL
+translates titles, subtitles, badges and working-group names but leaves the
+treatise body in English. By design (one authoritative source per document),
+not a bug — translating 46 treatises is a content project.
+
+## No test framework
+
+There is no vitest/jest/playwright config and no test script in
+`web/package.json`. The `web/scripts/*.py` files are one-off Playwright
+audits with absolute paths hardcoded to a Gemini/antigravity IDE directory —
+session artifacts, not a maintained suite. The real regression gate is
+`npm run build`, which runs `sync-publications.js` then
+`audit-publications.js` (word-for-word fidelity across all 46 documents).
+
+Note what that gate does *not* cover: it verifies disk → bundle fidelity, but
+never disk → registry coverage. A new `references/*.md` that nobody registers
+in `papers.ts`/`wiki.ts` is unreachable and the build stays green. One such
+orphan was found and published in Sep 2026; check coverage when adding files.
+
+## `references/WG-07-TM-Threat-Modeling/atq-card-terminal.html` is a duplicate
+
+Byte-identical copy of `web/public/terminals/atq-card-terminal.html`. Only the
+`web/public/` one is served; `sync-publications.js` ignores it (globs `.md`
+only), but the root `Dockerfile`'s `COPY references ./references` does ship
+it. Harmless, but the two must be kept in sync or one goes stale.
 
 ## [RESOLVED] Stale wiki embedded copy
 
