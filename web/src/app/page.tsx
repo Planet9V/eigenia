@@ -7,6 +7,7 @@ import { KnowledgeTransfer } from "@/components/KnowledgeTransfer";
 import { SCurveSection } from "@/components/SCurveSection";
 import { Principles } from "@/components/Principles";
 import { FirstVisitSplash } from "@/components/FirstVisitSplash";
+import { UnifiedStandardBand } from "@/components/UnifiedStandardBand";
 import { ArrowRight, Compass, Layers, Cpu, Users } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -158,6 +159,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* The Unified Standard: Topological BIM & Hierarchical BOM Band */}
+      <UnifiedStandardBand />
 
       {/* S-Curve Phase Transitions Section */}
       <SCurveSection />
