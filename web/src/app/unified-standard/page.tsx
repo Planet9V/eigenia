@@ -660,7 +660,10 @@ export default function UnifiedStandardPage() {
                 </div>
                 <div className="pt-3 border-t border-hairline text-[11px] font-mono text-muted flex items-center justify-between">
                   <span>Track 5: Engineering CAD</span>
-                  <Link href="/wiki?wg=WG-05-CAD" className="text-dutchOrange font-semibold hover:underline">
+                  <Link
+                    href="/wiki?wg=WG-05-CAD&doc=WG-05-CAD-DEXPI-Open-Standard-Position-Paper"
+                    className="text-dutchOrange font-semibold hover:underline"
+                  >
                     View in Wiki →
                   </Link>
                 </div>

@@ -99,6 +99,12 @@ export const PAPERS_REGISTRY: Record<string, { title: string; category: string; 
     number: "TRACK 02-E",
     relativePath: "references/WG-05-CAD-DEXPI-2/WG-05-CAD-IEC62443-SFAIRP-SecRACS.md",
   },
+  "dexpi-open-standard-position-paper": {
+    title: "Breaking the Proprietary CAD/BIM Monopoly: Why DEXPI 2.0 is the Open Foundation for Industrial Cyber-Physical Twins",
+    category: "Cyber-Physical Standards",
+    number: "TRACK 02-F",
+    relativePath: "references/WG-05-CAD-DEXPI-2/WG-05-CAD-DEXPI-Open-Standard-Position-Paper.md",
+  },
 
   // Track 3: Actuarial Re-Invention & Underwriter Treatises
   "1-underwriter-overview": {
