@@ -4,7 +4,7 @@ import { Navbar } from "@/components/Navbar";
 import { EuComplianceFooter } from "@/components/EuComplianceFooter";
 import { MarkdownViewer } from "@/components/MarkdownViewer";
 import { getPaperBySlug, getAllPaperSlugs } from "@/lib/papers";
-import { getAllWikiDocuments } from "@/lib/wiki";
+import { getAllWikiDocuments } from "@/lib/wikiRegistry";
 import { ArrowLeft, BookOpen, FileText, CheckCircle2, ShieldCheck, Hash } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";

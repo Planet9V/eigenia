@@ -19,7 +19,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { getAllWorkingGroups, WorkingGroupCategory } from "@/lib/wiki";
+import { getAllWorkingGroups, WorkingGroupCategory } from "@/lib/wikiRegistry";
 import { useLanguage } from "@/context/LanguageContext";
 
 const WG_ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {

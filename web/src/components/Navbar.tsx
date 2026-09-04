@@ -7,7 +7,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { useTheme } from "@/context/ThemeContext";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { getAllWikiDocuments, getAllWorkingGroups, getWorkingGroupById } from "@/lib/wiki";
+import { getAllWikiDocuments, getAllWorkingGroups, getWorkingGroupById } from "@/lib/wikiRegistry";
 
 // Derived from the wiki registry so these can never drift out of sync with the
 // published corpus, the way the previous hardcoded counts did.
