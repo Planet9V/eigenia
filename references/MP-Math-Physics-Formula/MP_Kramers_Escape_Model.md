@@ -42,4 +42,4 @@ This metric provides a temporal forecast of how long a specific actor (given the
 
 - [1] **Kramers, H. A. (1940)**: "Brownian motion in a field of force and the diffusion model of chemical reactions." *Physica*.
 - [2] **Hanggi, P., et al. (1990)**: "Reaction-rate theory: fifty years after Kramers." *Reviews of Modern Physics*.
-- [3] **Seldon, H. (2025)**: *Topological Cyber-Physics: Foundations of the Digital Twin*.
+- [3] **McKenney, J. (2025)**: *Topological Cyber-Physics: Foundations of the Digital Twin*. Eigenia Labs working paper.

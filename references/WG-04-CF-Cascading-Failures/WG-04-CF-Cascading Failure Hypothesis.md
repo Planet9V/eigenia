@@ -3928,11 +3928,11 @@ T+120 min: Regional blackout (1.2 million customers), frequency 47.5 Hz, system 
 
 #### Primary Sources - McKenney Research
 
-McKenney, J. (2024). "Death Wobble: Grid Frequency Instability from Coordinated DER Attacks." *Critical Infrastructure Protection Review*, 12(3), 145-178. DOI: 10.xxxx/cipr.2024.xxxxx
+McKenney, J. (2024). *The Grid's Precarious Pulse: Death Wobble and Frequency Instability from Coordinated DER Attacks*. Eigenia Labs, Working Group WG-04-CF. Published at /papers/death-wobble-frequency-instability
 
-McKenney, J. (2025). "Cascading Failure Analysis: South Australia 2016, UK 2019, and Iberian Peninsula 2025 Blackouts." *Energy Security Quarterly*, 8(1), 22-65. DOI: 10.xxxx/esq.2025.xxxxx
+McKenney, J. (2025). *Cascading Failure Analysis: South Australia 2016, UK 2019, and Iberian Peninsula 2025 Blackouts*. Eigenia Labs, Working Group WG-04-CF. (This document.)
 
-McKenney, J. (2024). "ERCOT and WECC Renewable Integration Challenges: Inverter-Based Resource Reliability Under Stress Conditions." *Grid Modernization Journal*, 15(4), 201-234. DOI: 10.xxxx/gmj.2024.xxxxx
+McKenney, J. (2024). *ERCOT and WECC Renewable Integration Challenges: Inverter-Based Resource Reliability Under Stress Conditions*. Eigenia Labs, Working Group WG-04-CF. Working paper.
 
 #### Regulatory and Standards Documents
 
