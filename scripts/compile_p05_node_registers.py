@@ -7,7 +7,7 @@ meeting all PAAI gate criteria and zero-tolerance style prohibitions.
 
 dest_path = 'references/WG-07-TM-Threat-Modeling/WG-07-TM-CyHAZOP-Node-Registers.md'
 
-content = """## Abstract
+content = r"""## Abstract
 
 While high-level hazard analyses establish the conceptual framework for cyber-physical safety, real-world industrial sabotage executes at the register and byte level. In megawatt AI data centers and mission-critical plants, physical equipment; Variable Frequency Drives (VFDs), Coolant Distribution Units (CDUs), Static Transfer Switches (STS), and Baseboard Management Controllers (BMCs); exposes its physical operating envelope across legacy operational technology (OT) network protocols. Modbus TCP holding registers, BACnet/IP analog output objects, and Redfish JSON schema payloads directly govern physical motor speeds, valve positions, trip thresholds, and electrical power capping.
 

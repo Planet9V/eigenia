@@ -10,7 +10,7 @@ import re
 
 dest_path = 'references/WG-02-DT-Digital-Twin/WG-02-DT-Seven-Staff-Fugue.md'
 
-content = """## Executive Abstract
+content = r"""## Executive Abstract
 
 Classical engineering representations of cyber-physical systems rely on static structural diagrams, relational tables, and disconnected time-series charts. These disjoint models obscure the essential nature of modern infrastructure: continuous, polyphonic, multi-layered temporal evolution. A failure in an industrial facility or hyperscale data center is never an isolated event; it is a dissonant counterpoint that echoes across silicon, thermodynamic fluids, network packets, human psychology, and reinsurance balance sheets.
 

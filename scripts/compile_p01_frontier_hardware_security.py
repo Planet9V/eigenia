@@ -7,7 +7,7 @@ meeting all PAAI gate criteria and zero-tolerance style prohibitions.
 
 dest_path = 'references/WG-05-CAD-DEXPI-2/WG-05-CAD-Frontier-AI-Hardware-Security.md'
 
-content = """# Frontier AI Hardware Security & Platform Assurance Framework
+content = r"""# Frontier AI Hardware Security & Platform Assurance Framework
 
 ## 1. Executive Summary & Foundational Scope
 

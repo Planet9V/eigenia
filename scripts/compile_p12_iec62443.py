@@ -7,7 +7,7 @@ meeting all PAAI gate criteria and zero-tolerance style prohibitions.
 
 dest_path = 'references/WG-05-CAD-DEXPI-2/WG-05-CAD-IEC62443-SFAIRP-SecRACS.md'
 
-content = """## Abstract
+content = r"""## Abstract
 
 The international standard IEC 62443 establishes the foundational requirements for securing Industrial Automation and Control Systems (IACS). It defines security levels (SL 1 to SL 4), zone and conduit segmentations, and foundational technical requirements. However, the published standard suffers from a critical delivery void: it dictates *what* technical deliverables must exist, but provides zero guidance on *how* to execute an engineering programme across the twenty-year facility lifecycle. In mission-critical environments, organisations routinely produce zone diagrams, declare compliance, and discover that security requirements never translated into procurement contracts or field commissioning tests.
 

@@ -15,7 +15,7 @@ In hyperscale mission-critical environments, a severe disconnect exists between 
 - **The Facility Engineer's Perspective:** A facility engineer observes an RPN of 567 on a Coolant Distribution Unit (CDU) pump cyber-induced shutdown and immediately recognizes an operational emergency.
 - **The CFO's Perspective:** The Chief Financial Officer reviews the identical report and asks: *What is the probabilistic annual dollar loss of that event, how will it impact quarterly EBITDA, and what capital expenditure is mathematically justified to prevent it?*
 
-Without rigorous financial quantification, cybersecurity requests are treated as discretionary overhead rather than risk-mitigating investments. As high-density AI clusters push rack densities beyond $100	ext{ kW}$ and cluster valuations past hundreds of millions of dollars, qualitative color-coded risk heat maps ("red, amber, green") are no longer legally or actuarially defensible.
+Without rigorous financial quantification, cybersecurity requests are treated as discretionary overhead rather than risk-mitigating investments. As high-density AI clusters push rack densities beyond $100\text{ kW}$ and cluster valuations past hundreds of millions of dollars, qualitative color-coded risk heat maps ("red, amber, green") are no longer legally or actuarially defensible.
 
 ```
 +-------------------------------------------------------------------------+
@@ -79,7 +79,7 @@ Accurately calculating Asset Value (AV) and Exposure Factor (EF) requires synchr
 +-------------------------------------------------------------------------+
 ```
 
-By joining the physical DEXPI asset graph with the CycloneDX silicon bill of materials, the financial model evaluates not merely the replacement cost of an industrial pump ($45,000	ext{ USD}$), but the total dependent compute payload ($375,000,000	ext{ USD}$) that crashes when that pump is commanded to stop.
+By joining the physical DEXPI asset graph with the CycloneDX silicon bill of materials, the financial model evaluates not merely the replacement cost of an industrial pump ($45,000\text{ USD}$), but the total dependent compute payload ($375,000,000\text{ USD}$) that crashes when that pump is commanded to stop.
 
 ---
 
@@ -88,33 +88,33 @@ By joining the physical DEXPI asset graph with the CycloneDX silicon bill of mat
 ### 3.1 Annualised Loss Expectancy (NIST SP 800-30 Rev. 1)
 The ALE framework calculates risk exposure through three sequential equations:
 
-$$	ext{SLE} = 	ext{AV} 	imes 	ext{EF}$$
+$$\text{SLE} = \text{AV} \times \text{EF}$$
 
-$$	ext{ALE} = 	ext{SLE} 	imes 	ext{ARO}$$
+$$\text{ALE} = \text{SLE} \times \text{ARO}$$
 
-$$\Delta 	ext{ALE} = 	ext{ALE}_{	ext{unmitigated}} - 	ext{ALE}_{	ext{hardened}}$$
+$$\Delta \text{ALE} = \text{ALE}_{\text{unmitigated}} - \text{ALE}_{\text{hardened}}$$
 
 Where:
 - **Asset Value (AV):** The total financial value of physical assets and unserved IT revenue exposed to disruption.
-- **Exposure Factor (EF):** The percentage of asset value destroyed or lost during a single event ($0.0 \le 	ext{EF} \le 1.0$).
+- **Exposure Factor (EF):** The percentage of asset value destroyed or lost during a single event ($0.0 \le \text{EF} \le 1.0$).
 - **Single Loss Expectancy (SLE):** The monetary loss expected from a single occurrence of the incident.
 - **Annualised Rate of Occurrence (ARO):** The statistical frequency of the event occurring within a twelve-month operational period.
 
 ### 3.2 The Gordon-Loeb Optimal Investment Theorem
-The Gordon-Loeb model (2002) determines the mathematically optimal capital expenditure $S^*$ to protect an information asset. Let $v$ represent the expected loss without additional security ($v = 	ext{ALE}$), and let $S$ represent the security investment. The post-mitigation vulnerability function is given by $S(v)$.
+The Gordon-Loeb model (2002) determines the mathematically optimal capital expenditure $S^*$ to protect an information asset. Let $v$ represent the expected loss without additional security ($v = \text{ALE}$), and let $S$ represent the security investment. The post-mitigation vulnerability function is given by $S(v)$.
 
 Gordon and Loeb prove that under broad classes of security breach probability functions, the optimal investment $S^*$ never exceeds approximately $37\%$ of the expected loss:
 
-$$S^*(z, v) \le rac{1}{e} \cdot v pprox 0.3679 \cdot 	ext{ALE}$$
+$$S^*(z, v) \le \frac{1}{e} \cdot v \approx 0.3679 \cdot \text{ALE}$$
 
-**The Practical CFO Takeaway:** If a cyber-induced chiller failure carries an unmitigated ALE of $2,000,000	ext{ USD}$, investing more than $735,800	ext{ USD}$ in security controls for that specific node yields diminishing marginal returns and destroys shareholder value.
+**The Practical CFO Takeaway:** If a cyber-induced chiller failure carries an unmitigated ALE of $2,000,000\text{ USD}$, investing more than $735,800\text{ USD}$ in security controls for that specific node yields diminishing marginal returns and destroys shareholder value.
 
 ### 3.3 Return on Security Investment (ROSI)
 The financial return on security controls is evaluated by dividing the net mitigated loss by the total cost of control implementation and maintenance:
 
-$$	ext{ROSI} = rac{\Delta 	ext{ALE} - C_{	ext{control}}}{C_{	ext{control}}} 	imes 100\% = rac{(	ext{ALE}_{	ext{unmitigated}} - 	ext{ALE}_{	ext{hardened}}) - C_{	ext{control}}}{C_{	ext{control}}} 	imes 100\%$$
+$$\text{ROSI} = \frac{\Delta \text{ALE} - C_{\text{control}}}{C_{\text{control}}} \times 100\% = \frac{(\text{ALE}_{\text{unmitigated}} - \text{ALE}_{\text{hardened}}) - C_{\text{control}}}{C_{\text{control}}} \times 100\%$$
 
-Where $C_{	ext{control}}$ includes capital expenditure (hardware firewalls, optical diodes, FPGA gateways), implementation labor, annual software licensing, and operational testing.
+Where $C_{\text{control}}$ includes capital expenditure (hardware firewalls, optical diodes, FPGA gateways), implementation labor, annual software licensing, and operational testing.
 
 ---
 
@@ -131,7 +131,7 @@ The following worked financial analysis evaluates the six high-consequence CyHAZ
 | Node | Failure Scenario | Asset Value (AV) | EF | Single Loss (SLE) | ARO (Cyber) | Pre-Mitigation ALE |
 |:---|:---|:---:|:---:|:---:|:---:|:---:|
 | **N2: Block UPS** | Coordinated NMC ransomware trips all inverters; 4-hour outage | $50,000,000 | 0.80 | $40,000,000 | 0.05 | **$2,000,000** |
-| **N5: Central Chiller** | Modbus setpoint manipulation locks supply temp at $22^\circ	ext{C}$; 8-hour thermal trip | $36,000,000 | 0.60 | $21,600,000 | 0.15 | **$3,240,000** |
+| **N5: Central Chiller** | Modbus setpoint manipulation locks supply temp at $22^\circ\text{C}$; 8-hour thermal trip | $36,000,000 | 0.60 | $21,600,000 | 0.15 | **$3,240,000** |
 | **N6: CDU Secondary** | Pump stop with spoofed flow telemetry; silicon thermal destruction | $75,000,000 | 0.85 | $63,750,000 | 0.10 | **$6,375,000** |
 | **N8: Facility BMS** | Ransomware encrypts supervisory SCADA; lights-out fail-safe collapse | $25,000,000 | 0.50 | $12,500,000 | 0.20 | **$2,500,000** |
 | **N10: Fire Suppression** | Inadvertent clean-agent release and HVAC emergency shutdown | $15,000,000 | 0.40 | $6,000,000 | 0.10 | **$600,000** |
@@ -142,7 +142,7 @@ The following worked financial analysis evaluates the six high-consequence CyHAZ
 
 ## 5. Security Programme Capital Allocation and ROSI Analysis
 
-To mitigate the $17.40	ext{M USD}$ annual loss exposure, the facility deploys an integrated operational technology security programme totaling $1.60	ext{M USD}$ in Year 1 capital and operational expenditure:
+To mitigate the $17.40\text{M USD}$ annual loss exposure, the facility deploys an integrated operational technology security programme totaling $1.60\text{M USD}$ in Year 1 capital and operational expenditure:
 
 ```
 +-------------------------------------------------------------------------+
@@ -150,7 +150,7 @@ To mitigate the $17.40	ext{M USD}$ annual loss exposure, the facility deploys an
 +-------------------------------------------------------------------------+
 ```
 
-| Node | Engineered Safeguard Deployed | Control Cost | Residual ARO | Post-Mitigation ALE | Net Loss Mitigated ($\Delta	ext{ALE}$) | Node ROSI |
+| Node | Engineered Safeguard Deployed | Control Cost | Residual ARO | Post-Mitigation ALE | Net Loss Mitigated ($\Delta\text{ALE}$) | Node ROSI |
 |:---|:---|:---:|:---:|:---:|:---:|:---:|
 | **N2: Block UPS** | Isolated VLAN, physical console login, disabled cloud NMC interface | $180,000 | 0.005 | $200,000 | $1,800,000 | **900%** |
 | **N5: Chiller** | BACnet deep packet inspection firewall, PLC setpoint clamping | $220,000 | 0.010 | $216,000 | $3,024,000 | **1,275%** |
@@ -163,11 +163,11 @@ To mitigate the $17.40	ext{M USD}$ annual loss exposure, the facility deploys an
 ### 5.1 Programme Evaluation Against the Gordon-Loeb Ceiling
 Evaluating the total programme against the Gordon-Loeb theorem:
 
-$$	ext{Gordon-Loeb Investment Ceiling} = 0.3679 	imes 	ext{ALE}_{	ext{unmitigated}} = 0.3679 	imes \$17,403,000 = \$6,402,564$$
+$$\text{Gordon-Loeb Investment Ceiling} = 0.3679 \times \text{ALE}_{\text{unmitigated}} = 0.3679 \times \$17,403,000 = \$6,402,564$$
 
-$$	ext{Budget Utilization Ratio} = rac{	ext{Programme Cost}}{	ext{Gordon-Loeb Ceiling}} = rac{\$1,600,000}{\$6,402,564} = 24.99\%$$
+$$\text{Budget Utilization Ratio} = \frac{\text{Programme Cost}}{\text{Gordon-Loeb Ceiling}} = \frac{\$1,600,000}{\$6,402,564} = 24.99\%$$
 
-The $1.60	ext{M USD}$ investment operates at only $25\%$ of the maximum rational spending ceiling, providing exceptional capital efficiency while eliminating $88.2\%$ of total annualized cyber-physical financial risk.
+The $1.60\text{M USD}$ investment operates at only $25\%$ of the maximum rational spending ceiling, providing exceptional capital efficiency while eliminating $88.2\%$ of total annualized cyber-physical financial risk.
 
 ---
 
@@ -180,13 +180,13 @@ Standard risk models assume that losses decay exponentially:
 
 $$P(L > x) \sim \exp(-\lambda x)$$
 
-Under thin tails (Mediocristan / Table A), the mean and variance are stable. Ten independent pump failures of $50,000	ext{ USD}$ each aggregate to $500,000	ext{ USD}$. Severe events are tens of standard deviations away and treated as statistically impossible.
+Under thin tails (Mediocristan / Table A), the mean and variance are stable. Ten independent pump failures of $50,000\text{ USD}$ each aggregate to $500,000\text{ USD}$. Severe events are tens of standard deviations away and treated as statistically impossible.
 
-However, cyber-physical operational technology operates in Extremistan (Table B). Losses follow a fat-tailed power-law distribution governed by a Pareto exponent $lpha$:
+However, cyber-physical operational technology operates in Extremistan (Table B). Losses follow a fat-tailed power-law distribution governed by a Pareto exponent $\alpha$:
 
-$$P(L > x) = L_{\min}^lpha \cdot x^{-lpha} \quad (1 < lpha < 2)$$
+$$P(L > x) = L_{\min}^\alpha \cdot x^{-\alpha} \quad (1 < \alpha < 2)$$
 
-When $lpha < 2$, the second moment (variance) of the loss distribution is infinite. When $lpha \le 1$, the first moment (the mathematical mean) is undefined.
+When $\alpha < 2$, the second moment (variance) of the loss distribution is infinite. When $\alpha \le 1$, the first moment (the mathematical mean) is undefined.
 
 ```
 +-------------------------------------------------------------------------+
@@ -211,17 +211,17 @@ When $lpha < 2$, the second moment (variance) of the loss distribution is infin
 ```
 
 ### 6.2 Mathematical Proof of Tail Expectation Divergence
-For a fat-tailed distribution with Pareto exponent $lpha$, the conditional tail expectation (Expected Shortfall or Tail Value at Risk) at confidence level $1 - p$ is formulated as:
+For a fat-tailed distribution with Pareto exponent $\alpha$, the conditional tail expectation (Expected Shortfall or Tail Value at Risk) at confidence level $1 - p$ is formulated as:
 
-$$	ext{ES}_p = E[L \mid L > 	ext{VaR}_p] = rac{lpha}{lpha - 1} \cdot 	ext{VaR}_p$$
+$$\text{ES}_p = E[L \mid L > \text{VaR}_p] = \frac{\alpha}{\alpha - 1} \cdot \text{VaR}_p$$
 
-If an underwriter assesses a hyperscale facility using a Gaussian model with $99\%$ Value-at-Risk ($	ext{VaR}_{0.99} = 25,000,000	ext{ USD}$), the Gaussian conditional tail loss is:
+If an underwriter assesses a hyperscale facility using a Gaussian model with $99\%$ Value-at-Risk ($\text{VaR}_{0.99} = 25,000,000\text{ USD}$), the Gaussian conditional tail loss is:
 
-$$	ext{ES}_{0.99}^{	ext{Gaussian}} pprox 	ext{VaR}_{0.99} + rac{\sigma}{\sqrt{2\pi}} pprox \$28,500,000$$
+$$\text{ES}_{0.99}^{\text{Gaussian}} \approx \text{VaR}_{0.99} + \frac{\sigma}{\sqrt{2\pi}} \approx \$28,500,000$$
 
-However, empirical cyber-physical catastrophe claims exhibit a power-law tail with $lpha pprox 1.25$. Under the Taleb fat-tail formulation:
+However, empirical cyber-physical catastrophe claims exhibit a power-law tail with $\alpha \approx 1.25$. Under the Taleb fat-tail formulation:
 
-$$	ext{ES}_{0.99}^{	ext{Fat-Tail}} = rac{1.25}{1.25 - 1} \cdot \$25,000,000 = 5.0 	imes \$25,000,000 = \$125,000,000$$
+$$\text{ES}_{0.99}^{\text{Fat-Tail}} = \frac{1.25}{1.25 - 1} \cdot \$25,000,000 = 5.0 \times \$25,000,000 = \$125,000,000$$
 
 The standard Gaussian model underestimates the catastrophic tail exposure by **96,500,000 USD (a 4.38x undercount)**. When common-cause cyber interdictions trigger simultaneous multi-hall cooling collapse, the physical loss wipes out thin-tailed insurance reserves, causing unhedged carrier insolvencies.
 
@@ -232,34 +232,34 @@ The standard Gaussian model underestimates the catastrophic tail exposure by **9
 To unify applied physics with financial risk management, the quantitative framework is governed by five core equations:
 
 ### 7.1 Single Loss Expectancy with Full Collateral Damage
-The Single Loss Expectancy ($	ext{SLE}$) accounts for capital replacement, collateral structural damage, and unserved business interruption:
+The Single Loss Expectancy ($\text{SLE}$) accounts for capital replacement, collateral structural damage, and unserved business interruption:
 
-$$	ext{SLE}(k) = C_{	ext{hardware}}(k) + C_{	ext{recovery}}(k) + \int_0^{T_{	ext{restore}}(k)} \dot{L}_{	ext{BI}}(t) \, dt + \Phi_{	ext{regulatory}}$$
+$$\text{SLE}(k) = C_{\text{hardware}}(k) + C_{\text{recovery}}(k) + \int_0^{T_{\text{restore}}(k)} \dot{L}_{\text{BI}}(t) \, dt + \Phi_{\text{regulatory}}$$
 
 Where:
-- $C_{	ext{hardware}}$ includes ruined accelerator packages and power converters.
-- $\dot{L}_{	ext{BI}}(t) = 18,500	ext{ USD/hour}$ SLA revenue burn rate.
-- $T_{	ext{restore}}$ is the supply-chain lead time governed by the Reliability Critical Items List (RCIL).
-- $\Phi_{	ext{regulatory}}$ is the statutory fine levied under EU NIS2 or EU CRA Article 64.
+- $C_{\text{hardware}}$ includes ruined accelerator packages and power converters.
+- $\dot{L}_{\text{BI}}(t) = 18,500\text{ USD/hour}$ SLA revenue burn rate.
+- $T_{\text{restore}}$ is the supply-chain lead time governed by the Reliability Critical Items List (RCIL).
+- $\Phi_{\text{regulatory}}$ is the statutory fine levied under EU NIS2 or EU CRA Article 64.
 
 ### 7.2 Dynamic Thermal Decay Governing Interruption Timelines
 When fluid flow collapses, the operational time window before irreversible silicon thermal damage occurs is governed by convective heat transfer:
 
-$$rac{dT_j(t)}{dt} = rac{P_{	ext{die}} - h_{	ext{conv}}(\dot{Q}(t)) \cdot A_{	ext{die}} \cdot (T_j(t) - T_{	ext{coolant}})}{C_{	ext{thermal}}}$$
+$$\frac{dT_j(t)}{dt} = \frac{P_{\text{die}} - h_{\text{conv}}(\dot{Q}(t)) \cdot A_{\text{die}} \cdot (T_j(t) - T_{\text{coolant}})}{C_{\text{thermal}}}$$
 
-Where fluid flow collapses from $38.5	ext{ L/min}$ PG25 to zero, intense silicon heat flux exceeding $120	ext{ W/cm}^2$ induces a junction temperature rate of change exceeding $4.2^\circ	ext{C/s}$ and breaches the $94.0^\circ	ext{C}$ threshold within $14.8	ext{ seconds}$, converting a temporary cooling trip into permanent capital equipment destruction.
+Where fluid flow collapses from $38.5\text{ L/min}$ PG25 to zero, intense silicon heat flux exceeding $120\text{ W/cm}^2$ induces a junction temperature rate of change exceeding $4.2^\circ\text{C/s}$ and breaches the $94.0^\circ\text{C}$ threshold within $14.8\text{ seconds}$, converting a temporary cooling trip into permanent capital equipment destruction.
 
 ### 7.3 Probable Maximum Loss (PML) under Table B Regimes
 For underwriting capital reserve determination, the Probable Maximum Loss under Extremistan tail regimes is formulated as:
 
-$$	ext{PML}_{	ext{Extremistan}} = \left( rac{lpha}{lpha - 1} ight) \cdot \left[ \sum_{j=1}^{N_{	ext{halls}}} 	ext{SLE}(j) \cdot \mathbf{1}_{\{	ext{shared\_SCADA}\}} ight]$$
+$$\text{PML}_{\text{Extremistan}} = \left( \frac{\alpha}{\alpha - 1} \right) \cdot \left[ \sum_{j=1}^{N_{\text{halls}}} \text{SLE}(j) \cdot \mathbf{1}_{\{\text{shared\_SCADA}\}} \right]$$
 
 ### 7.4 Net Present Value of Continuous Security Assurance
 The multi-year capital justification for operational technology resilience is expressed through discounted Net Present Value:
 
-$$	ext{NPV}_{	ext{security}} = \sum_{t=1}^N rac{\Delta 	ext{ALE}_t - 	ext{OPEX}_t}{(1 + r)^t} - 	ext{CAPEX}_0$$
+$$\text{NPV}_{\text{security}} = \sum_{t=1}^N \frac{\Delta \text{ALE}_t - \text{OPEX}_t}{(1 + r)^t} - \text{CAPEX}_0$$
 
-For the worked 100 MW case study at a discount rate of $r = 8.5\%$, over a 5-year operational lifecycle, the net present value exceeds $48,200,000	ext{ USD}$.
+For the worked 100 MW case study at a discount rate of $r = 8.5\%$, over a 5-year operational lifecycle, the net present value exceeds $48,200,000\text{ USD}$.
 
 ---
 

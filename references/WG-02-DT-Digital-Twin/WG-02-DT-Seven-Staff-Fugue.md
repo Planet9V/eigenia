@@ -98,7 +98,7 @@ Heinrich Schenker revolutionized music theory by demonstrating that complex tona
 
 ### 3.1 The Cyber-Physical Urlinie
 In high-density data campuses and industrial process plants, the fundamental line represents the unyielding thermodynamic and physical margin of the facility:
-- **$\hat{3}$ (Nominal Baseline):** Operating well within design margins (coolant temperature $\le 35	ext{ }^\circ	ext{C}$, supply pressure $6.0	ext{ bar}$, grid frequency $60.00	ext{ Hz}$).
+- **$\hat{3}$ (Nominal Baseline):** Operating well within design margins (coolant temperature $\le 35\text{ }^\circ\text{C}$, supply pressure $6.0\text{ bar}$, grid frequency $60.00\text{ Hz}$).
 - **$\hat{2}$ (Stressed Prolongation):** The system absorbs external interdiction or component loss. Compensatory mechanisms (secondary pumps, reserve chillers) engage. Dissonance emerges in the middleground staves.
 - **$\hat{1}$ (Terminal Resolution or Trip):** The system descends to its final resting point: either orderly controlled isolation (consonant resolution) or catastrophic equipment delamination (tragic collapse).
 
@@ -123,7 +123,7 @@ We construct a Vietoris-Rips simplicial complex $\mathcal{VR}(X, \epsilon)$ para
 ### 4.2 Barcode Intervals and Betti Numbers
 As $\epsilon$ increases, topological features (connected components $H_0$, cycles $H_1$, voids $H_2$) appear and disappear:
 
-$$	ext{PD}_k = \{ (b_i, d_i) \mid b_i = 	ext{birth parameter}, \, d_i = 	ext{death parameter} \}$$
+$$\text{PD}_k = \{ (b_i, d_i) \mid b_i = \text{birth parameter}, \, d_i = \text{death parameter} \}$$
 
 ```
 +-------------------------------------------------------------------------+
@@ -150,18 +150,18 @@ To predict future state evolution across the seven staves, we treat the facility
 
 The propagator $K(\mathbf{x}_f, t_f; \mathbf{x}_i, t_i)$ defining the probability amplitude of transitioning from initial nominal state $\mathbf{x}_i$ to failure state $\mathbf{x}_f$ is:
 
-$$K(\mathbf{x}_f, t_f; \mathbf{x}_i, t_i) = \int_{\mathbf{x}(t_i)=\mathbf{x}_i}^{\mathbf{x}(t_f)=\mathbf{x}_f} \mathcal{D}[\mathbf{x}(t)] \exp\left( rac{i}{\hbar_{	ext{sys}}} S[\mathbf{x}(t)] ight)$$
+$$K(\mathbf{x}_f, t_f; \mathbf{x}_i, t_i) = \int_{\mathbf{x}(t_i)=\mathbf{x}_i}^{\mathbf{x}(t_f)=\mathbf{x}_f} \mathcal{D}[\mathbf{x}(t)] \exp\left( \frac{i}{\hbar_{\text{sys}}} S[\mathbf{x}(t)] \right)$$
 
 Where:
 - $\mathcal{D}[\mathbf{x}(t)]$ is the functional integration measure over all possible operational paths.
-- $\hbar_{	ext{sys}}$ is the operational uncertainty parameter of the digital twin.
+- $\hbar_{\text{sys}}$ is the operational uncertainty parameter of the digital twin.
 - $S[\mathbf{x}(t)]$ is the cyber-physical action integral:
 
-$$S[\mathbf{x}(t)] = \int_{t_i}^{t_f} \mathcal{L}_{	ext{fugue}}(\mathbf{x}(t), \dot{\mathbf{x}}(t)) \, dt$$
+$$S[\mathbf{x}(t)] = \int_{t_i}^{t_f} \mathcal{L}_{\text{fugue}}(\mathbf{x}(t), \dot{\mathbf{x}}(t)) \, dt$$
 
 The Lagrangian of the Seven-Staff Fugue is decomposed into kinetic energy (rate of operational change) and potential energy (operational risk and constraint violation):
 
-$$\mathcal{L}_{	ext{fugue}} = rac{1}{2} \sum_{k=0}^6 m_k \left( rac{dx_k}{dt} ight)^2 - U_{	ext{plant}}(\mathbf{x}) - \sum_{j < k} V_{	ext{dissonance}}(x_j, x_k)$$
+$$\mathcal{L}_{\text{fugue}} = \frac{1}{2} \sum_{k=0}^6 m_k \left( \frac{dx_k}{dt} \right)^2 - U_{\text{plant}}(\mathbf{x}) - \sum_{j < k} V_{\text{dissonance}}(x_j, x_k)$$
 
 Paths that minimize the action ($\delta S = 0$) correspond to the classical deterministic trajectories of the facility. However, under cyber attacks that manipulate sensor feedback, non-classical paths experience constructive interference, causing the system to jump unexpectedly across potential barriers into catastrophic failure modes.
 
@@ -192,23 +192,23 @@ To ground the Seven-Staff Fugue in physical engineering reality, the musical sta
 ```
 
 ### 6.1 The 45-Second Thermal Catastrophe in Liquid-Cooled Facilities
-In modern high-density data centers operating at $120	ext{ kW}$ per rack across a 100 MW campus, Staff 1 (Physical Process) is governed by coupled thermodynamic equations:
+In modern high-density data centers operating at $120\text{ kW}$ per rack across a 100 MW campus, Staff 1 (Physical Process) is governed by coupled thermodynamic equations:
 
-$$rac{dT_j(t)}{dt} = rac{P_{	ext{die}} - h_{	ext{conv}}(\dot{Q}_{	ext{vol}}) \cdot A_{	ext{die}} \cdot (T_j - T_{	ext{coolant}})}{C_{	ext{thermal}}}$$
+$$\frac{dT_j(t)}{dt} = \frac{P_{\text{die}} - h_{\text{conv}}(\dot{Q}_{\text{vol}}) \cdot A_{\text{die}} \cdot (T_j - T_{\text{coolant}})}{C_{\text{thermal}}}$$
 
 Where:
-- $P_{	ext{die}} = 1,200	ext{ W}$ heat dissipation per accelerator.
-- Heat flux exceeds $140	ext{ W/cm}^2$.
+- $P_{\text{die}} = 1,200\text{ W}$ heat dissipation per accelerator.
+- Heat flux exceeds $140\text{ W/cm}^2$.
 - Coolant is $25\%$ propylene glycol / $75\%$ water (PG25).
-- Volumetric flow rate $\dot{Q}_{	ext{vol}} = 38.5	ext{ L/min}$ per rack.
+- Volumetric flow rate $\dot{Q}_{\text{vol}} = 38.5\text{ L/min}$ per rack.
 
 When Staff 3 (Threat Vector) injects a malicious setpoint into Staff 2 (PLC Firmware), closing the isolation valve, Staff 1 enters rapid hydraulic stagnation:
-1. At $t = 0.0	ext{s}$, $\dot{Q}_{	ext{vol}} 	o 0$. Convective coefficient $h_{	ext{conv}}$ plummets.
-2. At $t = 12.0	ext{s}$, die temperature rate of change $rac{dT_j}{dt} > 4.2	ext{ }^\circ	ext{C/s}$.
-3. At $t = 38.0	ext{s}$, junction temperature breaches the $85.0	ext{ }^\circ	ext{C}$ throttling threshold.
-4. At $t = 45.0	ext{s}$, silicon delamination occurs as $T_j > 94.0	ext{ }^\circ	ext{C}$.
+1. At $t = 0.0\text{s}$, $\dot{Q}_{\text{vol}} \to 0$. Convective coefficient $h_{\text{conv}}$ plummets.
+2. At $t = 12.0\text{s}$, die temperature rate of change $\frac{dT_j}{dt} > 4.2\text{ }^\circ\text{C/s}$.
+3. At $t = 38.0\text{s}$, junction temperature breaches the $85.0\text{ }^\circ\text{C}$ throttling threshold.
+4. At $t = 45.0\text{s}$, silicon delamination occurs as $T_j > 94.0\text{ }^\circ\text{C}$.
 
-In the fugue, this failure manifests as a violent dissonant clash between Staff 1 (surging temperature) and Staff 5 (falsified nominal sensor telemetry), while Staff 4 (operator) is paralyzed by cognitive denial. The persistent homology barcode detects the emergence of an infinite-persistence $H_1$ cycle at $t = 8.5	ext{s}$; fully 36.5 seconds before irreversible physical destruction.
+In the fugue, this failure manifests as a violent dissonant clash between Staff 1 (surging temperature) and Staff 5 (falsified nominal sensor telemetry), while Staff 4 (operator) is paralyzed by cognitive denial. The persistent homology barcode detects the emergence of an infinite-persistence $H_1$ cycle at $t = 8.5\text{s}$; fully 36.5 seconds before irreversible physical destruction.
 
 ---
 
@@ -242,18 +242,18 @@ To ensure that the Seven-Staff Fugue operates as an active defensive control sys
 
 By modeling the operational state space through the Seven-Staff Fugue, insurers and reinsurers replace backward-looking loss tables with forward-looking path integral probabilities:
 
-$$	ext{ALE}_{	ext{fugue}} = 	ext{SLE}_{	ext{catastrophe}} 	imes 	ext{ARO}_{	ext{path}} = 	ext{PML}_{	ext{facility}} 	imes \int_{	ext{collapse paths}} \mathcal{D}[\mathbf{x}] \, |\psi(\mathbf{x})|^2$$
+$$\text{ALE}_{\text{fugue}} = \text{SLE}_{\text{catastrophe}} \times \text{ARO}_{\text{path}} = \text{PML}_{\text{facility}} \times \int_{\text{collapse paths}} \mathcal{D}[\mathbf{x}] \, |\psi(\mathbf{x})|^2$$
 
-$$	ext{SLE}_{	ext{catastrophe}} = \sum_{k=1}^{N_{	ext{racks}}} C_{	ext{replacement}}(k) + \int_0^{T_{	ext{restore}}} \dot{L}_{	ext{BI}}(t) \, dt + \Phi_{	ext{regulatory}}$$
+$$\text{SLE}_{\text{catastrophe}} = \sum_{k=1}^{N_{\text{racks}}} C_{\text{replacement}}(k) + \int_0^{T_{\text{restore}}} \dot{L}_{\text{BI}}(t) \, dt + \Phi_{\text{regulatory}}$$
 
 Where:
-- $C_{	ext{replacement}}$ is the capital asset replacement cost ($14,400,000	ext{ USD}$ per 120-rack compute hall).
-- $\dot{L}_{	ext{BI}}(t)$ is the business interruption revenue loss rate ($24,000	ext{ USD/hour}$).
-- $\Phi_{	ext{regulatory}}$ is the statutory fine under EU CRA Article 64.
+- $C_{\text{replacement}}$ is the capital asset replacement cost ($14,400,000\text{ USD}$ per 120-rack compute hall).
+- $\dot{L}_{\text{BI}}(t)$ is the business interruption revenue loss rate ($24,000\text{ USD/hour}$).
+- $\Phi_{\text{regulatory}}$ is the statutory fine under EU CRA Article 64.
 
-Deploying the Seven-Staff Fugue digital twin monitoring architecture ($C_{	ext{controls}} = 310,000	ext{ USD}$) detects cross-layer dissonance in the middleground, reducing annualized loss expectancy from $10,500,000	ext{ USD}$ to $340,000	ext{ USD}$ and yielding a verified Return on Security Investment ($	ext{ROSI}$):
+Deploying the Seven-Staff Fugue digital twin monitoring architecture ($C_{\text{controls}} = 310,000\text{ USD}$) detects cross-layer dissonance in the middleground, reducing annualized loss expectancy from $10,500,000\text{ USD}$ to $340,000\text{ USD}$ and yielding a verified Return on Security Investment ($\text{ROSI}$):
 
-$$	ext{ROSI} = rac{(	ext{ALE}_{	ext{unmitigated}} - 	ext{ALE}_{	ext{hardened}}) - C_{	ext{controls}}}{C_{	ext{controls}}} 	imes 100\% = rac{\$10,160,000 - \$310,000}{\$310,000} 	imes 100\% = 3,177\%$$
+$$\text{ROSI} = \frac{(\text{ALE}_{\text{unmitigated}} - \text{ALE}_{\text{hardened}}) - C_{\text{controls}}}{C_{\text{controls}}} \times 100\% = \frac{\$10,160,000 - \$310,000}{\$310,000} \times 100\% = 3,177\%$$
 
 Compliance with SFAIRP (So Far As Is Reasonably Practicable) principles establishes legal and technical defensibility, securing reduced policy deductibles, eliminating restrictive sub-limit caps, and protecting global reinsurance syndicates under Lloyd's Y5381 against unmodeled systemic accumulation risk.
 

@@ -7,7 +7,7 @@ meeting all PAAI gate criteria and zero-tolerance style prohibitions.
 
 dest_path = 'references/WG-03-ML-Behaviorial_Modeling/WG-03-ML-Autonomous-OT-Trust-Boundary.md'
 
-content = """## Abstract
+content = r"""## Abstract
 
 In 2016, landmark demonstrations revealed that reinforcement learning algorithms could reduce data center cooling energy by up to 40% when granted real-time write access to chiller setpoints and pump speeds. Today, the global hyperscale sector is racing toward autonomous, lights-out facility operations. Machine learning agents are increasingly tasked with dynamic Power Usage Effectiveness (PUE) optimization, real-time demand response, predictive maintenance, and electrical load balancing across megawatt infrastructure.
 

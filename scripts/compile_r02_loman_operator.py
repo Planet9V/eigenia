@@ -10,7 +10,7 @@ import re
 
 dest_path = 'references/WG-03-ML-Behaviorial_Modeling/WG-03-ML-Loman-Operator-Topology-of-an-Act.md'
 
-content = """## Abstract
+content = r"""## Abstract
 
 When critical industrial infrastructure undergoes cyber-physical interdiction, the initial point of structural failure is rarely purely mechanical or digital; it is human. In control room environments, human operators facing unprecedented telemetry anomalies exhibit structured psychodynamic defense mechanisms: denial, rationalization, and parameter re-framing. These psychological dynamics delay emergency trip procedures, allowing localized equipment excursions to cascade into catastrophic plant destruction.
 

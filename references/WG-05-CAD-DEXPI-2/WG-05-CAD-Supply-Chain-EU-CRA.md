@@ -79,10 +79,10 @@ The supply chain operates across four distinct tiers:
 ### 2.2 Physical Failure Coupling Induced by Supply Chain Tampering
 When an adversary compromises a firmware module in an ODM-flashed microcontroller; such as an unauthenticated Modbus TCP interface or an unencrypted I2C thermal fan controller; the compromise couples directly to the physical facility:
 
-1. **Hydraulic Manifold Starvation:** The compromised firmware commands proportional valves to throttle volumetric delivery below the calibrated design flow rate of $38.5\text{ L/min}$ PG25 (25% propylene glycol). Secondary pressure collapses from $3.2\text{ bar}$ to $< 0.8\text{ bar}$, inducing pump cavitation.
-2. **Convective Heat Transfer Collapse:** The convective heat transfer coefficient $h_{\text{conv}}$ plummets as fluid flow drops out of the turbulent regime (Reynolds number $\text{Re} < 2,300$). The rate of change of silicon junction temperature exceeds $4.5^\circ\text{C/s}$.
-3. **Thermal Runaway and Die Warpage:** Heat flux across the accelerator package surpasses $100\text{ W/cm}^2$. Silicon junction temperature $T_j$ surges beyond the physical trip threshold of $94.0^\circ\text{C}$ within $14.8\text{ seconds}$, causing irreversible package delamination.
-4. **Electrical Power Infeed Surge:** A synchronous trip across twenty compute trays dumps $240\text{ kW}$ of electrical load instantaneously, inducing high-voltage inductive kickback across rack busbars and tripping upstream $2.5\text{ MW}$ facility transformers.
+1. **Hydraulic Manifold Starvation:** The compromised firmware commands proportional valves to throttle volumetric delivery below the calibrated design flow rate of $38.5\\text{ L/min}$ PG25 (25% propylene glycol). Secondary pressure collapses from $3.2\\text{ bar}$ to $< 0.8\\text{ bar}$, inducing pump cavitation.
+2. **Convective Heat Transfer Collapse:** The convective heat transfer coefficient $h_{\\text{conv}}$ plummets as fluid flow drops out of the turbulent regime (Reynolds number $\\text{Re} < 2,300$). The rate of change of silicon junction temperature exceeds $4.5^\\circ\\text{C/s}$.
+3. **Thermal Runaway and Die Warpage:** Heat flux across the accelerator package surpasses $100\\text{ W/cm}^2$. Silicon junction temperature $T_j$ surges beyond the physical trip threshold of $94.0^\\circ\\text{C}$ within $14.8\\text{ seconds}$, causing irreversible package delamination.
+4. **Electrical Power Infeed Surge:** A synchronous trip across twenty compute trays dumps $240\\text{ kW}$ of electrical load instantaneously, inducing high-voltage inductive kickback across rack busbars and tripping upstream $2.5\\text{ MW}$ facility transformers.
 
 ---
 
@@ -139,86 +139,86 @@ Major semiconductor vendors distribute manufacturing and packaging across global
 To transition systems assurance from subjective debate into deterministic mathematics, the regulatory and supply chain model is governed by six formulations.
 
 ### 4.1 Statutory Fine Exposure Formulation (CRA Article 64)
-Under EU Regulation 2024/2847, the legal financial exposure $\Phi_{\text{CRA}}$ resulting from non-compliance with Annex I essential requirements is calculated as:
+Under EU Regulation 2024/2847, the legal financial exposure $\\Phi_{\\text{CRA}}$ resulting from non-compliance with Annex I essential requirements is calculated as:
 
-$$\Phi_{\text{CRA}} = \max\left(15 \times 10^6 \text{ EUR}, \; \alpha_{\text{statutory}} \cdot \text{Turnover}_{\text{worldwide}}\right)$$
+$$\\Phi_{\\text{CRA}} = \\max\\left(15 \\times 10^6 \\text{ EUR}, \\; \\alpha_{\\text{statutory}} \\cdot \\text{Turnover}_{\\text{worldwide}}\\right)$$
 
 Where:
-- $\alpha_{\text{statutory}} = 0.025$ (2.5% of total worldwide annual turnover for the preceding financial year).
-- $\text{Turnover}_{\text{worldwide}}$ is the gross consolidated revenue of the parent undertaking.
+- $\\alpha_{\\text{statutory}} = 0.025$ (2.5% of total worldwide annual turnover for the preceding financial year).
+- $\\text{Turnover}_{\\text{worldwide}}$ is the gross consolidated revenue of the parent undertaking.
 
 For a multinational enterprise generating 24,000,000,000 EUR in global annual revenue, the statutory financial exposure under Tier 1 is:
 
-$$\Phi_{\text{CRA}} = \max\left(15 \times 10^6, \; 0.025 \times 24 \times 10^9\right) = \max\left(15\text{M}, \; 600\text{M}\right) = 600,000,000 \text{ EUR}$$
+$$\\Phi_{\\text{CRA}} = \\max\\left(15 \\times 10^6, \\; 0.025 \\times 24 \\times 10^9\\right) = \\max\\left(15\\text{M}, \\; 600\\text{M}\\right) = 600,000,000 \\text{ EUR}$$
 
 This catastrophic exposure shifts supply chain assurance from a technical overhead concern into an existential fiduciary duty for executive leadership.
 
 ### 4.2 The ALARP Risk-Justification Formulation for IEC 62443 SL-T Deviations
 Under the As Low As Reasonably Practicable (ALARP) principle, an engineering team may only justify a deviation from a normative Security Level Target (for example, accepting SL-T 2 instead of SL-T 3 on a legacy building management controller) if the financial or operational cost of implementing the higher control is grossly disproportionate to the risk reduction achieved:
 
-$$\frac{\Delta C_{\text{control}}}{\Delta \mathcal{R}_{\text{risk}}} > \gamma_{\text{disproportion}}$$
+$$\\frac{\\Delta C_{\\text{control}}}{\\Delta \\mathcal{R}_{\\text{risk}}} > \\gamma_{\\text{disproportion}}$$
 
 Where:
-- $\Delta C_{\text{control}}$ is the total cost of implementing the additional mitigation (including hardware redesign, procurement, downtime, and operational burden).
-- $\Delta \mathcal{R}_{\text{risk}}$ is the incremental reduction in annual risk exposure.
-- $\gamma_{\text{disproportion}}$ is the disproportion factor (typically $\gamma \ge 3$ for low consequence risks, and $\gamma \ge 10$ for catastrophic critical infrastructure hazards).
+- $\\Delta C_{\\text{control}}$ is the total cost of implementing the additional mitigation (including hardware redesign, procurement, downtime, and operational burden).
+- $\\Delta \\mathcal{R}_{\\text{risk}}$ is the incremental reduction in annual risk exposure.
+- $\\gamma_{\\text{disproportion}}$ is the disproportion factor (typically $\\gamma \\ge 3$ for low consequence risks, and $\\gamma \\ge 10$ for catastrophic critical infrastructure hazards).
 
-The incremental risk reduction $\Delta \mathcal{R}_{\text{risk}}$ is formulated across all realistic threat scenarios $\mathcal{S}$:
+The incremental risk reduction $\\Delta \\mathcal{R}_{\\text{risk}}$ is formulated across all realistic threat scenarios $\\mathcal{S}$:
 
-$$\Delta \mathcal{R}_{\text{risk}} = \sum_{s \in \mathcal{S}} \left( P_{\text{exploit}}(s \mid \text{baseline}) - P_{\text{exploit}}(s \mid \text{mitigated}) \right) \cdot \mathcal{C}_{\text{consequence}}(s)$$
+$$\\Delta \\mathcal{R}_{\\text{risk}} = \\sum_{s \\in \\mathcal{S}} \\left( P_{\\text{exploit}}(s \\mid \\text{baseline}) - P_{\\text{exploit}}(s \\mid \\text{mitigated}) \\right) \\cdot \\mathcal{C}_{\\text{consequence}}(s)$$
 
-Where $P_{\text{exploit}}$ is the empirical likelihood of attack success and $\mathcal{C}_{\text{consequence}}$ is the direct financial loss. If $\frac{\Delta C}{\Delta \mathcal{R}} \le \gamma$, the deviation is legally and technically non-conforming; the higher control must be implemented.
+Where $P_{\\text{exploit}}$ is the empirical likelihood of attack success and $\\mathcal{C}_{\\text{consequence}}$ is the direct financial loss. If $\\frac{\\Delta C}{\\Delta \\mathcal{R}} \\le \\gamma$, the deviation is legally and technically non-conforming; the higher control must be implemented.
 
 ### 4.3 Multi-Tier Supply Chain Compromise Probability
-The cumulative probability $P_{\text{chain}}$ that an infrastructure rack contains at least one compromised hardware, firmware, or software element across $M$ distinct supply chain tiers is formulated as:
+The cumulative probability $P_{\\text{chain}}$ that an infrastructure rack contains at least one compromised hardware, firmware, or software element across $M$ distinct supply chain tiers is formulated as:
 
-$$P_{\text{chain}} = 1 - \prod_{j=1}^M \prod_{k=1}^{N_j} \left( 1 - \theta_{j,k} \cdot \left(1 - \alpha_{\text{assurance},j,k}\right) \right)$$
+$$P_{\\text{chain}} = 1 - \\prod_{j=1}^M \\prod_{k=1}^{N_j} \\left( 1 - \\theta_{j,k} \\cdot \\left(1 - \\alpha_{\\text{assurance},j,k}\\right) \\right)$$
 
 Where:
 - $M$ is the number of supply chain tiers ($M = 4$: silicon, vendor, ODM, facility).
 - $N_j$ is the number of distinct components integrated at tier $j$.
-- $\theta_{j,k}$ is the baseline compromise probability of supplier $k$ at tier $j$ (reflecting geographic jurisdiction, adversary targeting, and corporate security posture).
-- $\alpha_{\text{assurance},j,k} \in [0, 1]$ is the verified systems assurance factor (where $\alpha = 0$ corresponds to unverified supplier questionnaires, and $\alpha = 0.99$ corresponds to FIPS 140-3 HSM attestation and continuous machine-readable VEX feeds).
+- $\\theta_{j,k}$ is the baseline compromise probability of supplier $k$ at tier $j$ (reflecting geographic jurisdiction, adversary targeting, and corporate security posture).
+- $\\alpha_{\\text{assurance},j,k} \\in [0, 1]$ is the verified systems assurance factor (where $\\alpha = 0$ corresponds to unverified supplier questionnaires, and $\\alpha = 0.99$ corresponds to FIPS 140-3 HSM attestation and continuous machine-readable VEX feeds).
 
-When an operator relies on static PDF questionnaires ($\alpha \le 0.15$) across 150 components, $P_{\text{chain}}$ asymptotically approaches $1.0$ ($100\%$ certainty of compromise). Enforcing automated, machine-verifiable CycloneDX schemas elevates $\alpha \to 0.98$, suppressing systemic compromise probability across the multi-tier fabric.
+When an operator relies on static PDF questionnaires ($\\alpha \\le 0.15$) across 150 components, $P_{\\text{chain}}$ asymptotically approaches $1.0$ ($100\\%$ certainty of compromise). Enforcing automated, machine-verifiable CycloneDX schemas elevates $\\alpha \\to 0.98$, suppressing systemic compromise probability across the multi-tier fabric.
 
 ### 4.4 Thermodynamic Junction Surge & Convective Dissipation
-When firmware tampering throttles volumetric liquid coolant delivery $\dot{Q}_{\text{vol}}$, the transient rate of change of silicon junction temperature $T_j(t)$ is governed by convective dissipation and internal die capacitance:
+When firmware tampering throttles volumetric liquid coolant delivery $\\dot{Q}_{\\text{vol}}$, the transient rate of change of silicon junction temperature $T_j(t)$ is governed by convective dissipation and internal die capacitance:
 
-$$\frac{dT_j(t)}{dt} = \frac{P_{\text{die}} - h_{\text{conv}}(\dot{Q}_{\text{vol}}) \cdot A_{\text{contact}} \cdot (T_j(t) - T_{\text{coolant}})}{C_{\text{thermal}}}$$
+$$\\frac{dT_j(t)}{dt} = \\frac{P_{\\text{die}} - h_{\\text{conv}}(\\dot{Q}_{\\text{vol}}) \\cdot A_{\\text{contact}} \\cdot (T_j(t) - T_{\\text{coolant}})}{C_{\\text{thermal}}}$$
 
-$$h_{\text{conv}}(\dot{Q}_{\text{vol}}) = \text{Nu} \cdot \frac{k_{\text{fluid}}}{D_h} = 0.023 \cdot \text{Re}^{0.8} \cdot \text{Pr}^{0.4} \cdot \frac{k_{\text{fluid}}}{D_h}$$
+$$h_{\\text{conv}}(\\dot{Q}_{\\text{vol}}) = \\text{Nu} \\cdot \\frac{k_{\\text{fluid}}}{D_h} = 0.023 \\cdot \\text{Re}^{0.8} \\cdot \\text{Pr}^{0.4} \\cdot \\frac{k_{\\text{fluid}}}{D_h}$$
 
 Where:
-- $P_{\text{die}}$ is the active compute power dissipation per package ($1,200\text{ W}$).
-- $h_{\text{conv}}$ is the convective heat transfer coefficient.
-- $\text{Re} = \frac{\rho v D_h}{\mu}$ is the Reynolds number governing fluid turbulence in the microchannel cold plate.
-- $\text{Pr}$ is the Prandtl number of the PG25 coolant mixture ($\text{Pr} \approx 18.5$ at $35^\circ\text{C}$).
-- $C_{\text{thermal}}$ is the thermal capacitance of the copper heat spreader ($C \approx 142\text{ J/K}$).
+- $P_{\\text{die}}$ is the active compute power dissipation per package ($1,200\\text{ W}$).
+- $h_{\\text{conv}}$ is the convective heat transfer coefficient.
+- $\\text{Re} = \\frac{\\rho v D_h}{\\mu}$ is the Reynolds number governing fluid turbulence in the microchannel cold plate.
+- $\\text{Pr}$ is the Prandtl number of the PG25 coolant mixture ($\\text{Pr} \\approx 18.5$ at $35^\\circ\\text{C}$).
+- $C_{\\text{thermal}}$ is the thermal capacitance of the copper heat spreader ($C \\approx 142\\text{ J/K}$).
 
-When flow drops below $5.0\text{ L/min}$, $\text{Re}$ collapses into laminar flow, reducing $h_{\text{conv}}$ by $78\%$. Within $14.8\text{ seconds}$, $T_j(t)$ crosses the irreversible catastrophic junction trip limit ($94.0^\circ\text{C}$), halting compute operations.
+When flow drops below $5.0\\text{ L/min}$, $\\text{Re}$ collapses into laminar flow, reducing $h_{\\text{conv}}$ by $78\\%$. Within $14.8\\text{ seconds}$, $T_j(t)$ crosses the irreversible catastrophic junction trip limit ($94.0^\\circ\\text{C}$), halting compute operations.
 
 ### 4.5 Cumulative Catastrophe Loss Function with Statutory Penalties
-For insurance underwriters and balance sheet risk modeling, the comprehensive financial Single Loss Expectancy ($\text{SLE}$) resulting from a cyber-physical breach involving regulatory non-compliance is formulated as:
+For insurance underwriters and balance sheet risk modeling, the comprehensive financial Single Loss Expectancy ($\\text{SLE}$) resulting from a cyber-physical breach involving regulatory non-compliance is formulated as:
 
-$$\text{SLE}_{\text{event}} = \text{SLE}_{\text{physical}} + \text{SLE}_{\text{business\_interruption}} + \Phi_{\text{CRA}} + \int_0^{T_{\text{remediation}}} \dot{C}_{\text{forensic}}(t) \, dt$$
+$$\\text{SLE}_{\\text{event}} = \\text{SLE}_{\\text{physical}} + \\text{SLE}_{\\text{business\\_interruption}} + \\Phi_{\\text{CRA}} + \\int_0^{T_{\\text{remediation}}} \\dot{C}_{\\text{forensic}}(t) \\, dt$$
 
-$$\text{ALE}_{\text{portfolio}} = \text{SLE}_{\text{event}} \times \text{ARO}$$
+$$\\text{ALE}_{\\text{portfolio}} = \\text{SLE}_{\\text{event}} \\times \\text{ARO}$$
 
 Where:
-- $\text{SLE}_{\text{physical}}$ represents the replacement cost of ruined physical assets (such as warped cold plates, burned pump motors, and degraded silicon chiplets).
-- $\text{SLE}_{\text{business\_interruption}}$ represents unserved inference SLAs and contract breach damages.
-- $\Phi_{\text{CRA}}$ is the administrative fine levied under CRA Article 64.
-- $\dot{C}_{\text{forensic}}(t)$ is the hourly rate of external incident response, legal counsel, and regulatory defense.
-- $T_{\text{remediation}}$ is the time required to regain regulatory certification and complete full firmware reflashing.
-- $\text{ARO}$ is the Annualised Rate of Occurrence, and $\text{ALE}$ is the Annualised Loss Expectancy.
+- $\\text{SLE}_{\\text{physical}}$ represents the replacement cost of ruined physical assets (such as warped cold plates, burned pump motors, and degraded silicon chiplets).
+- $\\text{SLE}_{\\text{business\\_interruption}}$ represents unserved inference SLAs and contract breach damages.
+- $\\Phi_{\\text{CRA}}$ is the administrative fine levied under CRA Article 64.
+- $\\dot{C}_{\\text{forensic}}(t)$ is the hourly rate of external incident response, legal counsel, and regulatory defense.
+- $T_{\\text{remediation}}$ is the time required to regain regulatory certification and complete full firmware reflashing.
+- $\\text{ARO}$ is the Annualised Rate of Occurrence, and $\\text{ALE}$ is the Annualised Loss Expectancy.
 
 ### 4.6 Return on Security Investment (ROSI) for Automated Supply Chain Controls
 The financial return on deploying automated machine-readable Bills of Materials and 6-site HSM audits is quantified through the Return on Security Investment:
 
-$$\text{ROSI} = \frac{(\text{ALE}_{\text{unverified}} - \text{ALE}_{\text{attested}}) - C_{\text{BOM\_controls}}}{C_{\text{BOM\_controls}}}$$
+$$\\text{ROSI} = \\frac{(\\text{ALE}_{\\text{unverified}} - \\text{ALE}_{\\text{attested}}) - C_{\\text{BOM\\_controls}}}{C_{\\text{BOM\\_controls}}}$$
 
-For a hyperscale infrastructure portfolio with an unverified baseline $\text{ALE}_{\text{unverified}} = 48.5\text{M EUR}$, implementing automated multi-BOM transparency reduces the post-control loss expectancy to $\text{ALE}_{\text{attested}} = 3.2\text{M EUR}$ at an annual control cost $C_{\text{BOM\_controls}} = 4.5\text{M EUR}$, delivering a verified $\text{ROSI} = 907\%$.
+For a hyperscale infrastructure portfolio with an unverified baseline $\\text{ALE}_{\\text{unverified}} = 48.5\\text{M EUR}$, implementing automated multi-BOM transparency reduces the post-control loss expectancy to $\\text{ALE}_{\\text{attested}} = 3.2\\text{M EUR}$ at an annual control cost $C_{\\text{BOM\\_controls}} = 4.5\\text{M EUR}$, delivering a verified $\\text{ROSI} = 907\\%$.
 
 ---
 
@@ -343,7 +343,7 @@ Lloyd's Market Association Bulletin Y5381 mandates that cyber policies exclude l
 | **Statutory Fine Coverage** | Excluded. Standard cyber policies do not indemnify unhedged regulatory fines. | Attested compliance under Annex VII satisfies due diligence standards; fines mitigated. | Insurers offer sub-limited regulatory defense and fine coverage extensions. |
 | **Probable Maximum Loss (PML)** | Subjective site estimates ($100M+ unconstrained accumulation). | Mathematically bounded failure propagation modeling physical manifold isolation. | PML reduced by 42%; reinsurance capital release achieved. |
 | **State-Backed Attack Attribution** | Ambiguous. Disputed claims lead to protracted coverage litigation under Y5381. | Attested hardware zero trust (Caliptra RoT, DICE) proves breach isolation. | Policyholders maintain affirmative coverage; war exclusion waivers granted. |
-| **Physical Consequential Loss** | Property and cyber policies engage in mutual coverage disputes over kinetic loss. | Multi-BOM digital twin models explicit physical damage boundaries ($h_f$, $\Delta T$). | Integrated Property-Cyber endorsements written with clear indemnity attachment points. |
+| **Physical Consequential Loss** | Property and cyber policies engage in mutual coverage disputes over kinetic loss. | Multi-BOM digital twin models explicit physical damage boundaries ($h_f$, $\\Delta T$). | Integrated Property-Cyber endorsements written with clear indemnity attachment points. |
 | **Deductible Sizing** | High static deductibles ($10M to $50M) reflecting unquantified supply chain risk. | Dynamic deductibles indexed to continuous VEX feed status and verified HSM provenance. | Working capital requirements reduced; premium credits up to 28% achieved. |
 
 ---

@@ -10,7 +10,7 @@ import re
 
 dest_path = 'references/WG-03-ML-Behaviorial_Modeling/WG-03-ML-Cognitive-Bias-Catalog.md'
 
-content = """## Executive Abstract
+content = r"""## Executive Abstract
 
 In high-consequence operational technology (OT) and mission-critical data center operations, security architectures are designed to withstand hardware component failures and cryptographic attacks. Yet the most vulnerable attack vector remains the human decision loop. Under operational stress and sensory alert flooding, control room operators, systems engineers, and incident responders systematically abandon slow, analytical System 2 deliberation in favor of rapid, heuristic System 1 cognitive shortcuts.
 

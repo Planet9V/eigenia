@@ -7,7 +7,7 @@ meeting all PAAI gate criteria and zero-tolerance style prohibitions.
 
 dest_path = 'references/WG-01-UI-Underwriter-insurance/WG-01-UI-ALE-ROSI-Decision-Framework.md'
 
-content = """## Abstract
+content = r"""## Abstract
 
 Engineering risk frameworks such as Failure Mode, Effects, and Criticality Analysis (FMECA) and Hazard and Operability studies (HAZOP) tell facility teams *what* can fail and *how severe* the physical breakdown will be. However, engineering risk metrics; such as Risk Priority Numbers (RPN); fail to answer the primary question asked by Chief Financial Officers, insurance underwriters, and corporate boards of directors: *How much capital is exposed to loss, and what is the optimal financial return on mitigating that exposure?*
 

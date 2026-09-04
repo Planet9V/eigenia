@@ -152,61 +152,61 @@ Derived from functional safety practice (EN 50126 / IEC 61508), Security-Related
 In critical infrastructure, functional safety engineers speak in Safety Integrity Levels (SIL 1 to SIL 4 per IEC 61508), while cybersecurity leads speak in Security Levels (SL 1 to SL 4 per IEC 62443). The two disciplines must converge on a unified mathematical formulation.
 
 ### 5.1 The Mathematical Convergence Formulation
-Under ISA TR 84.00.09 and CENELEC TS 50701, a safety-critical component cannot maintain its functional safety rating if its cyber attack surface is undefended. The required Security Level Target $	ext{SL-T}(k)$ for component $k$ is formulated as a function of its Safety Integrity Level $	ext{SIL}(k)$ and its cyber Risk Priority Number $	ext{RPN}_c(k)$:
+Under ISA TR 84.00.09 and CENELEC TS 50701, a safety-critical component cannot maintain its functional safety rating if its cyber attack surface is undefended. The required Security Level Target $\text{SL-T}(k)$ for component $k$ is formulated as a function of its Safety Integrity Level $\text{SIL}(k)$ and its cyber Risk Priority Number $\text{RPN}_c(k)$:
 
-$$	ext{SL-T}(k) = \min\left(4, \; \max\left(1, \; 	ext{SIL}(k) + \left\lfloor rac{	ext{RPN}_c(k) - 100}{150} ightfloor ight)ight)$$
+$$\text{SL-T}(k) = \min\left(4, \; \max\left(1, \; \text{SIL}(k) + \left\lfloor \frac{\text{RPN}_c(k) - 100}{150} \right\rfloor \right)\right)$$
 
 Where:
-- $	ext{SIL}(k) \in \{0, 1, 2, 3, 4\}$ is the baseline functional safety integrity level.
-- $	ext{RPN}_c(k) = S(k) \cdot O_c(k) \cdot D_c(k)$ is the cyber-induced risk priority number.
+- $\text{SIL}(k) \in \{0, 1, 2, 3, 4\}$ is the baseline functional safety integrity level.
+- $\text{RPN}_c(k) = S(k) \cdot O_c(k) \cdot D_c(k)$ is the cyber-induced risk priority number.
 
 For the Coolant Distribution Unit (CDU) secondary pump assembly:
-- $	ext{SIL} = 2$ (loss of cooling produces catastrophic silicon destruction).
-- $	ext{RPN}_c = 567$ (Severity 9, Occurrence 7, Detection 9).
+- $\text{SIL} = 2$ (loss of cooling produces catastrophic silicon destruction).
+- $\text{RPN}_c = 567$ (Severity 9, Occurrence 7, Detection 9).
 
-$$	ext{SL-T}_{	ext{CDU}} = \min\left(4, \; \max\left(1, \; 2 + \left\lfloor rac{567 - 100}{150} ightfloor ight)ight) = \min\left(4, \; 2 + \lfloor 3.11 flooright) = \min(4, \; 5) = \mathbf{4}$$
+$$\text{SL-T}_{\text{CDU}} = \min\left(4, \; \max\left(1, \; 2 + \left\lfloor \frac{567 - 100}{150} \right\rfloor \right)\right) = \min\left(4, \; 2 + \lfloor 3.11 \rfloor\right) = \min(4, \; 5) = \mathbf{4}$$
 
 Because the cyber RPN is extreme, the target security level escalates from SL-2 to **SL-4** (protection against sophisticated state-sponsored threat actors with significant resources).
 
 ### 5.2 Probability of Failure on Demand (PFD) under Cyber Attack
-Classical functional safety models component failure as random hardware degradation, calculating Probability of Failure on Demand ($	ext{PFD}_{	ext{avg}}$). In the presence of cyber attacks, the total effective failure probability $	ext{PFD}_{	ext{total}}(t)$ becomes:
+Classical functional safety models component failure as random hardware degradation, calculating Probability of Failure on Demand ($\text{PFD}_{\text{avg}}$). In the presence of cyber attacks, the total effective failure probability $\text{PFD}_{\text{total}}(t)$ becomes:
 
-$$	ext{PFD}_{	ext{total}}(t) = 1 - \left(1 - 	ext{PFD}_{	ext{mech}}(t)ight) \cdot \left(1 - P_{	ext{cyber\_exploit}}(t)ight)$$
+$$\text{PFD}_{\text{total}}(t) = 1 - \left(1 - \text{PFD}_{\text{mech}}(t)\right) \cdot \left(1 - P_{\text{cyber\_exploit}}(t)\right)$$
 
 Where:
-- $	ext{PFD}_{	ext{mech}} \le 10^{-3}$ for SIL-3 safety loops.
-- $P_{	ext{cyber\_exploit}}(t) = 1 - \exp(-\lambda_{	ext{exploit}} \cdot t \cdot [1 - 	ext{SL-C} / 	ext{SL-T}])$.
+- $\text{PFD}_{\text{mech}} \le 10^{-3}$ for SIL-3 safety loops.
+- $P_{\text{cyber\_exploit}}(t) = 1 - \exp(-\lambda_{\text{exploit}} \cdot t \cdot [1 - \text{SL-C} / \text{SL-T}])$.
 
-If the achieved security capability $	ext{SL-C}$ is zero (unauthenticated Modbus TCP), $P_{	ext{cyber\_exploit}} 	o 1.0$, completely invalidating the mechanical SIL rating and driving system failure probability to near-certainty.
+If the achieved security capability $\text{SL-C}$ is zero (unauthenticated Modbus TCP), $P_{\text{cyber\_exploit}} \to 1.0$, completely invalidating the mechanical SIL rating and driving system failure probability to near-certainty.
 
 ### 5.3 SFAIRP Disproportionate Cost Test Ratio
 Under legal standards in the United Kingdom, European Union, Australia, and New Zealand, operators must reduce risk "So Far As Is Reasonably Practicable" (SFAIRP) or "As Low As Reasonably Practicable" (ALARP). An engineering safeguard must be implemented unless the cost of the control is grossly disproportionate to the risk reduction achieved:
 
-$$	ext{DF} = rac{	ext{Cost of Control}}{	ext{Risk Reduction}} = rac{C_{	ext{control}}}{\Delta 	ext{ALE}} \le 	ext{DF}_{	ext{threshold}}$$
+$$\text{DF} = \frac{\text{Cost of Control}}{\text{Risk Reduction}} = \frac{C_{\text{control}}}{\Delta \text{ALE}} \le \text{DF}_{\text{threshold}}$$
 
 Where:
-- $\Delta 	ext{ALE} = 	ext{ALE}_{	ext{prior}} - 	ext{ALE}_{	ext{post}}$ is the annual expected monetary loss mitigated.
-- $	ext{DF}_{	ext{threshold}} \in [2.0, \; 10.0]$ is the statutory Disproportion Factor. For catastrophic life-safety and multi-million-dollar physical hazards, courts mandate $	ext{DF} = 6.0	ext{ to }10.0$.
+- $\Delta \text{ALE} = \text{ALE}_{\text{prior}} - \text{ALE}_{\text{post}}$ is the annual expected monetary loss mitigated.
+- $\text{DF}_{\text{threshold}} \in [2.0, \; 10.0]$ is the statutory Disproportion Factor. For catastrophic life-safety and multi-million-dollar physical hazards, courts mandate $\text{DF} = 6.0\text{ to }10.0$.
 
-If mitigating a $14,500,000	ext{ USD}$ CDU thermal runaway loss costs $450,000	ext{ USD}$:
+If mitigating a $14,500,000\text{ USD}$ CDU thermal runaway loss costs $450,000\text{ USD}$:
 
-$$	ext{DF} = rac{\$450,000}{\$14,500,000 - \$120,000} = rac{\$450,000}{\$14,380,000} = 0.0313 \ll 6.0$$
+$$\text{DF} = \frac{\$450,000}{\$14,500,000 - \$120,000} = \frac{\$450,000}{\$14,380,000} = 0.0313 \ll 6.0$$
 
 Because the cost of control is less than $3.2\%$ of the risk reduction, failing to implement the safeguard constitutes statutory gross negligence under EU CRA and common-law tort regimes.
 
 ### 5.4 Thermal Decay Governing Protection Speed
-When fluid circulation ceases in a $120	ext{ kW}$ liquid-cooled rack, transient silicon junction temperature $T_j(t)$ is governed by:
+When fluid circulation ceases in a $120\text{ kW}$ liquid-cooled rack, transient silicon junction temperature $T_j(t)$ is governed by:
 
-$$rac{dT_j(t)}{dt} = rac{P_{	ext{die}} - h_{	ext{conv}}(\dot{Q}_{	ext{vol}}) \cdot A_{	ext{die}} \cdot (T_j - T_{	ext{coolant}})}{C_{	ext{thermal}}}$$
+$$\frac{dT_j(t)}{dt} = \frac{P_{\text{die}} - h_{\text{conv}}(\dot{Q}_{\text{vol}}) \cdot A_{\text{die}} \cdot (T_j - T_{\text{coolant}})}{C_{\text{thermal}}}$$
 
-Where volumetric flow collapses from $38.5	ext{ L/min}$ PG25 to zero against an operating pressure of 6.0 bar, and silicon heat flux exceeding $120	ext{ W/cm}^2$ drives a junction temperature rate of change exceeding $4.2^\circ	ext{C/s}$ and temperature rise past 45 °C. The $94.0^\circ	ext{C}$ destruction limit is breached within $14.8	ext{ seconds}$, mathematically proving why SL-4 cryptographic rate limiters and hardwired SIL-3 thermal cutouts are non-negotiable SFAIRP mandates.
+Where volumetric flow collapses from $38.5\text{ L/min}$ PG25 to zero against an operating pressure of 6.0 bar, and silicon heat flux exceeding $120\text{ W/cm}^2$ drives a junction temperature rate of change exceeding $4.2^\circ\text{C/s}$ and temperature rise past 45 °C. The $94.0^\circ\text{C}$ destruction limit is breached within $14.8\text{ seconds}$, mathematically proving why SL-4 cryptographic rate limiters and hardwired SIL-3 thermal cutouts are non-negotiable SFAIRP mandates.
 
 ### 5.5 Return on Security Investment (ROSI) for SFAIR Programmes
 The programme-level financial return on implementing the SFAIR methodology across a 100 MW facility is quantified through:
 
-$$	ext{ROSI} = rac{(	ext{ALE}_{	ext{unmitigated}} - 	ext{ALE}_{	ext{SFAIR}}) - C_{	ext{programme}}}{C_{	ext{programme}}} 	imes 100\%$$
+$$\text{ROSI} = \frac{(\text{ALE}_{\text{unmitigated}} - \text{ALE}_{\text{SFAIR}}) - C_{\text{programme}}}{C_{\text{programme}}} \times 100\%$$
 
-Where a comprehensive SFAIR implementation ($C_{	ext{programme}} = 1,600,000	ext{ USD}$) reduces annualized loss expectancy from $17,403,000	ext{ USD}$ to $1,850,000	ext{ USD}$, delivering a verified $	ext{ROSI} = 872\%$.
+Where a comprehensive SFAIR implementation ($C_{\text{programme}} = 1,600,000\text{ USD}$) reduces annualized loss expectancy from $17,403,000\text{ USD}$ to $1,850,000\text{ USD}$, delivering a verified $\text{ROSI} = 872\%$.
 
 ---
 
@@ -220,7 +220,7 @@ The authoritative output of Stage 4 (Assess) is the Consolidated Master Hazard R
 +-------------------------------------------------------------------------+
 ```
 
-| Hazard ID | Node | Component | Deviation Mode | MITRE ATT&CK | EMB3D Property | SL-T | S | $O_c$ | $D_c$ | $	ext{RPN}_c$ | Table |
+| Hazard ID | Node | Component | Deviation Mode | MITRE ATT&CK | EMB3D Property | SL-T | S | $O_c$ | $D_c$ | $\text{RPN}_c$ | Table |
 |:---|:---|:---|:---|:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|
 | **HAZ-001** | N6 | CDU Pump Assembly | **NO (Stop)** | T0814 (Denial of Service) | Flow Tampering | **SL-4** | 9 | 7 | 9 | **567** | B |
 | **HAZ-002** | N6 | CDU Motorized Valve | **LESS (Throttle)** | T0836 (Modify Parameter) | Valve State Tampering | **SL-4** | 9 | 6 | 9 | **486** | B |

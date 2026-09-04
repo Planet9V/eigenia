@@ -572,54 +572,52 @@ To operationalize Musical Psychometric Notation in industrial and data center en
 ### 10.1 Coupling Auditory Telemetry to Industrial Control Layers
 Under IEC 62443 and EN 50126, security and safety interlocks operate across strict trust boundaries. MPN maps auditory harmonic registers directly to DEXPI 2.0 (ISO 15926) piping schematics and CycloneDX 1.6+ multi-BOM specifications:
 - **HBOM Roots of Trust:** Silicon attestation keys (Caliptra 2.0, OpenSIL, DICE) provide the baseline root tonic; if hardware attestation fails, the key signature instantly modulates into atonal dissonance.
-- **OBOM Operational Constraints:** System operational parameters (coolant flow $\ge 35	ext{ L/min}$ PG25, temperature $\le 45	ext{ }^\circ	ext{C}$, pressure $\le 6.0	ext{ bar}$) set the harmonic consonant interval.
+- **OBOM Operational Constraints:** System operational parameters (coolant flow $\ge 35\text{ L/min}$ PG25, temperature $\le 45\text{ }^\circ\text{C}$, pressure $\le 6.0\text{ bar}$) set the harmonic consonant interval.
 - **VEX Vulnerability Tracking:** Machine-readable vulnerability streams drive micro-tonal pitch drift, alerting operators before exploit payloads achieve execution.
 
 ### 10.2 Mathematical Formulation of Harmonic Dissonance and Thermal Dynamics
 The Seldon Crisis early-warning metric is formulated as an integral over cross-staff dissonance:
 
-$$D_{	ext{crisis}}(t) = \int_{t-T}^t \left( \sum_{k=1}^7 w_k \cdot 	ext{Dissonance}(S_1(k), S_2(k)) ight) dt$$
+$$D_{\text{crisis}}(t) = \int_{t-T}^t \left( \sum_{k=1}^7 w_k \cdot \text{Dissonance}(S_1(k), S_2(k)) \right) dt$$
 
 Where:
 - $w_k$ is the layer weighting factor ($w_1 = 0.15$ physical, $w_4 = 0.25$ psychometric).
-- $	ext{Dissonance}(S_1, S_2)$ calculates the roughness of overlapping frequencies using Plomp-Levelt psychoacoustic curves.
+- $\text{Dissonance}(S_1, S_2)$ calculates the roughness of overlapping frequencies using Plomp-Levelt psychoacoustic curves.
 
-In high-density liquid-cooled compute facilities running $120	ext{ kW}$ per rack, fluid stagnation causes silicon junction temperature $T_j(t)$ to surge catastrophically:
+In high-density liquid-cooled compute facilities running $120\text{ kW}$ per rack, fluid stagnation causes silicon junction temperature $T_j(t)$ to surge catastrophically:
 
-$$rac{dT_j(t)}{dt} = rac{P_{	ext{die}} - h_{	ext{conv}}(\dot{Q}_{	ext{vol}}) \cdot A_{	ext{die}} \cdot (T_j - T_{	ext{coolant}})}{C_{	ext{thermal}}}$$
+$$\frac{dT_j(t)}{dt} = \frac{P_{\text{die}} - h_{\text{conv}}(\dot{Q}_{\text{vol}}) \cdot A_{\text{die}} \cdot (T_j - T_{\text{coolant}})}{C_{\text{thermal}}}$$
 
-Where $P_{	ext{die}} = 1,200	ext{ W}$, heat flux exceeds $140	ext{ W/cm}^2$, and volumetric flow collapses, causing junction temperature to surge past $94.0	ext{ }^\circ	ext{C}$ in under 45 seconds. MPN auditory alarms trigger pitch modulations within 300 milliseconds of hydraulic flow deceleration, giving operators critical advance notice before thermal trip interlocks execute.
+Where $P_{\text{die}} = 1,200\text{ W}$, heat flux exceeds $140\text{ W/cm}^2$, and volumetric flow collapses, causing junction temperature to surge past $94.0\text{ }^\circ\text{C}$ in under 45 seconds. MPN auditory alarms trigger pitch modulations within 300 milliseconds of hydraulic flow deceleration, giving operators critical advance notice before thermal trip interlocks execute.
 
 ### 10.2.1 Acoustic Wave Propagation and Control Room Psychoacoustics
 The physical sound field in the mission-critical control room is governed by the inhomogeneous wave equation with thermal boundary damping:
 
-$$
-abla^2 p(\mathbf{r}, t) - rac{1}{c_s^2} rac{\partial^2 p(\mathbf{r}, t)}{\partial t^2} = -ho_0 rac{\partial q(\mathbf{r}, t)}{\partial t} - \mu 
-abla p(\mathbf{r}, t)$$
+$$\nabla^2 p(\mathbf{r}, t) - \frac{1}{c_s^2} \frac{\partial^2 p(\mathbf{r}, t)}{\partial t^2} = -\rho_0 \frac{\partial q(\mathbf{r}, t)}{\partial t} - \mu \nabla p(\mathbf{r}, t)$$
 
 Where:
 - $p(\mathbf{r}, t)$ is the acoustic sound pressure field in pascals.
-- $c_s = 343	ext{ m/s}$ is the speed of sound in air at $20	ext{ }^\circ	ext{C}$.
-- $ho_0$ is ambient air density ($1.204	ext{ kg/m}^3$).
+- $c_s = 343\text{ m/s}$ is the speed of sound in air at $20\text{ }^\circ\text{C}$.
+- $\rho_0$ is ambient air density ($1.204\text{ kg/m}^3$).
 - $q(\mathbf{r}, t)$ represents the distributed acoustic source density from multi-channel spatial monitors.
 - $\mu$ is the acoustic absorption coefficient of control room baffles.
 
 In a 100 MW campus facility containing 800 liquid-cooled racks operating at 120 kW per rack, high-frequency auditory dissonance penetrates the background acoustic noise of chiller compressors and secondary pumps, alerting personnel to rate of change anomalies in hydraulic flow without requiring continuous visual gaze fixation on primary SCADA screens.
 
 ### 10.3 Actuarial Risk Engineering and Lloyd's Y5381 Reinsurance Underwriting
-Auditory sonification directly reduces operator dwell time during major incidents, mitigating Annualised Loss Expectancy ($	ext{ALE}$) for affirmative cyber property catastrophe policies:
+Auditory sonification directly reduces operator dwell time during major incidents, mitigating Annualised Loss Expectancy ($\text{ALE}$) for affirmative cyber property catastrophe policies:
 
-$$	ext{ALE}_{	ext{sonification}} = 	ext{SLE}_{	ext{physical}} 	imes 	ext{ARO}_{	ext{incident}} = 	ext{PML}_{	ext{plant}} 	imes 	ext{ARO}_{	ext{incident}}$$
+$$\text{ALE}_{\text{sonification}} = \text{SLE}_{\text{physical}} \times \text{ARO}_{\text{incident}} = \text{PML}_{\text{plant}} \times \text{ARO}_{\text{incident}}$$
 
-$$	ext{SLE}_{	ext{physical}} = \sum_{k=1}^{N_{	ext{assets}}} C_{	ext{replacement}}(k) + \int_0^{T_{	ext{restore}}} \dot{L}_{	ext{BI}}(t) \, dt + \Phi_{	ext{regulatory}}$$
+$$\text{SLE}_{\text{physical}} = \sum_{k=1}^{N_{\text{assets}}} C_{\text{replacement}}(k) + \int_0^{T_{\text{restore}}} \dot{L}_{\text{BI}}(t) \, dt + \Phi_{\text{regulatory}}$$
 
 Where:
-- $C_{	ext{replacement}}$ is the capital asset replacement cost ($14,400,000	ext{ USD}$ per 120-rack hall).
-- $\dot{L}_{	ext{BI}}(t)$ is the business interruption revenue loss rate ($24,000	ext{ USD/hour}$).
-- $\Phi_{	ext{regulatory}}$ is the statutory fine under EU CRA Article 64.
+- $C_{\text{replacement}}$ is the capital asset replacement cost ($14,400,000\text{ USD}$ per 120-rack hall).
+- $\dot{L}_{\text{BI}}(t)$ is the business interruption revenue loss rate ($24,000\text{ USD/hour}$).
+- $\Phi_{\text{regulatory}}$ is the statutory fine under EU CRA Article 64.
 
-Deploying the MPN auditory telemetry system ($C_{	ext{controls}} = 195,000	ext{ USD}$) reduces mean-time-to-detect (MTTD) by 68%, mitigating annualized loss expectancy from $8,900,000	ext{ USD}$ to $280,000	ext{ USD}$ and yielding a verified Return on Security Investment ($	ext{ROSI}$):
+Deploying the MPN auditory telemetry system ($C_{\text{controls}} = 195,000\text{ USD}$) reduces mean-time-to-detect (MTTD) by 68%, mitigating annualized loss expectancy from $8,900,000\text{ USD}$ to $280,000\text{ USD}$ and yielding a verified Return on Security Investment ($\text{ROSI}$):
 
-$$	ext{ROSI} = rac{(	ext{ALE}_{	ext{unmitigated}} - 	ext{ALE}_{	ext{hardened}}) - C_{	ext{controls}}}{C_{	ext{controls}}} 	imes 100\% = rac{\$8,620,000 - \$195,000}{\$195,000} 	imes 100\% = 4,320\%$$
+$$\text{ROSI} = \frac{(\text{ALE}_{\text{unmitigated}} - \text{ALE}_{\text{hardened}}) - C_{\text{controls}}}{C_{\text{controls}}} \times 100\% = \frac{\$8,620,000 - \$195,000}{\$195,000} \times 100\% = 4,320\%$$
 
 Compliance with SFAIRP (So Far As Is Reasonably Practicable) standards underpins underwriting defensibility, securing lower policy deductibles, eliminating restrictive sub-limit caps, and protecting global reinsurance syndicates from correlated accumulation losses.

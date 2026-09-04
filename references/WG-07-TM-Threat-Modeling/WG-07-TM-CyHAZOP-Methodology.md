@@ -27,7 +27,7 @@ Standard HAZOP under IEC 61882 considers three root-cause categories: mechanical
 A cyber-induced deviation is the deliberate or accidental manipulation of a sensor value, setpoint register, actuator state, or firmware parameter across a digital communication conduit. Cyber-induced deviations exhibit four characteristics that make them far more destructive than mechanical failures:
 
 1. **Non-Random Simultaneity:** Mechanical failures occur as stochastic Poisson processes distributed across independent operating hours. Cyber attacks execute coordinated, multi-node manipulations simultaneously, defeating parallel N+1 redundancies in a single execution step.
-2. **Telemetry Spoofing (Silent Drift):** While mechanical failures trigger physical alarms on monitoring screens, a cyber exploit can spoof sensor telemetry registers (such as transmitting nominal $32^\circ	ext{C}$ temperature reports while throttling flow valves), blinding operators until physical damage occurs.
+2. **Telemetry Spoofing (Silent Drift):** While mechanical failures trigger physical alarms on monitoring screens, a cyber exploit can spoof sensor telemetry registers (such as transmitting nominal $32^\circ\text{C}$ temperature reports while throttling flow valves), blinding operators until physical damage occurs.
 3. **Speed of Propagation:** Network commands propagate at line rate across Ethernet conduits (sub-millisecond latency), vastly outpacing manual human operator reaction times or facility shift inspection rounds.
 4. **Geographic Distribution:** A single remote access vulnerability or compromised firmware update server allows an adversary to execute simultaneous physical sabotage across multiple campuses worldwide.
 
@@ -124,8 +124,8 @@ In CyHAZOP, the classical IEC 61882 guide words are mapped directly to physical 
 To demonstrate the rigorous application of CyHAZOP, we present detailed analysis tables for four essential nodes of a 100 MW high-density AI campus.
 
 ### 4.1 Node 1: Secondary Cooling Loop (CDU to GPU Cold Plates)
-- **Design Intent:** Deliver treated 25% propylene glycol (PG25) coolant at $30.0^\circ	ext{C} \pm 2.0^\circ	ext{C}$ to 8x AI accelerator cold plates at $38.5	ext{ L/min}$ per tray, maintaining silicon junction temperatures $T_j \le 85.0^\circ	ext{C}$ under $10.5	ext{ kW}$ compute dissipation.
-- **Node Boundary:** CDU secondary heat exchanger discharge nozzle $	o$ distribution manifold $	o$ flexible stainless steel braided hose $	o$ quick-disconnect dry-break couplings $	o$ microchannel cold plates $	o$ return manifold $	o$ CDU suction inlet.
+- **Design Intent:** Deliver treated 25% propylene glycol (PG25) coolant at $30.0^\circ\text{C} \pm 2.0^\circ\text{C}$ to 8x AI accelerator cold plates at $38.5\text{ L/min}$ per tray, maintaining silicon junction temperatures $T_j \le 85.0^\circ\text{C}$ under $10.5\text{ kW}$ compute dissipation.
+- **Node Boundary:** CDU secondary heat exchanger discharge nozzle $\to$ distribution manifold $\to$ flexible stainless steel braided hose $\to$ quick-disconnect dry-break couplings $\to$ microchannel cold plates $\to$ return manifold $\to$ CDU suction inlet.
 
 ```
 +-------------------------------------------------------------------------+
@@ -135,14 +135,14 @@ To demonstrate the rigorous application of CyHAZOP, we present detailed analysis
 
 | Guide Word | Parameter | Deviation | Physical Consequence | Cyber Attack Vector | Severity | Recommended Safeguard |
 |:---|:---|:---|:---|:---|:---|:---|
-| **NO** | Flow | Complete loss of coolant flow ($0	ext{ L/min}$). | Convective dissipation collapses. Silicon junction $T_j$ surges at $4.5^\circ	ext{C/s}$, exceeding $94^\circ	ext{C}$ in $< 14.8	ext{ s}$. Irreversible die warpage. | Modbus TCP function code 05/06 injected to PLC register 40012, asserting pump emergency stop. | **Catastrophic** | Hardwired pneumatic pressure relief and independent bi-metallic thermal interlock cutting server power. |
-| **LESS** | Flow | Throttled coolant flow ($5.8	ext{ L/min}$). | Fluid velocity drops below critical Reynolds number ($	ext{Re} < 2,300$). Heat transfer coefficient drops $78\%$. Accelerators throttle inference $60\%$. | Attacker overwrites VFD speed reference register from $60	ext{ Hz}$ to $12	ext{ Hz}$ via unauthenticated BACnet conduit. | **Major** | Cryptographically authenticated VFD command signing (IEC 62443-4-2 SL-3) and minimum speed hardware jumper. |
-| **MORE** | Temperature | Supply coolant exceeds $42.0^\circ	ext{C}$. | Loss of thermal logarithmic mean temperature difference ($\Delta T_{	ext{lm}}$). Chiller compressor stalls. Rack thermal trip engaged within 180 seconds. | Attacker tampers with primary plate heat exchanger proportional valve setpoint via BMS Redfish API. | **Major** | Out-of-band analog thermocouple loop bypassing the IP network, wired directly to chiller local control. |
-| **OTHER THAN** | Telemetry | Frozen nominal temperature ($30^\circ	ext{C}$) while true temperature rises. | Facility operators receive nominal dashboards while silicon cooks. Hardware safety trips disabled by spoofed BMC registers. | Man-in-the-middle ARP spoofing injecting forged Modbus telemetry packets into supervisory SCADA server. | **Catastrophic** | Cryptographic payload attestation (DICE/Caliptra) on sensor telemetry nodes and independent analog gauge audits. |
+| **NO** | Flow | Complete loss of coolant flow ($0\text{ L/min}$). | Convective dissipation collapses. Silicon junction $T_j$ surges at $4.5^\circ\text{C/s}$, exceeding $94^\circ\text{C}$ in $< 14.8\text{ s}$. Irreversible die warpage. | Modbus TCP function code 05/06 injected to PLC register 40012, asserting pump emergency stop. | **Catastrophic** | Hardwired pneumatic pressure relief and independent bi-metallic thermal interlock cutting server power. |
+| **LESS** | Flow | Throttled coolant flow ($5.8\text{ L/min}$). | Fluid velocity drops below critical Reynolds number ($\text{Re} < 2,300$). Heat transfer coefficient drops $78\%$. Accelerators throttle inference $60\%$. | Attacker overwrites VFD speed reference register from $60\text{ Hz}$ to $12\text{ Hz}$ via unauthenticated BACnet conduit. | **Major** | Cryptographically authenticated VFD command signing (IEC 62443-4-2 SL-3) and minimum speed hardware jumper. |
+| **MORE** | Temperature | Supply coolant exceeds $42.0^\circ\text{C}$. | Loss of thermal logarithmic mean temperature difference ($\Delta T_{\text{lm}}$). Chiller compressor stalls. Rack thermal trip engaged within 180 seconds. | Attacker tampers with primary plate heat exchanger proportional valve setpoint via BMS Redfish API. | **Major** | Out-of-band analog thermocouple loop bypassing the IP network, wired directly to chiller local control. |
+| **OTHER THAN** | Telemetry | Frozen nominal temperature ($30^\circ\text{C}$) while true temperature rises. | Facility operators receive nominal dashboards while silicon cooks. Hardware safety trips disabled by spoofed BMC registers. | Man-in-the-middle ARP spoofing injecting forged Modbus telemetry packets into supervisory SCADA server. | **Catastrophic** | Cryptographic payload attestation (DICE/Caliptra) on sensor telemetry nodes and independent analog gauge audits. |
 
 ### 4.2 Node 2: 400V/48V Distributed Block UPS Power Train
-- **Design Intent:** Continuous delivery of clean, three-phase 480V/400V AC power through a 4-to-3 Catcher UPS topology to rack-mounted busbars, stepping down to 48V DC via high-efficiency rectifiers, sustaining $120	ext{ kW}$ per rack without voltage sag or harmonic distortion ($< 3\%$ THD).
-- **Node Boundary:** 11 kV switchgear output $	o$ unit substation step-down transformer $	o$ Static Transfer Switch (STS) $	o$ distributed block UPS modules (1.25 MW each) $	o$ power distribution unit (PDU) $	o$ busway tap-off boxes.
+- **Design Intent:** Continuous delivery of clean, three-phase 480V/400V AC power through a 4-to-3 Catcher UPS topology to rack-mounted busbars, stepping down to 48V DC via high-efficiency rectifiers, sustaining $120\text{ kW}$ per rack without voltage sag or harmonic distortion ($< 3\%$ THD).
+- **Node Boundary:** 11 kV switchgear output $\to$ unit substation step-down transformer $\to$ Static Transfer Switch (STS) $\to$ distributed block UPS modules (1.25 MW each) $\to$ power distribution unit (PDU) $\to$ busway tap-off boxes.
 
 ```
 +-------------------------------------------------------------------------+
@@ -152,14 +152,14 @@ To demonstrate the rigorous application of CyHAZOP, we present detailed analysis
 
 | Guide Word | Parameter | Deviation | Physical Consequence | Cyber Attack Vector | Severity | Recommended Safeguard |
 |:---|:---|:---|:---|:---|:---|:---|
-| **NO** | Voltage | Instantaneous bus drop to $0	ext{ V}$. | Uncontrolled server drop. Data loss in DRAM buffers, corrupted database state, storage array crash. | Remote exploitation of SNMP/web interface on LayerZero STS, commanding force-open on both feeds. | **Catastrophic** | Hardwired mechanical interlock preventing simultaneous open commands; disable remote firmware updates on STS. |
-| **MORE** | Frequency | AC frequency surge to $65	ext{ Hz}$. | Core saturation in facility transformers, overheating magnetics, harmonic resonance causing capacitor bank explosion. | Tampering with inverter DSP control firmware via compromised JTAG or optical maintenance port. | **Catastrophic** | Hardware-calibrated over-frequency protection relay (IEC 61850 SIPROTEC) tripping within $16	ext{ ms}$. |
-| **AS WELL AS** | Harmonics | Severe harmonic distortion ($> 15\%	ext{ THD}$). | Neutral conductor overheating, eddy current losses, erratic tripping of downstream electronic circuit breakers. | Modulating load patterns via synchronized GPU kernel execution, matching the resonant frequency of power filters. | **Major** | Active power factor correction filters with autonomous analog feedback, isolated from host OS control. |
+| **NO** | Voltage | Instantaneous bus drop to $0\text{ V}$. | Uncontrolled server drop. Data loss in DRAM buffers, corrupted database state, storage array crash. | Remote exploitation of SNMP/web interface on LayerZero STS, commanding force-open on both feeds. | **Catastrophic** | Hardwired mechanical interlock preventing simultaneous open commands; disable remote firmware updates on STS. |
+| **MORE** | Frequency | AC frequency surge to $65\text{ Hz}$. | Core saturation in facility transformers, overheating magnetics, harmonic resonance causing capacitor bank explosion. | Tampering with inverter DSP control firmware via compromised JTAG or optical maintenance port. | **Catastrophic** | Hardware-calibrated over-frequency protection relay (IEC 61850 SIPROTEC) tripping within $16\text{ ms}$. |
+| **AS WELL AS** | Harmonics | Severe harmonic distortion ($> 15\%\text{ THD}$). | Neutral conductor overheating, eddy current losses, erratic tripping of downstream electronic circuit breakers. | Modulating load patterns via synchronized GPU kernel execution, matching the resonant frequency of power filters. | **Major** | Active power factor correction filters with autonomous analog feedback, isolated from host OS control. |
 | **PART OF** | Synchronization | Out-of-phase transfer across asynchronous utility feeds. | Massive mechanical torque shock across generator shafts, high-voltage flashover, catastrophic switchgear destruction. | Spoofing synchrocheck relay voltage phase angle telemetry via IEC 61850 GOOSE network manipulation. | **Catastrophic** | Hardwired analog synchrocheck relay with optical isolation, mechanically blocking out-of-phase closure. |
 
 ### 4.3 Node 3: BMS Supervisory Control Plane & Fire Suppression
 - **Design Intent:** Centralized monitoring of environmental parameters, ventilation louvers, smoke detection sensors, and life-safety systems, maintaining positive room air pressure and executing orderly zoning during emergency events.
-- **Node Boundary:** BMS BACnet/IP Ethernet backbone $	o$ field programmable controllers (JCI, Schneider, Honeywell) $	o$ pre-action sprinkler valves, clean-agent (NOVEC 1230 / Inergen) release solenoids, smoke purge dampers.
+- **Node Boundary:** BMS BACnet/IP Ethernet backbone $\to$ field programmable controllers (JCI, Schneider, Honeywell) $\to$ pre-action sprinkler valves, clean-agent (NOVEC 1230 / Inergen) release solenoids, smoke purge dampers.
 
 ```
 +-------------------------------------------------------------------------+
@@ -170,11 +170,11 @@ To demonstrate the rigorous application of CyHAZOP, we present detailed analysis
 | Guide Word | Parameter | Deviation | Physical Consequence | Cyber Attack Vector | Severity | Recommended Safeguard |
 |:---|:---|:---|:---|:---|:---|:---|
 | **OTHER THAN** | State | False gas discharge into populated data hall. | Full Emergency Power Off (EPO) tripped. High-pressure acoustic shock from discharge nozzles shatters spinning hard drives. | Exploiting CVE in BMS supervisory server (such as default BACnet broadcast credentials) to force solenoid trigger. | **Catastrophic** | Dual-custody, hardwired cross-zoned optical smoke and ionization detection requiring manual physical abort switch. |
-| **NO** | Ventilation | Total shutdown of data hall air economizers. | Heat accumulation in upper rack exhaust zones. Ambient hall temperature rises to $55^\circ	ext{C}$, degrading power supplies. | Ransomware encrypts BMS central controller, forcing all damper actuators into fail-closed default state. | **Major** | Spring-return mechanical damper actuators that fail open on loss of signal; dedicated local thermostat loops. |
+| **NO** | Ventilation | Total shutdown of data hall air economizers. | Heat accumulation in upper rack exhaust zones. Ambient hall temperature rises to $55^\circ\text{C}$, degrading power supplies. | Ransomware encrypts BMS central controller, forcing all damper actuators into fail-closed default state. | **Major** | Spring-return mechanical damper actuators that fail open on loss of signal; dedicated local thermostat loops. |
 
 ### 4.4 Node 4: Out-of-Band Baseboard Management Controller (BMC) Fabric
 - **Design Intent:** Dedicated out-of-band management network providing Redfish REST telemetry, KVM over IP, firmware flashing, and hardware power cycling for all compute blades without interfering with production traffic.
-- **Node Boundary:** Dedicated 1 GbE management switch fabric $	o$ ASPEED AST2600 BMC chip $	o$ PCIe sideband (MCTP over SMBus) $	o$ host processor power rail and voltage regulators.
+- **Node Boundary:** Dedicated 1 GbE management switch fabric $\to$ ASPEED AST2600 BMC chip $\to$ PCIe sideband (MCTP over SMBus) $\to$ host processor power rail and voltage regulators.
 
 ```
 +-------------------------------------------------------------------------+
@@ -194,77 +194,77 @@ To demonstrate the rigorous application of CyHAZOP, we present detailed analysis
 To move beyond qualitative hazard checklists, CyHAZOP formalizes the exact physical response of an infrastructure node to digital command manipulation.
 
 ### 5.1 Cyber-Physical Jacobian Transfer Function
-When an adversary manipulates a vector of cyber control variables $\mathbf{u}_{	ext{cyber}}(t)$ (such as valve positions, pump rotational speeds, or inverter setpoints), the deviation in physical state variables $\Delta \mathbf{Y}_{	ext{phys}}(t)$ (such as fluid pressure, flow rate, temperature, or voltage) is governed by the system Jacobian matrix $\mathbf{J}_{	ext{phys}}$:
+When an adversary manipulates a vector of cyber control variables $\mathbf{u}_{\text{cyber}}(t)$ (such as valve positions, pump rotational speeds, or inverter setpoints), the deviation in physical state variables $\Delta \mathbf{Y}_{\text{phys}}(t)$ (such as fluid pressure, flow rate, temperature, or voltage) is governed by the system Jacobian matrix $\mathbf{J}_{\text{phys}}$:
 
-$$\Delta \mathbf{Y}_{	ext{phys}}(t) = \int_0^t \mathbf{J}_{	ext{phys}}(	au) \cdot \mathbf{\Gamma}_{	ext{cyber}} \cdot \mathbf{u}_{	ext{cyber}}(	au) \, d	au$$
+$$\Delta \mathbf{Y}_{\text{phys}}(t) = \int_0^t \mathbf{J}_{\text{phys}}(\tau) \cdot \mathbf{\Gamma}_{\text{cyber}} \cdot \mathbf{u}_{\text{cyber}}(\tau) \, d\tau$$
 
-$$\mathbf{J}_{ij} = rac{\partial Y_{	ext{phys}, i}}{\partial X_{	ext{control}, j}}$$
+$$\mathbf{J}_{ij} = \frac{\partial Y_{\text{phys}, i}}{\partial X_{\text{control}, j}}$$
 
-Where $\mathbf{\Gamma}_{	ext{cyber}}$ is the network transmission and parsing matrix, accounting for protocol delays, register quantization, and controller execution loop latency.
+Where $\mathbf{\Gamma}_{\text{cyber}}$ is the network transmission and parsing matrix, accounting for protocol delays, register quantization, and controller execution loop latency.
 
-### 5.2 Silicon Junction Critical Runaway Formulation ($t_{	ext{trip}}$)
+### 5.2 Silicon Junction Critical Runaway Formulation ($t_{\text{trip}}$)
 When coolant flow is arrested (guide word NO FLOW), the transient temperature rise of the accelerator silicon die $T_j(t)$ is governed by lumped thermal capacitance, convective fluid flow, and internal heat flux:
 
-$$T_j(t) = T_{	ext{coolant},	ext{final}} + \left( T_{j,0} - T_{	ext{coolant},	ext{final}} ight) \cdot \exp\left(-rac{t}{	au_{	ext{th}}}ight) + rac{P_{	ext{die}}}{C_{	ext{thermal}}} \cdot t$$
+$$T_j(t) = T_{\text{coolant},\text{final}} + \left( T_{j,0} - T_{\text{coolant},\text{final}} \right) \cdot \exp\left(-\frac{t}{\tau_{\text{th}}}\right) + \frac{P_{\text{die}}}{C_{\text{thermal}}} \cdot t$$
 
-$$rac{dT_j(t)}{dt} = rac{P_{	ext{die}} - h_{	ext{conv}}(\dot{Q}_{	ext{vol}}) \cdot A_{	ext{contact}} \cdot (T_j(t) - T_{	ext{coolant}})}{C_{	ext{thermal}}}$$
+$$\frac{dT_j(t)}{dt} = \frac{P_{\text{die}} - h_{\text{conv}}(\dot{Q}_{\text{vol}}) \cdot A_{\text{contact}} \cdot (T_j(t) - T_{\text{coolant}})}{C_{\text{thermal}}}$$
 
-The time available before catastrophic silicon junction trip ($t_{	ext{trip}}$ at $T_j = 94.0^\circ	ext{C}$) is formulated as:
+The time available before catastrophic silicon junction trip ($t_{\text{trip}}$ at $T_j = 94.0^\circ\text{C}$) is formulated as:
 
-$$t_{	ext{trip}} = 	au_{	ext{th}} \cdot \ln\left( rac{P_{	ext{die}} \cdot R_{	heta,	ext{jc}} + T_{	ext{inlet}} - T_{j,0}}{P_{	ext{die}} \cdot R_{	heta,	ext{jc}} + T_{	ext{inlet}} - T_{	ext{trip}}} ight)$$
+$$t_{\text{trip}} = \tau_{\text{th}} \cdot \ln\left( \frac{P_{\text{die}} \cdot R_{\theta,\text{jc}} + T_{\text{inlet}} - T_{j,0}}{P_{\text{die}} \cdot R_{\theta,\text{jc}} + T_{\text{inlet}} - T_{\text{trip}}} \right)$$
 
 Where:
-- $	au_{	ext{th}}$ is the thermal time constant of the cold plate copper assembly ($	au_{	ext{th}} pprox 8.4	ext{ s}$).
-- $P_{	ext{die}}$ is the continuous compute dissipation ($1,200	ext{ W}$).
-- $R_{	heta,	ext{jc}}$ is the junction-to-case thermal resistance ($0.035	ext{ K/W}$).
-- For nominal starting conditions ($T_{j,0} = 65^\circ	ext{C}$, $T_{	ext{inlet}} = 30^\circ	ext{C}$), $t_{	ext{trip}} = 14.8	ext{ seconds}$. 
+- $\tau_{\text{th}}$ is the thermal time constant of the cold plate copper assembly ($\tau_{\text{th}} \approx 8.4\text{ s}$).
+- $P_{\text{die}}$ is the continuous compute dissipation ($1,200\text{ W}$).
+- $R_{\theta,\text{jc}}$ is the junction-to-case thermal resistance ($0.035\text{ K/W}$).
+- For nominal starting conditions ($T_{j,0} = 65^\circ\text{C}$, $T_{\text{inlet}} = 30^\circ\text{C}$), $t_{\text{trip}} = 14.8\text{ seconds}$. 
 
 Any protective control that relies on manual operator intervention (which requires minutes to hours) is guaranteed to fail. Protection must be executed via autonomous, hardware-interlocked safety instrumented loops.
 
 ### 5.3 Darcy-Weisbach Hydraulic Manifold Head Loss Spike
 When an adversary transmits Modbus function code 06 to throttle proportional valve `V-102` from $100\%$ open to $15\%$ open, the resulting hydraulic head loss across the distribution manifold is formulated as:
 
-$$h_f = \left( f \cdot rac{L}{D_h} + \sum K_{	ext{valve}}(	heta_{	ext{modbus}}) ight) \cdot rac{v^2}{2g} = \left( f \cdot rac{L}{D_h} + K_{	ext{valve}}(	heta) ight) \cdot rac{8 \dot{Q}_{	ext{vol}}^2}{\pi^2 g D_h^4}$$
+$$h_f = \left( f \cdot \frac{L}{D_h} + \sum K_{\text{valve}}(\theta_{\text{modbus}}) \right) \cdot \frac{v^2}{2g} = \left( f \cdot \frac{L}{D_h} + K_{\text{valve}}(\theta) \right) \cdot \frac{8 \dot{Q}_{\text{vol}}^2}{\pi^2 g D_h^4}$$
 
-Where $K_{	ext{valve}}(	heta) \propto rac{1}{\sin^4(	heta)}$ exhibits non-linear exponential growth as valve angle $	heta 	o 0$. Head loss surges from $0.45	ext{ bar}$ to $3.8	ext{ bar}$, exceeding pump deadhead pressure and inducing catastrophic cavitation.
+Where $K_{\text{valve}}(\theta) \propto \frac{1}{\sin^4(\theta)}$ exhibits non-linear exponential growth as valve angle $\theta \to 0$. Head loss surges from $0.45\text{ bar}$ to $3.8\text{ bar}$, exceeding pump deadhead pressure and inducing catastrophic cavitation.
 
 ### 5.4 Safety Instrumented System (SIS) Probability of Failure on Demand under Cyber Stress
-Under IEC 61508 and IEC 61511, the average Probability of Failure on Demand ($	ext{PFD}_{	ext{avg}}$) for a Safety Instrumented Function (SIF) is traditionally calculated solely from mechanical and electrical dangerous undetected failure rates ($\lambda_{	ext{DU}}$). 
+Under IEC 61508 and IEC 61511, the average Probability of Failure on Demand ($\text{PFD}_{\text{avg}}$) for a Safety Instrumented Function (SIF) is traditionally calculated solely from mechanical and electrical dangerous undetected failure rates ($\lambda_{\text{DU}}$). 
 
-In a networked environment subject to active adversary targeting, the effective failure probability must incorporate the cyber attack compromise rate $\lambda_{	ext{cyber}}$:
+In a networked environment subject to active adversary targeting, the effective failure probability must incorporate the cyber attack compromise rate $\lambda_{\text{cyber}}$:
 
-$$	ext{PFD}_{	ext{avg}} pprox rac{1}{2} \lambda_{	ext{DU}} \cdot T_{	ext{proof}} + \left( 1 - \exp\left( -\lambda_{	ext{cyber}} \cdot 	au_{	ext{exposure}} ight) ight)$$
+$$\text{PFD}_{\text{avg}} \approx \frac{1}{2} \lambda_{\text{DU}} \cdot T_{\text{proof}} + \left( 1 - \exp\left( -\lambda_{\text{cyber}} \cdot \tau_{\text{exposure}} \right) \right)$$
 
-$$\lambda_{	ext{cyber}} = \omega_{	ext{threat}} \cdot \prod_{k=1}^N \left( 1 - eta_{	ext{control}, k} ight)$$
+$$\lambda_{\text{cyber}} = \omega_{\text{threat}} \cdot \prod_{k=1}^N \left( 1 - \beta_{\text{control}, k} \right)$$
 
 Where:
-- $T_{	ext{proof}}$ is the periodic physical proof test interval (typically 8,760 hours / 1 year).
-- $	au_{	ext{exposure}}$ is the unpatched vulnerability window (time between CVE publication and patch application).
-- $\omega_{	ext{threat}}$ is the adversary encounter frequency targeting the facility OT protocol.
-- $eta_{	ext{control}, k}$ is the effectiveness factor of security control $k$ (zone firewalls, cryptographic signing, mutual TLS).
+- $T_{\text{proof}}$ is the periodic physical proof test interval (typically 8,760 hours / 1 year).
+- $\tau_{\text{exposure}}$ is the unpatched vulnerability window (time between CVE publication and patch application).
+- $\omega_{\text{threat}}$ is the adversary encounter frequency targeting the facility OT protocol.
+- $\beta_{\text{control}, k}$ is the effectiveness factor of security control $k$ (zone firewalls, cryptographic signing, mutual TLS).
 
-When controllers share an unauthenticated protocol (such as Modbus TCP with $eta = 0$), $	ext{PFD}_{	ext{avg}}$ increases by three orders of magnitude, collapsing an intended SIL-2 or SIL-3 safety loop down to an ineffective SIL-0 state.
+When controllers share an unauthenticated protocol (such as Modbus TCP with $\beta = 0$), $\text{PFD}_{\text{avg}}$ increases by three orders of magnitude, collapsing an intended SIL-2 or SIL-3 safety loop down to an ineffective SIL-0 state.
 
 ### 5.5 Actuarial Consequence & Risk Matrix Prioritization
-The quantitative CyHAZOP Risk Priority Index $\mathcal{R}_{	ext{CyHAZOP}}$ for a specific node deviation $D_m$ triggered by threat actor $T_a$ is formulated as:
+The quantitative CyHAZOP Risk Priority Index $\mathcal{R}_{\text{CyHAZOP}}$ for a specific node deviation $D_m$ triggered by threat actor $T_a$ is formulated as:
 
-$$\mathcal{R}_{	ext{CyHAZOP}}(N_k, D_m) = P_{	ext{breach}}(T_a 	o D_m) 	imes \left[ 	ext{SLE}_{	ext{hardware}} + 	ext{SLE}_{	ext{data}} + \int_0^{T_{	ext{restore}}} \dot{L}_{	ext{BI}}(t) \, dt ight]$$
+$$\mathcal{R}_{\text{CyHAZOP}}(N_k, D_m) = P_{\text{breach}}(T_a \to D_m) \times \left[ \text{SLE}_{\text{hardware}} + \text{SLE}_{\text{data}} + \int_0^{T_{\text{restore}}} \dot{L}_{\text{BI}}(t) \, dt \right]$$
 
-$$	ext{ALE}_{	ext{node}} = \mathcal{R}_{	ext{CyHAZOP}}(N_k, D_m) 	imes 	ext{ARO}$$
+$$\text{ALE}_{\text{node}} = \mathcal{R}_{\text{CyHAZOP}}(N_k, D_m) \times \text{ARO}$$
 
 Where:
-- $P_{	ext{breach}}$ is the empirical likelihood of achieving the unauthorized setpoint override.
-- $	ext{SLE}_{	ext{hardware}}$ is the direct equipment replacement cost.
-- $\dot{L}_{	ext{BI}}(t)$ is the unserved SLA penalty rate per hour.
-- $T_{	ext{restore}}$ is the physical recovery time governed by long-lead supply chain components.
-- $	ext{ARO}$ is the Annualised Rate of Occurrence, and $	ext{ALE}$ is the Annualised Loss Expectancy.
+- $P_{\text{breach}}$ is the empirical likelihood of achieving the unauthorized setpoint override.
+- $\text{SLE}_{\text{hardware}}$ is the direct equipment replacement cost.
+- $\dot{L}_{\text{BI}}(t)$ is the unserved SLA penalty rate per hour.
+- $T_{\text{restore}}$ is the physical recovery time governed by long-lead supply chain components.
+- $\text{ARO}$ is the Annualised Rate of Occurrence, and $\text{ALE}$ is the Annualised Loss Expectancy.
 
 ### 5.6 Return on Security Investment (ROSI) for Hardwired Safety Instrumented Loops
 The financial justification for retrofitting hardwired physical interlocks to prevent cyber-induced facility trips is quantified through Return on Security Investment:
 
-$$	ext{ROSI}_{	ext{SIS}} = rac{(	ext{ALE}_{	ext{software\_only}} - 	ext{ALE}_{	ext{hardwired\_SIS}}) - C_{	ext{hardware\_interlock}}}{C_{	ext{hardware\_interlock}}}$$
+$$\text{ROSI}_{\text{SIS}} = \frac{(\text{ALE}_{\text{software\_only}} - \text{ALE}_{\text{hardwired\_SIS}}) - C_{\text{hardware\_interlock}}}{C_{\text{hardware\_interlock}}}$$
 
-Where replacing software BACnet trips with hardwired dry-contact interlocks ($C_{	ext{interlock}} = 15,000	ext{ USD}$) reduces unmitigated catastrophe loss expectancy from $	ext{ALE} = 1,850,000	ext{ USD}$ to $	ext{ALE} = 22,000	ext{ USD}$, achieving a $	ext{ROSI} > 12,000\%$.
+Where replacing software BACnet trips with hardwired dry-contact interlocks ($C_{\text{interlock}} = 15,000\text{ USD}$) reduces unmitigated catastrophe loss expectancy from $\text{ALE} = 1,850,000\text{ USD}$ to $\text{ALE} = 22,000\text{ USD}$, achieving a $\text{ROSI} > 12,000\%$.
 
 ---
 
@@ -279,7 +279,7 @@ A major enterprise facility management provider suffered a catastrophic ransomwa
 Security researchers demonstrated that Schneider Electric APC Smart-UPS units featuring cloud connectivity could be remotely updated with unsigned, malicious firmware. The exploit bypassed all software boundaries, allowing attackers to manipulate internal inverter pulse-width modulation setpoints. This induced extreme physical thermal overstress, melting internal battery enclosures and creating direct electrical fire hazards without triggering upstream utility breakers.
 
 ### 6.3 Stuxnet: The Archetype of Physical Resonance Manipulation
-The physical destruction of uranium centrifuges at Natanz demonstrated the quintessential CyHAZOP deviation: guide word MORE applied to VFD frequency, alternating between $1,410	ext{ Hz}$, nominal $1,064	ext{ Hz}$, and $2	ext{ Hz}$. The attack deliberately excited the mechanical harmonic resonance frequencies of the rotor shafts while spoofing nominal telemetry back to supervisory SCADA monitors, causing physical rotor disintegration.
+The physical destruction of uranium centrifuges at Natanz demonstrated the quintessential CyHAZOP deviation: guide word MORE applied to VFD frequency, alternating between $1,410\text{ Hz}$, nominal $1,064\text{ Hz}$, and $2\text{ Hz}$. The attack deliberately excited the mechanical harmonic resonance frequencies of the rotor shafts while spoofing nominal telemetry back to supervisory SCADA monitors, causing physical rotor disintegration.
 
 ---
 

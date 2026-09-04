@@ -16,7 +16,7 @@ Operational technology protocols were conceived in an era when physical air gaps
 Modbus TCP encapsulates the classical Modbus serial Application Protocol inside standard TCP packets on port 502. It contains no authentication headers, no digital signatures, and no payload encryption. Any device on the subnet can issue read and write requests to any connected PLC:
 
 - **Function Code 03 (Read Holding Registers):** Retrieves 16-bit analog operational data (pressures, temperatures, flow rates, voltage measurements).
-- **Function Code 06 (Write Single Register):** Modifies a single 16-bit analog setpoint (such as commanding a VFD speed reference from $60.0	ext{ Hz}$ to $12.0	ext{ Hz}$).
+- **Function Code 06 (Write Single Register):** Modifies a single 16-bit analog setpoint (such as commanding a VFD speed reference from $60.0\text{ Hz}$ to $12.0\text{ Hz}$).
 - **Function Code 16 (Write Multiple Registers):** Rewrites entire blocks of operational parameters, such as recalibrating proportional-integral-derivative (PID) tuning constants or thermal trip limits.
 - **Function Code 05 (Write Single Coil):** Toggles discrete binary states (forcing a pump emergency stop, opening a circuit breaker, or discharging a chemical valve).
 
@@ -88,12 +88,12 @@ The Coolant Distribution Unit (CDU) manages heat rejection from compute trays to
 
 | Modbus Register | DEXPI Equipment Tag | Data Type & Scale | Engineering Parameter | Nominal Baseline | Malicious Setpoint Override | Physical Consequence | Severity |
 |:---|:---|:---|:---|:---|:---|:---|:---|
-| **40101** | `CDU-PUMP-01` | 16-bit uint (0-1) | Pump Operating State | 1 (Running) | 0 (Emergency Stop) | Immediate cessation of flow ($0	ext{ L/min}$). Silicon $T_j$ surges at $4.5^\circ	ext{C/s}$. | **Catastrophic** |
-| **40102** | `CDU-VFD-01` | 16-bit uint ($0.1	ext{ Hz}$) | VFD Inverter Speed Setpoint | 600 ($60.0	ext{ Hz}$) | 120 ($12.0	ext{ Hz}$) | Volumetric delivery drops to $5.8	ext{ L/min}$. Heat transfer coefficient drops $78\%$. | **Major** |
-| **40104** | `VALVE-V102` | 16-bit uint ($0.1\%$) | 3-Way Mixing Valve Position | 1000 ($100.0\%$ Open) | 150 ($15.0\%$ Open) | Darcy head loss increases from $0.45	ext{ bar}$ to $3.8	ext{ bar}$. Severe pump cavitation. | **Catastrophic** |
-| **30201** | `FT-101` | 16-bit uint ($0.1	ext{ L/min}$) | Secondary Flow Telemetry | 385 ($38.5	ext{ L/min}$) | Spoofed to 385 (True: 5.8) | Telemetry deception blinds SCADA monitors; hardware safety trips suppressed. | **Catastrophic** |
-| **30202** | `TT-101` | 16-bit int ($0.1^\circ	ext{C}$) | Supply Fluid Temperature | 300 ($30.0^\circ	ext{C}$) | Spoofed to 300 (True: 58.0) | Operators unaware of thermal runaway; facility alarms blinded until fire. | **Catastrophic** |
-| **40110** | `CDU-SAFETY` | 16-bit uint ($0.1^\circ	ext{C}$) | Hardware Thermal Trip Setpoint| 850 ($85.0^\circ	ext{C}$) | 1200 ($120.0^\circ	ext{C}$) | Overwrites internal safety cutoff, allowing compute dies to overheat to physical destruction. | **Catastrophic** |
+| **40101** | `CDU-PUMP-01` | 16-bit uint (0-1) | Pump Operating State | 1 (Running) | 0 (Emergency Stop) | Immediate cessation of flow ($0\text{ L/min}$). Silicon $T_j$ surges at $4.5^\circ\text{C/s}$. | **Catastrophic** |
+| **40102** | `CDU-VFD-01` | 16-bit uint ($0.1\text{ Hz}$) | VFD Inverter Speed Setpoint | 600 ($60.0\text{ Hz}$) | 120 ($12.0\text{ Hz}$) | Volumetric delivery drops to $5.8\text{ L/min}$. Heat transfer coefficient drops $78\%$. | **Major** |
+| **40104** | `VALVE-V102` | 16-bit uint ($0.1\%$) | 3-Way Mixing Valve Position | 1000 ($100.0\%$ Open) | 150 ($15.0\%$ Open) | Darcy head loss increases from $0.45\text{ bar}$ to $3.8\text{ bar}$. Severe pump cavitation. | **Catastrophic** |
+| **30201** | `FT-101` | 16-bit uint ($0.1\text{ L/min}$) | Secondary Flow Telemetry | 385 ($38.5\text{ L/min}$) | Spoofed to 385 (True: 5.8) | Telemetry deception blinds SCADA monitors; hardware safety trips suppressed. | **Catastrophic** |
+| **30202** | `TT-101` | 16-bit int ($0.1^\circ\text{C}$) | Supply Fluid Temperature | 300 ($30.0^\circ\text{C}$) | Spoofed to 300 (True: 58.0) | Operators unaware of thermal runaway; facility alarms blinded until fire. | **Catastrophic** |
+| **40110** | `CDU-SAFETY` | 16-bit uint ($0.1^\circ\text{C}$) | Hardware Thermal Trip Setpoint| 850 ($85.0^\circ\text{C}$) | 1200 ($120.0^\circ\text{C}$) | Overwrites internal safety cutoff, allowing compute dies to overheat to physical destruction. | **Catastrophic** |
 
 ### 3.2 Node 2: 400V/48V Power Train & Static Transfer Switch
 The electrical power train delivers three-phase utility power through distributed block UPS modules:
@@ -106,8 +106,8 @@ The electrical power train delivers three-phase utility power through distribute
 
 | Register / Point | Electrical Asset Tag | Protocol & Type | Engineering Parameter | Nominal Baseline | Malicious Setpoint Override | Physical Consequence | Severity |
 |:---|:---|:---|:---|:---|:---|:---|:---|
-| **40001** | `STS-FEED-SEL` | Modbus uint (0-2) | Active Supply Infeed Selector | 1 (Primary Feed A) | 0 (Force Both Open) | Instantaneous bus blackout ($0	ext{ V}$). Uncontrolled power loss across 100 MW campus. | **Catastrophic** |
-| **40015** | `UPS-INV-FREQ` | Modbus uint ($0.01	ext{ Hz}$) | Inverter Output Frequency | 5000 / 6000 ($60.0	ext{ Hz}$) | 6500 ($65.0	ext{ Hz}$) | Transformer core saturation, severe eddy currents, capacitor bank acoustic explosion. | **Catastrophic** |
+| **40001** | `STS-FEED-SEL` | Modbus uint (0-2) | Active Supply Infeed Selector | 1 (Primary Feed A) | 0 (Force Both Open) | Instantaneous bus blackout ($0\text{ V}$). Uncontrolled power loss across 100 MW campus. | **Catastrophic** |
+| **40015** | `UPS-INV-FREQ` | Modbus uint ($0.01\text{ Hz}$) | Inverter Output Frequency | 5000 / 6000 ($60.0\text{ Hz}$) | 6500 ($65.0\text{ Hz}$) | Transformer core saturation, severe eddy currents, capacitor bank acoustic explosion. | **Catastrophic** |
 | **AO:12** | `PDU-VOLT-TRIP`| BACnet Float (V) | Under-Voltage Trip Threshold | 360.0 V | 440.0 V | Erroneous spurious tripping of all PDU branch circuits during minor line fluctuations. | **Major** |
 | **40032** | `BESS-INVERTER`| Modbus uint (0-1) | Grid-Tie Anti-Islanding Protection | 1 (Enabled) | 0 (Disabled) | Uncontrolled back-feeding into dead utility grid; lethal electrocution hazard for line crews. | **Catastrophic** |
 
@@ -138,9 +138,9 @@ The BMC provides out-of-band server management via DMTF Redfish REST APIs and I2
 
 | Redfish JSON URI | Hardware Register | Bus & Protocol | Engineering Function | Nominal Value | Malicious Injection | Physical Consequence | Severity |
 |:---|:---|:---|:---|:---|:---|:---|:---|
-| `/redfish/v1/Chassis/Tray02/Power` | `PowerLimitWatts` | Redfish REST (HTTPS) | Tray Peak Power Cap | 10500 ($10.5	ext{ kW}$) | 2500 ($2.5	ext{ kW}$) | Throttles all 8x accelerators to baseline idle clocks; kills active training job. | **Major** |
-| `/redfish/v1/Chassis/Tray02/Thermal` | `Fans/0/SpeedSet` | Redfish REST (HTTPS) | Chassis Cooling Fan RPM | Dynamic ($8,500	ext{ RPM}$) | 0 ($0	ext{ RPM}$) | Loss of auxiliary chassis airflow; VRM power stages overheat and burn out. | **Catastrophic** |
-| `0x70 / Reg 0x21` (VRM Controller) | `VOUT_COMMAND` | I2C / PMBus | Core Voltage Rail ($V_{	ext{core}}$) | 0.85 V DC | 1.25 V DC ($+47\%$) | Gate oxide breakdown across $1,200	ext{ W}$ accelerator chiplets; instant silicon destruction. | **Catastrophic** |
+| `/redfish/v1/Chassis/Tray02/Power` | `PowerLimitWatts` | Redfish REST (HTTPS) | Tray Peak Power Cap | 10500 ($10.5\text{ kW}$) | 2500 ($2.5\text{ kW}$) | Throttles all 8x accelerators to baseline idle clocks; kills active training job. | **Major** |
+| `/redfish/v1/Chassis/Tray02/Thermal` | `Fans/0/SpeedSet` | Redfish REST (HTTPS) | Chassis Cooling Fan RPM | Dynamic ($8,500\text{ RPM}$) | 0 ($0\text{ RPM}$) | Loss of auxiliary chassis airflow; VRM power stages overheat and burn out. | **Catastrophic** |
+| `0x70 / Reg 0x21` (VRM Controller) | `VOUT_COMMAND` | I2C / PMBus | Core Voltage Rail ($V_{\text{core}}$) | 0.85 V DC | 1.25 V DC ($+47\%$) | Gate oxide breakdown across $1,200\text{ W}$ accelerator chiplets; instant silicon destruction. | **Catastrophic** |
 | `0x50 / Reg 0x04` (SPI Controller) | `FLASH_PROTECT`| SPI Sideband | Hardware Flash Write Protect | 1 (Protected) | 0 (Unprotected) | Disables firmware integrity checks, enabling persistent rootkit insertion into BIOS. | **Catastrophic** |
 
 ---
@@ -150,57 +150,57 @@ The BMC provides out-of-band server management via DMTF Redfish REST APIs and I2
 When an adversary alters an operational register, the physical system does not respond instantaneously. It responds according to non-linear physical differential equations governing fluid mechanics, heat transfer, and electromagnetic inductances.
 
 ### 4.1 Transient Hydraulic Response to Modbus VFD Step Change
-When Modbus register `40102` is stepped from $60.0	ext{ Hz}$ ($N_0$) to $12.0	ext{ Hz}$ ($N_{	ext{final}}$), the motor rotational speed $N(t)$ and resulting volumetric flow rate $\dot{Q}(t)$ follow a first-order lag governed by the VFD deceleration time constant $	au_{	ext{VFD}}$ ($	au_{	ext{VFD}} pprox 2.5	ext{ s}$):
+When Modbus register `40102` is stepped from $60.0\text{ Hz}$ ($N_0$) to $12.0\text{ Hz}$ ($N_{\text{final}}$), the motor rotational speed $N(t)$ and resulting volumetric flow rate $\dot{Q}(t)$ follow a first-order lag governed by the VFD deceleration time constant $\tau_{\text{VFD}}$ ($\tau_{\text{VFD}} \approx 2.5\text{ s}$):
 
-$$\dot{Q}(t) = \dot{Q}_{	ext{final}} + \left( \dot{Q}_0 - \dot{Q}_{	ext{final}} ight) \cdot \exp\left(-rac{t}{	au_{	ext{VFD}}}ight)$$
+$$\dot{Q}(t) = \dot{Q}_{\text{final}} + \left( \dot{Q}_0 - \dot{Q}_{\text{final}} \right) \cdot \exp\left(-\frac{t}{\tau_{\text{VFD}}}\right)$$
 
-$$\dot{Q}_0 = 38.5	ext{ L/min}, \quad \dot{Q}_{	ext{final}} = \dot{Q}_0 \cdot \left(rac{N_{	ext{final}}}{N_0}ight) = 38.5 \cdot \left(rac{12}{60}ight) = 7.7	ext{ L/min}$$
+$$\dot{Q}_0 = 38.5\text{ L/min}, \quad \dot{Q}_{\text{final}} = \dot{Q}_0 \cdot \left(\frac{N_{\text{final}}}{N_0}\right) = 38.5 \cdot \left(\frac{12}{60}\right) = 7.7\text{ L/min}$$
 
-As volumetric flow collapses below $10.0	ext{ L/min}$, fluid velocity in the microchannels drops from $1.85	ext{ m/s}$ to $0.37	ext{ m/s}$. The Reynolds number drops from $	ext{Re} pprox 6,850$ (turbulent) to $	ext{Re} pprox 1,370$ (laminar), collapsing the convective heat transfer coefficient $h_{	ext{conv}}$:
+As volumetric flow collapses below $10.0\text{ L/min}$, fluid velocity in the microchannels drops from $1.85\text{ m/s}$ to $0.37\text{ m/s}$. The Reynolds number drops from $\text{Re} \approx 6,850$ (turbulent) to $\text{Re} \approx 1,370$ (laminar), collapsing the convective heat transfer coefficient $h_{\text{conv}}$:
 
-$$h_{	ext{conv}}(t) = 0.023 \cdot \left( rac{ho \cdot v(t) \cdot D_h}{\mu} ight)^{0.8} \cdot 	ext{Pr}^{0.4} \cdot rac{k_{	ext{fluid}}}{D_h}$$
+$$h_{\text{conv}}(t) = 0.023 \cdot \left( \frac{\rho \cdot v(t) \cdot D_h}{\mu} \right)^{0.8} \cdot \text{Pr}^{0.4} \cdot \frac{k_{\text{fluid}}}{D_h}$$
 
-Within $3.2	ext{ seconds}$, convective heat transfer collapses by $74\%$, initiating immediate heat accumulation in the accelerator cold plate.
+Within $3.2\text{ seconds}$, convective heat transfer collapses by $74\%$, initiating immediate heat accumulation in the accelerator cold plate.
 
 ### 4.2 Telemetry Quantization & Sensor Deception Dynamics
-When an attacker injects false telemetry to register `30202` (Supply Temperature) while manipulating register `40104` (Valve Position), the perceived temperature $T_{	ext{SCADA}}(t)$ diverges from the true physical temperature $T_{	ext{phys}}(t)$:
+When an attacker injects false telemetry to register `30202` (Supply Temperature) while manipulating register `40104` (Valve Position), the perceived temperature $T_{\text{SCADA}}(t)$ diverges from the true physical temperature $T_{\text{phys}}(t)$:
 
-$$T_{	ext{SCADA}}(t) = T_{	ext{phys}}(t) \cdot \left(1 - \mathbf{1}_{\{t > t_{	ext{attack}}\}}ight) + T_{	ext{spoofed}} \cdot \mathbf{1}_{\{t > t_{	ext{attack}}\}}$$
+$$T_{\text{SCADA}}(t) = T_{\text{phys}}(t) \cdot \left(1 - \mathbf{1}_{\{t > t_{\text{attack}}\}}\right) + T_{\text{spoofed}} \cdot \mathbf{1}_{\{t > t_{\text{attack}}\}}$$
 
-$$T_{	ext{phys}}(t) = T_{	ext{inlet}} + rac{P_{	ext{die}}}{\dot{m}(t) \cdot C_p} \left(1 - \exp\left(-rac{t}{	au_{	ext{th}}}ight)ight)$$
+$$T_{\text{phys}}(t) = T_{\text{inlet}} + \frac{P_{\text{die}}}{\dot{m}(t) \cdot C_p} \left(1 - \exp\left(-\frac{t}{\tau_{\text{th}}}\right)\right)$$
 
-Where $T_{	ext{spoofed}} = 30.0^\circ	ext{C}$ remains constant on operator monitoring screens, while $T_{	ext{phys}}(t)$ surges past the physical threshold of $94.0^\circ	ext{C}$ at $t = 14.8	ext{ seconds}$. Because supervisory alarms depend on $T_{	ext{SCADA}}$, the control system fails to assert PROCHOT# throttling, leading to physical silicon destruction.
+Where $T_{\text{spoofed}} = 30.0^\circ\text{C}$ remains constant on operator monitoring screens, while $T_{\text{phys}}(t)$ surges past the physical threshold of $94.0^\circ\text{C}$ at $t = 14.8\text{ seconds}$. Because supervisory alarms depend on $T_{\text{SCADA}}$, the control system fails to assert PROCHOT# throttling, leading to physical silicon destruction.
 
 ### 4.3 High-Voltage Inductive Kickback on Sudden Bus Bar Trips
-When register `40001` forces an instantaneous open command on the main static transfer switch, the interruption of high current ($\Delta I = 2,500	ext{ A}$) across the rack busway inductance ($L_{	ext{bus}} pprox 12.0	ext{ }\mu	ext{H}$) generates an inductive voltage kickback surge $V_{	ext{surge}}$:
+When register `40001` forces an instantaneous open command on the main static transfer switch, the interruption of high current ($\Delta I = 2,500\text{ A}$) across the rack busway inductance ($L_{\text{bus}} \approx 12.0\text{ }\mu\text{H}$) generates an inductive voltage kickback surge $V_{\text{surge}}$:
 
-$$V_{	ext{surge}}(t) = -L_{	ext{bus}} \cdot rac{dI(t)}{dt} = -L_{	ext{bus}} \cdot rac{\Delta I}{\Delta t_{	ext{open}}}$$
+$$V_{\text{surge}}(t) = -L_{\text{bus}} \cdot \frac{dI(t)}{dt} = -L_{\text{bus}} \cdot \frac{\Delta I}{\Delta t_{\text{open}}}$$
 
-Where solid-state breaker opening time $\Delta t_{	ext{open}} pprox 4.0	ext{ ms}$. The transient voltage spike is calculated as:
+Where solid-state breaker opening time $\Delta t_{\text{open}} \approx 4.0\text{ ms}$. The transient voltage spike is calculated as:
 
-$$V_{	ext{surge}} = 12.0 	imes 10^{-6} 	ext{ H} 	imes rac{2,500	ext{ A}}{4.0 	imes 10^{-3}	ext{ s}} = 7.5	ext{ V per phase}$$
+$$V_{\text{surge}} = 12.0 \times 10^{-6} \text{ H} \times \frac{2,500\text{ A}}{4.0 \times 10^{-3}\text{ s}} = 7.5\text{ V per phase}$$
 
-Across medium-voltage distribution switchgear ($11	ext{ kV}$ feed with $L_{	ext{transformer}} pprox 4.5	ext{ mH}$ and $\Delta I = 15,000	ext{ A}$), an uncoordinated trip generates:
+Across medium-voltage distribution switchgear ($11\text{ kV}$ feed with $L_{\text{transformer}} \approx 4.5\text{ mH}$ and $\Delta I = 15,000\text{ A}$), an uncoordinated trip generates:
 
-$$V_{	ext{surge}} = 4.5 	imes 10^{-3} 	ext{ H} 	imes rac{15,000	ext{ A}}{8.0 	imes 10^{-3}	ext{ s}} = 8,437.5	ext{ V}$$
+$$V_{\text{surge}} = 4.5 \times 10^{-3} \text{ H} \times \frac{15,000\text{ A}}{8.0 \times 10^{-3}\text{ s}} = 8,437.5\text{ V}$$
 
-This $8.4	ext{ kV}$ inductive surge punches through transformer insulation barriers, creating catastrophic arc flash explosion and transformer oil fires.
+This $8.4\text{ kV}$ inductive surge punches through transformer insulation barriers, creating catastrophic arc flash explosion and transformer oil fires.
 
 ### 4.4 Actuarial Consequential Loss Accumulation
-For insurance treaty structuring and property catastrophe modeling, the financial loss $\mathcal{L}_{	ext{register}}$ resulting from unauthorized manipulation of operational technology registers is formulated as:
+For insurance treaty structuring and property catastrophe modeling, the financial loss $\mathcal{L}_{\text{register}}$ resulting from unauthorized manipulation of operational technology registers is formulated as:
 
-$$\mathcal{L}_{	ext{register}} = \sum_{k \in \mathcal{K}_{	ext{tripped}}} \left[ C_{	ext{hardware}}(k) + \int_0^{T_{	ext{restore}}(k)} \dot{L}_{	ext{BI}}(t) \, dt ight] + C_{	ext{rewire}}$$
+$$\mathcal{L}_{\text{register}} = \sum_{k \in \mathcal{K}_{\text{tripped}}} \left[ C_{\text{hardware}}(k) + \int_0^{T_{\text{restore}}(k)} \dot{L}_{\text{BI}}(t) \, dt \right] + C_{\text{rewire}}$$
 
-$$	ext{ALE} = \mathcal{L}_{	ext{register}} 	imes 	ext{ARO}$$
+$$\text{ALE} = \mathcal{L}_{\text{register}} \times \text{ARO}$$
 
-Where $C_{	ext{hardware}}$ represents the direct replacement cost of ruined compute trays ($120,000	ext{ USD}$ per tray), $\dot{L}_{	ext{BI}}$ is the hourly business interruption loss rate ($18,500	ext{ USD/hour}$), and $T_{	ext{restore}}$ is the supply-chain restoration lead time ($6	ext{ to }12	ext{ weeks}$ for high-density silicon accelerators).
+Where $C_{\text{hardware}}$ represents the direct replacement cost of ruined compute trays ($120,000\text{ USD}$ per tray), $\dot{L}_{\text{BI}}$ is the hourly business interruption loss rate ($18,500\text{ USD/hour}$), and $T_{\text{restore}}$ is the supply-chain restoration lead time ($6\text{ to }12\text{ weeks}$ for high-density silicon accelerators).
 
 ### 4.5 Return on Security Investment (ROSI) for Hardware Cryptographic Bumps
 The financial return on deploying hardware-enforced cryptographic message authentication (bump-in-the-wire MAC verification) on Modbus TCP conduits is quantified through:
 
-$$	ext{ROSI}_{	ext{MAC}} = rac{(	ext{ALE}_{	ext{unauthenticated}} - 	ext{ALE}_{	ext{authenticated}}) - C_{	ext{hardware\_MAC}}}{C_{	ext{hardware\_MAC}}}$$
+$$\text{ROSI}_{\text{MAC}} = \frac{(\text{ALE}_{\text{unauthenticated}} - \text{ALE}_{\text{authenticated}}) - C_{\text{hardware\_MAC}}}{C_{\text{hardware\_MAC}}}$$
 
-For an AI cluster with unmitigated catastrophe loss expectancy $	ext{ALE} = 4,200,000	ext{ USD}$, deploying bump-in-the-wire FPGA authenticators ($C_{	ext{hardware}} = 45,000	ext{ USD}$) eliminates unauthenticated write attacks, reducing residual $	ext{ALE} = 25,000	ext{ USD}$, achieving a verified $	ext{ROSI} = 9,177\%$.
+For an AI cluster with unmitigated catastrophe loss expectancy $\text{ALE} = 4,200,000\text{ USD}$, deploying bump-in-the-wire FPGA authenticators ($C_{\text{hardware}} = 45,000\text{ USD}$) eliminates unauthenticated write attacks, reducing residual $\text{ALE} = 25,000\text{ USD}$, achieving a verified $\text{ROSI} = 9,177\%$.
 
 ---
 
@@ -230,8 +230,8 @@ To protect critical infrastructure from register-level cyber-physical sabotage, 
 
 ### 6.2 Hardwired Analog Safety Interlocks (SIL-3)
 Software commands must never hold sole authority over life-safety or catastrophic physical thresholds:
-- **Physical Thermal Cutouts:** Microchannel cold plates must incorporate bi-metallic thermal switches wired directly to server power supply shutoff lines, physically dropping 48V DC power if $T_j > 90^\circ	ext{C}$ regardless of BMC register states.
-- **Pneumatic Pressure Relief:** Cooling distribution manifolds must feature mechanical spring-loaded pressure relief valves calibrated to $5.5	ext{ bar}$, mechanically venting fluid before pipe burst pressure is reached.
+- **Physical Thermal Cutouts:** Microchannel cold plates must incorporate bi-metallic thermal switches wired directly to server power supply shutoff lines, physically dropping 48V DC power if $T_j > 90^\circ\text{C}$ regardless of BMC register states.
+- **Pneumatic Pressure Relief:** Cooling distribution manifolds must feature mechanical spring-loaded pressure relief valves calibrated to $5.5\text{ bar}$, mechanically venting fluid before pipe burst pressure is reached.
 - **Hardware Reverse-Direction Jumpers:** Variable Frequency Drives must enforce motor direction through physical motherboard solder bridges or hardwired jumpers, rendering remote Modbus direction inversion impossible.
 
 ### 6.3 Open Silicon Roots of Trust & Caliptra 2.0
@@ -249,7 +249,7 @@ The presence of unauthenticated holding registers on cooling and power infrastru
 | Underwriting Dimension | Unauthenticated Legacy OT | Register-Hardened & CyHAZOP-Audited | Underwriting Impact |
 |:---|:---|:---|:---|
 | **Common-Cause Exploitability** | Single network script can trip all cooling loops simultaneously. | Cryptographic command signing and hardwired interlocks isolate failures. | Portfolio accumulation risk mitigated; eliminates correlated catastrophic losses. |
-| **PML / MPL Sizing** | Unbounded physical damage; potential total loss of compute hardware ($150	ext{M}+$). | Physically constrained by autonomous analog interlocks; loss bounded to single rack. | Reinsurance syndicates release capital buffers; rate reductions of 22% to 35%. |
+| **PML / MPL Sizing** | Unbounded physical damage; potential total loss of compute hardware ($150\text{M}+$). | Physically constrained by autonomous analog interlocks; loss bounded to single rack. | Reinsurance syndicates release capital buffers; rate reductions of 22% to 35%. |
 | **Lloyd's Y5381 Compliance** | Disputed claims during nation-state attacks; severe litigation risk. | Formally verified SIL-3 physical interlocks satisfy statutory due diligence standards. | Affirmative cyber-physical coverage granted with zero state-actor exclusions. |
 | **Parametric Triggers** | Subjective damage surveys requiring weeks of onsite inspection. | Parametric claims settlement triggered automatically by verified digital twin telemetry. | Claims resolved in days; operational working capital restored rapidly. |
 

@@ -174,65 +174,65 @@ To quantify cyber-physical stability and catastrophic tail-risk, the microgrid p
 ### 5.1 The Microgrid Swing Equation and Synthetic Inertia Decay
 The dynamic frequency response of the campus power system following a cyber-induced generation trip is governed by the rotational swing equation:
 
-$$2H_{	ext{sys}} rac{d\Delta f(t)}{dt} = P_{	ext{gen}}(t) - P_{	ext{load}}(t) - D_{	ext{load}} \cdot \Delta f(t)$$
+$$2H_{\text{sys}} \frac{d\Delta f(t)}{dt} = P_{\text{gen}}(t) - P_{\text{load}}(t) - D_{\text{load}} \cdot \Delta f(t)$$
 
 Where:
-- $H_{	ext{sys}} = rac{\sum_j H_j S_{n,j}}{S_{	ext{base}}}$ is the effective system inertia constant (seconds).
-- $\Delta f(t) = f(t) - f_0$ is the frequency deviation from nominal $60.0	ext{ Hz}$.
-- $D_{	ext{load}}$ is the load damping factor ($\% \Delta P / \% \Delta f$).
+- $H_{\text{sys}} = \frac{\sum_j H_j S_{n,j}}{S_{\text{base}}}$ is the effective system inertia constant (seconds).
+- $\Delta f(t) = f(t) - f_0$ is the frequency deviation from nominal $60.0\text{ Hz}$.
+- $D_{\text{load}}$ is the load damping factor ($\% \Delta P / \% \Delta f$).
 
-In a conventional grid, $H_{	ext{sys}} pprox 4.5	ext{ to }6.0	ext{ s}$. In an inverter-based microgrid, physical inertia collapses to $H_{	ext{sys}} < 0.8	ext{ s}$. The maximum Rate of Change of Frequency ($	ext{RoCoF}$) immediately following an instantaneous generation dump $\Delta P_{	ext{dump}}$ is:
+In a conventional grid, $H_{\text{sys}} \approx 4.5\text{ to }6.0\text{ s}$. In an inverter-based microgrid, physical inertia collapses to $H_{\text{sys}} < 0.8\text{ s}$. The maximum Rate of Change of Frequency ($\text{RoCoF}$) immediately following an instantaneous generation dump $\Delta P_{\text{dump}}$ is:
 
-$$	ext{RoCoF}_{\max} = \left. rac{df(t)}{dt} ight|_{t=0^+} = rac{f_0 \cdot \Delta P_{	ext{dump}}}{2 H_{	ext{sys}} S_{	ext{base}}}$$
+$$\text{RoCoF}_{\max} = \left. \frac{df(t)}{dt} \right|_{t=0^+} = \frac{f_0 \cdot \Delta P_{\text{dump}}}{2 H_{\text{sys}} S_{\text{base}}}$$
 
-For a $100	ext{ MW}$ facility ($S_{	ext{base}} = 100	ext{ MVA}$) experiencing a cyber-induced $30	ext{ MW}$ BESS inverter trip with $H_{	ext{sys}} = 0.75	ext{ s}$:
+For a $100\text{ MW}$ facility ($S_{\text{base}} = 100\text{ MVA}$) experiencing a cyber-induced $30\text{ MW}$ BESS inverter trip with $H_{\text{sys}} = 0.75\text{ s}$:
 
-$$	ext{RoCoF}_{\max} = rac{60.0 \cdot 30.0}{2 	imes 0.75 	imes 100.0} = rac{1,800}{150} = 12.0	ext{ Hz/s}$$
+$$\text{RoCoF}_{\max} = \frac{60.0 \cdot 30.0}{2 \times 0.75 \times 100.0} = \frac{1,800}{150} = 12.0\text{ Hz/s}$$
 
-Standard under-frequency load shedding relays trip at $1.5	ext{ to }2.0	ext{ Hz/s}$. A $	ext{RoCoF}$ of $12.0	ext{ Hz/s}$ trips every protection relay across the campus in less than $120	ext{ milliseconds}$, causing an instantaneous, uncoordinated blackout before backup diesel generators can initiate cranking cycles.
+Standard under-frequency load shedding relays trip at $1.5\text{ to }2.0\text{ Hz/s}$. A $\text{RoCoF}$ of $12.0\text{ Hz/s}$ trips every protection relay across the campus in less than $120\text{ milliseconds}$, causing an instantaneous, uncoordinated blackout before backup diesel generators can initiate cranking cycles.
 
 ### 5.2 Arrhenius Thermal Runaway Chemical Kinetics
 The temperature escalation inside a compromised lithium-ion battery cell is governed by coupled non-linear Arrhenius heat generation equations:
 
-$$rac{dT_{	ext{cell}}(t)}{dt} = rac{\dot{Q}_{	ext{joule}} + \dot{Q}_{	ext{SEI}} + \dot{Q}_{	ext{anode}} + \dot{Q}_{	ext{cathode}} - \dot{Q}_{	ext{cooling}}}{C_{	ext{cell}}}$$
+$$\frac{dT_{\text{cell}}(t)}{dt} = \frac{\dot{Q}_{\text{joule}} + \dot{Q}_{\text{SEI}} + \dot{Q}_{\text{anode}} + \dot{Q}_{\text{cathode}} - \dot{Q}_{\text{cooling}}}{C_{\text{cell}}}$$
 
-$$\dot{Q}_{	ext{reaction}, i} = \Delta H_i \cdot m_i \cdot A_i \cdot \exp\left(-rac{E_{a,i}}{R \cdot T_{	ext{cell}}(t)}ight)$$
+$$\dot{Q}_{\text{reaction}, i} = \Delta H_i \cdot m_i \cdot A_i \cdot \exp\left(-\frac{E_{a,i}}{R \cdot T_{\text{cell}}(t)}\right)$$
 
 Where:
 - $\Delta H_i$ is the enthalpy of reaction for cell component $i$ (SEI layer, anode, cathode).
-- $E_{a,i}$ is the activation energy ($120	ext{ to }140	ext{ kJ/mol}$).
-- $C_{	ext{cell}} = 980	ext{ J/K}$ is the cell heat capacity.
+- $E_{a,i}$ is the activation energy ($120\text{ to }140\text{ kJ/mol}$).
+- $C_{\text{cell}} = 980\text{ J/K}$ is the cell heat capacity.
 
-When an adversary modifies BMS holding registers to force continuous overcharge ($V_{	ext{cell}} > 4.25	ext{ V}$), internal Joule heating $\dot{Q}_{	ext{joule}} = I^2 R_{	ext{int}}$ drives $T_{	ext{cell}}$ past $80.0^\circ	ext{C}$. Once the Arrhenius exponential terms ignite, heat generation scales exponentially, driving cell temperature past $650^\circ	ext{C}$ at a rate of change exceeding $45^\circ	ext{C/s}$.
+When an adversary modifies BMS holding registers to force continuous overcharge ($V_{\text{cell}} > 4.25\text{ V}$), internal Joule heating $\dot{Q}_{\text{joule}} = I^2 R_{\text{int}}$ drives $T_{\text{cell}}$ past $80.0^\circ\text{C}$. Once the Arrhenius exponential terms ignite, heat generation scales exponentially, driving cell temperature past $650^\circ\text{C}$ at a rate of change exceeding $45^\circ\text{C/s}$.
 
 ### 5.3 Convective Heat Removal Collapse and Silicon Thermal Trip
 Simultaneously, compute racks drawing power from the microgrid experience cooling failure if water pumps trip:
 
-$$rac{dT_j(t)}{dt} = rac{P_{	ext{die}} - h_{	ext{conv}}(\dot{Q}_{	ext{vol}}) \cdot A_{	ext{die}} \cdot (T_j - T_{	ext{coolant}})}{C_{	ext{thermal}}}$$
+$$\frac{dT_j(t)}{dt} = \frac{P_{\text{die}} - h_{\text{conv}}(\dot{Q}_{\text{vol}}) \cdot A_{\text{die}} \cdot (T_j - T_{\text{coolant}})}{C_{\text{thermal}}}$$
 
-Where volumetric flow collapses from $38.5	ext{ L/min}$ PG25 coolant to zero, and silicon heat flux exceeding $120	ext{ W/cm}^2$ drives junction temperature past $94.0^\circ	ext{C}$ within $14.8	ext{ seconds}$, destroying accelerator silicon packages.
+Where volumetric flow collapses from $38.5\text{ L/min}$ PG25 coolant to zero, and silicon heat flux exceeding $120\text{ W/cm}^2$ drives junction temperature past $94.0^\circ\text{C}$ within $14.8\text{ seconds}$, destroying accelerator silicon packages.
 
 ### 5.4 Probable Maximum Loss (PML) for Campus Microgrid Collapse
 For property catastrophe and cyber business interruption underwriting, the total Probable Maximum Loss resulting from a coordinated BESS thermal runaway and substation explosion is formulated as:
 
-$$	ext{PML}_{	ext{Microgrid}} = C_{	ext{BESS}} + C_{	ext{substation}} + C_{	ext{compute\_hardware}} + \int_0^{T_{	ext{restore}}} \dot{L}_{	ext{BI}}(t) \, dt + \Phi_{	ext{environmental}}$$
+$$\text{PML}_{\text{Microgrid}} = C_{\text{BESS}} + C_{\text{substation}} + C_{\text{compute\_hardware}} + \int_0^{T_{\text{restore}}} \dot{L}_{\text{BI}}(t) \, dt + \Phi_{\text{environmental}}$$
 
-$$	ext{ALE}_{	ext{Microgrid}} = 	ext{PML}_{	ext{Microgrid}} 	imes 	ext{ARO}_{	ext{cyber}}$$
+$$\text{ALE}_{\text{Microgrid}} = \text{PML}_{\text{Microgrid}} \times \text{ARO}_{\text{cyber}}$$
 
 Where:
-- $C_{	ext{BESS}} = 45,000,000	ext{ USD}$ (complete replacement of 200 MWh containerized battery facility).
-- $C_{	ext{substation}} = 18,000,000	ext{ USD}$ (lead-time replacement of two 230 kV transformers).
-- $\dot{L}_{	ext{BI}}(t) = 18,500	ext{ USD/hour}$ continuous business interruption loss.
-- $T_{	ext{restore}} = 52	ext{ weeks} = 8,736	ext{ hours}$ (substation transformer lead time).
+- $C_{\text{BESS}} = 45,000,000\text{ USD}$ (complete replacement of 200 MWh containerized battery facility).
+- $C_{\text{substation}} = 18,000,000\text{ USD}$ (lead-time replacement of two 230 kV transformers).
+- $\dot{L}_{\text{BI}}(t) = 18,500\text{ USD/hour}$ continuous business interruption loss.
+- $T_{\text{restore}} = 52\text{ weeks} = 8,736\text{ hours}$ (substation transformer lead time).
 
-$$	ext{Business Interruption Loss} = \$18,500 	imes 8,736 = \$161,616,000$$
+$$\text{Business Interruption Loss} = \$18,500 \times 8,736 = \$161,616,000$$
 
-$$	ext{PML}_{	ext{Microgrid}} = \$45	ext{M} + \$18	ext{M} + \$120	ext{M} + \$161.6	ext{M} + \$15	ext{M} = \$359,616,000$$
+$$\text{PML}_{\text{Microgrid}} = \$45\text{M} + \$18\text{M} + \$120\text{M} + \$161.6\text{M} + \$15\text{M} = \$359,616,000$$
 
 This represents a classic Table B Extremistan catastrophe. The financial consequence of a cyber-physical failure dwarfs traditional IT breach losses by over an order of magnitude.
 
 ### 5.5 Return on Security Investment (ROSI) for Microgrid Safety Interlocks
-Deploying hardwired analog over-voltage relays, physical synchrocheck interlocks, and optical data diodes ($C_{	ext{control}} = 680,000	ext{ USD}$) reduces annual loss expectancy from $	ext{ALE} = 17,980,000	ext{ USD}$ to $	ext{ALE} = 360,000	ext{ USD}$, delivering a verified $	ext{ROSI} = 2,491\%$.
+Deploying hardwired analog over-voltage relays, physical synchrocheck interlocks, and optical data diodes ($C_{\text{control}} = 680,000\text{ USD}$) reduces annual loss expectancy from $\text{ALE} = 17,980,000\text{ USD}$ to $\text{ALE} = 360,000\text{ USD}$, delivering a verified $\text{ROSI} = 2,491\%$.
 
 ---
 
@@ -265,10 +265,10 @@ To eliminate Table B catastrophe risks across emerging power topologies, facilit
 ```
 
 ### 6.1 Invariant 1: Hardwired Analog Safety Isolation (SIL-3)
-Every BESS container must incorporate an autonomous, analog safety loop conforming to IEC 61508 / NFPA 855. Snap-action thermal fuses and off-gas sensors must be wired directly to shunt-trip coils on the primary DC disconnect switch. Under excessive voltage or temperature, the contactor opens by spring release in $< 40	ext{ milliseconds}$, physically interrupting the fault current independently of the digital BMS.
+Every BESS container must incorporate an autonomous, analog safety loop conforming to IEC 61508 / NFPA 855. Snap-action thermal fuses and off-gas sensors must be wired directly to shunt-trip coils on the primary DC disconnect switch. Under excessive voltage or temperature, the contactor opens by spring release in $< 40\text{ milliseconds}$, physically interrupting the fault current independently of the digital BMS.
 
 ### 6.2 Invariant 2: Unidirectional Generation Telemetry (Optical Diode)
-All telemetry passing between on-site generation sources (SMRs, utility substations) and the facility building management network must cross an optical data diode enforcing physical unidirectional transmission ($C_{	ext{reverse}} \equiv 0.000	ext{ bps}$). SCADA networks cannot inject setpoint writes or breaker trip commands into the generation control domain.
+All telemetry passing between on-site generation sources (SMRs, utility substations) and the facility building management network must cross an optical data diode enforcing physical unidirectional transmission ($C_{\text{reverse}} \equiv 0.000\text{ bps}$). SCADA networks cannot inject setpoint writes or breaker trip commands into the generation control domain.
 
 ### 6.3 Invariant 3: Electromechanical Synchrocheck Interlocks
 To prevent out-of-phase breaker closure attacks (which physically destroy substation transformers and generator shafts), all grid-tie breakers must incorporate hardwired electromechanical synchrocheck relays (Device 25). The breaker closing coil cannot receive electrical current unless the phase angle, voltage magnitude, and frequency differences across the contacts are verified to be within safe mechanical synchronization tolerances.

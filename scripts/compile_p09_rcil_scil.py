@@ -7,7 +7,7 @@ meeting all PAAI gate criteria and zero-tolerance style prohibitions.
 
 dest_path = 'references/WG-01-UI-Underwriter-insurance/WG-01-UI-RCIL-SCIL-Reinsurance.md'
 
-content = """## Abstract
+content = r"""## Abstract
 
 In mission-critical industrial facilities, risk assessment frameworks such as FMECA and HAZOP identify failure modes, but they do not procure physical equipment, establish inventory buffers, or underwrite business interruption insurance policies. The bridge between engineering risk analysis and balance-sheet resilience is the formal classification of components into the Reliability Critical Items List (RCIL) and the Safety Critical Items List (SCIL). 
 

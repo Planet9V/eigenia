@@ -7,7 +7,7 @@ meeting all PAAI gate criteria and zero-tolerance style prohibitions.
 
 dest_path = 'references/WG-01-UI-Underwriter-insurance/WG-01-UI-Quantitative-Cyber-Physical-FMECA.md'
 
-content = """## Abstract
+content = r"""## Abstract
 
 Failure Mode, Effects, and Criticality Analysis (FMECA) under IEC 60812 is the foundational methodology of industrial reliability engineering. For decades, mechanical and plant engineers have calculated Risk Priority Numbers (RPN) as the product of Severity, Occurrence, and Detection to prioritize maintenance budgets and capital equipment replacement. Traditional FMECA assumes that physical components fail through predictable stochastic mechanisms: mechanical bearing fatigue, thermal cycling degradation, corrosion, and seal wear. Under these assumptions, Occurrence is low and Detection is high, producing modest Risk Priority Numbers.
 

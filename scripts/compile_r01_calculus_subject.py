@@ -75,7 +75,7 @@ cleaned = cleaned.replace(r'\\cap', r'\cap')
 cleaned = cleaned.replace(r'\\{0\\}', r'\{0\}')
 
 # Format header block with authoritative Jim McKenney systems assurance framing
-header = """## Executive Abstract
+header = r"""## Executive Abstract
 
 The trajectory of Jacques Lacan's teaching is marked by a rigorous and progressively intensifying engagement with the formal sciences. While early psychoanalytic formulations were rooted in phenomenological and dialectical traditions; drawing on Hegel, Kojeve, and Heidegger; later Lacanian theory executes a decisive turn toward the "matheme." This turn is not merely a pedagogical convenience or a metaphor. It represents a fundamental epistemological claim: that psychoanalysis, if it is to transmit the Real of the subject without falling into imaginary semantic drift, must align itself with the formalization characteristic of modern science. Central to this project is the concept of the "calculus," appearing across multiple registers: from the "calculus of the subject" to the "infinitesimal calculus" of the unconscious, and finally to the "predicate calculus" of sexuation.
 
@@ -97,7 +97,7 @@ body = re.sub(r'###\s+\*\*\d\.\d\s*', '### ', body)
 body = re.sub(r'\*\*', '', body)  # clean remaining raw bold stars in headers
 
 # Actuarial and Engineering Grounding Section to guarantee full PAAI compliance
-grounding_section = """
+grounding_section = r"""
 ---
 
 ## 8. Applied Systems Assurance: Threat Modeling and Actuarial Formalism

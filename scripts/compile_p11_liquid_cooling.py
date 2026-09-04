@@ -7,7 +7,7 @@ meeting all PAAI gate criteria and zero-tolerance style prohibitions.
 
 dest_path = 'references/WG-02-DT-Digital-Twin/WG-02-DT-High-Density-Liquid-Cooling.md'
 
-content = """## Abstract
+content = r"""## Abstract
 
 Modern artificial intelligence compute accelerators have permanently broken the thermodynamic limits of air cooling. While legacy enterprise compute rarely exceeded 15 kW per rack, modern accelerator clusters; such as the NVIDIA GB200 NVL72 and dense AMD Instinct architectures; generate thermal heat loads between 120 kW and 142 kW within a single rack footprint. At these extreme densities, liquid cooling is an absolute physical necessity. Water possesses a thermal conductivity over 23x greater than air and stores approximately 3,000x more heat per unit volume.
 

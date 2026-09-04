@@ -322,44 +322,43 @@ To translate the Calculus of the Subject into operational infrastructure assuran
 ### 8.1 Coupling the Psychometric Tensor to Industrial Control Layers
 In high-consequence environments governed by IEC 62443 and EN 50126, human operators and external threat actors do not act in isolation; they interact across the write-access boundary. We map the subject's topological cut to physical plant telemetry captured via DEXPI 2.0 (ISO 15926) piping schematics and CycloneDX 1.6+ multi-BOM specifications:
 - **HBOM & Hardware Boundaries:** Physical silicon roots-of-trust (Caliptra 2.0, OpenSIL, DICE) establish the unyielding physical boundary against which adversary subjectivity fractures.
-- **OBOM Operational Envelopes:** System operational bounds (coolant flow $\ge 35	ext{ L/min}$ PG25, operating temperature $\le 45	ext{ }^\circ	ext{C}$, operating pressure $\le 6.0	ext{ bar}$) define the physical limits of plant survival.
+- **OBOM Operational Envelopes:** System operational bounds (coolant flow $\ge 35\text{ L/min}$ PG25, operating temperature $\le 45\text{ }^\circ\text{C}$, operating pressure $\le 6.0\text{ bar}$) define the physical limits of plant survival.
 - **VEX Vulnerability Tracking:** Machine-readable exploit streams track the points of external friction where adversary desire intersects systemic vulnerability.
 
 ### 8.2 Governing Mathematical Equations of the Behavioral Field
 The dynamic interaction between threat actor desire and industrial plant resistance is modeled via coupled differential equations on the manifold:
 
-$$rac{d\Psi_{	ext{subject}}(t)}{dt} = -
-abla U(\Psi) + \sqrt{2eta^{-1}} \, \eta(t)$$
+$$\frac{d\Psi_{\text{subject}}(t)}{dt} = -\nabla U(\Psi) + \sqrt{2\beta^{-1}} \, \eta(t)$$
 
 Where:
 - $U(\Psi)$ is the non-convex cognitive potential surface.
-- $eta^{-1}$ is the operational noise and systemic entropy.
+- $\beta^{-1}$ is the operational noise and systemic entropy.
 - $\eta(t)$ is the stochastic perturbation representing anomalous alert injection.
 
 When an adversary experiences cognitive overload or ideological crisis, the jump rate across the barrier is governed by the Kramers escape rate:
 
-$$r_{	ext{escape}} = rac{\sqrt{U''(x_{\min}) \cdot |U''(x_{	ext{barrier}})|}}{2\pi} \exp\left(-rac{\Delta U}{eta^{-1}}ight)$$
+$$r_{\text{escape}} = \frac{\sqrt{U''(x_{\min}) \cdot |U''(x_{\text{barrier}})|}}{2\pi} \exp\left(-\frac{\Delta U}{\beta^{-1}}\right)$$
 
 If an insider overrides coolant circulation in a 100 MW compute campus, the thermal rate of change of silicon junction temperature $T_j(t)$ across 120 kW racks collapses into rapid thermal destruction:
 
-$$rac{dT_j(t)}{dt} = rac{P_{	ext{die}} - h_{	ext{conv}}(\dot{Q}_{	ext{vol}}) \cdot A_{	ext{die}} \cdot (T_j - T_{	ext{coolant}})}{C_{	ext{thermal}}}$$
+$$\frac{dT_j(t)}{dt} = \frac{P_{\text{die}} - h_{\text{conv}}(\dot{Q}_{\text{vol}}) \cdot A_{\text{die}} \cdot (T_j - T_{\text{coolant}})}{C_{\text{thermal}}}$$
 
-Where volumetric hydraulic flow collapses, heat flux exceeds $140	ext{ W/cm}^2$, and convective dissipation drops, causing the silicon junction temperature to surge past $94.0	ext{ }^\circ	ext{C}$ in under 45 seconds.
+Where volumetric hydraulic flow collapses, heat flux exceeds $140\text{ W/cm}^2$, and convective dissipation drops, causing the silicon junction temperature to surge past $94.0\text{ }^\circ\text{C}$ in under 45 seconds.
 
 ### 8.3 Actuarial Risk Engineering and Reinsurance Treaty Underwriting
 Underwriting affirmative cyber-physical property catastrophe coverage under Lloyd's Y5381 requires quantifying how behavioral failure translates into physical asset loss:
 
-$$	ext{ALE}_{	ext{behavioral}} = 	ext{SLE}_{	ext{physical}} 	imes 	ext{ARO}_{	ext{actor}} = 	ext{PML}_{	ext{plant}} 	imes 	ext{ARO}_{	ext{actor}}$$
+$$\text{ALE}_{\text{behavioral}} = \text{SLE}_{\text{physical}} \times \text{ARO}_{\text{actor}} = \text{PML}_{\text{plant}} \times \text{ARO}_{\text{actor}}$$
 
-$$	ext{SLE}_{	ext{physical}} = \sum_{k=1}^{N_{	ext{assets}}} C_{	ext{replacement}}(k) + \int_0^{T_{	ext{restore}}} \dot{L}_{	ext{BI}}(t) \, dt + \Phi_{	ext{regulatory}}$$
+$$\text{SLE}_{\text{physical}} = \sum_{k=1}^{N_{\text{assets}}} C_{\text{replacement}}(k) + \int_0^{T_{\text{restore}}} \dot{L}_{\text{BI}}(t) \, dt + \Phi_{\text{regulatory}}$$
 
 Where:
-- $C_{	ext{replacement}}$ is capital equipment replacement cost ($120,000	ext{ USD}$ per ruined accelerator tray).
-- $\dot{L}_{	ext{BI}}(t)$ is the business interruption loss rate ($18,500	ext{ USD/hour}$).
-- $\Phi_{	ext{regulatory}}$ is the statutory penalty levied under EU CRA Article 64.
+- $C_{\text{replacement}}$ is capital equipment replacement cost ($120,000\text{ USD}$ per ruined accelerator tray).
+- $\dot{L}_{\text{BI}}(t)$ is the business interruption loss rate ($18,500\text{ USD/hour}$).
+- $\Phi_{\text{regulatory}}$ is the statutory penalty levied under EU CRA Article 64.
 
-Deploying psychometric behavioral monitoring ($C_{	ext{controls}} = 350,000	ext{ USD}$) mitigates insider-assisted sabotage, reducing annualized loss expectancy from $12,400,000	ext{ USD}$ to $920,000	ext{ USD}$ and yielding a verified Return on Security Investment ($	ext{ROSI}$):
+Deploying psychometric behavioral monitoring ($C_{\text{controls}} = 350,000\text{ USD}$) mitigates insider-assisted sabotage, reducing annualized loss expectancy from $12,400,000\text{ USD}$ to $920,000\text{ USD}$ and yielding a verified Return on Security Investment ($\text{ROSI}$):
 
-$$	ext{ROSI} = rac{(	ext{ALE}_{	ext{unmitigated}} - 	ext{ALE}_{	ext{hardened}}) - C_{	ext{controls}}}{C_{	ext{controls}}} 	imes 100\% = rac{\$11,480,000 - \$350,000}{\$350,000} 	imes 100\% = 3,180\%$$
+$$\text{ROSI} = \frac{(\text{ALE}_{\text{unmitigated}} - \text{ALE}_{\text{hardened}}) - C_{\text{controls}}}{C_{\text{controls}}} \times 100\% = \frac{\$11,480,000 - \$350,000}{\$350,000} \times 100\% = 3,180\%$$
 
 Full compliance with SFAIRP (So Far As Is Reasonably Practicable) standards protects operators from allegations of gross negligence, securing favorable policy deductible structures, eliminating restrictive sub-limit caps, and mitigating consequential loss and accumulation loading across reinsurer portfolios.

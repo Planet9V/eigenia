@@ -81,7 +81,7 @@ cleaned = cleaned.replace(r'\\mathcal{R}', r'\mathcal{R}')
 cleaned = cleaned.replace(r'\\mathcal{N}', r'\mathcal{N}')
 
 # Format header block with authoritative Jim McKenney systems assurance framing
-header = """## Executive Abstract
+header = r"""## Executive Abstract
 
 The formalization of the Lacanian subject has historically remained constrained to conceptual and topological formulations; specifically the mathemes, the Borromean knot, and the four discourses. While mathematically evocative, these models have resisted dynamic computational implementation capable of processing continuous time-series behavioral data. This treatise establishes the **Lacanian Gated Graph Neural Network (L-gGNN)**; a deep learning architecture that translates the algebraic logic of Suture, the retroactive temporality of the *point de capiton* (quilting point), and the four discourses into a differentiable, multi-relational graph convolution engine.
 
@@ -104,7 +104,7 @@ body = re.sub(r'\*\*', '', body)  # clean remaining raw bold stars in headers
 body = re.sub(r"([a-zA-Z]{3,})\.(\d{1,3})\b", r"\1 [\2]", body)
 
 # Systems Assurance and Actuarial Section to guarantee full PAAI compliance
-grounding_section = """
+grounding_section = r"""
 ---
 
 ## 9. Applied Systems Assurance: Cyber-Physical Threat Modeling and Actuarial Formalism

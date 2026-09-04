@@ -376,35 +376,35 @@ To translate the L-gGNN computational engine into operational infrastructure def
 ### 9.1 Coupling L-gGNN State Vectors to Physical Facility Boundaries
 In critical facilities governed by IEC 62443 and EN 50126, threat actors and system operators interact across strict architectural trust boundaries. The L-gGNN state vectors $\mathbf{h}_v^{(t)}$ are bound to physical plant components via DEXPI 2.0 (ISO 15926) piping and instrumentation diagrams (P&IDs) and CycloneDX 1.6+ multi-BOM streams:
 - **HBOM Boundary:** Silicon roots-of-trust (Caliptra 2.0, OpenSIL, DICE) enforce hardware-level immutable identities, anchoring the symbolic register against malicious compromise.
-- **OBOM Operational Constraints:** Physical operational boundaries (coolant flow $\ge 35	ext{ L/min}$ PG25, operating temperature $\le 45	ext{ }^\circ	ext{C}$, operating pressure $\le 6.0	ext{ bar}$) establish non-negotiable physical constraints.
+- **OBOM Operational Constraints:** Physical operational boundaries (coolant flow $\ge 35\text{ L/min}$ PG25, operating temperature $\le 45\text{ }^\circ\text{C}$, operating pressure $\le 6.0\text{ bar}$) establish non-negotiable physical constraints.
 - **VEX Advisory Streams:** Machine-readable vulnerability feeds provide dynamic threat input vectors, updating the adjacency matrix $\mathbf{A}$ as novel zero-day exploits emerge.
 
 ### 9.2 Thermodynamic Failure Coupling and Thermal Dynamics
-When an insider threat or compromised operator enters a state of high psychological entropy, operational commands can disrupt cooling infrastructure. In high-density liquid-cooled compute facilities running $120	ext{ kW}$ racks, coolant stagnation triggers catastrophic thermal runaway:
+When an insider threat or compromised operator enters a state of high psychological entropy, operational commands can disrupt cooling infrastructure. In high-density liquid-cooled compute facilities running $120\text{ kW}$ racks, coolant stagnation triggers catastrophic thermal runaway:
 
-$$rac{dT_j(t)}{dt} = rac{P_{	ext{die}} - h_{	ext{conv}}(\dot{Q}_{	ext{vol}}) \cdot A_{	ext{die}} \cdot (T_j - T_{	ext{coolant}})}{C_{	ext{thermal}}}$$
+$$\frac{dT_j(t)}{dt} = \frac{P_{\text{die}} - h_{\text{conv}}(\dot{Q}_{\text{vol}}) \cdot A_{\text{die}} \cdot (T_j - T_{\text{coolant}})}{C_{\text{thermal}}}$$
 
 Where:
-- $P_{	ext{die}} = 1,200	ext{ W}$ die power dissipation across a 100 MW campus.
-- Volumetric coolant flow $\dot{Q}_{	ext{vol}}$ collapses from $38.5	ext{ L/min}$ to zero.
-- Heat flux exceeds $140	ext{ W/cm}^2$.
-- The convective heat transfer coefficient $h_{	ext{conv}}$ drops, driving the rate of change of junction temperature $rac{dT_j}{dt} > 4.2	ext{ }^\circ	ext{C/s}$.
-- Silicon junction temperature $T_j$ breaches the $94.0	ext{ }^\circ	ext{C}$ destruction threshold in under 45 seconds.
+- $P_{\text{die}} = 1,200\text{ W}$ die power dissipation across a 100 MW campus.
+- Volumetric coolant flow $\dot{Q}_{\text{vol}}$ collapses from $38.5\text{ L/min}$ to zero.
+- Heat flux exceeds $140\text{ W/cm}^2$.
+- The convective heat transfer coefficient $h_{\text{conv}}$ drops, driving the rate of change of junction temperature $\frac{dT_j}{dt} > 4.2\text{ }^\circ\text{C/s}$.
+- Silicon junction temperature $T_j$ breaches the $94.0\text{ }^\circ\text{C}$ destruction threshold in under 45 seconds.
 
 ### 9.3 Actuarial Risk Engineering and Lloyd's Y5381 Reinsurance Underwriting
-By modeling the probability distribution of operator failure and insider attack progression through the L-gGNN, insurers quantify Annualised Loss Expectancy ($	ext{ALE}$) for affirmative cyber property catastrophe policies:
+By modeling the probability distribution of operator failure and insider attack progression through the L-gGNN, insurers quantify Annualised Loss Expectancy ($\text{ALE}$) for affirmative cyber property catastrophe policies:
 
-$$	ext{ALE}_{	ext{cyber}} = 	ext{SLE}_{	ext{physical}} 	imes 	ext{ARO}_{	ext{adversary}} = 	ext{PML}_{	ext{facility}} 	imes 	ext{ARO}_{	ext{adversary}}$$
+$$\text{ALE}_{\text{cyber}} = \text{SLE}_{\text{physical}} \times \text{ARO}_{\text{adversary}} = \text{PML}_{\text{facility}} \times \text{ARO}_{\text{adversary}}$$
 
-$$	ext{SLE}_{	ext{physical}} = \sum_{k=1}^{N_{	ext{assets}}} C_{	ext{replacement}}(k) + \int_0^{T_{	ext{restore}}} \dot{L}_{	ext{BI}}(t) \, dt + \Phi_{	ext{regulatory}}$$
+$$\text{SLE}_{\text{physical}} = \sum_{k=1}^{N_{\text{assets}}} C_{\text{replacement}}(k) + \int_0^{T_{\text{restore}}} \dot{L}_{\text{BI}}(t) \, dt + \Phi_{\text{regulatory}}$$
 
 Where:
-- $C_{	ext{replacement}}$ is the capital asset replacement cost ($120,000	ext{ USD}$ per server blade; $14,400,000	ext{ USD}$ per 120-rack hall).
-- $\dot{L}_{	ext{BI}}(t)$ is the business interruption revenue loss rate ($24,000	ext{ USD/hour}$).
-- $\Phi_{	ext{regulatory}}$ is the statutory fine under EU CRA Article 64.
+- $C_{\text{replacement}}$ is the capital asset replacement cost ($120,000\text{ USD}$ per server blade; $14,400,000\text{ USD}$ per 120-rack hall).
+- $\dot{L}_{\text{BI}}(t)$ is the business interruption revenue loss rate ($24,000\text{ USD/hour}$).
+- $\Phi_{\text{regulatory}}$ is the statutory fine under EU CRA Article 64.
 
-Deploying L-gGNN behavioral monitoring controls ($C_{	ext{controls}} = 380,000	ext{ USD}$) detects insider sabotage trajectories early in the signifying chain, reducing annualized loss expectancy from $11,800,000	ext{ USD}$ to $420,000	ext{ USD}$ and delivering a verified Return on Security Investment ($	ext{ROSI}$):
+Deploying L-gGNN behavioral monitoring controls ($C_{\text{controls}} = 380,000\text{ USD}$) detects insider sabotage trajectories early in the signifying chain, reducing annualized loss expectancy from $11,800,000\text{ USD}$ to $420,000\text{ USD}$ and delivering a verified Return on Security Investment ($\text{ROSI}$):
 
-$$	ext{ROSI} = rac{(	ext{ALE}_{	ext{unmitigated}} - 	ext{ALE}_{	ext{hardened}}) - C_{	ext{controls}}}{C_{	ext{controls}}} 	imes 100\% = rac{\$11,380,000 - \$380,000}{\$380,000} 	imes 100\% = 2,895\%$$
+$$\text{ROSI} = \frac{(\text{ALE}_{\text{unmitigated}} - \text{ALE}_{\text{hardened}}) - C_{\text{controls}}}{C_{\text{controls}}} \times 100\% = \frac{\$11,380,000 - \$380,000}{\$380,000} \times 100\% = 2,895\%$$
 
 Adherence to SFAIRP (So Far As Is Reasonably Practicable) standards underpins underwriting defensibility, securing lower policy deductibles, removing punitive sub-limit restrictions, and mitigating consequential loss and accumulation loading across global reinsurer balance sheets.

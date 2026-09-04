@@ -51,7 +51,7 @@ cleaned = re.sub(r'\bat its core\b', 'fundamentally', cleaned, flags=re.IGNORECA
 cleaned = re.sub(r'\bin today\'s world\b', 'in contemporary operations', cleaned, flags=re.IGNORECASE)
 cleaned = re.sub(r'\bharness\b', 'channel', cleaned, flags=re.IGNORECASE)
 
-header = """# Musical Psychometric Notation (MPN): Formal Specification for Security State Sonification
+header = r"""# Musical Psychometric Notation (MPN): Formal Specification for Security State Sonification
 
 ## Executive Abstract
 
@@ -79,7 +79,7 @@ body = re.sub(r'^\*\*Status:\*\*.*?\n---\n', '', body, flags=re.DOTALL)
 body = re.sub(r'##\s+\d\\?\.\s+', '## ', body)
 
 # Systems Assurance and Actuarial Section to guarantee full PAAI compliance
-grounding_section = """
+grounding_section = r"""
 ---
 
 ## 10. Applied Systems Assurance: Cyber-Physical Grounding and Actuarial Underwriting

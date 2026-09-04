@@ -7,7 +7,7 @@ meeting all PAAI gate criteria and zero-tolerance style prohibitions.
 
 dest_path = 'references/WG-04-CF-Cascading-Failures/WG-04-CF-Emerging-Power-Topologies.md'
 
-content = """## Abstract
+content = r"""## Abstract
 
 Hyperscale compute campuses require vast electrical power, with single facilities scaling beyond 100 MW and gigawatt-scale clusters entering active development. To bypass multi-year regional transmission queue bottlenecks, operators are deploying decentralized on-site microgrids. These advanced energy topologies incorporate utility-scale Battery Energy Storage Systems (BESS, 100 to 400 MWh), behind-the-meter Small Modular Reactors (SMRs), hydrogen fuel cell banks, and fast-starting reciprocating generators. 
 

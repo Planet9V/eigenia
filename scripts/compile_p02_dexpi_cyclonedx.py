@@ -7,7 +7,7 @@ CycloneDX 1.6 JSON schemas, fluid mechanics derivations, and actuarial tables.
 
 dest_path = 'references/WG-05-CAD-DEXPI-2/WG-05-CAD-Unified-DEXPI-CycloneDX.md'
 
-content = """## Abstract
+content = r"""## Abstract
 
 Modern high-density compute facilities and critical industrial plants suffer from a severe semantic disconnect between physical plant engineering and platform cybersecurity. Plant operators design facility infrastructure using Piping and Instrumentation Diagrams (P&IDs) under the DEXPI 2.0 (ISO 15926) data exchange standard. This standard captures pump curves, pipe diameters, manifold topologies, fluid chemistry (such as 25% propylene glycol), volumetric flow rates, and delta-T thermal dissipation limits. 
 

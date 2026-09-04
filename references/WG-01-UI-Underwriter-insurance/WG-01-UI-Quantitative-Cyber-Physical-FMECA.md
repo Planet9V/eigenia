@@ -16,16 +16,16 @@ Reliability engineers have used FMECA to design offshore oil platforms, aerospac
 2. **Occurrence (O):** The statistical frequency or probability of the failure mode occurring during the operational lifetime of the asset.
 3. **Detection (D):** The likelihood that existing monitoring systems, sensor alarms, or maintenance inspections will detect the failure condition before catastrophic damage manifests. In classical reliability scales, a rating of 1 represents instantaneous automated detection, while a rating of 10 represents complete undetectable latency.
 
-$$	ext{RPN} = 	ext{Severity} 	imes 	ext{Occurrence} 	imes 	ext{Detection}$$
+$$\text{RPN} = \text{Severity} \times \text{Occurrence} \times \text{Detection}$$
 
 ### 1.1 The Mechanical Baseline Assumption
-Classical FMECA calculates Occurrence from Mean Time Between Failure (MTBF) tables derived from decades of operational field data. A centrifugal pump impeller bearing wears out after 50,000 to 80,000 operating hours. This degradation is preceded by measurable physical warning signs: elevated acoustic vibration, temperature rise across bearing housings, and lubricating oil particulate accumulation. Standard supervisory SCADA systems detect these anomalies weeks before mechanical seizure occurs, yielding low Occurrence ratings ($O = 2 	ext{ to } 3$) and favorable Detection ratings ($D = 2 	ext{ to } 3$). The resulting mechanical RPN remains comfortably below 60.
+Classical FMECA calculates Occurrence from Mean Time Between Failure (MTBF) tables derived from decades of operational field data. A centrifugal pump impeller bearing wears out after 50,000 to 80,000 operating hours. This degradation is preceded by measurable physical warning signs: elevated acoustic vibration, temperature rise across bearing housings, and lubricating oil particulate accumulation. Standard supervisory SCADA systems detect these anomalies weeks before mechanical seizure occurs, yielding low Occurrence ratings ($O = 2 \text{ to } 3$) and favorable Detection ratings ($D = 2 \text{ to } 3$). The resulting mechanical RPN remains comfortably below 60.
 
 ### 1.2 The Cyber-Physical Reality
 When the same centrifugal pump is orchestrated by a Variable Frequency Drive connected to an unauthenticated facility network, the reliability model fractures:
 
-- **Occurrence Inversion:** The failure is no longer constrained by mechanical wear physics. A remote threat actor with network access can command the pump to stop at any arbitrary second ($O 	o 7$).
-- **Detection Blindness:** A skilled adversary does not simply send a stop command; they exploit the two-way nature of the industrial protocol to overwrite holding registers, spoofing nominal rotational speed and normal fluid flow back to the operator console ($D 	o 9$).
+- **Occurrence Inversion:** The failure is no longer constrained by mechanical wear physics. A remote threat actor with network access can command the pump to stop at any arbitrary second ($O \to 7$).
+- **Detection Blindness:** A skilled adversary does not simply send a stop command; they exploit the two-way nature of the industrial protocol to overwrite holding registers, spoofing nominal rotational speed and normal fluid flow back to the operator console ($D \to 9$).
 - **Common-Cause Synchronicity:** While mechanical bearing seizures are uncorrelated stochastic events, a single malicious script can command all redundant CDU pumps across an entire data hall to trip simultaneously, completely defeating parallel N+1 and 2N redundancy architectures.
 
 ---
@@ -77,13 +77,13 @@ The following comprehensive table documents eighteen critical infrastructure com
 +-------------------------------------------------------------------------+
 ```
 
-| Component | Physical Failure Mode | Traditional Mechanical Cause | Cyber-Physical Attack Vector | S | $O_m$ | $O_c$ | $D_m$ | $D_c$ | $	ext{RPN}_m$ | $	ext{RPN}_c$ | Cyber Multiplier |
+| Component | Physical Failure Mode | Traditional Mechanical Cause | Cyber-Physical Attack Vector | S | $O_m$ | $O_c$ | $D_m$ | $D_c$ | $\text{RPN}_m$ | $\text{RPN}_c$ | Cyber Multiplier |
 |:---|:---|:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | **CDU Pump Assembly** | Catastrophic flow cessation | Bearing seizure; VFD DC-bus capacitor failure | Unauthenticated Modbus write forces pump stop register 40101 | 9 | 3 | 7 | 2 | 9 | **54** | **567** | **10.5x** |
 | **CDU Motorized Valve** | Valve fails fully closed | Actuator motor burn; mechanical stem binding | Attacker commands 15% position via BMS while spoofing open status | 9 | 2 | 6 | 2 | 9 | **36** | **486** | **13.5x** |
-| **CDU Temp Transmitter** | False low reading during runaway | Thermocouple calibration drift; open wire | Modbus offset register overwritten; false $30^\circ	ext{C}$ reported | 7 | 2 | 6 | 3 | 8 | **42** | **336** | **8.0x** |
+| **CDU Temp Transmitter** | False low reading during runaway | Thermocouple calibration drift; open wire | Modbus offset register overwritten; false $30^\circ\text{C}$ reported | 7 | 2 | 6 | 3 | 8 | **42** | **336** | **8.0x** |
 | **Chiller Compressor** | Compressor shutdown | Refrigerant leak; motor thermal overload | BACnet shutdown command injected to chiller PLC | 8 | 2 | 5 | 2 | 7 | **32** | **280** | **8.75x** |
-| **Cooling Tower Fan VFD** | Fan locked at minimum speed | VFD gate driver failure; motor bearing wear | VFD maximum frequency register set to $5	ext{ Hz}$ via Modbus | 6 | 3 | 6 | 3 | 8 | **54** | **288** | **5.3x** |
+| **Cooling Tower Fan VFD** | Fan locked at minimum speed | VFD gate driver failure; motor bearing wear | VFD maximum frequency register set to $5\text{ Hz}$ via Modbus | 6 | 3 | 6 | 3 | 8 | **54** | **288** | **5.3x** |
 | **Static Transfer Switch** | Both infeed breakers forced open | Solenoid failure; logic board lockup | Web interface exploit commands force-open on both feeds | 10 | 1 | 5 | 1 | 8 | **10** | **400** | **40.0x** |
 | **Block UPS Module** | Inverter bridge shutdown | IGBT thermal breakdown; DC capacitor short | Cloud management firmware update bricks inverter DSP | 9 | 2 | 6 | 2 | 8 | **36** | **432** | **12.0x** |
 | **Substation Transformer** | Dielectric breakdown / fire | Oil contamination; insulation aging | Synchrocheck phase spoofing forces out-of-phase closure | 10 | 1 | 4 | 2 | 9 | **20** | **360** | **18.0x** |
@@ -93,10 +93,10 @@ The following comprehensive table documents eighteen critical infrastructure com
 | **Smoke Purge Damper** | Damper fails closed in fire | Actuator spring break; pneumatic pressure loss| BMS override forces smoke damper closed during fire event | 8 | 2 | 5 | 3 | 8 | **48** | **320** | **6.7x** |
 | **Water Treatment Dosing** | Coolant chemical fouling | Dosing pump blockage; chemical reservoir empty | Attacker disables biocide dosing via facility PLC interface | 6 | 3 | 6 | 4 | 8 | **72** | **288** | **4.0x** |
 | **Server BMC (AST2600)** | Chassis power kill / bricking | SPI flash solder fatigue; VRM overheating | Unauthenticated Redfish API flashes corrupted firmware image | 9 | 2 | 7 | 2 | 8 | **36** | **504** | **14.0x** |
-| **Silicon VRM Controller** | Over-voltage gate oxide punch | SMT capacitor cracking; PWM loop drift | I2C command overrides $V_{	ext{core}}$ voltage limit to $+40\%$ | 10 | 1 | 5 | 2 | 9 | **20** | **450** | **22.5x** |
+| **Silicon VRM Controller** | Over-voltage gate oxide punch | SMT capacitor cracking; PWM loop drift | I2C command overrides $V_{\text{core}}$ voltage limit to $+40\%$ | 10 | 1 | 5 | 2 | 9 | **20** | **450** | **22.5x** |
 | **Grid-Tie BESS Inverter** | Uncontrolled utility backfeed | Inverter sync loss; contactor mechanical weld | Modbus command disables anti-islanding safety routine | 9 | 1 | 4 | 2 | 9 | **18** | **324** | **18.0x** |
-| **Cold Plate QD Fitting** | O-ring seal rupture / leak | Elastomer degradation; mechanical misalignment| Rapid pump start water hammer surges pressure to $25	ext{ bar}$ | 8 | 3 | 6 | 3 | 8 | **72** | **384** | **5.3x** |
-| **CRAH Air Handling Fan** | Total airflow loss | Belt snap; motor winding short | BACnet group command forces all air handling fans to $0	ext{ RPM}$ | 7 | 3 | 6 | 2 | 7 | **42** | **294** | **7.0x** |
+| **Cold Plate QD Fitting** | O-ring seal rupture / leak | Elastomer degradation; mechanical misalignment| Rapid pump start water hammer surges pressure to $25\text{ bar}$ | 8 | 3 | 6 | 3 | 8 | **72** | **384** | **5.3x** |
+| **CRAH Air Handling Fan** | Total airflow loss | Belt snap; motor winding short | BACnet group command forces all air handling fans to $0\text{ RPM}$ | 7 | 3 | 6 | 2 | 7 | **42** | **294** | **7.0x** |
 
 ---
 
@@ -105,65 +105,65 @@ The following comprehensive table documents eighteen critical infrastructure com
 To ground cyber-physical FMECA in rigorous applied physics and financial actuarial science, the methodology is governed by five mathematical formulations.
 
 ### 4.1 The Dual-RPN Formulation and Cyber Multiplier Gap
-For any given physical asset $k$, the classical mechanical Risk Priority Number $	ext{RPN}_m$ and the cyber-induced Risk Priority Number $	ext{RPN}_c$ are defined as:
+For any given physical asset $k$, the classical mechanical Risk Priority Number $\text{RPN}_m$ and the cyber-induced Risk Priority Number $\text{RPN}_c$ are defined as:
 
-$$	ext{RPN}_m(k) = S(k) \cdot O_m(k) \cdot D_m(k)$$
+$$\text{RPN}_m(k) = S(k) \cdot O_m(k) \cdot D_m(k)$$
 
-$$	ext{RPN}_c(k) = S(k) \cdot O_c(k) \cdot D_c(k)$$
+$$\text{RPN}_c(k) = S(k) \cdot O_c(k) \cdot D_c(k)$$
 
-The Cyber Multiplier Gap $\mu_{	ext{cyber}}(k)$, representing the relative risk expansion factor, is formulated as:
+The Cyber Multiplier Gap $\mu_{\text{cyber}}(k)$, representing the relative risk expansion factor, is formulated as:
 
-$$\mu_{	ext{cyber}}(k) = rac{	ext{RPN}_c(k)}{	ext{RPN}_m(k)} = rac{O_c(k) \cdot D_c(k)}{O_m(k) \cdot D_m(k)}$$
+$$\mu_{\text{cyber}}(k) = \frac{\text{RPN}_c(k)}{\text{RPN}_m(k)} = \frac{O_c(k) \cdot D_c(k)}{O_m(k) \cdot D_m(k)}$$
 
-Across empirical critical infrastructure nodes, $\mu_{	ext{cyber}}$ ranges from $3.2$ to $40.0$. This proves that allocating maintenance budgets based solely on mechanical MTBF data severely misallocates capital, leaving the primary attack vectors entirely undefended.
+Across empirical critical infrastructure nodes, $\mu_{\text{cyber}}$ ranges from $3.2$ to $40.0$. This proves that allocating maintenance budgets based solely on mechanical MTBF data severely misallocates capital, leaving the primary attack vectors entirely undefended.
 
 ### 4.2 Adversarial Non-Random Failure Probability Density
-Traditional reliability engineering assumes component time-to-failure follows an exponential or Weibull distribution governed by a constant hazard rate $\lambda_{	ext{mech}}$. In the presence of targeted cyber attacks, the total failure probability density function $f_{	ext{total}}(t)$ becomes a bimodal mixture distribution:
+Traditional reliability engineering assumes component time-to-failure follows an exponential or Weibull distribution governed by a constant hazard rate $\lambda_{\text{mech}}$. In the presence of targeted cyber attacks, the total failure probability density function $f_{\text{total}}(t)$ becomes a bimodal mixture distribution:
 
-$$f_{	ext{total}}(t) = (1 - p_{	ext{attack}}) \cdot \lambda_{	ext{mech}} \exp\left(-\lambda_{	ext{mech}} tight) + p_{	ext{attack}} \cdot \delta\left(t - t_{	ext{exploit}}ight)$$
+$$f_{\text{total}}(t) = (1 - p_{\text{attack}}) \cdot \lambda_{\text{mech}} \exp\left(-\lambda_{\text{mech}} t\right) + p_{\text{attack}} \cdot \delta\left(t - t_{\text{exploit}}\right)$$
 
 Where:
-- $p_{	ext{attack}} \in [0, 1]$ is the probability that an adversary targets the facility OT network during operating interval $T$.
-- $\delta(t - t_{	ext{exploit}})$ is the Dirac delta function representing an instantaneous, non-random failure triggered at the attacker's chosen time $t_{	ext{exploit}}$.
+- $p_{\text{attack}} \in [0, 1]$ is the probability that an adversary targets the facility OT network during operating interval $T$.
+- $\delta(t - t_{\text{exploit}})$ is the Dirac delta function representing an instantaneous, non-random failure triggered at the attacker's chosen time $t_{\text{exploit}}$.
 
-Because $t_{	ext{exploit}}$ is correlated across multiple redundant units, the probability of simultaneous multi-unit failure $P_{	ext{simultaneous}}$ ceases to be the product of independent failure probabilities ($P_{	ext{mech}}^N pprox 0$). Instead, it scales directly with adversary capability:
+Because $t_{\text{exploit}}$ is correlated across multiple redundant units, the probability of simultaneous multi-unit failure $P_{\text{simultaneous}}$ ceases to be the product of independent failure probabilities ($P_{\text{mech}}^N \approx 0$). Instead, it scales directly with adversary capability:
 
-$$P_{	ext{simultaneous}} pprox p_{	ext{attack}} \cdot \prod_{j=1}^N \mathbf{1}_{\{	ext{shared\_vulnerability}_j\}}$$
+$$P_{\text{simultaneous}} \approx p_{\text{attack}} \cdot \prod_{j=1}^N \mathbf{1}_{\{\text{shared\_vulnerability}_j\}}$$
 
 ### 4.3 Transient Thermal Dissipation Collapse under Valve Throttling
 When a motorized isolation valve (FMECA Row 2) is commanded closed via Modbus TCP, the volumetric liquid flow rate $\dot{Q}(t)$ collapses. The transient temperature rise of the accelerator silicon die $T_j(t)$ is governed by:
 
-$$rac{dT_j(t)}{dt} = rac{P_{	ext{die}} - h_{	ext{conv}}(\dot{Q}(t)) \cdot A_{	ext{contact}} \cdot (T_j(t) - T_{	ext{coolant}})}{C_{	ext{thermal}}}$$
+$$\frac{dT_j(t)}{dt} = \frac{P_{\text{die}} - h_{\text{conv}}(\dot{Q}(t)) \cdot A_{\text{contact}} \cdot (T_j(t) - T_{\text{coolant}})}{C_{\text{thermal}}}$$
 
-$$h_{	ext{conv}}(\dot{Q}) = 0.023 \cdot \left( rac{4 ho \dot{Q}}{\pi D_h \mu} ight)^{0.8} \cdot 	ext{Pr}^{0.4} \cdot rac{k_{	ext{fluid}}}{D_h}$$
+$$h_{\text{conv}}(\dot{Q}) = 0.023 \cdot \left( \frac{4 \rho \dot{Q}}{\pi D_h \mu} \right)^{0.8} \cdot \text{Pr}^{0.4} \cdot \frac{k_{\text{fluid}}}{D_h}$$
 
 Where:
-- $P_{	ext{die}} = 1,200	ext{ W}$ compute dissipation.
-- $\dot{Q}$ collapses from nominal $38.5	ext{ L/min}$ PG25 to $0.0	ext{ L/min}$.
-- $C_{	ext{thermal}} = 142	ext{ J/K}$ thermal capacitance.
+- $P_{\text{die}} = 1,200\text{ W}$ compute dissipation.
+- $\dot{Q}$ collapses from nominal $38.5\text{ L/min}$ PG25 to $0.0\text{ L/min}$.
+- $C_{\text{thermal}} = 142\text{ J/K}$ thermal capacitance.
 
-Within $14.8	ext{ seconds}$, silicon junction temperature surges at a severe rate of change exceeding $4.2^\circ	ext{C/s}$ past the irreversible trip threshold of $94.0^\circ	ext{C}$, causing permanent hardware package delamination before human operators can verify alarm authenticity.
+Within $14.8\text{ seconds}$, silicon junction temperature surges at a severe rate of change exceeding $4.2^\circ\text{C/s}$ past the irreversible trip threshold of $94.0^\circ\text{C}$, causing permanent hardware package delamination before human operators can verify alarm authenticity.
 
 ### 4.4 Actuarial Consequence & Annualised Loss Expectancy (ALE)
-To translate FMECA RPN scores into insurance capital requirements, the Annualised Loss Expectancy ($	ext{ALE}$) for each failure mode is formulated as:
+To translate FMECA RPN scores into insurance capital requirements, the Annualised Loss Expectancy ($\text{ALE}$) for each failure mode is formulated as:
 
-$$	ext{ALE}(k) = 	ext{SLE}(k) 	imes 	ext{ARO}_c(k)$$
+$$\text{ALE}(k) = \text{SLE}(k) \times \text{ARO}_c(k)$$
 
-$$	ext{SLE}(k) = C_{	ext{replacement}}(k) + C_{	ext{collateral}}(k) + \int_0^{T_{	ext{restore}}(k)} \dot{L}_{	ext{BI}}(t) \, dt$$
+$$\text{SLE}(k) = C_{\text{replacement}}(k) + C_{\text{collateral}}(k) + \int_0^{T_{\text{restore}}(k)} \dot{L}_{\text{BI}}(t) \, dt$$
 
 Where:
-- $	ext{SLE}$ is the Single Loss Expectancy.
-- $	ext{ARO}_c(k) = lpha \cdot rac{	ext{RPN}_c(k)}{1,000}$ is the calibrated Annualised Rate of Occurrence derived from the cyber RPN score.
-- $C_{	ext{replacement}}$ is the capital equipment replacement cost (such as $120,000	ext{ USD}$ per ruined accelerator compute tray).
-- $\dot{L}_{	ext{BI}}(t)$ is the unserved SLA revenue loss rate ($18,500	ext{ USD/hour}$).
-- $T_{	ext{restore}}$ is the supply-chain restoration lead time governed by the Reliability Critical Items List (RCIL).
+- $\text{SLE}$ is the Single Loss Expectancy.
+- $\text{ARO}_c(k) = \alpha \cdot \frac{\text{RPN}_c(k)}{1,000}$ is the calibrated Annualised Rate of Occurrence derived from the cyber RPN score.
+- $C_{\text{replacement}}$ is the capital equipment replacement cost (such as $120,000\text{ USD}$ per ruined accelerator compute tray).
+- $\dot{L}_{\text{BI}}(t)$ is the unserved SLA revenue loss rate ($18,500\text{ USD/hour}$).
+- $T_{\text{restore}}$ is the supply-chain restoration lead time governed by the Reliability Critical Items List (RCIL).
 
 ### 4.5 Return on Security Investment (ROSI) Prioritized by RPN Delta
 The financial justification for implementing engineering safeguards is determined by the net reduction in Annualised Loss Expectancy divided by control cost:
 
-$$	ext{ROSI}(k) = rac{\left(	ext{ALE}_{	ext{unmitigated}}(k) - 	ext{ALE}_{	ext{hardened}}(k)ight) - C_{	ext{control}}(k)}{C_{	ext{control}}(k)}$$
+$$\text{ROSI}(k) = \frac{\left(\text{ALE}_{\text{unmitigated}}(k) - \text{ALE}_{\text{hardened}}(k)\right) - C_{\text{control}}(k)}{C_{\text{control}}(k)}$$
 
-For the CDU isolation valve (Row 2), implementing a hardwired mechanical limit switch and cryptographic Modbus MAC verification ($C_{	ext{control}} = 12,500	ext{ USD}$) reduces $	ext{RPN}_c$ from $486$ to $36$, lowering annual loss expectancy from $1,450,000	ext{ USD}$ to $18,000	ext{ USD}$, delivering a verified $	ext{ROSI} = 11,356\%$.
+For the CDU isolation valve (Row 2), implementing a hardwired mechanical limit switch and cryptographic Modbus MAC verification ($C_{\text{control}} = 12,500\text{ USD}$) reduces $\text{RPN}_c$ from $486$ to $36$, lowering annual loss expectancy from $1,450,000\text{ USD}$ to $18,000\text{ USD}$, delivering a verified $\text{ROSI} = 11,356\%$.
 
 ---
 
@@ -172,7 +172,7 @@ For the CDU isolation valve (Row 2), implementing a hardwired mechanical limit s
 The high cyber RPNs documented in this paper reflect empirical vulnerability mechanics validated through field incident response and academic research:
 
 ### 5.1 The 2024 High-Density AI Colocation Colling Incident
-A 40 MW high-density compute facility in the Asia-Pacific region experienced a cluster-wide thermal shutdown when an adversary leveraged unauthenticated BACnet write commands to manipulate chilled water setpoints. The attack exploited FMECA Row 4 (Chiller Compressor Controller) and Row 18 (CRAH Fan), commanding chillers to elevate supply water temperature while reducing fan speeds. Over $1,200	ext{ GPUs}$ throttled compute execution simultaneously, halting distributed foundation model training runs and inflicting $3.8	ext{M USD}$ in contractual SLA downtime penalties.
+A 40 MW high-density compute facility in the Asia-Pacific region experienced a cluster-wide thermal shutdown when an adversary leveraged unauthenticated BACnet write commands to manipulate chilled water setpoints. The attack exploited FMECA Row 4 (Chiller Compressor Controller) and Row 18 (CRAH Fan), commanding chillers to elevate supply water temperature while reducing fan speeds. Over $1,200\text{ GPUs}$ throttled compute execution simultaneously, halting distributed foundation model training runs and inflicting $3.8\text{M USD}$ in contractual SLA downtime penalties.
 
 ### 5.2 The 2022 Schneider APC UPS Zero-Day (TLStorm)
 Armis Security demonstrated three critical vulnerabilities (CVE-2022-22805, CVE-2022-22806, CVE-2022-0715) affecting Schneider Electric APC Smart-UPS devices. The flaws allowed remote, unauthenticated adversaries to flash malicious firmware over the network management card (NMC). Attackers could manipulate internal inverter gating registers (FMECA Row 7), creating sustained electrical arcing that melted internal lead-acid battery enclosures and physically destroyed the power equipment without tripping upstream circuit breakers.
@@ -219,7 +219,7 @@ All field controllers, VFDs, and smart sensors must enforce cryptographic messag
 ### 6.2 Hardwired Analog Safety Interlocks (SIL-3)
 Software logic ladders must never hold exclusive authority over physical trip envelopes:
 - **Bi-Metallic Thermal Cutouts:** Snap-action thermal switches mounted directly on cold plate copper heat spreaders, hardwired to server power supply shutoff lines.
-- **Pneumatic Pressure Relief:** Mechanical spring-loaded relief valves calibrated to $5.5	ext{ bar}$, mechanically venting fluid before pipe burst limits are reached.
+- **Pneumatic Pressure Relief:** Mechanical spring-loaded relief valves calibrated to $5.5\text{ bar}$, mechanically venting fluid before pipe burst limits are reached.
 - **Physical Direction Jumpers:** VFD motor rotation locked by physical motherboard solder bridges, preventing reverse rotation commands.
 
 ---
@@ -231,7 +231,7 @@ Integrating cyber-physical FMECA into catastrophe models provides reinsurance sy
 | Underwriting Dimension | Traditional Mechanical Underwriting | Cyber-Physical FMECA Underwriting | Actuarial & Financial Consequence |
 |:---|:---|:---|:---|
 | **Common-Cause Accumulation** | Assumes N+1 pumps fail independently; low portfolio correlation. | Identifies shared PLC firmware and unauthenticated Modbus conduits. | Eliminates hidden systemic tail-risk; avoids correlated portfolio insolvency. |
-| **Probable Maximum Loss (PML)** | Based on single component replacement ($50,000	ext{ to }150,000	ext{ USD}$). | Models coordinated cluster-wide failure cascades ($50,000,000	ext{+ USD}$). | Reinsurance capital requirements accurately sized; uncertainty loadings removed. |
+| **Probable Maximum Loss (PML)** | Based on single component replacement ($50,000\text{ to }150,000\text{ USD}$). | Models coordinated cluster-wide failure cascades ($50,000,000\text{+ USD}$). | Reinsurance capital requirements accurately sized; uncertainty loadings removed. |
 | **Lloyd's Y5381 Compliance** | Disputed claims during nation-state attacks; severe litigation exposure. | Attested SIL-3 hardwired interlocks prove physical exploit containment. | Affirmative cyber-physical coverage granted with zero state-actor exclusions. |
 | **Deductibles & Sub-Limits** | Punitive deductibles ($25M) and restrictive business interruption sub-limits. | Dynamic deductibles indexed to continuous FMECA compliance; full replacement cost. | Working capital unlocked; affirmative consequential loss coverage preserved. |
 | **Parametric Triggers** | Subjective damage adjusters requiring weeks of onsite surveys. | Parametric settlement triggered automatically by verified digital twin telemetry. | Claims settled in business days; working capital preserved. |

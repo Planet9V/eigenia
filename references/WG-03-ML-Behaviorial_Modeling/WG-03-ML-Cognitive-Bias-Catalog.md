@@ -76,14 +76,14 @@ When an adversary manipulates the human operator through cognitive bias, the ope
 
 The vulnerability of an operational team member to cognitive manipulation is quantified by the Bias Susceptibility Score ($BSS_i(t)$):
 
-$$BSS_i(t) = \sum_{b \in \mathcal{B}} w_b \cdot S_{i,b} \cdot \left[ 1 + \gamma \cdot 	ext{Stress}_i(t) ight]$$
+$$BSS_i(t) = \sum_{b \in \mathcal{B}} w_b \cdot S_{i,b} \cdot \left[ 1 + \gamma \cdot \text{Stress}_i(t) \right]$$
 
 Where:
 - $\mathcal{B}$ is the set of all documented cognitive biases.
 - $w_b \in [0, 1]$ is the threat relevance weighting of bias $b$ ($\sum w_b = 1.0$).
 - $S_{i,b} \in [0, 1]$ is the operator's baseline susceptibility to bias $b$, derived from psychometric assessments (CB5T / OCEAN and DISC profiles).
-- $	ext{Stress}_i(t) \in [0, 1]$ is the dynamic physiological and cognitive stress level at time $t$.
-- $\gamma \ge 0$ is the stress amplification coefficient ($\gamma pprox 1.85$).
+- $\text{Stress}_i(t) \in [0, 1]$ is the dynamic physiological and cognitive stress level at time $t$.
+- $\gamma \ge 0$ is the stress amplification coefficient ($\gamma \approx 1.85$).
 
 ```
 +-------------------------------------------------------------------------+
@@ -111,8 +111,8 @@ Where:
 - **Operational Consequence:** The Level 2 operator, scoring high in Agreeableness ($A \ge 0.82$) and Conscientiousness ($C \ge 0.78$), disables the physical pump interlock without demanding cryptographic verification, allowing coolant stagnation.
 
 ### 4.2 CB-02: Scarcity & Artificial Urgency
-- **Psychological Principle:** Scarcity triggers acute loss aversion; humans perceive opportunities or choices as vastly more valuable when time is severely constrained (Kahneman-Tversky Prospect Theory: $\lambda_{	ext{loss}} pprox 2.25$).
-- **Cyber-Physical Attack Scenario:** Adversary injects simulated telemetry suggesting a Tier-1 customer SLA violation costing $50,000	ext{ USD}$ per minute of downtime. A prompt appears on the engineering terminal: *"Immediate operator action required within 90 seconds to prevent cluster drop."*
+- **Psychological Principle:** Scarcity triggers acute loss aversion; humans perceive opportunities or choices as vastly more valuable when time is severely constrained (Kahneman-Tversky Prospect Theory: $\lambda_{\text{loss}} \approx 2.25$).
+- **Cyber-Physical Attack Scenario:** Adversary injects simulated telemetry suggesting a Tier-1 customer SLA violation costing $50,000\text{ USD}$ per minute of downtime. A prompt appears on the engineering terminal: *"Immediate operator action required within 90 seconds to prevent cluster drop."*
 - **Operational Consequence:** The operator rushes to enter credentials and execute script commands without performing peer verification or analyzing physical P&ID flow rates.
 
 ### 4.3 CB-03: Anchoring Bias (The First-Alarm Trap)
@@ -211,25 +211,25 @@ This computational engine allows the AEON digital twin to simulate thousands of 
 
 ## 5. Mathematical Modeling of Decision Latency and the Thermal Cliff
 
-The primary consequence of cognitive bias exploitation is **Decision Latency** ($	au_{	ext{delay}}$); the time lost while the operator rationalizes false hypotheses instead of executing emergency procedures.
+The primary consequence of cognitive bias exploitation is **Decision Latency** ($\tau_{\text{delay}}$); the time lost while the operator rationalizes false hypotheses instead of executing emergency procedures.
 
 We model decision latency as an exponential function of the Bias Susceptibility Score:
 
-$$	au_{	ext{delay}}(BSS) = 	au_0 \cdot \exp\left( \kappa \cdot BSS_i(t) ight)$$
+$$\tau_{\text{delay}}(BSS) = \tau_0 \cdot \exp\left( \kappa \cdot BSS_i(t) \right)$$
 
 Where:
-- $	au_0 = 8.5	ext{ seconds}$ is the baseline reaction time of an alert, unbiased operator.
+- $\tau_0 = 8.5\text{ seconds}$ is the baseline reaction time of an alert, unbiased operator.
 - $\kappa = 2.45$ is the cognitive distortion coefficient.
 
-In high-density liquid-cooled compute facilities running $120	ext{ kW}$ per rack across a 100 MW campus, fluid stagnation causes silicon junction temperature $T_j(t)$ to rise catastrophically:
+In high-density liquid-cooled compute facilities running $120\text{ kW}$ per rack across a 100 MW campus, fluid stagnation causes silicon junction temperature $T_j(t)$ to rise catastrophically:
 
-$$rac{dT_j(t)}{dt} = rac{P_{	ext{die}} - h_{	ext{conv}}(\dot{Q}_{	ext{vol}}) \cdot A_{	ext{die}} \cdot (T_j - T_{	ext{coolant}})}{C_{	ext{thermal}}}$$
+$$\frac{dT_j(t)}{dt} = \frac{P_{\text{die}} - h_{\text{conv}}(\dot{Q}_{\text{vol}}) \cdot A_{\text{die}} \cdot (T_j - T_{\text{coolant}})}{C_{\text{thermal}}}$$
 
 Where:
-- $P_{	ext{die}} = 1,200	ext{ W}$ heat dissipation per accelerator.
-- $C_{	ext{thermal}} = 142	ext{ J/K}$ thermal capacitance of the die assembly.
-- Heat flux exceeds $140	ext{ W/cm}^2$.
-- Operating pressure is $6.0	ext{ bar}$ with $38.5	ext{ L/min}$ PG25 coolant.
+- $P_{\text{die}} = 1,200\text{ W}$ heat dissipation per accelerator.
+- $C_{\text{thermal}} = 142\text{ J/K}$ thermal capacitance of the die assembly.
+- Heat flux exceeds $140\text{ W/cm}^2$.
+- Operating pressure is $6.0\text{ bar}$ with $38.5\text{ L/min}$ PG25 coolant.
 
 ```
 +-------------------------------------------------------------------------+
@@ -243,7 +243,7 @@ Where:
 +-------------------------------------------------------------------------+
 ```
 
-If cognitive bias induces a decision latency $	au_{	ext{delay}} > 35	ext{ seconds}$, the physical facility crosses the 45-second thermal trip cliff. The silicon packages experience irreversible thermal delamination before human operators execute manual breaker cutouts.
+If cognitive bias induces a decision latency $\tau_{\text{delay}} > 35\text{ seconds}$, the physical facility crosses the 45-second thermal trip cliff. The silicon packages experience irreversible thermal delamination before human operators execute manual breaker cutouts.
 
 ---
 
@@ -273,27 +273,27 @@ To eliminate the systemic failure modes introduced by cognitive bias, systems as
 
 ## 7. Actuarial Risk Engineering and Reinsurance Treaty Structuring
 
-Quantifying cognitive bias susceptibility allows insurers and corporate risk officers to calculate Annualised Loss Expectancy ($	ext{ALE}$) for affirmative cyber property catastrophe policies under Lloyd's Y5381:
+Quantifying cognitive bias susceptibility allows insurers and corporate risk officers to calculate Annualised Loss Expectancy ($\text{ALE}$) for affirmative cyber property catastrophe policies under Lloyd's Y5381:
 
-$$	ext{ALE}_{	ext{bias}} = 	ext{SLE}_{	ext{physical}} 	imes 	ext{ARO}_{	ext{exploit}} = 	ext{PML}_{	ext{hall}} 	imes \left( 	ext{ARO}_{	ext{baseline}} \cdot \overline{BSS} ight)$$
+$$\text{ALE}_{\text{bias}} = \text{SLE}_{\text{physical}} \times \text{ARO}_{\text{exploit}} = \text{PML}_{\text{hall}} \times \left( \text{ARO}_{\text{baseline}} \cdot \overline{BSS} \right)$$
 
-$$	ext{SLE}_{	ext{physical}} = \sum_{k=1}^{N_{	ext{racks}}} C_{	ext{replacement}}(k) + \int_0^{T_{	ext{restore}}} \dot{L}_{	ext{BI}}(t) \, dt + \Phi_{	ext{regulatory}}$$
+$$\text{SLE}_{\text{physical}} = \sum_{k=1}^{N_{\text{racks}}} C_{\text{replacement}}(k) + \int_0^{T_{\text{restore}}} \dot{L}_{\text{BI}}(t) \, dt + \Phi_{\text{regulatory}}$$
 
 Where:
-- $C_{	ext{replacement}}$ is the capital asset replacement cost ($14,400,000	ext{ USD}$ per 120-rack hall).
-- $\dot{L}_{	ext{BI}}(t)$ is the business interruption revenue loss rate ($24,000	ext{ USD/hour}$).
-- $\Phi_{	ext{regulatory}}$ is the statutory fine under EU CRA Article 64.
+- $C_{\text{replacement}}$ is the capital asset replacement cost ($14,400,000\text{ USD}$ per 120-rack hall).
+- $\dot{L}_{\text{BI}}(t)$ is the business interruption revenue loss rate ($24,000\text{ USD/hour}$).
+- $\Phi_{\text{regulatory}}$ is the statutory fine under EU CRA Article 64.
 
-Deploying cognitive bias mitigation training and automated TPI controls ($C_{	ext{controls}} = 180,000	ext{ USD}$) reduces the mean team susceptibility $\overline{BSS}$ by 62%, mitigating annualized loss expectancy from $9,200,000	ext{ USD}$ to $310,000	ext{ USD}$ and yielding a verified Return on Security Investment ($	ext{ROSI}$):
+Deploying cognitive bias mitigation training and automated TPI controls ($C_{\text{controls}} = 180,000\text{ USD}$) reduces the mean team susceptibility $\overline{BSS}$ by 62%, mitigating annualized loss expectancy from $9,200,000\text{ USD}$ to $310,000\text{ USD}$ and yielding a verified Return on Security Investment ($\text{ROSI}$):
 
-$$	ext{ROSI} = rac{(	ext{ALE}_{	ext{unmitigated}} - 	ext{ALE}_{	ext{hardened}}) - C_{	ext{controls}}}{C_{	ext{controls}}} 	imes 100\% = rac{\$8,890,000 - \$180,000}{\$180,000} 	imes 100\% = 4,838\%$$
+$$\text{ROSI} = \frac{(\text{ALE}_{\text{unmitigated}} - \text{ALE}_{\text{hardened}}) - C_{\text{controls}}}{C_{\text{controls}}} \times 100\% = \frac{\$8,890,000 - \$180,000}{\$180,000} \times 100\% = 4,838\%$$
 
 Compliance with SFAIRP (So Far As Is Reasonably Practicable) standards protects operators against allegations of gross negligence, securing reduced policy deductibles, eliminating restrictive sub-limit caps, and mitigating accumulation risk across global syndicates.
 
 ### 7.1 Catastrophic Accumulation Risk and Reinsurance Layering
-In hyperscale campus environments containing 800 liquid-cooled racks across four contiguous halls, human cognitive failure introduces severe correlation risk across reinsurance treaties. If an operations team succumbs to social proof and confirmation bias, a single adversary exploit can compromise all four halls simultaneously. The Probable Maximum Loss ($	ext{PML}$) escalates from $14,400,000	ext{ USD}$ for a single hall to $57,600,000	ext{ USD}$ in hardware damage, plus $115,000,000	ext{ USD}$ in consequential business interruption and cloud provider SLA penalties.
+In hyperscale campus environments containing 800 liquid-cooled racks across four contiguous halls, human cognitive failure introduces severe correlation risk across reinsurance treaties. If an operations team succumbs to social proof and confirmation bias, a single adversary exploit can compromise all four halls simultaneously. The Probable Maximum Loss ($\text{PML}$) escalates from $14,400,000\text{ USD}$ for a single hall to $57,600,000\text{ USD}$ in hardware damage, plus $115,000,000\text{ USD}$ in consequential business interruption and cloud provider SLA penalties.
 
-Underwriters operating under the Lloyd's Y5381 cyber war and state-backed attack exclusions require proof that cognitive bias cannot induce cross-hall correlated failure. By enforcing automated Two-Person Integrity (TPI) and isolated SIL-3 physical trip interlocks, facility operators prove independent failure domains, allowing reinsurers to eliminate punitive co-insurance penalties, structure realistic attachment points ($5,000,000	ext{ USD}$ primary retention), and underwrite affirmative cyber property limits up to $100,000,000	ext{ USD}$.
+Underwriters operating under the Lloyd's Y5381 cyber war and state-backed attack exclusions require proof that cognitive bias cannot induce cross-hall correlated failure. By enforcing automated Two-Person Integrity (TPI) and isolated SIL-3 physical trip interlocks, facility operators prove independent failure domains, allowing reinsurers to eliminate punitive co-insurance penalties, structure realistic attachment points ($5,000,000\text{ USD}$ primary retention), and underwrite affirmative cyber property limits up to $100,000,000\text{ USD}$.
 
 ---
 

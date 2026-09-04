@@ -48,7 +48,7 @@ Industrial facility managers frequently conflate reliability with safety:
 ```
 
 ### 1.1 The Fundamental Rule of Critical Items Hierarchy
-Every SCIL item is inherently an RCIL item, but not all RCIL items are SCIL items. While an EPMS power monitor failure degrades energy optimization (RCIL), it does not physically rupture high-pressure piping. In contrast, commanding a CDU motorized isolation valve closed while compute silicon dissipates $100	ext{ kW}$ per rack destroys millions of dollars of compute hardware within seconds (SCIL).
+Every SCIL item is inherently an RCIL item, but not all RCIL items are SCIL items. While an EPMS power monitor failure degrades energy optimization (RCIL), it does not physically rupture high-pressure piping. In contrast, commanding a CDU motorized isolation valve closed while compute silicon dissipates $100\text{ kW}$ per rack destroys millions of dollars of compute hardware within seconds (SCIL).
 
 ---
 
@@ -131,10 +131,10 @@ Components on the Safety Critical Items List are categorized as Table B Extremis
 
 | SCIL ID | Node | Component Name | Irreversible Hazard Consequence | Software Bypass Vulnerability | Mandatory Hardwired Safety Invariant |
 |:---|:---|:---|:---|:---|:---|
-| **SCIL-01** | N6 | CDU Secondary Isolation Valve | Total coolant flow starvation; accelerator silicon melts ($>94^\circ	ext{C}$) | Modbus command injects 0% position while reporting open | Spring-return fail-open actuator; mechanical travel stops locked at 40% open. |
+| **SCIL-01** | N6 | CDU Secondary Isolation Valve | Total coolant flow starvation; accelerator silicon melts ($>94^\circ\text{C}$) | Modbus command injects 0% position while reporting open | Spring-return fail-open actuator; mechanical travel stops locked at 40% open. |
 | **SCIL-02** | N6 | CDU Circulating Pump Assembly | Rapid fluid stagnation; water hammer rupture on sudden stop | Unauthenticated VFD shutdown drops fluid flow instantaneously | Bi-metallic snap-action thermal cutout switches hardwired to server power supply rails. |
 | **SCIL-03** | N2 | Block UPS Inverter Bridge | Electrical fire; battery DC bus short circuit; explosive arc flash | Cloud management firmware update corrupts PWM dead-time | Fast-acting semiconductor fuses and hardwired mechanical shunt-trip breakers. |
-| **SCIL-04** | N1 | Substation Synchrocheck Relay | Substation transformer catastrophic explosion ($20	ext{M+ USD}$) | IEC 61850 SV voltage spoofing forces out-of-phase breaker closure | Hardwired electromechanical synchrocheck interlock completely isolated from network. |
+| **SCIL-04** | N1 | Substation Synchrocheck Relay | Substation transformer catastrophic explosion ($20\text{M+ USD}$) | IEC 61850 SV voltage spoofing forces out-of-phase breaker closure | Hardwired electromechanical synchrocheck interlock completely isolated from network. |
 | **SCIL-05** | N10 | Clean Agent Gas Suppression | Premature gas discharge asphyxiates personnel; HVAC shutdown | BACnet write command asserts manual discharge solenoid | Physical double-action mechanical pull stations and pneumatic pressure switches. |
 | **SCIL-06** | N14 | BESS Battery Management System | Thermal runaway propagation; explosive hydrogen release | Modbus command disables cell over-voltage balancing alerts | Shunt-trip contactor wired directly to analog gas-detection sensors (H2/CO). |
 
@@ -145,55 +145,55 @@ Components on the Safety Critical Items List are categorized as Table B Extremis
 Classical inventory theory models component failure as a Poisson process. However, targeted cyber-physical attacks introduce correlated common-cause failures, breaking classical spares equations.
 
 ### 5.1 Bimodal Failure Probability Density Function
-In an adversarial operating environment, total component failure probability density $f_{	ext{total}}(t)$ is a mixture of stochastic mechanical wear and deterministic cyber exploitation:
+In an adversarial operating environment, total component failure probability density $f_{\text{total}}(t)$ is a mixture of stochastic mechanical wear and deterministic cyber exploitation:
 
-$$f_{	ext{total}}(t) = (1 - p_{	ext{attack}}) \cdot \lambda_{	ext{mech}} \exp\left(-\lambda_{	ext{mech}} tight) + p_{	ext{attack}} \cdot \delta\left(t - t_{	ext{exploit}}ight)$$
+$$f_{\text{total}}(t) = (1 - p_{\text{attack}}) \cdot \lambda_{\text{mech}} \exp\left(-\lambda_{\text{mech}} t\right) + p_{\text{attack}} \cdot \delta\left(t - t_{\text{exploit}}\right)$$
 
 Where:
-- $\lambda_{	ext{mech}}$ is the constant mechanical failure rate ($	ext{failures/hour}$).
-- $p_{	ext{attack}}$ is the probability of a targeted cyber campaign against the facility.
-- $\delta(t - t_{	ext{exploit}})$ is the Dirac delta function representing simultaneous failure across all identical devices sharing a common firmware vulnerability.
+- $\lambda_{\text{mech}}$ is the constant mechanical failure rate ($\text{failures/hour}$).
+- $p_{\text{attack}}$ is the probability of a targeted cyber campaign against the facility.
+- $\delta(t - t_{\text{exploit}})$ is the Dirac delta function representing simultaneous failure across all identical devices sharing a common firmware vulnerability.
 
-### 5.2 Actuarial Business Interruption Single Loss Expectancy ($	ext{SLE}_{	ext{BI}}$)
-When a critical component fails, the Single Loss Expectancy is dominated by the replacement lead time $T_{	ext{lead\_time}}$:
+### 5.2 Actuarial Business Interruption Single Loss Expectancy ($\text{SLE}_{\text{BI}}$)
+When a critical component fails, the Single Loss Expectancy is dominated by the replacement lead time $T_{\text{lead\_time}}$:
 
-$$	ext{SLE}_{	ext{BI}} = C_{	ext{hardware}} + \int_0^{T_{	ext{lead\_time}}} \dot{L}_{	ext{BI}}(t) \, dt$$
+$$\text{SLE}_{\text{BI}} = C_{\text{hardware}} + \int_0^{T_{\text{lead\_time}}} \dot{L}_{\text{BI}}(t) \, dt$$
 
-$$	ext{SLE}_{	ext{BI}} = C_{	ext{hardware}} + \dot{L}_{	ext{BI}} 	imes T_{	ext{lead\_time}}$$
+$$\text{SLE}_{\text{BI}} = C_{\text{hardware}} + \dot{L}_{\text{BI}} \times T_{\text{lead\_time}}$$
 
 For a 100 MW high-density AI facility:
-- Unserved compute SLA revenue loss rate: $\dot{L}_{	ext{BI}} = 18,500	ext{ USD/hour} = 444,000	ext{ USD/day}$.
-- Custom 4.5 MW chiller compressor lead time: $T_{	ext{lead\_time}} = 42	ext{ weeks} = 294	ext{ days}$.
+- Unserved compute SLA revenue loss rate: $\dot{L}_{\text{BI}} = 18,500\text{ USD/hour} = 444,000\text{ USD/day}$.
+- Custom 4.5 MW chiller compressor lead time: $T_{\text{lead\_time}} = 42\text{ weeks} = 294\text{ days}$.
 
-$$	ext{SLE}_{	ext{BI}} = \$1,800,000 + (\$444,000 	imes 294) = \$1,800,000 + \$130,536,000 = \$132,336,000$$
+$$\text{SLE}_{\text{BI}} = \$1,800,000 + (\$444,000 \times 294) = \$1,800,000 + \$130,536,000 = \$132,336,000$$
 
-The physical asset replacement cost ($1.8	ext{M USD}$) represents only **1.36% of the total loss**. The remaining **98.64% of loss is pure business interruption**, demonstrating why managing the RCIL and maintaining on-site strategic spares is the primary actuarial priority.
+The physical asset replacement cost ($1.8\text{M USD}$) represents only **1.36% of the total loss**. The remaining **98.64% of loss is pure business interruption**, demonstrating why managing the RCIL and maintaining on-site strategic spares is the primary actuarial priority.
 
 ### 5.3 Optimal Capital Spares Buffer under Gordon-Loeb Limits
-The optimal capital expenditure dedicated to on-site critical spares inventory $S^*_{	ext{spares}}$ is bounded by the Gordon-Loeb theorem:
+The optimal capital expenditure dedicated to on-site critical spares inventory $S^*_{\text{spares}}$ is bounded by the Gordon-Loeb theorem:
 
-$$S^*_{	ext{spares}} \le rac{1}{e} \cdot \left(	ext{ALE}_{	ext{unbuffered}} - 	ext{ALE}_{	ext{spared}}ight) pprox 0.3679 \cdot \Delta 	ext{ALE}$$
+$$S^*_{\text{spares}} \le \frac{1}{e} \cdot \left(\text{ALE}_{\text{unbuffered}} - \text{ALE}_{\text{spared}}\right) \approx 0.3679 \cdot \Delta \text{ALE}$$
 
-Where maintaining on-site cold-standby spares reduces restoration lead time from 42 weeks down to 48 hours ($T_{	ext{restore}} = 2	ext{ days}$), slashing Single Loss Expectancy from $132.3	ext{M USD}$ to $2.68	ext{M USD}$.
+Where maintaining on-site cold-standby spares reduces restoration lead time from 42 weeks down to 48 hours ($T_{\text{restore}} = 2\text{ days}$), slashing Single Loss Expectancy from $132.3\text{M USD}$ to $2.68\text{M USD}$.
 
 ### 5.4 Thermal Catastrophe Velocity Governing Component Trip
 When a CDU pump stops (SCIL-02), the heat transfer rate collapses while high-density accelerator ASICs dissipate intense heat flux:
 
-$$rac{dT_j(t)}{dt} = rac{P_{	ext{die}} - h_{	ext{conv}}(\dot{Q}(t)) \cdot A_{	ext{die}} \cdot (T_j(t) - T_{	ext{coolant}})}{C_{	ext{thermal}}}$$
+$$\frac{dT_j(t)}{dt} = \frac{P_{\text{die}} - h_{\text{conv}}(\dot{Q}(t)) \cdot A_{\text{die}} \cdot (T_j(t) - T_{\text{coolant}})}{C_{\text{thermal}}}$$
 
 Where:
-- $P_{	ext{die}} = 1,200	ext{ W}$ per accelerator package.
-- Volumetric flow collapses from $38.5	ext{ L/min}$ PG25 coolant to zero.
-- Heat flux exceeds $120	ext{ W/cm}^2$.
+- $P_{\text{die}} = 1,200\text{ W}$ per accelerator package.
+- Volumetric flow collapses from $38.5\text{ L/min}$ PG25 coolant to zero.
+- Heat flux exceeds $120\text{ W/cm}^2$.
 
-Junction temperature surges at a rate of change exceeding $4.2^\circ	ext{C/s}$. Within $14.8	ext{ seconds}$, silicon junction temperature breaches the $94.0^\circ	ext{C}$ destruction threshold. Only an analog, hardwired bi-metallic switch operating in $< 100	ext{ milliseconds}$ can cut electrical power quickly enough to prevent permanent delamination.
+Junction temperature surges at a rate of change exceeding $4.2^\circ\text{C/s}$. Within $14.8\text{ seconds}$, silicon junction temperature breaches the $94.0^\circ\text{C}$ destruction threshold. Only an analog, hardwired bi-metallic switch operating in $< 100\text{ milliseconds}$ can cut electrical power quickly enough to prevent permanent delamination.
 
 ### 5.5 Return on Security Investment (ROSI) for Strategic Spares
 The financial return on establishing an on-site strategic critical spares depot is quantified as:
 
-$$	ext{ROSI}_{	ext{spares}} = rac{\Delta 	ext{ALE}_{	ext{spares}} - C_{	ext{inventory}}}{C_{	ext{inventory}}} 	imes 100\%$$
+$$\text{ROSI}_{\text{spares}} = \frac{\Delta \text{ALE}_{\text{spares}} - C_{\text{inventory}}}{C_{\text{inventory}}} \times 100\%$$
 
-For a dedicated spares depot containing two complete CDU pump assemblies and one chiller compressor ($C_{	ext{inventory}} = 650,000	ext{ USD}$), the annual expected loss reduction is $7,200,000	ext{ USD}$, delivering a verified $	ext{ROSI} = 1,007\%$.
+For a dedicated spares depot containing two complete CDU pump assemblies and one chiller compressor ($C_{\text{inventory}} = 650,000\text{ USD}$), the annual expected loss reduction is $7,200,000\text{ USD}$, delivering a verified $\text{ROSI} = 1,007\%$.
 
 ---
 
@@ -237,7 +237,7 @@ All programmable controllers and network interface cards must incorporate an imm
 ### 6.3 Gate 3: Physical Safety Function Attestation
 For SCIL assets, the manufacturer must demonstrate physical, non-software fail-safe functionality. Safety interlocks must be verified by an accredited testing laboratory (TUV, UL) under IEC 61508 to achieve Safety Integrity Level 3 (SIL-3) with a Probability of Failure on Demand:
 
-$$	ext{PFD}_{	ext{avg}} \in [10^{-4}, \; 10^{-3}]$$
+$$\text{PFD}_{\text{avg}} \in [10^{-4}, \; 10^{-3}]$$
 
 ---
 
