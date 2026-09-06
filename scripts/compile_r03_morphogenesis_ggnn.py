@@ -17,6 +17,10 @@ with open(source_path, 'r', encoding='utf-8') as f:
 # Clean up broken escape artifacts
 cleaned = raw
 cleaned = re.sub(r"([a-zA-Z]{3,})\*{0,2}\.(\d{1,3})\b", r"\1 [\2]", cleaned)
+# The source manuscript escapes every LaTeX backslash, so "\\text" reaches the page
+# as a literal double backslash and KaTeX fails. Collapse a doubled backslash only
+# when a letter follows it; a bare "\\" is a legitimate LaTeX line break and stays.
+cleaned = re.sub(r"\\\\([a-zA-Z])", r"\\\1", cleaned)
 cleaned = cleaned.replace(r'\=', '=')
 cleaned = cleaned.replace(r'\_', '_')
 cleaned = cleaned.replace(r'\$', '$')

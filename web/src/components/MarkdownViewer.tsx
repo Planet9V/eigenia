@@ -86,7 +86,10 @@ export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content, suppres
   // Helper to render inline text with KaTeX formulas and bold/italic/links/code
   const renderFormattedText = (text: string): React.ReactNode[] => {
     // Split text by inline math ($...$) and block math ($$...$$)
-    const mathRegex = /(\$\$.*?\$\$|\$.*?\$)/g;
+    // The inline alternative must not treat an escaped "\$" as the closing delimiter,
+    // otherwise "$\$$" (Lacan's barred subject) splits into "$\$" plus an orphan "$"
+    // and KaTeX fails on the lone backslash.
+    const mathRegex = /(\$\$[\s\S]*?\$\$|\$(?:\\.|[^$\\])+?\$)/g;
     const parts = text.split(mathRegex);
 
     return parts.map((part, idx) => {
@@ -454,13 +457,28 @@ export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content, suppres
           mathStr = line.trim().slice(2, -2).trim();
           i++;
         } else {
-          i++;
           const mathLines: string[] = [];
-          while (i < lines.length && !lines[i].trim().startsWith("$$")) {
+          // The opening line may carry the start of the expression after the "$$",
+          // e.g. "$$\sigma_k(x) = \begin{cases}". Skipping the whole line dropped that
+          // opening, so KaTeX received a body with no \begin and rejected the aligning
+          // "&" with "Expected 'EOF', got '&'".
+          const openingRemainder = line.trim().slice(2);
+          if (openingRemainder.trim()) mathLines.push(openingRemainder);
+          i++;
+          // A multi-line block can close either with "$$" on its own line or with the
+          // "$$" trailing the last line, e.g. "\end{cases}$$".
+          while (i < lines.length) {
+            const trimmed = lines[i].trim();
+            if (trimmed.startsWith("$$")) {
+              i++;
+              break;
+            }
+            if (trimmed.endsWith("$$")) {
+              mathLines.push(lines[i].replace(/\$\$\s*$/, ""));
+              i++;
+              break;
+            }
             mathLines.push(lines[i]);
-            i++;
-          }
-          if (i < lines.length && lines[i].trim().startsWith("$$")) {
             i++;
           }
           mathStr = mathLines.join("\n").trim();

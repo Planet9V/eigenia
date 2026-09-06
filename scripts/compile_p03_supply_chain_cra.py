@@ -7,7 +7,7 @@ actuarial accumulation equations, and full PAAI index coverage.
 
 dest_path = 'references/WG-05-CAD-DEXPI-2/WG-05-CAD-Supply-Chain-EU-CRA.md'
 
-content = r"""## Abstract
+content = """## Abstract
 
 On September 13, 2024, the European Union published Regulation (EU) 2024/2847, the Cyber Resilience Act (CRA), establishing mandatory cybersecurity requirements for products with digital elements placed on the Single Market. With full enforcement commencing on September 11, 2026, the era of voluntary cybersecurity questionnaires and qualitative vendor self-attestations is definitively closed. Article 13, Article 14, and Annex I mandate machine-readable Software Bills of Materials (SBOMs), Hardware Bills of Materials (HBOMs), 24-hour vulnerability notification cadences, and verified supply chain provenance. Violations trigger severe statutory penalties under Article 64: administrative fines up to 15,000,000 EUR or 2.5% of worldwide annual turnover.
 

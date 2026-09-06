@@ -387,23 +387,12 @@ Hardware security within the AI Rack Envelope is fundamentally contingent upon v
 
 To eliminate supply chain ambiguity, the platform mandates integration of the **CycloneDX 1.6+ Four-Dimensional Bill of Materials (4-BOM)** standard, providing a machine-readable, cryptographically verifiable attestation of every element residing within the physical envelope:
 
-```
-+-----------------------------------------------------------------------------+
-|                      THE 4-BOM ARCHITECTURE MATRIX                          |
-|                                                                             |
-|  [1. SOFTWARE BOM (SBOM)]                 [2. HARDWARE BOM (HBOM)]          |
-|   - Host Linux Kernel Modules              - Silicon Die Revisions & Steppings|
-|   - ROCm / CUDA Runtime Drivers            - Interposer & Substrate Lots     |
-|   - OpenBMC Embedded Linux Tree            - Board Layout & Passive Bill     |
-|   - Cryptographic Microcode                - Silicon Foundry Provenance IDs  |
-|                                                                             |
-|  [3. OPERATIONAL TECHNOLOGY BOM (OTBOM)]   [4. COMPONENT BOM (CBOM)]         |
-|   - CDU Programmable Logic Firmware        - Liquid Cold Plate Alloys        |
-|   - Smart ePDU Microcontrollers            - Quick-Disconnect Seals (EPDM/FKM)|
-|   - Modbus/BACnet Gateway Firmware         - Manifold Welds & Piping Metals  |
-|   - Optical Leak Sensor Firmware           - 48V Busbar Copper Certifications|
-+-----------------------------------------------------------------------------+
-```
+| # | Bill of Materials | Tracked artifacts |
+|:--:|:---|:---|
+| 1 | **Software BOM (SBOM)** | Host Linux kernel modules; ROCm / CUDA runtime drivers; OpenBMC embedded Linux tree; cryptographic microcode |
+| 2 | **Hardware BOM (HBOM)** | Silicon die revisions and steppings; interposer and substrate lots; board layout and passive bill; silicon foundry provenance IDs |
+| 3 | **Operational Technology BOM (OTBOM)** | CDU programmable logic firmware; smart ePDU microcontrollers; Modbus/BACnet gateway firmware; optical leak sensor firmware |
+| 4 | **Component BOM (CBOM)** | Liquid cold plate alloys; quick-disconnect seals (EPDM/FKM); manifold welds and piping metals; 48 V busbar copper certifications |
 
 1. **Software Bill of Materials (SBOM)**: Enumerates all active host software, container layers, device drivers, and firmware blobs. Cryptographic hashes of all binaries are cross-referenced continuously against known vulnerability databases and Vulnerability Exploitability eXchange (VEX) statements.
 2. **Hardware Bill of Materials (HBOM)**: Extends BOM transparency into silicon and circuit board components. Captures exact die steppings, silicon fabrication foundry IDs, packaging substrate lot numbers, wafer serializations, and vendor manufacturing runs for all discrete silicon components (accelerators, NICs, PCIe switches, VRM controllers).

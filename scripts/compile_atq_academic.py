@@ -239,39 +239,14 @@ Where:
 
 Under this formulation, an actor with an ATQ of $78.6$ (Volt Typhoon) exhibits an effective temperature $2.8\times$ higher than an actor with an ATQ of $42.0$. Consequently, high-ATQ adversaries overcome substantial cyber-physical security barriers ($\Delta E$) with high probability, penetrating deep into Layer 1/Layer 2 control networks.
 
-```
-+-------------------------------------------------------------------------+
-|                  BOLTZMANN PROPAGATION TRAJECTORY                       |
-+-------------------------------------------------------------------------+
-| LOW ATQ ACTOR (ATQ = 38.2):                                             |
-| Edge Barrier: Corporate DMZ to SCADA DMZ (Delta E = 8.4 eV)             |
-| Transition Probability: P(DMZ -> SCADA) = 0.012 (Defenses hold)        |
-+-------------------------------------------------------------------------+
-                                    vs.
-+-------------------------------------------------------------------------+
-| HIGH ATQ ACTOR: VOLT TYPHOON (ATQ = 78.6, Energy Sector Affinity):      |
-| Edge Barrier: Corporate DMZ to SCADA DMZ (Delta E = 8.4 eV)             |
-| Effective Temperature: T_eff surges from 1.2 to 4.8                     |
-| Transition Probability: P(DMZ -> SCADA) = 0.684 (Breach imminent)       |
-+-------------------------------------------------------------------------+
-```
+**Boltzmann propagation trajectory.** The same topological barrier yields
+radically different transition probabilities depending on the actor's ATQ, because
+ATQ modulates the effective temperature $T_{\text{eff}}$ in the Boltzmann factor:
 
-```
-+-------------------------------------------------------------------------+
-|                  BOLTZMANN PROPAGATION TRAJECTORY                       |
-+-------------------------------------------------------------------------+
-| LOW ATQ ACTOR (ATQ = 38.2):                                             |
-| Edge Barrier: Corporate DMZ to SCADA DMZ (Delta E = 8.4 eV)             |
-| Transition Probability: P(DMZ -> SCADA) = 0.012 (Defenses hold)        |
-+-------------------------------------------------------------------------+
-                                    vs.
-+-------------------------------------------------------------------------+
-| HIGH ATQ ACTOR: VOLT TYPHOON (ATQ = 78.6, Energy Sector Affinity):      |
-| Edge Barrier: Corporate DMZ to SCADA DMZ (Delta E = 8.4 eV)             |
-| Effective Temperature: T_eff surges from 1.2 to 4.8                     |
-| Transition Probability: P(DMZ -> SCADA) = 0.684 (Breach imminent)       |
-+-------------------------------------------------------------------------+
-```
+| Actor | ATQ | Edge barrier | $\Delta E$ | $T_{\text{eff}}$ | $P(\text{DMZ} \rightarrow \text{SCADA})$ | Outcome |
+|:---|:---:|:---|:---:|:---|:---:|:---|
+| Low-ATQ actor | 38.2 | Corporate DMZ to SCADA DMZ | 8.4 eV | 1.2 (baseline) | 0.012 | Defenses hold |
+| **Volt Typhoon** (energy-sector affinity) | **78.6** | Corporate DMZ to SCADA DMZ | 8.4 eV | surges 1.2 to 4.8 | **0.684** | Breach imminent |
 
 ### 5.2 Physical Process Coupling: Thermal Hydraulic Transients
 When a high-ATQ adversary successfully navigates the graph walk and establishes write-access to Layer 1/Layer 2 controllers, the operational outcome is governed by the physical plant thermodynamics. In high-density liquid-cooled computing facilities operating at $120\text{ kW}$ per rack, malware-induced volumetric flow cessation triggers catastrophic thermal runaway.

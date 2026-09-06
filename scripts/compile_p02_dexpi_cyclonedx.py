@@ -7,7 +7,7 @@ CycloneDX 1.6 JSON schemas, fluid mechanics derivations, and actuarial tables.
 
 dest_path = 'references/WG-05-CAD-DEXPI-2/WG-05-CAD-Unified-DEXPI-CycloneDX.md'
 
-content = r"""## Abstract
+content = """## Abstract
 
 Modern high-density compute facilities and critical industrial plants suffer from a severe semantic disconnect between physical plant engineering and platform cybersecurity. Plant operators design facility infrastructure using Piping and Instrumentation Diagrams (P&IDs) under the DEXPI 2.0 (ISO 15926) data exchange standard. This standard captures pump curves, pipe diameters, manifold topologies, fluid chemistry (such as 25% propylene glycol), volumetric flow rates, and delta-T thermal dissipation limits. 
 
@@ -29,7 +29,7 @@ Plant and mechanical engineers speak the language of process chemistry, thermody
 1. **Equipment Objects:** Mechanical assets classified by functional schema, including Variable-Speed Centrifugal Pumps (`P-101`), Plate Heat Exchangers (`HEX-201`), and Coolant Distribution Units (`CDU-01`).
 2. **Piping Networks:** Pipe segments (`Line-102`) defining nominal pipe sizes, schedule ratings, wall thicknesses, and material specifications (such as 316L stainless steel or copper).
 3. **Hydronic Topologies:** Explicit flow connectivity mapping source nozzles, suction ports, discharge ports, and check valves.
-4. **Thermodynamic Envelopes:** Volumetric flow rates in liters per minute, static pressures in bar, pressure drops, fluid properties (water, 25% propylene glycol / PG25, or dielectric fluids), and supply and return temperatures ($32^\circ\text{C} \to 45^\circ\text{C}$).
+4. **Thermodynamic Envelopes:** Volumetric flow rates in liters per minute, static pressures in bar, pressure drops, fluid properties (water, 25% propylene glycol / PG25, or dielectric fluids), and supply and return temperatures ($32^\circ\\text{C} \to 45^\circ\\text{C}$).
 5. **Instrumentation and Control Loops:** Sensor tags (temperature transmitters `TT-101`, flow meters `FT-102`, differential pressure transmitters `PDT-103`), actuator trip limits, and electrical signal telemetry conduits (Modbus RTU, Modbus TCP, BACnet/IP).
 
 The following XML excerpt demonstrates how DEXPI 2.0 formally encodes a secondary Coolant Distribution Unit and its hydraulic connection to a compute rack manifold:
@@ -163,11 +163,11 @@ The `dexpi:` namespace defines eight primary property bindings:
 1. `dexpi:plant:equipmentId`: The unique alphanumeric Equipment Identifier matching the XML node in the DEXPI 2.0 model (for example, `EQUIP-TRAY-R04-T02`).
 2. `dexpi:cooling:supplyNozzle`: The designated input port on the cooling manifold supplying treated liquid coolant (`NOZZLE-QD-IN-R04-02`).
 3. `dexpi:cooling:returnNozzle`: The designated output port discharging warm coolant back to the Coolant Distribution Unit (`NOZZLE-QD-OUT-R04-02`).
-4. `dexpi:cooling:designFlowRateLpm`: The calibrated volumetric liquid flow rate required under maximum rated compute workload (nominal $38.5\text{ L/min}$).
+4. `dexpi:cooling:designFlowRateLpm`: The calibrated volumetric liquid flow rate required under maximum rated compute workload (nominal $38.5\\text{ L/min}$).
 5. `dexpi:cooling:fluidType`: The chemical composition of the working fluid, ensuring corrosion inhibitors and freeze protection match engineering tolerances (`PG25-PropyleneGlycol`).
-6. `dexpi:cooling:maxInletTempC`: The maximum permissible liquid coolant delivery temperature before silicon derating engages ($32.0^\circ\text{C}$).
+6. `dexpi:cooling:maxInletTempC`: The maximum permissible liquid coolant delivery temperature before silicon derating engages ($32.0^\circ\\text{C}$).
 7. `dexpi:power:busbarInfeed`: The physical connection point to the rack-level 48V DC power busbar (`BUSBAR-48V-R04-TAP02`).
-8. `dexpi:power:ratedKw`: The peak thermal dissipation equivalent of the electrical load ($10.5\text{ kW}$).
+8. `dexpi:power:ratedKw`: The peak thermal dissipation equivalent of the electrical load ($10.5\\text{ kW}$).
 
 ### 3.2 Machine-Readable JSON Implementation
 
@@ -269,7 +269,7 @@ To ensure the Cyber Digital Twin operates with physical fidelity rather than qua
 ### 4.1 Hydraulic Head Loss in Manifold Networks (Darcy-Weisbach)
 When calculating the physical consequences of cyber tampering with a secondary coolant distribution valve, the pressure drop across the manifold piping network is calculated using the Darcy-Weisbach formulation:
 
-$$h_f = f \cdot \frac{L}{D} \cdot \frac{v^2}{2g} = f \cdot \frac{8 L \dot{Q}_{\\text{vol}}^2}{\pi^2 g D^5}$$
+$$h_f = f \cdot \\frac{L}{D} \cdot \\frac{v^2}{2g} = f \cdot \\frac{8 L \dot{Q}_{\\text{vol}}^2}{\pi^2 g D^5}$$
 
 Where:
 - $h_f$ is the hydraulic head loss in meters ($\\text{m}$).

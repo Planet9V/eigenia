@@ -96,11 +96,7 @@ By connecting physical piping nodes to CycloneDX bills of materials, the reliabi
 
 The following register documents the critical operational components whose failure threatens facility availability, detailing their target security levels (SL-T) and lead-time replacement exposures:
 
-```
-+-------------------------------------------------------------------------+
-|          TABLE 17.1: RELIABILITY CRITICAL ITEMS REGISTER (RCIL)         |
-+-------------------------------------------------------------------------+
-```
+#### Table 17.1: Reliability Critical Items Register (RCIL)
 
 | RCIL ID | Subsystem | Component Name | Primary Reliability Function | Cyber Attack Failure Vector | SL-T | Lead Time | Typical Vendors |
 |:---|:---|:---|:---|:---|:---:|:---:|:---|
@@ -123,11 +119,7 @@ The following register documents the critical operational components whose failu
 
 Components on the Safety Critical Items List are categorized as Table B Extremistan assets. Their failure produces catastrophic loss. Consequently, they are subjected to mandatory hardwired safety invariants:
 
-```
-+-------------------------------------------------------------------------+
-|            TABLE 17.2: SAFETY CRITICAL ITEMS REGISTER (SCIL)           |
-+-------------------------------------------------------------------------+
-```
+#### Table 17.2: Safety Critical Items Register (SCIL)
 
 | SCIL ID | Node | Component Name | Irreversible Hazard Consequence | Software Bypass Vulnerability | Mandatory Hardwired Safety Invariant |
 |:---|:---|:---|:---|:---|:---|

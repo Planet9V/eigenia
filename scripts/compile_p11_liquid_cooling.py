@@ -83,11 +83,7 @@ By binding physical pipe diameters, roughness factors, and valve flow coefficien
 
 Modern compute facilities implement three primary cooling modalities, each presenting distinct thermodynamic characteristics and operational technology attack surfaces:
 
-```
-+-------------------------------------------------------------------------+
-|         TABLE 6.1: COMPARATIVE ANALYSIS OF COOLING MODALITIES           |
-+-------------------------------------------------------------------------+
-```
+#### Table 6.1: Comparative Analysis of Cooling Modalities
 
 | Engineering Parameter | Modality 1: Precision Air Cooling | Modality 2: Direct-to-Chip Liquid (DLC) | Modality 3: Immersion (Single/Two Phase) |
 |:---|:---|:---|:---|

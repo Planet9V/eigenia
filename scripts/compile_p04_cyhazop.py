@@ -136,11 +136,7 @@ To demonstrate the rigorous application of CyHAZOP, we present detailed analysis
 - **Design Intent:** Deliver treated 25% propylene glycol (PG25) coolant at $30.0^\circ\text{C} \pm 2.0^\circ\text{C}$ to 8x AI accelerator cold plates at $38.5\text{ L/min}$ per tray, maintaining silicon junction temperatures $T_j \le 85.0^\circ\text{C}$ under $10.5\text{ kW}$ compute dissipation.
 - **Node Boundary:** CDU secondary heat exchanger discharge nozzle $\to$ distribution manifold $\to$ flexible stainless steel braided hose $\to$ quick-disconnect dry-break couplings $\to$ microchannel cold plates $\to$ return manifold $\to$ CDU suction inlet.
 
-```
-+-------------------------------------------------------------------------+
-|           NODE 1: SECONDARY COOLING LOOP CYHAZOP MATRIX                 |
-+-------------------------------------------------------------------------+
-```
+#### Node 1: Secondary Cooling Loop CyHAZOP Matrix
 
 | Guide Word | Parameter | Deviation | Physical Consequence | Cyber Attack Vector | Severity | Recommended Safeguard |
 |:---|:---|:---|:---|:---|:---|:---|
@@ -153,11 +149,7 @@ To demonstrate the rigorous application of CyHAZOP, we present detailed analysis
 - **Design Intent:** Continuous delivery of clean, three-phase 480V/400V AC power through a 4-to-3 Catcher UPS topology to rack-mounted busbars, stepping down to 48V DC via high-efficiency rectifiers, sustaining $120\text{ kW}$ per rack without voltage sag or harmonic distortion ($< 3\%$ THD).
 - **Node Boundary:** 11 kV switchgear output $\to$ unit substation step-down transformer $\to$ Static Transfer Switch (STS) $\to$ distributed block UPS modules (1.25 MW each) $\to$ power distribution unit (PDU) $\to$ busway tap-off boxes.
 
-```
-+-------------------------------------------------------------------------+
-|             NODE 2: POWER DISTRIBUTION CYHAZOP MATRIX                   |
-+-------------------------------------------------------------------------+
-```
+#### Node 2: Power Distribution CyHAZOP Matrix
 
 | Guide Word | Parameter | Deviation | Physical Consequence | Cyber Attack Vector | Severity | Recommended Safeguard |
 |:---|:---|:---|:---|:---|:---|:---|
@@ -170,11 +162,7 @@ To demonstrate the rigorous application of CyHAZOP, we present detailed analysis
 - **Design Intent:** Centralized monitoring of environmental parameters, ventilation louvers, smoke detection sensors, and life-safety systems, maintaining positive room air pressure and executing orderly zoning during emergency events.
 - **Node Boundary:** BMS BACnet/IP Ethernet backbone $\to$ field programmable controllers (JCI, Schneider, Honeywell) $\to$ pre-action sprinkler valves, clean-agent (NOVEC 1230 / Inergen) release solenoids, smoke purge dampers.
 
-```
-+-------------------------------------------------------------------------+
-|             NODE 3: BMS & LIFE SAFETY CYHAZOP MATRIX                    |
-+-------------------------------------------------------------------------+
-```
+#### Node 3: BMS and Life Safety CyHAZOP Matrix
 
 | Guide Word | Parameter | Deviation | Physical Consequence | Cyber Attack Vector | Severity | Recommended Safeguard |
 |:---|:---|:---|:---|:---|:---|:---|
@@ -185,11 +173,7 @@ To demonstrate the rigorous application of CyHAZOP, we present detailed analysis
 - **Design Intent:** Dedicated out-of-band management network providing Redfish REST telemetry, KVM over IP, firmware flashing, and hardware power cycling for all compute blades without interfering with production traffic.
 - **Node Boundary:** Dedicated 1 GbE management switch fabric $\to$ ASPEED AST2600 BMC chip $\to$ PCIe sideband (MCTP over SMBus) $\to$ host processor power rail and voltage regulators.
 
-```
-+-------------------------------------------------------------------------+
-|             NODE 4: OUT-OF-BAND BMC CYHAZOP MATRIX                      |
-+-------------------------------------------------------------------------+
-```
+#### Node 4: Out-of-Band BMC CyHAZOP Matrix
 
 | Guide Word | Parameter | Deviation | Physical Consequence | Cyber Attack Vector | Severity | Recommended Safeguard |
 |:---|:---|:---|:---|:---|:---|:---|

@@ -38,7 +38,7 @@ By mapping these psychometric traits to the hyperparameters of the Gated Recurre
 
 ## The Architecture of the Lacanian Gated Graph Neural Network (L-gGNN)
 
-The L-gGNN is defined as a directed graph $\\mathcal{G} = (V, E, X)$, where the nodes $V$ represent the four structural positions of discourse, the edges $E$ represent the vectors of relation (impossibility, impotence, etc.), and the feature matrix $X$ represents the circulating mathemes.
+The L-gGNN is defined as a directed graph $\mathcal{G} = (V, E, X)$, where the nodes $V$ represent the four structural positions of discourse, the edges $E$ represent the vectors of relation (impossibility, impotence, etc.), and the feature matrix $X$ represents the circulating mathemes.
 
 ### The Topology of Positions ($V$)
 
@@ -55,30 +55,30 @@ The set of nodes $V = \{v_{agt}, v_{oth}, v_{pro}, v_{tru}\}$ corresponds to:
 
 The edges in the L-gGNN are directed and typed, representing specific logical relations. Lacan’s schemas imply a directed flow of "production" and "truth." The adjacency matrix $A$ is not merely a binary connectivity map but a weighted matrix defining the permissible flow of information [1]
 
-We define the adjacency matrix $A \\in \mathbb{R}^{4 \\times 4}$ based on the standard flow of the discourse schema:
+We define the adjacency matrix $A \in \mathbb{R}^{4 \times 4}$ based on the standard flow of the discourse schema:
 
-$$A = \\begin{bmatrix} 0 & 1 & 0 & 0 \\\\ 0 & 0 & 1 & 0 \\\\ 0 & 0 & 0 & 1 \\\\ 1 & 0 & 0 & 0 \\end{bmatrix}$$  
+$$A = \begin{bmatrix} 0 & 1 & 0 & 0 \\\\ 0 & 0 & 1 & 0 \\\\ 0 & 0 & 0 & 1 \\\\ 1 & 0 & 0 & 0 \end{bmatrix}$$  
 However, Lacan adds "internal" vectors of blockage and determination. Specifically:
 
 * Impossibility: The relation between Agent and Other is often marked by a "barrier" of impossibility (e.g., governing, educating, analyzing). In the GNN, this acts as a Gating Mask on the message passing from $v_{agt}$ to $v_{oth}$.  
 * Impotence: The relation between Truth and Product is blocked. Truth cannot directly access the Product; it must go through the Agent.  
-* Determination: The Truth determines the Agent. This is a strong, often unidirectional dependency ($v_{tru} \\to v_{agt}$).
+* Determination: The Truth determines the Agent. This is a strong, often unidirectional dependency ($v_{tru} \to v_{agt}$).
 
 The GNN implementation uses a Multi-Relational Graph approach 1, where different edge types carry different transformation matrices. We define two primary edge types:
 
-1. The Symbolic Axis ($E_{sym}$): $v_{agt} \\to v_{oth}$ and $v_{oth} \\to v_{pro}$. This is the axis of explicit speech.  
-2. The Real Axis ($E_{real}$): $v_{pro} \\to v_{tru}$ and $v_{tru} \\to v_{agt}$. This is the axis of feedback, trauma, and latent causality.
+1. The Symbolic Axis ($E_{sym}$): $v_{agt} \to v_{oth}$ and $v_{oth} \to v_{pro}$. This is the axis of explicit speech.  
+2. The Real Axis ($E_{real}$): $v_{pro} \to v_{tru}$ and $v_{tru} \to v_{agt}$. This is the axis of feedback, trauma, and latent causality.
 
 ### The Feature Space: Vectorizing the Mathemes
 
-The "content" that flows through these nodes are the Lacanian mathemes. In a computational context, we must represent these symbols as high-dimensional vectors ($x \\in \mathbb{R}^d$). The choice of vector initialization is crucial for the simulation.
+The "content" that flows through these nodes are the Lacanian mathemes. In a computational context, we must represent these symbols as high-dimensional vectors ($x \in \mathbb{R}^d$). The choice of vector initialization is crucial for the simulation.
 
 | Matheme | Psychoanalytic Concept | Computational Vector Representation | Statistical Properties |
 | :---- | :---- | :---- | :---- |
 | $S_1$ | Master Signifier | One-Hot / Orthogonal Vector | Sparse, High Norm, Low Entropy. Represents a rigid identifier or coordinate. |
 | $S_2$ | Knowledge / Battery | Dense Semantic Embedding | Distributed, High Dimensionality. Represents a web of associations (e.g., Word2Vec average). |
 | $\$$ | Barred Subject | Dropout / Noise Vector | High Variance, Zero Mean. Represents "lack" or "void"; a vector that requires external definition. |
-| $a$ | Object *petit a* | Gradient / Residual Vector | The error term ($y - \\hat{y}$). Represents "surplus" entropy that cannot be encoded by $S_2$. |
+| $a$ | Object *petit a* | Gradient / Residual Vector | The error term ($y - \hat{y}$). Represents "surplus" entropy that cannot be encoded by $S_2$. |
 
 The Signifying Chain is modeled as the propagation of these vectors. For example, when $S_1$ is in the Agent position, the node $v_{agt}$ emits a sparse, high-magnitude vector. When $\$$ is in the Agent position, the node emits a noisy, fluctuating vector.
 
@@ -96,45 +96,45 @@ $$r_t = \sigma(W_r x_t + U_r h_{t-1} + b_r)$$
 
 $$z_t = \sigma(W_z x_t + U_z h_{t-1} + b_z)$$
 
-$$\\tilde{h}_t = \\tanh(W_h x_t + U_h (r_t \odot h_{t-1}) + b_h)$$
+$$\tilde{h}_t = \tanh(W_h x_t + U_h (r_t \odot h_{t-1}) + b_h)$$
 
-$$h_t = (1 - z_t) \odot \\tilde{h}_t + z_t \odot h_{t-1}$$  
-We modify the bias terms $b_r$ and $b_z$ to include the personality vector $\\mathbf{P}$. Let $\\mathbf{P}$ be a normalized vector of the Big Five traits: $[O, C, E, A, N]$.
+$$h_t = (1 - z_t) \odot \tilde{h}_t + z_t \odot h_{t-1}$$  
+We modify the bias terms $b_r$ and $b_z$ to include the personality vector $\mathbf{P}$. Let $\mathbf{P}$ be a normalized vector of the Big Five traits: $[O, C, E, A, N]$.
 
 ### The Reset Gate ($r_t$) and the Function of Plasticity
 
-The Reset Gate determines how much of the past hidden state $h_{t-1}$ is used to compute the new candidate state $\\tilde{h}_t$. In psychoanalytic terms, this is the function of Nachträglichkeit (retroaction) or the ability to re-contextualize the past based on the present. In CB5T, this maps to Plasticity (Openness/Intellect).11
+The Reset Gate determines how much of the past hidden state $h_{t-1}$ is used to compute the new candidate state $\tilde{h}_t$. In psychoanalytic terms, this is the function of Nachträglichkeit (retroaction) or the ability to re-contextualize the past based on the present. In CB5T, this maps to Plasticity (Openness/Intellect).11
 
-* Openness ($\\theta_O$): High Openness implies a flexible relationship with the past. The subject can access memory but is not bound by it.  
+* Openness ($\theta_O$): High Openness implies a flexible relationship with the past. The subject can access memory but is not bound by it.  
 * The L-GRU Modification:
 
-  $$r_t = \sigma(W_r x_t + U_r h_{t-1} + b_r + \\lambda_O \\cdot \\theta_O)$$
+  $$r_t = \sigma(W_r x_t + U_r h_{t-1} + b_r + \lambda_O \cdot \theta_O)$$
 
-  where $\\lambda_O$ is a scaling factor.  
-  * High Openness: $r_t \\to 1$. The system fully integrates history with new input.  
-  * Low Openness (Rigidity/Repression): $r_t \\to 0$. The system "forgets" or "represses" the connection to the past state when processing new input. The candidate state $\\tilde{h}_t$ becomes purely reactive to the input $x_t$, lacking historical depth. This simulates Repression ($Verdrängung$); the severing of the link between the affect and the representation.
+  where $\lambda_O$ is a scaling factor.  
+  * High Openness: $r_t \to 1$. The system fully integrates history with new input.  
+  * Low Openness (Rigidity/Repression): $r_t \to 0$. The system "forgets" or "represses" the connection to the past state when processing new input. The candidate state $\tilde{h}_t$ becomes purely reactive to the input $x_t$, lacking historical depth. This simulates Repression ($Verdrängung$); the severing of the link between the affect and the representation.
 
 ### The Update Gate ($z_t$) and the Function of Stability
 
 The Update Gate determines how much of the previous state $h_{t-1}$ is carried over to the new step $t$. It controls the "inertia" of the system. In psychoanalytic terms, this is the function of Fixation or Identification. In CB5T, this maps to Stability (Conscientiousness, Inverse Neuroticism).3
 
-* Conscientiousness ($\\theta_C$): High Conscientiousness implies high goal maintenance and resistance to distraction.  
-* Neuroticism ($\\theta_N$): High Neuroticism implies volatility and sensitivity to error (entropy).  
+* Conscientiousness ($\theta_C$): High Conscientiousness implies high goal maintenance and resistance to distraction.  
+* Neuroticism ($\theta_N$): High Neuroticism implies volatility and sensitivity to error (entropy).  
 * The L-GRU Modification:
 
-  $$z_t = \sigma(W_z x_t + U_z h_{t-1} + b_z + \\lambda_C \\cdot \\theta_C - \\lambda_N \\cdot \\theta_N)$$  
-  * High Stability (High C, Low N): $z_t \\to 1$. The system ignores the new candidate state $\\tilde{h}_t$ and retains the old state $h_{t-1}$. The subject is "fixed" on their Master Signifier ($S_1$). They "hear" the Other ($x_t$), but they do not change.  
-  * Low Stability (High N): $z_t \\to 0$ or fluctuates. The system is easily overwritten by new inputs. The subject has a "weak ego" and is flooded by the discourse of the Other.
+  $$z_t = \sigma(W_z x_t + U_z h_{t-1} + b_z + \lambda_C \cdot \theta_C - \lambda_N \cdot \theta_N)$$  
+  * High Stability (High C, Low N): $z_t \to 1$. The system ignores the new candidate state $\tilde{h}_t$ and retains the old state $h_{t-1}$. The subject is "fixed" on their Master Signifier ($S_1$). They "hear" the Other ($x_t$), but they do not change.  
+  * Low Stability (High N): $z_t \to 0$ or fluctuates. The system is easily overwritten by new inputs. The subject has a "weak ego" and is flooded by the discourse of the Other.
 
 ### Attention Mechanisms and Agreeableness
 
 In the gGNN, messages from neighbors are aggregated using an attention mechanism.
 
-$$a_v^{(t)} = \sum_{u \\in \mathcal{N}(v)} \\alpha_{vu} h_u^{(t-1)}$$
+$$a_v^{(t)} = \sum_{u \in \mathcal{N}(v)} \alpha_{vu} h_u^{(t-1)}$$
 
-The attention weight $\\alpha_{vu}$ represents the "cathexis" or investment in the neighbor.
+The attention weight $\alpha_{vu}$ represents the "cathexis" or investment in the neighbor.
 
-* Agreeableness ($\\theta_A$): Maps to the baseline attention weight. High Agreeableness increases the bandwidth of the edges connecting $v_{oth}$ to $v_{agt}$, simulating "altruism" or susceptibility to social influence [16]
+* Agreeableness ($\theta_A$): Maps to the baseline attention weight. High Agreeableness increases the bandwidth of the edges connecting $v_{oth}$ to $v_{agt}$, simulating "altruism" or susceptibility to social influence [16]
 
 ---
 
@@ -144,23 +144,23 @@ With the architecture defined, we now simulate the "Quarter Turn"; the permutati
 
 ### The Master’s Discourse (Governing)
 
-Formula: $\\frac{S_1}{\$} \\to \\frac{S_2}{a}$
+Formula: $\frac{S_1}{\$} \to \frac{S_2}{a}$
 
 * Initialization:  
-  * $v_{agt} \\leftarrow S_1$ (Agent is Master Signifier).  
-  * $v_{oth} \\leftarrow S_2$ (Other is Knowledge).  
+  * $v_{agt} \leftarrow S_1$ (Agent is Master Signifier).  
+  * $v_{oth} \leftarrow S_2$ (Other is Knowledge).  
 * Dynamics: The Agent emits a sparse, high-norm vector ($S_1$). This vector propagates to the Other ($S_2$).  
-* Processing: The GRU at $v_{oth}$ (Knowledge) receives the command. Under the influence of the Master, the Stability parameter is effectively maximized ($z_t \\uparrow$). The Knowledge node aligns itself rigidly with the Master Signifier.  
+* Processing: The GRU at $v_{oth}$ (Knowledge) receives the command. Under the influence of the Master, the Stability parameter is effectively maximized ($z_t \uparrow$). The Knowledge node aligns itself rigidly with the Master Signifier.  
 * Entropy Profile: The system aims for Zero Entropy. The goal is total identity between command and execution.  
 * The Residue ($a$): The gGNN inevitably fails to perfectly map the sparse $S_1$ onto the dense $S_2$. The loss function (Free Energy) is non-zero. This error term propagates to the Product node ($v_{pro}$). In the Master's discourse, this residue ($a$) is produced but repressed (the arrow from $a$ to $\$$ is barred). The system accumulates "waste" data that it refuses to integrate.
 
 ### The University Discourse (Educating)
 
-Formula: $\\frac{S_2}{S_1} \\to \\frac{a}{\$}$
+Formula: $\frac{S_2}{S_1} \to \frac{a}{\$}$
 
 * Initialization:  
-  * $v_{agt} \\leftarrow S_2$ (Agent is Knowledge/Bureaucracy).  
-  * $v_{oth} \\leftarrow a$ (Other is the Object/Student).  
+  * $v_{agt} \leftarrow S_2$ (Agent is Knowledge/Bureaucracy).  
+  * $v_{oth} \leftarrow a$ (Other is the Object/Student).  
 * Dynamics: The Agent ($S_2$) attempts to "encalculate" the Object ($a$). The dense vector of Knowledge tries to encode the high-entropy residual vector.  
 * Processing: This is a compression algorithm. The network tries to fit the chaotic input ($a$) into the pre-existing categories of $S_2$.  
 * The Product: The output at $v_{pro}$ is $\$$; the Barred Subject. The student is "divided" by the imposition of knowledge. In GNN terms, the vector at $v_{pro}$ exhibits high variance and dropout; the subject is alienated from their own truth.  
@@ -168,11 +168,11 @@ Formula: $\\frac{S_2}{S_1} \\to \\frac{a}{\$}$
 
 ### The Hysteric’s Discourse (Protesting)
 
-Formula: $\\frac{\$}{a} \\to \\frac{S_1}{S_2}$
+Formula: $\frac{\$}{a} \to \frac{S_1}{S_2}$
 
 * Initialization:  
-  * $v_{agt} \\leftarrow \$$ (Agent is the Subject).  
-  * $v_{oth} \\leftarrow S_1$ (Other is the Master).  
+  * $v_{agt} \leftarrow \$$ (Agent is the Subject).  
+  * $v_{oth} \leftarrow S_1$ (Other is the Master).  
 * Dynamics: The Agent ($\$$) is a noise generator. It sends an "Error Signal" to the Master ($S_1$).  
 * Processing: The Master ($S_1$) is interrogated. The incoming message is high-entropy. To reduce this entropy, the Master must generate new Knowledge ($S_2$).  
 * Plasticity: This discourse requires High Plasticity ($O$). The Master must update their parameters.  
@@ -180,11 +180,11 @@ Formula: $\\frac{\$}{a} \\to \\frac{S_1}{S_2}$
 
 ### The Analyst’s Discourse (Revolutionizing)
 
-Formula: $\\frac{a}{S_2} \\to \\frac{\$}{S_1}$
+Formula: $\frac{a}{S_2} \to \frac{\$}{S_1}$
 
 * Initialization:  
-  * $v_{agt} \\leftarrow a$ (Agent is the Object).  
-  * $v_{oth} \\leftarrow \$$ (Other is the Subject).  
+  * $v_{agt} \leftarrow a$ (Agent is the Object).  
+  * $v_{oth} \leftarrow \$$ (Other is the Subject).  
 * Dynamics: The Agent occupies the position of the "waste" or "cause." The Analyst embodies the entropy of the system.  
 * Adversarial Training: The Analyst node sends the Residue Vector back to the Subject. This is mathematically equivalent to Adversarial Perturbation in deep learning. The Analyst injects the "unthought" element into the Subject's processing.  
 * The Outcome: The Subject ($\$$) is forced to confront the Real. The Subject must produce their own Master Signifiers ($S_1$) to bind this entropy. This is the only discourse that produces a new $S_1$ (Signifier of the Transferential Unconscious).
@@ -199,14 +199,14 @@ The L-gGNN does not run indefinitely. It is governed by the economics of Psychol
 
 The network attempts to minimize the Variational Free Energy ($F$) at each timestep.
 
-$$F = \\mathbb{E}_q [\\ln q(\\theta) - \\ln p(\\theta, \\text{data})]$$
+$$F = \mathbb{E}_q [\ln q(\theta) - \ln p(\theta, \text{data})]$$
 
-* $p(\\theta, \\text{data})$: The generative model (The Subject's fantasy/worldview).  
-* $q(\\theta)$: The recognition density (The perception of the current state).  
+* $p(\theta, \text{data})$: The generative model (The Subject's fantasy/worldview).  
+* $q(\theta)$: The recognition density (The perception of the current state).  
 * The Conflict: The Subject tries to match $q$ to $p$. When $a$ (surplus entropy) is present, $F$ increases.  
 * Anxiety: We define Anxiety in the simulation as the integral of Free Energy over time.
 
-  $$\\text{Anxiety} = \\int_{t=0}^{T} F(t) \\, dt$$
+  $$\text{Anxiety} = \int_{t=0}^{T} F(t) \\, dt$$
 
 ### Scansion and Catastrophe Theory
 
@@ -214,13 +214,13 @@ Lacan introduced the variable-length session ("Scansion") to cut the discourse a
 
 The behavior of the subject ($b$) is governed by the potential function:
 
-$$V(b) = \\frac{1}{4}b^4 - \\frac{1}{2}\\beta b^2 - \\alpha b$$
+$$V(b) = \frac{1}{4}b^4 - \frac{1}{2}\beta b^2 - \alpha b$$
 
-* Control Parameter $\\alpha$ (Normal Factor): Mapped to Free Energy / Anxiety. As the session progresses and the subject approaches the Real, $\\alpha$ increases.  
-* Control Parameter $\\beta$ (Splitting Factor): Mapped to the Resistance / Repression (Inverse Plasticity).  
-  * If $\\beta$ (Resistance) is low, the change in the subject's state ($b$) is smooth.  
-  * If $\\beta$ is high (High Resistance/Stability), the system moves along a "metastable" plateau. The subject maintains their defense despite rising anxiety.  
-* The Bifurcation Point (The Cut): When the trajectory crosses the bifurcation set ($27\\alpha^2 - 4\\beta^3 = 0$), the system undergoes a Catastrophic Jump. The subject's state snaps from the "Defense" attractor to the "Insight" (or Decompensation) attractor.  
+* Control Parameter $\alpha$ (Normal Factor): Mapped to Free Energy / Anxiety. As the session progresses and the subject approaches the Real, $\alpha$ increases.  
+* Control Parameter $\beta$ (Splitting Factor): Mapped to the Resistance / Repression (Inverse Plasticity).  
+  * If $\beta$ (Resistance) is low, the change in the subject's state ($b$) is smooth.  
+  * If $\beta$ is high (High Resistance/Stability), the system moves along a "metastable" plateau. The subject maintains their defense despite rising anxiety.  
+* The Bifurcation Point (The Cut): When the trajectory crosses the bifurcation set ($27\alpha^2 - 4\beta^3 = 0$), the system undergoes a Catastrophic Jump. The subject's state snaps from the "Defense" attractor to the "Insight" (or Decompensation) attractor.  
 * Algorithmic Scansion: The L-gGNN monitors the curvature of the potential surface. The "Analyst" (the external stopping criterion) executes the CUT (stops the GNN) precisely at the moment the system approaches the bifurcation point. This "punctuates" the session, fixing the meaning at the moment of maximum topological tension.
 
 ---
@@ -231,7 +231,7 @@ We present three simulations demonstrating how different CB5T parameterizations 
 
 ### Simulation A: The Obsessional Structure (High Stability, Low Plasticity)
 
-* Parameters: $\\theta_C = 0.9$ (High Conscientiousness), $\\theta_N = 0.7$ (High Neuroticism), $\\theta_O = 0.2$ (Low Openness).  
+* Parameters: $\theta_C = 0.9$ (High Conscientiousness), $\theta_N = 0.7$ (High Neuroticism), $\theta_O = 0.2$ (Low Openness).  
 * Graph State: Master’s Discourse.  
 * Trace:  
   1. Input: Ambiguous stimulus ($x_{ambig}$).  
@@ -244,7 +244,7 @@ We present three simulations demonstrating how different CB5T parameterizations 
 
 ### Simulation B: The Hysteric Structure (Low Stability, High Plasticity)
 
-* Parameters: $\\theta_C = 0.3$, $\\theta_N = 0.8$, $\\theta_O = 0.9$.  
+* Parameters: $\theta_C = 0.3$, $\theta_N = 0.8$, $\theta_O = 0.9$.  
 * Graph State: Hysteric’s Discourse.  
 * Trace:  
   1. Input: Same ambiguous stimulus.  
@@ -257,12 +257,12 @@ We present three simulations demonstrating how different CB5T parameterizations 
 
 ### Simulation C: The Psychotic Structure (Foreclosure)
 
-* Parameters: $\\theta_N = 1.0$, $\\theta_C = 0.0$.  
-* Topology Failure: The edge $v_{pro} \\to v_{tru}$ (The Return) is severed. The Name-of-the-Father ($S_1$) is rejected from the Agent position.  
+* Parameters: $\theta_N = 1.0$, $\theta_C = 0.0$.  
+* Topology Failure: The edge $v_{pro} \to v_{tru}$ (The Return) is severed. The Name-of-the-Father ($S_1$) is rejected from the Agent position.  
 * Trace:  
   1. Input: $a$ (The Real).  
   2. Dynamics: Without the anchoring of $S_1$ (which sets the coordinate system), the vector space collapses. The distance metric (e.g., Cosine Similarity) becomes meaningless.  
-  3. The Delusion: To compensate for the lack of symbolic order ($S_1$), the network treats *every* input as a message of absolute significance (Self-Reference). The Attention weights $\\alpha_{ij}$ become uniform or saturated.  
+  3. The Delusion: To compensate for the lack of symbolic order ($S_1$), the network treats *every* input as a message of absolute significance (Self-Reference). The Attention weights $\alpha_{ij}$ become uniform or saturated.  
   4. Result: Exploding Gradients. The Free Energy approaches infinity. The simulation crashes or outputs random noise interpreted as "Voices" (Hallucinations).
 
 ---
@@ -292,7 +292,7 @@ The "Calculus of the Subject" is computable. By integrating the topology of Laca
 ### A.1 Adjacency Permutations for Discourses
 
 We define the permutation matrices $P_\sigma$ corresponding to the quarter turn.  
-Let $x_{pos} \\in \{x_{agt}, x_{oth}, x_{pro}, x_{tru}\}$ be the feature vectors.
+Let $x_{pos} \in \{x_{agt}, x_{oth}, x_{pro}, x_{tru}\}$ be the feature vectors.
 
 * Master: $X_M =^T$  
 * University: $X_U =^T$  
@@ -340,10 +340,10 @@ class LacanianGRUCell(nn.Module):
 
 ### A.3 The Scansion Function (Cusp Catastrophe)
 
-$$\\Delta H = H_t - H_{t-1}$$
+$$\Delta H = H_t - H_{t-1}$$
 
-$$\\text{StopCondition} = \\mathbb{I} \\left( (\\Delta H \> \\tau_{spike}) \\lor (t \> T_{max}) \\right)$$  
-Where $\\tau_{spike}$ is dynamically adjusted based on the "Analyst's" threshold (often inversely proportional to the subject's $\\beta$ resistance).
+$$\text{StopCondition} = \mathbb{I} \left( (\Delta H \> \tau_{spike}) \lor (t \> T_{max}) \right)$$  
+Where $\tau_{spike}$ is dynamically adjusted based on the "Analyst's" threshold (often inversely proportional to the subject's $\beta$ resistance).
 
 #### Works cited
 

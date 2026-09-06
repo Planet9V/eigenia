@@ -122,11 +122,7 @@ Where $C_{\text{control}}$ includes capital expenditure (hardware firewalls, opt
 
 The following worked financial analysis evaluates the six high-consequence CyHAZOP nodes of a 100 MW high-density compute facility. Asset values reflect empirical replacement costs and unserved SLA revenue losses derived from commercial hyperscale operations:
 
-```
-+-------------------------------------------------------------------------+
-|          TABLE 10.1: PRE-MITIGATION ANNUALISED LOSS EXPECTANCY          |
-+-------------------------------------------------------------------------+
-```
+#### Table 10.1: Pre-Mitigation Annualised Loss Expectancy
 
 | Node | Failure Scenario | Asset Value (AV) | EF | Single Loss (SLE) | ARO (Cyber) | Pre-Mitigation ALE |
 |:---|:---|:---:|:---:|:---:|:---:|:---:|
@@ -144,11 +140,7 @@ The following worked financial analysis evaluates the six high-consequence CyHAZ
 
 To mitigate the $17.40\text{M USD}$ annual loss exposure, the facility deploys an integrated operational technology security programme totaling $1.60\text{M USD}$ in Year 1 capital and operational expenditure:
 
-```
-+-------------------------------------------------------------------------+
-|           TABLE 10.2: POST-MITIGATION LOSS REDUCTION & ROSI             |
-+-------------------------------------------------------------------------+
-```
+#### Table 10.2: Post-Mitigation Loss Reduction and ROSI
 
 | Node | Engineered Safeguard Deployed | Control Cost | Residual ARO | Post-Mitigation ALE | Net Loss Mitigated ($\Delta\text{ALE}$) | Node ROSI |
 |:---|:---|:---:|:---:|:---:|:---:|:---:|

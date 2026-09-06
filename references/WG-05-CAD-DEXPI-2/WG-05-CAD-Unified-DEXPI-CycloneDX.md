@@ -20,7 +20,7 @@ Plant and mechanical engineers speak the language of process chemistry, thermody
 1. **Equipment Objects:** Mechanical assets classified by functional schema, including Variable-Speed Centrifugal Pumps (`P-101`), Plate Heat Exchangers (`HEX-201`), and Coolant Distribution Units (`CDU-01`).
 2. **Piping Networks:** Pipe segments (`Line-102`) defining nominal pipe sizes, schedule ratings, wall thicknesses, and material specifications (such as 316L stainless steel or copper).
 3. **Hydronic Topologies:** Explicit flow connectivity mapping source nozzles, suction ports, discharge ports, and check valves.
-4. **Thermodynamic Envelopes:** Volumetric flow rates in liters per minute, static pressures in bar, pressure drops, fluid properties (water, 25% propylene glycol / PG25, or dielectric fluids), and supply and return temperatures ($32^\circ\text{C} \to 45^\circ\text{C}$).
+4. **Thermodynamic Envelopes:** Volumetric flow rates in liters per minute, static pressures in bar, pressure drops, fluid properties (water, 25% propylene glycol / PG25, or dielectric fluids), and supply and return temperatures ($32^\circ\text{C} 	o 45^\circ\text{C}$).
 5. **Instrumentation and Control Loops:** Sensor tags (temperature transmitters `TT-101`, flow meters `FT-102`, differential pressure transmitters `PDT-103`), actuator trip limits, and electrical signal telemetry conduits (Modbus RTU, Modbus TCP, BACnet/IP).
 
 The following XML excerpt demonstrates how DEXPI 2.0 formally encodes a secondary Coolant Distribution Unit and its hydraulic connection to a compute rack manifold:
@@ -260,77 +260,77 @@ To ensure the Cyber Digital Twin operates with physical fidelity rather than qua
 ### 4.1 Hydraulic Head Loss in Manifold Networks (Darcy-Weisbach)
 When calculating the physical consequences of cyber tampering with a secondary coolant distribution valve, the pressure drop across the manifold piping network is calculated using the Darcy-Weisbach formulation:
 
-$$h_f = f \cdot \frac{L}{D} \cdot \frac{v^2}{2g} = f \cdot \frac{8 L \dot{Q}_{\\text{vol}}^2}{\pi^2 g D^5}$$
+$$h_f = f \cdot \frac{L}{D} \cdot \frac{v^2}{2g} = f \cdot \frac{8 L \dot{Q}_{\text{vol}}^2}{\pi^2 g D^5}$$
 
 Where:
-- $h_f$ is the hydraulic head loss in meters ($\\text{m}$).
-- $f$ is the Darcy friction factor, determined via the Colebrook-White equation as a function of the Reynolds number $\\text{Re}$ and pipe absolute roughness $\\epsilon$.
-- $L$ is the equivalent length of the manifold distribution line ($L = 14.5\\text{ m}$).
-- $D$ is the inner hydraulic diameter of the stainless steel manifold pipe ($D = 0.050\\text{ m}$).
-- $v$ is the fluid flow velocity ($\\text{m/s}$).
-- $\\dot{Q}_{\\text{vol}}$ is the volumetric liquid flow rate ($\\text{m}^3\\text{/s}$), corresponding to $38.5\\text{ L/min} \\approx 6.42 \\times 10^{-4}\\text{ m}^3\\text{/s}$.
-- $g$ is the acceleration due to gravity ($9.81\\text{ m/s}^2$).
+- $h_f$ is the hydraulic head loss in meters ($\text{m}$).
+- $f$ is the Darcy friction factor, determined via the Colebrook-White equation as a function of the Reynolds number $\text{Re}$ and pipe absolute roughness $\epsilon$.
+- $L$ is the equivalent length of the manifold distribution line ($L = 14.5\text{ m}$).
+- $D$ is the inner hydraulic diameter of the stainless steel manifold pipe ($D = 0.050\text{ m}$).
+- $v$ is the fluid flow velocity ($\text{m/s}$).
+- $\dot{Q}_{\text{vol}}$ is the volumetric liquid flow rate ($\text{m}^3\text{/s}$), corresponding to $38.5\text{ L/min} \approx 6.42 \times 10^{-4}\text{ m}^3\text{/s}$.
+- $g$ is the acceleration due to gravity ($9.81\text{ m/s}^2$).
 
-The Reynolds number $\\text{Re}$ governing flow turbulence is formulated as:
+The Reynolds number $\text{Re}$ governing flow turbulence is formulated as:
 
-$$\\text{Re} = \\frac{\\rho v D}{\\mu} = \\frac{4 \\rho \\dot{Q}_{\\text{vol}}}{\\pi D \\mu}$$
+$$\text{Re} = \frac{\rho v D}{\mu} = \frac{4 \rho \dot{Q}_{\text{vol}}}{\pi D \mu}$$
 
-Where $\\rho$ is the density of 25% propylene glycol ($\\rho \\approx 1032\\text{ kg/m}^3$) and $\\mu$ is the dynamic viscosity ($\\mu \\approx 2.45 \\times 10^{-3}\\text{ Pa}\\cdot\\text{s}$ at $35^\\circ\\text{C}$). For nominal flow, $\\text{Re} \\approx 6,850$, indicating fully developed turbulent flow. 
+Where $\rho$ is the density of 25% propylene glycol ($\rho \approx 1032\text{ kg/m}^3$) and $\mu$ is the dynamic viscosity ($\mu \approx 2.45 \times 10^{-3}\text{ Pa}\cdot\text{s}$ at $35^\circ\text{C}$). For nominal flow, $\text{Re} \approx 6,850$, indicating fully developed turbulent flow. 
 
-If an adversary transmits unauthorized Modbus write commands to partially close proportional valve `V-102`, the flow area is restricted, causing local resistance coefficient $K$ to escalate. This induces hydraulic cavitation, drops $\\text{Re}$ into the laminar-turbulent transition zone, increases head loss $h_f$ by a factor of 4.8, and starves downstream compute trays.
+If an adversary transmits unauthorized Modbus write commands to partially close proportional valve `V-102`, the flow area is restricted, causing local resistance coefficient $K$ to escalate. This induces hydraulic cavitation, drops $\text{Re}$ into the laminar-turbulent transition zone, increases head loss $h_f$ by a factor of 4.8, and starves downstream compute trays.
 
 ### 4.2 Plate Heat Exchanger Logarithmic Mean Temperature Difference (LMTD)
 Heat transfer between the primary facility water loop and the secondary IT liquid cooling loop across plate heat exchanger `HEX-201` is governed by:
 
-$$\\dot{Q}_{\\text{thermal}} = U \\cdot A \\cdot \\Delta T_{\\text{lm}} = U \\cdot A \\cdot \\frac{(T_{h,\\text{in}} - T_{c,\\text{out}}) - (T_{h,\\text{out}} - T_{c,\\text{in}})}{\\ln\\left(\\frac{T_{h,\\text{in}} - T_{c,\\text{out}}}{T_{h,\\text{out}} - T_{c,\\text{in}}}\\right)}$$
+$$\dot{Q}_{\text{thermal}} = U \cdot A \cdot \Delta T_{\text{lm}} = U \cdot A \cdot \frac{(T_{h,\text{in}} - T_{c,\text{out}}) - (T_{h,\text{out}} - T_{c,\text{in}})}{\ln\left(\frac{T_{h,\text{in}} - T_{c,\text{out}}}{T_{h,\text{out}} - T_{c,\text{in}}}\right)}$$
 
 Where:
-- $\\dot{Q}_{\\text{thermal}}$ is the total heat transfer rate in kilowatts ($120.0\\text{ kW}$ per rack).
-- $U$ is the overall heat transfer coefficient ($U \\approx 4,200\\text{ W/(m}^2\\cdot\\text{K)}$ for water-glycol plate exchangers).
-- $A$ is the active plate surface area ($A = 12.8\\text{ m}^2$).
-- $T_{h,\\text{in}}$ is the return coolant temperature from the accelerator trays ($45.0^\\circ\\text{C}$).
-- $T_{h,\\text{out}}$ is the cooled supply temperature delivering fluid back to compute trays ($32.0^\\circ\\text{C}$).
-- $T_{c,\\text{in}}$ and $T_{c,\\text{out}}$ are the chilled facility water supply and return temperatures ($20.0^\\circ\\text{C} \\to 28.0^\\circ\\text{C}$).
+- $\dot{Q}_{\text{thermal}}$ is the total heat transfer rate in kilowatts ($120.0\text{ kW}$ per rack).
+- $U$ is the overall heat transfer coefficient ($U \approx 4,200\text{ W/(m}^2\cdot\text{K)}$ for water-glycol plate exchangers).
+- $A$ is the active plate surface area ($A = 12.8\text{ m}^2$).
+- $T_{h,\text{in}}$ is the return coolant temperature from the accelerator trays ($45.0^\circ\text{C}$).
+- $T_{h,\text{out}}$ is the cooled supply temperature delivering fluid back to compute trays ($32.0^\circ\text{C}$).
+- $T_{c,\text{in}}$ and $T_{c,\text{out}}$ are the chilled facility water supply and return temperatures ($20.0^\circ\text{C} \to 28.0^\circ\text{C}$).
 
-If cyber tampering elevates primary chilled water supply $T_{c,\\text{in}}$ or throttles secondary pump speed, $\\Delta T_{\\text{lm}}$ collapses. The heat exchanger fails to reject $120\\text{ kW}$, causing secondary delivery temperatures to climb into silicon thermal runaway.
+If cyber tampering elevates primary chilled water supply $T_{c,\text{in}}$ or throttles secondary pump speed, $\Delta T_{\text{lm}}$ collapses. The heat exchanger fails to reject $120\text{ kW}$, causing secondary delivery temperatures to climb into silicon thermal runaway.
 
 ### 4.3 Pump Affinity Laws and Pressure Surges
 When a compromised Variable Frequency Drive (VFD) alters pump impeller rotational speed $N$, the resulting flow rate, head pressure, and power demand change according to the Affinity Laws:
 
-$$\\frac{\\dot{Q}_1}{\\dot{Q}_2} = \\frac{N_1}{N_2}, \\quad \\frac{H_1}{H_2} = \\left(\\frac{N_1}{N_2}\\right)^2, \\quad \\frac{P_1}{P_2} = \\left(\\frac{N_1}{N_2}\\right)^3$$
+$$\frac{\dot{Q}_1}{\dot{Q}_2} = \frac{N_1}{N_2}, \quad \frac{H_1}{H_2} = \left(\frac{N_1}{N_2}\right)^2, \quad \frac{P_1}{P_2} = \left(\frac{N_1}{N_2}\right)^3$$
 
-Rapid deceleration of pump motors through network overrides induces water hammer pressure surges $\\Delta P_{\\text{surge}}$ calculated via Joukowsky's equation:
+Rapid deceleration of pump motors through network overrides induces water hammer pressure surges $\Delta P_{\text{surge}}$ calculated via Joukowsky's equation:
 
-$$\\Delta P_{\\text{surge}} = \\rho \\cdot c \\cdot \\Delta v$$
+$$\Delta P_{\text{surge}} = \rho \cdot c \cdot \Delta v$$
 
-Where $c$ is the acoustic wave speed in the fluid (approximately $1,350\\text{ m/s}$ in PG25). A sudden velocity drop $\\Delta v = 1.8\\text{ m/s}$ generates a transient pressure shock $\\Delta P_{\\text{surge}} \\approx 2.5\\text{ MPa}$ ($25\\text{ bar}$), exceeding the mechanical burst pressure of cold plate quick-disconnect couplings.
+Where $c$ is the acoustic wave speed in the fluid (approximately $1,350\text{ m/s}$ in PG25). A sudden velocity drop $\Delta v = 1.8\text{ m/s}$ generates a transient pressure shock $\Delta P_{\text{surge}} \approx 2.5\text{ MPa}$ ($25\text{ bar}$), exceeding the mechanical burst pressure of cold plate quick-disconnect couplings.
 
 ### 4.4 Multigraph Blast Radius Formulation
-In the Cyber Digital Twin, the combined DEXPI plant and CycloneDX architecture is represented as a directed multigraph $\\mathcal{G} = (\\mathcal{V}, \\mathcal{E}, \\mathcal{W})$, where $\\mathcal{V}$ consists of physical equipment nodes $\\mathcal{V}_{\\text{plant}}$ and cyber components $\\mathcal{V}_{\\text{cyber}}$, while $\\mathcal{E}$ includes physical fluid edges, electrical conduits, and logical network dependencies.
+In the Cyber Digital Twin, the combined DEXPI plant and CycloneDX architecture is represented as a directed multigraph $\mathcal{G} = (\mathcal{V}, \mathcal{E}, \mathcal{W})$, where $\mathcal{V}$ consists of physical equipment nodes $\mathcal{V}_{\text{plant}}$ and cyber components $\mathcal{V}_{\text{cyber}}$, while $\mathcal{E}$ includes physical fluid edges, electrical conduits, and logical network dependencies.
 
-The blast radius $\\mathcal{B}(v_{\\text{target}})$ resulting from an attack on a physical or cyber node $v_{\\text{target}}$ across graph depth $k$ is formulated as:
+The blast radius $\mathcal{B}(v_{\text{target}})$ resulting from an attack on a physical or cyber node $v_{\text{target}}$ across graph depth $k$ is formulated as:
 
-$$\\mathcal{B}(v_{\\text{target}}) = \\left\\{ u \\in \\mathcal{V} \\mid \\text{dist}_{\\mathcal{G}}(v_{\\text{target}}, u) \\le k \\quad \\text{and} \\quad \\prod_{(x,y) \\in \\mathcal{P}(v_{\\text{target}}, u)} w(x,y) \\ge \\theta_{\\text{impact}} \\right\\}$$
+$$\mathcal{B}(v_{\text{target}}) = \left\{ u \in \mathcal{V} \mid \text{dist}_{\mathcal{G}}(v_{\text{target}}, u) \le k \quad \text{and} \quad \prod_{(x,y) \in \mathcal{P}(v_{\text{target}}, u)} w(x,y) \ge \theta_{\text{impact}} \right\}$$
 
 Where:
-- $\\text{dist}_{\\mathcal{G}}(v_{\\text{target}}, u)$ is the shortest path distance in the multigraph.
-- $\\mathcal{P}(v_{\\text{target}}, u)$ is the directed path from the compromised node to the destination node.
-- $w(x,y) \\in (0, 1]$ represents the physical coupling strength or dependency criticality between node $x$ and node $y$.
-- $\\theta_{\\text{impact}}$ is the minimum propagation threshold governing cascade activation.
+- $\text{dist}_{\mathcal{G}}(v_{\text{target}}, u)$ is the shortest path distance in the multigraph.
+- $\mathcal{P}(v_{\text{target}}, u)$ is the directed path from the compromised node to the destination node.
+- $w(x,y) \in (0, 1]$ represents the physical coupling strength or dependency criticality between node $x$ and node $y$.
+- $\theta_{\text{impact}}$ is the minimum propagation threshold governing cascade activation.
 
 ### 4.5 Actuarial Consequence & Downtime Loss Function
-For property catastrophe and cyber business interruption underwriting, the total financial consequence $\\mathcal{L}_{\\text{total}}$ of a cyber-physical failure event initiating at node $v_{\\text{target}}$ is formulated as:
+For property catastrophe and cyber business interruption underwriting, the total financial consequence $\mathcal{L}_{\text{total}}$ of a cyber-physical failure event initiating at node $v_{\text{target}}$ is formulated as:
 
-$$\\mathcal{L}_{\\text{total}}(v_{\\text{target}}) = \\sum_{u \\in \\mathcal{B}(v_{\\text{target}})} \\left[ C_{\\text{hardware}}(u) + C_{\\text{data}}(u) + \\int_0^{T_{\\text{restore}}(u)} \\dot{L}_{\\text{BI}}(u, t) \\, dt \\right]$$
+$$\mathcal{L}_{\text{total}}(v_{\text{target}}) = \sum_{u \in \mathcal{B}(v_{\text{target}})} \left[ C_{\text{hardware}}(u) + C_{\text{data}}(u) + \int_0^{T_{\text{restore}}(u)} \dot{L}_{\text{BI}}(u, t) \, dt \right]$$
 
-$$\\text{ALE}(v_{\\text{target}}) = \\mathcal{L}_{\\text{total}}(v_{\\text{target}}) \\times \\text{ARO}(v_{\\text{target}})$$
+$$\text{ALE}(v_{\text{target}}) = \mathcal{L}_{\text{total}}(v_{\text{target}}) \times \text{ARO}(v_{\text{target}})$$
 
 Where:
-- $C_{\\text{hardware}}(u)$ is the capital replacement cost of ruined physical assets (such as warped cold plates, burned pump motors, or degraded silicon chiplets).
-- $C_{\\text{data}}(u)$ is the reconstruction cost of corrupted model checkpoints or lost training progress.
-- $\\dot{L}_{\\text{BI}}(u, t)$ is the continuous business interruption loss rate per unit of unserved compute capacity.
-- $T_{\\text{restore}}(u)$ is the mean physical restoration time, determined by equipment supply chain lead times documented in the Reliability Critical Items List (RCIL).
-- $\\text{ALE}$ is the Annualised Loss Expectancy, and $\\text{ARO}$ is the Annualised Rate of Occurrence.
+- $C_{\text{hardware}}(u)$ is the capital replacement cost of ruined physical assets (such as warped cold plates, burned pump motors, or degraded silicon chiplets).
+- $C_{\text{data}}(u)$ is the reconstruction cost of corrupted model checkpoints or lost training progress.
+- $\dot{L}_{\text{BI}}(u, t)$ is the continuous business interruption loss rate per unit of unserved compute capacity.
+- $T_{\text{restore}}(u)$ is the mean physical restoration time, determined by equipment supply chain lead times documented in the Reliability Critical Items List (RCIL).
+- $\text{ALE}$ is the Annualised Loss Expectancy, and $\text{ARO}$ is the Annualised Rate of Occurrence.
 
 Under Lloyd's Y5381 war exclusions, underwriters require verified attestation that state-sponsored cyber attacks cannot exploit facility OT to cause unhedged business interruption. The DEXPI-CycloneDX bridge provides this deterministic proof.
 

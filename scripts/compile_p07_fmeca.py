@@ -80,11 +80,7 @@ By linking active CycloneDX VEX vulnerability feeds to physical DEXPI asset node
 
 The following comprehensive table documents eighteen critical infrastructure components across cooling, electrical distribution, building management, and compute silicon. It compares traditional mechanical failure modes against cyber-induced vectors, exposing the massive Cyber Multiplier Gap:
 
-```
-+-------------------------------------------------------------------------+
-|          THE EIGENIA DUAL-RPN CYBER-PHYSICAL FMECA MASTER TABLE         |
-+-------------------------------------------------------------------------+
-```
+#### The Eigenia Dual-RPN Cyber-Physical FMECA Master Table
 
 | Component | Physical Failure Mode | Traditional Mechanical Cause | Cyber-Physical Attack Vector | S | $O_m$ | $O_c$ | $D_m$ | $D_c$ | $\text{RPN}_m$ | $\text{RPN}_c$ | Cyber Multiplier |
 |:---|:---|:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
