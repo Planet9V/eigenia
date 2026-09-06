@@ -24,37 +24,23 @@ Industrial facility managers frequently conflate reliability with safety:
 - **Reliability Engineering Focus:** Reliability aims to maximize Mean Time Between Failures (MTBF) and minimize unplanned downtime. A component is reliability-critical if its degradation drops facility availability below four-nines ($99.99\%$).
 - **Safety Engineering Focus:** Safety aims to prevent catastrophic physical destruction, fire, personnel injury, and environmental release. A component is safety-critical if its unmitigated failure creates an irreversible physical hazard.
 
+#### The Structural Taxonomy: RCIL vs. SCIL
+
+The total industrial facility asset inventory (pumps, valves, switchgear, relays, BMS controllers, inverters, breakers) passes through two successive filters, each of which yields a register:
+
+```mermaid
+flowchart LR
+    INV["Total facility<br/>asset inventory"] -->|"operational degradation filter"| RCIL["RCIL<br/>Reliability Critical Items List"]
+    RCIL -->|"irreversible physical damage filter"| SCIL["SCIL<br/>Safety Critical Items List"]
 ```
-+-------------------------------------------------------------------------+
-|                THE STRUCTURAL TAXONOMY: RCIL VS. SCIL                   |
-+-------------------------------------------------------------------------+
-| TOTAL INDUSTRIAL FACILITY ASSET INVENTORY                               |
-| (Pumps, Valves, Switchgear, Relays, BMS Controllers, Inverters, Breakers)|
-+-------------------------------------------------------------------------+
-                                    |
-                    OPERATIONAL DEGRADATION FILTER
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| RELIABILITY CRITICAL ITEMS LIST (RCIL):                                 |
-| - Components whose failure drops availability below design SLA (99.99%) |
-| - Security Mandate: IEC 62443 Security Level Target (SL-T 2 or SL-T 3)  |
-| - Procurement Mandate: CycloneDX SBOM/HBOM, Cryptographic Signing       |
-| - Examples: EPMS Power Meters, Chiller PLCs, CRAH Fans, UPS NMC Cards   |
-+-------------------------------------------------------------------------+
-                                    |
-                    IRREVERSIBLE PHYSICAL DAMAGE FILTER
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| SAFETY CRITICAL ITEMS LIST (SCIL):                                      |
-| - Components whose failure causes hardware destruction, fire, or injury |
-| - Security Mandate: Table B Extremistan Asset Classification            |
-| - Architectural Mandate: Independent Hardwired SIL-3 Safety Functions  |
-| - Strict Prohibition: Software/Network Can NEVER Hold Exclusive Trip   |
-| - Examples: CDU Direct-to-Chip Valves, Transformer Arc Relays, Gas Panel|
-+-------------------------------------------------------------------------+
-```
+
+| Dimension | Reliability Critical Items List (RCIL) | Safety Critical Items List (SCIL) |
+|:---|:---|:---|
+| **Selection filter** | Failure drops availability below design SLA (99.99%) | Failure causes hardware destruction, fire, or injury |
+| **Security mandate** | IEC 62443 Security Level Target (SL-T 2 or SL-T 3) | Table B Extremistan asset classification |
+| **Procurement / architectural mandate** | CycloneDX SBOM/HBOM, cryptographic signing | Independent hardwired SIL-3 safety functions |
+| **Strict prohibition** | None at this tier | Software/network can NEVER hold exclusive trip |
+| **Examples** | EPMS power meters, chiller PLCs, CRAH fans, UPS NMC cards | CDU direct-to-chip valves, transformer arc relays, gas panel |
 
 ### 1.1 The Fundamental Rule of Critical Items Hierarchy
 Every SCIL item is inherently an RCIL item, but not all RCIL items are SCIL items. While an EPMS power monitor failure degrades energy optimization (RCIL), it does not physically rupture high-pressure piping. In contrast, commanding a CDU motorized isolation valve closed while compute silicon dissipates $100\text{ kW}$ per rack destroys millions of dollars of compute hardware within seconds (SCIL).
@@ -65,37 +51,34 @@ Every SCIL item is inherently an RCIL item, but not all RCIL items are SCIL item
 
 To establish an auditable supply-chain and reliability graph, every RCIL and SCIL component is cross-referenced between the DEXPI 2.0 (ISO 15926) plant piping schematic and the CycloneDX 1.6+ multi-BOM specification:
 
+#### Supply Chain and Topology Mapping Graph
+
+```mermaid
+flowchart LR
+    DEXPI["DEXPI 2.0<br/>piping and instrumentation"] -->|"cross-domain digital twin binding"| CDX["CycloneDX 1.6+<br/>multi-BOM record"]
+    CDX -->|"supply chain replacement exposure"| LOG["Logistics and<br/>reinsurance parameters"]
 ```
-+-------------------------------------------------------------------------+
-|                 SUPPLY CHAIN & TOPOLOGY MAPPING GRAPH                   |
-+-------------------------------------------------------------------------+
-| DEXPI 2.0 PHYSICAL PIPING & INSTRUMENTATION DIAGRAM:                    |
-| - Tag: CDU-PUMP-01A (Primary Centrifugal Variable Speed Pump)           |
-| - Hydraulic Specs: 38.5 L/min PG25, 4.5 bar Head, Flanged 316L Stainless|
-+-------------------------------------------------------------------------+
-                                    |
-                    CROSS-DOMAIN DIGITAL TWIN BINDING
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| CYCLONEDX 1.6+ MULTI-BOM COMPONENT RECORD:                              |
-| - HBOM: VFD Inverter Silicon, IGBT Bridges, Microcontroller Die         |
-| - SBOM: Embedded RTOS Kernel, Modbus Stack, Caliptra Silicon RoT        |
-| - CBOM: Mutual TLS 1.3 Certificates, DICE Attestation Identity Keys     |
-| - OBOM: Operational Limits (Max 60 Hz, Min 15 Hz, Max Temp Rise 2°C/hr) |
-| - VEX:  Live Vulnerability Tracking Feeds (CISA ICS-CERT Advisories)   |
-+-------------------------------------------------------------------------+
-                                    |
-                    SUPPLY CHAIN REPLACEMENT EXPOSURE
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| LOGISTICS & REINSURANCE PARAMETERS:                                     |
-| - Replacement Lead Time: 28 Weeks (Custom Titanium Plate Heat Exchanger)|
-| - Single-Source Foundry Exposure: TSMC Fab 18 / Infineon Dresden        |
-| - On-Site Critical Spares Inventory Buffer: 2x Complete Redundant Units |
-+-------------------------------------------------------------------------+
-```
+
+**DEXPI 2.0 physical piping and instrumentation diagram**
+
+- Tag: CDU-PUMP-01A (primary centrifugal variable speed pump)
+- Hydraulic specs: 38.5 L/min PG25, 4.5 bar head, flanged 316L stainless
+
+**CycloneDX 1.6+ multi-BOM component record**
+
+| BOM layer | Recorded content |
+|:---|:---|
+| **HBOM** | VFD inverter silicon, IGBT bridges, microcontroller die |
+| **SBOM** | Embedded RTOS kernel, Modbus stack, Caliptra silicon RoT |
+| **CBOM** | Mutual TLS 1.3 certificates, DICE attestation identity keys |
+| **OBOM** | Operational limits (max 60 Hz, min 15 Hz, max temp rise 2°C/hr) |
+| **VEX** | Live vulnerability tracking feeds (CISA ICS-CERT advisories) |
+
+**Logistics and reinsurance parameters**
+
+- Replacement lead time: 28 weeks (custom titanium plate heat exchanger)
+- Single-source foundry exposure: TSMC Fab 18 / Infineon Dresden
+- On-site critical spares inventory buffer: 2x complete redundant units
 
 By connecting physical piping nodes to CycloneDX bills of materials, the reliability digital twin identifies supply-chain bottlenecks and component single-source vulnerabilities before procurement contracts are finalized.
 
@@ -202,32 +185,19 @@ For a dedicated spares depot containing two complete CDU pump assemblies and one
 
 To ensure that components placed on the RCIL and SCIL do not introduce persistent vulnerabilities into the operational plant, procurement teams must enforce four mandatory quality gates:
 
+#### Four-Stage Procurement Systems Assurance Gates
+
+```mermaid
+flowchart LR
+    G1["GATE 1<br/>Multi-BOM delivery"] --> G2["GATE 2<br/>Hardware root of trust"] --> G3["GATE 3<br/>SIL-3 safety validation"] --> G4["GATE 4<br/>Vulnerability SLA"]
 ```
-+-------------------------------------------------------------------------+
-|             FOUR-STAGE PROCUREMENT SYSTEMS ASSURANCE GATES             |
-+-------------------------------------------------------------------------+
-| GATE 1: CYCLONEDX 1.6+ MULTI-BOM DELIVERY (HBOM / SBOM / CBOM)          |
-| Mandatory machine-readable software and silicon bill of materials.      |
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| GATE 2: HARDWARE ROOT OF TRUST & ATTESTED PROVENANCE                    |
-| Caliptra 2.0 Silicon RoT, DICE keys, OpenSIL verified boot chain.      |
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| GATE 3: INDEPENDENT SIL-3 HARDWIRED ANALOG SAFETY VALIDATION            |
-| Third-party laboratory verification of non-networked physical cutouts.  |
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| GATE 4: CONTRACTUAL SUPPLY CHAIN VULNERABILITY SLA                      |
-| Vendor committed 72-hour patch SLA backed by EU CRA Article 13/14 fines.|
-+-------------------------------------------------------------------------+
-```
+
+| Gate | Requirement | Mandatory evidence |
+|:---|:---|:---|
+| **Gate 1** | CycloneDX 1.6+ multi-BOM delivery (HBOM / SBOM / CBOM) | Machine-readable software and silicon bill of materials |
+| **Gate 2** | Hardware root of trust and attested provenance | Caliptra 2.0 silicon RoT, DICE keys, OpenSIL verified boot chain |
+| **Gate 3** | Independent SIL-3 hardwired analog safety validation | Third-party laboratory verification of non-networked physical cutouts |
+| **Gate 4** | Contractual supply chain vulnerability SLA | Vendor committed 72-hour patch SLA backed by EU CRA Article 13/14 fines |
 
 ### 6.1 Gate 1: Mandatory CycloneDX Multi-BOM Ingestion
 Vendors delivering equipment on the RCIL or SCIL must provide certified CycloneDX 1.6+ manifests. The delivery must include an HBOM specifying every microchip, an SBOM listing all firmware libraries, and a CBOM identifying cryptographic certificate algorithms. Equipment delivered without machine-readable BOMs is rejected at the loading dock.

@@ -25,26 +25,16 @@ For three decades, data center design relied on moving massive volumes of chille
 - **Volumetric Heat Capacity Deficit:** The volumetric heat capacity of air is $\rho c_p \approx 1.2\text{ kJ/(m}^3\cdot\text{K)}$, whereas water stores $\rho c_p \approx 4,184\text{ kJ/(m}^3\cdot\text{K)}$; a 3,486-fold deficit.
 - **The Acoustic and Space Boundary:** Cooling a 130 kW rack with air requires a volumetric flow rate exceeding $16,000\text{ CFM}$ ($7.55\text{ m}^3\text{/s}$). The physical fan power required to push this volume creates acoustic sound pressure levels exceeding $95\text{ dBA}$ and consumes over $25\%$ of total rack electrical power.
 
-```
-+-------------------------------------------------------------------------+
-|           THE 120 kW RACK THERMODYNAMIC COMPARISON                      |
-+-------------------------------------------------------------------------+
-| AIR COOLING AT 120 kW / RACK:                                           |
-| - Volumetric Flow: > 16,000 CFM (Massive Containment Aisles Required)   |
-| - Parasitic Fan Power: 28 kW per rack (Eats 20% of facility power)      |
-| - Thermal Ride-Through Time: 15 to 30 minutes (Large air buffer)        |
-+-------------------------------------------------------------------------+
-                                    |
-                    PHYSICAL SCALING TRANSITION
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| DIRECT-TO-CHIP LIQUID COOLING (DLC) AT 120 kW / RACK:                   |
-| - Volumetric Flow: 38.5 L/min PG25 Coolant (Compact Quick Disconnects)  |
-| - Parasitic Pumping Power: < 1.8 kW per rack (Exceptional PUE < 1.08)   |
-| - Thermal Ride-Through Time: 15 to 45 SECONDS (Zero thermal buffer)     |
-+-------------------------------------------------------------------------+
-```
+#### The 120 kW Rack: Air Against Direct-to-Chip Liquid
+
+| Parameter at 120 kW per rack | Precision air cooling | Direct-to-Chip liquid cooling (DLC) |
+|:---|:---|:---|
+| **Volumetric flow** | > 16,000 CFM | 38.5 L/min PG25 coolant |
+| **Distribution hardware** | Massive containment aisles required | Compact quick disconnects |
+| **Parasitic power** | 28 kW fan power per rack, eating 20% of facility power | < 1.8 kW pumping power per rack, PUE < 1.08 |
+| **Thermal ride-through** | 15 to 30 minutes (large air buffer) | 15 to 45 **seconds** (zero thermal buffer) |
+
+Moving between those two columns is a physical scaling transition, not a design preference. At an identical rack load, flow rate, parasitic power and ride-through time each shift by orders of magnitude.
 
 ---
 
@@ -52,28 +42,33 @@ For three decades, data center design relied on moving massive volumes of chille
 
 To execute real-time thermal digital twin simulations, the hydraulic plant is mapped between the DEXPI 2.0 (ISO 15926) piping schematic and the CycloneDX 1.6+ multi-BOM specification:
 
+```mermaid
+flowchart LR
+  subgraph DEXPI["DEXPI 2.0 hydraulic network"]
+    direction LR
+    FWS["FWS<br/>primary chilled water"] --> HX["CDU<br/>plate heat exchanger"] --> TCS["TCS<br/>secondary loop"]
+  end
+  subgraph BOM["CycloneDX 1.6+ multi-BOM"]
+    direction TB
+    HBOM["HBOM"]
+    SBOM["SBOM"]
+    CBOM["CBOM"]
+    OBOM["OBOM"]
+    VEX["VEX"]
+  end
+  DEXPI -->|cross-domain digital twin binding| BOM
 ```
-+-------------------------------------------------------------------------+
-|             DEXPI-CYCLONEDX COOLING TOPOLOGY GRAPH                      |
-+-------------------------------------------------------------------------+
-| DEXPI 2.0 PHYSICAL HYDRAULIC NETWORK:                                   |
-| - Facility Water System (FWS): Primary Chilled Water Loop (12°C - 18°C) |
-| - Technology Cooling System (TCS): Secondary Loop (32°C Supply, PG25)  |
-| - Equipment: CDU Plate Heat Exchanger, Dual 15 kW Canned Motor Pumps   |
-+-------------------------------------------------------------------------+
-                                    |
-                    CROSS-DOMAIN DIGITAL TWIN BINDING
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| CYCLONEDX 1.6+ MULTI-BOM SPECIFICATION:                                 |
-| - HBOM: Microchannel Copper Cold Plates, Quick Disconnect Couplings     |
-| - SBOM: CDU PLC Embedded Firmware, Modbus TCP Network Stack             |
-| - CBOM: Mutual TLS Certificates, DICE Attestation Keys                  |
-| - OBOM: Operational Envelopes (Flow >= 35 L/min, Temp <= 45°C, 4.5 bar) |
-| - VEX:  Live Vulnerability Tracking Feeds (CISA ICS-CERT Advisories)   |
-+-------------------------------------------------------------------------+
-```
+
+| Domain | Record | Content bound into the twin |
+|:---|:---|:---|
+| DEXPI 2.0 | Facility Water System (FWS) | Primary chilled water loop, 12°C to 18°C |
+| DEXPI 2.0 | Technology Cooling System (TCS) | Secondary loop, 32°C supply, PG25 |
+| DEXPI 2.0 | Equipment | CDU plate heat exchanger, dual 15 kW canned motor pumps |
+| CycloneDX 1.6+ | HBOM | Microchannel copper cold plates, quick disconnect couplings |
+| CycloneDX 1.6+ | SBOM | CDU PLC embedded firmware, Modbus TCP network stack |
+| CycloneDX 1.6+ | CBOM | Mutual TLS certificates, DICE attestation keys |
+| CycloneDX 1.6+ | OBOM | Operational envelopes: flow >= 35 L/min, temp <= 45°C, 4.5 bar |
+| CycloneDX 1.6+ | VEX | Live vulnerability tracking feeds, CISA ICS-CERT advisories |
 
 By binding physical pipe diameters, roughness factors, and valve flow coefficients ($C_v$) from DEXPI to CycloneDX bill of materials records, the digital twin verifies that software setpoints do not command hydraulic states that induce cavitation or thermal runaway.
 
@@ -110,42 +105,18 @@ Immersion cooling submerses entire server chassis into dielectric fluid tanks:
 
 The critical vulnerability of Direct-to-Chip cooling is the total absence of physical thermal inertia:
 
+```mermaid
+flowchart LR
+  T0["T = 0.0 s<br/>cyber interdiction"] --> T1["T = 1.5 s<br/>fluid stagnation"] --> T2["T = 12.0 s<br/>silicon excursion"] --> T3["T = 38.0 s<br/>throttle at 85°C"] --> T4["T = 45.0 s<br/>shutdown at 94°C"]
 ```
-+-------------------------------------------------------------------------+
-|                  THE 45-SECOND THERMAL TRIP CLIFF                       |
-+-------------------------------------------------------------------------+
-| T = 0.0s: CYBER INTERDICTION                                            |
-| Unauthenticated Modbus write forces CDU secondary pump to stop (0 Hz).  |
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| T = 1.5s: HYDRAULIC FLUID STAGNATION                                    |
-| Fluid velocity inside microchannels collapses from 1.8 m/s to 0.0 m/s.  |
-| Convective heat transfer coefficient h_conv plummets by 95%.            |
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| T = 12.0s: SILICON TEMPERATURE EXCURSION                                |
-| Silicon die dissipates 1,200 W into stagnant copper cold plate.         |
-| Die junction temperature rises at a rate of change exceeding 4.2°C/s.  |
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| T = 38.0s: THERMAL THROTTLING THRESHOLD BREACHED (85°C)                  |
-| ASIC internal thermal management cuts clock frequencies by 50%.         |
-| Distributed foundation model training cluster desynchronizes.           |
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| T = 45.0s: EMERGENCY HARDWARE POWER SHUTDOWN (94°C)                     |
-| Silicon protection logic trips chassis power supplies.                  |
-| If thermal switches fail, substrate interposers delaminate permanently. |
-+-------------------------------------------------------------------------+
-```
+
+| Elapsed | Event | Physical mechanism |
+|:---|:---|:---|
+| **T = 0.0 s** | Cyber interdiction | Unauthenticated Modbus write forces the CDU secondary pump to stop (0 Hz). |
+| **T = 1.5 s** | Hydraulic fluid stagnation | Fluid velocity inside the microchannels collapses from 1.8 m/s to 0.0 m/s. The convective heat transfer coefficient $h_{\text{conv}}$ plummets by 95%. |
+| **T = 12.0 s** | Silicon temperature excursion | The silicon die dissipates 1,200 W into a stagnant copper cold plate. Die junction temperature rises at a rate of change exceeding 4.2°C/s. |
+| **T = 38.0 s** | Thermal throttling threshold breached (85°C) | ASIC internal thermal management cuts clock frequencies by 50%. The distributed foundation model training cluster desynchronizes. |
+| **T = 45.0 s** | Emergency hardware power shutdown (94°C) | Silicon protection logic trips the chassis power supplies. If the thermal switches fail, substrate interposers delaminate permanently. |
 
 ### 4.1 Transient Thermal Conduction Formulation
 The silicon junction temperature $T_j(t)$ following fluid stagnation is governed by the transient energy conservation equation:
@@ -190,29 +161,11 @@ Standard quick-disconnect fittings and flexible rack hoses are rated for an oper
 
 Commercial Coolant Distribution Units manufactured by leading OEMs (CoolIT, Vertiv, Motivair, Schneider) represent the single highest-consequence attack surface in hyperscale infrastructure:
 
-```
-+-------------------------------------------------------------------------+
-|                  THE UNPROTECTED CDU ATTACK SURFACE                     |
-+-------------------------------------------------------------------------+
-| EXPOSURE FINDING 1: ZERO ISASECURE / IEC 62443 CERTIFICATION            |
-| Not a single commercial CDU controller holds IEC 62443-4-2 component-  |
-| level certification. Firmware lacks secure boot and crypto signatures. |
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| EXPOSURE FINDING 2: UNPROTECTED MODBUS TCP REGISTER ACCESS              |
-| Modbus port 502 operates in cleartext. Any entity on the facility VLAN  |
-| can issue Function Code 06 to write pump speed and valve setpoints.     |
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| EXPOSURE FINDING 3: BIDIRECTIONAL TELEMETRY SPOOFING                    |
-| An attacker commanding a pump stop simultaneously overwrites holding    |
-| registers to report nominal flow, blinding supervisory BMS operators.   |
-+-------------------------------------------------------------------------+
-```
+#### Exposure Findings: The Unprotected CDU Attack Surface
+
+1. **Zero ISASecure / IEC 62443 certification.** Not a single commercial CDU controller holds IEC 62443-4-2 component-level certification. Firmware lacks secure boot and crypto signatures.
+2. **Unprotected Modbus TCP register access.** Modbus port 502 operates in cleartext. Any entity on the facility VLAN can issue Function Code 06 to write pump speed and valve setpoints.
+3. **Bidirectional telemetry spoofing.** An attacker commanding a pump stop simultaneously overwrites holding registers to report nominal flow, blinding supervisory BMS operators.
 
 ---
 
@@ -220,29 +173,16 @@ Commercial Coolant Distribution Units manufactured by leading OEMs (CoolIT, Vert
 
 To eliminate the 45-second thermal trip cliff, systems assurance leads mandate three architectural quality gates:
 
+```mermaid
+flowchart LR
+  G1["GATE 1<br/>bi-metallic cutout<br/>SIL-3"] --> G2["GATE 2<br/>Zone 1 conduit<br/>data diode"] --> G3["GATE 3<br/>relief valve<br/>5.5 bar"]
 ```
-+-------------------------------------------------------------------------+
-|               THREE-STAGE LIQUID COOLING QUALITY GATES                  |
-+-------------------------------------------------------------------------+
-| GATE 1: HARDWIRED BI-METALLIC THERMAL SWITCHES (SIL-3)                  |
-| Snap-action physical thermal switches mounted directly on cold plates.  |
-| Mechanically cuts server 48V power in < 100 ms on thermal surge.       |
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| GATE 2: PROTOCOL-ISOLATED ZONE 1 CONDUITS WITH DATA DIODES              |
-| CDU controllers isolated behind industrial firewalls. Telemetry crosses |
-| an optical Tx-only data diode (C_rev = 0.000 bps) to supervisory BMS.   |
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| GATE 3: SPRING-LOADED HYDRAULIC RELIEF VALVES                           |
-| Mechanical pressure relief valves calibrated to 5.5 bar bypass piping,  |
-| mechanically venting water hammer pressure spikes without software.     |
-+-------------------------------------------------------------------------+
-```
+
+| Gate | Mechanism | Physical guarantee |
+|:---|:---|:---|
+| **Gate 1** | Hardwired bi-metallic thermal switches (SIL-3), snap-action, mounted directly on the cold plates | Mechanically cuts server 48V power in < 100 ms on thermal surge |
+| **Gate 2** | Protocol-isolated Zone 1 conduits: CDU controllers behind industrial firewalls, telemetry crossing an optical Tx-only data diode | Reverse channel capacity $C_{\text{rev}} = 0.000\text{ bps}$ toward the supervisory BMS |
+| **Gate 3** | Spring-loaded mechanical pressure relief valves calibrated to 5.5 bar on bypass piping | Vents water hammer pressure spikes without any software in the loop |
 
 ### 6.1 Gate 1: Hardwired Bi-Metallic Thermal Cutouts (SIL-3)
 Software monitoring algorithms cannot be trusted to protect hardware during a 45-second thermal cliff. Facilities must install analog, bi-metallic snap-action thermal switches directly on the copper base of each cold plate. The switch is wired in series with the server power supply enable line. If die temperature breaches $88.0^\circ\text{C}$, the switch physically opens, terminating compute power in $< 100\text{ milliseconds}$ independently of the BMC, operating system, or network.

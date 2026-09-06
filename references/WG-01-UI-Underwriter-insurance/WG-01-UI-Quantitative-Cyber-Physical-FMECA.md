@@ -34,34 +34,30 @@ When the same centrifugal pump is orchestrated by a Variable Frequency Drive con
 
 To execute automated cyber-physical FMECA within the Cyber Digital Twin, every failure mode is cross-referenced between the DEXPI 2.0 (ISO 15926) plant schematic and the CycloneDX 1.6+ multi-BOM catalog:
 
+#### Cyber-Physical FMECA Graph Topology
+
+```mermaid
+flowchart LR
+  A["DEXPI 2.0<br/>mechanical asset"]
+  B["Industrial control<br/>conduit"]
+  C["CycloneDX 1.6+<br/>multi-BOM"]
+  A -- "cross-domain conduit binding" --> B
+  B -- "silicon and platform CycloneDX mapping" --> C
 ```
-+-------------------------------------------------------------------------+
-|                  CYBER-PHYSICAL FMECA GRAPH TOPOLOGY                    |
-+-------------------------------------------------------------------------+
-| DEXPI 2.0 MECHANICAL ASSET: CDU-PUMP-01, VALVE-V102, MANIFOLD-R04       |
-| (Hydraulic Properties: PG25 Coolant, Design Flow 38.5 L/min, Head Loss) |
-+-------------------------------------------------------------------------+
-                                    |
-                    CROSS-DOMAIN CONDUIT BINDING
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| INDUSTRIAL CONTROL CONDUIT: Modbus TCP Port 502 / BACnet/IP UDP 47808   |
-| - Registers: 40101 (State), 40102 (Speed), 40104 (Valve), 30201 (Flow)  |
-+-------------------------------------------------------------------------+
-                                    |
-                    SILICON & PLATFORM CYCLONEDX MAPPING
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| CYCLONEDX 1.6+ MULTI-BOM SPECIFICATION:                                 |
-| - HBOM: OCP ORV3 Trays, Samtec Connectors, Caliptra Silicon RoT         |
-| - SBOM: OpenBMC Linux Kernel, Caliptra Mask ROM, OpenSIL Firmware       |
-| - CBOM: DICE Cryptographic Certificates, Post-Quantum ML-DSA Keys       |
-| - OBOM: Hardware Rate Limits (64 kbps), Thermal Trip Limits (94°C)      |
-| - VEX:  Machine-Readable Vulnerability Disclosures (CVE Status)         |
-+-------------------------------------------------------------------------+
-```
+
+| Graph Layer | Bound Entities | Attributes Carried on the Node |
+|:---|:---|:---|
+| DEXPI 2.0 mechanical asset | CDU-PUMP-01, VALVE-V102, MANIFOLD-R04 | Hydraulic properties: PG25 coolant, design flow $38.5\text{ L/min}$, head loss |
+| Industrial control conduit | Modbus TCP port 502, BACnet/IP UDP 47808 | Registers 40101 (state), 40102 (speed), 40104 (valve), 30201 (flow) |
+| CycloneDX 1.6+ multi-BOM specification | HBOM, SBOM, CBOM, OBOM, VEX | Itemised in the table below |
+
+| Multi-BOM | Catalogued Contents |
+|:---|:---|
+| **HBOM** | OCP ORV3 trays, Samtec connectors, Caliptra silicon RoT |
+| **SBOM** | OpenBMC Linux kernel, Caliptra mask ROM, OpenSIL firmware |
+| **CBOM** | DICE cryptographic certificates, post-quantum ML-DSA keys |
+| **OBOM** | Hardware rate limits ($64\text{ kbps}$), thermal trip limits ($94^\circ\text{C}$) |
+| **VEX** | Machine-readable vulnerability disclosures (CVE status) |
 
 By linking active CycloneDX VEX vulnerability feeds to physical DEXPI asset nodes, the digital twin automatically recalculates component RPNs when a new unpatched remote code execution vulnerability is discovered in an operational technology controller.
 
@@ -182,32 +178,23 @@ Adversaries in Ukraine deployed custom malware engineered to speak native electr
 
 To drive cyber RPNs back toward manageable mechanical baselines, systems assurance leads mandate four architectural quality gates:
 
+#### Four-Stage FMECA Engineering Quality Gates
+
+```mermaid
+flowchart LR
+  G1["Gate 1<br/>Cryptographic protocol<br/>enforcement"]
+  G2["Gate 2<br/>Hardwired analog<br/>safety interlocks"]
+  G3["Gate 3<br/>Unidirectional optical<br/>telemetry diodes"]
+  G4["Gate 4<br/>Immutable hardware<br/>roots of trust"]
+  G1 --> G2 --> G3 --> G4
 ```
-+-------------------------------------------------------------------------+
-|                FOUR-STAGE FMECA ENGINEERING QUALITY GATES               |
-+-------------------------------------------------------------------------+
-| GATE 1: CRYPTOGRAPHIC PROTOCOL ENFORCEMENT (IEC 62443-4-2 SL-3)         |
-| Deprecate cleartext Modbus TCP & BACnet. Enforce TLS 1.3 mutual auth.   |
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| GATE 2: HARDWIRED ANALOG SAFETY INTERLOCKS (SIL-3)                      |
-| Bi-metallic thermal cutouts & pressure relief bypass all software buses. |
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| GATE 3: UNIDIRECTIONAL OPTICAL TELEMETRY DIODES                         |
-| Sensor telemetry exported via Tx-only optical diodes (C_rev = 0.00 bps).|
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| GATE 4: IMMUTABLE HARDWARE ROOTS OF TRUST                               |
-| Caliptra 2.0 Silicon RoT, DICE device identity, dual-flash recovery.   |
-+-------------------------------------------------------------------------+
-```
+
+| Gate | Control | Engineering Requirement |
+|:---:|:---|:---|
+| **1** | Cryptographic protocol enforcement (IEC 62443-4-2 SL-3) | Deprecate cleartext Modbus TCP and BACnet. Enforce TLS 1.3 mutual authentication. |
+| **2** | Hardwired analog safety interlocks (SIL-3) | Bi-metallic thermal cutouts and pressure relief bypass all software buses. |
+| **3** | Unidirectional optical telemetry diodes | Sensor telemetry exported via Tx-only optical diodes ($C_{\text{rev}} = 0.00\text{ bps}$). |
+| **4** | Immutable hardware roots of trust | Caliptra 2.0 silicon RoT, DICE device identity, dual-flash recovery. |
 
 ### 6.1 Cryptographic Protocol Enforcement (IEC 62443-4-2 SL-3)
 All field controllers, VFDs, and smart sensors must enforce cryptographic message authentication. Unauthenticated Modbus TCP port 502 must be terminated. Where legacy field equipment cannot support native TLS 1.3, deploy hardware bump-in-the-wire FPGA gateways that validate HMAC-SHA256 signatures on all write registers before physical actuation.

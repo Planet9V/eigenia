@@ -27,32 +27,33 @@ Industrial control systems (ICS) and hyperscale computing infrastructure face pe
 
 When two distinct threat actors; such as Volt Typhoon (PRC-aligned, focusing on critical infrastructure pre-positioning) and Lazarus Group (DPRK-aligned, focusing on currency generation and disruptive malware); are both designated as "Tier 1 Critical Threats", the quantitative gap between their operational postures is lost. In legacy scoring paradigms, both actors saturate the top 5% of risk scales. Decision-makers cannot determine which adversary presents greater immediate risk to a specific facility configuration, nor can they quantify the return on investment of targeted architectural defenses.
 
-```
-+-------------------------------------------------------------------------+
-|                  THE DISCRIMINATORY POWER DEFICIT                       |
-+-------------------------------------------------------------------------+
-| LEGACY THREE-FACTOR MODEL (V1):                                         |
-| Input: Base Intent (33%), Static Capability (33%), Opportunity (34%)    |
-|   Lazarus Group:  83.2  ---\                                            |
-|   Volt Typhoon:   82.9      |-- Variance: 2.9 points (Indistinguishable)|
-|   APT28:          80.5      |   Result: Pervasive ceiling saturation    |
-|   Mustang Panda:  80.3  ---/                                            |
-+-------------------------------------------------------------------------+
-                                    |
-                    REFORM: 12 ORTHOGONAL DIMENSIONS
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| EIGENIA TWELVE-FACTOR MODEL (V2):                                       |
-| Input: 12 Empirically Calibrated Dimensions with Saturation Bounds     |
-|   Volt Typhoon:   78.6  ---\                                            |
-|   Dragonfly:      76.2      |                                           |
-|   Lazarus Group:  76.0      |-- Variance: 10.6 points (3.7x Expansion)  |
-|   APT29:          73.6      |   Result: Operational posture decoupled   |
-|   Ember Bear:     73.4      |           from historical incident volume |
-|   Kimsuky:        68.0  ---/                                            |
-+-------------------------------------------------------------------------+
-```
+#### The discriminatory power deficit
+
+**Legacy three-factor model (V1).** Input: Base Intent (33%), Static Capability (33%), Opportunity (34%).
+
+| Threat actor | V1 score |
+|:---|:---:|
+| Lazarus Group | 83.2 |
+| Volt Typhoon | 82.9 |
+| APT28 | 80.5 |
+| Mustang Panda | 80.3 |
+
+Variance across the top band: 2.9 points. The four actors are mutually indistinguishable, and the result is pervasive ceiling saturation.
+
+**Reform: 12 orthogonal dimensions.**
+
+**Eigenia twelve-factor model (V2).** Input: 12 empirically calibrated dimensions with saturation bounds.
+
+| Threat actor | V2 ATQ |
+|:---|:---:|
+| Volt Typhoon | 78.6 |
+| Dragonfly | 76.2 |
+| Lazarus Group | 76.0 |
+| APT29 | 73.6 |
+| Ember Bear | 73.4 |
+| Kimsuky | 68.0 |
+
+Variance across the top band: 10.6 points, a 3.7x expansion. Operational posture is decoupled from historical incident volume.
 
 As demonstrated above, the transition from a coarse three-factor model to the twelve-factor ATQ formulation expands the top-decile score variance by $365\%$, separating dormant historical actors from actively pre-positioned operational threats.
 
@@ -337,19 +338,15 @@ The ATQ model enforces full end-to-end normative systems assurance across cyber-
 
 To enable real-time operator inspection and dynamic adversary re-scoring, the complete twelve-factor mathematical model is rendered through the **ATQ Interactive Card Terminal**; accessible at [`/terminals/atq-card-terminal.html`](/terminals/atq-card-terminal.html).
 
-```
-+-------------------------------------------------------------------------+
-|                  ATQ INTERACTIVE CARD TERMINAL ARCHITECTURE             |
-+-------------------------------------------------------------------------+
-| LOCATION: /terminals/atq-card-terminal.html                             |
-| CAPABILITIES:                                                           |
-| 1. High-Assurance HUD View: 20-segment micro-LED bars for all 12 weights |
-| 2. TACAM 7D Cross-Match Matrix: Sector, Protocol, CPE, and Kill Chain   |
-| 3. 90-Day Trajectory Sparkline: Historical delta analysis across epochs |
-| 4. Raw ASCII Console Output: Direct terminal export for CLI workflows   |
-| 5. Production Formula Specification: Mathematical table and data links  |
-+-------------------------------------------------------------------------+
-```
+#### ATQ interactive card terminal architecture
+
+Location: `/terminals/atq-card-terminal.html`. Capabilities:
+
+1. **High-assurance HUD view:** 20-segment micro-LED bars for all 12 weights.
+2. **TACAM 7D cross-match matrix:** sector, protocol, CPE, and kill chain.
+3. **90-day trajectory sparkline:** historical delta analysis across epochs.
+4. **Raw ASCII console output:** direct terminal export for CLI workflows.
+5. **Production formula specification:** mathematical table and data links.
 
 ### 8.1 Production Decomposed Telemetry Display
 The interactive terminal renders the exact auditable component decomposition for any profiled adversary. Below is the canonical output for Volt Typhoon generated from production epoch 234:

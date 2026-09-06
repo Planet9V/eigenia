@@ -46,26 +46,41 @@ A cyber-induced deviation is the deliberate or accidental manipulation of a sens
 
 Traditional HAZOP fails in computing environments because engineers lack a unified data structure connecting physical piping to digital silicon. CyHAZOP resolves this by binding DEXPI 2.0 (ISO 15926) plant piping models with CycloneDX 1.6+ multi-BOM catalogs:
 
+**CyHAZOP unified asset delineation**
+
+```mermaid
+flowchart LR
+    subgraph L["DEXPI 2.0 P&ID nodes (ISO 15926)"]
+        HEX["Heat exchanger HEX-201"]
+        PUMP["Pump P-101"]
+        MAN["Manifolds"]
+    end
+    BIND{{"Cross-domain conduit binding"}}
+    subgraph R["CycloneDX 1.6+ multi-BOM specification"]
+        HBOM["HBOM"]
+        SBOM["SBOM"]
+        CBOM["CBOM"]
+        OBOM["OBOM"]
+        VEX["VEX"]
+    end
+    HEX --> BIND
+    PUMP --> BIND
+    MAN --> BIND
+    BIND --> HBOM
+    BIND --> SBOM
+    BIND --> CBOM
+    BIND --> OBOM
+    BIND --> VEX
 ```
-+-------------------------------------------------------------------------+
-|                  CYHAZOP UNIFIED ASSET DELINEATION                      |
-+-------------------------------------------------------------------------+
-| DEXPI 2.0 P&ID NODES: Heat Exchanger HEX-201, Pump P-101, Manifolds     |
-| (ISO 15926 Fluid Properties: PG25 Coolant, Volumetric Flow Rate, Bar)   |
-+-------------------------------------------------------------------------+
-                                    |
-                    CROSS-DOMAIN CONDUIT BINDING
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| CYCLONEDX 1.6+ MULTI-BOM SPECIFICATION                                  |
-| - HBOM: OCP ORV3 Trays, Samtec Connectors, ASIC Silicon Dies            |
-| - SBOM: Caliptra Silicon RoT, OpenSIL Initializers, Linux Kernels       |
-| - CBOM: DICE Cryptographic Certificates, Post-Quantum ML-DSA Keys       |
-| - OBOM: Operational Limits, Voltage Setpoints, Line-Rate Egress Caps    |
-| - VEX:  Real-Time Vulnerability Exploitability eXchange Feeds           |
-+-------------------------------------------------------------------------+
-```
+
+| Layer | Element | Content bound into the unified model |
+|:---|:---|:---|
+| **DEXPI 2.0 P&ID (ISO 15926)** | Heat Exchanger HEX-201, Pump P-101, Manifolds | ISO 15926 fluid properties: PG25 coolant, volumetric flow rate, bar |
+| **CycloneDX 1.6+** | HBOM | OCP ORV3 trays, Samtec connectors, ASIC silicon dies |
+| | SBOM | Caliptra Silicon RoT, OpenSIL initializers, Linux kernels |
+| | CBOM | DICE cryptographic certificates, post-quantum ML-DSA keys |
+| | OBOM | Operational limits, voltage setpoints, line-rate egress caps |
+| | VEX | Real-time Vulnerability Exploitability eXchange feeds |
 
 By cross-referencing CycloneDX VEX vulnerability feeds with DEXPI mechanical equipment tags, CyHAZOP teams immediately determine whether a newly disclosed CVE in an operational technology controller can induce a physical hydraulic cavitation or electrical arc flash hazard.
 
@@ -75,43 +90,34 @@ By cross-referencing CycloneDX VEX vulnerability feeds with DEXPI mechanical equ
 
 The CyHAZOP study is executed by a multidisciplinary team; mechanical process engineers, electrical systems leads, industrial control engineers, and cybersecurity assurance architects; through an 18-step structured lifecycle governed by the EN 50126 V-model:
 
+**CyHAZOP lifecycle phases**
+
+```mermaid
+flowchart LR
+    P1["Phase 1<br/>System definition and<br/>node delineation"]
+    P2["Phase 2<br/>Parameter and guide<br/>word matrix execution"]
+    P3["Phase 3<br/>Consequence and<br/>safeguard evaluation"]
+    P4["Phase 4<br/>Remediation, SIS hardening<br/>and verification"]
+    P1 --> P2 --> P3 --> P4
 ```
-+-------------------------------------------------------------------------+
-|                       CYHAZOP LIFECYCLE PHASES                          |
-+-------------------------------------------------------------------------+
-| PHASE 1: SYSTEM DEFINITION & NODE DELINEATION                           |
-| 1. Ingest P&ID Schematics (DEXPI 2.0) & Single-Line Electrical Diagrams |
-| 2. Partition System into Physical Nodes (Process Fluid / Power Infeed)  |
-| 3. Define Exact Design Intent & Quantitative Operational Envelopes      |
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| PHASE 2: PARAMETER & GUIDE WORD MATRIX EXECUTION                        |
-| 4. Select Node Parameter (Flow, Temp, Pressure, Voltage, Frequency)     |
-| 5. Apply Guide Word (NO, LESS, MORE, REVERSE, AS WELL AS, OTHER THAN)   |
-| 6. Identify Mechanical & Electrical Root Causes                         |
-| 7. Identify Cyber-Induced Conduits, Protocols, & Attack Vectors         |
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| PHASE 3: CONSEQUENCE & SAFEGUARD EVALUATION                             |
-| 8. Model Physical Consequence (Thermodynamics, Heat Flux, Cavitation)   |
-| 9. Identify Existing Protective Safeguards (Alarms, BMCs, Trips)        |
-| 10. Evaluate Safeguard Integrity under Cyber Stress (Common-Mode Fail)  |
-| 11. Assign Quantitative Hazard Severity Index (Catastrophic / Critical) |
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| PHASE 4: REMEDIATION, SIS HARDENING & VERIFICATION                      |
-| 12. Specify Safety Instrumented Systems (Hardwired Interlocks, SIL)     |
-| 13. Map Conduits to IEC 62443 Security Level Targets (SL-T 1 to SL-T 4) |
-| 14. Establish Physical Verification & Proof Testing Intervals           |
-| 15. Generate Formal CyHAZOP Ledger for Underwriting & Regulatory Proof  |
-+-------------------------------------------------------------------------+
-```
+
+| Phase | Step | Activity |
+|:---|:---|:---|
+| **Phase 1: System Definition & Node Delineation** | 1 | Ingest P&ID Schematics (DEXPI 2.0) & Single-Line Electrical Diagrams |
+| | 2 | Partition System into Physical Nodes (Process Fluid / Power Infeed) |
+| | 3 | Define Exact Design Intent & Quantitative Operational Envelopes |
+| **Phase 2: Parameter & Guide Word Matrix Execution** | 4 | Select Node Parameter (Flow, Temp, Pressure, Voltage, Frequency) |
+| | 5 | Apply Guide Word (NO, LESS, MORE, REVERSE, AS WELL AS, OTHER THAN) |
+| | 6 | Identify Mechanical & Electrical Root Causes |
+| | 7 | Identify Cyber-Induced Conduits, Protocols, & Attack Vectors |
+| **Phase 3: Consequence & Safeguard Evaluation** | 8 | Model Physical Consequence (Thermodynamics, Heat Flux, Cavitation) |
+| | 9 | Identify Existing Protective Safeguards (Alarms, BMCs, Trips) |
+| | 10 | Evaluate Safeguard Integrity under Cyber Stress (Common-Mode Fail) |
+| | 11 | Assign Quantitative Hazard Severity Index (Catastrophic / Critical) |
+| **Phase 4: Remediation, SIS Hardening & Verification** | 12 | Specify Safety Instrumented Systems (Hardwired Interlocks, SIL) |
+| | 13 | Map Conduits to IEC 62443 Security Level Targets (SL-T 1 to SL-T 4) |
+| | 14 | Establish Physical Verification & Proof Testing Intervals |
+| | 15 | Generate Formal CyHAZOP Ledger for Underwriting & Regulatory Proof |
 
 ### 3.1 The Guide Word Lexicon
 In CyHAZOP, the classical IEC 61882 guide words are mapped directly to physical parameters and cyber command primitives:
@@ -288,38 +294,25 @@ CyHAZOP provides the empirical justification for zone boundaries:
 - **Zone 2 (Supervisory Facility OT):** Coolant Distribution Unit PLC, Block UPS supervisory controller, chiller master panel. Security Level Target: **SL-T 3**. Enforces strict network isolation via unidirectional data diodes and OpenSIL verified firmware.
 - **Zone 3 (Enterprise Facility Network):** Central BMS server, EPMS database, DCIM telemetry collectors. Security Level Target: **SL-T 2**. Enforces multifactor authentication, role-based access control, and machine-readable CycloneDX VEX monitoring.
 
+**IEC 62443 zone and conduit partitioning**
+
+```mermaid
+flowchart LR
+    Z3["Zone 3<br/>Enterprise BMS / DCIM supervisory<br/>SL-T 2"]
+    Z2["Zone 2<br/>Facility OT / CDU master PLCs / switchgear relays<br/>SL-T 3"]
+    Z1["Zone 1<br/>Field actuators / VFD motor controllers / cold plates<br/>SL-T 3"]
+    Z0["Zone 0<br/>Physical silicon / heat flux / busbars<br/>SL-T 4"]
+    Z3 -->|"Conduit: unidirectional data diode"| Z2
+    Z2 -->|"Conduit: encrypted mTLS / signed Modbus"| Z1
+    Z1 -->|"Hardwired analog safety loop (SIL-3)"| Z0
 ```
-+-------------------------------------------------------------------------+
-|                  IEC 62443 ZONE & CONDUIT PARTITIONING                  |
-+-------------------------------------------------------------------------+
-|  ZONE 3: Enterprise BMS / DCIM Supervisory (SL-T 2)                     |
-|  - CycloneDX VEX Continuous Vulnerability Feeds                         |
-+-------------------------------------------------------------------------+
-                                    |
-                    CONDUIT: Unidirectional Data Diode
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-|  ZONE 2: Facility OT / CDU Master PLCs / Switchgear Relays (SL-T 3)     |
-|  - OpenSIL Attested Firmware, Immutable Syslog Conduits                 |
-+-------------------------------------------------------------------------+
-                                    |
-                    CONDUIT: Encrypted mTLS / Signed Modbus
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-|  ZONE 1: Field Actuators / VFD Motor Controllers / Cold Plates (SL-T 3) |
-|  - Hardwired Proof-Tested Interlocks (SIL-3)                            |
-+-------------------------------------------------------------------------+
-                                    |
-                    HARDWIRED ANALOG SAFETY LOOP (SIL-3)
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-|  ZONE 0: Physical Silicon / Heat Flux / Busbars (SL-T 4)                |
-|  - Caliptra 2.0 RoT, DICE Identity, Dual-Flash Gold Recovery           |
-+-------------------------------------------------------------------------+
-```
+
+| Zone | Security Level Target | Control asserted inside the zone |
+|:---|:---|:---|
+| **Zone 3: Enterprise BMS / DCIM Supervisory** | SL-T 2 | CycloneDX VEX continuous vulnerability feeds |
+| **Zone 2: Facility OT / CDU Master PLCs / Switchgear Relays** | SL-T 3 | OpenSIL attested firmware, immutable syslog conduits |
+| **Zone 1: Field Actuators / VFD Motor Controllers / Cold Plates** | SL-T 3 | Hardwired proof-tested interlocks (SIL-3) |
+| **Zone 0: Physical Silicon / Heat Flux / Busbars** | SL-T 4 | Caliptra 2.0 RoT, DICE identity, dual-flash gold recovery |
 
 ---
 

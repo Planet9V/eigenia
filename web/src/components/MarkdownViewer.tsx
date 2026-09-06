@@ -3,6 +3,7 @@
 import React from "react";
 import katex from "katex";
 import "katex/dist/katex.min.css";
+import MermaidDiagram from "./MermaidDiagram";
 
 interface MarkdownViewerProps {
   content: string;
@@ -216,6 +217,14 @@ export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content, suppres
           i++;
         }
         i++; // skip closing ```
+
+        // Mermaid diagrams render as SVG; mermaid itself is loaded lazily
+        // inside MermaidDiagram, so diagram-free pages never fetch it.
+        if (lang.trim().toLowerCase() === "mermaid") {
+          blocks.push(<MermaidDiagram key={`mermaid-${i}`} chart={codeLines.join("\n")} />);
+          continue;
+        }
+
         blocks.push(
           <div key={`code-${i}`} className="my-6 rounded-2xl bg-[#090a0c] border border-zinc-800 p-5 shadow-xl font-mono text-xs text-dutchOrange overflow-x-auto">
             {lang && <div className="text-[10px] uppercase text-zinc-500 mb-2 border-b border-zinc-800 pb-1">{lang}</div>}

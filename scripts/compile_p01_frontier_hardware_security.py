@@ -17,42 +17,37 @@ This specification establishes the architectural foundation for the **AI Rack En
 
 To bridge the historical chasm between semiconductor microarchitecture, server chassis firmware, civil infrastructure, and financial underwriting, this treatise synthesizes industrial cybersecurity standards (IEC 62443 Security Levels SL-1 through SL-4) with railway and nuclear functional safety methodologies (CLC/TS 50701 and EN 50126 RAMS: Reliability, Availability, Maintainability, and Safety) and actuarial loss accumulation models under Lloyd's Market Association Y5381 covenants. We demonstrate that in high-density accelerator facilities operating between 100 kW and 140 kW per rack, cybersecurity, physical functional safety, and actuarial solvency converge: cyber interdictions of physical cooling or power controls induce catastrophic silicon failure within seconds, while physical perturbations can be applied to bypass cryptographic boundaries. This standard provides the engineering mechanisms; encompassing open silicon root-of-trust engines, line-rate bus encryption, machine-speed automated testbenches, and four-dimensional bills of materials; required to guarantee platform integrity, model weight confidentiality, and insured asset survivability.
 
+```mermaid
+graph LR
+    subgraph FAC["FACILITY THREAT ENVIRONMENT (UNTRUSTED)"]
+        F1["Chilled Water / CDUs"]
+        F2["48V/400V Busbars"]
+        F3["BMS / EPMS"]
+        F4["Facility LAN"]
+    end
+
+    P["MULTI-VECTOR PRESSURE<br/>EXERTED AT BOUNDARY<br/>Thermal Shock, Power Transients,<br/>Sideband Sniffing, Covert Egress"]
+
+    subgraph ENV["THE AI RACK ENVELOPE"]
+        L1["1. Physical and<br/>Environmental Boundary"]
+        L2["2. Facility Conduit Defense<br/>IEC 62443 SL-4 Zone Boundary"]
+        L3["3. Host Node and Out-of-Band<br/>Management (Distrusted Tier)"]
+        L4["4. Silicon Root of Trust and<br/>Cryptographic Accelerator Enclave"]
+        L1 --> L2
+        L2 --> L3
+        L3 -->|"SPDM 1.3 Attestation /<br/>IDE Encryption"| L4
+    end
+
+    FAC --> P
+    P --> L1
 ```
-+-----------------------------------------------------------------------------+
-|                     FACILITY THREAT ENVIRONMENT (UNTRUSTED)                 |
-|  [Chilled Water / CDUs]  [48V/400V Busbars]  [BMS / EPMS]  [Facility LAN]  |
-+-----------------------------------------------------------------------------+
-                                       |
-                   MULTI-VECTOR PRESSURE EXERTED AT BOUNDARY
-       (Thermal Shock, Power Transients, Sideband Sniffing, Covert Egress)
-                                       v
-+-----------------------------------------------------------------------------+
-|                            THE AI RACK ENVELOPE                             |
-|                                                                             |
-|   +---------------------------------------------------------------------+   |
-|   | 1. Physical & Environmental Boundary                                |   |
-|   |    - Tamper-Evident Enclosure, Intrusion Interlocks, Sealed Cold Plates|   |
-|   +---------------------------------------------------------------------+   |
-|                                      |                                      |
-|   +---------------------------------------------------------------------+   |
-|   | 2. Facility Conduit Defense (IEC 62443 SL-4 Zone Boundary)          |   |
-|   |    - Micro-CDU Flow Meters, Optical Fiber Air-Gaps, Dual Power Filters |   |
-|   +---------------------------------------------------------------------+   |
-|                                      |                                      |
-|   +---------------------------------------------------------------------+   |
-|   | 3. Host Node & Out-of-Band Management (Distrusted Tier)             |   |
-|   |    - Host CPU, Hypervisor, Linux OS, Baseboard Management Controller|   |
-|   +---------------------------------------------------------------------+   |
-|                                      |                                      |
-|                     SPDM 1.3 ATTESTATION / IDE ENCRYPTION                   |
-|                                      v                                      |
-|   +---------------------------------------------------------------------+   |
-|   | 4. Silicon Root of Trust & Cryptographic Accelerator Enclave        |   |
-|   |    - Caliptra RoT, Locked Accelerator Kernels, Isolated HBM Memory  |   |
-|   |    - PQC Engine (CNSA 2.0 / ML-DSA-87), Hardware Egress Throttling  |   |
-|   +---------------------------------------------------------------------+   |
-+-----------------------------------------------------------------------------+
-```
+
+| Envelope layer | Constituent controls |
+| :--- | :--- |
+| **1. Physical & Environmental Boundary** | Tamper-Evident Enclosure, Intrusion Interlocks, Sealed Cold Plates |
+| **2. Facility Conduit Defense** (IEC 62443 SL-4 Zone Boundary) | Micro-CDU Flow Meters, Optical Fiber Air-Gaps, Dual Power Filters |
+| **3. Host Node & Out-of-Band Management** (Distrusted Tier) | Host CPU, Hypervisor, Linux OS, Baseboard Management Controller |
+| **4. Silicon Root of Trust & Cryptographic Accelerator Enclave** | Caliptra RoT, Locked Accelerator Kernels, Isolated HBM Memory; PQC Engine (CNSA 2.0 / ML-DSA-87), Hardware Egress Throttling |
 
 ## 2. The AI Rack Envelope Architecture & Trust Boundaries
 
@@ -93,33 +88,24 @@ To ensure end-to-end data confidentiality, the AI Rack Envelope establishes line
 
 This multi-point cryptographic enclosure ensures that even if an adversary achieves complete physical tap access to copper DAC cables, optical transceivers, or backplane bus lines within the datacenter, all intercepted payloads remain cryptographically unassailable.
 
-```
-+-----------------------------------------------------------------------------+
-|                     FOUR-POINT CRYPTOGRAPHIC ENVELOPE                       |
-|                                                                             |
-|                     [Point 4: Scale-Out RDMA Network]                       |
-|                      (MACsec / PSP 800G-1.6T Fabric)                        |
-|                                     |                                       |
-|                                     v                                       |
-|  +-----------------------------------------------------------------------+  |
-|  | HOST PROCESSING TIER (UNTRUSTED)                                      |  |
-|  |  [Host CPU Complex] <------- [Point 3: NVMe Storage] -------> [NVMe]  |  |
-|  |           |                     (IEEE 1619 Encryption)                |  |
-|  +-----------|-----------------------------------------------------------+  |
-|              |                                                              |
-|              | [Point 2: Host-to-Device Bus]                                |
-|              | (PCIe Gen 5/6 IDE with SPDM 1.3 Authentication)              |
-|              v                                                              |
-|  +-----------------------------------------------------------------------+  |
-|  | ACCELERATOR SILICON COMPLEX (TRUSTED ZONE)                            |  |
-|  |                                                                       |  |
-|  |   +---------------------+-------------------+---------------------+   |  |
-|  |   |    Accelerator A    | <===============> |    Accelerator B    |   |  |
-|  |   | [Caliptra RoT/HBM3] |  [Point 1: Coherent| [Caliptra RoT/HBM3] |   |  |
-|  |   +---------------------+   Scale-Up Fabric] +---------------------+   |  |
-|  |                              (Line-Rate IDE)                          |  |
-|  +-----------------------------------------------------------------------+  |
-+-----------------------------------------------------------------------------+
+```mermaid
+graph TB
+    P4["Point 4: Scale-Out RDMA Network<br/>MACsec / PSP 800G-1.6T Fabric"]
+
+    subgraph HOST["HOST PROCESSING TIER (UNTRUSTED)"]
+        CPU["Host CPU Complex"]
+        NVME["NVMe"]
+    end
+
+    subgraph ACC["ACCELERATOR SILICON COMPLEX (TRUSTED ZONE)"]
+        AA["Accelerator A<br/>Caliptra RoT/HBM3"]
+        AB["Accelerator B<br/>Caliptra RoT/HBM3"]
+    end
+
+    P4 --> CPU
+    CPU <-->|"Point 3: NVMe Storage<br/>IEEE 1619 Encryption"| NVME
+    CPU -->|"Point 2: Host-to-Device Bus<br/>PCIe Gen 5/6 IDE with SPDM 1.3 Authentication"| AA
+    AA <-->|"Point 1: Coherent Scale-Up Fabric<br/>Line-Rate IDE"| AB
 ```
 
 ## 3. The Facility Threat Model: Pressure on the Compute Envelope
@@ -128,32 +114,14 @@ Conventional cybersecurity frameworks model threat actors operating almost exclu
 
 The Facility Threat Model treats the physical plant as an untrusted domain that exerts continuous multi-domain pressure across the AI Rack Envelope.
 
-```
-+-----------------------------------------------------------------------------+
-|                      FACILITY THREAT INTERFACE MATRIX                       |
-|                                                                             |
-|      Facility Pressure Vector             AI Rack Envelope Target Boundary   |
-|   +-----------------------------+--------+-------------------------------+  |
-|   | Thermodynamic Pressure      | -----> | Liquid Cold Plates, Dielectric|  |
-|   | (CDU pump drop, heat shock) |        | Cavitation, Thermal Throttling|  |
-|   +-----------------------------+--------+-------------------------------+  |
-|                                                                             |
-|   +-----------------------------+--------+-------------------------------+  |
-|   | Electrical Transient Vector | -----> | 48V Busbars, Point-of-Load    |  |
-|   | (di/dt steps, grid droop)   |        | VRMs, Hardware Clocking       |  |
-|   +-----------------------------+--------+-------------------------------+  |
-|                                                                             |
-|   +-----------------------------+--------+-------------------------------+  |
-|   | Out-of-Band Sideband Vector | -----> | BMC Firmware, I2C/I3C Buses,  |  |
-|   | (IPMI, Redfish, JTAG tap)   |        | SPI Boot Flash, OpenBIC       |  |
-|   +-----------------------------+--------+-------------------------------+  |
-|                                                                             |
-|   +-----------------------------+--------+-------------------------------+  |
-|   | Interconnect Egress Vector  | -----> | RDMA Fabric Transceivers,     |  |
-|   | (Covert sideband streaming) |        | Telemetry Streaming Channels  |  |
-|   +-----------------------------+--------+-------------------------------+  |
-+-----------------------------------------------------------------------------+
-```
+**Facility Threat Interface Matrix**
+
+| Facility Pressure Vector | Mechanism | AI Rack Envelope Target Boundary |
+| :--- | :--- | :--- |
+| **Thermodynamic Pressure** | CDU pump drop, heat shock | Liquid Cold Plates, Dielectric Cavitation, Thermal Throttling |
+| **Electrical Transient Vector** | di/dt steps, grid droop | 48V Busbars, Point-of-Load VRMs, Hardware Clocking |
+| **Out-of-Band Sideband Vector** | IPMI, Redfish, JTAG tap | BMC Firmware, I2C/I3C Buses, SPI Boot Flash, OpenBIC |
+| **Interconnect Egress Vector** | Covert sideband streaming | RDMA Fabric Transceivers, Telemetry Streaming Channels |
 
 ### 3.1 Thermodynamic & Liquid Cooling Pathways
 
@@ -215,23 +183,19 @@ Mitigating the facility threat model requires ending the separation between info
 
 To construct a defensible architecture, this framework integrates **IEC 62443** (Security for Industrial Automation and Control Systems) with **CLC/TS 50701** and **EN 50126** (Railway and Industrial Safety RAMS Engineering).
 
+```mermaid
+graph LR
+    Z1["ZONE 1: Facility Plant<br/>Chilled Water / CDUs<br/>48V DC Power Switchgear<br/>BMS / EPMS Controllers"]
+    Z2["ZONE 2: Chassis Mgmt<br/>BMC / OpenBIC<br/>ePDUs / Sensors<br/>Environmental Relays"]
+    Z3["ZONE 3: Host OS<br/>Host Kernel<br/>Device Drivers<br/>Orchestration Pods"]
+    Z4["ZONE 4: Silicon Cryptographic Core<br/>Caliptra Silicon RoT<br/>Model Weight Registers<br/>Coherent Tensor Execution"]
+
+    Z1 -->|"Conduit A: SL-2"| Z2
+    Z2 -->|"Conduit B: SL-3"| Z3
+    Z3 -->|"Conduit C: SL-4"| Z4
 ```
-+-----------------------------------------------------------------------------+
-|               IEC 62443 ZONES & CONDUITS ARCHITECTURE MATRIX                |
-|                                                                             |
-|  [ZONE 1: Facility Plant]  ---(Conduit A: SL-2)--->  [ZONE 2: Chassis Mgmt] |
-|   - Chilled Water / CDUs                              - BMC / OpenBIC       |
-|   - 48V DC Power Switchgear                           - ePDUs / Sensors     |
-|   - BMS / EPMS Controllers                            - Environmental Relays|
-|                                                               |             |
-|                                                     (Conduit B: SL-3)       |
-|                                                               v             |
-|  [ZONE 4: Silicon Cryptographic Core] <--(Conduit C)-- [ZONE 3: Host OS]    |
-|   - Caliptra Silicon RoT                  (SL-4)       - Host Kernel        |
-|   - Model Weight Registers                             - Device Drivers     |
-|   - Coherent Tensor Execution                          - Orchestration Pods |
-+-----------------------------------------------------------------------------+
-```
+
+*IEC 62443 zones and conduits architecture matrix. Conduit SL ratings are the enforced boundary levels; zone target levels are stated in section 4.1.*
 
 ### 4.1 IEC 62443 Zones and Conduits Applied to AI Facilities
 
@@ -282,29 +246,21 @@ A central challenge in critical infrastructure engineering is resolving fundamen
 
 To ensure that silicon components within the AI Rack Envelope execute exclusively authentic, unmodified firmware from the initial millisecond of power application, the platform architecture incorporates an immutable, open-source Hardware Root of Trust.
 
-```
-+-----------------------------------------------------------------------------+
-|                  CALIPTRA SILICON ROOT OF TRUST (RoT) ARCHITECTURE          |
-|                                                                             |
-|  +-----------------------------------------------------------------------+  |
-|  | HARDWARE IMMUTABLE CORE (Silicon Die)                                 |  |
-|  |  +------------------------+--+--------------------+--+--------------+  |  |
-|  |  | Mask ROM (128 KB)      |  | Cryptographic Accel|  | Key Vault    |  |  |
-|  |  | Immutable First-Stage  |  | SHA384 / ECC384 /  |  | Unique Die ID|  |  |
-|  |  | Bootloader (ROM Code)  |  | ML-DSA-87 / LMS    |  | (UDS / CDI)  |  |  |
-|  |  +------------------------+--+--------------------+--+--------------+  |  |
-|  +-----------------------------------------------------------------------+  |
-|                                      |                                      |
-|                       DICE MEASURED BOOT TRANSITION                         |
-|                                      v                                      |
-|  +-----------------------------------------------------------------------+  |
-|  | MUTABLE ACTIVE PLATFORM FIRMWARE                                      |  |
-|  |  +------------------------+--+--------------------+--+--------------+  |  |
-|  |  | Firmware Engine (FMC)  |  | Runtime Engine(RT) |  | SPDM 1.3 Core|  |  |
-|  |  | Validates OS / Drivers |  | Monitors Bus State |  | Attestation   |  |  |
-|  |  +------------------------+--+--------------------+--+--------------+  |  |
-|  +-----------------------------------------------------------------------+  |
-+-----------------------------------------------------------------------------+
+```mermaid
+graph TB
+    subgraph CORE["HARDWARE IMMUTABLE CORE (Silicon Die)"]
+        ROM["Mask ROM (128 KB)<br/>Immutable First-Stage<br/>Bootloader (ROM Code)"]
+        CRY["Cryptographic Accelerator<br/>SHA384 / ECC384 /<br/>ML-DSA-87 / LMS"]
+        KV["Key Vault<br/>Unique Die ID<br/>(UDS / CDI)"]
+    end
+
+    subgraph MUT["MUTABLE ACTIVE PLATFORM FIRMWARE"]
+        FMC["Firmware Engine (FMC)<br/>Validates OS / Drivers"]
+        RT["Runtime Engine (RT)<br/>Monitors Bus State"]
+        SPDM["SPDM 1.3 Core<br/>Attestation"]
+    end
+
+    CORE -->|"DICE Measured Boot Transition"| MUT
 ```
 
 ### 5.1 Open-Source Silicon RoT: The Caliptra Specification
@@ -346,34 +302,21 @@ In frontier AI environments, threat actors deploy autonomous agentic exploit gen
 
 The AI Rack Envelope incorporates a continuous, machine-speed automated falsification architecture. Rather than treating security validation as an annual compliance milestone, the platform establishes a closed-loop verification pipeline coupling autonomous security test agents with high-fidelity Hardware-in-the-Loop (HIL) digital twin emulators:
 
+```mermaid
+graph LR
+    S1["1. Autonomous Agentic<br/>Exploit Generation"]
+    S2["2. Hardware-in-the-Loop (HIL) and<br/>FPGA Digital Twin Emulation"]
+    S3["3. Automated Mitigation Synthesis<br/>and Firmware Lockout"]
+
+    S1 -->|"High-Speed<br/>Co-Simulation Dispatch"| S2
+    S2 -->|"Formal Falsification<br/>Verification"| S3
 ```
-+-----------------------------------------------------------------------------+
-|             MACHINE-SPEED AUTONOMOUS FALSIFICATION PIPELINE                 |
-|                                                                             |
-|   +---------------------------------------------------------------------+   |
-|   | 1. Autonomous Agentic Exploit Generation                            |   |
-|   |    - Hypothesizes microarchitectural race conditions                |   |
-|   |    - Synthesizes fault injection patterns (di/dt, thermal cycles)   |   |
-|   |    - Generates novel SPDM/PCIe IDE fuzzing payloads                 |   |
-|   +---------------------------------------------------------------------+   |
-|                                      |                                      |
-|                       HIGH-SPEED CO-SIMULATION DISPATCH                     |
-|                                      v                                      |
-|   +---------------------------------------------------------------------+   |
-|   | 2. Hardware-in-the-Loop (HIL) & FPGA Digital Twin Emulation         |   |
-|   |    - Executes attack hypothesis against cycle-accurate silicon model|   |
-|   |    - Physical testbed applies thermal/electrical stress in real time|   |
-|   +---------------------------------------------------------------------+   |
-|                                      |                                      |
-|                       FORMAL FALSIFICATION VERIFICATION                     |
-|                                      v                                      |
-|   +---------------------------------------------------------------------+   |
-|   | 3. Automated Mitigation Synthesis & Firmware Lockout                |   |
-|   |    - Generates microcode patch or isolates vulnerable execution lane|   |
-|   |    - Updates IEC 62443 conduit firewall rules in < 500 ms           |   |
-|   +---------------------------------------------------------------------+   |
-+-----------------------------------------------------------------------------+
-```
+
+| Pipeline stage | Actions performed |
+| :--- | :--- |
+| **1. Autonomous Agentic Exploit Generation** | Hypothesizes microarchitectural race conditions; synthesizes fault injection patterns (di/dt, thermal cycles); generates novel SPDM/PCIe IDE fuzzing payloads |
+| **2. Hardware-in-the-Loop (HIL) & FPGA Digital Twin Emulation** | Executes attack hypothesis against cycle-accurate silicon model; physical testbed applies thermal/electrical stress in real time |
+| **3. Automated Mitigation Synthesis & Firmware Lockout** | Generates microcode patch or isolates vulnerable execution lane; updates IEC 62443 conduit firewall rules in < 500 ms |
 
 1. **Automated Exploit Hypothesis Generation**: Machine-speed agentic models ingest hardware register descriptions, Verilog RTL code, and platform firmware binaries. The models analyze race conditions, sideband leakage vectors, and thermal vulnerability windows, generating thousands of concrete, executable exploit candidates per hour.
 2. **Cycle-Accurate HIL Execution**: Candidate exploits are immediately dispatched to parallelized FPGA-based silicon emulators and instrumented physical test racks. The testbed monitors bus telemetry, power supply noise, and register state transitions, verifying whether the candidate exploit successfully violates security invariants.

@@ -26,28 +26,45 @@ In hyperscale mission-critical environments, a severe disconnect exists between 
 
 Without rigorous financial quantification, cybersecurity requests are treated as discretionary overhead rather than risk-mitigating investments. As high-density AI clusters push rack densities beyond $100\text{ kW}$ and cluster valuations past hundreds of millions of dollars, qualitative color-coded risk heat maps ("red, amber, green") are no longer legally or actuarially defensible.
 
+#### The Capital Allocation Quantification Bridge
+
+```mermaid
+flowchart LR
+  subgraph ENG["CyHAZOP and FMECA engineering layer"]
+    direction TB
+    E1["node deviations"]
+    E2["physical units"]
+    E3["cyber RPN 567"]
+  end
+  X{{"actuarial formulation translation"}}
+  subgraph CAP["CFO and underwriting capital allocation layer"]
+    direction TB
+    C1["SLE"]
+    C2["ALE"]
+    C3["ROSI"]
+    C4["Gordon-Loeb ceiling"]
+    C5["Taleb fat-tail correction"]
+  end
+  E1 --> X
+  E2 --> X
+  E3 --> X
+  X --> C1
+  X --> C2
+  X --> C3
+  X --> C4
+  X --> C5
 ```
-+-------------------------------------------------------------------------+
-|             THE CAPITAL ALLOCATION QUANTIFICATION BRIDGE                |
-+-------------------------------------------------------------------------+
-| CYHAZOP & FMECA ENGINEERING LAYER:                                      |
-| - Node Deviations: MORE, LESS, SPOOFED, POISONED                        |
-| - Physical Units: Bar, L/min, °C, kW, Hz                                |
-| - Quantitative Metric: Cyber Risk Priority Number (RPN_c = 567)         |
-+-------------------------------------------------------------------------+
-                                    |
-                    ACTUARIAL FORMULATION TRANSLATION
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| CFO & UNDERWRITING CAPITAL ALLOCATION LAYER:                            |
-| - Single Loss Expectancy (SLE = AV x EF)                                |
-| - Annualised Loss Expectancy (ALE = SLE x ARO)                          |
-| - Return on Security Investment (ROSI = [Delta ALE - Cost] / Cost)       |
-| - Gordon-Loeb Investment Ceiling (S* <= 0.368 x ALE)                    |
-| - Taleb Fat-Tail Power-Law Correction (Alpha < 2.0 Extremistan Scale)   |
-+-------------------------------------------------------------------------+
-```
+
+| Layer | Element | Content |
+| :--- | :--- | :--- |
+| CyHAZOP and FMECA engineering | Node deviations | MORE, LESS, SPOOFED, POISONED |
+| CyHAZOP and FMECA engineering | Physical units | Bar, L/min, °C, kW, Hz |
+| CyHAZOP and FMECA engineering | Quantitative metric | Cyber Risk Priority Number, $\text{RPN}_c = 567$ |
+| CFO and underwriting capital allocation | Single Loss Expectancy | $\text{SLE} = \text{AV} \times \text{EF}$ |
+| CFO and underwriting capital allocation | Annualised Loss Expectancy | $\text{ALE} = \text{SLE} \times \text{ARO}$ |
+| CFO and underwriting capital allocation | Return on Security Investment | $\text{ROSI} = [\Delta\text{ALE} - \text{Cost}] / \text{Cost}$ |
+| CFO and underwriting capital allocation | Gordon-Loeb investment ceiling | $S^* \le 0.368 \times \text{ALE}$ |
+| CFO and underwriting capital allocation | Taleb fat-tail power-law correction | $\alpha < 2.0$, Extremistan scale |
 
 ---
 
@@ -55,38 +72,44 @@ Without rigorous financial quantification, cybersecurity requests are treated as
 
 Accurately calculating Asset Value (AV) and Exposure Factor (EF) requires synchronizing physical piping models with silicon inventories across the DEXPI 2.0 (ISO 15926) and CycloneDX 1.6+ specifications:
 
+#### Financial Asset Exposure Topology
+
+```mermaid
+flowchart LR
+  A["DEXPI 2.0 physical infrastructure assets"]
+  B["CycloneDX 1.6+ compute payload assets"]
+  C["business interruption exposure"]
+  A -->|concurrent IT compute payload| B
+  B -->|revenue impact valuation| C
 ```
-+-------------------------------------------------------------------------+
-|                   FINANCIAL ASSET EXPOSURE TOPOLOGY                     |
-+-------------------------------------------------------------------------+
-| DEXPI 2.0 PHYSICAL INFRASTRUCTURE ASSETS:                               |
-| - 12x Chiller Plant Units: 4.5 MW each ($1.8M/unit = $21.6M AV)         |
-| - 48x Coolant Distribution Units: 2.3 MW each ($220k/unit = $10.56M AV) |
-| - 16x Block UPS Modules: 6.25 MVA each ($1.2M/unit = $19.2M AV)         |
-| - Primary / Secondary Piping: PG25 Coolant at 38.5 L/min per rack       |
-+-------------------------------------------------------------------------+
-                                    |
-                    CONCURRENT IT COMPUTE PAYLOAD
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| CYCLONEDX 1.6+ COMPUTE PAYLOAD ASSETS:                                  |
-| - HBOM: 25,000 AI Accelerator ASICs across 3,125 Trays ($375M AV)       |
-| - SBOM: Caliptra Silicon RoT, DICE Root Keys, OpenSIL Drivers           |
-| - CBOM: Mutual TLS Certificates, Firmware Signing Keys                  |
-| - OBOM: Operational Bounds (94°C Thermal Trip, 64 kbps Rate Limits)     |
-| - VEX:  Real-Time CVE Vulnerability Exploit State Feeds                 |
-+-------------------------------------------------------------------------+
-                                    |
-                    REVENUE IMPACT VALUATION
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| BUSINESS INTERRUPTION EXPOSURE:                                         |
-| - 100 MW Compute Cluster Revenue: $18,500 / hour ($444,000 / day)       |
-| - Foundation Model Training Checkpoint Disruption Loss: $4.2M / event   |
-+-------------------------------------------------------------------------+
-```
+
+**DEXPI 2.0 physical infrastructure assets.**
+
+| Asset class | Quantity | Rating per unit | Cost per unit | Asset value (AV) |
+| :--- | :---: | :---: | :---: | :---: |
+| Chiller plant units | 12 | 4.5 MW | $1.8M | $21.6M |
+| Coolant distribution units | 48 | 2.3 MW | $220k | $10.56M |
+| Block UPS modules | 16 | 6.25 MVA | $1.2M | $19.2M |
+
+Primary and secondary piping carries PG25 coolant at 38.5 L/min per rack.
+
+**CycloneDX 1.6+ compute payload assets.**
+
+| BOM layer | Inventory |
+| :--- | :--- |
+| HBOM | 25,000 AI accelerator ASICs across 3,125 trays ($375M AV) |
+| SBOM | Caliptra silicon RoT, DICE root keys, OpenSIL drivers |
+| CBOM | Mutual TLS certificates, firmware signing keys |
+| OBOM | Operational bounds: 94°C thermal trip, 64 kbps rate limits |
+| VEX | Real-time CVE vulnerability exploit state feeds |
+
+**Business interruption exposure.**
+
+| Exposure | Basis | Value |
+| :--- | :--- | :---: |
+| 100 MW compute cluster revenue | per hour | $18,500 |
+| 100 MW compute cluster revenue | per day | $444,000 |
+| Foundation model training checkpoint disruption loss | per event | $4.2M |
 
 By joining the physical DEXPI asset graph with the CycloneDX silicon bill of materials, the financial model evaluates not merely the replacement cost of an industrial pump ($45,000\text{ USD}$), but the total dependent compute payload ($375,000,000\text{ USD}$) that crashes when that pump is commanded to stop.
 
@@ -189,27 +212,19 @@ $$P(L > x) = L_{\min}^\alpha \cdot x^{-\alpha} \quad (1 < \alpha < 2)$$
 
 When $\alpha < 2$, the second moment (variance) of the loss distribution is infinite. When $\alpha \le 1$, the first moment (the mathematical mean) is undefined.
 
-```
-+-------------------------------------------------------------------------+
-|                  THIN TAILS VS. FAT TAILS LOSS REGIMES                  |
-+-------------------------------------------------------------------------+
-| MEDIOCRISTAN (TABLE A - THIN-TAILED):                                   |
-| - Standard ALE applies: ALE = SLE x ARO                                 |
-| - Independent stochastic events; Gaussian decay; stable variance        |
-| - Example: Individual motor bearing wear; MTBF tables                   |
-+-------------------------------------------------------------------------+
-                                    |
-                    CORRELATED CYBER ATTACK INVERSION
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| EXTREMISTAN (TABLE B - FAT-TAILED):                                     |
-| - Power-law tail: P(L > x) = x^(-alpha), where 1 < alpha < 2            |
-| - Common-cause software vulnerabilities trip entire 100 MW data halls   |
-| - The conditional tail expectation E[L | L > VaR] dominates total loss  |
-| - Standard ALE underestimates probable maximum loss by 10x to 100x      |
-+-------------------------------------------------------------------------+
-```
+#### Thin Tails Versus Fat Tails Loss Regimes
+
+A correlated cyber attack inverts the first regime into the second.
+
+| Regime | Property | Statement |
+| :--- | :--- | :--- |
+| Mediocristan (Table A, thin-tailed) | Loss model | Standard ALE applies: $\text{ALE} = \text{SLE} \times \text{ARO}$ |
+| Mediocristan (Table A, thin-tailed) | Event structure | Independent stochastic events; Gaussian decay; stable variance |
+| Mediocristan (Table A, thin-tailed) | Example | Individual motor bearing wear; MTBF tables |
+| Extremistan (Table B, fat-tailed) | Loss model | Power-law tail: $P(L > x) = x^{-\alpha}$, where $1 < \alpha < 2$ |
+| Extremistan (Table B, fat-tailed) | Event structure | Common-cause software vulnerabilities trip entire 100 MW data halls |
+| Extremistan (Table B, fat-tailed) | Dominant term | The conditional tail expectation $E[L \mid L > \text{VaR}]$ dominates total loss |
+| Extremistan (Table B, fat-tailed) | Model error | Standard ALE underestimates probable maximum loss by 10x to 100x |
 
 ### 6.2 Mathematical Proof of Tail Expectation Divergence
 For a fat-tailed distribution with Pareto exponent $\alpha$, the conditional tail expectation (Expected Shortfall or Tail Value at Risk) at confidence level $1 - p$ is formulated as:

@@ -29,7 +29,7 @@ Plant and mechanical engineers speak the language of process chemistry, thermody
 1. **Equipment Objects:** Mechanical assets classified by functional schema, including Variable-Speed Centrifugal Pumps (`P-101`), Plate Heat Exchangers (`HEX-201`), and Coolant Distribution Units (`CDU-01`).
 2. **Piping Networks:** Pipe segments (`Line-102`) defining nominal pipe sizes, schedule ratings, wall thicknesses, and material specifications (such as 316L stainless steel or copper).
 3. **Hydronic Topologies:** Explicit flow connectivity mapping source nozzles, suction ports, discharge ports, and check valves.
-4. **Thermodynamic Envelopes:** Volumetric flow rates in liters per minute, static pressures in bar, pressure drops, fluid properties (water, 25% propylene glycol / PG25, or dielectric fluids), and supply and return temperatures ($32^\circ\\text{C} \to 45^\circ\\text{C}$).
+4. **Thermodynamic Envelopes:** Volumetric flow rates in liters per minute, static pressures in bar, pressure drops, fluid properties (water, 25% propylene glycol / PG25, or dielectric fluids), and supply and return temperatures ($32^\circ\\text{C} \\to 45^\circ\\text{C}$).
 5. **Instrumentation and Control Loops:** Sensor tags (temperature transmitters `TT-101`, flow meters `FT-102`, differential pressure transmitters `PDT-103`), actuator trip limits, and electrical signal telemetry conduits (Modbus RTU, Modbus TCP, BACnet/IP).
 
 The following XML excerpt demonstrates how DEXPI 2.0 formally encodes a secondary Coolant Distribution Unit and its hydraulic connection to a compute rack manifold:
