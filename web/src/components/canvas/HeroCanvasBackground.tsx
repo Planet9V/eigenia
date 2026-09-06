@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 
 export type HeroCanvasVariant = "streamlines" | "isolines" | "digital-twin";
 
@@ -24,6 +24,8 @@ export const HeroCanvasBackground: React.FC<HeroCanvasBackgroundProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const isVisibleRef = useRef(true);
+  // Observed container width. Changing it rebuilds the scene at the new aspect.
+  const [boxWidth, setBoxWidth] = useState(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -35,12 +37,33 @@ export const HeroCanvasBackground: React.FC<HeroCanvasBackgroundProps> = ({
     // Check prefers-reduced-motion
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    const W = 1440;
-    const H = 620;
+    // Reference frame the scene was originally tuned against. Noise is still sampled
+    // against these numbers so features keep a constant on-screen size; a wider
+    // viewport reveals MORE field rather than stretching the same field.
+    const REF_W = 1440;
+    const REF_H = 620;
 
-    // Set canvas internal resolution (2x for Retina sharpness)
-    canvas.width = W * 2;
-    canvas.height = H * 2;
+    // Height stays fixed, so every vertically-tuned constant (including the status
+    // label at H - 20) keeps working. Only the width tracks the container, so the
+    // buffer aspect matches the box and object-fit: cover has nothing left to crop.
+    // W was previously hard-coded to 1440: at a 1920px viewport the top and bottom
+    // 25% of the scene were cropped away, at 2560px 44%, taking the label with them.
+    const H = REF_H;
+    const box = containerRef.current?.getBoundingClientRect();
+    const aspect = box && box.height > 0 ? box.width / box.height : REF_W / REF_H;
+    // Clamp so neither a narrow tablet nor an ultrawide yields a degenerate scene.
+    const W = Math.round(H * Math.min(Math.max(aspect, 1.2), 6));
+
+    // Retina sharpness, but cap the pixel budget: an unclamped 2x buffer on an
+    // ultrawide is several times the per-frame fill cost of the original 2880x1240.
+    const MAX_PIXELS = 4_200_000;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const scale = Math.min(dpr, Math.sqrt(MAX_PIXELS / (W * H)));
+    canvas.width = Math.round(W * scale);
+    canvas.height = Math.round(H * scale);
+
+    // Keeps visual density constant as the canvas widens.
+    const density = W / REF_W;
 
     // Helper math & noise functions
     const rng = (seed: number) => {
@@ -113,7 +136,8 @@ export const HeroCanvasBackground: React.FC<HeroCanvasBackgroundProps> = ({
     if (variant === "digital-twin") {
       const r = rng(20260812);
       const centers: [number, number][] = [];
-      for (let c = 0; c < 54; c++) {
+      const twinClusters = Math.max(12, Math.round(54 * density));
+      for (let c = 0; c < twinClusters; c++) {
         const cx = 60 + r() * (W - 120);
         const cy = 40 + r() * (H - 80);
         centers.push([cx, cy]);
@@ -286,7 +310,7 @@ export const HeroCanvasBackground: React.FC<HeroCanvasBackgroundProps> = ({
       isoField = new Float32Array((cols + 1) * (rows + 1));
       for (let j = 0; j <= rows; j++) {
         for (let i = 0; i <= cols; i++) {
-          isoField[j * (cols + 1) + i] = fbm((i * step) / W * 3.1, (j * step) / H * 1.9, 9);
+          isoField[j * (cols + 1) + i] = fbm((i * step) / REF_W * 3.1, (j * step) / REF_H * 1.9, 9);
         }
       }
     }
@@ -351,12 +375,13 @@ export const HeroCanvasBackground: React.FC<HeroCanvasBackgroundProps> = ({
 
     if (variant === "streamlines") {
       const r2 = rng(7717);
-      for (let p = 0; p < 620; p++) {
+      const streamCount = Math.max(180, Math.round(620 * density));
+        for (let p = 0; p < streamCount; p++) {
         let x = r2() * W;
         let y = r2() * H;
         const pts: [number, number][] = [[x, y]];
         for (let k = 0; k < 54; k++) {
-          const a = fbm((x / W) * 2.1, (y / H) * 1.5, 12) * Math.PI * 3;
+          const a = fbm((x / REF_W) * 2.1, (y / REF_H) * 1.5, 12) * Math.PI * 3;
           x += Math.cos(a) * 5;
           y += Math.sin(a) * 5;
           if (x < -20 || x > W + 20 || y < -20 || y > H + 20) break;
@@ -445,7 +470,32 @@ export const HeroCanvasBackground: React.FC<HeroCanvasBackgroundProps> = ({
       cancelAnimationFrame(rafId);
       observer.disconnect();
     };
-  }, [variant, loopSeconds, accent]);
+  }, [variant, loopSeconds, accent, boxWidth]);
+
+  // Rebuild the scene when the container's width changes materially. The scene is
+  // generated for one specific width, so without this the canvas would keep a stale
+  // aspect after a window resize and object-fit would start cropping again.
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el || typeof ResizeObserver === "undefined") return;
+
+    let timer: number | undefined;
+    const ro = new ResizeObserver(([entry]) => {
+      const w = Math.round(entry.contentRect.width);
+      window.clearTimeout(timer);
+      // Regenerating the field is expensive and a drag-resize fires continuously,
+      // so debounce, then ignore changes too small to be visible (scrollbars, etc).
+      timer = window.setTimeout(() => {
+        setBoxWidth((prev) => (Math.abs(prev - w) >= 64 ? w : prev));
+      }, 200);
+    });
+
+    ro.observe(el);
+    return () => {
+      window.clearTimeout(timer);
+      ro.disconnect();
+    };
+  }, []);
 
   return (
     <div ref={containerRef} className="absolute inset-0 overflow-hidden pointer-events-none select-none">
