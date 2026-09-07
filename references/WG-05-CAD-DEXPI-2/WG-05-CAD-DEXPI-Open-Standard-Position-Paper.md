@@ -121,7 +121,7 @@ DEXPI solves this through a three-tier catalog architecture:
 ```
 
 1. **Tier 1 (Requirements Tier)**: Captures process requirements independently of commercial manufacturers. Process chemists and thermodynamic modelers specify operating envelopes without knowing which vendor will win the bidding process.
-2. **Tier 2 (Vendor Equipment Tier)**: Contains verified manufacturer catalogs. Equipment vendors publish their technical cut-sheets directly in standardized DEXPI XML, exposing calibrated pump head curves, motor electrical loads, and valve flow characteristics.
+2. **Tier 2 (Vendor Equipment Tier)**: Contains manufacturer catalogs the vendor has signed. Equipment vendors publish their technical cut-sheets directly in standardized DEXPI XML, exposing calibrated pump head curves, motor electrical loads, and valve flow characteristics. The signature establishes who published each curve and when, which is what the owner needs to hold a vendor to a stated duty point years later. It does not establish that the curve is right; that is what the factory acceptance test is for.
 3. **Tier 3 (Customer Configured Tier)**: Represents the physical instance anchored in the operational facility. It binds the Tier 1 requirement and Tier 2 vendor model to a physical tag, serial number, field-bus address, and maintenance ledger.
 
 ## 4. Operational Safety, Interlocks, and the Write-Access Boundary
@@ -150,7 +150,7 @@ When facility data is stored in proprietary schemas, the asset owner is subject 
 2. **Revamp and Migration Penalties**: Refurbishing a facility designed fifteen years prior often requires spending millions of dollars manually re-drafting paper or PDF drawings because the original CAD software version is obsolete.
 3. **Insurance and Actuarial Opaqueness**: Insurers and reinsurers cannot independently verify plant resilience, forcing the facility owner to pay risk premiums driven by market uncertainty.
 
-> ❝ Subjective cybersecurity questionnaires are obsolete. When insuring a $1.2B AI datacenter, underwriters under Lloyd's Market Association Y5381 covenants require quantitative proof of risk accumulation. By joining BIM and BOM, the digital twin can run Monte Carlo simulations to compute empirical Single Loss Expectancy (SLE) and Annualised Loss Expectancy (ALE). This allows CFOs to scientifically justify security capital investments (ROSI) and set actuarially sound captive insurance retention layers. ❞
+> ❝ Subjective cybersecurity questionnaires are obsolete. When insuring a $1.2B AI datacenter, underwriters under Lloyd's Market Association Y5381 covenants require quantitative proof of risk accumulation. By joining BIM and BOM, the digital twin can run Monte Carlo simulations to compute a modelled Single Loss Expectancy (SLE) and Annualised Loss Expectancy (ALE) from stated frequency and severity assumptions, with each assumption named on the face of the result. This allows CFOs to scientifically justify security capital investments (ROSI) and set actuarially sound captive insurance retention layers. ❞
 >
 > *— Chief Financial / Actuarial Risk Officer (Capital Allocation & Critical Infrastructure Reinsurance)*
 

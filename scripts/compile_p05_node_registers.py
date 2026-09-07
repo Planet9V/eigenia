@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """
 Compiler for Paper P-05: CyHAZOP System Drill-Down: Node Registers for Power, Cooling, and Safety
-Generates an empirical, register-level, mathematically grounded technical treatise
+Generates a register-level, mathematically grounded technical treatise
 meeting all PAAI gate criteria and zero-tolerance style prohibitions.
 """
+
+import re
 
 dest_path = 'references/WG-07-TM-Threat-Modeling/WG-07-TM-CyHAZOP-Node-Registers.md'
 
@@ -13,7 +15,7 @@ While high-level hazard analyses establish the conceptual framework for cyber-ph
 
 In over 95% of deployed operational facilities, these industrial control protocols lack cryptographic authentication, message integrity validation, or replay protection. An adversary with network visibility on a supervisory VLAN can forge a single unauthenticated Modbus write command (Function Code 06 or 16) to alter a pump speed reference or bypass a safety interlock. Because human operators rely on the same network conduit for telemetry, attackers simultaneously spoof input registers, blinding facility engineers until physical destruction occurs.
 
-This paper provides an authoritative, empirical register-level drill-down for the four primary CyHAZOP nodes of a high-density facility: the Liquid Cooling Loop, the Electrical Power Train, the Building Management System (BMS), and the Silicon Management Plane. We document the exact Modbus holding registers, BACnet object IDs, and Redfish REST endpoints that govern physical operation. We formulate the mathematical dynamics of register step-changes, parameter quantization drift, and electrical inductive kickback. Finally, we establish the systems assurance requirements for hardware cryptographic bumps-in-the-wire, Caliptra Silicon Root of Trust attestation, and actuarial catastrophe loss models under Lloyd's Y5381.
+This paper provides a register-level drill-down for the four primary CyHAZOP nodes of a high-density facility: the Liquid Cooling Loop, the Electrical Power Train, the Building Management System (BMS), and the Silicon Management Plane. We document the exact Modbus holding registers, BACnet object IDs, and Redfish REST endpoints that govern physical operation. We formulate the mathematical dynamics of register step-changes, parameter quantization drift, and electrical inductive kickback. Finally, we establish the systems assurance requirements for hardware cryptographic bumps-in-the-wire, Caliptra Silicon Root of Trust attestation, and actuarial catastrophe loss models under Lloyd's Y5381.
 
 ---
 
@@ -82,9 +84,9 @@ To prevent disconnected analysis, every industrial register documented in this C
 
 ---
 
-## 3. Empirical Register Maps across Four Critical Nodes
+## 3. Register Maps across Four Critical Nodes
 
-We present the complete empirical register mappings, physical engineering interpretations, and malicious manipulation consequences across the four core infrastructure nodes.
+This section sets out the register mappings, their physical engineering interpretation, and the consequence of manipulating each one, across the four core infrastructure nodes. The register numbers, object identifiers and endpoints are taken from the published protocol maps of the equipment classes named in each table. The engineering interpretations and the consequences beside them are this working group's analysis of what a write to that address does to the plant, and they are reasoned from the physics of the node rather than observed on a specific site.
 
 ### 3.1 Node 1: Secondary Cooling Loop (CDU & Manifold Registers)
 The Coolant Distribution Unit (CDU) manages heat rejection from compute trays to the primary facility water loop:
@@ -209,13 +211,15 @@ The financial return on deploying hardware-enforced cryptographic message authen
 
 $$\text{ROSI}_{\text{MAC}} = \frac{(\text{ALE}_{\text{unauthenticated}} - \text{ALE}_{\text{authenticated}}) - C_{\text{hardware\_MAC}}}{C_{\text{hardware\_MAC}}}$$
 
-For an AI cluster with unmitigated catastrophe loss expectancy $\text{ALE} = 4,200,000\text{ USD}$, deploying bump-in-the-wire FPGA authenticators ($C_{\text{hardware}} = 45,000\text{ USD}$) eliminates unauthenticated write attacks, reducing residual $\text{ALE} = 25,000\text{ USD}$, achieving a verified $\text{ROSI} = 9,177\%$.
+For an AI cluster with unmitigated catastrophe loss expectancy $\text{ALE} = 4,200,000\text{ USD}$, deploying bump-in-the-wire FPGA authenticators ($C_{\text{hardware}} = 45,000\text{ USD}$) blocks unauthenticated writes at the conduit, reducing residual $\text{ALE} = 25,000\text{ USD}$ and giving a modelled $\text{ROSI} = 9,177\%$.
+
+The three inputs are the working group's own. The 45,000 USD is a hardware and installation estimate for FPGA authenticators across the cluster's Modbus conduits. The 4,200,000 USD unmitigated expectancy comes from the consequence model in section 4, which is itself built on assumed tray replacement cost, an assumed hourly interruption rate and an assumed event frequency. The 25,000 USD residual assumes the authenticator removes the unauthenticated write path entirely and leaves only attacks that reach a legitimate key. The quotient is exact to 9,177.78% and that exactness carries no evidential weight. What the calculation does support is the ordering: an authenticator costing tens of thousands sits against a consequence measured in millions, so the case for it does not depend on the precise figures.
 
 ---
 
 ## 5. Industrial Proof: Documented Exploitation Mechanics
 
-The register manipulations documented in this paper represent known, weaponized techniques verified through security incident response and controlled lab testing:
+The register manipulations documented in this paper follow the mechanics of publicly reported incidents. The cases below are drawn from published reporting on each event; where this paper describes what an attacker could have done next rather than what was reported, it says so in the text:
 
 ### 5.1 Unitronics Vision PLC Water Sector Compromises (November 2023)
 Nation-state adversaries compromised municipal water boosting stations by connecting directly to port 502 across the public internet. The attackers leveraged default administrative credentials (PIN 1111) to write to holding registers controlling chlorine dosing pumps and pressure regulators. The attack demonstrated that adversaries possess automated tooling to identify and manipulate specific industrial registers.
@@ -259,8 +263,10 @@ The presence of unauthenticated holding registers on cooling and power infrastru
 |:---|:---|:---|:---|
 | **Common-Cause Exploitability** | Single network script can trip all cooling loops simultaneously. | Cryptographic command signing and hardwired interlocks isolate failures. | Portfolio accumulation risk mitigated; eliminates correlated catastrophic losses. |
 | **PML / MPL Sizing** | Unbounded physical damage; potential total loss of compute hardware ($150\text{M}+$). | Physically constrained by autonomous analog interlocks; loss bounded to single rack. | Reinsurance syndicates release capital buffers; rate reductions of 22% to 35%. |
-| **Lloyd's Y5381 Compliance** | Disputed claims during nation-state attacks; severe litigation risk. | Formally verified SIL-3 physical interlocks satisfy statutory due diligence standards. | Affirmative cyber-physical coverage granted with zero state-actor exclusions. |
-| **Parametric Triggers** | Subjective damage surveys requiring weeks of onsite inspection. | Parametric claims settlement triggered automatically by verified digital twin telemetry. | Claims resolved in days; operational working capital restored rapidly. |
+| **Lloyd's Y5381 Compliance** | Disputed claims during nation-state attacks; severe litigation risk. | SIL-3 physical interlocks, proof-tested on a stated interval and documented in the hazard ledger, satisfy statutory due diligence standards. | Affirmative cyber-physical coverage granted with zero state-actor exclusions. |
+| **Parametric Triggers** | Subjective damage surveys requiring weeks of onsite inspection. | Parametric claims settlement triggered automatically by digital twin telemetry read from instruments the adjuster can calibrate and re-read. | Claims resolved in days; operational working capital restored rapidly. |
+
+The rate reductions of 22% to 35% in the impact column are modelled. They express what this working group judges a syndicate will concede once physical interlocks bound the loss to a single rack, and they are reasoned from the size of the accumulation buffer such a syndicate currently carries against unbounded cooling failure. No slip, submission or treaty wording is cited for them.
 
 ---
 
@@ -272,11 +278,14 @@ Securing operational technology registers against cyber-physical sabotage demand
 2. **Zero Trust for Network Write Commands:** Unauthenticated Modbus TCP and BACnet write operations must be prohibited. All command conduits must enforce cryptographic authentication and integrity validation.
 3. **Defense in Depth Demands Analog Independence:** Software must never be the sole guardian against software failure. High-consequence failure modes must be arrested by hardwired, analog, or mechanical interlocks.
 4. **Sub-Second Physics Trumps Human Intervention:** Silicon thermal runaway executes in seconds; supervisory alarms and manual operating procedures require minutes. Safety loops must be autonomous, local, and immediate.
-5. **Actuarial Proof Requires Quantitative Telemetry:** Reinsurance treaty structuring and risk transfer demand mathematically verified digital twin models linking register states directly to physical thermodynamic constraints.
+5. **Actuarial Argument Requires Quantitative Telemetry:** Reinsurance treaty structuring and risk transfer need digital twin models that link register states directly to physical thermodynamic constraints, with every parameter in the model named and its origin stated. A model whose inputs are traceable can be argued over by an underwriter; a model whose inputs are asserted cannot, however exact its arithmetic.
 """
 
 # Clean any surviving em-dashes
 content = content.replace('—', '; ')
+# A spaced em dash becomes ' ;  '. A semicolon never takes a space before it;
+# collapse the artifact here so it cannot reach a published document.
+content = re.sub(r'\s+;\s+', '; ', content)
 
 with open(dest_path, 'w', encoding='utf-8') as f:
     f.write(content)

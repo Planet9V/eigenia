@@ -1,6 +1,6 @@
 ## Abstract
 
-On September 13, 2024, the European Union published Regulation (EU) 2024/2847, the Cyber Resilience Act (CRA), establishing mandatory cybersecurity requirements for products with digital elements placed on the Single Market. With full enforcement commencing on September 11, 2026, the era of voluntary cybersecurity questionnaires and qualitative vendor self-attestations is definitively closed. Article 13, Article 14, and Annex I mandate machine-readable Software Bills of Materials (SBOMs), Hardware Bills of Materials (HBOMs), 24-hour vulnerability notification cadences, and verified supply chain provenance. Violations trigger severe statutory penalties under Article 64: administrative fines up to 15,000,000 EUR or 2.5% of worldwide annual turnover.
+On September 13, 2024, the European Union published Regulation (EU) 2024/2847, the Cyber Resilience Act (CRA), establishing mandatory cybersecurity requirements for products with digital elements placed on the Single Market. With full enforcement commencing on September 11, 2026, the era of voluntary cybersecurity questionnaires and qualitative vendor self-attestations is definitively closed. Article 13, Article 14, and Annex I mandate machine-readable Software Bills of Materials (SBOMs), Hardware Bills of Materials (HBOMs), 24-hour vulnerability notification cadences, and supply chain provenance the manufacturer must be able to evidence on demand to a notified body. Violations trigger severe statutory penalties under Article 64: administrative fines up to 15,000,000 EUR or 2.5% of worldwide annual turnover.
 
 For critical infrastructure operators, industrial automation vendors, and high-density AI compute providers, compliance cannot be achieved through manual audits. Modern infrastructure depends on multi-tiered supply chains spanning overseas Original Design Manufacturers (ODMs), sub-tier silicon foundries, open-source firmware repositories, and third-party commercial software dependencies. A vulnerability introduced at any stage; whether a backdoored Baseboard Management Controller (BMC) image, an unverified field-programmable gate array bitstream, or a shared manufacturing symmetric key; compromises the entire operational technology perimeter. When such firmware overrides secondary cooling manifold valves or voltage regulators, the failure mode is not purely digital; it triggers physical hydraulic cavitation, thermodynamic heat flux runaway, and catastrophic transformer stress.
 
@@ -167,7 +167,7 @@ The incremental risk reduction $\Delta \mathcal{R}_{\text{risk}}$ is formulated 
 
 $$\Delta \mathcal{R}_{\text{risk}} = \sum_{s \in \mathcal{S}} \left( P_{\text{exploit}}(s \mid \text{baseline}) - P_{\text{exploit}}(s \mid \text{mitigated}) \right) \cdot \mathcal{C}_{\text{consequence}}(s)$$
 
-Where $P_{\text{exploit}}$ is the empirical likelihood of attack success and $\mathcal{C}_{\text{consequence}}$ is the direct financial loss. If $\frac{\Delta C}{\Delta \mathcal{R}} \le \gamma$, the deviation is legally and technically non-conforming; the higher control must be implemented.
+Where $P_{\text{exploit}}$ is the modelled likelihood of attack success and $\mathcal{C}_{\text{consequence}}$ is the direct financial loss. The analyst sets $P_{\text{exploit}}$ from exploit prediction percentile and the coverage of the controls already in place; it is an assumption entered into the relation, not a frequency counted from attempts against this facility. State the value used and the reasoning behind it alongside every disproportion argument, because the whole SFAIRP test turns on it. If $\frac{\Delta C}{\Delta \mathcal{R}} \le \gamma$, the deviation is legally and technically non-conforming; the higher control must be implemented.
 
 ### 4.3 Multi-Tier Supply Chain Compromise Probability
 The cumulative probability $P_{\text{chain}}$ that an infrastructure rack contains at least one compromised hardware, firmware, or software element across $M$ distinct supply chain tiers is formulated as:
@@ -178,7 +178,7 @@ Where:
 - $M$ is the number of supply chain tiers ($M = 4$: silicon, vendor, ODM, facility).
 - $N_j$ is the number of distinct components integrated at tier $j$.
 - $\theta_{j,k}$ is the baseline compromise probability of supplier $k$ at tier $j$ (reflecting geographic jurisdiction, adversary targeting, and corporate security posture).
-- $\alpha_{\text{assurance},j,k} \in [0, 1]$ is the verified systems assurance factor (where $\alpha = 0$ corresponds to unverified supplier questionnaires, and $\alpha = 0.99$ corresponds to FIPS 140-3 HSM attestation and continuous machine-readable VEX feeds).
+- $\alpha_{\text{assurance},j,k} \in [0, 1]$ is the systems assurance factor, an analyst-assigned score for how much independent evidence backs supplier $k$ at tier $j$ (where $\alpha = 0$ corresponds to an unevidenced supplier questionnaire, and $\alpha = 0.99$ corresponds to FIPS 140-3 HSM attestation plus a continuous machine-readable VEX feed). The endpoints are the working group's own calibration. No study is cited that maps an attestation regime onto a compromise probability, and none is claimed.
 
 When an operator relies on static PDF questionnaires ($\alpha \le 0.15$) across 150 components, $P_{\text{chain}}$ asymptotically approaches $1.0$ ($100\%$ certainty of compromise). Enforcing automated, machine-verifiable CycloneDX schemas elevates $\alpha \to 0.98$, suppressing systemic compromise probability across the multi-tier fabric.
 
@@ -218,7 +218,9 @@ The financial return on deploying automated machine-readable Bills of Materials 
 
 $$\text{ROSI} = \frac{(\text{ALE}_{\text{unverified}} - \text{ALE}_{\text{attested}}) - C_{\text{BOM\_controls}}}{C_{\text{BOM\_controls}}}$$
 
-For a hyperscale infrastructure portfolio with an unverified baseline $\text{ALE}_{\text{unverified}} = 48.5\text{M EUR}$, implementing automated multi-BOM transparency reduces the post-control loss expectancy to $\text{ALE}_{\text{attested}} = 3.2\text{M EUR}$ at an annual control cost $C_{\text{BOM\_controls}} = 4.5\text{M EUR}$, delivering a verified $\text{ROSI} = 907\%$.
+For a hyperscale infrastructure portfolio with an unattested baseline $\text{ALE}_{\text{unverified}} = 48.5\text{M EUR}$, implementing automated multi-BOM transparency reduces the post-control loss expectancy to $\text{ALE}_{\text{attested}} = 3.2\text{M EUR}$ at an annual control cost $C_{\text{BOM\_controls}} = 4.5\text{M EUR}$, giving a modelled $\text{ROSI} = 907\%$.
+
+All three inputs are the working group's assumptions for a portfolio of this size. The 48.5M EUR baseline is not a measured loss run, the 3.2M EUR residual is not a post-implementation observation, and the 4.5M EUR control cost is an engineering estimate of tooling, staffing and audit travel. The division is exact and reproduces to 906.67%. Exactness of the arithmetic says nothing about the three numbers going in, so the figure belongs in a business case only after each input has been replaced by the operator's own.
 
 ---
 
@@ -323,7 +325,7 @@ Technical specifications alone are insufficient to guarantee supply chain integr
 ### 6.1 Structure of Annex 7 Procurement Covenants
 Annex 7 binds all value chain participants to verifiable security deliverables:
 
-1. **Mandatory Machine-Readable Deliverables:** Every hardware delivery must include a cryptographically signed CycloneDX 1.6+ document containing verified HBOM, SBOM, CBOM, and MBOM tiers. Deliveries lacking valid machine-readable documentation are rejected at the loading dock without payment release.
+1. **Mandatory Machine-Readable Deliverables:** Every hardware delivery must include a CycloneDX 1.6+ document signed by the supplier, containing HBOM, SBOM, CBOM, and MBOM tiers, whose signature the buyer checks against the supplier's enrolled key before the goods are accepted. Deliveries lacking valid machine-readable documentation are rejected at the loading dock without payment release.
 2. **Factory HSM Audit Rights:** The buyer reserves the right to conduct independent physical and cryptographic audits of the supplier's manufacturing facilities and key injection infrastructure.
 3. **24-Hour Vulnerability Escalation SLA:** Suppliers must contractually commit to notifying the buyer within twelve hours of discovering any critical vulnerability or active exploit affecting delivered hardware or firmware.
 4. **Indemnification for Regulatory Fines:** If a regulatory penalty under CRA Article 64 is levied against the operator due to an undisclosed vulnerability, falsified SBOM, or backdoored component provided by the supplier, the supplier contractually assumes full financial liability.
@@ -344,7 +346,9 @@ Lloyd's Market Association Bulletin Y5381 mandates that cyber policies exclude l
 | **Probable Maximum Loss (PML)** | Subjective site estimates ($100M+ unconstrained accumulation). | Mathematically bounded failure propagation modeling physical manifold isolation. | PML reduced by 42%; reinsurance capital release achieved. |
 | **State-Backed Attack Attribution** | Ambiguous. Disputed claims lead to protracted coverage litigation under Y5381. | Attested hardware zero trust (Caliptra RoT, DICE) proves breach isolation. | Policyholders maintain affirmative coverage; war exclusion waivers granted. |
 | **Physical Consequential Loss** | Property and cyber policies engage in mutual coverage disputes over kinetic loss. | Multi-BOM digital twin models explicit physical damage boundaries ($h_f$, $\Delta T$). | Integrated Property-Cyber endorsements written with clear indemnity attachment points. |
-| **Deductible Sizing** | High static deductibles ($10M to $50M) reflecting unquantified supply chain risk. | Dynamic deductibles indexed to continuous VEX feed status and verified HSM provenance. | Working capital requirements reduced; premium credits up to 28% achieved. |
+| **Deductible Sizing** | High static deductibles ($10M to $50M) reflecting unquantified supply chain risk. | Dynamic deductibles indexed to continuous VEX feed status and to HSM provenance the buyer has audited under the Annex 7 audit right. | Working capital requirements reduced; premium credits up to 28% achieved. |
+
+The percentages in the right-hand column are modelled outcomes, not quoted terms. The 42% reduction in probable maximum loss and the 28% premium credit express what this working group judges a complete multi-BOM evidence package to be worth at placement. No broker submission, bound slip or treaty wording is cited for either number, and neither should be carried into a board paper without a broker testing it against the current market.
 
 ---
 
