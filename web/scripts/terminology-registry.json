@@ -1,0 +1,41 @@
+{
+  "_comment": "One definition per term. The gate fails if a document uses a listed variant. Add a term here before using it in a paper.",
+  "terms": [
+    {
+      "canonical": "Cryptography Bill of Materials",
+      "abbreviation": "CBOM",
+      "variants": ["Component BOM", "Component Bill of Materials", "Component Bill of Material"],
+      "note": "Ruled 2026-09-07. Matches CycloneDX cryptographic-asset."
+    },
+    {
+      "canonical": "ECMA-424",
+      "abbreviation": null,
+      "variants": ["CycloneDX (ISO/IEC 5962)", "CycloneDX 1.6+ (ISO/IEC 5962)"],
+      "note": "CycloneDX standardisation. ISO/IEC 5962 is SPDX and must never be attached to CycloneDX."
+    },
+    {
+      "canonical": "ISO 15926-1",
+      "abbreviation": null,
+      "variants": [],
+      "note": "Overview and fundamental principles. Part number is mandatory at every use."
+    },
+    {
+      "canonical": "ISO 15926-2",
+      "abbreviation": null,
+      "variants": [],
+      "note": "Data model."
+    },
+    {
+      "canonical": "ISO 15926-4",
+      "abbreviation": null,
+      "variants": [],
+      "note": "Reference data library."
+    }
+  ],
+  "bare_forms_forbidden": [
+    {
+      "pattern": "ISO 15926(?![-0-9])",
+      "message": "ISO 15926 must carry a part number. Parts differ: 1 overview, 2 data model, 4 reference data library."
+    }
+  ]
+}
