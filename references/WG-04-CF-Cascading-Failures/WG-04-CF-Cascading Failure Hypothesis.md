@@ -2892,26 +2892,31 @@ Overall 10-Year Risk: P_10yr × P_success = 0.48 (48% MEDIUM-HIGH)
 3. **Environmental Factors (20% weight):** Declining grid inertia amplifies attack impact
 4. **Detection Capability (10% weight):** Current monitoring insufficient for rapid response
 
+**Reconciliation with the body of the paper.** The multiplicative model above is an illustration of how threat factors compound, not the paper's stated likelihood. Its factors are the working group's own judgements and none carries a citation, so the 29 percent annual and 48 percent ten-year figures it produces are not used anywhere else in this document. Section 5.9 and section 9.5 both use the paper's stated assessment of 15 to 30 percent over a ten-year horizon, midpoint 22.5 percent, which is also the working group's own and also uncited. Where the two disagree, the body governs. A reader building on this paper should use 15 to 30 percent and treat the multiplicative decomposition as showing structure rather than supplying a number.
+
 #### Consequence Impact Analysis
 
 **Economic Impact Model:**
 
+This appendix does not carry a second cost model. Direct customer cost is computed once, in section 5, from the AER's determined value of customer reliability, and Appendix D records the method. The relation is:
+
 ```
-Direct Costs:
-- Equipment damage (BESS, transformers, relays): [investment required]M (median scenario)
-- Emergency response and restoration labor: [investment required]M
-- Replacement power procurement (spot market): [investment required]M
-
-Indirect Costs:
-- Customer compensation (regulatory requirement): [investment required]M
-- Reputation damage and customer churn: [investment required]M
-- Regulatory fines (AESCSF non-compliance): [investment required]M
-- Business interruption across 6 critical sectors: [investment required]M
-
-Total Economic Impact: [investment required]M to [investment required]B (90% confidence interval)
-
-Expected Value: E(Cost) = [investment required]M × 0.7 + [investment required]B × 0.3 = [investment required]M
+E_unserved (kWh) = customers x average coincident demand (kW) x restoration hours
+C_direct  (AUD)  = VCR (AUD per kWh) x E_unserved
 ```
+
+Applied to the reference case, the full network at the longest duration the AER determination covers:
+
+```
+1,200,000 customers x 2.15 kW x 12 h = 30,960 MWh
+30,960,000 kWh x AUD 38.53 per kWh   = AUD 1.19 billion
+```
+
+That AUD 1.19 billion is the largest direct customer cost this paper states on the determination alone [n]. The tier 4 envelope of AUD 1.99 billion to AUD 8.95 billion in section 5.4 extends it to 24 and 72 hours and is an extrapolation, labelled as one wherever it appears.
+
+An earlier draft of this appendix carried seven further cost lines: equipment damage, emergency response and restoration labour, replacement power procurement, customer compensation, reputation damage and churn, regulatory fines for AESCSF non-compliance, and business interruption across the six dependent sectors. Every one is a real cost and none has a sourced input. All seven are removed and recorded in section 5.10 and section 4.7, which set out the missing input in each case. No total economic impact and no expected value across a 70 or 30 percent weighting are stated, because six of the eight terms that total would need do not exist.
+
+The single sourced cross-check available is an observed one. Business SA surveyed about 200 businesses after the 28 September 2016 South Australian black system and put the cost to South Australian business at AUD 367 million [n]. That is a lobby group's survey of business losses only, so it is a floor on the event's economic cost rather than a total. Section 5.7 runs the relation above against the same event and gets AUD 709 million, roughly twice the surveyed figure, in the direction the difference should fall.
 
 **Physical Safety Impact Model:**
 
@@ -2932,70 +2937,68 @@ Serious Injury Risk:
 
 Total Serious Injury Range: 40-120 (median: 75)
 
-Value of Statistical Life (VSL): [investment required]M (Australian government standard)
-Safety Impact Value: 12 fatalities × [investment required]M = [investment required]M
+No monetised safety impact is stated.
 ```
+
+An earlier draft multiplied the median 12 fatalities by an Australian government value of statistical life. No VSL figure was sourced for this paper, so neither the VSL nor the product is stated. The fatality and injury ranges above are prospective models with no Australian cyber-physical precedent; Appendix M records the basis for them and section 6.4 carries the same caution. They are not converted to dollars and are not added to the direct customer cost of section 5.
 
 #### Risk-Adjusted Return on Investment (ROI)
 
-**Investment Summary:**
+**Investment Summary.** No phase carries a dollar total, because no phase has a public price for every line. Section 9.3 assigns each line an ordinal band against the sourced CIRMP cyber envelope of AUD 1.29 million one-off and AUD 0.60 million per year, and states the band arithmetic:
 
-- Phase 1 (Critical): [investment required]M
-- Phase 2 (Enhanced): [investment required]M
-- Phase 3 (Advanced): [investment required]M
-- Total Program Cost: [investment required]M
+- Phase 1, immediate: two band C one-off lines, one band B, and two band R recurring lines
+- Phase 2, short term: three band D lines, two band C, one band B
+- Phase 3, ongoing: band R throughout, five lines, none with a public price
+- Bounded one-off total across Phases 1 and 2: AUD 2.3 million to AUD 6.2 million (modelled: band boundary arithmetic, not a quotation)
+- Three band D lines exceed the envelope individually and cannot be bounded above, so the true one-off total is higher than AUD 6.2 million by an amount this paper cannot state
 
-**Risk Reduction Effectiveness:**
+**Risk Reduction Effectiveness.** An earlier draft assigned Phase 1 a 60 percent reduction, Phase 2 a further 20 percent to 80 percent cumulative, and Phase 3 a further 10 percent to 90 percent cumulative. None of those figures was cited, and cumulating them treats risk reductions as additive. Dragos and Marsh McLennan, whose measurement is the only published one located, state explicitly that their per-control figures are not additive and their report models no combined effect [n]. The cumulative ladder is removed. The band used in its place is their measured range across five OT control classes, 12.18 to 18.46 percent per class, applied once rather than compounded.
 
-- Phase 1: 60% reduction in attack success probability
-- Phase 2: Additional 20% reduction (80% cumulative)
-- Phase 3: Additional 10% reduction (90% cumulative)
-
-**Expected Loss Calculation:**
+**Expected Loss Calculation.** The three-phase ladder an earlier draft carried here needed a per-phase residual success probability for every step, and no such figure exists. The method that does hold, worked in section 9.5, uses three inputs and one relation:
 
 ```
-Current Risk (No Mitigation):
-  E(Loss_current) = P_attack × P_success × E(Cost)
-                  = 0.29 × 0.50 × [investment required]M = [investment required]M per year
-
-Post-Phase 1 Risk:
-  E(Loss_phase1) = 0.29 × (0.50 × 0.40) × [investment required]M = [investment required]M per year
-  Annual Risk Reduction = [investment required]M - [investment required]M = [investment required]M
-
-Post-Phase 2 Risk:
-  E(Loss_phase2) = 0.29 × (0.50 × 0.20) × [investment required]M = [investment required]M per year
-  Annual Risk Reduction = [investment required]M (from baseline)
-
-Post-Phase 3 Risk:
-  E(Loss_phase3) = 0.29 × (0.50 × 0.10) × [investment required]M = [investment required]M per year
-  Annual Risk Reduction = [investment required]M (from baseline)
+Expected loss  = P(attack over 10 years) x direct cost
+Avoided loss   = expected loss x risk reduction
 ```
 
-**ROI Calculation (10-Year Horizon):**
+Applied to the reference case, with every input named:
 
 ```
-Total Risk Reduction Value (10 years):
-  Value = [investment required]M/year × 10 years = [investment required]M
-
-Total Program Investment: [investment required]M
-
-Net Benefit: [investment required]M - [investment required]M = [investment required]M
-
-ROI = ([investment required]M / [investment required]M) × 100% = 4,390%
-
-Payback Period: [investment required]M / [investment required]M/year = 0.6 years (7 months)
+P(attack over 10 years) = 0.15 to 0.30, midpoint 0.225
+    working group assessment, section 1. Uncited.
+Direct cost             = AUD 1.19 billion
+    AER determined VCR, full network at 12 h, section 5.4.
+Expected loss           = 0.225 x 1,190 = AUD 268 million
+    section 5.9. Range AUD 179 million to AUD 358 million.
+Risk reduction          = 0.1218 to 0.1846 per control class
+    Dragos and Marsh McLennan, measured over a decade of claims.
+Avoided loss at 0.12    = 268 x 0.12 = AUD 32.2 million over 10 years
+Avoided loss at 0.18    = 268 x 0.18 = AUD 48.2 million over 10 years
 ```
 
-**Sensitivity Analysis:**
+**ROI Calculation, 10-Year Horizon.** Section 9.5 derives this once and it is not recomputed here. Programme cost is the ten-year CIRMP cyber component, AUD 1.29 million one-off plus ten years at AUD 0.60 million per year, giving AUD 7.3 million.
 
-| Parameter                | Low Estimate           | Base Case              | High Estimate          | ROI Range        |
+```
+At 12 percent:  32.2 / 7.3 = 4.4 : 1     net benefit AUD 24.9 million
+At 18 percent:  48.2 / 7.3 = 6.6 : 1     net benefit AUD 40.9 million
+Sensitivity:   179 x 0.12 / 7.3 = 2.9 : 1
+               358 x 0.18 / 7.3 = 8.8 : 1
+```
+
+Neither side is discounted. No discount rate is sourced, so no figure above is a net present value and none should be labelled one.
+
+**Payback period.** Spreading the ten-year avoided loss evenly across ten years gives AUD 3.22 million per year at 12 percent and AUD 4.82 million per year at 18 percent. Against a programme cost of AUD 7.3 million, payback is 2.3 years and 1.5 years respectively (modelled: the even spread is an assumption the underlying probability assessment does not require, since a single event either occurs in a given year or does not). The earlier draft's 7 months rested on a 4,390 percent return that section 9.5 shows to be an order of magnitude high.
+
+**Sensitivity Analysis.**
+
+| Parameter | Low | Base | High | Resulting ratio |
 | :--- | :--- | :--- | :--- | :--- |
-| Attack Probability       | 15% (10-yr)            | 48% (10-yr)            | 75% (10-yr)            | 1,460% - 7,320%  |
-| Impact Cost              | [investment required]M | [investment required]M | [investment required]B | 2,195% - 10,975% |
-| Mitigation Effectiveness | 70%                    | 90%                    | 95%                    | 3,414% - 4,635%  |
-| Implementation Cost      | [investment required]M | [investment required]M | [investment required]M | 3,293% - 5,853%  |
+| Attack probability over 10 years | 15 percent | 22.5 percent | 30 percent | Drives expected loss of AUD 179 million, AUD 268 million, AUD 358 million (working group assessment, uncited) |
+| Direct cost | AUD 1.19 billion, VCR determination boundary | Same | AUD 8.95 billion, tier 4 at 72 h | Base ratios 4.4:1 to 6.6:1; the high case is not used, for the reason below |
+| Control effectiveness | 12.18 percent | 15 percent | 18.46 percent | 2.9:1 to 8.8:1 across the full loss range [n] |
+| Programme cost | AUD 7.3 million | AUD 7.3 million | Unbounded above | The three band D lines of section 9.3 cannot be bounded, so no high-cost ratio is computable |
 
-**Interpretation:** Even under conservative assumptions (Low Estimate column), the security program delivers >1,000% ROI, demonstrating robust economic justification across all reasonable scenarios.
+**Interpretation.** The defensible ratio is 4.4:1 to 6.6:1, inside a sensitivity envelope of 2.9:1 to 8.8:1. Substituting the tier 4 upper bound of AUD 8.95 billion would give 33:1 to 49.5:1, and section 9.5 declines to use it: that figure stacks the working group's own probability assessment on a VCR extrapolated to six times its determined range, and a ratio built on two unsourced assumptions and an extrapolation is a rhetorical device rather than a result. The programme cost side is also optimistic, because AUD 7.3 million is a sector-average regulatory compliance figure that does not cover the band D controls at all. Both distortions are stated rather than netted off.
 
 #### Cascading Failure Physics Equations
 
