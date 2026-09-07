@@ -3,7 +3,7 @@ This assessment models cascading failure propagation from coordinated cyber-phys
 
 ## Cascading Failure Hypothesis
 
-The central finding is that a coordinated "Death Wobble" oscillation attack (see [j,mckenney's Death Wobble-The Grids Precarious Pulse Frequency Instability - jmckenney](/papers/death-wobble-frequency-instability), a phenomenon extensively documented by McKenney (2024, 2025) in analysis of the South Australia 2016 blackout (6.1 Hz/s RoCoF), UK 2019 blackout (0.125 Hz/s RoCoF relay disconnection threshold), and Iberian Peninsula 2025 event (inter-area oscillations), executed through the Retailer API supply chain, can induce Rate of Change of Frequency (RoCoF) exceedances greater than 1.0 Hz/s under reduced-inertia grid conditions. This triggers protection relay cascades that propagate from a localized 8,000-customer outage to a regional blackout affecting 1.2 million customers within 120 minutes. Six interdependent critical infrastructure systems, including water, hospitals, telecommunications, transport, military, and financial services, together amplify the consequences into a multi-domain crisis with estimated economic impact between [investment required] million and [investment required] billion.
+The central finding is that a coordinated "Death Wobble" oscillation attack (see [j,mckenney's Death Wobble-The Grids Precarious Pulse Frequency Instability - jmckenney](/papers/death-wobble-frequency-instability), a phenomenon extensively documented by McKenney (2024, 2025) in analysis of the South Australia 2016 blackout (6.1 Hz/s RoCoF), UK 2019 blackout (0.125 Hz/s RoCoF relay disconnection threshold), and Iberian Peninsula 2025 event (inter-area oscillations), executed through the Retailer API supply chain, can induce Rate of Change of Frequency (RoCoF) exceedances greater than 1.0 Hz/s under reduced-inertia grid conditions. This triggers protection relay cascades that propagate from a localized 8,000-customer outage to a regional blackout affecting 1.2 million customers within 120 minutes. Six interdependent critical infrastructure systems, including water, hospitals, telecommunications, transport, military, and financial services, together amplify the consequences into a multi-domain crisis. Direct customer cost of unserved energy runs from AUD 1.3 million at the localized tier to AUD 8.95 billion at system-wide collapse. The lower figure rests on the AER's determined Value of Customer Reliability. The upper figure extrapolates that 12-hour-bounded value across 72 hours and is an upper bound, not a determination (section 5).
 
 The probability of such an attack materializing within a 10-year horizon is assessed at 15-30% (MEDIUM), based on the convergence of vulnerable DERMS/API architecture, inadequate ICS protocol security, reduced grid inertia from renewable penetration, and demonstrated nation-state capability against energy infrastructure. Physical safety consequences range from 5 to 25 fatalities and 40 to 120 serious injuries, arising from thermal runaway events, traffic signal failures, medical infrastructure collapse, and delayed emergency services.
 
@@ -1349,68 +1349,121 @@ gantt
 
 ## 5. Economic Impact Assessment
 
-### 5.1 Impact Summary
+This section costs one thing: the direct cost to customers of energy not supplied during the modelled cascade. Equipment damage, litigation, insurance, reputational cost and opportunity cost are not quantified, because no sourced input exists for them; section 5.10 records each omission. Every monetary figure below is either computed from a cited input or labelled as a modelled estimate with its assumption stated.
 
-| Impact Category                               | Low Estimate                    | High Estimate                   | Most Likely (P50)               |
-| :--- | :--- | :--- | :--- |
-| **Direct Grid Damage**                  | [investment required]           | [investment required]           | [investment required]           |
-| **Customer Economic Loss**              | [investment required]           | [investment required]           | [investment required]           |
-| **Regulatory Penalties and Litigation** | [investment required]           | [investment required]           | [investment required]           |
-| **Reputational Damage (24-month)**      | [investment required]           | [investment required]           | [investment required]           |
-| **Insurance Claims and Premiums**       | [investment required]           | [investment required]           | [investment required]           |
-| **Opportunity Costs**                   | [investment required]           | [investment required]           | [investment required]           |
-| **TOTAL (24-Month Horizon)**            | **[investment required]** | **[investment required]** | **[investment required]** |
+### 5.1 Derivation Basis
 
-**[MODELED ESTIMATE - Sensitivity analysis: ±30% based on attack severity, restoration effectiveness, and regulatory response. Economic modeling uses AEMO Value of Customer Reliability (VCR) methodology adapted for cyber-physical attack scenarios. High estimate assumes Tier 4 system-wide collapse; low estimate assumes Tier 2 local cascade containment.]**
+Every monetary figure in this section derives from published inputs through the relations below.
+A reader holding the cited sources can reproduce or contest any value.
 
-### 5.2 Direct Grid Damage
+$$E_{\text{unserved}} = N_{\text{customers}} \times \bar{P}_{\text{demand}} \times t_{\text{restore}}$$
 
-Equipment replacement and emergency restoration costs are driven by transformer failure probabilities and BESS thermal damage:
+$$C_{\text{direct}} = \text{VCR} \times E_{\text{unserved}}$$
 
-| Component                        | Failure Probability | Quantity at Risk  | Unit Cost             | Low Estimate          | High Estimate         |
+VCR is the Value of Customer Reliability in dollars per kilowatt hour, determined by the Australian
+Energy Regulator [n]. Determination of VCR has been the AER's statutory responsibility since the
+Australian Energy Market Commission's final rule of July 2018. The earlier 2014 NEM-wide study was
+produced by AEMO [n].
+
+Figures marked **modelled** are not measured outcomes. Their assumptions are stated inline.
+
+### 5.2 Scope Limit on the VCR Values
+
+The AER determined the 2024 VCR values for unplanned outages of up to 12 hours. That is the duration range the willingness-to-pay surveys behind them covered [n]. The cascade modelled in this paper runs to 72 hours.
+
+Applying a 12-hour value across 72 hours takes the parameter roughly an order of magnitude outside the range for which it was determined. The correct instrument for outages longer than 12 hours is the AER's separate Value of Network Resilience review, and this paper holds no VNR figure. Every figure below that rests on a duration longer than 12 hours is therefore an upper-bound extrapolation, not a determination, and is marked as such in the cell where it appears. The extrapolation is linear in duration. The real relation is not known to be linear, and what a household will pay to avoid the second day of an outage is not established by a survey about the first twelve hours.
+
+Two further limits apply to the VCR values used here.
+
+- The NEM value of AUD 41.48 per kWh and the NSW value of AUD 38.53 per kWh are **residential** values from Table 1 of the AER's 2024 final report [n]. They are not all-customer blended values. The AER's NEM-wide and regional aggregates were not retrieved and are not used anywhere in this section.
+- The reference network is modelled on NSW, so NSW residential AUD 38.53 per kWh is the base case throughout. Substituting the NEM residential value raises every computed figure below by 7.7 percent.
+
+### 5.3 Input Values
+
+| Input | Value | Basis |
+| :--- | :--- | :--- |
+| Customers, full network | 1,200,000 | RefDNSP-1.2M stipulated parameter, section 2. Modelled, not sourced |
+| Average coincident demand per customer | 2.15 kW | 1,826 MW regional demand across 850,000 customers, AEMO final report on the South Australian black system of 28 September 2016 [n] |
+| VCR, residential NSW | AUD 38.53 per kWh, 2024 dollars | AER 2024 VCR final report, Table 1 [n] |
+| VCR, residential NEM | AUD 41.48 per kWh, 2024 dollars | AER 2024 VCR final report, Table 1 [n] |
+| VCR duration validity | Unplanned outages up to 12 hours | AER 2024 VCR final report, scope statement [n] |
+
+The 2.15 kW anchor is an all-customer coincident average. AEMO's 1,826 MW is regional demand and the 850,000 is all South Australian customers, so the figure already carries residential, commercial and industrial load together. No per-segment demand figure was available, so the same 2.15 kW is applied to every customer in the table below.
+
+Two transplants are involved and both are stated rather than buried. The 2.15 kW is measured for one region, at one moment, on a spring afternoon in South Australia, and is applied here to a modelled NSW network. Coincident demand per customer varies by jurisdiction, season and time of day, and no NSW equivalent was sourced. Second, the customer counts and restoration durations in section 5.4 come from the cascade model of section 3.2. They are the working group's own scenario parameters, not measured outcomes.
+
+### 5.4 Direct Customer Cost by Cascade Tier
+
+Tiers, customer counts and durations are those of section 3.2. Unserved energy is customers multiplied by 2.15 kW multiplied by restoration hours. Direct cost is that energy multiplied by AUD 38.53 per kWh.
+
+| Tier | Customers | Duration | Unserved energy | Direct customer cost | VCR domain |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| Power Transformers (66 kV)       | 5-15%               | 54 substations    | [investment required] | [investment required] | [investment required] |
-| Switchgear (11 kV)               | 8-20%               | 162 bays          | [investment required] | [investment required] | [investment required] |
-| BESS Battery Modules             | 2-8% (thermal)      | 54 systems        | [investment required] | [investment required] | [investment required] |
-| BESS Inverters/PCS               | 5-12%               | 54 units          | [investment required] | [investment required] | [investment required] |
-| Emergency Restoration Labour     | 100%                | 72-hour operation | Not applicable         | [investment required] | [investment required] |
-| Replacement Equipment Expediting | 100%                | Air freight, OEM  | Not applicable         | [investment required] | [investment required] |
+| 1, immediate impact zone | 8,000 to 12,000 | 2 to 4 h | 34 to 103 MWh | AUD 1.3 million to AUD 4.0 million [n] | 12 h or less, determined |
+| 2, local cascade, lower bound | 80,000 | 8 h | 1,376 MWh | AUD 53 million [n] | 12 h or less, determined |
+| 2, local cascade, upper bound | 120,000 | 16 h | 4,128 MWh | AUD 159 million (modelled: VCR extrapolated to 16 h, beyond its 12 h determination) | Extrapolated |
+| 3, regional cascade | 400,000 to 600,000 | 16 to 36 h | 13,760 to 46,440 MWh | AUD 530 million to AUD 1.79 billion (modelled: VCR extrapolated to 36 h) | Extrapolated |
+| 4, system-wide collapse | 1,000,000 to 1,500,000 | 24 to 72 h | 51,600 to 232,200 MWh | AUD 1.99 billion to AUD 8.95 billion (modelled: VCR extrapolated to 72 h, six times its determined range) | Extrapolated |
 
-Transformer lead times under normal procurement are implementation period required. Emergency procurement via air freight requires 3-5 times normal cost, placing the per-unit expedited cost at [investment required] million.
+Worked example, tier 2 lower bound: 80,000 customers multiplied by 2.15 kW multiplied by 8 hours gives 1,376,000 kWh. At AUD 38.53 per kWh that is AUD 53.0 million.
 
-### 5.3 Customer Economic Loss
+**Reference case at the boundary of validity.** The full network at the longest duration the AER determination covers: 1,200,000 customers multiplied by 2.15 kW multiplied by 12 hours gives 30,960 MWh, and at AUD 38.53 per kWh, AUD 1.19 billion [n]. This is the largest direct customer cost this paper can state on the determination alone. Every figure above it is an extrapolation, including the headline tier 4 range.
 
-**Residential Impact:** Outage duration determines severity from food spoilage ([investment required] per customer at 2-4 hours) through refrigeration loss and lost wages ([investment required] per customer at 8-16 hours) to major property impact including hotel costs and lost productivity ([investment required] per customer at 24-48 hours). With 1,000,000 customers affected at the 24-48 hour tier, residential losses alone reach [investment required] million.
+The full envelope across the cascade, from the localized tier 1 outage to system-wide collapse, is AUD 1.3 million to AUD 8.95 billion. The lower bound is a determination. The upper bound is not.
 
-**Commercial Impact:** 8,500 retail and hospitality businesses lose an average [investment required] per day in revenue. 1,200 manufacturing facilities lose [investment required] per day. 12,000 professional services firms lose [investment required] per day. Aggregate commercial customer losses range from [investment required] million to [investment required] million.
+### 5.5 Restoration Profile and the Single-Scalar Simplification
 
-**Industrial Impact:** Food processing (45 facilities, [investment required] million in product spoilage), chemical and pharmaceutical production (12 facilities, [investment required] million in batch losses), and mining operations (8 facilities, [investment required] million in production halt costs).
+The table above uses one restoration-hours scalar per tier. Real restorations are not uniform. In the only observed Australian case at this scale, the South Australian black system of 28 September 2016, the first customers were restored under three hours after the event, 80 to 90 percent of load was back by midnight, roughly eight hours in, and the last customers were not restored until 11 October, a tail of about thirteen days [n].
 
-### 5.4 Regulatory Penalties and Litigation
+A single scalar is therefore a simplification, and it is stated as one. It understates the tail and overstates the head. The direction of the error depends on which end dominates, and the tail dominates when it is long: if 10 percent of 1,200,000 customers stayed off for thirteen days, that alone is 120,000 multiplied by 2.15 kW multiplied by 312 hours, or 80,496 MWh, which is AUD 3.10 billion at AUD 38.53 per kWh (modelled: VCR extrapolated to 312 h, twenty-six times its determined range). That figure is offered to show why the scalar is a simplification, not as a cost estimate. At twenty-six times the determined duration the VCR carries no useful information, which is the honest conclusion about long-tail restoration cost on the evidence available.
 
-**SOCI Act 2018 Violations:**
+### 5.6 Segment Composition of the Customer Base
 
-- Failure to protect critical infrastructure: [investment required] million (80% probability)
-- Inadequate risk management program: [investment required] million (90% probability)
-- Late incident reporting: [investment required] million (60% probability)
+The table in section 5.4 applies a residential VCR to every customer. The AER's business values, in AUD per kWh, 2024 dollars, Table 2 of the final report [n], are Agriculture 22.25, Commercial 34.39 and Industrial 33.49. All three sit below the NSW residential 38.53 used above, so applying the residential value across the whole customer base biases the computed cost upward rather than downward.
 
-**Civil Litigation:**
+The AER's very large business values, Table 3 [n], are Services 33.10, Industrial 12.22, Mines 10.63 and Metals 5.38. They are not used in any computation here, and they should not be treated as stable parameters: the AER attributes part of the fall since 2019 to a change in who answered the survey rather than to a change in preference, noting that "the sample composition for each segment in 2024 is substantially different from 2019". Very large business industrial falls from AUD 142.22 to AUD 12.22 in 2024 dollars across five years, an order of magnitude on a resample.
 
-- Wrongful death claims: 5-15 cases at [investment required] million average = [investment required] million
-- Personal injury claims: 50-120 cases at [investment required] average = [investment required] million
-- Business interruption class action: [investment required] million (residential) + [investment required] million (commercial)
+### 5.7 Observed Cost of a Comparable Event
 
-### 5.5 Risk-Adjusted Expected Loss
+Business SA, the state's peak business lobby, surveyed about 200 businesses after the 28 September 2016 South Australian black system and put the cost to South Australian business at AUD 367 million, with a median of AUD 5,000 per business and about AUD 115 million of the total falling on four firms [n]. This is a lobby group's survey, not a regulator's figure, and it counts business losses only, so it is a floor on the event's economic cost rather than a total.
 
-```
-Probability of Attack (10-year horizon): 15-30%
-Expected Loss = [investment required] (P50) x 22.5% (midpoint probability) = [investment required]
+The same relation used in section 5.4, applied to that event, gives a cross-check: 850,000 customers multiplied by 2.15 kW multiplied by 8 hours is 14,620 MWh, and at the South Australian residential VCR of AUD 48.52 per kWh that is AUD 709 million [n]. The modelled figure is about twice the surveyed one, which is the expected direction of difference: the model applies a residential VCR to all customers and counts residential and public-sector loss that the survey excluded, while the survey counts categories of business cost that the unserved-energy relation does not decompose. Note also that this applies a 2024 VCR to a 2016 event, so the comparison is not like for like in price terms.
 
-Net Present Value (5-year horizon):
-  Low: [investment required] x 20% x 0.85 discount factor = [investment required]
-  High: [investment required] x 25% x 0.85 discount factor = [investment required]
-  Most Likely: [investment required]
-```
+### 5.8 Regulatory and Legal Consequence
+
+No sourced basis exists for forecasting SOCI Act 2018 penalties, civil damages, or class action quantum against the reference network. Those figures are not stated. What can be stated is the one regulatory outcome that has been settled for a comparable event.
+
+After the Great Britain outage of 9 August 2019, which disconnected 1,152,878 customers, Ofgem reported that Hornsea 1 Limited and RWE Generation UK plc each agreed to make voluntary payments of GBP 4.5 million to the Energy Industry Voluntary Redress Scheme, and that Eastern Power Networks plc and South Eastern Power Networks plc agreed to pay GBP 1.5 million in aggregate for reconnecting customers without instruction, a separate breach from the cascade itself [n]. Ofgem made no formal legal determination of breach, and found no failures by the system operator that contributed to the outage [n].
+
+The order of magnitude is the point. About GBP 10.5 million across four licensees, for an event affecting a customer count comparable to the tier 4 scenario, is small against the direct customer cost computed in section 5.4. Regulatory payments are not a proxy for economic loss, and neither figure should be used to estimate the other.
+
+### 5.9 Risk-Adjusted Expected Loss
+
+The probability of the modelled attack over a 10-year horizon, 15 to 30 percent, is this paper's own assessment (section 1). It is not an external determination and carries no citation.
+
+Expected loss is that probability multiplied by direct cost. Using the reference case at the boundary of VCR validity, AUD 1.19 billion:
+
+- At 15 percent: AUD 179 million (modelled: probability is the working group's own assessment)
+- At 22.5 percent, the midpoint: AUD 268 million (modelled: same basis)
+- At 30 percent: AUD 358 million (modelled: same basis)
+
+Substituting the tier 4 upper bound of AUD 8.95 billion raises the midpoint expected loss to AUD 2.01 billion (modelled: compounds the probability assessment with a VCR extrapolated to 72 h). No net present value is stated, because no discount rate is sourced and an assumed one would add a second unsourced parameter to a figure that already carries two.
+
+### 5.10 Categories Not Quantified
+
+The following were carried as cost lines in an earlier draft of this section and are removed rather than estimated. Each is a real cost. None has a sourced input.
+
+| Category | Why it is not quantified |
+| :--- | :--- |
+| Direct grid damage | No sourced unit cost for 66 kV transformers, 11 kV switchgear, BESS modules or inverters, and no sourced failure probability for any of them |
+| Emergency restoration labour and expediting | No sourced labour rate or air-freight premium |
+| Regulatory penalties | No sourced SOCI Act penalty schedule or precedent against an Australian DNSP |
+| Civil litigation | No sourced quantum for wrongful death, personal injury or business interruption class action in this jurisdiction |
+| Reputational damage | No sourced method for valuing it over a 24-month horizon |
+| Insurance claims and premium response | No sourced premium elasticity |
+| Opportunity cost | No sourced basis, and it overlaps the direct customer cost already computed |
+| Per-facility industrial loss | No sourced per-facility spoilage or batch-loss value for food processing, pharmaceutical or mining operations |
+
+Interdependency amplification across the six critical infrastructure systems of section 4 is also excluded from every figure in this section. The direct customer cost computed here is a component of total economic loss, not the total.
 
 ---
 
