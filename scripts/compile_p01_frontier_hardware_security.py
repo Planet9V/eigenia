@@ -322,13 +322,13 @@ graph LR
 2. **Cycle-Accurate HIL Execution**: Candidate exploits are immediately dispatched to parallelized FPGA-based silicon emulators and instrumented physical test racks. The testbed monitors bus telemetry, power supply noise, and register state transitions, verifying whether the candidate exploit successfully violates security invariants.
 3. **Automated Microcode Synthesis**: When the pipeline reproduces a working exploit for a candidate vulnerability on the hardware-in-the-loop testbench, it synthesizes candidate microcode mitigations (e.g., pipeline serialization fences, disabled branch predictors, or rate-limited sidebands), re-runs the same exploit to confirm the mitigation blocks it, re-runs the functional safety suite to confirm the mitigation has not broken a trip path, and distributes the cryptographically signed patch across the production cluster. The confirmation is against the exploit the pipeline holds, which is narrower than a claim that the vulnerability class is closed.
 
-## 7. Supply Chain Provenance & The 4-BOM Architecture
+## 7. Supply Chain Provenance and the Multi-BOM Architecture
 
 Hardware security within the AI Rack Envelope is fundamentally contingent upon verifiable provenance across the global semiconductor and system integration supply chain. An adversary who intercepts a compute tray during manufacturing, transit, or rack assembly can embed microscopic hardware trojans; such as rogue interposers, malicious passive components, or tampered SPI flash chips; that bypass all subsequent logical security controls.
 
-### 7.1 The Unified 4-BOM Provenance Architecture
+### 7.1 The Unified Multi-BOM Provenance Architecture
 
-To eliminate supply chain ambiguity, the platform mandates integration of the **CycloneDX 1.6+ Four-Dimensional Bill of Materials (4-BOM)** standard, providing a machine-readable, cryptographically verifiable attestation of every element residing within the physical envelope:
+To eliminate supply chain ambiguity, the platform mandates the BOM layers defined in section 2.1 of *Unified DEXPI 2.0 & CycloneDX 1.6+ Semantic Bridge*, which is where the layer count is stated once for the corpus. Each layer is expressed in CycloneDX 1.6 [11], and together they give a machine-readable, cryptographically verifiable attestation of every element residing within the physical envelope. The selection of layers is Eigenia's composition over CycloneDX rather than a construct the specification mandates; the component types in the third column are CycloneDX's own:
 
 | # | Bill of Materials | CycloneDX component type | Tracked artifacts |
 |:--:|:---|:---|:---|
@@ -518,7 +518,7 @@ In the commercial property and casualty market, cyber perils affecting industria
 
 To obtain affirmative coverage and prevent crippling sub-limits or uninsurable exclusions:
 1. **IEC 62443 SL-4 as Underwriting Warranties**: Insurers mandate that compute zones housing critical assets satisfy SL-3 or SL-4 conduit segmentation, evidenced by a third-party assessment report the syndicate can read. Failure to maintain independent hardware roots of trust (Caliptra) and line-rate encryption voids affirmative coverage upon forensic investigation.
-2. **Dynamic Retention Deductibles**: Facilities implementing 4-BOM attestations (CycloneDX 1.6+) that an independent assessor has signed off, together with SIL-3 safety interlocks, qualify for base retention deductibles of $250,000\text{ USD}$ per occurrence. Unverified facilities face punitive deductibles exceeding $5,000,000\text{ USD}$ and severe indemnity sub-limits capping business interruption recoveries at less than $10\%$ of total loss.
+2. **Dynamic Retention Deductibles**: Facilities implementing multi-BOM attestations across all six layers (CycloneDX 1.6+) that an independent assessor has signed off, together with SIL-3 safety interlocks, qualify for base retention deductibles of $250,000\text{ USD}$ per occurrence. Unverified facilities face punitive deductibles exceeding $5,000,000\text{ USD}$ and severe indemnity sub-limits capping business interruption recoveries at less than $10\%$ of total loss.
 3. **Catastrophe Risk Accumulation**: Reinsurers deploy deterministic catastrophe models to evaluate simultaneous multi-facility failure across power distribution zones. The AI Rack Envelope provides the provable physical isolation required to decouple correlated rack failures, transforming an uninsurable systemic catastrophe into an actuarially sound, diversified underwriting risk profile.
 
 ## 10. Normative Standards, References & IEEE Bibliographic Register

@@ -7,9 +7,9 @@ The Data Exchange in Process Industry (DEXPI) 2.0 standard defines an XML-based 
 - **Topology Relationship Extraction:** Automatically infers process fluid connections (`PipingSegment`), electrical signaling lines (`SignalLine`), and safety loop dependencies.
 - **Minimum Operational Requirements (MOR):** Verifies physical redundancy constraints on pumps, pressure relief valves, and safety instrumented systems (SIS).
 
-## 2. CycloneDX 1.6 4-BOM Attestations
+## 2. CycloneDX 1.6 Multi-BOM Attestations
 
-Traditional Software Bill of Materials (SBOM) only cover application code libraries. Eigenia extends this with a unified **4-BOM Architecture**:
+Traditional Software Bill of Materials (SBOM) only cover application code libraries. Eigenia extends this across the BOM layers defined in section 2.1 of *Unified DEXPI 2.0 & CycloneDX 1.6+ Semantic Bridge*, which is where the layer count is stated once for the corpus:
 
 | BOM Dimension | Scope & Target | CycloneDX component type |
 | :--- | :--- | :--- |
@@ -25,5 +25,5 @@ CBOM is the Cryptography Bill of Materials, which is what CycloneDX means by the
 ## 3. Deliverables & Integration Standards
 
 1. **DEXPI 2.0 XML Parser:** High-speed graph ingestion translating P&ID sheets into Neo4j/pgvector node triples.
-2. **CycloneDX 1.6 4-BOM Validator:** Automated attestation checking hardware firmware hashes against National Vulnerability Database (NVD) CVEs and ICS-CERT advisories.
+2. **CycloneDX 1.6 Multi-BOM Validator:** Automated attestation checking hardware firmware hashes against National Vulnerability Database (NVD) CVEs and ICS-CERT advisories.
 3. **Plant-to-Twin Synchronization:** Continuous telemetry bridging CAD design intent with real-time SCADA sensor metrics.

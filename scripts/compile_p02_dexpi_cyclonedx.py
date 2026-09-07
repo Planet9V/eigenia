@@ -120,6 +120,12 @@ CycloneDX 1.6+ provides a unified, extensible data format capable of encoding mu
 
 ### 2.1 The Six BOM Layers Defined
 
+Six layers, and six is the count every other Eigenia document refers to when it cites a BOM layer count: HBOM, SBOM, CBOM, MBOM, OBOM and SaaSBOM. This section is where that number is stated for the corpus, so no other document restates it as a bare numeral.
+
+VEX and VDR sit alongside the six and are not counted among them. A vulnerability assertion is a statement about an inventory rather than an inventory in its own right, which is why the table below carries seven rows for six layers.
+
+Each of the six is a BOM type CycloneDX defines. Selecting these six for a cyber-physical asset is Eigenia's composition over CycloneDX 1.6, not a construct the specification mandates. The component types in the second column are CycloneDX's own, and a validator built against ECMA-424 accepts every one of them.
+
 The following table summarizes how each BOM layer operates within the converged Cyber Digital Twin:
 
 | BOM Type | CycloneDX 1.6 Component `type` | Encoded Technical Properties | Verification Standard |
