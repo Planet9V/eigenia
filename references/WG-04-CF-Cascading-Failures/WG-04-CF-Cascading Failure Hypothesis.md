@@ -2105,7 +2105,7 @@ Five actions delivered through policy change and configuration rather than capit
 
 ### 9.7 Board-Level Recommendations
 
-Based on the comprehensive risk assessment and financial analysis in this document, the following Board-level recommendations are presented with risk-adjusted strategic value calculations:
+Five recommendations follow. Costs use the bands of section 9.1, and the cost-benefit basis is the one derived in section 9.5. Where a control has no published price, the recommendation says so and asks the board to require a quotation rather than approve a number nobody can check.
 
 **Recommendation 1: approve the critical path controls**
 
