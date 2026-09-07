@@ -101,7 +101,7 @@ The SFAIR methodology structures IEC 62443 delivery into seven stage-gated phase
 | **Stage 1** | **Scope (S)** | Establish facility boundary; inventory physical assets from DEXPI P&IDs; identify safety-critical nodes. | System Architecture Definition; Criticality Register | **ZCR-1** |
 | **Stage 2** | **Find (F1)** | Network topology discovery; passive OT network capture; protocol inventory (Modbus, BACnet, DNP3). | Asset Inventory Matrix; Communication Flow Graph | **ZCR-2** |
 | **Stage 3** | **Find (F2)** | Zone and conduit partitioning; identify trust boundaries; classify external connectivity vectors. | IEC 62443-3-2 Zone & Conduit Diagram | **ZCR-3** |
-| **Stage 4** | **Assess (A)** | Execute CyHAZOP workshop; score dual-RPN; execute SIL-to-SL convergence mapping. | Consolidated Master Hazard Log; SL-T Assignments | **ZCR-4** |
+| **Stage 4** | **Assess (A)** | Execute CyHAZOP workshop; score $\text{RPN}_c$; execute SIL-to-SL convergence mapping. | Consolidated Master Hazard Log; SL-T Assignments | **ZCR-4** |
 | **Stage 5** | **Implement (I1)** | Author SecRACS contracts; mandate CycloneDX multi-BOM in RFPs; vendor design reviews. | SecRACS Specification; Procurement Contract Addenda| **ZCR-5** |
 | **Stage 6** | **Implement (I2)** | Factory Acceptance Testing (FAT); Site Acceptance Testing (SAT); verify optical data diodes. | FAT/SAT Test Reports; SL-A Verification Matrix | **ZCR-6** |
 | **Stage 7** | **Review (R)** | Third-Party Programme Director audit; annual penetration testing; continuous VEX monitoring. | Certificate of Compliance; Reinsurance Warranty | **ZCR-7** |
