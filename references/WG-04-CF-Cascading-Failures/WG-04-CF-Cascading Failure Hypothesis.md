@@ -1983,21 +1983,55 @@ minimum viable defence costs more than AUD 3.10m by an unbounded amount.
 
 ### 9.3 Return on Investment
 
-```
-Avoided Loss (10-year NPV):     [investment required] (risk-adjusted expected loss)
-Investment:                      [investment required] (24-month program, midpoint)
-Risk Reduction:                  90% (defense-in-depth)
-Net Benefit:                     [investment required] x 90% - [investment required] = [investment required]
-strategic value:                             [investment required] / [investment required] = 30.8:1
+An earlier draft of this section reported ratios of 30.8:1 and 43.9:1, the second annotated as 4,390 percent. Both were computed from inputs that no longer appear anywhere in the text, so neither could be checked, and both rested on an uncited 90 percent risk reduction. They are removed. What follows is built from three sourced inputs and one formula, and every step is shown so a reader can contest it.
 
-Full scenario strategic value (including tail risk):
-  Avoided Loss:                  [investment required] (including high-impact scenarios)
-  Risk Reduction:                90%
-  Net Benefit:                   [investment required] x 90% - [investment required] = [investment required]
-  strategic value:                           [investment required] / [investment required] = 43.9:1 (4,390%)
+**Input 1: programme cost, AUD 7.3 million over ten years.**
+
+From the Australian Government's October 2024 Impact Analysis for amendments to the SOCI Act 2018, Table 19, indexed to June 2024 dollars: a critical electricity asset entity carries an average Critical Infrastructure Risk Management Program cost of AUD 9.2 million one-off and AUD 4.3 million per year [n]. Table 27 of the same document puts cyber and information security hazard at 14 percent of the electricity sector's ten-year regulatory burden [n]. Scaling:
+
+```
+One-off cyber component   = 9.2  x 0.14 = AUD 1.29 million
+Annual cyber component    = 4.3  x 0.14 = AUD 0.60 million per year
+Ten-year programme cost   = 1.29 + (10 x 0.60) = AUD 7.3 million
 ```
 
-The [investment required] million investment represents 0.375% of RefDNSP-1.2M's [investment required] billion regulated asset base.
+This figure covers the cyber and information security hazard component of a CIRMP obligation, as a sector average across critical electricity asset entities. It is not the cost of a bespoke security programme, and it does not cover the band D controls of section 9.2 and section 9.3, which exceed it individually. Using it as the programme cost is a deliberately favourable assumption toward the programme, and the ratios below are correspondingly optimistic.
+
+**Input 2: avoided loss, AUD 268 million.**
+
+Section 5.9 gives the risk-adjusted expected loss over a 10-year horizon as AUD 179 million to AUD 358 million, midpoint AUD 268 million. That range is the paper's own 15 to 30 percent attack probability applied to the AUD 1.19 billion reference case, which is the full network at 12 hours, the longest duration the AER's VCR determination covers. The probability is the working group's assessment and carries no citation. The AUD 1.19 billion is computed from the AER's determined VCR and is the largest direct customer cost this paper can state without extrapolating that determination.
+
+**Input 3: risk reduction, 12 to 18 percent.**
+
+Dragos and Marsh McLennan measure average risk reduction per OT control class at 12.18 to 18.46 percent across a decade of insurance claims [n]. Their five classes are not additive and the report models no combined effect, so no defence-in-depth multiplier is applied here. The band is used directly.
+
+**Result.**
+
+```
+At 12 percent risk reduction:
+  Avoided loss    = 268 x 0.12  = AUD 32.2 million
+  Programme cost  =               AUD 7.3 million
+  Net benefit     = 32.2 - 7.3  = AUD 24.9 million
+  Ratio           = 32.2 / 7.3  = 4.4 : 1
+
+At 18 percent risk reduction:
+  Avoided loss    = 268 x 0.18  = AUD 48.2 million
+  Programme cost  =               AUD 7.3 million
+  Net benefit     = 48.2 - 7.3  = AUD 40.9 million
+  Ratio           = 48.2 / 7.3  = 6.6 : 1
+
+Sensitivity across the full section 5.9 loss range:
+  179 x 0.12 / 7.3 = 2.9 : 1   (low loss, low control effectiveness)
+  358 x 0.18 / 7.3 = 8.8 : 1   (high loss, high control effectiveness)
+```
+
+Neither side of that ratio is discounted. Section 5.9 states no net present value because no discount rate is sourced, and the same applies here, so cost and benefit are both in undiscounted ten-year dollars. Do not label any figure above an NPV.
+
+**Read the result plainly.** The honest ratio is 4.4:1 to 6.6:1, with a sensitivity envelope of 2.9:1 to 8.8:1. That is an order of magnitude below the 43.9:1 the earlier draft claimed. It is still a strong business case. A control programme that returns four to seven dollars for every dollar spent, computed from a government cost estimate and an insurance-claims effectiveness measurement rather than from assumption, does not need inflating, and inflating it is how a board learns to distrust the next number in the same table.
+
+**Tail-risk variant, and why it is not the headline.** Section 5.9 also gives a midpoint expected loss of AUD 2.01 billion when the tier 4 upper bound of AUD 8.95 billion is substituted for the reference case. Running the same arithmetic gives 33:1 at 12 percent and 49.5:1 at 18 percent. Those numbers are not used here. Section 5.9 labels that AUD 2.01 billion as compounding the working group's own probability assessment with a VCR extrapolated to 72 hours, six times the range for which the AER determined it. Two unsourced assumptions stacked on one extrapolation is not a basis for a capital decision, and a ratio derived from it is a rhetorical device rather than a result.
+
+**On the regulated asset base.** An earlier draft stated that the programme represented 0.375 percent of RefDNSP-1.2M's regulated asset base. That claim is removed. RefDNSP-1.2M has no stipulated regulated asset base in section 2, and no RAB figure for any Australian distribution business was sourced for this paper, so the ratio has no denominator and cannot be computed. The nearest available figure is not a substitute: the AER's draft decision for Ausgrid allowed AUD 9,619.6 million of revenue across the five years to 2029 [n], which is a revenue allowance for a different and real business, not an asset base and not RefDNSP-1.2M's.
 
 ### 9.4 Quick Wins: Immediate Actions ([investment required], targeted timeframe)
 
