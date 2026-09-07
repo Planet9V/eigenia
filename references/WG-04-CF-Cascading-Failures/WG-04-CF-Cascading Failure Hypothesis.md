@@ -2107,9 +2107,11 @@ Five actions delivered through policy change and configuration rather than capit
 
 Based on the comprehensive risk assessment and financial analysis in this document, the following Board-level recommendations are presented with risk-adjusted strategic value calculations:
 
-**Recommendation 1: Approve Immediate Critical Investment ([investment required], targeted timeframe)**
+**Recommendation 1: approve the critical path controls**
 
 **Rationale:**
+
+The five figures below are RefDNSP-1.2M's stipulated state from section 2 and the working group's own assessments. They are scenario parameters, not measurements of a real network.
 
 - Current attack surface score: 8.7/10 (CRITICAL)
 - IEC 62443 compliance: 38% (SOCI Act risk)
@@ -2117,29 +2119,45 @@ Based on the comprehensive risk assessment and financial analysis in this docume
 - Demonstrated nation-state capability (Sandworm, FrostyGoop)
 - 15-30% probability of attack within 10-year horizon
 
-**Investment Breakdown:**
+**Critical path, by cost band:**
 
-- Death Wobble Oscillation Detection: [investment required]
-- Modbus Security Gateway (54 sites): [investment required]
-- BMS Firmware Hardening: [investment required]
-- IEC 62351-6 GOOSE Authentication (15 critical substations): [investment required]
+| Control | Cost band | Bounded? |
+| :--- | :--- | :--- |
+| Death Wobble oscillation detection | C, AUD 0.52 million to AUD 1.29 million | Yes |
+| Modbus security gateway across all 54 sites | D, above AUD 1.29 million | No. No published unit price exists for any Modbus security gateway, and no per-site installation cost was found |
+| BMS firmware hardening | B, AUD 0.13 million to AUD 0.52 million | Yes |
+| IEC 62351-6 GOOSE authentication at 15 critical substations | D, above AUD 1.29 million | No. No public cost anchor exists for a GOOSE authentication or MACsec retrofit at any scale |
 
-**strategic value Calculation:**
+The two bounded lines sum to AUD 0.65 million to AUD 1.81 million one-off (modelled: band boundary arithmetic against the AUD 1.29 million CIRMP cyber envelope of section 9.1, not a quotation). The two band D lines cannot be bounded above from any public source, so no total for the critical path is stated.
+
+**Cost-benefit basis:**
 
 ```
-Avoided Loss (10-year NPV): [investment required] (P50 risk-adjusted expected loss)
-Investment: [investment required] (critical path only)
-Risk Reduction: 90% (defense-in-depth)
-Net Benefit: [investment required] × 90% - [investment required] = [investment required]
-strategic value: [investment required] / [investment required] = 115:1
+No separate ratio is computed for the critical path, because two of
+its four lines have no upper cost bound and a ratio needs a
+denominator. The board-level number is the programme-level one from
+section 9.3:
 
-This exceeds Board-mandated 10:1 strategic value threshold for regulated asset base investments by 11.5x
+  Programme cost (10 years, CIRMP cyber component)   AUD 7.3 million
+  Avoided loss (section 5.9 midpoint)                AUD 268 million
+  Risk reduction (Dragos and Marsh McLennan)         12 to 18 percent
+
+  268 x 0.12 / 7.3 = 4.4 : 1
+  268 x 0.18 / 7.3 = 6.6 : 1
+
+  Sensitivity across the full section 5.9 range: 2.9 : 1 to 8.8 : 1
+
+An earlier draft reported 115:1 here, against a stated board threshold
+of 10:1. That figure was computed from an uncited 90 percent risk
+reduction and an investment number that no longer appears in the text.
+It is removed. On the sourced basis the programme returns 4.4:1 to
+6.6:1, which does not clear a 10:1 hurdle. A board applying that hurdle
+should be told so directly rather than shown a number built to clear it.
 ```
 
 **Board Resolution Language:**
 
-> *"The Board approves capital investment of [investment required] million for OT cybersecurity enhancements addressing cascading failure risks identified in EE-CTI-006 assessment, to be completed within targeted timeframe, with quarterly progress reporting to Board Risk Committee. This investment is classified as critical infrastructure protection expenditure eligible for regulatory asset base inclusion under SOCI Act compliance obligations."*
-
+> *"The Board approves the four critical path OT cybersecurity controls addressing cascading failure risks identified in the EE-CTI-006 assessment, being Death Wobble oscillation detection, Modbus security gateway deployment, BMS firmware hardening and IEC 62351-6 GOOSE authentication, subject to receipt of vendor quotations for the two controls that carry no published price. Management is directed to return to the Board Risk Committee with quoted costs before commitment. The Board notes that the assessed cost-benefit ratio for the wider programme is 4.4:1 to 6.6:1 on a sourced basis, computed from the Commonwealth Impact Analysis cost estimate for a Critical Infrastructure Risk Management Program and published per-control risk reduction of 12 to 18 percent, and that this does not clear the Board's 10:1 threshold for regulated asset base investments. Quarterly progress reporting to the Board Risk Committee is required."*
 **Recommendation 2: Establish OT Cybersecurity Governance Framework**
 
 **Governance Structure:**
@@ -2182,12 +2200,15 @@ All future BESS deployments (Community Battery Program expansion from 54 to 150+
 | **IEC 62443 SL-2 Compliance**     | Third-party audit confirming SL-2 requirements met              | Certified IEC 62443 Auditor  | Pre-commissioning |
 | **Incident Response Integration** | BESS included in OT SOC monitoring, playbooks developed         | EE OT SOC                    | Pre-commissioning |
 
-**Financial Impact:**
+**Financial impact:**
 
-- Security validation cost per BESS: [investment required]
-- 96 future BESS deployments (150 total - 54 existing) × [investment required] = [investment required]
-- Incremental cost: 0.6% of total BESS program cost ([investment required] capital program)
-- Risk reduction: Prevents [investment required]/site from becoming [investment required]/site loss (FrostyGoop Lviv precedent)
+No per-BESS security validation cost is stated. No public price was found for a pre-commissioning IEC 62443 SL-2 audit of a battery energy storage installation, from a certification body or from any of the assessors named in Recommendation 4. What can be stated is the structure of the cost and its scale relative to the sourced envelope.
+
+- Deployments in scope: 96 (150 planned sites less the 54 existing)
+- Per-site cost: unpriced. Band A per site is the working group's judgement, on the basis that a pre-commissioning audit is a professional services engagement at a single site, not a capital purchase
+- Programme cost: 96 sites at band A gives up to AUD 12.5 million across the expansion (modelled: 96 multiplied by the band A ceiling of AUD 0.13 million, not a quotation). At the top of that band the validation programme costs an order of magnitude more than the whole CIRMP cyber envelope of section 9.1, which is why the per-site figure needs quoting before this recommendation goes to a capital decision
+- Share of total BESS programme cost: not computable. No capital cost for the Community Battery Program expansion is stipulated in section 2 or sourced anywhere, so the earlier draft's claim of 0.6 percent has no denominator. It is removed
+- Loss avoided per site: not stated. The earlier draft asserted a per-site loss avoided on the FrostyGoop Lviv precedent. That incident is a heating utility in Ukraine in January 2024, and no per-site financial loss for it was sourced. Section 5.10 records per-facility industrial loss as a category this paper does not quantify, and this line is no exception
 
 **Board Resolution Language:**
 
@@ -2205,7 +2226,7 @@ Engage independent third-party cybersecurity firm with ICS/OT specialization to 
    - Foundational Requirements compliance (FR1-FR7)
    - System Requirements compliance (SR1-SR7)
    - Security Level Target vs. Achieved analysis
-   - Cost: [investment required]
+   - Cost band: B (professional services engagement across 185 substations and 54 BESS sites; no published price for an IEC 62443-3-3 gap assessment at this scale)
 2. **OT Penetration Testing** (implementation period)
 
    - External attack surface enumeration
@@ -2213,22 +2234,22 @@ Engage independent third-party cybersecurity firm with ICS/OT specialization to 
    - Protocol exploitation (Modbus, DNP3, GOOSE injection attempts)
    - Lateral movement from IT to OT networks
    - Physical security integration testing
-   - Cost: [investment required]
+   - Cost band: B (no published price for OT penetration testing from any assessor named below)
 3. **Red Team Exercise: Cascading Failure Scenario** (implementation period)
 
    - Simulated Death Wobble oscillation attack (non-disruptive)
    - Simulated thermal runaway initiation (isolated test environment)
    - Simulated multi-substation coordinated attack (tabletop + technical)
    - Blue team response evaluation (OT SOC, incident response)
-   - Cost: [investment required]
+   - Cost band: B (no published price for an ICS red team engagement; the cyber-physical scope and isolated test environment put it above a standard penetration test)
 4. **SOCI Act Compliance Validation** (implementation period)
 
    - Risk Management Program assessment
    - Incident reporting procedures validation
    - Regulatory obligation mapping
-   - Cost: [investment required]
+   - Cost band: A. The closest sourced figure is a bound rather than a price: the Department of Home Affairs states that AUD 2 million "may be a more reasonable estimate" for the incremental cost of remedying a deficient Risk Management Program [n]. Assessing an RMP costs less than remedying the deficiencies the assessment finds, so AUD 2 million is a ceiling on this line and not its price
 
-**Total Audit Investment: [investment required]**
+**Total audit cost: three lines in band B and one in band A, summing to AUD 0.39 million to AUD 1.69 million** (modelled: band boundary arithmetic against the AUD 1.29 million CIRMP cyber envelope of section 9.1, not a quotation). No workstream above carries a quoted price, and the four assessors shortlisted below all quote per engagement. This total should be replaced with quotations before it reaches a board paper.
 **Timeline: implementation period (completion before winter peak demand)**
 
 **Audit Deliverables:**
@@ -2248,7 +2269,7 @@ Engage independent third-party cybersecurity firm with ICS/OT specialization to 
 
 **Board Resolution Language:**
 
-> *"The Board approves [investment required] investment for independent third-party security audit covering IEC 62443 compliance, OT penetration testing, and SOCI Act validation, to be completed within implementation period. Audit findings shall be presented to Board Risk Committee with remediation roadmap and cost-benefit analysis for recommended controls."*
+> *"The Board approves an independent third-party security audit covering IEC 62443 compliance, OT penetration testing, red team validation and SOCI Act compliance, to be completed within the implementation period, with the cost to be set by competitive quotation and reported to the Board Risk Committee before engagement. Audit findings shall be presented to Board Risk Committee with remediation roadmap and cost-benefit analysis for recommended controls."*
 
 **Recommendation 5: Dual Authorization for High-Impact Commands (Immediate Policy Change)**
 
@@ -2312,13 +2333,13 @@ DERMS API Configuration File Update:
 - Week 5: Activate policy, monitor retailer feedback
 - Week 6+: Monthly review of dual authorization rejections for process tuning
 
-**Cost:** [investment required] (configuration change only)
-**Risk Reduction:** 85% reduction in single-credential compromise impact
+**Cost:** band A, configuration change only (section 9.1)
+**Effect:** no measured figure is stated. This control maps loosely to the secure remote access class, which Dragos and Marsh McLennan measure at 12.18 percent average risk reduction, the lowest of their five classes [n]. The mapping is approximate and the figure is a global claims-population average, not a measurement of this control on this network. The mechanism is exact and is the better statement: dual authorization removes the single-credential path to bulk dispatch, so an attacker holding one stolen retailer OAuth token can no longer move the fleet. The earlier draft's 85 percent reduction had no source
 **Implementation:** Immediate (targeted timeframe policy effective date)
 
 **Board Resolution Language:**
 
-> *"The Board mandates dual authorization for all electricity dispatch commands exceeding 10 MW aggregate capacity or affecting more than 100 devices, effective immediately. This policy change requires no capital investment and provides 85% risk reduction against API credential compromise attacks. Chief OT Security Officer shall report monthly on dual authorization metrics and operational effectiveness."*
+> *"The Board mandates dual authorization for all electricity dispatch commands exceeding 10 MW aggregate capacity or affecting more than 100 devices, effective immediately. This policy change requires no capital investment. Its effect is to remove the single-credential path to bulk dispatch: an attacker holding one compromised retailer API token can no longer command the battery fleet without a second, separately held approval. No measured risk reduction figure is available for this control; the nearest published benchmark, for the secure remote access control class, is 12 percent. Chief OT Security Officer shall report monthly on dual authorization metrics and operational effectiveness."*
 
 ### 9.4 Governance and Compliance Actions
 
