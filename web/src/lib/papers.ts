@@ -289,6 +289,30 @@ export const PAPERS_REGISTRY: Record<string, { title: string; category: string; 
     number: "TRACK 07-C",
     relativePath: "references/WG-04-CF-Cascading-Failures/WG-04-CF-Emerging-Power-Topologies.md",
   },
+  "grid-unseen-tremors": {
+    title: "The Grid's Unseen Tremors: Frequency Stability, Cascading Risk, and the Imperative for Action",
+    category: "Cascading Failures",
+    number: "TRACK 07-D",
+    relativePath: "references/WG-04-CF-Cascading-Failures/WG-04-CF-Grid-Unseen-Tremors.md",
+  },
+  "unseen-current": {
+    title: "The Unseen Current: Emerging Threats to Grid Stability in Renewable-Dominated Systems",
+    category: "Cascading Failures",
+    number: "TRACK 07-E",
+    relativePath: "references/WG-04-CF-Cascading-Failures/WG-04-CF-Unseen-Current.md",
+  },
+  "project-inertia": {
+    title: "Project Inertia: Synchronous Inertia Decay and System Separation Risk",
+    category: "Cascading Failures",
+    number: "TRACK 07-F",
+    relativePath: "references/WG-04-CF-Cascading-Failures/WG-04-CF-Project-Inertia.md",
+  },
+  "ercot-wecc-ibr-reliability": {
+    title: "ERCOT and WECC Renewable Integration: Inverter-Based Resource Reliability Under Stress",
+    category: "Cascading Failures",
+    number: "TRACK 07-G",
+    relativePath: "references/WG-04-CF-Cascading-Failures/WG-04-CF-ERCOT-WECC-IBR-Reliability.md",
+  },
 
   // Additional Models
   "cdt-mathematical-models": {
