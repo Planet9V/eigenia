@@ -1787,34 +1787,48 @@ Priority 1 band arithmetic: bands A plus C plus C. Summing the band boundaries g
 **Whole of immediate actions:** nine controls, one in band A, two in band B, three in band C and three in band D. The six bounded controls sum to AUD 1.8 million to AUD 5.0 million one-off (modelled: band boundary arithmetic, not a quotation). The three band D controls have no upper bound and are excluded from that sum, so the real total is higher by an unknown amount. The sourced CIRMP cyber one-off envelope is AUD 1.29 million. The immediate action list therefore costs several times what the sector-average regulatory compliance figure covers. That is the honest reading and it is stated here rather than smoothed over.
 ### 9.2 Investment Roadmap
 
-**Phase 1: Immediate (targeted timeframe): [investment required] million**
+Costs below use the band scheme of section 9.1. No line carries a dollar figure that was not derived from a cited source, and the two lines that do carry dollars carry them in the currency of the source, not converted.
 
-| Action                                     | Cost                       | Timeline                       | Risk Addressed         |
+**Phase 1: immediate**
+
+| Action | Cost band | Timeline | Risk addressed |
 | :--- | :--- | :--- | :--- |
-| API Behavioral Analytics and Rate Limiting | [investment required]      | implementation period required | Mass command injection |
-| Modbus Security Gateway Pilot (5 sites)    | [investment required]      | implementation period required | BESS protocol attacks  |
-| Container Runtime Security                 | [investment required]      | implementation period required | Kubernetes escape      |
-| 24/7 OT SOC Establishment (8 analysts)     | [investment required]/year | implementation period required | All vectors            |
-| OT Incident Response Retainer (Dragos)     | [investment required]/year | implementation period          | Response capability    |
+| API behavioural analytics and rate limiting | C | Implementation period | Mass command injection |
+| Modbus security gateway pilot, 5 sites | C | Implementation period | BESS protocol attacks |
+| Container runtime security | B | Implementation period | Kubernetes escape |
+| 24/7 OT SOC establishment, 8 analysts | R, and see the note below | Implementation period | All vectors |
+| OT incident response retainer | R (no public retainer price found for any OT incident response vendor) | Implementation period | Response capability |
 
-**Phase 2: Short-Term (implementation period required): [investment required] million**
+**The SOC line is the one place a real annual figure exists, and it does not fit the envelope.** A general enterprise 24/7 SOC of 8 to 12 people costs USD 1.07 million to USD 1.59 million per year in loaded personnel cost, with salary bands anchored to the US Bureau of Labor Statistics wage series for information security analysts and a 1.28 multiplier for payroll tax and benefits [n]. A separate vendor estimate puts a competent 24x7 SOC above USD 1 million per year for a basic operation and at USD 2 million to USD 3 million per year for an advanced one, with technology adding a further USD 0.5 million to USD 1 million per year [n]. Turnover of 20 to 30 percent per year adds USD 80,000 to USD 160,000 per year in replacement cost for an 8-person team [n].
 
-| Action                                     | Cost                  | Timeline                       | Risk Addressed              |
+Three caveats, and all three matter. The figures are in US dollars and no exchange rate is sourced here, so they cannot be added to any AUD figure in this paper. They describe a general enterprise SOC watching IT telemetry, not an OT SOC: protocol-aware network monitoring, OT asset inventory and engineering workstation telemetry are additional to this baseline, not included in it. And they are vendor and benchmark-site content, not a regulator's figure.
+
+Taken at parity, and parity is used only to make the comparison possible rather than as a rate, the personnel floor alone of USD 1.07 million per year exceeds the entire AUD 0.60 million per year cyber and information security component of the sector-average CIRMP from section 9.1. A dedicated 24/7 OT SOC is not fundable inside the sector-average regulatory compliance budget. It needs its own determination.
+
+**Phase 2: short term**
+
+| Action | Cost band | Timeline | Risk addressed |
 | :--- | :--- | :--- | :--- |
-| ICS-Aware Firewalls (all zone boundaries)  | [investment required] | implementation period required | Protocol exploitation       |
-| ICCP Protocol Parser Development           | [investment required] | implementation period required | ADMS integration attacks    |
-| Physics-Based Dispatch Validation          | [investment required] | implementation period required | Grid-destabilizing commands |
-| Behavioral Analytics Platform (UEBA + NDR) | [investment required] | implementation period required | Anomalous patterns          |
-| Supply Chain Risk Management Program       | [investment required] | implementation period required | Vendor compromise           |
-| Zero-Trust Microsegmentation               | [investment required] | implementation period required | Lateral movement            |
+| ICS-aware firewalls at all zone boundaries | D (no public OT firewall platform pricing; every vendor quotes per deployment) | Implementation period | Protocol exploitation |
+| ICCP protocol parser development | B (bespoke engineering, no product to price) | Implementation period | ADMS integration attacks |
+| Physics-based dispatch validation | C (no public cost anchor for DERMS hardening) | Implementation period | Grid-destabilizing commands |
+| Behavioural analytics platform, UEBA and NDR | D (no public OT network monitoring platform pricing) | Implementation period | Anomalous patterns |
+| Supply chain risk management programme | C (no public cost anchor for an electricity-sector supply chain programme) | Implementation period | Vendor compromise |
+| Zero-trust microsegmentation | D (no public cost anchor in an ICS context) | Implementation period | Lateral movement |
 
-**Phase 3: Ongoing: [investment required] million per year**
+Phase 2 is the expensive phase and the least anchored. Four of its six lines sit in bands C and D against an envelope of AUD 1.29 million, and three of the six have no public price of any kind. A drafter with access to vendor quotations should replace this table with quoted figures before it goes to a board.
+
+**Phase 3: ongoing**
+
+Band R throughout. No public price was found for any line.
 
 - Continuous monitoring and threat hunting
 - Quarterly OT penetration testing
-- Annual red team exercises (cyber-physical scenarios)
-- Threat intelligence integration (ICS-CERT feeds)
+- Annual red team exercises on cyber-physical scenarios
+- Threat intelligence integration from ICS-CERT feeds
 - Security awareness training for operations staff
+
+The ongoing cyber and information security component of the sector-average CIRMP is AUD 0.60 million per year (section 9.1). The five lines above plus the SOC and the incident response retainer of Phase 1 are all recurring. On the only annual figure available, the SOC alone consumes more than that envelope.
 
 **Phase 2 Technical Detail:**
 
@@ -1879,7 +1893,7 @@ graph LR
     style E fill:#457b9d,stroke:#1d3557,color:#fff
 ```
 
-**Total 24-Month Investment: [investment required] million (midpoint)**
+**Programme total.** No total is stated as a single number, because eight of the eleven lines above have no public price and three of them cannot be bounded above at all. What can be stated is the band arithmetic. The eight bounded one-off lines across Phase 1 and Phase 2, two in band B and four in band C plus the two Phase 1 recurring lines held aside, sum to AUD 2.3 million to AUD 6.2 million (modelled: band boundary arithmetic against the AUD 1.29 million CIRMP cyber envelope, not a quotation). The three band D lines in Phase 2, ICS-aware firewalls at all zone boundaries, the behavioural analytics platform and zero-trust microsegmentation, each exceed that envelope on their own and are excluded from the sum. The true total is above AUD 6.2 million by an amount this paper cannot bound.
 
 ### 9.2 Risk Mitigation Decision Tree
 
