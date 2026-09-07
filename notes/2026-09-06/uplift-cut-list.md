@@ -113,3 +113,33 @@ and should find the reason.
 Note that several of these corrections made the paper's case STRONGER, not
 weaker: 45% of critical imbalance rather than 2.7%, and a UK 2019 cascade
 restated on figures that actually support the protection-maloperation argument.
+
+### Post-T7: the Appendix E multiplicative likelihood model
+
+Cut on Jim's instruction, 2026-09-06, after the T7 agent flagged it.
+
+**What was removed.** A model compounding four uncited threat factors
+(1.5 x 2.0 x 1.3 x 1.5) onto an uncited 5 percent base rate, producing
+0.29 per year, a 96 percent ten-year attack-attempt probability, and a
+48 percent overall ten-year risk after an uncited 50 percent success
+probability. Plus the four risk-driver weights (40/30/20/10 percent) and the
+reconciliation paragraph that existed only to disclaim the model.
+
+**Why.** Five uncited inputs producing a figure that contradicted the one the
+body of the paper actually uses. Section 5.9 and section 9.5 both use 15 to 30
+percent over ten years, midpoint 22.5. A decomposition that looks like a
+derivation is more misleading than no derivation, because the arithmetic checks
+out and the reader has no way to see that the inputs were chosen.
+
+This is the same defect class as F10, and as the corpus-wide finding that
+quantitative results are labelled "verified" where the arithmetic is exact and
+the inputs are author-chosen.
+
+**What replaced it.** A statement of what was removed and why, the paper's
+actual stated likelihood with a pointer to the two sections that derive from it,
+and the four factors retained as an ORDERED list with no weights, because no
+weight is measured. Quantifying their contribution needs incident data the
+working group does not hold, and Appendix M records that as an open limitation.
+
+**Word budget.** 276 words removed, 263 added, net **-13**. The only net
+reduction in the entire uplift, and it is itemised here.

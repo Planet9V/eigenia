@@ -2864,35 +2864,36 @@ C_direct  (AUD)  = VCR (AUD per kWh) x E_unserved
 
 #### Frequency Risk Analysis
 
-**Death Wobble Attack Likelihood Assessment:**
+**Death Wobble Attack Likelihood Assessment**
 
-```
-Base Probability (P_base) = 0.05 per year (5%)
+This appendix previously carried a multiplicative model that compounded four
+threat factors onto a 5 percent base rate to produce 29 percent per year and 48
+percent over ten years. It has been removed. None of its five inputs carried a
+citation, its output contradicted the figure the body of the paper actually
+uses, and a decomposition that looks like a derivation is more misleading than
+no derivation at all.
 
-Threat Factors (multiplicative):
-- Nation-state capability demonstrated (VOLTZITE, Sandworm): 1.5x
-- Vulnerable attack surface (Retailer API, ICCP, Modbus): 2.0x
-- Reduced grid inertia increasing physical exploitability: 1.3x
-- No oscillation detection capability: 1.5x
+The paper's stated likelihood is 15 to 30 percent over a ten-year horizon,
+midpoint 22.5 percent. It is the working group's own assessment, it is labelled
+as such, and it is the only likelihood used anywhere in this document. Sections
+5.9 and 9.5 both derive from it. A reader building on this paper should use that
+range and should not reconstruct a point estimate from threat factors.
 
-Adjusted Probability: P_attack = P_base × 1.5 × 2.0 × 1.3 × 1.5 = 0.29 per year (29%)
+The factors below are retained because the STRUCTURE of the argument is sound
+and useful. They are ordered by the working group's judgement of contribution.
+No weight is given, because no weight is measured.
 
-10-Year Horizon Probability: P_10yr = 1 - (1 - P_attack)^10 = 0.96 (96%)
-  Interpretation: Near certainty of attack attempt within decade
+1. **Technical vulnerability.** The Retailer API lacks rate limiting and
+   oscillation detection. This is the factor the paper documents most directly.
+2. **Threat capability.** Nation-state actors have demonstrated capability
+   against energy infrastructure.
+3. **Environmental exposure.** Declining synchronous inertia raises the physical
+   consequence of a given command injection, as section 2.2 derives.
+4. **Detection capability.** Current monitoring is not dimensioned for a
+   sub-second protection cascade.
 
-Conservative Estimate (Success Probability): P_success = 0.50 (50% chance attacker succeeds)
-
-Overall 10-Year Risk: P_10yr × P_success = 0.48 (48% MEDIUM-HIGH)
-```
-
-**Risk Drivers:**
-
-1. **Technical Vulnerability (40% weight):** Retailer API lacks rate limiting, oscillation detection
-2. **Threat Capability (30% weight):** Nation-state actors targeting energy infrastructure
-3. **Environmental Factors (20% weight):** Declining grid inertia amplifies attack impact
-4. **Detection Capability (10% weight):** Current monitoring insufficient for rapid response
-
-**Reconciliation with the body of the paper.** The multiplicative model above is an illustration of how threat factors compound, not the paper's stated likelihood. Its factors are the working group's own judgements and none carries a citation, so the 29 percent annual and 48 percent ten-year figures it produces are not used anywhere else in this document. Section 5.9 and section 9.5 both use the paper's stated assessment of 15 to 30 percent over a ten-year horizon, midpoint 22.5 percent, which is also the working group's own and also uncited. Where the two disagree, the body governs. A reader building on this paper should use 15 to 30 percent and treat the multiplicative decomposition as showing structure rather than supplying a number.
+Quantifying their relative contribution needs incident data the working group
+does not hold. Section 12, Appendix M, records that as an open limitation.
 
 #### Consequence Impact Analysis
 
