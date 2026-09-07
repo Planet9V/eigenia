@@ -167,14 +167,34 @@ already produced a case where the honest fix reduced a claimed return from
 the single highest-value change available. Volume metrics would have scored both
 as regressions.
 
-## Open questions for Jim
+## Decisions taken, 2026-09-07
 
-1. **Is DEXPI e.V. engagement in scope?** P1 is written as a contribution
-   proposal. Whether it is actually submitted upstream changes how normative the
-   language should be.
-2. **RefBESS-250MW versus reusing RefDNSP-1.2M.** The Cascading Failure paper
-   already specifies a 1.2 million customer network. A BESS site is a different
-   granularity. Reuse, or specify a new asset at site scale?
-3. **P7 depends on a CVE-to-physical-consequence chain.** The corpus has the
-   tiered CVE matcher concept from other work. Is that available here, or does
-   P7 build its own?
+**CBOM is Cryptography Bill of Materials.** Ruled by Jim. This is also what
+CycloneDX itself means by `cryptographic-asset`, so the corpus now agrees with
+the standard it cites. Two documents carried "Component BOM" and are corrected
+in W0. Where a document needed a component inventory concept, it names the
+SBOM or HBOM layer that actually carries it rather than reusing CBOM.
+
+**RefBESS-250MW is a new reference architecture, not a reuse of RefDNSP-1.2M.**
+The two sit at different granularities and answer different questions. RefDNSP
+is a 1.2 million customer distribution network; the cascade argument needs that
+scale. A BESS site is a plant: pumps, heat exchangers, containerised cells,
+switchgear, a BMS. It is the granularity at which DEXPI, CycloneDX and CIM all
+have something to say about the same object, which is exactly what P4 must
+demonstrate. Eigenia's reference architecture set expands rather than being
+overloaded.
+
+**P7 builds its own CVE-to-physical-consequence chain.** It does not depend on
+tooling from other working groups. That keeps the three-schema programme
+self-contained and means P7 can be read and contested without reference to
+anything outside it.
+
+## Still open
+
+**DEXPI e.V. engagement.** P1 is drafted as a contribution proposal, and Jim's
+own source document confirms the mechanism exists: DEXPI e.V. is developing the
+Standard Library as "a curated set of templates intended to extend or restrict
+the DEXPI Specification to meet specific engineering requirements." Whether P1
+is actually submitted upstream changes how normative its language should be. It
+does not block W0 or the writing of P1's technical content, so it is recorded
+here rather than held as a gate.
