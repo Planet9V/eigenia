@@ -1482,7 +1482,7 @@ A secondary attack vector targeting Battery Management System (BMS) controllers 
 - Evacuation radius: 500 metres (toxic gas plume includes HF, CO, and particulates)
 - Fatalities estimate: 0-2 (rapid evacuation and remote locations reduce risk)
 - Serious injuries: 2-8 (smoke inhalation, burns)
-- Environmental contamination: Fluorinated compounds in soil and water, cleanup cost [investment required] million
+- Environmental contamination: fluorinated compounds in soil and water. No sourced remediation unit cost for a lithium-ion fire site in Australia was located, so no cleanup cost is stated
 
 ### 6.2 Traffic Signal Failures
 
@@ -1516,7 +1516,7 @@ The delayed or denied medical care caused by hospital overload, ambulance respon
 | **Hospital Admissions** | 250 | 680 | 420 |
 | **Emergency Presentations** | 1,200 | 3,500 | 2,100 |
 
-These figures carry legal consequences: wrongful death litigation ([investment required] million at P50), WorkSafe NSW investigation, potential Coroner's inquest, EPA environmental investigation, and the possibility of criminal charges for negligence causing death if cybersecurity failures are deemed reckless.
+These figures carry legal consequences: wrongful death litigation, WorkSafe NSW investigation, potential Coroner's inquest, EPA environmental investigation, and the possibility of criminal charges for negligence causing death if cybersecurity failures are deemed reckless. No quantum is stated for any of them. Section 5.10 records civil litigation as unquantified for the same reason: no sourced wrongful death, personal injury or class action quantum exists for this jurisdiction, and section 5.8 shows why regulatory outcomes are not a proxy, with about GBP 10.5 million in voluntary payments across four licensees after an event that disconnected 1,152,878 customers [n].
 
 ---
 
