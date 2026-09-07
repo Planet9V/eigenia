@@ -133,18 +133,73 @@ title variants to one, mark the two RefDNSP internal reports as scenario
 artifacts, and resolve every `[n]` marker introduced in sections 5 and 9 against
 a real numbered entry.
 
-## Corpus-wide audit, not yet run
+## Corpus-wide audit: RUN 2026-09-06
 
-This register covers WG-04-CF, because that is where the current work is. The
-same class of defect is likely present in the other eight working groups and has
-not been checked. A corpus-wide pass over all 50 documents should look for:
+Four auditors read all 49 documents in full, none sampled, and returned 127
+findings. Reports are committed at `notes/2026-09-06/audit-*.md`.
 
-- citations to Eigenia or McKenney works with no file behind them
-- citations to external methods, models or datasets with no traceable source
-  (the standing `CLAUDE.md` policy, for instance Clayton Copulas, GGNNs, Kramers
-  escape models)
-- uncited quantitative claims of the kind recorded as F10, which are already
-  known to exist in this paper's section 7.5 and Appendix M
+### Citation infrastructure, measured
 
-Until that pass runs, this register is known to be incomplete, and says so here
-rather than implying it is the whole picture.
+| Working group | Docs | Words | `[n]` markers | Docs with a bibliography |
+|:---|---:|---:|---:|---:|
+| WG-01-UI Underwriter | 12 | 28,235 | **0** | **0 of 12** |
+| WG-02-DT Digital Twin | 10 | 21,919 | 69 | **0 of 10** |
+| WG-03-ML Behavioural | 7 | 23,067 | 43 | 3 of 7 |
+| WG-04-CF Cascading | 7 | 64,144 | 375 | 5 of 7 |
+| WG-05-CAD DEXPI | 6 | 19,909 | **0** | **0 of 6** |
+| WG-07-TM Threat Modeling | 4 | 12,727 | **0** | **0 of 4** |
+| WG-08-MO Monte Carlo | 1 | 539 | **0** | **0 of 1** |
+| MP Math Physics | 2 | 4,887 | 3 | **0 of 2** |
+
+Read the second and fourth columns together. WG-02-DT carries 69 numbered
+citation markers and not one bibliography for them to resolve against. Every
+marker in that working group points nowhere.
+
+WG-01-UI is the starker case: 28,235 published words, no markers, no
+bibliography, no URL, no DOI, against 41 invocations of named external work
+including Gordon-Loeb sixteen times and Taleb thirteen. Nothing is
+misattributed there because nothing is attributed at all.
+
+WG-04-CF is the only working group with a functioning citation apparatus, and
+that is a result of this session's work, not a pre-existing condition.
+
+### Dangling works, verified against disk
+
+Each is cited in exactly one document and has no file anywhere:
+
+| Work | Cited in |
+|:---|:---|
+| *Topological Cyber-Physics* | `MP_Kramers_Escape_Model.md` |
+| *Psychohistory and the Digital Twin* | `WG-03-ML-Mckenney-Lacanian.md` |
+| *Symphonic Calculus* | `WG-03-ML-Musical-Psychometric-Notation.md` |
+| *Systems Assurance in High-Entropy Industrial Complexes* | `WG-05-CAD-Frontier-AI-Hardware-Security.md` |
+
+These are four more rows for the works-to-create list, or four citations to
+strike. They are NOT the same case as the three WG-04-CF works written this
+session: those were cited repeatedly and load-bearing, whereas these four are
+each cited once. Striking may be the better answer for some. That is Jim's call
+per work.
+
+### Two leads that were REFUTED, and why it matters
+
+Prior notes recorded citations to `[87]` and `[558]` as dangling. Both were
+**line numbers**, not citation indices. The audit proved it: no three-digit
+citation exists anywhere in that scope, and the file allegedly citing `[87]` is
+86 lines long. **Zero out-of-range citations exist in WG-03-ML or MP.**
+
+Recorded because this register is meant to be trustworthy, and two of its
+original entries were wrong. A register that carries unverified leads has the
+same defect as the corpus it audits.
+
+### The finding that outranks the citation gap
+
+Across at least three working groups, quantitative results are labelled
+**"verified"** or **"empirical"** where the arithmetic is exact and the inputs
+are author-chosen. WG-01-UI's three ROSI figures reproduce exactly. WG-02-DT's
+three reproduce exactly. WG-03-ML's six reproduce to the digit, five labelled
+verified. WG-05-CAD carries six more.
+
+Correct arithmetic on invented inputs is worse than an arithmetic error,
+because checking the sums confirms it. This is the same defect class as F10 in
+`findings.md`, at corpus scale, and it is the single highest-value fix
+available: one sweep over the words "verified", "empirical" and "we prove".
