@@ -1897,29 +1897,29 @@ graph LR
 
 ### 9.2 Risk Mitigation Decision Tree
 
-The following decision tree guides investment prioritization based on attack likelihood and consequence:
+The tree below orders the controls of section 9.2 by the network conditions that make each one urgent. Cost bands are those of section 9.1. The tree ranks; it does not price.
 
 ```mermaid
 graph TB
     Start[Cascading Failure Risk Assessment]
     Start --> Q1{Current Grid Inertia <br/>Regularly <3.0 seconds?}
 
-    Q1 -->|Yes| Critical1[CRITICAL PRIORITY:<br/>Death Wobble Oscillation Detection<br/>Investment: [investment required]<br/>Timeline: targeted timeframe]
+    Q1 -->|Yes| Critical1[CRITICAL PRIORITY:<br/>Death Wobble Oscillation Detection<br/>Cost band C<br/>Timeline: targeted timeframe]
     Q1 -->|No| Q2{BESS Fleet >100 MW<br/>Deployed?}
 
     Q2 -->|Yes| Q3{Modbus TCP Encrypted?}
     Q2 -->|No| Medium1[MEDIUM PRIORITY:<br/>Monitor BESS deployment pace<br/>Implement before 100 MW threshold]
 
-    Q3 -->|No| Critical2[CRITICAL PRIORITY:<br/>Modbus Security Gateway<br/>Investment: [investment required]<br/>Timeline: implementation period]
+    Q3 -->|No| Critical2[CRITICAL PRIORITY:<br/>Modbus Security Gateway<br/>Cost band C<br/>Timeline: implementation period]
     Q3 -->|Yes| Q4{BMS Firmware Validates<br/>Thermal Limits?}
 
-    Q4 -->|No| High1[HIGH PRIORITY:<br/>BMS Firmware Hardening<br/>Investment: [investment required]<br/>Timeline: implementation period]
+    Q4 -->|No| High1[HIGH PRIORITY:<br/>BMS Firmware Hardening<br/>Cost band B<br/>Timeline: implementation period]
     Q4 -->|Yes| Q5{IEC 61850 GOOSE<br/>Authenticated?}
 
     Q5 -->|No| Q6{>50 Substations<br/>Using GOOSE?}
     Q5 -->|Yes| Low1[LOW PRIORITY:<br/>Maintain current controls]
 
-    Q6 -->|Yes| Critical3[CRITICAL PRIORITY:<br/>IEC 62351-6 Implementation<br/>Investment: [investment required]<br/>Timeline: implementation period]
+    Q6 -->|Yes| Critical3[CRITICAL PRIORITY:<br/>IEC 62351-6 Implementation<br/>Cost band D<br/>Timeline: implementation period]
     Q6 -->|No| Medium2[MEDIUM PRIORITY:<br/>Plan for future deployment]
 
     Critical1 --> Implementation[Execute<br/>Implementation Roadmap]
@@ -1930,7 +1930,7 @@ graph TB
     Implementation --> Validation[Penetration Testing<br/>+ Red Team Validation]
     Validation --> Q7{Controls Effective?}
 
-    Q7 -->|Yes| Success[Risk Reduction:<br/>90-95%<br/>Continuous Monitoring]
+    Q7 -->|Yes| Success[Benchmark risk reduction:<br/>12 to 18 percent per control class<br/>Dragos and Marsh McLennan 2025<br/>Continuous Monitoring]
     Q7 -->|No| Remediation[Gap Remediation<br/>+ Control Tuning]
     Remediation --> Validation
 
@@ -1941,38 +1941,44 @@ graph TB
     style Success fill:#2ed573,stroke:#009432,color:#000
 ```
 
-**Decision Tree Application - RefDNSP-1.2M Current State:**
+The terminal node of the tree used to read "Risk Reduction: 90-95%". That figure had no source. It now carries the only published benchmark located, 12 to 18 percent average risk reduction per control class, from the Dragos and Marsh McLennan 2025 OT Security Financial Risk Report [n]. The report states those figures are not additive, so passing through several branches of the tree does not compound them.
 
-Based on EE-CTI-002, EE-CTI-003, and EE-CTI-007 findings:
+**Decision tree applied to RefDNSP-1.2M.**
+
+The answers below are the reference network's stipulated state from section 2 and the internal assessments EE-CTI-002, EE-CTI-003 and EE-CTI-007. They are the working group's own scenario parameters, not measured properties of any real network.
 
 ```
-Q1: Current Grid Inertia Regularly <3.0 seconds?
-    Answer: YES (AEMO data: 15-20% of operational hours below 3.0s)
-    Result: CRITICAL PRIORITY - Death Wobble Oscillation Detection
+Q1: Grid inertia regularly below 3.0 seconds?
+    Answer: YES (15 to 20 percent of operational hours below 3.0 s)
+    Result: CRITICAL - Death Wobble oscillation detection, cost band C
 
-Q2: BESS Fleet >100 MW Deployed?
+Q2: BESS fleet above 100 MW deployed?
     Answer: YES (270 MW across 54 sites, operational and planned)
-    Result: Continue to Q3
+    Result: continue to Q3
 
-Q3: Modbus TCP Encrypted?
+Q3: Modbus TCP encrypted?
     Answer: NO (plaintext confirmed in EE-CTI-002, CVSS 9.1)
-    Result: CRITICAL PRIORITY - Modbus Security Gateway
+    Result: CRITICAL - Modbus security gateway, cost band C
 
-Q5: IEC 61850 GOOSE Authenticated?
+Q5: IEC 61850 GOOSE authenticated?
     Answer: NO (no IEC 62351-6 deployment, per EE-CTI-003)
-    Result: Continue to Q6
+    Result: continue to Q6
 
-Q6: >50 Substations Using GOOSE?
+Q6: More than 50 substations using GOOSE?
     Answer: YES (10,000+ IEDs across 185 major substations)
-    Result: CRITICAL PRIORITY - IEC 62351-6 Implementation
+    Result: CRITICAL - IEC 62351-6 implementation, cost band D
 
-Final Investment Requirements:
-- Death Wobble Detection: [investment required] (targeted timeframe)
-- Modbus Security Gateway: [investment required] (implementation period)
-- BMS Firmware Hardening: [investment required] (implementation period)
-- IEC 62351-6 GOOSE Authentication: [investment required] (implementation period)
+Critical path, by cost band:
+- Death Wobble detection:            band C   (AUD 0.52m to AUD 1.29m)
+- Modbus security gateway:           band C   (AUD 0.52m to AUD 1.29m)
+- BMS firmware hardening:            band B   (AUD 0.13m to AUD 0.52m)
+- IEC 62351-6 GOOSE authentication:  band D   (above AUD 1.29m, no upper bound)
 
-Total Critical Path: [investment required] (minimum viable defense)
+Bounded lines sum to AUD 1.17m to AUD 3.10m one-off (modelled: band
+boundary arithmetic against the AUD 1.29m CIRMP cyber envelope of
+section 9.1, not a quotation). The GOOSE authentication line has no
+public cost anchor at any scale and is excluded from that sum, so the
+minimum viable defence costs more than AUD 3.10m by an unbounded amount.
 ```
 
 ### 9.3 Return on Investment
