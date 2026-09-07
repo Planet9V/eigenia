@@ -3097,58 +3097,64 @@ T+120 min: Regional blackout (1.2 million customers), frequency 47.5 Hz, system 
 
 ### Appendix F: Mitigation Technology Matrix
 
-| Technology                     | Vendor Examples        | Location          | Vectors Mitigated                       | Cost                  |
+Vendor names below are examples of the product class, not recommendations and not a procurement shortlist. No vendor in any of these classes publishes a price. Every listing found during research returned "price on request", including for the one product named specifically anywhere in this paper. The Cost band column therefore carries the ordinal scheme of section 9.1, measured against the sourced CIRMP cyber envelope of AUD 1.29 million one-off: A under 10 percent, B 10 to 40 percent, C 40 to 100 percent, D above the envelope, R recurring against AUD 0.60 million per year. Where section 9.2 or 9.3 has already banded the same control, the band is carried across unchanged and the cell says so.
+
+| Technology | Vendor Examples | Location | Vectors Mitigated | Cost band |
 | :--- | :--- | :--- | :--- | :--- |
-| API Security Gateway           | Apigee, Kong           | DMZ (Z3.5)        | API mass command injection              | [investment required] |
-| Container Runtime Security     | Aqua, Sysdig           | OpenShift Cluster | Container escape, privilege escalation  | [investment required] |
-| ICS-Aware Firewall             | Fortinet, Palo Alto    | Zone boundaries   | Protocol exploitation, lateral movement | [investment required] |
-| OT Protocol Parser             | Dragos, Nozomi         | SOC (Z3)          | ICCP/Modbus/DNP3 manipulation           | [investment required] |
-| Behavioral Analytics           | Splunk UBA, Exabeam    | SOC (Z3)          | Anomalous API usage, insider threats    | [investment required] |
-| Modbus Security Gateway        | Moxa EDR, Fortinet ICS | Zone 2 boundary   | Modbus injection, command spoofing      | [investment required] |
-| Network Detection and Response | Darktrace, Vectra AI   | Zone 3 internal   | Lateral movement, data exfiltration     | [investment required] |
-| Hardware Security Module       | Thales Luna, Entrust   | Data centre (Z3)  | Key theft, certificate compromise       | [investment required] |
-| Privileged Access Management   | CyberArk, BeyondTrust  | Bastion (Z3.5)    | Vendor access abuse, credential theft   | [investment required] |
+| API Security Gateway | Apigee, Kong | DMZ (Z3.5) | API mass command injection | C, as section 9.2 |
+| Container Runtime Security | Aqua, Sysdig | OpenShift Cluster | Container escape, privilege escalation | B, as section 9.3 Phase 1 |
+| ICS-Aware Firewall | Fortinet, Palo Alto | Zone boundaries | Protocol exploitation, lateral movement | D, as section 9.3 Phase 2 |
+| OT Protocol Parser | Dragos, Nozomi | SOC (Z3) | ICCP/Modbus/DNP3 manipulation | D, as section 9.2 |
+| Behavioral Analytics | Splunk UBA, Exabeam | SOC (Z3) | Anomalous API usage, insider threats | D, as section 9.3 Phase 2 |
+| Modbus Security Gateway | Moxa EDR, Fortinet ICS | Zone 2 boundary | Modbus injection, command spoofing | C, as section 9.2 |
+| Network Detection and Response | Darktrace, Vectra AI | Zone 3 internal | Lateral movement, data exfiltration | D, part of the same section 9.3 NDR line |
+| Hardware Security Module | Thales Luna, Entrust | Data centre (Z3) | Key theft, certificate compromise | B (engineering judgement; no public anchor, no prior band) |
+| Privileged Access Management | CyberArk, BeyondTrust | Bastion (Z3.5) | Vendor access abuse, credential theft | C (engineering judgement; no public anchor, no prior band) |
+
+Four of these nine sit in band D, meaning each exceeds the whole sourced cyber envelope on its own and needs a separate funding determination. That is the central cost finding of this paper and it is not softened by the ordinal presentation: the controls the analysis most wants are the ones with no public price and the largest likely cost.
 
 ### Appendix G: Security Control Catalog
 
-#### Phase 1 Critical Controls (Q2-Q3 2026, [investment required])
+#### Phase 1 Critical Controls, Q2 to Q3 2026
 
-| Control ID | Control Name                       | IEC 62443 Requirement               | MITRE D3FEND                              | Implementation                                                     | Cost                  | Risk Reduction |
+Cost bands use the scheme of section 9.1, measured against the sourced CIRMP cyber envelope of AUD 1.29 million one-off. The benefit column gives the Dragos and Marsh McLennan class figure where a control maps onto one of their five measured OT control classes, and a mechanism where none maps. An earlier draft of this catalog gave each control an uncited percentage and cumulated them; those figures are removed, because the only published measurement states plainly that per-control risk reductions are not additive [n].
+
+| Control ID | Control Name | IEC 62443 Requirement | MITRE D3FEND | Implementation | Cost band | Benefit basis |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| CTL-001    | Retailer API Rate Limiting         | CR 3.1 (Communication Restrictions) | D3-NTF (Network Traffic Filtering)        | API gateway rate limit: 10 req/min/retailer, 100 devices/batch     | [investment required] | 40%            |
-| CTL-002    | DER Oscillation Detection          | CR 2.6 (Resource Management)        | D3-APLM (Application Behavior Monitoring) | Physics-based anomaly detection: >5% frequency in 60s = alert      | [investment required] | 35%            |
-| CTL-003    | DERMS API Authentication Hardening | CR 1.1 (User Identification)        | D3-MFA (Multi-Factor Authentication)      | Certificate-based authentication for all API clients               | [investment required] | 25%            |
-| CTL-004    | BESS Command Validation            | CR 3.4 (Software Process Integrity) | D3-PSA (Process Spawn Analysis)           | SOC/power setpoint bounds checking before Modbus transmission      | [investment required] | 30%            |
-| CTL-005    | Emergency DERMS Shutdown           | CR 4.1 (Event Logging)              | D3-IRA (Incident Response Automation)     | Kill switch disabling all DER dispatch in <60 seconds              | [investment required] | 20%            |
-| CTL-006    | Grid Frequency Monitoring          | CR 3.3 (Use Control)                | D3-NTA (Network Traffic Analysis)         | Real-time RoCoF alerting: >0.3 Hz/s = SOC notification             | [investment required] | 15%            |
-| CTL-007    | SCADA Alarm Integrity              | CR 2.8 (Auditable Events)           | D3-AL (Audit Logging)                     | Cryptographic signing of SCADA alarm messages                      | [investment required] | 20%            |
-| CTL-008    | ICCP Data Validation               | CR 3.2 (Provenance Tracking)        | D3-ITF (Inbound Traffic Filtering)        | Constraint data sanity checks: feeder limits, timestamp validation | [investment required] | 15%            |
+| CTL-001 | Retailer API Rate Limiting | CR 3.1 (Communication Restrictions) | D3-NTF (Network Traffic Filtering) | API gateway rate limit: 10 req/min/retailer, 100 devices/batch | A (gateway configuration) | Mechanism: caps commands per unit time, so a fleet cannot be driven at resonance through the API |
+| CTL-002 | DER Oscillation Detection | CR 2.6 (Resource Management) | D3-APLM (Application Behavior Monitoring) | Physics-based anomaly detection: >5% frequency in 60s = alert | B, as section 7.1 | Mechanism: fires on a pattern with no benign explanation. No false-positive rate measured for this network |
+| CTL-003 | DERMS API Authentication Hardening | CR 1.1 (User Identification) | D3-MFA (Multi-Factor Authentication) | Certificate-based authentication for all API clients | A (configuration on an existing identity platform) | Secure remote access, 12.18 percent class average [n]. Class average, not this control's measured effect |
+| CTL-004 | BESS Command Validation | CR 3.4 (Software Process Integrity) | D3-PSA (Process Spawn Analysis) | SOC/power setpoint bounds checking before Modbus transmission | A, as the rate-limiting control in section 9.2 | Mechanism: a setpoint outside declared bounds is not transmitted, so the register write never leaves DERMS |
+| CTL-005 | Emergency DERMS Shutdown | CR 4.1 (Event Logging) | D3-IRA (Incident Response Automation) | Kill switch disabling all DER dispatch in <60 seconds | A (DERMS engineering) | Incident response plan, 18.46 percent class average [n]. Class average, not a measured result for a kill switch |
+| CTL-006 | Grid Frequency Monitoring | CR 3.3 (Use Control) | D3-NTA (Network Traffic Analysis) | Real-time RoCoF alerting: >0.3 Hz/s = SOC notification | B (telemetry integration into existing monitoring) | Network visibility and monitoring, 16.47 percent class average [n] |
+| CTL-007 | SCADA Alarm Integrity | CR 2.8 (Auditable Events) | D3-AL (Audit Logging) | Cryptographic signing of SCADA alarm messages | B, as the application-layer signing control in section 7.3 | Mechanism: a forged alarm fails verification. It does nothing against an attacker holding the signing key |
+| CTL-008 | ICCP Data Validation | CR 3.2 (Provenance Tracking) | D3-ITF (Inbound Traffic Filtering) | Constraint data sanity checks: feeder limits, timestamp validation | A, as data point allowlisting in section 7.3 | Mechanism: constraint values outside physical feeder limits are refused. It does not catch plausible false values |
 
-**Phase 1 Cumulative Risk Reduction: 60%**
+**Phase 1 band arithmetic:** five band A and three band B give AUD 0.4 million to AUD 2.2 million one-off (modelled: band boundary arithmetic against the AUD 1.29 million CIRMP cyber envelope, not a quotation). No cumulative risk reduction is stated; the earlier draft's 60 percent had no source and summed figures that cannot be summed.
 
-#### Phase 2 Enhanced Controls (Q4 2026-Q1 2027, [investment required])
+#### Phase 2 Enhanced Controls, Q4 2026 to Q1 2027
 
-| Control ID | Control Name                 | IEC 62443 Requirement          | MITRE D3FEND                          | Implementation                                                   | Cost                  | Risk Reduction |
+| Control ID | Control Name | IEC 62443 Requirement | MITRE D3FEND | Implementation | Cost band | Benefit basis |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| CTL-009    | BESS Network Segmentation    | CR 3.1 (Network Segmentation)  | D3-NI (Network Isolation)             | VLAN isolation for each BESS, firewall rules                     | [investment required] | 25%            |
-| CTL-010    | ICCP Encryption              | CR 4.3 (Use of Cryptography)   | D3-EC (Encrypted Communication)       | TLS 1.3 for ICCP between DERMS and ADMS                          | [investment required] | 20%            |
-| CTL-011    | Modbus Replacement           | CR 4.3 (Use of Cryptography)   | D3-EC (Encrypted Communication)       | Migrate to DNP3 Secure Authentication v5                         | [investment required] | 30%            |
-| CTL-012    | Container Security Hardening | CR 2.4 (Mobile Code Integrity) | D3-SJA (System Call Analysis)         | Pod Security Standards (restricted), Falco runtime monitoring    | [investment required] | 20%            |
-| CTL-013    | Firmware Verification        | CR 3.4 (Software Integrity)    | D3-FBA (File-Based Behavior Analysis) | Cryptographic signature validation for BESS firmware updates     | [investment required] | 15%            |
-| CTL-014    | UEBA for DERMS API           | CR 2.9 (Session Integrity)     | D3-UBA (User Behavior Analysis)       | Machine learning baseline for normal retailer API usage patterns | [investment required] | 25%            |
+| CTL-009 | BESS Network Segmentation | CR 3.1 (Network Segmentation) | D3-NI (Network Isolation) | VLAN isolation for each BESS, firewall rules | C, as section 7.4 (54 sites) | Defensible architecture, 17.09 percent class average [n] |
+| CTL-010 | ICCP Encryption | CR 4.3 (Use of Cryptography) | D3-EC (Encrypted Communication) | TLS 1.3 for ICCP between DERMS and ADMS | B (bespoke engineering across two platforms) | Mechanism: removes the passive-observer and on-path-injection paths. It does nothing against a compromised endpoint at either end |
+| CTL-011 | Modbus Replacement | CR 4.3 (Use of Cryptography) | D3-EC (Encrypted Communication) | Migrate to DNP3 Secure Authentication v5 | D (fleet-wide protocol migration across 54 sites; exceeds the envelope on its own) | Mechanism: authenticated writes cannot be forged, which closes the register-write path of section 2.3.1 at its root rather than filtering it |
+| CTL-012 | Container Security Hardening | CR 2.4 (Mobile Code Integrity) | D3-SJA (System Call Analysis) | Pod Security Standards (restricted), Falco runtime monitoring | B, as section 9.3 Phase 1 | Defensible architecture, 17.09 percent class average [n] |
+| CTL-013 | Firmware Verification | CR 3.4 (Software Integrity) | D3-FBA (File-Based Behavior Analysis) | Cryptographic signature validation for BESS firmware updates | B, as the BMS firmware control in section 9.2 | Mechanism: an unsigned or altered firmware image does not install. It does nothing against a signed malicious image from a compromised vendor |
+| CTL-014 | UEBA for DERMS API | CR 2.9 (Session Integrity) | D3-UBA (User Behavior Analysis) | Machine learning baseline for normal retailer API usage patterns | D, as the UEBA and NDR line in section 9.3 Phase 2 | Network visibility and monitoring, 16.47 percent class average [n] |
 
-**Phase 2 Cumulative Risk Reduction: 80%**
+**Phase 2 band arithmetic:** the four bounded lines, three band B and one band C, give AUD 0.9 million to AUD 2.9 million one-off (modelled: band boundary arithmetic, not a quotation). CTL-011 and CTL-014 sit in band D, have no upper bound, and are excluded, so the real figure is higher by an unknown amount. No cumulative risk reduction is stated; the earlier draft's 80 percent had no source.
 
-#### Phase 3 Advanced Controls (Q2-Q4 2027, [investment required])
+#### Phase 3 Advanced Controls, Q2 to Q4 2027
 
-| Control ID | Control Name                   | IEC 62443 Requirement           | MITRE D3FEND                              | Implementation                                              | Cost                  | Risk Reduction  |
+| Control ID | Control Name | IEC 62443 Requirement | MITRE D3FEND | Implementation | Cost band | Benefit basis |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| CTL-015    | AI-Based Cascade Prediction    | CR 2.6 (Resource Management)    | D3-APLM (Application Behavior Monitoring) | ML model predicting cascading failure from SCADA telemetry  | [investment required] | 10%             |
-| CTL-016    | Supply Chain SBOM              | CR 1.13 (Supply Chain Security) | D3-SICA (Software Component Analysis)     | Continuous SBOM tracking for mPrest, SwitchDin, all vendors | [investment required] | 5%              |
-| CTL-017    | OT Deception Grid              | CR 2.5 (Backup)                 | D3-D (Decoy)                              | Honeypot BESS controllers, fake DERMS API endpoints         | [investment required] | 5%              |
-| CTL-018    | Quantum-Resistant Cryptography | CR 4.3 (Use of Cryptography)    | D3-EC (Encrypted Communication)           | Post-quantum algorithms for long-term key protection        | [investment required] | Future-proofing |
+| CTL-015 | AI-Based Cascade Prediction | CR 2.6 (Resource Management) | D3-APLM (Application Behavior Monitoring) | ML model predicting cascading failure from SCADA telemetry | D (bespoke model development with no public anchor and no bounded scope) | No benchmark class maps, and no predictive accuracy has been measured for this network. The control is speculative and is ranked last for that reason |
+| CTL-016 | Supply Chain SBOM | CR 1.13 (Supply Chain Security) | D3-SICA (Software Component Analysis) | Continuous SBOM tracking for mPrest, SwitchDin, all vendors | C, as the supply chain risk management programme in section 9.3 Phase 2 | Mechanism: a component inventory is what makes a vendor advisory actionable at all. It detects nothing on its own |
+| CTL-017 | OT Deception Grid | CR 2.5 (Backup) | D3-D (Decoy) | Honeypot BESS controllers, fake DERMS API endpoints | B (engineering judgement; no public anchor) | Mechanism: a decoy controller has no legitimate traffic, so any interaction with it is an alert with no false-positive population by construction |
+| CTL-018 | Quantum-Resistant Cryptography | CR 4.3 (Use of Cryptography) | D3-EC (Encrypted Communication) | Post-quantum algorithms for long-term key protection | D (fleet-wide cryptographic replacement; no public anchor) | Mechanism addresses a future capability, not a current one. No benefit is claimed against any threat modelled in this paper |
 
-**Phase 3 Cumulative Risk Reduction: 90%**
+**Phase 3 band arithmetic:** the two bounded lines, one band B and one band C, give AUD 0.7 million to AUD 1.8 million one-off (modelled: band boundary arithmetic, not a quotation). CTL-015 and CTL-018 sit in band D and are excluded. No cumulative risk reduction is stated; the earlier draft's 90 percent had no source, and the same 90 percent was the basis of the 43.9:1 return that section 9.5 removed.
 
 #### Control Effectiveness Validation
 
