@@ -26,9 +26,10 @@ mentions.
 | Appendix A formula, UFLS wrap | 30,945 | +4 | |
 | Semicolon repair | 30,946 | +1 | 43 artifacts, no net loss |
 | T5 section 5 economics | 32,571 | +1,625 | derivations, caveats, cut-list table |
+| T6 section 9 recommendations | 38,088 | +5,517 | cost basis, bands, ROI rebuild, removal notes |
 
-Net so far: **+2,576 words**. Nothing has been shortened. Every task has been
-gated on the word count not falling.
+Net so far: **+8,093 words**, from a 29,995 baseline. Nothing has been
+shortened. Every task has been gated on the word count not falling.
 
 ## Cuts made, with reasons
 
@@ -52,7 +53,47 @@ silently shorter section.
 
 ### Task 6, section 9 Strategic Recommendations
 
-To be appended when the task reports.
+Six rows cut. Each carries an in-text paragraph naming what was removed and
+why, so a reader meets the absence and its reason together.
+
+| # | Cut | Reason |
+|:--|:---|:---|
+| 1 | `0.375% of regulated asset base` | no RAB stipulated for RefDNSP-1.2M and none sourced for any Australian DNSP. Replaced with the nearest non-substitute, clearly labelled: Ausgrid's draft-decision revenue allowance of AUD 9,619.6M over five years, which is a revenue allowance for a different, real business |
+| 2 | `0.6% of total BESS program cost` | the denominator does not exist. No BESS capital programme cost is stipulated or sourced |
+| 3 | Per-site FrostyGoop loss avoided | no per-site financial loss sourced for the January 2024 Lviv incident; section 5.10 already excludes per-facility industrial loss |
+| 4 | SOCI penalty maximum, and the 3.7:1 penalty-avoidance ratio | no penalty schedule and no Australian DNSP precedent sourced |
+| 5 | APRA capital charge line | no instrument identified, and APRA's remit does not obviously reach a DNSP |
+| 6 | Insurance ROI block, 47.3:1 | two of three benefit terms unsourced; the third double-counted section 9.5's avoided loss |
+
+### Task 6, uncited percentages removed rather than replaced
+
+These were not cost cuts but claim cuts. Recorded here because each removed a
+number a reader could have relied on.
+
+| Removed | Reason |
+|:---|:---|
+| `95% / 99% / 99%` cumulative control effectiveness | risk reductions are not additive; the paper modelled no combined effect |
+| `73%` cumulative for quick wins | same |
+| `90%` plus a `115:1` critical-path ratio | two of four cost lines unbounded, so no ratio is computable |
+| `15 to 25%` insurance premium reduction | no Australian OT cyber premium data of any kind exists in the evidence base |
+| `90%`, `47.3:1`, `5%` loss ratio, `8%` capital charge, `6%` cost of capital, `8.5` discount factor | the whole insurance economics block rested on six unsourced parameters |
+| `85%` inside the proposed BOARD RESOLUTION | a director would have relied on it. Replaced with the control mechanism and the statement that no measured figure exists, the nearest benchmark being 12 percent |
+
+### Rows converted to relative bands rather than cut
+
+21 controls had no public cost anchor and became bands against the sourced
+AUD 1.29M one-off / AUD 0.60M per year CIRMP cyber envelope (A under 10%,
+B 10 to 40%, C 40 to 100%, D over 100%, R recurring):
+
+DERMS hardening, Modbus gateway at 5 and at 54 sites, BMS firmware, fire
+suppression, OT protocol DPI, protection anomaly detection, IEC 62351-6 GOOSE,
+container runtime security, 24/7 OT SOC, OT incident response retainer, ICS
+firewalls, ICCP parser, UEBA and NDR platform, supply chain risk management,
+zero-trust microsegmentation, Phase 3 ongoing lines, BESS pre-commissioning
+validation, four audit workstreams, asset discovery tooling, and five NERC-CIP
+lines.
+
+The band boundaries are engineering judgement, stated as such in the paper.
 
 ## Corrections that removed a false claim without removing content
 
