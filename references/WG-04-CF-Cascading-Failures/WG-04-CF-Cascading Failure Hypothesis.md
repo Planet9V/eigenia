@@ -1704,45 +1704,87 @@ Three playbooks address the primary attack scenarios:
 
 ## 9. Strategic Recommendations
 
-### 9.1 Priority Action Items (Immediate - targeted timeframe)
+This section prices two things: what each recommended control costs, and what it buys. Both are weakly sourced. That is stated in the cells themselves rather than buried in a footnote, because a cost-benefit table with one sourced column and one invented column is worse than no table.
 
-The following actions provide maximum risk reduction for minimum investment and can be implemented within targeted timeframe without major architectural changes:
+### 9.1 Cost and Benefit Basis
 
-**Priority 1: Death Wobble Oscillation Detection (implementation period)**
+**Cost anchor.** The only regulator-quality Australian per-entity figure located is the Australian Government's October 2024 Impact Analysis for amendments to the Security of Critical Infrastructure Act 2018 [n]. Table 19 of that document, indexed to June 2024 dollars, puts the average cost of a Critical Infrastructure Risk Management Program at AUD 9.2 million one-off and AUD 4.3 million per year for a critical electricity asset entity. That is a whole-of-hazard figure. It covers cyber and information security hazard, personnel hazard, supply chain hazard, physical and natural hazard, and material risk together. Table 27 of the same document puts cyber and information security hazard at 14 percent of the electricity sector's ten-year regulatory burden estimate.
 
-| Action                                     | Technical Implementation                                                                                                                                                | Cost                  | Risk Reduction                                    | Timeline              |
+Scaling the electricity row by that share gives the cyber component:
+
+- One-off: 9.2 multiplied by 0.14 gives AUD 1.29 million
+- Ongoing: 4.3 multiplied by 0.14 gives AUD 0.60 million per year
+- Ten-year total: 1.29 plus 10 multiplied by 0.60 gives AUD 7.3 million
+
+Read that figure for what it is. It is a sector-average regulatory compliance cost for the cyber and information security hazard component of a CIRMP obligation, averaged across multiple electricity entities. It is not a bespoke security programme budget, it is not a figure for any named distribution business, and it is not RefDNSP-1.2M's own number.
+
+No AER-approved dollar figure for cyber security capital expenditure inside a named Australian distribution determination was retrieved. What is confirmed is structural: the AER's 2024-29 final revenue decisions for six network businesses name "cyber security and digitalisation measures" as a considered expenditure category, and Ausgrid's own account of its approved plan states it "reduced our cyber security program through efficiency savings" [n]. Cyber security is a real, reviewed, approvable line item in an Australian distribution determination. Its size is not public.
+
+**Cost bands.** Twelve control classes recommended in this section have no public cost anchor of any kind: DERMS security hardening, Modbus security gateway hardware, IEC 62351-6 GOOSE authentication, protection relay setting review, OT intrusion detection and network monitoring platform licensing, supply chain risk management programmes, zero-trust microsegmentation, OT asset discovery tooling, NERC-CIP equivalence programmes, AESCSF uplift, Australian OT cyber insurance premiums, and the AER's cyber security dollar split. Vendors quote per deployment and publish nothing. Every price found was "price on request".
+
+Rather than invent a number, each control below carries an ordinal band measured against the sourced CIRMP cyber envelope:
+
+| Band | Definition against the AUD 1.29 million one-off cyber envelope | Indicative one-off |
+| :--- | :--- | :--- |
+| A | Under 10 percent of the envelope | Under AUD 0.13 million |
+| B | 10 to 40 percent of the envelope | AUD 0.13 million to AUD 0.52 million |
+| C | 40 to 100 percent of the envelope | AUD 0.52 million to AUD 1.29 million |
+| D | Exceeds the envelope on its own; needs a separate funding determination | Above AUD 1.29 million |
+| R | Recurring; priced per year against the AUD 0.60 million per year ongoing envelope | Stated per year |
+
+Band assignment is the working group's engineering judgement about relative cost. It is not a quotation, a market price, or a vendor estimate. It ranks the controls against each other and against a sourced regulatory envelope. It does not price them. Any band arithmetic below is arithmetic on modelled bands and is labelled as such.
+
+**Benefit anchor.** The only published measurement of OT control effectiveness located is the Dragos and Marsh McLennan 2025 OT Security Financial Risk Report, built from a decade of insurance claims and information security event data [n]. It maps five controls, aligned to the SANS ICS 5 Critical Controls, to measured average risk reduction:
+
+| Control class | Average risk reduction |
+| :--- | :--- |
+| Incident response plan | 18.46 percent |
+| Defensible architecture | 17.09 percent |
+| Network visibility and monitoring | 16.47 percent |
+| Risk-based vulnerability management | 13.87 percent |
+| Secure remote access | 12.18 percent |
+
+Three limits on those figures, all from the report itself. They are class averages across a global, all-sector claims population, not the measured effect of any specific product at any specific site. They are explicitly not additive, and the report does not model a combined effect. The provenance is a security vendor and an insurance broker working from proprietary claims data that cannot be independently audited.
+
+An earlier draft of this section assigned individual controls risk reductions of 40, 60, 65, 70, 80, 85, 90, 95 and 98 percent, none of them cited. Those figures are roughly five times the only published benchmark and they are removed. Where a control maps onto a Dragos and Marsh class, the class figure is cited and the mapping is stated. Where no class maps, the benefit is stated as a mechanism rather than a number. A mechanism a reader can check beats a percentage a reader cannot.
+
+### 9.2 Priority Action Items
+
+The three groups below change risk without redesigning the network architecture.
+
+**Priority 1: oscillation detection and command validation**
+
+| Action | Technical implementation | Cost band | Effect | Timeline |
 | :--- | :--- | :--- | :--- | :--- |
-| **API Behavioral Analytics**         | Deploy machine learning anomaly detection on DERMS API traffic to identify oscillation patterns (>5 charge/discharge commands per asset within 10 minutes)              | [investment required] | 70% reduction in oscillation attack success       | implementation period |
-| **Physics-Based Command Validation** | Implement grid frequency and RoCoF telemetry integration into DERMS dispatch validation (reject commands if system inertia <2.5 seconds OR frequency deviation >0.1 Hz) | [investment required] | 85% reduction in grid-destabilizing commands      | implementation period |
-| **BESS Command Rate Limiting**       | Enforce 5-minute minimum interval between charge/discharge state changes per asset (prevents rapid oscillation)                                                         | [investment required] | 60% reduction in oscillation attack effectiveness | implementation period |
+| **API behavioural analytics** | Anomaly detection on DERMS API traffic to identify oscillation patterns, more than 5 charge or discharge commands per asset within 10 minutes | C (no vendor price published; see 9.1) | Network visibility and monitoring. Dragos and Marsh McLennan measure 16.47 percent average risk reduction for this control class [n]. Class average, not this control's measured effect | Implementation period |
+| **Physics-based command validation** | Grid frequency and RoCoF telemetry integrated into DERMS dispatch validation; reject commands when system inertia is below 2.5 seconds or frequency deviation exceeds 0.1 Hz | C (no public cost anchor for DERMS hardening) | No benchmark class maps to this control, so no percentage is stated. The control removes the operating window the oscillation attack of section 2.2 depends on, by refusing dispatch in exactly the low-inertia conditions the attack needs | Implementation period |
+| **BESS command rate limiting** | Enforce a 5-minute minimum interval between charge and discharge state changes per asset | A (configuration and vendor engineering) | No benchmark class maps. A 5-minute minimum caps the achievable oscillation at one full cycle per 600 seconds, 0.0017 Hz. Section 2.1.2 puts the attack band at 0.5 to 0.55 Hz, roughly 300 times faster. The control moves the attack outside the resonance band rather than lowering its probability | Implementation period |
 
-**Total Priority 1 Investment: [investment required]**
-**Cumulative Risk Reduction: 95% (defense-in-depth across three controls)**
+Priority 1 band arithmetic: bands A plus C plus C. Summing the band boundaries gives AUD 1.0 million to AUD 2.7 million one-off (modelled: band boundary arithmetic, not a quotation). At the top of that range these three controls alone cost about twice the whole sourced CIRMP cyber one-off envelope of AUD 1.29 million.
 
-**Priority 2: Thermal Runaway Prevention (implementation period)**
+**Combined effect: not stated as a number.** Dragos and Marsh McLennan state their per-control figures are not additive and their report does not model a combined effect [n]. Three controls measured at 12 to 18 percent each do not compound to the 95 percent the earlier draft claimed, and that 95 percent had no source.
 
-| Action                                    | Technical Implementation                                                                                                                                              | Cost                  | Risk Reduction                                          | Timeline              |
+**Priority 2: thermal runaway prevention**
+
+| Action | Technical implementation | Cost band | Effect | Timeline |
 | :--- | :--- | :--- | :--- | :--- |
-| **Modbus Security Gateway (Pilot)** | Deploy Modbus firewall at 5 critical BESS sites (Moxa EDR-G903 or Fortinet ICS) with register allowlisting (block writes to thermal setpoint registers 0x1000-0x1003) | [investment required] | 95% reduction in Modbus injection attacks               | implementation period |
-| **BMS Firmware Hardening**          | Update battery management system firmware to enforce voltage/thermal limit validation at firmware level (cannot be overridden via Modbus)                             | [investment required] | 85% reduction in thermal runaway initiation             | implementation period |
-| **Enhanced Fire Suppression**       | Upgrade fire suppression at 10 highest-capacity sites (replace FM-200 with water deluge + thermal barrier systems)                                                    | [investment required] | 40% reduction in fire spread (cell-to-cell propagation) | implementation period |
+| **Modbus security gateway pilot** | Modbus firewall at 5 critical BESS sites with register allowlisting, blocking writes to thermal setpoint registers 0x1000 to 0x1003 | C (the Moxa EDR-G903 named in an earlier draft was confirmed to exist and to carry IEC 62443-aligned features, but every listing found returns price on request, and no per-site installation cost was found anywhere) | Defensible architecture. Dragos and Marsh McLennan measure 17.09 percent average risk reduction for this class [n]. Class average, not a measured result for register allowlisting | Implementation period |
+| **BMS firmware hardening** | Enforce voltage and thermal limit validation in battery management system firmware, below the Modbus interface | B (vendor firmware engineering and fleet rollout) | No benchmark class maps. The control moves limit enforcement below the protocol, so a write to a setpoint register cannot raise a limit. It closes the register-write path of section 2.3.1. It does not remove the attacker's access to the register | Implementation period |
+| **Enhanced fire suppression** | Upgrade suppression at the 10 highest-capacity sites, replacing FM-200 with water deluge and thermal barriers | D (physical plant at 10 sites; exceeds the annual cyber envelope on its own) | Outside the scope of every cyber control benchmark located. The control limits cell-to-cell propagation once runaway has started. No sourced propagation reduction figure exists for either the existing or the replacement system, and none is stated | Implementation period |
 
-**Total Priority 2 Investment: [investment required]**
-**Cumulative Risk Reduction: 99% (attack initiation) + 40% (propagation mitigation)**
+**Combined effect:** the first two controls address attack initiation and the third addresses consequence once initiation has succeeded. They are not commensurable and are not combined into a single figure. The earlier draft's "99 percent attack initiation plus 40 percent propagation" had no source for either term.
 
-**Priority 3: Multi-Substation Attack Detection (implementation period)**
+**Priority 3: multi-substation attack detection**
 
-| Action                                             | Technical Implementation                                                                                                                                                  | Cost                  | Risk Reduction                               | Timeline              |
+| Action | Technical implementation | Cost band | Effect | Timeline |
 | :--- | :--- | :--- | :--- | :--- |
-| **OT Protocol Deep Packet Inspection**       | Deploy ICS-aware firewall with DNP3/Modbus/GOOSE protocol parsing at critical zone boundaries (Fortinet FortiGate ICS or Palo Alto PA-7000 with ICS license)              | [investment required] | 80% detection rate for protocol exploitation | implementation period |
-| **Coordinated Protection Anomaly Detection** | Implement SCADA analytics to detect simultaneous protection operations across >10 substations within 60-second window (statistical impossibility under normal conditions) | [investment required] | 90% detection rate for coordinated attacks   | implementation period |
-| **GOOSE Message Authentication**             | Deploy IEC 62351-6 authentication at 15 critical substations (MACsec-based GOOSE signing)                                                                                 | [investment required] | 98% prevention of GOOSE injection attacks    | implementation period |
+| **OT protocol deep packet inspection** | ICS-aware firewall with DNP3, Modbus and GOOSE protocol parsing at critical zone boundaries | D (platform licensing across all zone boundaries; every OT monitoring vendor keeps pricing confidential) | Network visibility and monitoring, 16.47 percent class average [n]. The earlier draft claimed an 80 percent detection rate. No detection rate was sourced, and a detection rate is a different quantity from a risk reduction in any case | Implementation period |
+| **Coordinated protection anomaly detection** | SCADA analytics detecting simultaneous protection operations across more than 10 substations inside a 60-second window | B (analytics on an existing SCADA historian) | No benchmark class maps. The control fires on a pattern with no benign explanation: independent protection operations at more than 10 sites inside 60 seconds are not produced by uncorrelated faults. No false-positive rate has been measured for this network, so no detection figure is stated | Implementation period |
+| **GOOSE message authentication** | IEC 62351-6 authentication at 15 critical substations, MACsec-based GOOSE signing | D (no public cost anchor exists for a GOOSE authentication or MACsec retrofit at any scale) | No benchmark class maps. Authenticated GOOSE frames cannot be forged by an attacker who does not hold the key. The control does nothing against an attacker who does hold one, which is the supply chain case of section 7.1 | Implementation period |
 
-**Total Priority 3 Investment: [investment required]**
-**Cumulative Risk Reduction: 99% (with defense-in-depth)**
+**Combined effect:** not stated. The earlier draft's 99 percent had no source.
 
-**Total Immediate Actions Investment: [investment required]**
-
+**Whole of immediate actions:** nine controls, one in band A, two in band B, three in band C and three in band D. The six bounded controls sum to AUD 1.8 million to AUD 5.0 million one-off (modelled: band boundary arithmetic, not a quotation). The three band D controls have no upper bound and are excluded from that sum, so the real total is higher by an unknown amount. The sourced CIRMP cyber one-off envelope is AUD 1.29 million. The immediate action list therefore costs several times what the sector-average regulatory compliance figure covers. That is the honest reading and it is stated here rather than smoothed over.
 ### 9.2 Investment Roadmap
 
 **Phase 1: Immediate (targeted timeframe): [investment required] million**
