@@ -380,7 +380,7 @@ The AEMO standard for RoCoF tolerance is 1.0 Hz/s. Protection relays are configu
 
 McKenney explicitly warns: "Experts explicitly warn that RoCoF values above 1 Hz/s (measured over 500ms) may be unmanageable by current system protections, potentially leading to fast grid collapse" (McKenney, 2024).
 
-**[RESEARCH GAP: Actual RoCoF tolerance of RefDNSP-1.2M grid requires dynamic stability study with AEMO. Estimated cost: [investment required]. Current analysis uses AEMO standard thresholds as conservative baseline.]**
+**Research gap.** The actual RoCoF tolerance of the RefDNSP-1.2M network is not known. Establishing it requires a dynamic stability study run with AEMO against the network's own topology, protection relay settings and interconnection to the transmission system. No cost anchor for a study of that kind was sourced for this paper, so no cost is stated. Until such a study exists, the analysis below uses the published AEMC and AEMO thresholds as a conservative baseline.
 
 Under the reduced-inertia scenario:
 
@@ -687,28 +687,28 @@ graph TB
 - Geographic Area: 5 km radius around targeted substation cluster
 - Customers Affected: 8,000-12,000 residential, 200-400 commercial
 - Duration: 2-4 hours with priority restoration
-- Economic Impact: [investment required] million
+- Direct customer cost: AUD 1.3 million to AUD 4.0 million, computed in section 5.4 from the AER's 2024 residential NSW value of customer reliability [n]. Both bounds sit inside the 12-hour range for which that value was determined
 
 **Tier 2: Local Cascade Zone (T+15 to T+30 minutes):**
 
 - Geographic Area: 3 adjacent substations, 15 km radius
 - Customers Affected: 80,000-120,000 residential, 2,000-3,500 commercial
 - Duration: 8-16 hours with sequential restoration
-- Economic Impact: [investment required] million
+- Direct customer cost: AUD 53 million at 8 hours, computed in section 5.4 [n], rising to AUD 159 million at 16 hours (modelled: VCR extrapolated past its 12-hour determination)
 
 **Tier 3: Regional Cascade Zone (T+30 to T+60 minutes):**
 
 - Geographic Area: 8 additional substations, 40 km radius
 - Customers Affected: 400,000-600,000 residential, 8,000-15,000 commercial
 - Duration: 16-36 hours
-- Economic Impact: [investment required] million
+- Direct customer cost: AUD 530 million to AUD 1.79 billion, computed in section 5.4 (modelled: VCR extrapolated to 36 hours, three times its determined range)
 
 **Tier 4: System-Wide Collapse (T+60 to T+120 minutes, worst case):**
 
 - Geographic Area: Full RefDNSP-1.2M network plus adjacent DNSPs
 - Customers Affected: 1.0-1.5 million residential, 25,000-40,000 commercial
 - Duration: 24-72 hours
-- Economic Impact: [investment required] million - [investment required] billion
+- Direct customer cost: AUD 1.99 billion to AUD 8.95 billion, computed in section 5.4 (modelled: VCR extrapolated to 72 hours, six times its determined range)
 
 ### 3.3 Attack Execution Timeline
 
