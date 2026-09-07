@@ -221,3 +221,45 @@ trip. The arithmetic in each has to be redone against df/dt, not against an
 absolute threshold.
 
 Needs Jim's call before proceeding, because it changes what the paper argues.
+
+## F10. Section 9's risk-reduction column is fabricated precision. OPEN.
+
+Found while sourcing remediation costs. Section 9 does not only have 108
+`[investment required]` placeholders; the column NEXT to them is worse, because
+it looks sourced and is not.
+
+16 lines carry a specific risk-reduction percentage:
+
+    95% reduction in Modbus injection attacks
+    85% reduction in single-credential compromise impact   (x4)
+    70% reduction in oscillation attack success            (x2)
+    65% reduction in compromised vendor access dwell time
+    60% reduction in oscillation attack effectiveness      (x4)
+    50%, 40%, 20%, 10% reductions elsewhere
+
+None carries a citation. The only published benchmark located for control
+effectiveness, the Dragos and Marsh McLennan 2025 OT Security Financial Risk
+Report, gives risk reduction in the range of 12 to 18 percent per control. The
+paper's figures are roughly five times larger.
+
+A placeholder is honest about being empty. "85% reduction in single-credential
+compromise impact" is not; it reads as a measured result, and one of these
+numbers is quoted inside a proposed BOARD RESOLUTION at line 2145, where a
+director would rely on it.
+
+This is the same error class as F1 and F6: a number presented in a category it
+does not belong to. It must be fixed in the same pass as the section 9
+placeholders, because filling the cost column while leaving a fabricated
+benefit column beside it produces a cost-benefit table that is half sourced and
+wholly misleading.
+
+Options, in order of preference:
+1. Cite the Dragos and Marsh ranges where a control maps onto one of their
+   categories, and accept the smaller numbers.
+2. Where no benchmark maps, express the benefit qualitatively (the control
+   removes the single-credential path; it does not reduce it by a stated
+   percentage) rather than numerically.
+3. Where the paper genuinely wants a modelled figure, label it modelled and
+   state the assumption, as with the RefDNSP-1.2M network parameters.
+
+Do not keep an uncited percentage in a cost-benefit table.
