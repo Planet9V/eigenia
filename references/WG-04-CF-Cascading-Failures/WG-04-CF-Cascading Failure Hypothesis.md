@@ -11,16 +11,16 @@ The probability of such an attack materializing within a 10-year horizon is asse
 
 ## Table of Contents
 
-1. Executive Summary
-2. Background and Context
-3. Death Wobble Physics: Grid Frequency Dynamics
-4. Cascade Propagation Modeling
-5. Grid Interdependency Analysis
-6. Economic Impact Assessment
-7. Physical Safety Consequences
-8. Attack Vector Analysis and Mitigation
-9. Operational Procedures
-10. Strategic Recommendations
+1. Background and Context
+2. Death Wobble Physics: Grid Frequency Dynamics
+3. Cascade Propagation Modeling
+4. Grid Interdependency Analysis
+5. Economic Impact Assessment
+6. Physical Safety Consequences
+7. Attack Vector Analysis and Mitigation
+8. Operational Procedures
+9. Strategic Recommendations
+10. Limitations and Threats to Validity
 11. Conclusion
 12. References
 13. Appendices
@@ -58,9 +58,7 @@ This assessment is conducted under the requirements of:
 
 Current compliance status: AESCSF SP2 at 32% (target 80%), IEC 62443 at 38% (target 80%). These gaps directly enable the cascading failure scenarios modeled in this document.
 
----
-
-## 2. Reference Network Specification: RefDNSP-1.2M
+### 1.4 Reference Network Specification: RefDNSP-1.2M
 
 This analysis is conducted against a specified synthetic distribution network, designated
 RefDNSP-1.2M. It is not a specific operator. Its parameters are drawn from published Australian
@@ -429,11 +427,11 @@ McKenney's (2024, 2025) comprehensive analysis of three major blackouts demonstr
 2. **UK Blackout (August 9, 2019)**: Lightning strikes near the Eaton Socon to Wymondley circuit triggered cascading generation losses: 641 MW from Little Barford gas plant, in three separate trips (a 244 MW steam turbine, then 210 MW and 187 MW gas turbines), plus 737 MW from Hornsea offshore wind. **Approximately 350 MW of distributed generation tripped** on RoCoF protection relays set to disconnect at 0.125 Hz/s (the relay's disconnection threshold; no measured RoCoF of 0.135 Hz/s appears anywhere in National Grid ESO's technical report). This result also confirms protection system maloperation even at moderate RoCoF. System inertia: 210 GVA·s (National Grid ESO technical report, Table 4); the report gives no wind-penetration figure for 9 August 2019.
 3. **Iberian Peninsula (April 28, 2025)**: 60 million people affected (Spain + Portugal), up to 10 hours outage, 56% renewable penetration. Suspected inter-area oscillations between Iberia and Continental Europe due to weak interconnection (~2,800 MW, only 6% of Spanish capacity). McKenney recorded two significant inter-area oscillations in the 30 minutes before the blackout. This paper carries the Iberian event as an oscillation precedent and as nothing more. No final report from the Spanish or Portuguese system operator sits in this working group's evidence base; the renewable-penetration and interconnection figures above come from contemporary reporting rather than from an incident investigation, and the causal attribution to inter-area oscillation is stated in the sources as suspected rather than established. A claim that the event confirmed warnings given earlier that year is also withdrawn. A prediction and an outcome nobody has causally attributed are not a confirmation of each other, and treating them as one is the failure mode this paper is written to avoid.
 
-### 2.3 BESS Thermal Runaway Cascading Scenarios
+### 2.4 BESS Thermal Runaway Cascading Scenarios
 
 Battery thermal runaway represents a distinct attack vector with potential for **physical cascading failure** beyond electrical grid disruption. Unlike the Death Wobble oscillation attack (which targets grid frequency stability), thermal runaway attacks exploit battery management system (BMS) vulnerabilities to induce fires or explosions.
 
-### 2.3.1 Lithium-Ion Thermal Runaway Physics
+### 2.4.1 Lithium-Ion Thermal Runaway Physics
 
 Lithium-ion batteries store tremendous energy density (150-250 Wh/kg) in chemically reactive materials. When cell temperature exceeds safe limits, a self-sustaining exothermic reaction begins:
 
@@ -528,7 +526,7 @@ modbus_client.write_coil(
 ### T+2-4 hours: Full container fire
 ```
 
-### 2.3.2 Multi-Site Thermal Cascade Scenario
+### 2.4.2 Multi-Site Thermal Cascade Scenario
 
 **Attack Scenario: Coordinated Thermal Runaway Across 54 BESS Sites**
 
@@ -577,7 +575,7 @@ TNT Equivalent:
 - Ignite nearby structures and vegetation
 - Cause serious injury or fatality to nearby personnel
 
-### 2.3.3 Fire Suppression Failure Analysis
+### 2.4.3 Fire Suppression Failure Analysis
 
 Community BESS installations typically use one of three fire suppression technologies:
 
@@ -1710,7 +1708,7 @@ Priority 1 band arithmetic: bands A plus C plus C. Summing the band boundaries g
 | Action | Technical implementation | Cost band | Effect | Timeline |
 | :--- | :--- | :--- | :--- | :--- |
 | **Modbus security gateway pilot** | Modbus firewall at 5 critical BESS sites with register allowlisting, blocking writes to thermal setpoint registers 0x1000 to 0x1003 | C (the Moxa EDR-G903 named in an earlier draft was confirmed to exist and to carry IEC 62443-aligned features, but every listing found returns price on request, and no per-site installation cost was found anywhere) | Defensible architecture. Dragos and Marsh McLennan measure 17.09 percent average risk reduction for this class [n]. Class average, not a measured result for register allowlisting | Implementation period |
-| **BMS firmware hardening** | Enforce voltage and thermal limit validation in battery management system firmware, below the Modbus interface | B (vendor firmware engineering and fleet rollout) | No benchmark class maps. The control moves limit enforcement below the protocol, so a write to a setpoint register cannot raise a limit. It closes the register-write path of section 2.3.1. It does not remove the attacker's access to the register | Implementation period |
+| **BMS firmware hardening** | Enforce voltage and thermal limit validation in battery management system firmware, below the Modbus interface | B (vendor firmware engineering and fleet rollout) | No benchmark class maps. The control moves limit enforcement below the protocol, so a write to a setpoint register cannot raise a limit. It closes the register-write path of section 2.4.1. It does not remove the attacker's access to the register | Implementation period |
 | **Enhanced fire suppression** | Upgrade suppression at the 10 highest-capacity sites, replacing FM-200 with water deluge and thermal barriers | D (physical plant at 10 sites; exceeds the annual cyber envelope on its own) | Outside the scope of every cyber control benchmark located. The control limits cell-to-cell propagation once runaway has started. No sourced propagation reduction figure exists for either the existing or the replacement system, and none is stated | Implementation period |
 
 **Combined effect:** the first two controls address attack initiation and the third addresses consequence once initiation has succeeded. They are not commensurable and are not combined into a single figure. The earlier draft's "99 percent attack initiation plus 40 percent propagation" had no source for either term.
@@ -2375,7 +2373,47 @@ A risk that cannot be priced cannot be transferred on known terms. Two consequen
 
 ---
 
-## 10. Conclusion
+## 10. Limitations and Threats to Validity
+
+What this assessment can support, and what it cannot, is set out here before the conclusion rather than behind the bibliography, so that a reader reaches the conclusion already knowing what it rests on.
+
+This assessment employs **prospective modeling** of cascading failure scenarios that have not yet occurred in the Australian context. The methodology combines:
+
+1. **Physics-Based Foundation**: Grid frequency dynamics, RoCoF calculations, and protection system behavior are derived from established power systems engineering (AEMO standards, IEC 60255 relay specifications). Where this paper states what a grid actually did, it cites the operator's own report rather than another Eigenia document: AEMO's final report on the South Australian black system of 28 September 2016, National Grid ESO's technical report on the events of 9 August 2019, ENTSO-E's expert panel report on the Continental Europe separation of 8 January 2021, and the NERC and Texas RE disturbance reports on the two Odessa events. No Eigenia paper is the source of record for a measurement taken on somebody else's system, and an earlier draft of this line made one the source of record for all of them.
+2. **International Precedent Analysis**: South Australia 2016, UK 2019 (0.125 Hz/s RoCoF relay cascade), and Iberian Peninsula 2025 (inter-area oscillations) are precedents for the protection behaviour this paper models. They are not validation of it, and an earlier draft of this section called them that.
+
+   The South Australian precedent carries one figure this paper cannot confirm. A peak RoCoF of 6.1 Hz/s is attributed to AEMO's final report of March 2017, here and in secondary commentary elsewhere. A researcher opened that report directly and could not locate the figure in it, and it circulates only in commentary downstream of the report. It is stated here as unconfirmed rather than as a measurement, and no argument in this paper should rest on it until someone quotes the passage of the final report that carries it. What that report does confirm for the event is a loss of 456 MW over a period of less than seven seconds, against a regional demand of 1,826 MW. Those are the sourced figures for the South Australian precedent, and they are sufficient to carry it: eight of nine wind farms disconnected on a voltage-dip-count protection setting rather than on the fault itself, which is the protection behaviour this paper models.
+
+   Two distinct mechanisms run through those events, and this paper keeps them apart. The first is that low inertia raises df/dt for a given power imbalance. That follows from the swing equation, it is derivable rather than observed, and it is the basis of the cascade argument in section 2. The second is that inverter-based resources disconnect for faults they were never obliged to ride through. That is documented across four NERC disturbance reports and it does not depend on inertia at all.
+
+   The evidence available to this working group actively contradicts deriving the second mechanism from the first. At Odessa on 9 May 2021 ERCOT stood at 56% synchronous generation and lost 1,340 MW. On 4 June 2022 it stood at 73.5% synchronous generation and lost 2,555 MW. The larger loss came at the higher synchronous share, which is the wrong ordering if low inertia were the operative cause. NERC states the mechanism for the 2021 event plainly: none of the resources tripped consequentially by the fault itself. That sentence is NERC's own, from the joint NERC and Texas RE *Odessa Disturbance* report on the events of 9 May and 26 June 2021, and it is quoted in this working group's *ERCOT and WECC Renewable Integration Challenges*, section 4.2, against the primary document. The two mechanisms compound where they meet. Neither produces the other, and this paper does not claim that either does.
+
+   None of these events resulted from coordinated cyber-physical attacks. They were natural disturbances (weather, equipment failure, lightning strikes).
+3. **Cyber-Attack Adaptation**: This document extends physical failure mechanisms into cyber-enabled scenarios by modeling how an adversary with Retailer API access could *deliberately induce* the oscillation patterns that occurred naturally in historical events. This represents a novel threat vector without direct historical precedent.
+4. **Consequence Modeling Uncertainty**:
+
+   - **Fatality Estimates (5-25)**: No cyber-physical attack on electricity infrastructure has caused direct fatalities at this scale. Ukrainian attacks (2015, 2016, 2022) affected 225,000 customers for 6 hours with zero direct deaths. Our estimates extrapolate from medical literature on hospital outage mortality (cardiac care delays, dialysis interruption), traffic accident statistics from signal outages (2019 Sydney precedent: 180% accident rate increase), and thermal runaway scenarios (Arizona 2019 McMicken fire: 4 firefighters injured, zero fatalities). These are *worst-case models* not empirical predictions.
+   - **Economic Impact (AUD 1.19 billion at the determination boundary; AUD 1.99 billion to AUD 8.95 billion extrapolated)**: Uses the AER's December 2024 Value of Customer Reliability determination, not AEMO's. Determination has been the AER's statutory responsibility since the AEMC's final rule of July 2018, and an earlier draft of this paper credited it to AEMO throughout [n]. The AER determined those values for unplanned outages of up to 12 hours. The cascade modelled here runs to 72 hours, so every figure resting on a longer duration is a linear extrapolation roughly six times outside the determined range, not a determination; section 5.2 states it in exactly those terms and section 5.4 marks each affected cell. The correct instrument beyond 12 hours is the AER's separate Value of Network Resilience review, and this paper holds no VNR figure at all. No regulatory penalty or litigation estimate is made anywhere in this document: no SOCI Act penalty schedule and no Australian distribution precedent were sourced, and US class-action settlements were not adapted across jurisdictions. No plus-or-minus 30 percent sensitivity band is claimed either. The real uncertainty is structural rather than proportional, and section 9.5 expresses it as a ratio envelope of 2.9:1 to 8.8:1 driven by an uncited probability assessment and a class-average control effectiveness measurement.
+5. **Research Gaps Requiring Empirical Validation**:
+
+   - **RefDNSP-1.2M-Specific RoCoF Tolerance**: Current analysis uses the generic 1.0 Hz/s threshold. Actual tolerance requires a dynamic stability study run with AEMO against RefDNSP-1.2M's own topology, protection relay settings, and interconnection to TransGrid. No cost anchor for a study of that kind was sourced, so none is stated. Section 2.2 records the same gap.
+   - **BESS Oscillation Resonance**: Laboratory testing is required to establish whether 54 community batteries can sustain coherent oscillation at 0.3 to 1.2 Hz, or whether control system delays and communications latency prevent synchronization. No cost anchor for such testing was sourced, so none is stated. This gap is load-bearing rather than incidental: if synchronization fails, the initiating mechanism of section 2.2 does not work, and with it the cascade this paper models.
+   - **Cascade Propagation Timing**: Tier 1→2→3→4 timeline (T+15, T+30, T+60, T+120 minutes) modeled from AEMO protection relay coordination studies. Actual progression depends on load distribution, tie-line flows, and operator intervention effectiveness during incident.
+6. **Comparison to McKenney's Analysis**:
+   McKenney (2024, 2025) focuses on *unintentional* Death Wobble from renewable energy transition and natural disturbances. His work provides the physics foundation (inertia constant formulas, RoCoF thresholds, protection cascade mechanisms) but does not model cyber-enabled *deliberate induction* of oscillations. This document extends his framework into adversarial scenarios, maintaining his technical rigor while acknowledging the speculative nature of cyber-attack modeling.
+
+**Board Interpretation Guidance**:
+
+- **High Confidence**: grid frequency physics, which follows from the swing equation rather than from any measurement taken for this paper, and protection relay behaviour under rate-of-change settings, which four published incident investigations describe directly. The Death Wobble mechanism itself does not belong in this band. Its physics is sound and its protection precedents are real, but no published incident shows an adversary deliberately inducing the oscillation, and item 5 above records the synchronisation question that would decide whether 54 batteries can sustain one
+- **Moderate Confidence**: the direct customer cost of AUD 1.19 billion at the 12-hour boundary of the AER determination, which is computed from a published value through a stated relation but on stipulated customer counts
+- **Lower Confidence**: every figure resting on a duration beyond 12 hours, including the tier 4 range; fatality estimates, which have no Australian cyber-attack precedent; and attack execution success rates, which depend on adversary sophistication and on the unresolved synchronization question above
+- **Not stated at all**: equipment damage, regulatory penalties, civil litigation, reputational damage, insurance response, opportunity cost and per-facility industrial loss. Section 5.10 lists each with the input it lacks. Their absence is a limit on this paper's total, not a claim that they are zero
+
+This assessment is designed for **strategic risk management** (Board-level capital allocation, security investment prioritization) not **tactical operations** (SOC playbook development, incident response procedures). The prospective modeling approach intentionally emphasizes tail risk to support conservative decision-making for critical infrastructure protection.
+
+---
+
+## 11. Conclusion
 
 RefDNSP-1.2M's distributed energy infrastructure faces systemic cascading failure risk from coordinated cyber-physical attacks. The convergence of four conditions creates this risk:
 
@@ -2384,7 +2422,7 @@ RefDNSP-1.2M's distributed energy infrastructure faces systemic cascading failur
 3. **Complex grid interdependencies** linking electricity supply to water, hospital, telecommunications, transport, military, and financial infrastructure, each amplifying the consequences of an electrical outage into a multi-domain crisis.
 4. **Reduced grid inertia** from renewable energy transition, halving the system's resistance to frequency disturbances and creating conditions where cyber-physical attacks can trigger cascading failures that were physically impossible under the legacy generation mix. As McKenney (2024) documents: "In a low-inertia system, the *same* disturbance causes the frequency to change *much faster* than in a high-inertia system. This rapid frequency change *is* the dangerous 'wobble.'" Historical precedents (South Australia 2016: 6.1 Hz/s, UK 2019: 0.125 Hz/s RoCoF relay disconnection, Iberian Peninsula 2025: inter-area oscillations) establish that this vulnerability has already materialized in comparable grids worldwide (McKenney, 2024, 2025).
 
-The most likely attack scenario is Retailer API compromise leading to 54 BESS oscillation. That produces the local and regional cascade of section 3.2, tiers 2 and 3, affecting 80,000 to 600,000 customers for 8 to 36 hours. Section 5.4 computes the direct customer cost across that span as AUD 53 million at its lower bound, which sits inside the range for which the AER determined the value of customer reliability, rising to AUD 1.79 billion at its upper bound, which does not. The worst case is system-wide collapse: 1.0 to 1.5 million customers for 24 to 72 hours, and AUD 1.99 billion to AUD 8.95 billion of direct customer cost (modelled: VCR extrapolated to 72 hours, six times its determined range). The 5 to 25 fatality range is a prospective model with no Australian precedent, and Appendix J states the grounds for it and the confidence it carries.
+The most likely attack scenario is Retailer API compromise leading to 54 BESS oscillation. That produces the local and regional cascade of section 3.2, tiers 2 and 3, affecting 80,000 to 600,000 customers for 8 to 36 hours. Section 5.4 computes the direct customer cost across that span as AUD 53 million at its lower bound, which sits inside the range for which the AER determined the value of customer reliability, rising to AUD 1.79 billion at its upper bound, which does not. The worst case is system-wide collapse: 1.0 to 1.5 million customers for 24 to 72 hours, and AUD 1.99 billion to AUD 8.95 billion of direct customer cost (modelled: VCR extrapolated to 72 hours, six times its determined range). The 5 to 25 fatality range is a prospective model with no Australian precedent, and section 10 states the grounds for it and the confidence it carries.
 
 Read one boundary figure alongside those. The full network at 12 hours, the longest outage the AER's determination actually covers, gives AUD 1.19 billion [n]. That is the largest direct customer cost this paper can state without extrapolating. Everything above it, including the headline tier 4 range, is an upper-bound extrapolation and is labelled as one wherever it appears.
 
@@ -2392,7 +2430,7 @@ The mitigation programme is not discretionary. It is a regulatory obligation und
 
 ---
 
-## 11. References
+## 12. References
 
 ### Primary Sources
 
@@ -2444,7 +2482,7 @@ National Transportation Safety Board. (2020). *Battery Energy Storage System Fir
 
 ---
 
-## 12. Appendices
+## 13. Appendices
 
 ### Appendix A: Physics Calculations
 
@@ -2831,7 +2869,7 @@ No weight is given, because no weight is measured.
    sub-second protection cascade.
 
 Quantifying their relative contribution needs incident data the working group
-does not hold. Section 12, Appendix J, records that as an open limitation.
+does not hold. Section 10 records that as an open limitation.
 
 #### Consequence Impact Analysis
 
@@ -2879,7 +2917,7 @@ Total Serious Injury Range: 40-120 (median: 75)
 No monetised safety impact is stated.
 ```
 
-An earlier draft multiplied the median 12 fatalities by an Australian government value of statistical life. No VSL figure was sourced for this paper, so neither the VSL nor the product is stated. The fatality and injury ranges above are prospective models with no Australian cyber-physical precedent; Appendix J records the basis for them and section 6.4 carries the same caution. They are not converted to dollars and are not added to the direct customer cost of section 5.
+An earlier draft multiplied the median 12 fatalities by an Australian government value of statistical life. No VSL figure was sourced for this paper, so neither the VSL nor the product is stated. The fatality and injury ranges above are prospective models with no Australian cyber-physical precedent; Section 10 records the basis for them and section 6.4 carries the same caution. They are not converted to dollars and are not added to the direct customer cost of section 5.
 
 #### Risk-Adjusted Return on Investment (ROI)
 
@@ -3077,7 +3115,7 @@ Cost bands use the scheme of section 9.1, measured against the sourced CIRMP cyb
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | CTL-009 | BESS Network Segmentation | CR 3.1 (Network Segmentation) | D3-NI (Network Isolation) | VLAN isolation for each BESS, firewall rules | C, as section 7.4 (54 sites) | Defensible architecture, 17.09 percent class average [n] |
 | CTL-010 | ICCP Encryption | CR 4.3 (Use of Cryptography) | D3-EC (Encrypted Communication) | TLS 1.3 for ICCP between DERMS and ADMS | B (bespoke engineering across two platforms) | Mechanism: removes the passive-observer and on-path-injection paths. It does nothing against a compromised endpoint at either end |
-| CTL-011 | Modbus Replacement | CR 4.3 (Use of Cryptography) | D3-EC (Encrypted Communication) | Migrate to DNP3 Secure Authentication v5 | D (fleet-wide protocol migration across 54 sites; exceeds the envelope on its own) | Mechanism: authenticated writes cannot be forged, which closes the register-write path of section 2.3.1 at its root rather than filtering it |
+| CTL-011 | Modbus Replacement | CR 4.3 (Use of Cryptography) | D3-EC (Encrypted Communication) | Migrate to DNP3 Secure Authentication v5 | D (fleet-wide protocol migration across 54 sites; exceeds the envelope on its own) | Mechanism: authenticated writes cannot be forged, which closes the register-write path of section 2.4.1 at its root rather than filtering it |
 | CTL-012 | Container Security Hardening | CR 2.4 (Mobile Code Integrity) | D3-SJA (System Call Analysis) | Pod Security Standards (restricted), Falco runtime monitoring | B, as section 9.3 Phase 1 | Defensible architecture, 17.09 percent class average [n] |
 | CTL-013 | Firmware Verification | CR 3.4 (Software Integrity) | D3-FBA (File-Based Behavior Analysis) | Cryptographic signature validation for BESS firmware updates | B, as the BMS firmware control in section 9.2 | Mechanism: an unsigned or altered firmware image does not install. It does nothing against a signed malicious image from a compromised vendor |
 | CTL-014 | UEBA for DERMS API | CR 2.9 (Session Integrity) | D3-UBA (User Behavior Analysis) | Machine learning baseline for normal retailer API usage patterns | D, as the UEBA and NDR line in section 9.3 Phase 2 | Network visibility and monitoring, 16.47 percent class average [n] |
@@ -3221,41 +3259,7 @@ Cost bands use the scheme of section 9.1, measured against the sourced CIRMP cyb
 - RefDNSP-1.2M DERMS High Level Architecture (HLD)
 - AEMO Power System Frequency Risk Review 2024
 
-### Appendix J: Methodological Transparency and Uncertainty Quantification
-
-This assessment employs **prospective modeling** of cascading failure scenarios that have not yet occurred in the Australian context. The methodology combines:
-
-1. **Physics-Based Foundation**: Grid frequency dynamics, RoCoF calculations, and protection system behavior are derived from established power systems engineering (AEMO standards, IEC 60255 relay specifications). Where this paper states what a grid actually did, it cites the operator's own report rather than another Eigenia document: AEMO's final report on the South Australian black system of 28 September 2016, National Grid ESO's technical report on the events of 9 August 2019, ENTSO-E's expert panel report on the Continental Europe separation of 8 January 2021, and the NERC and Texas RE disturbance reports on the two Odessa events. No Eigenia paper is the source of record for a measurement taken on somebody else's system, and an earlier draft of this line made one the source of record for all of them.
-2. **International Precedent Analysis**: South Australia 2016 (6.1 Hz/s RoCoF), UK 2019 (0.125 Hz/s RoCoF relay cascade), and Iberian Peninsula 2025 (inter-area oscillations) are precedents for the protection behaviour this paper models. They are not validation of it, and an earlier draft of this appendix called them that.
-
-   Two distinct mechanisms run through those events, and this paper keeps them apart. The first is that low inertia raises df/dt for a given power imbalance. That follows from the swing equation, it is derivable rather than observed, and it is the basis of the cascade argument in section 2. The second is that inverter-based resources disconnect for faults they were never obliged to ride through. That is documented across four NERC disturbance reports and it does not depend on inertia at all.
-
-   The evidence available to this working group actively contradicts deriving the second mechanism from the first. At Odessa on 9 May 2021 ERCOT stood at 56% synchronous generation and lost 1,340 MW. On 4 June 2022 it stood at 73.5% synchronous generation and lost 2,555 MW. The larger loss came at the higher synchronous share, which is the wrong ordering if low inertia were the operative cause. NERC states the mechanism for the 2021 event plainly: none of the resources tripped consequentially by the fault itself. That sentence is NERC's own, from the joint NERC and Texas RE *Odessa Disturbance* report on the events of 9 May and 26 June 2021, and it is quoted in this working group's *ERCOT and WECC Renewable Integration Challenges*, section 4.2, against the primary document. The two mechanisms compound where they meet. Neither produces the other, and this paper does not claim that either does.
-
-   None of these events resulted from coordinated cyber-physical attacks. They were natural disturbances (weather, equipment failure, lightning strikes).
-3. **Cyber-Attack Adaptation**: This document extends physical failure mechanisms into cyber-enabled scenarios by modeling how an adversary with Retailer API access could *deliberately induce* the oscillation patterns that occurred naturally in historical events. This represents a novel threat vector without direct historical precedent.
-4. **Consequence Modeling Uncertainty**:
-
-   - **Fatality Estimates (5-25)**: No cyber-physical attack on electricity infrastructure has caused direct fatalities at this scale. Ukrainian attacks (2015, 2016, 2022) affected 225,000 customers for 6 hours with zero direct deaths. Our estimates extrapolate from medical literature on hospital outage mortality (cardiac care delays, dialysis interruption), traffic accident statistics from signal outages (2019 Sydney precedent: 180% accident rate increase), and thermal runaway scenarios (Arizona 2019 McMicken fire: 4 firefighters injured, zero fatalities). These are *worst-case models* not empirical predictions.
-   - **Economic Impact (AUD 1.19 billion at the determination boundary; AUD 1.99 billion to AUD 8.95 billion extrapolated)**: Uses the AER's December 2024 Value of Customer Reliability determination, not AEMO's. Determination has been the AER's statutory responsibility since the AEMC's final rule of July 2018, and an earlier draft of this paper credited it to AEMO throughout [n]. The AER determined those values for unplanned outages of up to 12 hours. The cascade modelled here runs to 72 hours, so every figure resting on a longer duration is a linear extrapolation roughly six times outside the determined range, not a determination; section 5.2 states it in exactly those terms and section 5.4 marks each affected cell. The correct instrument beyond 12 hours is the AER's separate Value of Network Resilience review, and this paper holds no VNR figure at all. No regulatory penalty or litigation estimate is made anywhere in this document: no SOCI Act penalty schedule and no Australian distribution precedent were sourced, and US class-action settlements were not adapted across jurisdictions. No plus-or-minus 30 percent sensitivity band is claimed either. The real uncertainty is structural rather than proportional, and section 9.5 expresses it as a ratio envelope of 2.9:1 to 8.8:1 driven by an uncited probability assessment and a class-average control effectiveness measurement.
-5. **Research Gaps Requiring Empirical Validation**:
-
-   - **RefDNSP-1.2M-Specific RoCoF Tolerance**: Current analysis uses the generic 1.0 Hz/s threshold. Actual tolerance requires a dynamic stability study run with AEMO against RefDNSP-1.2M's own topology, protection relay settings, and interconnection to TransGrid. No cost anchor for a study of that kind was sourced, so none is stated. Section 2.2 records the same gap.
-   - **BESS Oscillation Resonance**: Laboratory testing is required to establish whether 54 community batteries can sustain coherent oscillation at 0.3 to 1.2 Hz, or whether control system delays and communications latency prevent synchronization. No cost anchor for such testing was sourced, so none is stated. This gap is load-bearing rather than incidental: if synchronization fails, the initiating mechanism of section 2.2 does not work, and with it the cascade this paper models.
-   - **Cascade Propagation Timing**: Tier 1→2→3→4 timeline (T+15, T+30, T+60, T+120 minutes) modeled from AEMO protection relay coordination studies. Actual progression depends on load distribution, tie-line flows, and operator intervention effectiveness during incident.
-6. **Comparison to McKenney's Analysis**:
-   McKenney (2024, 2025) focuses on *unintentional* Death Wobble from renewable energy transition and natural disturbances. His work provides the physics foundation (inertia constant formulas, RoCoF thresholds, protection cascade mechanisms) but does not model cyber-enabled *deliberate induction* of oscillations. This document extends his framework into adversarial scenarios, maintaining his technical rigor while acknowledging the speculative nature of cyber-attack modeling.
-
-**Board Interpretation Guidance**:
-
-- **High Confidence**: grid frequency physics, which follows from the swing equation rather than from any measurement taken for this paper, and protection relay behaviour under rate-of-change settings, which four published incident investigations describe directly. The Death Wobble mechanism itself does not belong in this band. Its physics is sound and its protection precedents are real, but no published incident shows an adversary deliberately inducing the oscillation, and item 5 above records the synchronisation question that would decide whether 54 batteries can sustain one
-- **Moderate Confidence**: the direct customer cost of AUD 1.19 billion at the 12-hour boundary of the AER determination, which is computed from a published value through a stated relation but on stipulated customer counts
-- **Lower Confidence**: every figure resting on a duration beyond 12 hours, including the tier 4 range; fatality estimates, which have no Australian cyber-attack precedent; and attack execution success rates, which depend on adversary sophistication and on the unresolved synchronization question above
-- **Not stated at all**: equipment damage, regulatory penalties, civil litigation, reputational damage, insurance response, opportunity cost and per-facility industrial loss. Section 5.10 lists each with the input it lacks. Their absence is a limit on this paper's total, not a claim that they are zero
-
-This assessment is designed for **strategic risk management** (Board-level capital allocation, security investment prioritization) not **tactical operations** (SOC playbook development, incident response procedures). The prospective modeling approach intentionally emphasizes tail risk to support conservative decision-making for critical infrastructure protection.
-
-### Appendix K: References and Bibliography
+### Appendix J: References and Bibliography
 
 #### Primary Sources - McKenney Research
 
@@ -3263,7 +3267,7 @@ McKenney, J. (2024). *The Grid's Precarious Pulse: Death Wobble and Frequency In
 
 McKenney, J. (2025). *Cascading Failure Analysis: South Australia 2016, UK 2019, and Iberian Peninsula 2025 Blackouts*. Eigenia Labs, Working Group WG-04-CF. (This document.)
 
-McKenney, J. (2024). *ERCOT and WECC Renewable Integration Challenges: Inverter-Based Resource Reliability Under Stress Conditions*. Eigenia Labs, Working Group WG-04-CF. Written and published within WG-04-CF. It corrects three claims this paper previously carried, and sections 1.2, 2.2 and Appendix J of this document state the corrected versions. It is cited here for the corrections and for the reading of the primary reports, never as the source of record for what ERCOT, NERC or LBNL published; each of those carries its own entry below.
+McKenney, J. (2024). *ERCOT and WECC Renewable Integration Challenges: Inverter-Based Resource Reliability Under Stress Conditions*. Eigenia Labs, Working Group WG-04-CF. Written and published within WG-04-CF. It corrects three claims this paper previously carried, and sections 1.2, 2.2 and 10 of this document state the corrected versions. It is cited here for the corrections and for the reading of the primary reports, never as the source of record for what ERCOT, NERC or LBNL published; each of those carries its own entry below.
 
 #### Primary Sources - Inverter-Based Resource Disturbance Reports
 
@@ -3357,7 +3361,7 @@ RefDNSP-1.2M (2025). *EE-CTI-004: BESS Architecture Vulnerability Assessment, Ba
 
 RefDNSP-1.2M (2025). *EE-CTI-007: DERMS Security Architecture Review, Cloud Integration Risks and Mitigations*. RefDNSP-1.2M Cybersecurity Intelligence.
 
-### Appendix L: Glossary
+### Appendix K: Glossary
 
 | Term | Definition | EE Context |
 | :--- | :--- | :--- |
