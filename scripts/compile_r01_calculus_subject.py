@@ -25,6 +25,9 @@ cleaned = cleaned.replace(r'\-', '-')
 
 # Replace em dashes and double hyphens
 cleaned = cleaned.replace('—', '; ')
+# An em dash written with surrounding spaces becomes ' ;  '. A semicolon never takes
+# a space before it, so collapse the artifact at the source rather than in the output.
+cleaned = re.sub(r'\s+;\s+', '; ', cleaned)
 cleaned = cleaned
 
 # Replace prohibited AI filler words
@@ -142,7 +145,7 @@ Where:
 - $\dot{L}_{\text{BI}}(t)$ is the business interruption loss rate ($18,500\text{ USD/hour}$).
 - $\Phi_{\text{regulatory}}$ is the statutory penalty levied under EU CRA Article 64.
 
-Deploying psychometric behavioral monitoring ($C_{\text{controls}} = 350,000\text{ USD}$) mitigates insider-assisted sabotage, reducing annualized loss expectancy from $12,400,000\text{ USD}$ to $920,000\text{ USD}$ and yielding a verified Return on Security Investment ($\text{ROSI}$):
+Deploying psychometric behavioral monitoring ($C_{\text{controls}} = 350,000\text{ USD}$) mitigates insider-assisted sabotage, reducing annualized loss expectancy from $12,400,000\text{ USD}$ to $920,000\text{ USD}$ and yielding a modelled Return on Security Investment ($\text{ROSI}$). The two loss expectancies and the monitoring cost are author-chosen reference values for an insider-sabotage scenario. The percentage below is exact arithmetic on those values and carries no observational weight of its own:
 
 $$\text{ROSI} = \frac{(\text{ALE}_{\text{unmitigated}} - \text{ALE}_{\text{hardened}}) - C_{\text{controls}}}{C_{\text{controls}}} \times 100\% = \frac{\$11,480,000 - \$350,000}{\$350,000} \times 100\% = 3,180\%$$
 
@@ -153,6 +156,7 @@ final_content = header + body + grounding_section
 
 # Final verification: eliminate any lingering em-dashes
 final_content = final_content.replace('—', '; ').replace('–', ' - ')
+final_content = re.sub(r'\s+;\s+', '; ', final_content)
 
 # Ensure directory exists
 os.makedirs(os.path.dirname(dest_path), exist_ok=True)

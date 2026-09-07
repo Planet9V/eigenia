@@ -24,6 +24,9 @@ cleaned = cleaned.replace(r'\-', '-')
 
 # Replace em dashes and double hyphens
 cleaned = cleaned.replace('—', '; ')
+# A spaced em dash becomes ' ;  '. A semicolon never takes a space before it;
+# collapse the artifact here so it cannot reach a published document.
+cleaned = re.sub(r'\s+;\s+', '; ', cleaned)
 cleaned = cleaned
 
 # Replace prohibited AI filler words
@@ -133,7 +136,7 @@ Where:
 - $\dot{L}_{\text{BI}}(t)$ is the business interruption revenue loss rate ($24,000\text{ USD/hour}$).
 - $\Phi_{\text{regulatory}}$ is the statutory fine under EU CRA Article 64.
 
-Deploying the MPN auditory telemetry system ($C_{\text{controls}} = 195,000\text{ USD}$) reduces mean-time-to-detect (MTTD) by 68%, mitigating annualized loss expectancy from $8,900,000\text{ USD}$ to $280,000\text{ USD}$ and yielding a verified Return on Security Investment ($\text{ROSI}$):
+Deploying the MPN auditory telemetry system ($C_{\text{controls}} = 195,000\text{ USD}$) reduces mean-time-to-detect (MTTD) by 68%, mitigating annualized loss expectancy from $8,900,000\text{ USD}$ to $280,000\text{ USD}$ and yielding a modelled Return on Security Investment ($\text{ROSI}$). The 68% reduction in mean-time-to-detect is an assumed sonification benefit rather than a measured one, and both loss expectancies are reference figures for a 120-rack hall. The percentage below is arithmetic on them:
 
 $$\text{ROSI} = \frac{(\text{ALE}_{\text{unmitigated}} - \text{ALE}_{\text{hardened}}) - C_{\text{controls}}}{C_{\text{controls}}} \times 100\% = \frac{\$8,620,000 - \$195,000}{\$195,000} \times 100\% = 4,320\%$$
 
@@ -144,6 +147,9 @@ final_content = header + body + grounding_section
 
 # Final verification: eliminate any lingering em-dashes
 final_content = final_content.replace('—', '; ')
+# A spaced em dash becomes ' ;  '. A semicolon never takes a space before it;
+# collapse the artifact here so it cannot reach a published document.
+final_content = re.sub(r'\s+;\s+', '; ', final_content)
 
 # Ensure directory exists
 os.makedirs(os.path.dirname(dest_path), exist_ok=True)

@@ -4,6 +4,7 @@ Compiler for Paper P-08: Annualised Loss Expectancy (ALE) & Return on Security I
 Generates a 5,500+ word, mathematically rigorous, actuarial & CFO-level treatise
 meeting all PAAI gate criteria and zero-tolerance style prohibitions.
 """
+import re
 
 dest_path = 'references/WG-01-UI-Underwriter-insurance/WG-01-UI-ALE-ROSI-Decision-Framework.md'
 
@@ -11,9 +12,9 @@ content = r"""## Abstract
 
 Engineering risk frameworks such as Failure Mode, Effects, and Criticality Analysis (FMECA) and Hazard and Operability studies (HAZOP) tell facility teams *what* can fail and *how severe* the physical breakdown will be. However, engineering risk metrics; such as Risk Priority Numbers (RPN); fail to answer the primary question asked by Chief Financial Officers, insurance underwriters, and corporate boards of directors: *How much capital is exposed to loss, and what is the optimal financial return on mitigating that exposure?*
 
-This paper translates the cyber-physical CyHAZOP and dual-RPN engineering methodologies into the formal financial risk quantification frameworks required for capital allocation: Annualised Loss Expectancy (ALE) per NIST SP 800-30, the Gordon-Loeb optimal information security investment model, and the Open FAIR probabilistic taxonomy. Using a fully worked, empirical reference case of a 100 MW high-density compute facility, we prove that a targeted 1.60M USD operational technology security programme mitigates 15.07M USD in annual expected losses; delivering a verified programme-level Return on Security Investment (ROSI) of 842%. The programme operates at 49% of the Gordon-Loeb investment ceiling, preserving financial efficiency while closing critical vulnerability vectors.
+This paper translates the cyber-physical CyHAZOP and dual-RPN engineering methodologies into the formal financial risk quantification frameworks required for capital allocation: Annualised Loss Expectancy (ALE) per NIST SP 800-30, the Gordon-Loeb optimal information security investment model, and the Open FAIR probabilistic taxonomy. The worked reference case is a modelled 100 MW high-density compute facility. It is not a measured site. Every exposure factor, cyber annual rate of occurrence and residual rate of occurrence used in Section 4 is a working-group estimate, not an observation drawn from claims history. On those stated inputs the analysis models a targeted 1.60M USD operational technology security programme mitigating 15,350,250 USD in annual expected losses, giving a modelled programme-level Return on Security Investment (ROSI) of 859% (modelled: exposure factors 0.40 to 0.85, cyber ARO 0.05 to 0.20, residual ARO 0.005 to 0.030, all working-group estimates). The programme operates at 24.99% of the Gordon-Loeb investment ceiling of 6,402,564 USD, which leaves capital headroom while closing the vulnerability vectors Section 4 enumerates. Tables 10.1 and 10.2 recompute exactly from the inputs printed inside them; the inputs themselves carry no external source, so the outputs are a sensitivity result and not a measurement.
 
-Crucially, this paper demonstrates that standard ALE, Gordon-Loeb, and Gaussian Value-at-Risk (VaR) models systematically underestimate catastrophic tail-risk because they assume thin-tailed Mediocristan distributions. By introducing Nassim Nicholas Taleb fat-tail power-law corrections, we prove that for Table B (Extremistan) cyber-physical catastrophes; such as simultaneous multi-megawatt cooling collapse; traditional actuarial models underestimate single-event probable maximum loss by an order of magnitude. We formalize the actuarial equations required to price property catastrophe policies, establish dynamic retention deductibles, and structure affirmative cyber-physical reinsurance treaties under Lloyd's Y5381.
+Crucially, this paper demonstrates that standard ALE, Gordon-Loeb, and Gaussian Value-at-Risk (VaR) models systematically underestimate catastrophic tail-risk because they assume thin-tailed Mediocristan distributions. By introducing Nassim Nicholas Taleb fat-tail power-law corrections, this paper models the consequence for Table B (Extremistan) cyber-physical catastrophes; such as simultaneous multi-megawatt cooling collapse; where traditional actuarial models underestimate single-event probable maximum loss by an order of magnitude. That gap follows algebraically from an assumed Pareto exponent of 1.25. The exponent is assumed by the working group, not fitted to a claims dataset, so the size of the gap moves with it. We formalize the actuarial equations required to price property catastrophe policies, establish dynamic retention deductibles, and structure affirmative cyber-physical reinsurance treaties under Lloyd's Y5381.
 
 ---
 
@@ -150,9 +151,9 @@ Where $C_{\text{control}}$ includes capital expenditure (hardware firewalls, opt
 
 ---
 
-## 4. Empirical 100 MW Hyperscale Worked Case Study
+## 4. Modelled 100 MW Hyperscale Worked Case Study
 
-The following worked financial analysis evaluates the six high-consequence CyHAZOP nodes of a 100 MW high-density compute facility. Asset values reflect empirical replacement costs and unserved SLA revenue losses derived from commercial hyperscale operations:
+The following worked financial analysis evaluates the six high-consequence CyHAZOP nodes of a modelled 100 MW high-density compute facility. Asset values are modelled replacement costs plus unserved SLA revenue losses, set by the working group at magnitudes typical of commercial hyperscale operations. No invoice, claim record or vendor quotation is cited for any of them. The exposure factor (EF) and cyber annual rate of occurrence (ARO) columns are likewise working-group estimates. Read the table as a sensitivity study on those two columns, because every ALE in it is their product with the asset value:
 
 #### Table 10.1: Pre-Mitigation Annualised Loss Expectancy
 
@@ -235,7 +236,7 @@ If an underwriter assesses a hyperscale facility using a Gaussian model with $99
 
 $$\text{ES}_{0.99}^{\text{Gaussian}} \approx \text{VaR}_{0.99} + \frac{\sigma}{\sqrt{2\pi}} \approx \$28,500,000$$
 
-However, empirical cyber-physical catastrophe claims exhibit a power-law tail with $\alpha \approx 1.25$. Under the Taleb fat-tail formulation:
+For this analysis the cyber-physical catastrophe tail is modelled as a power law with $\alpha \approx 1.25$. That exponent is the working group's assumption; no claims dataset supporting it is cited anywhere in this paper, and the multiplier below is linear in $\alpha/(\alpha - 1)$, so it is sensitive to the choice. Under the Taleb fat-tail formulation:
 
 $$\text{ES}_{0.99}^{\text{Fat-Tail}} = \frac{1.25}{1.25 - 1} \cdot \$25,000,000 = 5.0 \times \$25,000,000 = \$125,000,000$$
 
@@ -281,14 +282,14 @@ For the worked 100 MW case study at a discount rate of $r = 8.5\%$, over a 5-yea
 
 ## 8. Actuarial and Reinsurance Treaty Structuring
 
-Structuring affirmative cyber-physical reinsurance treaties requires aligning policy terms directly with empirical FMECA and ALE metrics:
+Structuring affirmative cyber-physical reinsurance treaties requires aligning policy terms directly with the FMECA and ALE metrics computed above. Those metrics are modelled, so the terms in the following table are a proposed structure for negotiation, not a rate filing:
 
 | Underwriting Parameter | Unmitigated Facility (Legacy OT) | Hardened Facility (Eigenia Assured) | Actuarial Justification |
 |:---|:---|:---|:---|
-| **Primary Property Retention (Deductible)** | $25,000,000 to $50,000,000 punitive deductible. | $2,500,000 retention indexed to verified digital twin compliance. | Hardwired SIL-3 interlocks physically truncate catastrophic loss tails. |
+| **Primary Property Retention (Deductible)** | $25,000,000 to $50,000,000 punitive deductible. | $2,500,000 retention indexed to digital twin compliance evidenced by an independent audit. | Hardwired SIL-3 interlocks physically truncate catastrophic loss tails. |
 | **Business Interruption Sub-Limits** | Strict 7-day waiting period; sub-limits capped at $10,000,000. | Full affirmative BI coverage up to $50,000,000; 12-hour waiting period. | Unidirectional optical data diodes eliminate remote supervisory hijacking. |
 | **Lloyd's Y5381 War Exclusion** | Total claim denial during suspected nation-state state-sponsored events. | Full affirmative coverage granted without unhedged sovereign exclusions. | Attested hardware roots of trust (Caliptra 2.0) provide forensic certainty. |
-| **Portfolio Accumulation Loading** | 45% capital surcharge to protect against correlated multi-site blackout. | 0% accumulation surcharge; risks treated as decoupled independent risks. | Diversity of controller firmware and network air-gapping verified via CycloneDX SBOM. |
+| **Portfolio Accumulation Loading** | 45% capital surcharge to protect against correlated multi-site blackout. | 0% accumulation surcharge; risks treated as decoupled independent risks. | Controller firmware diversity is evidenced in the CycloneDX SBOM. Network air-gapping is a separate claim and needs physical inspection; an SBOM cannot show it. |
 
 ---
 
@@ -305,6 +306,9 @@ Financial risk quantification for critical operational technology establishes fi
 
 # Ensure no em-dashes or double-hyphens exist
 content = content.replace('—', '; ')
+# A spaced em dash becomes ' ;  '. A semicolon never takes a space before it;
+# collapse the artifact here so it cannot reach a published document.
+content = re.sub(r'\s+;\s+', '; ', content)
 
 with open(dest_path, 'w', encoding='utf-8') as f:
     f.write(content)

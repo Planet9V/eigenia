@@ -4,7 +4,7 @@ Contemporary cyber threat intelligence suffers from an acute measurement deficie
 
 This treatise formalizes the **Adversary Threat Quotient (ATQ)**; a continuous, cardinal metric normalized on the closed interval $[0, 100]$ that quantifies the real-time operational lethality of a specific adversary. Computed continuously via a PostgreSQL materialized view (`seldon.seldon_score_v2`), the ATQ synthesizes over 100,000 Threat Actor Capability & Asset Matching (TACAM) records, 600,000 Exploit Prediction Scoring System (EPSS) trajectory data points, 80,000 knowledge graph edges, and 35,000 geopolitical conflict events. 
 
-The ATQ decomposes into twelve orthogonal, auditable dimensions calibrated with empirical saturation thresholds ($\theta_k$) to eliminate ceiling effects and maximize discriminatory power. Downstream, the ATQ serves as a direct parameterizing scalar for the Eigenia Monte Carlo graph simulation engine, modulating Boltzmann random walk probabilities across physical facility piping and instrumentation topologies (DEXPI 2.0 / ISO 15926). By establishing a direct mathematical bridge from threat actor posture to Annualised Loss Expectancy (ALE) and Gordon-Loeb optimal security investment bounds, the ATQ transforms qualitative threat intelligence into deterministic risk engineering.
+The ATQ decomposes into twelve auditable dimensions, each carrying a stated saturation threshold ($\theta_k$) chosen to keep the dimension from collapsing to unity across the actor population. One of those thresholds is set from data the working group holds; the rest are either the size of a fixed enumeration or the working group's own cap, and section 2.1 states which is which. Downstream, the ATQ serves as a direct parameterizing scalar for the Eigenia Monte Carlo graph simulation engine, modulating Boltzmann random walk probabilities across physical facility piping and instrumentation topologies (DEXPI 2.0 / ISO 15926). By establishing a direct mathematical bridge from threat actor posture to Annualised Loss Expectancy (ALE) and Gordon-Loeb optimal security investment bounds, the ATQ transforms qualitative threat intelligence into deterministic risk engineering.
 
 ---
 
@@ -29,7 +29,7 @@ Variance across the top band: 2.9 points. The four actors are mutually indisting
 
 **Reform: 12 orthogonal dimensions.**
 
-**Eigenia twelve-factor model (V2).** Input: 12 empirically calibrated dimensions with saturation bounds.
+**Eigenia twelve-factor model (V2).** Input: 12 dimensions, each with a stated saturation bound.
 
 | Threat actor | V2 ATQ |
 |:---|:---:|
@@ -39,6 +39,8 @@ Variance across the top band: 2.9 points. The four actors are mutually indisting
 | APT29 | 73.6 |
 | Ember Bear | 73.4 |
 | Kimsuky | 68.0 |
+
+These six scores were returned by `seldon.seldon_score_v2` under the weight vector as published before the correction recorded in section 2.1, which summed to 1.05 rather than 1.00. They are kept here as the record of what that model produced. Every one of them moves when the corrected vector is re-run, by an amount that depends on each actor's Temporal dimension; Volt Typhoon's own recomputation is worked through in section 8.1.
 
 Variance across the top band: 10.6 points, a 3.7x expansion. Operational posture is decoupled from historical incident volume.
 
@@ -69,7 +71,7 @@ The twelve dimensions are structured into four operational tiers: Base Capabilit
 |:--:|:---|:---|:---:|:---|:---:|:---|:---|
 | 1 | **EIC Base Score** | Base Capability | 0.18 | Explicit Intent, Capability, and Opportunity | Dynamic Percentile | $\text{PERCENT\_RANK}(x_{a,1})$ | `seldon.actor_eic` |
 | 2 | **Kill Chain Completeness** | Tactical Arsenal | 0.14 | Distinct MITRE Tactics Executable | 14 Tactics | $x_{a,2} / 14.0$ | `tacam_ttp_clusters` |
-| 3 | **Temporal Threat Score** | Dynamic Momentum | 0.13 | Operational Tempo & Recency Decay | 1.0 (Unit Interval) | $\min(1.0, x_{a,3})$ | `tacam_temporal_clusters` |
+| 3 | **Temporal Threat Score** | Dynamic Momentum | 0.08 | Operational Tempo & Recency Decay | 1.0 (Unit Interval) | $\min(1.0, x_{a,3})$ | `tacam_temporal_clusters` |
 | 4 | **EPSS Base Average** | Tactical Arsenal | 0.10 | Mean Exploit Prediction Score | 0.20 ($5\times$ Multiplier) | $\min(1.0, 5.0 \cdot \bar{x}_{\text{EPSS}})$ | FIRST EPSS Daily Feed |
 | 5 | **Technique Reach** | Tactical Arsenal | 0.10 | Unique MITRE ATT&CK Techniques | 120 Techniques | $\min(1.0, x_{a,5} / 120.0)$ | Knowledge Graph (`USES_TECHNIQUE`) |
 | 6 | **Vendor Exposure** | Environmental Exposure | 0.10 | Distinct Hardware/Software Vendors | 50 Vendors | $\min(1.0, x_{a,6} / 50.0)$ | `tacam_cpe_clusters` |
@@ -80,9 +82,17 @@ The twelve dimensions are structured into four operational tiers: Base Capabilit
 | 11 | **EPSS Velocity** | Dynamic Momentum | 0.05 | Rate of Change in Exploitability | 0.01/day ($100\times$ Cap) | $\min(1.0, \max(0.0, 100 \cdot \dot{v}_{\text{EPSS}}))$ | EPSS Trajectory Time-Series |
 | 12 | **Geopolitical Tension** | Dynamic Momentum | 0.05 | State Hostility & Conflict Index | 1.0 (Unit Interval) | $\min(1.0, x_{a,12})$ | ACLED & Geopolitical Field |
 
+#### Note on the weight vector
+
+The twelve weights above sum to exactly 1.00 and the composite therefore lands on $[0, 100]$ as section 1 states. Earlier revisions of this paper published Dimension 3 at 0.13, which made the twelve sum to 1.05 and put the composite on a 105-point scale while the text still claimed 100. Dimension 3 is the weight that was reduced, and the reason is on the page: Dimension 3 (Operational Tempo and Recency Decay) and Dimension 10 (Days Elapsed Since Last Activity) both read from `tacam_temporal_clusters` and both encode how recently the actor was active. Two of the twelve were measuring the same thing, so the surplus 0.05 was removed from the larger of the pair rather than spread across all twelve. Every other weight keeps the share the table has always stated.
+
+The weights are actuarial judgement, not a fitted result. No regression against loss outcomes produced them, and no external study is cited for them. They encode this working group's view of what makes an adversary dangerous to an industrial facility, and a reader who disagrees can change one weight and re-run the materialized view rather than argue with the whole score.
+
+Scores published in this paper before the correction were computed on the 1.05 vector. Section 1's V2 table and the component card in section 8.1 both carry those pre-correction figures, and each says so where it appears.
+
 ---
 
-## 3. The Mathematics of Empirical Saturation Thresholds
+## 3. The Mathematics of Saturation Thresholds
 
 A primary failure mode of composite scoring models is the uncalibrated ceiling effect. If the saturation threshold $\theta_k$ for a dimension is established below the median of active adversaries, the dimension loses all mathematical utility, collapsing to unity for all evaluated entities.
 
@@ -96,7 +106,7 @@ $$\sigma_k(x) = \begin{cases}
 
 Consider the mathematical consequence of altering the Incident Volume threshold $\theta_9$. In the legacy V1 model, $\theta_9 = 3$. The probability of an advanced state-backed threat actor exceeding 3 attributed incidents is $P(x \ge 3) = 0.942$. Consequently, $94.2\%$ of evaluated threat actors received $\sigma_9 = 1.0$, rendering the dimension mathematically degenerate.
 
-In the ATQ V2 formulation, $\theta_9$ was calibrated to the 85th percentile of the empirical incident distribution ($\theta_9 = 20$). Under this calibration:
+In the ATQ V2 formulation, $\theta_9$ was calibrated to the 85th percentile of the empirical incident distribution held in the curated incident corpus that Dimension 9 draws on ($\theta_9 = 20$). The percentile is computed over the attributed public incident counts in that corpus, so this threshold is set by counting rather than by judgement; it is the only one of the twelve for which that is true. Under this calibration:
 
 $$P(x < 20) = 0.850, \quad P(x \ge 20) = 0.150$$
 
@@ -174,7 +184,7 @@ SELECT
     -- Individual weighted components
     ROUND((dim_eic * 18.0)::numeric, 2) AS w_eic,
     ROUND((dim_killchain * 14.0)::numeric, 2) AS w_killchain,
-    ROUND((dim_temporal * 13.0)::numeric, 2) AS w_temporal,
+    ROUND((dim_temporal * 8.0)::numeric, 2) AS w_temporal,
     ROUND((dim_epss_base * 10.0)::numeric, 2) AS w_epss_base,
     ROUND((dim_tech_reach * 10.0)::numeric, 2) AS w_tech_reach,
     ROUND((dim_vendor_exp * 10.0)::numeric, 2) AS w_vendor_exp,
@@ -188,7 +198,7 @@ SELECT
     ROUND((
         (dim_eic * 18.0) +
         (dim_killchain * 14.0) +
-        (dim_temporal * 13.0) +
+        (dim_temporal * 8.0) +
         (dim_epss_base * 10.0) +
         (dim_tech_reach * 10.0) +
         (dim_vendor_exp * 10.0) +
@@ -222,7 +232,7 @@ Where:
 $$\mathcal{T}_{\text{eff}}(a) = \mathcal{T}_0 \cdot \left( \frac{\text{ATQ}_a(t)}{100} \right)^{\gamma} \cdot \prod_{s \in \text{Sectors}} \mu_s(a)$$
 
 Where:
-- $\gamma \approx 1.85$ is the empirical non-linearity parameter.
+- $\gamma \approx 1.85$ is the non-linearity exponent. The working group set it at 1.85 so that a top-decile actor's effective temperature separates clearly from a mid-band actor's. No fit against incident data produced the value and none is claimed for it; every effective temperature downstream carries that choice.
 - $\mu_s(a) \in [1.0, 2.5]$ is the TACAM sector-affinity multiplier.
 
 Under this formulation, an actor with an ATQ of $78.6$ (Volt Typhoon) exhibits an effective temperature $2.8\times$ higher than an actor with an ATQ of $42.0$. Consequently, high-ATQ adversaries overcome substantial cyber-physical security barriers ($\Delta E$) with high probability, penetrating deep into Layer 1/Layer 2 control networks.
@@ -275,7 +285,7 @@ Where:
 - $\text{ARO}(a)$ is the Annualized Rate of Occurrence derived from Dimension 10 (Recency) and Dimension 12 (Geopolitical Tension).
 - $\text{SLE}(a)$ is the Single Loss Expectancy encompassing physical equipment replacement, business interruption, and regulatory fines under EU CRA Article 64.
 
-### 6.2 Empirical Underwriting Case Study
+### 6.2 Worked Underwriting Case Study
 Consider an enterprise operating a $120\text{ MW}$ compute facility with $144,000,000\text{ USD}$ in physical asset exposure. When evaluated against the legacy three-factor model, threat pressure was categorized as "High", justifying a generic $4,000,000\text{ USD}$ perimeter upgrade.
 
 When evaluated via the twelve-factor ATQ:
@@ -298,11 +308,11 @@ Where:
 - $\dot{L}_{\text{BI}}(t)$ is the business interruption revenue loss rate ($24,000\text{ USD/hour}$).
 - $\Phi_{\text{regulatory}}$ represents statutory penalties under EU CRA Article 64.
 
-By utilizing the ATQ to simulate threat actor penetration and deploying deterministic SIL-3 physical trip controls ($C_{\text{controls}} = 240,000\text{ USD}$), the insured reduces breach probability from $0.684$ to $0.012$. This mitigates $\text{ALE}$ from $18,200,000\text{ USD}$ to $410,000\text{ USD}$, delivering a verified Return on Security Investment ($\text{ROSI}$):
+By running the ATQ through the penetration simulation and deploying deterministic SIL-3 physical trip controls ($C_{\text{controls}} = 240,000\text{ USD}$), the insured cuts modelled breach probability from $0.684$ to $0.012$. That moves modelled $\text{ALE}$ from $18,200,000\text{ USD}$ to $410,000\text{ USD}$, giving a modelled Return on Security Investment ($\text{ROSI}$):
 
 $$\text{ROSI} = \frac{(\text{ALE}_{\text{unmitigated}} - \text{ALE}_{\text{hardened}}) - C_{\text{controls}}}{C_{\text{controls}}} \times 100\% = \frac{\$17,790,000 - \$240,000}{\$240,000} \times 100\% = 7,312\%$$
 
-This verified reduction enables underwriters to waive restrictive sub-limit caps, lower policy deductible retentions from $10,000,000\text{ USD}$ to $2,500,000\text{ USD}$, eliminate consequential loss exclusions, and protect reinsurers against systemic accumulation exposure.
+Every input to that quotient is the working group's: the 240,000 USD control cost, the two breach probabilities out of the simulation, and the 144,000,000 USD asset exposure the ALE is built on. The division is exact and reproduces to 7,312.5%, which is a statement about the arithmetic and not about the inputs. A reduction of this shape, once an operator has substituted its own asset values and its own control costs, is what lets underwriters waive restrictive sub-limit caps, lower policy deductible retentions from $10,000,000\text{ USD}$ to $2,500,000\text{ USD}$, drop consequential loss exclusions, and hold systemic accumulation exposure down. The percentage is the model talking; the placement is a negotiation.
 
 ---
 
@@ -336,7 +346,7 @@ Location: `/terminals/atq-card-terminal.html`. Capabilities:
 5. **Production formula specification:** mathematical table and data links.
 
 ### 8.1 Production Decomposed Telemetry Display
-The interactive terminal renders the exact auditable component decomposition for any profiled adversary. Below is the canonical output for Volt Typhoon generated from production epoch 234:
+The interactive terminal renders the auditable component decomposition for any profiled adversary. Below is the output for Volt Typhoon at production epoch 234, printed exactly as the materialized view returned it. It was computed on the pre-correction weight vector, so the Temporal row prints a 13% share against the 8% that section 2.1 now specifies, and the composite it prints sits on the old 105-point scale. The dimensional inputs behind it are unaffected by the weight change. Under the corrected vector the same inputs give Temporal $\sigma_3 = 0.954$, worth 7.6 points of a possible 8 rather than 12.4 of 13. Subtracting that 4.8-point difference takes the composite from 78.6 to 73.8. Both figures are printed here rather than one silently replacing the other, because the scores quoted elsewhere in this paper are the pre-correction ones:
 
 ```
 ┌──────────────────────────────────────────────────────────┐
@@ -392,8 +402,8 @@ To validate the methodological rigor of the ATQ, it is benchmarked against estab
 
 ---
 
-## 10. Conclusion: From Threat Narrative to Empirical Physics
+## 10. Conclusion: From Threat Narrative to a Stated Model
 
-The Adversary Threat Quotient resolves the measurement problem in modern cybersecurity. By grounding threat actor evaluation in twelve orthogonal, empirically saturated dimensions; continuously refreshed against live telemetry and weaponization feeds; the ATQ eliminates the subjective ambiguity of traditional threat intelligence.
+The Adversary Threat Quotient resolves the measurement problem in modern cybersecurity. By grounding threat actor evaluation in twelve dimensions, each with a named data source and a stated saturation bound, continuously refreshed against live telemetry and weaponization feeds, the ATQ replaces the nominal labels of traditional threat intelligence with a number whose construction can be argued with. The weights are the working group's actuarial judgement, stated in section 2.1 so a reader can disagree with a specific one rather than with the whole score.
 
 When coupled to physical facility digital twins through DEXPI 2.0 piping schematics and Boltzmann random-walk graph traversals, the ATQ bridges the chasm between threat actor capabilities and thermodynamic consequences. Security leaders and reinsurance underwriters are equipped with an auditable, cardinal measurement that translates raw threat data into deterministic engineering controls and mathematically optimal capital investments.

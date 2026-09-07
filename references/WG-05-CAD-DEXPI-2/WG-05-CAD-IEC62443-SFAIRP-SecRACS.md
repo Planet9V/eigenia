@@ -101,7 +101,7 @@ The SFAIR methodology structures IEC 62443 delivery into seven stage-gated phase
 | **Stage 1** | **Scope (S)** | Establish facility boundary; inventory physical assets from DEXPI P&IDs; identify safety-critical nodes. | System Architecture Definition; Criticality Register | **ZCR-1** |
 | **Stage 2** | **Find (F1)** | Network topology discovery; passive OT network capture; protocol inventory (Modbus, BACnet, DNP3). | Asset Inventory Matrix; Communication Flow Graph | **ZCR-2** |
 | **Stage 3** | **Find (F2)** | Zone and conduit partitioning; identify trust boundaries; classify external connectivity vectors. | IEC 62443-3-2 Zone & Conduit Diagram | **ZCR-3** |
-| **Stage 4** | **Assess (A)** | Execute CyHAZOP workshop; score dual-RPN; execute SIL-to-SL convergence mapping. | Consolidated Master Hazard Log; SL-T Assignments | **ZCR-4** |
+| **Stage 4** | **Assess (A)** | Execute CyHAZOP workshop; score $\text{RPN}_c$; execute SIL-to-SL convergence mapping. | Consolidated Master Hazard Log; SL-T Assignments | **ZCR-4** |
 | **Stage 5** | **Implement (I1)** | Author SecRACS contracts; mandate CycloneDX multi-BOM in RFPs; vendor design reviews. | SecRACS Specification; Procurement Contract Addenda| **ZCR-5** |
 | **Stage 6** | **Implement (I2)** | Factory Acceptance Testing (FAT); Site Acceptance Testing (SAT); verify optical data diodes. | FAT/SAT Test Reports; SL-A Verification Matrix | **ZCR-6** |
 | **Stage 7** | **Review (R)** | Third-Party Programme Director audit; annual penetration testing; continuous VEX monitoring. | Certificate of Compliance; Reinsurance Warranty | **ZCR-7** |
@@ -206,7 +206,9 @@ The programme-level financial return on implementing the SFAIR methodology acros
 
 $$\text{ROSI} = \frac{(\text{ALE}_{\text{unmitigated}} - \text{ALE}_{\text{SFAIR}}) - C_{\text{programme}}}{C_{\text{programme}}} \times 100\%$$
 
-Where a comprehensive SFAIR implementation ($C_{\text{programme}} = 1,600,000\text{ USD}$) reduces annualized loss expectancy from $17,403,000\text{ USD}$ to $1,850,000\text{ USD}$, delivering a verified $\text{ROSI} = 872\%$.
+Where a comprehensive SFAIR implementation ($C_{\text{programme}} = 1,600,000\text{ USD}$) reduces annualized loss expectancy from $17,403,000\text{ USD}$ to $1,850,000\text{ USD}$, the modelled $\text{ROSI} = 872\%$.
+
+This figure is modelled, not measured. Three inputs drive it and the working group chose all three: the programme cost of 1,600,000 USD, the unmitigated annualized loss expectancy of 17,403,000 USD, and the residual 1,850,000 USD after the SFAIR controls are in place. No claims history, no operator loss run and no incident dataset is cited for any of them. The division is exact and reproduces to 872.06%, which is precisely why the number needs its assumption stated: a reader who checks the arithmetic confirms the arithmetic and learns nothing about the inputs. Halve the unmitigated ALE and the return falls to roughly 386%. Treat 872% as the output of a stated relation under stated assumptions, and re-run it against the facility's own loss data before it enters a business case.
 
 ---
 
@@ -251,9 +253,11 @@ Operationalizing IEC 62443 through SFAIR and SecRACS transforms the facility's r
 |:---|:---|:---|:---|
 | **Property Catastrophe Deductible** | Punitive $25,000,000 deductible; mandatory thermal sub-limits. | $2,500,000 deductible; full affirmative replacement cost coverage. | Working capital released; retention points optimized. |
 | **Business Interruption (BI) Sub-Limits** | Restrictive $15,000,000 sub-limit; 7-day waiting period. | Full affirmative BI coverage up to $75,000,000; 12-hour waiting period. | Protection against multi-month equipment replacement queues. |
-| **Lloyd's Y5381 War Exclusion** | Total claim denial during state-sponsored cyber campaigns. | Affirmative cyber-physical coverage granted; war exclusion waived. | Verified physical air gaps provide forensic proof of containment. |
-| **Portfolio Accumulation Loading** | 40% capital surcharge to protect against correlated cluster-wide blackout. | 0% accumulation surcharge; zones verified as decoupled and independent. | Eliminates systemic capital loadings across multi-campus portfolios. |
+| **Lloyd's Y5381 War Exclusion** | Total claim denial during state-sponsored cyber campaigns. | Affirmative cyber-physical coverage granted; war exclusion waived. | Physical air gaps recorded in the as-built DEXPI topology and walked down on site by the loss adjuster give containment something inspectable. |
+| **Portfolio Accumulation Loading** | 40% capital surcharge to protect against correlated cluster-wide blackout. | 0% accumulation surcharge; zones documented as decoupled, each carrying its own conduit inventory and its own power and cooling feed. | Eliminates systemic capital loadings across multi-campus portfolios. |
 | **Consequential Loss Protection** | Excluded under standard mechanical breakdown policies. | Affirmatively underwritten; full consequential loss indemnification. | Statutory board liability completely hedged. |
+
+Every deductible, sub-limit and surcharge in the table above is a modelled placement, not a quoted one. The figures describe the terms this working group expects a syndicate to offer against an assured facility, and they are set from engineering judgement about what the evidence package is worth to an underwriter. They are not extracted from a bound slip, a broker submission or a treaty wording. Read them as the shape of the argument a facility can make with a complete hazard register in hand, and price the actual placement with a broker.
 
 ---
 

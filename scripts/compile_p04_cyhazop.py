@@ -5,6 +5,8 @@ Enhanced with complete multi-BOM linkage, DEXPI 2.0 node mapping,
 Caliptra Silicon Root of Trust attestation, and full PAAI index coverage.
 """
 
+import re
+
 dest_path = 'references/WG-07-TM-Threat-Modeling/WG-07-TM-CyHAZOP-Methodology.md'
 
 content = r"""## Abstract
@@ -19,7 +21,7 @@ This paper formalizes the CyHAZOP methodology: the systematic extension of IEC 6
 
 ## 1. The Methodological Void in Megawatt Compute Facilities
 
-Over forty years of industrial safety practice have proven that high-reliability mechanical engineering is insufficient to guarantee physical survival when control planes are networked.
+Forty years of industrial safety practice rest on a premise that networked control planes break: that a hazard reached only through a physical failure path can be engineered out mechanically. Once a control plane carries traffic, an attacker reaches the same hazard without touching the mechanism. High-reliability mechanical engineering remains necessary and stops being sufficient. That is the gap this paper addresses, and it is an engineering argument from the structure of the failure paths, not a claim about a measured accident record.
 
 ### 1.1 The Practitioner's Field Observation
 In industrial automation assessments conducted across rail corridors, water treatment plants, and data centers on four continents, a consistent engineering vulnerability emerges. Mechanical engineers design extreme hardware redundancy: N+1 or 2N centrifugal pumps, plate heat exchangers, chilled water loops, and dual-infeed power feeds. However, the supervisory control network orchestrating these redundant mechanical elements shares a common Ethernet switch fabric, unauthenticated Modbus TCP protocols, identical PLC firmware revisions, and shared vendor administrative credentials.
@@ -88,7 +90,7 @@ By cross-referencing CycloneDX VEX vulnerability feeds with DEXPI mechanical equ
 
 ## 3. The Standardized CyHAZOP Workflow
 
-The CyHAZOP study is executed by a multidisciplinary team; mechanical process engineers, electrical systems leads, industrial control engineers, and cybersecurity assurance architects; through an 18-step structured lifecycle governed by the EN 50126 V-model:
+The CyHAZOP study is executed by a multidisciplinary team; mechanical process engineers, electrical systems leads, industrial control engineers, and cybersecurity assurance architects; through a 15-step structured lifecycle governed by the EN 50126 V-model. The fifteen steps sit in four phases of three, four, four and four; the table below numbers every one of them:
 
 **CyHAZOP lifecycle phases**
 
@@ -252,7 +254,7 @@ $$\mathcal{R}_{\text{CyHAZOP}}(N_k, D_m) = P_{\text{breach}}(T_a \to D_m) \times
 $$\text{ALE}_{\text{node}} = \mathcal{R}_{\text{CyHAZOP}}(N_k, D_m) \times \text{ARO}$$
 
 Where:
-- $P_{\text{breach}}$ is the empirical likelihood of achieving the unauthorized setpoint override.
+- $P_{\text{breach}}$ is the modelled likelihood of achieving the unauthorized setpoint override, assigned by the study team from the conduit's exposure, the authentication in front of it and the threat actor's assessed capability. It is an input to the index, not a rate observed at this facility.
 - $\text{SLE}_{\text{hardware}}$ is the direct equipment replacement cost.
 - $\dot{L}_{\text{BI}}(t)$ is the unserved SLA penalty rate per hour.
 - $T_{\text{restore}}$ is the physical recovery time governed by long-lead supply chain components.
@@ -263,7 +265,9 @@ The financial justification for retrofitting hardwired physical interlocks to pr
 
 $$\text{ROSI}_{\text{SIS}} = \frac{(\text{ALE}_{\text{software\_only}} - \text{ALE}_{\text{hardwired\_SIS}}) - C_{\text{hardware\_interlock}}}{C_{\text{hardware\_interlock}}}$$
 
-Where replacing software BACnet trips with hardwired dry-contact interlocks ($C_{\text{interlock}} = 15,000\text{ USD}$) reduces unmitigated catastrophe loss expectancy from $\text{ALE} = 1,850,000\text{ USD}$ to $\text{ALE} = 22,000\text{ USD}$, achieving a $\text{ROSI} > 12,000\%$.
+Where replacing software BACnet trips with hardwired dry-contact interlocks ($C_{\text{interlock}} = 15,000\text{ USD}$) reduces unmitigated catastrophe loss expectancy from $\text{ALE} = 1,850,000\text{ USD}$ to $\text{ALE} = 22,000\text{ USD}$, the modelled $\text{ROSI}$ exceeds $12,000\%$.
+
+The size of that ratio is a property of the inputs, not evidence for them. A 15,000 USD interlock sits in the denominator, so any large loss reduction divided by it returns a number in the thousands of percent. The working group set all three figures: the interlock cost from vendor list prices for dry-contact relays and wiring, the 1,850,000 USD unmitigated ALE from the node's own consequence model, and the 22,000 USD residual from the assumption that a hardwired trip removes all but the nuisance cases. None is a measured loss. The honest reading is narrow and still useful: for hazards where a mechanical interlock genuinely removes the consequence, the interlock is cheap relative to what it prevents. Do not carry the percentage itself into a board paper.
 
 ---
 
@@ -287,11 +291,11 @@ The physical destruction of uranium centrifuges at Natanz demonstrated the quint
 To translate CyHAZOP findings into engineering defenses, each identified hazard is mapped directly to the IEC 62443 industrial cybersecurity standard and modern open silicon roots of trust.
 
 ### 7.1 Zone and Conduit Partitioning (IEC 62443-3-2)
-CyHAZOP provides the empirical justification for zone boundaries:
+CyHAZOP gives an engineering justification for where the zone boundaries fall. Each boundary below is drawn where a deviation stops propagating, which is a judgement made from the node's physics and its conduits rather than a measurement:
 
 - **Zone 0 (Physical Silicon & Process):** Chiplet die, microchannel cold plate, liquid manifold. Security Level Target: **SL-T 4**. Enforces Caliptra 2.0 Silicon Root of Trust, immutable boot ROM, DICE certificate provenance, and hardwired physical overrides.
 - **Zone 1 (Field Control & VFDs):** Pump controllers, local valve actuators, power metering chips. Security Level Target: **SL-T 3**. Enforces cryptographically signed commands and encrypted RS-485 conduits.
-- **Zone 2 (Supervisory Facility OT):** Coolant Distribution Unit PLC, Block UPS supervisory controller, chiller master panel. Security Level Target: **SL-T 3**. Enforces strict network isolation via unidirectional data diodes and OpenSIL verified firmware.
+- **Zone 2 (Supervisory Facility OT):** Coolant Distribution Unit PLC, Block UPS supervisory controller, chiller master panel. Security Level Target: **SL-T 3**. Enforces strict network isolation via unidirectional data diodes and OpenSIL firmware whose signature is checked at every boot against the vendor's enrolled key.
 - **Zone 3 (Enterprise Facility Network):** Central BMS server, EPMS database, DCIM telemetry collectors. Security Level Target: **SL-T 2**. Enforces multifactor authentication, role-based access control, and machine-readable CycloneDX VEX monitoring.
 
 **IEC 62443 zone and conduit partitioning**
@@ -321,15 +325,17 @@ flowchart LR
 The application of CyHAZOP provides reinsurance syndicates and catastrophe modelers with the first mathematically defensible basis for underwriting cyber-physical infrastructure risk.
 
 ### 8.1 Lloyd's Y5381 Compliance & SFAIRP Defense
-Under Lloyd's Market Association Bulletin Y5381, underwriters require verified attestation that state-sponsored cyber attacks cannot exploit facility OT to cause unhedged business interruption. CyHAZOP delivers this attestation:
+Under Lloyd's Market Association Bulletin Y5381, underwriters ask for attestation, backed by evidence they can inspect, that state-sponsored cyber attacks cannot exploit facility OT to cause unhedged business interruption. A CyHAZOP ledger is what such an attestation is built from: it names every node, every deviation considered, every safeguard credited and every safeguard found wanting, so the underwriter reviews the reasoning instead of accepting the conclusion.
 
 | Insurance Underwriting Dimension | Traditional Datacenter Underwriting | CyHAZOP-Audited Facility | Actuarial & Financial Benefit |
 |:---|:---|:---|:---|
 | **Common-Cause Failures** | Assumed independent based on N+1 pump or chiller counts. | Identifies shared PLC firmware and unauthenticated Modbus conduits across parallel loops. | Eliminates hidden systemic tail-risk; prevents correlated portfolio insolvency. |
-| **Probable Maximum Loss (PML)** | Unconstrained subjective estimates exceeding 150,000,000 USD. | Mathematically bounded by proven hardwired safety interlocks and physical isolation times. | Probable Maximum Loss reduced by 35% to 50%; capital release for underwriters. |
-| **War Exclusion Waivers** | Disputed claims during sovereign cyber warfare events; protracted litigation. | Verified SIL-3 physical safety interlocks prove exploit containment regardless of attack origin. | Affirmative cyber-physical coverage granted with clear indemnity triggers. |
+| **Probable Maximum Loss (PML)** | Unconstrained subjective estimates exceeding 150,000,000 USD. | Bounded by hardwired safety interlocks whose trip times are measurable on site and by the physical isolation times those trips produce. | Probable Maximum Loss reduced by 35% to 50%; capital release for underwriters. |
+| **War Exclusion Waivers** | Disputed claims during sovereign cyber warfare events; protracted litigation. | SIL-3 physical safety interlocks, proof-tested at the intervals set at step 14, contain the consequence regardless of attack origin because the trip path carries no network. | Affirmative cyber-physical coverage granted with clear indemnity triggers. |
 | **Legal Due Diligence (SFAIRP)** | Vulnerable to gross negligence lawsuits following physical facility destruction. | Formal CyHAZOP ledger demonstrates risks were reduced So Far As Is Reasonably Practicable. | Absolute statutory and tort liability defense for executive leadership. |
 | **Deductible Optimization** | Rigid, punitive deductibles ($15M to $50M) imposed on high-density facilities. | Parametric deductible schedules keyed to continuous CyHAZOP digital twin telemetry. | Working capital unlocked; premium credits up to 32% secured. |
+
+The benefits column is modelled. The 35% to 50% reduction in probable maximum loss and the 32% premium credit are this working group's estimates of what a syndicate concedes once the hazard register removes the uncertainty it currently prices for. Neither figure comes from a placement, a slip or a treaty wording, and neither is a market rate. They describe the argument a facility can make, not terms anyone has been offered.
 
 ---
 
@@ -346,6 +352,9 @@ The CyHAZOP methodology establishes five non-negotiable engineering principles f
 
 # Ensure no em-dashes or double-hyphens exist
 content = content.replace('—', '; ')
+# A spaced em dash becomes ' ;  '. A semicolon never takes a space before it;
+# collapse the artifact here so it cannot reach a published document.
+content = re.sub(r'\s+;\s+', '; ', content)
 
 with open(dest_path, 'w', encoding='utf-8') as f:
     f.write(content)

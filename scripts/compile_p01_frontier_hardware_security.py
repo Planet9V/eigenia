@@ -222,12 +222,12 @@ We establish four mandatory operational zones:
 #### Conduit Enforcement Rules
 All conduits crossing zone boundaries must enforce deterministic security policies:
 1. **Conduit A (Zone 1 to Zone 2)**: All cooling and electrical commands flowing from the facility BMS to rack-level BMCs must pass through a hardware unidirectional data diode or a proxy enforcing strict schema validation. Write operations are restricted to non-destructive setpoints; commands requesting emergency fluid shutoff or power cutoff require dual cryptographic authorization.
-2. **Conduit B (Zone 2 to Zone 3)**: Communication between the BMC and the host CPU occurs exclusively over MCTP-over-PCIe or SMBus. The host processor treats the BMC as untrusted: all configuration updates dispatched by the BMC must be validated against local cryptographic policies.
+2. **Conduit B (Zone 2 to Zone 3)**: Communication between the BMC and the host CPU occurs exclusively over MCTP-over-PCIe or SMBus. The host processor treats the BMC as untrusted: every configuration update dispatched by the BMC is checked against local cryptographic policy before it takes effect, meaning the signature chain, the rollback counter and the scope the policy grants that update.
 3. **Conduit C (Zone 3 to Zone 4)**: The interface between the host operating system and the accelerator silicon is an uncompromising SL-4 conduit. Unencrypted direct memory access (DMA) is structurally impossible. All data transfers traverse SPDM 1.3 authenticated and encrypted PCIe IDE channels.
 
 ### 4.2 CLC/TS 50701 & EN 50126 RAMS Engineering
 
-CLC/TS 50701 and EN 50126 govern the engineering of Safety-Critical and Cybersecurity systems in environments where failure induces loss of life or catastrophic infrastructure collapse. Applying these standards to frontier AI datacenters ensures that **Reliability, Availability, Maintainability, and Safety (RAMS)** parameters are mathematically proven rather than empirically hoped for.
+CLC/TS 50701 and EN 50126 govern the engineering of Safety-Critical and Cybersecurity systems in environments where failure induces loss of life or catastrophic infrastructure collapse. Applying these standards [2], [3] to frontier AI datacenters puts **Reliability, Availability, Maintainability, and Safety (RAMS)** parameters on a stated failure model with stated rates, rather than leaving them to be hoped for. The derivation is only as good as the rates fed into it. Where this paper states a rate, it states whether the rate came from a component datasheet or from the working group's own judgement, and no rate here is drawn from an operating fleet.
 
 #### Hazard Identification & Safety Instrumented Systems (SIS)
 Under EN 50126, every potential failure mode within the AI Rack Envelope is categorized into a Safety Integrity Level (SIL):
@@ -273,7 +273,7 @@ Caliptra provides:
 
 $$CDI = \text{HMAC-SHA384}(UDS, \text{Hash}(Firmware_{Layer}))$$
 
-If an adversary modifies a single byte of firmware code, the resulting device private key completely shifts, preventing the compromised firmware from decrypting authorized platform secrets or establishing validated network sessions.
+If an adversary modifies a single byte of firmware code, the resulting device private key completely shifts, preventing the compromised firmware from decrypting authorized platform secrets or establishing network sessions a peer will accept, because the handshake requires a signature the shifted key cannot produce.
 
 ### 5.2 SPDM 1.3 Component Authentication & Attestation
 
@@ -320,7 +320,7 @@ graph LR
 
 1. **Automated Exploit Hypothesis Generation**: Machine-speed agentic models ingest hardware register descriptions, Verilog RTL code, and platform firmware binaries. The models analyze race conditions, sideband leakage vectors, and thermal vulnerability windows, generating thousands of concrete, executable exploit candidates per hour.
 2. **Cycle-Accurate HIL Execution**: Candidate exploits are immediately dispatched to parallelized FPGA-based silicon emulators and instrumented physical test racks. The testbed monitors bus telemetry, power supply noise, and register state transitions, verifying whether the candidate exploit successfully violates security invariants.
-3. **Automated Microcode Synthesis**: When a vulnerability is proven viable, the verification pipeline automatically synthesizes candidate microcode mitigations (e.g., pipeline serialization fences, disabled branch predictors, or rate-limited sidebands), validates that the fix neutralizes the exploit without violating functional safety parameters, and distributes the cryptographically signed patch across the production cluster.
+3. **Automated Microcode Synthesis**: When the pipeline reproduces a working exploit for a candidate vulnerability on the hardware-in-the-loop testbench, it synthesizes candidate microcode mitigations (e.g., pipeline serialization fences, disabled branch predictors, or rate-limited sidebands), re-runs the same exploit to confirm the mitigation blocks it, re-runs the functional safety suite to confirm the mitigation has not broken a trip path, and distributes the cryptographically signed patch across the production cluster. The confirmation is against the exploit the pipeline holds, which is narrower than a claim that the vulnerability class is closed.
 
 ## 7. Supply Chain Provenance & The 4-BOM Architecture
 
@@ -353,7 +353,7 @@ The AI Rack Envelope enforces migration to open-source platform initialization:
 
 ## 8. Mathematical Formulations & Thermodynamic Hazard Calculus
 
-To ground this architectural framework in empirical rigor, we formalize the physical, thermodynamic, and electrical hazard dynamics governing the AI Rack Envelope.
+This section formalizes the physical, thermodynamic, and electrical hazard dynamics governing the AI Rack Envelope. The relations that follow are modelled. Each takes inputs the working group chose, applies a stated physical relation, and returns an exact result. Nothing in this section is a field measurement, and where a coefficient or a rate is assumed, the text says so at the point of use.
 
 ### 8.1 Thermodynamic Heat Balance & Silicon Thermal Runaway
 
@@ -423,7 +423,7 @@ For high-current 48V distribution bars where $L_{eff} \approx 12\text{ nH}$, $C_
 
 The operational reliability of the AI Rack Envelope under continuous cyber-physical stress is formalized via a multi-state continuous-time Markov chain (CTMC). We define four discrete operational states:
 
-1. **State $S_0$ (Nominal Secure)**: All zones operating within normative parameters; cryptographic envelopes validated; cooling and power steady-state.
+1. **State $S_0$ (Nominal Secure)**: All zones operating within normative parameters; every cryptographic envelope passing its signature check on presentation; cooling and power at steady state.
 2. **State $S_1$ (Degraded / Stressed)**: Facility threat pressure detected (e.g., elevated cooling temperatures, unusual $di/dt$ transient noise, unverified SPDM challenge); autonomous safety throttling active.
 3. **State $S_2$ (Interdiction Containment)**: Safety Instrumented System (SIS) triggered; cryptographic keys zeroized; physical compute isolated.
 4. **State $S_3$ (Catastrophic Failure)**: Boundary breached; model weights compromised or silicon physically destroyed through thermal/electrical runaway.
@@ -463,7 +463,7 @@ Engineering risk models such as FMECA and HAZOP determine physical failure modes
 
 In a frontier AI cluster, asset valuation comprises both physical hardware replacement cost and consequential loss resulting from training checkpoint corruption, re-computation overhead, and prolonged business interruption.
 
-The Single Loss Expectancy (SLE) for a catastrophic boundary breach is defined per NIST SP 800-30 Rev. 1 as:
+The Single Loss Expectancy (SLE) for a catastrophic boundary breach is defined per NIST SP 800-30 Rev. 1 [24] as:
 
 $$\text{SLE} = \text{Asset Value (AV)} \times \text{Exposure Factor (EF)}$$
 
@@ -478,7 +478,7 @@ Under baseline un-hardened infrastructure lacking the AI Rack Envelope ($EF = 0.
 
 $$\text{SLE}_{base} = 126,240,000\text{ USD} \times 0.85 = 107,304,000\text{ USD}$$
 
-Given an empirical Annualised Rate of Occurrence (ARO) for severe facility disturbances, grid instabilities, and targeted cyber-physical attacks of $\text{ARO} = 0.12\text{ events/year}$, the baseline Annualised Loss Expectancy (ALE) is:
+The working group assumes an Annualised Rate of Occurrence (ARO) for severe facility disturbances, grid instabilities, and targeted cyber-physical attacks of $\text{ARO} = 0.12\text{ events/year}$. That figure is modelled, not measured. It expresses a judgement of roughly one severe event per eight years at a site of this class, and no incident dataset, insurer loss run or operator record is cited for it. The two exposure factors used below, $EF = 0.85$ unhardened and $EF \le 0.05$ hardened, are the working group's judgement on the same footing. Every figure downstream inherits all three assumptions. On the assumed rate, the baseline Annualised Loss Expectancy (ALE) is:
 
 $$\text{ALE}_{base} = \text{SLE}_{base} \times \text{ARO} = 107,304,000\text{ USD} \times 0.12 = 12,876,480\text{ USD/year}$$
 
@@ -500,19 +500,21 @@ The Return on Security Investment (ROSI) is expressed as:
 
 $$\text{ROSI} = \frac{\Delta \text{ALE} - C}{C} \times 100\% = \frac{12,750,240\text{ USD} - 900,000\text{ USD}}{900,000\text{ USD}} \times 100\% \approx 1316.7\%$$
 
-In addition, the Gordon-Loeb Theorem proves that the optimal expenditure to protect an information asset should generally not exceed $37\%$ ($1/e \approx 0.368$) of the expected loss:
+This ROSI is modelled. It reproduces exactly to 1316.69%, and that exactness is a property of the division, not evidence for the five numbers entering it: the assumed ARO of 0.12, the two assumed exposure factors, the accelerator unit cost, and the 120,000 USD per hour run-rate for a 2,048-accelerator training job. Change the assumed ARO alone and the return moves proportionally, because ARO scales the numerator and leaves the control cost untouched. What survives the assumptions is the ordering: a 900,000 USD annual control spend sits against a modelled exposure two orders of magnitude larger, so the case for the controls does not rest on the precise percentage. The percentage should not travel into a board paper without the operator's own loss data replacing all five inputs.
+
+The Gordon-Loeb result [23] holds that optimal expenditure to protect an information asset should generally not exceed $37\%$ ($1/e \approx 0.368$) of the expected loss. That is a sourced bound on the ratio; the loss it is applied to here is the modelled $\text{ALE}_{base}$ derived above, so the ceiling inherits the assumed ARO and exposure factors:
 
 $$C^* \le \frac{1}{e} v \cdot \text{ALE}_{base} \approx 0.368 \times 12,876,480\text{ USD} \approx 4,738,545\text{ USD}$$
 
-Because the annualized cost of the AI Rack Envelope ($900,000\text{ USD}$) represents only $19\%$ of the Gordon-Loeb ceiling, the investment is mathematically and financially sound.
+The annualized cost of the AI Rack Envelope, 900,000 USD, sits at 19% of that ceiling. Under the model's own assumptions the spend is therefore well inside the bound Gordon-Loeb sets, which is the most the calculation can say. It is a consistency check on the size of the investment, not an independent confirmation that the investment pays.
 
 ### 9.3 Reinsurance Covenants, Lloyd's Y5381 Endorsements & Deductibles
 
 In the commercial property and casualty market, cyber perils affecting industrial control systems and datacenters are strictly governed by the Lloyd's Market Association (LMA) Bulletin **Y5381** (Cyber Physical Damage and Consequential Loss Clauses). Standard commercial property policies explicitly exclude losses caused by cyber interdictions unless affirmative endorsements are attached.
 
 To obtain affirmative coverage and prevent crippling sub-limits or uninsurable exclusions:
-1. **IEC 62443 SL-4 as Underwriting Warranties**: Insurers mandate that compute zones housing critical assets satisfy verified SL-3 or SL-4 conduit segmentation. Failure to maintain independent hardware roots of trust (Caliptra) and line-rate encryption voids affirmative coverage upon forensic investigation.
-2. **Dynamic Retention Deductibles**: Facilities implementing verified 4-BOM attestations (CycloneDX 1.6+) and SIL-3 safety interlocks qualify for base retention deductibles of $250,000\text{ USD}$ per occurrence. Unverified facilities face punitive deductibles exceeding $5,000,000\text{ USD}$ and severe indemnity sub-limits capping business interruption recoveries at less than $10\%$ of total loss.
+1. **IEC 62443 SL-4 as Underwriting Warranties**: Insurers mandate that compute zones housing critical assets satisfy SL-3 or SL-4 conduit segmentation, evidenced by a third-party assessment report the syndicate can read. Failure to maintain independent hardware roots of trust (Caliptra) and line-rate encryption voids affirmative coverage upon forensic investigation.
+2. **Dynamic Retention Deductibles**: Facilities implementing 4-BOM attestations (CycloneDX 1.6+) that an independent assessor has signed off, together with SIL-3 safety interlocks, qualify for base retention deductibles of $250,000\text{ USD}$ per occurrence. Unverified facilities face punitive deductibles exceeding $5,000,000\text{ USD}$ and severe indemnity sub-limits capping business interruption recoveries at less than $10\%$ of total loss.
 3. **Catastrophe Risk Accumulation**: Reinsurers deploy deterministic catastrophe models to evaluate simultaneous multi-facility failure across power distribution zones. The AI Rack Envelope provides the provable physical isolation required to decouple correlated rack failures, transforming an uninsurable systemic catastrophe into an actuarially sound, diversified underwriting risk profile.
 
 ## 10. Normative Standards, References & IEEE Bibliographic Register

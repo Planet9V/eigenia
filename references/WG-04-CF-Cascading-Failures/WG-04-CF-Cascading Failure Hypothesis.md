@@ -1,9 +1,9 @@
 # Cascading Failure Hypothesis: Non-Linear Energy Grid Instability
-This assessment models cascading failure propagation from coordinated cyber-physical attacks targeting a refernce modelled electrical utility distribution network (see reference to ACME Inc.), the analysis integrates findings from the BESS Architecture Vulnerability Assessment and the DERMS Security Architecture Review to quantify systemic risk across the modelled NSW electricity network and its dependent critical infrastructure.
+This assessment models cascading failure propagation from coordinated cyber-physical attacks targeting a refernce modelled electrical utility distribution network (see reference to RefDNSP-1.2M), the analysis integrates findings from the BESS Architecture Vulnerability Assessment and the DERMS Security Architecture Review to quantify systemic risk across the modelled NSW electricity network and its dependent critical infrastructure.
 
 ## Cascading Failure Hypothesis
 
-The central finding is that a coordinated "Death Wobble" oscillation attack (see [j,mckenney's Death Wobble-The Grids Precarious Pulse Frequency Instability - jmckenney](/papers/death-wobble-frequency-instability), a phenomenon extensively documented by McKenney (2024, 2025) in analysis of the South Australia 2016 blackout (6.1 Hz/s RoCoF), UK 2019 blackout (0.135 Hz/s relay trips), and Iberian Peninsula 2025 event (inter-area oscillations), executed through the Retailer API supply chain, can induce Rate of Change of Frequency (RoCoF) exceedances greater than 1.0 Hz/s under reduced-inertia grid conditions. This triggers protection relay cascades that propagate from a localized 8,000-customer outage to a regional blackout affecting 1.2 million customers within 120 minutes. Six interdependent critical infrastructure systems ; water, hospitals, telecommunications, transport, military, and financial services ; amplify the consequences into a multi-domain crisis with estimated economic impact between [investment required] million and [investment required] billion.
+The central finding is that a coordinated "Death Wobble" oscillation attack (see [j,mckenney's Death Wobble-The Grids Precarious Pulse Frequency Instability - jmckenney](/papers/death-wobble-frequency-instability), a phenomenon extensively documented by McKenney (2024, 2025) in analysis of the South Australia 2016 blackout (456 MW disconnected in under seven seconds by a voltage-dip-count protection setting), UK 2019 blackout (0.125 Hz/s RoCoF relay disconnection threshold), and Iberian Peninsula 2025 event (inter-area oscillations), executed through the Retailer API supply chain, can induce Rate of Change of Frequency (RoCoF) exceedances greater than 1.0 Hz/s under reduced-inertia grid conditions. This triggers protection relay cascades that propagate from a localized 8,000-customer outage to a regional blackout affecting 1.2 million customers within 120 minutes. Six interdependent critical infrastructure systems, including water, hospitals, telecommunications, transport, military, and financial services, together amplify the consequences into a multi-domain crisis. Direct customer cost of unserved energy runs from AUD 1.3 million at the localized tier to AUD 8.95 billion at system-wide collapse. The lower figure rests on the AER's determined Value of Customer Reliability. The upper figure extrapolates that 12-hour-bounded value across 72 hours and is an upper bound, not a determination (section 5).
 
 The probability of such an attack materializing within a 10-year horizon is assessed at 15-30% (MEDIUM), based on the convergence of vulnerable DERMS/API architecture, inadequate ICS protocol security, reduced grid inertia from renewable penetration, and demonstrated nation-state capability against energy infrastructure. Physical safety consequences range from 5 to 25 fatalities and 40 to 120 serious injuries, arising from thermal runaway events, traffic signal failures, medical infrastructure collapse, and delayed emergency services.
 
@@ -11,16 +11,16 @@ The probability of such an attack materializing within a 10-year horizon is asse
 
 ## Table of Contents
 
-1. Executive Summary
-2. Background and Context
-3. Death Wobble Physics: Grid Frequency Dynamics
-4. Cascade Propagation Modeling
-5. Grid Interdependency Analysis
-6. Economic Impact Assessment
-7. Physical Safety Consequences
-8. Attack Vector Analysis and Mitigation
-9. Recovery Procedures
-10. Strategic Recommendations
+1. Background and Context
+2. Death Wobble Physics: Grid Frequency Dynamics
+3. Cascade Propagation Modeling
+4. Grid Interdependency Analysis
+5. Economic Impact Assessment
+6. Physical Safety Consequences
+7. Attack Vector Analysis and Mitigation
+8. Operational Procedures
+9. Strategic Recommendations
+10. Limitations and Threats to Validity
 11. Conclusion
 12. References
 13. Appendices
@@ -31,17 +31,21 @@ The probability of such an attack materializing within a 10-year horizon is asse
 
 ### 1.1 Purpose and Scope
 
-This document establishes the cascading failure risk profile for ACME Inc.'s DER infrastructure under coordinated cyber-physical attack conditions. It synthesizes vulnerability findings from EE-CTI-004 (BESS Architecture Vulnerability Assessment) and EE-CTI-005 (DERMS Security Architecture Review) into a comprehensive impact model spanning grid operations, interdependent infrastructure, economic consequences, and physical safety.
+This document establishes the cascading failure risk profile for RefDNSP-1.2M's DER infrastructure under coordinated cyber-physical attack conditions. It synthesizes vulnerability findings from EE-CTI-004 (BESS Architecture Vulnerability Assessment) and EE-CTI-005 (DERMS Security Architecture Review) into a comprehensive impact model spanning grid operations, interdependent infrastructure, economic consequences, and physical safety.
 
-The scope encompasses the full ACME Inc. distribution network, including 54 community batteries (270 MW aggregate capacity), 278,622 controllable DER devices (1.07 GW), and the six critical infrastructure systems directly dependent on uninterrupted electricity supply within the service territory.
+The scope encompasses the full RefDNSP-1.2M distribution network, including 54 community batteries (270 MW aggregate capacity), 278,622 controllable DER devices (1.07 GW), and the six critical infrastructure systems directly dependent on uninterrupted electricity supply within the service territory.
 
 ### 1.2 Threat Context
 
 The Australian Energy Market Operator (AEMO) identifies grid frequency stability as the primary operational risk during the transition to high-renewable-penetration generation portfolios. As synchronous generation retires, system inertia declines from a historical constant of 4-6 seconds to 2-3 seconds during high-renewable periods. This reduction doubles the grid's sensitivity to rapid power imbalances, creating conditions where cyber-physical attacks against battery energy storage systems can trigger cascading failures that were physically impossible under the legacy generation mix.
 
-McKenney's (2024, 2025) research across Australian, UK, European, and US interconnections establishes that this vulnerability is not theoretical but empirically demonstrated. His analysis of ERCOT (Texas) ; operating at 43% inverter-based resource capacity with peak renewable penetration >75% ; notes: "ERCOT's experience serves as a potential preview for other regions, demonstrating the intense interplay between resource adequacy, operational reliability under stress (especially weather extremes), and the critical need for robust performance from new technologies" (McKenney, 2024). The Western Interconnection (WECC) faces similar challenges with interconnection queue times averaging 5 years (up from <2 years in 2008) and "unexpected tripping of inverter-based resources during faults" documented in NERC alerts (McKenney, 2024).
+McKenney's (2024, 2025) research across Australian, UK, European, and US interconnections argues that this vulnerability is not theoretical. The argument rests on incidents that system operators investigated and published, so the figures supporting it belong to those operators rather than to this working group. Three figures this paper previously carried have since been rechecked against the primary documents, and the corrected versions are stated here in place of the originals.
 
-Concurrent vulnerability assessments have identified an attack surface score of 8.7/10 across the BESS infrastructure and a DERMS risk score of 21/25 (CATASTROPHIC). The Retailer API, which provides third-party control of DER assets through the mPrest DERMS platform, lacks behavioral analytics, oscillation detection, and physics-based command validation ; the three controls that would prevent the "Death Wobble" attack scenario detailed in this document.
+ERCOT's inverter-based resource capacity share was given as 43%. That figure is unsupported. No ERCOT publication at any date checked carries it, and the bracketing values are 28.8% in November 2021 and 45.0% in August 2026 (sourced: [ERCOT and WECC Renewable Integration Challenges](/papers/ercot-wecc-ibr-reliability), sections 1 and 6, from ERCOT's own monthly reporting). ERCOT's peak instantaneous renewable penetration above 75% is sourced and can be made exact: 75.67% at 2:13 p.m. on 29 March 2024, 34,958 MW. That is a single instant, and it is not simultaneous with any capacity-share figure, so the two must not be paired in one sentence as an earlier draft of this paragraph paired them. The Western Interconnection queue duration of roughly 5 years, up from under 2 years in 2008, is verbatim from Lawrence Berkeley National Laboratory's *Queued Up* 2024 edition, but it is a national United States figure; LBNL publishes no WECC-only queue duration, and this paper states it as national or not at all.
+
+What survives the recheck is the mechanism rather than the arithmetic around it. NERC has documented inverter-based resources disconnecting during faults they were not required to disconnect for, across four disturbance reports covering ERCOT and southern California (sourced: [ERCOT and WECC Renewable Integration Challenges](/papers/ercot-wecc-ibr-reliability), section 4). That is a specification and settings failure inside the resources themselves. It is independent of how much inertia the system happens to be carrying, and section 2.3 keeps the two mechanisms apart for that reason.
+
+Concurrent vulnerability assessments have identified an attack surface score of 8.7/10 across the BESS infrastructure and a DERMS risk score of 21/25 (CATASTROPHIC). The Retailer API, which provides third-party control of DER assets through the mPrest DERMS platform, lacks behavioral analytics, oscillation detection, and physics-based command validation. These are the three specific controls that would prevent the "Death Wobble" attack scenario detailed in this document.
 
 ### 1.3 Regulatory Framework
 
@@ -53,6 +57,25 @@ This assessment is conducted under the requirements of:
 - **NERC CIP:** Critical Infrastructure Protection standards for bulk electric systems (international reference)
 
 Current compliance status: AESCSF SP2 at 32% (target 80%), IEC 62443 at 38% (target 80%). These gaps directly enable the cascading failure scenarios modeled in this document.
+
+### 1.4 Reference Network Specification: RefDNSP-1.2M
+
+This analysis is conducted against a specified synthetic distribution network, designated
+RefDNSP-1.2M. It is not a specific operator. Its parameters are drawn from published Australian
+network data so that every result in this paper can be reproduced or contested.
+
+| Parameter | Value | Basis |
+|:---|:---|:---|
+| Customers served | 1.2 million | Modelled, mid-size NEM distribution network |
+| Critical substations | 185 | Modelled |
+| Distributed BESS fleet | 54 units, 270 MW aggregate | AEMO DER register scale [n] |
+| Nominal frequency | 50.0 Hz | AEMO NEM operating standard [n] |
+| Protection RoCoF threshold | 1.0 Hz/s | AEMO frequency risk review [n] |
+| DERMS platform | Vendor-neutral aggregation layer | Modelled |
+| Control protocols | DNP3, IEC 61850, ICCP | IEC standards |
+| Regulatory regime | SOCI Act, AESCSF SP-2 | Australian Government [n] |
+
+Each `[n]` marks a citation whose index is assigned when this paper's bibliography is consolidated. Until then the marker signals that a source exists for the row and names where it will appear, not that the index is final.
 
 ---
 
@@ -92,11 +115,13 @@ Where:
 - H = time (seconds) a generator could supply rated power from stored kinetic energy
 ```
 
-Under traditional synchronous generation, H ranges from 4-6 seconds, providing substantial resistance to frequency disturbances. Under high-renewable conditions (30%+ inverter-based generation), H drops to 2-3 seconds ; a 50% reduction that doubles the RoCoF for any given power imbalance. As McKenney notes: "In a low-inertia system, the *same* disturbance (e.g., a large power plant loss) causes the frequency to change *much faster* than in a high-inertia system. This rapid frequency change *is* the dangerous 'wobble.'" (McKenney, 2024).
+Under traditional synchronous generation, H ranges from 4-6 seconds, providing substantial resistance to frequency disturbances. Under high-renewable conditions (30%+ inverter-based generation), H drops to 2-3 seconds. This drop in inertia represents a 50% reduction that doubles the RoCoF for any given power imbalance. As McKenney notes: "In a low-inertia system, the *same* disturbance (e.g., a large power plant loss) causes the frequency to change *much faster* than in a high-inertia system. This rapid frequency change *is* the dangerous 'wobble.'" (McKenney, 2024).
+
+The swing equation behind these relations, and the distinction between a protection setting and a measured value, are derived at length in [The Grid's Unseen Tremors](/papers/grid-unseen-tremors). That paper works the RoCoF relation through to the thresholds actually in service and cites the operator document each one comes from. Read it before treating any Hz/s figure in this section as a measurement.
 
 ### 2.1.1 Grid Inertia Depletion Mechanics
 
-The transition from synchronous generation to inverter-based resources fundamentally alters the grid's physical response to disturbances. Traditional synchronous generators provide inertia through massive rotating turbines and generators ; physical momentum that resists changes in rotational speed (and thus frequency). A 500 MW coal-fired generator with an H constant of 5.0 seconds stores approximately 2,500 MWh of kinetic energy in its rotating mass.
+The transition from synchronous generation to inverter-based resources fundamentally alters the grid's physical response to disturbances. Traditional synchronous generators provide inertia through massive rotating turbines and generators. This rotational inertia is physical momentum that resists changes in rotational speed (and thus frequency). A 500 MW coal-fired generator with an H constant of 5.0 seconds stores approximately 2,500 MWh of kinetic energy in its rotating mass.
 
 In contrast, inverter-based resources (solar PV, wind with full-power converters, battery energy storage systems) have **zero inherent inertia**. These devices use power electronics to convert DC power to AC, with no rotating mass coupled to the grid. While "synthetic inertia" or "virtual inertia" control algorithms can emulate inertial response through rapid power injection, this is fundamentally different from physical momentum:
 
@@ -122,21 +147,28 @@ South Australia September 28, 2016 - Inertia Timeline:
 T-60 minutes: System inertia = 3,500 MWs (stable, 6 wind farms operational)
 T-30 minutes: System inertia = 3,200 MWs (weather conditions deteriorating)
 T-5 minutes:  System inertia = 2,800 MWs (multiple wind farm faults reducing output)
-T-0 seconds:  445 MW wind generation loss (9 separate faults within 7 seconds)
+T-2 minutes:  Six voltage dips across the SA grid (tornado-damaged 275 kV transmission lines)
+T-0 seconds:  456 MW sustained wind generation loss (8 of 9 wind farms respond to a voltage-dip-count protection setting, over less than seven seconds)
 
-RoCoF Response:
-- With H = 2.8 seconds (actual pre-fault inertia): 6.1 Hz/s measured
-- With H = 5.0 seconds (traditional inertia): 3.4 Hz/s theoretical
+Frequency Response:
+- Supply-demand imbalance: in the order of 1,000 MW, against 1,826 MW of regional demand
+- System RoCoF: no value given in AEMO's final report
 - Design assumption for protection relays: 3.0 Hz/s maximum
 
-Outcome: 6.1 Hz/s RoCoF exceeded design assumptions by 2x, triggering:
-- Under-frequency protection relay cascade
-- Loss of Heywood Interconnector (SA-VIC link)
-- Complete system black (state-wide blackout)
+Outcome: a 1,000 MW deficit inside an islanded region, triggering:
+- Heywood Interconnector special protection scheme trip, about 700 ms after the last wind farm reduced output
+- Islanding of South Australia from Victoria
+- Complete system black (state-wide blackout) 87 seconds after the first fault
 - 850,000 customers without power
 ```
 
-This historical precedent establishes that RoCoF values can **exceed design assumptions by a factor of 2 under realistic grid conditions**. Protection relay manufacturers (ABB, Siemens, SEL) design under-frequency protection with assumed RoCoF limits of 1.0-3.0 Hz/s. When actual RoCoF reaches 6.1 Hz/s, relays designed for slower frequency decline can:
+Two cautions attach to that block. The inertia trace above is McKenney's (2024) reconstruction, not an AEMO measurement: no inertia value for the South Australian system at the moment of the disturbance appears anywhere in this working group's evidence base, and AEMO's final report gives none. The supply-demand imbalance, the regional demand, the Heywood special protection scheme trip and its 700 ms delay, the 87-second sequence and the 850,000 customers are AEMO's own figures from the final report of March 2017.
+
+This historical precedent establishes that **protection operating exactly as configured can strip a region of enough generation to black it out**. It does not establish a RoCoF magnitude, and this paper no longer claims that it does. AEMO's final report carries no RoCoF value for the event. A peak of 6.1 Hz/s is attributed to that report in secondary commentary and was carried in earlier drafts of this paper; a researcher opened the report and could not locate it. Section 10 sets out what is confirmed and what is not.
+
+The magnitude claim rests on Great Britain instead, where every number is in the system operator's own technical report. On 9 August 2019 approximately 350 MW of embedded generation disconnected on RoCoF protection set to trip at 0.125 Hz/s. Cumulative infeed loss reached 1,481 MW, frequency was arrested at 49.1 Hz and then fell to 48.8 Hz, and low frequency demand disconnection shed 931 MW across 1,152,878 customers. That is the harder finding for an operator to dismiss, because the cascade needed no extreme rate of change. It needed a rate of change above a relay setting of one eighth of a hertz per second, which is well inside what a coordinated oscillation can produce.
+
+Protection relay manufacturers (ABB, Siemens, SEL) design under-frequency protection with assumed RoCoF limits of 1.0-3.0 Hz/s. When actual RoCoF runs above that design band, relays built for slower frequency decline can:
 
 1. **Trip spuriously** when frequency passes through their setpoint too quickly to allow proper time delay
 2. **Measure frequency incorrectly** due to zero-crossing detection errors at extreme RoCoF
@@ -234,11 +266,11 @@ Content-Type: application/json
 
 According to the DERMS Security Architecture Review, the following controls are typically **absent**:
 
-1. **No rate limiting on bulk dispatch commands** ; attacker can issue unlimited commands at maximum API bandwidth
-2. **No behavioral analytics** ; no detection of unusual oscillation patterns or rapid charge/discharge cycling
-3. **No physics-based validation** ; DERMS does not verify that commanded power changes are grid-safe based on current inertia and frequency conditions
-4. **No dual authorization for large commands** ; single OAuth token sufficient to control entire 270 MW fleet
-5. **No oscillation detection algorithm** ; no mathematical analysis of command frequency signatures
+1. **No rate limiting on bulk dispatch commands**: attacker can issue unlimited commands at maximum API bandwidth
+2. **No behavioral analytics**: no detection of unusual oscillation patterns or rapid charge/discharge cycling
+3. **No physics-based validation**: DERMS does not verify that commanded power changes are grid-safe based on current inertia and frequency conditions
+4. **No dual authorization for large commands**: single OAuth token sufficient to control entire 270 MW fleet
+5. **No oscillation detection algorithm**: no mathematical analysis of command frequency signatures
 
 **Oscillation Waveform Mathematics:**
 
@@ -352,31 +384,69 @@ The AEMO standard for RoCoF tolerance is 1.0 Hz/s. Protection relays are configu
 | RoCoF Value             | System Response                        | Historical Precedent                           |
 | :--- | :--- | :--- |
 | < 0.1-0.2 Hz/s          | Historically normal under high inertia | Traditional grid operations                    |
-| 0.125-0.135 Hz/s        | UK 2019 relay trip threshold           | UK August 9, 2019 blackout                     |
+| 0.125 Hz/s              | UK 2019 relay disconnection threshold (not a measured system RoCoF) | UK August 9, 2019 blackout                     |
 | > 1 Hz/s (500ms window) | Protection system maloperation likely  | ENTSO-E warnings                               |
 | 6 Hz/s                  | Extreme instability                    | South Australia Sept 28, 2016 (design: 3 Hz/s) |
 
 McKenney explicitly warns: "Experts explicitly warn that RoCoF values above 1 Hz/s (measured over 500ms) may be unmanageable by current system protections, potentially leading to fast grid collapse" (McKenney, 2024).
 
-**[RESEARCH GAP: Actual RoCoF tolerance of ACME Inc. grid requires dynamic stability study with AEMO. Estimated cost: [investment required]. Current analysis uses AEMO standard thresholds as conservative baseline.]**
+**Research gap.** The actual RoCoF tolerance of the RefDNSP-1.2M network is not known. Establishing it requires a dynamic stability study run with AEMO against the network's own topology, protection relay settings and interconnection to the transmission system. No cost anchor for a study of that kind was sourced for this paper, so no cost is stated. Until such a study exists, the analysis below uses the published AEMC and AEMO thresholds as a conservative baseline.
 
 Under the reduced-inertia scenario:
 
 ```
-Critical Power Imbalance = 2H x RoCoF_max x S_base
-  = 2 x 3 x 1 x 10,000 = 60,000 MW-seconds
+Critical Power Imbalance = RoCoF_max x 2H x S_base / f0
+  = 1.0 x 2 x 3 x 10,000 / 50 = 1,200 MW
 
-Attack capability: 540 MW swing = 2.7% of critical threshold (single oscillation)
+Attack capability: 540 MW swing = 45% of critical threshold (single oscillation)
 ```
 
-A single oscillation cycle does not exceed the RoCoF threshold. However, sustained oscillation at frequencies matching the grid's electromechanical resonance (0.3-1.2 Hz) produces cumulative amplitude growth. After 10-15 oscillation cycles over approximately 10 minutes, frequency deviation amplitude exceeds +/- 0.15 Hz, triggering under-frequency protection relays at the 49.85 Hz threshold.
+The swing equation is RoCoF = (dP x f0) / (2H x S_base), where dP is the power imbalance in MW, f0 the nominal frequency (50 Hz), H the inertia constant in seconds, and S_base the system base in MVA (Basakarad et al., 2020). Rearranged for the imbalance that produces the 1.0 Hz/s maximum design RoCoF, the critical figure is 1,200 MW. A single 540 MW fleet swing reaches 45% of that threshold in one oscillation. That is the sharp result in this analysis: one controllable command, issued through a compromised retailer API, moves the system almost halfway to the imbalance that drives RoCoF past the point where protection maloperates.
+
+A single oscillation cycle does not by itself exceed the RoCoF threshold. Sustained oscillation at frequencies matching the grid's electromechanical resonance (0.3 to 1.2 Hz) is the mechanism that does. For a sinusoidal frequency deviation of amplitude A at oscillation frequency f, the peak rate of change is df/dt = A x 2 x pi x f. A deviation of +/- 0.15 Hz at the top of the resonance band, 1.2 Hz, gives a peak RoCoF of 0.15 x 2 x pi x 1.2 = 1.13 Hz/s. The same +/- 0.15 Hz at 1.0 Hz gives 0.94 Hz/s, and at 0.3 Hz gives 0.28 Hz/s. At the top of its own resonance range the attack crosses the 1.0 Hz/s threshold at which this analysis already places likely protection maloperation.
+
+The detail that makes the attack work is where the frequency sits while that happens. A +/- 0.15 Hz deviation around 50 Hz stays between 49.85 and 50.15 Hz, which is exactly the AEMC normal operating band the system occupies almost all the time. Absolute-frequency protection, under-frequency load shedding, never sees it, because the frequency never falls to a shedding setpoint. Rate-of-change protection does see it, because df/dt reaches 1.13 Hz/s while the frequency itself never leaves the band an operator watches. The cascade is initiated by RoCoF relays tripping on rate of change, not by under-frequency relays tripping on an absolute setpoint. This is the same failure mode that disconnected roughly 350 MW of embedded generation in Great Britain on 9 August 2019, where RoCoF protection set to 0.125 Hz/s tripped generation the system needed. The earlier characterisation, an oscillation growing until frequency reached 49.85 Hz and under-frequency relays tripped, described a setpoint no network service provider would install, because 49.85 Hz is the floor of the normal band and shedding there would fire during ordinary operation.
+
+The diagram below traces the same attack through the two protection systems that could stop it. The left lane is what under-frequency protection watches, the absolute frequency, which never leaves the 49.85 to 50.15 Hz normal band. The right lane is what RoCoF protection watches, the rate of change, which climbs with oscillation frequency until it crosses the 1.0 Hz/s threshold. The attack passes the left lane untouched and trips the right lane, which is the whole point.
+
+```mermaid
+graph TB
+    OSC[Attack input<br/>BESS fleet swing +/- 540 MW<br/>Frequency deviation +/- 0.15 Hz<br/>Resonance band 0.3 to 1.2 Hz]
+
+    OSC --> ABS[Absolute frequency<br/>stays 49.85 to 50.15 Hz]
+    OSC --> RATE[Rate of change df/dt<br/>climbs with oscillation frequency]
+
+    subgraph "Under-frequency protection watches absolute Hz"
+        ABS --> UF[Normal operating band never left<br/>load-shedding setpoint never reached]
+        UF --> UFOUT[No trip]
+    end
+
+    subgraph "RoCoF protection watches df/dt against 1.0 Hz per second"
+        RATE --> D1[0.3 Hz oscillation gives df/dt 0.28 Hz/s, below threshold]
+        RATE --> D2[1.0 Hz oscillation gives df/dt 0.94 Hz/s, below threshold]
+        RATE --> D3[1.2 Hz oscillation gives df/dt 1.13 Hz/s, above 1.0 Hz/s]
+        D3 --> RCOUT[RoCoF relay trip]
+    end
+
+    UFOUT --> CONC[Cascade begins on rate of change<br/>while frequency stays inside the band an operator watches]
+    RCOUT --> CONC
+
+    classDef inband fill:#2ed573,stroke:#009432,color:#000
+    classDef cross fill:#ff4757,stroke:#c92a2a,color:#fff
+    classDef neutral fill:#457b9d,stroke:#1d3557,color:#fff
+    class ABS,UF,UFOUT inband
+    class D3,RCOUT cross
+    class OSC,RATE,D1,D2,CONC neutral
+```
+
+A single oscillation cycle reaches only 0.113 Hz/s and trips nothing. The values above are the sustained-oscillation peaks derived earlier in this section: df/dt of A x 2 x pi x f for a +/- 0.15 Hz deviation at each resonance frequency. Great Britain's 9 August 2019 relays were set even lower, at 0.125 Hz/s, and a cascade followed.
 
 ### 2.3 Why Reduced Inertia Creates Vulnerability
 
 McKenney (2024, 2025) identifies four pathways by which low inertia accelerates cascading failures:
 
 1. **Amplified Initial Shock**: Lower inertia = less kinetic energy buffering, resulting in faster, deeper frequency deviation from the same disturbance (mathematical relationship: ΔF ∝ 1/H)
-2. **Protection System Errors**: High RoCoF triggers spurious trips of healthy equipment. McKenney (2024) cites the UK 2019 event where 345 MW of distributed generation tripped at 0.135 Hz/s (relay threshold: 0.125 Hz/s), and notes that NERC data indicates ~70% of major disturbances involve protection system issues.
+2. **Protection System Errors**: High RoCoF triggers spurious trips of healthy equipment. McKenney (2024) cites the UK 2019 event where approximately 350 MW of distributed generation tripped on RoCoF protection relays set to disconnect at 0.125 Hz/s (that setting is the relay's disconnection threshold, not a measured system-wide RoCoF), part of a cumulative infeed loss that reached 1,481 MW before frequency was arrested at 49.1 Hz, and notes that NERC data indicates ~70% of major disturbances involve protection system issues.
 3. **Faster Escalation**: Under-Frequency Load Shedding (UFLS) activates more quickly, generator self-protection trips accelerate, and control systems are outpaced by rapid frequency changes.
 4. **Increased Complexity**: Legacy systems + new inverter-based resource behaviors + novel load types create unexpected interactions. McKenney (2025) highlights the July 2024 Eastern Interconnection event where a 1,500 MW data center simultaneously disconnected, noting that "power systems have historically been planned and operated to withstand the loss of large *generators*, not the sudden, simultaneous loss of large *loads*."
 
@@ -391,19 +461,23 @@ The following table illustrates how the same 540 MW attack produces different co
 
 The grid does not need to be at minimum inertia for the attack to succeed. Any period where H falls below 3.0 seconds creates conditions where sustained oscillation can trigger the protection cascade within the 15-30 minute attack window. AEMO data indicates that H drops below 3.0 seconds during approximately 15-20% of operational hours in 2025-2026, primarily during midday solar peaks and overnight low-demand periods.
 
+Operators publish inertia floors for exactly this reason, and those floors are the check on the table above. EirGrid holds a minimum synchronous area inertia of 23,000 MVA.s against a largest infeed of about 450 MW (EirGrid, *Inertia Management on the Power Systems of Ireland and Northern Ireland*, March 2024). ERCOT sets a critical inertia System Operating Limit of 100 GW.s, derived from a 2,750 MW contingency and a 0.416 second budget to reach the first stage of under-frequency load shedding (ERCOT, *Inertia: Basic Concepts and Impacts on the ERCOT Grid*, April 2018). [Project Inertia](/papers/project-inertia) works both figures against the RoCoF relation and projects the decay to 2030 and 2040. It is also where the 105 GW.s figure that circulates for ERCOT is separated from the 100 GW.s limit, which is the same setting-against-measurement error this paper corrects for South Australia and Great Britain.
+
 **International Precedents Supporting Death Wobble Risk:**
 
 McKenney's (2024, 2025) comprehensive analysis of three major blackouts demonstrates how declining inertia transforms grid vulnerability:
 
-1. **South Australia (September 28, 2016)**: 48.36% inverter-based resource penetration, 445 MW wind generation loss, **peak RoCoF of 6.1 Hz/s** (design assumption: 3 Hz/s) ; demonstrating that actual RoCoF can exceed design assumptions by 2x. McKenney notes: "This incident demonstrated the potential for extreme instability in very low inertia conditions... highlighting the direct impact of RoCoF sensitivity in a system with significant wind penetration."
-2. **UK Blackout (August 9, 2019)**: Lightning strike triggered cascading losses (660 MW gas + 740 MW wind). **345 MW of distributed generation tripped spuriously** when RoCoF reached 0.135 Hz/s (relay threshold: 0.125 Hz/s) ; demonstrating protection system maloperation even at moderate RoCoF. System inertia: 210 GW·s at ~30% wind penetration.
-3. **Iberian Peninsula (April 28, 2025)**: 60 million people affected (Spain + Portugal), up to 10 hours outage, 56% renewable penetration. Suspected inter-area oscillations between Iberia and Continental Europe due to weak interconnection (~2,800 MW, only 6% of Spanish capacity). McKenney observed: "Two significant inter-area oscillations in 30 minutes pre-blackout" and noted the event validated his warnings from the Chicago Conference on Grid Stability earlier that year.
+1. **South Australia (September 28, 2016)**: 48.36% inverter-based resource penetration, 456 MW sustained wind generation loss over less than seven seconds (8 of 9 wind farms tripping on a voltage-dip-count protection setting), a supply-demand imbalance in the order of 1,000 MW against 1,826 MW of regional demand, and loss of all supply to the region 87 seconds after the first fault. A peak RoCoF of 6.1 Hz/s is widely attributed to this event, in secondary commentary and in earlier drafts of this paper. It is not in AEMO's final report, and this paper does not use it; section 10 states the position in full. What the event establishes without any RoCoF figure is that the Heywood Interconnector's special protection scheme tripped about 700 milliseconds after the last wind farm reduced its output, doing exactly what it was configured to do, and that islanding South Australia against a 1,000 MW deficit blacked out the state. An earlier version of this paper carried a sentence attributed to McKenney (2024) describing the incident as demonstrating the potential for extreme instability in very low inertia conditions. It is withdrawn here for two reasons. First, no inertia value for the South Australian system at the moment of the disturbance appears anywhere in this working group's evidence base, so the phrase "very low inertia conditions" has no measured referent. Second, the ERCOT record runs against the framing: the larger of the two Odessa losses, 2,555 MW on 4 June 2022, occurred at 73.5% synchronous generation, while the smaller loss of 1,340 MW on 9 May 2021 occurred at 56% (sourced: [ERCOT and WECC Renewable Integration Challenges](/papers/ercot-wecc-ibr-reliability), section 4.2, from the NERC and Texas RE Odessa disturbance reports). If low inertia were the operative cause the ordering would run the other way. What South Australia does establish, from AEMO's final report, is that eight of nine wind farms disconnected on a voltage-dip-count protection setting rather than on the fault itself. That is a protection settings failure of the same class NERC found at Odessa, and it is the finding this paper carries forward.
+2. **UK Blackout (August 9, 2019)**: Lightning strikes near the Eaton Socon to Wymondley circuit triggered cascading generation losses: 641 MW from Little Barford gas plant, in three separate trips (a 244 MW steam turbine, then 210 MW and 187 MW gas turbines), plus 737 MW from Hornsea offshore wind. **Approximately 350 MW of distributed generation tripped** on RoCoF protection relays set to disconnect at 0.125 Hz/s (the relay's disconnection threshold; no measured RoCoF of 0.135 Hz/s appears anywhere in National Grid ESO's technical report). This result also confirms protection system maloperation even at moderate RoCoF. System inertia: 210 GVA·s (National Grid ESO technical report, Table 4); the report gives no wind-penetration figure for 9 August 2019.
+3. **Iberian Peninsula (April 28, 2025)**: 60 million people affected (Spain + Portugal), up to 10 hours outage, 56% renewable penetration. Suspected inter-area oscillations between Iberia and Continental Europe due to weak interconnection (~2,800 MW, only 6% of Spanish capacity). McKenney recorded two significant inter-area oscillations in the 30 minutes before the blackout. This paper carries the Iberian event as an oscillation precedent and as nothing more. No final report from the Spanish or Portuguese system operator sits in this working group's evidence base; the renewable-penetration and interconnection figures above come from contemporary reporting rather than from an incident investigation, and the causal attribution to inter-area oscillation is stated in the sources as suspected rather than established. A claim that the event confirmed warnings given earlier that year is also withdrawn. A prediction and an outcome nobody has causally attributed are not a confirmation of each other, and treating them as one is the failure mode this paper is written to avoid.
 
-### 2.3 BESS Thermal Runaway Cascading Scenarios
+### 2.4 BESS Thermal Runaway Cascading Scenarios
 
 Battery thermal runaway represents a distinct attack vector with potential for **physical cascading failure** beyond electrical grid disruption. Unlike the Death Wobble oscillation attack (which targets grid frequency stability), thermal runaway attacks exploit battery management system (BMS) vulnerabilities to induce fires or explosions.
 
-### 2.3.1 Lithium-Ion Thermal Runaway Physics
+The same failure mode at campus scale, where a battery fleet sits behind one microgrid controller alongside inverter plant and, increasingly, small modular reactor auxiliaries, is worked through in [Emerging Power Topologies](/papers/emerging-power-topologies). That paper carries the Arrhenius kinetics for the runaway, the convective heat removal collapse that precedes it, and the case for hardwired analog safety isolation: a temperature limit enforced in firmware is a limit an attacker with write access can move.
+
+### 2.4.1 Lithium-Ion Thermal Runaway Physics
 
 Lithium-ion batteries store tremendous energy density (150-250 Wh/kg) in chemically reactive materials. When cell temperature exceeds safe limits, a self-sustaining exothermic reaction begins:
 
@@ -446,14 +520,14 @@ As detailed in EE-CTI-002 (Bawley Point Vulnerability Assessment) and EE-CTI-003
 | Vulnerability ID     | Description                        | CVSS | Exploitation Method                                                                                |
 | :--- | :--- | :--- | :--- |
 | **V-001**      | Modbus TCP Plaintext Communication | 9.1  | Man-in-the-middle command injection between SwitchDin Utility Server and Vendor RTU                |
-| **V-004**      | Unmanaged Vendor 4G/5G Connections | 8.8  | Direct internet access to BESS controllers bypassing all ACME Inc. security controls               |
+| **V-004**      | Unmanaged Vendor 4G/5G Connections | 8.8  | Direct internet access to BESS controllers bypassing all RefDNSP-1.2M security controls               |
 | **FrostyGoop** | Weaponized Modbus Function Code 6  | 10.0 | Write Single Register command to thermal setpoint registers (demonstrated in Ukraine January 2024) |
 
 **FrostyGoop Attack Adaptation for BESS:**
 
 The FrostyGoop malware (discovered by Dragos in April 2024, analyzed in EE-CTI-003) demonstrated the first Modbus-specific ICS attack causing physical damage. The Ukrainian heating system attack manipulated thermal setpoints via Modbus Function Code 6 (Write Single Register), causing 100,000 residents to lose heat for 48 hours.
 
-An identical attack vector threatens ACME Inc. BESS infrastructure:
+An identical attack vector threatens RefDNSP-1.2M BESS infrastructure:
 
 ```python
 ### FrostyGoop-style BESS thermal runaway attack (ANALYSIS ONLY)
@@ -498,7 +572,7 @@ modbus_client.write_coil(
 ### T+2-4 hours: Full container fire
 ```
 
-### 2.3.2 Multi-Site Thermal Cascade Scenario
+### 2.4.2 Multi-Site Thermal Cascade Scenario
 
 **Attack Scenario: Coordinated Thermal Runaway Across 54 BESS Sites**
 
@@ -547,7 +621,7 @@ TNT Equivalent:
 - Ignite nearby structures and vegetation
 - Cause serious injury or fatality to nearby personnel
 
-### 2.3.3 Fire Suppression Failure Analysis
+### 2.4.3 Fire Suppression Failure Analysis
 
 Community BESS installations typically use one of three fire suppression technologies:
 
@@ -571,7 +645,7 @@ Community BESS installations typically use one of three fire suppression technol
 
 NSW Fire and Rescue has approximately:
 
-- **70 fire stations** in ACME Inc. service territory
+- **70 fire stations** in RefDNSP-1.2M service territory
 - **120 pumper appliances** (typical capacity: 3,000 liters)
 - **15 hazmat-rated teams** capable of lithium-ion fire response
 
@@ -607,7 +681,9 @@ This creates a **secondary cascading failure** where fires at sites 16-54 burn u
 
 ### 3.1 Four-Tier Cascade Model
 
-The cascading failure propagates through four tiers, each amplifying the affected customer base by an order of magnitude. This multi-tier cascade pattern is consistent with McKenney's (2024) analysis of European Network of Transmission System Operators for Electricity (ENTSO-E) system split risks: "ENTSO-E studies confirm that declining inertia significantly increases the risk of system splits leading to high RoCoF (>1 Hz/s) and potential widespread blackouts in future scenarios." McKenney documents that ENTSO-E "Project Inertia" studies for 2030-2040 scenarios identify an increasing number of "global severe splits" where both separated systems collapse due to uncontrollable RoCoF ; precisely the multi-tier cascade pattern modeled here.
+The cascading failure propagates through four tiers, each amplifying the affected customer base by an order of magnitude. This multi-tier cascade pattern is consistent with McKenney's (2024) analysis of European Network of Transmission System Operators for Electricity (ENTSO-E) system split risks: "ENTSO-E studies confirm that declining inertia significantly increases the risk of system splits leading to high RoCoF (>1 Hz/s) and potential widespread blackouts in future scenarios." McKenney documents that ENTSO-E "Project Inertia" studies for 2030-2040 scenarios identify an increasing number of "global severe splits" where both separated systems collapse due to uncontrollable RoCoF. This is precisely the multi-tier cascade failure pattern modeled in this assessment.
+
+That attribution does not survive checking, and this paper flags it here rather than carrying it unqualified. [The Unseen Current](/papers/unseen-current), section 6.2, records that no ENTSO-E document under the name "Project Inertia", and no ENTSO-E use of the phrase "global severe splits", appears in any primary source this working group holds. What it does hold in full is the ENTSO-E ICS Investigation Expert Panel final report on the Continental Europe separation of 8 January 2021, which is a post-event investigation and not a forward scenario study. Read the four-tier model below against that report. Eigenia's own forward projection of inertia decay is published separately as [Project Inertia](/papers/project-inertia); it shares a name with an ENTSO-E workstream and nothing in it is an ENTSO-E finding.
 
 The following diagram models the complete propagation chain from initial attack execution to system-wide collapse:
 
@@ -616,7 +692,7 @@ graph TB
     subgraph "Tier 1: Initial Attack - T+0 to T+15 min"
         A1[Retailer API Compromise] -->|Mass Command Injection| A2[54 BESS Oscillating<br/>+/- 540 MW Power Swing]
         A2 -->|Sustained Oscillation| A3[Grid Frequency Deviation<br/>Exceeds +/- 0.15 Hz]
-        A3 -->|RoCoF > 1.0 Hz/s| A4[Under-Frequency Relay Trip<br/>49.85 Hz Threshold]
+        A3 -->|RoCoF > 1.0 Hz/s| A4[RoCoF Relay Trip<br/>Frequency Stays In Band]
     end
 
     subgraph "Tier 2: Local Cascade - T+15 to T+30 min"
@@ -654,35 +730,72 @@ graph TB
     class E1,E2,E3 recovery
 ```
 
+The node chain above shows what connects to what. It does not show the causal ordering in time, which is where the danger lives; each tier fires because the previous one did, and the intervals between them are short. The sequence diagram below carries the same tiers as a timeline, so the reader can see how little time separates a compromised token from a regional blackout. It is added rather than substituted because the two views answer different questions: the node chain shows the propagation topology, the sequence shows the order and the intervals.
+
+```mermaid
+sequenceDiagram
+    participant AT as Attacker
+    participant API as Retailer API
+    participant BESS as BESS Fleet
+    participant GRID as Grid Frequency
+    participant PROT as Protection Relays
+    participant NET as Distribution Network
+    participant AEMO as AEMO
+
+    Note over AT,API: T+0 min, initial attack
+    AT->>API: Compromised OAuth token, bulk dispatch
+    API->>BESS: Synchronised charge and discharge, 54 assets
+    BESS->>GRID: +/- 540 MW power swing
+    Note over GRID: Frequency stays 49.85 to 50.15 Hz
+
+    Note over GRID,PROT: T+15 min, protection cascade
+    GRID->>PROT: df/dt above 1.0 Hz/s
+    PROT->>NET: RoCoF relays trip, load shed 200 MW
+
+    Note over NET: T+30 min, local cascade
+    NET->>NET: Voltage sag, 3 substations offline, 8k to 12k customers
+
+    Note over NET: T+60 min, regional cascade
+    NET->>NET: 300 MW load drop, adjacent zones overload, 100k to 500k customers
+
+    Note over NET,AEMO: T+120 min, system-wide collapse
+    NET->>AEMO: 800 MW deficit, generator protection trips
+    AEMO->>NET: Emergency protocols, 1.0m to 1.5m customers
+
+    Note over AEMO,NET: T+120 min to T+72 h, recovery
+    AEMO->>NET: Manual black start, zone by zone
+    NET-->>NET: Full recovery in 24 to 72 hours
+```
+
 ### 3.2 Tier-by-Tier Impact Quantification
 
-**Tier 1 ; Immediate Impact Zone (T+0 to T+15 minutes):**
+**Tier 1: Immediate Impact Zone (T+0 to T+15 minutes):**
 
 - Geographic Area: 5 km radius around targeted substation cluster
 - Customers Affected: 8,000-12,000 residential, 200-400 commercial
 - Duration: 2-4 hours with priority restoration
-- Economic Impact: [investment required] million
+- Direct customer cost: AUD 1.3 million to AUD 4.0 million, computed in section 5.4 from the AER's 2024 residential NSW value of customer reliability [n]. Both bounds sit inside the 12-hour range for which that value was determined
 
-**Tier 2 ; Local Cascade Zone (T+15 to T+30 minutes):**
+**Tier 2: Local Cascade Zone (T+15 to T+30 minutes):**
 
 - Geographic Area: 3 adjacent substations, 15 km radius
 - Customers Affected: 80,000-120,000 residential, 2,000-3,500 commercial
 - Duration: 8-16 hours with sequential restoration
-- Economic Impact: [investment required] million
+- Direct customer cost: AUD 53 million at 8 hours, computed in section 5.4 [n], rising to AUD 159 million at 16 hours (modelled: VCR extrapolated past its 12-hour determination)
 
-**Tier 3 ; Regional Cascade Zone (T+30 to T+60 minutes):**
+**Tier 3: Regional Cascade Zone (T+30 to T+60 minutes):**
 
 - Geographic Area: 8 additional substations, 40 km radius
 - Customers Affected: 400,000-600,000 residential, 8,000-15,000 commercial
 - Duration: 16-36 hours
-- Economic Impact: [investment required] million
+- Direct customer cost: AUD 530 million to AUD 1.79 billion, computed in section 5.4 (modelled: VCR extrapolated to 36 hours, three times its determined range)
 
-**Tier 4 ; System-Wide Collapse (T+60 to T+120 minutes, worst case):**
+**Tier 4: System-Wide Collapse (T+60 to T+120 minutes, worst case):**
 
-- Geographic Area: Full ACME Inc. network plus adjacent DNSPs
+- Geographic Area: Full RefDNSP-1.2M network plus adjacent DNSPs
 - Customers Affected: 1.0-1.5 million residential, 25,000-40,000 commercial
 - Duration: 24-72 hours
-- Economic Impact: [investment required] million - [investment required] billion
+- Direct customer cost: AUD 1.99 billion to AUD 8.95 billion, computed in section 5.4 (modelled: VCR extrapolated to 72 hours, six times its determined range)
 
 ### 3.3 Attack Execution Timeline
 
@@ -697,7 +810,7 @@ The following table details the minute-by-minute progression of the attack from 
 | T+1:15  | Second oscillation        | All 18 batteries: "Discharge 100%, duration 60s"       | Grid: -90 MW load (180 MW swing)     |
 | T+2:15  | Third oscillation         | Repeat charge cycle at 0.3 Hz effective frequency      | Frequency: 50 Hz to 50.03 Hz         |
 | T+10:00 | Amplitude growth          | 10 cycles completed, oscillation amplitude +/- 0.15 Hz | Protection relays detect instability |
-| T+15:00 | Protection cascade        | Under-frequency relays trip at 49.85 Hz threshold      | Load shedding initiated              |
+| T+15:00 | Protection cascade        | RoCoF relays trip on rate of change above 1.0 Hz/s while frequency stays inside the 49.85 to 50.15 Hz normal band (RefDNSP-1.2M scenario assumption, not a sourced AEMO relay setting) | Load shedding initiated              |
 | T+18:00 | Regional expansion        | Load shedding causes voltage sag across 3 substations  | 100K customers offline               |
 | T+22:00 | Stabilization attempt     | AEMO Emergency Frequency Control System activated      | Blackout contained                   |
 | T+26:00 | Restoration begins        | Manual substation restoration commences                | Progressive re-energization          |
@@ -716,13 +829,13 @@ As documented in EE-CTI-005 (Sandworm Energy Grid Campaign), the Russian GRU Uni
 - **Modbus TCP exploitation** (via FrostyGoop evolution) for physical damage
 - **Wiper malware deployment** (ORCSHRED, SOLOSHRED, CADDYWIPER) to destroy forensic evidence and delay recovery
 
-**ACME Inc. Attack Surface:**
+**RefDNSP-1.2M Attack Surface:**
 
 | Infrastructure Component    | Quantity    | Protocol Vulnerability                                   | Sandworm Demonstrated Capability                     |
 | :--- | :--- | :--- | :--- |
-| **Major Substations** | 185         | IEC 61850 GOOSE (unencrypted, no authentication)         | Industroyer malware, proven in Ukraine 2016          |
-| **Distribution RTUs** | 32,000+     | DNP3 (unencrypted, optional authentication not deployed) | BlackEnergy/Industroyer, proven in Ukraine 2015/2016 |
-| **Community BESS**    | 54 (270 MW) | Modbus TCP (plaintext, no authentication)                | FrostyGoop malware, proven in Ukraine 2024           |
+| **Major Substations** | 185         | IEC 61850 GOOSE (unencrypted, no authentication)         | Industroyer, deployed against Ukrainian transmission in 2016 |
+| **Distribution RTUs** | 32,000+     | DNP3 (unencrypted, optional authentication not deployed) | BlackEnergy and Industroyer, deployed against Ukrainian distribution in 2015 and transmission in 2016 |
+| **Community BESS**    | 54 (270 MW) | Modbus TCP (plaintext, no authentication)                | FrostyGoop, deployed against a Ukrainian district heating utility in 2024 |
 | **Protection IEDs**   | 10,000+     | IEC 61850 GOOSE peer-to-peer                             | Industroyer GOOSE injection module                   |
 
 **Integrated Attack Scenario: "Coordinated Infrastructure Collapse"**
@@ -751,7 +864,7 @@ graph TB
 
     subgraph "Phase 4: T+45 to T+60 min - Protection Cascade"
         B3 -->|DNP3 Direct Operate| E1[Circuit Breaker Commands<br/>30 Substations]
-        C2 -->|Under-Frequency Relays| E1
+        C2 -->|RoCoF Relays| E1
         E1 -->|Coordinated Trips| E2[Regional Power Flow Disruption]
     end
 
@@ -781,7 +894,7 @@ graph TB
 
 **185-Substation Synchronized Trip Scenario:**
 
-ACME Inc. operates 185 major substations classified as "critical" for grid stability. A coordinated DNP3 Direct Operate attack, modeled on the Industroyer malware framework, could simultaneously trip circuit breakers across these substations.
+RefDNSP-1.2M operates 185 major substations classified as "critical" for grid stability. A coordinated DNP3 Direct Operate attack, modeled on the Industroyer malware framework, could simultaneously trip circuit breakers across these substations.
 
 **Attack Execution (Sandworm Methodology):**
 
@@ -859,8 +972,15 @@ T+60 seconds: Frequency Reversal
   - Frequency begins falling: 50.5 Hz → 50.0 Hz → 49.7 Hz
 
 T+90 seconds: Under-Frequency Load Shedding (UFLS)
-  - UFLS Stage 1: 49.85 Hz - shed 5% of load (additional 500 MW)
-  - UFLS Stage 2: 49.70 Hz - shed 10% of load (additional 1,000 MW)
+  Modelled staged ladder for RefDNSP-1.2M. AEMO coordinates UFLS but publishes
+  no single national relay-setting table, so these stages are the scenario's
+  own assumption, not a sourced AEMO figure.
+  This is genuine under-frequency shedding, unlike the RoCoF-triggered
+  initiation in Section 2.2. Real generation has been lost and frequency has
+  fallen well below the normal band, so absolute-frequency relays fire as
+  designed.
+  - UFLS Stage 1 (modelled): 49.0 Hz - shed 5% of load (additional 500 MW)
+  - UFLS Stage 2 (modelled): 48.8 Hz - shed 10% of load (additional 1,000 MW)
   - Cascading load shedding across interconnected regions
 
 T+120 seconds: System Islanding
@@ -884,9 +1004,9 @@ Recovery: 24-72 hours (black start procedures, sequential restoration)
 | **Ukraine 2015 (BlackEnergy)** | 30 substations                      | 225,000                   | 6 hours               | Manual circuit breaker operations via compromised SCADA                        |
 | **Ukraine 2016 (Industroyer)** | 1 substation (330kV transmission)   | 20% of Kyiv (~300,000)    | 1 hour                | Automated IEC 61850/DNP3 protocol exploitation                                 |
 | **South Australia 2016**       | Cascading relay trips (not cyber)   | 850,000 (entire state)    | 6-24 hours            | Natural weather event triggering protection cascade                            |
-| **ACME Inc. Scenario**         | **185 substations (modeled)** | **1.2-1.5 million** | **24-72 hours** | **Coordinated DNP3 Direct Operate + BESS oscillation + thermal runaway** |
+| **RefDNSP-1.2M Scenario**         | **185 substations (modeled)** | **1.2-1.5 million** | **24-72 hours** | **Coordinated DNP3 Direct Operate + BESS oscillation + thermal runaway** |
 
-The ACME Inc. scenario represents a **6x escalation** in substation count compared to Ukraine's largest demonstrated attack, with **5x customer impact** and **4x longer restoration** due to:
+The RefDNSP-1.2M scenario represents a **6x escalation** in substation count compared to Ukraine's largest demonstrated attack, with **5x customer impact** and **4x longer restoration** due to:
 
 1. **Larger geographic area** (970 km² vs. single city)
 2. **More complex grid topology** (interconnected NEM vs. isolated Ukrainian oblasts)
@@ -895,7 +1015,9 @@ The ACME Inc. scenario represents a **6x escalation** in substation count compar
 
 ### 3.5 Grid Island Formation and Collapse Mechanics
 
-When major portions of an interconnected grid lose synchronization, the system fragments into isolated "islands" ; electrically separated regions that must each maintain their own generation-load balance independently.
+When major portions of an interconnected grid lose synchronization, the system fragments into isolated "islands." These are electrically separated regions that must each maintain their own generation-load balance independently.
+
+Separation is not hypothetical and the reference case is measured. On 8 January 2021 the Continental Europe synchronous area split in two across a flow of about 5.8 GW. The deficit side fell at 60 mHz/s to a nadir of 49.746 Hz while the surplus side rose at 300 mHz/s to a peak of 50.6 Hz (ENTSO-E ICS Investigation Expert Panel, *Continental Europe Synchronous Area Separation on 08 January 2021*, final report, 15 July 2021). Same imbalance, same instant, five times the rate of change on one side. [The Unseen Current](/papers/unseen-current), section 4, follows that sequence at the resolution the Expert Panel published it and inverts the RoCoF relation to recover the effective inertia each fragment retained. The island survival criteria below ask the same question in advance.
 
 **NSW Grid Island Formation Triggers:**
 
@@ -967,6 +1089,8 @@ Outcome: ISLAND COLLAPSE within 3-5 minutes
 
 The electricity distribution network serves as the foundational layer upon which six interdependent critical infrastructure systems depend. Failure in the primary electrical grid propagates through these systems in cascading waves, each amplifying the consequences of the initial outage.
 
+Where the grid separates decides how many of those systems lose supply at once. A separation does not divide a network into two smaller versions of itself; it divides it into fragments with very different capacity to absorb the imbalance each inherits, and the fragment boundary is drawn by protection operating in sequence rather than by any planning decision. [The Unseen Current](/papers/unseen-current), section 4.2, makes that argument on the RoCoF figures ENTSO-E published for both sides of the 8 January 2021 split.
+
 ```mermaid
 graph TB
     subgraph "Primary Grid"
@@ -1034,7 +1158,7 @@ Water supply infrastructure is the most consequential secondary failure domain. 
 | 12-24 hours          | Wastewater system backup               | Sanitation failure, contamination risk             | Critical     |
 | 24-48 hours          | Public health emergency                | Disease outbreak risk (gastroenteritis, hepatitis) | Catastrophic |
 
-Emergency water supply requirements: 87 sites at 10,000 litres per site = 870,000 litres capacity. Hospital priority allocation: 12 facilities at 50,000 litres per day = 600,000 litres per day. Emergency cost: [investment required] million per day.
+Emergency water supply requirements: 87 sites at 10,000 litres per site = 870,000 litres capacity. Hospital priority allocation: 12 facilities at 50,000 litres per day = 600,000 litres per day. Both volumes are stipulated RefDNSP-1.2M scenario parameters, not sourced figures. No unit cost for emergency water tankering in New South Wales was located, so the daily cost of supplying those volumes is not stated.
 
 ### 4.3 Hospital and Medical Infrastructure Cascade
 
@@ -1056,8 +1180,8 @@ Mobile network failure creates a secondary crisis by severing the population fro
 
 - 420 cell towers with 2-8 hour battery backup reach zero coverage between T+2 and T+8 hours
 - 70% of emergency 000 calls originate from mobile networks; landline capacity covers only 30% of normal call volume
-- Ambulance response time increases from 12 minutes (normal) to 45 minutes (incident) ; a 275% degradation
-- Hospital emergency department presentations surge from 3,500 per day (normal) to 8,500 per day (incident) ; a 243% increase
+- Ambulance response time increases from 12 minutes (normal) to 45 minutes (incident). That is a 275% degradation in response time.
+- Hospital emergency department presentations surge from 3,500 per day (normal) to 8,500 per day (incident). That is a 243% increase in daily volume.
 
 ### 4.5 Transport System Cascade
 
@@ -1070,7 +1194,7 @@ Transport infrastructure suffers immediate and severe degradation:
 
 ### 4.6 Defence and National Security Infrastructure
 
-RAAF Base Richmond, naval facilities in the Sydney area, and defence data centres are all within the ACME Inc. service territory. A 30-50% reduction in sortie generation capability at RAAF Richmond, degradation of naval munitions cooling systems, and 40-60% reduction in tactical communications bandwidth constitute a national security incident requiring Defence Minister briefing and triggering potential Parliamentary inquiry.
+RAAF Base Richmond, naval facilities in the Sydney area, and defence data centres are all within the RefDNSP-1.2M service territory. A 30-50% reduction in sortie generation capability at RAAF Richmond, degradation of naval munitions cooling systems, and 40-60% reduction in tactical communications bandwidth constitute a national security incident requiring Defence Minister briefing and triggering potential Parliamentary inquiry.
 
 **RAAF Base Richmond Impact Analysis:**
 
@@ -1121,7 +1245,7 @@ National Security Implications:
 ```
 Garden Island (Sydney Harbour) - East Coast Principal Naval Base:
 
-Critical Systems Dependent on ACME Inc. Grid:
+Critical Systems Dependent on RefDNSP-1.2M Grid:
 - Submarine support facilities (HMAS Platypus)
 - Surface vessel replenishment systems
 - Naval ammunition storage refrigeration (temperature-critical munitions)
@@ -1172,7 +1296,7 @@ Beyond direct customer losses, the financial services infrastructure dependent o
 
 **Stock Exchange and Trading Infrastructure:**
 
-The Australian Securities Exchange (ASX) data centers and trading infrastructure are located within Sydney's central business district, with critical components in the ACME Inc. service territory.
+The Australian Securities Exchange (ASX) data centers and trading infrastructure are located within Sydney's central business district, with critical components in the RefDNSP-1.2M service territory.
 
 ```
 ASX Trading Infrastructure Dependencies:
@@ -1180,7 +1304,7 @@ ASX Trading Infrastructure Dependencies:
 Primary Data Center (Equinix SY3, Sydney):
 - Grid power: 15 MW (normal operations)
 - Backup: N+1 diesel generators (48-hour fuel capacity)
-- Criticality: National financial markets, [investment required] trillion market capitalization
+- Criticality: national financial markets; no sourced ASX market capitalisation figure is held, so none is stated
 
 Secondary Data Center (Equinix SY1, Sydney):
 - Grid power: 8 MW (normal operations)
@@ -1213,28 +1337,25 @@ T+48 to T+72 hours: Extended Outage Crisis
 
 **Economic Multiplier Effects:**
 
-```
-Direct Economic Loss: Customer outage costs (calculated in Section 5)
-  - Residential: [investment required]
-  - Commercial: [investment required]
-  - Industrial: [investment required]
+The only cost this paper computes is the direct cost to customers of energy not supplied, and it is computed once, in section 5.4, from the AER's determined value of customer reliability. For the 72-hour system-wide case that figure is AUD 1.99 billion to AUD 8.95 billion (modelled: VCR extrapolated to 72 hours, six times its determined range). Section 5.4's reference case at the boundary of the determination, the full network at 12 hours, is AUD 1.19 billion [n].
 
-Indirect Economic Loss (24-hour outage):
-  - Stock market trading suspension: [investment required] billion daily trading volume lost
-  - Banking system disruption: [investment required] billion daily transaction volume
-  - Retail commerce halt: [investment required] million daily sales (NSW region)
-  - Logistics disruption: [investment required] million daily freight movement
-  - Tourism impact: [investment required] million daily (hotel cancellations, transportation)
+That figure is not split by customer segment. Section 5.6 sets out why: the 2.15 kW coincident demand anchor is an all-customer average taken from AEMO's South Australian black system report, no per-segment demand figure was sourced, and the residential VCR is therefore applied across the whole base. A residential, commercial and industrial split would need two inputs the paper does not hold.
 
-Tertiary Economic Loss (48-72 hour outage):
-  - Supply chain breakdown: [investment required] billion (perishable goods, manufacturing inventory)
-  - Insurance claims: [investment required] million (business interruption, property damage)
-  - Lost productivity: [investment required] billion (workforce unable to work, telework impossible)
-  - Recovery costs: [investment required] million (emergency services, infrastructure repair)
+The indirect and tertiary categories below were carried as dollar lines in an earlier draft of this section. Each is a real cost. None has a sourced input, and inventing one here would contradict section 5, which quantifies the same cascade from published values.
 
-Total Economic Impact (72-hour scenario):
-  Direct + Indirect + Tertiary = [investment required]
-```
+| Category | Order | Why it is not quantified |
+| :--- | :--- | :--- |
+| Stock market trading suspension | Indirect | No sourced ASX daily trading volume, and no basis for converting a suspension into a realised loss rather than a deferral |
+| Banking system disruption | Indirect | No sourced daily transaction volume for the affected region, and transaction volume is not loss |
+| Retail commerce halt | Indirect | No sourced NSW regional daily retail sales figure |
+| Logistics disruption | Indirect | No sourced daily freight movement value for the service territory |
+| Tourism impact | Indirect | No sourced accommodation or transport cancellation value |
+| Supply chain breakdown | Tertiary | Section 5.10 already excludes per-facility spoilage and batch loss for the same reason: no sourced per-facility value |
+| Insurance claims | Tertiary | Section 5.10 excludes insurance response; no sourced premium elasticity or claims ratio |
+| Lost productivity | Tertiary | No sourced basis, and it overlaps the direct customer cost already computed |
+| Recovery costs | Tertiary | No sourced emergency services or infrastructure repair rate |
+
+No total is stated for direct plus indirect plus tertiary loss, because nine of the twelve terms have no value. The direct customer cost of section 5.4 is a component of total economic loss, not the total, and this section does not close that gap.
 
 ### 4.8 Cross-Sector Dependency Matrix
 
@@ -1316,68 +1437,123 @@ gantt
 
 ## 5. Economic Impact Assessment
 
-### 5.1 Impact Summary
+This section costs one thing: the direct cost to customers of energy not supplied during the modelled cascade. Equipment damage, litigation, insurance, reputational cost and opportunity cost are not quantified, because no sourced input exists for them; section 5.10 records each omission. Every monetary figure below is either computed from a cited input or labelled as a modelled estimate with its assumption stated.
 
-| Impact Category                               | Low Estimate                    | High Estimate                   | Most Likely (P50)               |
-| :--- | :--- | :--- | :--- |
-| **Direct Grid Damage**                  | [investment required]           | [investment required]           | [investment required]           |
-| **Customer Economic Loss**              | [investment required]           | [investment required]           | [investment required]           |
-| **Regulatory Penalties and Litigation** | [investment required]           | [investment required]           | [investment required]           |
-| **Reputational Damage (24-month)**      | [investment required]           | [investment required]           | [investment required]           |
-| **Insurance Claims and Premiums**       | [investment required]           | [investment required]           | [investment required]           |
-| **Opportunity Costs**                   | [investment required]           | [investment required]           | [investment required]           |
-| **TOTAL (24-Month Horizon)**            | **[investment required]** | **[investment required]** | **[investment required]** |
+### 5.1 Derivation Basis
 
-**[MODELED ESTIMATE - Sensitivity analysis: ±30% based on attack severity, restoration effectiveness, and regulatory response. Economic modeling uses AEMO Value of Customer Reliability (VCR) methodology adapted for cyber-physical attack scenarios. High estimate assumes Tier 4 system-wide collapse; low estimate assumes Tier 2 local cascade containment.]**
+Every monetary figure in this section derives from published inputs through the relations below.
+A reader holding the cited sources can reproduce or contest any value.
 
-### 5.2 Direct Grid Damage
+The relations produce one loss figure for one modelled event. Turning that into an annualised expectancy, and then into a defensible return on a control programme, is set out in [Annualised Loss Expectancy and Return on Security Investment for OT](/papers/ale-rosi-decision-framework), which works ALE per NIST SP 800-30 Rev. 1, the Gordon-Loeb optimal investment ceiling and the ROSI ratio through a modelled hyperscale case. Section 5.9 uses the first of those and section 9.5 uses a benefit to cost form of the third. No Gordon-Loeb ceiling is computed anywhere in this paper, because RefDNSP-1.2M has no stipulated security budget and no vulnerability parameter to fit one against.
 
-Equipment replacement and emergency restoration costs are driven by transformer failure probabilities and BESS thermal damage:
+$$E_{\text{unserved}} = N_{\text{customers}} \times \bar{P}_{\text{demand}} \times t_{\text{restore}}$$
 
-| Component                        | Failure Probability | Quantity at Risk  | Unit Cost             | Low Estimate          | High Estimate         |
+$$C_{\text{direct}} = \text{VCR} \times E_{\text{unserved}}$$
+
+VCR is the Value of Customer Reliability in dollars per kilowatt hour, determined by the Australian
+Energy Regulator [n]. Determination of VCR has been the AER's statutory responsibility since the
+Australian Energy Market Commission's final rule of July 2018. The earlier 2014 NEM-wide study was
+produced by AEMO [n].
+
+Figures marked **modelled** are not measured outcomes. Their assumptions are stated inline.
+
+### 5.2 Scope Limit on the VCR Values
+
+The AER determined the 2024 VCR values for unplanned outages of up to 12 hours. That is the duration range the willingness-to-pay surveys behind them covered [n]. The cascade modelled in this paper runs to 72 hours.
+
+Applying a 12-hour value across 72 hours takes the parameter roughly an order of magnitude outside the range for which it was determined. The correct instrument for outages longer than 12 hours is the AER's separate Value of Network Resilience review, and this paper holds no VNR figure. Every figure below that rests on a duration longer than 12 hours is therefore an upper-bound extrapolation, not a determination, and is marked as such in the cell where it appears. The extrapolation is linear in duration. The real relation is not known to be linear, and what a household will pay to avoid the second day of an outage is not established by a survey about the first twelve hours.
+
+Two further limits apply to the VCR values used here.
+
+- The NEM value of AUD 41.48 per kWh and the NSW value of AUD 38.53 per kWh are **residential** values from Table 1 of the AER's 2024 final report [n]. They are not all-customer blended values. The AER's NEM-wide and regional aggregates were not retrieved and are not used anywhere in this section.
+- The reference network is modelled on NSW, so NSW residential AUD 38.53 per kWh is the base case throughout. Substituting the NEM residential value raises every computed figure below by 7.7 percent.
+
+### 5.3 Input Values
+
+| Input | Value | Basis |
+| :--- | :--- | :--- |
+| Customers, full network | 1,200,000 | RefDNSP-1.2M stipulated parameter, section 2. Modelled, not sourced |
+| Average coincident demand per customer | 2.15 kW | 1,826 MW regional demand across 850,000 customers, AEMO final report on the South Australian black system of 28 September 2016 [n] |
+| VCR, residential NSW | AUD 38.53 per kWh, 2024 dollars | AER 2024 VCR final report, Table 1 [n] |
+| VCR, residential NEM | AUD 41.48 per kWh, 2024 dollars | AER 2024 VCR final report, Table 1 [n] |
+| VCR duration validity | Unplanned outages up to 12 hours | AER 2024 VCR final report, scope statement [n] |
+
+The 2.15 kW anchor is an all-customer coincident average. AEMO's 1,826 MW is regional demand and the 850,000 is all South Australian customers, so the figure already carries residential, commercial and industrial load together. No per-segment demand figure was available, so the same 2.15 kW is applied to every customer in the table below.
+
+Two transplants are involved and both are stated rather than buried. The 2.15 kW is measured for one region, at one moment, on a spring afternoon in South Australia, and is applied here to a modelled NSW network. Coincident demand per customer varies by jurisdiction, season and time of day, and no NSW equivalent was sourced. Second, the customer counts and restoration durations in section 5.4 come from the cascade model of section 3.2. They are the working group's own scenario parameters, not measured outcomes.
+
+### 5.4 Direct Customer Cost by Cascade Tier
+
+Tiers, customer counts and durations are those of section 3.2. Unserved energy is customers multiplied by 2.15 kW multiplied by restoration hours. Direct cost is that energy multiplied by AUD 38.53 per kWh.
+
+| Tier | Customers | Duration | Unserved energy | Direct customer cost | VCR domain |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| Power Transformers (66 kV)       | 5-15%               | 54 substations    | [investment required] | [investment required] | [investment required] |
-| Switchgear (11 kV)               | 8-20%               | 162 bays          | [investment required] | [investment required] | [investment required] |
-| BESS Battery Modules             | 2-8% (thermal)      | 54 systems        | [investment required] | [investment required] | [investment required] |
-| BESS Inverters/PCS               | 5-12%               | 54 units          | [investment required] | [investment required] | [investment required] |
-| Emergency Restoration Labour     | 100%                | 72-hour operation | ;                    | [investment required] | [investment required] |
-| Replacement Equipment Expediting | 100%                | Air freight, OEM  | ;                    | [investment required] | [investment required] |
+| 1, immediate impact zone | 8,000 to 12,000 | 2 to 4 h | 34 to 103 MWh | AUD 1.3 million to AUD 4.0 million [n] | 12 h or less, determined |
+| 2, local cascade, lower bound | 80,000 | 8 h | 1,376 MWh | AUD 53 million [n] | 12 h or less, determined |
+| 2, local cascade, upper bound | 120,000 | 16 h | 4,128 MWh | AUD 159 million (modelled: VCR extrapolated to 16 h, beyond its 12 h determination) | Extrapolated |
+| 3, regional cascade | 400,000 to 600,000 | 16 to 36 h | 13,760 to 46,440 MWh | AUD 530 million to AUD 1.79 billion (modelled: VCR extrapolated to 36 h) | Extrapolated |
+| 4, system-wide collapse | 1,000,000 to 1,500,000 | 24 to 72 h | 51,600 to 232,200 MWh | AUD 1.99 billion to AUD 8.95 billion (modelled: VCR extrapolated to 72 h, six times its determined range) | Extrapolated |
 
-Transformer lead times under normal procurement are implementation period required. Emergency procurement via air freight requires 3-5 times normal cost, placing the per-unit expedited cost at [investment required] million.
+Worked example, tier 2 lower bound: 80,000 customers multiplied by 2.15 kW multiplied by 8 hours gives 1,376,000 kWh. At AUD 38.53 per kWh that is AUD 53.0 million.
 
-### 5.3 Customer Economic Loss
+**Reference case at the boundary of validity.** The full network at the longest duration the AER determination covers: 1,200,000 customers multiplied by 2.15 kW multiplied by 12 hours gives 30,960 MWh, and at AUD 38.53 per kWh, AUD 1.19 billion [n]. This is the largest direct customer cost this paper can state on the determination alone. Every figure above it is an extrapolation, including the headline tier 4 range.
 
-**Residential Impact:** Outage duration determines severity from food spoilage ([investment required] per customer at 2-4 hours) through refrigeration loss and lost wages ([investment required] per customer at 8-16 hours) to major property impact including hotel costs and lost productivity ([investment required] per customer at 24-48 hours). With 1,000,000 customers affected at the 24-48 hour tier, residential losses alone reach [investment required] million.
+The full envelope across the cascade, from the localized tier 1 outage to system-wide collapse, is AUD 1.3 million to AUD 8.95 billion. The lower bound is a determination. The upper bound is not.
 
-**Commercial Impact:** 8,500 retail and hospitality businesses lose an average [investment required] per day in revenue. 1,200 manufacturing facilities lose [investment required] per day. 12,000 professional services firms lose [investment required] per day. Aggregate commercial customer losses range from [investment required] million to [investment required] million.
+### 5.5 Restoration Profile and the Single-Scalar Simplification
 
-**Industrial Impact:** Food processing (45 facilities, [investment required] million in product spoilage), chemical and pharmaceutical production (12 facilities, [investment required] million in batch losses), and mining operations (8 facilities, [investment required] million in production halt costs).
+The table above uses one restoration-hours scalar per tier. Real restorations are not uniform. In the only observed Australian case at this scale, the South Australian black system of 28 September 2016, the first customers were restored under three hours after the event, 80 to 90 percent of load was back by midnight, roughly eight hours in, and the last customers were not restored until 11 October, a tail of about thirteen days [n].
 
-### 5.4 Regulatory Penalties and Litigation
+A single scalar is therefore a simplification, and it is stated as one. It understates the tail and overstates the head. The direction of the error depends on which end dominates, and the tail dominates when it is long: if 10 percent of 1,200,000 customers stayed off for thirteen days, that alone is 120,000 multiplied by 2.15 kW multiplied by 312 hours, or 80,496 MWh, which is AUD 3.10 billion at AUD 38.53 per kWh (modelled: VCR extrapolated to 312 h, twenty-six times its determined range). That figure is offered to show why the scalar is a simplification, not as a cost estimate. At twenty-six times the determined duration the VCR carries no useful information, which is the honest conclusion about long-tail restoration cost on the evidence available.
 
-**SOCI Act 2018 Violations:**
+### 5.6 Segment Composition of the Customer Base
 
-- Failure to protect critical infrastructure: [investment required] million (80% probability)
-- Inadequate risk management program: [investment required] million (90% probability)
-- Late incident reporting: [investment required] million (60% probability)
+The table in section 5.4 applies a residential VCR to every customer. The AER's business values, in AUD per kWh, 2024 dollars, Table 2 of the final report [n], are Agriculture 22.25, Commercial 34.39 and Industrial 33.49. All three sit below the NSW residential 38.53 used above, so applying the residential value across the whole customer base biases the computed cost upward rather than downward.
 
-**Civil Litigation:**
+The AER's very large business values, Table 3 [n], are Services 33.10, Industrial 12.22, Mines 10.63 and Metals 5.38. They are not used in any computation here, and they should not be treated as stable parameters: the AER attributes part of the fall since 2019 to a change in who answered the survey rather than to a change in preference, noting that "the sample composition for each segment in 2024 is substantially different from 2019". Very large business industrial falls from AUD 142.22 to AUD 12.22 in 2024 dollars across five years, an order of magnitude on a resample.
 
-- Wrongful death claims: 5-15 cases at [investment required] million average = [investment required] million
-- Personal injury claims: 50-120 cases at [investment required] average = [investment required] million
-- Business interruption class action: [investment required] million (residential) + [investment required] million (commercial)
+### 5.7 Observed Cost of a Comparable Event
 
-### 5.5 Risk-Adjusted Expected Loss
+Business SA, the state's peak business lobby, surveyed about 200 businesses after the 28 September 2016 South Australian black system and put the cost to South Australian business at AUD 367 million, with a median of AUD 5,000 per business and about AUD 115 million of the total falling on four firms [n]. This is a lobby group's survey, not a regulator's figure, and it counts business losses only, so it is a floor on the event's economic cost rather than a total.
 
-```
-Probability of Attack (10-year horizon): 15-30%
-Expected Loss = [investment required] (P50) x 22.5% (midpoint probability) = [investment required]
+The same relation used in section 5.4, applied to that event, gives a cross-check: 850,000 customers multiplied by 2.15 kW multiplied by 8 hours is 14,620 MWh, and at the South Australian residential VCR of AUD 48.52 per kWh that is AUD 709 million [n]. The modelled figure is about twice the surveyed one, which is the expected direction of difference: the model applies a residential VCR to all customers and counts residential and public-sector loss that the survey excluded, while the survey counts categories of business cost that the unserved-energy relation does not decompose. Note also that this applies a 2024 VCR to a 2016 event, so the comparison is not like for like in price terms.
 
-Net Present Value (5-year horizon):
-  Low: [investment required] x 20% x 0.85 discount factor = [investment required]
-  High: [investment required] x 25% x 0.85 discount factor = [investment required]
-  Most Likely: [investment required]
-```
+### 5.8 Regulatory and Legal Consequence
+
+No sourced basis exists for forecasting SOCI Act 2018 penalties, civil damages, or class action quantum against the reference network. Those figures are not stated. What can be stated is the one regulatory outcome that has been settled for a comparable event.
+
+After the Great Britain outage of 9 August 2019, which disconnected 1,152,878 customers, Ofgem reported that Hornsea 1 Limited and RWE Generation UK plc each agreed to make voluntary payments of GBP 4.5 million to the Energy Industry Voluntary Redress Scheme, and that Eastern Power Networks plc and South Eastern Power Networks plc agreed to pay GBP 1.5 million in aggregate for reconnecting customers without instruction, a separate breach from the cascade itself [n]. Ofgem made no formal legal determination of breach, and found no failures by the system operator that contributed to the outage [n].
+
+The order of magnitude is the point. About GBP 10.5 million across four licensees, for an event affecting a customer count comparable to the tier 4 scenario, is small against the direct customer cost computed in section 5.4. Regulatory payments are not a proxy for economic loss, and neither figure should be used to estimate the other.
+
+### 5.9 Risk-Adjusted Expected Loss
+
+The probability of the modelled attack over a 10-year horizon, 15 to 30 percent, is this paper's own assessment (section 1). It is not an external determination and carries no citation.
+
+Expected loss is that probability multiplied by direct cost. Using the reference case at the boundary of VCR validity, AUD 1.19 billion:
+
+- At 15 percent: AUD 179 million (modelled: probability is the working group's own assessment)
+- At 22.5 percent, the midpoint: AUD 268 million (modelled: same basis)
+- At 30 percent: AUD 358 million (modelled: same basis)
+
+Substituting the tier 4 upper bound of AUD 8.95 billion raises the midpoint expected loss to AUD 2.01 billion (modelled: compounds the probability assessment with a VCR extrapolated to 72 h). No net present value is stated, because no discount rate is sourced and an assumed one would add a second unsourced parameter to a figure that already carries two.
+
+### 5.10 Categories Not Quantified
+
+The following were carried as cost lines in an earlier draft of this section and are removed rather than estimated. Each is a real cost. None has a sourced input.
+
+| Category | Why it is not quantified |
+| :--- | :--- |
+| Direct grid damage | No sourced unit cost for 66 kV transformers, 11 kV switchgear, BESS modules or inverters, and no sourced failure probability for any of them |
+| Emergency restoration labour and expediting | No sourced labour rate or air-freight premium |
+| Regulatory penalties | No sourced SOCI Act penalty schedule or precedent against an Australian DNSP |
+| Civil litigation | No sourced quantum for wrongful death, personal injury or business interruption class action in this jurisdiction |
+| Reputational damage | No sourced method for valuing it over a 24-month horizon |
+| Insurance claims and premium response | No sourced premium elasticity |
+| Opportunity cost | No sourced basis, and it overlaps the direct customer cost already computed |
+| Per-facility industrial loss | No sourced per-facility spoilage or batch-loss value for food processing, pharmaceutical or mining operations |
+
+Interdependency amplification across the six critical infrastructure systems of section 4 is also excluded from every figure in this section. The direct customer cost computed here is a component of total economic loss, not the total.
 
 ---
 
@@ -1399,7 +1575,7 @@ A secondary attack vector targeting Battery Management System (BMS) controllers 
 - Evacuation radius: 500 metres (toxic gas plume includes HF, CO, and particulates)
 - Fatalities estimate: 0-2 (rapid evacuation and remote locations reduce risk)
 - Serious injuries: 2-8 (smoke inhalation, burns)
-- Environmental contamination: Fluorinated compounds in soil and water, cleanup cost [investment required] million
+- Environmental contamination: fluorinated compounds in soil and water. No sourced remediation unit cost for a lithium-ion fire site in Australia was located, so no cleanup cost is stated
 
 ### 6.2 Traffic Signal Failures
 
@@ -1433,11 +1609,15 @@ The delayed or denied medical care caused by hospital overload, ambulance respon
 | **Hospital Admissions** | 250 | 680 | 420 |
 | **Emergency Presentations** | 1,200 | 3,500 | 2,100 |
 
-These figures carry legal consequences: wrongful death litigation ([investment required] million at P50), WorkSafe NSW investigation, potential Coroner's inquest, EPA environmental investigation, and the possibility of criminal charges for negligence causing death if cybersecurity failures are deemed reckless.
+These figures carry legal consequences: wrongful death litigation, WorkSafe NSW investigation, potential Coroner's inquest, EPA environmental investigation, and the possibility of criminal charges for negligence causing death if cybersecurity failures are deemed reckless. No quantum is stated for any of them. Section 5.10 records civil litigation as unquantified for the same reason: no sourced wrongful death, personal injury or class action quantum exists for this jurisdiction, and section 5.8 shows why regulatory outcomes are not a proxy, with about GBP 10.5 million in voluntary payments across four licensees after an event that disconnected 1,152,878 customers [n].
 
 ---
 
 ## 7. Attack Vector Analysis and Mitigation
+
+The four vectors below were found by walking each attack path against the physical process it reaches, not by enumerating vulnerabilities and sorting them by CVSS. That walk is the CyHAZOP method: the IEC 61882 process safety guide words applied to cyber-physical nodes, with the transfer function from an injected command to a physical excursion stated explicitly rather than assumed. [CyHAZOP: Cyber-Physical Hazard Analysis for Hyperscale Infrastructure](/papers/cyhazop-hyperscale-methodology) sets out the guide word lexicon, the node register format and the DEXPI to multi-BOM linkage the walk depends on. Section 7.4 below, a Modbus write to a BMS voltage setpoint that ends in thermal runaway, is a worked instance of it.
+
+What this section does not do is score the adversary. Every mitigation below is priced against a control class or a stated mechanism, never against a named actor's capability to reach the asset. Eigenia scores that separately, in two documents that work together. [The TACAM matrix](/papers/tacam-deep-dive) characterises actors across capability, sector targeting and vendor product exposure. [The Adversary Threat Quotient](/papers/atq-deep-dive) reduces those dimensions to one cardinal figure on a 0 to 100 interval that can parameterise a loss model directly. A reader who needs to know whether a specific actor can execute the six stages of section 7.1 should start there. This paper assumes the capability exists, on the Sandworm precedent of section 3.4, and asks only what blocking it would cost.
 
 ### 7.1 Retailer API Supply Chain Attack
 
@@ -1445,9 +1625,9 @@ This is the primary attack vector enabling the Death Wobble scenario. The attack
 
 ```mermaid
 graph LR
-    A[Reconnaissance<br/>Procurement docs<br/>implementation period] -->|Architecture| B[Social Engineering<br/>Retailer employee<br/>implementation period]
-    B -->|Credential Theft| C[API Access<br/>OAuth token<br/>implementation period]
-    C -->|Asset Discovery| D[DER Enumeration<br/>54 BESS mapped<br/>implementation period]
+    A[Reconnaissance<br/>Procurement docs] -->|Architecture| B[Social Engineering<br/>Retailer employee]
+    B -->|Credential Theft| C[API Access<br/>OAuth token]
+    C -->|Asset Discovery| D[DER Enumeration<br/>54 BESS mapped]
     D -->|Oscillation Calc| E[Attack Execution<br/>Mass dispatch<br/>30 minutes]
     E -->|Grid Instability| F[Cascading Blackout<br/>1.2M customers<br/>24-72 hours]
 
@@ -1458,6 +1638,53 @@ graph LR
     class A,B recon
     class C,D access
     class E,F impact
+```
+
+The same six stages map onto the Purdue reference model, from enterprise systems at Level 4 and 5 down to the physical process at Level 0. The mapping matters because the boundary crossings are the argument: the attack starts in the retailer's business systems, crosses the IT-OT boundary through an API that accepts a stolen token, and ends by moving grid frequency itself. Each labelled arrow is a crossing a defender could have blocked.
+
+```mermaid
+graph TB
+    subgraph "Level 4 and 5: Enterprise"
+        S1[Reconnaissance<br/>Procurement and architecture docs]
+        S2[Social engineering<br/>Retailer employee targeted]
+        S3[Credential theft<br/>OAuth token captured]
+        S1 --> S2 --> S3
+    end
+
+    subgraph "Level 3.5: IT-OT DMZ"
+        S4[Retailer API access<br/>Bearer token accepted, no MFA]
+    end
+
+    subgraph "Level 3: Operations"
+        S5[DERMS command injection<br/>Bulk dispatch to 54 BESS]
+    end
+
+    subgraph "Level 2: Supervisory control"
+        S6[Synchronised setpoints<br/>Charge and discharge, all assets in phase]
+    end
+
+    subgraph "Level 1: Basic control"
+        S7[BESS controllers execute<br/>+/- 540 MW power swing]
+    end
+
+    subgraph "Level 0: Process"
+        S8[Grid frequency oscillates<br/>df/dt crosses 1.0 Hz/s threshold]
+        S9[Protection relays trip<br/>Cascade begins]
+        S8 --> S9
+    end
+
+    S3 -->|crosses into DMZ| S4
+    S4 -->|crosses into operations| S5
+    S5 -->|into supervisory| S6
+    S6 -->|into basic control| S7
+    S7 -->|into process| S8
+
+    classDef it fill:#457b9d,stroke:#1d3557,color:#fff
+    classDef dmz fill:#ffa502,stroke:#ff6b00,color:#000
+    classDef ot fill:#ff4757,stroke:#c92a2a,color:#fff
+    class S1,S2,S3 it
+    class S4 dmz
+    class S5,S6,S7,S8,S9 ot
 ```
 
 **Current Control Gaps:**
@@ -1472,15 +1699,17 @@ graph LR
 
 **Mitigation Strategy:**
 
-| Mitigation                                     | Cost                  | Risk Reduction |
-| :--- | :--- | :--- |
-| API Behavioral Analytics (Apigee/Kong with ML) | [investment required] | 70%            |
-| Just-In-Time MFA for dispatch commands         | [investment required] | 85%            |
-| Dual Authorization for commands >10 MW         | [investment required] | 90%            |
-| Oscillation Detection Algorithm                | [investment required] | 95%            |
-| Device Command Batching Limits                 | [investment required] | 60%            |
+Costs use the ordinal band scheme of section 9.1, measured against the sourced CIRMP cyber envelope of AUD 1.29 million one-off. Bands rank controls against each other; they do not price them. Where a control maps onto one of the five OT control classes Dragos and Marsh McLennan measured, the class figure is cited and the mapping stated. Where none maps, the benefit is given as a mechanism rather than a percentage. An earlier draft of this section assigned each control a risk reduction of 60 to 95 percent, none of them cited and all of them roughly five times the only published benchmark. Those figures are removed.
 
-Combined risk reduction with defense-in-depth: **98%**. Total investment: **[investment required] million**.
+| Mitigation | Cost band | Effect |
+| :--- | :--- | :--- |
+| API behavioural analytics, Apigee or Kong with ML | C, the band section 9.2 assigns the same control | Network visibility and monitoring. Dragos and Marsh McLennan measure 16.47 percent average risk reduction for this class [n]. A class average across a global claims population, not this control's measured effect |
+| Just-in-time MFA for dispatch commands | A (policy and configuration on an existing identity platform) | Secure remote access. Dragos and Marsh McLennan measure 12.18 percent average risk reduction for this class [n]. Same caveat |
+| Dual authorization for commands above 10 MW | A, the band section 9.6 assigns this quick win | No benchmark class maps. The control removes the single-credential path: one stolen OAuth token no longer dispatches a fleet. It does not lower the chance of the token being stolen |
+| Oscillation detection algorithm | B (analytics on telemetry the network already collects) | No benchmark class maps. The control fires on a pattern with no benign explanation, more than five charge or discharge reversals per asset inside 10 minutes. No false-positive rate has been measured for this network, so no detection figure is stated |
+| Device command batching limits | A (configuration and vendor engineering, as in section 9.2) | No benchmark class maps. A 5-minute minimum interval caps achievable oscillation at 0.0017 Hz against the 0.5 to 0.55 Hz attack band of section 2.1.2, which moves the attack outside resonance rather than lowering its probability |
+
+Band arithmetic: three band A, one band B, one band C. Summing the band boundaries gives AUD 0.7 million to AUD 2.2 million one-off (modelled: band boundary arithmetic, not a quotation). No combined risk reduction is stated. Dragos and Marsh McLennan state their per-control figures are not additive and model no combined effect [n]; the earlier draft's 98 percent had no source.
 
 ### 7.2 Kubernetes Container Escape
 
@@ -1490,15 +1719,15 @@ Relevant vulnerabilities include CVE-2024-0874 (OpenShift route access control b
 
 **Mitigation Strategy:**
 
-| Mitigation                                            | Cost                  | Risk Reduction |
+| Mitigation | Cost band | Effect |
 | :--- | :--- | :--- |
-| Container Runtime Security (Aqua/Sysdig)              | [investment required] | 85%            |
-| Pod Security Policies (no-privileged, read-only root) | [investment required] | 70%            |
-| Network Policies (deny-all default)                   | [investment required] | 75%            |
-| Image Signing Verification                            | [investment required] | 60%            |
-| etcd Encryption at Rest                               | [investment required] | 80%            |
+| Container runtime security, Aqua or Sysdig | B, the band section 9.3 assigns the same control in Phase 1 | Defensible architecture. Dragos and Marsh McLennan measure 17.09 percent average risk reduction for this class [n]. Class average, not a measured result for this product |
+| Pod security policies, no-privileged and read-only root | A (platform configuration) | No benchmark class maps. A container that cannot run privileged and cannot write its own root filesystem loses the two most commonly used escape paths. It does not remove a kernel vulnerability |
+| Network policies, deny-all default | A (platform configuration) | Defensible architecture, 17.09 percent class average [n]. The mechanism is direct: a compromised DERMS microservice cannot open a connection to the ICCP adapter pod at all |
+| Image signing verification | B (pipeline engineering across the whole build chain) | No benchmark class maps. An unsigned image does not run, which closes the supply chain path of section 7.1 into the cluster. It does nothing against an attacker holding the signing key |
+| etcd encryption at rest | A (platform configuration) | No benchmark class maps. Cluster secrets read from disk or from a backup are ciphertext. It does not protect secrets read through a live API server session |
 
-Combined risk reduction: **95%**. Total investment: **[investment required] million**.
+Band arithmetic: three band A and two band B give AUD 0.3 million to AUD 1.4 million one-off (modelled: band boundary arithmetic, not a quotation). No combined figure is stated; the earlier draft's 95 percent had no source.
 
 ### 7.3 ICCP Protocol Manipulation
 
@@ -1506,193 +1735,189 @@ Compromise of the ICCP Adapter enables forging of grid constraint queries to ADM
 
 **Mitigation Strategy:**
 
-| Mitigation                                             | Cost                  | Risk Reduction |
+| Mitigation | Cost band | Effect |
 | :--- | :--- | :--- |
-| ICCP Protocol Parser for SIEM                          | [investment required] | 80%            |
-| Application-Layer Signing (ADMS signs, DERMS verifies) | [investment required] | 95%            |
-| Data Point Allowlisting                                | [investment required] | 70%            |
-| Redundant Validation (cross-check SCADA telemetry)     | [investment required] | 85%            |
+| ICCP protocol parser for SIEM | B, the band section 9.3 assigns this line in Phase 2 (bespoke engineering, no product to price) | Network visibility and monitoring, 16.47 percent class average [n]. Class average, not this parser's measured effect |
+| Application-layer signing, ADMS signs and DERMS verifies | B (bespoke engineering across two platforms) | No benchmark class maps. Forged constraint data fails verification. It does nothing if the attacker holds the ADMS signing key, which is the supply chain case of section 7.1 |
+| Data point allowlisting | A (configuration on the existing ICCP association) | No benchmark class maps. A data point outside the agreed set is refused, so no new constraint object can be introduced. It does not prevent false values inside the allowed set |
+| Redundant validation, cross-check against SCADA telemetry | B (analytics on an existing SCADA historian, as in section 9.2) | No benchmark class maps. An ICCP constraint that disagrees with independently measured SCADA telemetry is held rather than acted on. This requires the two paths to be genuinely independent, which is not verified for RefDNSP-1.2M anywhere in this paper |
 
-Combined risk reduction: **98%**. Total investment: **[investment required] million**.
+Band arithmetic: one band A and three band B give AUD 0.4 million to AUD 1.7 million one-off (modelled: band boundary arithmetic, not a quotation). No combined figure is stated; the earlier draft's 98 percent had no source.
 
 ### 7.4 Modbus Injection to BESS Controllers
 
 Modbus TCP (port 502) between the Utility Server and BESS controllers operates without encryption, authentication, or integrity checking. A compromised Utility Server can write arbitrary register values to BMS controllers, including overcharge voltage setpoints that initiate thermal runaway.
 
+The register write matters because of what sits downstream of it. [Emerging Power Topologies](/papers/emerging-power-topologies), section 3, follows the thermal runaway cascade from cell to module to container and reaches the conclusion the second mitigation line below records: limit enforcement has to sit beneath the protocol, because a limit the protocol can write is a limit the attacker can write.
+
 **Mitigation Strategy:**
 
-| Mitigation                                      | Cost                  | Risk Reduction |
+| Mitigation | Cost band | Effect |
 | :--- | :--- | :--- |
-| Modbus Security Gateway (Moxa EDR/Fortinet ICS) | [investment required] | 95%            |
-| BMS Firmware Update (voltage limit validation)  | [investment required] | 85%            |
-| Network Segmentation (dedicated VLAN per BESS)  | [investment required] | 75%            |
-| Anomaly Detection (Nozomi/Claroty)              | [investment required] | 80%            |
+| Modbus security gateway, Moxa EDR or Fortinet ICS | C, the band section 9.2 assigns the same control. Every listing found for the named product returns price on request | Defensible architecture, 17.09 percent class average [n]. Class average, not a measured result for register allowlisting |
+| BMS firmware update, voltage limit validation | B, the band section 9.2 assigns the same control | No benchmark class maps. Limit enforcement moves below the protocol, so a write to a setpoint register cannot raise a limit. It does not remove the attacker's access to the register |
+| Network segmentation, dedicated VLAN per BESS | C (54 sites; the wider zero-trust microsegmentation line in section 9.3 sits in band D) | Defensible architecture, 17.09 percent class average [n] |
+| Anomaly detection, Nozomi or Claroty | D, the band section 9.3 assigns OT network monitoring. No vendor in this class publishes a price | Network visibility and monitoring, 16.47 percent class average [n] |
 
-Combined risk reduction: **99%**. Total investment: **[investment required] million**.
+Band arithmetic: the three bounded lines, one band B and two band C, give AUD 1.2 million to AUD 3.1 million one-off (modelled: band boundary arithmetic, not a quotation). The band D line has no upper bound and is excluded, so the real figure is higher by an unknown amount. No combined risk reduction is stated; the earlier draft's 99 percent had no source.
 
 ### 7.5 Consolidated Mitigation Investment
 
-| Attack Vector               | Investment                      | Risk Reduction   | strategic value Basis                             |
+| Attack Vector | Cost bands | Bounded band arithmetic | Benefit basis |
 | :--- | :--- | :--- | :--- |
-| Retailer API Supply Chain   | [investment required]           | 98%              | Avoided [investment required] expected loss x 98% |
-| Kubernetes Container Escape | [investment required]           | 95%              | Avoided loss x 95% x 0.6 probability              |
-| ICCP Protocol Manipulation  | [investment required]           | 98%              | Avoided loss x 98% x 0.5 probability              |
-| Modbus Injection            | [investment required]           | 99%              | Avoided loss x 99% x 0.4 probability              |
-| **Total**             | **[investment required]** | **85-95%** | **Defense-in-depth across all vectors**     |
+| Retailer API supply chain | 3 x A, 1 x B, 1 x C | AUD 0.7 million to AUD 2.2 million | Two of five controls map to a Dragos and Marsh class, at 16.47 and 12.18 percent [n]. Three state a mechanism |
+| Kubernetes container escape | 3 x A, 2 x B | AUD 0.3 million to AUD 1.4 million | Two of five map to defensible architecture, 17.09 percent [n]. Three state a mechanism |
+| ICCP protocol manipulation | 1 x A, 3 x B | AUD 0.4 million to AUD 1.7 million | One of four maps to network visibility and monitoring, 16.47 percent [n]. Three state a mechanism |
+| Modbus injection | 1 x B, 2 x C, 1 x D | AUD 1.2 million to AUD 3.1 million, band D excluded | All four map to a Dragos and Marsh class, at 17.09 or 16.47 percent [n] |
+| **Total, bounded lines only** | 18 controls, of which one is band D and unbounded | **AUD 2.5 million to AUD 8.4 million** | Not aggregable; see below |
+
+Three things about that total. It is band boundary arithmetic against the sourced AUD 1.29 million CIRMP cyber envelope of section 9.1, not a quotation from anyone. It excludes the single band D line, which has no upper bound, so the true figure is higher by an amount this paper cannot state. And the sourced envelope itself is AUD 1.29 million one-off, so the seventeen bounded controls alone cost between about twice and six and a half times what the sector-average regulatory compliance figure covers. That is the same conclusion section 9.3 reaches from the other direction.
+
+No aggregate risk reduction is given, and no per-vector return on investment is given. Dragos and Marsh McLennan state their class figures are not additive and model no combined effect [n], so the columns cannot be summed. A per-vector ratio would also need a per-vector avoided loss, and section 5 computes one avoided loss for the whole cascade rather than four. The programme-level ratio, 4.4:1 to 6.6:1 with a sensitivity envelope of 2.9:1 to 8.8:1, is derived once in section 9.5 and is not restated per vector here.
 
 ---
 
-## 8. Recovery Procedures
+## 8. Operational Procedures
 
-### 8.1 Emergency Response Timeline
+The emergency response timeline, the recovery constraints and the three incident response playbooks that stood here are published separately, as sections 2 through 5 of the [Grid Incident Response Playbook](/papers/grid-incident-response-playbook). That document also carries what were appendices J, K and L of this paper: the attack detection signatures and indicators of compromise, the black start and resilience procedures, and the stakeholder communication and coordination protocols.
 
-```mermaid
-gantt
-    title Grid Restoration Timeline Post-Attack
-    dateFormat HH:mm
-
-    section Emergency Response - T+0 to T+2h
-    AEMO emergency protocols :crit, 00:00, 30m
-    Black start procedures Shoalhaven :crit, 00:30, 120m
-
-    section Damage Assessment - T+1h to T+8h
-    Substation inspections 12 teams parallel : 00:45, 540m
-    Equipment damage evaluation : 01:30, 240m
-    Grid topology reconfiguration : 02:00, 120m
-    Cyber forensics DERMS isolation : 01:00, 360m
-
-    section Phase 1 Restoration - Critical
-    Hospital feeders priority :crit, 02:30, 60m
-    Water infrastructure : 03:00, 120m
-    Emergency services : 03:30, 60m
-
-    section Phase 2 Restoration - Essential
-    Telecommunications : 04:30, 120m
-    Data centres : 05:00, 120m
-    Commercial areas : 06:00, 240m
-
-    section Phase 3 Restoration - General
-    Residential zones sequential : 08:00, 960m
-    Industrial areas : 10:00, 720m
-
-    section Phase 4 Normalization
-    Full grid stability verification : 24:00, 240m
-    Post-incident forensic analysis : 28:00, 480m
-```
-
-### 8.2 Key Recovery Constraints
-
-Five constraints govern the pace of restoration:
-
-1. **Black Start Capability:** Limited to 3 hydroelectric units at Shoalhaven Scheme, requiring 2 hours for initiation.
-2. **Manual Inspection Requirement:** 54 substations require physical inspection before re-energization. Sequential inspection takes 108 hours; deploying 12 parallel inspection teams reduces this to 9 hours.
-3. **Thermal Cycling Limits:** Transformers that have been thermally stressed cannot be re-energized immediately. A 4-8 hour cooling wait period is required.
-4. **Sequential Restoration Limit:** A maximum of 3 substations can be re-energized simultaneously to prevent re-collapse from inrush current.
-5. **Equipment Damage Probability:** 5-15% chance of transformer or switchgear damage requiring replacement. Emergency procurement: implementation period required via air freight (versus implementation period required normal lead time).
-
-### 8.3 Incident Response Playbooks
-
-Three playbooks address the primary attack scenarios:
-
-**DERMS/API Compromise Playbook:**
-
-- Detection signatures: API request volume exceeding 5 times baseline, mass device command to more than 100 devices in single call, rapid repeated commands at intervals under 15 seconds
-- Immediate actions: Revoke OAuth token, enable API emergency read-only mode, isolate DERMS pods via Kubernetes network policy deny-all
-- Containment: Audit all dispatch commands in the preceding 48 hours, cross-check against SCADA telemetry, manually disconnect any BESS in unsafe state
-- Eradication: Forensic imaging of DERMS pods, rebuild from clean signed container images, rotate all credentials
-
-**BESS Thermal Runaway Playbook:**
-
-- Detection signatures: BMS alarm at cell temperature above 60 degrees Celsius, cell voltage above 4.3 V, fire suppression system activation
-- Immediate actions: Emergency shutdown (open contactor), activate fire suppression, evacuate all personnel within 500 metres, call Fire and Rescue NSW HAZMAT
-- Containment: Cool adjacent containers with water spray, establish toxic gas exclusion zone, begin environmental monitoring
-- Recovery: Allow battery to self-extinguish over 4-12 hours (cannot be forcibly extinguished), 48-hour cooling before approach, EPA-licensed hazardous waste removal
-
-**Kubernetes Container Escape Playbook:**
-
-- Detection signatures: Container runtime alert for privilege escalation, unusual process execution (shell spawned in pod), host filesystem access from container
-- Immediate actions: Drain workloads from compromised OpenShift node, force delete compromised pod, network isolation via deny-all egress
-- Eradication: Rebuild node from golden image, re-deploy pods from clean signed images, audit all pod security and network policies
+Nothing was shortened in the move. The split is by audience. A responder needs the run-books without the physics; a reviewer needs the physics without the run-books. Every threshold, cost band and figure in the playbook is derived in this paper, and this paper stays the source of record for all of them.
 
 ---
 
 ## 9. Strategic Recommendations
 
-### 9.1 Priority Action Items (Immediate - targeted timeframe)
+This section prices two things: what each recommended control costs, and what it buys. Both are weakly sourced. That is stated in the cells themselves rather than buried in a footnote, because a cost-benefit table with one sourced column and one invented column is worse than no table.
 
-The following actions provide maximum risk reduction for minimum investment and can be implemented within targeted timeframe without major architectural changes:
+### 9.1 Cost and Benefit Basis
 
-**Priority 1: Death Wobble Oscillation Detection (implementation period)**
+**Cost anchor.** The only regulator-quality Australian per-entity figure located is the Australian Government's October 2024 Impact Analysis for amendments to the Security of Critical Infrastructure Act 2018 [n]. Table 19 of that document, indexed to June 2024 dollars, puts the average cost of a Critical Infrastructure Risk Management Program at AUD 9.2 million one-off and AUD 4.3 million per year for a critical electricity asset entity. That is a whole-of-hazard figure. It covers cyber and information security hazard, personnel hazard, supply chain hazard, physical and natural hazard, and material risk together. Table 27 of the same document puts cyber and information security hazard at 14 percent of the electricity sector's ten-year regulatory burden estimate.
 
-| Action                                     | Technical Implementation                                                                                                                                                | Cost                  | Risk Reduction                                    | Timeline              |
+Scaling the electricity row by that share gives the cyber component:
+
+- One-off: 9.2 multiplied by 0.14 gives AUD 1.29 million
+- Ongoing: 4.3 multiplied by 0.14 gives AUD 0.60 million per year
+- Ten-year total: 1.29 plus 10 multiplied by 0.60 gives AUD 7.3 million
+
+Read that figure for what it is. It is a sector-average regulatory compliance cost for the cyber and information security hazard component of a CIRMP obligation, averaged across multiple electricity entities. It is not a bespoke security programme budget, it is not a figure for any named distribution business, and it is not RefDNSP-1.2M's own number.
+
+No AER-approved dollar figure for cyber security capital expenditure inside a named Australian distribution determination was retrieved. What is confirmed is structural: the AER's 2024-29 final revenue decisions for six network businesses name "cyber security and digitalisation measures" as a considered expenditure category, and Ausgrid's own account of its approved plan states it "reduced our cyber security program through efficiency savings" [n]. Cyber security is a real, reviewed, approvable line item in an Australian distribution determination. Its size is not public.
+
+**Cost bands.** Twelve control classes recommended in this section have no public cost anchor of any kind: DERMS security hardening, Modbus security gateway hardware, IEC 62351-6 GOOSE authentication, protection relay setting review, OT intrusion detection and network monitoring platform licensing, supply chain risk management programmes, zero-trust microsegmentation, OT asset discovery tooling, NERC-CIP equivalence programmes, AESCSF uplift, Australian OT cyber insurance premiums, and the AER's cyber security dollar split. Vendors quote per deployment and publish nothing. Every price found was "price on request".
+
+Rather than invent a number, each control below carries an ordinal band measured against the sourced CIRMP cyber envelope:
+
+| Band | Definition against the AUD 1.29 million one-off cyber envelope | Indicative one-off |
+| :--- | :--- | :--- |
+| A | Under 10 percent of the envelope | Under AUD 0.13 million |
+| B | 10 to 40 percent of the envelope | AUD 0.13 million to AUD 0.52 million |
+| C | 40 to 100 percent of the envelope | AUD 0.52 million to AUD 1.29 million |
+| D | Exceeds the envelope on its own; needs a separate funding determination | Above AUD 1.29 million |
+| R | Recurring; priced per year against the AUD 0.60 million per year ongoing envelope | Stated per year |
+
+Band assignment is the working group's engineering judgement about relative cost. It is not a quotation, a market price, or a vendor estimate. It ranks the controls against each other and against a sourced regulatory envelope. It does not price them. Any band arithmetic below is arithmetic on modelled bands and is labelled as such.
+
+**Benefit anchor.** The only published measurement of OT control effectiveness located is the Dragos and Marsh McLennan 2025 OT Security Financial Risk Report, built from a decade of insurance claims and information security event data [n]. It maps five controls, aligned to the SANS ICS 5 Critical Controls, to measured average risk reduction:
+
+| Control class | Average risk reduction |
+| :--- | :--- |
+| Incident response plan | 18.46 percent |
+| Defensible architecture | 17.09 percent |
+| Network visibility and monitoring | 16.47 percent |
+| Risk-based vulnerability management | 13.87 percent |
+| Secure remote access | 12.18 percent |
+
+Three limits on those figures, all from the report itself. They are class averages across a global, all-sector claims population, not the measured effect of any specific product at any specific site. They are explicitly not additive, and the report does not model a combined effect. The provenance is a security vendor and an insurance broker working from proprietary claims data that cannot be independently audited.
+
+An earlier draft of this section assigned individual controls risk reductions of 40, 60, 65, 70, 80, 85, 90, 95 and 98 percent, none of them cited. Those figures are roughly five times the only published benchmark and they are removed. Where a control maps onto a Dragos and Marsh class, the class figure is cited and the mapping is stated. Where no class maps, the benefit is stated as a mechanism rather than a number. A mechanism a reader can check beats a percentage a reader cannot.
+
+### 9.2 Priority Action Items
+
+The three groups below change risk without redesigning the network architecture.
+
+**Priority 1: oscillation detection and command validation**
+
+| Action | Technical implementation | Cost band | Effect | Timeline |
 | :--- | :--- | :--- | :--- | :--- |
-| **API Behavioral Analytics**         | Deploy machine learning anomaly detection on DERMS API traffic to identify oscillation patterns (>5 charge/discharge commands per asset within 10 minutes)              | [investment required] | 70% reduction in oscillation attack success       | implementation period |
-| **Physics-Based Command Validation** | Implement grid frequency and RoCoF telemetry integration into DERMS dispatch validation (reject commands if system inertia <2.5 seconds OR frequency deviation >0.1 Hz) | [investment required] | 85% reduction in grid-destabilizing commands      | implementation period |
-| **BESS Command Rate Limiting**       | Enforce 5-minute minimum interval between charge/discharge state changes per asset (prevents rapid oscillation)                                                         | [investment required] | 60% reduction in oscillation attack effectiveness | implementation period |
+| **API behavioural analytics** | Anomaly detection on DERMS API traffic to identify oscillation patterns, more than 5 charge or discharge commands per asset within 10 minutes | C (no vendor price published; see 9.1) | Network visibility and monitoring. Dragos and Marsh McLennan measure 16.47 percent average risk reduction for this control class [n]. Class average, not this control's measured effect | Implementation period |
+| **Physics-based command validation** | Grid frequency and RoCoF telemetry integrated into DERMS dispatch validation; reject commands when system inertia is below 2.5 seconds or frequency deviation exceeds 0.1 Hz | C (no public cost anchor for DERMS hardening) | No benchmark class maps to this control, so no percentage is stated. The control removes the operating window the oscillation attack of section 2.2 depends on, by refusing dispatch in exactly the low-inertia conditions the attack needs | Implementation period |
+| **BESS command rate limiting** | Enforce a 5-minute minimum interval between charge and discharge state changes per asset | A (configuration and vendor engineering) | No benchmark class maps. A 5-minute minimum caps the achievable oscillation at one full cycle per 600 seconds, 0.0017 Hz. Section 2.1.2 puts the attack band at 0.5 to 0.55 Hz, roughly 300 times faster. The control moves the attack outside the resonance band rather than lowering its probability | Implementation period |
 
-**Total Priority 1 Investment: [investment required]**
-**Cumulative Risk Reduction: 95% (defense-in-depth across three controls)**
+Priority 1 band arithmetic: bands A plus C plus C. Summing the band boundaries gives AUD 1.0 million to AUD 2.7 million one-off (modelled: band boundary arithmetic, not a quotation). At the top of that range these three controls alone cost about twice the whole sourced CIRMP cyber one-off envelope of AUD 1.29 million.
 
-**Priority 2: Thermal Runaway Prevention (implementation period)**
+**Combined effect: not stated as a number.** Dragos and Marsh McLennan state their per-control figures are not additive and their report does not model a combined effect [n]. Three controls measured at 12 to 18 percent each do not compound to the 95 percent the earlier draft claimed, and that 95 percent had no source.
 
-| Action                                    | Technical Implementation                                                                                                                                              | Cost                  | Risk Reduction                                          | Timeline              |
+**Priority 2: thermal runaway prevention**
+
+| Action | Technical implementation | Cost band | Effect | Timeline |
 | :--- | :--- | :--- | :--- | :--- |
-| **Modbus Security Gateway (Pilot)** | Deploy Modbus firewall at 5 critical BESS sites (Moxa EDR-G903 or Fortinet ICS) with register allowlisting (block writes to thermal setpoint registers 0x1000-0x1003) | [investment required] | 95% reduction in Modbus injection attacks               | implementation period |
-| **BMS Firmware Hardening**          | Update battery management system firmware to enforce voltage/thermal limit validation at firmware level (cannot be overridden via Modbus)                             | [investment required] | 85% reduction in thermal runaway initiation             | implementation period |
-| **Enhanced Fire Suppression**       | Upgrade fire suppression at 10 highest-capacity sites (replace FM-200 with water deluge + thermal barrier systems)                                                    | [investment required] | 40% reduction in fire spread (cell-to-cell propagation) | implementation period |
+| **Modbus security gateway pilot** | Modbus firewall at 5 critical BESS sites with register allowlisting, blocking writes to thermal setpoint registers 0x1000 to 0x1003 | C (the Moxa EDR-G903 named in an earlier draft was confirmed to exist and to carry IEC 62443-aligned features, but every listing found returns price on request, and no per-site installation cost was found anywhere) | Defensible architecture. Dragos and Marsh McLennan measure 17.09 percent average risk reduction for this class [n]. Class average, not a measured result for register allowlisting | Implementation period |
+| **BMS firmware hardening** | Enforce voltage and thermal limit validation in battery management system firmware, below the Modbus interface | B (vendor firmware engineering and fleet rollout) | No benchmark class maps. The control moves limit enforcement below the protocol, so a write to a setpoint register cannot raise a limit. It closes the register-write path of section 2.4.1. It does not remove the attacker's access to the register | Implementation period |
+| **Enhanced fire suppression** | Upgrade suppression at the 10 highest-capacity sites, replacing FM-200 with water deluge and thermal barriers | D (physical plant at 10 sites; exceeds the annual cyber envelope on its own) | Outside the scope of every cyber control benchmark located. The control limits cell-to-cell propagation once runaway has started. No sourced propagation reduction figure exists for either the existing or the replacement system, and none is stated | Implementation period |
 
-**Total Priority 2 Investment: [investment required]**
-**Cumulative Risk Reduction: 99% (attack initiation) + 40% (propagation mitigation)**
+**Combined effect:** the first two controls address attack initiation and the third addresses consequence once initiation has succeeded. They are not commensurable and are not combined into a single figure. The earlier draft's "99 percent attack initiation plus 40 percent propagation" had no source for either term.
 
-**Priority 3: Multi-Substation Attack Detection (implementation period)**
+**Priority 3: multi-substation attack detection**
 
-| Action                                             | Technical Implementation                                                                                                                                                  | Cost                  | Risk Reduction                               | Timeline              |
+| Action | Technical implementation | Cost band | Effect | Timeline |
 | :--- | :--- | :--- | :--- | :--- |
-| **OT Protocol Deep Packet Inspection**       | Deploy ICS-aware firewall with DNP3/Modbus/GOOSE protocol parsing at critical zone boundaries (Fortinet FortiGate ICS or Palo Alto PA-7000 with ICS license)              | [investment required] | 80% detection rate for protocol exploitation | implementation period |
-| **Coordinated Protection Anomaly Detection** | Implement SCADA analytics to detect simultaneous protection operations across >10 substations within 60-second window (statistical impossibility under normal conditions) | [investment required] | 90% detection rate for coordinated attacks   | implementation period |
-| **GOOSE Message Authentication**             | Deploy IEC 62351-6 authentication at 15 critical substations (MACsec-based GOOSE signing)                                                                                 | [investment required] | 98% prevention of GOOSE injection attacks    | implementation period |
+| **OT protocol deep packet inspection** | ICS-aware firewall with DNP3, Modbus and GOOSE protocol parsing at critical zone boundaries | D (platform licensing across all zone boundaries; every OT monitoring vendor keeps pricing confidential) | Network visibility and monitoring, 16.47 percent class average [n]. The earlier draft claimed an 80 percent detection rate. No detection rate was sourced, and a detection rate is a different quantity from a risk reduction in any case | Implementation period |
+| **Coordinated protection anomaly detection** | SCADA analytics detecting simultaneous protection operations across more than 10 substations inside a 60-second window | B (analytics on an existing SCADA historian) | No benchmark class maps. The control fires on a pattern with no benign explanation: independent protection operations at more than 10 sites inside 60 seconds are not produced by uncorrelated faults. No false-positive rate has been measured for this network, so no detection figure is stated | Implementation period |
+| **GOOSE message authentication** | IEC 62351-6 authentication at 15 critical substations, MACsec-based GOOSE signing | D (no public cost anchor exists for a GOOSE authentication or MACsec retrofit at any scale) | No benchmark class maps. Authenticated GOOSE frames cannot be forged by an attacker who does not hold the key. The control does nothing against an attacker who does hold one, which is the supply chain case of section 7.1 | Implementation period |
 
-**Total Priority 3 Investment: [investment required]**
-**Cumulative Risk Reduction: 99% (with defense-in-depth)**
+**Combined effect:** not stated. The earlier draft's 99 percent had no source.
 
-**Total Immediate Actions Investment: [investment required]**
+**Whole of immediate actions:** nine controls, one in band A, two in band B, three in band C and three in band D. The six bounded controls sum to AUD 1.8 million to AUD 5.0 million one-off (modelled: band boundary arithmetic, not a quotation). The three band D controls have no upper bound and are excluded from that sum, so the real total is higher by an unknown amount. The sourced CIRMP cyber one-off envelope is AUD 1.29 million. The immediate action list therefore costs several times what the sector-average regulatory compliance figure covers. That is the honest reading and it is stated here rather than smoothed over.
+### 9.3 Investment Roadmap
 
-### 9.2 Investment Roadmap
+Costs below use the band scheme of section 9.1. No line carries a dollar figure that was not derived from a cited source, and the two lines that do carry dollars carry them in the currency of the source, not converted.
 
-**Phase 1 ; Immediate (targeted timeframe): [investment required] million**
+**Phase 1: immediate**
 
-| Action                                     | Cost                       | Timeline                       | Risk Addressed         |
+| Action | Cost band | Timeline | Risk addressed |
 | :--- | :--- | :--- | :--- |
-| API Behavioral Analytics and Rate Limiting | [investment required]      | implementation period required | Mass command injection |
-| Modbus Security Gateway Pilot (5 sites)    | [investment required]      | implementation period required | BESS protocol attacks  |
-| Container Runtime Security                 | [investment required]      | implementation period required | Kubernetes escape      |
-| 24/7 OT SOC Establishment (8 analysts)     | [investment required]/year | implementation period required | All vectors            |
-| OT Incident Response Retainer (Dragos)     | [investment required]/year | implementation period          | Response capability    |
+| API behavioural analytics and rate limiting | C | Implementation period | Mass command injection |
+| Modbus security gateway pilot, 5 sites | C | Implementation period | BESS protocol attacks |
+| Container runtime security | B | Implementation period | Kubernetes escape |
+| 24/7 OT SOC establishment, 8 analysts | R, and see the note below | Implementation period | All vectors |
+| OT incident response retainer | R (no public retainer price found for any OT incident response vendor) | Implementation period | Response capability |
 
-**Phase 2 ; Short-Term (implementation period required): [investment required] million**
+**The SOC line is the one place a real annual figure exists, and it does not fit the envelope.** A general enterprise 24/7 SOC of 8 to 12 people costs USD 1.07 million to USD 1.59 million per year in loaded personnel cost, with salary bands anchored to the US Bureau of Labor Statistics wage series for information security analysts and a 1.28 multiplier for payroll tax and benefits [n]. A separate vendor estimate puts a competent 24x7 SOC above USD 1 million per year for a basic operation and at USD 2 million to USD 3 million per year for an advanced one, with technology adding a further USD 0.5 million to USD 1 million per year [n]. Turnover of 20 to 30 percent per year adds USD 80,000 to USD 160,000 per year in replacement cost for an 8-person team [n].
 
-| Action                                     | Cost                  | Timeline                       | Risk Addressed              |
+Three caveats, and all three matter. The figures are in US dollars and no exchange rate is sourced here, so they cannot be added to any AUD figure in this paper. They describe a general enterprise SOC watching IT telemetry, not an OT SOC: protocol-aware network monitoring, OT asset inventory and engineering workstation telemetry are additional to this baseline, not included in it. And they are vendor and benchmark-site content, not a regulator's figure.
+
+Taken at parity, and parity is used only to make the comparison possible rather than as a rate, the personnel floor alone of USD 1.07 million per year exceeds the entire AUD 0.60 million per year cyber and information security component of the sector-average CIRMP from section 9.1. A dedicated 24/7 OT SOC is not fundable inside the sector-average regulatory compliance budget. It needs its own determination.
+
+**Phase 2: short term**
+
+| Action | Cost band | Timeline | Risk addressed |
 | :--- | :--- | :--- | :--- |
-| ICS-Aware Firewalls (all zone boundaries)  | [investment required] | implementation period required | Protocol exploitation       |
-| ICCP Protocol Parser Development           | [investment required] | implementation period required | ADMS integration attacks    |
-| Physics-Based Dispatch Validation          | [investment required] | implementation period required | Grid-destabilizing commands |
-| Behavioral Analytics Platform (UEBA + NDR) | [investment required] | implementation period required | Anomalous patterns          |
-| Supply Chain Risk Management Program       | [investment required] | implementation period required | Vendor compromise           |
-| Zero-Trust Microsegmentation               | [investment required] | implementation period required | Lateral movement            |
+| ICS-aware firewalls at all zone boundaries | D (no public OT firewall platform pricing; every vendor quotes per deployment) | Implementation period | Protocol exploitation |
+| ICCP protocol parser development | B (bespoke engineering, no product to price) | Implementation period | ADMS integration attacks |
+| Physics-based dispatch validation | C (no public cost anchor for DERMS hardening) | Implementation period | Grid-destabilizing commands |
+| Behavioural analytics platform, UEBA and NDR | D (no public OT network monitoring platform pricing) | Implementation period | Anomalous patterns |
+| Supply chain risk management programme | C (no public cost anchor for an electricity-sector supply chain programme) | Implementation period | Vendor compromise |
+| Zero-trust microsegmentation | D (no public cost anchor in an ICS context) | Implementation period | Lateral movement |
 
-**Phase 3 ; Ongoing: [investment required] million per year**
+Phase 2 is the expensive phase and the least anchored. Four of its six lines sit in bands C and D against an envelope of AUD 1.29 million, and three of the six have no public price of any kind. A drafter with access to vendor quotations should replace this table with quoted figures before it goes to a board.
+
+**Phase 3: ongoing**
+
+Band R throughout. No public price was found for any line.
 
 - Continuous monitoring and threat hunting
 - Quarterly OT penetration testing
-- Annual red team exercises (cyber-physical scenarios)
-- Threat intelligence integration (ICS-CERT feeds)
+- Annual red team exercises on cyber-physical scenarios
+- Threat intelligence integration from ICS-CERT feeds
 - Security awareness training for operations staff
+
+The ongoing cyber and information security component of the sector-average CIRMP is AUD 0.60 million per year (section 9.1). The five lines above plus the SOC and the incident response retainer of Phase 1 are all recurring. On the only annual figure available, the SOC alone consumes more than that envelope.
 
 **Phase 2 Technical Detail:**
 
 ```mermaid
 graph TB
-    subgraph "Defense-in-Depth Architecture (18-Month Implementation)"
+    subgraph "Defense-in-Depth Architecture (Phase 2)"
         L1[Layer 1: Perimeter Security]
         L2[Layer 2: Network Segmentation]
         L3[Layer 3: Protocol Security]
@@ -1751,33 +1976,33 @@ graph LR
     style E fill:#457b9d,stroke:#1d3557,color:#fff
 ```
 
-**Total 24-Month Investment: [investment required] million (midpoint)**
+**Programme total.** No total is stated as a single number, because eight of the eleven lines above have no public price and three of them cannot be bounded above at all. What can be stated is the band arithmetic. The eight bounded one-off lines across Phase 1 and Phase 2, two in band B and four in band C plus the two Phase 1 recurring lines held aside, sum to AUD 2.3 million to AUD 6.2 million (modelled: band boundary arithmetic against the AUD 1.29 million CIRMP cyber envelope, not a quotation). The three band D lines in Phase 2, ICS-aware firewalls at all zone boundaries, the behavioural analytics platform and zero-trust microsegmentation, each exceed that envelope on their own and are excluded from the sum. The true total is above AUD 6.2 million by an amount this paper cannot bound.
 
-### 9.2 Risk Mitigation Decision Tree
+### 9.4 Risk Mitigation Decision Tree
 
-The following decision tree guides investment prioritization based on attack likelihood and consequence:
+The tree below orders the controls of section 9.2 by the network conditions that make each one urgent. Cost bands are those of section 9.1. The tree ranks; it does not price.
 
 ```mermaid
 graph TB
     Start[Cascading Failure Risk Assessment]
     Start --> Q1{Current Grid Inertia <br/>Regularly <3.0 seconds?}
 
-    Q1 -->|Yes| Critical1[CRITICAL PRIORITY:<br/>Death Wobble Oscillation Detection<br/>Investment: [investment required]<br/>Timeline: targeted timeframe]
+    Q1 -->|Yes| Critical1[CRITICAL PRIORITY:<br/>Death Wobble Oscillation Detection<br/>Cost band C<br/>Timeline: targeted timeframe]
     Q1 -->|No| Q2{BESS Fleet >100 MW<br/>Deployed?}
 
     Q2 -->|Yes| Q3{Modbus TCP Encrypted?}
     Q2 -->|No| Medium1[MEDIUM PRIORITY:<br/>Monitor BESS deployment pace<br/>Implement before 100 MW threshold]
 
-    Q3 -->|No| Critical2[CRITICAL PRIORITY:<br/>Modbus Security Gateway<br/>Investment: [investment required]<br/>Timeline: implementation period]
+    Q3 -->|No| Critical2[CRITICAL PRIORITY:<br/>Modbus Security Gateway<br/>Cost band C<br/>Timeline: targeted timeframe]
     Q3 -->|Yes| Q4{BMS Firmware Validates<br/>Thermal Limits?}
 
-    Q4 -->|No| High1[HIGH PRIORITY:<br/>BMS Firmware Hardening<br/>Investment: [investment required]<br/>Timeline: implementation period]
+    Q4 -->|No| High1[HIGH PRIORITY:<br/>BMS Firmware Hardening<br/>Cost band B<br/>Timeline: targeted timeframe]
     Q4 -->|Yes| Q5{IEC 61850 GOOSE<br/>Authenticated?}
 
     Q5 -->|No| Q6{>50 Substations<br/>Using GOOSE?}
     Q5 -->|Yes| Low1[LOW PRIORITY:<br/>Maintain current controls]
 
-    Q6 -->|Yes| Critical3[CRITICAL PRIORITY:<br/>IEC 62351-6 Implementation<br/>Investment: [investment required]<br/>Timeline: implementation period]
+    Q6 -->|Yes| Critical3[CRITICAL PRIORITY:<br/>IEC 62351-6 Implementation<br/>Cost band D<br/>Timeline: targeted timeframe]
     Q6 -->|No| Medium2[MEDIUM PRIORITY:<br/>Plan for future deployment]
 
     Critical1 --> Implementation[Execute<br/>Implementation Roadmap]
@@ -1788,7 +2013,7 @@ graph TB
     Implementation --> Validation[Penetration Testing<br/>+ Red Team Validation]
     Validation --> Q7{Controls Effective?}
 
-    Q7 -->|Yes| Success[Risk Reduction:<br/>90-95%<br/>Continuous Monitoring]
+    Q7 -->|Yes| Success[Benchmark risk reduction:<br/>12 to 18 percent per control class<br/>Dragos and Marsh McLennan 2025<br/>Continuous Monitoring]
     Q7 -->|No| Remediation[Gap Remediation<br/>+ Control Tuning]
     Remediation --> Validation
 
@@ -1799,108 +2024,179 @@ graph TB
     style Success fill:#2ed573,stroke:#009432,color:#000
 ```
 
-**Decision Tree Application - ACME Inc. Current State:**
+The terminal node of the tree used to read "Risk Reduction: 90-95%". That figure had no source. It now carries the only published benchmark located, 12 to 18 percent average risk reduction per control class, from the Dragos and Marsh McLennan 2025 OT Security Financial Risk Report [n]. The report states those figures are not additive, so passing through several branches of the tree does not compound them.
 
-Based on EE-CTI-002, EE-CTI-003, and EE-CTI-007 findings:
+**Decision tree applied to RefDNSP-1.2M.**
+
+The answers below are the reference network's stipulated state from section 2 and the internal assessments EE-CTI-002, EE-CTI-003 and EE-CTI-007. They are the working group's own scenario parameters, not measured properties of any real network.
 
 ```
-Q1: Current Grid Inertia Regularly <3.0 seconds?
-    Answer: YES (AEMO data: 15-20% of operational hours below 3.0s)
-    Result: CRITICAL PRIORITY - Death Wobble Oscillation Detection
+Q1: Grid inertia regularly below 3.0 seconds?
+    Answer: YES (15 to 20 percent of operational hours below 3.0 s)
+    Result: CRITICAL - Death Wobble oscillation detection, cost band C
 
-Q2: BESS Fleet >100 MW Deployed?
+Q2: BESS fleet above 100 MW deployed?
     Answer: YES (270 MW across 54 sites, operational and planned)
-    Result: Continue to Q3
+    Result: continue to Q3
 
-Q3: Modbus TCP Encrypted?
+Q3: Modbus TCP encrypted?
     Answer: NO (plaintext confirmed in EE-CTI-002, CVSS 9.1)
-    Result: CRITICAL PRIORITY - Modbus Security Gateway
+    Result: CRITICAL - Modbus security gateway, cost band C
 
-Q5: IEC 61850 GOOSE Authenticated?
+Q5: IEC 61850 GOOSE authenticated?
     Answer: NO (no IEC 62351-6 deployment, per EE-CTI-003)
-    Result: Continue to Q6
+    Result: continue to Q6
 
-Q6: >50 Substations Using GOOSE?
+Q6: More than 50 substations using GOOSE?
     Answer: YES (10,000+ IEDs across 185 major substations)
-    Result: CRITICAL PRIORITY - IEC 62351-6 Implementation
+    Result: CRITICAL - IEC 62351-6 implementation, cost band D
 
-Final Investment Requirements:
-- Death Wobble Detection: [investment required] (targeted timeframe)
-- Modbus Security Gateway: [investment required] (implementation period)
-- BMS Firmware Hardening: [investment required] (implementation period)
-- IEC 62351-6 GOOSE Authentication: [investment required] (implementation period)
+Critical path, by cost band:
+- Death Wobble detection:            band C   (AUD 0.52m to AUD 1.29m)
+- Modbus security gateway:           band C   (AUD 0.52m to AUD 1.29m)
+- BMS firmware hardening:            band B   (AUD 0.13m to AUD 0.52m)
+- IEC 62351-6 GOOSE authentication:  band D   (above AUD 1.29m, no upper bound)
 
-Total Critical Path: [investment required] (minimum viable defense)
+Bounded lines sum to AUD 1.17m to AUD 3.10m one-off (modelled: band
+boundary arithmetic against the AUD 1.29m CIRMP cyber envelope of
+section 9.1, not a quotation). The GOOSE authentication line has no
+public cost anchor at any scale and is excluded from that sum, so the
+minimum viable defence costs more than AUD 3.10m by an unbounded amount.
 ```
 
-### 9.3 Return on Investment
+### 9.5 Return on Investment
+
+An earlier draft of this section reported ratios of 30.8:1 and 43.9:1, the second annotated as 4,390 percent. Both were computed from inputs that no longer appear anywhere in the text, so neither could be checked, and both rested on an uncited 90 percent risk reduction. They are removed. What follows is built from three sourced inputs and one formula, and every step is shown so a reader can contest it.
+
+One label correction before the arithmetic. What follows is a benefit to cost ratio, not a Return on Security Investment. [Annualised Loss Expectancy and Return on Security Investment for OT](/papers/ale-rosi-decision-framework), section 3.3, defines ROSI as the avoided loss net of the control cost, divided by the control cost, so the 4.4:1 below corresponds to a ROSI of about 341 percent and the 6.6:1 to about 560 percent. Those two percentages are stated once, here, and are used nowhere else, because a ratio a board can check against a cost is more useful to it than a percentage it cannot.
+
+**Input 1: programme cost, AUD 7.3 million over ten years.**
+
+From the Australian Government's October 2024 Impact Analysis for amendments to the SOCI Act 2018, Table 19, indexed to June 2024 dollars: a critical electricity asset entity carries an average Critical Infrastructure Risk Management Program cost of AUD 9.2 million one-off and AUD 4.3 million per year [n]. Table 27 of the same document puts cyber and information security hazard at 14 percent of the electricity sector's ten-year regulatory burden [n]. Scaling:
 
 ```
-Avoided Loss (10-year NPV):     [investment required] (risk-adjusted expected loss)
-Investment:                      [investment required] (24-month program, midpoint)
-Risk Reduction:                  90% (defense-in-depth)
-Net Benefit:                     [investment required] x 90% - [investment required] = [investment required]
-strategic value:                             [investment required] / [investment required] = 30.8:1
-
-Full scenario strategic value (including tail risk):
-  Avoided Loss:                  [investment required] (including high-impact scenarios)
-  Risk Reduction:                90%
-  Net Benefit:                   [investment required] x 90% - [investment required] = [investment required]
-  strategic value:                           [investment required] / [investment required] = 43.9:1 (4,390%)
+One-off cyber component   = 9.2  x 0.14 = AUD 1.29 million
+Annual cyber component    = 4.3  x 0.14 = AUD 0.60 million per year
+Ten-year programme cost   = 1.29 + (10 x 0.60) = AUD 7.3 million
 ```
 
-The [investment required] million investment represents 0.375% of ACME Inc.'s [investment required] billion regulated asset base.
+This figure covers the cyber and information security hazard component of a CIRMP obligation, as a sector average across critical electricity asset entities. It is not the cost of a bespoke security programme, and it does not cover the band D controls of section 9.2 and section 9.3, which exceed it individually. Using it as the programme cost is a deliberately favourable assumption toward the programme, and the ratios below are correspondingly optimistic.
 
-### 9.4 Quick Wins: Immediate Actions ([investment required], targeted timeframe)
+**Input 2: avoided loss, AUD 268 million.**
 
-The following actions provide immediate risk reduction with minimal cost and can be implemented through policy changes and configuration updates:
+Section 5.9 gives the risk-adjusted expected loss over a 10-year horizon as AUD 179 million to AUD 358 million, midpoint AUD 268 million. That range is the paper's own 15 to 30 percent attack probability applied to the AUD 1.19 billion reference case, which is the full network at 12 hours, the longest duration the AER's VCR determination covers. The probability is the working group's assessment and carries no citation. The AUD 1.19 billion is computed from the AER's determined VCR and is the largest direct customer cost this paper can state without extrapolating that determination.
 
-**Quick Win 1: API Dual Authorization Policy**
+**Input 3: risk reduction, 12 to 18 percent.**
 
-| Action                                                                                        | Implementation                                                                                                                                | Cost                                                      | Risk Reduction                                                      | Timeline              |
-| :--- | :--- | :--- | :--- | :--- |
-| Enforce dual authorization for dispatch commands >10 MW                                       | Modify DERMS API authorization logic to require second OAuth token approval for bulk commands or commands affecting >10 MW aggregate capacity | [investment required] (configuration change)              | 85% reduction in single-credential compromise impact                | implementation period |
-| Implementation: Update mPrest DERMS configuration file to enable "dual_auth_threshold_MW": 10 | Example: Retailer A requests 54 BESS discharge → System prompts ACME Inc. control room operator for approval                                 | Operational impact: 30-60 second delay for large commands | User acceptance: HIGH (operators already approve critical commands) |                       |
+Dragos and Marsh McLennan measure average risk reduction per OT control class at 12.18 to 18.46 percent across a decade of insurance claims [n]. Their five classes are not additive and the report models no combined effect, so no defence-in-depth multiplier is applied here. The band is used directly.
 
-**Quick Win 2: BESS State-Change Rate Limiting**
+**Result.**
 
-| Action                                                                                                                                                              | Implementation                                                                                                    | Cost                                                                             | Risk Reduction                                     | Timeline              |
-| :--- | :--- | :--- | :--- | :--- |
-| Enforce 5-minute minimum interval between charge/discharge state changes                                                                                            | Modify SwitchDin Utility Server to track last command timestamp per asset, reject commands within 5-minute window | [investment required] (vendor engineering support)                               | 60% reduction in oscillation attack effectiveness  | implementation period |
-| Technical validation: Battery inverters require 30-90 seconds for state transition (charge → discharge), so 5-minute minimum does not impact legitimate operations | Example: BESS receives "charge" command at 13:00:00, subsequent "discharge" command rejected until 13:05:00       | Operational impact: None (normal operations use 15-30 minute dispatch intervals) | User acceptance: HIGH (no impact on grid services) |                       |
+```
+At 12 percent risk reduction:
+  Avoided loss    = 268 x 0.12  = AUD 32.2 million
+  Programme cost  =               AUD 7.3 million
+  Net benefit     = 32.2 - 7.3  = AUD 24.9 million
+  Ratio           = 32.2 / 7.3  = 4.4 : 1
 
-**Quick Win 3: Oscillation Pattern Detection (Basic)**
+At 18 percent risk reduction:
+  Avoided loss    = 268 x 0.18  = AUD 48.2 million
+  Programme cost  =               AUD 7.3 million
+  Net benefit     = 48.2 - 7.3  = AUD 40.9 million
+  Ratio           = 48.2 / 7.3  = 6.6 : 1
 
-| Action                                                                              | Implementation                                                                                     | Cost                                            | Risk Reduction                                                                                                             | Timeline                                                     |
-| :--- | :--- | :--- | :--- | :--- |
-| Deploy SIEM correlation rule to detect >5 state changes per asset within 30 minutes | Configure existing Splunk SIEM to parse DERMS API logs and alert on rapid charge/discharge cycling | [investment required] (existing platform)       | 70% reduction in undetected oscillation attacks                                                                            | implementation period                                        |
-| Alert logic: `index=derms sourcetype=api_commands                                   | stats count by asset_id, command_type                                                              | where count > 5 AND time_window < 1800 seconds` | Example output: "ALERT: BESS_Bawley_001 received 8 charge/discharge commands in 22 minutes - potential oscillation attack" | Operational impact: SOC investigation workload +2 hours/week |
+Sensitivity across the full section 5.9 loss range:
+  179 x 0.12 / 7.3 = 2.9 : 1   (low loss, low control effectiveness)
+  358 x 0.18 / 7.3 = 8.8 : 1   (high loss, high control effectiveness)
+```
 
-**Quick Win 4: Critical Substation GOOSE Monitoring**
+Neither side of that ratio is discounted. Section 5.9 states no net present value because no discount rate is sourced, and the same applies here, so cost and benefit are both in undiscounted ten-year dollars. Do not label any figure above an NPV.
 
-| Action                                                                                                                                       | Implementation                                                                                                                  | Cost                                            | Risk Reduction                                      | Timeline              |
-| :--- | :--- | :--- | :--- | :--- |
-| Deploy network tap + packet capture at 5 critical substations to record GOOSE traffic for forensic analysis                                  | Install Garland G-TAP network tap on IEC 61850 station bus, mirror to PCAP storage (5 TB capacity)                              | [investment required] (hardware + installation) | 80% improvement in GOOSE injection attack detection | implementation period |
-| Forensic capability: Retained GOOSE traffic enables post-incident analysis to identify spoofed messages vs. legitimate protection operations | Example: After protection cascade, security team replays GOOSE traffic to identify timing anomalies suggesting injection attack | Operational impact: None (passive monitoring)   | User acceptance: HIGH (enhances incident response)  |                       |
+**Read the result plainly.** The honest ratio is 4.4:1 to 6.6:1, with a sensitivity envelope of 2.9:1 to 8.8:1. That is an order of magnitude below the 43.9:1 the earlier draft claimed. It is still a strong business case. A control programme that returns four to seven dollars for every dollar spent, computed from a government cost estimate and an insurance-claims effectiveness measurement rather than from assumption, does not need inflating, and inflating it is how a board learns to distrust the next number in the same table.
 
-**Quick Win 5: Vendor Access Logging and Alerting**
+**Tail-risk variant, and why it is not the headline.** Section 5.9 also gives a midpoint expected loss of AUD 2.01 billion when the tier 4 upper bound of AUD 8.95 billion is substituted for the reference case. Running the same arithmetic gives 33:1 at 12 percent and 49.5:1 at 18 percent. Those numbers are not used here. Section 5.9 labels that AUD 2.01 billion as compounding the working group's own probability assessment with a VCR extrapolated to 72 hours, six times the range for which the AER determined it. Two unsourced assumptions stacked on one extrapolation is not a basis for a capital decision, and a ratio derived from it is a rhetorical device rather than a result.
 
-| Action                                                                                                                                                                  | Implementation                                                                                                                                                | Cost                                                        | Risk Reduction                                                                                    | Timeline              |
-| :--- | :--- | :--- | :--- | :--- |
-| Enable detailed logging for all vendor remote access sessions via Bastion Host, with real-time alerting for unusual activity                                            | Configure Citrix Bastion Host to log all commands, file transfers, and configuration changes; send alerts to SOC for after-hours access or high-risk commands | [investment required] (SIEM integration)                    | 65% reduction in compromised vendor access dwell time                                             | implementation period |
-| Alert triggers: (1) Vendor login outside 0800-1700 business hours, (2) Access to SCADA master station, (3) Modbus/DNP3 write commands, (4) Configuration file downloads | Example: "ALERT: Vendor_BatteryOEM_Engineer logged in at 02:34 AM Saturday, accessed RTU configuration files, downloaded 15 MB data"                          | Operational impact: SOC investigation workload +1 hour/week | User acceptance: MEDIUM (vendors may resist increased scrutiny, requires contractual enforcement) |                       |
+**On the regulated asset base.** An earlier draft stated that the programme represented 0.375 percent of RefDNSP-1.2M's regulated asset base. That claim is removed. RefDNSP-1.2M has no stipulated regulated asset base in section 2, and no RAB figure for any Australian distribution business was sourced for this paper, so the ratio has no denominator and cannot be computed. The nearest available figure is not a substitute: the AER's draft decision for Ausgrid allowed AUD 9,619.6 million of revenue across the five years to 2029 [n], which is a revenue allowance for a different and real business, not an asset base and not RefDNSP-1.2M's.
 
-**Total Quick Wins Investment: [investment required]**
-**Cumulative Risk Reduction: 73% (across multiple attack vectors)**
-**Implementation Timeline: targeted timeframe (all items)**
+### 9.6 Quick Wins
 
-### 9.5 Board-Level Recommendations
+Five actions delivered through policy change and configuration rather than capital purchase. All five sit in cost band A of section 9.1, under AUD 0.13 million each, because none of them buys hardware or a platform licence. Band A is still an engineering judgement about relative cost, not a quotation.
 
-Based on the comprehensive risk assessment and financial analysis in this document, the following Board-level recommendations are presented with risk-adjusted strategic value calculations:
+**Quick win 1: API dual authorization policy**
 
-**Recommendation 1: Approve Immediate Critical Investment ([investment required], targeted timeframe)**
+| Attribute | Detail |
+| :--- | :--- |
+| Action | Require dual authorization for dispatch commands above 10 MW aggregate capacity |
+| Implementation | Set `dual_auth_threshold_MW: 10` in the mPrest DERMS configuration, requiring a second OAuth token approval for bulk commands or commands affecting more than 10 MW aggregate capacity |
+| Cost band | A, configuration change |
+| Effect | Secure remote access. Dragos and Marsh McLennan measure 12.18 percent average risk reduction for this control class, the lowest of their five [n]. The mapping is approximate: their class covers remote access generally, not API authorization specifically. Stated as a mechanism instead: the control removes the single-credential path to bulk dispatch, so one stolen retailer token no longer moves the fleet |
+| Operational impact | 30 to 60 second delay on large commands. Operator acceptance high, as operators already approve critical commands |
+| Worked example | Retailer A requests discharge across 54 BESS units. The system prompts a RefDNSP-1.2M control room operator for approval |
+| Timeline | Implementation period |
+
+**Quick win 2: BESS state-change rate limiting**
+
+| Attribute | Detail |
+| :--- | :--- |
+| Action | Enforce a 5-minute minimum interval between charge and discharge state changes |
+| Implementation | Modify the SwitchDin Utility Server to track the last command timestamp per asset and reject commands inside the 5-minute window |
+| Cost band | A, vendor engineering support |
+| Effect | No Dragos and Marsh class maps to this control, so no percentage is stated. A 5-minute minimum caps the achievable oscillation at one full cycle per 600 seconds, 0.0017 Hz. Section 2.1.2 puts the attack band at 0.5 to 0.55 Hz, roughly 300 times faster. The control puts the attack outside the resonance band |
+| Operational impact | None. Normal operations use 15 to 30 minute dispatch intervals, and battery inverters need 30 to 90 seconds for a charge to discharge transition, so the 5-minute floor does not bind on legitimate use |
+| Worked example | A BESS receives a charge command at 13:00:00. A discharge command is rejected until 13:05:00 |
+| Timeline | Implementation period |
+
+**Quick win 3: basic oscillation pattern detection**
+
+| Attribute | Detail |
+| :--- | :--- |
+| Action | SIEM correlation rule detecting more than 5 state changes per asset within 30 minutes |
+| Implementation | Configure the existing Splunk SIEM to parse DERMS API logs and alert on rapid charge and discharge cycling. Rule: `index=derms sourcetype=api_commands` then `stats count by asset_id, command_type` then `where count > 5 AND time_window < 1800 seconds` |
+| Cost band | A, existing platform |
+| Effect | Network visibility and monitoring. Dragos and Marsh McLennan measure 16.47 percent average risk reduction for this class [n]. The earlier draft claimed a 70 percent reduction in undetected oscillation attacks; that figure had no source and no false-negative rate has been measured for this rule on this network |
+| Operational impact | SOC investigation workload rises by about 2 hours per week |
+| Worked example | Alert text: BESS_Bawley_001 received 8 charge and discharge commands in 22 minutes, potential oscillation attack |
+| Timeline | Implementation period |
+
+**Quick win 4: critical substation GOOSE monitoring**
+
+| Attribute | Detail |
+| :--- | :--- |
+| Action | Network tap and packet capture at 5 critical substations to record GOOSE traffic for forensic analysis |
+| Implementation | Install a Garland G-TAP network tap on the IEC 61850 station bus and mirror to PCAP storage of 5 TB capacity |
+| Cost band | A, tap hardware and installation at 5 sites |
+| Effect | Network visibility and monitoring, 16.47 percent class average [n]. This control is forensic rather than preventive: retained GOOSE traffic lets a security team replay a protection cascade and identify timing anomalies suggesting injection. It detects nothing in real time and prevents nothing. The earlier draft's 80 percent improvement in detection had no source |
+| Operational impact | None. Passive monitoring |
+| Worked example | After a protection cascade, the security team replays captured GOOSE traffic to separate spoofed messages from legitimate protection operations |
+| Timeline | Implementation period |
+
+**Quick win 5: vendor access logging and alerting**
+
+| Attribute | Detail |
+| :--- | :--- |
+| Action | Detailed logging of all vendor remote access sessions through the bastion host, with real-time alerting on unusual activity |
+| Implementation | Configure the Citrix bastion host to log all commands, file transfers and configuration changes, and send alerts to the SOC for after-hours access or high-risk commands |
+| Cost band | A, SIEM integration |
+| Effect | Secure remote access, 12.18 percent class average [n]. The earlier draft claimed a 65 percent reduction in compromised vendor access dwell time; no dwell time measurement exists for this network, before or after, so no reduction can be stated. What the control does is make vendor session activity reviewable at all, which is the precondition for measuring dwell time later |
+| Alert triggers | Vendor login outside 0800 to 1700, access to the SCADA master station, Modbus or DNP3 write commands, configuration file downloads |
+| Operational impact | SOC investigation workload rises by about 1 hour per week |
+| Worked example | Alert text: Vendor_BatteryOEM_Engineer logged in at 02:34 Saturday, accessed RTU configuration files, downloaded 15 MB |
+| User acceptance | Medium. Vendors may resist increased scrutiny, so contractual enforcement is needed |
+| Timeline | Implementation period |
+
+**Quick wins total.** Five controls, all band A. Band arithmetic gives under AUD 0.65 million one-off in total (modelled: five times the band A ceiling of AUD 0.13 million, not a quotation). Against the AUD 1.29 million CIRMP cyber one-off envelope of section 9.1, the whole quick-win set fits inside half of it, which is the argument for doing these first.
+
+**Combined effect: not stated as a number.** The earlier draft claimed 73 percent cumulative risk reduction across multiple attack vectors. Dragos and Marsh McLennan state their per-control figures are not additive and their report models no combined effect [n]. Three of these five controls map to classes measured at 12.18 and 16.47 percent, and two map to no class at all. Nothing in the evidence supports compounding them into a single figure, and 73 percent had no source.
+
+### 9.7 Board-Level Recommendations
+
+Five recommendations follow. Costs use the bands of section 9.1, and the cost-benefit basis is the one derived in section 9.5. Where a control has no published price, the recommendation says so and asks the board to require a quotation rather than approve a number nobody can check.
+
+**Recommendation 1: approve the critical path controls**
 
 **Rationale:**
+
+The five figures below are RefDNSP-1.2M's stipulated state from section 2 and the working group's own assessments. They are scenario parameters, not measurements of a real network.
 
 - Current attack surface score: 8.7/10 (CRITICAL)
 - IEC 62443 compliance: 38% (SOCI Act risk)
@@ -1908,29 +2204,45 @@ Based on the comprehensive risk assessment and financial analysis in this docume
 - Demonstrated nation-state capability (Sandworm, FrostyGoop)
 - 15-30% probability of attack within 10-year horizon
 
-**Investment Breakdown:**
+**Critical path, by cost band:**
 
-- Death Wobble Oscillation Detection: [investment required]
-- Modbus Security Gateway (54 sites): [investment required]
-- BMS Firmware Hardening: [investment required]
-- IEC 62351-6 GOOSE Authentication (15 critical substations): [investment required]
+| Control | Cost band | Bounded? |
+| :--- | :--- | :--- |
+| Death Wobble oscillation detection | C, AUD 0.52 million to AUD 1.29 million | Yes |
+| Modbus security gateway across all 54 sites | D, above AUD 1.29 million | No. No published unit price exists for any Modbus security gateway, and no per-site installation cost was found |
+| BMS firmware hardening | B, AUD 0.13 million to AUD 0.52 million | Yes |
+| IEC 62351-6 GOOSE authentication at 15 critical substations | D, above AUD 1.29 million | No. No public cost anchor exists for a GOOSE authentication or MACsec retrofit at any scale |
 
-**strategic value Calculation:**
+The two bounded lines sum to AUD 0.65 million to AUD 1.81 million one-off (modelled: band boundary arithmetic against the AUD 1.29 million CIRMP cyber envelope of section 9.1, not a quotation). The two band D lines cannot be bounded above from any public source, so no total for the critical path is stated.
+
+**Cost-benefit basis:**
 
 ```
-Avoided Loss (10-year NPV): [investment required] (P50 risk-adjusted expected loss)
-Investment: [investment required] (critical path only)
-Risk Reduction: 90% (defense-in-depth)
-Net Benefit: [investment required] × 90% - [investment required] = [investment required]
-strategic value: [investment required] / [investment required] = 115:1
+No separate ratio is computed for the critical path, because two of
+its four lines have no upper cost bound and a ratio needs a
+denominator. The board-level number is the programme-level one from
+section 9.5:
 
-This exceeds Board-mandated 10:1 strategic value threshold for regulated asset base investments by 11.5x
+  Programme cost (10 years, CIRMP cyber component)   AUD 7.3 million
+  Avoided loss (section 5.9 midpoint)                AUD 268 million
+  Risk reduction (Dragos and Marsh McLennan)         12 to 18 percent
+
+  268 x 0.12 / 7.3 = 4.4 : 1
+  268 x 0.18 / 7.3 = 6.6 : 1
+
+  Sensitivity across the full section 5.9 range: 2.9 : 1 to 8.8 : 1
+
+An earlier draft reported 115:1 here, against a stated board threshold
+of 10:1. That figure was computed from an uncited 90 percent risk
+reduction and an investment number that no longer appears in the text.
+It is removed. On the sourced basis the programme returns 4.4:1 to
+6.6:1, which does not clear a 10:1 hurdle. A board applying that hurdle
+should be told so directly rather than shown a number built to clear it.
 ```
 
 **Board Resolution Language:**
 
-> *"The Board approves capital investment of [investment required] million for OT cybersecurity enhancements addressing cascading failure risks identified in EE-CTI-006 assessment, to be completed within targeted timeframe, with quarterly progress reporting to Board Risk Committee. This investment is classified as critical infrastructure protection expenditure eligible for regulatory asset base inclusion under SOCI Act compliance obligations."*
-
+> *"The Board approves the four critical path OT cybersecurity controls addressing cascading failure risks identified in the EE-CTI-006 assessment, being Death Wobble oscillation detection, Modbus security gateway deployment, BMS firmware hardening and IEC 62351-6 GOOSE authentication, subject to receipt of vendor quotations for the two controls that carry no published price. Management is directed to return to the Board Risk Committee with quoted costs before commitment. The Board notes that the assessed cost-benefit ratio for the wider programme is 4.4:1 to 6.6:1 on a sourced basis, computed from the Commonwealth Impact Analysis cost estimate for a Critical Infrastructure Risk Management Program and published per-control risk reduction of 12 to 18 percent, and that this does not clear the Board's 10:1 threshold for regulated asset base investments. Quarterly progress reporting to the Board Risk Committee is required."*
 **Recommendation 2: Establish OT Cybersecurity Governance Framework**
 
 **Governance Structure:**
@@ -1955,7 +2267,7 @@ This exceeds Board-mandated 10:1 strategic value threshold for regulated asset b
 
 **Board Resolution Language:**
 
-> *"The Board establishes a dedicated OT Cybersecurity Governance Framework with Chief OT Security Officer position reporting to Board Risk Committee, with mandate to achieve IEC 62443 SL-2 compliance across critical infrastructure within implementation period. Quarterly reporting on KPIs and threat landscape required."*
+> *"The Board establishes a dedicated OT Cybersecurity Governance Framework with Chief OT Security Officer position reporting to Board Risk Committee, with mandate to achieve IEC 62443 SL-2 compliance across critical infrastructure within implementation period. Quarterly reporting on KPIs and the threat environment required."*
 
 **Recommendation 3: Mandate Pre-Deployment Security Validation for BESS Expansion**
 
@@ -1973,12 +2285,15 @@ All future BESS deployments (Community Battery Program expansion from 54 to 150+
 | **IEC 62443 SL-2 Compliance**     | Third-party audit confirming SL-2 requirements met              | Certified IEC 62443 Auditor  | Pre-commissioning |
 | **Incident Response Integration** | BESS included in OT SOC monitoring, playbooks developed         | EE OT SOC                    | Pre-commissioning |
 
-**Financial Impact:**
+**Financial impact:**
 
-- Security validation cost per BESS: [investment required]
-- 96 future BESS deployments (150 total - 54 existing) × [investment required] = [investment required]
-- Incremental cost: 0.6% of total BESS program cost ([investment required] capital program)
-- Risk reduction: Prevents [investment required]/site from becoming [investment required]/site loss (FrostyGoop Lviv precedent)
+No per-BESS security validation cost is stated. No public price was found for a pre-commissioning IEC 62443 SL-2 audit of a battery energy storage installation, from a certification body or from any of the assessors named in Recommendation 4. What can be stated is the structure of the cost and its scale relative to the sourced envelope.
+
+- Deployments in scope: 96 (150 planned sites less the 54 existing)
+- Per-site cost: unpriced. Band A per site is the working group's judgement, on the basis that a pre-commissioning audit is a professional services engagement at a single site, not a capital purchase
+- Programme cost: 96 sites at band A gives up to AUD 12.5 million across the expansion (modelled: 96 multiplied by the band A ceiling of AUD 0.13 million, not a quotation). At the top of that band the validation programme costs an order of magnitude more than the whole CIRMP cyber envelope of section 9.1, which is why the per-site figure needs quoting before this recommendation goes to a capital decision
+- Share of total BESS programme cost: not computable. No capital cost for the Community Battery Program expansion is stipulated in section 2 or sourced anywhere, so the earlier draft's claim of 0.6 percent has no denominator. It is removed
+- Loss avoided per site: not stated. The earlier draft asserted a per-site loss avoided on the FrostyGoop Lviv precedent. That incident is a heating utility in Ukraine in January 2024, and no per-site financial loss for it was sourced. Section 5.10 records per-facility industrial loss as a category this paper does not quantify, and this line is no exception
 
 **Board Resolution Language:**
 
@@ -1996,7 +2311,7 @@ Engage independent third-party cybersecurity firm with ICS/OT specialization to 
    - Foundational Requirements compliance (FR1-FR7)
    - System Requirements compliance (SR1-SR7)
    - Security Level Target vs. Achieved analysis
-   - Cost: [investment required]
+   - Cost band: B (professional services engagement across 185 substations and 54 BESS sites; no published price for an IEC 62443-3-3 gap assessment at this scale)
 2. **OT Penetration Testing** (implementation period)
 
    - External attack surface enumeration
@@ -2004,22 +2319,22 @@ Engage independent third-party cybersecurity firm with ICS/OT specialization to 
    - Protocol exploitation (Modbus, DNP3, GOOSE injection attempts)
    - Lateral movement from IT to OT networks
    - Physical security integration testing
-   - Cost: [investment required]
+   - Cost band: B (no published price for OT penetration testing from any assessor named below)
 3. **Red Team Exercise: Cascading Failure Scenario** (implementation period)
 
    - Simulated Death Wobble oscillation attack (non-disruptive)
    - Simulated thermal runaway initiation (isolated test environment)
    - Simulated multi-substation coordinated attack (tabletop + technical)
    - Blue team response evaluation (OT SOC, incident response)
-   - Cost: [investment required]
+   - Cost band: B (no published price for an ICS red team engagement; the cyber-physical scope and isolated test environment put it above a standard penetration test)
 4. **SOCI Act Compliance Validation** (implementation period)
 
    - Risk Management Program assessment
    - Incident reporting procedures validation
    - Regulatory obligation mapping
-   - Cost: [investment required]
+   - Cost band: A. The closest sourced figure is a bound rather than a price: the Department of Home Affairs states that AUD 2 million "may be a more reasonable estimate" for the incremental cost of remedying a deficient Risk Management Program [n]. Assessing an RMP costs less than remedying the deficiencies the assessment finds, so AUD 2 million is a ceiling on this line and not its price
 
-**Total Audit Investment: [investment required]**
+**Total audit cost: three lines in band B and one in band A, summing to AUD 0.39 million to AUD 1.69 million** (modelled: band boundary arithmetic against the AUD 1.29 million CIRMP cyber envelope of section 9.1, not a quotation). No workstream above carries a quoted price, and the four assessors shortlisted below all quote per engagement. This total should be replaced with quotations before it reaches a board paper.
 **Timeline: implementation period (completion before winter peak demand)**
 
 **Audit Deliverables:**
@@ -2039,7 +2354,7 @@ Engage independent third-party cybersecurity firm with ICS/OT specialization to 
 
 **Board Resolution Language:**
 
-> *"The Board approves [investment required] investment for independent third-party security audit covering IEC 62443 compliance, OT penetration testing, and SOCI Act validation, to be completed within implementation period. Audit findings shall be presented to Board Risk Committee with remediation roadmap and cost-benefit analysis for recommended controls."*
+> *"The Board approves an independent third-party security audit covering IEC 62443 compliance, OT penetration testing, red team validation and SOCI Act compliance, to be completed within the implementation period, with the cost to be set by competitive quotation and reported to the Board Risk Committee before engagement. Audit findings shall be presented to Board Risk Committee with remediation roadmap and cost-benefit analysis for recommended controls."*
 
 **Recommendation 5: Dual Authorization for High-Impact Commands (Immediate Policy Change)**
 
@@ -2103,15 +2418,15 @@ DERMS API Configuration File Update:
 - Week 5: Activate policy, monitor retailer feedback
 - Week 6+: Monthly review of dual authorization rejections for process tuning
 
-**Cost:** [investment required] (configuration change only)
-**Risk Reduction:** 85% reduction in single-credential compromise impact
+**Cost:** band A, configuration change only (section 9.1)
+**Effect:** no measured figure is stated. This control maps loosely to the secure remote access class, which Dragos and Marsh McLennan measure at 12.18 percent average risk reduction, the lowest of their five classes [n]. The mapping is approximate and the figure is a global claims-population average, not a measurement of this control on this network. The mechanism is exact and is the better statement: dual authorization removes the single-credential path to bulk dispatch, so an attacker holding one stolen retailer OAuth token can no longer move the fleet. The earlier draft's 85 percent reduction had no source
 **Implementation:** Immediate (targeted timeframe policy effective date)
 
 **Board Resolution Language:**
 
-> *"The Board mandates dual authorization for all electricity dispatch commands exceeding 10 MW aggregate capacity or affecting more than 100 devices, effective immediately. This policy change requires no capital investment and provides 85% risk reduction against API credential compromise attacks. Chief OT Security Officer shall report monthly on dual authorization metrics and operational effectiveness."*
+> *"The Board mandates dual authorization for all electricity dispatch commands exceeding 10 MW aggregate capacity or affecting more than 100 devices, effective immediately. This policy change requires no capital investment. Its effect is to remove the single-credential path to bulk dispatch: an attacker holding one compromised retailer API token can no longer command the battery fleet without a second, separately held approval. No measured risk reduction figure is available for this control; the nearest published benchmark, for the secure remote access control class, is 12 percent. Chief OT Security Officer shall report monthly on dual authorization metrics and operational effectiveness."*
 
-### 9.4 Governance and Compliance Actions
+**Governance and compliance actions**
 
 **Executive Actions:**
 
@@ -2127,121 +2442,147 @@ DERMS API Configuration File Update:
 
 ---
 
-### 9.6 Compliance and Regulatory Alignment
+### 9.8 Compliance and Regulatory Alignment
 
-The security investments recommended in this document directly address regulatory obligations under multiple frameworks:
+The controls recommended above map onto three frameworks. Costs use the bands of section 9.1. The AER's own cyber security dollar split is not public, and none of the three frameworks publishes an uplift cost, so no table below carries a quoted price.
 
-**Security of Critical Infrastructure Act 2018 (SOCI Act) Alignment:**
+**Security of Critical Infrastructure Act 2018 alignment:**
 
-| SOCI Requirement                          | Current Compliance                      | Recommended Control                              | Investment                                                       | Compliance Impact                         |
+| SOCI requirement | Current compliance | Recommended control | Cost band | Compliance impact |
 | :--- | :--- | :--- | :--- | :--- |
-| **Risk Management Program (RMP)**   | Partial (40% complete)                  | IEC 62443 gap assessment + remediation roadmap   | [investment required] (audit) + [investment required] (controls) | Achieves 80% RMP maturity                 |
-| **Cyber Security Obligations**      | Non-compliant (no OT-specific controls) | OT SIEM deployment + 24/7 SOC                    | [investment required] (Phase 1)                                  | Achieves mandatory monitoring requirement |
-| **Incident Reporting**              | Partial (IT-focused, OT gap)            | OT incident response playbook + ACSC integration | [investment required]                                            | Achieves 12-hour reporting obligation     |
-| **Critical Infrastructure Systems** | Identified (185 substations, 54 BESS)   | Defense-in-depth security architecture           | [investment required]                                            | Protects designated critical assets       |
+| **Risk Management Program** | Partial, 40 percent complete | IEC 62443 gap assessment plus remediation roadmap | B (assessment) plus C (controls) | Raises RMP maturity. The target figure of 80 percent in an earlier draft was a stipulated aspiration, not a measured outcome, and is stated here as a direction rather than a number |
+| **Cyber security obligations** | Non-compliant, no OT-specific controls | OT SIEM deployment plus 24/7 SOC | D one-off plus R recurring. Section 9.3 shows the SOC personnel floor alone exceeds the sourced annual cyber envelope | Meets the mandatory monitoring requirement |
+| **Incident reporting** | Partial, IT-focused with an OT gap | OT incident response playbook plus ACSC integration | A, procedural | Meets the 12-hour reporting obligation |
+| **Critical infrastructure systems** | Identified: 185 substations, 54 BESS | Defence-in-depth security architecture | D, the whole Phase 2 programme of section 9.3 | Protects designated critical assets |
 
-**Regulatory Penalty Avoidance:**
+The sourced cost anchor for this whole table is the one from section 9.1: AUD 1.29 million one-off and AUD 0.60 million per year for the cyber and information security hazard component of a sector-average CIRMP, from the Commonwealth Impact Analysis [n]. Every band above is measured against it.
 
-- SOCI Act non-compliance penalties: [investment required] million (maximum)
-- Proactive compliance investment: [investment required] (RMP + controls)
-- Penalty avoidance strategic value: [investment required] / [investment required] = 3.7:1 (minimum, not including reputational damage)
+**Regulatory penalty avoidance.** No figure is stated. An earlier draft claimed a maximum SOCI Act non-compliance penalty and computed a 3.7:1 penalty-avoidance ratio from it. No SOCI Act penalty schedule or precedent against an Australian distribution business was sourced, so neither the numerator nor the ratio can be reproduced, and both are removed. Section 5.8 makes the same finding for the loss side: the one settled regulatory outcome for a comparable event, the Great Britain outage of 9 August 2019, produced about GBP 10.5 million in voluntary payments across four licensees [n], which is small against the direct customer cost and is not a penalty schedule.
 
-**Australian Energy Sector Cyber Security Framework (AESCSF) Alignment:**
+**Australian Energy Sector Cyber Security Framework alignment.**
 
-The AESCSF Security Profile 2 (SP2) mandates specific OT security controls for DNSPs:
+The AESCSF is AEMO's maturity framework for the electricity, gas and liquid fuels sub-sectors, rebuilt as Version 2 in October 2023 with 11 domains and 354 practices [n]. Since June 2026 the enhanced CIRMP Rules under the SOCI Act name the 2023 AESCSF Framework Core at Security Profile 2 as an accepted compliance pathway for critical electricity assets, with a transition grace period ending June 2028 [n]. Alternative accepted pathways are the ACSC Essential Eight at Maturity Level Two, AS ISO/IEC 27001:2023, NIST CSF 2.0, and C2M2 v2.1 at MIL-2. AEMO states the programme runs on user-pays cost recovery, so participation costs money and that money is charged back to participants, but no fee schedule and no uplift costing was found [n].
 
-| AESCSF Principle                                  | SP2 Requirement                                               | Current Maturity  | Target Maturity   | Gap Closure Investment                                                       |
+| AESCSF principle | SP2 requirement | Current maturity | Target maturity | Gap closure cost band |
 | :--- | :--- | :--- | :--- | :--- |
-| **Principle 2.1: Asset Management**         | Comprehensive OT asset inventory with security classification | Level 2 (Defined) | Level 3 (Managed) | [investment required] (asset discovery tooling)                              |
-| **Principle 2.2: Risk Assessment**          | Annual cyber-physical risk assessment with Board reporting    | Level 1 (Ad Hoc)  | Level 3 (Managed) | [investment required] (annual audit + this assessment)                       |
-| **Principle 2.3: Secure OT Communications** | Encryption and authentication for critical protocols          | Level 1 (Ad Hoc)  | Level 3 (Managed) | [investment required] (IEC 62351-6) + [investment required] (Modbus gateway) |
-| **Principle 3.1: Defense in Depth**         | Multi-layer security controls across IT/OT boundary           | Level 1 (Ad Hoc)  | Level 3 (Managed) | [investment required] (ICS firewalls + segmentation)                         |
-| **Principle 4.1: OT Monitoring**            | Real-time anomaly detection and incident response             | Level 0 (None)    | Level 3 (Managed) | [investment required] (OT SIEM + SOC)                                        |
+| **Principle 2.1: asset management** | Comprehensive OT asset inventory with security classification | Level 2, Defined | Level 3, Managed | C. No public cost anchor exists for OT asset discovery tooling in an electricity distribution context |
+| **Principle 2.2: risk assessment** | Annual cyber-physical risk assessment with Board reporting | Level 1, Ad hoc | Level 3, Managed | B, annual assessment plus this document |
+| **Principle 2.3: secure OT communications** | Encryption and authentication for critical protocols | Level 1, Ad hoc | Level 3, Managed | D. IEC 62351-6 and the Modbus gateway are both unbounded band D lines |
+| **Principle 3.1: defence in depth** | Multi-layer security controls across the IT and OT boundary | Level 1, Ad hoc | Level 3, Managed | D, ICS firewalls plus segmentation |
+| **Principle 4.1: OT monitoring** | Real-time anomaly detection and incident response | Level 0, None | Level 3, Managed | D one-off plus R recurring, OT SIEM plus SOC |
 
-**AESCSF Compliance Score:**
+**AESCSF compliance score.** The current 32 percent and the 80 percent target are the working group's own scoring of the reference network against the five principles above, not an AEMO assessment result. No uplift cost is stated: three of the five gap closures are unbounded band D lines, and AEMO publishes no AESCSF uplift costing for any participant. AEMO and the AER increasingly treat Security Profile 2 as the industry baseline, and the CIRMP Rules now name it as a compliance pathway, so the cost of not closing these gaps is the cost of failing a named regulatory pathway with a June 2028 deadline.
 
-- Current: 32% (Level 1.6 average across 5 principles)
-- Target: 80% (Level 3+ required for SP2)
-- Investment to close gap: [investment required] (3-year program)
-- Regulatory expectation: AEMO and AER increasingly expecting SP2 compliance as industry baseline
+**NERC-CIP international benchmarking.**
 
-**NERC-CIP International Benchmarking:**
+NERC-CIP is not mandatory in Australia. It is included because it decomposes the same controls into auditable requirements.
 
-While NERC-CIP is US-specific and not mandatory in Australia, it provides internationally recognized best practices:
-
-| NERC-CIP Standard                                     | Equivalent Control                                        | ACME Inc. Current State                    | Investment to Achieve                                      |
+| NERC-CIP standard | Equivalent control | RefDNSP-1.2M current state | Cost band |
 | :--- | :--- | :--- | :--- |
-| **CIP-005-6 R1: Electronic Security Perimeter** | ICS firewall at IT/OT boundary with deny-all default      | Partial (firewall exists, ACLs weak)       | [investment required] (firewall rules + DPI)               |
-| **CIP-007-6 R2: Patch Management**              | 35-day patching for critical OT vulnerabilities           | Non-compliant (no OT patch program)        | [investment required]/year (patch testing + deployment)    |
-| **CIP-007-6 R4: Security Event Monitoring**     | Log collection and 15-day review for OT systems           | Non-compliant (no OT SIEM)                 | [investment required] (OT SIEM deployment)                 |
-| **CIP-010-3 R1: Configuration Management**      | Baseline configurations with change control for BESS/RTUs | Partial (IT-focused, OT gap)               | [investment required] (configuration management tooling)   |
-| **CIP-013-1 R1: Supply Chain Risk Management**  | Vendor cybersecurity requirements in procurement          | Non-compliant (vendor 4G modems unmanaged) | [investment required] (vendor security policy development) |
+| **CIP-005-6 R1: electronic security perimeter** | ICS firewall at the IT and OT boundary with deny-all default | Partial, firewall exists but ACLs are weak | C, firewall rules plus deep packet inspection |
+| **CIP-007-6 R2: patch management** | 35-day patching for critical OT vulnerabilities | Non-compliant, no OT patch program | R recurring, patch testing and deployment |
+| **CIP-007-6 R4: security event monitoring** | Log collection and 15-day review for OT systems | Non-compliant, no OT SIEM | D, OT SIEM deployment |
+| **CIP-010-3 R1: configuration management** | Baseline configurations with change control for BESS and RTUs | Partial, IT-focused with an OT gap | B, configuration management tooling |
+| **CIP-013-1 R1: supply chain risk management** | Vendor cybersecurity requirements in procurement | Non-compliant, vendor 4G modems unmanaged | B, vendor security policy development |
 
-**Total Investment for NERC-CIP Equivalence: [investment required]**
-**Benefit:** Enables marketing of "NERC-CIP equivalent security controls" to regulators and insurance underwriters, potentially reducing cyber insurance premiums by 15-25%
+**Total for NERC-CIP equivalence:** not stated. Three of the five lines are bounded (two band B and one band C, summing to AUD 0.78 million to AUD 2.33 million, modelled band boundary arithmetic), one is an unbounded band D line and one is recurring. No public cost anchor exists for a NERC-CIP equivalence programme in any jurisdiction.
 
-### 9.7 Insurance and Risk Transfer Considerations
+**On the insurance benefit.** An earlier draft claimed that demonstrating NERC-CIP equivalent controls could reduce cyber insurance premiums by 15 to 25 percent. That claim is removed. No Australian OT cyber insurance premium data was found at all, for a baseline premium or for a post-control premium, so no percentage reduction can be sourced or computed. Section 9.9 states the same finding at length.
+### 9.9 Insurance and Risk Transfer
 
-**Cyber Insurance Policy Implications:**
+This subsection states what cannot be priced. That is its main content and it is not an evasion. An earlier draft priced an insurable loss, a required premium, a coverage cap, a baseline premium, a post-control premium, a premium saving, a payback period, an APRA capital charge, a cost of capital and a ten-year discount factor, and then combined them into a 47.3:1 ratio. Not one of those inputs had a source. The surviving arithmetic in that draft, a payback of 3.98 divided by the difference between 1.8 and 0.5 giving 3.1 years, still leaks the original figures: an AUD 3.98 million programme and premiums falling from AUD 1.8 million to AUD 0.5 million per year. Those numbers are not restored here, because restoring them would make them no more sourced than they were.
 
-Current cyber insurance policies for critical infrastructure typically **exclude OT/ICS losses** due to insurers' inability to quantify cascading failure risk. This assessment provides actuarially sound risk quantification that enables:
+**What was searched for and not found.**
 
-1. **OT-Specific Cyber Insurance Coverage:**
+No Australian OT cyber insurance premium data was located: not a baseline premium for a distribution network business, not a post-control premium, not a coverage cap, not a loss ratio, and not a percentage premium movement attributable to any control. The gap is recorded explicitly in the external research supporting this section. Nothing in this subsection can therefore be priced, and nothing is.
 
-   - Insurable loss estimate: [investment required] million (P50 scenario)
-   - Required premium (at 5% loss ratio): [investment required] million/year
-   - Coverage gap: Most policies cap OT losses at [investment required] million (insufficient for Tier 4 cascade)
-2. **Premium Reduction Through Risk Mitigation:**
+**What can be stated.**
 
-   - Baseline premium (current controls): [investment required] million/year (estimated, no current OT coverage)
-   - Premium after [investment required] control investment: [investment required] million/year (90% risk reduction)
-   - Premium savings: [investment required] million/year
-   - Payback period: 3.98M / (1.8M - 0.5M) = 3.1 years through insurance savings alone
-3. **Regulatory Capital Requirements:**
+Three things, all sourced.
 
-   - APRA (Australian Prudential Regulation Authority) may impose capital requirements for uninsured OT cyber risk
-   - Potential capital charge: 8% of [investment required] uninsured exposure = [investment required] additional regulatory capital
-   - Opportunity cost: [investment required] × 6% cost of capital = [investment required]/year
-   - Control investment avoids capital charge, saving [investment required]/year in perpetuity
+First, the loss side is already quantified elsewhere in this paper and does not need an insurance-specific restatement. Section 5.9 puts the risk-adjusted expected loss over a 10-year horizon at AUD 179 million to AUD 358 million, midpoint AUD 268 million, built from the AER's determined VCR and this paper's own 15 to 30 percent probability assessment. Section 5.4 gives the reference case, the full network at the 12-hour boundary of VCR validity, at AUD 1.19 billion. Those are the numbers an underwriter would be asked to price against. They are stated with their assumptions in section 5 and are not repeated with different labels here.
 
-**strategic value Including Insurance Benefits:**
+Second, the industry-level loss picture is published. Dragos and Marsh McLennan put average annual OT-related cyber risk at USD 31.1 billion globally, of which USD 12.7 billion involves business interruption claims, and put a 1-in-250-year tail at USD 329.5 billion total with USD 172.4 billion business-interruption related [n]. They also report that roughly 70 percent of OT-impacting breaches involve indirect costs, meaning abundance-of-caution shutdowns and ripple effects rather than direct damage, and give a utilities-specific likelihood of 2.17 percent per year for an event in North American electric power generation and distribution [n]. These are global, modelled, USD figures from a vendor and a broker working from proprietary claims data. They establish that the risk class is large and is being modelled by the insurance market. They do not price an Australian policy and they are not a premium.
 
-```
-Annual Benefits:
-- Avoided loss (10-year NPV amortized): [investment required] million/year
-- Insurance premium reduction: [investment required] million/year
-- Regulatory capital avoidance: [investment required] million/year
-Total Annual Benefit: [investment required] million/year
+Third, the structural claim in the earlier draft survives, because it is a statement about policy wording rather than about price: cyber insurance policies for critical infrastructure commonly exclude or sub-limit OT and ICS losses. This paper holds no policy wording to cite for that, so it is carried here as an assertion the working group has not evidenced, and a reader should treat it as such until a policy is produced.
 
-Investment: [investment required] (one-time) + [investment required]/year (ongoing SOC operations)
-Net Annual Benefit: [investment required] - [investment required] = [investment required] million/year
-strategic value (10-year NPV): ([investment required] × 8.5 discount factor) / [investment required] = 47.3:1
+**What follows for the board.**
 
-This analysis conservatively excludes reputational damage, regulatory penalties, and litigation costs.
-```
+A risk that cannot be priced cannot be transferred on known terms. Two consequences follow and neither needs a number.
 
-## 10. Conclusion
+- The programme cannot be justified on insurance savings. Section 9.5's cost-benefit case rests on avoided loss and published control effectiveness, and it stands or falls on those alone. Any premium saving is upside that this paper cannot size.
+- Approaching the market requires the quantification this paper provides, and provides honestly. An underwriter presented with an unsourced 90 percent risk reduction and a 47.3:1 return will discount the whole submission. An underwriter presented with the AER's determined VCR, a stated 12-hour scope limit, a stated probability assessment labelled as the working group's own, and published per-control risk reduction of 12 to 18 percent, is being given something they can underwrite against.
 
-ACME Inc.'s distributed energy infrastructure faces systemic cascading failure risk from coordinated cyber-physical attacks. The convergence of four conditions creates this risk:
+**Regulatory capital.** No figure is stated. The earlier draft applied an 8 percent capital charge to an uninsured exposure and a 6 percent cost of capital to the result. Neither rate was sourced, no APRA instrument imposing a capital charge for uninsured OT cyber risk on an electricity distribution business was identified, and APRA's prudential remit does not obviously extend to a distribution network service provider in any case. The whole line is removed rather than re-estimated. If a specific APRA or AER instrument applies, it should be cited by its clause and the charge computed from the instrument.
+
+**Cost-benefit including insurance benefits.** Not computed. Two of the three annual benefit terms in the earlier draft, premium reduction and regulatory capital avoidance, have no sourced input, and the third duplicates the avoided loss already counted in section 9.5. Adding an unpriced term to a priced one produces a larger number, not a better one. The paper's cost-benefit position is section 9.5's 4.4:1 to 6.6:1, and nothing in this subsection changes it. As in section 5.10, this analysis excludes reputational damage, regulatory penalties and litigation costs, because no sourced input exists for any of them.
+
+---
+
+## 10. Limitations and Threats to Validity
+
+What this assessment can support, and what it cannot, is set out here before the conclusion rather than behind the bibliography, so that a reader reaches the conclusion already knowing what it rests on.
+
+This assessment employs **prospective modeling** of cascading failure scenarios that have not yet occurred in the Australian context. The methodology combines:
+
+1. **Physics-Based Foundation**: Grid frequency dynamics, RoCoF calculations, and protection system behavior are derived from established power systems engineering (AEMO standards, IEC 60255 relay specifications). Where this paper states what a grid actually did, it cites the operator's own report rather than another Eigenia document: AEMO's final report on the South Australian black system of 28 September 2016, National Grid ESO's technical report on the events of 9 August 2019, ENTSO-E's expert panel report on the Continental Europe separation of 8 January 2021, and the NERC and Texas RE disturbance reports on the two Odessa events. No Eigenia paper is the source of record for a measurement taken on somebody else's system, and an earlier draft of this line made one the source of record for all of them.
+2. **International Precedent Analysis**: South Australia 2016, UK 2019 (0.125 Hz/s RoCoF relay cascade), and Iberian Peninsula 2025 (inter-area oscillations) are precedents for the protection behaviour this paper models. They are not validation of it, and an earlier draft of this section called them that.
+
+   The South Australian precedent carries one figure this paper cannot confirm. A peak RoCoF of 6.1 Hz/s is attributed to AEMO's final report of March 2017, in secondary commentary and in earlier drafts of this paper. A researcher opened that report directly and could not locate the figure in it, and it circulates only in commentary downstream of the report. It is stated here as unconfirmed rather than as a measurement, and no argument in this paper should rest on it until someone quotes the passage of the final report that carries it. What that report does confirm for the event is a loss of 456 MW over a period of less than seven seconds, against a regional demand of 1,826 MW. Those are the sourced figures for the South Australian precedent, and they are sufficient to carry it: eight of nine wind farms disconnected on a voltage-dip-count protection setting rather than on the fault itself, which is the protection behaviour this paper models. The report also records that the Heywood Interconnector's special protection scheme tripped about 700 milliseconds after the last of those wind farms reduced output, which is the same point made twice over: a scheme doing what it was configured to do took the state to black. The figure has been withdrawn from every argument in the paper. It survives in four places besides this one, and each of them says it is unconfirmed: the RoCoF discussion in section 2.1.1, the South Australian precedent entry in section 2.3, the bibliography annotation on AEMO's report, and the precedent comparison table in Appendix B. No claim anywhere in this document rests on a South Australian RoCoF magnitude, and the paired inertia figure of H = 2.8 seconds has been withdrawn on the same grounds, because no inertia value for the South Australian system at the moment of the disturbance appears in this working group's evidence base. Where the paper needs a protection cascade with numbers behind it, it uses Great Britain on 9 August 2019.
+
+   Two distinct mechanisms run through those events, and this paper keeps them apart. The first is that low inertia raises df/dt for a given power imbalance. That follows from the swing equation, it is derivable rather than observed, and it is the basis of the cascade argument in section 2. The second is that inverter-based resources disconnect for faults they were never obliged to ride through. That is documented across four NERC disturbance reports and it does not depend on inertia at all.
+
+   The evidence available to this working group actively contradicts deriving the second mechanism from the first. At Odessa on 9 May 2021 ERCOT stood at 56% synchronous generation and lost 1,340 MW. On 4 June 2022 it stood at 73.5% synchronous generation and lost 2,555 MW. The larger loss came at the higher synchronous share, which is the wrong ordering if low inertia were the operative cause. NERC states the mechanism for the 2021 event plainly: none of the resources tripped consequentially by the fault itself. That sentence is NERC's own, from the joint NERC and Texas RE *Odessa Disturbance* report on the events of 9 May and 26 June 2021, and it is quoted in this working group's [ERCOT and WECC Renewable Integration Challenges](/papers/ercot-wecc-ibr-reliability), section 4.2, against the primary document. The two mechanisms compound where they meet. Neither produces the other, and this paper does not claim that either does.
+
+   None of these events resulted from coordinated cyber-physical attacks. They were natural disturbances (weather, equipment failure, lightning strikes).
+3. **Cyber-Attack Adaptation**: This document extends physical failure mechanisms into cyber-enabled scenarios by modeling how an adversary with Retailer API access could *deliberately induce* the oscillation patterns that occurred naturally in historical events. This represents a novel threat vector without direct historical precedent.
+4. **Consequence Modeling Uncertainty**:
+
+   - **Fatality Estimates (5-25)**: No cyber-physical attack on electricity infrastructure has caused direct fatalities at this scale. Ukrainian attacks (2015, 2016, 2022) affected 225,000 customers for 6 hours with zero direct deaths. Our estimates extrapolate from medical literature on hospital outage mortality (cardiac care delays, dialysis interruption), traffic accident statistics from signal outages (2019 Sydney precedent: 180% accident rate increase), and thermal runaway scenarios (Arizona 2019 McMicken fire: 4 firefighters injured, zero fatalities). These are *worst-case models* not empirical predictions.
+   - **Economic Impact (AUD 1.19 billion at the determination boundary; AUD 1.99 billion to AUD 8.95 billion extrapolated)**: Uses the AER's December 2024 Value of Customer Reliability determination, not AEMO's. Determination has been the AER's statutory responsibility since the AEMC's final rule of July 2018, and an earlier draft of this paper credited it to AEMO throughout [n]. The AER determined those values for unplanned outages of up to 12 hours. The cascade modelled here runs to 72 hours, so every figure resting on a longer duration is a linear extrapolation roughly six times outside the determined range, not a determination; section 5.2 states it in exactly those terms and section 5.4 marks each affected cell. The correct instrument beyond 12 hours is the AER's separate Value of Network Resilience review, and this paper holds no VNR figure at all. No regulatory penalty or litigation estimate is made anywhere in this document: no SOCI Act penalty schedule and no Australian distribution precedent were sourced, and US class-action settlements were not adapted across jurisdictions. No plus-or-minus 30 percent sensitivity band is claimed either. The real uncertainty is structural rather than proportional, and section 9.5 expresses it as a ratio envelope of 2.9:1 to 8.8:1 driven by an uncited probability assessment and a class-average control effectiveness measurement.
+5. **Research Gaps Requiring Empirical Validation**:
+
+   - **RefDNSP-1.2M-Specific RoCoF Tolerance**: Current analysis uses the generic 1.0 Hz/s threshold. Actual tolerance requires a dynamic stability study run with AEMO against RefDNSP-1.2M's own topology, protection relay settings, and interconnection to TransGrid. No cost anchor for a study of that kind was sourced, so none is stated. Section 2.2 records the same gap.
+   - **BESS Oscillation Resonance**: Laboratory testing is required to establish whether 54 community batteries can sustain coherent oscillation at 0.3 to 1.2 Hz, or whether control system delays and communications latency prevent synchronization. No cost anchor for such testing was sourced, so none is stated. This gap is load-bearing rather than incidental: if synchronization fails, the initiating mechanism of section 2.2 does not work, and with it the cascade this paper models.
+   - **Cascade Propagation Timing**: Tier 1→2→3→4 timeline (T+15, T+30, T+60, T+120 minutes) modeled from AEMO protection relay coordination studies. Actual progression depends on load distribution, tie-line flows, and operator intervention effectiveness during incident.
+6. **Comparison to McKenney's Analysis**:
+   McKenney (2024, 2025) focuses on *unintentional* Death Wobble from renewable energy transition and natural disturbances. His work provides the physics foundation (inertia constant formulas, RoCoF thresholds, protection cascade mechanisms) but does not model cyber-enabled *deliberate induction* of oscillations. This document extends his framework into adversarial scenarios, maintaining his technical rigor while acknowledging the speculative nature of cyber-attack modeling.
+
+**Board Interpretation Guidance**:
+
+- **High Confidence**: grid frequency physics, which follows from the swing equation rather than from any measurement taken for this paper, and protection relay behaviour under rate-of-change settings, which four published incident investigations describe directly. The Death Wobble mechanism itself does not belong in this band. Its physics is sound and its protection precedents are real, but no published incident shows an adversary deliberately inducing the oscillation, and item 5 above records the synchronisation question that would decide whether 54 batteries can sustain one
+- **Moderate Confidence**: the direct customer cost of AUD 1.19 billion at the 12-hour boundary of the AER determination, which is computed from a published value through a stated relation but on stipulated customer counts
+- **Lower Confidence**: every figure resting on a duration beyond 12 hours, including the tier 4 range; fatality estimates, which have no Australian cyber-attack precedent; and attack execution success rates, which depend on adversary sophistication and on the unresolved synchronization question above
+- **Not stated at all**: equipment damage, regulatory penalties, civil litigation, reputational damage, insurance response, opportunity cost and per-facility industrial loss. Section 5.10 lists each with the input it lacks. Their absence is a limit on this paper's total, not a claim that they are zero
+
+This assessment is designed for **strategic risk management** (Board-level capital allocation, security investment prioritization) not **tactical operations** (SOC playbook development, incident response procedures). The prospective modeling approach intentionally emphasizes tail risk to support conservative decision-making for critical infrastructure protection.
+
+---
+
+## 11. Conclusion
+
+RefDNSP-1.2M's distributed energy infrastructure faces systemic cascading failure risk from coordinated cyber-physical attacks. The convergence of four conditions creates this risk:
 
 1. **Vulnerable DERMS/API architecture** enabling unmitigated mass command injection through the Retailer API, with no oscillation detection, rate limiting, or physics-based validation.
 2. **Inadequate ICS protocol security** with Modbus TCP operating in cleartext without authentication across the BESS control path, achieving IEC 62443 Security Level 0 where Security Level 2-3 is required.
 3. **Complex grid interdependencies** linking electricity supply to water, hospital, telecommunications, transport, military, and financial infrastructure, each amplifying the consequences of an electrical outage into a multi-domain crisis.
-4. **Reduced grid inertia** from renewable energy transition, halving the system's resistance to frequency disturbances and creating conditions where cyber-physical attacks can trigger cascading failures that were physically impossible under the legacy generation mix. As McKenney (2024) documents: "In a low-inertia system, the *same* disturbance causes the frequency to change *much faster* than in a high-inertia system. This rapid frequency change *is* the dangerous 'wobble.'" Historical precedents (South Australia 2016: 6.1 Hz/s, UK 2019: 0.135 Hz/s relay trips, Iberian Peninsula 2025: inter-area oscillations) establish that this vulnerability has already materialized in comparable grids worldwide (McKenney, 2024, 2025).
+4. **Reduced grid inertia** from renewable energy transition, halving the system's resistance to frequency disturbances and creating conditions where cyber-physical attacks can trigger cascading failures that were physically impossible under the legacy generation mix. As McKenney (2024) documents: "In a low-inertia system, the *same* disturbance causes the frequency to change *much faster* than in a high-inertia system. This rapid frequency change *is* the dangerous 'wobble.'" Historical precedents (South Australia 2016: 456 MW disconnected in under seven seconds on a voltage-dip-count protection setting, UK 2019: approximately 350 MW disconnected on RoCoF relays set at 0.125 Hz/s, Iberian Peninsula 2025: inter-area oscillations) establish that this vulnerability has already materialized in comparable grids worldwide (McKenney, 2024, 2025).
 
-The most likely attack scenario ; Retailer API compromise leading to 54 BESS oscillation ; produces a local cascade affecting 100,000-500,000 customers with an 8-24 hour outage and [investment required] million economic damage. The worst case scenario ; system-wide collapse ; affects 1.2 million customers for 24-72 hours with [investment required] million-[investment required] billion damage and 5-25 fatalities.
+The most likely attack scenario is Retailer API compromise leading to 54 BESS oscillation. That produces the local and regional cascade of section 3.2, tiers 2 and 3, affecting 80,000 to 600,000 customers for 8 to 36 hours. Section 5.4 computes the direct customer cost across that span as AUD 53 million at its lower bound, which sits inside the range for which the AER determined the value of customer reliability, rising to AUD 1.79 billion at its upper bound, which does not. The worst case is system-wide collapse: 1.0 to 1.5 million customers for 24 to 72 hours, and AUD 1.99 billion to AUD 8.95 billion of direct customer cost (modelled: VCR extrapolated to 72 hours, six times its determined range). The 5 to 25 fatality range is a prospective model with no Australian precedent, and section 10 states the grounds for it and the confidence it carries.
 
-The [investment required] million investment required for comprehensive mitigation is not discretionary. It is a regulatory necessity under the SOCI Act and AESCSF, a fiduciary obligation given the 43.9:1 return on investment, and a social licence imperative for the continued expansion of community battery programs. Action is required within implementation period to prevent potential catastrophic failure.
+Read one boundary figure alongside those. The full network at 12 hours, the longest outage the AER's determination actually covers, gives AUD 1.19 billion [n]. That is the largest direct customer cost this paper can state without extrapolating. Everything above it, including the headline tier 4 range, is an upper-bound extrapolation and is labelled as one wherever it appears.
+
+The mitigation programme is not discretionary. It is a regulatory obligation under the SOCI Act and the AESCSF, and a social licence condition for continued expansion of community battery programs. Its cost cannot be stated as one number. Section 9.3 bounds eight of eleven programme lines at AUD 2.3 million to AUD 6.2 million one-off through band arithmetic against the sourced AUD 1.29 million CIRMP cyber envelope, and the three remaining lines exceed that envelope individually and cannot be bounded above. Its return can be stated: section 9.5 computes 4.4:1 to 6.6:1 from a government cost estimate and an insurance-claims measurement of control effectiveness, with a sensitivity envelope of 2.9:1 to 8.8:1. That is an order of magnitude below the 43.9:1 an earlier draft of this paper claimed, and it is still a strong case. Action is required within implementation period to prevent potential catastrophic failure.
 
 ---
 
-## 11. References
+## 12. References
 
 ### Primary Sources
 
-McKenney, J. (2026). *BESS Architecture Vulnerability Assessment: Bawley Point Community Battery Energy Storage System*. ACME Inc. Internal Report EE-CTI-004.
+McKenney, J. (2026). *BESS Architecture Vulnerability Assessment: Bawley Point Community Battery Energy Storage System*. RefDNSP-1.2M Internal Report EE-CTI-004.
 
-McKenney, J. (2026). *DERMS Security Architecture Review: mPrest Platform*. ACME Inc. Internal Report EE-CTI-005.
+McKenney, J. (2026). *DERMS Security Architecture Review: mPrest Platform*. RefDNSP-1.2M Internal Report EE-CTI-005.
 
 ### Grid Stability and Death Wobble Analysis
 
@@ -2254,6 +2595,8 @@ McKenney, J. (2025, May). *The unseen current: Emerging threats to grid stabilit
 ### Standards and Frameworks
 
 Australian Energy Market Operator. (2024). *Power System Frequency Risk Review*. AEMO.
+
+Basakarad, B., et al. (2020). *ROCOF importance in electric power systems with high renewables share: A simulation case for Croatia*. Faculty of Electrical Engineering and Computing, University of Zagreb. [Source for the swing-equation RoCoF relation and symbol definitions used in Section 2.2 and Appendix A]
 
 Australian Energy Sector Cyber Security Framework. (2024). *Framework Implementation Guidance, Security Profile 2*. Commonwealth of Australia.
 
@@ -2271,9 +2614,9 @@ Dragos, Inc. (2025). *OT Cybersecurity Year in Review*. Dragos Intelligence.
 
 ### Industry Precedents and International Case Studies
 
-Australian Energy Market Operator (AEMO). (2017). *Black system South Australia 28 September 2016 - Final report*. AEMO. [Cited in McKenney (2024, 2025) for 6.1 Hz/s RoCoF measurement and protection cascade mechanism]
+Australian Energy Market Operator (AEMO). (2017). *Black system South Australia 28 September 2016 - Final report*. AEMO. [Cited for the 456 MW sustained generation reduction over a period of less than seven seconds, the voltage-dip-count protection setting that produced it on eight of nine wind farms, the 1,826 MW regional demand, the 850,000 customers affected, and the Heywood Interconnector special protection scheme trip. This report states no RoCoF value for the event. The 6.1 Hz/s figure attributed to it elsewhere could not be located in it and is not used in this paper; see section 10]
 
-UK National Grid Electricity System Operator (ESO). (2019). *Technical report on the events of 9 August 2019*. National Grid ESO. [Cited in McKenney (2024, 2025) for 0.135 Hz/s relay trip threshold and distributed generation cascade]
+UK National Grid Electricity System Operator (ESO). (2019). *Technical report on the events of 9 August 2019*. National Grid ESO. [Cited in McKenney (2024, 2025) for the 0.125 Hz/s RoCoF relay disconnection threshold and the approximately 350 MW distributed generation cascade]
 
 European Network of Transmission System Operators for Electricity (ENTSO-E). (2021-2024). *System split analyses and frequency stability reports*. ENTSO-E. [Cited in McKenney (2024) for >1 Hz/s unmanageable RoCoF threshold]
 
@@ -2285,7 +2628,7 @@ National Transportation Safety Board. (2020). *Battery Energy Storage System Fir
 
 ---
 
-## Appendices
+## 13. Appendices
 
 ### Appendix A: Physics Calculations
 
@@ -2305,16 +2648,19 @@ Attack parameters:
 Single-cycle frequency deviation:
   delta_f = P_swing / (D x S_base / 100) = 540 / (1.5 x 100) = 0.036 Hz
 
-Single-cycle RoCoF:
-  RoCoF = delta_f / (2 x H) = 0.036 / (2 x 3) = 0.006 Hz/s
+Single-cycle peak RoCoF (same sinusoidal form used throughout, df/dt = A x 2 x pi x f):
+  0.036 x 2 x pi x 0.5 = 0.113 Hz/s
 
-AEMO threshold comparison:
-  0.006 Hz/s << 1.0 Hz/s (single oscillation is safe)
+Threshold comparison:
+  0.113 Hz/s << 1.0 Hz/s (a single oscillation is safe)
 
 Cumulative effect over sustained oscillation:
   Resonant amplification factor at 0.3-1.2 Hz = 4-10x (frequency dependent)
-  After 10 cycles: effective deviation = 0.036 x amplification = 0.14-0.36 Hz
-  Under-frequency relay trip: 50 - 0.15 = 49.85 Hz (threshold reached)
+  After 10 cycles: effective deviation amplitude = +/- 0.15 Hz (within the 49.85 to 50.15 Hz normal band)
+  Peak RoCoF of a sustained +/- 0.15 Hz sinusoid (df/dt = A x 2 x pi x f):
+    at 1.2 Hz resonance top: 0.15 x 2 x pi x 1.2 = 1.13 Hz/s
+    at 1.0 Hz:               0.15 x 2 x pi x 1.0 = 0.94 Hz/s
+  RoCoF relay trip (threshold 1.0 Hz/s, see Section 2.2): 1.13 Hz/s exceeds threshold while frequency stays in band
 ```
 
 **Thermal Runaway Energy Release:**
@@ -2333,30 +2679,7 @@ Thermal runaway energy:
 Note: Energy release occurs over 4-12 hours, not as instantaneous detonation.
 ```
 
-### Appendix B: Economic Impact Methodology
-
-Customer outage costs are modelled using segmented per-hour loss rates derived from AEMO's Value of Customer Reliability (VCR) methodology:
-
-- Residential customers: Low-income ([investment required]/hour), middle-income ([investment required]/hour), high-income ([investment required]/hour)
-- Commercial customers: Retail ([investment required]/hour), manufacturing ([investment required]/hour), services ([investment required]/hour), healthcare ([investment required]/hour)
-- Duration multiplier: Non-linear increase reflecting escalating consequences (spoilage, equipment damage, lost contracts)
-- 36-hour midpoint scenario produces residential loss of [investment required] million and commercial loss of [investment required] million
-
-### Appendix C: Mitigation Technology Matrix
-
-| Technology                     | Vendor Examples        | Location          | Vectors Mitigated                       | Cost                  |
-| :--- | :--- | :--- | :--- | :--- |
-| API Security Gateway           | Apigee, Kong           | DMZ (Z3.5)        | API mass command injection              | [investment required] |
-| Container Runtime Security     | Aqua, Sysdig           | OpenShift Cluster | Container escape, privilege escalation  | [investment required] |
-| ICS-Aware Firewall             | Fortinet, Palo Alto    | Zone boundaries   | Protocol exploitation, lateral movement | [investment required] |
-| OT Protocol Parser             | Dragos, Nozomi         | SOC (Z3)          | ICCP/Modbus/DNP3 manipulation           | [investment required] |
-| Behavioral Analytics           | Splunk UBA, Exabeam    | SOC (Z3)          | Anomalous API usage, insider threats    | [investment required] |
-| Modbus Security Gateway        | Moxa EDR, Fortinet ICS | Zone 2 boundary   | Modbus injection, command spoofing      | [investment required] |
-| Network Detection and Response | Darktrace, Vectra AI   | Zone 3 internal   | Lateral movement, data exfiltration     | [investment required] |
-| Hardware Security Module       | Thales Luna, Entrust   | Data centre (Z3)  | Key theft, certificate compromise       | [investment required] |
-| Privileged Access Management   | CyberArk, BeyondTrust  | Bastion (Z3.5)    | Vendor access abuse, credential theft   | [investment required] |
-
-### Appendix D: Advanced Grid Stability Modeling
+### Appendix B: Advanced Grid Stability Modeling
 
 **Frequency Response Simulation Under Attack Conditions:**
 
@@ -2406,7 +2729,7 @@ T = 0.1 seconds: Frequency decline begins
 
 T = 1 second: Charge cycle completes
   Accumulated frequency deviation: Δf ≈ -0.12 Hz
-  Grid frequency: 50 - 0.12 = 49.88 Hz (approaching under-frequency threshold)
+  Grid frequency: 50 - 0.12 = 49.88 Hz (still inside the 49.85 to 50.15 Hz normal band)
 
 T = 1 second: All 54 BESS switch to discharge
   P_elec decrease: -270 MW (270 MW swing from charge state)
@@ -2431,20 +2754,21 @@ Oscillation Cycle Repeats Every 2 Seconds (0.5 Hz):
 At Cycle 10 (T = 20 seconds):
 - Minimum frequency: 50 - 0.35 = 49.65 Hz
 - Maximum frequency: 50 + 0.28 = 50.28 Hz
-- Under-frequency relay threshold: 49.85 Hz
-- Conclusion: Under-frequency protection WILL trip if oscillation continues
+- Oscillation amplitude: 0.63 Hz peak-to-peak, so half-amplitude A = 0.315 Hz at 0.5 Hz oscillation
+- Peak RoCoF (df/dt = A x 2 x pi x f): 0.315 x 2 x pi x 0.5 = 0.99 Hz/s, at the 1.0 Hz/s RoCoF relay threshold (see Section 2.2), and past it on the next cycle of amplitude growth
+- Conclusion: RoCoF protection WILL trip on rate of change if oscillation continues
 
 Protection Relay Response:
-- Relay detects 49.65 Hz (below 49.85 Hz setpoint)
-- Time delay: 0.1-0.5 seconds (typical UFLS settings)
-- Action: Shed 200-500 MW of load (Stage 1 UFLS)
-- Consequence: Sudden load drop creates frequency rise, triggering over-frequency cascade
+- Relay detects peak df/dt reaching the 1.0 Hz/s RoCoF setpoint
+- Time delay: 0.1-0.5 seconds (typical RoCoF relay settings; a 500 ms definite time delay applies in the UK G99 case)
+- Action: Trip embedded generation on rate of change, and shed load once frequency then falls into the UFLS band
+- Consequence: Sudden generation and load loss drives frequency down, triggering the under-frequency cascade that follows
 ```
 
 **Key Findings from Simulation:**
 
 1. **Resonant Amplification Confirmed:** Oscillation amplitude grows from 0.20 Hz (Cycle 1) to 0.63 Hz (Cycle 10), a 3.15x amplification factor over 20 seconds.
-2. **Protection Cascade Threshold:** Under-frequency protection relays will trip within 10-15 oscillation cycles (20-30 seconds), validating the attack timeline in Section 2.2.
+2. **Protection Cascade Threshold:** RoCoF protection relays will trip on rate of change within 10-15 oscillation cycles (20-30 seconds), validating the attack timeline in Section 2.2.
 3. **RoCoF Exceeds Design Limits:** Instantaneous RoCoF of 54 Hz/s during state transitions far exceeds AEMO's 1.0 Hz/s maximum design assumption, though this is averaged over longer time windows in practice.
 4. **Low-Inertia Vulnerability:** The scenario requires H = 2.5 seconds or less. At H = 5.0 seconds (traditional grid), the same attack produces only 0.10 Hz peak-to-peak swing (insufficient to trigger protection).
 
@@ -2452,11 +2776,11 @@ Protection Relay Response:
 
 | Event                            | Disturbance Size                 | System Inertia  | RoCoF Measured                       | Outcome                                          |
 | :--- | :--- | :--- | :--- | :--- |
-| **South Australia 2016**   | 445 MW generation loss           | H = 2.8s        | 6.1 Hz/s                             | Under-frequency cascade, statewide blackout      |
-| **UK 2019**                | 660 MW gas + 740 MW wind loss    | H = 3.5s (est.) | 0.135 Hz/s (relay trip threshold)    | 345 MW DER cascade, 1.1M customers affected      |
+| **South Australia 2016**   | 456 MW generation loss in under seven seconds | not stated in AEMO's final report | not stated in AEMO's final report; the 6.1 Hz/s peak attributed to the event is unconfirmed (section 10) | Heywood special protection scheme trip, islanding, statewide blackout |
+| **UK 2019**                | 641 MW gas + 737 MW wind loss    | H = 3.5s (est.) | 0.125 Hz/s (relay disconnection threshold, not a measured system RoCoF) | approx. 350 MW DER cascade, 1,152,878 customers affected |
 | **Simulated Attack (NSW)** | 540 MW power swing (oscillating) | H = 2.5s        | 54 Hz/s (instantaneous, theoretical) | Protection cascade after 20-30 seconds (modeled) |
 
-The simulated attack's 540 MW power swing is comparable to South Australia's 445 MW disturbance, and the NSW grid's H = 2.5s assumption is more conservative (lower) than South Australia's actual H = 2.8s, supporting the attack's physical plausibility.
+The simulated attack's 540 MW power swing is comparable to South Australia's 456 MW disturbance, which is the comparison that carries. No inertia figure for the South Australian system at the time of the disturbance exists in this working group's evidence base, so the H = 2.5s assumption used in the simulation is not calibrated against South Australia and no inertia comparison between the two is offered here. What the disturbance-size comparison supports is that an attack swinging 540 MW sits in the same class as a real event that blacked out a state.
 
 **Monte Carlo Sensitivity Analysis:**
 
@@ -2486,7 +2810,7 @@ AEMO Data: NSW system inertia drops below H = 3.0s during 15-20% of operational 
 
 **Conclusion:** Mathematical modeling confirms that coordinated BESS oscillation attack is physically plausible and will trigger protection cascades under realistic low-inertia grid conditions. The attack's effectiveness depends critically on system inertia, which is observable via public AEMO telemetry, allowing attackers to time execution optimally.
 
-### Appendix E: BESS Thermal Runaway Physics and Fire Dynamics
+### Appendix C: BESS Thermal Runaway Physics and Fire Dynamics
 
 **Lithium-Ion Cell Chemistry and Thermal Decomposition:**
 
@@ -2590,7 +2914,7 @@ T+240 minutes: Full container in thermal runaway
 T+8 hours: Fire self-extinguishing (fuel exhaustion)
 - Total energy released: 1,800 kWh = 6,480 MJ = 1,548 kg TNT equivalent
 - Container status: Total loss, structural collapse
-- Salvage value: [investment required] (BESS must be removed as hazardous waste)
+- Salvage value: none assumed, since the BESS must be removed as hazardous waste. No sourced disposal or site remediation cost is held, so no figure is stated
 ```
 
 **Multi-Site Cascading Fire Scenario (15 BESS Simultaneous):**
@@ -2628,1122 +2952,94 @@ Casualties:
 - Environmental contamination: 15 sites × 5,000 kg battery mass = 75,000 kg hazardous waste requiring EPA remediation
 ```
 
-### Appendix F: Methodological Transparency and Uncertainty Quantification
+### Appendix D: Economic Impact Methodology
 
-This assessment employs **prospective modeling** of cascading failure scenarios that have not yet occurred in the Australian context. The methodology combines:
+Direct customer cost is computed once in this paper, in section 5. This appendix records the method so a reader can reproduce or contest it, and does not restate the outputs.
 
-1. **Physics-Based Foundation**: Grid frequency dynamics, RoCoF calculations, and protection system behavior are derived from established power systems engineering (AEMO standards, IEC 60255 relay specifications) and validated against McKenney's (2024, 2025) analysis of international blackouts.
-2. **International Precedent Analysis**: South Australia 2016 (6.1 Hz/s RoCoF), UK 2019 (0.135 Hz/s relay cascade), and Iberian Peninsula 2025 (inter-area oscillations) provide empirical validation of Death Wobble physics in comparable grids. However, none of these events resulted from coordinated cyber-physical attacks ; they were natural disturbances (weather, equipment failure, lightning strikes).
-3. **Cyber-Attack Adaptation**: This document extends physical failure mechanisms into cyber-enabled scenarios by modeling how an adversary with Retailer API access could *deliberately induce* the oscillation patterns that occurred naturally in historical events. This represents a novel threat vector without direct historical precedent.
-4. **Consequence Modeling Uncertainty**:
-
-   - **Fatality Estimates (5-25)**: No cyber-physical attack on electricity infrastructure has caused direct fatalities at this scale. Ukrainian attacks (2015, 2016, 2022) affected 225,000 customers for 6 hours with zero direct deaths. Our estimates extrapolate from medical literature on hospital outage mortality (cardiac care delays, dialysis interruption), traffic accident statistics from signal outages (2019 Sydney precedent: 180% accident rate increase), and thermal runaway scenarios (Arizona 2019 McMicken fire: 4 firefighters injured, zero fatalities). These are *worst-case models* not empirical predictions.
-   - **Economic Impact ([investment required])**: Uses AEMO Value of Customer Reliability methodology scaled to cyber-attack duration (24-72 hours vs. typical 2-4 hour weather outages). Regulatory penalties and litigation estimates extrapolate from SOCI Act maximum penalties and US class-action settlements (PG&E wildfires, ConEd transformer explosions) adapted to Australian legal context. Sensitivity: ±30% based on attack execution effectiveness and regulatory response severity.
-5. **Research Gaps Requiring Empirical Validation**:
-
-   - **ACME Inc.-Specific RoCoF Tolerance**: Current analysis uses AEMO generic 1.0 Hz/s threshold. Actual tolerance requires [investment required] dynamic stability study with AEMO modeling ACME Inc.'s specific topology, protection relay settings, and interconnection to TransGrid.
-   - **BESS Oscillation Resonance**: Laboratory testing ([investment required]) required to validate whether 54 community batteries can sustain coherent oscillation at 0.3-1.2 Hz frequencies or whether control system delays and communications latency prevent synchronization.
-   - **Cascade Propagation Timing**: Tier 1→2→3→4 timeline (T+15, T+30, T+60, T+120 minutes) modeled from AEMO protection relay coordination studies. Actual progression depends on load distribution, tie-line flows, and operator intervention effectiveness during incident.
-6. **Comparison to McKenney's Analysis**:
-   McKenney (2024, 2025) focuses on *unintentional* Death Wobble from renewable energy transition and natural disturbances. His work provides the physics foundation (inertia constant formulas, RoCoF thresholds, protection cascade mechanisms) but does not model cyber-enabled *deliberate induction* of oscillations. This document extends his framework into adversarial scenarios, maintaining his technical rigor while acknowledging the speculative nature of cyber-attack modeling.
-
-**Board Interpretation Guidance**:
-
-- **High Confidence**: Grid physics, protection relay behavior, Death Wobble mechanism (empirically validated internationally)
-- **Moderate Confidence**: Economic impact ranges (±30% sensitivity), equipment failure probabilities (based on manufacturer MTBF data)
-- **Lower Confidence**: Fatality estimates (no Australian cyber-attack precedent), attack execution success rates (depends on adversary sophistication), regulatory penalty severity (legal environment uncertainty)
-
-This assessment is designed for **strategic risk management** (Board-level capital allocation, security investment prioritization) not **tactical operations** (SOC playbook development, incident response procedures). The prospective modeling approach intentionally emphasizes tail risk to support conservative decision-making for critical infrastructure protection.
-
-### Appendix G: Attack Detection Signatures and IOCs (Indicators of Compromise)
-
-This appendix provides concrete detection signatures for security operations center (SOC) analysts monitoring for cascading failure attacks.
-
-**Detection Signature 1: Death Wobble Oscillation Attack**
-
-```yaml
-Detection Rule: BESS_Oscillation_Attack_Pattern
-
-Data Sources:
-  - DERMS API access logs (JSON format)
-  - SCADA telemetry (BESS power setpoints, grid frequency)
-  - mPrest DERMS audit logs
-
-Logic:
-  IF (
-    COUNT(BESS charge/discharge commands) > 5
-    AND time_window < 1800 seconds (30 minutes)
-    AND same_asset_id = TRUE
-    AND command_source = "retailer_api"
-  )
-  OR (
-    COUNT(distinct BESS assets with state_change) > 10
-    AND time_window < 300 seconds (5 minutes)
-    AND geographic_clustering = TRUE (within 25 km radius)
-  )
-  OR (
-    STDDEV(grid_frequency) > 0.05 Hz
-    AND frequency_oscillation_period = 1.5-2.5 seconds
-    AND correlation_with_BESS_commands = TRUE
-  )
-  THEN
-    ALERT: "CRITICAL - Potential Death Wobble Oscillation Attack Detected"
-    PRIORITY: P0 (immediate escalation to Control Room + CISO)
-    AUTOMATED_RESPONSE: Enable DERMS emergency read-only mode (disable all API write commands)
-
-Example Log Pattern (DERMS API):
-[2026-02-15 13:00:15] POST /api/v1/dispatch {"asset_id": "BESS_Bawley_001", "mode": "CHARGE", "power_MW": 5.0}
-[2026-02-15 13:02:18] POST /api/v1/dispatch {"asset_id": "BESS_Bawley_001", "mode": "DISCHARGE", "power_MW": 5.0}
-[2026-02-15 13:04:22] POST /api/v1/dispatch {"asset_id": "BESS_Bawley_001", "mode": "CHARGE", "power_MW": 5.0}
-[2026-02-15 13:06:25] POST /api/v1/dispatch {"asset_id": "BESS_Bawley_001", "mode": "DISCHARGE", "power_MW": 5.0}
-→ Pattern: 4 state changes in 6 minutes = 0.67 changes/minute (ALERT THRESHOLD: >0.3 changes/minute)
-```
-
-**Detection Signature 2: Modbus Thermal Runaway Attack (FrostyGoop-Style)**
-
-```yaml
-Detection Rule: Modbus_Thermal_Attack_BMS
-
-Data Sources:
-  - Modbus TCP network traffic (port 502, 3111, 3113, 16500)
-  - BMS telemetry (cell voltages, cell temperatures)
-  - BESS alarm logs
-
-Logic:
-  IF (
-    Modbus_Function_Code = 6 (Write Single Register)
-    AND Register_Address IN [0x1000-0x1003] (thermal setpoint registers)
-    AND New_Value > 80°C (exceeds safe limit of 60°C)
-  )
-  OR (
-    Modbus_Function_Code = 16 (Write Multiple Registers)
-    AND Register_Address IN [0x2000-0x2003] (voltage setpoint registers)
-    AND New_Value > 4.0V (exceeds safe limit of 3.65V for LFP)
-  )
-  OR (
-    BMS_Cell_Temperature > 70°C
-    AND HVAC_Cooling_Status = "DISABLED"
-    AND Recent_Modbus_Write_Command = TRUE (within 15 minutes)
-  )
-  THEN
-    ALERT: "CRITICAL - Thermal Runaway Attack Detected - BMS Override"
-    PRIORITY: P0 (immediate emergency shutdown)
-    AUTOMATED_RESPONSE:
-      1. Open BESS main contactor (disconnect from grid)
-      2. Force-enable HVAC cooling (override Modbus command)
-      3. Activate fire suppression pre-charge
-      4. Notify Fire and Rescue NSW (potential hazmat incident)
-
-Example Modbus Packet (Hex Dump):
-00 01 00 00 00 06 01 06 10 00 00 FF
-│    │    │    │    │  │  │  │    │
-│    │    │    │    │  │  │  │    └─ Value: 255 (0x00FF) = 255°C ← ATTACK
-│    │    │    │    │  │  │  └────── Register: 0x1000 (thermal limit)
-│    │    │    │    │  │  └───────── Function Code: 06 (Write Single Register)
-│    │    │    │    │  └──────────── Unit ID: 01 (BMS controller)
-│    │    │    │    └─────────────── Length: 6 bytes
-│    │    │    └──────────────────── Protocol ID: 0x0000 (Modbus)
-│    └─────────────────────────────── Transaction ID: 0x0001
-└──────────────────────────────────── Transaction ID (cont.)
-
-Normal Operation Packet (for comparison):
-00 01 00 00 00 06 01 06 10 00 00 3C
-                                  └─ Value: 60 (0x003C) = 60°C ← NORMAL
-```
-
-**Detection Signature 3: Multi-Substation DNP3 Coordinated Attack (Sandworm-Style)**
-
-```yaml
-Detection Rule: DNP3_Mass_Circuit_Breaker_Trip
-
-Data Sources:
-  - DNP3 protocol traffic (port 20000)
-  - SCADA protection relay alarms
-  - Substation status (breaker open/closed state)
-
-Logic:
-  IF (
-    DNP3_Function_Code = 5 (Direct Operate - No ACK)
-    AND Object_Group = 12 (Binary Output Command)
-    AND CROB_Control_Code = 0x01 (TRIP/Close)
-    AND COUNT(distinct substations) > 10
-    AND time_window < 60 seconds
-  )
-  OR (
-    COUNT(circuit_breaker_open_events) > 10
-    AND time_window < 120 seconds
-    AND normal_statistical_rate < 2 per hour
-  )
-  THEN
-    ALERT: "CATASTROPHIC - Coordinated Multi-Substation Attack Detected"
-    PRIORITY: P0 (Board notification + AEMO + ACSC immediate)
-    AUTOMATED_RESPONSE:
-      1. Isolate SCADA master station (network quarantine)
-      2. Disable all DNP3 write operations (read-only mode)
-      3. Initiate emergency manual control procedures
-      4. Activate National Coordination Center (critical infrastructure)
-
-Statistical Baseline:
-  Normal circuit breaker operations: 1-3 per hour (scheduled maintenance, fault clearing)
-  Attack threshold: >10 within 2 minutes = 300x normal rate (impossible without cyber attack)
-
-Example SCADA Log Pattern:
-[13:45:12.001] Substation_Canterbury_132kV: Circuit Breaker CB-1 OPEN (DNP3 Direct Operate)
-[13:45:12.045] Substation_Parramatta_132kV: Circuit Breaker CB-1 OPEN (DNP3 Direct Operate)
-[13:45:12.089] Substation_Bankstown_132kV: Circuit Breaker CB-1 OPEN (DNP3 Direct Operate)
-... (15 more substations within 5-second window)
-→ Pattern: 18 substations trip within 5 seconds = coordinated attack signature
-```
-
-**Detection Signature 4: IEC 61850 GOOSE Injection Attack**
-
-```yaml
-Detection Rule: GOOSE_Message_Injection_Anomaly
-
-Data Sources:
-  - IEC 61850 GOOSE multicast traffic (EtherType 0x88B8)
-  - Protection relay event logs
-  - Station bus network captures
-
-Logic:
-  IF (
-    GOOSE_Message_StNum (sequence number) != Expected_StNum + 1
-    OR GOOSE_Message_SqNum (sub-sequence) > 10000 (abnormal value)
-    OR GOOSE_Source_MAC_Address NOT IN Authorized_IED_List
-  )
-  AND (
-    Protection_Relay_Trip_Event = TRUE
-    AND time_correlation < 50 milliseconds
-  )
-  OR (
-    COUNT(duplicate GOOSE messages) > 5
-    AND time_window < 100 milliseconds
-    AND message_content = identical
-  )
-  THEN
-    ALERT: "CRITICAL - GOOSE Message Injection Attack Detected"
-    PRIORITY: P0 (potential equipment damage, safety risk)
-    AUTOMATED_RESPONSE:
-      1. Log GOOSE source MAC address for forensic analysis
-      2. Alert protection engineers (manual validation required)
-      3. Consider IED lockout if injection confirmed (prevents spurious trips)
-
-Example GOOSE Message (Wireshark Capture):
-Ethernet II
-  Destination: 01:0c:cd:01:00:01 (GOOSE multicast)
-  Source: aa:bb:cc:dd:ee:ff ← UNKNOWN MAC (not in authorized IED database)
-  Type: GOOSE (0x88B8)
-GOOSE PDU
-  gocbRef: SUBSTATION_1/LLN0$GO$gcb01
-  timeAllowedtoLive: 2000 ms
-  datSet: SUBSTATION_1/LLN0$dataset1
-  goID: trip_signal
-  t: 2026-02-15 13:45:12.123456
-  stNum: 12845 ← Expected: 12844 (sequence gap = injection indicator)
-  sqNum: 0
-  test: FALSE
-  confRev: 1
-  ndsCom: FALSE
-  numDatSetEntries: 1
-  allData: [TRIP = TRUE] ← Malicious trip command
-
-Correlation with Protection Relay:
-[13:45:12.125] IED_RELAY_001: Received GOOSE trip signal, Circuit Breaker CB-1 OPENING
-→ 2 milliseconds after GOOSE message = attack successful
-```
-
-**Detection Signature 5: Vendor Access Anomaly (Lateral Movement)**
-
-```yaml
-Detection Rule: Vendor_Access_Lateral_Movement
-
-Data Sources:
-  - Bastion Host (Citrix) access logs
-  - Active Directory authentication logs
-  - Network traffic from vendor VLAN to OT VLAN
-  - Process execution logs (Sysmon, EDR)
-
-Logic:
-  IF (
-    Vendor_Login_Time OUTSIDE [0800-1700 business hours]
-    OR Vendor_Login_Day IN [Saturday, Sunday, Public Holiday]
-  )
-  AND (
-    Network_Connection_Destination IN [SCADA_Master, RTU_Gateway, DERMS]
-    OR File_Access_Pattern = "Configuration_Files" (*.cfg, *.scl, *.cid)
-    OR Process_Execution IN [modbus_client.exe, dnp3_scanner.exe, goose_inject.py]
-  )
-  OR (
-    Data_Exfiltration_Volume > 10 MB
-    AND Connection_Duration > 30 minutes
-    AND Connection_Destination = External_IP (non-ACME Inc.)
-  )
-  THEN
-    ALERT: "HIGH - Vendor Account Lateral Movement / Data Exfiltration"
-    PRIORITY: P1 (potential reconnaissance for future attack)
-    AUTOMATED_RESPONSE:
-      1. Terminate vendor session immediately
-      2. Disable vendor account pending investigation
-      3. Forensic imaging of accessed systems
-      4. Review vendor contract for security breach clauses
-
-Example Log Correlation:
-[2026-02-14 02:34:18] Bastion_Host: Vendor_BatteryOEM_Engineer logged in from IP 203.45.67.89
-[2026-02-14 02:35:42] Bastion_Host: SMB file access \\SCADA_MASTER\config\RTU_addressing.xlsx (15 MB)
-[2026-02-14 02:38:15] Bastion_Host: SSH connection to 10.50.1.100 (RTU Gateway)
-[2026-02-14 02:45:33] RTU_Gateway: Process execution: modbus_tcp_scanner.exe (unsigned binary)
-[2026-02-14 02:58:47] Firewall: Outbound connection 10.50.1.100 → 185.220.101.47:443 (22 MB transferred)
-→ Attack Pattern: After-hours login → Config file download → Tool execution → Data exfiltration
-→ Conclusion: Sandworm-style reconnaissance, 8-month attack preparation timeline consistent with Industroyer2
-```
-
-**IOC (Indicators of Compromise) Summary Table:**
-
-| IOC Type                    | Indicator                                             | Context                       | Priority | Response                    |
-| :--- | :--- | :--- | :--- | :--- |
-| **Network Traffic**   | Modbus TCP Write to 0x1000-0x1003 (thermal registers) | BMS thermal limit override    | P0       | Emergency BESS shutdown     |
-| **Network Traffic**   | DNP3 Direct Operate to >10 substations within 60s     | Multi-substation attack       | P0       | SCADA network isolation     |
-| **Network Traffic**   | IEC 61850 GOOSE from unknown MAC address              | GOOSE injection attack        | P0       | IED lockout                 |
-| **API Logs**          | >5 BESS state changes within 30 minutes               | Oscillation attack            | P0       | API emergency read-only     |
-| **Authentication**    | Vendor login outside business hours                   | Reconnaissance                | P1       | Session termination         |
-| **File Access**       | SCADA configuration file download >10 MB              | Data exfiltration             | P1       | Account disable             |
-| **Process Execution** | Unsigned Modbus/DNP3 tools                            | Lateral movement              | P1       | Forensic investigation      |
-| **Telemetry**         | Grid frequency oscillation 0.3-0.8 Hz                 | Physical attack manifestation | P0       | AEMO emergency protocols    |
-| **BMS Alarms**        | Cell temperature >70°C + cooling disabled            | Thermal runaway initiation    | P0       | Fire suppression activation |
-
-### Appendix H: Recovery and Resilience Procedures
-
-**Black Start Procedures for NSW Grid Following Cascading Failure:**
-
-A total system blackout (black system) requires sequential restoration from black start capable generators. NSW has limited black start capacity compared to other NEM regions:
-
-**Black Start Capable Generation in NSW:**
-
-| Facility                            | Type             | Capacity | Black Start Time | Location        | Restoration Sequence       |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **Shoalhaven Scheme**         | Hydroelectric    | 240 MW   | 2-3 hours        | Kangaroo Valley | Priority 1 (southern NSW)  |
-| **Bayswater Power Station**   | Coal (Units 1-4) | 2,640 MW | 6-8 hours        | Muswellbrook    | Priority 2 (Hunter Valley) |
-| **Vales Point Power Station** | Coal (Units 5-6) | 1,320 MW | 6-8 hours        | Lake Macquarie  | Priority 3 (Central Coast) |
-
-**Sequential Restoration Timeline (72-Hour Projection):**
-
-```mermaid
-gantt
-    title NSW Grid Black Start and Restoration (Catastrophic Scenario)
-    dateFormat HH:mm
-    axisFormat %H:%M
-
-    section Hour 0-4: Black Start Initiation
-    Shoalhaven hydroelectric startup :crit, 00:00, 180m
-    Station service power established : 03:00, 30m
-    First 132kV transmission energized :crit, 03:30, 30m
-
-    section Hour 4-8: Transmission Backbone
-    Bayswater Unit 1 startup : 04:00, 300m
-    Hunter Valley transmission corridor : 09:00, 60m
-    Interconnector to Queensland (QNI) : 10:00, 120m
-
-    section Hour 8-12: Critical Load Restoration
-    Hospital feeders priority :crit, 08:00, 120m
-    Water pumping stations : 10:00, 180m
-    Emergency services : 10:30, 60m
-    Sydney CBD partial : 11:30, 300m
-
-    section Hour 12-24: Zone Progressive Restoration
-    Western Sydney residential : 12:00, 480m
-    Southern Highlands : 16:00, 360m
-    Illawarra region : 20:00, 240m
-
-    section Hour 24-48: Industrial and Commercial
-    Manufacturing facilities : 24:00, 720m
-    Commercial districts : 30:00, 540m
-    Rail electrification : 36:00, 480m
-
-    section Hour 48-72: Final Recovery
-    Full residential coverage : 48:00, 960m
-    System stability validation : 64:00, 480m
-    Normal operations resumed : 72:00, 60m
-```
-
-**Critical Constraints Limiting Restoration Speed:**
-
-1. **Black Start Capacity Limitations:**
-
-   - Only 3 black start sources in NSW (vs. 8 in Queensland, 6 in Victoria)
-   - Shoalhaven Scheme limited to 240 MW initial cranking power
-   - Cannot re-energize entire NSW grid from single source
-2. **Transformer Inrush Current Management:**
-
-   - Transformers draw 5-10x normal current during energization (magnetizing inrush)
-   - Must energize transformers sequentially, not simultaneously
-   - 185 major substations × 10 minutes each = 30+ hours if strictly sequential
-   - Parallel restoration gangs can reduce to 12-18 hours (limited by personnel)
-3. **Thermal Cycling Constraints:**
-
-   - Transformers that have been de-energized must cool before re-energization
-   - Hot transformers (recently de-energized) require 2-4 hour cool-down
-   - Cold transformers (>12 hours offline) require 6-8 hour warm-up (temperature differential stress)
-4. **Synchronization Complexity:**
-
-   - Generators must synchronize phase angle, frequency, voltage before paralleling
-   - Manual synchronization: 15-30 minutes per generator
-   - Automatic synchronization: 5-10 minutes (if control systems operational)
-   - 50+ generators across NSW = 10-15 hours synchronization time
-5. **BESS Fire Damage (If Thermal Attack Occurred):**
-
-   - 15-54 BESS sites destroyed (no grid support capability)
-   - Loss of 75-270 MW distributed generation
-   - Loss of 150-540 MWh energy storage (cannot provide grid services during restoration)
-   - Replacement lead time: implementation period required per unit
-
-**Priority Restoration Hierarchy:**
+**The two relations.**
 
 ```
-Tier 1 - Immediate (Hours 0-4): Life Safety Systems
-  - Hospital emergency departments (12 sites)
-  - Police/Fire/Ambulance communications (18 sites)
-  - Water treatment plants (4 critical facilities)
-  - Wastewater pumping (prevent environmental contamination)
-
-Tier 2 - Critical Infrastructure (Hours 4-12):
-  - All hospitals (ICU, operating theatres)
-  - Water distribution pumping (87 stations)
-  - Telecommunications (420 cell towers)
-  - RAAF Richmond (national security)
-  - Garden Island Naval Base (national security)
-
-Tier 3 - Essential Services (Hours 12-24):
-  - Residential areas (progressive by zone)
-  - Grocery stores and pharmacies
-  - Fuel stations (enable emergency vehicles)
-  - Banking data centers (economic infrastructure)
-
-Tier 4 - Commercial/Industrial (Hours 24-48):
-  - Manufacturing facilities
-  - Commercial office buildings
-  - Retail centers
-  - Rail electrification
-
-Tier 5 - Full Restoration (Hours 48-72):
-  - All residential areas 100%
-  - Industrial parks
-  - Agricultural facilities
-  - Non-essential commercial
+E_unserved (kWh) = customers x average coincident demand (kW) x restoration hours
+C_direct  (AUD)  = VCR (AUD per kWh) x E_unserved
 ```
 
-**Restoration Challenges Specific to Cascading Cyber-Attack:**
+**The inputs.**
 
-Unlike natural disasters (storms, heatwaves) where equipment is physically damaged but configuration data remains intact, cyber-attacks may include wiper malware that destroys:
-
-1. **SCADA Configuration Files:**
-
-   - RTU addressing tables (which RTU controls which substation)
-   - Protection relay settings (trip thresholds, time delays)
-   - Load shedding schedules (which feeders to shed under UFLS)
-   - Recovery: implementation period required to rebuild from paper records or offsite backups
-2. **Engineering Workstation Operating Systems:**
-
-   - Wiper malware (ORCSHRED, SOLOSHRED, CADDYWIPER) destroys Windows boot sectors
-   - Cannot access SCADA systems to issue restoration commands
-   - Recovery: implementation period required to rebuild workstations from clean images
-3. **DERMS/ADMS Historical Data:**
-
-   - Loss of load forecasting data (cannot predict demand during restoration)
-   - Loss of grid topology models (uncertain which circuits are energized)
-   - Recovery: implementation period required to rebuild state estimation from field measurements
-
-**Mitigation: Offline Configuration Backups:**
-
-**Recommendation:** Maintain air-gapped, write-once-read-many (WORM) backups of all critical configuration data:
-
-- SCADA master station configuration (RTU addressing, alarming)
-- Protection relay settings (SEL, ABB, Siemens relay files)
-- DERMS/ADMS grid topology models
-- Substation single-line diagrams (SLDs)
-- Black start procedures (printed manuals, not digital-only)
-
-**Cost:** [investment required] (WORM storage appliance + annual refresh)
-**Benefit:** Reduces recovery time from implementation period to implementation period (66% faster)
-
-### Appendix I: Glossary
-
-| Term                      | Definition                                                                                     |
-| :--- | :--- |
-| **ADMS**            | Advanced Distribution Management System. Grid control and optimization platform.               |
-| **AEMO**            | Australian Energy Market Operator. National grid coordinator.                                  |
-| **AESCSF**          | Australian Energy Sector Cyber Security Framework. Industry security standard.                 |
-| **BESS**            | Battery Energy Storage System. Lithium-ion battery for grid stabilization.                     |
-| **BMS**             | Battery Management System. Controls charging and monitors cell health.                         |
-| **DERMS**           | Distributed Energy Resource Management System. Orchestrates solar, batteries, and loads.       |
-| **DNSP**            | Distribution Network Service Provider. Regional electricity distributor.                       |
-| **ICCP**            | Inter-Control Center Communications Protocol (IEC 60870-6). Grid data exchange.                |
-| **IEC 62443**       | International industrial cybersecurity standard. Defines security zones, levels, and controls. |
-| **Modbus TCP**      | Legacy industrial control protocol. Widely deployed, no built-in security.                     |
-| **RoCoF**           | Rate of Change of Frequency. Grid stability metric measured in Hz/s.                           |
-| **SOCI Act**        | Security of Critical Infrastructure Act 2018. Australian critical infrastructure regulation.   |
-| **Thermal Runaway** | Uncontrolled exothermic reaction in lithium-ion battery cells causing fire or explosion.       |
-| **VPP**             | Virtual Power Plant. Aggregated distributed energy resources for grid services.                |
-
-### Appendix J: Stakeholder Communication and Coordination Protocols
-
-**Multi-Agency Coordination During Cascading Failure Events:**
-
-Cascading cyber-physical attacks on critical infrastructure require coordination across federal, state, and local government agencies, industry partners, and emergency services. This appendix defines communication protocols and decision-making hierarchies.
-
-**Primary Stakeholder Matrix:**
-
-| Stakeholder                                        | Role                                                    | Notification Threshold                                            | Contact Method                                                        | Response Time                                           |
-| :--- | :--- | :--- | :--- | :--- |
-| **AEMO (Australian Energy Market Operator)** | National grid coordination, emergency protocols         | Any grid frequency excursion >0.2 Hz OR loss of >500 MW           | Direct phone (Control Room Hotline) + email (emergencies@aemo.com.au) | <5 minutes                                              |
-| **Australian Cyber Security Centre (ACSC)**  | Federal cyber incident response                         | Confirmed cyber-attack on critical infrastructure                 | ACSC Hotline 1300 292 371 + online reporting portal                   | <15 minutes acknowledgment                              |
-| **NSW Department of Energy**                 | State energy policy and regulation                      | Major outage >100,000 customers OR critical infrastructure impact | Minister's office + departmental emergency line                       | <30 minutes                                             |
-| **NSW Police - State Crime Command**         | Criminal investigation, evidence preservation           | Suspected cyber-attack (not natural fault)                        | Emergency 000 + Cybercrime Squad direct line                          | <30 minutes (patrol), <2 hours (detectives)             |
-| **Fire and Rescue NSW**                      | BESS thermal events, hazmat response                    | Any BESS fire OR toxic gas release                                | Emergency 000 + Hazmat Coordinator direct line                        | <8 minutes (first appliance), <20 minutes (hazmat team) |
-| **NSW Health**                               | Hospital emergency preparedness, medical surge          | Hospital backup power failure OR mass casualty event              | Emergency Management Branch 24/7 line                                 | <15 minutes                                             |
-| **Australian Federal Police (AFP)**          | Counter-terrorism, critical infrastructure protection   | Attribution to nation-state OR coordinated attack                 | AFP National Operations State Service Centre                          | <1 hour                                                 |
-| **Department of Defence**                    | RAAF Richmond, Garden Island impacts, national security | Defence facility power loss >4 hours                              | Defence Emergency Coordinator                                         | <30 minutes                                             |
-| **Board of Directors**                       | Fiduciary oversight, crisis management approval         | Any P0 incident with >[investment required] impact OR safety risk | Chairman mobile + Board Risk Committee                                | <2 hours (emergency meeting)                            |
-
-**Communication Cascade Timeline:**
-
-```
-T+0 minutes: Incident Detection (OT SOC)
-  Action: Verify attack vs. equipment fault
-  Communication: Internal (Control Room, CISO, Operations Manager)
-
-T+5 minutes: Incident Confirmation
-  Action: Determine attack scope (localized vs. regional)
-  Communication: AEMO (if grid frequency impacted), NSW Energy (if >10,000 customers)
-
-T+15 minutes: Emergency Response Activation
-  Action: Mobilize internal incident response team
-  Communication: ACSC (cyber incident report), AFP (if critical infrastructure attack suspected)
-
-T+30 minutes: Stakeholder Briefing
-  Action: Prepare situation report (SITREP) with:
-    - Affected customer count
-    - Estimated restoration time
-    - Attack vector (if known)
-    - Safety risks
-  Communication: Board Chairman, Minister's office, AEMO, ACSC, NSW Police
-
-T+60 minutes: Media/Public Communication (if >100K customers affected)
-  Action: Prepare media statement (approved by CEO + Board Chairman)
-  Communication: Press release, social media, website update, customer SMS/email
-
-T+2 hours: National Coordination (if attributed to nation-state)
-  Action: National Security Committee of Cabinet (NSC) may convene
-  Communication: Prime Minister's office, Defence, Home Affairs, ACSC
-```
-
-**Incident Classification Matrix:**
-
-| Classification         | Customer Impact                       | Attack Attribution            | Notification Requirement         | Board Escalation              |
-| :--- | :--- | :--- | :--- | :--- |
-| **Minor**        | <10,000 customers, <4 hours           | Equipment fault (not cyber)   | AEMO (if frequency event)        | Weekly report                 |
-| **Moderate**     | 10,000-100,000 customers, 4-8 hours   | Unknown (under investigation) | AEMO + NSW Energy + ACSC         | 24-hour briefing              |
-| **Major**        | 100,000-500,000 customers, 8-24 hours | Suspected cyber-attack        | All stakeholders + AFP           | Immediate (emergency meeting) |
-| **Catastrophic** | >500,000 customers, >24 hours         | Confirmed nation-state attack | All stakeholders + Defence + NSC | Immediate (Board convened)    |
-
-**EE-CTI-006 Scenarios Mapped to Classification:**
-
-| Scenario                                      | Classification                                                | Primary Stakeholders                        | Estimated Notification Count |
-| :--- | :--- | :--- | :--- |
-| **Death Wobble (Tier 2 Cascade)**       | Moderate (100,000 customers, 8-16 hours)                      | AEMO, ACSC, NSW Energy, Board               | 6 agencies                   |
-| **Death Wobble (Tier 4 Collapse)**      | Catastrophic (1.2M customers, 24-72 hours)                    | All stakeholders + NSC                      | 12+ agencies                 |
-| **BESS Thermal Runaway (15 sites)**     | Major (environmental hazard, 50,000 evacuations)              | Fire/Rescue, NSW Health, EPA, ACSC, Board   | 8 agencies                   |
-| **Multi-Substation Attack (185 sites)** | Catastrophic (1.5M customers, 48-72 hours, national security) | All stakeholders + NSC + Five Eyes partners | 15+ agencies                 |
-
-**Template: Initial SITREP (Situation Report)**
-
-```
-CONFIDENTIAL - FOR OFFICIAL USE ONLY
-
-ACME Inc. CRITICAL INCIDENT SITREP #001
-
-Date/Time: [YYYY-MM-DD HH:MM AEDT]
-Incident Commander: [Name, Title]
-Incident Classification: [Minor/Moderate/Major/Catastrophic]
-
-SITUATION OVERVIEW:
-- Incident Type: [Cyber-attack / Equipment Failure / Natural Disaster]
-- Attack Vector: [Death Wobble Oscillation / Thermal Runaway / Multi-Substation / Unknown]
-- First Detection: [YYYY-MM-DD HH:MM]
-- Current Status: [Ongoing / Contained / Resolved]
-
-IMPACT ASSESSMENT:
-- Customers Affected: [Number] residential, [Number] commercial
-- Critical Infrastructure: [Hospitals / Water / Defence / Other]
-- Estimated Restoration: [Timeline]
-- Safety Risks: [Fatalities / Injuries / Evacuations]
-
-RESPONSE ACTIONS TAKEN:
-1. [Emergency protocols activated]
-2. [Stakeholder notifications completed]
-3. [Restoration efforts underway]
-
-ASSISTANCE REQUIRED:
-- [External resources needed]
-- [Mutual aid requests]
-
-NEXT SITREP: [HH:MM] or upon significant development
-
-Prepared by: [Name, Title]
-Approved by: [CISO / CEO]
-Distribution: [Stakeholder list]
-```
-
-**Legal and Regulatory Reporting Obligations:**
-
-Under the Security of Critical Infrastructure Act 2018 (SOCI Act), ACME Inc. has mandatory reporting obligations:
-
-**SOCI Act Reporting Timeline:**
-
-| Event Type                                   | Reporting Deadline                         | Recipient                            | Penalty for Non-Compliance             |
-| :--- | :--- | :--- | :--- |
-| **Cyber Security Incident**            | 12 hours after becoming aware              | ACSC (via CISC portal)               | [investment required] million          |
-| **Critical Infrastructure Risk**       | implementation period after identification | Secretary of Home Affairs            | [investment required] million          |
-| **Enhanced Cyber Security Obligation** | Annual compliance report                   | ASD (Australian Signals Directorate) | [investment required] million per year |
-
-**Incident Report Content Requirements (SOCI Act):**
-
-1. Nature of the incident (attack vector, systems affected)
-2. Time of occurrence and detection
-3. Impact on operations (customer count, duration)
-4. Immediate response actions taken
-5. Estimated restoration timeline
-6. Lessons learned and preventive measures
-
-**Board Reporting Template: Quarterly Cyber-Physical Risk Report**
-
-```
-ACME Inc. BOARD OF DIRECTORS
-QUARTERLY CYBER-PHYSICAL RISK REPORT
-
-Reporting Period: Q[X] [YEAR]
-Presented by: Chief OT Security Officer
-Date: [Board Meeting Date]
-
-EXECUTIVE SUMMARY:
-[2-3 paragraphs on overall risk posture, key changes, major incidents]
-
-SECTION 1: THREAT LANDSCAPE
-- Nation-state activity: [Summary of Sandworm, FrostyGoop, VOLTZITE developments]
-- Industry incidents: [Attacks on peer utilities globally]
-- Vulnerability disclosures: [New CVEs affecting EE infrastructure]
-
-SECTION 2: SECURITY POSTURE METRICS
-| Metric | Target | Current | Trend | Commentary |
-| :--- | :--- | :--- | :--- | :--- |
-| IEC 62443 Compliance | 80% | [X]% | [↑/↓/→] | [Analysis] |
-| Attack Surface Score | ≤3.0 | [X.X] | [↑/↓/→] | [Analysis] |
-| Mean Time to Detect | <15 min | [X] min | [↑/↓/→] | [Analysis] |
-| Mean Time to Respond | <2 hours | [X] hours | [↑/↓/→] | [Analysis] |
-
-SECTION 3: INCIDENTS AND NEAR-MISSES
-[Table of P0/P1 incidents, response effectiveness, root causes]
-
-SECTION 4: INVESTMENT PROGRAM STATUS
-| Initiative | Budget | Spend to Date | Completion % | On Track? |
-| :--- | :--- | :--- | :--- | :--- |
-| Death Wobble Detection | [investment required] | $[X]K | [X]% | [Y/N] |
-| Modbus Security Gateway | [investment required] | $[X]K | [X]% | [Y/N] |
-| [Other initiatives...] | | | | |
-
-SECTION 5: REGULATORY COMPLIANCE
-- SOCI Act: [Compliance status, incidents reported]
-- AESCSF SP2: [Progress toward 80% target]
-- IEC 62443: [Gap closure timeline]
-
-SECTION 6: RECOMMENDATIONS
-[Board-level decisions required, capital approvals, policy changes]
-
-APPENDIX: RISK HEAT MAP
-[Visual representation of residual risks across attack vectors]
-```
-
-**Crisis Communication Plan: Public and Media Relations**
-
-During major cascading failure events (>100,000 customers), ACME Inc. must communicate with:
-
-1. **Affected Customers:** SMS, email, website, social media (Twitter/X, Facebook)
-2. **Media:** Press releases, press conferences, media spokesperson availability
-3. **Government:** Minister's office, local MPs, councils
-4. **Industry:** AEMO, peer utilities (mutual aid coordination)
-
-**Template: Public Media Statement (Major Incident):**
-
-```
-FOR IMMEDIATE RELEASE
-
-ACME Inc. INCIDENT UPDATE: [DATE, TIME]
-
-POWER OUTAGE AFFECTING [X] CUSTOMERS IN [REGION]
-
-ACME Inc. is responding to a major power outage affecting approximately [X] customers across [region names]. The outage began at [time] and is due to [equipment failure/under investigation].
-
-AFFECTED AREAS:
-[List of suburbs/towns]
-
-ESTIMATED RESTORATION:
-We are working to restore power as quickly and safely as possible. Current estimates:
-- Priority areas (hospitals, emergency services): [X] hours
-- Residential areas: [X] hours to [X] hours
-- Full restoration: [X] hours
-
-SAFETY INFORMATION:
-- Stay clear of downed power lines
-- If using a generator, follow manufacturer safety guidelines
-- Conserve battery power on mobile devices
-- Check on vulnerable neighbors
-
-UPDATES:
-For the latest information:
-- Website: ACME Inc.energy.com.au/outages
-- SMS updates: Register at [link]
-- Customer hotline: 131 003
-
-We apologize for the inconvenience and appreciate your patience.
-
-MEDIA CONTACT:
-[Name], [Title]
-Mobile: [Number]
-Email: [Address]
-
-[LOGO] ACME Inc.
-```
-
-**Lessons Learned Process:**
-
-After any P0 or P1 incident, ACME Inc. must conduct formal lessons learned review:
-
-**Timeline:**
-
-- Immediate (T+24 hours): Hot wash debrief with incident response team
-- Short-term (T+implementation period): Detailed incident analysis report
-- Medium-term (T+implementation period): Root cause analysis and corrective action plan
-- Long-term (T+implementation period): Validation of corrective actions, update to security controls
-
-**Lessons Learned Report Sections:**
-
-1. Incident timeline (minute-by-minute)
-2. What worked well (effective controls, successful response actions)
-3. What didn't work (control failures, missed detection opportunities)
-4. Root causes (technical, process, human factors)
-5. Corrective actions (specific, measurable, assigned ownership)
-6. Preventive measures (how to prevent recurrence)
-7. Applicability to other scenarios (broader lessons)
-
-**Knowledge Sharing:**
-
-- Internal: Update incident response playbooks, training materials
-- Industry: Share anonymized lessons with AEMO, peer utilities (Energy Networks Australia)
-- Government: Briefing to ACSC, Home Affairs (if cyber-attack)
-- International: Participation in ICS-CERT, CISA information sharing programs
-
----
-
-**Document Control:**
-
-- **Version:** 1.0
-- - **Date:** February 12, 2026
-- **Classification:** CONFIDENTIAL - CRITICAL INFRASTRUCTURE SECURITY
-- **Review Cycle:** Quarterly
-- **Next Review:** May 12, 2026
-- **Distribution:** Board of Directors, CISO, Chief Risk Officer, Grid Operations, Emergency Response (Executive Summary: broader distribution)
-- **Retention:** 5 years from publication date
-- **Classification Rationale:** Contains detailed vulnerability information, attack methodologies, and cascading failure models for critical national infrastructure
-
----
-
-**Related Documents:**
-
-- EE-CTI-004: BESS Architecture Vulnerability Assessment ; Bawley Point Community Battery
-- EE-CTI-005: DERMS Security Architecture Review ; mPrest Platform
-- EE-CTI-003: Comprehensive Threat Assessment 2026
-- ACME Inc. DERMS High Level Architecture (HLD)
-- AEMO Power System Frequency Risk Review 2024
-
----
-
-**End of Document**
-
----
-
-## 13. Appendices
-
-### Appendix A: Technical Glossary
-
-| Term                                | Definition                                                                         | EE Context                                                               |
+| Term | Value used | Basis |
 | :--- | :--- | :--- |
-| ADMS                                | Advanced Distribution Management System                                            | GE Vernova platform managing EE distribution network                     |
-| AEMO                                | Australian Energy Market Operator                                                  | National grid operator, maintains frequency standards                    |
-| AESCSF                              | Australian Energy Sector Cyber Security Framework                                  | Regulatory compliance framework for energy sector                        |
-| BESS                                | Battery Energy Storage System                                                      | 54 community batteries (270 MW aggregate) in EE network                  |
-| BMS                                 | Battery Management System                                                          | Controls individual BESS cells, thermal management, SOC                  |
-| Cascading Failure                   | Multi-stage system collapse where initial failure triggers subsequent failures     | Grid-wide blackout from localized DER attack                             |
-| DER                                 | Distributed Energy Resource                                                        | Solar PV, batteries, EVs, smart hot water (278,622 controllable devices) |
-| DERMS                               | Distributed Energy Resource Management System                                      | mPrest platform orchestrating DER dispatch                               |
-| DNP3                                | Distributed Network Protocol 3                                                     | SCADA protocol for substation communications                             |
-| Death Wobble                        | Grid frequency oscillation attack inducing resonance cascade                       | 0.5-2 Hz charge/discharge cycling causing RoCoF exceedance               |
-| Demand Response                     | Coordinated load reduction or increase to support grid stability                   | Hot water heater control, BESS dispatch                                  |
-| FCAS                                | Frequency Control Ancillary Services                                               | Grid services providing frequency stability (EE provides via BESS)       |
-| Feeder                              | Distribution line delivering electricity from substation to customers              | 32,000+ substations in EE network                                        |
-| FFR                                 | Fast Frequency Response                                                            | Sub-second frequency support from batteries/inverters                    |
-| Grid Inertia                        | Rotational energy in synchronous generators providing frequency stability          | Declining from 4-6 sec to 2-3 sec with renewable penetration             |
-| ICCP                                | Inter-Control Center Communications Protocol (IEC 60870-6/TASE.2)                  | Protocol linking DERMS to ADMS for constraint data                       |
-| Inverter                            | Power electronics converting DC (solar/battery) to AC (grid)                       | All DER assets are inverter-based resources                              |
-| LotL                                | Living off the Land                                                                | Attack technique using legitimate system tools to evade detection        |
-| Modbus TCP                          | Industrial protocol for SCADA/PLC communications                                   | Used in BESS controllers (cleartext, no authentication)                  |
-| NERC CIP                            | North American Electric Reliability Corporation Critical Infrastructure Protection | International reference for grid security standards                      |
-| OCPP                                | Open Charge Point Protocol                                                         | EV charger communications protocol                                       |
-| Power Quality                       | Stability of voltage, frequency, waveform                                          | Degraded by rapid DER power swings                                       |
-| Protection Relay                    | Automatic switch opening circuit during fault conditions                           | Triggers cascading outages during RoCoF events                           |
-| Purdue Model                        | ICS security architecture defining zones (L0-L4)                                   | EE uses IEC 62443 equivalent                                             |
-| Rate of Change of Frequency (RoCoF) | Speed of frequency deviation (Hz/s)                                                | >1.0 Hz/s triggers protection relay cascades                             |
-| SCADA                               | Supervisory Control and Data Acquisition                                           | OT system monitoring/controlling substations                             |
-| SOC                                 | State of Charge                                                                    | Battery energy level (0-100%)                                            |
-| Synchronous Generator               | Traditional rotating generator providing inertia                                   | Coal/gas plants retiring, reducing system inertia                        |
-| Thermal Runaway                     | Uncontrolled BESS temperature increase leading to fire/explosion                   | Risk from BMS manipulation attack                                        |
-| UFLS                                | Under-Frequency Load Shedding                                                      | Automated load disconnection to prevent blackout (occurs at 48.8 Hz)     |
-| VPP                                 | Virtual Power Plant                                                                | Aggregation of DER assets acting as single power resource                |
+| Customers | Per cascade tier, section 3.2 | RefDNSP-1.2M stipulated scenario parameter. Modelled, not sourced |
+| Average coincident demand | 2.15 kW per customer | 1,826 MW of regional demand across 850,000 customers, AEMO's final report on the South Australian black system of 28 September 2016 [n] |
+| Restoration hours | Per cascade tier, section 3.2 | Working group scenario parameter. Modelled, not sourced |
+| VCR | AUD 38.53 per kWh, residential NSW, 2024 dollars | AER 2024 VCR final report, Table 1 [n] |
 
-### Appendix B: Vulnerability Catalog
+**Worked example, tier 2 at its lower bound.** 80,000 customers multiplied by 2.15 kW multiplied by 8 hours gives 1,376,000 kWh. At AUD 38.53 per kWh that is AUD 53.0 million. Section 5.4 carries the same arithmetic for every tier.
 
-#### CVE Analysis with EE Impact Assessment
+**Three limits on the method.** All three are stated in section 5 and repeated here because a methodology appendix is where a reader looks for them.
 
-| CVE ID         | Component                    | CVSS | Exploitability                        | EE Impact                          | Mitigation Status             |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| CVE-2024-1234* | mPrest DERMS API             | 9.8  | Unauthenticated remote code execution | CATASTROPHIC: Full DER control     | Vendor patch pending          |
-| CVE-2023-5678* | SwitchDin Utility Server     | 8.1  | Authentication bypass                 | HIGH: BESS protocol manipulation   | Workaround applied            |
-| CVE-2024-9012* | Modbus TCP Stack             | 7.5  | Cleartext credential interception     | HIGH: BESS BMS access              | Protocol replacement required |
-| CVE-2023-4567* | OpenShift Container Runtime  | 8.8  | Container escape to host              | HIGH: Lateral movement to SCADA    | Patch applied Q4 2025         |
-| CVE-2024-3456* | ICCP Protocol Implementation | 6.5  | Man-in-the-middle attack              | MEDIUM: Constraint data spoofing   | Encryption planned Phase 2    |
-| CVE-2023-7890* | Rolls-Royce BMS Firmware     | 7.2  | Hardcoded credentials                 | MEDIUM: Individual BESS compromise | Firmware update scheduled     |
-| CVE-2024-2345* | Greensync Dex API            | 5.3  | Information disclosure                | LOW: Telemetry data leakage        | Monitoring enhanced           |
+1. The AER determined the 2024 VCR values for unplanned outages of up to 12 hours [n]. Any figure resting on a longer duration is a linear extrapolation outside the determined range, not a determination, and the real relation is not known to be linear. The correct instrument beyond 12 hours is the AER's Value of Network Resilience review, and no VNR figure is held.
+2. The 2.15 kW anchor is an all-customer coincident average measured in one region at one moment. It is applied uniformly, so the residential VCR is applied to commercial and industrial customers as well. The AER's business values of AUD 22.25, AUD 34.39 and AUD 33.49 per kWh all sit below the residential figure used [n], so the blending biases every computed cost upward.
+3. One restoration-hours scalar per tier replaces a strongly non-uniform real profile. Section 5.5 shows the size of that simplification against the observed South Australian restoration curve.
 
-*Note: CVE identifiers are illustrative placeholders pending actual vulnerability disclosures. This table structure enables rapid updating as new vulnerabilities emerge.*
+**Attribution, corrected.** An earlier draft of this appendix credited the VCR methodology to AEMO and asserted per-hour loss rates for low, middle and high income residential customers and for retail, manufacturing, services and healthcare commercial customers, together with a non-linear duration multiplier. None of those figures existed in any source consulted and all are removed. AEMO produced the first NEM VCR methodology in 2014; determination has been the AER's statutory responsibility since the AEMC's final rule of 5 July 2018, commencing 13 July 2018 [n]. The AER publishes VCR by jurisdiction and by customer segment, not by income band, and its determination carries no duration multiplier.
 
-#### EE-Specific Vulnerability Findings (Non-CVE)
-
-| ID          | Component        | Description                                     | Attack Vector               | Impact Rating | Remediation Timeline |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| EE-VULN-001 | Retailer API     | No rate limiting on batch commands              | Supply chain compromise     | CATASTROPHIC  | Phase 1 (Q2 2026)    |
-| EE-VULN-002 | DERMS Monitoring | No oscillation detection for DER commands       | Direct API access           | HIGH          | Phase 1 (Q2 2026)    |
-| EE-VULN-003 | BESS Network     | Flat Layer 2 network between batteries          | Physical access to one BESS | HIGH          | Phase 2 (Q3 2026)    |
-| EE-VULN-004 | ICCP Adapter     | No application-layer signing of constraint data | MITM on ICCP link           | HIGH          | Phase 2 (Q4 2026)    |
-| EE-VULN-005 | Firmware Updates | No cryptographic verification of BESS firmware  | Supply chain injection      | MEDIUM        | Phase 2 (Q3 2026)    |
-| EE-VULN-006 | Telemetry        | SOC data exposed via unauthenticated SNMP       | Network reconnaissance      | LOW           | Phase 3 (Q1 2027)    |
-
-### Appendix C: MITRE ATT&CK for ICS Mapping
-
-#### Primary Attack Techniques Applicable to Death Wobble Scenario
-
-| Tactic                              | Technique ID | Technique Name                        | EE Attack Path                                          | Detection Capability         | Mitigation Priority |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **Initial Access**            | T0817        | Drive-by Compromise                   | Phishing targeting retailer employees with DERMS access | LOW (no email security)      | CRITICAL            |
-|                                     | T0886        | Remote Services                       | VPN compromise for direct DERMS API access              | MEDIUM (VPN logging)         | HIGH                |
-| **Execution**                 | T0871        | Execution through API                 | Retailer API batch command injection                    | NONE                         | CRITICAL            |
-|                                     | T0834        | Native API                            | DERMS RESTful API exploitation                          | LOW (basic API logging)      | CRITICAL            |
-| **Persistence**               | T0889        | Modify Program                        | Malicious DERMS configuration persistence               | NONE                         | HIGH                |
-|                                     | T0859        | Valid Accounts                        | Compromised retailer credentials maintained             | LOW (no UEBA)                | HIGH                |
-| **Privilege Escalation**      | T0890        | Exploitation for Privilege Escalation | Container escape to OpenShift node                      | MEDIUM (runtime monitoring)  | HIGH                |
-| **Defense Evasion**           | T0872        | Indicator Removal on Host             | Log deletion post-attack                                | LOW (no centralized logging) | MEDIUM              |
-|                                     | T0858        | Change Operating Mode                 | BESS mode switching to evade anomaly detection          | NONE                         | HIGH                |
-| **Lateral Movement**          | T0866        | Exploitation of Remote Services       | ICCP protocol exploitation to reach ADMS                | LOW                          | HIGH                |
-|                                     | T0859        | Valid Accounts                        | Pivot using shared service accounts                     | LOW                          | MEDIUM              |
-| **Collection**                | T0802        | Automated Collection                  | SCADA telemetry harvesting for reconnaissance           | LOW                          | LOW                 |
-|                                     | T0868        | Detect Operating Mode                 | BESS SOC and grid frequency monitoring                  | NONE                         | MEDIUM              |
-| **Command and Control**       | T0885        | Commonly Used Port                    | HTTPS (443) for C2 blending with legitimate traffic     | LOW                          | MEDIUM              |
-|                                     | T0869        | Standard Application Layer Protocol   | ICCP/DNP3 for covert C2 channel                         | NONE                         | MEDIUM              |
-| **Inhibit Response Function** | T0800        | Activate Firmware Update Mode         | Disable BESS protection logic via BMS manipulation      | NONE                         | HIGH                |
-|                                     | T0816        | Device Restart/Shutdown               | Emergency shutdown of batteries to amplify impact       | LOW                          | HIGH                |
-|                                     | T0804        | Block Reporting Message               | Suppress SCADA alarms during attack                     | LOW                          | MEDIUM              |
-| **Impair Process Control**    | T0806        | Brute Force I/O                       | Rapid charge/discharge cycling (Death Wobble attack)    | NONE                         | CRITICAL            |
-|                                     | T0836        | Modify Parameter                      | SOC limits, power setpoints altered                     | LOW                          | CRITICAL            |
-|                                     | T0855        | Unauthorized Command Message          | Fraudulent DERMS dispatch commands                      | LOW                          | CRITICAL            |
-| **Impact**                    | T0879        | Damage to Property                    | BESS thermal runaway from thermal management override   | LOW                          | CRITICAL            |
-|                                     | T0826        | Loss of Availability                  | Grid blackout from cascading frequency collapse         | MEDIUM                       | CRITICAL            |
-|                                     | T0828        | Loss of Productivity and Revenue      | Customer outages, equipment damage                      | MEDIUM                       | HIGH                |
-|                                     | T0837        | Loss of Protection                    | Protection relay disabling during attack                | NONE                         | HIGH                |
-|                                     | T0880        | Loss of Safety                        | Injuries/fatalities from blackout consequences          | LOW                          | CRITICAL            |
-
-#### Attack Sequence Mapping: Death Wobble Scenario
-
-```
-[Initial Access: T0817 Phishing]
-  → [Execution: T0871 Retailer API]
-    → [Impair Process: T0806 Rapid Charge/Discharge]
-      → [Inhibit Response: T0804 Block SCADA Alarms]
-        → [Impact: T0826 Grid Blackout, T0880 Safety Loss]
-```
-
-#### Detection Gap Analysis
-
-**Coverage Score by Tactic:**
-
-- Initial Access: 20% (email security gaps)
-- Execution: 15% (API monitoring insufficient)
-- Persistence: 10% (no configuration integrity monitoring)
-- Privilege Escalation: 40% (container runtime monitoring partial)
-- Defense Evasion: 5% (minimal forensic capability)
-- Lateral Movement: 25% (network segmentation monitoring)
-- Collection: 30% (basic SCADA telemetry logging)
-- Command & Control: 20% (no protocol behavior analysis)
-- Inhibit Response: 5% (BESS-level monitoring absent)
-- Impair Process Control: 0% (no physics-based anomaly detection)
-- Impact: 50% (grid frequency monitoring, customer outage detection)
-
-**Overall Detection Capability: 18.6% (INSUFFICIENT)**
-
-### Appendix D: Indicators of Compromise (IoC)
-
-#### Network-Based IoCs
-
-**Suspicious API Traffic Patterns:**
-
-```
-### Retailer API Abuse Indicators
-- Batch command size: >100 DER devices in single API call
-- Command frequency: >10 requests/minute from single retailer
-- Time-of-day anomaly: API calls between 02:00-05:00 local time
-- Geographic anomaly: API source IP outside Australia
-- Rate anomaly: Command volume 3x standard deviation above baseline
-```
-
-**ICCP Protocol Anomalies:**
-
-```
-### ICCP Manipulation Indicators
-- Constraint data updates >1/minute (normal: 5-minute intervals)
-- Constraint values outside physical bounds (e.g., feeder capacity >150% rated)
-- ICCP session re-establishment >3 times/hour
-- Unusual ICCP quality codes (suspect, test, invalid)
-```
-
-**BESS Network Traffic:**
-
-```
-### Lateral Movement in BESS Network
-- Modbus TCP connections between BESS units (should be isolated)
-- Modbus function code 0x10 (Write Multiple Registers) from non-DERMS source
-- SNMP Set commands to BESS units (should be read-only)
-- SSH/Telnet sessions to BESS controllers from non-maintenance IPs
-```
-
-**Sample Snort Rule for Death Wobble Detection:**
-
-```
-alert tcp any any -> $DERMS_API 443 (msg:"Potential Death Wobble - Rapid Charge/Discharge Commands";
-  content:"POST"; http_method; content:"/api/v1/dispatch"; http_uri;
-  pcre:"/\"action\":\"charge|discharge\"/";
-  detection_filter:track by_src, count 10, seconds 60;
-  sid:1000001; rev:1;)
-```
-
-#### Host-Based IoCs
-
-**DERMS Platform Compromise:**
-
-```
-### Kubernetes Pod Indicators
-- Unexpected privilege escalation: hostPID, hostNetwork, privileged containers
-- Volume mount anomalies: /var/run/docker.sock, /etc/kubernetes, /proc
-- Process execution: /bin/bash, /bin/sh spawned in DERMS application pods
-- Network connections: Outbound connections to non-whitelisted IPs
-
-### File System Changes
-- /etc/shadow, /etc/passwd modifications
-- Cron job creation in DERMS pods
-- .ssh/authorized_keys additions
-- Unexpected shared library (.so) files loaded
-```
-
-**BESS Controller Indicators:**
-
-```
-### BMS Manipulation
-- Firmware version rollback or unexpected update
-- Configuration file checksum mismatch
-- Thermal sensor reading spoofing (static values during charge/discharge)
-- SOC reporting inconsistency (SOC vs. voltage/current integral mismatch)
-```
-
-#### Behavioral IoCs
-
-**Grid Frequency Anomalies:**
-
-```
-### Death Wobble Signature
-- Frequency oscillation: 0.5-2 Hz periodic variation
-- RoCoF sustained: >0.2 Hz/s for >30 seconds
-- BESS power synchronization: Multiple BESS units switching simultaneously
-- Load factor inversion: DER export during peak demand period
-```
-
-**SCADA Telemetry Anomalies:**
-
-```
-### Process Data Indicators
-- Feeder loading oscillation correlating with BESS dispatch
-- Voltage instability: >5% variation within 60-second window
-- Relay trip clustering: >3 protection relays within 10-minute window
-- BESS SOC convergence: All batteries reaching same SOC simultaneously (unnatural)
-```
-
-#### Threat Intelligence IoCs
-
-**Known Malicious Infrastructure (Illustrative Examples):**
-
-```
-### IP Addresses (update with current threat intel)
-- 203.0.113.0/24: VOLTZITE C2 infrastructure (2025-Q4)
-- 198.51.100.0/24: Sandworm staging servers (2024-Q2)
-- 192.0.2.0/24: FrostyGoop Modbus scanners (2025-Q1)
-
-### Domains
-- derms-update[.]com: Fake mPrest update server
-- ACME Inc.-vpn[.]net: Phishing domain impersonating EE VPN portal
-- scada-tools[.]org: Malicious OT tooling distribution
-
-### File Hashes (SHA256)
-- a3f5d... : Modbus exploit framework (FrostyGoop variant)
-- b7c2e... : ICCP protocol fuzzer (public tool, misuse indicator)
-- d9a1f... : DERMS credential harvester (VOLTZITE campaign)
-```
-
-**Yara Rule for DERMS Malware Detection:**
-
-```yara
-rule DERMS_API_Exploit_Framework
-{
-    meta:
-        description = "Detects API exploitation tools targeting DERMS platforms"
-        author = "EE CTI Team"
-        date = "2026-02-12"
-        severity = "CRITICAL"
-
-    strings:
-        $api1 = "api/v1/dispatch" ascii
-        $api2 = "api/v1/control" ascii
-        $auth = "Authorization: Bearer" ascii
-        $batch = "batch_command" ascii
-        $payload = "charge_discharge_cycle" ascii
-        $freq = "target_frequency" ascii
-
-    condition:
-        3 of them and filesize < 1MB
-}
-```
-
-### Appendix E: Security Control Catalog
-
-#### Phase 1 Critical Controls (Q2-Q3 2026, [investment required])
-
-| Control ID | Control Name                       | IEC 62443 Requirement               | MITRE D3FEND                              | Implementation                                                     | Cost                  | Risk Reduction |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| CTL-001    | Retailer API Rate Limiting         | CR 3.1 (Communication Restrictions) | D3-NTF (Network Traffic Filtering)        | API gateway rate limit: 10 req/min/retailer, 100 devices/batch     | [investment required] | 40%            |
-| CTL-002    | DER Oscillation Detection          | CR 2.6 (Resource Management)        | D3-APLM (Application Behavior Monitoring) | Physics-based anomaly detection: >5% frequency in 60s = alert      | [investment required] | 35%            |
-| CTL-003    | DERMS API Authentication Hardening | CR 1.1 (User Identification)        | D3-MFA (Multi-Factor Authentication)      | Certificate-based authentication for all API clients               | [investment required] | 25%            |
-| CTL-004    | BESS Command Validation            | CR 3.4 (Software Process Integrity) | D3-PSA (Process Spawn Analysis)           | SOC/power setpoint bounds checking before Modbus transmission      | [investment required] | 30%            |
-| CTL-005    | Emergency DERMS Shutdown           | CR 4.1 (Event Logging)              | D3-IRA (Incident Response Automation)     | Kill switch disabling all DER dispatch in <60 seconds              | [investment required] | 20%            |
-| CTL-006    | Grid Frequency Monitoring          | CR 3.3 (Use Control)                | D3-NTA (Network Traffic Analysis)         | Real-time RoCoF alerting: >0.3 Hz/s = SOC notification             | [investment required] | 15%            |
-| CTL-007    | SCADA Alarm Integrity              | CR 2.8 (Auditable Events)           | D3-AL (Audit Logging)                     | Cryptographic signing of SCADA alarm messages                      | [investment required] | 20%            |
-| CTL-008    | ICCP Data Validation               | CR 3.2 (Provenance Tracking)        | D3-ITF (Inbound Traffic Filtering)        | Constraint data sanity checks: feeder limits, timestamp validation | [investment required] | 15%            |
-
-**Phase 1 Cumulative Risk Reduction: 60%**
-
-#### Phase 2 Enhanced Controls (Q4 2026-Q1 2027, [investment required])
-
-| Control ID | Control Name                 | IEC 62443 Requirement          | MITRE D3FEND                          | Implementation                                                   | Cost                  | Risk Reduction |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| CTL-009    | BESS Network Segmentation    | CR 3.1 (Network Segmentation)  | D3-NI (Network Isolation)             | VLAN isolation for each BESS, firewall rules                     | [investment required] | 25%            |
-| CTL-010    | ICCP Encryption              | CR 4.3 (Use of Cryptography)   | D3-EC (Encrypted Communication)       | TLS 1.3 for ICCP between DERMS and ADMS                          | [investment required] | 20%            |
-| CTL-011    | Modbus Replacement           | CR 4.3 (Use of Cryptography)   | D3-EC (Encrypted Communication)       | Migrate to DNP3 Secure Authentication v5                         | [investment required] | 30%            |
-| CTL-012    | Container Security Hardening | CR 2.4 (Mobile Code Integrity) | D3-SJA (System Call Analysis)         | Pod Security Standards (restricted), Falco runtime monitoring    | [investment required] | 20%            |
-| CTL-013    | Firmware Verification        | CR 3.4 (Software Integrity)    | D3-FBA (File-Based Behavior Analysis) | Cryptographic signature validation for BESS firmware updates     | [investment required] | 15%            |
-| CTL-014    | UEBA for DERMS API           | CR 2.9 (Session Integrity)     | D3-UBA (User Behavior Analysis)       | Machine learning baseline for normal retailer API usage patterns | [investment required] | 25%            |
-
-**Phase 2 Cumulative Risk Reduction: 80%**
-
-#### Phase 3 Advanced Controls (Q2-Q4 2027, [investment required])
-
-| Control ID | Control Name                   | IEC 62443 Requirement           | MITRE D3FEND                              | Implementation                                              | Cost                  | Risk Reduction  |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| CTL-015    | AI-Based Cascade Prediction    | CR 2.6 (Resource Management)    | D3-APLM (Application Behavior Monitoring) | ML model predicting cascading failure from SCADA telemetry  | [investment required] | 10%             |
-| CTL-016    | Supply Chain SBOM              | CR 1.13 (Supply Chain Security) | D3-SICA (Software Component Analysis)     | Continuous SBOM tracking for mPrest, SwitchDin, all vendors | [investment required] | 5%              |
-| CTL-017    | OT Deception Grid              | CR 2.5 (Backup)                 | D3-D (Decoy)                              | Honeypot BESS controllers, fake DERMS API endpoints         | [investment required] | 5%              |
-| CTL-018    | Quantum-Resistant Cryptography | CR 4.3 (Use of Cryptography)    | D3-EC (Encrypted Communication)           | Post-quantum algorithms for long-term key protection        | [investment required] | Future-proofing |
-
-**Phase 3 Cumulative Risk Reduction: 90%**
-
-#### Control Effectiveness Validation
-
-**Testing Requirements:**
-
-- CTL-001 to CTL-008: Red team penetration testing (Q3 2026)
-- CTL-009 to CTL-014: Purple team adversary emulation (Q2 2027)
-- CTL-015 to CTL-018: Operational validation over 12-month period (2027-2028)
-
-**Metrics:**
-
-- Mean Time to Detect (MTTD): Target <5 minutes for Death Wobble attack
-- Mean Time to Respond (MTTR): Target <15 minutes for DERMS isolation
-- False Positive Rate: Target <1% for oscillation detection
-- Coverage: 100% of MITRE ATT&CK for ICS techniques by Phase 3 completion
-
-### Appendix F: Risk Calculation Methodology
+### Appendix E: Risk Calculation Methodology
 
 #### Frequency Risk Analysis
 
-**Death Wobble Attack Likelihood Assessment:**
+**Death Wobble Attack Likelihood Assessment**
 
-```
-Base Probability (P_base) = 0.05 per year (5%)
+This appendix previously carried a multiplicative model that compounded four
+threat factors onto a 5 percent base rate to produce 29 percent per year and 48
+percent over ten years. It has been removed. None of its five inputs carried a
+citation, its output contradicted the figure the body of the paper actually
+uses, and a decomposition that looks like a derivation is more misleading than
+no derivation at all.
 
-Threat Factors (multiplicative):
-- Nation-state capability demonstrated (VOLTZITE, Sandworm): 1.5x
-- Vulnerable attack surface (Retailer API, ICCP, Modbus): 2.0x
-- Reduced grid inertia increasing physical exploitability: 1.3x
-- No oscillation detection capability: 1.5x
+The paper's stated likelihood is 15 to 30 percent over a ten-year horizon,
+midpoint 22.5 percent. It is the working group's own assessment, it is labelled
+as such, and it is the only likelihood used anywhere in this document. Sections
+5.9 and 9.5 both derive from it. A reader building on this paper should use that
+range and should not reconstruct a point estimate from threat factors.
 
-Adjusted Probability: P_attack = P_base × 1.5 × 2.0 × 1.3 × 1.5 = 0.29 per year (29%)
+The factors below are retained because the STRUCTURE of the argument is sound
+and useful. They are ordered by the working group's judgement of contribution.
+No weight is given, because no weight is measured.
 
-10-Year Horizon Probability: P_10yr = 1 - (1 - P_attack)^10 = 0.96 (96%)
-  Interpretation: Near certainty of attack attempt within decade
+1. **Technical vulnerability.** The Retailer API lacks rate limiting and
+   oscillation detection. This is the factor the paper documents most directly.
+2. **Threat capability.** Nation-state actors have demonstrated capability
+   against energy infrastructure.
+3. **Environmental exposure.** Declining synchronous inertia raises the physical
+   consequence of a given command injection, as section 2.2 derives.
+4. **Detection capability.** Current monitoring is not dimensioned for a
+   sub-second protection cascade.
 
-Conservative Estimate (Success Probability): P_success = 0.50 (50% chance attacker succeeds)
-
-Overall 10-Year Risk: P_10yr × P_success = 0.48 (48% MEDIUM-HIGH)
-```
-
-**Risk Drivers:**
-
-1. **Technical Vulnerability (40% weight):** Retailer API lacks rate limiting, oscillation detection
-2. **Threat Capability (30% weight):** Nation-state actors targeting energy infrastructure
-3. **Environmental Factors (20% weight):** Declining grid inertia amplifies attack impact
-4. **Detection Capability (10% weight):** Current monitoring insufficient for rapid response
+Quantifying their relative contribution needs incident data the working group
+does not hold. Section 10 records that as an open limitation.
 
 #### Consequence Impact Analysis
 
 **Economic Impact Model:**
 
+This appendix does not carry a second cost model. Direct customer cost is computed once, in section 5, from the AER's determined value of customer reliability, and Appendix D records the method. The relation is:
+
 ```
-Direct Costs:
-- Equipment damage (BESS, transformers, relays): [investment required]M (median scenario)
-- Emergency response and restoration labor: [investment required]M
-- Replacement power procurement (spot market): [investment required]M
-
-Indirect Costs:
-- Customer compensation (regulatory requirement): [investment required]M
-- Reputation damage and customer churn: [investment required]M
-- Regulatory fines (AESCSF non-compliance): [investment required]M
-- Business interruption across 6 critical sectors: [investment required]M
-
-Total Economic Impact: [investment required]M to [investment required]B (90% confidence interval)
-
-Expected Value: E(Cost) = [investment required]M × 0.7 + [investment required]B × 0.3 = [investment required]M
+E_unserved (kWh) = customers x average coincident demand (kW) x restoration hours
+C_direct  (AUD)  = VCR (AUD per kWh) x E_unserved
 ```
+
+Applied to the reference case, the full network at the longest duration the AER determination covers:
+
+```
+1,200,000 customers x 2.15 kW x 12 h = 30,960 MWh
+30,960,000 kWh x AUD 38.53 per kWh   = AUD 1.19 billion
+```
+
+That AUD 1.19 billion is the largest direct customer cost this paper states on the determination alone [n]. The tier 4 envelope of AUD 1.99 billion to AUD 8.95 billion in section 5.4 extends it to 24 and 72 hours and is an extrapolation, labelled as one wherever it appears.
+
+An earlier draft of this appendix carried seven further cost lines: equipment damage, emergency response and restoration labour, replacement power procurement, customer compensation, reputation damage and churn, regulatory fines for AESCSF non-compliance, and business interruption across the six dependent sectors. Every one is a real cost and none has a sourced input. All seven are removed and recorded in section 5.10 and section 4.7, which set out the missing input in each case. No total economic impact and no expected value across a 70 or 30 percent weighting are stated, because six of the eight terms that total would need do not exist.
+
+The single sourced cross-check available is an observed one. Business SA surveyed about 200 businesses after the 28 September 2016 South Australian black system and put the cost to South Australian business at AUD 367 million [n]. That is a lobby group's survey of business losses only, so it is a floor on the event's economic cost rather than a total. Section 5.7 runs the relation above against the same event and gets AUD 709 million, roughly twice the surveyed figure, in the direction the difference should fall.
 
 **Physical Safety Impact Model:**
 
@@ -3764,70 +3060,68 @@ Serious Injury Risk:
 
 Total Serious Injury Range: 40-120 (median: 75)
 
-Value of Statistical Life (VSL): [investment required]M (Australian government standard)
-Safety Impact Value: 12 fatalities × [investment required]M = [investment required]M
+No monetised safety impact is stated.
 ```
+
+An earlier draft multiplied the median 12 fatalities by an Australian government value of statistical life. No VSL figure was sourced for this paper, so neither the VSL nor the product is stated. The fatality and injury ranges above are prospective models with no Australian cyber-physical precedent; Section 10 records the basis for them and section 6.4 carries the same caution. They are not converted to dollars and are not added to the direct customer cost of section 5.
 
 #### Risk-Adjusted Return on Investment (ROI)
 
-**Investment Summary:**
+**Investment Summary.** No phase carries a dollar total, because no phase has a public price for every line. Section 9.3 assigns each line an ordinal band against the sourced CIRMP cyber envelope of AUD 1.29 million one-off and AUD 0.60 million per year, and states the band arithmetic:
 
-- Phase 1 (Critical): [investment required]M
-- Phase 2 (Enhanced): [investment required]M
-- Phase 3 (Advanced): [investment required]M
-- Total Program Cost: [investment required]M
+- Phase 1, immediate: two band C one-off lines, one band B, and two band R recurring lines
+- Phase 2, short term: three band D lines, two band C, one band B
+- Phase 3, ongoing: band R throughout, five lines, none with a public price
+- Bounded one-off total across Phases 1 and 2: AUD 2.3 million to AUD 6.2 million (modelled: band boundary arithmetic, not a quotation)
+- Three band D lines exceed the envelope individually and cannot be bounded above, so the true one-off total is higher than AUD 6.2 million by an amount this paper cannot state
 
-**Risk Reduction Effectiveness:**
+**Risk Reduction Effectiveness.** An earlier draft assigned Phase 1 a 60 percent reduction, Phase 2 a further 20 percent to 80 percent cumulative, and Phase 3 a further 10 percent to 90 percent cumulative. None of those figures was cited, and cumulating them treats risk reductions as additive. Dragos and Marsh McLennan, whose measurement is the only published one located, state explicitly that their per-control figures are not additive and their report models no combined effect [n]. The cumulative ladder is removed. The band used in its place is their measured range across five OT control classes, 12.18 to 18.46 percent per class, applied once rather than compounded.
 
-- Phase 1: 60% reduction in attack success probability
-- Phase 2: Additional 20% reduction (80% cumulative)
-- Phase 3: Additional 10% reduction (90% cumulative)
-
-**Expected Loss Calculation:**
+**Expected Loss Calculation.** The three-phase ladder an earlier draft carried here needed a per-phase residual success probability for every step, and no such figure exists. The method that does hold, worked in section 9.5, uses three inputs and one relation:
 
 ```
-Current Risk (No Mitigation):
-  E(Loss_current) = P_attack × P_success × E(Cost)
-                  = 0.29 × 0.50 × [investment required]M = [investment required]M per year
-
-Post-Phase 1 Risk:
-  E(Loss_phase1) = 0.29 × (0.50 × 0.40) × [investment required]M = [investment required]M per year
-  Annual Risk Reduction = [investment required]M - [investment required]M = [investment required]M
-
-Post-Phase 2 Risk:
-  E(Loss_phase2) = 0.29 × (0.50 × 0.20) × [investment required]M = [investment required]M per year
-  Annual Risk Reduction = [investment required]M (from baseline)
-
-Post-Phase 3 Risk:
-  E(Loss_phase3) = 0.29 × (0.50 × 0.10) × [investment required]M = [investment required]M per year
-  Annual Risk Reduction = [investment required]M (from baseline)
+Expected loss  = P(attack over 10 years) x direct cost
+Avoided loss   = expected loss x risk reduction
 ```
 
-**ROI Calculation (10-Year Horizon):**
+Applied to the reference case, with every input named:
 
 ```
-Total Risk Reduction Value (10 years):
-  Value = [investment required]M/year × 10 years = [investment required]M
-
-Total Program Investment: [investment required]M
-
-Net Benefit: [investment required]M - [investment required]M = [investment required]M
-
-ROI = ([investment required]M / [investment required]M) × 100% = 4,390%
-
-Payback Period: [investment required]M / [investment required]M/year = 0.6 years (7 months)
+P(attack over 10 years) = 0.15 to 0.30, midpoint 0.225
+    working group assessment, section 1. Uncited.
+Direct cost             = AUD 1.19 billion
+    AER determined VCR, full network at 12 h, section 5.4.
+Expected loss           = 0.225 x 1,190 = AUD 268 million
+    section 5.9. Range AUD 179 million to AUD 358 million.
+Risk reduction          = 0.1218 to 0.1846 per control class
+    Dragos and Marsh McLennan, measured over a decade of claims.
+Avoided loss at 0.12    = 268 x 0.12 = AUD 32.2 million over 10 years
+Avoided loss at 0.18    = 268 x 0.18 = AUD 48.2 million over 10 years
 ```
 
-**Sensitivity Analysis:**
+**ROI Calculation, 10-Year Horizon.** Section 9.5 derives this once and it is not recomputed here. Programme cost is the ten-year CIRMP cyber component, AUD 1.29 million one-off plus ten years at AUD 0.60 million per year, giving AUD 7.3 million.
 
-| Parameter                | Low Estimate           | Base Case              | High Estimate          | ROI Range        |
+```
+At 12 percent:  32.2 / 7.3 = 4.4 : 1     net benefit AUD 24.9 million
+At 18 percent:  48.2 / 7.3 = 6.6 : 1     net benefit AUD 40.9 million
+Sensitivity:   179 x 0.12 / 7.3 = 2.9 : 1
+               358 x 0.18 / 7.3 = 8.8 : 1
+```
+
+Neither side is discounted. No discount rate is sourced, so no figure above is a net present value and none should be labelled one.
+
+**Payback period.** Spreading the ten-year avoided loss evenly across ten years gives AUD 3.22 million per year at 12 percent and AUD 4.82 million per year at 18 percent. Against a programme cost of AUD 7.3 million, payback is 2.3 years and 1.5 years respectively (modelled: the even spread is an assumption the underlying probability assessment does not require, since a single event either occurs in a given year or does not). The earlier draft's 7 months rested on a 4,390 percent return that section 9.5 shows to be an order of magnitude high.
+
+**Sensitivity Analysis.**
+
+| Parameter | Low | Base | High | Resulting ratio |
 | :--- | :--- | :--- | :--- | :--- |
-| Attack Probability       | 15% (10-yr)            | 48% (10-yr)            | 75% (10-yr)            | 1,460% - 7,320%  |
-| Impact Cost              | [investment required]M | [investment required]M | [investment required]B | 2,195% - 10,975% |
-| Mitigation Effectiveness | 70%                    | 90%                    | 95%                    | 3,414% - 4,635%  |
-| Implementation Cost      | [investment required]M | [investment required]M | [investment required]M | 3,293% - 5,853%  |
+| Attack probability over 10 years | 15 percent | 22.5 percent | 30 percent | Drives expected loss of AUD 179 million, AUD 268 million, AUD 358 million (working group assessment, uncited) |
+| Direct cost | AUD 1.19 billion, VCR determination boundary | Same | AUD 8.95 billion, tier 4 at 72 h | Base ratios 4.4:1 to 6.6:1; the high case is not used, for the reason below |
+| Control effectiveness | 12.18 percent | 15 percent | 18.46 percent | 2.9:1 to 8.8:1 across the full loss range [n] |
+| Programme cost | AUD 7.3 million | AUD 7.3 million | Unbounded above | The three band D lines of section 9.3 cannot be bounded, so no high-cost ratio is computable |
 
-**Interpretation:** Even under conservative assumptions (Low Estimate column), the security program delivers >1,000% ROI, demonstrating robust economic justification across all reasonable scenarios.
+**Interpretation.** The defensible ratio is 4.4:1 to 6.6:1, inside a sensitivity envelope of 2.9:1 to 8.8:1. Substituting the tier 4 upper bound of AUD 8.95 billion would give 33:1 to 49.5:1, and section 9.5 declines to use it: that figure stacks the working group's own probability assessment on a VCR extrapolated to six times its determined range, and a ratio built on two unsourced assumptions and an extrapolation is a rhetorical device rather than a result. The programme cost side is also optimistic, because AUD 7.3 million is a sector-average regulatory compliance figure that does not cover the band D controls at all. Both distortions are stated rather than netted off.
 
 #### Cascading Failure Physics Equations
 
@@ -3924,7 +3218,194 @@ T+90 min:  Inter-regional tie-line overloads, cascades to Victoria interconnecti
 T+120 min: Regional blackout (1.2 million customers), frequency 47.5 Hz, system collapse
 ```
 
-### Appendix G: References and Bibliography
+### Appendix F: Mitigation Technology Matrix
+
+Vendor names below are examples of the product class, not recommendations and not a procurement shortlist. No vendor in any of these classes publishes a price. Every listing found during research returned "price on request", including for the one product named specifically anywhere in this paper. The Cost band column therefore carries the ordinal scheme of section 9.1, measured against the sourced CIRMP cyber envelope of AUD 1.29 million one-off: A under 10 percent, B 10 to 40 percent, C 40 to 100 percent, D above the envelope, R recurring against AUD 0.60 million per year. Where section 9.2 or 9.3 has already banded the same control, the band is carried across unchanged and the cell says so.
+
+| Technology | Vendor Examples | Location | Vectors Mitigated | Cost band |
+| :--- | :--- | :--- | :--- | :--- |
+| API Security Gateway | Apigee, Kong | DMZ (Z3.5) | API mass command injection | C, as section 9.2 |
+| Container Runtime Security | Aqua, Sysdig | OpenShift Cluster | Container escape, privilege escalation | B, as section 9.3 Phase 1 |
+| ICS-Aware Firewall | Fortinet, Palo Alto | Zone boundaries | Protocol exploitation, lateral movement | D, as section 9.3 Phase 2 |
+| OT Protocol Parser | Dragos, Nozomi | SOC (Z3) | ICCP/Modbus/DNP3 manipulation | D, as section 9.2 |
+| Behavioral Analytics | Splunk UBA, Exabeam | SOC (Z3) | Anomalous API usage, insider threats | D, as section 9.3 Phase 2 |
+| Modbus Security Gateway | Moxa EDR, Fortinet ICS | Zone 2 boundary | Modbus injection, command spoofing | C, as section 9.2 |
+| Network Detection and Response | Darktrace, Vectra AI | Zone 3 internal | Lateral movement, data exfiltration | D, part of the same section 9.3 NDR line |
+| Hardware Security Module | Thales Luna, Entrust | Data centre (Z3) | Key theft, certificate compromise | B (engineering judgement; no public anchor, no prior band) |
+| Privileged Access Management | CyberArk, BeyondTrust | Bastion (Z3.5) | Vendor access abuse, credential theft | C (engineering judgement; no public anchor, no prior band) |
+
+Four of these nine sit in band D, meaning each exceeds the whole sourced cyber envelope on its own and needs a separate funding determination. That is the central cost finding of this paper and it is not softened by the ordinal presentation: the controls the analysis most wants are the ones with no public price and the largest likely cost.
+
+### Appendix G: Security Control Catalog
+
+#### Phase 1 Critical Controls, Q2 to Q3 2026
+
+Cost bands use the scheme of section 9.1, measured against the sourced CIRMP cyber envelope of AUD 1.29 million one-off. The benefit column gives the Dragos and Marsh McLennan class figure where a control maps onto one of their five measured OT control classes, and a mechanism where none maps. An earlier draft of this catalog gave each control an uncited percentage and cumulated them; those figures are removed, because the only published measurement states plainly that per-control risk reductions are not additive [n].
+
+| Control ID | Control Name | IEC 62443 Requirement | MITRE D3FEND | Implementation | Cost band | Benefit basis |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| CTL-001 | Retailer API Rate Limiting | CR 3.1 (Communication Restrictions) | D3-NTF (Network Traffic Filtering) | API gateway rate limit: 10 req/min/retailer, 100 devices/batch | A (gateway configuration) | Mechanism: caps commands per unit time, so a fleet cannot be driven at resonance through the API |
+| CTL-002 | DER Oscillation Detection | CR 2.6 (Resource Management) | D3-APLM (Application Behavior Monitoring) | Physics-based anomaly detection: >5% frequency in 60s = alert | B, as section 7.1 | Mechanism: fires on a pattern with no benign explanation. No false-positive rate measured for this network |
+| CTL-003 | DERMS API Authentication Hardening | CR 1.1 (User Identification) | D3-MFA (Multi-Factor Authentication) | Certificate-based authentication for all API clients | A (configuration on an existing identity platform) | Secure remote access, 12.18 percent class average [n]. Class average, not this control's measured effect |
+| CTL-004 | BESS Command Validation | CR 3.4 (Software Process Integrity) | D3-PSA (Process Spawn Analysis) | SOC/power setpoint bounds checking before Modbus transmission | A, as the rate-limiting control in section 9.2 | Mechanism: a setpoint outside declared bounds is not transmitted, so the register write never leaves DERMS |
+| CTL-005 | Emergency DERMS Shutdown | CR 4.1 (Event Logging) | D3-IRA (Incident Response Automation) | Kill switch disabling all DER dispatch in <60 seconds | A (DERMS engineering) | Incident response plan, 18.46 percent class average [n]. Class average, not a measured result for a kill switch |
+| CTL-006 | Grid Frequency Monitoring | CR 3.3 (Use Control) | D3-NTA (Network Traffic Analysis) | Real-time RoCoF alerting: >0.3 Hz/s = SOC notification | B (telemetry integration into existing monitoring) | Network visibility and monitoring, 16.47 percent class average [n] |
+| CTL-007 | SCADA Alarm Integrity | CR 2.8 (Auditable Events) | D3-AL (Audit Logging) | Cryptographic signing of SCADA alarm messages | B, as the application-layer signing control in section 7.3 | Mechanism: a forged alarm fails verification. It does nothing against an attacker holding the signing key |
+| CTL-008 | ICCP Data Validation | CR 3.2 (Provenance Tracking) | D3-ITF (Inbound Traffic Filtering) | Constraint data sanity checks: feeder limits, timestamp validation | A, as data point allowlisting in section 7.3 | Mechanism: constraint values outside physical feeder limits are refused. It does not catch plausible false values |
+
+**Phase 1 band arithmetic:** five band A and three band B give AUD 0.4 million to AUD 2.2 million one-off (modelled: band boundary arithmetic against the AUD 1.29 million CIRMP cyber envelope, not a quotation). No cumulative risk reduction is stated; the earlier draft's 60 percent had no source and summed figures that cannot be summed.
+
+#### Phase 2 Enhanced Controls, Q4 2026 to Q1 2027
+
+| Control ID | Control Name | IEC 62443 Requirement | MITRE D3FEND | Implementation | Cost band | Benefit basis |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| CTL-009 | BESS Network Segmentation | CR 3.1 (Network Segmentation) | D3-NI (Network Isolation) | VLAN isolation for each BESS, firewall rules | C, as section 7.4 (54 sites) | Defensible architecture, 17.09 percent class average [n] |
+| CTL-010 | ICCP Encryption | CR 4.3 (Use of Cryptography) | D3-EC (Encrypted Communication) | TLS 1.3 for ICCP between DERMS and ADMS | B (bespoke engineering across two platforms) | Mechanism: removes the passive-observer and on-path-injection paths. It does nothing against a compromised endpoint at either end |
+| CTL-011 | Modbus Replacement | CR 4.3 (Use of Cryptography) | D3-EC (Encrypted Communication) | Migrate to DNP3 Secure Authentication v5 | D (fleet-wide protocol migration across 54 sites; exceeds the envelope on its own) | Mechanism: authenticated writes cannot be forged, which closes the register-write path of section 2.4.1 at its root rather than filtering it |
+| CTL-012 | Container Security Hardening | CR 2.4 (Mobile Code Integrity) | D3-SJA (System Call Analysis) | Pod Security Standards (restricted), Falco runtime monitoring | B, as section 9.3 Phase 1 | Defensible architecture, 17.09 percent class average [n] |
+| CTL-013 | Firmware Verification | CR 3.4 (Software Integrity) | D3-FBA (File-Based Behavior Analysis) | Cryptographic signature validation for BESS firmware updates | B, as the BMS firmware control in section 9.2 | Mechanism: an unsigned or altered firmware image does not install. It does nothing against a signed malicious image from a compromised vendor |
+| CTL-014 | UEBA for DERMS API | CR 2.9 (Session Integrity) | D3-UBA (User Behavior Analysis) | Machine learning baseline for normal retailer API usage patterns | D, as the UEBA and NDR line in section 9.3 Phase 2 | Network visibility and monitoring, 16.47 percent class average [n] |
+
+**Phase 2 band arithmetic:** the four bounded lines, three band B and one band C, give AUD 0.9 million to AUD 2.9 million one-off (modelled: band boundary arithmetic, not a quotation). CTL-011 and CTL-014 sit in band D, have no upper bound, and are excluded, so the real figure is higher by an unknown amount. No cumulative risk reduction is stated; the earlier draft's 80 percent had no source.
+
+#### Phase 3 Advanced Controls, Q2 to Q4 2027
+
+| Control ID | Control Name | IEC 62443 Requirement | MITRE D3FEND | Implementation | Cost band | Benefit basis |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| CTL-015 | AI-Based Cascade Prediction | CR 2.6 (Resource Management) | D3-APLM (Application Behavior Monitoring) | ML model predicting cascading failure from SCADA telemetry | D (bespoke model development with no public anchor and no bounded scope) | No benchmark class maps, and no predictive accuracy has been measured for this network. The control is speculative and is ranked last for that reason |
+| CTL-016 | Supply Chain SBOM | CR 1.13 (Supply Chain Security) | D3-SICA (Software Component Analysis) | Continuous SBOM tracking for mPrest, SwitchDin, all vendors | C, as the supply chain risk management programme in section 9.3 Phase 2 | Mechanism: a component inventory is what makes a vendor advisory actionable at all. It detects nothing on its own |
+| CTL-017 | OT Deception Grid | CR 2.5 (Backup) | D3-D (Decoy) | Honeypot BESS controllers, fake DERMS API endpoints | B (engineering judgement; no public anchor) | Mechanism: a decoy controller has no legitimate traffic, so any interaction with it is an alert with no false-positive population by construction |
+| CTL-018 | Quantum-Resistant Cryptography | CR 4.3 (Use of Cryptography) | D3-EC (Encrypted Communication) | Post-quantum algorithms for long-term key protection | D (fleet-wide cryptographic replacement; no public anchor) | Mechanism addresses a future capability, not a current one. No benefit is claimed against any threat modelled in this paper |
+
+**Phase 3 band arithmetic:** the two bounded lines, one band B and one band C, give AUD 0.7 million to AUD 1.8 million one-off (modelled: band boundary arithmetic, not a quotation). CTL-015 and CTL-018 sit in band D and are excluded. No cumulative risk reduction is stated; the earlier draft's 90 percent had no source, and the same 90 percent was the basis of the 43.9:1 return that section 9.5 removed.
+
+#### Control Effectiveness Validation
+
+**Testing Requirements:**
+
+- CTL-001 to CTL-008: Red team penetration testing (Q3 2026)
+- CTL-009 to CTL-014: Purple team adversary emulation (Q2 2027)
+- CTL-015 to CTL-018: Operational validation over 12-month period (2027-2028)
+
+**Metrics:**
+
+- Mean Time to Detect (MTTD): Target <5 minutes for Death Wobble attack
+- Mean Time to Respond (MTTR): Target <15 minutes for DERMS isolation
+- False Positive Rate: Target <1% for oscillation detection
+- Coverage: 100% of MITRE ATT&CK for ICS techniques by Phase 3 completion
+
+### Appendix H: Vulnerability Catalog
+
+#### CVE Analysis with EE Impact Assessment
+
+| CVE ID         | Component                    | CVSS | Exploitability                        | EE Impact                          | Mitigation Status             |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| CVE-2024-1234* | mPrest DERMS API             | 9.8  | Unauthenticated remote code execution | CATASTROPHIC: Full DER control     | Vendor patch pending          |
+| CVE-2023-5678* | SwitchDin Utility Server     | 8.1  | Authentication bypass                 | HIGH: BESS protocol manipulation   | Workaround applied            |
+| CVE-2024-9012* | Modbus TCP Stack             | 7.5  | Cleartext credential interception     | HIGH: BESS BMS access              | Protocol replacement required |
+| CVE-2023-4567* | OpenShift Container Runtime  | 8.8  | Container escape to host              | HIGH: Lateral movement to SCADA    | Patch applied Q4 2025         |
+| CVE-2024-3456* | ICCP Protocol Implementation | 6.5  | Man-in-the-middle attack              | MEDIUM: Constraint data spoofing   | Encryption planned Phase 2    |
+| CVE-2023-7890* | Rolls-Royce BMS Firmware     | 7.2  | Hardcoded credentials                 | MEDIUM: Individual BESS compromise | Firmware update scheduled     |
+| CVE-2024-2345* | Greensync Dex API            | 5.3  | Information disclosure                | LOW: Telemetry data leakage        | Monitoring enhanced           |
+
+*Note: CVE identifiers are illustrative placeholders pending actual vulnerability disclosures. This table structure enables rapid updating as new vulnerabilities emerge.*
+
+#### EE-Specific Vulnerability Findings (Non-CVE)
+
+| ID          | Component        | Description                                     | Attack Vector               | Impact Rating | Remediation Timeline |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| EE-VULN-001 | Retailer API     | No rate limiting on batch commands              | Supply chain compromise     | CATASTROPHIC  | Phase 1 (Q2 2026)    |
+| EE-VULN-002 | DERMS Monitoring | No oscillation detection for DER commands       | Direct API access           | HIGH          | Phase 1 (Q2 2026)    |
+| EE-VULN-003 | BESS Network     | Flat Layer 2 network between batteries          | Physical access to one BESS | HIGH          | Phase 2 (Q3 2026)    |
+| EE-VULN-004 | ICCP Adapter     | No application-layer signing of constraint data | MITM on ICCP link           | HIGH          | Phase 2 (Q4 2026)    |
+| EE-VULN-005 | Firmware Updates | No cryptographic verification of BESS firmware  | Supply chain injection      | MEDIUM        | Phase 2 (Q3 2026)    |
+| EE-VULN-006 | Telemetry        | SOC data exposed via unauthenticated SNMP       | Network reconnaissance      | LOW           | Phase 3 (Q1 2027)    |
+
+### Appendix I: MITRE ATT&CK for ICS Mapping
+
+#### Primary Attack Techniques Applicable to Death Wobble Scenario
+
+| Tactic                              | Technique ID | Technique Name                        | EE Attack Path                                          | Detection Capability         | Mitigation Priority |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Initial Access**            | T0817        | Drive-by Compromise                   | Phishing targeting retailer employees with DERMS access | LOW (no email security)      | CRITICAL            |
+|                                     | T0886        | Remote Services                       | VPN compromise for direct DERMS API access              | MEDIUM (VPN logging)         | HIGH                |
+| **Execution**                 | T0871        | Execution through API                 | Retailer API batch command injection                    | NONE                         | CRITICAL            |
+|                                     | T0834        | Native API                            | DERMS RESTful API exploitation                          | LOW (basic API logging)      | CRITICAL            |
+| **Persistence**               | T0889        | Modify Program                        | Malicious DERMS configuration persistence               | NONE                         | HIGH                |
+|                                     | T0859        | Valid Accounts                        | Compromised retailer credentials maintained             | LOW (no UEBA)                | HIGH                |
+| **Privilege Escalation**      | T0890        | Exploitation for Privilege Escalation | Container escape to OpenShift node                      | MEDIUM (runtime monitoring)  | HIGH                |
+| **Defense Evasion**           | T0872        | Indicator Removal on Host             | Log deletion post-attack                                | LOW (no centralized logging) | MEDIUM              |
+|                                     | T0858        | Change Operating Mode                 | BESS mode switching to evade anomaly detection          | NONE                         | HIGH                |
+| **Lateral Movement**          | T0866        | Exploitation of Remote Services       | ICCP protocol exploitation to reach ADMS                | LOW                          | HIGH                |
+|                                     | T0859        | Valid Accounts                        | Pivot using shared service accounts                     | LOW                          | MEDIUM              |
+| **Collection**                | T0802        | Automated Collection                  | SCADA telemetry harvesting for reconnaissance           | LOW                          | LOW                 |
+|                                     | T0868        | Detect Operating Mode                 | BESS SOC and grid frequency monitoring                  | NONE                         | MEDIUM              |
+| **Command and Control**       | T0885        | Commonly Used Port                    | HTTPS (443) for C2 blending with legitimate traffic     | LOW                          | MEDIUM              |
+|                                     | T0869        | Standard Application Layer Protocol   | ICCP/DNP3 for covert C2 channel                         | NONE                         | MEDIUM              |
+| **Inhibit Response Function** | T0800        | Activate Firmware Update Mode         | Disable BESS protection logic via BMS manipulation      | NONE                         | HIGH                |
+|                                     | T0816        | Device Restart/Shutdown               | Emergency shutdown of batteries to amplify impact       | LOW                          | HIGH                |
+|                                     | T0804        | Block Reporting Message               | Suppress SCADA alarms during attack                     | LOW                          | MEDIUM              |
+| **Impair Process Control**    | T0806        | Brute Force I/O                       | Rapid charge/discharge cycling (Death Wobble attack)    | NONE                         | CRITICAL            |
+|                                     | T0836        | Modify Parameter                      | SOC limits, power setpoints altered                     | LOW                          | CRITICAL            |
+|                                     | T0855        | Unauthorized Command Message          | Fraudulent DERMS dispatch commands                      | LOW                          | CRITICAL            |
+| **Impact**                    | T0879        | Damage to Property                    | BESS thermal runaway from thermal management override   | LOW                          | CRITICAL            |
+|                                     | T0826        | Loss of Availability                  | Grid blackout from cascading frequency collapse         | MEDIUM                       | CRITICAL            |
+|                                     | T0828        | Loss of Productivity and Revenue      | Customer outages, equipment damage                      | MEDIUM                       | HIGH                |
+|                                     | T0837        | Loss of Protection                    | Protection relay disabling during attack                | NONE                         | HIGH                |
+|                                     | T0880        | Loss of Safety                        | Injuries/fatalities from blackout consequences          | LOW                          | CRITICAL            |
+
+#### Attack Sequence Mapping: Death Wobble Scenario
+
+```
+[Initial Access: T0817 Phishing]
+  → [Execution: T0871 Retailer API]
+    → [Impair Process: T0806 Rapid Charge/Discharge]
+      → [Inhibit Response: T0804 Block SCADA Alarms]
+        → [Impact: T0826 Grid Blackout, T0880 Safety Loss]
+```
+
+#### Detection Gap Analysis
+
+**Coverage Score by Tactic:**
+
+- Initial Access: 20% (email security gaps)
+- Execution: 15% (API monitoring insufficient)
+- Persistence: 10% (no configuration integrity monitoring)
+- Privilege Escalation: 40% (container runtime monitoring partial)
+- Defense Evasion: 5% (minimal forensic capability)
+- Lateral Movement: 25% (network segmentation monitoring)
+- Collection: 30% (basic SCADA telemetry logging)
+- Command & Control: 20% (no protocol behavior analysis)
+- Inhibit Response: 5% (BESS-level monitoring absent)
+- Impair Process Control: 0% (no physics-based anomaly detection)
+- Impact: 50% (grid frequency monitoring, customer outage detection)
+
+**Overall Detection Capability: 18.6% (INSUFFICIENT)**
+
+---
+
+**Document Control:**
+
+- **Version:** 1.0
+- - **Date:** February 12, 2026
+- **Classification:** CONFIDENTIAL - CRITICAL INFRASTRUCTURE SECURITY
+- **Review Cycle:** Quarterly
+- **Next Review:** May 12, 2026
+- **Distribution:** Board of Directors, CISO, Chief Risk Officer, Grid Operations, Emergency Response (Executive Summary: broader distribution)
+- **Retention:** 5 years from publication date
+- **Classification Rationale:** Contains detailed vulnerability information, attack methodologies, and cascading failure models for critical national infrastructure
+
+---
+
+**Related Documents:**
+
+- EE-CTI-004: BESS Architecture Vulnerability Assessment, Bawley Point Community Battery
+- EE-CTI-005: DERMS Security Architecture Review, mPrest Platform
+- EE-CTI-003: Comprehensive Threat Assessment 2026
+- RefDNSP-1.2M DERMS High Level Architecture (HLD)
+- AEMO Power System Frequency Risk Review 2024
+
+### Appendix J: References and Bibliography
 
 #### Primary Sources - McKenney Research
 
@@ -3932,7 +3413,17 @@ McKenney, J. (2024). *The Grid's Precarious Pulse: Death Wobble and Frequency In
 
 McKenney, J. (2025). *Cascading Failure Analysis: South Australia 2016, UK 2019, and Iberian Peninsula 2025 Blackouts*. Eigenia Labs, Working Group WG-04-CF. (This document.)
 
-McKenney, J. (2024). *ERCOT and WECC Renewable Integration Challenges: Inverter-Based Resource Reliability Under Stress Conditions*. Eigenia Labs, Working Group WG-04-CF. Working paper.
+McKenney, J. (2024). *ERCOT and WECC Renewable Integration Challenges: Inverter-Based Resource Reliability Under Stress Conditions*. Eigenia Labs, Working Group WG-04-CF. Written and published within WG-04-CF. It corrects three claims this paper previously carried, and sections 1.2, 2.2 and 10 of this document state the corrected versions. It is cited here for the corrections and for the reading of the primary reports, never as the source of record for what ERCOT, NERC or LBNL published; each of those carries its own entry below.
+
+#### Primary Sources - Inverter-Based Resource Disturbance Reports
+
+North American Electric Reliability Corporation and Texas Reliability Entity. (2021). *Odessa Disturbance, Texas Events: May 9, 2021 and June 26, 2021*. Atlanta: NERC. https://www.nerc.com/globalassets/our-work/reports/event-reports/odessa_disturbance_report.pdf
+
+North American Electric Reliability Corporation and Texas Reliability Entity. (2022). *2022 Odessa Disturbance, Texas Event: June 4, 2022*. Atlanta: NERC. https://www.nerc.com/comm/RSTC_Reliability_Guidelines/NERC_2022_Odessa_Disturbance_Report%20(1).pdf
+
+Lawrence Berkeley National Laboratory. (2024). *Queued Up: 2024 Edition. Characteristics of Power Plants Seeking Transmission Interconnection*. Berkeley: LBNL. https://emp.lbl.gov/sites/default/files/2024-04/Queued%20Up%202024%20Edition_1.pdf
+
+Electric Reliability Council of Texas. (2024). *ERCOT Monthly, Issued April 2024 (March 2024 Look Back)*. Austin: ERCOT. https://www.ercot.com/files/docs/2024/04/30/ERCOT-Monthly-April-2024.pdf
 
 #### Regulatory and Standards Documents
 
@@ -3940,9 +3431,9 @@ Australian Energy Market Operator (AEMO). (2024). *Power System Frequency Risk R
 
 Australian Energy Sector Cyber Security Framework (AESCSF). (2023). *Security Profile 2 (SP2) Requirements for Distribution Networks*. Canberra: Department of Home Affairs.
 
-IEC 62443-3-3:2013. *Industrial communication networks ; Network and system security ; Part 3-3: System security requirements and security levels*. Geneva: International Electrotechnical Commission.
+IEC 62443-3-3:2013. *Industrial communication networks, Network and system security, Part 3-3: System security requirements and security levels*. Geneva: International Electrotechnical Commission.
 
-NERC CIP-014-3. *Physical Security ; Transmission Stations and Transmission Substations*. Atlanta: North American Electric Reliability Corporation.
+NERC CIP-014-3. *Physical Security: Transmission Stations and Transmission Substations*. Atlanta: North American Electric Reliability Corporation.
 
 Security of Critical Infrastructure Act 2018 (SOCI Act). *Risk Management Program Requirements for Electricity Sector Assets*. Canberra: Australian Government.
 
@@ -3962,11 +3453,11 @@ CERT-UA. (2022). *Technical Analysis: INDUSTROYER2 Malware Targeting ICS Protoco
 
 Kundur, P., Balu, N. J., & Lauby, M. G. (1994). *Power System Stability and Control*. New York: McGraw-Hill. (Classic reference for frequency dynamics)
 
-Miller, N. W., Shao, M., Pajic, S., & D'Aquila, R. (2014). "Western Wind and Solar Integration Study Phase 3 ; Frequency Response and Transient Stability." *NREL Technical Report* NREL/SR-5D00-62906. Golden, CO: National Renewable Energy Laboratory.
+Miller, N. W., Shao, M., Pajic, S., & D'Aquila, R. (2014). "Western Wind and Solar Integration Study Phase 3: Frequency Response and Transient Stability." *NREL Technical Report* NREL/SR-5D00-62906. Golden, CO: National Renewable Energy Laboratory.
 
 Ulbig, A., Borsche, T. S., & Andersson, G. (2014). "Impact of Low Rotational Inertia on Power System Stability and Operation." *IFAC Proceedings Volumes*, 47(3), 7290-7297. DOI: 10.3182/20140824-6-ZA-1003.02615
 
-Australian Energy Market Operator (AEMO). (2019). *Transfer Limit Advice ; System Strength in South Australia*. Melbourne: AEMO. (Analysis of 2016 blackout)
+Australian Energy Market Operator (AEMO). (2019). *Transfer Limit Advice: System Strength in South Australia*. Melbourne: AEMO. (Analysis of 2016 blackout)
 
 National Grid ESO. (2019). *Technical Report on the events of 9 August 2019*. Warwick, UK: National Grid. (UK blackout investigation)
 
@@ -4004,14 +3495,59 @@ Ouyang, M. (2014). "Review on modeling and simulation of interdependent critical
 
 Zimmerman, R., & Restrepo, C. E. (2006). "The Next Step: Quantifying Infrastructure Interdependencies to Improve Security." *International Journal of Critical Infrastructures*, 2(2-3), 215-230.
 
-#### ACME Inc. Internal Documents
+#### RefDNSP-1.2M Internal Documents
 
-ACME Inc.. (2025). *DERMS High Level Architecture (HLD) ; mPrest Platform Deployment*.  : ACME Inc..
+RefDNSP-1.2M (2025). *DERMS High Level Architecture (HLD): mPrest Platform Deployment*. RefDNSP-1.2M
 
-ACME Inc.. (2025). *BESS Deployment Standard Operating Procedures*.  : ACME Inc..
+RefDNSP-1.2M (2025). *BESS Deployment Standard Operating Procedures*. RefDNSP-1.2M
 
-ACME Inc.. (2024). *Cybersecurity Incident Response Plan ; Version 2.3*.  : ACME Inc..
+RefDNSP-1.2M (2024). *Cybersecurity Incident Response Plan: Version 2.3*. RefDNSP-1.2M
 
-ACME Inc.. (2025). *EE-CTI-004: BESS Architecture Vulnerability Assessment ;   Community Battery*.  : ACME Inc. Cybersecurity Intelligence.
+RefDNSP-1.2M (2025). *EE-CTI-004: BESS Architecture Vulnerability Assessment, Bawley Point Community Battery*. RefDNSP-1.2M Cybersecurity Intelligence.
 
-ACME Inc.. (2025). *EE-CTI-007: DERMS Security Architecture Review ; Cloud Integration Risks and Mitigations*.: ACME Inc. Cybersecurity Intelligence.
+RefDNSP-1.2M (2025). *EE-CTI-007: DERMS Security Architecture Review, Cloud Integration Risks and Mitigations*. RefDNSP-1.2M Cybersecurity Intelligence.
+
+### Appendix K: Glossary
+
+| Term | Definition | EE Context |
+| :--- | :--- | :--- |
+| **ADMS** | Advanced Distribution Management System. Grid control and optimization platform. | GE Vernova platform managing EE distribution network |
+| **AEMO** | Australian Energy Market Operator. National grid coordinator. | National grid operator, maintains frequency standards |
+| **AESCSF** | Australian Energy Sector Cyber Security Framework. Industry security standard. | Regulatory compliance framework for energy sector |
+| **BESS** | Battery Energy Storage System. Lithium-ion battery for grid stabilization. | 54 community batteries (270 MW aggregate) in EE network |
+| **BMS** | Battery Management System. Controls charging and monitors cell health. | Controls individual BESS cells, thermal management, SOC |
+| **Cascading Failure** | Multi-stage system collapse where initial failure triggers subsequent failures | Grid-wide blackout from localized DER attack |
+| **DER** | Distributed Energy Resource | Solar PV, batteries, EVs, smart hot water (278,622 controllable devices) |
+| **DERMS** | Distributed Energy Resource Management System. Orchestrates solar, batteries, and loads. | mPrest platform orchestrating DER dispatch |
+| **DNP3** | Distributed Network Protocol 3 | SCADA protocol for substation communications |
+| **DNSP** | Distribution Network Service Provider. Regional electricity distributor. | |
+| **Death Wobble** | Grid frequency oscillation attack inducing resonance cascade | 0.5-2 Hz charge/discharge cycling causing RoCoF exceedance |
+| **Demand Response** | Coordinated load reduction or increase to support grid stability | Hot water heater control, BESS dispatch |
+| **FCAS** | Frequency Control Ancillary Services | Grid services providing frequency stability (EE provides via BESS) |
+| **Feeder** | Distribution line delivering electricity from substation to customers | 32,000+ substations in EE network |
+| **FFR** | Fast Frequency Response | Sub-second frequency support from batteries/inverters |
+| **Grid Inertia** | Rotational energy in synchronous generators providing frequency stability | Declining from 4-6 sec to 2-3 sec with renewable penetration |
+| **ICCP** | Inter-Control Center Communications Protocol (IEC 60870-6/TASE.2). Grid data exchange. | Protocol linking DERMS to ADMS for constraint data |
+| **IEC 62443** | International industrial cybersecurity standard. Defines security zones, levels, and controls. | |
+| **Inverter** | Power electronics converting DC (solar/battery) to AC (grid) | All DER assets are inverter-based resources |
+| **LotL** | Living off the Land | Attack technique using legitimate system tools to evade detection |
+| **Modbus TCP** | Legacy industrial control protocol for SCADA/PLC communications. Widely deployed, no built-in security. | Used in BESS controllers (cleartext, no authentication) |
+| **NERC CIP** | North American Electric Reliability Corporation Critical Infrastructure Protection | International reference for grid security standards |
+| **OCPP** | Open Charge Point Protocol | EV charger communications protocol |
+| **Power Quality** | Stability of voltage, frequency, waveform | Degraded by rapid DER power swings |
+| **Protection Relay** | Automatic switch opening circuit during fault conditions | Triggers cascading outages during RoCoF events |
+| **Purdue Model** | ICS security architecture defining zones (L0-L4) | EE uses IEC 62443 equivalent |
+| **RoCoF (Rate of Change of Frequency)** | Rate of Change of Frequency. Grid stability metric measured in Hz/s. Speed of frequency deviation. | >1.0 Hz/s triggers protection relay cascades |
+| **SCADA** | Supervisory Control and Data Acquisition | OT system monitoring/controlling substations |
+| **SOC** | State of Charge | Battery energy level (0-100%) |
+| **SOCI Act** | Security of Critical Infrastructure Act 2018. Australian critical infrastructure regulation. | |
+| **Synchronous Generator** | Traditional rotating generator providing inertia | Coal/gas plants retiring, reducing system inertia |
+| **Thermal Runaway** | Uncontrolled exothermic reaction in lithium-ion battery cells causing fire or explosion. | Risk from BMS manipulation attack |
+| **UFLS** | Under-Frequency Load Shedding | Automated load disconnection to prevent blackout (occurs at 48.8 Hz) |
+| **VPP** | Virtual Power Plant. Aggregated distributed energy resources for grid services. | Aggregation of DER assets acting as single power resource |
+
+---
+
+**End of Document**
+
+---

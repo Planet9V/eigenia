@@ -3,6 +3,7 @@
 Adds properly formatted KaTeX equations, thermodynamic parameters,
 and actuarial formulations to the manuscript with deep underwriting rigor.
 """
+import re
 
 path = 'references/WG-05-CAD-DEXPI-2/WG-05-CAD-Frontier-AI-Hardware-Security.md'
 
@@ -16,6 +17,9 @@ if idx != -1:
 
 # Replace any em-dashes and banned AI words
 text = text.replace('—', '; ').replace('--', '; ')
+# A spaced em dash becomes ' ;  '. A semicolon never takes a space before it;
+# collapse the artifact here so it cannot reach a published document.
+text = re.sub(r'\s+;\s+', '; ', text)
 replacements = {
     'harness': 'apply',
     'harnessing': 'applying',

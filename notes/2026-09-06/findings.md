@@ -1,0 +1,313 @@
+# Cascading Failure uplift: findings not anticipated by the plan
+
+Date: 2026-09-06
+Status: open, feeding new tasks
+Source: evidence-gathering tasks 2, 3a and my own verification
+
+The plan assumed the paper's technical layer was sound and only its financial
+layer was hollow. Sourcing the technical claims disproved that. What follows
+are defects in the published paper itself, found while sourcing it.
+
+## F1. The paper contradicts itself on 49.85 Hz. CONFIRMED.
+
+`49.85 Hz` appears 8 times. It is used two incompatible ways.
+
+Correct, line 940:
+
+    48.8 Hz < f < 51.2 Hz (AEMO normal operating band: 49.85-50.15 Hz)
+
+Wrong, lines 393, 640, 721, 883:
+
+    triggering under-frequency protection relays at the 49.85 Hz threshold
+    A3 -->|RoCoF > 1.0 Hz/s| A4[Under-Frequency Relay Trip<br/>49.85 Hz Threshold]
+    | T+15:00 | Protection cascade | Under-frequency relays trip at 49.85 Hz threshold |
+    - UFLS Stage 1: 49.85 Hz - shed 5% of load (additional 500 MW)
+
+49.85 Hz is the floor of the AEMC Frequency Operating Standard's NORMAL
+OPERATING BAND, the range the system sits in almost all the time. It is not a
+load-shedding trigger. The paper says so itself at line 940 and then treats it
+as a trip point everywhere else.
+
+This does not need an external source to establish. The paper refutes itself.
+It is the single most damaging technical error in the document: a grid engineer
+reading it would stop there.
+
+Confirmed independently against the AEMC Frequency Operating Standard
+(effective 1 January 2020) in
+`references/external-research/WG-04-CF_grid-inertia-rocof_20260906.md`,
+Source 2: normal band 49.85 to 50.15 Hz, extreme limit 47.0 to 52.0 Hz.
+
+Fix requires finding the real NEM UFLS schedule. AEMO's Inertia Requirements
+Methodology uses 49 Hz as its RoCoF-to-time reference point, a full Hz below
+the paper's number, which is the right order of magnitude for shedding.
+
+## F2. 445 MW is superseded. CONFIRMED.
+
+4 occurrences, lines 146, 419, 2476, 2480. AEMO's March 2017 FINAL report gives
+456 MW over "a period of less than seven seconds". 445 MW is October 2016
+INTERIM reporting. Same root cause as the three errors already corrected in the
+outage-cost evidence file: interim data that AEMO later revised.
+
+Line 146 additionally says "9 separate faults within 7 seconds"; AEMO's final
+report describes six voltage dips and eight of nine wind farms responding.
+Align the whole line, not just the MW figure.
+
+## F3. 6.1 Hz/s is unconfirmed. OPEN.
+
+9 occurrences. Attributed variously to AEMO's final report and to McKenney
+(2024, 2025). The Task 3a researcher opened AEMO's final report directly and
+could not find it. It circulates widely in secondary commentary.
+
+Note the paper presents it as measured, line 149: "With H = 2.8 seconds (actual
+pre-fault inertia): 6.1 Hz/s measured".
+
+Three ways to resolve, in order of preference:
+1. Someone opens AEMO's final report RoCoF section and quotes it.
+2. Derive it from the swing equation using the now-confirmed 456 MW and a
+   sourced inertia figure, and label it a derivation, not a measurement.
+3. Cut it and rebuild the argument on the UK 2019 event, which is fully
+   documented and is a better example anyway because its protection cascade is
+   the paper's actual thesis.
+
+Do not publish it as an AEMO measurement without option 1.
+
+## F4. The UK 1 Hz/s claim needs a qualifier. OPEN.
+
+Great Britain still runs legacy 0.125 Hz/s relays alongside the newer 1 Hz/s
+G99 setting with a 500 ms definite time delay. The retrofit programme for
+existing sub-50 MW generation had a 31 August 2022 deadline. A flat "the UK
+RoCoF threshold is 1 Hz/s" misdescribes a system carrying several tranches at
+different settings.
+
+## F5. 37 orphaned semicolons from em-dash stripping. CONFIRMED.
+
+A previous em-dash removal pass replaced `—` with ` ; `, leaving a space before
+the semicolon. 37 occurrences, including the second sentence of the abstract:
+
+    Six interdependent critical infrastructure systems ; water, hospitals,
+    telecommunications, transport, military, and financial services ; amplify
+
+This is live on the site. It reads as a typographical fault on every one of the
+37 lines. Correct repair is per-instance, not a blind replace: some want a
+comma, some a colon, some parentheses, some a sentence break. A global
+substitution would produce 37 new infelicities in place of 37 old ones.
+
+## Sequencing consequence
+
+F1, F2 and F5 are corrections to text the plan's later tasks will rewrite
+anyway. Doing them now risks double work. Doing them late risks the rewrite
+propagating the errors into new prose.
+
+Decision: fix F1, F2 and F5 BEFORE the section rebuilds (plan tasks 5 and 6),
+because those tasks rewrite the sections these errors live in and would
+otherwise carry them forward. F3 and F4 are resolved during the rebuild, when
+the surrounding argument is being rewritten regardless.
+
+## F6. The UK 2019 figures are wrong in five places. CONFIRMED.
+
+Checked against National Grid ESO's Technical Report on the events of
+9 August 2019 (final, 6 September 2019), filed as Source 2 in
+`references/external-research/WG-04-CF_blackout-incidents_20260906.md`.
+
+| Paper says | Report says | Where in paper |
+|:---|:---|:---|
+| 660 MW gas | 641 MW, and in THREE separate trips (244 MW ST, then 210 MW GT, then 187 MW GT), not one event | 420, 2477 |
+| 740 MW wind | 737 MW (Hornsea) | 420, 2477 |
+| 345 MW DER tripped | "approximately 350MW" | 400, 420, 2477 |
+| "RoCoF reached 0.135 Hz/s" | 0.125 Hz/s is the RELAY THRESHOLD. No measured system RoCoF of 0.135 Hz/s appears anywhere in the report | 6, 376, 400, 420, 2251, 2297, 2477, 2657 |
+| "~30% wind penetration" | no wind-penetration figure for that day in the report | 420 |
+
+The 0.135 Hz/s error is the serious one, and it is the same class of mistake as
+F1: a protection SETTING reported as a MEASURED value. It appears 8 times,
+including the abstract and the conclusions, and it is load-bearing for the
+paper's "protection maloperation at moderate RoCoF" argument. That argument
+survives, but it has to be restated on the real evidence: embedded generation
+disconnected on a 0.125 Hz/s relay setting, which is what actually happened.
+
+The 210 GVAs inertia figure IS correctly sourced (ESO report Table 4). Keep it.
+
+Better numbers now available for the same argument: the cumulative loss reached
+1,481 MW, frequency was arrested at 49.1 Hz, then fell to 48.8 Hz, and LFDD
+disconnected 931 MW across 1,152,878 customers. The paper's "1.1M customers"
+at line 2477 is close and can be made exact.
+
+## F7. The SA tower count is confirmed ABSENT, not merely unretrieved. CLOSED.
+
+Section 2.4, Table 6, Section 3.1.4 and Appendix V of AEMO's final report were
+read in full. None gives a count of transmission towers that fell; Table 6 says
+only "Damaged towers bypassed". The "23 towers" figure circulating in press
+coverage has no basis in the final report.
+
+This closes the gap left open in `WG-04-CF_outage-cost-vcr_20260906.md`, and it
+closes it in the negative, with certainty. The earlier decision to strike the
+figure rather than correct it to 22 was right.
+
+## F8. Do not use the ENTSO-E 2021 separation as a mass-blackout example.
+
+The loads shed in France (~1,300 MW) and Italy (~400 MW) were large industrial
+customers under standing interruptibility contracts, shed automatically at a
+frequency threshold. ENTSO-E's final report states the incident "had no major
+influence on the security of supply of European consumers". No customer count
+appears in the report.
+
+The event is valuable to this paper for its millisecond causal chain across
+four TSOs, and for one detail that is directly on thesis: the Turkish Marmara
+SPS shed 975 MW as designed while the Hamitabat SPS correctly did not fire.
+Use it for cascade mechanics. Use UK 2019 or South Australia for outage scale.
+
+## F9. The cascade-initiation mechanism is physically incoherent. OPEN, BLOCKING.
+
+The 49.85 Hz corrections are now honestly labelled as RefDNSP-1.2M modelled
+assumptions rather than sourced AEMO settings. That removes a false citation.
+It does not fix the underlying physics, and it should not be mistaken for
+having done so.
+
+The paper's initiation mechanism, section 2.2 and Appendix A, is:
+
+    sustained oscillation grows to +/- 0.15 Hz amplitude
+    -> frequency reaches 49.85 Hz
+    -> under-frequency relays trip
+    -> cascade begins
+
+The problem: 49.85 Hz is the FLOOR OF THE NORMAL OPERATING BAND. The grid sits
+between 49.85 and 50.15 Hz almost all the time, by design. No network service
+provider sets under-frequency load shedding at a frequency the system visits
+routinely; doing so would shed load during normal operation, continuously.
+
+So the paper now models something no real operator would build. Labelling it
+"modelled" makes the paper honest about the provenance of the number while
+leaving it asserting an implausible model. A grid engineer will not accept it.
+Calling an implausible assumption "modelled" does not make it plausible.
+
+The scenario cannot simply be re-based on a realistic threshold either. Real
+UFLS sits near 49 Hz or below. Reaching that from 50 Hz needs roughly +/- 1.0 Hz
+of oscillation amplitude, not +/- 0.15 Hz, which is a far larger and far less
+defensible claim than the one the paper makes.
+
+### The resolution is already in the paper, unrecognised
+
+The paper conflates two different protection principles it elsewhere describes
+correctly:
+
+- ABSOLUTE-FREQUENCY protection, which trips when frequency crosses a set value
+  such as 49 Hz. This is what UFLS is.
+- RATE-OF-CHANGE protection (RoCoF), which trips on df/dt regardless of the
+  absolute frequency. This is what tripped roughly 350 MW of embedded
+  generation in Great Britain on 9 August 2019, at a 0.125 Hz/s setting.
+
+A small oscillation at high enough frequency produces LARGE df/dt while never
+leaving the normal band. An oscillation of +/- 0.15 Hz amplitude at 1.0 Hz
+gives a peak df/dt of about 2 pi x 1.0 x 0.15, roughly 0.94 Hz/s, which is at
+the 1 Hz/s RoCoF threshold the paper already cites, while the frequency itself
+stays inside 49.85 to 50.15 Hz the entire time.
+
+That is a coherent, sourced, and considerably more interesting mechanism: the
+attack never violates the frequency band an operator watches, and trips
+protection on rate of change instead. It also aligns the paper with its own
+strongest evidence, the UK 2019 event, which was a RoCoF-protection cascade,
+not an under-frequency-threshold cascade.
+
+### Consequence for sequencing
+
+This is a change to the paper's central argument, not a correction to a figure.
+It must be settled before plan tasks 5 and 6 rebuild sections 5 and 9, because
+those sections narrate the cascade and would otherwise be rebuilt on the
+incoherent version.
+
+It also touches the timeline table (line 722), the Mermaid diagram (line 641),
+the UFLS ladder (lines 884 to 886), Appendix A (line 2339) and the 54-BESS
+simulation (lines 2456, 2460), all of which currently key off the 49.85 Hz
+trip. The arithmetic in each has to be redone against df/dt, not against an
+absolute threshold.
+
+Needs Jim's call before proceeding, because it changes what the paper argues.
+
+## F10. Section 9's risk-reduction column is fabricated precision. OPEN.
+
+Found while sourcing remediation costs. Section 9 does not only have 108
+`[investment required]` placeholders; the column NEXT to them is worse, because
+it looks sourced and is not.
+
+16 lines carry a specific risk-reduction percentage:
+
+    95% reduction in Modbus injection attacks
+    85% reduction in single-credential compromise impact   (x4)
+    70% reduction in oscillation attack success            (x2)
+    65% reduction in compromised vendor access dwell time
+    60% reduction in oscillation attack effectiveness      (x4)
+    50%, 40%, 20%, 10% reductions elsewhere
+
+None carries a citation. The only published benchmark located for control
+effectiveness, the Dragos and Marsh McLennan 2025 OT Security Financial Risk
+Report, gives risk reduction in the range of 12 to 18 percent per control. The
+paper's figures are roughly five times larger.
+
+A placeholder is honest about being empty. "85% reduction in single-credential
+compromise impact" is not; it reads as a measured result, and one of these
+numbers is quoted inside a proposed BOARD RESOLUTION at line 2145, where a
+director would rely on it.
+
+This is the same error class as F1 and F6: a number presented in a category it
+does not belong to. It must be fixed in the same pass as the section 9
+placeholders, because filling the cost column while leaving a fabricated
+benefit column beside it produces a cost-benefit table that is half sourced and
+wholly misleading.
+
+Options, in order of preference:
+1. Cite the Dragos and Marsh ranges where a control maps onto one of their
+   categories, and accept the smaller numbers.
+2. Where no benchmark maps, express the benefit qualitatively (the control
+   removes the single-credential path; it does not reduce it by a stated
+   percentage) rather than numerically.
+3. Where the paper genuinely wants a modelled figure, label it modelled and
+   state the assumption, as with the RefDNSP-1.2M network parameters.
+
+Do not keep an uncited percentage in a cost-benefit table.
+
+## F11. The evidence contradicts the paper's low-inertia framing. OPEN.
+
+Found while authoring the ERCOT and WECC paper.
+
+The Cascading Failure paper attributes this to McKenney (2024), about South
+Australia 2016:
+
+> "This incident demonstrated the potential for extreme instability in very low
+> inertia conditions... highlighting the direct impact of RoCoF sensitivity in a
+> system with significant wind penetration."
+
+The two Odessa disturbances run against it, on NERC's own figures:
+
+| Event | Synchronous share | Solar lost | Total lost |
+|:---|---:|---:|---:|
+| Odessa, 9 May 2021 | 56% | 1,112 MW | 1,340 MW |
+| Odessa, 4 June 2022 | 73.5% | 1,711 MW | 2,555 MW |
+
+The LARGER loss occurred at the HIGHER synchronous share. If low inertia were
+the operative cause, the ordering should be the other way round.
+
+NERC's own finding on the 2021 event states the mechanism plainly: "none of the
+resources tripped consequentially by the fault itself". The resources
+disconnected because of how their inverters were configured to respond to a
+fault they were never obliged to disconnect for. That is a specification and
+settings problem, not an inertia problem.
+
+This does not overturn the paper's thesis. Low inertia genuinely raises RoCoF
+for a given imbalance, and the swing equation is not in doubt. What it overturns
+is the claim that low inertia is what made these particular events severe. Two
+separate mechanisms are being run together:
+
+1. Low inertia raises df/dt for a given power imbalance. Real, derivable, and
+   the basis of the paper's cascade argument.
+2. Inverter-based resources disconnect for faults they should ride through.
+   Real, documented in four NERC reports, and INDEPENDENT of inertia.
+
+The paper currently reads as though mechanism 2 is a consequence of mechanism 1.
+The evidence says it is not. Odessa 2022 lost 2,555 MW with nearly three
+quarters of its generation synchronous.
+
+Consequence: the quoted sentence is unsupported and should be struck or
+restated. The stronger version of the paper's argument keeps both mechanisms and
+says they compound, rather than deriving one from the other. That is also a
+better fit for the paper's own RoCoF-based initiation mechanism, which was
+rebuilt in this session precisely because it had confused an absolute-frequency
+threshold with a rate-of-change one.

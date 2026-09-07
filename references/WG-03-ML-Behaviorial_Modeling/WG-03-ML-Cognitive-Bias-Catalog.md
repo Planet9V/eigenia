@@ -284,7 +284,7 @@ Where:
 - $\dot{L}_{\text{BI}}(t)$ is the business interruption revenue loss rate ($24,000\text{ USD/hour}$).
 - $\Phi_{\text{regulatory}}$ is the statutory fine under EU CRA Article 64.
 
-Deploying cognitive bias mitigation training and automated TPI controls ($C_{\text{controls}} = 180,000\text{ USD}$) reduces the mean team susceptibility $\overline{BSS}$ by 62%, mitigating annualized loss expectancy from $9,200,000\text{ USD}$ to $310,000\text{ USD}$ and yielding a verified Return on Security Investment ($\text{ROSI}$):
+Deploying cognitive bias mitigation training and automated TPI controls ($C_{\text{controls}} = 180,000\text{ USD}$) reduces the mean team susceptibility $\overline{BSS}$ by 62%, mitigating annualized loss expectancy from $9,200,000\text{ USD}$ to $310,000\text{ USD}$ and yielding a modelled Return on Security Investment ($\text{ROSI}$). The 62% reduction in mean team susceptibility is an assumed training effect rather than a measured one, and both loss expectancies are reference figures. The percentage below is arithmetic on those inputs:
 
 $$\text{ROSI} = \frac{(\text{ALE}_{\text{unmitigated}} - \text{ALE}_{\text{hardened}}) - C_{\text{controls}}}{C_{\text{controls}}} \times 100\% = \frac{\$8,890,000 - \$180,000}{\$180,000} \times 100\% = 4,838\%$$
 

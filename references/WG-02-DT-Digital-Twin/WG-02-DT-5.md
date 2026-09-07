@@ -133,7 +133,7 @@ This is *not* “HR analytics.” It is a way to quantify a key fact Taleb would
 
 ## Strategic Takeaway: Anti-Fragile Systems Truth
 
-Cyber Digital Twins do not sell static \"coverage\"; they deliver anti-fragile, empirically tested truth.
+Cyber Digital Twins do not sell static \"coverage\"; they deliver anti-fragile, simulation-tested truth. The testing is modelled. The twin takes the plant's own topology, component list, and stated failure thresholds, runs thousands of adversarial paths through them, and reports where the plant breaks. None of that is a field measurement. The inputs belong to the facility, the conclusions follow from them by stated relations, and both stay open to challenge.
 
 Traditional “defense in depth” often behaves like Taleb’s doomed trading strategy:
 - it performs well in normal times,

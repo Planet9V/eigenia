@@ -4,6 +4,7 @@ Compiler for Paper P-06: Autonomous OT & AI-Driven Facility Control: The Write-A
 Generates a 5,500+ word, academically rigorous, physics-grounded treatise
 meeting all PAAI gate criteria and zero-tolerance style prohibitions.
 """
+import re
 
 dest_path = 'references/WG-03-ML-Behaviorial_Modeling/WG-03-ML-Autonomous-OT-Trust-Boundary.md'
 
@@ -13,7 +14,7 @@ In 2016, landmark demonstrations revealed that reinforcement learning algorithms
 
 However, granting machine learning agents autonomous write access to operational technology (OT) control networks creates an catastrophic cyber-physical failure mode. Machine learning models suffer from distribution drift, reward function gaming, adversarial prompt or telemetry injection, and out-of-distribution hallucinations. When an autonomous software algorithm commands physical valves, inverters, and switchgear, the threat actor is no longer merely an external adversary injecting Modbus TCP packets; it is the optimization algorithm itself, operating inside the trust perimeter and issuing syntactically valid commands.
 
-Applying the Nassim Taleb Extremistan test demonstrates that autonomous AI facility write access creates unhedged tail-risk: catastrophic multi-megawatt thermal runaway, instantaneous load dumps, and multi-million-dollar hardware destruction. This paper formalizes the Write-Access Trust Boundary. We prove mathematically why optimization algorithms must be restricted to read-only digital twin mirrors isolated by hardware-enforced unidirectional optical data diodes. We model reinforcement learning reward gaming, formulate dynamic Lyapunov stability for cyber-physical control loops, and establish actuarial underwriting criteria for insuring AI-managed mission-critical facilities under Lloyd's Y5381.
+Applying the Nassim Taleb Extremistan test demonstrates that autonomous AI facility write access creates unhedged tail-risk: catastrophic multi-megawatt thermal runaway, instantaneous load dumps, and multi-million-dollar hardware destruction. This paper formalizes the Write-Access Trust Boundary. Starting from the failure modes listed above, it derives why optimization algorithms should be restricted to read-only digital twin mirrors isolated by hardware-enforced unidirectional optical data diodes. The derivation is a conclusion drawn from assumed failure modes and assumed loss magnitudes. It is not a theorem about any deployed installation, and it holds only as far as those assumptions hold. We model reinforcement learning reward gaming, formulate dynamic Lyapunov stability for cyber-physical control loops, and establish actuarial underwriting criteria for insuring AI-managed mission-critical facilities under Lloyd's Y5381.
 
 ---
 
@@ -200,7 +201,7 @@ The financial return on deploying hardware-enforced read-only data diodes and ph
 
 $$\text{ROSI} = \frac{(\text{ALE}_{\text{autonomous\_write}} - \text{ALE}_{\text{read\_only}}) - C_{\text{diode\_controls}}}{C_{\text{diode\_controls}}}$$
 
-Where isolating an autonomous facility with an optical data diode ($C_{\text{diode}} = 65,000\text{ USD}$) reduces catastrophe loss expectancy from $\text{ALE} = 14,200,000\text{ USD}$ to $\text{ALE} = 45,000\text{ USD}$, delivering a verified $\text{ROSI} > 21,000\%$.
+Where isolating an autonomous facility with an optical data diode ($C_{\text{diode}} = 65,000\text{ USD}$) reduces catastrophe loss expectancy from $\text{ALE} = 14,200,000\text{ USD}$ to $\text{ALE} = 45,000\text{ USD}$, delivering a modelled $\text{ROSI} > 21,000\%$. The percentage is exact arithmetic on the two loss expectancies and the diode cost stated in this section. All three are author-chosen reference values for a hyperscale hall, so substitute site figures before quoting the result to a risk committee.
 
 ---
 
@@ -251,13 +252,13 @@ Every critical node must incorporate an analog, hardwired Safety Instrumented Fu
 
 ## 7. Actuarial and Reinsurance Treaty Structuring
 
-Deploying autonomous AI facility control without verified physical bounds checkers renders a hyperscale facility technically uninsurable under modern property catastrophe and cyber reinsurance treaties:
+Deploying autonomous AI facility control without proof-tested physical bounds checkers renders a hyperscale facility technically uninsurable under modern property catastrophe and cyber reinsurance treaties:
 
 | Insurance Underwriting Dimension | Unconstrained Autonomous AI Control | Bounded Read-Only AI (Digital Twin + Diode) | Underwriting Impact |
 |:---|:---|:---|:---|
 | **Systemic Failure Accumulation** | Correlated cluster-wide thermal trips; algorithm acts as a single point of failure. | Optical data diode prevents algorithmic commands from reaching physical plant. | Reinsurance syndicates eliminate common-cause risk buffers; rates decrease 28%. |
 | **Probable Maximum Loss (PML)** | Total facility loss exposure exceeding 250,000,000 USD (Table B Extremistan). | Physically constrained by hardwired SIL-3 interlocks; loss bounded to single chassis. | PML reduced by 45%; capital reserves released. |
-| **War Exclusion (Lloyd's Y5381)** | State-sponsored adversaries poisoning AI training pipelines; claims disputed. | Verified optical separation provides deterministic defense against external manipulation. | Affirmative coverage granted without unhedged sovereign cyber exclusions. |
+| **War Exclusion (Lloyd's Y5381)** | State-sponsored adversaries poisoning AI training pipelines; claims disputed. | Optical separation, confirmed by inspecting the fibre path for any return channel, gives a deterministic defense against external manipulation. | Affirmative coverage granted without unhedged sovereign cyber exclusions. |
 | **Gross Negligence Liability** | Facility leadership vulnerable to shareholder lawsuits following unconstrained AI runaway. | Full compliance with EN 50126 and IEC 62443 demonstrates SFAIRP legal due diligence. | Total statutory and tort liability defense for board members. |
 | **Deductibles and Sub-Limits** | Punitive deductibles ($25M to $50M) and strict business interruption sub-limits. | Dynamic deductibles indexed to continuous digital twin compliance; full replacement cost. | Working capital unlocked; affirmative consequential loss coverage preserved. |
 
@@ -275,6 +276,9 @@ Autonomous operational technology demands four immutable engineering principles:
 
 # Ensure no em-dashes or double-hyphens exist
 content = content.replace('—', '; ')
+# A spaced em dash becomes ' ;  '. A semicolon never takes a space before it;
+# collapse the artifact here so it cannot reach a published document.
+content = re.sub(r'\s+;\s+', '; ', content)
 
 with open(dest_path, 'w', encoding='utf-8') as f:
     f.write(content)

@@ -5,6 +5,8 @@ Expands manuscript to 5,500+ words with complete DEXPI XML listings,
 CycloneDX 1.6 JSON schemas, fluid mechanics derivations, and actuarial tables.
 """
 
+import re
+
 dest_path = 'references/WG-05-CAD-DEXPI-2/WG-05-CAD-Unified-DEXPI-CycloneDX.md'
 
 content = """## Abstract
@@ -341,7 +343,7 @@ Where:
 - $T_{\\text{restore}}(u)$ is the mean physical restoration time, determined by equipment supply chain lead times documented in the Reliability Critical Items List (RCIL).
 - $\\text{ALE}$ is the Annualised Loss Expectancy, and $\\text{ARO}$ is the Annualised Rate of Occurrence.
 
-Under Lloyd's Y5381 war exclusions, underwriters require verified attestation that state-sponsored cyber attacks cannot exploit facility OT to cause unhedged business interruption. The DEXPI-CycloneDX bridge provides this deterministic proof.
+Under Lloyd's Y5381 war exclusions, underwriters ask for attestation, backed by evidence they can inspect themselves, that state-sponsored cyber attacks cannot exploit facility OT to cause unhedged business interruption. The DEXPI-CycloneDX bridge does not settle that question; no data structure can. What it supplies is an inventory an adjuster can walk. Every conduit, every component and every firmware revision is named, dated and signed, so a containment argument is checked against the plant rather than asserted about it. The strength of the attestation still rests on how completely the twin matches the installed asset, and that match is a maintenance obligation, not a property of the schema.
 
 ---
 
@@ -412,10 +414,12 @@ Connecting physical P&ID data directly to digital BOM schemas fundamentally alte
 | Insurance Underwriting Dimension | Traditional Qualitative Method | DEXPI + CycloneDX Digital Twin Method | Underwriting Consequence |
 |:---|:---|:---|:---|
 | **PML / MPL Calculation** | Subjective engineer site visits, manual building surveys, static occupancy estimates. | Deterministic graph traversal calculating worst-case hydraulic and electrical failure cascades. | Reinsurance syndicates eliminate uncertainty buffers; premium rates decrease by 18% to 32%. |
-| **Business Interruption (BI)** | Historical claims averages, broad industry downtime tables (days to weeks). | Supply-chain-linked restoration curves calculated from verified RCIL lead times. | BI sub-limits expanded; parametric triggers calibrated to physical sensor thresholds. |
+| **Business Interruption (BI)** | Historical claims averages, broad industry downtime tables (days to weeks). | Supply-chain-linked restoration curves calculated from RCIL lead times quoted by the named supplier and re-quoted at each contract renewal. | BI sub-limits expanded; parametric triggers calibrated to physical sensor thresholds. |
 | **Common Cause Accumulation** | Unknown. Redundant cooling loops assumed to be independent. | Automated multi-BOM graph identifies shared PLC firmware or common manifold supply lines. | Eliminates hidden systemic tail-risk across multi-facility regional portfolios. |
 | **War Exclusion (Lloyd's Y5381)** | Disputed claims during state-backed attacks; extensive legal litigation. | Attested hardware zero trust (Caliptra RoT, DICE) proves state-sponsored exploit containment. | Clear indemnification certainty; waiver of sovereign attack exclusions for certified assets. |
 | **Policy Deductibles** | Fixed high deductibles ($5M to $25M) to protect insurers against moral hazard. | Dynamic deductibles indexed to real-time digital twin compliance and maintenance telemetry. | Lower working capital lockup for facility operators; risk-aligned capital reserves. |
+
+The right-hand column states modelled underwriting consequences. The 18% to 32% premium band is this working group's estimate of what a syndicate will concede for a twin it can interrogate directly, reasoned from the size of the uncertainty buffer such a syndicate currently carries. It is not a rate quoted by any market and it is not drawn from a placement. Take it as the shape of the commercial argument, and price the actual programme with a broker who can test it.
 
 ---
 
@@ -478,6 +482,9 @@ The Unified DEXPI 2.0 and CycloneDX 1.6+ Semantic Bridge establishes five non-ne
 
 # Clean any surviving em-dashes and AI words
 content = content.replace('—', '; ')
+# A spaced em dash becomes ' ;  '. A semicolon never takes a space before it;
+# collapse the artifact here so it cannot reach a published document.
+content = re.sub(r'\s+;\s+', '; ', content)
 
 with open(dest_path, 'w', encoding='utf-8') as f:
     f.write(content)

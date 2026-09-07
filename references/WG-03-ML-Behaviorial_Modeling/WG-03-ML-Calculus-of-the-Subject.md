@@ -21,7 +21,7 @@ To understand "how calculus is formed and made" in the psychoanalytic context, w
 
 Ultimately, this report argues that the "calculus of the subject" is the operation by which psychoanalysis writes the impossibility of the sexual relationship and the structural lack of the speaking being. It is a calculus not of accumulation, but of loss; a logic of the "not-all" that resists the totalizing synthesis of the imaginary mirror.
 
-## The Genesis of Form ;  The Mirror Stage and the Geometry of the Ego
+## The Genesis of Form; The Mirror Stage and the Geometry of the Ego
 
 ### The Ontological Status of the Specular Image
 
@@ -65,7 +65,7 @@ In this view, the mirror is not just a physical object but a logical function th
 
 This logical formalism allows us to strip the mirror stage of its purely visual or developmental trappings and see it as the first step in the "calculus of the subject." It is the operation that creates a distinct "object" out of the flux of being. However, it is a flawed operation because it relies on the illusion of symmetry. The "calculus" proper will begin only when the asymmetry of the signifier is introduced [6]
 
-## The Historical Formation of the Calculus ;  A Genealogy of the Cut
+## The Historical Formation of the Calculus; A Genealogy of the Cut
 
 To understand Lacan’s "calculus of the subject," we must understand the "calculus" as a historical episteme. Lacan posits that the concept of the unconscious is "imposed on us" by the same approach to reality that necessitated the invention of infinitesimal calculus [8] The history of calculus is a history of grappling with the Real; specifically, the Real of the infinite and the continuum which resists the symbolic count.
 
@@ -108,7 +108,7 @@ The "crisis of foundations" in the 19th century forced mathematics to exorcise t
 This moment is decisive for Lacan. The "taming of the infinite" through the concept of the Limit provides the model for the "Matheme".15 The Real is not a mystical beyond; it is the Limit of the Symbolic. It is constructed by the convergence of the signifying chain.  
 The "calculus of the subject" is thus the formalization of the asymptotic relation between the Subject and the Objet a. The subject approaches the object infinitely, circling it, defining it by the very contour of its failure to reach it.
 
-## The Calculus of the Subject ;  Suture and Signifier
+## The Calculus of the Subject; Suture and Signifier
 
 Having established the historical and geometric foundations, we turn to the core of the report: the "Calculus of the Subject" as articulated in the Lacanian orientation, particularly through the intervention of Jacques-Alain Miller’s concept of "Suture".16
 
@@ -155,7 +155,7 @@ The subject does not move in a straight line (progress). The subject moves in a 
 
 This is where Lacan’s calculus diverges most sharply from standard "utilitarian" calculus (Bentham). The "calculus of interests" assumes a subject who maximizes pleasure and minimizes pain (linear). The "calculus of the subject" (Lacan) reveals a subject who pursues a paradoxical *jouissance* (pain-pleasure) through repetitive, circular failure (the death drive).16
 
-## The Real as Irrational ;  Topology and the Dedekind Cut
+## The Real as Irrational; Topology and the Dedekind Cut
 
 If the Symbolic is the domain of the integer and the rational number (the discrete count), the Real is the domain of the Irrational Number and the Continuum. Lacan uses the "Dedekind Cut" to formalize the relationship between the subject (Symbolic) and the *objet a* (Real).21
 
@@ -221,7 +221,7 @@ Philosopher Alain Badiou has fiercely critiqued this "calculus," labeling it "pr
 * Badiou's Argument: Lacan mixes up standard logic with Intuitionist Logic. Intuitionism (Brouwer) denies the "Law of Excluded Middle" and rejects the "Actual Infinite." It claims that $\neg \forall x$ does not imply $\exists x \neg$. Badiou argues Lacan opportunistically uses Intuitionism to defend his "Not-All" while ignoring the rigorous definitions of modern Set Theory (Cantor) which allow for the Actual Infinite.  
 * Lacan's Defense: Lacan is not doing pure mathematics; he is articulating the logic of the *signifying subject*. The subject *cannot* experience the "Actual Infinite" of Cantor. The subject's infinite is the "Bad Infinite" (Hegel) of desire; the endless metonymy. Therefore, the Intuitionist logic of the "constructible" is more appropriate for the subject of the unconscious than the transcendent infinite of Set Theory [24]
 
-## Other Calculus ;  Cybernetics, Probability, and Deleuze
+## Other Calculus; Cybernetics, Probability, and Deleuze
 
 The prompt asks for "other calculus." Lacan engages with several other forms of calculation to triangulate his theory.
 
@@ -357,7 +357,7 @@ Where:
 - $\dot{L}_{\text{BI}}(t)$ is the business interruption loss rate ($18,500\text{ USD/hour}$).
 - $\Phi_{\text{regulatory}}$ is the statutory penalty levied under EU CRA Article 64.
 
-Deploying psychometric behavioral monitoring ($C_{\text{controls}} = 350,000\text{ USD}$) mitigates insider-assisted sabotage, reducing annualized loss expectancy from $12,400,000\text{ USD}$ to $920,000\text{ USD}$ and yielding a verified Return on Security Investment ($\text{ROSI}$):
+Deploying psychometric behavioral monitoring ($C_{\text{controls}} = 350,000\text{ USD}$) mitigates insider-assisted sabotage, reducing annualized loss expectancy from $12,400,000\text{ USD}$ to $920,000\text{ USD}$ and yielding a modelled Return on Security Investment ($\text{ROSI}$). The two loss expectancies and the monitoring cost are author-chosen reference values for an insider-sabotage scenario. The percentage below is exact arithmetic on those values and carries no observational weight of its own:
 
 $$\text{ROSI} = \frac{(\text{ALE}_{\text{unmitigated}} - \text{ALE}_{\text{hardened}}) - C_{\text{controls}}}{C_{\text{controls}}} \times 100\% = \frac{\$11,480,000 - \$350,000}{\$350,000} \times 100\% = 3,180\%$$
 
