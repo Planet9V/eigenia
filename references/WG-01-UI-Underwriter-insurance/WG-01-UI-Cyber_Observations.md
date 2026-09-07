@@ -1,4 +1,4 @@
-# Empirical Cyber Insurance Market Observations & Underwriting Telemetry
+# Cyber Insurance Market Observations and Underwriting Telemetry
 Insurance companies and underwriters approach cyber insurance by moving away from traditional, static questionnaires in favor of dynamic, highly quantitative models driven by continuous telemetry, advanced actuarial mathematics, and systemic risk modeling.
 
 ## 1. Continuous Telemetry and Outside-In Assessment
@@ -18,7 +18,7 @@ Cyber risk does not follow a standard "normal" (bell curve) distribution; instea
 Unlike physical catastrophes, cyber risk is borderless and systemic, propagating downward through shared digital infrastructure like cloud platforms and software supply chains. To model this non-diversifiable accumulation risk, actuaries deploy:
 
 - **Epidemic Network Models:** Drawing from biological epidemiology to simulate how malware spreads through interconnected supply chains.
-- **Hawkes Processes:** Self-exciting point models used to capture "contagion," reflecting the empirical reality that one major cyber event temporarily increases the probability of subsequent events.
+- **Hawkes Processes:** Self-exciting point models used to capture "contagion," reflecting the reported clustering in which one major cyber event temporarily raises the probability of subsequent events. This note cites no study for the clustering and states none of its own; the model choice is the observation being recorded here, not a fitted excitation rate.
 - **Realistic Disaster Scenarios:** Catastrophe modeling platforms stress-test an insurer's entire portfolio against theoretical extreme events, such as a widespread software supply chain compromise or a coordinated attack on the power grid, to ensure the insurer remains solvent.
 
 ## 4. Cyber Business Interruption (CBI) 
@@ -39,7 +39,7 @@ Cyber risk does not follow a standard "normal" (bell curve) distribution; instea
 Unlike physical catastrophes, cyber risk is borderless and systemic, propagating downward through shared digital infrastructure like cloud platforms and software supply chains. To model this non-diversifiable accumulation risk, actuaries deploy:
 
 - **Epidemic Network Models:** Drawing from biological epidemiology to simulate how malware spreads through interconnected supply chains.
-- **Hawkes Processes:** Self-exciting point models used to capture "contagion," reflecting the empirical reality that one major cyber event temporarily increases the probability of subsequent events.
+- **Hawkes Processes:** Self-exciting point models used to capture "contagion," reflecting the reported clustering in which one major cyber event temporarily raises the probability of subsequent events. This note cites no study for the clustering and states none of its own; the model choice is the observation being recorded here, not a fitted excitation rate.
 - **Realistic Disaster Scenarios:** Catastrophe modeling platforms stress-test an insurer's entire portfolio against theoretical extreme events, such as a widespread software supply chain compromise or a coordinated attack on the power grid, to ensure the insurer remains solvent.
 
 ## 4. Cyber Business Interruption (CBI) Focus 

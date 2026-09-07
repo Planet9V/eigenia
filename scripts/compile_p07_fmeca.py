@@ -13,7 +13,7 @@ Failure Mode, Effects, and Criticality Analysis (FMECA) under IEC 60812 is the f
 
 This paper establishes the Cyber-Physical Extension to FMECA. When industrial assets; Coolant Distribution Unit (CDU) pumps, motorized isolation valves, building management controllers, and automatic transfer switches; are connected to operational technology networks, they become susceptible to deliberate digital manipulation. An adversary commanding a pump stop or valve closure via unauthenticated Modbus TCP executes the failure instantaneously, independently of component operating age. In parallel, because adversaries spoof telemetry registers to report nominal states, Detection drops catastrophically.
 
-Across an empirical eighteen-component audit of a 100 MW high-density compute facility, we demonstrate that cyber-induced failure modes carry Risk Priority Numbers 3.2x to 13.5x higher than their mechanical equivalents. The CDU isolation valve, for example, escalates from an RPN of 36 (mechanical binding) to an RPN of 486 (remote Modbus command injection with spoofed telemetry). We formulate the mathematical dynamics of the Cyber Multiplier Gap, model adversarial Poisson injection failure densities, and provide CFOs, reinsurance syndicates, and catastrophe underwriters with an actuarial bridge linking component RPNs directly to Annualised Loss Expectancy (ALE), Probable Maximum Loss (PML), and Return on Security Investment (ROSI).
+Across a modelled eighteen-component register for a 100 MW high-density compute facility, this paper shows that cyber-induced failure modes carry Risk Priority Numbers 3.2x to 13.5x higher than their mechanical equivalents. The multiplier is modelled, not measured. Severity, Occurrence and Detection are analyst-assigned ordinal scores by the definition of FMECA in IEC 60812, and the eighteen rows below were scored by the working group rather than drawn from a fleet failure database. The products recompute exactly from the scores printed in the table; the scores themselves are judgement. The CDU isolation valve, for example, escalates from an RPN of 36 (mechanical binding) to an RPN of 486 (remote Modbus command injection with spoofed telemetry). We formulate the mathematical dynamics of the Cyber Multiplier Gap, model adversarial Poisson injection failure densities, and provide CFOs, reinsurance syndicates, and catastrophe underwriters with an actuarial bridge linking component RPNs directly to Annualised Loss Expectancy (ALE), Probable Maximum Loss (PML), and Return on Security Investment (ROSI).
 
 ---
 
@@ -116,7 +116,7 @@ The Cyber Multiplier Gap $\mu_{\text{cyber}}(k)$, representing the relative risk
 
 $$\mu_{\text{cyber}}(k) = \frac{\text{RPN}_c(k)}{\text{RPN}_m(k)} = \frac{O_c(k) \cdot D_c(k)}{O_m(k) \cdot D_m(k)}$$
 
-Across empirical critical infrastructure nodes, $\mu_{\text{cyber}}$ ranges from $3.2$ to $40.0$. This proves that allocating maintenance budgets based solely on mechanical MTBF data severely misallocates capital, leaving the primary attack vectors entirely undefended.
+Across the critical infrastructure nodes scored in this paper, $\mu_{\text{cyber}}$ ranges from $3.2$ to $40.0$. That range is the ratio of two sets of assigned ordinal scores, so it is a modelled spread rather than a measured one. It carries a clear implication: allocating maintenance budgets on mechanical MTBF data alone misallocates capital and leaves the primary attack vectors undefended.
 
 ### 4.2 Adversarial Non-Random Failure Probability Density
 Traditional reliability engineering assumes component time-to-failure follows an exponential or Weibull distribution governed by a constant hazard rate $\lambda_{\text{mech}}$. In the presence of targeted cyber attacks, the total failure probability density function $f_{\text{total}}(t)$ becomes a bimodal mixture distribution:
@@ -164,13 +164,13 @@ The financial justification for implementing engineering safeguards is determine
 
 $$\text{ROSI}(k) = \frac{\left(\text{ALE}_{\text{unmitigated}}(k) - \text{ALE}_{\text{hardened}}(k)\right) - C_{\text{control}}(k)}{C_{\text{control}}(k)}$$
 
-For the CDU isolation valve (Row 2), implementing a hardwired mechanical limit switch and cryptographic Modbus MAC verification ($C_{\text{control}} = 12,500\text{ USD}$) reduces $\text{RPN}_c$ from $486$ to $36$, lowering annual loss expectancy from $1,450,000\text{ USD}$ to $18,000\text{ USD}$, delivering a verified $\text{ROSI} = 11,356\%$.
+For the CDU isolation valve (Row 2), implementing a hardwired mechanical limit switch and cryptographic Modbus MAC verification ($C_{\text{control}} = 12,500\text{ USD}$) reduces $\text{RPN}_c$ from $486$ to $36$, lowering annual loss expectancy from $1,450,000\text{ USD}$ to $18,000\text{ USD}$, giving a modelled $\text{ROSI} = 11,356\%$ (modelled: both loss expectancies and the control cost are working-group estimates, and the calibration constant $\alpha$ linking $\text{RPN}_c$ to $\text{ARO}_c$ is not stated anywhere in this paper).
 
 ---
 
-## 5. Industrial Proof: Validated Cyber-Physical Failure Case Studies
+## 5. Failure Case Studies: One Named Incident and One Anonymous Report
 
-The high cyber RPNs documented in this paper reflect empirical vulnerability mechanics validated through field incident response and academic research:
+The high cyber RPNs documented in this paper follow from vulnerability mechanics that are separately attested in two case studies of unequal strength. Section 5.2 names the vendor, the researcher and three CVE identifiers, so a reader can check it. Section 5.1 names no operator, no date beyond the year and no public report, so a reader cannot; it is retained as an illustrative account, not as evidence:
 
 ### 5.1 The 2024 High-Density AI Colocation Colling Incident
 A 40 MW high-density compute facility in the Asia-Pacific region experienced a cluster-wide thermal shutdown when an adversary leveraged unauthenticated BACnet write commands to manipulate chilled water setpoints. The attack exploited FMECA Row 4 (Chiller Compressor Controller) and Row 18 (CRAH Fan), commanding chillers to elevate supply water temperature while reducing fan speeds. Over $1,200\text{ GPUs}$ throttled compute execution simultaneously, halting distributed foundation model training runs and inflicting $3.8\text{M USD}$ in contractual SLA downtime penalties.
@@ -224,9 +224,9 @@ Integrating cyber-physical FMECA into catastrophe models provides reinsurance sy
 |:---|:---|:---|:---|
 | **Common-Cause Accumulation** | Assumes N+1 pumps fail independently; low portfolio correlation. | Identifies shared PLC firmware and unauthenticated Modbus conduits. | Eliminates hidden systemic tail-risk; avoids correlated portfolio insolvency. |
 | **Probable Maximum Loss (PML)** | Based on single component replacement ($50,000\text{ to }150,000\text{ USD}$). | Models coordinated cluster-wide failure cascades ($50,000,000\text{+ USD}$). | Reinsurance capital requirements accurately sized; uncertainty loadings removed. |
-| **Lloyd's Y5381 Compliance** | Disputed claims during nation-state attacks; severe litigation exposure. | Attested SIL-3 hardwired interlocks prove physical exploit containment. | Affirmative cyber-physical coverage granted with zero state-actor exclusions. |
+| **Lloyd's Y5381 Compliance** | Disputed claims during nation-state attacks; severe litigation exposure. | Attested SIL-3 hardwired interlocks bound the exploit in hardware, which is an argument a syndicate can inspect rather than a loss statistic. | Affirmative cyber-physical coverage granted with zero state-actor exclusions. |
 | **Deductibles & Sub-Limits** | Punitive deductibles ($25M) and restrictive business interruption sub-limits. | Dynamic deductibles indexed to continuous FMECA compliance; full replacement cost. | Working capital unlocked; affirmative consequential loss coverage preserved. |
-| **Parametric Triggers** | Subjective damage adjusters requiring weeks of onsite surveys. | Parametric settlement triggered automatically by verified digital twin telemetry. | Claims settled in business days; working capital preserved. |
+| **Parametric Triggers** | Subjective damage adjusters requiring weeks of onsite surveys. | Parametric settlement triggered automatically by cryptographically signed digital twin telemetry. | Claims settled in business days; working capital preserved. |
 
 ---
 

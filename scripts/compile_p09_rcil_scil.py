@@ -13,7 +13,7 @@ In mission-critical industrial facilities, risk assessment frameworks such as FM
 
 This paper establishes the definitive RCIL and SCIL registers for hyperscale compute infrastructure. We define the rigorous technical boundary between reliability-critical components (whose failure degrades operational availability below contractual SLAs) and safety-critical components (whose failure produces irreversible physical hardware destruction, arc-flash explosions, or environmental catastrophes). Safety-critical items are non-negotiable Table B (Extremistan) assets that require independent, hardwired SIL-3 analog interlocks that operate completely outside software networks.
 
-Crucially, this paper formalizes the actuarial relationship between long-lead equipment replacement timelines; such as 52-week substation transformer queues and 30-week custom Coolant Distribution Unit (CDU) lead times; and unhedged business interruption loss exposure. By modeling adversarial common-cause cyber interdictions that destroy redundant physical units simultaneously, we prove that classical Poisson spares inventory models fail catastrophically. We formulate the mathematical dynamics of cyber-physical spares optimization, derive optimal capital inventory buffers under Gordon-Loeb constraints, and establish reinsurance treaty structuring criteria under Lloyd's Y5381.
+Crucially, this paper formalizes the actuarial relationship between long-lead equipment replacement timelines; such as 52-week substation transformer queues and 30-week custom Coolant Distribution Unit (CDU) lead times; and unhedged business interruption loss exposure. By modeling adversarial common-cause cyber interdictions that destroy redundant physical units simultaneously, this paper shows where classical Poisson spares inventory models break. The failure is structural rather than statistical: Poisson spares sizing assumes independent unit failures, and a common-cause interdiction violates that assumption by construction, so the model is being applied outside its stated domain. That argument stands on the model's own assumption, not on a fitted dataset. We formulate the mathematical dynamics of cyber-physical spares optimization, derive optimal capital inventory buffers under Gordon-Loeb constraints, and establish reinsurance treaty structuring criteria under Lloyd's Y5381.
 
 ---
 
@@ -177,7 +177,7 @@ The financial return on establishing an on-site strategic critical spares depot 
 
 $$\text{ROSI}_{\text{spares}} = \frac{\Delta \text{ALE}_{\text{spares}} - C_{\text{inventory}}}{C_{\text{inventory}}} \times 100\%$$
 
-For a dedicated spares depot containing two complete CDU pump assemblies and one chiller compressor ($C_{\text{inventory}} = 650,000\text{ USD}$), the annual expected loss reduction is $7,200,000\text{ USD}$, delivering a verified $\text{ROSI} = 1,007\%$.
+For a dedicated spares depot containing two complete CDU pump assemblies and one chiller compressor ($C_{\text{inventory}} = 650,000\text{ USD}$), the annual expected loss reduction is taken as $7,200,000\text{ USD}$, giving a modelled $\text{ROSI} = 1,007\%$ (modelled: the loss reduction and the inventory cost are both working-group estimates, and this paper does not derive the $7,200,000$ figure from the registers above; treat it as an assumed input to the ratio).
 
 ---
 
@@ -214,14 +214,14 @@ $$\text{PFD}_{\text{avg}} \in [10^{-4}, \; 10^{-3}]$$
 
 ## 7. Actuarial and Reinsurance Treaty Structuring
 
-The existence of verified RCIL and SCIL registers directly alters the underwriting terms of property catastrophe and business interruption reinsurance treaties:
+Registers that a syndicate can audit, line by line and against the physical plant, alter the underwriting terms of property catastrophe and business interruption reinsurance treaties. The register is the auditable object; the terms in the table below are a proposed structure for negotiation, and the percentages in the right-hand column are the working group's estimates rather than filed rates:
 
-| Treaty Underwriting Dimension | Facility Without Formal Critical Items Lists | Facility with Verified RCIL / SCIL Assurance | Actuarial & Reinsurance Impact |
+| Treaty Underwriting Dimension | Facility Without Formal Critical Items Lists | Facility with Audited RCIL / SCIL Assurance | Actuarial & Reinsurance Impact |
 |:---|:---|:---|:---|
 | **Business Interruption Period** | Calculated against unhedged 42-week OEM lead times; massive rate loadings. | Calculated against 48-hour on-site strategic spares replacement window. | Premium reduction of 34%; business interruption reserves released. |
-| **Systemic Accumulation Surcharge** | Common-cause cyber exploit assumed to take down all sister facilities. | CycloneDX diversity audit proves decoupled firmware and isolated conduits. | 0% portfolio accumulation loading; risk treated as uncorrelated. |
-| **Lloyd's Y5381 Compliance** | Disputed claims during nation-state campaigns; litigated war exclusions. | Verified SIL-3 analog safety interlocks eliminate state-sponsored physical rupture. | Affirmative cyber-physical coverage granted without disputed war exclusions. |
-| **Retention Deductibles & Sub-Limits** | Punitive $25,000,000 deductible with strict waiting periods and narrow sub-limits. | Dynamic $2,500,000 retention indexed to verified spares depot audits; full replacement cost. | Working capital unlocked; affirmative consequential loss coverage preserved. |
+| **Systemic Accumulation Surcharge** | Common-cause cyber exploit assumed to take down all sister facilities. | CycloneDX diversity audit evidences decoupled firmware; conduit isolation is a separate finding and needs a physical network survey. | 0% portfolio accumulation loading; risk treated as uncorrelated. |
+| **Lloyd's Y5381 Compliance** | Disputed claims during nation-state campaigns; litigated war exclusions. | SIL-3 analog safety interlocks certified by an accredited laboratory bound physical rupture regardless of who issues the command. | Affirmative cyber-physical coverage granted without disputed war exclusions. |
+| **Retention Deductibles & Sub-Limits** | Punitive $25,000,000 deductible with strict waiting periods and narrow sub-limits. | Dynamic $2,500,000 retention indexed to spares depot audits carried out by the carrier's own surveyor; full replacement cost. | Working capital unlocked; affirmative consequential loss coverage preserved. |
 | **Probable Maximum Loss (PML)** | Unhedged PML exceeds $150,000,000 due to unmitigated multi-month lead times. | Hardwired SIL-3 limits bound single-event PML below $15,000,000. | Treaty capacity unlocked; primary layer attachment rates drop 22%. |
 
 ---
