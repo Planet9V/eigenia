@@ -2403,46 +2403,36 @@ NERC-CIP is not mandatory in Australia. It is included because it decomposes the
 **Total for NERC-CIP equivalence:** not stated. Three of the five lines are bounded (two band B and one band C, summing to AUD 0.78 million to AUD 2.33 million, modelled band boundary arithmetic), one is an unbounded band D line and one is recurring. No public cost anchor exists for a NERC-CIP equivalence programme in any jurisdiction.
 
 **On the insurance benefit.** An earlier draft claimed that demonstrating NERC-CIP equivalent controls could reduce cyber insurance premiums by 15 to 25 percent. That claim is removed. No Australian OT cyber insurance premium data was found at all, for a baseline premium or for a post-control premium, so no percentage reduction can be sourced or computed. Section 9.7 states the same finding at length.
+### 9.7 Insurance and Risk Transfer
 
-### 9.7 Insurance and Risk Transfer Considerations
+This subsection states what cannot be priced. That is its main content and it is not an evasion. An earlier draft priced an insurable loss, a required premium, a coverage cap, a baseline premium, a post-control premium, a premium saving, a payback period, an APRA capital charge, a cost of capital and a ten-year discount factor, and then combined them into a 47.3:1 ratio. Not one of those inputs had a source. The surviving arithmetic in that draft, a payback of 3.98 divided by the difference between 1.8 and 0.5 giving 3.1 years, still leaks the original figures: an AUD 3.98 million programme and premiums falling from AUD 1.8 million to AUD 0.5 million per year. Those numbers are not restored here, because restoring them would make them no more sourced than they were.
 
-**Cyber Insurance Policy Implications:**
+**What was searched for and not found.**
 
-Current cyber insurance policies for critical infrastructure typically **exclude OT/ICS losses** due to insurers' inability to quantify cascading failure risk. This assessment provides actuarially sound risk quantification that enables:
+No Australian OT cyber insurance premium data was located: not a baseline premium for a distribution network business, not a post-control premium, not a coverage cap, not a loss ratio, and not a percentage premium movement attributable to any control. The gap is recorded explicitly in the external research supporting this section. Nothing in this subsection can therefore be priced, and nothing is.
 
-1. **OT-Specific Cyber Insurance Coverage:**
+**What can be stated.**
 
-   - Insurable loss estimate: [investment required] million (P50 scenario)
-   - Required premium (at 5% loss ratio): [investment required] million/year
-   - Coverage gap: Most policies cap OT losses at [investment required] million (insufficient for Tier 4 cascade)
-2. **Premium Reduction Through Risk Mitigation:**
+Three things, all sourced.
 
-   - Baseline premium (current controls): [investment required] million/year (estimated, no current OT coverage)
-   - Premium after [investment required] control investment: [investment required] million/year (90% risk reduction)
-   - Premium savings: [investment required] million/year
-   - Payback period: 3.98M / (1.8M - 0.5M) = 3.1 years through insurance savings alone
-3. **Regulatory Capital Requirements:**
+First, the loss side is already quantified elsewhere in this paper and does not need an insurance-specific restatement. Section 5.9 puts the risk-adjusted expected loss over a 10-year horizon at AUD 179 million to AUD 358 million, midpoint AUD 268 million, built from the AER's determined VCR and this paper's own 15 to 30 percent probability assessment. Section 5.4 gives the reference case, the full network at the 12-hour boundary of VCR validity, at AUD 1.19 billion. Those are the numbers an underwriter would be asked to price against. They are stated with their assumptions in section 5 and are not repeated with different labels here.
 
-   - APRA (Australian Prudential Regulation Authority) may impose capital requirements for uninsured OT cyber risk
-   - Potential capital charge: 8% of [investment required] uninsured exposure = [investment required] additional regulatory capital
-   - Opportunity cost: [investment required] × 6% cost of capital = [investment required]/year
-   - Control investment avoids capital charge, saving [investment required]/year in perpetuity
+Second, the industry-level loss picture is published. Dragos and Marsh McLennan put average annual OT-related cyber risk at USD 31.1 billion globally, of which USD 12.7 billion involves business interruption claims, and put a 1-in-250-year tail at USD 329.5 billion total with USD 172.4 billion business-interruption related [n]. They also report that roughly 70 percent of OT-impacting breaches involve indirect costs, meaning abundance-of-caution shutdowns and ripple effects rather than direct damage, and give a utilities-specific likelihood of 2.17 percent per year for an event in North American electric power generation and distribution [n]. These are global, modelled, USD figures from a vendor and a broker working from proprietary claims data. They establish that the risk class is large and is being modelled by the insurance market. They do not price an Australian policy and they are not a premium.
 
-**strategic value Including Insurance Benefits:**
+Third, the structural claim in the earlier draft survives, because it is a statement about policy wording rather than about price: cyber insurance policies for critical infrastructure commonly exclude or sub-limit OT and ICS losses. This paper holds no policy wording to cite for that, so it is carried here as an assertion the working group has not evidenced, and a reader should treat it as such until a policy is produced.
 
-```
-Annual Benefits:
-- Avoided loss (10-year NPV amortized): [investment required] million/year
-- Insurance premium reduction: [investment required] million/year
-- Regulatory capital avoidance: [investment required] million/year
-Total Annual Benefit: [investment required] million/year
+**What follows for the board.**
 
-Investment: [investment required] (one-time) + [investment required]/year (ongoing SOC operations)
-Net Annual Benefit: [investment required] - [investment required] = [investment required] million/year
-strategic value (10-year NPV): ([investment required] × 8.5 discount factor) / [investment required] = 47.3:1
+A risk that cannot be priced cannot be transferred on known terms. Two consequences follow and neither needs a number.
 
-This analysis conservatively excludes reputational damage, regulatory penalties, and litigation costs.
-```
+- The programme cannot be justified on insurance savings. Section 9.3's cost-benefit case rests on avoided loss and published control effectiveness, and it stands or falls on those alone. Any premium saving is upside that this paper cannot size.
+- Approaching the market requires the quantification this paper provides, and provides honestly. An underwriter presented with an unsourced 90 percent risk reduction and a 47.3:1 return will discount the whole submission. An underwriter presented with the AER's determined VCR, a stated 12-hour scope limit, a stated probability assessment labelled as the working group's own, and published per-control risk reduction of 12 to 18 percent, is being given something they can underwrite against.
+
+**Regulatory capital.** No figure is stated. The earlier draft applied an 8 percent capital charge to an uninsured exposure and a 6 percent cost of capital to the result. Neither rate was sourced, no APRA instrument imposing a capital charge for uninsured OT cyber risk on an electricity distribution business was identified, and APRA's prudential remit does not obviously extend to a distribution network service provider in any case. The whole line is removed rather than re-estimated. If a specific APRA or AER instrument applies, it should be cited by its clause and the charge computed from the instrument.
+
+**Cost-benefit including insurance benefits.** Not computed. Two of the three annual benefit terms in the earlier draft, premium reduction and regulatory capital avoidance, have no sourced input, and the third duplicates the avoided loss already counted in section 9.3. Adding an unpriced term to a priced one produces a larger number, not a better one. The paper's cost-benefit position is section 9.3's 4.4:1 to 6.6:1, and nothing in this subsection changes it. As in section 5.10, this analysis excludes reputational damage, regulatory penalties and litigation costs, because no sourced input exists for any of them.
+
+---
 
 ## 10. Conclusion
 
