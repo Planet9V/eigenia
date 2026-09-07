@@ -1785,7 +1785,7 @@ Priority 1 band arithmetic: bands A plus C plus C. Summing the band boundaries g
 **Combined effect:** not stated. The earlier draft's 99 percent had no source.
 
 **Whole of immediate actions:** nine controls, one in band A, two in band B, three in band C and three in band D. The six bounded controls sum to AUD 1.8 million to AUD 5.0 million one-off (modelled: band boundary arithmetic, not a quotation). The three band D controls have no upper bound and are excluded from that sum, so the real total is higher by an unknown amount. The sourced CIRMP cyber one-off envelope is AUD 1.29 million. The immediate action list therefore costs several times what the sector-average regulatory compliance figure covers. That is the honest reading and it is stated here rather than smoothed over.
-### 9.2 Investment Roadmap
+### 9.3 Investment Roadmap
 
 Costs below use the band scheme of section 9.1. No line carries a dollar figure that was not derived from a cited source, and the two lines that do carry dollars carry them in the currency of the source, not converted.
 
@@ -1895,7 +1895,7 @@ graph LR
 
 **Programme total.** No total is stated as a single number, because eight of the eleven lines above have no public price and three of them cannot be bounded above at all. What can be stated is the band arithmetic. The eight bounded one-off lines across Phase 1 and Phase 2, two in band B and four in band C plus the two Phase 1 recurring lines held aside, sum to AUD 2.3 million to AUD 6.2 million (modelled: band boundary arithmetic against the AUD 1.29 million CIRMP cyber envelope, not a quotation). The three band D lines in Phase 2, ICS-aware firewalls at all zone boundaries, the behavioural analytics platform and zero-trust microsegmentation, each exceed that envelope on their own and are excluded from the sum. The true total is above AUD 6.2 million by an amount this paper cannot bound.
 
-### 9.2 Risk Mitigation Decision Tree
+### 9.4 Risk Mitigation Decision Tree
 
 The tree below orders the controls of section 9.2 by the network conditions that make each one urgent. Cost bands are those of section 9.1. The tree ranks; it does not price.
 
@@ -1981,7 +1981,7 @@ public cost anchor at any scale and is excluded from that sum, so the
 minimum viable defence costs more than AUD 3.10m by an unbounded amount.
 ```
 
-### 9.3 Return on Investment
+### 9.5 Return on Investment
 
 An earlier draft of this section reported ratios of 30.8:1 and 43.9:1, the second annotated as 4,390 percent. Both were computed from inputs that no longer appear anywhere in the text, so neither could be checked, and both rested on an uncited 90 percent risk reduction. They are removed. What follows is built from three sourced inputs and one formula, and every step is shown so a reader can contest it.
 
@@ -2033,7 +2033,7 @@ Neither side of that ratio is discounted. Section 5.9 states no net present valu
 
 **On the regulated asset base.** An earlier draft stated that the programme represented 0.375 percent of RefDNSP-1.2M's regulated asset base. That claim is removed. RefDNSP-1.2M has no stipulated regulated asset base in section 2, and no RAB figure for any Australian distribution business was sourced for this paper, so the ratio has no denominator and cannot be computed. The nearest available figure is not a substitute: the AER's draft decision for Ausgrid allowed AUD 9,619.6 million of revenue across the five years to 2029 [n], which is a revenue allowance for a different and real business, not an asset base and not RefDNSP-1.2M's.
 
-### 9.4 Quick Wins
+### 9.6 Quick Wins
 
 Five actions delivered through policy change and configuration rather than capital purchase. All five sit in cost band A of section 9.1, under AUD 0.13 million each, because none of them buys hardware or a platform licence. Band A is still an engineering judgement about relative cost, not a quotation.
 
@@ -2103,7 +2103,7 @@ Five actions delivered through policy change and configuration rather than capit
 
 **Combined effect: not stated as a number.** The earlier draft claimed 73 percent cumulative risk reduction across multiple attack vectors. Dragos and Marsh McLennan state their per-control figures are not additive and their report models no combined effect [n]. Three of these five controls map to classes measured at 12.18 and 16.47 percent, and two map to no class at all. Nothing in the evidence supports compounding them into a single figure, and 73 percent had no source.
 
-### 9.5 Board-Level Recommendations
+### 9.7 Board-Level Recommendations
 
 Based on the comprehensive risk assessment and financial analysis in this document, the following Board-level recommendations are presented with risk-adjusted strategic value calculations:
 
@@ -2136,7 +2136,7 @@ The two bounded lines sum to AUD 0.65 million to AUD 1.81 million one-off (model
 No separate ratio is computed for the critical path, because two of
 its four lines have no upper cost bound and a ratio needs a
 denominator. The board-level number is the programme-level one from
-section 9.3:
+section 9.5:
 
   Programme cost (10 years, CIRMP cyber component)   AUD 7.3 million
   Avoided loss (section 5.9 midpoint)                AUD 268 million
@@ -2182,7 +2182,7 @@ should be told so directly rather than shown a number built to clear it.
 
 **Board Resolution Language:**
 
-> *"The Board establishes a dedicated OT Cybersecurity Governance Framework with Chief OT Security Officer position reporting to Board Risk Committee, with mandate to achieve IEC 62443 SL-2 compliance across critical infrastructure within implementation period. Quarterly reporting on KPIs and threat landscape required."*
+> *"The Board establishes a dedicated OT Cybersecurity Governance Framework with Chief OT Security Officer position reporting to Board Risk Committee, with mandate to achieve IEC 62443 SL-2 compliance across critical infrastructure within implementation period. Quarterly reporting on KPIs and the threat environment required."*
 
 **Recommendation 3: Mandate Pre-Deployment Security Validation for BESS Expansion**
 
@@ -2341,7 +2341,7 @@ DERMS API Configuration File Update:
 
 > *"The Board mandates dual authorization for all electricity dispatch commands exceeding 10 MW aggregate capacity or affecting more than 100 devices, effective immediately. This policy change requires no capital investment. Its effect is to remove the single-credential path to bulk dispatch: an attacker holding one compromised retailer API token can no longer command the battery fleet without a second, separately held approval. No measured risk reduction figure is available for this control; the nearest published benchmark, for the secure remote access control class, is 12 percent. Chief OT Security Officer shall report monthly on dual authorization metrics and operational effectiveness."*
 
-### 9.4 Governance and Compliance Actions
+**Governance and compliance actions**
 
 **Executive Actions:**
 
@@ -2357,7 +2357,7 @@ DERMS API Configuration File Update:
 
 ---
 
-### 9.6 Compliance and Regulatory Alignment
+### 9.8 Compliance and Regulatory Alignment
 
 The controls recommended above map onto three frameworks. Costs use the bands of section 9.1. The AER's own cyber security dollar split is not public, and none of the three frameworks publishes an uplift cost, so no table below carries a quoted price.
 
@@ -2402,8 +2402,8 @@ NERC-CIP is not mandatory in Australia. It is included because it decomposes the
 
 **Total for NERC-CIP equivalence:** not stated. Three of the five lines are bounded (two band B and one band C, summing to AUD 0.78 million to AUD 2.33 million, modelled band boundary arithmetic), one is an unbounded band D line and one is recurring. No public cost anchor exists for a NERC-CIP equivalence programme in any jurisdiction.
 
-**On the insurance benefit.** An earlier draft claimed that demonstrating NERC-CIP equivalent controls could reduce cyber insurance premiums by 15 to 25 percent. That claim is removed. No Australian OT cyber insurance premium data was found at all, for a baseline premium or for a post-control premium, so no percentage reduction can be sourced or computed. Section 9.7 states the same finding at length.
-### 9.7 Insurance and Risk Transfer
+**On the insurance benefit.** An earlier draft claimed that demonstrating NERC-CIP equivalent controls could reduce cyber insurance premiums by 15 to 25 percent. That claim is removed. No Australian OT cyber insurance premium data was found at all, for a baseline premium or for a post-control premium, so no percentage reduction can be sourced or computed. Section 9.9 states the same finding at length.
+### 9.9 Insurance and Risk Transfer
 
 This subsection states what cannot be priced. That is its main content and it is not an evasion. An earlier draft priced an insurable loss, a required premium, a coverage cap, a baseline premium, a post-control premium, a premium saving, a payback period, an APRA capital charge, a cost of capital and a ten-year discount factor, and then combined them into a 47.3:1 ratio. Not one of those inputs had a source. The surviving arithmetic in that draft, a payback of 3.98 divided by the difference between 1.8 and 0.5 giving 3.1 years, still leaks the original figures: an AUD 3.98 million programme and premiums falling from AUD 1.8 million to AUD 0.5 million per year. Those numbers are not restored here, because restoring them would make them no more sourced than they were.
 
@@ -2425,12 +2425,12 @@ Third, the structural claim in the earlier draft survives, because it is a state
 
 A risk that cannot be priced cannot be transferred on known terms. Two consequences follow and neither needs a number.
 
-- The programme cannot be justified on insurance savings. Section 9.3's cost-benefit case rests on avoided loss and published control effectiveness, and it stands or falls on those alone. Any premium saving is upside that this paper cannot size.
+- The programme cannot be justified on insurance savings. Section 9.5's cost-benefit case rests on avoided loss and published control effectiveness, and it stands or falls on those alone. Any premium saving is upside that this paper cannot size.
 - Approaching the market requires the quantification this paper provides, and provides honestly. An underwriter presented with an unsourced 90 percent risk reduction and a 47.3:1 return will discount the whole submission. An underwriter presented with the AER's determined VCR, a stated 12-hour scope limit, a stated probability assessment labelled as the working group's own, and published per-control risk reduction of 12 to 18 percent, is being given something they can underwrite against.
 
 **Regulatory capital.** No figure is stated. The earlier draft applied an 8 percent capital charge to an uninsured exposure and a 6 percent cost of capital to the result. Neither rate was sourced, no APRA instrument imposing a capital charge for uninsured OT cyber risk on an electricity distribution business was identified, and APRA's prudential remit does not obviously extend to a distribution network service provider in any case. The whole line is removed rather than re-estimated. If a specific APRA or AER instrument applies, it should be cited by its clause and the charge computed from the instrument.
 
-**Cost-benefit including insurance benefits.** Not computed. Two of the three annual benefit terms in the earlier draft, premium reduction and regulatory capital avoidance, have no sourced input, and the third duplicates the avoided loss already counted in section 9.3. Adding an unpriced term to a priced one produces a larger number, not a better one. The paper's cost-benefit position is section 9.3's 4.4:1 to 6.6:1, and nothing in this subsection changes it. As in section 5.10, this analysis excludes reputational damage, regulatory penalties and litigation costs, because no sourced input exists for any of them.
+**Cost-benefit including insurance benefits.** Not computed. Two of the three annual benefit terms in the earlier draft, premium reduction and regulatory capital avoidance, have no sourced input, and the third duplicates the avoided loss already counted in section 9.5. Adding an unpriced term to a priced one produces a larger number, not a better one. The paper's cost-benefit position is section 9.5's 4.4:1 to 6.6:1, and nothing in this subsection changes it. As in section 5.10, this analysis excludes reputational damage, regulatory penalties and litigation costs, because no sourced input exists for any of them.
 
 ---
 
