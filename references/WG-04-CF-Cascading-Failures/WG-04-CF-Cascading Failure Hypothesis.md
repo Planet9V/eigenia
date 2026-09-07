@@ -3320,7 +3320,7 @@ SAFETY INFORMATION:
 
 UPDATES:
 For the latest information:
-- Website: RefDNSP-1.2M energy.com.au/outages
+- Website: refdnsp.example.com.au/outages
 - SMS updates: Register at [link]
 - Customer hotline: 131 003
 
