@@ -2359,56 +2359,50 @@ DERMS API Configuration File Update:
 
 ### 9.6 Compliance and Regulatory Alignment
 
-The security investments recommended in this document directly address regulatory obligations under multiple frameworks:
+The controls recommended above map onto three frameworks. Costs use the bands of section 9.1. The AER's own cyber security dollar split is not public, and none of the three frameworks publishes an uplift cost, so no table below carries a quoted price.
 
-**Security of Critical Infrastructure Act 2018 (SOCI Act) Alignment:**
+**Security of Critical Infrastructure Act 2018 alignment:**
 
-| SOCI Requirement                          | Current Compliance                      | Recommended Control                              | Investment                                                       | Compliance Impact                         |
+| SOCI requirement | Current compliance | Recommended control | Cost band | Compliance impact |
 | :--- | :--- | :--- | :--- | :--- |
-| **Risk Management Program (RMP)**   | Partial (40% complete)                  | IEC 62443 gap assessment + remediation roadmap   | [investment required] (audit) + [investment required] (controls) | Achieves 80% RMP maturity                 |
-| **Cyber Security Obligations**      | Non-compliant (no OT-specific controls) | OT SIEM deployment + 24/7 SOC                    | [investment required] (Phase 1)                                  | Achieves mandatory monitoring requirement |
-| **Incident Reporting**              | Partial (IT-focused, OT gap)            | OT incident response playbook + ACSC integration | [investment required]                                            | Achieves 12-hour reporting obligation     |
-| **Critical Infrastructure Systems** | Identified (185 substations, 54 BESS)   | Defense-in-depth security architecture           | [investment required]                                            | Protects designated critical assets       |
+| **Risk Management Program** | Partial, 40 percent complete | IEC 62443 gap assessment plus remediation roadmap | B (assessment) plus C (controls) | Raises RMP maturity. The target figure of 80 percent in an earlier draft was a stipulated aspiration, not a measured outcome, and is stated here as a direction rather than a number |
+| **Cyber security obligations** | Non-compliant, no OT-specific controls | OT SIEM deployment plus 24/7 SOC | D one-off plus R recurring. Section 9.3 shows the SOC personnel floor alone exceeds the sourced annual cyber envelope | Meets the mandatory monitoring requirement |
+| **Incident reporting** | Partial, IT-focused with an OT gap | OT incident response playbook plus ACSC integration | A, procedural | Meets the 12-hour reporting obligation |
+| **Critical infrastructure systems** | Identified: 185 substations, 54 BESS | Defence-in-depth security architecture | D, the whole Phase 2 programme of section 9.3 | Protects designated critical assets |
 
-**Regulatory Penalty Avoidance:**
+The sourced cost anchor for this whole table is the one from section 9.1: AUD 1.29 million one-off and AUD 0.60 million per year for the cyber and information security hazard component of a sector-average CIRMP, from the Commonwealth Impact Analysis [n]. Every band above is measured against it.
 
-- SOCI Act non-compliance penalties: [investment required] million (maximum)
-- Proactive compliance investment: [investment required] (RMP + controls)
-- Penalty avoidance strategic value: [investment required] / [investment required] = 3.7:1 (minimum, not including reputational damage)
+**Regulatory penalty avoidance.** No figure is stated. An earlier draft claimed a maximum SOCI Act non-compliance penalty and computed a 3.7:1 penalty-avoidance ratio from it. No SOCI Act penalty schedule or precedent against an Australian distribution business was sourced, so neither the numerator nor the ratio can be reproduced, and both are removed. Section 5.8 makes the same finding for the loss side: the one settled regulatory outcome for a comparable event, the Great Britain outage of 9 August 2019, produced about GBP 10.5 million in voluntary payments across four licensees [n], which is small against the direct customer cost and is not a penalty schedule.
 
-**Australian Energy Sector Cyber Security Framework (AESCSF) Alignment:**
+**Australian Energy Sector Cyber Security Framework alignment.**
 
-The AESCSF Security Profile 2 (SP2) mandates specific OT security controls for DNSPs:
+The AESCSF is AEMO's maturity framework for the electricity, gas and liquid fuels sub-sectors, rebuilt as Version 2 in October 2023 with 11 domains and 354 practices [n]. Since June 2026 the enhanced CIRMP Rules under the SOCI Act name the 2023 AESCSF Framework Core at Security Profile 2 as an accepted compliance pathway for critical electricity assets, with a transition grace period ending June 2028 [n]. Alternative accepted pathways are the ACSC Essential Eight at Maturity Level Two, AS ISO/IEC 27001:2023, NIST CSF 2.0, and C2M2 v2.1 at MIL-2. AEMO states the programme runs on user-pays cost recovery, so participation costs money and that money is charged back to participants, but no fee schedule and no uplift costing was found [n].
 
-| AESCSF Principle                                  | SP2 Requirement                                               | Current Maturity  | Target Maturity   | Gap Closure Investment                                                       |
+| AESCSF principle | SP2 requirement | Current maturity | Target maturity | Gap closure cost band |
 | :--- | :--- | :--- | :--- | :--- |
-| **Principle 2.1: Asset Management**         | Comprehensive OT asset inventory with security classification | Level 2 (Defined) | Level 3 (Managed) | [investment required] (asset discovery tooling)                              |
-| **Principle 2.2: Risk Assessment**          | Annual cyber-physical risk assessment with Board reporting    | Level 1 (Ad Hoc)  | Level 3 (Managed) | [investment required] (annual audit + this assessment)                       |
-| **Principle 2.3: Secure OT Communications** | Encryption and authentication for critical protocols          | Level 1 (Ad Hoc)  | Level 3 (Managed) | [investment required] (IEC 62351-6) + [investment required] (Modbus gateway) |
-| **Principle 3.1: Defense in Depth**         | Multi-layer security controls across IT/OT boundary           | Level 1 (Ad Hoc)  | Level 3 (Managed) | [investment required] (ICS firewalls + segmentation)                         |
-| **Principle 4.1: OT Monitoring**            | Real-time anomaly detection and incident response             | Level 0 (None)    | Level 3 (Managed) | [investment required] (OT SIEM + SOC)                                        |
+| **Principle 2.1: asset management** | Comprehensive OT asset inventory with security classification | Level 2, Defined | Level 3, Managed | C. No public cost anchor exists for OT asset discovery tooling in an electricity distribution context |
+| **Principle 2.2: risk assessment** | Annual cyber-physical risk assessment with Board reporting | Level 1, Ad hoc | Level 3, Managed | B, annual assessment plus this document |
+| **Principle 2.3: secure OT communications** | Encryption and authentication for critical protocols | Level 1, Ad hoc | Level 3, Managed | D. IEC 62351-6 and the Modbus gateway are both unbounded band D lines |
+| **Principle 3.1: defence in depth** | Multi-layer security controls across the IT and OT boundary | Level 1, Ad hoc | Level 3, Managed | D, ICS firewalls plus segmentation |
+| **Principle 4.1: OT monitoring** | Real-time anomaly detection and incident response | Level 0, None | Level 3, Managed | D one-off plus R recurring, OT SIEM plus SOC |
 
-**AESCSF Compliance Score:**
+**AESCSF compliance score.** The current 32 percent and the 80 percent target are the working group's own scoring of the reference network against the five principles above, not an AEMO assessment result. No uplift cost is stated: three of the five gap closures are unbounded band D lines, and AEMO publishes no AESCSF uplift costing for any participant. AEMO and the AER increasingly treat Security Profile 2 as the industry baseline, and the CIRMP Rules now name it as a compliance pathway, so the cost of not closing these gaps is the cost of failing a named regulatory pathway with a June 2028 deadline.
 
-- Current: 32% (Level 1.6 average across 5 principles)
-- Target: 80% (Level 3+ required for SP2)
-- Investment to close gap: [investment required] (3-year program)
-- Regulatory expectation: AEMO and AER increasingly expecting SP2 compliance as industry baseline
+**NERC-CIP international benchmarking.**
 
-**NERC-CIP International Benchmarking:**
+NERC-CIP is not mandatory in Australia. It is included because it decomposes the same controls into auditable requirements.
 
-While NERC-CIP is US-specific and not mandatory in Australia, it provides internationally recognized best practices:
-
-| NERC-CIP Standard                                     | Equivalent Control                                        | RefDNSP-1.2M Current State                    | Investment to Achieve                                      |
+| NERC-CIP standard | Equivalent control | RefDNSP-1.2M current state | Cost band |
 | :--- | :--- | :--- | :--- |
-| **CIP-005-6 R1: Electronic Security Perimeter** | ICS firewall at IT/OT boundary with deny-all default      | Partial (firewall exists, ACLs weak)       | [investment required] (firewall rules + DPI)               |
-| **CIP-007-6 R2: Patch Management**              | 35-day patching for critical OT vulnerabilities           | Non-compliant (no OT patch program)        | [investment required]/year (patch testing + deployment)    |
-| **CIP-007-6 R4: Security Event Monitoring**     | Log collection and 15-day review for OT systems           | Non-compliant (no OT SIEM)                 | [investment required] (OT SIEM deployment)                 |
-| **CIP-010-3 R1: Configuration Management**      | Baseline configurations with change control for BESS/RTUs | Partial (IT-focused, OT gap)               | [investment required] (configuration management tooling)   |
-| **CIP-013-1 R1: Supply Chain Risk Management**  | Vendor cybersecurity requirements in procurement          | Non-compliant (vendor 4G modems unmanaged) | [investment required] (vendor security policy development) |
+| **CIP-005-6 R1: electronic security perimeter** | ICS firewall at the IT and OT boundary with deny-all default | Partial, firewall exists but ACLs are weak | C, firewall rules plus deep packet inspection |
+| **CIP-007-6 R2: patch management** | 35-day patching for critical OT vulnerabilities | Non-compliant, no OT patch program | R recurring, patch testing and deployment |
+| **CIP-007-6 R4: security event monitoring** | Log collection and 15-day review for OT systems | Non-compliant, no OT SIEM | D, OT SIEM deployment |
+| **CIP-010-3 R1: configuration management** | Baseline configurations with change control for BESS and RTUs | Partial, IT-focused with an OT gap | B, configuration management tooling |
+| **CIP-013-1 R1: supply chain risk management** | Vendor cybersecurity requirements in procurement | Non-compliant, vendor 4G modems unmanaged | B, vendor security policy development |
 
-**Total Investment for NERC-CIP Equivalence: [investment required]**
-**Benefit:** Enables marketing of "NERC-CIP equivalent security controls" to regulators and insurance underwriters, potentially reducing cyber insurance premiums by 15-25%
+**Total for NERC-CIP equivalence:** not stated. Three of the five lines are bounded (two band B and one band C, summing to AUD 0.78 million to AUD 2.33 million, modelled band boundary arithmetic), one is an unbounded band D line and one is recurring. No public cost anchor exists for a NERC-CIP equivalence programme in any jurisdiction.
+
+**On the insurance benefit.** An earlier draft claimed that demonstrating NERC-CIP equivalent controls could reduce cyber insurance premiums by 15 to 25 percent. That claim is removed. No Australian OT cyber insurance premium data was found at all, for a baseline premium or for a post-control premium, so no percentage reduction can be sourced or computed. Section 9.7 states the same finding at length.
 
 ### 9.7 Insurance and Risk Transfer Considerations
 
