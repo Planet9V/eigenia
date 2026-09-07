@@ -154,3 +154,70 @@ The event is valuable to this paper for its millisecond causal chain across
 four TSOs, and for one detail that is directly on thesis: the Turkish Marmara
 SPS shed 975 MW as designed while the Hamitabat SPS correctly did not fire.
 Use it for cascade mechanics. Use UK 2019 or South Australia for outage scale.
+
+## F9. The cascade-initiation mechanism is physically incoherent. OPEN, BLOCKING.
+
+The 49.85 Hz corrections are now honestly labelled as RefDNSP-1.2M modelled
+assumptions rather than sourced AEMO settings. That removes a false citation.
+It does not fix the underlying physics, and it should not be mistaken for
+having done so.
+
+The paper's initiation mechanism, section 2.2 and Appendix A, is:
+
+    sustained oscillation grows to +/- 0.15 Hz amplitude
+    -> frequency reaches 49.85 Hz
+    -> under-frequency relays trip
+    -> cascade begins
+
+The problem: 49.85 Hz is the FLOOR OF THE NORMAL OPERATING BAND. The grid sits
+between 49.85 and 50.15 Hz almost all the time, by design. No network service
+provider sets under-frequency load shedding at a frequency the system visits
+routinely; doing so would shed load during normal operation, continuously.
+
+So the paper now models something no real operator would build. Labelling it
+"modelled" makes the paper honest about the provenance of the number while
+leaving it asserting an implausible model. A grid engineer will not accept it.
+Calling an implausible assumption "modelled" does not make it plausible.
+
+The scenario cannot simply be re-based on a realistic threshold either. Real
+UFLS sits near 49 Hz or below. Reaching that from 50 Hz needs roughly +/- 1.0 Hz
+of oscillation amplitude, not +/- 0.15 Hz, which is a far larger and far less
+defensible claim than the one the paper makes.
+
+### The resolution is already in the paper, unrecognised
+
+The paper conflates two different protection principles it elsewhere describes
+correctly:
+
+- ABSOLUTE-FREQUENCY protection, which trips when frequency crosses a set value
+  such as 49 Hz. This is what UFLS is.
+- RATE-OF-CHANGE protection (RoCoF), which trips on df/dt regardless of the
+  absolute frequency. This is what tripped roughly 350 MW of embedded
+  generation in Great Britain on 9 August 2019, at a 0.125 Hz/s setting.
+
+A small oscillation at high enough frequency produces LARGE df/dt while never
+leaving the normal band. An oscillation of +/- 0.15 Hz amplitude at 1.0 Hz
+gives a peak df/dt of about 2 pi x 1.0 x 0.15, roughly 0.94 Hz/s, which is at
+the 1 Hz/s RoCoF threshold the paper already cites, while the frequency itself
+stays inside 49.85 to 50.15 Hz the entire time.
+
+That is a coherent, sourced, and considerably more interesting mechanism: the
+attack never violates the frequency band an operator watches, and trips
+protection on rate of change instead. It also aligns the paper with its own
+strongest evidence, the UK 2019 event, which was a RoCoF-protection cascade,
+not an under-frequency-threshold cascade.
+
+### Consequence for sequencing
+
+This is a change to the paper's central argument, not a correction to a figure.
+It must be settled before plan tasks 5 and 6 rebuild sections 5 and 9, because
+those sections narrate the cascade and would otherwise be rebuilt on the
+incoherent version.
+
+It also touches the timeline table (line 722), the Mermaid diagram (line 641),
+the UFLS ladder (lines 884 to 886), Appendix A (line 2339) and the 54-BESS
+simulation (lines 2456, 2460), all of which currently key off the 49.85 Hz
+trip. The arithmetic in each has to be redone against df/dt, not against an
+absolute threshold.
+
+Needs Jim's call before proceeding, because it changes what the paper argues.
