@@ -10,7 +10,7 @@ It is written for a responder. A control room engineer, a SOC analyst, an incide
 
 Where a numbered section is cited below (section 3.2, section 5, section 5.8, section 5.10, section 9.1), the number refers to the paper, not to this playbook.
 
-The reference network is RefDNSP-1.2M, the modelled 1.2 million customer New South Wales distribution network specified in section 2 of the paper. Site counts, facility names, contact routes and phone numbers belong to that model, not to any real operator. Anyone adapting this playbook to a real network must replace them.
+The reference network is RefDNSP-1.2M, the modelled 1.2 million customer New South Wales distribution network specified in section 1.4 of the paper. Site counts, facility names, contact routes and phone numbers belong to that model, not to any real operator. Anyone adapting this playbook to a real network must replace them.
 
 Sections 2 through 5 were published as section 8 and appendices J, K and L of the paper up to September 2026. They moved here unchanged, so the research argument and the operational paperwork stop competing for the same reader.
 

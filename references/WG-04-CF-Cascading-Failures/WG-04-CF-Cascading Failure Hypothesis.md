@@ -75,7 +75,7 @@ network data so that every result in this paper can be reproduced or contested.
 | Control protocols | DNP3, IEC 61850, ICCP | IEC standards |
 | Regulatory regime | SOCI Act, AESCSF SP-2 | Australian Government [n] |
 
-Each `[n]` is replaced with its real citation index in Task 12, after the bibliography is merged.
+Each `[n]` marks a citation whose index is assigned when this paper's bibliography is consolidated. Until then the marker signals that a source exists for the row and names where it will appear, not that the index is final.
 
 ---
 
