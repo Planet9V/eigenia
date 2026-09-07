@@ -90,7 +90,14 @@ export const MarkdownViewer: React.FC<MarkdownViewerProps> = ({ content, suppres
     // The inline alternative must not treat an escaped "\$" as the closing delimiter,
     // otherwise "$\$$" (Lacan's barred subject) splits into "$\$" plus an orphan "$"
     // and KaTeX fails on the lone backslash.
-    const mathRegex = /(\$\$[\s\S]*?\$\$|\$(?:\\.|[^$\\])+?\$)/g;
+    //
+    // Currency ranges are the other trap. "$25M to $50M" has a $ ... $ in it, so a
+    // naive inline rule renders "25M to " as math and swallows the prices. 73 such
+    // spans exist across the corpus. Pandoc's rule fixes it: a closing $ followed by
+    // a digit is not a delimiter. Applied ONLY to spans containing no backslash, so
+    // real commands still bind tightly to a following number ("$\pm$0.15 Hz").
+    const mathRegex =
+      /(\$\$[\s\S]*?\$\$|\$(?:[^$\\]*\\.)+[^$\\]*\$|\$[^$\\]+?\$(?![0-9]))/g;
     const parts = text.split(mathRegex);
 
     return parts.map((part, idx) => {
