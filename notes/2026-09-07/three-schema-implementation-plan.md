@@ -867,6 +867,32 @@ git push -u origin HEAD
 
 To be recorded by Task 4, Step 4.
 
+## Known gate limitation, recorded 2026-09-07
+
+The terminology gate skips fenced blocks. That is correct for code samples, and
+wrong for one case that exists today.
+
+`references/WG-02-DT-Digital-Twin/WG-02-DT-Seven-Staff-Fugue.md:178` carries a
+bare `ISO 15926` inside an UNLABELLED fence holding an ASCII diagram. A reader
+sees that text on the published page exactly as they see prose, but the gate
+does not check it. Verified: fence parity above line 178 is odd, so it is
+genuinely inside a fence, and the line reads
+`| DEXPI 2.0 PIPING SCHEMATIC (ISO 15926): |` inside a drawn box.
+
+So the gate reports **20**, and the true corpus count is **21**.
+
+This is why the plan's predicted figure was wrong: it came from a plain grep
+that does not skip fences. The Task 2 implementer found the discrepancy,
+investigated it, and reported it rather than adjusting the script or the
+expectation. That is the behaviour the red-green discipline is meant to produce.
+
+**Refinement available, deliberately not taken yet:** distinguish a fence with a
+language tag (```json, ```python, genuine code, skip it) from an unlabelled
+fence (usually an ASCII diagram or a quoted block, check it). That would catch
+the 21st. It is deferred on just-in-time grounds; one occurrence does not yet
+justify the added complexity, and the ASCII diagram is separately a candidate
+for conversion to a real diagram under the earlier ASCII-to-Mermaid work.
+
 ## What this plan does not do
 
 - It does not fix WG-02-DT's 69 unresolved citation markers, WG-01-UI's zero-citation problem, or the 182 corpus audit findings. Those are recorded in `notes/2026-09-06/publication-roadmap.md` and are a separate programme.
