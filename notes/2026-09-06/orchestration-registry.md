@@ -100,5 +100,34 @@ Recorded so the same trap is not re-entered.
 | I passed on leads `[87]` and `[558]` | they were line numbers in an old note, never verified | auditor refuted both; register now records it |
 | My ATQ weight spot-check said 1.00 | regex grabbed 8 of 12 rows | read the actual table: 1.05, auditor was right |
 
-Six entries. Four are my own errors, and every one was caught by running a
-check rather than trusting a summary, including two where the summary was mine.
+| I patched 6 compilers held by a running agent | I swept all 20 `compile_*.py` for an unguarded em-dash substitution without checking the lock table I wrote | see below |
+| My compiler patch broke 11 of 20 scripts | my `import re` insertion silently no-opped on files with no existing import statement | caught by running every compiler; fixed, all 20 clean |
+
+Eight entries. Six are my own errors, and every one was caught by running a
+check rather than trusting a summary, including three where the summary was
+mine.
+
+### The lock violation, recorded in full
+
+At 12:0x I found that 19 of 20 compilers carry an unguarded
+`.replace('—', '; ')`, which is the ROOT CAUSE of every spaced-semicolon
+artifact this project has repaired by hand. I patched all 19 and re-ran them.
+
+Six of those compilers (`compile_atq_academic`, `p02`, `p03`, `p04`, `p05`,
+`p12`) were held at that moment by the still-running WG-05-CAD and WG-07-TM
+sweep agent. I wrote the lock table specifically to stop this and then walked
+through it myself, because I was thinking of the compilers as infrastructure
+rather than as the agent's files.
+
+Consequence, assessed rather than assumed: running the compilers regenerated
+seven `.md` files, and the diffs show the sweep agent's own pending relabels
+landing correctly, not corruption. Its edits were in the `.py`; my run applied
+them. tsc is clean and the build reports all 56 documents at 100 percent
+fidelity. No damage found.
+
+But that is luck, not method. Had the agent been mid-edit on a literal, I would
+have baked a half-written paper into a published document and the build would
+have passed. The correct move was to queue the compiler sweep behind the lock.
+
+I am holding every one of those changes uncommitted until that agent finishes
+and commits its own work.
