@@ -3,7 +3,7 @@ This assessment models cascading failure propagation from coordinated cyber-phys
 
 ## Cascading Failure Hypothesis
 
-The central finding is that a coordinated "Death Wobble" oscillation attack (see [j,mckenney's Death Wobble-The Grids Precarious Pulse Frequency Instability - jmckenney](/papers/death-wobble-frequency-instability), a phenomenon extensively documented by McKenney (2024, 2025) in analysis of the South Australia 2016 blackout (6.1 Hz/s RoCoF), UK 2019 blackout (0.135 Hz/s relay trips), and Iberian Peninsula 2025 event (inter-area oscillations), executed through the Retailer API supply chain, can induce Rate of Change of Frequency (RoCoF) exceedances greater than 1.0 Hz/s under reduced-inertia grid conditions. This triggers protection relay cascades that propagate from a localized 8,000-customer outage to a regional blackout affecting 1.2 million customers within 120 minutes. Six interdependent critical infrastructure systems ; water, hospitals, telecommunications, transport, military, and financial services ; amplify the consequences into a multi-domain crisis with estimated economic impact between [investment required] million and [investment required] billion.
+The central finding is that a coordinated "Death Wobble" oscillation attack (see [j,mckenney's Death Wobble-The Grids Precarious Pulse Frequency Instability - jmckenney](/papers/death-wobble-frequency-instability), a phenomenon extensively documented by McKenney (2024, 2025) in analysis of the South Australia 2016 blackout (6.1 Hz/s RoCoF), UK 2019 blackout (0.125 Hz/s RoCoF relay disconnection threshold), and Iberian Peninsula 2025 event (inter-area oscillations), executed through the Retailer API supply chain, can induce Rate of Change of Frequency (RoCoF) exceedances greater than 1.0 Hz/s under reduced-inertia grid conditions. This triggers protection relay cascades that propagate from a localized 8,000-customer outage to a regional blackout affecting 1.2 million customers within 120 minutes. Six interdependent critical infrastructure systems ; water, hospitals, telecommunications, transport, military, and financial services ; amplify the consequences into a multi-domain crisis with estimated economic impact between [investment required] million and [investment required] billion.
 
 The probability of such an attack materializing within a 10-year horizon is assessed at 15-30% (MEDIUM), based on the convergence of vulnerable DERMS/API architecture, inadequate ICS protocol security, reduced grid inertia from renewable penetration, and demonstrated nation-state capability against energy infrastructure. Physical safety consequences range from 5 to 25 fatalities and 40 to 120 serious injuries, arising from thermal runaway events, traffic signal failures, medical infrastructure collapse, and delayed emergency services.
 
@@ -143,7 +143,8 @@ South Australia September 28, 2016 - Inertia Timeline:
 T-60 minutes: System inertia = 3,500 MWs (stable, 6 wind farms operational)
 T-30 minutes: System inertia = 3,200 MWs (weather conditions deteriorating)
 T-5 minutes:  System inertia = 2,800 MWs (multiple wind farm faults reducing output)
-T-0 seconds:  445 MW wind generation loss (9 separate faults within 7 seconds)
+T-2 minutes:  Six voltage dips across the SA grid (tornado-damaged 275 kV transmission lines)
+T-0 seconds:  456 MW sustained wind generation loss (8 of 9 wind farms respond to a voltage-dip-count protection setting, over less than seven seconds)
 
 RoCoF Response:
 - With H = 2.8 seconds (actual pre-fault inertia): 6.1 Hz/s measured
@@ -373,7 +374,7 @@ The AEMO standard for RoCoF tolerance is 1.0 Hz/s. Protection relays are configu
 | RoCoF Value             | System Response                        | Historical Precedent                           |
 | :--- | :--- | :--- |
 | < 0.1-0.2 Hz/s          | Historically normal under high inertia | Traditional grid operations                    |
-| 0.125-0.135 Hz/s        | UK 2019 relay trip threshold           | UK August 9, 2019 blackout                     |
+| 0.125 Hz/s              | UK 2019 relay disconnection threshold (not a measured system RoCoF) | UK August 9, 2019 blackout                     |
 | > 1 Hz/s (500ms window) | Protection system maloperation likely  | ENTSO-E warnings                               |
 | 6 Hz/s                  | Extreme instability                    | South Australia Sept 28, 2016 (design: 3 Hz/s) |
 
@@ -390,14 +391,14 @@ Critical Power Imbalance = 2H x RoCoF_max x S_base
 Attack capability: 540 MW swing = 2.7% of critical threshold (single oscillation)
 ```
 
-A single oscillation cycle does not exceed the RoCoF threshold. However, sustained oscillation at frequencies matching the grid's electromechanical resonance (0.3-1.2 Hz) produces cumulative amplitude growth. After 10-15 oscillation cycles over approximately 10 minutes, frequency deviation amplitude exceeds +/- 0.15 Hz, triggering under-frequency protection relays at the 49.85 Hz threshold.
+A single oscillation cycle does not exceed the RoCoF threshold. However, sustained oscillation at frequencies matching the grid's electromechanical resonance (0.3-1.2 Hz) produces cumulative amplitude growth. After 10-15 oscillation cycles over approximately 10 minutes, frequency deviation amplitude exceeds +/- 0.15 Hz, reaching 49.85 Hz, RefDNSP-1.2M's modelled under-frequency relay trip point for this scenario. This is not a sourced NEM-wide AEMO relay setting: AEMO coordinates under-frequency load shedding but leaves the actual relay thresholds and staging to individual Network Service Providers, and no consolidated national relay-setting table exists.
 
 ### 2.3 Why Reduced Inertia Creates Vulnerability
 
 McKenney (2024, 2025) identifies four pathways by which low inertia accelerates cascading failures:
 
 1. **Amplified Initial Shock**: Lower inertia = less kinetic energy buffering, resulting in faster, deeper frequency deviation from the same disturbance (mathematical relationship: ΔF ∝ 1/H)
-2. **Protection System Errors**: High RoCoF triggers spurious trips of healthy equipment. McKenney (2024) cites the UK 2019 event where 345 MW of distributed generation tripped at 0.135 Hz/s (relay threshold: 0.125 Hz/s), and notes that NERC data indicates ~70% of major disturbances involve protection system issues.
+2. **Protection System Errors**: High RoCoF triggers spurious trips of healthy equipment. McKenney (2024) cites the UK 2019 event where approximately 350 MW of distributed generation tripped on RoCoF protection relays set to disconnect at 0.125 Hz/s (that setting is the relay's disconnection threshold, not a measured system-wide RoCoF), part of a cumulative infeed loss that reached 1,481 MW before frequency was arrested at 49.1 Hz, and notes that NERC data indicates ~70% of major disturbances involve protection system issues.
 3. **Faster Escalation**: Under-Frequency Load Shedding (UFLS) activates more quickly, generator self-protection trips accelerate, and control systems are outpaced by rapid frequency changes.
 4. **Increased Complexity**: Legacy systems + new inverter-based resource behaviors + novel load types create unexpected interactions. McKenney (2025) highlights the July 2024 Eastern Interconnection event where a 1,500 MW data center simultaneously disconnected, noting that "power systems have historically been planned and operated to withstand the loss of large *generators*, not the sudden, simultaneous loss of large *loads*."
 
@@ -416,8 +417,8 @@ The grid does not need to be at minimum inertia for the attack to succeed. Any p
 
 McKenney's (2024, 2025) comprehensive analysis of three major blackouts demonstrates how declining inertia transforms grid vulnerability:
 
-1. **South Australia (September 28, 2016)**: 48.36% inverter-based resource penetration, 445 MW wind generation loss, **peak RoCoF of 6.1 Hz/s** (design assumption: 3 Hz/s) ; demonstrating that actual RoCoF can exceed design assumptions by 2x. McKenney notes: "This incident demonstrated the potential for extreme instability in very low inertia conditions... highlighting the direct impact of RoCoF sensitivity in a system with significant wind penetration."
-2. **UK Blackout (August 9, 2019)**: Lightning strike triggered cascading losses (660 MW gas + 740 MW wind). **345 MW of distributed generation tripped spuriously** when RoCoF reached 0.135 Hz/s (relay threshold: 0.125 Hz/s) ; demonstrating protection system maloperation even at moderate RoCoF. System inertia: 210 GW·s at ~30% wind penetration.
+1. **South Australia (September 28, 2016)**: 48.36% inverter-based resource penetration, 456 MW sustained wind generation loss over less than seven seconds (8 of 9 wind farms tripping on a voltage-dip-count protection setting), **peak RoCoF of 6.1 Hz/s** (design assumption: 3 Hz/s) ; demonstrating that actual RoCoF can exceed design assumptions by 2x. McKenney notes: "This incident demonstrated the potential for extreme instability in very low inertia conditions... highlighting the direct impact of RoCoF sensitivity in a system with significant wind penetration."
+2. **UK Blackout (August 9, 2019)**: Lightning strikes near the Eaton Socon to Wymondley circuit triggered cascading generation losses: 641 MW from Little Barford gas plant, in three separate trips (a 244 MW steam turbine, then 210 MW and 187 MW gas turbines), plus 737 MW from Hornsea offshore wind. **Approximately 350 MW of distributed generation tripped** on RoCoF protection relays set to disconnect at 0.125 Hz/s (the relay's disconnection threshold; no measured RoCoF of 0.135 Hz/s appears anywhere in National Grid ESO's technical report) ; demonstrating protection system maloperation even at moderate RoCoF. System inertia: 210 GVA·s (National Grid ESO technical report, Table 4); the report gives no wind-penetration figure for 9 August 2019.
 3. **Iberian Peninsula (April 28, 2025)**: 60 million people affected (Spain + Portugal), up to 10 hours outage, 56% renewable penetration. Suspected inter-area oscillations between Iberia and Continental Europe due to weak interconnection (~2,800 MW, only 6% of Spanish capacity). McKenney observed: "Two significant inter-area oscillations in 30 minutes pre-blackout" and noted the event validated his warnings from the Chicago Conference on Grid Stability earlier that year.
 
 ### 2.3 BESS Thermal Runaway Cascading Scenarios
@@ -637,7 +638,7 @@ graph TB
     subgraph "Tier 1: Initial Attack - T+0 to T+15 min"
         A1[Retailer API Compromise] -->|Mass Command Injection| A2[54 BESS Oscillating<br/>+/- 540 MW Power Swing]
         A2 -->|Sustained Oscillation| A3[Grid Frequency Deviation<br/>Exceeds +/- 0.15 Hz]
-        A3 -->|RoCoF > 1.0 Hz/s| A4[Under-Frequency Relay Trip<br/>49.85 Hz Threshold]
+        A3 -->|RoCoF > 1.0 Hz/s| A4[Under-Frequency Relay Trip<br/>49.85 Hz Modelled Threshold]
     end
 
     subgraph "Tier 2: Local Cascade - T+15 to T+30 min"
@@ -718,7 +719,7 @@ The following table details the minute-by-minute progression of the attack from 
 | T+1:15  | Second oscillation        | All 18 batteries: "Discharge 100%, duration 60s"       | Grid: -90 MW load (180 MW swing)     |
 | T+2:15  | Third oscillation         | Repeat charge cycle at 0.3 Hz effective frequency      | Frequency: 50 Hz to 50.03 Hz         |
 | T+10:00 | Amplitude growth          | 10 cycles completed, oscillation amplitude +/- 0.15 Hz | Protection relays detect instability |
-| T+15:00 | Protection cascade        | Under-frequency relays trip at 49.85 Hz threshold      | Load shedding initiated              |
+| T+15:00 | Protection cascade        | Under-frequency relays trip at modelled 49.85 Hz threshold (RefDNSP-1.2M scenario assumption, not a sourced AEMO relay setting) | Load shedding initiated              |
 | T+18:00 | Regional expansion        | Load shedding causes voltage sag across 3 substations  | 100K customers offline               |
 | T+22:00 | Stabilization attempt     | AEMO Emergency Frequency Control System activated      | Blackout contained                   |
 | T+26:00 | Restoration begins        | Manual substation restoration commences                | Progressive re-energization          |
@@ -879,9 +880,9 @@ T+60 seconds: Frequency Reversal
   - Net deficit: 1,200 MW generation loss vs. 2,800 MW load loss
   - Frequency begins falling: 50.5 Hz → 50.0 Hz → 49.7 Hz
 
-T+90 seconds: Under-Frequency Load Shedding (UFLS)
-  - UFLS Stage 1: 49.85 Hz - shed 5% of load (additional 500 MW)
-  - UFLS Stage 2: 49.70 Hz - shed 10% of load (additional 1,000 MW)
+T+90 seconds: Under-Frequency Load Shedding (UFLS) - modelled staged ladder for RefDNSP-1.2M; AEMO coordinates UFLS but does not publish a single national relay-setting table, so these stages are the scenario's own assumption, not a sourced AEMO figure
+  - UFLS Stage 1 (modelled): 49.85 Hz - shed 5% of load (additional 500 MW)
+  - UFLS Stage 2 (modelled): 49.70 Hz - shed 10% of load (additional 1,000 MW)
   - Cascading load shedding across interconnected regions
 
 T+120 seconds: System Islanding
@@ -2248,7 +2249,7 @@ RefDNSP-1.2M's distributed energy infrastructure faces systemic cascading failur
 1. **Vulnerable DERMS/API architecture** enabling unmitigated mass command injection through the Retailer API, with no oscillation detection, rate limiting, or physics-based validation.
 2. **Inadequate ICS protocol security** with Modbus TCP operating in cleartext without authentication across the BESS control path, achieving IEC 62443 Security Level 0 where Security Level 2-3 is required.
 3. **Complex grid interdependencies** linking electricity supply to water, hospital, telecommunications, transport, military, and financial infrastructure, each amplifying the consequences of an electrical outage into a multi-domain crisis.
-4. **Reduced grid inertia** from renewable energy transition, halving the system's resistance to frequency disturbances and creating conditions where cyber-physical attacks can trigger cascading failures that were physically impossible under the legacy generation mix. As McKenney (2024) documents: "In a low-inertia system, the *same* disturbance causes the frequency to change *much faster* than in a high-inertia system. This rapid frequency change *is* the dangerous 'wobble.'" Historical precedents (South Australia 2016: 6.1 Hz/s, UK 2019: 0.135 Hz/s relay trips, Iberian Peninsula 2025: inter-area oscillations) establish that this vulnerability has already materialized in comparable grids worldwide (McKenney, 2024, 2025).
+4. **Reduced grid inertia** from renewable energy transition, halving the system's resistance to frequency disturbances and creating conditions where cyber-physical attacks can trigger cascading failures that were physically impossible under the legacy generation mix. As McKenney (2024) documents: "In a low-inertia system, the *same* disturbance causes the frequency to change *much faster* than in a high-inertia system. This rapid frequency change *is* the dangerous 'wobble.'" Historical precedents (South Australia 2016: 6.1 Hz/s, UK 2019: 0.125 Hz/s RoCoF relay disconnection, Iberian Peninsula 2025: inter-area oscillations) establish that this vulnerability has already materialized in comparable grids worldwide (McKenney, 2024, 2025).
 
 The most likely attack scenario ; Retailer API compromise leading to 54 BESS oscillation ; produces a local cascade affecting 100,000-500,000 customers with an 8-24 hour outage and [investment required] million economic damage. The worst case scenario ; system-wide collapse ; affects 1.2 million customers for 24-72 hours with [investment required] million-[investment required] billion damage and 5-25 fatalities.
 
@@ -2294,7 +2295,7 @@ Dragos, Inc. (2025). *OT Cybersecurity Year in Review*. Dragos Intelligence.
 
 Australian Energy Market Operator (AEMO). (2017). *Black system South Australia 28 September 2016 - Final report*. AEMO. [Cited in McKenney (2024, 2025) for 6.1 Hz/s RoCoF measurement and protection cascade mechanism]
 
-UK National Grid Electricity System Operator (ESO). (2019). *Technical report on the events of 9 August 2019*. National Grid ESO. [Cited in McKenney (2024, 2025) for 0.135 Hz/s relay trip threshold and distributed generation cascade]
+UK National Grid Electricity System Operator (ESO). (2019). *Technical report on the events of 9 August 2019*. National Grid ESO. [Cited in McKenney (2024, 2025) for the 0.125 Hz/s RoCoF relay disconnection threshold and the approximately 350 MW distributed generation cascade]
 
 European Network of Transmission System Operators for Electricity (ENTSO-E). (2021-2024). *System split analyses and frequency stability reports*. ENTSO-E. [Cited in McKenney (2024) for >1 Hz/s unmanageable RoCoF threshold]
 
@@ -2335,7 +2336,7 @@ AEMO threshold comparison:
 Cumulative effect over sustained oscillation:
   Resonant amplification factor at 0.3-1.2 Hz = 4-10x (frequency dependent)
   After 10 cycles: effective deviation = 0.036 x amplification = 0.14-0.36 Hz
-  Under-frequency relay trip: 50 - 0.15 = 49.85 Hz (threshold reached)
+  Under-frequency relay trip (RefDNSP-1.2M's modelled threshold, see Section 2.2; not a sourced NEM relay setting): 50 - 0.15 = 49.85 Hz (threshold reached)
 ```
 
 **Thermal Runaway Energy Release:**
@@ -2452,11 +2453,11 @@ Oscillation Cycle Repeats Every 2 Seconds (0.5 Hz):
 At Cycle 10 (T = 20 seconds):
 - Minimum frequency: 50 - 0.35 = 49.65 Hz
 - Maximum frequency: 50 + 0.28 = 50.28 Hz
-- Under-frequency relay threshold: 49.85 Hz
+- Under-frequency relay threshold (RefDNSP-1.2M modelled setpoint, not a sourced NEM relay setting): 49.85 Hz
 - Conclusion: Under-frequency protection WILL trip if oscillation continues
 
 Protection Relay Response:
-- Relay detects 49.65 Hz (below 49.85 Hz setpoint)
+- Relay detects 49.65 Hz (below the modelled 49.85 Hz setpoint)
 - Time delay: 0.1-0.5 seconds (typical UFLS settings)
 - Action: Shed 200-500 MW of load (Stage 1 UFLS)
 - Consequence: Sudden load drop creates frequency rise, triggering over-frequency cascade
@@ -2473,11 +2474,11 @@ Protection Relay Response:
 
 | Event                            | Disturbance Size                 | System Inertia  | RoCoF Measured                       | Outcome                                          |
 | :--- | :--- | :--- | :--- | :--- |
-| **South Australia 2016**   | 445 MW generation loss           | H = 2.8s        | 6.1 Hz/s                             | Under-frequency cascade, statewide blackout      |
-| **UK 2019**                | 660 MW gas + 740 MW wind loss    | H = 3.5s (est.) | 0.135 Hz/s (relay trip threshold)    | 345 MW DER cascade, 1.1M customers affected      |
+| **South Australia 2016**   | 456 MW generation loss           | H = 2.8s        | 6.1 Hz/s                             | Under-frequency cascade, statewide blackout      |
+| **UK 2019**                | 641 MW gas + 737 MW wind loss    | H = 3.5s (est.) | 0.125 Hz/s (relay disconnection threshold, not a measured system RoCoF) | approx. 350 MW DER cascade, 1,152,878 customers affected |
 | **Simulated Attack (NSW)** | 540 MW power swing (oscillating) | H = 2.5s        | 54 Hz/s (instantaneous, theoretical) | Protection cascade after 20-30 seconds (modeled) |
 
-The simulated attack's 540 MW power swing is comparable to South Australia's 445 MW disturbance, and the NSW grid's H = 2.5s assumption is more conservative (lower) than South Australia's actual H = 2.8s, supporting the attack's physical plausibility.
+The simulated attack's 540 MW power swing is comparable to South Australia's 456 MW disturbance, and the NSW grid's H = 2.5s assumption is more conservative (lower) than South Australia's actual H = 2.8s, supporting the attack's physical plausibility.
 
 **Monte Carlo Sensitivity Analysis:**
 
@@ -2654,7 +2655,7 @@ Casualties:
 This assessment employs **prospective modeling** of cascading failure scenarios that have not yet occurred in the Australian context. The methodology combines:
 
 1. **Physics-Based Foundation**: Grid frequency dynamics, RoCoF calculations, and protection system behavior are derived from established power systems engineering (AEMO standards, IEC 60255 relay specifications) and validated against McKenney's (2024, 2025) analysis of international blackouts.
-2. **International Precedent Analysis**: South Australia 2016 (6.1 Hz/s RoCoF), UK 2019 (0.135 Hz/s relay cascade), and Iberian Peninsula 2025 (inter-area oscillations) provide empirical validation of Death Wobble physics in comparable grids. However, none of these events resulted from coordinated cyber-physical attacks ; they were natural disturbances (weather, equipment failure, lightning strikes).
+2. **International Precedent Analysis**: South Australia 2016 (6.1 Hz/s RoCoF), UK 2019 (0.125 Hz/s RoCoF relay cascade), and Iberian Peninsula 2025 (inter-area oscillations) provide empirical validation of Death Wobble physics in comparable grids. However, none of these events resulted from coordinated cyber-physical attacks ; they were natural disturbances (weather, equipment failure, lightning strikes).
 3. **Cyber-Attack Adaptation**: This document extends physical failure mechanisms into cyber-enabled scenarios by modeling how an adversary with Retailer API access could *deliberately induce* the oscillation patterns that occurred naturally in historical events. This represents a novel threat vector without direct historical precedent.
 4. **Consequence Modeling Uncertainty**:
 
