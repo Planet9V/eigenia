@@ -1,5 +1,5 @@
 # Cascading Failure Hypothesis: Non-Linear Energy Grid Instability
-This assessment models cascading failure propagation from coordinated cyber-physical attacks targeting a refernce modelled electrical utility distribution network (see reference to ACME Inc.), the analysis integrates findings from the BESS Architecture Vulnerability Assessment and the DERMS Security Architecture Review to quantify systemic risk across the modelled NSW electricity network and its dependent critical infrastructure.
+This assessment models cascading failure propagation from coordinated cyber-physical attacks targeting a refernce modelled electrical utility distribution network (see reference to RefDNSP-1.2M), the analysis integrates findings from the BESS Architecture Vulnerability Assessment and the DERMS Security Architecture Review to quantify systemic risk across the modelled NSW electricity network and its dependent critical infrastructure.
 
 ## Cascading Failure Hypothesis
 
@@ -31,9 +31,9 @@ The probability of such an attack materializing within a 10-year horizon is asse
 
 ### 1.1 Purpose and Scope
 
-This document establishes the cascading failure risk profile for ACME Inc.'s DER infrastructure under coordinated cyber-physical attack conditions. It synthesizes vulnerability findings from EE-CTI-004 (BESS Architecture Vulnerability Assessment) and EE-CTI-005 (DERMS Security Architecture Review) into a comprehensive impact model spanning grid operations, interdependent infrastructure, economic consequences, and physical safety.
+This document establishes the cascading failure risk profile for RefDNSP-1.2M's DER infrastructure under coordinated cyber-physical attack conditions. It synthesizes vulnerability findings from EE-CTI-004 (BESS Architecture Vulnerability Assessment) and EE-CTI-005 (DERMS Security Architecture Review) into a comprehensive impact model spanning grid operations, interdependent infrastructure, economic consequences, and physical safety.
 
-The scope encompasses the full ACME Inc. distribution network, including 54 community batteries (270 MW aggregate capacity), 278,622 controllable DER devices (1.07 GW), and the six critical infrastructure systems directly dependent on uninterrupted electricity supply within the service territory.
+The scope encompasses the full RefDNSP-1.2M distribution network, including 54 community batteries (270 MW aggregate capacity), 278,622 controllable DER devices (1.07 GW), and the six critical infrastructure systems directly dependent on uninterrupted electricity supply within the service territory.
 
 ### 1.2 Threat Context
 
@@ -53,6 +53,27 @@ This assessment is conducted under the requirements of:
 - **NERC CIP:** Critical Infrastructure Protection standards for bulk electric systems (international reference)
 
 Current compliance status: AESCSF SP2 at 32% (target 80%), IEC 62443 at 38% (target 80%). These gaps directly enable the cascading failure scenarios modeled in this document.
+
+---
+
+## 2. Reference Network Specification: RefDNSP-1.2M
+
+This analysis is conducted against a specified synthetic distribution network, designated
+RefDNSP-1.2M. It is not a specific operator. Its parameters are drawn from published Australian
+network data so that every result in this paper can be reproduced or contested.
+
+| Parameter | Value | Basis |
+|:---|:---|:---|
+| Customers served | 1.2 million | Modelled, mid-size NEM distribution network |
+| Critical substations | 185 | Modelled |
+| Distributed BESS fleet | 54 units, 270 MW aggregate | AEMO DER register scale [n] |
+| Nominal frequency | 50.0 Hz | AEMO NEM operating standard [n] |
+| Protection RoCoF threshold | 1.0 Hz/s | AEMO frequency risk review [n] |
+| DERMS platform | Vendor-neutral aggregation layer | Modelled |
+| Control protocols | DNP3, IEC 61850, ICCP | IEC standards |
+| Regulatory regime | SOCI Act, AESCSF SP-2 | Australian Government [n] |
+
+Each `[n]` is replaced with its real citation index in Task 12, after the bibliography is merged.
 
 ---
 
@@ -358,7 +379,7 @@ The AEMO standard for RoCoF tolerance is 1.0 Hz/s. Protection relays are configu
 
 McKenney explicitly warns: "Experts explicitly warn that RoCoF values above 1 Hz/s (measured over 500ms) may be unmanageable by current system protections, potentially leading to fast grid collapse" (McKenney, 2024).
 
-**[RESEARCH GAP: Actual RoCoF tolerance of ACME Inc. grid requires dynamic stability study with AEMO. Estimated cost: [investment required]. Current analysis uses AEMO standard thresholds as conservative baseline.]**
+**[RESEARCH GAP: Actual RoCoF tolerance of RefDNSP-1.2M grid requires dynamic stability study with AEMO. Estimated cost: [investment required]. Current analysis uses AEMO standard thresholds as conservative baseline.]**
 
 Under the reduced-inertia scenario:
 
@@ -446,14 +467,14 @@ As detailed in EE-CTI-002 (Bawley Point Vulnerability Assessment) and EE-CTI-003
 | Vulnerability ID     | Description                        | CVSS | Exploitation Method                                                                                |
 | :--- | :--- | :--- | :--- |
 | **V-001**      | Modbus TCP Plaintext Communication | 9.1  | Man-in-the-middle command injection between SwitchDin Utility Server and Vendor RTU                |
-| **V-004**      | Unmanaged Vendor 4G/5G Connections | 8.8  | Direct internet access to BESS controllers bypassing all ACME Inc. security controls               |
+| **V-004**      | Unmanaged Vendor 4G/5G Connections | 8.8  | Direct internet access to BESS controllers bypassing all RefDNSP-1.2M security controls               |
 | **FrostyGoop** | Weaponized Modbus Function Code 6  | 10.0 | Write Single Register command to thermal setpoint registers (demonstrated in Ukraine January 2024) |
 
 **FrostyGoop Attack Adaptation for BESS:**
 
 The FrostyGoop malware (discovered by Dragos in April 2024, analyzed in EE-CTI-003) demonstrated the first Modbus-specific ICS attack causing physical damage. The Ukrainian heating system attack manipulated thermal setpoints via Modbus Function Code 6 (Write Single Register), causing 100,000 residents to lose heat for 48 hours.
 
-An identical attack vector threatens ACME Inc. BESS infrastructure:
+An identical attack vector threatens RefDNSP-1.2M BESS infrastructure:
 
 ```python
 ### FrostyGoop-style BESS thermal runaway attack (ANALYSIS ONLY)
@@ -571,7 +592,7 @@ Community BESS installations typically use one of three fire suppression technol
 
 NSW Fire and Rescue has approximately:
 
-- **70 fire stations** in ACME Inc. service territory
+- **70 fire stations** in RefDNSP-1.2M service territory
 - **120 pumper appliances** (typical capacity: 3,000 liters)
 - **15 hazmat-rated teams** capable of lithium-ion fire response
 
@@ -679,7 +700,7 @@ graph TB
 
 **Tier 4 ; System-Wide Collapse (T+60 to T+120 minutes, worst case):**
 
-- Geographic Area: Full ACME Inc. network plus adjacent DNSPs
+- Geographic Area: Full RefDNSP-1.2M network plus adjacent DNSPs
 - Customers Affected: 1.0-1.5 million residential, 25,000-40,000 commercial
 - Duration: 24-72 hours
 - Economic Impact: [investment required] million - [investment required] billion
@@ -716,7 +737,7 @@ As documented in EE-CTI-005 (Sandworm Energy Grid Campaign), the Russian GRU Uni
 - **Modbus TCP exploitation** (via FrostyGoop evolution) for physical damage
 - **Wiper malware deployment** (ORCSHRED, SOLOSHRED, CADDYWIPER) to destroy forensic evidence and delay recovery
 
-**ACME Inc. Attack Surface:**
+**RefDNSP-1.2M Attack Surface:**
 
 | Infrastructure Component    | Quantity    | Protocol Vulnerability                                   | Sandworm Demonstrated Capability                     |
 | :--- | :--- | :--- | :--- |
@@ -781,7 +802,7 @@ graph TB
 
 **185-Substation Synchronized Trip Scenario:**
 
-ACME Inc. operates 185 major substations classified as "critical" for grid stability. A coordinated DNP3 Direct Operate attack, modeled on the Industroyer malware framework, could simultaneously trip circuit breakers across these substations.
+RefDNSP-1.2M operates 185 major substations classified as "critical" for grid stability. A coordinated DNP3 Direct Operate attack, modeled on the Industroyer malware framework, could simultaneously trip circuit breakers across these substations.
 
 **Attack Execution (Sandworm Methodology):**
 
@@ -884,9 +905,9 @@ Recovery: 24-72 hours (black start procedures, sequential restoration)
 | **Ukraine 2015 (BlackEnergy)** | 30 substations                      | 225,000                   | 6 hours               | Manual circuit breaker operations via compromised SCADA                        |
 | **Ukraine 2016 (Industroyer)** | 1 substation (330kV transmission)   | 20% of Kyiv (~300,000)    | 1 hour                | Automated IEC 61850/DNP3 protocol exploitation                                 |
 | **South Australia 2016**       | Cascading relay trips (not cyber)   | 850,000 (entire state)    | 6-24 hours            | Natural weather event triggering protection cascade                            |
-| **ACME Inc. Scenario**         | **185 substations (modeled)** | **1.2-1.5 million** | **24-72 hours** | **Coordinated DNP3 Direct Operate + BESS oscillation + thermal runaway** |
+| **RefDNSP-1.2M Scenario**         | **185 substations (modeled)** | **1.2-1.5 million** | **24-72 hours** | **Coordinated DNP3 Direct Operate + BESS oscillation + thermal runaway** |
 
-The ACME Inc. scenario represents a **6x escalation** in substation count compared to Ukraine's largest demonstrated attack, with **5x customer impact** and **4x longer restoration** due to:
+The RefDNSP-1.2M scenario represents a **6x escalation** in substation count compared to Ukraine's largest demonstrated attack, with **5x customer impact** and **4x longer restoration** due to:
 
 1. **Larger geographic area** (970 km² vs. single city)
 2. **More complex grid topology** (interconnected NEM vs. isolated Ukrainian oblasts)
@@ -1070,7 +1091,7 @@ Transport infrastructure suffers immediate and severe degradation:
 
 ### 4.6 Defence and National Security Infrastructure
 
-RAAF Base Richmond, naval facilities in the Sydney area, and defence data centres are all within the ACME Inc. service territory. A 30-50% reduction in sortie generation capability at RAAF Richmond, degradation of naval munitions cooling systems, and 40-60% reduction in tactical communications bandwidth constitute a national security incident requiring Defence Minister briefing and triggering potential Parliamentary inquiry.
+RAAF Base Richmond, naval facilities in the Sydney area, and defence data centres are all within the RefDNSP-1.2M service territory. A 30-50% reduction in sortie generation capability at RAAF Richmond, degradation of naval munitions cooling systems, and 40-60% reduction in tactical communications bandwidth constitute a national security incident requiring Defence Minister briefing and triggering potential Parliamentary inquiry.
 
 **RAAF Base Richmond Impact Analysis:**
 
@@ -1121,7 +1142,7 @@ National Security Implications:
 ```
 Garden Island (Sydney Harbour) - East Coast Principal Naval Base:
 
-Critical Systems Dependent on ACME Inc. Grid:
+Critical Systems Dependent on RefDNSP-1.2M Grid:
 - Submarine support facilities (HMAS Platypus)
 - Surface vessel replenishment systems
 - Naval ammunition storage refrigeration (temperature-critical munitions)
@@ -1172,7 +1193,7 @@ Beyond direct customer losses, the financial services infrastructure dependent o
 
 **Stock Exchange and Trading Infrastructure:**
 
-The Australian Securities Exchange (ASX) data centers and trading infrastructure are located within Sydney's central business district, with critical components in the ACME Inc. service territory.
+The Australian Securities Exchange (ASX) data centers and trading infrastructure are located within Sydney's central business district, with critical components in the RefDNSP-1.2M service territory.
 
 ```
 ASX Trading Infrastructure Dependencies:
@@ -1799,7 +1820,7 @@ graph TB
     style Success fill:#2ed573,stroke:#009432,color:#000
 ```
 
-**Decision Tree Application - ACME Inc. Current State:**
+**Decision Tree Application - RefDNSP-1.2M Current State:**
 
 Based on EE-CTI-002, EE-CTI-003, and EE-CTI-007 findings:
 
@@ -1849,7 +1870,7 @@ Full scenario strategic value (including tail risk):
   strategic value:                           [investment required] / [investment required] = 43.9:1 (4,390%)
 ```
 
-The [investment required] million investment represents 0.375% of ACME Inc.'s [investment required] billion regulated asset base.
+The [investment required] million investment represents 0.375% of RefDNSP-1.2M's [investment required] billion regulated asset base.
 
 ### 9.4 Quick Wins: Immediate Actions ([investment required], targeted timeframe)
 
@@ -1860,7 +1881,7 @@ The following actions provide immediate risk reduction with minimal cost and can
 | Action                                                                                        | Implementation                                                                                                                                | Cost                                                      | Risk Reduction                                                      | Timeline              |
 | :--- | :--- | :--- | :--- | :--- |
 | Enforce dual authorization for dispatch commands >10 MW                                       | Modify DERMS API authorization logic to require second OAuth token approval for bulk commands or commands affecting >10 MW aggregate capacity | [investment required] (configuration change)              | 85% reduction in single-credential compromise impact                | implementation period |
-| Implementation: Update mPrest DERMS configuration file to enable "dual_auth_threshold_MW": 10 | Example: Retailer A requests 54 BESS discharge → System prompts ACME Inc. control room operator for approval                                 | Operational impact: 30-60 second delay for large commands | User acceptance: HIGH (operators already approve critical commands) |                       |
+| Implementation: Update mPrest DERMS configuration file to enable "dual_auth_threshold_MW": 10 | Example: Retailer A requests 54 BESS discharge → System prompts RefDNSP-1.2M control room operator for approval                                 | Operational impact: 30-60 second delay for large commands | User acceptance: HIGH (operators already approve critical commands) |                       |
 
 **Quick Win 2: BESS State-Change Rate Limiting**
 
@@ -2169,7 +2190,7 @@ The AESCSF Security Profile 2 (SP2) mandates specific OT security controls for D
 
 While NERC-CIP is US-specific and not mandatory in Australia, it provides internationally recognized best practices:
 
-| NERC-CIP Standard                                     | Equivalent Control                                        | ACME Inc. Current State                    | Investment to Achieve                                      |
+| NERC-CIP Standard                                     | Equivalent Control                                        | RefDNSP-1.2M Current State                    | Investment to Achieve                                      |
 | :--- | :--- | :--- | :--- |
 | **CIP-005-6 R1: Electronic Security Perimeter** | ICS firewall at IT/OT boundary with deny-all default      | Partial (firewall exists, ACLs weak)       | [investment required] (firewall rules + DPI)               |
 | **CIP-007-6 R2: Patch Management**              | 35-day patching for critical OT vulnerabilities           | Non-compliant (no OT patch program)        | [investment required]/year (patch testing + deployment)    |
@@ -2222,7 +2243,7 @@ This analysis conservatively excludes reputational damage, regulatory penalties,
 
 ## 10. Conclusion
 
-ACME Inc.'s distributed energy infrastructure faces systemic cascading failure risk from coordinated cyber-physical attacks. The convergence of four conditions creates this risk:
+RefDNSP-1.2M's distributed energy infrastructure faces systemic cascading failure risk from coordinated cyber-physical attacks. The convergence of four conditions creates this risk:
 
 1. **Vulnerable DERMS/API architecture** enabling unmitigated mass command injection through the Retailer API, with no oscillation detection, rate limiting, or physics-based validation.
 2. **Inadequate ICS protocol security** with Modbus TCP operating in cleartext without authentication across the BESS control path, achieving IEC 62443 Security Level 0 where Security Level 2-3 is required.
@@ -2239,9 +2260,9 @@ The [investment required] million investment required for comprehensive mitigati
 
 ### Primary Sources
 
-McKenney, J. (2026). *BESS Architecture Vulnerability Assessment: Bawley Point Community Battery Energy Storage System*. ACME Inc. Internal Report EE-CTI-004.
+McKenney, J. (2026). *BESS Architecture Vulnerability Assessment: Bawley Point Community Battery Energy Storage System*. RefDNSP-1.2M Internal Report EE-CTI-004.
 
-McKenney, J. (2026). *DERMS Security Architecture Review: mPrest Platform*. ACME Inc. Internal Report EE-CTI-005.
+McKenney, J. (2026). *DERMS Security Architecture Review: mPrest Platform*. RefDNSP-1.2M Internal Report EE-CTI-005.
 
 ### Grid Stability and Death Wobble Analysis
 
@@ -2641,7 +2662,7 @@ This assessment employs **prospective modeling** of cascading failure scenarios 
    - **Economic Impact ([investment required])**: Uses AEMO Value of Customer Reliability methodology scaled to cyber-attack duration (24-72 hours vs. typical 2-4 hour weather outages). Regulatory penalties and litigation estimates extrapolate from SOCI Act maximum penalties and US class-action settlements (PG&E wildfires, ConEd transformer explosions) adapted to Australian legal context. Sensitivity: ±30% based on attack execution effectiveness and regulatory response severity.
 5. **Research Gaps Requiring Empirical Validation**:
 
-   - **ACME Inc.-Specific RoCoF Tolerance**: Current analysis uses AEMO generic 1.0 Hz/s threshold. Actual tolerance requires [investment required] dynamic stability study with AEMO modeling ACME Inc.'s specific topology, protection relay settings, and interconnection to TransGrid.
+   - **RefDNSP-1.2M-Specific RoCoF Tolerance**: Current analysis uses AEMO generic 1.0 Hz/s threshold. Actual tolerance requires [investment required] dynamic stability study with AEMO modeling RefDNSP-1.2M's specific topology, protection relay settings, and interconnection to TransGrid.
    - **BESS Oscillation Resonance**: Laboratory testing ([investment required]) required to validate whether 54 community batteries can sustain coherent oscillation at 0.3-1.2 Hz frequencies or whether control system delays and communications latency prevent synchronization.
    - **Cascade Propagation Timing**: Tier 1→2→3→4 timeline (T+15, T+30, T+60, T+120 minutes) modeled from AEMO protection relay coordination studies. Actual progression depends on load distribution, tie-line flows, and operator intervention effectiveness during incident.
 6. **Comparison to McKenney's Analysis**:
@@ -2876,7 +2897,7 @@ Logic:
   OR (
     Data_Exfiltration_Volume > 10 MB
     AND Connection_Duration > 30 minutes
-    AND Connection_Destination = External_IP (non-ACME Inc.)
+    AND Connection_Destination = External_IP (non-RefDNSP-1.2M)
   )
   THEN
     ALERT: "HIGH - Vendor Account Lateral Movement / Data Exfiltration"
@@ -3159,7 +3180,7 @@ T+2 hours: National Coordination (if attributed to nation-state)
 ```
 CONFIDENTIAL - FOR OFFICIAL USE ONLY
 
-ACME Inc. CRITICAL INCIDENT SITREP #001
+RefDNSP-1.2M CRITICAL INCIDENT SITREP #001
 
 Date/Time: [YYYY-MM-DD HH:MM AEDT]
 Incident Commander: [Name, Title]
@@ -3195,7 +3216,7 @@ Distribution: [Stakeholder list]
 
 **Legal and Regulatory Reporting Obligations:**
 
-Under the Security of Critical Infrastructure Act 2018 (SOCI Act), ACME Inc. has mandatory reporting obligations:
+Under the Security of Critical Infrastructure Act 2018 (SOCI Act), RefDNSP-1.2M has mandatory reporting obligations:
 
 **SOCI Act Reporting Timeline:**
 
@@ -3217,7 +3238,7 @@ Under the Security of Critical Infrastructure Act 2018 (SOCI Act), ACME Inc. has
 **Board Reporting Template: Quarterly Cyber-Physical Risk Report**
 
 ```
-ACME Inc. BOARD OF DIRECTORS
+RefDNSP-1.2M BOARD OF DIRECTORS
 QUARTERLY CYBER-PHYSICAL RISK REPORT
 
 Reporting Period: Q[X] [YEAR]
@@ -3264,7 +3285,7 @@ APPENDIX: RISK HEAT MAP
 
 **Crisis Communication Plan: Public and Media Relations**
 
-During major cascading failure events (>100,000 customers), ACME Inc. must communicate with:
+During major cascading failure events (>100,000 customers), RefDNSP-1.2M must communicate with:
 
 1. **Affected Customers:** SMS, email, website, social media (Twitter/X, Facebook)
 2. **Media:** Press releases, press conferences, media spokesperson availability
@@ -3276,11 +3297,11 @@ During major cascading failure events (>100,000 customers), ACME Inc. must commu
 ```
 FOR IMMEDIATE RELEASE
 
-ACME Inc. INCIDENT UPDATE: [DATE, TIME]
+RefDNSP-1.2M INCIDENT UPDATE: [DATE, TIME]
 
 POWER OUTAGE AFFECTING [X] CUSTOMERS IN [REGION]
 
-ACME Inc. is responding to a major power outage affecting approximately [X] customers across [region names]. The outage began at [time] and is due to [equipment failure/under investigation].
+RefDNSP-1.2M is responding to a major power outage affecting approximately [X] customers across [region names]. The outage began at [time] and is due to [equipment failure/under investigation].
 
 AFFECTED AREAS:
 [List of suburbs/towns]
@@ -3299,7 +3320,7 @@ SAFETY INFORMATION:
 
 UPDATES:
 For the latest information:
-- Website: ACME Inc.energy.com.au/outages
+- Website: RefDNSP-1.2M energy.com.au/outages
 - SMS updates: Register at [link]
 - Customer hotline: 131 003
 
@@ -3310,12 +3331,12 @@ MEDIA CONTACT:
 Mobile: [Number]
 Email: [Address]
 
-[LOGO] ACME Inc.
+[LOGO] RefDNSP-1.2M
 ```
 
 **Lessons Learned Process:**
 
-After any P0 or P1 incident, ACME Inc. must conduct formal lessons learned review:
+After any P0 or P1 incident, RefDNSP-1.2M must conduct formal lessons learned review:
 
 **Timeline:**
 
@@ -3361,7 +3382,7 @@ After any P0 or P1 incident, ACME Inc. must conduct formal lessons learned revie
 - EE-CTI-004: BESS Architecture Vulnerability Assessment ; Bawley Point Community Battery
 - EE-CTI-005: DERMS Security Architecture Review ; mPrest Platform
 - EE-CTI-003: Comprehensive Threat Assessment 2026
-- ACME Inc. DERMS High Level Architecture (HLD)
+- RefDNSP-1.2M DERMS High Level Architecture (HLD)
 - AEMO Power System Frequency Risk Review 2024
 
 ---
@@ -3603,7 +3624,7 @@ alert tcp any any -> $DERMS_API 443 (msg:"Potential Death Wobble - Rapid Charge/
 
 ### Domains
 - derms-update[.]com: Fake mPrest update server
-- ACME Inc.-vpn[.]net: Phishing domain impersonating EE VPN portal
+- RefDNSP-1.2M-vpn[.]net: Phishing domain impersonating EE VPN portal
 - scada-tools[.]org: Malicious OT tooling distribution
 
 ### File Hashes (SHA256)
@@ -4004,14 +4025,14 @@ Ouyang, M. (2014). "Review on modeling and simulation of interdependent critical
 
 Zimmerman, R., & Restrepo, C. E. (2006). "The Next Step: Quantifying Infrastructure Interdependencies to Improve Security." *International Journal of Critical Infrastructures*, 2(2-3), 215-230.
 
-#### ACME Inc. Internal Documents
+#### RefDNSP-1.2M Internal Documents
 
-ACME Inc.. (2025). *DERMS High Level Architecture (HLD) ; mPrest Platform Deployment*.  : ACME Inc..
+RefDNSP-1.2M (2025). *DERMS High Level Architecture (HLD) ; mPrest Platform Deployment*.  : RefDNSP-1.2M
 
-ACME Inc.. (2025). *BESS Deployment Standard Operating Procedures*.  : ACME Inc..
+RefDNSP-1.2M (2025). *BESS Deployment Standard Operating Procedures*.  : RefDNSP-1.2M
 
-ACME Inc.. (2024). *Cybersecurity Incident Response Plan ; Version 2.3*.  : ACME Inc..
+RefDNSP-1.2M (2024). *Cybersecurity Incident Response Plan ; Version 2.3*.  : RefDNSP-1.2M
 
-ACME Inc.. (2025). *EE-CTI-004: BESS Architecture Vulnerability Assessment ;   Community Battery*.  : ACME Inc. Cybersecurity Intelligence.
+RefDNSP-1.2M (2025). *EE-CTI-004: BESS Architecture Vulnerability Assessment ;   Community Battery*.  : RefDNSP-1.2M Cybersecurity Intelligence.
 
-ACME Inc.. (2025). *EE-CTI-007: DERMS Security Architecture Review ; Cloud Integration Risks and Mitigations*.: ACME Inc. Cybersecurity Intelligence.
+RefDNSP-1.2M (2025). *EE-CTI-007: DERMS Security Architecture Review ; Cloud Integration Risks and Mitigations*.: RefDNSP-1.2M Cybersecurity Intelligence.
