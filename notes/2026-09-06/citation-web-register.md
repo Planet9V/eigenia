@@ -38,10 +38,10 @@ Seven distinct Eigenia or McKenney works are cited across `references/`.
 | *The Grid's Precarious Pulse: Death Wobble and Frequency Instability* | WG-04-CF | **PUBLISHED** | none |
 | *Death wobble: the grid's precarious pulse* (2024, April) | WG-04-CF | **PUBLISHED**, cited under a variant title | normalise the title in the bibliography |
 | *Cascading Failure Analysis: SA 2016, UK 2019, Iberian 2025* | WG-04-CF | **SELF**, the bibliography marks it "(This document.)" | keep, it is not a missing work |
-| *The Grid's Unseen Tremors* (2024) | WG-04-CF | **BEING WRITTEN** (Task 16, D1) | in flight |
-| *The Unseen Current* (2025) | WG-04-CF | **BEING WRITTEN** (Task 16, D2) | in flight |
-| *ERCOT and WECC Renewable Integration Challenges* (2024) | WG-04-CF | **SOURCED, NOT YET WRITTEN** (Task 16, D3) | evidence filed 2026-09-06; author next |
-| *Project Inertia* | WG-04-CF line 636 | **TO BE WRITTEN**, see the naming problem below | W1 |
+| *The Grid's Unseen Tremors* (2024) | WG-04-CF | **PUBLISHED** `c52f6a4`, registered, HTTP 200 | CLOSED |
+| *The Unseen Current* (2025) | WG-04-CF | **PUBLISHED** `d70210b`, registered, HTTP 200 | CLOSED |
+| *ERCOT and WECC Renewable Integration Challenges* (2024) | WG-04-CF | **PUBLISHED** `4b4d385`, registered, HTTP 200 | CLOSED |
+| *Project Inertia* | WG-04-CF | **PUBLISHED** `f4007fc`, registered, HTTP 200, carries the mandatory not-ENTSO-E statement | W1 CLOSED |
 
 ### Two entries that must NOT become real documents
 
@@ -203,3 +203,34 @@ Correct arithmetic on invented inputs is worse than an arithmetic error,
 because checking the sums confirms it. This is the same defect class as F10 in
 `findings.md`, at corpus scale, and it is the single highest-value fix
 available: one sweep over the words "verified", "empirical" and "we prove".
+
+
+## Status at the 2026-09-07 push
+
+W1 and W2 are closed. Five works were written, registered in both registries and
+verified returning HTTP 200: *The Grid's Unseen Tremors*, *The Unseen Current*,
+*Project Inertia*, *ERCOT and WECC Renewable Integration Challenges*, and the
+extracted *Grid Incident Response Playbook*.
+
+**The ENTSO-E attribution at what was line 636 was NOT repointed at Eigenia's
+Project Inertia paper**, and that was the right call. It now carries the working
+group's own refutation in place, citing *The Unseen Current* section 6.2 for the
+finding that no ENTSO-E document of that name appears in any primary source this
+group holds, plus an explicit statement that Eigenia's paper shares a name with
+an ENTSO-E workstream and is not an ENTSO-E finding.
+
+The register's original instruction was that the claim "should be struck from any
+document asserting it". It was qualified rather than struck, because striking is a
+content deletion and the cardinal rule reserves that for Jim. **Open for his
+decision.**
+
+### What the corpus audit left open
+
+182 findings across 49 documents. This session closed the epistemic-label class
+(156 occurrences to 27) and a handful of confirmed defects. Everything else in
+those four audit reports is open, and the highest-value items remain:
+
+- the shared parameter sheet, which closes 21 findings at once
+- WG-01-UI's 29,279 words with zero citations against 41 named external invocations
+- WG-02-DT's 69 citation markers with no bibliography anywhere in the folder
+- the physics that does not close in the liquid cooling papers
