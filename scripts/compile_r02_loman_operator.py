@@ -294,7 +294,7 @@ Where:
 - $\dot{L}_{\text{BI}}(t)$ is the business interruption revenue loss rate ($24,000\text{ USD/hour}$).
 - $\Phi_{\text{regulatory}}$ is the statutory fine levied under EU CRA Article 64.
 
-Deploying deterministic hardwired SIL-3 interlocks ($C_{\text{controls}} = 220,000\text{ USD}$) decouples plant safety from human psychodynamics, reducing annualized loss expectancy from $9,850,000\text{ USD}$ to $310,000\text{ USD}$ and yielding an exceptional Return on Security Investment ($\text{ROSI}$):
+Deploying deterministic hardwired SIL-3 interlocks ($C_{\text{controls}} = 220,000\text{ USD}$) decouples plant safety from human psychodynamics, reducing annualized loss expectancy from $9,850,000\text{ USD}$ to $310,000\text{ USD}$ and yielding a modelled Return on Security Investment ($\text{ROSI}$). The two loss expectancies and the interlock cost are author-chosen reference values. The percentage below is exact arithmetic on them, not a result read off claims history:
 
 $$\text{ROSI} = \frac{(\text{ALE}_{\text{unmitigated}} - \text{ALE}_{\text{hardened}}) - C_{\text{controls}}}{C_{\text{controls}}} \times 100\% = \frac{\$9,540,000 - \$220,000}{\$220,000} \times 100\% = 4,236\%$$
 
@@ -313,6 +313,9 @@ Compliance with SFAIRP (So Far As Is Reasonably Practicable) principles eliminat
 
 # Final verification: eliminate any lingering em-dashes
 content = content.replace('—', '; ')
+# A spaced em dash becomes ' ;  '. A semicolon never takes a space before it;
+# collapse the artifact here so it cannot reach a published document.
+content = re.sub(r'\s+;\s+', '; ', content)
 
 # Ensure directory exists
 os.makedirs(os.path.dirname(dest_path), exist_ok=True)

@@ -4,6 +4,7 @@ Compiler for Paper P-06: Autonomous OT & AI-Driven Facility Control: The Write-A
 Generates a 5,500+ word, academically rigorous, physics-grounded treatise
 meeting all PAAI gate criteria and zero-tolerance style prohibitions.
 """
+import re
 
 dest_path = 'references/WG-03-ML-Behaviorial_Modeling/WG-03-ML-Autonomous-OT-Trust-Boundary.md'
 
@@ -275,6 +276,9 @@ Autonomous operational technology demands four immutable engineering principles:
 
 # Ensure no em-dashes or double-hyphens exist
 content = content.replace('—', '; ')
+# A spaced em dash becomes ' ;  '. A semicolon never takes a space before it;
+# collapse the artifact here so it cannot reach a published document.
+content = re.sub(r'\s+;\s+', '; ', content)
 
 with open(dest_path, 'w', encoding='utf-8') as f:
     f.write(content)

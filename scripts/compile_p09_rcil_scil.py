@@ -4,6 +4,7 @@ Compiler for Paper P-09: Reliability & Safety Critical Items Lists (RCIL / SCIL)
 Generates a 5,500+ word, mathematically rigorous, actuarial & engineering treatise
 meeting all PAAI gate criteria and zero-tolerance style prohibitions.
 """
+import re
 
 dest_path = 'references/WG-01-UI-Underwriter-insurance/WG-01-UI-RCIL-SCIL-Reinsurance.md'
 
@@ -239,6 +240,9 @@ Reliability and Safety Critical Items management establishes five immutable engi
 
 # Ensure no em-dashes or double-hyphens exist
 content = content.replace('—', '; ')
+# A spaced em dash becomes ' ;  '. A semicolon never takes a space before it;
+# collapse the artifact here so it cannot reach a published document.
+content = re.sub(r'\s+;\s+', '; ', content)
 
 with open(dest_path, 'w', encoding='utf-8') as f:
     f.write(content)

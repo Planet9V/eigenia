@@ -4,6 +4,7 @@ Compiler for Paper P-10: Emerging Power Topologies: Cyber-Physical Resilience of
 Generates a 5,500+ word, mathematically rigorous, electrical grid & nuclear engineering treatise
 meeting all PAAI gate criteria and zero-tolerance style prohibitions.
 """
+import re
 
 dest_path = 'references/WG-04-CF-Cascading-Failures/WG-04-CF-Emerging-Power-Topologies.md'
 
@@ -317,6 +318,9 @@ Emerging power topologies demand five immutable engineering principles:
 
 # Ensure no em-dashes or double-hyphens exist
 content = content.replace('—', '; ')
+# A spaced em dash becomes ' ;  '. A semicolon never takes a space before it;
+# collapse the artifact here so it cannot reach a published document.
+content = re.sub(r'\s+;\s+', '; ', content)
 
 with open(dest_path, 'w', encoding='utf-8') as f:
     f.write(content)

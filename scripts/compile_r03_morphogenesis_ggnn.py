@@ -36,6 +36,9 @@ cleaned = cleaned.replace(r'\?', '?')
 
 # Replace em dashes and double hyphens
 cleaned = cleaned.replace('—', '; ')
+# A spaced em dash becomes ' ;  '. A semicolon never takes a space before it;
+# collapse the artifact here so it cannot reach a published document.
+cleaned = re.sub(r'\s+;\s+', '; ', cleaned)
 cleaned = cleaned
 
 # Replace prohibited AI filler words
@@ -156,6 +159,9 @@ final_content = header + body + grounding_section
 
 # Final verification: eliminate any lingering em-dashes
 final_content = final_content.replace('—', '; ').replace('–', ' - ')
+# A spaced em dash becomes ' ;  '. A semicolon never takes a space before it;
+# collapse the artifact here so it cannot reach a published document.
+final_content = re.sub(r'\s+;\s+', '; ', final_content)
 
 # The em-dash substitution above leaves ' ;  ' wherever the source manuscript
 # spaced its dashes. Collapse those back to a tight semicolon.

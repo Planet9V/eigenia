@@ -283,6 +283,9 @@ In this architecture:
 
 # Final verification: eliminate any lingering em-dashes
 content = content.replace('—', '; ')
+# A spaced em dash becomes ' ;  '. A semicolon never takes a space before it;
+# collapse the artifact here so it cannot reach a published document.
+content = re.sub(r'\s+;\s+', '; ', content)
 
 # Ensure directory exists
 os.makedirs(os.path.dirname(dest_path), exist_ok=True)

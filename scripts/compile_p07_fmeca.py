@@ -4,6 +4,7 @@ Compiler for Paper P-07: Quantitative Cyber-Physical FMECA: Failure Mode Analysi
 Generates a 5,500+ word, mathematically rigorous, empirical engineering treatise
 meeting all PAAI gate criteria and zero-tolerance style prohibitions.
 """
+import re
 
 dest_path = 'references/WG-01-UI-Underwriter-insurance/WG-01-UI-Quantitative-Cyber-Physical-FMECA.md'
 
@@ -243,6 +244,9 @@ Quantitative cyber-physical FMECA establishes five immutable engineering princip
 
 # Ensure no em-dashes or double-hyphens exist
 content = content.replace('—', '; ')
+# A spaced em dash becomes ' ;  '. A semicolon never takes a space before it;
+# collapse the artifact here so it cannot reach a published document.
+content = re.sub(r'\s+;\s+', '; ', content)
 
 with open(dest_path, 'w', encoding='utf-8') as f:
     f.write(content)

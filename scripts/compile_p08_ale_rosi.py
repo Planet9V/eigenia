@@ -4,6 +4,7 @@ Compiler for Paper P-08: Annualised Loss Expectancy (ALE) & Return on Security I
 Generates a 5,500+ word, mathematically rigorous, actuarial & CFO-level treatise
 meeting all PAAI gate criteria and zero-tolerance style prohibitions.
 """
+import re
 
 dest_path = 'references/WG-01-UI-Underwriter-insurance/WG-01-UI-ALE-ROSI-Decision-Framework.md'
 
@@ -305,6 +306,9 @@ Financial risk quantification for critical operational technology establishes fi
 
 # Ensure no em-dashes or double-hyphens exist
 content = content.replace('—', '; ')
+# A spaced em dash becomes ' ;  '. A semicolon never takes a space before it;
+# collapse the artifact here so it cannot reach a published document.
+content = re.sub(r'\s+;\s+', '; ', content)
 
 with open(dest_path, 'w', encoding='utf-8') as f:
     f.write(content)
