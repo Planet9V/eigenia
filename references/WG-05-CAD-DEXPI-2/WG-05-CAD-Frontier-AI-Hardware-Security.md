@@ -208,20 +208,20 @@ We establish four mandatory operational zones:
 
 #### Zone 4: The Silicon Cryptographic Compute Enclave (Target: SL-4)
 - **Scope**: Accelerator execution dies, on-package High-Bandwidth Memory (HBM3e/HBM4), on-die SRAM, and coherent scale-up crossbars.
-- **Security Posture**: The highest protection tier defined by IEC 62443-3-3. Protection against sovereign-tier adversaries armed with physical laboratory equipment. Silicon root-of-trust enforcement, cryptographic bus encryption, line-rate memory scrambling, and autonomous kernel verification.
+- **Security Posture**: The highest protection tier defined by IEC 62443-3-3 [1]. Protection against sovereign-tier adversaries armed with physical laboratory equipment. Silicon root-of-trust enforcement, cryptographic bus encryption, line-rate memory scrambling, and autonomous kernel verification.
 
 #### Conduit Enforcement Rules
 All conduits crossing zone boundaries must enforce deterministic security policies:
 1. **Conduit A (Zone 1 to Zone 2)**: All cooling and electrical commands flowing from the facility BMS to rack-level BMCs must pass through a hardware unidirectional data diode or a proxy enforcing strict schema validation. Write operations are restricted to non-destructive setpoints; commands requesting emergency fluid shutoff or power cutoff require dual cryptographic authorization.
 2. **Conduit B (Zone 2 to Zone 3)**: Communication between the BMC and the host CPU occurs exclusively over MCTP-over-PCIe or SMBus. The host processor treats the BMC as untrusted: every configuration update dispatched by the BMC is checked against local cryptographic policy before it takes effect, meaning the signature chain, the rollback counter and the scope the policy grants that update.
-3. **Conduit C (Zone 3 to Zone 4)**: The interface between the host operating system and the accelerator silicon is an uncompromising SL-4 conduit. Unencrypted direct memory access (DMA) is structurally impossible. All data transfers traverse SPDM 1.3 authenticated and encrypted PCIe IDE channels.
+3. **Conduit C (Zone 3 to Zone 4)**: The interface between the host operating system and the accelerator silicon is an uncompromising SL-4 conduit. Unencrypted direct memory access (DMA) is structurally impossible. All data transfers traverse SPDM 1.3 authenticated and encrypted PCIe IDE channels [6], [7].
 
 ### 4.2 CLC/TS 50701 & EN 50126 RAMS Engineering
 
 CLC/TS 50701 and EN 50126 govern the engineering of Safety-Critical and Cybersecurity systems in environments where failure induces loss of life or catastrophic infrastructure collapse. Applying these standards [2], [3] to frontier AI datacenters puts **Reliability, Availability, Maintainability, and Safety (RAMS)** parameters on a stated failure model with stated rates, rather than leaving them to be hoped for. The derivation is only as good as the rates fed into it. Where this paper states a rate, it states whether the rate came from a component datasheet or from the working group's own judgement, and no rate here is drawn from an operating fleet.
 
 #### Hazard Identification & Safety Instrumented Systems (SIS)
-Under EN 50126, every potential failure mode within the AI Rack Envelope is categorized into a Safety Integrity Level (SIL):
+Under EN 50126 [3], every potential failure mode within the AI Rack Envelope is categorized into a Safety Integrity Level (SIL), the scale IEC 61508 defines [20]:
 - **Thermal Runaway Mitigation (SIL-2 / SIL-3)**: If manifold differential pressure drops below safe operational limits ($P_{manifold} < P_{crit}$), an autonomous, hardware-wired Safety Instrumented Function (SIF) triggers an orderly execution pause and progressive power derate within 500 milliseconds, long before silicon approaches thermal destruction. This SIF is implemented using hardwired, analog comparator logic completely decoupled from the software BMC or OS.
 - **Overcurrent Busbar Protection (SIL-3)**: Electronic circuit breakers (eFuses) located directly on the 48V power sled monitor current derivative ($di/dt$). If abnormal current transients exceeding design baselines are detected (indicating a resonant frequency attack or hard short), the eFuse severs the bus connection within 5 microseconds, preserving silicon health.
 
@@ -256,10 +256,10 @@ graph TB
 
 ### 5.1 Open-Source Silicon RoT: The Caliptra Specification
 
-Proprietary vendor roots of trust introduce opaque security implementations that resist comprehensive independent security auditing. The AI Rack Envelope mandates integration of the open-source **Caliptra Silicon Root of Trust** specification directly into accelerator ASIC dies, host processors, and switching chips.
+Proprietary vendor roots of trust introduce opaque security implementations that resist comprehensive independent security auditing. The AI Rack Envelope mandates integration of the open-source **Caliptra Silicon Root of Trust** specification [5] directly into accelerator ASIC dies, host processors, and switching chips.
 
 Caliptra provides:
-1. **Immutable Silicon Core**: An integrated micro-controller containing 128 KB of mask ROM, physically etched during semiconductor fabrication. This ROM contains the non-modifiable primary bootloader, establishing the root of the verification chain.
+1. **Immutable Silicon Core**: An integrated micro-controller containing 128 KB of mask ROM, physically etched during semiconductor fabrication. This ROM contains the non-modifiable primary bootloader, establishing the root of the verification chain. This is the root of trust for detection and update that NIST SP 800-193 requires of a resilient platform [4].
 2. **Deterministic Cryptographic Identity (DICE)**: Device Identifier Composition Engine (DICE) architecture generates an asymmetric cryptographic identity derived from an immutable Unique Device Secret (UDS) fused into silicon registers during wafer manufacturing. Every firmware update produces a new Compound Device Identifier (CDI):
 
 $$CDI = \text{HMAC-SHA384}(UDS, \text{Hash}(Firmware_{Layer}))$$
@@ -268,15 +268,15 @@ If an adversary modifies a single byte of firmware code, the resulting device pr
 
 ### 5.2 SPDM 1.3 Component Authentication & Attestation
 
-Before any compute tray within the AI Rack Envelope is admitted into the distributed training fabric, it must undergo formal mutual attestation using the **Security Protocol and Data Model (SPDM) version 1.3** standard:
+Before any compute tray within the AI Rack Envelope is admitted into the distributed training fabric, it must undergo formal mutual attestation using the **Security Protocol and Data Model (SPDM) version 1.3** standard [6]:
 - **Cryptographic Measurement Exchange**: The central cluster control plane dispatches a cryptographically randomized nonce challenge to each accelerator module over the management bus.
 - **Hardware-Signed Evidence**: The Caliptra RoT generates an SPDM Certificate Chain response, signing the nonce alongside the current contents of its internal Platform Configuration Registers (PCRs), which record the exact cryptographic hashes of all active firmware, microcode patches, board strapping resistor configurations, and initialization tables.
 - **Automated Admission Decision**: The cluster orchestrator verifies the attestation signature against the semiconductor manufacturer's public certificate authority. If a node exhibits an unrecognized PCR measurement, it is isolated by hardware fabric switches and prevented from receiving model weight parameters.
 
 ### 5.3 Post-Quantum Cryptographic (PQC) Silicon Roadmap
 
-Frontier model weights represent assets with operational lifetimes spanning multiple decades. Consequently, platform integrity mechanisms must defend against adversaries operating under the "Harvest Now, Decrypt Later" doctrine. The AI Rack Envelope mandates alignment with the National Security Agency's **Commercial National Security Algorithm Suite 2.0 (CNSA 2.0)**:
-- **Stateful Hash-Based Signatures (LMS / XMSS)**: Primary firmware images and boot stages are signed using Leighton-Micali Signatures (LMS) in compliance with NIST SP 800-208. Because hash-based signatures rely strictly on collision-resistant hash functions rather than discrete logarithms or elliptic curves, they are inherently immune to Shor's algorithm on quantum computers.
+Frontier model weights represent assets with operational lifetimes spanning multiple decades. Consequently, platform integrity mechanisms must defend against adversaries operating under the "Harvest Now, Decrypt Later" doctrine. The AI Rack Envelope mandates alignment with the National Security Agency's **Commercial National Security Algorithm Suite 2.0 (CNSA 2.0)** [9]:
+- **Stateful Hash-Based Signatures (LMS / XMSS)**: Primary firmware images and boot stages are signed using Leighton-Micali Signatures (LMS) in compliance with NIST SP 800-208 [8]. Because hash-based signatures rely strictly on collision-resistant hash functions rather than discrete logarithms or elliptic curves, they are inherently immune to Shor's algorithm on quantum computers.
 - **Module-Lattice-Based Digital Signatures (ML-DSA-87 / Dilithium)**: Runtime SPDM device attestation and ephemeral inter-tray session handshakes execute using ML-DSA-87, ensuring quantum-resistant mutual authentication across the coherent compute fabric.
 
 ## 6. Machine-Speed Autonomous Verification & Platform Falsification
@@ -333,7 +333,7 @@ To eliminate supply chain ambiguity, the platform mandates the BOM layers define
 1. **Hardware Bill of Materials (HBOM)**: Extends BOM transparency into silicon, circuit board, and mechanical components. Captures exact die steppings, silicon fabrication foundry IDs, packaging substrate lot numbers, wafer serializations, and vendor manufacturing runs for all discrete silicon components (accelerators, NICs, PCIe switches, VRM controllers). The same layer carries the physical cooling hardware: cold plates, quick-disconnect couplings, secondary manifolds, and busbar assemblies. CycloneDX has no separate materials layer, and its physical part inventory is the HBOM; this document uses it that way rather than inventing a layer name no validator would recognise.
 2. **Software Bill of Materials (SBOM)**: Enumerates all active host software, container layers, device drivers, and firmware blobs, including the firmware running on the facility side of the envelope: CDU programmable logic, smart ePDU microcontrollers, Modbus and BACnet gateways, and optical leak sensors. Cryptographic hashes of all binaries are cross-referenced continuously against known vulnerability databases and Vulnerability Exploitability eXchange (VEX) statements.
 3. **Cryptography Bill of Materials (CBOM)**: Inventories the cryptographic assets the platform depends on: DICE certificate chains, the Unique Device Secret fused during wafer manufacturing, each Compound Device Identifier derived from it, the LMS keys that sign boot stages, and the ML-DSA-87 keys that sign runtime attestations. CycloneDX binds this layer to the `cryptographic-asset` component type, which is what turns a post-quantum migration into a query against an inventory rather than a survey of engineers.
-4. **Manufacturing Bill of Materials (MBOM)**: Carries the provenance of the physical materials the HBOM enumerates: copper cold plate metallurgy, ethylene-propylene-diene-monomer (EPDM) seal formulations, dielectric fluid chemical specifications, manifold weld procedure records, wafer lot numbers, and ODM chain-of-custody signatures. Equipment classes are stated against the ISO 15926-4 reference data library, ensuring that counterfeit mechanical elements that degrade thermal safety are identified prior to operational energization.
+4. **Manufacturing Bill of Materials (MBOM)**: Carries the provenance of the physical materials the HBOM enumerates: copper cold plate metallurgy, ethylene-propylene-diene-monomer (EPDM) seal formulations, dielectric fluid chemical specifications, manifold weld procedure records, wafer lot numbers, and ODM chain-of-custody signatures. Equipment classes are stated against the ISO 15926-4 reference data library [21], [25], ensuring that counterfeit mechanical elements that degrade thermal safety are identified prior to operational energization.
 5. **Operations Bill of Materials (OBOM)**: Details the logic configurations, setpoint limits, and operating envelopes enforced within row-level CDUs, power supply units, busbar monitor controllers, and environmental sensor microcontrollers. This is the layer an underwriter reads to establish what the facility is permitted to do, as distinct from what it is built from.
 6. **SaaS Bill of Materials (SaaSBOM)**: Records the management and telemetry services the envelope exposes, including Redfish BMC endpoints, IPMI and SNMP interfaces, and the facility Modbus TCP and BACnet endpoints that reach the cooling and power controllers. An endpoint absent from this layer is an endpoint nobody is defending.
 
@@ -342,7 +342,7 @@ To eliminate supply chain ambiguity, the platform mandates the BOM layers define
 A critical requirement for hardware supply chain transparency is the total elimination of proprietary, closed-source binary initialization blobs in host CPUs and accelerators. Historically, platform boot sequences rely on proprietary Unified Extensible Firmware Interface (UEFI) initialization blobs that execute at highest CPU privilege levels (Ring -2 / System Management Mode) prior to operating system initialization. These binary blobs represent massive, un-auditable security risks.
 
 The AI Rack Envelope enforces migration to open-source platform initialization:
-- **OpenSIL Integration**: Platform boot firmware integrates the Open Silicon Initialization Library (OpenSIL), stripping monolithic firmware into modular, open-source execution libraries written in memory-safe paradigms.
+- **OpenSIL Integration**: Platform boot firmware integrates the Open Silicon Initialization Library (OpenSIL) [17], stripping monolithic firmware into modular, open-source execution libraries written in memory-safe paradigms.
 - **Transparent Coreboot Payload**: OpenSIL executes within an open-source coreboot environment, enabling platform operators to audit every line of code executed during silicon reset, memory training, and PCIe link negotiation.
 - **Supply Chain Cryptographic Ledger & EU CRA Alignment**: Every build artifact, binary image, and configuration script is anchored into a public, tamper-proof transparency log (e.g., Sigstore Rekor), enabling cryptographically irrefutable verification that deployed hardware satisfies the binding essential cybersecurity requirements of the EU Cyber Resilience Act (Regulation 2024/2847).
 
@@ -505,7 +505,7 @@ The annualized cost of the AI Rack Envelope, 900,000 USD, sits at 19% of that ce
 
 ### 9.3 Reinsurance Covenants, Lloyd's Y5381 Endorsements & Deductibles
 
-In the commercial property and casualty market, cyber perils affecting industrial control systems and datacenters are strictly governed by the Lloyd's Market Association (LMA) Bulletin **Y5381** (Cyber Physical Damage and Consequential Loss Clauses). Standard commercial property policies explicitly exclude losses caused by cyber interdictions unless affirmative endorsements are attached.
+In the commercial property and casualty market, cyber perils affecting industrial control systems and datacenters are strictly governed by the Lloyd's Market Association (LMA) Bulletin **Y5381** (Cyber Physical Damage and Consequential Loss Clauses) [22]. Standard commercial property policies explicitly exclude losses caused by cyber interdictions unless affirmative endorsements are attached.
 
 To obtain affirmative coverage and prevent crippling sub-limits or uninsurable exclusions:
 1. **IEC 62443 SL-4 as Underwriting Warranties**: Insurers mandate that compute zones housing critical assets satisfy SL-3 or SL-4 conduit segmentation, evidenced by a third-party assessment report the syndicate can read. Failure to maintain independent hardware roots of trust (Caliptra) and line-rate encryption voids affirmative coverage upon forensic investigation.
