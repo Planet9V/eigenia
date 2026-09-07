@@ -385,13 +385,17 @@ McKenney explicitly warns: "Experts explicitly warn that RoCoF values above 1 Hz
 Under the reduced-inertia scenario:
 
 ```
-Critical Power Imbalance = 2H x RoCoF_max x S_base
-  = 2 x 3 x 1 x 10,000 = 60,000 MW-seconds
+Critical Power Imbalance = RoCoF_max x 2H x S_base / f0
+  = 1.0 x 2 x 3 x 10,000 / 50 = 1,200 MW
 
-Attack capability: 540 MW swing = 2.7% of critical threshold (single oscillation)
+Attack capability: 540 MW swing = 45% of critical threshold (single oscillation)
 ```
 
-A single oscillation cycle does not exceed the RoCoF threshold. However, sustained oscillation at frequencies matching the grid's electromechanical resonance (0.3-1.2 Hz) produces cumulative amplitude growth. After 10-15 oscillation cycles over approximately 10 minutes, frequency deviation amplitude exceeds +/- 0.15 Hz, reaching 49.85 Hz, RefDNSP-1.2M's modelled under-frequency relay trip point for this scenario. This is not a sourced NEM-wide AEMO relay setting: AEMO coordinates under-frequency load shedding but leaves the actual relay thresholds and staging to individual Network Service Providers, and no consolidated national relay-setting table exists.
+The swing equation is RoCoF = (dP x f0) / (2H x S_base), where dP is the power imbalance in MW, f0 the nominal frequency (50 Hz), H the inertia constant in seconds, and S_base the system base in MVA (Basakarad et al., 2020). Rearranged for the imbalance that produces the 1.0 Hz/s maximum design RoCoF, the critical figure is 1,200 MW. A single 540 MW fleet swing reaches 45% of that threshold in one oscillation. That is the sharp result in this analysis: one controllable command, issued through a compromised retailer API, moves the system almost halfway to the imbalance that drives RoCoF past the point where protection maloperates.
+
+A single oscillation cycle does not by itself exceed the RoCoF threshold. Sustained oscillation at frequencies matching the grid's electromechanical resonance (0.3 to 1.2 Hz) is the mechanism that does. For a sinusoidal frequency deviation of amplitude A at oscillation frequency f, the peak rate of change is df/dt = A x 2 x pi x f. A deviation of +/- 0.15 Hz at the top of the resonance band, 1.2 Hz, gives a peak RoCoF of 0.15 x 2 x pi x 1.2 = 1.13 Hz/s. The same +/- 0.15 Hz at 1.0 Hz gives 0.94 Hz/s, and at 0.3 Hz gives 0.28 Hz/s. At the top of its own resonance range the attack crosses the 1.0 Hz/s threshold at which this analysis already places likely protection maloperation.
+
+The detail that makes the attack work is where the frequency sits while that happens. A +/- 0.15 Hz deviation around 50 Hz stays between 49.85 and 50.15 Hz, which is exactly the AEMC normal operating band the system occupies almost all the time. Absolute-frequency protection, under-frequency load shedding, never sees it, because the frequency never falls to a shedding setpoint. Rate-of-change protection does see it, because df/dt reaches 1.13 Hz/s while the frequency itself never leaves the band an operator watches. The cascade is initiated by RoCoF relays tripping on rate of change, not by under-frequency relays tripping on an absolute setpoint. This is the same failure mode that disconnected roughly 350 MW of embedded generation in Great Britain on 9 August 2019, where RoCoF protection set to 0.125 Hz/s tripped generation the system needed. The earlier characterisation, an oscillation growing until frequency reached 49.85 Hz and under-frequency relays tripped, described a setpoint no network service provider would install, because 49.85 Hz is the floor of the normal band and shedding there would fire during ordinary operation.
 
 ### 2.3 Why Reduced Inertia Creates Vulnerability
 
@@ -638,7 +642,7 @@ graph TB
     subgraph "Tier 1: Initial Attack - T+0 to T+15 min"
         A1[Retailer API Compromise] -->|Mass Command Injection| A2[54 BESS Oscillating<br/>+/- 540 MW Power Swing]
         A2 -->|Sustained Oscillation| A3[Grid Frequency Deviation<br/>Exceeds +/- 0.15 Hz]
-        A3 -->|RoCoF > 1.0 Hz/s| A4[Under-Frequency Relay Trip<br/>49.85 Hz Modelled Threshold]
+        A3 -->|RoCoF > 1.0 Hz/s| A4[RoCoF Relay Trip<br/>Frequency Stays In Band]
     end
 
     subgraph "Tier 2: Local Cascade - T+15 to T+30 min"
@@ -719,7 +723,7 @@ The following table details the minute-by-minute progression of the attack from 
 | T+1:15  | Second oscillation        | All 18 batteries: "Discharge 100%, duration 60s"       | Grid: -90 MW load (180 MW swing)     |
 | T+2:15  | Third oscillation         | Repeat charge cycle at 0.3 Hz effective frequency      | Frequency: 50 Hz to 50.03 Hz         |
 | T+10:00 | Amplitude growth          | 10 cycles completed, oscillation amplitude +/- 0.15 Hz | Protection relays detect instability |
-| T+15:00 | Protection cascade        | Under-frequency relays trip at modelled 49.85 Hz threshold (RefDNSP-1.2M scenario assumption, not a sourced AEMO relay setting) | Load shedding initiated              |
+| T+15:00 | Protection cascade        | RoCoF relays trip on rate of change above 1.0 Hz/s while frequency stays inside the 49.85 to 50.15 Hz normal band (RefDNSP-1.2M scenario assumption, not a sourced AEMO relay setting) | Load shedding initiated              |
 | T+18:00 | Regional expansion        | Load shedding causes voltage sag across 3 substations  | 100K customers offline               |
 | T+22:00 | Stabilization attempt     | AEMO Emergency Frequency Control System activated      | Blackout contained                   |
 | T+26:00 | Restoration begins        | Manual substation restoration commences                | Progressive re-energization          |
@@ -773,7 +777,7 @@ graph TB
 
     subgraph "Phase 4: T+45 to T+60 min - Protection Cascade"
         B3 -->|DNP3 Direct Operate| E1[Circuit Breaker Commands<br/>30 Substations]
-        C2 -->|Under-Frequency Relays| E1
+        C2 -->|RoCoF Relays| E1
         E1 -->|Coordinated Trips| E2[Regional Power Flow Disruption]
     end
 
@@ -880,9 +884,9 @@ T+60 seconds: Frequency Reversal
   - Net deficit: 1,200 MW generation loss vs. 2,800 MW load loss
   - Frequency begins falling: 50.5 Hz → 50.0 Hz → 49.7 Hz
 
-T+90 seconds: Under-Frequency Load Shedding (UFLS) - modelled staged ladder for RefDNSP-1.2M; AEMO coordinates UFLS but does not publish a single national relay-setting table, so these stages are the scenario's own assumption, not a sourced AEMO figure
-  - UFLS Stage 1 (modelled): 49.85 Hz - shed 5% of load (additional 500 MW)
-  - UFLS Stage 2 (modelled): 49.70 Hz - shed 10% of load (additional 1,000 MW)
+T+90 seconds: Under-Frequency Load Shedding (UFLS) - modelled staged ladder for RefDNSP-1.2M; AEMO coordinates UFLS but does not publish a single national relay-setting table, so these stages are the scenario's own assumption, not a sourced AEMO figure. Unlike the RoCoF-triggered initiation described in Section 2.2, this is genuine under-frequency shedding: real generation has now been lost and the frequency has fallen well below the normal band, so absolute-frequency relays legitimately fire
+  - UFLS Stage 1 (modelled): 49.0 Hz - shed 5% of load (additional 500 MW)
+  - UFLS Stage 2 (modelled): 48.8 Hz - shed 10% of load (additional 1,000 MW)
   - Cascading load shedding across interconnected regions
 
 T+120 seconds: System Islanding
@@ -2277,6 +2281,8 @@ McKenney, J. (2025, May). *The unseen current: Emerging threats to grid stabilit
 
 Australian Energy Market Operator. (2024). *Power System Frequency Risk Review*. AEMO.
 
+Basakarad, B., et al. (2020). *ROCOF importance in electric power systems with high renewables share: A simulation case for Croatia*. Faculty of Electrical Engineering and Computing, University of Zagreb. [Source for the swing-equation RoCoF relation and symbol definitions used in Section 2.2 and Appendix A]
+
 Australian Energy Sector Cyber Security Framework. (2024). *Framework Implementation Guidance, Security Profile 2*. Commonwealth of Australia.
 
 International Electrotechnical Commission. (2019). *IEC 62443-3-3: Industrial communication networks - Network and system security - Part 3-3: System security requirements and security levels*. IEC.
@@ -2335,8 +2341,11 @@ AEMO threshold comparison:
 
 Cumulative effect over sustained oscillation:
   Resonant amplification factor at 0.3-1.2 Hz = 4-10x (frequency dependent)
-  After 10 cycles: effective deviation = 0.036 x amplification = 0.14-0.36 Hz
-  Under-frequency relay trip (RefDNSP-1.2M's modelled threshold, see Section 2.2; not a sourced NEM relay setting): 50 - 0.15 = 49.85 Hz (threshold reached)
+  After 10 cycles: effective deviation amplitude = +/- 0.15 Hz (within the 49.85 to 50.15 Hz normal band)
+  Peak RoCoF of a sustained +/- 0.15 Hz sinusoid (df/dt = A x 2 x pi x f):
+    at 1.2 Hz resonance top: 0.15 x 2 x pi x 1.2 = 1.13 Hz/s
+    at 1.0 Hz:               0.15 x 2 x pi x 1.0 = 0.94 Hz/s
+  RoCoF relay trip (threshold 1.0 Hz/s, see Section 2.2): 1.13 Hz/s exceeds threshold while frequency stays in band
 ```
 
 **Thermal Runaway Energy Release:**
@@ -2428,7 +2437,7 @@ T = 0.1 seconds: Frequency decline begins
 
 T = 1 second: Charge cycle completes
   Accumulated frequency deviation: Δf ≈ -0.12 Hz
-  Grid frequency: 50 - 0.12 = 49.88 Hz (approaching under-frequency threshold)
+  Grid frequency: 50 - 0.12 = 49.88 Hz (still inside the 49.85 to 50.15 Hz normal band)
 
 T = 1 second: All 54 BESS switch to discharge
   P_elec decrease: -270 MW (270 MW swing from charge state)
@@ -2453,20 +2462,21 @@ Oscillation Cycle Repeats Every 2 Seconds (0.5 Hz):
 At Cycle 10 (T = 20 seconds):
 - Minimum frequency: 50 - 0.35 = 49.65 Hz
 - Maximum frequency: 50 + 0.28 = 50.28 Hz
-- Under-frequency relay threshold (RefDNSP-1.2M modelled setpoint, not a sourced NEM relay setting): 49.85 Hz
-- Conclusion: Under-frequency protection WILL trip if oscillation continues
+- Oscillation amplitude: 0.63 Hz peak-to-peak, so half-amplitude A = 0.315 Hz at 0.5 Hz oscillation
+- Peak RoCoF (df/dt = A x 2 x pi x f): 0.315 x 2 x pi x 0.5 = 0.99 Hz/s, at the 1.0 Hz/s RoCoF relay threshold (see Section 2.2), and past it on the next cycle of amplitude growth
+- Conclusion: RoCoF protection WILL trip on rate of change if oscillation continues
 
 Protection Relay Response:
-- Relay detects 49.65 Hz (below the modelled 49.85 Hz setpoint)
-- Time delay: 0.1-0.5 seconds (typical UFLS settings)
-- Action: Shed 200-500 MW of load (Stage 1 UFLS)
-- Consequence: Sudden load drop creates frequency rise, triggering over-frequency cascade
+- Relay detects peak df/dt reaching the 1.0 Hz/s RoCoF setpoint
+- Time delay: 0.1-0.5 seconds (typical RoCoF relay settings; a 500 ms definite time delay applies in the UK G99 case)
+- Action: Trip embedded generation on rate of change, and shed load once frequency then falls into the UFLS band
+- Consequence: Sudden generation and load loss drives frequency down, triggering the under-frequency cascade that follows
 ```
 
 **Key Findings from Simulation:**
 
 1. **Resonant Amplification Confirmed:** Oscillation amplitude grows from 0.20 Hz (Cycle 1) to 0.63 Hz (Cycle 10), a 3.15x amplification factor over 20 seconds.
-2. **Protection Cascade Threshold:** Under-frequency protection relays will trip within 10-15 oscillation cycles (20-30 seconds), validating the attack timeline in Section 2.2.
+2. **Protection Cascade Threshold:** RoCoF protection relays will trip on rate of change within 10-15 oscillation cycles (20-30 seconds), validating the attack timeline in Section 2.2.
 3. **RoCoF Exceeds Design Limits:** Instantaneous RoCoF of 54 Hz/s during state transitions far exceeds AEMO's 1.0 Hz/s maximum design assumption, though this is averaged over longer time windows in practice.
 4. **Low-Inertia Vulnerability:** The scenario requires H = 2.5 seconds or less. At H = 5.0 seconds (traditional grid), the same attack produces only 0.10 Hz peak-to-peak swing (insufficient to trigger protection).
 
