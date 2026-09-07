@@ -30,23 +30,54 @@ function walk(dir, out = []) {
   return out;
 }
 
-/** Bibliography entries look like "12. Author..." or "[12] Author..." after a References heading. */
+/**
+ * Bibliography entries, after a heading that names a reference list.
+ *
+ * Three widenings over the naive version, each forced by a real false positive
+ * found when this gate was first run:
+ *
+ *  1. "Citations" is a heading this corpus actually uses, in "## Research and
+ *     Citations" and "#### Citations". The naive vocabulary of References,
+ *     Bibliography and Works Cited missed four documents that DO carry a
+ *     resolving list.
+ *  2. The keyword can sit mid-title. "## 10. Normative Standards, References
+ *     and IEEE Bibliographic Register" is a bibliography heading; requiring the
+ *     keyword immediately after the number prefix missed it.
+ *  3. Entries may be bulleted. This corpus writes "- [1] Kramers, H. A. (1940)"
+ *     as often as "1. Kramers". Anchoring the digit to line start missed those.
+ *
+ * Reporting a document as unsourced when it carries a resolving bibliography is
+ * the worst failure this gate can have, because it would send someone to add a
+ * bibliography that already exists.
+ */
 function bibliographyIndices(text) {
   const idx = new Set();
-  const parts = text.split(/^#{1,4} *(?:\d+\.? *)?(?:References|Bibliography|Works Cited)\b/im);
+  const parts = text.split(
+    /^#{1,4} .*\b(?:References|Bibliography|Works Cited|Citations)\b.*$/im
+  );
   if (parts.length < 2) return idx;
   const tail = parts.slice(1).join("\n");
-  for (const mm of tail.matchAll(/^\s*(?:\[(\d{1,3})\]|(\d{1,3})\.)\s+\S/gm)) {
+  for (const mm of tail.matchAll(/^\s*(?:[-*+]\s*)?(?:\[(\d{1,3})\]|(\d{1,3})\.)\s+\S/gm)) {
     idx.add(Number(mm[1] ?? mm[2]));
   }
   return idx;
 }
 
-// Prove the gate can fail before trusting a pass.
-if (bibliographyIndices("## References\n1. Something\n").size !== 1) {
-  console.error("CITATION AUDIT ABORTED: entry parser did not find a known entry,");
-  console.error("so a green result here would prove nothing.");
-  process.exit(2);
+// Prove the gate can fail before trusting a pass. Each case below corresponds to
+// a false positive this gate actually produced; if any stops parsing, the gate
+// has silently narrowed and its green results are not trustworthy.
+const CANARIES = [
+  ["## References\n1. Something\n", 1, "plain numbered entry"],
+  ["## Research and Citations\n- [2] Something\n", 1, "bulleted bracket entry under a Citations heading"],
+  ["## 10. Normative Standards, References and Register\n3. Something\n", 1, "keyword mid-title"],
+  ["## Introduction\n1. Not a bibliography\n", 0, "a non-bibliography heading must yield nothing"],
+];
+for (const [sample, expected, why] of CANARIES) {
+  if (bibliographyIndices(sample).size !== expected) {
+    console.error(`CITATION AUDIT ABORTED: canary failed, ${why}.`);
+    console.error("A green result here would prove nothing.");
+    process.exit(2);
+  }
 }
 
 console.log("\n" + "=".repeat(72));
