@@ -533,7 +533,7 @@ To obtain affirmative coverage and prevent crippling sub-limits or uninsurable e
 8. **National Institute of Standards and Technology (NIST).** *NIST SP 800-208: Recommendation for Stateful Hash-Based Signature Schemes.* Special Publication, U.S. Department of Commerce, 2020.
 9. **National Security Agency (NSA).** *Announcing the Commercial National Security Algorithm Suite 2.0 (CNSA 2.0).* Cybersecurity Advisory, Fort Meade, MD, 2022.
 10. **European Commission.** *Regulation of the European Parliament and of the Council on horizontal cybersecurity requirements for products with digital elements (Cyber Resilience Act).* COM(2022) 454 final, Brussels, 2022.
-11. **OWASP Foundation.** *CycloneDX v1.6: Modern Full-Stack Attestation Standard for Software, Hardware, and Operational Technology.* 2024.
+11. **OWASP Foundation / Ecma International.** *CycloneDX Bill of Materials Specification.* ECMA-424, 1st edition, June 2024, defining CycloneDX v1.6. Ecma International Technical Committee 54 (TC54), Geneva. Not to be confused with ISO/IEC 5962:2021, which is the SPDX specification.
 12. **Ashok, A., et al.** *Cyber-Physical Threat Analysis for Critical Liquid-Cooled Infrastructure.* IEEE Transactions on Industrial Informatics, vol. 19, no. 4, pp. 4120-4131, 2023.
 13. **McKenney, J.** *Systems Assurance in High-Entropy Industrial Complexes: Mathematical Modeling of Boundary Failures and Cognitive Distortion.* Eigenia Labs Monograph Series, WG-05-CAD, 2026.
 14. **Taleb, N. N.** *Antifragile: Things That Gain from Disorder.* Random House, New York, 2012.

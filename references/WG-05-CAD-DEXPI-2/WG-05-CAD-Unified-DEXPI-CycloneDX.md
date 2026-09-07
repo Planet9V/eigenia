@@ -2,7 +2,9 @@
 
 Modern high-density compute facilities and critical industrial plants suffer from a severe semantic disconnect between physical plant engineering and platform cybersecurity. Plant operators design facility infrastructure using Piping and Instrumentation Diagrams (P&IDs) under the DEXPI 2.0 (ISO 15926) data exchange standard. This standard captures pump curves, pipe diameters, manifold topologies, fluid chemistry (such as 25% propylene glycol), volumetric flow rates, and delta-T thermal dissipation limits. 
 
-Conversely, cybersecurity and platform security engineers operate through Bills of Materials under the CycloneDX 1.6+ (ISO/IEC 5962) standard. This format documents hardware chips (HBOM), immutable firmware images (SBOM), cryptographic keys and certificates (CBOM), manufacturing supply chain provenance (MBOM), runtime operational envelopes (OBOM), and out-of-band management endpoints (SaaSBOM).
+Conversely, cybersecurity and platform security engineers operate through Bills of Materials under the CycloneDX 1.6+ (ECMA-424) standard. This format documents hardware chips (HBOM), immutable firmware images (SBOM), cryptographic keys and certificates (CBOM), manufacturing supply chain provenance (MBOM), runtime operational envelopes (OBOM), and out-of-band management endpoints (SaaSBOM).
+
+Two standard numbers are easy to confuse here, and this paper uses them precisely. ECMA-424, first edition June 2024, is the formal specification of CycloneDX 1.6, published by Ecma International Technical Committee 54 (TC54) alongside the OWASP Foundation. The other major bill of materials format is SPDX version 2.2.1, standardised as ISO/IEC 5962:2021. The two are separate specifications, both appear in this paper, and they are never interchangeable.
 
 Because these two engineering domains rely on disjoint data models, facility engineers provide cybersecurity teams with static two-dimensional PDF drawings, while security teams provide facility engineers with qualitative compliance checklists. When an operational technology conduit is manipulated; such as an unauthenticated Modbus TCP command throttling a secondary cooling distribution manifold; neither team possesses an automated data structure to compute the physical-to-digital blast radius. 
 
@@ -57,7 +59,7 @@ The following XML excerpt demonstrates how DEXPI 2.0 formally encodes a secondar
 </PlantModel>
 ```
 
-### 1.2 The Platform and Cybersecurity View (CycloneDX 1.6+ / ISO/IEC 5962)
+### 1.2 The Platform and Cybersecurity View (CycloneDX 1.6+ / ECMA-424)
 Cybersecurity, platform firmware, and IT infrastructure engineers operate in an entirely different semantic universe. Their domain focuses on supply chain transparency, vulnerability tracking, and zero-trust boundaries. Under CycloneDX 1.6+, systems are represented as hierarchical, component-oriented JSON documents defining:
 
 1. **Hardware Bills of Materials (HBOM):** Physical motherboards, compute trays, host server processors, accelerator ASICs, Samtec high-speed connectors, and Hardware Security Modules (HSMs).
@@ -112,7 +114,7 @@ The following table summarizes how each BOM layer operates within the converged 
 | BOM Type | CycloneDX 1.6 Component `type` | Encoded Technical Properties | Verification Standard |
 |:---|:---|:---|:---|
 | **HBOM** | `device`, `hardware` | Physical part numbers, Samtec connector specifications, OCP ORV3 rack slot positions, ASIC silicon revisions, and fuse-blown states. | OCP SAFE, IEEE 1680 |
-| **SBOM** | `firmware`, `library`, `application` | Cryptographic hashes of immutable Caliptra ROM, First Mutable Code (FMC), OpenSIL initialization drivers, and OpenBMC runtimes. | CycloneDX 1.6, SPDX |
+| **SBOM** | `firmware`, `library`, `application` | Cryptographic hashes of immutable Caliptra ROM, First Mutable Code (FMC), OpenSIL initialization drivers, and OpenBMC runtimes. | CycloneDX 1.6 (ECMA-424), SPDX 2.2.1 (ISO/IEC 5962) |
 | **CBOM** | `cryptographic-asset` | Unique Device Secrets (UDS), Compound Device Identifiers (CDI), DICE certificate chains, and post-quantum LMS / ML-DSA-87 keys. | NIST SP 800-208, CNSA 2.0 |
 | **MBOM** | `component` / `metadata.manufacturer` | 6-site global HSM key provisioning logs, wafer lot numbers, packaging date stamps, and ODM chain-of-custody signatures. | EU CRA Annex I, ISO 20243 |
 | **OBOM** | `data`, `service` | Hardware-enforced non-token egress rate limits (64 kbps), peak electrical draw limits (10.5 kW), and thermal throttling thresholds. | IEC 62443-3-3, ISO 27001 |
