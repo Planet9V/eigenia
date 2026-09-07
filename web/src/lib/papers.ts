@@ -313,6 +313,12 @@ export const PAPERS_REGISTRY: Record<string, { title: string; category: string; 
     number: "TRACK 07-G",
     relativePath: "references/WG-04-CF-Cascading-Failures/WG-04-CF-ERCOT-WECC-IBR-Reliability.md",
   },
+  "grid-incident-response-playbook": {
+    title: "Grid Incident Response Playbook: Detection Signatures, Recovery and Coordination",
+    category: "Cascading Failures",
+    number: "TRACK 07-H",
+    relativePath: "references/WG-04-CF-Cascading-Failures/WG-04-CF-Grid-Incident-Response-Playbook.md",
+  },
 
   // Additional Models
   "cdt-mathematical-models": {
