@@ -436,7 +436,7 @@ sed -n '1,120p' references/WG-05-CAD-DEXPI-2/WG-05-CAD-Unified-DEXPI-CycloneDX.m
 2. The three identity systems, reproducing the table below exactly
 3. Why extension rather than fork
 4. The join, normatively
-5. The DEXPI Standard Library extension
+5. The DEXPI Profile extension
 6. The CycloneDX property taxonomy
 7. The CIM profile reference, deferring detail to P2
 8. Conformance requirements, deferring the suite to P3
@@ -451,7 +451,9 @@ The identity table, which every later paper cites:
 | CycloneDX | component supply chain | `bom-ref` plus `purl` or `cpe` | build system | machine, versioned, ephemeral |
 | IEC 61970 CIM | electrical network topology | `mRID`, a UUID | network model tool | machine, stable, opaque |
 
-Section 3 rests on a fact from Jim's own source document: DEXPI e.V. is developing the Standard Library as "a curated set of templates intended to extend or restrict the DEXPI Specification to meet specific engineering requirements." That is a sanctioned extension point, so no leg needs forking and every file stays conformant to its own specification.
+Section 3 rests on a sanctioned extension point, and its name changed during this work. Jim's briefing document describes a **Standard Library**. DEXPI e.V.'s August 2026 update does not mention one; it describes a **DEXPI Profile**, a "mechanism for defining explicit constraints on classes and properties" which "creates the basis for the DEXPI Process Type Library". Verified by direct fetch on 2026-09-07. Jim ruled that day: write against the Profile, keep the Standard Library history so a reader holding the briefing document can reconcile it.
+
+Carry the open question rather than resolving it: the Standard Library extended OR restricted; the Profile constrains. This join ADDS attributes. State both readings and what would settle it. The join's content is carrier-independent, so the proposal survives either answer.
 
 - [ ] **Step 3: Use RFC 2119 keywords, because this is an upstream submission**
 

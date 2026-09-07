@@ -29,9 +29,26 @@ previous attempt has ended as a vendor's proprietary model.
 
 ### Why extension rather than fork
 
-DEXPI 2.0 ships a **Standard Library** mechanism for exactly this: curated
-templates that extend or restrict the specification without altering it. That
-mechanism is what makes the proposal adoptable rather than merely publishable.
+DEXPI ships a sanctioned extension point, and its name changed under us during
+this work. Jim's briefing document describes a **Standard Library**, "a curated
+set of templates intended to extend or restrict the DEXPI Specification to meet
+specific engineering requirements." DEXPI e.V.'s own August 2026 update does not
+mention a Standard Library at all; it describes a **DEXPI Profile**, a
+"mechanism for defining explicit constraints on classes and properties", which
+"creates the basis for the DEXPI Process Type Library". Verified by fetching
+that page directly on 2026-09-07.
+
+Jim ruled on 2026-09-07: **write against the DEXPI Profile.** The corpus records
+both, because a reader holding the briefing document must be able to reconcile
+it with the published papers.
+
+One open question rides on the switch and is deliberately not resolved. The
+Standard Library was described as templates to extend OR restrict. The Profile
+is described as constraints. This join ADDS four attributes to a DEXPI object,
+and a mechanism that only narrows what is already permitted may not be its
+carrier. P1 states both readings and names what would settle it, rather than
+guessing. The join's content is carrier-independent, so the proposal survives
+either answer.
 CycloneDX takes registered property taxonomies. CIM takes profiles, and CGMES
 is the precedent for profiling a large model down to a purpose.
 
@@ -225,7 +242,7 @@ What upstream submission changes:
 - **No Eigenia-proprietary terms in the normative text.** RefBESS-250MW and the
   other reference assets belong in the applied papers, not in P1's schema.
 - **The three-identity join must survive contact with each body's own process.**
-  DEXPI e.V. for the Standard Library extension, the CycloneDX project for the
+  DEXPI e.V. for the Profile extension, the CycloneDX project for the
   property taxonomy, and the relevant IEC TC 57 working group for the CIM
   profile. Three separate submissions, not one.
 
