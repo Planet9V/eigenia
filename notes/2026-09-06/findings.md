@@ -263,3 +263,51 @@ Options, in order of preference:
    state the assumption, as with the RefDNSP-1.2M network parameters.
 
 Do not keep an uncited percentage in a cost-benefit table.
+
+## F11. The evidence contradicts the paper's low-inertia framing. OPEN.
+
+Found while authoring the ERCOT and WECC paper.
+
+The Cascading Failure paper attributes this to McKenney (2024), about South
+Australia 2016:
+
+> "This incident demonstrated the potential for extreme instability in very low
+> inertia conditions... highlighting the direct impact of RoCoF sensitivity in a
+> system with significant wind penetration."
+
+The two Odessa disturbances run against it, on NERC's own figures:
+
+| Event | Synchronous share | Solar lost | Total lost |
+|:---|---:|---:|---:|
+| Odessa, 9 May 2021 | 56% | 1,112 MW | 1,340 MW |
+| Odessa, 4 June 2022 | 73.5% | 1,711 MW | 2,555 MW |
+
+The LARGER loss occurred at the HIGHER synchronous share. If low inertia were
+the operative cause, the ordering should be the other way round.
+
+NERC's own finding on the 2021 event states the mechanism plainly: "none of the
+resources tripped consequentially by the fault itself". The resources
+disconnected because of how their inverters were configured to respond to a
+fault they were never obliged to disconnect for. That is a specification and
+settings problem, not an inertia problem.
+
+This does not overturn the paper's thesis. Low inertia genuinely raises RoCoF
+for a given imbalance, and the swing equation is not in doubt. What it overturns
+is the claim that low inertia is what made these particular events severe. Two
+separate mechanisms are being run together:
+
+1. Low inertia raises df/dt for a given power imbalance. Real, derivable, and
+   the basis of the paper's cascade argument.
+2. Inverter-based resources disconnect for faults they should ride through.
+   Real, documented in four NERC reports, and INDEPENDENT of inertia.
+
+The paper currently reads as though mechanism 2 is a consequence of mechanism 1.
+The evidence says it is not. Odessa 2022 lost 2,555 MW with nearly three
+quarters of its generation synchronous.
+
+Consequence: the quoted sentence is unsupported and should be struck or
+restated. The stronger version of the paper's argument keeps both mechanisms and
+says they compound, rather than deriving one from the other. That is also a
+better fit for the paper's own RoCoF-based initiation mechanism, which was
+rebuilt in this session precisely because it had confused an absolute-frequency
+threshold with a rate-of-change one.
