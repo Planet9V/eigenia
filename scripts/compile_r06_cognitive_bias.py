@@ -19,7 +19,7 @@ This catalog establishes the definitive taxonomy of cognitive biases exploited b
 - We map classical Kahneman-Tversky heuristics (Anchoring, Confirmation, Availability, Authority Bias, Escalation of Commitment) directly to MITRE ATT&CK for ICS techniques and social engineering playbooks.
 - We demonstrate how cognitive bias creates predictable decision latency, transforming brief software-induced cooling trips into catastrophic, permanent hardware destruction.
 
-Coupled to physical infrastructure through DEXPI 2.0 (ISO 15926) piping schematics and CycloneDX 1.6+ multi-BOM specifications, this treatise provides the quantitative foundation for human defender simulation in the AEON digital twin and establishes affirmative actuarial loss hedging under Lloyd's Y5381.
+Coupled to physical infrastructure through DEXPI 2.0 piping schematics, classed against the ISO 15926-4 reference data library, and CycloneDX 1.6+ multi-BOM specifications, this treatise provides the quantitative foundation for human defender simulation in the AEON digital twin and establishes affirmative actuarial loss hedging under Lloyd's Y5381.
 
 ---
 

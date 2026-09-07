@@ -61,7 +61,7 @@ flowchart LR
 
 ## 2. Multi-BOM and DEXPI Asset Valuation Topology
 
-Accurately calculating Asset Value (AV) and Exposure Factor (EF) requires synchronizing physical piping models with silicon inventories across the DEXPI 2.0 (ISO 15926) and CycloneDX 1.6+ specifications:
+Accurately calculating Asset Value (AV) and Exposure Factor (EF) requires synchronizing physical piping models with silicon inventories across the DEXPI 2.0 and CycloneDX 1.6+ specifications, with DEXPI equipment classes drawn from the ISO 15926-4 reference data library:
 
 #### Financial Asset Exposure Topology
 

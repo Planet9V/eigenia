@@ -108,7 +108,7 @@ grounding_section = r"""
 To translate the Calculus of the Subject into operational infrastructure assurance, the mathematical topology of the unconscious is directly coupled to physical plant assets and reinsurance capital allocations.
 
 ### 8.1 Coupling the Psychometric Tensor to Industrial Control Layers
-In high-consequence environments governed by IEC 62443 and EN 50126, human operators and external threat actors do not act in isolation; they interact across the write-access boundary. We map the subject's topological cut to physical plant telemetry captured via DEXPI 2.0 (ISO 15926) piping schematics and CycloneDX 1.6+ multi-BOM specifications:
+In high-consequence environments governed by IEC 62443 and EN 50126, human operators and external threat actors do not act in isolation; they interact across the write-access boundary. We map the subject's topological cut to physical plant telemetry captured via DEXPI 2.0 piping schematics, classed against the ISO 15926-4 reference data library, and CycloneDX 1.6+ multi-BOM specifications:
 - **HBOM & Hardware Boundaries:** Physical silicon roots-of-trust (Caliptra 2.0, OpenSIL, DICE) establish the unyielding physical boundary against which adversary subjectivity fractures.
 - **OBOM Operational Envelopes:** System operational bounds (coolant flow $\ge 35\text{ L/min}$ PG25, operating temperature $\le 45\text{ }^\circ\text{C}$, operating pressure $\le 6.0\text{ bar}$) define the physical limits of plant survival.
 - **VEX Vulnerability Tracking:** Machine-readable exploit streams track the points of external friction where adversary desire intersects systemic vulnerability.

@@ -41,7 +41,7 @@ Traditional engineering reliability models (e.g., MIL-HDBK-217F) model humans as
 
 ## 2. Multi-BOM and DEXPI Process Topology Integration
 
-To ground behavioral phase space simulations in physical reality, the operator's decision envelope is cross-referenced with the plant's DEXPI 2.0 (ISO 15926) piping schematic and CycloneDX 1.6+ multi-BOM specification:
+To ground behavioral phase space simulations in physical reality, the operator's decision envelope is cross-referenced with the plant's DEXPI 2.0 piping schematic, classed against the ISO 15926-4 reference data library, and CycloneDX 1.6+ multi-BOM specification:
 
 ```
 +-------------------------------------------------------------------------+

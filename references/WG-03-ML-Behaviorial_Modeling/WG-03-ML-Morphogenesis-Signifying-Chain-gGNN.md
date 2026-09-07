@@ -4,7 +4,7 @@ The formalization of the Lacanian subject has historically remained constrained 
 
 By parameterizing the Gated Recurrent Unit (GRU) reset and update gates via Colin DeYoung's Cybernetic Big Five Theory (CB5T), the L-gGNN dynamically modulates information retention, signifying substitution, and network topological reconfiguration as a function of actor psychometrics. We formalize the four discourse permutations (Master, Hysteric, University, and Analyst) as directed graph transitions, demonstrate how non-linear message passing simulates the bifurcation between obsessional neurosis and hysteria, and integrate this neural engine into high-consequence critical infrastructure protection.
 
-Coupled to industrial physical plant telemetry through DEXPI 2.0 (ISO 15926) piping schematics and CycloneDX 1.6+ multi-BOM specifications, the L-gGNN forecasts human insider threat escalation and operator paralysis during cyber-physical interdictions, establishing quantitative actuarial loss metrics under Lloyd's Y5381.
+Coupled to industrial physical plant telemetry through DEXPI 2.0 piping schematics, classed against the ISO 15926-4 reference data library, and CycloneDX 1.6+ multi-BOM specifications, the L-gGNN forecasts human insider threat escalation and operator paralysis during cyber-physical interdictions, establishing quantitative actuarial loss metrics under Lloyd's Y5381.
 
 ---
 
@@ -374,7 +374,7 @@ Where $\tau_{spike}$ is dynamically adjusted based on the "Analyst's" threshold 
 To translate the L-gGNN computational engine into operational infrastructure defense, the dynamic neural graph is bound directly to physical asset constraints and reinsurance treaty allocations.
 
 ### 9.1 Coupling L-gGNN State Vectors to Physical Facility Boundaries
-In critical facilities governed by IEC 62443 and EN 50126, threat actors and system operators interact across strict architectural trust boundaries. The L-gGNN state vectors $\mathbf{h}_v^{(t)}$ are bound to physical plant components via DEXPI 2.0 (ISO 15926) piping and instrumentation diagrams (P&IDs) and CycloneDX 1.6+ multi-BOM streams:
+In critical facilities governed by IEC 62443 and EN 50126, threat actors and system operators interact across strict architectural trust boundaries. The L-gGNN state vectors $\mathbf{h}_v^{(t)}$ are bound to physical plant components via DEXPI 2.0 piping and instrumentation diagrams (P&IDs), classed against the ISO 15926-4 reference data library, and CycloneDX 1.6+ multi-BOM streams:
 - **HBOM Boundary:** Silicon roots-of-trust (Caliptra 2.0, OpenSIL, DICE) enforce hardware-level immutable identities, anchoring the symbolic register against malicious compromise.
 - **OBOM Operational Constraints:** Physical operational boundaries (coolant flow $\ge 35\text{ L/min}$ PG25, operating temperature $\le 45\text{ }^\circ\text{C}$, operating pressure $\le 6.0\text{ bar}$) establish non-negotiable physical constraints.
 - **VEX Advisory Streams:** Machine-readable vulnerability feeds provide dynamic threat input vectors, updating the adjacency matrix $\mathbf{A}$ as novel zero-day exploits emerge.

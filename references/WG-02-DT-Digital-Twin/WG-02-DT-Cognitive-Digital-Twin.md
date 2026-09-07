@@ -4,7 +4,7 @@ Digital twin architectures in industrial and data center environments traditiona
 
 This treatise formalizes the **Cognitive Digital Twin (CDT)**; an agent-based, stochastic simulation engine that models human defender performance under crisis. Grounded in Cognitive Load Theory (Sweller), the Yerkes-Dodson inverted-U arousal law, and Klein's Recognition-Primed Decision (RPD) model, the CDT simulates defender agents defined by psychometric state vectors ($\text{Skills}$, $\text{Personality}$, $\text{Dynamic Stress}$). By simulating thousands of stochastic incident scenarios, the CDT reveals where human latency intersects physical system limits; specifically the 45-second thermal trip cliff in high-density liquid-cooled computing facilities.
 
-Coupled to physical infrastructure through DEXPI 2.0 (ISO 15926) piping schematics and CycloneDX 1.6+ multi-BOM specifications, the Cognitive Digital Twin enables automated facility interlocks to intervene before human cognitive collapse triggers catastrophic equipment destruction, establishing verifiable actuarial loss bounds under Lloyd's Y5381.
+Coupled to physical infrastructure through DEXPI 2.0 piping schematics, classed against the ISO 15926-4 reference data library, and CycloneDX 1.6+ multi-BOM specifications, the Cognitive Digital Twin enables automated facility interlocks to intervene before human cognitive collapse triggers catastrophic equipment destruction, establishing verifiable actuarial loss bounds under Lloyd's Y5381.
 
 ---
 

@@ -51,7 +51,7 @@ Deep packet inspection firewalls cannot inspect intent. If an algorithm hallucin
 
 ## 2. Multi-BOM and DEXPI Structural Alignment
 
-To model and constrain autonomous facility control, the cyber-physical operational boundary is mapped across the DEXPI 2.0 (ISO 15926) plant schematic and the CycloneDX 1.6+ multi-BOM specification:
+To model and constrain autonomous facility control, the cyber-physical operational boundary is mapped across the DEXPI 2.0 plant schematic, classed against the ISO 15926-4 reference data library, and the CycloneDX 1.6+ multi-BOM specification:
 
 ```
 +-------------------------------------------------------------------------+

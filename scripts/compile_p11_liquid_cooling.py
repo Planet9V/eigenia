@@ -41,7 +41,7 @@ Moving between those two columns is a physical scaling transition, not a design 
 
 ## 2. Multi-BOM and DEXPI Process Hydraulic Topology
 
-To execute real-time thermal digital twin simulations, the hydraulic plant is mapped between the DEXPI 2.0 (ISO 15926) piping schematic and the CycloneDX 1.6+ multi-BOM specification:
+To execute real-time thermal digital twin simulations, the hydraulic plant is mapped between the DEXPI 2.0 piping schematic, classed against the ISO 15926-4 reference data library, and the CycloneDX 1.6+ multi-BOM specification:
 
 ```mermaid
 flowchart LR

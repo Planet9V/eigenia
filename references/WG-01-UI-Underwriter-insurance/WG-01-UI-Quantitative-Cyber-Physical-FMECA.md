@@ -32,7 +32,7 @@ When the same centrifugal pump is orchestrated by a Variable Frequency Drive con
 
 ## 2. Multi-BOM and DEXPI Structural Mapping
 
-To execute automated cyber-physical FMECA within the Cyber Digital Twin, every failure mode is cross-referenced between the DEXPI 2.0 (ISO 15926) plant schematic and the CycloneDX 1.6+ multi-BOM catalog:
+To execute automated cyber-physical FMECA within the Cyber Digital Twin, every failure mode is cross-referenced between the DEXPI 2.0 plant schematic, classed against the ISO 15926-4 reference data library, and the CycloneDX 1.6+ multi-BOM catalog:
 
 #### Cyber-Physical FMECA Graph Topology
 

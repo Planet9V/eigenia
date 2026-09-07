@@ -19,7 +19,7 @@ This treatise establishes **The Seven-Staff Fugue**; a formal topological and mu
 - **Feynman Path Integrals** evaluate all possible operational trajectories between baseline stability and catastrophic collapse, weighting each path by its action integral.
 - **Persistent Homology Barcodes** compute the topological birth and death of multi-layer dissonance cycles, providing unambiguous mathematical detection of impending systemic collapse.
 
-Coupled to physical infrastructure through DEXPI 2.0 (ISO 15926) piping schematics and CycloneDX 1.6+ multi-BOM specifications, the Seven-Staff Fugue provides the core mathematical engine for the 3.2M-node AEON digital twin, establishing verifiable actuarial loss boundaries under Lloyd's Y5381.
+Coupled to physical infrastructure through DEXPI 2.0 piping schematics, classed against the ISO 15926-4 reference data library, and CycloneDX 1.6+ multi-BOM specifications, the Seven-Staff Fugue provides the core mathematical engine for the 3.2M-node AEON digital twin, establishing verifiable actuarial loss boundaries under Lloyd's Y5381.
 
 ---
 
@@ -187,7 +187,7 @@ To ground the Seven-Staff Fugue in physical engineering reality, the musical sta
 +-------------------------------------------------------------------------+
 |                  DIGITAL TWIN PROCESS INTEGRATION                       |
 +-------------------------------------------------------------------------+
-| DEXPI 2.0 PIPING SCHEMATIC (ISO 15926):                                 |
+| DEXPI 2.0 PIPING SCHEMATIC (ISO 15926-4):                               |
 | - Staff 1 (Baritone) tracks physical fluid velocity and pressure:      |
 |   Coolant flow rate Q_vol >= 35 L/min PG25, P_operating <= 6.0 bar.    |
 +-------------------------------------------------------------------------+

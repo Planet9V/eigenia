@@ -67,7 +67,7 @@ MPN establishes a rigorous mathematical grammar:
 - **Instrument Families** encode DISC behavioral profiles across operational personnel.
 - **Dynamic Markings** reflect OCEAN psychometric stress states.
 
-By computing real-time harmonic dissonance integrals across the musical score, MPN provides defensive teams with a 15 to 30 minute early warning of organizational collapse; a mathematical formulation of Isaac Asimov's "Seldon Crisis." When coupled with physical plant telemetry through DEXPI 2.0 (ISO 15926) piping models and CycloneDX 1.6+ multi-BOM streams, MPN prevents cascading cyber-physical failure and establishes deterministic actuarial loss mitigation under Lloyd's Y5381.
+By computing real-time harmonic dissonance integrals across the musical score, MPN provides defensive teams with a 15 to 30 minute early warning of organizational collapse; a mathematical formulation of Isaac Asimov's "Seldon Crisis." When coupled with physical plant telemetry through DEXPI 2.0 piping models, classed against the ISO 15926-4 reference data library, and CycloneDX 1.6+ multi-BOM streams, MPN prevents cascading cyber-physical failure and establishes deterministic actuarial loss mitigation under Lloyd's Y5381.
 
 """
 
@@ -90,7 +90,7 @@ grounding_section = r"""
 To operationalize Musical Psychometric Notation in industrial and data center environments, auditory telemetry is coupled directly to physical thermodynamic envelopes and reinsurance risk capital.
 
 ### 10.1 Coupling Auditory Telemetry to Industrial Control Layers
-Under IEC 62443 and EN 50126, security and safety interlocks operate across strict trust boundaries. MPN maps auditory harmonic registers directly to DEXPI 2.0 (ISO 15926) piping schematics and CycloneDX 1.6+ multi-BOM specifications:
+Under IEC 62443 and EN 50126, security and safety interlocks operate across strict trust boundaries. MPN maps auditory harmonic registers directly to DEXPI 2.0 piping schematics, classed against the ISO 15926-4 reference data library, and CycloneDX 1.6+ multi-BOM specifications:
 - **HBOM Roots of Trust:** Silicon attestation keys (Caliptra 2.0, OpenSIL, DICE) provide the baseline root tonic; if hardware attestation fails, the key signature instantly modulates into atonal dissonance.
 - **OBOM Operational Constraints:** System operational parameters (coolant flow $\ge 35\text{ L/min}$ PG25, temperature $\le 45\text{ }^\circ\text{C}$, pressure $\le 6.0\text{ bar}$) set the harmonic consonant interval.
 - **VEX Vulnerability Tracking:** Machine-readable vulnerability streams drive micro-tonal pitch drift, alerting operators before exploit payloads achieve execution.

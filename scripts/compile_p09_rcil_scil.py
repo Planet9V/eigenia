@@ -50,7 +50,7 @@ Every SCIL item is inherently an RCIL item, but not all RCIL items are SCIL item
 
 ## 2. Multi-BOM and DEXPI Asset Topology Integration
 
-To establish an auditable supply-chain and reliability graph, every RCIL and SCIL component is cross-referenced between the DEXPI 2.0 (ISO 15926) plant piping schematic and the CycloneDX 1.6+ multi-BOM specification:
+To establish an auditable supply-chain and reliability graph, every RCIL and SCIL component is cross-referenced between the DEXPI 2.0 plant piping schematic, classed against the ISO 15926-4 reference data library, and the CycloneDX 1.6+ multi-BOM specification:
 
 #### Supply Chain and Topology Mapping Graph
 

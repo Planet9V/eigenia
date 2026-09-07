@@ -65,7 +65,7 @@ In an inverter-dominated microgrid, mechanical inertia is replaced by synthetic 
 
 ## 2. Multi-BOM and DEXPI Structural Mapping
 
-To model cascading electrical and thermal hazards, the microgrid architecture is structured across the DEXPI 2.0 (ISO 15926) piping and instrumentation standard and the CycloneDX 1.6+ multi-BOM specification:
+To model cascading electrical and thermal hazards, the microgrid architecture is structured across the DEXPI 2.0 piping and instrumentation standard, classed against the ISO 15926-4 reference data library, and the CycloneDX 1.6+ multi-BOM specification:
 
 ```
 +-------------------------------------------------------------------------+

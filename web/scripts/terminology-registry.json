@@ -4,13 +4,20 @@
     {
       "canonical": "Cryptography Bill of Materials",
       "abbreviation": "CBOM",
-      "variants": ["Component BOM", "Component Bill of Materials", "Component Bill of Material"],
+      "variants": [
+        "Component BOM",
+        "Component Bill of Materials",
+        "Component Bill of Material"
+      ],
       "note": "Ruled 2026-09-07. Matches CycloneDX cryptographic-asset."
     },
     {
       "canonical": "ECMA-424",
       "abbreviation": null,
-      "variants": ["CycloneDX (ISO/IEC 5962)", "CycloneDX 1.6+ (ISO/IEC 5962)"],
+      "variants": [
+        "CycloneDX (ISO/IEC 5962)",
+        "CycloneDX 1.6+ (ISO/IEC 5962)"
+      ],
       "note": "CycloneDX standardisation. ISO/IEC 5962 is SPDX and must never be attached to CycloneDX."
     },
     {
@@ -34,8 +41,18 @@
   ],
   "bare_forms_forbidden": [
     {
-      "pattern": "ISO 15926(?![-0-9])",
-      "message": "ISO 15926 must carry a part number. Parts differ: 1 overview, 2 data model, 4 reference data library."
+      "pattern": "ISO 15926(?![-0-9])(?! [Ss]eries\\b)(?!(?<=DEXPI 2\\.0 \\(ISO 15926) / Proteus XML\\))",
+      "message": "ISO 15926 must carry a part number. Parts differ: 1 overview, 2 data model, 4 reference data library. Naming the whole standard as the \"ISO 15926 series\" is the only unqualified form allowed, plus the exceptions listed here.",
+      "exceptions": [
+        {
+          "form": "ISO 15926 series",
+          "reason": "references/WG-05-CAD-DEXPI-2/WG-05-CAD-DEXPI-Open-Standard-Position-Paper.md lines 5, 27, 29 and 168. Each of those four sentences means the multi-part standard as a whole, not one part: line 5 pairs the series with the ISO 15926-4 reference data library in the same sentence, line 27 heads a section covering both the information model and the reference data library, line 29 cites the series title common to every part, and line 168 again pairs series with part 4. \"Series\" states the referent explicitly, so no part number is missing. Assigning a part here would make the citation wrong, not more precise."
+        },
+        {
+          "form": "DEXPI 2.0 (ISO 15926 / Proteus XML)",
+          "reason": "references/WG-05-CAD-DEXPI-2/WG-05-CAD-DEXPI-Open-Standard-Position-Paper.md line 19. The phrase sits inside an attributed pull quote from a mechanical engineer. The speaker did not state a part. Editing quoted speech to satisfy a lint rule falsifies the quotation, which is a worse fault than an imprecise citation, so the quote stands and the exception is recorded here instead. The carve-out is pinned to this exact wording: a bare \"ISO 15926\" anywhere else, including \"ISO 15926 / Proteus XML\" without the \"DEXPI 2.0 (\" prefix, still fails."
+        }
+      ]
     }
   ]
 }
