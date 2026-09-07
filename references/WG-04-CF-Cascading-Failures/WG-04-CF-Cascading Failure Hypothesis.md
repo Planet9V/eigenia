@@ -2033,48 +2033,75 @@ Neither side of that ratio is discounted. Section 5.9 states no net present valu
 
 **On the regulated asset base.** An earlier draft stated that the programme represented 0.375 percent of RefDNSP-1.2M's regulated asset base. That claim is removed. RefDNSP-1.2M has no stipulated regulated asset base in section 2, and no RAB figure for any Australian distribution business was sourced for this paper, so the ratio has no denominator and cannot be computed. The nearest available figure is not a substitute: the AER's draft decision for Ausgrid allowed AUD 9,619.6 million of revenue across the five years to 2029 [n], which is a revenue allowance for a different and real business, not an asset base and not RefDNSP-1.2M's.
 
-### 9.4 Quick Wins: Immediate Actions ([investment required], targeted timeframe)
+### 9.4 Quick Wins
 
-The following actions provide immediate risk reduction with minimal cost and can be implemented through policy changes and configuration updates:
+Five actions delivered through policy change and configuration rather than capital purchase. All five sit in cost band A of section 9.1, under AUD 0.13 million each, because none of them buys hardware or a platform licence. Band A is still an engineering judgement about relative cost, not a quotation.
 
-**Quick Win 1: API Dual Authorization Policy**
+**Quick win 1: API dual authorization policy**
 
-| Action                                                                                        | Implementation                                                                                                                                | Cost                                                      | Risk Reduction                                                      | Timeline              |
-| :--- | :--- | :--- | :--- | :--- |
-| Enforce dual authorization for dispatch commands >10 MW                                       | Modify DERMS API authorization logic to require second OAuth token approval for bulk commands or commands affecting >10 MW aggregate capacity | [investment required] (configuration change)              | 85% reduction in single-credential compromise impact                | implementation period |
-| Implementation: Update mPrest DERMS configuration file to enable "dual_auth_threshold_MW": 10 | Example: Retailer A requests 54 BESS discharge → System prompts RefDNSP-1.2M control room operator for approval                                 | Operational impact: 30-60 second delay for large commands | User acceptance: HIGH (operators already approve critical commands) |                       |
+| Attribute | Detail |
+| :--- | :--- |
+| Action | Require dual authorization for dispatch commands above 10 MW aggregate capacity |
+| Implementation | Set `dual_auth_threshold_MW: 10` in the mPrest DERMS configuration, requiring a second OAuth token approval for bulk commands or commands affecting more than 10 MW aggregate capacity |
+| Cost band | A, configuration change |
+| Effect | Secure remote access. Dragos and Marsh McLennan measure 12.18 percent average risk reduction for this control class, the lowest of their five [n]. The mapping is approximate: their class covers remote access generally, not API authorization specifically. Stated as a mechanism instead: the control removes the single-credential path to bulk dispatch, so one stolen retailer token no longer moves the fleet |
+| Operational impact | 30 to 60 second delay on large commands. Operator acceptance high, as operators already approve critical commands |
+| Worked example | Retailer A requests discharge across 54 BESS units. The system prompts a RefDNSP-1.2M control room operator for approval |
+| Timeline | Implementation period |
 
-**Quick Win 2: BESS State-Change Rate Limiting**
+**Quick win 2: BESS state-change rate limiting**
 
-| Action                                                                                                                                                              | Implementation                                                                                                    | Cost                                                                             | Risk Reduction                                     | Timeline              |
-| :--- | :--- | :--- | :--- | :--- |
-| Enforce 5-minute minimum interval between charge/discharge state changes                                                                                            | Modify SwitchDin Utility Server to track last command timestamp per asset, reject commands within 5-minute window | [investment required] (vendor engineering support)                               | 60% reduction in oscillation attack effectiveness  | implementation period |
-| Technical validation: Battery inverters require 30-90 seconds for state transition (charge → discharge), so 5-minute minimum does not impact legitimate operations | Example: BESS receives "charge" command at 13:00:00, subsequent "discharge" command rejected until 13:05:00       | Operational impact: None (normal operations use 15-30 minute dispatch intervals) | User acceptance: HIGH (no impact on grid services) |                       |
+| Attribute | Detail |
+| :--- | :--- |
+| Action | Enforce a 5-minute minimum interval between charge and discharge state changes |
+| Implementation | Modify the SwitchDin Utility Server to track the last command timestamp per asset and reject commands inside the 5-minute window |
+| Cost band | A, vendor engineering support |
+| Effect | No Dragos and Marsh class maps to this control, so no percentage is stated. A 5-minute minimum caps the achievable oscillation at one full cycle per 600 seconds, 0.0017 Hz. Section 2.1.2 puts the attack band at 0.5 to 0.55 Hz, roughly 300 times faster. The control puts the attack outside the resonance band |
+| Operational impact | None. Normal operations use 15 to 30 minute dispatch intervals, and battery inverters need 30 to 90 seconds for a charge to discharge transition, so the 5-minute floor does not bind on legitimate use |
+| Worked example | A BESS receives a charge command at 13:00:00. A discharge command is rejected until 13:05:00 |
+| Timeline | Implementation period |
 
-**Quick Win 3: Oscillation Pattern Detection (Basic)**
+**Quick win 3: basic oscillation pattern detection**
 
-| Action                                                                              | Implementation                                                                                     | Cost                                            | Risk Reduction                                                                                                             | Timeline                                                     |
-| :--- | :--- | :--- | :--- | :--- |
-| Deploy SIEM correlation rule to detect >5 state changes per asset within 30 minutes | Configure existing Splunk SIEM to parse DERMS API logs and alert on rapid charge/discharge cycling | [investment required] (existing platform)       | 70% reduction in undetected oscillation attacks                                                                            | implementation period                                        |
-| Alert logic: `index=derms sourcetype=api_commands                                   | stats count by asset_id, command_type                                                              | where count > 5 AND time_window < 1800 seconds` | Example output: "ALERT: BESS_Bawley_001 received 8 charge/discharge commands in 22 minutes - potential oscillation attack" | Operational impact: SOC investigation workload +2 hours/week |
+| Attribute | Detail |
+| :--- | :--- |
+| Action | SIEM correlation rule detecting more than 5 state changes per asset within 30 minutes |
+| Implementation | Configure the existing Splunk SIEM to parse DERMS API logs and alert on rapid charge and discharge cycling. Rule: `index=derms sourcetype=api_commands` then `stats count by asset_id, command_type` then `where count > 5 AND time_window < 1800 seconds` |
+| Cost band | A, existing platform |
+| Effect | Network visibility and monitoring. Dragos and Marsh McLennan measure 16.47 percent average risk reduction for this class [n]. The earlier draft claimed a 70 percent reduction in undetected oscillation attacks; that figure had no source and no false-negative rate has been measured for this rule on this network |
+| Operational impact | SOC investigation workload rises by about 2 hours per week |
+| Worked example | Alert text: BESS_Bawley_001 received 8 charge and discharge commands in 22 minutes, potential oscillation attack |
+| Timeline | Implementation period |
 
-**Quick Win 4: Critical Substation GOOSE Monitoring**
+**Quick win 4: critical substation GOOSE monitoring**
 
-| Action                                                                                                                                       | Implementation                                                                                                                  | Cost                                            | Risk Reduction                                      | Timeline              |
-| :--- | :--- | :--- | :--- | :--- |
-| Deploy network tap + packet capture at 5 critical substations to record GOOSE traffic for forensic analysis                                  | Install Garland G-TAP network tap on IEC 61850 station bus, mirror to PCAP storage (5 TB capacity)                              | [investment required] (hardware + installation) | 80% improvement in GOOSE injection attack detection | implementation period |
-| Forensic capability: Retained GOOSE traffic enables post-incident analysis to identify spoofed messages vs. legitimate protection operations | Example: After protection cascade, security team replays GOOSE traffic to identify timing anomalies suggesting injection attack | Operational impact: None (passive monitoring)   | User acceptance: HIGH (enhances incident response)  |                       |
+| Attribute | Detail |
+| :--- | :--- |
+| Action | Network tap and packet capture at 5 critical substations to record GOOSE traffic for forensic analysis |
+| Implementation | Install a Garland G-TAP network tap on the IEC 61850 station bus and mirror to PCAP storage of 5 TB capacity |
+| Cost band | A, tap hardware and installation at 5 sites |
+| Effect | Network visibility and monitoring, 16.47 percent class average [n]. This control is forensic rather than preventive: retained GOOSE traffic lets a security team replay a protection cascade and identify timing anomalies suggesting injection. It detects nothing in real time and prevents nothing. The earlier draft's 80 percent improvement in detection had no source |
+| Operational impact | None. Passive monitoring |
+| Worked example | After a protection cascade, the security team replays captured GOOSE traffic to separate spoofed messages from legitimate protection operations |
+| Timeline | Implementation period |
 
-**Quick Win 5: Vendor Access Logging and Alerting**
+**Quick win 5: vendor access logging and alerting**
 
-| Action                                                                                                                                                                  | Implementation                                                                                                                                                | Cost                                                        | Risk Reduction                                                                                    | Timeline              |
-| :--- | :--- | :--- | :--- | :--- |
-| Enable detailed logging for all vendor remote access sessions via Bastion Host, with real-time alerting for unusual activity                                            | Configure Citrix Bastion Host to log all commands, file transfers, and configuration changes; send alerts to SOC for after-hours access or high-risk commands | [investment required] (SIEM integration)                    | 65% reduction in compromised vendor access dwell time                                             | implementation period |
-| Alert triggers: (1) Vendor login outside 0800-1700 business hours, (2) Access to SCADA master station, (3) Modbus/DNP3 write commands, (4) Configuration file downloads | Example: "ALERT: Vendor_BatteryOEM_Engineer logged in at 02:34 AM Saturday, accessed RTU configuration files, downloaded 15 MB data"                          | Operational impact: SOC investigation workload +1 hour/week | User acceptance: MEDIUM (vendors may resist increased scrutiny, requires contractual enforcement) |                       |
+| Attribute | Detail |
+| :--- | :--- |
+| Action | Detailed logging of all vendor remote access sessions through the bastion host, with real-time alerting on unusual activity |
+| Implementation | Configure the Citrix bastion host to log all commands, file transfers and configuration changes, and send alerts to the SOC for after-hours access or high-risk commands |
+| Cost band | A, SIEM integration |
+| Effect | Secure remote access, 12.18 percent class average [n]. The earlier draft claimed a 65 percent reduction in compromised vendor access dwell time; no dwell time measurement exists for this network, before or after, so no reduction can be stated. What the control does is make vendor session activity reviewable at all, which is the precondition for measuring dwell time later |
+| Alert triggers | Vendor login outside 0800 to 1700, access to the SCADA master station, Modbus or DNP3 write commands, configuration file downloads |
+| Operational impact | SOC investigation workload rises by about 1 hour per week |
+| Worked example | Alert text: Vendor_BatteryOEM_Engineer logged in at 02:34 Saturday, accessed RTU configuration files, downloaded 15 MB |
+| User acceptance | Medium. Vendors may resist increased scrutiny, so contractual enforcement is needed |
+| Timeline | Implementation period |
 
-**Total Quick Wins Investment: [investment required]**
-**Cumulative Risk Reduction: 73% (across multiple attack vectors)**
-**Implementation Timeline: targeted timeframe (all items)**
+**Quick wins total.** Five controls, all band A. Band arithmetic gives under AUD 0.65 million one-off in total (modelled: five times the band A ceiling of AUD 0.13 million, not a quotation). Against the AUD 1.29 million CIRMP cyber one-off envelope of section 9.1, the whole quick-win set fits inside half of it, which is the argument for doing these first.
+
+**Combined effect: not stated as a number.** The earlier draft claimed 73 percent cumulative risk reduction across multiple attack vectors. Dragos and Marsh McLennan state their per-control figures are not additive and their report models no combined effect [n]. Three of these five controls map to classes measured at 12.18 and 16.47 percent, and two map to no class at all. Nothing in the evidence supports compounding them into a single figure, and 73 percent had no source.
 
 ### 9.5 Board-Level Recommendations
 
