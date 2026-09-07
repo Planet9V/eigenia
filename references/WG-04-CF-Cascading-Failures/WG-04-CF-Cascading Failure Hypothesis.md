@@ -1067,7 +1067,7 @@ Water supply infrastructure is the most consequential secondary failure domain. 
 | 12-24 hours          | Wastewater system backup               | Sanitation failure, contamination risk             | Critical     |
 | 24-48 hours          | Public health emergency                | Disease outbreak risk (gastroenteritis, hepatitis) | Catastrophic |
 
-Emergency water supply requirements: 87 sites at 10,000 litres per site = 870,000 litres capacity. Hospital priority allocation: 12 facilities at 50,000 litres per day = 600,000 litres per day. Emergency cost: [investment required] million per day.
+Emergency water supply requirements: 87 sites at 10,000 litres per site = 870,000 litres capacity. Hospital priority allocation: 12 facilities at 50,000 litres per day = 600,000 litres per day. Both volumes are stipulated RefDNSP-1.2M scenario parameters, not sourced figures. No unit cost for emergency water tankering in New South Wales was located, so the daily cost of supplying those volumes is not stated.
 
 ### 4.3 Hospital and Medical Infrastructure Cascade
 
@@ -1213,7 +1213,7 @@ ASX Trading Infrastructure Dependencies:
 Primary Data Center (Equinix SY3, Sydney):
 - Grid power: 15 MW (normal operations)
 - Backup: N+1 diesel generators (48-hour fuel capacity)
-- Criticality: National financial markets, [investment required] trillion market capitalization
+- Criticality: national financial markets; no sourced ASX market capitalisation figure is held, so none is stated
 
 Secondary Data Center (Equinix SY1, Sydney):
 - Grid power: 8 MW (normal operations)
@@ -1246,28 +1246,25 @@ T+48 to T+72 hours: Extended Outage Crisis
 
 **Economic Multiplier Effects:**
 
-```
-Direct Economic Loss: Customer outage costs (calculated in Section 5)
-  - Residential: [investment required]
-  - Commercial: [investment required]
-  - Industrial: [investment required]
+The only cost this paper computes is the direct cost to customers of energy not supplied, and it is computed once, in section 5.4, from the AER's determined value of customer reliability. For the 72-hour system-wide case that figure is AUD 1.99 billion to AUD 8.95 billion (modelled: VCR extrapolated to 72 hours, six times its determined range). Section 5.4's reference case at the boundary of the determination, the full network at 12 hours, is AUD 1.19 billion [n].
 
-Indirect Economic Loss (24-hour outage):
-  - Stock market trading suspension: [investment required] billion daily trading volume lost
-  - Banking system disruption: [investment required] billion daily transaction volume
-  - Retail commerce halt: [investment required] million daily sales (NSW region)
-  - Logistics disruption: [investment required] million daily freight movement
-  - Tourism impact: [investment required] million daily (hotel cancellations, transportation)
+That figure is not split by customer segment. Section 5.6 sets out why: the 2.15 kW coincident demand anchor is an all-customer average taken from AEMO's South Australian black system report, no per-segment demand figure was sourced, and the residential VCR is therefore applied across the whole base. A residential, commercial and industrial split would need two inputs the paper does not hold.
 
-Tertiary Economic Loss (48-72 hour outage):
-  - Supply chain breakdown: [investment required] billion (perishable goods, manufacturing inventory)
-  - Insurance claims: [investment required] million (business interruption, property damage)
-  - Lost productivity: [investment required] billion (workforce unable to work, telework impossible)
-  - Recovery costs: [investment required] million (emergency services, infrastructure repair)
+The indirect and tertiary categories below were carried as dollar lines in an earlier draft of this section. Each is a real cost. None has a sourced input, and inventing one here would contradict section 5, which quantifies the same cascade from published values.
 
-Total Economic Impact (72-hour scenario):
-  Direct + Indirect + Tertiary = [investment required]
-```
+| Category | Order | Why it is not quantified |
+| :--- | :--- | :--- |
+| Stock market trading suspension | Indirect | No sourced ASX daily trading volume, and no basis for converting a suspension into a realised loss rather than a deferral |
+| Banking system disruption | Indirect | No sourced daily transaction volume for the affected region, and transaction volume is not loss |
+| Retail commerce halt | Indirect | No sourced NSW regional daily retail sales figure |
+| Logistics disruption | Indirect | No sourced daily freight movement value for the service territory |
+| Tourism impact | Indirect | No sourced accommodation or transport cancellation value |
+| Supply chain breakdown | Tertiary | Section 5.10 already excludes per-facility spoilage and batch loss for the same reason: no sourced per-facility value |
+| Insurance claims | Tertiary | Section 5.10 excludes insurance response; no sourced premium elasticity or claims ratio |
+| Lost productivity | Tertiary | No sourced basis, and it overlaps the direct customer cost already computed |
+| Recovery costs | Tertiary | No sourced emergency services or infrastructure repair rate |
+
+No total is stated for direct plus indirect plus tertiary loss, because nine of the twelve terms have no value. The direct customer cost of section 5.4 is a component of total economic loss, not the total, and this section does not close that gap.
 
 ### 4.8 Cross-Sector Dependency Matrix
 
