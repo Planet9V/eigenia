@@ -1627,7 +1627,7 @@ Band arithmetic: the three bounded lines, one band B and two band C, give AUD 1.
 
 Three things about that total. It is band boundary arithmetic against the sourced AUD 1.29 million CIRMP cyber envelope of section 9.1, not a quotation from anyone. It excludes the single band D line, which has no upper bound, so the true figure is higher by an amount this paper cannot state. And the sourced envelope itself is AUD 1.29 million one-off, so these 18 controls cost roughly two to six times what the sector-average regulatory compliance figure covers. That is the same conclusion section 9.3 reaches from the other direction.
 
-No aggregate risk reduction is given, and no per-vector return on investment is given. Dragos and Marsh McLennan state their class figures are not additive and model no combined effect [n], so the columns cannot be summed. A per-vector ratio would additionally need a per-vector avoided loss, and section 5 computes one avoided loss for the whole cascade rather than four. The programme-level ratio, 4.4:1 to 6.6:1 with a sensitivity envelope of 2.9:1 to 8.8:1, is derived once in section 9.5 and is not restated per vector here.
+No aggregate risk reduction is given, and no per-vector return on investment is given. Dragos and Marsh McLennan state their class figures are not additive and model no combined effect [n], so the columns cannot be summed. A per-vector ratio would also need a per-vector avoided loss, and section 5 computes one avoided loss for the whole cascade rather than four. The programme-level ratio, 4.4:1 to 6.6:1 with a sensitivity envelope of 2.9:1 to 8.8:1, is derived once in section 9.5 and is not restated per vector here.
 
 ---
 
@@ -3804,8 +3804,8 @@ Unlike natural disasters (storms, heatwaves) where equipment is physically damag
 - Substation single-line diagrams (SLDs)
 - Black start procedures (printed manuals, not digital-only)
 
-**Cost:** [investment required] (WORM storage appliance + annual refresh)
-**Benefit:** Reduces recovery time from implementation period to implementation period (66% faster)
+**Cost:** band B (write-once storage appliance plus annual refresh; no public appliance price was located, and the band is the engineering judgement of section 9.1, not a quotation)
+**Benefit:** stated as a mechanism, not a percentage. Offline, immutable copies of relay settings, SCADA configuration and topology models mean restoration does not depend on systems the attacker may still hold. No measured recovery-time reduction exists for this network, and the earlier draft's 66 percent had no source.
 
 ### Appendix L: Stakeholder Communication and Coordination Protocols
 
@@ -3825,7 +3825,7 @@ Cascading cyber-physical attacks on critical infrastructure require coordination
 | **NSW Health**                               | Hospital emergency preparedness, medical surge          | Hospital backup power failure OR mass casualty event              | Emergency Management Branch 24/7 line                                 | <15 minutes                                             |
 | **Australian Federal Police (AFP)**          | Counter-terrorism, critical infrastructure protection   | Attribution to nation-state OR coordinated attack                 | AFP National Operations State Service Centre                          | <1 hour                                                 |
 | **Department of Defence**                    | RAAF Richmond, Garden Island impacts, national security | Defence facility power loss >4 hours                              | Defence Emergency Coordinator                                         | <30 minutes                                             |
-| **Board of Directors**                       | Fiduciary oversight, crisis management approval         | Any P0 incident with >[investment required] impact OR safety risk | Chairman mobile + Board Risk Committee                                | <2 hours (emergency meeting)                            |
+| **Board of Directors**                       | Fiduciary oversight, crisis management approval         | Any P0 incident reaching cascade tier 2 of section 3.2, meaning 80,000 customers or more, OR any safety risk | Chairman mobile + Board Risk Committee                                | <2 hours (emergency meeting)                            |
 
 **Communication Cascade Timeline:**
 
@@ -3924,9 +3924,11 @@ Under the Security of Critical Infrastructure Act 2018 (SOCI Act), RefDNSP-1.2M 
 
 | Event Type                                   | Reporting Deadline                         | Recipient                            | Penalty for Non-Compliance             |
 | :--- | :--- | :--- | :--- |
-| **Cyber Security Incident**            | 12 hours after becoming aware              | ACSC (via CISC portal)               | [investment required] million          |
-| **Critical Infrastructure Risk**       | implementation period after identification | Secretary of Home Affairs            | [investment required] million          |
-| **Enhanced Cyber Security Obligation** | Annual compliance report                   | ASD (Australian Signals Directorate) | [investment required] million per year |
+| **Cyber Security Incident**            | 12 hours after becoming aware              | ACSC (via CISC portal)               | Not stated; see note below             |
+| **Critical Infrastructure Risk**       | implementation period after identification | Secretary of Home Affairs            | Not stated; see note below             |
+| **Enhanced Cyber Security Obligation** | Annual compliance report                   | ASD (Australian Signals Directorate) | Not stated; see note below             |
+
+No penalty amount is stated for any of the three obligations above. No SOCI Act penalty schedule and no enforcement precedent against an Australian distribution network service provider was sourced for this paper, and section 5.8 and section 5.10 record the same exclusion. A drafter with access to the Act's civil penalty provisions should insert the unit amounts directly from the instrument rather than from any figure in this document. The one settled regulatory outcome this paper can cite for a comparable event is Ofgem's, after the Great Britain outage of 9 August 2019: about GBP 10.5 million in voluntary redress payments across four licensees, with no formal determination of breach [n].
 
 **Incident Report Content Requirements (SOCI Act):**
 
@@ -3969,8 +3971,8 @@ SECTION 3: INCIDENTS AND NEAR-MISSES
 SECTION 4: INVESTMENT PROGRAM STATUS
 | Initiative | Budget | Spend to Date | Completion % | On Track? |
 | :--- | :--- | :--- | :--- | :--- |
-| Death Wobble Detection | [investment required] | $[X]K | [X]% | [Y/N] |
-| Modbus Security Gateway | [investment required] | $[X]K | [X]% | [Y/N] |
+| Death Wobble Detection | [Approved budget] | $[X]K | [X]% | [Y/N] |
+| Modbus Security Gateway | [Approved budget] | $[X]K | [X]% | [Y/N] |
 | [Other initiatives...] | | | | |
 
 SECTION 5: REGULATORY COMPLIANCE
@@ -4097,11 +4099,11 @@ This assessment employs **prospective modeling** of cascading failure scenarios 
 4. **Consequence Modeling Uncertainty**:
 
    - **Fatality Estimates (5-25)**: No cyber-physical attack on electricity infrastructure has caused direct fatalities at this scale. Ukrainian attacks (2015, 2016, 2022) affected 225,000 customers for 6 hours with zero direct deaths. Our estimates extrapolate from medical literature on hospital outage mortality (cardiac care delays, dialysis interruption), traffic accident statistics from signal outages (2019 Sydney precedent: 180% accident rate increase), and thermal runaway scenarios (Arizona 2019 McMicken fire: 4 firefighters injured, zero fatalities). These are *worst-case models* not empirical predictions.
-   - **Economic Impact ([investment required])**: Uses AEMO Value of Customer Reliability methodology scaled to cyber-attack duration (24-72 hours vs. typical 2-4 hour weather outages). Regulatory penalties and litigation estimates extrapolate from SOCI Act maximum penalties and US class-action settlements (PG&E wildfires, ConEd transformer explosions) adapted to Australian legal context. Sensitivity: ±30% based on attack execution effectiveness and regulatory response severity.
+   - **Economic Impact (AUD 1.19 billion at the determination boundary; AUD 1.99 billion to AUD 8.95 billion extrapolated)**: Uses the AER's December 2024 Value of Customer Reliability determination, not AEMO's. Determination has been the AER's statutory responsibility since the AEMC's final rule of July 2018, and an earlier draft of this paper credited it to AEMO throughout [n]. The AER determined those values for unplanned outages of up to 12 hours. The cascade modelled here runs to 72 hours, so every figure resting on a longer duration is a linear extrapolation roughly six times outside the determined range, not a determination; section 5.2 states it in exactly those terms and section 5.4 marks each affected cell. The correct instrument beyond 12 hours is the AER's separate Value of Network Resilience review, and this paper holds no VNR figure at all. No regulatory penalty or litigation estimate is made anywhere in this document: no SOCI Act penalty schedule and no Australian distribution precedent were sourced, and US class-action settlements were not adapted across jurisdictions. No plus-or-minus 30 percent sensitivity band is claimed either. The real uncertainty is structural rather than proportional, and section 9.5 expresses it as a ratio envelope of 2.9:1 to 8.8:1 driven by an uncited probability assessment and a class-average control effectiveness measurement.
 5. **Research Gaps Requiring Empirical Validation**:
 
-   - **RefDNSP-1.2M-Specific RoCoF Tolerance**: Current analysis uses AEMO generic 1.0 Hz/s threshold. Actual tolerance requires [investment required] dynamic stability study with AEMO modeling RefDNSP-1.2M's specific topology, protection relay settings, and interconnection to TransGrid.
-   - **BESS Oscillation Resonance**: Laboratory testing ([investment required]) required to validate whether 54 community batteries can sustain coherent oscillation at 0.3-1.2 Hz frequencies or whether control system delays and communications latency prevent synchronization.
+   - **RefDNSP-1.2M-Specific RoCoF Tolerance**: Current analysis uses the generic 1.0 Hz/s threshold. Actual tolerance requires a dynamic stability study run with AEMO against RefDNSP-1.2M's own topology, protection relay settings, and interconnection to TransGrid. No cost anchor for a study of that kind was sourced, so none is stated. Section 2.2 records the same gap.
+   - **BESS Oscillation Resonance**: Laboratory testing is required to establish whether 54 community batteries can sustain coherent oscillation at 0.3 to 1.2 Hz, or whether control system delays and communications latency prevent synchronization. No cost anchor for such testing was sourced, so none is stated. This gap is load-bearing rather than incidental: if synchronization fails, the initiating mechanism of section 2.2 does not work, and with it the cascade this paper models.
    - **Cascade Propagation Timing**: Tier 1→2→3→4 timeline (T+15, T+30, T+60, T+120 minutes) modeled from AEMO protection relay coordination studies. Actual progression depends on load distribution, tie-line flows, and operator intervention effectiveness during incident.
 6. **Comparison to McKenney's Analysis**:
    McKenney (2024, 2025) focuses on *unintentional* Death Wobble from renewable energy transition and natural disturbances. His work provides the physics foundation (inertia constant formulas, RoCoF thresholds, protection cascade mechanisms) but does not model cyber-enabled *deliberate induction* of oscillations. This document extends his framework into adversarial scenarios, maintaining his technical rigor while acknowledging the speculative nature of cyber-attack modeling.
@@ -4109,8 +4111,9 @@ This assessment employs **prospective modeling** of cascading failure scenarios 
 **Board Interpretation Guidance**:
 
 - **High Confidence**: Grid physics, protection relay behavior, Death Wobble mechanism (empirically validated internationally)
-- **Moderate Confidence**: Economic impact ranges (±30% sensitivity), equipment failure probabilities (based on manufacturer MTBF data)
-- **Lower Confidence**: Fatality estimates (no Australian cyber-attack precedent), attack execution success rates (depends on adversary sophistication), regulatory penalty severity (legal environment uncertainty)
+- **Moderate Confidence**: the direct customer cost of AUD 1.19 billion at the 12-hour boundary of the AER determination, which is computed from a published value through a stated relation but on stipulated customer counts
+- **Lower Confidence**: every figure resting on a duration beyond 12 hours, including the tier 4 range; fatality estimates, which have no Australian cyber-attack precedent; and attack execution success rates, which depend on adversary sophistication and on the unresolved synchronization question above
+- **Not stated at all**: equipment damage, regulatory penalties, civil litigation, reputational damage, insurance response, opportunity cost and per-facility industrial loss. Section 5.10 lists each with the input it lacks. Their absence is a limit on this paper's total, not a claim that they are zero
 
 This assessment is designed for **strategic risk management** (Board-level capital allocation, security investment prioritization) not **tactical operations** (SOC playbook development, incident response procedures). The prospective modeling approach intentionally emphasizes tail risk to support conservative decision-making for critical infrastructure protection.
 
