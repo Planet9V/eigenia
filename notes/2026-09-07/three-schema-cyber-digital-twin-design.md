@@ -184,17 +184,51 @@ have something to say about the same object, which is exactly what P4 must
 demonstrate. Eigenia's reference architecture set expands rather than being
 overloaded.
 
-**P7 builds its own CVE-to-physical-consequence chain.** It does not depend on
-tooling from other working groups. That keeps the three-schema programme
-self-contained and means P7 can be read and contested without reference to
-anything outside it.
+**P7 REUSES the existing chain.** Jim first said build its own, then reversed to
+reuse within the same session; the later instruction stands and it is the better
+answer. The machinery already exists and P7 extends it rather than running a
+parallel one:
 
-## Still open
+| Existing asset | Where | What P7 takes |
+|:---|:---|:---|
+| Multigraph blast radius formulation | `WG-05-CAD-Unified-DEXPI-CycloneDX.md` section 4.4 | The two-schema formulation, extended to three. `B(v_target)` and the shortest-path distance term already exist. |
+| Plant as a directed multigraph | `WG-05-CAD-DEXPI-Open-Standard-Position-Paper.md` line 69 | `G_P = (V_P, E_P)`, the DEXPI-side graph definition. |
+| Threat actor and exploit-likelihood scoring | `WG-07-TM-TACAM.md`, and ATQ | EPSS and KEV signals. EPSS appears in 8 documents, KEV in 2. |
 
-**DEXPI e.V. engagement.** P1 is drafted as a contribution proposal, and Jim's
-own source document confirms the mechanism exists: DEXPI e.V. is developing the
+Reuse is the stronger choice for a reason beyond effort. A parallel chain would
+have made P7 a second opinion competing with section 4.4; extending it makes P7
+the paper that generalises an existing Eigenia result from two ontologies to
+three. That is a cleaner contribution and it strengthens the citation web
+instead of forking it.
+
+**Consequence for W0.** Section 4.4 is now load-bearing for P7, so its
+correctness matters more than it did an hour ago. It sits in a document that
+also carries the ISO/IEC 5962 error W0 is fixing.
+
+**DEXPI e.V. upstream submission is IN SCOPE.** Approved 2026-09-07. This is
+the decision with the largest effect on how P1, P2 and P3 are written.
+
+Jim's own source document confirms the mechanism: DEXPI e.V. is developing the
 Standard Library as "a curated set of templates intended to extend or restrict
-the DEXPI Specification to meet specific engineering requirements." Whether P1
-is actually submitted upstream changes how normative its language should be. It
-does not block W0 or the writing of P1's technical content, so it is recorded
-here rather than held as a gate.
+the DEXPI Specification to meet specific engineering requirements." That is a
+sanctioned extension point, in writing, from the body that owns the standard.
+
+What upstream submission changes:
+
+- **Normative language.** P1, P2 and P3 use RFC 2119 keywords (MUST, SHOULD,
+  MAY) with a conformance section, not descriptive prose. A body cannot adopt a
+  proposal that does not say what an implementer is required to do.
+- **P3 stops being optional.** A specification submitted without a conformance
+  suite and test vectors is not adoptable. P3 moves ahead of P2 in sequence.
+- **Licensing must be stated.** DEXPI 2.0 is CC BY 4.0 on GitLab. The extension
+  must carry a compatible licence, declared in P1, or it cannot be merged.
+- **No Eigenia-proprietary terms in the normative text.** RefBESS-250MW and the
+  other reference assets belong in the applied papers, not in P1's schema.
+- **The three-identity join must survive contact with each body's own process.**
+  DEXPI e.V. for the Standard Library extension, the CycloneDX project for the
+  property taxonomy, and the relevant IEC TC 57 working group for the CIM
+  profile. Three separate submissions, not one.
+
+That last point is worth stating plainly: this is three upstream engagements,
+each on its own timetable, and none of them is Eigenia's to control. The papers
+must stand as research regardless of whether any submission is accepted.
