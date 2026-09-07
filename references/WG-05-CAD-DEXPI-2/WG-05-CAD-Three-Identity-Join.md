@@ -83,7 +83,7 @@ A fourth identifier is the minimum that works, provided it does one job only. Th
 
 A specification that requires any of the three bodies to change its standard will not be adopted. This one requires none of them to, because all three already publish a mechanism for exactly this kind of addition.
 
-**DEXPI.** DEXPI e.V. is developing the Standard Library as "a curated set of templates intended to extend or restrict the DEXPI Specification to meet specific engineering requirements" [3]. That is a sanctioned extension point, in writing, from the body that owns the standard. The join is delivered as a template in that library. It adds attributes to existing classes; it introduces no class of its own.
+**DEXPI.** The DEXPI Specification Teams are developing the DEXPI Profile, "which extends the DEXPI specification with a mechanism for defining explicit constraints on classes and properties" [12]. That is a sanctioned extension point, in writing, from the body that owns the standard. The join is delivered as a Profile. It adds attributes to existing classes; it introduces no class of its own. The verb in that sentence governs what the Profile does to the specification, which is to add a mechanism, and the mechanism itself is described in the language of constraints. Section 3.1 states what that leaves open instead of assuming it away.
 
 **CycloneDX.** CycloneDX has carried custom properties since version 1.3, and the project maintains a public property taxonomy in which a top-level namespace is registered by opening an issue, held as reserved, and confirmed once the taxonomy documentation is publicly available [10]. The join is delivered as a registered namespace under that process.
 
@@ -91,11 +91,21 @@ A specification that requires any of the three bodies to change its standard wil
 
 So all three legs have a sanctioned extension point, nothing is forked, and every file stays conformant to its own specification. This is the difference between a proposal a body can adopt and one it must reject on governance grounds, and it is worth stating plainly, because governance rather than technique is what has killed the previous attempts.
 
-### 3.1 A note on the moving DEXPI extension mechanism
+### 3.1 The DEXPI extension mechanism, and what it leaves unsettled
 
-DEXPI e.V.'s August 2026 update describes work on DEXPI 2.0.1, which corrects and clarifies the Process Model and will replace DEXPI 2.0 as the recommended basis for implementations, and on the DEXPI Profile, "which extends the DEXPI specification with a mechanism for defining explicit constraints on classes and properties", forming the basis for a DEXPI Process Type Library [12].
+DEXPI e.V.'s August 2026 update describes two pieces of work that bear on this specification [12]. The first is DEXPI 2.0.1, being prepared as an important update to the DEXPI 2.0 specification, addressing corrections and clarifications in the Process Model, and expected once released to become the recommended basis for further work with the specification, replacing DEXPI 2.0. The second is the DEXPI Profile, "which extends the DEXPI specification with a mechanism for defining explicit constraints on classes and properties", and which creates the basis for the DEXPI Process Type Library.
 
-This specification is written against the Standard Library mechanism, because that is the mechanism DEXPI has published a description of. The join's content is a set of attributes on existing classes and a rule about where they attach; that content is independent of which of the two mechanisms carries it. Section 9 records this as an open dependency rather than resolving it here, because resolving it requires the published DEXPI Profile text, which does not yet exist.
+An earlier draft of this specification named a different carrier, the DEXPI Standard Library, described in briefing material held by the authors as a curated set of templates intended to extend or restrict the DEXPI Specification to meet specific engineering requirements. That briefing material is not publicly resolvable, so it is not cited here. The August 2026 update does not mention a Standard Library; the term does not appear on the page. The Profile is the mechanism DEXPI e.V. currently describes, so the DEXPI leg is written against the Profile, and the earlier reading is recorded here rather than deleted. A reader holding the older briefing can then tell which of the two documents is current instead of guessing.
+
+One question survives the switch, and it is not cosmetic. This join adds four attributes to a DEXPI object. The Profile is described as a mechanism for defining constraints. Adding and constraining are not the same operation, and the update's single sentence carries both ideas at once: "extends" governs what the Profile does to the specification, which is to add a mechanism, while the mechanism is then described as defining explicit constraints on classes and properties. Two readings are available on that sentence and the page does not choose between them.
+
+Under the first reading, defining explicit constraints on classes and properties includes declaring which properties a class may carry. A Profile can then license the attribute set of section 5.1, and the DEXPI leg fits the mechanism as published.
+
+Under the second reading, a Profile only narrows a model that already exists. Adding an attribute set would then need a different mechanism, most plausibly the generic attribute facility the DEXPI plant model already provides, which is the same facility the example encoding in section 5.2 uses.
+
+This specification assumes the first reading, and R-16 names the Profile as the carrier on that basis. The assumption is stated here and repeated in section 9 as a limitation, because it is an assumption and not a citation. What would settle it is the published Profile text, or a direct answer from the DEXPI Specification Teams; the August 2026 update names Dr. Gregor Tolksdorf as a contact for its question and answer sessions [12].
+
+If the second reading is correct, the correction is small, and that is worth stating plainly because it tells a reviewer the proposal holds under either answer. The join's content is four attributes on existing classes, a closed vocabulary of five relations, and a rule about where the attributes attach. None of it depends on which mechanism carries it. R-17, the attachment rule, is the requirement that binds under either reading. R-16 is the only requirement that would change, and it would change by naming a different carrier for content that stays as written.
 
 ## 4. The join, normatively
 
@@ -215,19 +225,21 @@ R-15. A join assertion SHOULD carry the instant at which the binding was made. W
 
 R-14 exists because silent selection is how a twin becomes untrustworthy without anyone noticing. Two identity claims for one reference means the model authority has made a mistake, and the correct behaviour of a consumer is to say so.
 
-## 5. The DEXPI Standard Library extension
+## 5. The DEXPI Profile extension
 
-The DEXPI leg is delivered as a template in the DEXPI Standard Library, adding attributes to existing DEXPI classes and introducing none of its own.
+The DEXPI leg is delivered as a DEXPI Profile, adding attributes to existing DEXPI classes and introducing none of its own. The Profile is the extension point DEXPI e.V. is currently building, and section 3.1 records both what is known about it and what is not.
 
-R-16. The DEXPI leg MUST be expressed as a Standard Library template and MUST NOT declare a new DEXPI class.
+R-16. The DEXPI leg MUST be expressed as a DEXPI Profile and MUST NOT declare a new DEXPI class.
 
-R-17. The template MUST attach its attributes to the object that carries the `TagName`, and MUST NOT attach them to a drawing, a shape, a symbol or a presentation element. A join bound to a graphic does not survive a redraw.
+R-16 names the carrier and settles nothing else. Section 3.1 records that the Profile is described in terms of constraints and that its capacity to license an added attribute set is not yet confirmed in published text. If a Profile proves to be restriction-only, R-16 is the single requirement that has to be restated, naming the generic attribute facility of the DEXPI plant model in place of the Profile. Every other requirement in this section stands unchanged, because they govern where the attributes attach, what they must state, and what they may not do, rather than what carries them.
+
+R-17. The Profile MUST attach its attributes to the object that carries the `TagName`, and MUST NOT attach them to a drawing, a shape, a symbol or a presentation element. A join bound to a graphic does not survive a redraw.
 
 R-18. The DEXPI leg MUST state the object's ISO 15926-4 class alongside its tag. A tag alone is scoped to one plant and one discipline and carries no cross-site meaning.
 
-R-19. A DEXPI file carrying the template MUST validate against the DEXPI 2.0 Specification.
+R-19. A DEXPI file carrying the Profile MUST validate against the DEXPI 2.0 Specification.
 
-R-20. The template MUST NOT relax any constraint the base specification declares. It MAY restrict, which is a use the Standard Library mechanism explicitly contemplates.
+R-20. The Profile MUST NOT relax any constraint the base specification declares. It MAY restrict, which is the use the Profile mechanism is described as existing to serve [12].
 
 ### 5.1 Attribute set
 
@@ -345,7 +357,11 @@ Each of the following is a thing this specification cannot do. They are stated b
 
 **The relation vocabulary is closed at five and may prove too few.** Redundancy, protection and standby relationships are not expressible and would currently be forced into `supplies` or `controls`, which loses the distinction. Widening the vocabulary is a breaking change for consumers. The choice here is deliberate and it is the one this specification is least confident about.
 
-**The DEXPI serialization binding is provisional.** Section 5.2 states the attachment rule, which is stable, and shows a generic attribute encoding, which is not yet confirmed against the published DEXPI 2.0 schema. Separately, DEXPI e.V. is developing both DEXPI 2.0.1 and the DEXPI Profile mechanism [12], and the extension point this specification targets may be the Profile rather than the Standard Library by the time a submission is considered. The join's content is unaffected; its carrier may change.
+**The DEXPI serialization binding is provisional.** Section 5.2 states the attachment rule, which is stable, and shows a generic attribute encoding, which is not yet confirmed against the published DEXPI 2.0 schema. R-17 is the requirement that binds, and the element spelling is not part of it. An implementer who reproduces the example verbatim and has it rejected by a validator has found a defect in the example, not in the join.
+
+**The DEXPI Profile is assumed to permit an added attribute set.** DEXPI e.V. describes the Profile as extending the DEXPI specification "with a mechanism for defining explicit constraints on classes and properties" [12]. This specification reads that as covering a declaration of which properties a class may carry, which is what licenses the four attributes of section 5.1. The competing reading is that a Profile only narrows a model already defined, in which case the DEXPI leg needs the generic attribute facility instead. Section 3.1 sets out both readings in full. An earlier draft of this document named the DEXPI Standard Library as the carrier, and the August 2026 update does not mention that mechanism, which is why the carrier moved. R-16 therefore rests on a reading of one published sentence rather than on published Profile text. A reviewer at DEXPI e.V. can confirm or correct it in a sentence, and the join's content is unaffected either way; only its carrier is at stake.
+
+**The normative DEXPI target is 2.0 and a successor is in preparation.** DEXPI e.V. states that DEXPI 2.0.1 is being prepared as an important update to the DEXPI 2.0 specification, that the work addresses corrections and clarifications in the Process Model, and that once released it is expected to become the recommended basis for further work with the specification, replacing DEXPI 2.0 [12]. This specification does not move its normative target. R-19 and R-35 are written against DEXPI 2.0, which is the version that exists. An implementation working against 2.0.1 MUST state that under R-34. Whether 2.0.1 changes anything the DEXPI leg depends on cannot be known before it is published, and the corrections are described as falling in the Process Model rather than in the P&ID plant model content the example encoding in section 5.2 uses.
 
 **CycloneDX has editions later than the one targeted here.** This specification is written against CycloneDX 1.6 as standardised in ECMA-424, first edition, June 2024 [6], and a later edition of ECMA-424 exists. Custom properties have been available since CycloneDX 1.3, so the taxonomy is not expected to be version-sensitive, but the normative target stated here is 1.6 and an implementation on a later version MUST say so under R-34.
 
@@ -366,5 +382,5 @@ Each of the following is a thing this specification cannot do. They are stated b
 9. **International Electrotechnical Commission.** *IEC 61970-301: Energy management system application program interface (EMS-API), Part 301: Common information model (CIM) base.* International Standard.
 10. **CycloneDX Project.** *CycloneDX Property Taxonomy.* OWASP Foundation. Taxonomy of official CycloneDX property namespaces and names, including the top-level namespace registration process.
 11. **International Electrotechnical Commission.** *IEC TS 61970-600-1:2021 and IEC TS 61970-600-2:2021: Common Grid Model Exchange Standard (CGMES).* Technical Specifications, developed with ENTSO-E.
-12. **DEXPI e.V.** *DEXPI August 2026 Update.* Announcement of work on DEXPI 2.0.1 and the DEXPI Profile mechanism, dexpi.org, August 2026.
+12. **DEXPI e.V.** *DEXPI August 2026 Update.* dexpi.org, August 2026. States that DEXPI 2.0.1 is being prepared as an important update to the DEXPI 2.0 specification and that the Specification Teams are developing the DEXPI Profile, which extends the DEXPI specification with a mechanism for defining explicit constraints on classes and properties. Available at https://dexpi.org/dexpi-august-2026-update/ (accessed 7 September 2026).
 13. **Davis, K., Peabody, B., and Leach, P.** *Universally Unique IDentifiers (UUIDs).* RFC 9562, Internet Engineering Task Force, May 2024. Obsoletes RFC 4122.
