@@ -143,3 +143,79 @@ working group does not hold, and Appendix M records that as an open limitation.
 
 **Word budget.** 276 words removed, 263 added, net **-13**. The only net
 reduction in the entire uplift, and it is itemised here.
+
+### T11: promote the limitations into the body, fix the duplicate section numbers
+
+Date: 2026-09-07. File: `WG-04-CF-Cascading Failure Hypothesis.md`.
+
+**Word budget.** 38,680 before, 38,870 after, net **+190**. Nothing was
+shortened. The reconciliation is exact and every term is listed below.
+
+| Term | Words |
+|:---|---:|
+| Lead-in sentence added to the promoted section | +34 |
+| South Australia 6.1 Hz/s correction paragraph (F3) | +160 |
+| Table of contents entry `10. Limitations and Threats to Validity` | +6 |
+| One `---` rule added between the new section 10 and the conclusion | +1 |
+| Heading `### Appendix J: Methodological Transparency and Uncertainty Quantification` becomes `## 10. Limitations and Threats to Validity` | -1 |
+| REMOVED: `1. Executive Summary` from the table of contents | -3 |
+| REMOVED: `---` rule that separated 1.3 from the reference network block | -1 |
+| REMOVED: `(6.1 Hz/s RoCoF)` from the international precedent line | -3 |
+| `Section 12, Appendix J, records` becomes `Section 10 records` | -2 |
+| `and Appendix J of this document` becomes `and 10 of this document` | -1 |
+| **Net** | **+190** |
+
+**Three removals, itemised.**
+
+1. `1. Executive Summary` from the table of contents. The body has no section
+   called Executive Summary. The contents list was numbered one ahead of the
+   body all the way down: it called Background and Context item 2 when the body
+   heads it `## 1.` The list now matches the body heading for heading. No prose
+   was removed; a phantom entry was.
+2. One `---` horizontal rule between section 1.3 and the reference network
+   specification. The rule marked a top-level section boundary. The reference
+   network is now `### 1.4`, the closing subsection of section 1, so the rule
+   marked a boundary that no longer exists.
+3. `(6.1 Hz/s RoCoF)` from item 2 of the promoted section, replaced by a
+   160-word paragraph stating what the figure is and is not. See below.
+
+**The 6.1 Hz/s correction (finding F3).** The precedent was not deleted; the
+claim about it was corrected. Item 2 previously read
+`South Australia 2016 (6.1 Hz/s RoCoF)` inside a list of precedents, in an
+appendix that carries a heading reading "Research Gaps Requiring Empirical
+Validation". The figure is not in AEMO's March 2017 final report. A researcher
+opened the report and could not locate it, and it circulates only in secondary
+commentary. The replacement states it as unconfirmed, states that no argument in
+the paper should rest on it, and re-founds the South Australian precedent on the
+two figures AEMO's final report does carry: 456 MW lost over a period of less
+than seven seconds, against 1,826 MW of regional demand. The protection
+behaviour the precedent exists to illustrate, eight of nine wind farms
+disconnecting on a voltage-dip-count setting rather than on the fault, survives
+intact and is now the stated basis.
+
+Note that 6.1 Hz/s still appears elsewhere in the paper, including section 2.3,
+where it is bolded as a peak measurement. Correcting those occurrences was
+outside this task's scope and is recorded here as open.
+
+**Structural changes, no content moved or lost.**
+
+- Appendix J moved whole into the body as `## 10. Limitations and Threats to
+  Validity`, immediately before the conclusion. Every word of the appendix
+  travelled with it. One phrase inside it, "an earlier draft of this appendix",
+  became "an earlier draft of this section", because it is no longer an
+  appendix.
+- The duplicate `## 2.` was resolved by making the reference network
+  specification `### 1.4` under Background and Context, not by pushing every
+  later section up one. That keeps the top-level sequence at 1 to 13 as
+  specified, and it leaves sections 2 through 9 numbered exactly as they were,
+  so the roughly 140 in-body `section N.M` references and the seven references
+  in the Grid Incident Response Playbook all still resolve.
+- The duplicate `### 2.3` was resolved by renumbering BESS Thermal Runaway
+  Cascading Scenarios to 2.4, with 2.3.1 to 2.3.3 becoming 2.4.1 to 2.4.3.
+- Appendices re-lettered to close the gap the promotion opened: References and
+  Bibliography K to J, Glossary L to K. Neither is cross-referenced from the
+  body.
+
+**Open, not fixed here.** Line 13 of the Grid Incident Response Playbook says
+the reference network is "specified in section 2 of the paper". It is now
+section 1.4. That file was not modifiable under this task's file lock.
