@@ -863,9 +863,44 @@ git push -u origin HEAD
 
 ---
 
-## Citation baseline
+## Citation baseline, recorded 2026-09-07
 
-To be recorded by Task 4, Step 4.
+**12 unresolved markers across 2 documents**, both in WG-02-DT:
+
+| Document | Unresolved marker values | Bibliography |
+|:---|:---|:---|
+| `WG-02-DT-1.md` | 1 to 9 | none |
+| `WG-02-DT-5.md` | 1, 2, 6 | none |
+
+The folder carries 69 raw marker occurrences and no References, Bibliography
+or Citations heading anywhere. The gate counts distinct marker values per
+document, so 69 occurrences collapse to 12 distinct unresolved indices.
+
+### The first baseline was wrong, and why that matters
+
+The gate initially reported **41 markers across 6 documents**. Four of those six
+were FALSE POSITIVES: they carry a bibliography the gate could not see.
+
+| Document | Heading it actually has |
+|:---|:---|
+| `MP_Kramers_Escape_Model.md` | `## Research and Citations` |
+| `WG-03-ML-Mckenney-Lacanian.md` | `## Research and Citations` |
+| `WG-04-CF-Death Wobble...md` | `#### Citations` |
+| `WG-05-CAD-Frontier-AI-Hardware-Security.md` | `## 10. Normative Standards, References and IEEE Bibliographic Register` |
+
+Three defects in the gate, not the corpus: "Citations" was absent from the
+heading vocabulary; the keyword had to sit immediately after the number prefix;
+and entries had to begin at line start, so `- [1] Kramers, H. A. (1940)` was
+invisible.
+
+Had the 41 been recorded, it would have sent someone to add bibliographies to
+four documents that already have them, and every future measurement would have
+been taken against a number that was wrong by a factor of three.
+
+The Task 4 implementer found this because the brief required it to open at least
+five reported markers and read the surrounding line before committing a
+baseline, and required it NOT to change the gate to suppress what it found. The
+discovery and the fix were deliberately separated.
 
 ## Known gate limitation, recorded 2026-09-07
 
