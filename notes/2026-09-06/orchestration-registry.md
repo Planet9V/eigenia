@@ -39,7 +39,28 @@ zero contention because none of them wrote to `references/`.
 | T13 | Four mermaid diagrams | T11 | opus | paper |
 | T14 | Cross-references and style sweep | T13 | opus | paper |
 | T15 | Full verification, then push | T14 | orchestrator | all |
-| S1 | Publication gap register | none | swarm, read-only | none |
+| S1 | Publication gap register | none | DONE, `97704d8` | none |
+| T16 | Fix line 636 ENTSO-E attribution | T8 releases paper | queued | paper |
+| A6 | Corpus "verified/empirical" sweep | T15 push | queued, swarm | all `references/` |
+| A1 | Shared parameter sheet per WG | A6 | queued | new files |
+| A2 | Actuarial method note | A6 | queued | new file |
+
+### T16, carried from the Project Inertia decision
+
+Line 636 of the Cascading Failure paper still reads `ENTSO-E "Project Inertia"`
+and attributes a finding to ENTSO-E that no source in the evidence base
+supports. The Project Inertia paper written today is EIGENIA's and must not be
+the target of that citation; repointing it would convert a sourcing gap into a
+misattribution, which is worse. The fix is to carry a real ENTSO-E citation or
+restate the claim as Eigenia's own analysis. Verified still open at 11:37.
+
+### A6 is the highest-value item in the programme
+
+Measured, not estimated: **136 occurrences** of `verified`, `empirical`,
+`validated` or `we prove` across **32 of 50 documents**, totalling **157,049 of
+185,568 words, 85 percent of the corpus**. It needs NO external source. It is a
+relabelling pass: Sourced, Modelled, or Novel synthesis, per the reference model
+in `publication-roadmap.md`.
 
 T12, the bibliography merge, is DEFERRED at Jim's instruction. Consequence to
 carry into T15: sections 5 and 9 ship with `[n]` markers that resolve to
