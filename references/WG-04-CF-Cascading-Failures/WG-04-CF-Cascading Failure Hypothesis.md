@@ -2792,7 +2792,7 @@ T+240 minutes: Full container in thermal runaway
 T+8 hours: Fire self-extinguishing (fuel exhaustion)
 - Total energy released: 1,800 kWh = 6,480 MJ = 1,548 kg TNT equivalent
 - Container status: Total loss, structural collapse
-- Salvage value: [investment required] (BESS must be removed as hazardous waste)
+- Salvage value: none assumed, since the BESS must be removed as hazardous waste. No sourced disposal or site remediation cost is held, so no figure is stated
 ```
 
 **Multi-Site Cascading Fire Scenario (15 BESS Simultaneous):**
@@ -2832,12 +2832,33 @@ Casualties:
 
 ### Appendix D: Economic Impact Methodology
 
-Customer outage costs are modelled using segmented per-hour loss rates derived from AEMO's Value of Customer Reliability (VCR) methodology:
+Direct customer cost is computed once in this paper, in section 5. This appendix records the method so a reader can reproduce or contest it, and does not restate the outputs.
 
-- Residential customers: Low-income ([investment required]/hour), middle-income ([investment required]/hour), high-income ([investment required]/hour)
-- Commercial customers: Retail ([investment required]/hour), manufacturing ([investment required]/hour), services ([investment required]/hour), healthcare ([investment required]/hour)
-- Duration multiplier: Non-linear increase reflecting escalating consequences (spoilage, equipment damage, lost contracts)
-- 36-hour midpoint scenario produces residential loss of [investment required] million and commercial loss of [investment required] million
+**The two relations.**
+
+```
+E_unserved (kWh) = customers x average coincident demand (kW) x restoration hours
+C_direct  (AUD)  = VCR (AUD per kWh) x E_unserved
+```
+
+**The inputs.**
+
+| Term | Value used | Basis |
+| :--- | :--- | :--- |
+| Customers | Per cascade tier, section 3.2 | RefDNSP-1.2M stipulated scenario parameter. Modelled, not sourced |
+| Average coincident demand | 2.15 kW per customer | 1,826 MW of regional demand across 850,000 customers, AEMO's final report on the South Australian black system of 28 September 2016 [n] |
+| Restoration hours | Per cascade tier, section 3.2 | Working group scenario parameter. Modelled, not sourced |
+| VCR | AUD 38.53 per kWh, residential NSW, 2024 dollars | AER 2024 VCR final report, Table 1 [n] |
+
+**Worked example, tier 2 at its lower bound.** 80,000 customers multiplied by 2.15 kW multiplied by 8 hours gives 1,376,000 kWh. At AUD 38.53 per kWh that is AUD 53.0 million. Section 5.4 carries the same arithmetic for every tier.
+
+**Three limits on the method.** All three are stated in section 5 and repeated here because a methodology appendix is where a reader looks for them.
+
+1. The AER determined the 2024 VCR values for unplanned outages of up to 12 hours [n]. Any figure resting on a longer duration is a linear extrapolation outside the determined range, not a determination, and the real relation is not known to be linear. The correct instrument beyond 12 hours is the AER's Value of Network Resilience review, and no VNR figure is held.
+2. The 2.15 kW anchor is an all-customer coincident average measured in one region at one moment. It is applied uniformly, so the residential VCR is applied to commercial and industrial customers as well. The AER's business values of AUD 22.25, AUD 34.39 and AUD 33.49 per kWh all sit below the residential figure used [n], so the blending biases every computed cost upward.
+3. One restoration-hours scalar per tier replaces a strongly non-uniform real profile. Section 5.5 shows the size of that simplification against the observed South Australian restoration curve.
+
+**Attribution, corrected.** An earlier draft of this appendix credited the VCR methodology to AEMO and asserted per-hour loss rates for low, middle and high income residential customers and for retail, manufacturing, services and healthcare commercial customers, together with a non-linear duration multiplier. None of those figures existed in any source consulted and all are removed. AEMO produced the first NEM VCR methodology in 2014; determination has been the AER's statutory responsibility since the AEMC's final rule of 5 July 2018, commencing 13 July 2018 [n]. The AER publishes VCR by jurisdiction and by customer segment, not by income band, and its determination carries no duration multiplier.
 
 ### Appendix E: Risk Calculation Methodology
 
