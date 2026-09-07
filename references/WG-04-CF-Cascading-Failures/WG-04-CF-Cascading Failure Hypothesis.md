@@ -884,7 +884,14 @@ T+60 seconds: Frequency Reversal
   - Net deficit: 1,200 MW generation loss vs. 2,800 MW load loss
   - Frequency begins falling: 50.5 Hz → 50.0 Hz → 49.7 Hz
 
-T+90 seconds: Under-Frequency Load Shedding (UFLS) - modelled staged ladder for RefDNSP-1.2M; AEMO coordinates UFLS but does not publish a single national relay-setting table, so these stages are the scenario's own assumption, not a sourced AEMO figure. Unlike the RoCoF-triggered initiation described in Section 2.2, this is genuine under-frequency shedding: real generation has now been lost and the frequency has fallen well below the normal band, so absolute-frequency relays legitimately fire
+T+90 seconds: Under-Frequency Load Shedding (UFLS)
+  Modelled staged ladder for RefDNSP-1.2M. AEMO coordinates UFLS but publishes
+  no single national relay-setting table, so these stages are the scenario's
+  own assumption, not a sourced AEMO figure.
+  This is genuine under-frequency shedding, unlike the RoCoF-triggered
+  initiation in Section 2.2. Real generation has been lost and frequency has
+  fallen well below the normal band, so absolute-frequency relays fire as
+  designed.
   - UFLS Stage 1 (modelled): 49.0 Hz - shed 5% of load (additional 500 MW)
   - UFLS Stage 2 (modelled): 48.8 Hz - shed 10% of load (additional 1,000 MW)
   - Cascading load shedding across interconnected regions
@@ -2333,11 +2340,11 @@ Attack parameters:
 Single-cycle frequency deviation:
   delta_f = P_swing / (D x S_base / 100) = 540 / (1.5 x 100) = 0.036 Hz
 
-Single-cycle RoCoF:
-  RoCoF = delta_f / (2 x H) = 0.036 / (2 x 3) = 0.006 Hz/s
+Single-cycle peak RoCoF (same sinusoidal form used throughout, df/dt = A x 2 x pi x f):
+  0.036 x 2 x pi x 0.5 = 0.113 Hz/s
 
-AEMO threshold comparison:
-  0.006 Hz/s << 1.0 Hz/s (single oscillation is safe)
+Threshold comparison:
+  0.113 Hz/s << 1.0 Hz/s (a single oscillation is safe)
 
 Cumulative effect over sustained oscillation:
   Resonant amplification factor at 0.3-1.2 Hz = 4-10x (frequency dependent)
