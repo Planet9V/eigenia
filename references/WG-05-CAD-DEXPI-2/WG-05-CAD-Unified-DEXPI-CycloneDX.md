@@ -1,6 +1,6 @@
 ## Abstract
 
-Modern high-density compute facilities and critical industrial plants suffer from a severe semantic disconnect between physical plant engineering and platform cybersecurity. Plant operators design facility infrastructure using Piping and Instrumentation Diagrams (P&IDs) under the DEXPI 2.0 (ISO 15926) data exchange standard. This standard captures pump curves, pipe diameters, manifold topologies, fluid chemistry (such as 25% propylene glycol), volumetric flow rates, and delta-T thermal dissipation limits. 
+Modern high-density compute facilities and critical industrial plants suffer from a severe semantic disconnect between physical plant engineering and platform cybersecurity. Plant operators design facility infrastructure using Piping and Instrumentation Diagrams (P&IDs) under the DEXPI 2.0 data exchange standard, whose equipment and property classes are defined against the ISO 15926-4 reference data library. This standard captures pump curves, pipe diameters, manifold topologies, fluid chemistry (such as 25% propylene glycol), volumetric flow rates, and delta-T thermal dissipation limits. 
 
 Conversely, cybersecurity and platform security engineers operate through Bills of Materials under the CycloneDX 1.6+ (ECMA-424) standard. This format documents hardware chips (HBOM), immutable firmware images (SBOM), cryptographic keys and certificates (CBOM), manufacturing supply chain provenance (MBOM), runtime operational envelopes (OBOM), and out-of-band management endpoints (SaaSBOM).
 
@@ -16,8 +16,8 @@ This paper formalizes the Unified DEXPI 2.0 and CycloneDX 1.6+ Semantic Bridge. 
 
 Industrial plants, water treatment facilities, and liquid-cooled data center facilities operate as tightly coupled cyber-physical systems. Despite their physical interdependence, the engineering tools used to design, operate, and insure these assets remain completely isolated.
 
-### 1.1 The Mechanical Engineering View (DEXPI 2.0 / ISO 15926)
-Plant and mechanical engineers speak the language of process chemistry, thermodynamics, and fluid mechanics. Their primary system model is the Piping and Instrumentation Diagram (P&ID). Under the DEXPI 2.0 standard (Data Exchange in the Process Industry, based on ISO 15926), the P&ID is represented as an object-oriented XML data structure defining:
+### 1.1 The Mechanical Engineering View (DEXPI 2.0 / ISO 15926-4)
+Plant and mechanical engineers speak the language of process chemistry, thermodynamics, and fluid mechanics. Their primary system model is the Piping and Instrumentation Diagram (P&ID). Under the DEXPI 2.0 standard (Data Exchange in the Process Industry, whose object and property classes are defined against ISO 15926-4 reference data), the P&ID is represented as an object-oriented XML data structure defining:
 
 1. **Equipment Objects:** Mechanical assets classified by functional schema, including Variable-Speed Centrifugal Pumps (`P-101`), Plate Heat Exchangers (`HEX-201`), and Coolant Distribution Units (`CDU-01`).
 2. **Piping Networks:** Pipe segments (`Line-102`) defining nominal pipe sizes, schedule ratings, wall thicknesses, and material specifications (such as 316L stainless steel or copper).
@@ -101,7 +101,7 @@ CycloneDX 1.6+ provides a unified, extensible data format capable of encoding mu
 +-------------------------------------------------------------------------+
 |                  DEXPI 2.0 PHYSICAL PLANT ONTOLOGY                      |
 +-------------------------------------------------------------------------+
-|  Cooling Distribution Units, Heat Exchangers, Pumps (ISO 15926 XML)     |
+|  Cooling Distribution Units, Heat Exchangers, Pumps (ISO 15926-4)       |
 |  Secondary Manifolds, Quick-Disconnect Ports, Flow Meters, Valves       |
 |  Fluid Dynamics: PG25 Volumetric Delivery, ΔT, Hydraulic Head Loss     |
 +-------------------------------------------------------------------------+

@@ -4,7 +4,7 @@ Contemporary cyber threat intelligence suffers from an acute measurement deficie
 
 This treatise formalizes the **Adversary Threat Quotient (ATQ)**; a continuous, cardinal metric normalized on the closed interval $[0, 100]$ that quantifies the real-time operational lethality of a specific adversary. Computed continuously via a PostgreSQL materialized view (`seldon.seldon_score_v2`), the ATQ synthesizes over 100,000 Threat Actor Capability & Asset Matching (TACAM) records, 600,000 Exploit Prediction Scoring System (EPSS) trajectory data points, 80,000 knowledge graph edges, and 35,000 geopolitical conflict events. 
 
-The ATQ decomposes into twelve auditable dimensions, each carrying a stated saturation threshold ($\theta_k$) chosen to keep the dimension from collapsing to unity across the actor population. One of those thresholds is set from data the working group holds; the rest are either the size of a fixed enumeration or the working group's own cap, and section 2.1 states which is which. Downstream, the ATQ serves as a direct parameterizing scalar for the Eigenia Monte Carlo graph simulation engine, modulating Boltzmann random walk probabilities across physical facility piping and instrumentation topologies (DEXPI 2.0 / ISO 15926). By establishing a direct mathematical bridge from threat actor posture to Annualised Loss Expectancy (ALE) and Gordon-Loeb optimal security investment bounds, the ATQ transforms qualitative threat intelligence into deterministic risk engineering.
+The ATQ decomposes into twelve auditable dimensions, each carrying a stated saturation threshold ($\theta_k$) chosen to keep the dimension from collapsing to unity across the actor population. One of those thresholds is set from data the working group holds; the rest are either the size of a fixed enumeration or the working group's own cap, and section 2.1 states which is which. Downstream, the ATQ serves as a direct parameterizing scalar for the Eigenia Monte Carlo graph simulation engine, modulating Boltzmann random walk probabilities across physical facility piping and instrumentation topologies (DEXPI 2.0 / ISO 15926-4). By establishing a direct mathematical bridge from threat actor posture to Annualised Loss Expectancy (ALE) and Gordon-Loeb optimal security investment bounds, the ATQ transforms qualitative threat intelligence into deterministic risk engineering.
 
 ---
 
@@ -320,7 +320,7 @@ Every input to that quotient is the working group's: the 240,000 USD control cos
 
 The ATQ model enforces full end-to-end normative systems assurance across cyber-physical infrastructure:
 - **IEC 62443 Standards Alignment:** Mapped to IEC 62443-3-2 risk assessment zones, Security Level Targets (SL-T 1 through SL-T 4), and SecRAC operational conditions.
-- **Physical Topology Integration (ISO 15926 / DEXPI 2.0):** Threat propagation graphs are anchored directly to XML piping and instrumentation schematics.
+- **Physical Topology Integration (DEXPI 2.0 / ISO 15926-4):** Threat propagation graphs are anchored directly to XML piping and instrumentation schematics.
 - **CycloneDX 1.6+ Multi-BOM Architecture:**
   * **HBOM (Hardware Bill of Materials):** Silicon ASICs, power distribution units, and variable frequency drives (VFDs).
   * **SBOM (Software Bill of Materials):** Firmware digests, SCADA runtime binaries, and Modbus protocol stacks.

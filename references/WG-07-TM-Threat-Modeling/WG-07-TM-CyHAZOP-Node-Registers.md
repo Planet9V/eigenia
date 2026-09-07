@@ -39,7 +39,7 @@ Baseboard Management Controllers (BMCs) operate an independent out-of-band manag
 
 ## 2. Multi-BOM and DEXPI Integration
 
-To prevent disconnected analysis, every industrial register documented in this CyHAZOP drill-down is mapped directly to its physical DEXPI 2.0 (ISO 15926) equipment tag and its CycloneDX 1.6+ multi-BOM component reference:
+To prevent disconnected analysis, every industrial register documented in this CyHAZOP drill-down is mapped directly to its physical DEXPI 2.0 equipment tag, classed against ISO 15926-4 reference data, and its CycloneDX 1.6+ multi-BOM component reference:
 
 ```
 +-------------------------------------------------------------------------+

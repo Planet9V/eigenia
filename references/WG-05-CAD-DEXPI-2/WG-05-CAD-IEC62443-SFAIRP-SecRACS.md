@@ -48,7 +48,7 @@ In industrial infrastructure, a profound disconnect separates theoretical standa
 
 ## 2. Multi-BOM and DEXPI Process Topology Integration
 
-To enforce IEC 62443 requirements systematically, the cyber-physical architecture couples the DEXPI 2.0 (ISO 15926) plant schematic with the CycloneDX 1.6+ multi-BOM specification:
+To enforce IEC 62443 requirements systematically, the cyber-physical architecture couples the DEXPI 2.0 plant schematic, whose equipment classes come from the ISO 15926-4 reference data library, with the CycloneDX 1.6+ multi-BOM specification:
 
 ```
 +-------------------------------------------------------------------------+

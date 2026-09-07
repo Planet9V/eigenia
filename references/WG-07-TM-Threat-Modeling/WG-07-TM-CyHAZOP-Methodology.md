@@ -4,7 +4,7 @@ In petrochemical refineries, nuclear power plants, and rail transport networks, 
 
 Conversely, modern hyperscale data centers and megawatt AI facilities have historically treated cybersecurity as an IT perimeter discipline, completely divorced from process safety engineering. Facilities deploy hundreds of networked programmable logic controllers (PLCs), variable frequency drives (VFDs), coolant distribution units (CDUs), and automatic transfer switches (ATS) across 400V power trains and liquid cooling loops. Each device runs firmware. Each presents an operational technology (OT) network interface. A compromised cooling controller commands the exact same physical failure as a sheared pump shaft, but executes across multiple redundant nodes simultaneously within sub-second timescales.
 
-This paper formalizes the CyHAZOP methodology: the systematic extension of IEC 61882 process safety hazard analysis to cyber-physical operational technology environments. By linking DEXPI 2.0 (ISO 15926) piping schematics directly to CycloneDX 1.6+ multi-BOM catalogs (HBOM, SBOM, CBOM, OBOM), CyHAZOP provides the mathematical bridge between digital exploits and physical damage. We analyze four critical hyperscale nodes: the CDU Secondary Liquid Cooling Loop, the Distributed Block UPS Power Train, the Building Management System (BMS) Supervisory Bus, and the Out-of-Band BMC Fabric. We formulate the mathematical transfer functions mapping cyber command injections to thermodynamic and hydraulic excursions, model Safety Instrumented System (SIS) probability of failure on demand under cyber stress, and present actuarial loss formulations for insurance treaty structuring, Probable Maximum Loss (PML), and Lloyd's Y5381 war exclusions.
+This paper formalizes the CyHAZOP methodology: the systematic extension of IEC 61882 process safety hazard analysis to cyber-physical operational technology environments. By linking DEXPI 2.0 piping schematics, classed against ISO 15926-4 reference data, directly to CycloneDX 1.6+ multi-BOM catalogs (HBOM, SBOM, CBOM, OBOM), CyHAZOP provides the mathematical bridge between digital exploits and physical damage. We analyze four critical hyperscale nodes: the CDU Secondary Liquid Cooling Loop, the Distributed Block UPS Power Train, the Building Management System (BMS) Supervisory Bus, and the Out-of-Band BMC Fabric. We formulate the mathematical transfer functions mapping cyber command injections to thermodynamic and hydraulic excursions, model Safety Instrumented System (SIS) probability of failure on demand under cyber stress, and present actuarial loss formulations for insurance treaty structuring, Probable Maximum Loss (PML), and Lloyd's Y5381 war exclusions.
 
 ---
 
@@ -35,13 +35,13 @@ A cyber-induced deviation is the deliberate or accidental manipulation of a sens
 
 ## 2. Integrating DEXPI 2.0 and CycloneDX Multi-BOM into CyHAZOP
 
-Traditional HAZOP fails in computing environments because engineers lack a unified data structure connecting physical piping to digital silicon. CyHAZOP resolves this by binding DEXPI 2.0 (ISO 15926) plant piping models with CycloneDX 1.6+ multi-BOM catalogs:
+Traditional HAZOP fails in computing environments because engineers lack a unified data structure connecting physical piping to digital silicon. CyHAZOP resolves this by binding DEXPI 2.0 plant piping models, whose equipment classes come from ISO 15926-4, with CycloneDX 1.6+ multi-BOM catalogs:
 
 **CyHAZOP unified asset delineation**
 
 ```mermaid
 flowchart LR
-    subgraph L["DEXPI 2.0 P&ID nodes (ISO 15926)"]
+    subgraph L["DEXPI 2.0 P&ID nodes (ISO 15926-4)"]
         HEX["Heat exchanger HEX-201"]
         PUMP["Pump P-101"]
         MAN["Manifolds"]
@@ -66,7 +66,7 @@ flowchart LR
 
 | Layer | Element | Content bound into the unified model |
 |:---|:---|:---|
-| **DEXPI 2.0 P&ID (ISO 15926)** | Heat Exchanger HEX-201, Pump P-101, Manifolds | ISO 15926 fluid properties: PG25 coolant, volumetric flow rate, bar |
+| **DEXPI 2.0 P&ID (ISO 15926-4)** | Heat Exchanger HEX-201, Pump P-101, Manifolds | ISO 15926-4 fluid property classes: PG25 coolant, volumetric flow rate, bar |
 | **CycloneDX 1.6+** | HBOM | OCP ORV3 trays, Samtec connectors, ASIC silicon dies |
 | | SBOM | Caliptra Silicon RoT, OpenSIL initializers, Linux kernels |
 | | CBOM | DICE cryptographic certificates, post-quantum ML-DSA keys |

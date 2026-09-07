@@ -2,7 +2,7 @@
 
 ## Abstract
 
-Critical infrastructure, process manufacturing, and high-density computing facilities are trapped within proprietary Computer-Aided Engineering (CAE) and Building Information Modeling (BIM) software ecosystems. Closed binary formats and vendor-locked data schemas enforced by Autodesk AutoCAD Plant 3D, Revit, AVEVA, and Bentley restrict access to core piping, mechanical, and instrumentation models. This walled garden prevents automated multi-physics simulation, multi-party systems assurance, and real-time cybersecurity graph compilation. This paper presents DEXPI 2.0 (Data Exchange in the Process Industry), an open, vendor-neutral specification grounded in ISO 15926 and modern XML/UML architectures, as the sovereign foundation for industrial digital twins. We analyze the technical mechanisms of vendor lock-in, define the mathematical representation of DEXPI topological networks, and demonstrate its three-tier equipment catalog abstraction across functional requirements, vendor specifications, and customer-configured assets. By liberating engineering data into computable graph structures, DEXPI 2.0 establishes the physical substrate required to build verifiable, open-standard cyber-physical twins.
+Critical infrastructure, process manufacturing, and high-density computing facilities are trapped within proprietary Computer-Aided Engineering (CAE) and Building Information Modeling (BIM) software ecosystems. Closed binary formats and vendor-locked data schemas enforced by Autodesk AutoCAD Plant 3D, Revit, AVEVA, and Bentley restrict access to core piping, mechanical, and instrumentation models. This walled garden prevents automated multi-physics simulation, multi-party systems assurance, and real-time cybersecurity graph compilation. This paper presents DEXPI 2.0 (Data Exchange in the Process Industry), an open, vendor-neutral specification grounded in the ISO 15926 series and modern XML/UML architectures, with its equipment and property classes drawn from the ISO 15926-4 reference data library, as the sovereign foundation for industrial digital twins. We analyze the technical mechanisms of vendor lock-in, define the mathematical representation of DEXPI topological networks, and demonstrate its three-tier equipment catalog abstraction across functional requirements, vendor specifications, and customer-configured assets. By liberating engineering data into computable graph structures, DEXPI 2.0 establishes the physical substrate required to build verifiable, open-standard cyber-physical twins.
 
 ## 1. The Crisis of Proprietary Walled Gardens in Industrial Engineering
 
@@ -24,11 +24,13 @@ The operational consequences of this lock-in are severe:
 
 The DEXPI initiative was founded by an international consortium of plant owner-operators (including BASF, Bayer, Evonik, and Covestro) in partnership with major CAE software vendors and academic institutions. Its explicit mission is the complete eradication of data exchange barriers across the plant lifecycle.
 
-### 2.1 Alignment with ISO 15926 and Information Modeling
+### 2.1 Alignment with the ISO 15926 Series and Information Modeling
 
-DEXPI 2.0 moves beyond early file-translation experiments by establishing a formal Unified Modeling Language (UML) information model mapped directly to the ISO 15926 enterprise integration standard (Industrial automation systems and integration; Integration of life-cycle data for process plants including oil and gas production facilities).
+DEXPI 2.0 moves beyond early file-translation experiments by establishing a formal Unified Modeling Language (UML) information model mapped onto the ISO 15926 series (Industrial automation systems and integration; Integration of life-cycle data for process plants including oil and gas production facilities).
 
-Under ISO 15926, every physical entity, functional requirement, and topological connection is classified within a formal Reference Data Library (RDL). DEXPI utilizes the POSC Caesar Association sandbox and a specialized DEXPI Sandbox to define exact semantic classes:
+The series is not a single document, and which part is meant changes what the claim says. ISO 15926-1 states the scope and fundamental principles. ISO 15926-2 holds the data model. ISO 15926-4 holds the reference data library, and that is the part DEXPI actually consumes.
+
+Under ISO 15926-4, every physical entity, functional requirement, and topological connection is classified within a formal Reference Data Library (RDL). DEXPI uses the POSC Caesar Association sandbox and a specialized DEXPI Sandbox, which carries the additional part 4 class definitions DEXPI needs, to define exact semantic classes:
 
 - `PlantStructure`: Spatial breakdown, process units, and plant boundary definitions.
 - `Equipment`: Apparatus, rotational machines, thermal exchangers, and containment vessels.
@@ -163,4 +165,4 @@ When an organization mandates DEXPI 2.0 across all engineering, procurement, and
 
 Proprietary CAD and BIM tools have served their historical purpose as drafting aids, but their closed architectures now throttle the evolution of industrial cyber-physical intelligence. Critical infrastructure cannot remain dependent on proprietary formats that obscure physical risks and prevent algorithmic defense.
 
-DEXPI 2.0 provides the missing foundation: an open, ISO 15926-aligned information model that treats the process plant as a computable directed graph. By adopting DEXPI 2.0, industrial operators establish vendor independence, unlock automated safety verification, and prepare their physical assets for seamless integration with cyber bill of materials standards. The road to the sovereign cyber digital twin begins with the liberation of the P&ID.
+DEXPI 2.0 provides the missing foundation: an open information model, aligned to the ISO 15926 series and classed against the ISO 15926-4 reference data library, that treats the process plant as a computable directed graph. By adopting DEXPI 2.0, industrial operators establish vendor independence, unlock automated safety verification, and prepare their physical assets for seamless integration with cyber bill of materials standards. The road to the sovereign cyber digital twin begins with the liberation of the P&ID.
