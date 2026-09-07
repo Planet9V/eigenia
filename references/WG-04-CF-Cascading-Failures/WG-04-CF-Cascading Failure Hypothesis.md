@@ -405,6 +405,40 @@ A single oscillation cycle does not by itself exceed the RoCoF threshold. Sustai
 
 The detail that makes the attack work is where the frequency sits while that happens. A +/- 0.15 Hz deviation around 50 Hz stays between 49.85 and 50.15 Hz, which is exactly the AEMC normal operating band the system occupies almost all the time. Absolute-frequency protection, under-frequency load shedding, never sees it, because the frequency never falls to a shedding setpoint. Rate-of-change protection does see it, because df/dt reaches 1.13 Hz/s while the frequency itself never leaves the band an operator watches. The cascade is initiated by RoCoF relays tripping on rate of change, not by under-frequency relays tripping on an absolute setpoint. This is the same failure mode that disconnected roughly 350 MW of embedded generation in Great Britain on 9 August 2019, where RoCoF protection set to 0.125 Hz/s tripped generation the system needed. The earlier characterisation, an oscillation growing until frequency reached 49.85 Hz and under-frequency relays tripped, described a setpoint no network service provider would install, because 49.85 Hz is the floor of the normal band and shedding there would fire during ordinary operation.
 
+The diagram below traces the same attack through the two protection systems that could stop it. The left lane is what under-frequency protection watches, the absolute frequency, which never leaves the 49.85 to 50.15 Hz normal band. The right lane is what RoCoF protection watches, the rate of change, which climbs with oscillation frequency until it crosses the 1.0 Hz/s threshold. The attack passes the left lane untouched and trips the right lane, which is the whole point.
+
+```mermaid
+graph TB
+    OSC[Attack input<br/>BESS fleet swing +/- 540 MW<br/>Frequency deviation +/- 0.15 Hz<br/>Resonance band 0.3 to 1.2 Hz]
+
+    OSC --> ABS[Absolute frequency<br/>stays 49.85 to 50.15 Hz]
+    OSC --> RATE[Rate of change df/dt<br/>climbs with oscillation frequency]
+
+    subgraph "Under-frequency protection watches absolute Hz"
+        ABS --> UF[Normal operating band never left<br/>load-shedding setpoint never reached]
+        UF --> UFOUT[No trip]
+    end
+
+    subgraph "RoCoF protection watches df/dt against 1.0 Hz per second"
+        RATE --> D1[0.3 Hz oscillation gives df/dt 0.28 Hz/s, below threshold]
+        RATE --> D2[1.0 Hz oscillation gives df/dt 0.94 Hz/s, below threshold]
+        RATE --> D3[1.2 Hz oscillation gives df/dt 1.13 Hz/s, above 1.0 Hz/s]
+        D3 --> RCOUT[RoCoF relay trip]
+    end
+
+    UFOUT --> CONC[Cascade begins on rate of change<br/>while frequency stays inside the band an operator watches]
+    RCOUT --> CONC
+
+    classDef inband fill:#2ed573,stroke:#009432,color:#000
+    classDef cross fill:#ff4757,stroke:#c92a2a,color:#fff
+    classDef neutral fill:#457b9d,stroke:#1d3557,color:#fff
+    class ABS,UF,UFOUT inband
+    class D3,RCOUT cross
+    class OSC,RATE,D1,D2,CONC neutral
+```
+
+A single oscillation cycle reaches only 0.113 Hz/s and trips nothing. The values above are the sustained-oscillation peaks derived earlier in this section: df/dt of A x 2 x pi x f for a +/- 0.15 Hz deviation at each resonance frequency. Great Britain's 9 August 2019 relays were set even lower, at 0.125 Hz/s, and a cascade followed.
+
 ### 2.3 Why Reduced Inertia Creates Vulnerability
 
 McKenney (2024, 2025) identifies four pathways by which low inertia accelerates cascading failures:
@@ -686,6 +720,43 @@ graph TB
     class A3,A4,B1,B2,B3,C1,C2,C3 cascade
     class D1,D2,D3 collapse
     class E1,E2,E3 recovery
+```
+
+The node chain above shows what connects to what. It does not show the causal ordering in time, which is where the danger lives; each tier fires because the previous one did, and the intervals between them are short. The sequence diagram below carries the same tiers as a timeline, so the reader can see how little time separates a compromised token from a regional blackout. It is added rather than substituted because the two views answer different questions: the node chain shows the propagation topology, the sequence shows the order and the intervals.
+
+```mermaid
+sequenceDiagram
+    participant AT as Attacker
+    participant API as Retailer API
+    participant BESS as BESS Fleet
+    participant GRID as Grid Frequency
+    participant PROT as Protection Relays
+    participant NET as Distribution Network
+    participant AEMO as AEMO
+
+    Note over AT,API: T+0 min, initial attack
+    AT->>API: Compromised OAuth token, bulk dispatch
+    API->>BESS: Synchronised charge and discharge, 54 assets
+    BESS->>GRID: +/- 540 MW power swing
+    Note over GRID: Frequency stays 49.85 to 50.15 Hz
+
+    Note over GRID,PROT: T+15 min, protection cascade
+    GRID->>PROT: df/dt above 1.0 Hz/s
+    PROT->>NET: RoCoF relays trip, load shed 200 MW
+
+    Note over NET: T+30 min, local cascade
+    NET->>NET: Voltage sag, 3 substations offline, 8k to 12k customers
+
+    Note over NET: T+60 min, regional cascade
+    NET->>NET: 300 MW load drop, adjacent zones overload, 100k to 500k customers
+
+    Note over NET,AEMO: T+120 min, system-wide collapse
+    NET->>AEMO: 800 MW deficit, generator protection trips
+    AEMO->>NET: Emergency protocols, 1.0m to 1.5m customers
+
+    Note over AEMO,NET: T+120 min to T+72 h, recovery
+    AEMO->>NET: Manual black start, zone by zone
+    NET-->>NET: Full recovery in 24 to 72 hours
 ```
 
 ### 3.2 Tier-by-Tier Impact Quantification
@@ -1536,9 +1607,9 @@ This is the primary attack vector enabling the Death Wobble scenario. The attack
 
 ```mermaid
 graph LR
-    A[Reconnaissance<br/>Procurement docs<br/>implementation period] -->|Architecture| B[Social Engineering<br/>Retailer employee<br/>implementation period]
-    B -->|Credential Theft| C[API Access<br/>OAuth token<br/>implementation period]
-    C -->|Asset Discovery| D[DER Enumeration<br/>54 BESS mapped<br/>implementation period]
+    A[Reconnaissance<br/>Procurement docs] -->|Architecture| B[Social Engineering<br/>Retailer employee]
+    B -->|Credential Theft| C[API Access<br/>OAuth token]
+    C -->|Asset Discovery| D[DER Enumeration<br/>54 BESS mapped]
     D -->|Oscillation Calc| E[Attack Execution<br/>Mass dispatch<br/>30 minutes]
     E -->|Grid Instability| F[Cascading Blackout<br/>1.2M customers<br/>24-72 hours]
 
@@ -1549,6 +1620,53 @@ graph LR
     class A,B recon
     class C,D access
     class E,F impact
+```
+
+The same six stages map onto the Purdue reference model, from enterprise systems at Level 4 and 5 down to the physical process at Level 0. The mapping matters because the boundary crossings are the argument: the attack starts in the retailer's business systems, crosses the IT-OT boundary through an API that accepts a stolen token, and ends by moving grid frequency itself. Each labelled arrow is a crossing a defender could have blocked.
+
+```mermaid
+graph TB
+    subgraph "Level 4 and 5: Enterprise"
+        S1[Reconnaissance<br/>Procurement and architecture docs]
+        S2[Social engineering<br/>Retailer employee targeted]
+        S3[Credential theft<br/>OAuth token captured]
+        S1 --> S2 --> S3
+    end
+
+    subgraph "Level 3.5: IT-OT DMZ"
+        S4[Retailer API access<br/>Bearer token accepted, no MFA]
+    end
+
+    subgraph "Level 3: Operations"
+        S5[DERMS command injection<br/>Bulk dispatch to 54 BESS]
+    end
+
+    subgraph "Level 2: Supervisory control"
+        S6[Synchronised setpoints<br/>Charge and discharge, all assets in phase]
+    end
+
+    subgraph "Level 1: Basic control"
+        S7[BESS controllers execute<br/>+/- 540 MW power swing]
+    end
+
+    subgraph "Level 0: Process"
+        S8[Grid frequency oscillates<br/>df/dt crosses 1.0 Hz/s threshold]
+        S9[Protection relays trip<br/>Cascade begins]
+        S8 --> S9
+    end
+
+    S3 -->|crosses into DMZ| S4
+    S4 -->|crosses into operations| S5
+    S5 -->|into supervisory| S6
+    S6 -->|into basic control| S7
+    S7 -->|into process| S8
+
+    classDef it fill:#457b9d,stroke:#1d3557,color:#fff
+    classDef dmz fill:#ffa502,stroke:#ff6b00,color:#000
+    classDef ot fill:#ff4757,stroke:#c92a2a,color:#fff
+    class S1,S2,S3 it
+    class S4 dmz
+    class S5,S6,S7,S8,S9 ot
 ```
 
 **Current Control Gaps:**
@@ -1779,7 +1897,7 @@ The ongoing cyber and information security component of the sector-average CIRMP
 
 ```mermaid
 graph TB
-    subgraph "Defense-in-Depth Architecture (18-Month Implementation)"
+    subgraph "Defense-in-Depth Architecture (Phase 2)"
         L1[Layer 1: Perimeter Security]
         L2[Layer 2: Network Segmentation]
         L3[Layer 3: Protocol Security]
