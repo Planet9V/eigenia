@@ -122,7 +122,10 @@ Utility-scale BESS installations (Node N15, IEC 62443 Zone 6) provide fast frequ
 +-------------------------------------------------------------------------+
 ```
 
-### 3.1 NFPA 855:2026 and UL 9540A Empirical Safety Mandates
+### 3.1 NFPA 855 and UL 9540A Safety Mandates
+
+What follows are code requirements and test-protocol requirements, not measured results. UL 9540A is a test method that characterises how a cell, module or unit behaves once thermal runaway starts; NFPA 855 is an installation standard that sets rules referencing those test results. A design meeting both has satisfied a specification. It has not been shown to survive an attack, and no test in either document contemplates an adversary writing to the battery management system.
+
 Under NFPA 855 (Standard for the Installation of Stationary Energy Storage Systems) and UL 9540A testing protocols, BESS installations require:
 - **15-Meter Setback Distances:** Minimum physical separation from data hall structures unless unit-level testing proves zero fire propagation.
 - **Continuous Off-Gas Detection:** Electrochemical sensors detecting trace hydrogen fluoride (HF) and off-gas hydrocarbons prior to thermal runaway onset.
@@ -232,7 +235,9 @@ $$\text{PML}_{\text{Microgrid}} = \$45\text{M} + \$18\text{M} + \$120\text{M} + 
 This represents a classic Table B Extremistan catastrophe. The financial consequence of a cyber-physical failure dwarfs traditional IT breach losses by over an order of magnitude.
 
 ### 5.5 Return on Security Investment (ROSI) for Microgrid Safety Interlocks
-Deploying hardwired analog over-voltage relays, physical synchrocheck interlocks, and optical data diodes ($C_{\text{control}} = 680,000\text{ USD}$) reduces annual loss expectancy from $\text{ALE} = 17,980,000\text{ USD}$ to $\text{ALE} = 360,000\text{ USD}$, delivering a verified $\text{ROSI} = 2,491\%$.
+Deploying hardwired analog over-voltage relays, physical synchrocheck interlocks, and optical data diodes ($C_{\text{control}} = 680,000\text{ USD}$) reduces annual loss expectancy from $\text{ALE} = 17,980,000\text{ USD}$ to $\text{ALE} = 360,000\text{ USD}$, delivering $\text{ROSI} = 2,491\%$ (modelled: the arithmetic recomputes exactly from the three stated inputs, and this working group chose all three).
+
+The control cost, the unmitigated annual loss expectancy and the residual loss expectancy are scenario parameters for the reference microgrid of section 4. No claims population, vendor quotation or operator record stands behind any of them. The ratio is a statement about the model rather than a measured return on a real deployment, and it moves proportionally with whichever input a reader disputes. Halve the avoided loss and the figure halves. The only published benchmark this working group holds for control effectiveness is the Dragos and Marsh McLennan 2025 OT Security Financial Risk Report, which measures average risk reduction per control class in the range of 12 to 18 percent, and it measures reduction in risk rather than return on investment, so it does not bound this number in either direction.
 
 ---
 
@@ -277,14 +282,16 @@ To prevent out-of-phase breaker closure attacks (which physically destroy substa
 
 ## 7. Actuarial and Reinsurance Treaty Structuring
 
-Underwriting emerging microgrids and BESS installations requires aligning policy language with empirical physical invariants:
+Underwriting emerging microgrids and BESS installations requires aligning policy language with the physical invariants set out in section 6. Those three invariants are this working group's own synthesis. No insurer has been shown to underwrite against them, and no treaty is known to reference them.
+
+The table below is a proposed treaty structure rather than observed market terms. Every deductible, waiting period and loading in it is set by this working group to show the shape of the argument, not quoted from a reinsurer:
 
 | Reinsurance Treaty Dimension | Unhardened Microgrid (Software BMS Only) | Hardened Microgrid (Eigenia Standard) | Actuarial Consequence |
 |:---|:---|:---|:---|
 | **Property Catastrophe Retention (Deductible)** | Punitive $50,000,000 deductible; mandatory thermal runaway sub-limits. | $5,000,000 deductible; full replacement cost coverage without sub-limits. | Working capital released; policy attachment points optimized. |
 | **Business Interruption Waiting Period** | 14-day waiting period; lead-time exclusions for long-lead transformers. | 24-hour waiting period; full affirmative coverage across 52-week restoration. | Complete balance-sheet protection against unhedged utility outages. |
-| **Lloyd's Y5381 War Exclusion** | Total claim denial if cyber attack is attributed to state-sponsored actor. | Affirmative cyber-physical coverage granted; war exclusion waived. | Verified physical air gaps provide forensic proof of containment. |
-| **Portfolio Accumulation Surcharge** | 35% premium loading to cover correlated multi-site microgrid failure. | 0% accumulation loading; microgrids verified as electrically independent. | Eliminates systemic capital loadings across multi-campus portfolios. |
+| **Lloyd's Y5381 War Exclusion** | Total claim denial if cyber attack is attributed to state-sponsored actor. | Affirmative cyber-physical coverage granted; war exclusion waived. | Inspected physical air gaps provide forensic evidence of containment. |
+| **Portfolio Accumulation Surcharge** | 35% premium loading to cover correlated multi-site microgrid failure. | 0% accumulation loading; microgrids shown by design review to be electrically independent. | Eliminates systemic capital loadings across multi-campus portfolios. |
 
 ---
 

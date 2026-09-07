@@ -516,7 +516,9 @@ $$x_{min}^{scaled} = x_{min} \times \max\left(0.7, \ \frac{\log_{10}(R)}{9}\righ
 
 ### F32. Kolmogorov-Smirnov Goodness-of-Fit Test
 
-Tests whether the fitted Pareto distribution adequately models the empirical tail.
+Tests whether the fitted Pareto distribution is consistent with the empirical tail, meaning the observed loss sample itself rather than a known ground truth distribution.
+
+The word carries its statistical sense on this line and no wider one. $F_{emp}$ is the empirical distribution function of the sample drawn from the `threat_incidents` table, and the statistic compares the fitted curve against that sample alone. A small $D_n$ says the sample does not refute the Pareto fit at the chosen significance level. It does not establish that losses are Pareto distributed, it says nothing about the reporting bias the preceding formula corrects for, and this document records no such test having been run against any dataset. The formula is stated here as part of the model specification, not as a result.
 
 **File:** `ale-engine.ts:225-268`
 

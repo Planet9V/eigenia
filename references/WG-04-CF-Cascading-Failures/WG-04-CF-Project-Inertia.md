@@ -267,7 +267,7 @@ This uses the table's assumption that the lost infeed carries no inertia; where 
 
 **Reasoning, shown.** AEMO's table gives 0.25 seconds from 50 Hz to 49 Hz at 4 Hz/s [1]. PRC-029-1 requires RoCoF to be computed as an average "for a time period of greater than or equal to 0.1 second", and not during the fault [4]. At 4 Hz/s that minimum window consumes 40% of the budget before any device decides anything, and EirGrid's fastest published response product starts at 150 ms [3], 60% of it. They come from different jurisdictions and services and must not be added into one timeline.
 
-**Falsifier.** A jurisdiction mandating a materially shorter RoCoF measurement window, or a validated sub-cycle measurement that does not depend on a windowed average.
+**Falsifier.** A jurisdiction mandating a materially shorter RoCoF measurement window, or a sub-cycle measurement technique accepted into a published reliability standard on the strength of type testing, so that it no longer depends on a windowed average. Neither exists in this paper's evidence base today, which is why the claim stands; either would retire it.
 
 **Third claim, Eigenia synthesis.** The dominant severe event by 2040 is a separation whose imbalance is sized by scheduled cross-region flow, not by the largest generating unit.
 
