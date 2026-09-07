@@ -11,12 +11,16 @@ The Data Exchange in Process Industry (DEXPI) 2.0 standard defines an XML-based 
 
 Traditional Software Bill of Materials (SBOM) only cover application code libraries. Eigenia extends this with a unified **4-BOM Architecture**:
 
-| BOM Dimension | Scope & Target | Attestation Schema |
+| BOM Dimension | Scope & Target | CycloneDX component type |
 | :--- | :--- | :--- |
-| **1. Software BOM (SBOM)** | Operating system, firmware, embedded SCADA libraries | CycloneDX 1.6 JSON/XML |
-| **2. Hardware BOM (HBOM)** | PLC chassis, I/O modules, ASIC chips, board revisions | Hardware Component Schema |
-| **3. OT BOM (OTBOM)** | Modbus/DNP3 fieldbus devices, RTU controllers, sensors | Field Device Attestation |
-| **4. Component BOM (CBOM)** | Valves, actuators, heat exchangers, physical piping | Industrial Asset BOM |
+| **1. Hardware BOM (HBOM)** | PLC chassis, I/O modules, ASIC chips, board revisions, and the physical plant items: valves, actuators, heat exchangers, piping | `device`, `hardware` |
+| **2. Software BOM (SBOM)** | Operating system, firmware, embedded SCADA libraries, and the firmware inside Modbus/DNP3 fieldbus devices, RTU controllers and sensors | `firmware`, `library`, `application` |
+| **3. Cryptography BOM (CBOM)** | Device identity keys, certificate chains, and the algorithms each control loop depends on | `cryptographic-asset` |
+| **4. Manufacturing BOM (MBOM)** | Supplier chain of custody, production lots, and material certification for the physical plant items | `component`, `metadata.manufacturer` |
+| **5. Operations BOM (OBOM)** | Setpoint limits, rate limits, and the operating envelope each device is permitted to hold | `data`, `service` |
+| **6. SaaS BOM (SaaSBOM)** | Fieldbus and management endpoints exposed by RTUs, protocol gateways and historians | `service` |
+
+CBOM is the Cryptography Bill of Materials, which is what CycloneDX means by the `cryptographic-asset` component type. Physical plant items are not a separate BOM layer: the part inventory is the HBOM, and the material certification behind those parts is the MBOM. Field device firmware is software and belongs in the SBOM, and the network endpoints those devices expose belong in the SaaSBOM.
 
 ## 3. Deliverables & Integration Standards
 
