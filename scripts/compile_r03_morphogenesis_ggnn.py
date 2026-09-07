@@ -145,7 +145,7 @@ Where:
 - $\dot{L}_{\text{BI}}(t)$ is the business interruption revenue loss rate ($24,000\text{ USD/hour}$).
 - $\Phi_{\text{regulatory}}$ is the statutory fine under EU CRA Article 64.
 
-Deploying L-gGNN behavioral monitoring controls ($C_{\text{controls}} = 380,000\text{ USD}$) detects insider sabotage trajectories early in the signifying chain, reducing annualized loss expectancy from $11,800,000\text{ USD}$ to $420,000\text{ USD}$ and delivering a verified Return on Security Investment ($\text{ROSI}$):
+Deploying L-gGNN behavioral monitoring controls ($C_{\text{controls}} = 380,000\text{ USD}$) detects insider sabotage trajectories early in the signifying chain, reducing annualized loss expectancy from $11,800,000\text{ USD}$ to $420,000\text{ USD}$ and delivering a modelled Return on Security Investment ($\text{ROSI}$). The loss expectancies, the control cost, and the detection improvement they encode are author-chosen reference values for a 120-rack hall. The percentage below is exact arithmetic on those values:
 
 $$\text{ROSI} = \frac{(\text{ALE}_{\text{unmitigated}} - \text{ALE}_{\text{hardened}}) - C_{\text{controls}}}{C_{\text{controls}}} \times 100\% = \frac{\$11,380,000 - \$380,000}{\$380,000} \times 100\% = 2,895\%$$
 
@@ -156,6 +156,10 @@ final_content = header + body + grounding_section
 
 # Final verification: eliminate any lingering em-dashes
 final_content = final_content.replace('—', '; ').replace('–', ' - ')
+
+# The em-dash substitution above leaves ' ;  ' wherever the source manuscript
+# spaced its dashes. Collapse those back to a tight semicolon.
+final_content = final_content.replace(' ;  ', '; ').replace(' ; ', '; ')
 
 # Ensure directory exists
 os.makedirs(os.path.dirname(dest_path), exist_ok=True)

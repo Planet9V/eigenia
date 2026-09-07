@@ -263,7 +263,7 @@ Where:
 - $\dot{L}_{\text{BI}}(t)$ is the business interruption revenue loss rate ($24,000\text{ USD/hour}$).
 - $\Phi_{\text{regulatory}}$ is the statutory fine under EU CRA Article 64.
 
-Deploying the Seven-Staff Fugue digital twin monitoring architecture ($C_{\text{controls}} = 310,000\text{ USD}$) detects cross-layer dissonance in the middleground, reducing annualized loss expectancy from $10,500,000\text{ USD}$ to $340,000\text{ USD}$ and yielding a verified Return on Security Investment ($\text{ROSI}$):
+Deploying the Seven-Staff Fugue digital twin monitoring architecture ($C_{\text{controls}} = 310,000\text{ USD}$) detects cross-layer dissonance in the middleground, reducing annualized loss expectancy from $10,500,000\text{ USD}$ to $340,000\text{ USD}$ and yielding a modelled Return on Security Investment ($\text{ROSI}$). Both loss expectancies and the control cost are author-chosen reference values for a 120-rack hall. The percentage below is exact arithmetic on those values and nothing more:
 
 $$\text{ROSI} = \frac{(\text{ALE}_{\text{unmitigated}} - \text{ALE}_{\text{hardened}}) - C_{\text{controls}}}{C_{\text{controls}}} \times 100\% = \frac{\$10,160,000 - \$310,000}{\$310,000} \times 100\% = 3,177\%$$
 

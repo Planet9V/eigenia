@@ -347,7 +347,7 @@ Where $\tau_{spike}$ is dynamically adjusted based on the "Analyst's" threshold 
 
 #### Works cited
 
-1. Gated Graph Neural Networks ;  Graph4NLP v0.4.1 documentation - GitHub Pages, accessed November 27, 2025, [https://graph4ai.github.io/graph4nlp/guide/gnn/ggnn.html](https://graph4ai.github.io/graph4nlp/guide/gnn/ggnn.html)  
+1. Gated Graph Neural Networks; Graph4NLP v0.4.1 documentation - GitHub Pages, accessed November 27, 2025, [https://graph4ai.github.io/graph4nlp/guide/gnn/ggnn.html](https://graph4ai.github.io/graph4nlp/guide/gnn/ggnn.html)  
 2. GATED GRAPH SEQUENCE NEURAL NETWORKS - Microsoft, accessed November 27, 2025, [https://www.microsoft.com/en-us/research/wp-content/uploads/2015/11/1511.05493.pdf](https://www.microsoft.com/en-us/research/wp-content/uploads/2015/11/1511.05493.pdf)  
 3. Cybernetic Big Five Theory - Scott Barry Kaufman, accessed November 27, 2025, [https://scottbarrykaufman.com/wp-content/uploads/2014/08/DeYoung-2014-CB5T-JRP.pdf](https://scottbarrykaufman.com/wp-content/uploads/2014/08/DeYoung-2014-CB5T-JRP.pdf)  
 4. View of Lacanian Psychoanalysis and the Logic of the Cut - Sanglap: Journal of Literary and Cultural Inquiry, accessed November 27, 2025, [https://sanglap-journal.in/index.php/sanglap/article/view/93/155](https://sanglap-journal.in/index.php/sanglap/article/view/93/155)  
@@ -403,7 +403,7 @@ Where:
 - $\dot{L}_{\text{BI}}(t)$ is the business interruption revenue loss rate ($24,000\text{ USD/hour}$).
 - $\Phi_{\text{regulatory}}$ is the statutory fine under EU CRA Article 64.
 
-Deploying L-gGNN behavioral monitoring controls ($C_{\text{controls}} = 380,000\text{ USD}$) detects insider sabotage trajectories early in the signifying chain, reducing annualized loss expectancy from $11,800,000\text{ USD}$ to $420,000\text{ USD}$ and delivering a verified Return on Security Investment ($\text{ROSI}$):
+Deploying L-gGNN behavioral monitoring controls ($C_{\text{controls}} = 380,000\text{ USD}$) detects insider sabotage trajectories early in the signifying chain, reducing annualized loss expectancy from $11,800,000\text{ USD}$ to $420,000\text{ USD}$ and delivering a modelled Return on Security Investment ($\text{ROSI}$). The loss expectancies, the control cost, and the detection improvement they encode are author-chosen reference values for a 120-rack hall. The percentage below is exact arithmetic on those values:
 
 $$\text{ROSI} = \frac{(\text{ALE}_{\text{unmitigated}} - \text{ALE}_{\text{hardened}}) - C_{\text{controls}}}{C_{\text{controls}}} \times 100\% = \frac{\$11,380,000 - \$380,000}{\$380,000} \times 100\% = 2,895\%$$
 

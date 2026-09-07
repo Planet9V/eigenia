@@ -293,7 +293,7 @@ class CognitiveDigitalTwin:
         }
 ```
 
-This simulation engine generates statistical distributions of human error probabilities under varying control room configurations, providing engineering teams with empirical evidence to justify automated safety interlocks.
+This simulation engine generates statistical distributions of human error probabilities under varying control room configurations, giving engineering teams a simulated error distribution with which to argue for automated safety interlocks. That distribution is model output. It inherits every assumption in the psychometric parameters, the arousal curve, and the alarm-rate schedule fed into the engine, and it is not a measurement taken in any real control room.
 
 ---
 
@@ -334,7 +334,7 @@ Where:
 - $\dot{L}_{\text{BI}}(t)$ is the business interruption revenue loss rate ($24,000\text{ USD/hour}$).
 - $\Phi_{\text{regulatory}}$ is the statutory fine under EU CRA Article 64.
 
-Deploying the Cognitive Digital Twin to optimize control room ergonomics and automate emergency trip interlocks ($C_{\text{controls}} = 240,000\text{ USD}$) reduces the probability of human-induced thermal destruction $P_{\text{cognitive collapse}}$ from $0.42$ to $0.015$, mitigating annualized loss expectancy from $9,600,000\text{ USD}$ to $290,000\text{ USD}$ and delivering a verified Return on Security Investment ($\text{ROSI}$):
+Deploying the Cognitive Digital Twin to optimize control room ergonomics and automate emergency trip interlocks ($C_{\text{controls}} = 240,000\text{ USD}$) reduces the probability of human-induced thermal destruction $P_{\text{cognitive collapse}}$ from $0.42$ to $0.015$, mitigating annualized loss expectancy from $9,600,000\text{ USD}$ to $290,000\text{ USD}$ and delivering a modelled Return on Security Investment ($\text{ROSI}$). The collapse probabilities $0.42$ and $0.015$ are simulation outputs under the parameter set stated above rather than observed rates, and the two loss expectancies are reference figures. The percentage below follows from them by arithmetic alone:
 
 $$\text{ROSI} = \frac{(\text{ALE}_{\text{unmitigated}} - \text{ALE}_{\text{hardened}}) - C_{\text{controls}}}{C_{\text{controls}}} \times 100\% = \frac{\$9,310,000 - \$240,000}{\$240,000} \times 100\% = 3,779\%$$
 
@@ -343,7 +343,7 @@ Compliance with SFAIRP (So Far As Is Reasonably Practicable) standards underpins
 ### 8.1 Lloyd's Y5381 Cyber Catastrophe Underwriting and Primary Attachment Points
 Underwriting cyber property damage in high-density computing campuses requires navigating the strict war and state-backed cyber operation exclusions defined in Lloyd's Market Association bulletins (LMA5529 through LMA5533 and Y5381). Insurers require transparent proof that an operator's delay in activating emergency cooling interlocks will not convert an insurable hardware breakdown into an uninsurable systemic catastrophe.
 
-By embedding the Cognitive Digital Twin into the insured facility's operational risk audit, underwriters verify that human cognitive failure is insulated by deterministic SIL-3 physical hardware cutouts. This empirical demonstration allows syndicate syndication leads to structure favorable treaty terms: lowering primary attachment points from $10,000,000\text{ USD}$ down to $2,500,000\text{ USD}$, eliminating punitive consequential loss exclusions, and underwriting affirmative limits up to $75,000,000\text{ USD}$ per single campus risk.
+By embedding the Cognitive Digital Twin into the insured facility's operational risk audit, underwriters verify that human cognitive failure is insulated by deterministic SIL-3 physical hardware cutouts. That demonstration rests on the twin's stated model of operator failure and on the physical evidence of the cutout wiring, not on claims data. On that basis syndicate syndication leads can structure favorable treaty terms: lowering primary attachment points from $10,000,000\text{ USD}$ down to $2,500,000\text{ USD}$, eliminating punitive consequential loss exclusions, and underwriting affirmative limits up to $75,000,000\text{ USD}$ per single campus risk.
 
 ---
 
