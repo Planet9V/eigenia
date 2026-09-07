@@ -102,3 +102,55 @@ Decision: fix F1, F2 and F5 BEFORE the section rebuilds (plan tasks 5 and 6),
 because those tasks rewrite the sections these errors live in and would
 otherwise carry them forward. F3 and F4 are resolved during the rebuild, when
 the surrounding argument is being rewritten regardless.
+
+## F6. The UK 2019 figures are wrong in five places. CONFIRMED.
+
+Checked against National Grid ESO's Technical Report on the events of
+9 August 2019 (final, 6 September 2019), filed as Source 2 in
+`references/external-research/WG-04-CF_blackout-incidents_20260906.md`.
+
+| Paper says | Report says | Where in paper |
+|:---|:---|:---|
+| 660 MW gas | 641 MW, and in THREE separate trips (244 MW ST, then 210 MW GT, then 187 MW GT), not one event | 420, 2477 |
+| 740 MW wind | 737 MW (Hornsea) | 420, 2477 |
+| 345 MW DER tripped | "approximately 350MW" | 400, 420, 2477 |
+| "RoCoF reached 0.135 Hz/s" | 0.125 Hz/s is the RELAY THRESHOLD. No measured system RoCoF of 0.135 Hz/s appears anywhere in the report | 6, 376, 400, 420, 2251, 2297, 2477, 2657 |
+| "~30% wind penetration" | no wind-penetration figure for that day in the report | 420 |
+
+The 0.135 Hz/s error is the serious one, and it is the same class of mistake as
+F1: a protection SETTING reported as a MEASURED value. It appears 8 times,
+including the abstract and the conclusions, and it is load-bearing for the
+paper's "protection maloperation at moderate RoCoF" argument. That argument
+survives, but it has to be restated on the real evidence: embedded generation
+disconnected on a 0.125 Hz/s relay setting, which is what actually happened.
+
+The 210 GVAs inertia figure IS correctly sourced (ESO report Table 4). Keep it.
+
+Better numbers now available for the same argument: the cumulative loss reached
+1,481 MW, frequency was arrested at 49.1 Hz, then fell to 48.8 Hz, and LFDD
+disconnected 931 MW across 1,152,878 customers. The paper's "1.1M customers"
+at line 2477 is close and can be made exact.
+
+## F7. The SA tower count is confirmed ABSENT, not merely unretrieved. CLOSED.
+
+Section 2.4, Table 6, Section 3.1.4 and Appendix V of AEMO's final report were
+read in full. None gives a count of transmission towers that fell; Table 6 says
+only "Damaged towers bypassed". The "23 towers" figure circulating in press
+coverage has no basis in the final report.
+
+This closes the gap left open in `WG-04-CF_outage-cost-vcr_20260906.md`, and it
+closes it in the negative, with certainty. The earlier decision to strike the
+figure rather than correct it to 22 was right.
+
+## F8. Do not use the ENTSO-E 2021 separation as a mass-blackout example.
+
+The loads shed in France (~1,300 MW) and Italy (~400 MW) were large industrial
+customers under standing interruptibility contracts, shed automatically at a
+frequency threshold. ENTSO-E's final report states the incident "had no major
+influence on the security of supply of European consumers". No customer count
+appears in the report.
+
+The event is valuable to this paper for its millisecond causal chain across
+four TSOs, and for one detail that is directly on thesis: the Turkish Marmara
+SPS shed 975 MW as designed while the Hamitabat SPS correctly did not fire.
+Use it for cascade mechanics. Use UK 2019 or South Australia for outage scale.
