@@ -41,9 +41,9 @@ The Australian Energy Market Operator (AEMO) identifies grid frequency stability
 
 McKenney's (2024, 2025) research across Australian, UK, European, and US interconnections argues that this vulnerability is not theoretical. The argument rests on incidents that system operators investigated and published, so the figures supporting it belong to those operators rather than to this working group. Three figures this paper previously carried have since been rechecked against the primary documents, and the corrected versions are stated here in place of the originals.
 
-ERCOT's inverter-based resource capacity share was given as 43%. That figure is unsupported. No ERCOT publication at any date checked carries it, and the bracketing values are 28.8% in November 2021 and 45.0% in August 2026 (sourced: *ERCOT and WECC Renewable Integration Challenges*, sections 1 and 6, from ERCOT's own monthly reporting). ERCOT's peak instantaneous renewable penetration above 75% is sourced and can be made exact: 75.67% at 2:13 p.m. on 29 March 2024, 34,958 MW. That is a single instant, and it is not simultaneous with any capacity-share figure, so the two must not be paired in one sentence as an earlier draft of this paragraph paired them. The Western Interconnection queue duration of roughly 5 years, up from under 2 years in 2008, is verbatim from Lawrence Berkeley National Laboratory's *Queued Up* 2024 edition, but it is a national United States figure; LBNL publishes no WECC-only queue duration, and this paper states it as national or not at all.
+ERCOT's inverter-based resource capacity share was given as 43%. That figure is unsupported. No ERCOT publication at any date checked carries it, and the bracketing values are 28.8% in November 2021 and 45.0% in August 2026 (sourced: [ERCOT and WECC Renewable Integration Challenges](/papers/ercot-wecc-ibr-reliability), sections 1 and 6, from ERCOT's own monthly reporting). ERCOT's peak instantaneous renewable penetration above 75% is sourced and can be made exact: 75.67% at 2:13 p.m. on 29 March 2024, 34,958 MW. That is a single instant, and it is not simultaneous with any capacity-share figure, so the two must not be paired in one sentence as an earlier draft of this paragraph paired them. The Western Interconnection queue duration of roughly 5 years, up from under 2 years in 2008, is verbatim from Lawrence Berkeley National Laboratory's *Queued Up* 2024 edition, but it is a national United States figure; LBNL publishes no WECC-only queue duration, and this paper states it as national or not at all.
 
-What survives the recheck is the mechanism rather than the arithmetic around it. NERC has documented inverter-based resources disconnecting during faults they were not required to disconnect for, across four disturbance reports covering ERCOT and southern California (sourced: *ERCOT and WECC Renewable Integration Challenges*, section 4). That is a specification and settings failure inside the resources themselves. It is independent of how much inertia the system happens to be carrying, and section 2.3 keeps the two mechanisms apart for that reason.
+What survives the recheck is the mechanism rather than the arithmetic around it. NERC has documented inverter-based resources disconnecting during faults they were not required to disconnect for, across four disturbance reports covering ERCOT and southern California (sourced: [ERCOT and WECC Renewable Integration Challenges](/papers/ercot-wecc-ibr-reliability), section 4). That is a specification and settings failure inside the resources themselves. It is independent of how much inertia the system happens to be carrying, and section 2.3 keeps the two mechanisms apart for that reason.
 
 Concurrent vulnerability assessments have identified an attack surface score of 8.7/10 across the BESS infrastructure and a DERMS risk score of 21/25 (CATASTROPHIC). The Retailer API, which provides third-party control of DER assets through the mPrest DERMS platform, lacks behavioral analytics, oscillation detection, and physics-based command validation. These are the three specific controls that would prevent the "Death Wobble" attack scenario detailed in this document.
 
@@ -116,6 +116,8 @@ Where:
 ```
 
 Under traditional synchronous generation, H ranges from 4-6 seconds, providing substantial resistance to frequency disturbances. Under high-renewable conditions (30%+ inverter-based generation), H drops to 2-3 seconds. This drop in inertia represents a 50% reduction that doubles the RoCoF for any given power imbalance. As McKenney notes: "In a low-inertia system, the *same* disturbance (e.g., a large power plant loss) causes the frequency to change *much faster* than in a high-inertia system. This rapid frequency change *is* the dangerous 'wobble.'" (McKenney, 2024).
+
+The swing equation behind these relations, and the distinction between a protection setting and a measured value, are derived at length in [The Grid's Unseen Tremors](/papers/grid-unseen-tremors). That paper works the RoCoF relation through to the thresholds actually in service and cites the operator document each one comes from. Read it before treating any Hz/s figure in this section as a measurement.
 
 ### 2.1.1 Grid Inertia Depletion Mechanics
 
@@ -459,17 +461,21 @@ The following table illustrates how the same 540 MW attack produces different co
 
 The grid does not need to be at minimum inertia for the attack to succeed. Any period where H falls below 3.0 seconds creates conditions where sustained oscillation can trigger the protection cascade within the 15-30 minute attack window. AEMO data indicates that H drops below 3.0 seconds during approximately 15-20% of operational hours in 2025-2026, primarily during midday solar peaks and overnight low-demand periods.
 
+Operators publish inertia floors for exactly this reason, and those floors are the check on the table above. EirGrid holds a minimum synchronous area inertia of 23,000 MVA.s against a largest infeed of about 450 MW (EirGrid, *Inertia Management on the Power Systems of Ireland and Northern Ireland*, March 2024). ERCOT sets a critical inertia System Operating Limit of 100 GW.s, derived from a 2,750 MW contingency and a 0.416 second budget to reach the first stage of under-frequency load shedding (ERCOT, *Inertia: Basic Concepts and Impacts on the ERCOT Grid*, April 2018). [Project Inertia](/papers/project-inertia) works both figures against the RoCoF relation and projects the decay to 2030 and 2040. It is also where the 105 GW.s figure that circulates for ERCOT is separated from the 100 GW.s limit, which is the same setting-against-measurement error this paper corrects for South Australia and Great Britain.
+
 **International Precedents Supporting Death Wobble Risk:**
 
 McKenney's (2024, 2025) comprehensive analysis of three major blackouts demonstrates how declining inertia transforms grid vulnerability:
 
-1. **South Australia (September 28, 2016)**: 48.36% inverter-based resource penetration, 456 MW sustained wind generation loss over less than seven seconds (8 of 9 wind farms tripping on a voltage-dip-count protection setting), a supply-demand imbalance in the order of 1,000 MW against 1,826 MW of regional demand, and loss of all supply to the region 87 seconds after the first fault. A peak RoCoF of 6.1 Hz/s is widely attributed to this event, in secondary commentary and in earlier drafts of this paper. It is not in AEMO's final report, and this paper does not use it; section 10 states the position in full. What the event establishes without any RoCoF figure is that the Heywood Interconnector's special protection scheme tripped about 700 milliseconds after the last wind farm reduced its output, doing exactly what it was configured to do, and that islanding South Australia against a 1,000 MW deficit blacked out the state. An earlier version of this paper carried a sentence attributed to McKenney (2024) describing the incident as demonstrating the potential for extreme instability in very low inertia conditions. It is withdrawn here for two reasons. First, no inertia value for the South Australian system at the moment of the disturbance appears anywhere in this working group's evidence base, so the phrase "very low inertia conditions" has no measured referent. Second, the ERCOT record runs against the framing: the larger of the two Odessa losses, 2,555 MW on 4 June 2022, occurred at 73.5% synchronous generation, while the smaller loss of 1,340 MW on 9 May 2021 occurred at 56% (sourced: *ERCOT and WECC Renewable Integration Challenges*, section 4.2, from the NERC and Texas RE Odessa disturbance reports). If low inertia were the operative cause the ordering would run the other way. What South Australia does establish, from AEMO's final report, is that eight of nine wind farms disconnected on a voltage-dip-count protection setting rather than on the fault itself. That is a protection settings failure of the same class NERC found at Odessa, and it is the finding this paper carries forward.
+1. **South Australia (September 28, 2016)**: 48.36% inverter-based resource penetration, 456 MW sustained wind generation loss over less than seven seconds (8 of 9 wind farms tripping on a voltage-dip-count protection setting), a supply-demand imbalance in the order of 1,000 MW against 1,826 MW of regional demand, and loss of all supply to the region 87 seconds after the first fault. A peak RoCoF of 6.1 Hz/s is widely attributed to this event, in secondary commentary and in earlier drafts of this paper. It is not in AEMO's final report, and this paper does not use it; section 10 states the position in full. What the event establishes without any RoCoF figure is that the Heywood Interconnector's special protection scheme tripped about 700 milliseconds after the last wind farm reduced its output, doing exactly what it was configured to do, and that islanding South Australia against a 1,000 MW deficit blacked out the state. An earlier version of this paper carried a sentence attributed to McKenney (2024) describing the incident as demonstrating the potential for extreme instability in very low inertia conditions. It is withdrawn here for two reasons. First, no inertia value for the South Australian system at the moment of the disturbance appears anywhere in this working group's evidence base, so the phrase "very low inertia conditions" has no measured referent. Second, the ERCOT record runs against the framing: the larger of the two Odessa losses, 2,555 MW on 4 June 2022, occurred at 73.5% synchronous generation, while the smaller loss of 1,340 MW on 9 May 2021 occurred at 56% (sourced: [ERCOT and WECC Renewable Integration Challenges](/papers/ercot-wecc-ibr-reliability), section 4.2, from the NERC and Texas RE Odessa disturbance reports). If low inertia were the operative cause the ordering would run the other way. What South Australia does establish, from AEMO's final report, is that eight of nine wind farms disconnected on a voltage-dip-count protection setting rather than on the fault itself. That is a protection settings failure of the same class NERC found at Odessa, and it is the finding this paper carries forward.
 2. **UK Blackout (August 9, 2019)**: Lightning strikes near the Eaton Socon to Wymondley circuit triggered cascading generation losses: 641 MW from Little Barford gas plant, in three separate trips (a 244 MW steam turbine, then 210 MW and 187 MW gas turbines), plus 737 MW from Hornsea offshore wind. **Approximately 350 MW of distributed generation tripped** on RoCoF protection relays set to disconnect at 0.125 Hz/s (the relay's disconnection threshold; no measured RoCoF of 0.135 Hz/s appears anywhere in National Grid ESO's technical report). This result also confirms protection system maloperation even at moderate RoCoF. System inertia: 210 GVA·s (National Grid ESO technical report, Table 4); the report gives no wind-penetration figure for 9 August 2019.
 3. **Iberian Peninsula (April 28, 2025)**: 60 million people affected (Spain + Portugal), up to 10 hours outage, 56% renewable penetration. Suspected inter-area oscillations between Iberia and Continental Europe due to weak interconnection (~2,800 MW, only 6% of Spanish capacity). McKenney recorded two significant inter-area oscillations in the 30 minutes before the blackout. This paper carries the Iberian event as an oscillation precedent and as nothing more. No final report from the Spanish or Portuguese system operator sits in this working group's evidence base; the renewable-penetration and interconnection figures above come from contemporary reporting rather than from an incident investigation, and the causal attribution to inter-area oscillation is stated in the sources as suspected rather than established. A claim that the event confirmed warnings given earlier that year is also withdrawn. A prediction and an outcome nobody has causally attributed are not a confirmation of each other, and treating them as one is the failure mode this paper is written to avoid.
 
 ### 2.4 BESS Thermal Runaway Cascading Scenarios
 
 Battery thermal runaway represents a distinct attack vector with potential for **physical cascading failure** beyond electrical grid disruption. Unlike the Death Wobble oscillation attack (which targets grid frequency stability), thermal runaway attacks exploit battery management system (BMS) vulnerabilities to induce fires or explosions.
+
+The same failure mode at campus scale, where a battery fleet sits behind one microgrid controller alongside inverter plant and, increasingly, small modular reactor auxiliaries, is worked through in [Emerging Power Topologies](/papers/emerging-power-topologies). That paper carries the Arrhenius kinetics for the runaway, the convective heat removal collapse that precedes it, and the case for hardwired analog safety isolation: a temperature limit enforced in firmware is a limit an attacker with write access can move.
 
 ### 2.4.1 Lithium-Ion Thermal Runaway Physics
 
@@ -676,6 +682,8 @@ This creates a **secondary cascading failure** where fires at sites 16-54 burn u
 ### 3.1 Four-Tier Cascade Model
 
 The cascading failure propagates through four tiers, each amplifying the affected customer base by an order of magnitude. This multi-tier cascade pattern is consistent with McKenney's (2024) analysis of European Network of Transmission System Operators for Electricity (ENTSO-E) system split risks: "ENTSO-E studies confirm that declining inertia significantly increases the risk of system splits leading to high RoCoF (>1 Hz/s) and potential widespread blackouts in future scenarios." McKenney documents that ENTSO-E "Project Inertia" studies for 2030-2040 scenarios identify an increasing number of "global severe splits" where both separated systems collapse due to uncontrollable RoCoF. This is precisely the multi-tier cascade failure pattern modeled in this assessment.
+
+That attribution does not survive checking, and this paper flags it here rather than carrying it unqualified. [The Unseen Current](/papers/unseen-current), section 6.2, records that no ENTSO-E document under the name "Project Inertia", and no ENTSO-E use of the phrase "global severe splits", appears in any primary source this working group holds. What it does hold in full is the ENTSO-E ICS Investigation Expert Panel final report on the Continental Europe separation of 8 January 2021, which is a post-event investigation and not a forward scenario study. Read the four-tier model below against that report. Eigenia's own forward projection of inertia decay is published separately as [Project Inertia](/papers/project-inertia); it shares a name with an ENTSO-E workstream and nothing in it is an ENTSO-E finding.
 
 The following diagram models the complete propagation chain from initial attack execution to system-wide collapse:
 
@@ -1009,6 +1017,8 @@ The RefDNSP-1.2M scenario represents a **6x escalation** in substation count com
 
 When major portions of an interconnected grid lose synchronization, the system fragments into isolated "islands." These are electrically separated regions that must each maintain their own generation-load balance independently.
 
+Separation is not hypothetical and the reference case is measured. On 8 January 2021 the Continental Europe synchronous area split in two across a flow of about 5.8 GW. The deficit side fell at 60 mHz/s to a nadir of 49.746 Hz while the surplus side rose at 300 mHz/s to a peak of 50.6 Hz (ENTSO-E ICS Investigation Expert Panel, *Continental Europe Synchronous Area Separation on 08 January 2021*, final report, 15 July 2021). Same imbalance, same instant, five times the rate of change on one side. [The Unseen Current](/papers/unseen-current), section 4, follows that sequence at the resolution the Expert Panel published it and inverts the RoCoF relation to recover the effective inertia each fragment retained. The island survival criteria below ask the same question in advance.
+
 **NSW Grid Island Formation Triggers:**
 
 | Interconnector                 | Thermal Rating | Protection Threshold      | Island Formation Condition                                           |
@@ -1078,6 +1088,8 @@ Outcome: ISLAND COLLAPSE within 3-5 minutes
 ### 4.1 Six Critical Infrastructure Systems
 
 The electricity distribution network serves as the foundational layer upon which six interdependent critical infrastructure systems depend. Failure in the primary electrical grid propagates through these systems in cascading waves, each amplifying the consequences of the initial outage.
+
+Where the grid separates decides how many of those systems lose supply at once. A separation does not divide a network into two smaller versions of itself; it divides it into fragments with very different capacity to absorb the imbalance each inherits, and the fragment boundary is drawn by protection operating in sequence rather than by any planning decision. [The Unseen Current](/papers/unseen-current), section 4.2, makes that argument on the RoCoF figures ENTSO-E published for both sides of the 8 January 2021 split.
 
 ```mermaid
 graph TB
@@ -1432,6 +1444,8 @@ This section costs one thing: the direct cost to customers of energy not supplie
 Every monetary figure in this section derives from published inputs through the relations below.
 A reader holding the cited sources can reproduce or contest any value.
 
+The relations produce one loss figure for one modelled event. Turning that into an annualised expectancy, and then into a defensible return on a control programme, is set out in [Annualised Loss Expectancy and Return on Security Investment for OT](/papers/ale-rosi-decision-framework), which works ALE per NIST SP 800-30 Rev. 1, the Gordon-Loeb optimal investment ceiling and the ROSI ratio through a modelled hyperscale case. Section 5.9 uses the first of those and section 9.5 uses a benefit to cost form of the third. No Gordon-Loeb ceiling is computed anywhere in this paper, because RefDNSP-1.2M has no stipulated security budget and no vulnerability parameter to fit one against.
+
 $$E_{\text{unserved}} = N_{\text{customers}} \times \bar{P}_{\text{demand}} \times t_{\text{restore}}$$
 
 $$C_{\text{direct}} = \text{VCR} \times E_{\text{unserved}}$$
@@ -1601,6 +1615,10 @@ These figures carry legal consequences: wrongful death litigation, WorkSafe NSW 
 
 ## 7. Attack Vector Analysis and Mitigation
 
+The four vectors below were found by walking each attack path against the physical process it reaches, not by enumerating vulnerabilities and sorting them by CVSS. That walk is the CyHAZOP method: the IEC 61882 process safety guide words applied to cyber-physical nodes, with the transfer function from an injected command to a physical excursion stated explicitly rather than assumed. [CyHAZOP: Cyber-Physical Hazard Analysis for Hyperscale Infrastructure](/papers/cyhazop-hyperscale-methodology) sets out the guide word lexicon, the node register format and the DEXPI to multi-BOM linkage the walk depends on. Section 7.4 below, a Modbus write to a BMS voltage setpoint that ends in thermal runaway, is a worked instance of it.
+
+What this section does not do is score the adversary. Every mitigation below is priced against a control class or a stated mechanism, never against a named actor's capability to reach the asset. Eigenia scores that separately, in two documents that work together. [The TACAM matrix](/papers/tacam-deep-dive) characterises actors across capability, sector targeting and vendor product exposure. [The Adversary Threat Quotient](/papers/atq-deep-dive) reduces those dimensions to one cardinal figure on a 0 to 100 interval that can parameterise a loss model directly. A reader who needs to know whether a specific actor can execute the six stages of section 7.1 should start there. This paper assumes the capability exists, on the Sandworm precedent of section 3.4, and asks only what blocking it would cost.
+
 ### 7.1 Retailer API Supply Chain Attack
 
 This is the primary attack vector enabling the Death Wobble scenario. The attack chain proceeds through six stages:
@@ -1729,6 +1747,8 @@ Band arithmetic: one band A and three band B give AUD 0.4 million to AUD 1.7 mil
 ### 7.4 Modbus Injection to BESS Controllers
 
 Modbus TCP (port 502) between the Utility Server and BESS controllers operates without encryption, authentication, or integrity checking. A compromised Utility Server can write arbitrary register values to BMS controllers, including overcharge voltage setpoints that initiate thermal runaway.
+
+The register write matters because of what sits downstream of it. [Emerging Power Topologies](/papers/emerging-power-topologies), section 3, follows the thermal runaway cascade from cell to module to container and reaches the conclusion the second mitigation line below records: limit enforcement has to sit beneath the protocol, because a limit the protocol can write is a limit the attacker can write.
 
 **Mitigation Strategy:**
 
@@ -1973,16 +1993,16 @@ graph TB
     Q2 -->|Yes| Q3{Modbus TCP Encrypted?}
     Q2 -->|No| Medium1[MEDIUM PRIORITY:<br/>Monitor BESS deployment pace<br/>Implement before 100 MW threshold]
 
-    Q3 -->|No| Critical2[CRITICAL PRIORITY:<br/>Modbus Security Gateway<br/>Cost band C<br/>Timeline: implementation period]
+    Q3 -->|No| Critical2[CRITICAL PRIORITY:<br/>Modbus Security Gateway<br/>Cost band C<br/>Timeline: targeted timeframe]
     Q3 -->|Yes| Q4{BMS Firmware Validates<br/>Thermal Limits?}
 
-    Q4 -->|No| High1[HIGH PRIORITY:<br/>BMS Firmware Hardening<br/>Cost band B<br/>Timeline: implementation period]
+    Q4 -->|No| High1[HIGH PRIORITY:<br/>BMS Firmware Hardening<br/>Cost band B<br/>Timeline: targeted timeframe]
     Q4 -->|Yes| Q5{IEC 61850 GOOSE<br/>Authenticated?}
 
     Q5 -->|No| Q6{>50 Substations<br/>Using GOOSE?}
     Q5 -->|Yes| Low1[LOW PRIORITY:<br/>Maintain current controls]
 
-    Q6 -->|Yes| Critical3[CRITICAL PRIORITY:<br/>IEC 62351-6 Implementation<br/>Cost band D<br/>Timeline: implementation period]
+    Q6 -->|Yes| Critical3[CRITICAL PRIORITY:<br/>IEC 62351-6 Implementation<br/>Cost band D<br/>Timeline: targeted timeframe]
     Q6 -->|No| Medium2[MEDIUM PRIORITY:<br/>Plan for future deployment]
 
     Critical1 --> Implementation[Execute<br/>Implementation Roadmap]
@@ -2047,6 +2067,8 @@ minimum viable defence costs more than AUD 3.10m by an unbounded amount.
 ### 9.5 Return on Investment
 
 An earlier draft of this section reported ratios of 30.8:1 and 43.9:1, the second annotated as 4,390 percent. Both were computed from inputs that no longer appear anywhere in the text, so neither could be checked, and both rested on an uncited 90 percent risk reduction. They are removed. What follows is built from three sourced inputs and one formula, and every step is shown so a reader can contest it.
+
+One label correction before the arithmetic. What follows is a benefit to cost ratio, not a Return on Security Investment. [Annualised Loss Expectancy and Return on Security Investment for OT](/papers/ale-rosi-decision-framework), section 3.3, defines ROSI as the avoided loss net of the control cost, divided by the control cost, so the 4.4:1 below corresponds to a ROSI of about 341 percent and the 6.6:1 to about 560 percent. Those two percentages are stated once, here, and are used nowhere else, because a ratio a board can check against a cost is more useful to it than a percentage it cannot.
 
 **Input 1: programme cost, AUD 7.3 million over ten years.**
 
@@ -2510,7 +2532,7 @@ This assessment employs **prospective modeling** of cascading failure scenarios 
 
    Two distinct mechanisms run through those events, and this paper keeps them apart. The first is that low inertia raises df/dt for a given power imbalance. That follows from the swing equation, it is derivable rather than observed, and it is the basis of the cascade argument in section 2. The second is that inverter-based resources disconnect for faults they were never obliged to ride through. That is documented across four NERC disturbance reports and it does not depend on inertia at all.
 
-   The evidence available to this working group actively contradicts deriving the second mechanism from the first. At Odessa on 9 May 2021 ERCOT stood at 56% synchronous generation and lost 1,340 MW. On 4 June 2022 it stood at 73.5% synchronous generation and lost 2,555 MW. The larger loss came at the higher synchronous share, which is the wrong ordering if low inertia were the operative cause. NERC states the mechanism for the 2021 event plainly: none of the resources tripped consequentially by the fault itself. That sentence is NERC's own, from the joint NERC and Texas RE *Odessa Disturbance* report on the events of 9 May and 26 June 2021, and it is quoted in this working group's *ERCOT and WECC Renewable Integration Challenges*, section 4.2, against the primary document. The two mechanisms compound where they meet. Neither produces the other, and this paper does not claim that either does.
+   The evidence available to this working group actively contradicts deriving the second mechanism from the first. At Odessa on 9 May 2021 ERCOT stood at 56% synchronous generation and lost 1,340 MW. On 4 June 2022 it stood at 73.5% synchronous generation and lost 2,555 MW. The larger loss came at the higher synchronous share, which is the wrong ordering if low inertia were the operative cause. NERC states the mechanism for the 2021 event plainly: none of the resources tripped consequentially by the fault itself. That sentence is NERC's own, from the joint NERC and Texas RE *Odessa Disturbance* report on the events of 9 May and 26 June 2021, and it is quoted in this working group's [ERCOT and WECC Renewable Integration Challenges](/papers/ercot-wecc-ibr-reliability), section 4.2, against the primary document. The two mechanisms compound where they meet. Neither produces the other, and this paper does not claim that either does.
 
    None of these events resulted from coordinated cyber-physical attacks. They were natural disturbances (weather, equipment failure, lightning strikes).
 3. **Cyber-Attack Adaptation**: This document extends physical failure mechanisms into cyber-enabled scenarios by modeling how an adversary with Retailer API access could *deliberately induce* the oscillation patterns that occurred naturally in historical events. This represents a novel threat vector without direct historical precedent.
