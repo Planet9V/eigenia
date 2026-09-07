@@ -1555,15 +1555,17 @@ graph LR
 
 **Mitigation Strategy:**
 
-| Mitigation                                     | Cost                  | Risk Reduction |
-| :--- | :--- | :--- |
-| API Behavioral Analytics (Apigee/Kong with ML) | [investment required] | 70%            |
-| Just-In-Time MFA for dispatch commands         | [investment required] | 85%            |
-| Dual Authorization for commands >10 MW         | [investment required] | 90%            |
-| Oscillation Detection Algorithm                | [investment required] | 95%            |
-| Device Command Batching Limits                 | [investment required] | 60%            |
+Costs use the ordinal band scheme of section 9.1, measured against the sourced CIRMP cyber envelope of AUD 1.29 million one-off. Bands rank controls against each other; they do not price them. Where a control maps onto one of the five OT control classes Dragos and Marsh McLennan measured, the class figure is cited and the mapping stated. Where none maps, the benefit is given as a mechanism rather than a percentage. An earlier draft of this section assigned each control a risk reduction of 60 to 95 percent, none of them cited and all of them roughly five times the only published benchmark. Those figures are removed.
 
-Combined risk reduction with defense-in-depth: **98%**. Total investment: **[investment required] million**.
+| Mitigation | Cost band | Effect |
+| :--- | :--- | :--- |
+| API behavioural analytics, Apigee or Kong with ML | C, the band section 9.2 assigns the same control | Network visibility and monitoring. Dragos and Marsh McLennan measure 16.47 percent average risk reduction for this class [n]. A class average across a global claims population, not this control's measured effect |
+| Just-in-time MFA for dispatch commands | A (policy and configuration on an existing identity platform) | Secure remote access. Dragos and Marsh McLennan measure 12.18 percent average risk reduction for this class [n]. Same caveat |
+| Dual authorization for commands above 10 MW | A, the band section 9.6 assigns this quick win | No benchmark class maps. The control removes the single-credential path: one stolen OAuth token no longer dispatches a fleet. It does not lower the chance of the token being stolen |
+| Oscillation detection algorithm | B (analytics on telemetry the network already collects) | No benchmark class maps. The control fires on a pattern with no benign explanation, more than five charge or discharge reversals per asset inside 10 minutes. No false-positive rate has been measured for this network, so no detection figure is stated |
+| Device command batching limits | A (configuration and vendor engineering, as in section 9.2) | No benchmark class maps. A 5-minute minimum interval caps achievable oscillation at 0.0017 Hz against the 0.5 to 0.55 Hz attack band of section 2.1.2, which moves the attack outside resonance rather than lowering its probability |
+
+Band arithmetic: three band A, one band B, one band C. Summing the band boundaries gives AUD 0.7 million to AUD 2.2 million one-off (modelled: band boundary arithmetic, not a quotation). No combined risk reduction is stated. Dragos and Marsh McLennan state their per-control figures are not additive and model no combined effect [n]; the earlier draft's 98 percent had no source.
 
 ### 7.2 Kubernetes Container Escape
 
@@ -1573,15 +1575,15 @@ Relevant vulnerabilities include CVE-2024-0874 (OpenShift route access control b
 
 **Mitigation Strategy:**
 
-| Mitigation                                            | Cost                  | Risk Reduction |
+| Mitigation | Cost band | Effect |
 | :--- | :--- | :--- |
-| Container Runtime Security (Aqua/Sysdig)              | [investment required] | 85%            |
-| Pod Security Policies (no-privileged, read-only root) | [investment required] | 70%            |
-| Network Policies (deny-all default)                   | [investment required] | 75%            |
-| Image Signing Verification                            | [investment required] | 60%            |
-| etcd Encryption at Rest                               | [investment required] | 80%            |
+| Container runtime security, Aqua or Sysdig | B, the band section 9.3 assigns the same control in Phase 1 | Defensible architecture. Dragos and Marsh McLennan measure 17.09 percent average risk reduction for this class [n]. Class average, not a measured result for this product |
+| Pod security policies, no-privileged and read-only root | A (platform configuration) | No benchmark class maps. A container that cannot run privileged and cannot write its own root filesystem loses the two most commonly used escape paths. It does not remove a kernel vulnerability |
+| Network policies, deny-all default | A (platform configuration) | Defensible architecture, 17.09 percent class average [n]. The mechanism is direct: a compromised DERMS microservice cannot open a connection to the ICCP adapter pod at all |
+| Image signing verification | B (pipeline engineering across the whole build chain) | No benchmark class maps. An unsigned image does not run, which closes the supply chain path of section 7.1 into the cluster. It does nothing against an attacker holding the signing key |
+| etcd encryption at rest | A (platform configuration) | No benchmark class maps. Cluster secrets read from disk or from a backup are ciphertext. It does not protect secrets read through a live API server session |
 
-Combined risk reduction: **95%**. Total investment: **[investment required] million**.
+Band arithmetic: three band A and two band B give AUD 0.3 million to AUD 1.4 million one-off (modelled: band boundary arithmetic, not a quotation). No combined figure is stated; the earlier draft's 95 percent had no source.
 
 ### 7.3 ICCP Protocol Manipulation
 
@@ -1589,14 +1591,14 @@ Compromise of the ICCP Adapter enables forging of grid constraint queries to ADM
 
 **Mitigation Strategy:**
 
-| Mitigation                                             | Cost                  | Risk Reduction |
+| Mitigation | Cost band | Effect |
 | :--- | :--- | :--- |
-| ICCP Protocol Parser for SIEM                          | [investment required] | 80%            |
-| Application-Layer Signing (ADMS signs, DERMS verifies) | [investment required] | 95%            |
-| Data Point Allowlisting                                | [investment required] | 70%            |
-| Redundant Validation (cross-check SCADA telemetry)     | [investment required] | 85%            |
+| ICCP protocol parser for SIEM | B, the band section 9.3 assigns this line in Phase 2 (bespoke engineering, no product to price) | Network visibility and monitoring, 16.47 percent class average [n]. Class average, not this parser's measured effect |
+| Application-layer signing, ADMS signs and DERMS verifies | B (bespoke engineering across two platforms) | No benchmark class maps. Forged constraint data fails verification. It does nothing if the attacker holds the ADMS signing key, which is the supply chain case of section 7.1 |
+| Data point allowlisting | A (configuration on the existing ICCP association) | No benchmark class maps. A data point outside the agreed set is refused, so no new constraint object can be introduced. It does not prevent false values inside the allowed set |
+| Redundant validation, cross-check against SCADA telemetry | B (analytics on an existing SCADA historian, as in section 9.2) | No benchmark class maps. An ICCP constraint that disagrees with independently measured SCADA telemetry is held rather than acted on. This requires the two paths to be genuinely independent, which is not verified for RefDNSP-1.2M anywhere in this paper |
 
-Combined risk reduction: **98%**. Total investment: **[investment required] million**.
+Band arithmetic: one band A and three band B give AUD 0.4 million to AUD 1.7 million one-off (modelled: band boundary arithmetic, not a quotation). No combined figure is stated; the earlier draft's 98 percent had no source.
 
 ### 7.4 Modbus Injection to BESS Controllers
 
@@ -1604,24 +1606,28 @@ Modbus TCP (port 502) between the Utility Server and BESS controllers operates w
 
 **Mitigation Strategy:**
 
-| Mitigation                                      | Cost                  | Risk Reduction |
+| Mitigation | Cost band | Effect |
 | :--- | :--- | :--- |
-| Modbus Security Gateway (Moxa EDR/Fortinet ICS) | [investment required] | 95%            |
-| BMS Firmware Update (voltage limit validation)  | [investment required] | 85%            |
-| Network Segmentation (dedicated VLAN per BESS)  | [investment required] | 75%            |
-| Anomaly Detection (Nozomi/Claroty)              | [investment required] | 80%            |
+| Modbus security gateway, Moxa EDR or Fortinet ICS | C, the band section 9.2 assigns the same control. Every listing found for the named product returns price on request | Defensible architecture, 17.09 percent class average [n]. Class average, not a measured result for register allowlisting |
+| BMS firmware update, voltage limit validation | B, the band section 9.2 assigns the same control | No benchmark class maps. Limit enforcement moves below the protocol, so a write to a setpoint register cannot raise a limit. It does not remove the attacker's access to the register |
+| Network segmentation, dedicated VLAN per BESS | C (54 sites; the wider zero-trust microsegmentation line in section 9.3 sits in band D) | Defensible architecture, 17.09 percent class average [n] |
+| Anomaly detection, Nozomi or Claroty | D, the band section 9.3 assigns OT network monitoring. No vendor in this class publishes a price | Network visibility and monitoring, 16.47 percent class average [n] |
 
-Combined risk reduction: **99%**. Total investment: **[investment required] million**.
+Band arithmetic: the three bounded lines, one band B and two band C, give AUD 1.2 million to AUD 3.1 million one-off (modelled: band boundary arithmetic, not a quotation). The band D line has no upper bound and is excluded, so the real figure is higher by an unknown amount. No combined risk reduction is stated; the earlier draft's 99 percent had no source.
 
 ### 7.5 Consolidated Mitigation Investment
 
-| Attack Vector               | Investment                      | Risk Reduction   | strategic value Basis                             |
+| Attack Vector | Cost bands | Bounded band arithmetic | Benefit basis |
 | :--- | :--- | :--- | :--- |
-| Retailer API Supply Chain   | [investment required]           | 98%              | Avoided [investment required] expected loss x 98% |
-| Kubernetes Container Escape | [investment required]           | 95%              | Avoided loss x 95% x 0.6 probability              |
-| ICCP Protocol Manipulation  | [investment required]           | 98%              | Avoided loss x 98% x 0.5 probability              |
-| Modbus Injection            | [investment required]           | 99%              | Avoided loss x 99% x 0.4 probability              |
-| **Total**             | **[investment required]** | **85-95%** | **Defense-in-depth across all vectors**     |
+| Retailer API supply chain | 3 x A, 1 x B, 1 x C | AUD 0.7 million to AUD 2.2 million | Two of five controls map to a Dragos and Marsh class, at 16.47 and 12.18 percent [n]. Three state a mechanism |
+| Kubernetes container escape | 3 x A, 2 x B | AUD 0.3 million to AUD 1.4 million | Two of five map to defensible architecture, 17.09 percent [n]. Three state a mechanism |
+| ICCP protocol manipulation | 1 x A, 3 x B | AUD 0.4 million to AUD 1.7 million | One of four maps to network visibility and monitoring, 16.47 percent [n]. Three state a mechanism |
+| Modbus injection | 1 x B, 2 x C, 1 x D | AUD 1.2 million to AUD 3.1 million, band D excluded | All four map to a Dragos and Marsh class, at 17.09 or 16.47 percent [n] |
+| **Total, bounded lines only** | 17 controls, one unbounded | **AUD 2.5 million to AUD 8.4 million** | Not aggregable; see below |
+
+Three things about that total. It is band boundary arithmetic against the sourced AUD 1.29 million CIRMP cyber envelope of section 9.1, not a quotation from anyone. It excludes the single band D line, which has no upper bound, so the true figure is higher by an amount this paper cannot state. And the sourced envelope itself is AUD 1.29 million one-off, so these 18 controls cost roughly two to six times what the sector-average regulatory compliance figure covers. That is the same conclusion section 9.3 reaches from the other direction.
+
+No aggregate risk reduction is given, and no per-vector return on investment is given. Dragos and Marsh McLennan state their class figures are not additive and model no combined effect [n], so the columns cannot be summed. A per-vector ratio would additionally need a per-vector avoided loss, and section 5 computes one avoided loss for the whole cascade rather than four. The programme-level ratio, 4.4:1 to 6.6:1 with a sensitivity envelope of 2.9:1 to 8.8:1, is derived once in section 9.5 and is not restated per vector here.
 
 ---
 
