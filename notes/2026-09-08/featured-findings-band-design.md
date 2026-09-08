@@ -6,9 +6,9 @@ Spec location follows this repo's precedent (`notes/<date>/`), not the skill def
 
 ## Why
 
-The homepage is `FirstVisitSplash, SiteChrome, Hero, Compass, four icon cards,
-UnifiedStandardBand, SCurveSection, Principles, KnowledgeTransfer`. Nothing on it
-names a single paper. Fifty-nine treatises exist, nine of them published in the last
+The homepage is `FirstVisitSplash, SiteChrome, Hero`, a `research-portals` section
+holding four portal cards, then `UnifiedStandardBand, SCurveSection, Principles,
+KnowledgeTransfer`. Nothing on it names a single paper. Fifty-nine treatises exist, nine of them published in the last
 two days, and a visitor cannot tell any of that from the front page.
 
 The behaviour this is meant to change: an OT engineer, standards practitioner or
@@ -76,12 +76,17 @@ Current values, all derived and none hardcoded:
 
 ## Placement
 
-Both go between `Compass` and `UnifiedStandardBand`.
+Both go after the `research-portals` section closes and before
+`<UnifiedStandardBand />`, around line 163 of `web/src/app/page.tsx`.
 
 Directly under the Hero was rejected: a strip of cards there competes with the
-site's opening statement and pushes `Compass` below the fold. After `Compass` the
-visitor has been oriented and is ready for "here is what is actually inside."
-`FeaturedFindingsBand` first, `WorkingGroupsStrip` immediately after.
+site's opening statement and pushes the portal cards below the fold. After the
+portals the visitor has been oriented and is ready for "here is what is actually
+inside." `FeaturedFindingsBand` first, `WorkingGroupsStrip` immediately after.
+
+Correction recorded 2026-09-08: an earlier draft of this spec named a `Compass`
+component at this seam. There is none. `Compass` is a lucide icon used inside one
+of the four portal cards. The placement is unchanged; only the landmark was wrong.
 
 ## Data model
 
@@ -139,6 +144,41 @@ here so the work is not lost and so a later rotation has stock to draw on:
 | `three-identity-join` | Three schemas, three identifiers, and no file permitted to hold another's. Thirty-five requirements to join them anyway. |
 | `energy-refbess-250mw` | One advisory, three hops, and a change-control scope produced by traversal instead of by someone reading a spreadsheet. |
 | `conformance-reference-implementation` | Thirty-two rules. Until they run, every finding in this programme is reasoned rather than observed. |
+
+### Five further hooks, added 2026-09-08 on request
+
+Risk modelling, catastrophe modelling, TACAM, ATQ and supply chain visibility.
+Each is grounded in a verified passage in the paper it names.
+
+| Slug | Hook |
+|:---|:---|
+| `ale-rosi-decision-framework` | A modelled 859 percent return, and a section explaining why the models behind it understate the tail. |
+| `monte-carlo-engine` | Uniform sampling almost never walks into the catastrophic path. This engine weights the walk toward it. |
+| `tacam-deep-dive` | Actor-to-technique tables are two-dimensional. This profiles 389 groups across seven. |
+| `atq-deep-dive` | Three hundred and sixty-five percent more variance in the top decile, which is what separates a dormant actor from one already in position. |
+| `supply-chain-eu-cra-standards` | Twenty-four hours to notify, and provenance evidenced on demand, down through ODMs and sub-tier silicon foundries. |
+
+Sources for each, so a later editor can check them without rereading the papers:
+
+- **ALE-ROSI** states a modelled programme ROSI of 859 percent against 15,350,250 USD
+  of annual expected loss, and separately states that ALE, Gordon-Loeb and Gaussian
+  Value at Risk all underestimate catastrophic tail risk because they assume
+  thin-tailed distributions. The hook pairs the number with that admission, because
+  the admission is the more unusual half.
+- **Monte Carlo Engine** replaces a uniform breadth-first search with an
+  importance-weighted one, selecting edges under a Boltzmann distribution.
+- **TACAM** profiles threat actors across seven independent dimensions, 77,279 data
+  points over 389 groups, and criticises the two-dimensional actor-to-technique table
+  as the thing it replaces.
+- **ATQ** reports that its formulation expands top-decile score variance by 365
+  percent, separating dormant historical actors from actively pre-positioned ones.
+- **Supply Chain and EU CRA** describes 24-hour vulnerability notification cadences
+  and supply chain provenance a manufacturer must evidence on demand to a notified
+  body, reaching ODMs, sub-tier silicon foundries, open-source firmware repositories
+  and third-party commercial software.
+
+Thirteen hooks now exist. Five are featured. The other eight are stock for rotation
+and cost nothing to hold.
 
 ### Voice constraints on any future hook
 
@@ -281,7 +321,7 @@ deliberate visual language and this has to sit inside it rather than beside it.
 - Publication dates. `WikiDocumentMeta.publicationDate` exists and is unset on most
   entries, so "newest five" is not currently computable. Adding dates across 59
   documents is its own piece of work and is not required for this.
-- Hooks for the other 54 documents. Eight are written, five are used.
+- Hooks for the other 46 documents. Thirteen are written, five are used.
 - The `/wiki` bundle-size problem. Pre-existing, and its sidebar genuinely needs
   content for search, so it is not a drive-by fix.
 - Any change to the curated card sets on `/unified-standard`. Their counts are
