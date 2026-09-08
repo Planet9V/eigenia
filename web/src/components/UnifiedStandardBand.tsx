@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { getWorkingGroupById } from "@/lib/wikiRegistry";
 import { ArrowRight, Layers, ShieldCheck, GitMerge } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -55,7 +56,7 @@ export const UnifiedStandardBand: React.FC = () => {
               </div>
               <div className="space-y-0.5">
                 <span className="text-muted block uppercase text-[9px] tracking-wider">Treatises</span>
-                <span className="text-primary font-semibold">7 Papers</span>
+                <span className="text-primary font-semibold">{getWorkingGroupById("WG-05-CAD")?.documents.length ?? 0} Papers</span>
               </div>
             </div>
 
