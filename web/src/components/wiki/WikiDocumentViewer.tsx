@@ -25,6 +25,17 @@ interface WikiDocumentViewerProps {
   hasNext?: boolean;
 }
 
+/**
+ * Reading time in whole minutes, at 225 words per minute.
+ *
+ * Character and line counts were shown here before. They told a reader nothing
+ * they could act on, while the time a document will cost them is the thing they
+ * are actually deciding. The raw word count survives as a tooltip.
+ */
+function readingMinutes(words: number): number {
+  return Math.max(1, Math.round(words / 225));
+}
+
 export default function WikiDocumentViewer({
   docData,
   workingGroup,
@@ -167,17 +178,10 @@ export default function WikiDocumentViewer({
               )}
             </div>
 
-            <div className="flex items-center gap-3 text-[11px]">
-              <span title="Character Count">
-                {docData.charCount.toLocaleString()} {t("wiki_chars")}
-              </span>
-              <span>•</span>
-              <span title="Word Count">
-                {docData.wordCount.toLocaleString()} {t("wiki_words")}
-              </span>
-              <span>•</span>
-              <span title="Line Count">
-                {docData.lineCount.toLocaleString()} {t("wiki_lines")}
+            <div className="flex items-center gap-1.5 text-[11px]">
+              <Clock className="h-3.5 w-3.5 text-muted" />
+              <span title={`${docData.wordCount.toLocaleString()} words`}>
+                {readingMinutes(docData.wordCount)} {t("wiki_reading_time")}
               </span>
             </div>
           </div>
