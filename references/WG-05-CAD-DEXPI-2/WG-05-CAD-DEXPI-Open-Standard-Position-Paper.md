@@ -18,7 +18,7 @@ The operational consequences of this lock-in are severe:
 
 > ❝ Plant design in AutoCAD Plant 3D and Revit has crippled cross-discipline collaboration for twenty years. When we design a 140 kW liquid-cooled AI cluster, our P&IDs contain vital hydraulic information: pipe schedules, glycol-water ratios (PG25), valve Cv ratings, pump head curves, and fail-safe orientations (fail-open vs fail-closed). In Revit, that data is trapped in proprietary geometry blobs. DEXPI 2.0 (ISO 15926 / Proteus XML) breaks this lock by serializing the plant as a machine-readable directed graph. If we can map DEXPI's 3-tier catalog (Requirements → Manufacturer Cut-Sheet → As-Built Asset) to digital twins, plant engineers can simulate failure modes without expensive CAD licenses. ❞
 >
-> *— Mechanical Engineer / Piping Specialist (Industrial Process Systems Review)*
+> *Mechanical Engineer / Piping Specialist (Industrial Process Systems Review)*
 
 ## 2. DEXPI 2.0: Architecture, Standards, and Semantic Foundations
 
@@ -134,7 +134,7 @@ In modern process automation, the Purdue Enterprise Reference Architecture (PERA
 
 > ❝ Operators don't have time to parse software dependency trees during a thermal excursion. The unified model must respect the Purdue Model and IEC 62443 zone boundaries. Mechanical engineers must be able to view their familiar P&ID schematics, while security personnel view vulnerability blast radiuses. Above all, the digital twin must enforce the hard write-access trust boundary: AI and optimization models may observe and simulate, but analog safety instrumented systems (IEC 61511) must hold final physical authority. ❞
 >
-> *— Plant Operations Lead (Critical Facilities Operational Reliability)*
+> *Plant Operations Lead (Critical Facilities Operational Reliability)*
 
 DEXPI 2.0 explicitly models safety instrumented functions (SIF) and mechanical interlocks as first-class objects:
 - Mechanical pressure relief valves (`PRV-101`) are defined with independent discharge piping segments that operate through mechanical force, with zero software dependencies.
@@ -154,7 +154,7 @@ When facility data is stored in proprietary schemas, the asset owner is subject 
 
 > ❝ Subjective cybersecurity questionnaires are obsolete. When insuring a $1.2B AI datacenter, underwriters under Lloyd's Market Association Y5381 covenants require quantitative proof of risk accumulation. By joining BIM and BOM, the digital twin can run Monte Carlo simulations to compute a modelled Single Loss Expectancy (SLE) and Annualised Loss Expectancy (ALE) from stated frequency and severity assumptions, with each assumption named on the face of the result. This allows CFOs to scientifically justify security capital investments (ROSI) and set actuarially sound captive insurance retention layers. ❞
 >
-> *— Chief Financial / Actuarial Risk Officer (Capital Allocation & Critical Infrastructure Reinsurance)*
+> *Chief Financial / Actuarial Risk Officer (Capital Allocation & Critical Infrastructure Reinsurance)*
 
 When an organization mandates DEXPI 2.0 across all engineering, procurement, and construction (EPC) contracts:
 - The facility owner retains absolute, perpetual ownership of the engineering topology in open XML.
