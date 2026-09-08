@@ -8,6 +8,8 @@ import { SCurveSection } from "@/components/SCurveSection";
 import { Principles } from "@/components/Principles";
 import { FirstVisitSplash } from "@/components/FirstVisitSplash";
 import { UnifiedStandardBand } from "@/components/UnifiedStandardBand";
+import { FeaturedFindingsBand } from "@/components/home/FeaturedFindingsBand";
+import { WorkingGroupsStrip } from "@/components/home/WorkingGroupsStrip";
 import { ArrowRight, Compass, Layers, Cpu, Users } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -159,6 +161,12 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Featured Findings: five papers, led by what they found */}
+      <FeaturedFindingsBand />
+
+      {/* Working Groups: nine groups, counts derived from the registry */}
+      <WorkingGroupsStrip />
 
       {/* The Unified Standard: Topological BIM & Hierarchical BOM Band */}
       <UnifiedStandardBand />

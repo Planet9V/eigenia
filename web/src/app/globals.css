@@ -103,3 +103,39 @@ html.light main {
 ::-webkit-scrollbar-thumb:hover {
   background: #E05A10;
 }
+
+/* Featured Findings band.
+   Motion is tied to a view progress timeline, so it advances only while the
+   reader scrolls and stops when they stop. WCAG 2.2.2 Pause Stop Hide does not
+   apply to user-driven motion, which is why this band needs no pause control.
+   transform is compositor-only; animating top or left instead costs roughly
+   fifty percent of frames. */
+.findings-track {
+  animation: findings-drift linear both;
+  animation-timeline: view();
+  animation-range: entry 20% exit 80%;
+}
+
+@keyframes findings-drift {
+  from {
+    transform: translateX(2%);
+  }
+  to {
+    transform: translateX(-6%);
+  }
+}
+
+/* Firefox does not support animation-timeline without a flag. The unanimated
+   state is a normal horizontal scroll-snap strip, which is fully usable, so
+   this fallback loses nothing. */
+@supports not (animation-timeline: view()) {
+  .findings-track {
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .findings-track {
+    animation: none;
+  }
+}
