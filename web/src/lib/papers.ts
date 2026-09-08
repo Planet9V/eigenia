@@ -105,6 +105,48 @@ export const PAPERS_REGISTRY: Record<string, { title: string; category: string; 
     number: "TRACK 02-F",
     relativePath: "references/WG-05-CAD-DEXPI-2/WG-05-CAD-DEXPI-Open-Standard-Position-Paper.md",
   },
+  "three-identity-join": {
+    title: "The Three-Identity Join: DEXPI 2.0, CycloneDX 1.6, and IEC 61970 CIM",
+    category: "Cyber-Physical Standards",
+    number: "TRACK 02-G",
+    relativePath: "references/WG-05-CAD-DEXPI-2/WG-05-CAD-Three-Identity-Join.md",
+  },
+  "cim-profile-cyber-physical": {
+    title: "A CIM Profile for Cyber-Physical Assets",
+    category: "Cyber-Physical Standards",
+    number: "TRACK 02-H",
+    relativePath: "references/WG-05-CAD-DEXPI-2/WG-05-CAD-CIM-Profile-Cyber-Physical.md",
+  },
+  "conformance-reference-implementation": {
+    title: "Conformance Suite and Reference Implementation",
+    category: "Cyber-Physical Standards",
+    number: "TRACK 02-I",
+    relativePath: "references/WG-05-CAD-DEXPI-2/WG-05-CAD-Conformance-Reference-Implementation.md",
+  },
+  "refbess-250mw-specification": {
+    title: "RefBESS-250MW: A Synthetic Reference Battery Storage Architecture",
+    category: "Cyber-Physical Standards",
+    number: "TRACK 02-J",
+    relativePath: "references/WG-05-CAD-DEXPI-2/WG-05-CAD-RefBESS-250MW-Specification.md",
+  },
+  "energy-refbess-250mw": {
+    title: "Energy Case: The Three-Schema Join at RefBESS-250MW",
+    category: "Cyber-Physical Standards",
+    number: "TRACK 02-K",
+    relativePath: "references/WG-05-CAD-DEXPI-2/WG-05-CAD-Energy-RefBESS-250MW.md",
+  },
+  "manufacturing-refpharma-api-1": {
+    title: "Manufacturing Case: The CIM-Thin Test at RefPharma-API-1",
+    category: "Cyber-Physical Standards",
+    number: "TRACK 02-L",
+    relativePath: "references/WG-05-CAD-DEXPI-2/WG-05-CAD-Manufacturing-RefPharma-API-1.md",
+  },
+  "rail-refdepot-emu-12": {
+    title: "Rail Case: A Split Domain at RefDepot-EMU-12",
+    category: "Cyber-Physical Standards",
+    number: "TRACK 02-M",
+    relativePath: "references/WG-05-CAD-DEXPI-2/WG-05-CAD-Rail-RefDepot-EMU-12.md",
+  },
 
   // Track 3: Actuarial Re-Invention & Underwriter Treatises
   "1-underwriter-overview": {
