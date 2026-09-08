@@ -108,9 +108,15 @@ list. Every hardcoded list in this repo has rotted; today's count was stale by 3
 and the plan file recorded stale per-working-group counts alongside it. A flag on
 the entry cannot drift from the entry.
 
-Ordering in the band follows registry order, filtered to `featured === true`. If
-more than five carry the flag, the component renders the first five and the build
-does not fail; the count is a display decision, not a data constraint.
+Ordering is by `featuredRank`, a third optional field, ascending. If more than five
+carry the flag, the component renders the first five and the build does not fail;
+the count is a display decision, not a data constraint.
+
+Correction recorded 2026-09-08. This section originally said ordering follows
+registry order, which contradicted the design's own statement that Rail leads.
+Rendering the band exposed it: Rail came fourth. `featuredRank` resolves it while
+keeping the principle that nothing lives in a parallel list, and `audit-featured`
+now requires a rank on every featured document and rejects duplicates.
 
 ## The hooks
 
