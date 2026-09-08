@@ -22,7 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: route === "" ? 1.0 : 0.8,
   }));
 
-  // Dynamic Papers Routes (25 Papers & Treatises)
+  // Dynamic Papers Routes (one per PAPERS_REGISTRY entry)
   const paperSlugs = getAllPaperSlugs();
   const paperRoutes = paperSlugs.map((slug) => ({
     url: `${baseUrl}/papers/${slug}`,

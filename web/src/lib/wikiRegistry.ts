@@ -2,7 +2,7 @@
  * Wiki METADATA registry: working groups, document metadata, and pure lookups.
  *
  * Deliberately does NOT import ./generatedReferencesContent. That module pulls in
- * generatedReferencesContent.json (~3.3 MB, the full prose of all 46 treatises).
+ * generatedReferencesContent.json (~3.3 MB, the full prose of every treatise).
  * Anything that only needs counts, titles or navigation must import from HERE, not
  * from ./wiki, or the whole corpus is bundled into the client on every route that
  * renders it. See ./wiki.ts for the content-resolving functions.

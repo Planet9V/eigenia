@@ -127,7 +127,7 @@ export default function WikiAccordionSidebar({
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder={t("wiki_search_placeholder")}
+            placeholder={t("wiki_search_placeholder").replace("{count}", String(totalTreatises))}
             className="w-full rounded-xl border border-hairline bg-input py-2 pl-9 pr-3 text-xs text-primary placeholder-muted transition-colors focus:border-dutchOrange/60 focus:outline-none"
           />
         </div>
