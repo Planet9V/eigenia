@@ -137,13 +137,13 @@ Two consequences follow immediately and both are load-bearing later. A vertex in
 
 $$\mathcal{E} = \mathcal{E}_{\text{intra}} \sqcup \mathcal{E}_{\text{join}} \sqcup \mathcal{E}_{\text{rep}}$$
 
-**$\mathcal{E}_{\text{intra}}$, edges inside one ontology.**
+$\mathcal{E}_{\text{intra}}$, **edges inside one ontology.**
 
 $$\mathcal{E}_{\text{intra}} = E_{\text{fluid}} \cup E_{\text{signal}} \cup E_{\text{dep}} \cup E_{\text{cim}}$$
 
 $E_{\text{fluid}}$ and $E_{\text{signal}}$ are $E_P$ of the position paper, unchanged, and sit inside $\mathcal{V}_{\text{plant}}$ [3]. $E_{\text{dep}}$ is the CycloneDX `dependencies` graph, inside $\mathcal{V}_{\text{cyber}}$; P1 R-25 requires a `partOf` component and the component representing its asset to be connected there, so the edges exist in any conformant document [4], [12]. $E_{\text{cim}}$ is the set of associations P2 section 4.3 admits, inside $\mathcal{V}_{\text{elec}}$, and only those the document actually declares, because C-8 forbids a consumer inferring containment, supply or protection from `mRID` values or from naming conventions [5].
 
-**$\mathcal{E}_{\text{join}}$, edges induced by join assertions.**
+$\mathcal{E}_{\text{join}}$, **edges induced by join assertions.**
 
 A join assertion is not an edge. It binds one object to one asset reference under one relation [4]. Edges are induced from assertions sharing a reference, and the induction rule is where P1's traversal obligations are discharged.
 
@@ -157,7 +157,7 @@ Charging depth for a hop inside a co-identity class would make $k$ a function of
 
 *Rule J3, connectivity expansion.* Where an edge of type $\mathrm{supply}$ lands on a co-identity class containing a CPAI object $e$, and the document declares a `Terminal` on $e$ sharing a `ConnectivityNode` with the `Terminal` of another admitted object $f$, the edge expands to $f$'s co-identity class at the same weight and the same depth. This is P2's own description of what completeness level L2 buys, that a single `supplies` assertion becomes a computable downstream set instead of one edge, written as a rule [5]. It fires only on associations the document actually declares, because C-8 forbids inferring supply from naming conventions, and it is the only place in this formulation where a CPAI association affects the product rather than the report.
 
-**$\mathcal{E}_{\text{rep}}$, reporting edges.**
+$\mathcal{E}_{\text{rep}}$, **reporting edges.**
 
 The containment associations of CPAI, `Equipment` to `EquipmentContainer`, `Bay` to `VoltageLevel` and `VoltageLevel` to `Substation`, are edges in the model and are not edges in a consequence graph. Losing a pump does not lose the cubicle. Both P4 and P6 traversed exactly this chain and reported the objects as *reached and not affected*, each calling the alternative the most likely error in an automated version of the traversal [8], [10].
 
@@ -196,11 +196,11 @@ Assigning by type rather than per edge is a limitation dressed as a design. A pe
 
 The schedule is in section 9. Three of its entries need their reasoning stated here because they are not obvious.
 
-**$w_{\mathrm{coalesce}} = 1.00$.** Definitional. The two objects are one asset, so nothing attenuates across the hop.
+$w_{\mathrm{coalesce}} = 1.00$. **Definitional.** The two objects are one asset, so nothing attenuates across the hop.
 
-**$w_{\mathrm{supply}}$ differs between an electrical and a fluid edge.** A breaker opening removes supply completely and there is no partial state, so the electrical supply weight is $1.00$. A piping segment feeding a block is not the only thing standing between a pump and that block, so the fluid supply weight is below one. This is the single place where the electrical partition is *less* uncertain than the process partition, and it is worth noticing: a switch is binary and a pipe is not.
+$w_{\mathrm{supply}}$ **differs between an electrical and a fluid edge.** A breaker opening removes supply completely and there is no partial state, so the electrical supply weight is $1.00$. A piping segment feeding a block is not the only thing standing between a pump and that block, so the fluid supply weight is below one. This is the single place where the electrical partition is *less* uncertain than the process partition, and it is worth noticing: a switch is binary and a pipe is not.
 
-**$w_{\mathrm{observe}} = 0.60$.** Lower than every other type, because a falsified reading has to pass through a decision this graph does not model before it reaches anything physical. The value is a choice and the terminal-edge rule of section 4.3 does most of the work regardless of what number sits here.
+$w_{\mathrm{observe}} = 0.60$. **Lower than every other type**, because a falsified reading has to pass through a decision this graph does not model before it reaches anything physical. The value is a choice and the terminal-edge rule of section 4.3 does most of the work regardless of what number sits here.
 
 ### 4.5 The redundancy gate
 

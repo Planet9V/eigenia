@@ -130,3 +130,38 @@ session says a layout is "verified at desktop width" but not "verified on
 an actual narrow viewport," that's why — it's a tooling gap, not a skipped
 step. Real mobile/tablet testing needs an actual device or a browser
 outside this automation path.
+
+## Bold cannot span inline math in `MarkdownViewer`
+
+**Status:** renderer limitation, documented rather than fixed. Sources corrected.
+
+`renderInlineMarkdown` splits each line on `mathRegex` first, then applies
+`tokenRegex` (which handles `**bold**`, `*italic*`, links and code) to each
+non-math segment independently. A bold span that crosses a math boundary
+therefore never pairs up:
+
+```markdown
+**$\mathcal{E}_{\text{intra}}$, edges inside one ontology.**
+```
+
+splits into `**`, then the math, then `, edges inside one ontology.**`. Neither
+`**` finds its partner, and the trailing pair renders literally on the page as
+two asterisks. This shipped to production in
+`WG-05-CAD-Blast-Radius-Three-Ontologies.md` and was caught by looking at the
+deployed page in a browser; every automated gate passed, because the markdown
+is valid and only the renderer disagrees.
+
+**Rule for authors:** do not open or close a bold span with inline math. Put the
+math outside the emphasis.
+
+```markdown
+$\mathcal{E}_{\text{intra}}$, **edges inside one ontology.**
+```
+
+**Why the renderer was not changed:** the fix means restructuring
+split-then-tokenize so emphasis can span segment boundaries, which alters inline
+rendering for all 65 reference documents. Six lines in one document did not
+justify that regression risk. If a third document hits this, fix the renderer
+instead of the sources.
+
+Detect with: `grep -rnE '^\*\*\$|\$\*\*$' references/`
