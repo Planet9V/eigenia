@@ -24,6 +24,8 @@ export interface WikiDocumentMeta {
   badge?: string;
   badgeNl?: string;
   featured?: boolean;
+  /** Lower ranks lead the homepage band. Rail leads: it carries the only safety consequence. */
+  featuredRank?: number;
   hook?: string;
 }
 
@@ -780,6 +782,7 @@ export const WORKING_GROUPS: WorkingGroupCategory[] = [
         badge: "CIM PROFILE",
         badgeNl: "CIM-PROFIEL",
         featured: true,
+        featuredRank: 4,
         hook: "A model that says nothing about a relay is not a model that says there is no relay.",
       },
       {
@@ -810,6 +813,7 @@ export const WORKING_GROUPS: WorkingGroupCategory[] = [
         badge: "REFERENCE ASSET",
         badgeNl: "REFERENTIEACTIEF",
         featured: true,
+        featuredRank: 5,
         hook: "Fifteen parameters sourced, thirty-five modelled, and every row says which.",
       },
       {
@@ -840,6 +844,7 @@ export const WORKING_GROUPS: WorkingGroupCategory[] = [
         badge: "MANUFACTURING CASE",
         badgeNl: "PRODUCTIECASUS",
         featured: true,
+        featuredRank: 2,
         hook: "Fifty-eight candidates. True, conformant, operationally worthless.",
       },
       {
@@ -856,6 +861,7 @@ export const WORKING_GROUPS: WorkingGroupCategory[] = [
         badge: "RAIL CASE",
         badgeNl: "SPOORCASUS",
         featured: true,
+        featuredRank: 1,
         hook: "The most dangerous item in the set had the lowest service impact. Availability triage ranks it last.",
       },
       {
@@ -872,6 +878,7 @@ export const WORKING_GROUPS: WorkingGroupCategory[] = [
         badge: "BLAST RADIUS",
         badgeNl: "EXPLOSIESTRAAL",
         featured: true,
+        featuredRank: 3,
         hook: "A blast radius can contain equipment whose loss removes the hazard. Its size is not a measure of harm.",
       },
     ],
@@ -1083,5 +1090,6 @@ export function getAllWikiDocuments(lang: "en" | "nl" = "en"): WikiDocumentMeta[
 export function getFeaturedDocuments(limit = 5): WikiDocumentMeta[] {
   return getAllWikiDocuments()
     .filter((d) => d.featured === true)
+    .sort((a, b) => (a.featuredRank ?? 99) - (b.featuredRank ?? 99))
     .slice(0, limit);
 }

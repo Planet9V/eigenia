@@ -38,7 +38,9 @@ for (const b of blocks) {
   if (!/featured:\s*true/.test(b)) continue;
   const slug = (b.match(/slug:\s*"([^"]+)"/) || [])[1] ?? "(unknown)";
   const hook = (b.match(/hook:\s*"((?:[^"\\]|\\.)*)"/) || [])[1] ?? null;
-  featured.push({ slug, hook });
+  const rankRaw = (b.match(/featuredRank:\s*(\d+)/) || [])[1];
+  const rank = rankRaw === undefined ? null : Number(rankRaw);
+  featured.push({ slug, hook, rank });
 }
 
 const errors = [];
@@ -66,6 +68,18 @@ for (const { slug, hook } of featured) {
   }
 }
 
+// Ranks decide which card leads. Without this check the order can drift back
+// to registry order silently, which is exactly what happened on first render.
+const ranks = featured.map((f) => f.rank);
+if (ranks.some((r) => r === null)) {
+  for (const f of featured) {
+    if (f.rank === null) errors.push(`${f.slug}: featured but has no featuredRank`);
+  }
+} else {
+  const dupes = ranks.filter((r, i) => ranks.indexOf(r) !== i);
+  if (dupes.length) errors.push(`duplicate featuredRank values: ${[...new Set(dupes)].join(", ")}`);
+}
+
 console.log("=".repeat(64));
 console.log("FEATURED SET AUDIT");
 console.log("=".repeat(64));
@@ -78,5 +92,6 @@ if (errors.length) {
 }
 
 console.log(`FEATURED AUDIT PASSED: ${featured.length} featured, all hooks valid.`);
-for (const f of featured) console.log(`  ${f.slug}`);
+for (const f of [...featured].sort((a, b) => a.rank - b.rank))
+  console.log(`  ${f.rank}. ${f.slug}`);
 console.log("=".repeat(64));
