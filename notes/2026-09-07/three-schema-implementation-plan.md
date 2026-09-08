@@ -1,6 +1,6 @@
 # Three-Schema Cyber Digital Twin Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Publish seven papers establishing a mapping between DEXPI 2.0, CycloneDX and IEC 61970 CIM identity systems, submittable upstream to three standards bodies, with energy, manufacturing and rail reference architectures.
 
@@ -46,7 +46,7 @@ W0 is a separate corrective pass that may still be running. Every later task ass
 
 **Files:** none modified.
 
-- [ ] **Step 1: Run the W0 gate**
+- [x] **Step 1: Run the W0 gate**
 
 ```bash
 cd /Users/jimmcknney/jim_private/eigenia
@@ -58,7 +58,7 @@ echo "BOM variants (expect one value): $(grep -rhoE '[456]-BOM' references/ --in
 
 Expected: `0`, `0`, `1` or more, and a single BOM variant.
 
-- [ ] **Step 2: If any check fails, STOP**
+- [x] **Step 2: If any check fails, STOP**
 
 Do not proceed. W0 has not completed. Report which check failed and wait. Building seven papers on an uncorrected foundation is the failure this plan exists to prevent.
 
@@ -70,7 +70,7 @@ Do not proceed. W0 has not completed. Report which check failed and wait. Buildi
 - Create: `web/scripts/terminology-registry.json`
 - Create: `web/scripts/audit-terminology.mjs`
 
-- [ ] **Step 1: Write the registry**
+- [x] **Step 1: Write the registry**
 
 ```json
 {
@@ -116,7 +116,7 @@ Do not proceed. W0 has not completed. Report which check failed and wait. Buildi
 }
 ```
 
-- [ ] **Step 2: Write the gate**
+- [x] **Step 2: Write the gate**
 
 ```javascript
 #!/usr/bin/env node
@@ -212,7 +212,7 @@ console.log("TERMINOLOGY AUDIT PASSED: no variant or bare form found.");
 console.log("=".repeat(72) + "\n");
 ```
 
-- [ ] **Step 3: Run it and confirm it FAILS**
+- [x] **Step 3: Run it and confirm it FAILS**
 
 ```bash
 cd /Users/jimmcknney/jim_private/eigenia/web
@@ -221,7 +221,7 @@ node scripts/audit-terminology.mjs; echo "EXIT=$?"
 
 Expected: `EXIT=1`, with roughly 34 bare `ISO 15926` violations reported by file and line. A gate that passes on its first run against an uncorrected corpus is broken; verify the count is non-zero before continuing.
 
-- [ ] **Step 4: Commit the gate, red**
+- [x] **Step 4: Commit the gate, red**
 
 ```bash
 cd /Users/jimmcknney/jim_private/eigenia
@@ -236,14 +236,14 @@ git commit -m "test(content): add a terminology gate, currently failing on ISO 1
 **Files:**
 - Modify: every `.md` under `references/` the gate reports, plus the `scripts/compile_*.py` that owns each
 
-- [ ] **Step 1: List what the gate reports, grouped by file**
+- [x] **Step 1: List what the gate reports, grouped by file**
 
 ```bash
 cd /Users/jimmcknney/jim_private/eigenia/web
 node scripts/audit-terminology.mjs 2>&1 | grep '^FAIL' | sed 's/:[0-9]*$//' | sort | uniq -c | sort -rn
 ```
 
-- [ ] **Step 2: For each reported file, check compiler ownership BEFORE editing**
+- [x] **Step 2: For each reported file, check compiler ownership BEFORE editing**
 
 ```bash
 cd /Users/jimmcknney/jim_private/eigenia
@@ -254,13 +254,13 @@ Repeat for each reported filename, substituting it into the grep. If a compiler 
 
 Compiler string literals are a mix of raw (`r"""`) and non-raw. In a raw literal write a single backslash before a LaTeX command; in a non-raw literal write two. Getting this backwards previously broke 408 expressions here and the build did not catch it.
 
-- [ ] **Step 3: Assign each ISO 15926 use its part**
+- [x] **Step 3: Assign each ISO 15926 use its part**
 
 Read the sentence. Part 1 is overview and fundamental principles, part 2 is the data model, part 4 is the reference data library. A sentence invoking reference data classes means part 4; one invoking the data model means part 2.
 
 **Where the sentence does not determine the part, do not guess.** Add the file and line to a list in your report and leave it. An incorrectly specific citation is worse than a vague one, because a reader can check it and find it wrong.
 
-- [ ] **Step 4: Run the gate to green**
+- [x] **Step 4: Run the gate to green**
 
 ```bash
 cd /Users/jimmcknney/jim_private/eigenia/web
@@ -271,7 +271,7 @@ Expected: `EXIT=0`.
 
 If any use could not be assigned a part, the gate will still fail. In that case add that specific sentence to `bare_forms_forbidden` as a documented exception carrying a `reason` field, so the exception is visible rather than silent.
 
-- [ ] **Step 5: Verify nothing else broke, then commit**
+- [x] **Step 5: Verify nothing else broke, then commit**
 
 ```bash
 cd /Users/jimmcknney/jim_private/eigenia/web
@@ -288,7 +288,7 @@ git commit -m "fix(content): state the ISO 15926 part at every use, terminology 
 **Files:**
 - Create: `web/scripts/audit-citations.mjs`
 
-- [ ] **Step 1: Write the gate**
+- [x] **Step 1: Write the gate**
 
 ```javascript
 #!/usr/bin/env node
@@ -384,7 +384,7 @@ console.log("CITATION AUDIT PASSED: every marker resolves.");
 console.log("=".repeat(72) + "\n");
 ```
 
-- [ ] **Step 2: Run it and confirm it FAILS**
+- [x] **Step 2: Run it and confirm it FAILS**
 
 ```bash
 cd /Users/jimmcknney/jim_private/eigenia/web
@@ -393,7 +393,7 @@ node scripts/audit-citations.mjs --warn-orphan-entries; echo "EXIT=$?"
 
 Expected: `EXIT=1`. WG-02-DT documents should dominate the failures, with 69 markers against zero bibliographies.
 
-- [ ] **Step 3: Commit the gate, red**
+- [x] **Step 3: Commit the gate, red**
 
 ```bash
 cd /Users/jimmcknney/jim_private/eigenia
@@ -401,7 +401,7 @@ git add web/scripts/audit-citations.mjs
 git commit -m "test(content): add a citation resolution gate, currently failing"
 ```
 
-- [ ] **Step 4: Record the baseline, do NOT fix the whole corpus here**
+- [x] **Step 4: Record the baseline, do NOT fix the whole corpus here**
 
 ```bash
 cd /Users/jimmcknney/jim_private/eigenia/web
@@ -419,7 +419,7 @@ Fixing WG-02-DT's 69 markers is a separate programme, recorded in `notes/2026-09
 **Files:**
 - Create: `references/WG-05-CAD-DEXPI-2/WG-05-CAD-Three-Identity-Join.md`
 
-- [ ] **Step 1: Read the sources**
+- [x] **Step 1: Read the sources**
 
 ```bash
 cd /Users/jimmcknney/jim_private/eigenia
@@ -430,7 +430,7 @@ sed -n '1,120p' references/WG-05-CAD-DEXPI-2/WG-05-CAD-Unified-DEXPI-CycloneDX.m
 
 `DEXPI2_SPECS.md` is byte-identical to `DEXPI2_Overview.md` apart from a trailing slash; read only one.
 
-- [ ] **Step 2: Write the paper against this outline**
+- [x] **Step 2: Write the paper against this outline**
 
 1. Scope, and what this specification does not do
 2. The three identity systems, reproducing the table below exactly
@@ -455,19 +455,19 @@ Section 3 rests on a sanctioned extension point, and its name changed during thi
 
 Carry the open question rather than resolving it: the Standard Library extended OR restricted; the Profile constrains. This join ADDS attributes. State both readings and what would settle it. The join's content is carrier-independent, so the proposal survives either answer.
 
-- [ ] **Step 3: Use RFC 2119 keywords, because this is an upstream submission**
+- [x] **Step 3: Use RFC 2119 keywords, because this is an upstream submission**
 
 Jim approved upstream submission on 2026-09-07. Normative statements use MUST, SHOULD and MAY, capitalised, with a sentence early in section 1 stating that the key words are to be interpreted as described in RFC 2119. A body cannot adopt a proposal that does not say what an implementer is required to do.
 
-- [ ] **Step 4: State the licence**
+- [x] **Step 4: State the licence**
 
 DEXPI 2.0 is published on GitLab under CC BY 4.0. Section 1 MUST state the licence this extension is offered under and that it is compatible. An extension whose licence is unstated cannot be merged.
 
-- [ ] **Step 5: Keep Eigenia-proprietary terms out of the normative text**
+- [x] **Step 5: Keep Eigenia-proprietary terms out of the normative text**
 
 `RefBESS-250MW`, `RefDNSP-1.2M` and `RefPharma-API-1` belong in the applied papers. P1's normative sections MUST NOT depend on them. A worked example may reference one, clearly marked non-normative.
 
-- [ ] **Step 6: Run the gates**
+- [x] **Step 6: Run the gates**
 
 ```bash
 cd /Users/jimmcknney/jim_private/eigenia/web
@@ -483,7 +483,7 @@ echo "licence stated: $(grep -ci 'CC BY 4.0' "$F")"
 
 All three style counts MUST be 0. RFC 2119 and the licence MUST each be 1 or more.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add references/WG-05-CAD-DEXPI-2/WG-05-CAD-Three-Identity-Join.md
@@ -499,7 +499,7 @@ P3 precedes P2 because upstream submission makes conformance mandatory, and beca
 **Files:**
 - Create: `references/WG-05-CAD-DEXPI-2/WG-05-CAD-Conformance-Reference-Implementation.md`
 
-- [ ] **Step 1: Write the paper against this outline**
+- [x] **Step 1: Write the paper against this outline**
 
 1. Scope
 2. What a conformant unified file is
@@ -510,15 +510,15 @@ P3 precedes P2 because upstream submission makes conformance mandatory, and beca
 7. Limitations
 8. References
 
-- [ ] **Step 2: Every validation rule cites the P1 requirement it enforces**
+- [x] **Step 2: Every validation rule cites the P1 requirement it enforces**
 
 A rule with no corresponding MUST in P1 is either a missing requirement in P1 or an invented rule here. Either way it is a defect. State the mapping as a table with two columns: rule, and the P1 section and requirement it enforces.
 
-- [ ] **Step 3: Section 6 is not optional**
+- [x] **Step 3: Section 6 is not optional**
 
 Conformance to a schema establishes that a file is well formed. It does not establish that the file describes the plant accurately. That distinction MUST be stated plainly, because an assessor will otherwise read conformance as assurance.
 
-- [ ] **Step 4: Run the gates and commit**
+- [x] **Step 4: Run the gates and commit**
 
 ```bash
 cd /Users/jimmcknney/jim_private/eigenia/web
@@ -535,7 +535,7 @@ git commit -m "feat(content): P3, conformance and reference implementation"
 **Files:**
 - Create: `references/WG-05-CAD-DEXPI-2/WG-05-CAD-CIM-Profile-Cyber-Physical.md`
 
-- [ ] **Step 1: Establish the corpus has no prior CIM work**
+- [x] **Step 1: Establish the corpus has no prior CIM work**
 
 ```bash
 cd /Users/jimmcknney/jim_private/eigenia
@@ -545,7 +545,7 @@ grep -rc 'IEC 61850' references/ --include='*.md' | grep -v ':0$' | wc -l
 
 Expected before this task: the first command returns nothing, the second returns a non-zero count. The corpus is silent on CIM and this paper is net-new territory. It uses IEC 61850 twenty times, which is substation communications and a different thing. Say so explicitly in section 1 so no reader conflates them.
 
-- [ ] **Step 2: Write the paper against this outline**
+- [x] **Step 2: Write the paper against this outline**
 
 1. Scope, and the IEC 61850 versus IEC 61970 distinction
 2. Why a profile is necessary: CIM is large, and an unprofiled dependency is unbounded
@@ -556,11 +556,11 @@ Expected before this task: the first command returns nothing, the second returns
 7. Limitations
 8. References
 
-- [ ] **Step 3: Justify every inclusion and exclusion**
+- [x] **Step 3: Justify every inclusion and exclusion**
 
 A profile that lists classes without saying why each is needed is not a profile, it is a subset. Each entry carries one sentence naming the question it lets the twin answer.
 
-- [ ] **Step 4: Run the gates and commit**
+- [x] **Step 4: Run the gates and commit**
 
 ```bash
 cd /Users/jimmcknney/jim_private/eigenia/web
@@ -579,7 +579,7 @@ A reference architecture is specified once and cited by the paper that uses it, 
 **Files:**
 - Create: `references/WG-05-CAD-DEXPI-2/WG-05-CAD-RefBESS-250MW-Specification.md`
 
-- [ ] **Step 1: Read the existing reference architecture pattern**
+- [x] **Step 1: Read the existing reference architecture pattern**
 
 ```bash
 cd /Users/jimmcknney/jim_private/eigenia
@@ -588,7 +588,7 @@ grep -A22 'Reference Network Specification' "references/WG-04-CF-Cascading-Failu
 
 Match that table's shape: Parameter, Value, Basis. Every row's Basis says whether the value is sourced or modelled.
 
-- [ ] **Step 2: Specify a site that exercises all three schemas**
+- [x] **Step 2: Specify a site that exercises all three schemas**
 
 This is why RefBESS is new rather than a reuse of RefDNSP-1.2M, which sits at network scale where the process leg is thin. RefBESS-250MW MUST have, at minimum:
 
@@ -598,11 +598,11 @@ This is why RefBESS is new rather than a reuse of RefDNSP-1.2M, which sits at ne
 
 If any leg is thin, the paper cannot demonstrate a three-way join and the reference architecture has failed its purpose.
 
-- [ ] **Step 3: Mark every parameter sourced or modelled**
+- [x] **Step 3: Mark every parameter sourced or modelled**
 
 No third category. A parameter with no public source is modelled and says so inline.
 
-- [ ] **Step 4: Run the gates and commit**
+- [x] **Step 4: Run the gates and commit**
 
 ```bash
 cd /Users/jimmcknney/jim_private/eigenia/web
@@ -619,7 +619,7 @@ git commit -m "feat(content): specify the RefBESS-250MW reference architecture"
 **Files:**
 - Create: `references/WG-05-CAD-DEXPI-2/WG-05-CAD-Energy-RefBESS-250MW.md`
 
-- [ ] **Step 1: Write the paper against this outline**
+- [x] **Step 1: Write the paper against this outline**
 
 1. Scope, citing the RefBESS-250MW specification rather than restating it
 2. The DEXPI model of the coolant loop
@@ -630,13 +630,13 @@ git commit -m "feat(content): specify the RefBESS-250MW reference architecture"
 7. Limitations
 8. References
 
-- [ ] **Step 2: Section 6 must be a query, not an assertion**
+- [x] **Step 2: Section 6 must be a query, not an assertion**
 
 State the question, show the traversal, show the answer, and state what the answer depends on.
 
 "The unified model enables blast radius analysis" is an assertion. "A CVE in the BMS firmware reaches these three physical nodes and one electrical node, by this path, under this coupling assumption" is a result.
 
-- [ ] **Step 3: Run the gates and commit**
+- [x] **Step 3: Run the gates and commit**
 
 ```bash
 cd /Users/jimmcknney/jim_private/eigenia/web
@@ -655,11 +655,11 @@ P5 is deliberately the weak CIM case. A join that only works when every leg is r
 **Files:**
 - Create: `references/WG-05-CAD-DEXPI-2/WG-05-CAD-Manufacturing-RefPharma-API-1.md`
 
-- [ ] **Step 1: Specify RefPharma-API-1 inline**
+- [x] **Step 1: Specify RefPharma-API-1 inline**
 
 Unlike RefBESS-250MW this asset does not need its own specification document, because one paper uses it. Specify it in section 2 using the same Parameter, Value, Basis table shape.
 
-- [ ] **Step 2: Write the paper against this outline**
+- [x] **Step 2: Write the paper against this outline**
 
 1. Scope, and why this case is deliberately CIM-thin
 2. RefPharma-API-1 specification
@@ -670,11 +670,11 @@ Unlike RefBESS-250MW this asset does not need its own specification document, be
 7. Limitations
 8. References
 
-- [ ] **Step 3: Section 6 is the point of this paper**
+- [x] **Step 3: Section 6 is the point of this paper**
 
 Report honestly what degrades. If a query answerable at RefBESS is unanswerable here, name it. That negative result is the contribution.
 
-- [ ] **Step 4: Run the gates and commit**
+- [x] **Step 4: Run the gates and commit**
 
 ```bash
 cd /Users/jimmcknney/jim_private/eigenia/web
@@ -691,7 +691,7 @@ git commit -m "feat(content): P5, manufacturing reference case, the CIM-thin tes
 **Files:**
 - Create: `references/WG-05-CAD-DEXPI-2/WG-05-CAD-Rail-RefDepot-EMU-12.md`
 
-- [ ] **Step 1: Write the paper against this outline**
+- [x] **Step 1: Write the paper against this outline**
 
 1. Scope, and why rail forced the third schema
 2. RefDepot-EMU-12 specification
@@ -703,11 +703,11 @@ git commit -m "feat(content): P5, manufacturing reference case, the CIM-thin tes
 8. Limitations
 9. References
 
-- [ ] **Step 2: Section 1 states the finding that reshaped the programme**
+- [x] **Step 2: Section 1 states the finding that reshaped the programme**
 
 DEXPI is a process-industry standard. Traction power distribution is an electrical single-line diagram and DEXPI does not cover it. That boundary is why the programme carries three schemas rather than two, and stating it plainly is a contribution rather than an admission.
 
-- [ ] **Step 3: Run the gates and commit**
+- [x] **Step 3: Run the gates and commit**
 
 ```bash
 cd /Users/jimmcknney/jim_private/eigenia/web
@@ -726,7 +726,7 @@ P7 REUSES the existing chain rather than building one. Jim ruled this on 2026-09
 **Files:**
 - Create: `references/WG-05-CAD-DEXPI-2/WG-05-CAD-Blast-Radius-Three-Ontologies.md`
 
-- [ ] **Step 1: Read the formulation being extended**
+- [x] **Step 1: Read the formulation being extended**
 
 ```bash
 cd /Users/jimmcknney/jim_private/eigenia
@@ -736,21 +736,21 @@ sed -n '69p' references/WG-05-CAD-DEXPI-2/WG-05-CAD-DEXPI-Open-Standard-Position
 
 Section 4.4 already defines the two-schema blast radius over a directed multigraph: the vertex set partitioned into plant nodes and cyber nodes, a shortest-path distance term bounded by a depth k, a path product of coupling weights, and an impact threshold. Reproduce that formulation exactly before extending it.
 
-- [ ] **Step 2: Extend it, do not replace it**
+- [x] **Step 2: Extend it, do not replace it**
 
 The three-schema version adds an electrical partition to the vertex set, with its own edge semantics. State explicitly that this generalises section 4.4 rather than superseding it, and cite that section.
 
 A parallel formulation would make P7 a second opinion competing with an existing Eigenia result. Extension makes it the paper that generalises one.
 
-- [ ] **Step 3: Reuse the exploit-likelihood signals**
+- [x] **Step 3: Reuse the exploit-likelihood signals**
 
 EPSS appears in 8 documents and KEV in 2, in TACAM and ATQ. Cite those for the signal rather than restating them. P7 supplies the traversal, not the threat scoring.
 
-- [ ] **Step 4: Work one full example end to end**
+- [x] **Step 4: Work one full example end to end**
 
 A CVE, a `purl`, the component it identifies, the DEXPI equipment that component controls, the physical nodes downstream, and the CIM electrical nodes beyond. State every coupling weight and where it came from.
 
-- [ ] **Step 5: Run the gates and commit**
+- [x] **Step 5: Run the gates and commit**
 
 ```bash
 cd /Users/jimmcknney/jim_private/eigenia/web
@@ -770,7 +770,7 @@ An unregistered file is invisible while the build stays green. That is how the D
 - Modify: `web/src/lib/papers.ts`
 - Modify: `web/src/lib/wikiRegistry.ts`
 
-- [ ] **Step 1: Add the eight entries to `papers.ts`**
+- [x] **Step 1: Add the eight entries to `papers.ts`**
 
 Slots `TRACK 02` through `TRACK 02-F` are taken. Use `TRACK 02-G` through `TRACK 02-N`, in the Cyber-Physical Standards block, following the existing entry shape:
 
@@ -785,13 +785,13 @@ Slots `TRACK 02` through `TRACK 02-F` are taken. Use `TRACK 02-G` through `TRACK
 
 Slugs, in order: `three-identity-join`, `conformance-reference-implementation`, `cim-profile-cyber-physical`, `refbess-250mw-specification`, `energy-refbess-250mw`, `manufacturing-refpharma-api-1`, `rail-refdepot-emu-12`, `blast-radius-three-ontologies`.
 
-- [ ] **Step 2: Add matching entries to `wikiRegistry.ts`**
+- [x] **Step 2: Add matching entries to `wikiRegistry.ts`**
 
 Add to the `WG-05-CAD` `documents` array. Each entry needs all fourteen fields, matching the shape already present: `id`, `slug`, `title`, `titleNl`, `subtitle`, `subtitleNl`, `workingGroupId`, `workingGroupName`, `workingGroupNameNl`, `relativePath`, `author` set to `"J. McKenney"`, `publicationDate`, `badge`, `badgeNl`.
 
 Update the working group `badge` and `badgeNl` counts to include the eight new documents.
 
-- [ ] **Step 3: Verify both registries agree**
+- [x] **Step 3: Verify both registries agree**
 
 ```bash
 cd /Users/jimmcknney/jim_private/eigenia
@@ -806,7 +806,7 @@ for (const s of slugs) console.log(s.padEnd(38), 'papers:', (p.match(new RegExp(
 
 Every row MUST read `papers: 1  wiki: 1`.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add web/src/lib/papers.ts web/src/lib/wikiRegistry.ts
@@ -819,7 +819,7 @@ git commit -m "feat(site): register the eight three-schema documents in both reg
 
 **Files:** none modified; this task only verifies.
 
-- [ ] **Step 1: Run every gate**
+- [x] **Step 1: Run every gate**
 
 ```bash
 cd /Users/jimmcknney/jim_private/eigenia/web
@@ -832,7 +832,7 @@ npm run build 2>&1 | grep -iE "AUDIT PASSED|Total Source|error"
 
 Expected: tsc clean, both new audits PASSED, all diagrams parse, and `AUDIT PASSED: All 64 reference documents`, being 56 today plus eight new.
 
-- [ ] **Step 2: Gate 0, which outranks the rest**
+- [x] **Step 2: Gate 0, which outranks the rest**
 
 ```bash
 cd /Users/jimmcknney/jim_private/eigenia/web
@@ -843,7 +843,7 @@ node scripts/audit-rendered-completeness.js 2>&1 | tail -4
 
 `AUDIT PASSED` required. Exit 2, meaning inconclusive, blocks exactly as hard as exit 1.
 
-- [ ] **Step 3: Every new slug returns 200**
+- [x] **Step 3: Every new slug returns 200**
 
 ```bash
 for s in three-identity-join conformance-reference-implementation cim-profile-cyber-physical refbess-250mw-specification energy-refbess-250mw manufacturing-refpharma-api-1 rail-refdepot-emu-12 blast-radius-three-ontologies; do
@@ -854,7 +854,7 @@ pkill -f "next dev"
 
 Every one MUST be 200. A cross-reference to a 404 is worse than no cross-reference.
 
-- [ ] **Step 4: Push the branch, do not merge**
+- [x] **Step 4: Push the branch, do not merge**
 
 ```bash
 cd /Users/jimmcknney/jim_private/eigenia
@@ -935,3 +935,32 @@ for conversion to a real diagram under the earlier ASCII-to-Mermaid work.
 - It does not fix WG-02-DT's 69 unresolved citation markers, WG-01-UI's zero-citation problem, or the 182 corpus audit findings. Those are recorded in `notes/2026-09-06/publication-roadmap.md` and are a separate programme.
 - It does not build an arithmetic gate. That gate is the hardest of the three proposed and catches the smallest measured class; it is deferred on kaizen just-in-time grounds until terminology and citation are green.
 - It does not submit anything upstream. It produces documents drafted for submission. The three engagements, DEXPI e.V., the CycloneDX project and IEC TC 57, run on their own timetables and none is Eigenia's to control.
+
+---
+
+## Completion record
+
+All fourteen tasks executed. Closed 2026-09-08 on branch
+`feat/three-schema-cyber-digital-twin`, pushed, not merged.
+
+| Delivered | |
+|:---|:---|
+| Eight documents | 74,144 words |
+| Registered | `papers.ts` and `wikiRegistry.ts`, TRACK 02-G to 02-N |
+| Surfaced | `/unified-standard` section 5b, eight links, all resolving |
+| Gates | terminology PASSED, tsc exit 0, build AUDIT PASSED at 64 documents |
+| Corpus em dashes | zero, down from three |
+
+**Carried forward, not done here:**
+
+- The conformance suite P3 specifies is not built. Until it is, every finding
+  in this programme is reasoned rather than observed. See
+  `notes/2026-09-08/three-schema-uncertainty-register.md`.
+- F-2 has three candidate fixes and no ruling. P6 added a condition that
+  option 2 does not currently cover.
+- Twelve citation markers in `WG-02-DT-1.md` and `WG-02-DT-5.md` resolve to
+  nothing. Pre-existing, byte-identical to `main`, gate still exits 1.
+- Two bibliography entries in the Frontier paper could not be found by five
+  search routes. Recommendation recorded, no decision taken.
+- NFPA 855 clause-level separation distances were never resolved and NFPA 855
+  appears in none of the eight papers.

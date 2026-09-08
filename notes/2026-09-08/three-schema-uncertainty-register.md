@@ -54,8 +54,12 @@ each could invalidate a paper's central premise.
   earthing switch.
 - **`Feeder` and `PowerTransformerEnd`** appear in the papers but were never independently
   verified against IEC 61970-301.
-- **NFPA 855 clause-level separation distances** were never resolved. NFPA 855 appears in
-  none of the eight papers.
+- **NFPA 855 clause-level separation distances** researched 2026-09-08 and filed at
+  `references/external-research/WG-05-CAD_nfpa-855-ess-separation_20260908.md`. The
+  three-foot / 0.9 m separation is well reported and the clause is placed at Section 15.5
+  by secondary sources only; the standard itself is paid and was not read. Clause numbers
+  move between editions and a 2026 edition exists, so the number is not safe to cite.
+  Deliberately written into no paper. NFPA 855 still appears in none of the eight.
 - **Two bibliography entries in the Frontier paper** could not be found by five
   independent search routes and are not cited by any body text. See
   `notes/2026-09-07/suspect-citations-verification.md`. Recommendation there is to strike
