@@ -189,3 +189,8 @@ For step-by-step instructions on local Docker setup, required environment variab
 Herengracht 450, 1017 CA Amsterdam, The Netherlands  
 **Direct Board Intake:** [jim@eigenia.nl](mailto:jim@eigenia.nl)  
 **KvK Registered B.V. (Amsterdam, NL)** • BTW/VAT ID: `NL865421908B01`
+
+## Testing
+
+`cd web && npm run verify` runs everything: sync, typecheck, audit suite, unit
+tests. See [documentation/TESTING.md](documentation/TESTING.md).

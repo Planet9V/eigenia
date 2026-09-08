@@ -231,3 +231,20 @@ type correctly every time.
 - **Zero em dashes:** Strictly replace all `—` and `--` with semicolons, colons, commas, or parentheses.
 - **Zero prohibited AI filler words:** No `leverage`, `utilize`, `pivotal`, `testament to`, `foster`, `streamline`, `at its core`, `landscape`, `beacon`, `game-changing`, `harness`, `furthermore`, `robust`.
 <!-- END academic-publication-formatting-rules (managed) -->
+
+## Testing, and the one command that matters
+
+`cd web && npm run verify` runs the sync, the typecheck, the audit suite and the
+unit tests. Run it before you push. `documentation/TESTING.md` is the full picture.
+
+Three things worth knowing before you change anything here:
+
+- **Adding a check is one file.** Drop `audit-<name>.mjs` into `web/scripts/`, exit 0
+  on success and non-zero on failure. `run-audits.mjs` discovers it by filename, so
+  CI, `prebuild` and the pre-push hook all pick it up with no other edit.
+- **`scripts/known-failures.json` is a ratchet.** Frozen failures may shrink, never
+  grow. Never raise a count to make a build pass; if something new is broken, it is
+  new, and it is yours.
+- **Green gates are not the same as a correct page.** A stray `**` shipped to
+  production with every audit passing, because the markdown was valid and only the
+  renderer disagreed. For anything user-facing, still open a browser and look.

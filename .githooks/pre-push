@@ -1,0 +1,29 @@
+#!/bin/sh
+#
+# Pre-push gate. Runs the fast checks before anything leaves this machine.
+#
+# Pushing to main deploys to eigenia.nl via Railway, so a broken push is a
+# broken production site. This catches the cheap classes of breakage first.
+#
+# Enabled by:  git config core.hooksPath .githooks
+# Committed to the repo, so it travels with a clone rather than living only in
+# one person's .git/hooks.
+#
+# Skip it for a genuine emergency:  git push --no-verify
+# If you find yourself typing that regularly, the hook is wrong. Fix the hook.
+
+set -e
+
+REPO_ROOT=$(git rev-parse --show-toplevel)
+cd "$REPO_ROOT/web"
+
+echo "pre-push: typecheck"
+npx tsc --noEmit
+
+echo "pre-push: audits (quick)"
+npm run audit:quick --silent
+
+echo "pre-push: unit tests"
+npm run test:run --silent
+
+echo "pre-push: ok"

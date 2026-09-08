@@ -1,0 +1,93 @@
+name: CI
+
+# Runs on every push and pull request. This is the gate that used to not exist:
+# five audit scripts lived in web/scripts/ and only one of them ran, and only as
+# a side effect of prebuild. Content defects reached production because nothing
+# checked them.
+#
+# Jobs are deliberately separate so a failure names itself in the UI. A red
+# "Audits" is a content problem; a red "Types and build" is a code problem.
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    working-directory: web
+
+jobs:
+  audits:
+    name: Audits
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install
+        run: npm ci
+
+      # The audits read references/*.md, and the content bundle is generated
+      # from it. Sync first, or audit-publications compares against a stale file.
+      - name: Sync generated content
+        run: npm run sync
+
+      - name: Run the audit suite
+        run: npm run audit
+
+  unit:
+    name: Unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install
+        run: npm ci
+
+      - name: Sync generated content
+        run: npm run sync
+
+      - name: Vitest
+        run: npm run test:run
+
+  build:
+    name: Types and build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install
+        run: npm ci
+
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+      # `npm run build` triggers prebuild, which syncs and audits, then compiles.
+      # This is the command Railway runs, so a green build here means the deploy
+      # will compile.
+      - name: Build
+        run: npm run build

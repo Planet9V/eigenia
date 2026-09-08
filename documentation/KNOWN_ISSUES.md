@@ -54,17 +54,14 @@ not a bug — translating 46 treatises is a content project.
 
 ## No test framework
 
-There is no vitest/jest/playwright config and no test script in
-`web/package.json`. The `web/scripts/*.py` files are one-off Playwright
-audits with absolute paths hardcoded to a Gemini/antigravity IDE directory —
-session artifacts, not a maintained suite. The real regression gate is
-`npm run build`, which runs `sync-publications.js` then
-`audit-publications.js` (word-for-word fidelity across all 46 documents).
+**RESOLVED 2026-09-08.** Vitest for unit tests, an auto-discovering audit suite
+with a ratchet for pre-existing failures, GitHub Actions CI, and a pre-push hook.
+`cd web && npm run verify` runs the lot. See `documentation/TESTING.md`.
 
-Note what that gate does *not* cover: it verifies disk → bundle fidelity, but
-never disk → registry coverage. A new `references/*.md` that nobody registers
-in `papers.ts`/`wiki.ts` is unreachable and the build stays green. One such
-orphan was found and published in Sep 2026; check coverage when adding files.
+Two limits survive and are worth keeping in view. Nothing renders React and asserts
+on the output, so there are no component tests. And no layer catches a renderer
+disagreeing with valid markdown, which is how a stray `**` reached production with
+every gate green; for anything user-facing, open a browser and look.
 
 ## `references/WG-07-TM-Threat-Modeling/atq-card-terminal.html` is a duplicate
 
