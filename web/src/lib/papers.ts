@@ -147,6 +147,12 @@ export const PAPERS_REGISTRY: Record<string, { title: string; category: string; 
     number: "TRACK 02-M",
     relativePath: "references/WG-05-CAD-DEXPI-2/WG-05-CAD-Rail-RefDepot-EMU-12.md",
   },
+  "blast-radius-three-ontologies": {
+    title: "Blast Radius Across Three Ontologies",
+    category: "Cyber-Physical Standards",
+    number: "TRACK 02-N",
+    relativePath: "references/WG-05-CAD-DEXPI-2/WG-05-CAD-Blast-Radius-Three-Ontologies.md",
+  },
 
   // Track 3: Actuarial Re-Invention & Underwriter Treatises
   "1-underwriter-overview": {
