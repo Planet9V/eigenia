@@ -30,6 +30,28 @@ const KNOWN_FAILURES_PATH = join(HERE, "known-failures.json");
 /** Audits that take long enough to skip under --quick. */
 const SLOW = new Set(["audit-rendered-completeness.js", "audit-mermaid.mjs"]);
 
+/**
+ * Audits that fetch from a running dev server. Without one they report every
+ * document unreachable, which is neither a pass nor a real failure. The runner
+ * probes for the server and skips them loudly when it is absent.
+ *
+ * Loudly matters. A silent skip is how a check rots into decoration.
+ */
+const NEEDS_SERVER = new Set(["audit-rendered-completeness.js"]);
+const SERVER_URL = process.env.AUDIT_BASE_URL ?? "http://localhost:4500";
+
+async function serverIsUp() {
+  try {
+    const ctl = new AbortController();
+    const t = setTimeout(() => ctl.abort(), 2000);
+    const res = await fetch(SERVER_URL, { signal: ctl.signal });
+    clearTimeout(t);
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+
 const args = new Set(process.argv.slice(2));
 const QUICK = args.has("--quick");
 const LIST_ONLY = args.has("--list");
@@ -63,6 +85,7 @@ function extractCount(output, pattern) {
 
 const known = loadKnownFailures();
 const audits = discoverAudits();
+const serverUp = await serverIsUp();
 
 if (LIST_ONLY) {
   console.log(`${audits.length} audit(s) discovered in scripts/:`);
@@ -80,6 +103,15 @@ const results = [];
 for (const script of audits) {
   if (QUICK && SLOW.has(script)) {
     results.push({ script, status: "SKIP", note: "slow, skipped under --quick" });
+    continue;
+  }
+
+  if (NEEDS_SERVER.has(script) && !serverUp) {
+    results.push({
+      script,
+      status: "SKIP",
+      note: `needs a dev server at ${SERVER_URL}, none responding. Run \`npm run dev\` and re-run to include it.`,
+    });
     continue;
   }
 
@@ -192,6 +224,11 @@ if (failed.length) {
 console.log(
   `AUDIT SUITE PASSED: ${passed} passing, ${frozenCount} frozen, ${skipped} skipped.`
 );
+if (!serverUp && audits.some((a) => NEEDS_SERVER.has(a))) {
+  console.log(
+    `Server-dependent audits did not run. A pass here does not cover them.`
+  );
+}
 if (frozenCount) {
   console.log("Frozen entries are pre-existing debt. They can shrink, never grow.");
 }

@@ -91,3 +91,19 @@ jobs:
       # will compile.
       - name: Build
         run: npm run build
+
+      # audit-rendered-completeness fetches every page from a running server. It
+      # is skipped everywhere else, so this is the only place it actually runs.
+      # A permanently skipped check is not a check.
+      - name: Start the server
+        run: |
+          npm run start &
+          for i in $(seq 1 30); do
+            curl -sf -o /dev/null http://localhost:4500/ && break
+            sleep 2
+          done
+          curl -sf -o /dev/null http://localhost:4500/ || {
+            echo "server never came up"; exit 1; }
+
+      - name: Audits, including the server-dependent one
+        run: npm run audit

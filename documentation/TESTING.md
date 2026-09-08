@@ -119,10 +119,21 @@ disagreed with, and only a real browser showed it. `scripts/verify_live_*.py` an
 `audit_live_*.py` are older Playwright-style helpers, currently unwired and hardcoded
 to another machine's paths.
 
-**`audit-rendered-completeness.js` returns exit 2 for INCONCLUSIVE** on pages under
-5 KB. The runner treats any non-zero exit as a failure, so an inconclusive result is
-reported as a failure rather than a pass. That is deliberate: inconclusive is not
-green.
+**`audit-rendered-completeness.js` needs a running dev server.** The runner probes
+`http://localhost:4500` (override with `AUDIT_BASE_URL`) and, finding nothing, skips
+that audit and says so: *"Server-dependent audits did not run. A pass here does not
+cover them."* It is not silently passed and not falsely failed. CI runs it for real in
+the build job, which starts a server after building; that is the only place it
+actually executes, because a permanently skipped check is not a check.
+
+It also returns exit 2 for INCONCLUSIVE on pages under 5 KB. The runner treats any
+non-zero exit as a failure, which is deliberate: inconclusive is not green.
+
+**Node version is pinned to 20 across CI and the Dockerfile.** They disagreed once,
+and it mattered: `jsdom@30` pulls an `undici` needing Node 22+, so `audit-mermaid`
+died with `webidl.util.markAsUncloneable is not a function` on Node 20. It passed
+locally on Node 26. `jsdom` is pinned to `^25` for this reason. If you bump it, bump
+the Dockerfile too, or the Railway build breaks where your machine does not.
 
 **Dependency discipline.** `audit-mermaid.mjs` imported `jsdom` without it being
 declared in `package.json`. It worked by accident on one machine and would have failed
