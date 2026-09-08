@@ -23,6 +23,8 @@ export interface WikiDocumentMeta {
   publicationDate?: string;
   badge?: string;
   badgeNl?: string;
+  featured?: boolean;
+  hook?: string;
 }
 
 export interface WikiDocumentData extends WikiDocumentMeta {
@@ -1059,4 +1061,17 @@ export function getWorkingGroupById(id: string, lang: "en" | "nl" = "en"): Worki
 
 export function getAllWikiDocuments(lang: "en" | "nl" = "en"): WikiDocumentMeta[] {
   return getAllWorkingGroups(lang).flatMap((wg) => wg.documents);
+}
+
+/**
+ * Documents marked for the homepage Featured Findings band.
+ *
+ * Reads metadata only. Never import ./wiki from a homepage component: it pulls
+ * generatedReferencesContent.json, about 3.3 MB, into the client bundle. That is
+ * why `hook` is a metadata field rather than an excerpt taken from the paper.
+ */
+export function getFeaturedDocuments(limit = 5): WikiDocumentMeta[] {
+  return getAllWikiDocuments()
+    .filter((d) => d.featured === true)
+    .slice(0, limit);
 }
