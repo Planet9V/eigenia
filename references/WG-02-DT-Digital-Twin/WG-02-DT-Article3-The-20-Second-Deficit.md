@@ -1,17 +1,3 @@
----
-title: "The 20 Second Deficit: Operator Decision Latency Against a 45 Second Thermal Cliff"
-slug: "the-20-second-deficit"
-section: "insights"
-locale: "en"
-publishedAt: "2026-09-08"
-updatedAt: "2026-09-08"
-excerpt: "When industrial alarm floods strike, human decision latency expands from 12 seconds to over 65 seconds. In liquid-cooled data centers and cryogenic gas terminals, physical destruction occurs in 45 seconds and 4 seconds respectively. This paper formalizes the cognitive dimension of the Cyber Digital Twin, proving mathematically why human operators cannot defend physical infrastructure and why safety loops must be hardwired."
-metaTitle: "The 20 Second Deficit: Decision Latency vs Thermal Destruction | Eigenia"
-metaDescription: "Mathematical modeling of human decision latency, Sweller cognitive load, Yerkes-Dodson arousal, and physical thermal cliffs in industrial control systems."
-words: 1459
-readingMinutes: 6
----
-
 ## 1. The Human Decision-Maker as the Ultimate Point of Failure
 
 Digital twin architectures in industrial process facilities and hyperscale campuses traditionally model fluid mechanics, thermal conduction, power distribution, and network packet propagation. However, during acute cyber-physical crises, the ultimate point of failure is almost invariably the human decision-maker. 

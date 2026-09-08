@@ -1,17 +1,3 @@
----
-title: "The Barbell Defense: Why Deterministic Physics Must Replace Software Snake Oil"
-slug: "the-barbell-defense-why-deterministic-physics-must-replace-software-snake-oil"
-section: "insights"
-locale: "en"
-publishedAt: "2026-09-08"
-updatedAt: "2026-09-08"
-excerpt: "Enterprise IT security vendors sell endpoint agents, cloud SIEMs, and deep packet inspection under the illusion that software can secure operational technology. This paper proves how conventional security tools induce fatal control loop jitter, crash legacy controllers, and expand attack surfaces. We formalize Taleb's Barbell Defense: eliminating left-tail ruin through zero-software physical interlocks while confining digital twin simulations to decoupled supervisory planes."
-metaTitle: "The Barbell Defense in OT Cybersecurity | Eigenia"
-metaDescription: "Why IT cybersecurity tools harm critical infrastructure. Applying Taleb's Barbell Strategy, Gordon-Loeb investment limits, and hardwired physical interlocks."
-words: 1454
-readingMinutes: 6
----
-
 ## 1. The Hazardous Incursion of Enterprise IT Tooling into OT
 
 For two decades, the enterprise cybersecurity market has expanded into industrial operational technology (OT). Commercial vendors package corporate Endpoint Detection and Response (EDR) agents, next-generation firewalls, active vulnerability scanners, and cloud log forwarders, marketing them to operators of power grids, chemical refineries, rail networks, and hyperscale data centers.

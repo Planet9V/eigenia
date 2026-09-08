@@ -1,17 +1,3 @@
----
-title: "Lacan in the Control Room: The Symbolic Severance and the Irruption of the Real"
-slug: "lacan-in-the-control-room-the-symbolic-severance-and-the-irruption-of-the-real"
-section: "insights"
-locale: "en"
-publishedAt: "2026-09-08"
-updatedAt: "2026-09-08"
-excerpt: "Industrial cyber attacks do not target machinery directly; they sever the symbolic relationship between digital telemetry and physical matter. Drawing upon Jacques Lacan's topological registers, this paper analyzes the specular illusion of supervisory control screens, formalizes the Loman Operator, and proves why the traumatic Real shatters operator ego defenses."
-metaTitle: "Lacan in the Control Room: The Irruption of the Real | Eigenia"
-metaDescription: "Lacanian psychoanalytic topology applied to industrial SCADA HMI deception, the symbolic severance, the Loman Operator, and cyber-physical systems assurance."
-words: 1394
-readingMinutes: 6
----
-
 ## 1. The Technological Mirror: Deception at the Human Interface
 
 In high-consequence industrial facilities, the human operator does not interact directly with physical matter. The operator does not observe the phase transition of liquid methane inside a cryogenic heat exchanger, the shear stress twisting a high-voltage generator shaft, or the thermal flux boiling dielectric coolant in a compute hall.

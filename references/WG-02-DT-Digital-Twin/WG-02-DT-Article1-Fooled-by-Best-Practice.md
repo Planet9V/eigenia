@@ -1,17 +1,3 @@
----
-title: "Fooled by Best Practice: The Epistemological Fraud of OT Cybersecurity"
-slug: "fooled-by-best-practice-the-epistemological-fraud-of-ot-cybersecurity"
-section: "insights"
-locale: "en"
-publishedAt: "2026-09-08"
-updatedAt: "2026-09-08"
-excerpt: "A clean audit and three incident-free years are not proof of security. They represent a single realized sample path through an unobserved probability distribution. This paper applies Nassim Nicholas Taleb's epistemology to critical infrastructure, proving why conventional compliance frameworks hide tail ruin and how Monte Carlo graph simulation reveals the cemetery of silent evidence."
-metaTitle: "Fooled by Best Practice in OT Cybersecurity | Eigenia"
-metaDescription: "Epistemological audit of OT cybersecurity failures using Nassim Taleb's Fooled by Randomness. Survivorship bias, silent evidence, and Monte Carlo graph distributions."
-words: 1760
-readingMinutes: 8
----
-
 ## 1. The Epistemological Fracture in Critical Infrastructure Defense
 
 In 2001, Nassim Nicholas Taleb published *Fooled by Randomness*, demonstrating that financial risk managers systematically confuse luck with skill and mistake favorable historical outcomes for structural stability. Financial institutions evaluated traders by visible track records while remaining blind to the unobserved counterfactual worlds where identical strategies produced catastrophic insolvency.
