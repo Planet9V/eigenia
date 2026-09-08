@@ -779,6 +779,8 @@ export const WORKING_GROUPS: WorkingGroupCategory[] = [
         relativePath: "references/WG-05-CAD-DEXPI-2/WG-05-CAD-CIM-Profile-Cyber-Physical.md",
         badge: "CIM PROFILE",
         badgeNl: "CIM-PROFIEL",
+        featured: true,
+        hook: "A model that says nothing about a relay is not a model that says there is no relay.",
       },
       {
         id: "WG-05-CAD-Conformance-Reference-Implementation",
@@ -807,6 +809,8 @@ export const WORKING_GROUPS: WorkingGroupCategory[] = [
         relativePath: "references/WG-05-CAD-DEXPI-2/WG-05-CAD-RefBESS-250MW-Specification.md",
         badge: "REFERENCE ASSET",
         badgeNl: "REFERENTIEACTIEF",
+        featured: true,
+        hook: "Fifteen parameters sourced, thirty-five modelled, and every row says which.",
       },
       {
         id: "WG-05-CAD-Energy-RefBESS-250MW",
@@ -835,6 +839,8 @@ export const WORKING_GROUPS: WorkingGroupCategory[] = [
         relativePath: "references/WG-05-CAD-DEXPI-2/WG-05-CAD-Manufacturing-RefPharma-API-1.md",
         badge: "MANUFACTURING CASE",
         badgeNl: "PRODUCTIECASUS",
+        featured: true,
+        hook: "Fifty-eight candidates. True, conformant, operationally worthless.",
       },
       {
         id: "WG-05-CAD-Rail-RefDepot-EMU-12",
@@ -849,6 +855,8 @@ export const WORKING_GROUPS: WorkingGroupCategory[] = [
         relativePath: "references/WG-05-CAD-DEXPI-2/WG-05-CAD-Rail-RefDepot-EMU-12.md",
         badge: "RAIL CASE",
         badgeNl: "SPOORCASUS",
+        featured: true,
+        hook: "The most dangerous item in the set had the lowest service impact. Availability triage ranks it last.",
       },
       {
         id: "WG-05-CAD-Blast-Radius-Three-Ontologies",
@@ -863,6 +871,8 @@ export const WORKING_GROUPS: WorkingGroupCategory[] = [
         relativePath: "references/WG-05-CAD-DEXPI-2/WG-05-CAD-Blast-Radius-Three-Ontologies.md",
         badge: "BLAST RADIUS",
         badgeNl: "EXPLOSIESTRAAL",
+        featured: true,
+        hook: "A blast radius can contain equipment whose loss removes the hazard. Its size is not a measure of harm.",
       },
     ],
   },
