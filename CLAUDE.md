@@ -248,3 +248,27 @@ Three things worth knowing before you change anything here:
 - **Green gates are not the same as a correct page.** A stray `**` shipped to
   production with every audit passing, because the markdown was valid and only the
   renderer disagreed. For anything user-facing, still open a browser and look.
+
+## The corpus system view, and how far to trust it
+
+`notes/2026-09-08/corpus-system-view.md` is the map of the research corpus: a
+directory index of all nine working groups, a per-group technical breakdown, and
+a layered architecture of the Cyber Digital Twin. Read it before writing a new
+paper or drafting anything that has to place work inside the corpus. It answers
+"what already exists and which group owns it" faster than walking `references/`.
+
+Deliberately **not published**. It is a map rather than research, it is in
+neither registry, and in `references/` it inflated the audited corpus count while
+being unreachable on the site.
+
+Two cautions, both earned:
+
+- **Its file index is hand-written and goes stale** the moment a paper is added.
+  Trust it for orientation, verify against `references/` before relying on a
+  count or a filename.
+- **It arrived with three fabricated claims**: a figure lifted from one working
+  group and relabelled as another's, invented specifics about an engine, and a
+  named external method credited to a group that never used it. All three were
+  removed and the corrective pass is recorded at the foot of the document. Treat
+  any *number* in it as needing a check against the paper it describes; the
+  structural map is reliable, the quantitative claims were not.
