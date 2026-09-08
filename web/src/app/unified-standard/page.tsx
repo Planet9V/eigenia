@@ -655,7 +655,7 @@ export default function UnifiedStandardPage() {
                     Breaking the Proprietary CAD/BIM Monopoly
                   </h3>
                   <p className="text-xs text-secondary font-light leading-relaxed">
-                    Why DEXPI 2.0 (ISO 15926) is the open foundation for industrial cyber-physical twins, liberating engineering models from closed Autodesk and AVEVA formats.
+                    Why DEXPI 2.0 (ISO 15926 series) is the open foundation for industrial cyber-physical twins, liberating engineering models from closed Autodesk and AVEVA formats.
                   </p>
                 </div>
                 <div className="pt-3 border-t border-hairline text-[11px] font-mono text-muted flex items-center justify-between">
@@ -798,6 +798,198 @@ export default function UnifiedStandardPage() {
                   <Link href="/wiki" className="text-dutchOrange font-semibold hover:underline flex items-center gap-1">
                     <span>Access Full Research Wiki</span>
                     <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+
+        {/* =========================================================================
+            SECTION 5b: The Three-Schema Cyber Digital Twin Programme
+        ========================================================================= */}
+        <section id="three-schema" className="py-20 bg-canvas text-primary relative font-sans border-b border-hairline">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <div className="max-w-3xl space-y-2">
+              <span className="font-mono text-[10px] sm:text-xs tracking-[0.2em] uppercase text-dutchOrange font-semibold block">
+                Three-Schema Programme // WG-05-CAD
+              </span>
+              <h2 className="font-sans text-2xl sm:text-3xl font-semibold tracking-tight text-primary">
+                Joining DEXPI 2.0, CycloneDX 1.6, and IEC 61970 CIM
+              </h2>
+              <p className="text-sm sm:text-base text-secondary font-light leading-relaxed">
+                Three identity systems, one traversable graph. A specification, a CIM profile, a conformance suite, an open reference asset, and three applied cases across energy, manufacturing, and rail. The applied cases disagree with each other, and that disagreement is the result.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 font-sans">
+
+              <div className="p-8 rounded-2xl bg-surface border border-hairline space-y-4 shadow-xl flex flex-col justify-between">
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between text-[11px] font-mono">
+                    <span className="text-dutchOrange font-semibold">P1 // WG-05-CAD</span>
+                    <span className="text-muted">Specification</span>
+                  </div>
+                  <h3 className="font-sans text-base font-semibold text-primary leading-snug">
+                    The Three-Identity Join
+                  </h3>
+                  <p className="text-xs text-secondary font-light leading-relaxed">
+                    Thirty-five requirements binding DEXPI TagName, CycloneDX purl, and CIM mRID into one traversable graph.
+                  </p>
+                </div>
+                <div className="pt-3 border-t border-hairline text-[11px] font-mono text-muted flex items-center justify-between">
+                  <span>Track 5: Engineering CAD</span>
+                  <Link href="/papers/three-identity-join" className="text-dutchOrange font-semibold hover:underline">
+                    Read paper →
+                  </Link>
+                </div>
+              </div>
+
+              <div className="p-8 rounded-2xl bg-surface border border-hairline space-y-4 shadow-xl flex flex-col justify-between">
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between text-[11px] font-mono">
+                    <span className="text-dutchOrange font-semibold">P2 // WG-05-CAD</span>
+                    <span className="text-muted">Profile</span>
+                  </div>
+                  <h3 className="font-sans text-base font-semibold text-primary leading-snug">
+                    A CIM Profile for Cyber-Physical Assets
+                  </h3>
+                  <p className="text-xs text-secondary font-light leading-relaxed">
+                    The CPAI profile, completeness levels L0 to L4, and the rule that silence is not absence.
+                  </p>
+                </div>
+                <div className="pt-3 border-t border-hairline text-[11px] font-mono text-muted flex items-center justify-between">
+                  <span>Track 5: Engineering CAD</span>
+                  <Link href="/papers/cim-profile-cyber-physical" className="text-dutchOrange font-semibold hover:underline">
+                    Read paper →
+                  </Link>
+                </div>
+              </div>
+
+              <div className="p-8 rounded-2xl bg-surface border border-hairline space-y-4 shadow-xl flex flex-col justify-between">
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between text-[11px] font-mono">
+                    <span className="text-dutchOrange font-semibold">P3 // WG-05-CAD</span>
+                    <span className="text-muted">Conformance</span>
+                  </div>
+                  <h3 className="font-sans text-base font-semibold text-primary leading-snug">
+                    Conformance Suite and Reference Implementation
+                  </h3>
+                  <p className="text-xs text-secondary font-light leading-relaxed">
+                    Thirty-two validation rules, and the suite that turns the specification from reasoned into observed.
+                  </p>
+                </div>
+                <div className="pt-3 border-t border-hairline text-[11px] font-mono text-muted flex items-center justify-between">
+                  <span>Track 5: Engineering CAD</span>
+                  <Link href="/papers/conformance-reference-implementation" className="text-dutchOrange font-semibold hover:underline">
+                    Read paper →
+                  </Link>
+                </div>
+              </div>
+
+              <div className="p-8 rounded-2xl bg-surface border border-hairline space-y-4 shadow-xl flex flex-col justify-between">
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between text-[11px] font-mono">
+                    <span className="text-dutchOrange font-semibold">REF // WG-05-CAD</span>
+                    <span className="text-muted">Reference Asset</span>
+                  </div>
+                  <h3 className="font-sans text-base font-semibold text-primary leading-snug">
+                    RefBESS-250MW Reference Architecture
+                  </h3>
+                  <p className="text-xs text-secondary font-light leading-relaxed">
+                    An open, citable 250 MW battery storage asset: fifteen sourced and thirty-five modelled parameters.
+                  </p>
+                </div>
+                <div className="pt-3 border-t border-hairline text-[11px] font-mono text-muted flex items-center justify-between">
+                  <span>Track 5: Engineering CAD</span>
+                  <Link href="/papers/refbess-250mw-specification" className="text-dutchOrange font-semibold hover:underline">
+                    Read paper →
+                  </Link>
+                </div>
+              </div>
+
+              <div className="p-8 rounded-2xl bg-surface border border-hairline space-y-4 shadow-xl flex flex-col justify-between">
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between text-[11px] font-mono">
+                    <span className="text-dutchOrange font-semibold">P4 // WG-05-CAD</span>
+                    <span className="text-muted">Applied Case</span>
+                  </div>
+                  <h3 className="font-sans text-base font-semibold text-primary leading-snug">
+                    Energy: The Join at RefBESS-250MW
+                  </h3>
+                  <p className="text-xs text-secondary font-light leading-relaxed">
+                    A CIM-rich asset at completeness level L4, where the three-schema traversal works as designed.
+                  </p>
+                </div>
+                <div className="pt-3 border-t border-hairline text-[11px] font-mono text-muted flex items-center justify-between">
+                  <span>Track 5: Engineering CAD</span>
+                  <Link href="/papers/energy-refbess-250mw" className="text-dutchOrange font-semibold hover:underline">
+                    Read paper →
+                  </Link>
+                </div>
+              </div>
+
+              <div className="p-8 rounded-2xl bg-surface border border-hairline space-y-4 shadow-xl flex flex-col justify-between">
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between text-[11px] font-mono">
+                    <span className="text-dutchOrange font-semibold">P5 // WG-05-CAD</span>
+                    <span className="text-muted">Applied Case</span>
+                  </div>
+                  <h3 className="font-sans text-base font-semibold text-primary leading-snug">
+                    Manufacturing: The CIM-Thin Test
+                  </h3>
+                  <p className="text-xs text-secondary font-light leading-relaxed">
+                    Where the third leg contributes nothing and the join collapses to a two-schema bridge.
+                  </p>
+                </div>
+                <div className="pt-3 border-t border-hairline text-[11px] font-mono text-muted flex items-center justify-between">
+                  <span>Track 5: Engineering CAD</span>
+                  <Link href="/papers/manufacturing-refpharma-api-1" className="text-dutchOrange font-semibold hover:underline">
+                    Read paper →
+                  </Link>
+                </div>
+              </div>
+
+              <div className="p-8 rounded-2xl bg-surface border border-hairline space-y-4 shadow-xl flex flex-col justify-between">
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between text-[11px] font-mono">
+                    <span className="text-dutchOrange font-semibold">P6 // WG-05-CAD</span>
+                    <span className="text-muted">Applied Case</span>
+                  </div>
+                  <h3 className="font-sans text-base font-semibold text-primary leading-snug">
+                    Rail: A Split Domain at RefDepot-EMU-12
+                  </h3>
+                  <p className="text-xs text-secondary font-light leading-relaxed">
+                    The component leg as the only bridge, and a join that crosses in one direction only.
+                  </p>
+                </div>
+                <div className="pt-3 border-t border-hairline text-[11px] font-mono text-muted flex items-center justify-between">
+                  <span>Track 5: Engineering CAD</span>
+                  <Link href="/papers/rail-refdepot-emu-12" className="text-dutchOrange font-semibold hover:underline">
+                    Read paper →
+                  </Link>
+                </div>
+              </div>
+
+              <div className="p-8 rounded-2xl bg-surface border border-hairline space-y-4 shadow-xl flex flex-col justify-between">
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between text-[11px] font-mono">
+                    <span className="text-dutchOrange font-semibold">P7 // WG-05-CAD</span>
+                    <span className="text-muted">Metric</span>
+                  </div>
+                  <h3 className="font-sans text-base font-semibold text-primary leading-snug">
+                    Blast Radius Across Three Ontologies
+                  </h3>
+                  <p className="text-xs text-secondary font-light leading-relaxed">
+                    Generalising the two-schema multigraph metric, and the two conditions under which the third leg adds nothing.
+                  </p>
+                </div>
+                <div className="pt-3 border-t border-hairline text-[11px] font-mono text-muted flex items-center justify-between">
+                  <span>Track 5: Engineering CAD</span>
+                  <Link href="/papers/blast-radius-three-ontologies" className="text-dutchOrange font-semibold hover:underline">
+                    Read paper →
                   </Link>
                 </div>
               </div>
