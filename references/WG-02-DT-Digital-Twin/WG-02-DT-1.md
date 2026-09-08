@@ -231,7 +231,7 @@ the vocabulary that made the failure legible.
 3. **Taleb, N. N.** *Fooled by Randomness*, on survivorship bias in fund performance: the losing funds close and leave no record, so the surviving track record is selected rather than earned.
 4. **Taleb, N. N.** *The Black Swan*, on backtesting and in-sample survival: a strategy that has not failed inside its sample is not thereby shown to be safe outside it.
 5. **Taleb, N. N.** *Fooled by Randomness*, on risk systems as architectures of self-deception, and on mistaking the visible outcomes of randomness for evidence of a working method.
-6. **Eigenia Labs.** The seven-layer Cyber Digital Twin and the AEON engine that operates over it. The layers are enumerated in section II of this document: reference equipment (L0), deployed equipment with its drift (L1), the software dependency chain (L2), the mapped threat environment (L3), the psychology of defenders and attackers (L4), the real-time information environment (L5), and the predictive layer (L6). Applied further in `WG-02-DT-4.md`, `WG-02-DT-Seven-Staff-Fugue.md` and `MP-Math-Physics-Formula/MP_Mathematical_Models.md`. **Open discrepancy: `MP_Mathematical_Models.md` labels the same ontology "L0 Physical through L7 Temporal", which enumerates eight. Either that file carries a layer this document omits, or its range is written wrong.**
+6. **Eigenia Labs.** The seven-layer Cyber Digital Twin and the AEON engine that operates over it. The layers are enumerated in section II of this document: reference equipment (L0), deployed equipment with its drift (L1), the software dependency chain (L2), the mapped threat landscape (L3), the psychology of defenders and attackers (L4), the real-time information environment (L5), and the predictive layer (L6). Applied further in `WG-02-DT-4.md`, `WG-02-DT-Seven-Staff-Fugue.md` and `MP-Math-Physics-Formula/MP_Mathematical_Models.md`. **Open: `MP_Mathematical_Models.md` describes a different seven-layer model under the same L-notation, running L0 Physical Process, L1 Cyber Detection, L2 OT/ICS Isolation, L3 Organizational Impact, L4 Geopolitical Propagation, L5 Economic Quantification, L6 Psychographic Shift, L7 Temporal Forecast. That is a consequence cascade; the model in this document is an asset and evidence stack. They share no layer meaning at any index, and that file also calls its own eight-label range a "7-layer ontology". Which model `[6]` should point at is unresolved.**
 7. **Taleb, N. N.** *Fooled by Randomness*, on alternative histories: judging a decision by the distribution of states it could have produced rather than the one that happened to occur.
 8. **Eigenia Labs.** *Monte Carlo Engine: Importance Sampling and Graph Random Walks.* `WG-08-MO-Monte-Carlo-Application/WG-08-MO-Monte Carlo Engine.md`. The computational form of the alternative-histories argument.
 9. **Taleb, N. N.** *Antifragile: Things That Gain from Disorder.* Random House, New York, 2012, ISBN 978-1-4000-6782-4. Source for the barbell: bounded downside, open-ended upside, and the avoidance of strategies that look good on average while carrying hidden ruin.
@@ -246,6 +246,7 @@ each names a work that demonstrably contains that claim. Where a claim appears i
 more than one Incerto volume, the entry names the volume that develops it. No
 marker was assigned to a work whose contents were not checked.
 
-Entry 6 carries seventeen of this document's citations. The architecture itself
-is specified here in section II; what is open is the L7 discrepancy noted in that
-entry.
+Entry 6 carries seventeen of this document's citations. The architecture is
+specified here in section II. What is open is that a second, different
+seven-layer model exists elsewhere in the corpus under the same L-notation, as
+that entry records.

@@ -229,7 +229,8 @@ type correctly every time.
 
 ### 4. Continuous Style Invariants
 - **Zero em dashes:** Strictly replace all `—` and `--` with semicolons, colons, commas, or parentheses.
-- **Zero prohibited AI filler words:** No `leverage`, `utilize`, `pivotal`, `testament to`, `foster`, `streamline`, `at its core`, `landscape`, `beacon`, `game-changing`, `harness`, `furthermore`, `robust`.
+- **`landscape` is permitted.** `threat landscape` is standard domain usage in this field and reads as precise, not as filler. Do not flag it.
+- **Zero prohibited AI filler words:** No `leverage`, `utilize`, `pivotal`, `testament to`, `foster`, `streamline`, `at its core`, `beacon`, `game-changing`, `harness`, `furthermore`, `robust`.
 <!-- END academic-publication-formatting-rules (managed) -->
 
 ## Testing, and the one command that matters
