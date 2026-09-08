@@ -77,7 +77,7 @@ Two upstream, one bridging, three applied, one payoff.
 
 | # | Paper | Audience | Establishes |
 |:--|:---|:---|:---|
-| P1 | The Three-Identity Join | upstream | The mapping between `TagName`, `purl`/`bom-ref` and `mRID`, delivered as a DEXPI Standard Library extension, a CycloneDX property taxonomy and a CIM profile reference. |
+| P1 | The Three-Identity Join | upstream | The mapping between `TagName`, `purl`/`bom-ref` and `mRID`, delivered as a DEXPI Profile, a CycloneDX property taxonomy and a CIM profile reference. |
 | P2 | A CIM Profile for Cyber-Physical Assets | upstream | Which CIM subset, and why. Without a profile, "add CIM" is unbounded. CGMES is the precedent. |
 | P3 | Conformance and Reference Implementation | upstream | What a conformant unified file is. Three round-trips, validation rules, test vectors. This is what separates an adopted spec from an admired one. |
 | P4 | Energy: RefBESS-250MW | practitioner | Full coverage. Process systems and switchgear, the second of which two schemas could not reach. |
@@ -225,10 +225,24 @@ also carries the ISO/IEC 5962 error W0 is fixing.
 **DEXPI e.V. upstream submission is IN SCOPE.** Approved 2026-09-07. This is
 the decision with the largest effect on how P1, P2 and P3 are written.
 
-Jim's own source document confirms the mechanism: DEXPI e.V. is developing the
-Standard Library as "a curated set of templates intended to extend or restrict
-the DEXPI Specification to meet specific engineering requirements." That is a
-sanctioned extension point, in writing, from the body that owns the standard.
+The mechanism is sanctioned, and its name moved during this work. Jim's briefing
+document describes a Standard Library, "a curated set of templates intended to
+extend or restrict the DEXPI Specification to meet specific engineering
+requirements." DEXPI e.V.'s own August 2026 update does not use that term. It
+says: "In parallel, the Specification Teams are developing the DEXPI Profile,
+which extends the DEXPI specification with a mechanism for defining explicit
+constraints on classes and properties." Verified by direct fetch on 2026-09-07.
+
+So the sanctioned extension point is the DEXPI Profile, and P1 is written
+against it. The Standard Library history is retained in P1 so a reader holding
+the briefing document can reconcile the two.
+
+One question rides on it and is not settled by the page: "extends" governs what
+the Profile does to the SPECIFICATION, adding a mechanism, and says nothing
+about what a Profile document may do to a MODEL. P1 assumes it can license an
+added attribute set, states that assumption three times, and records it as a
+limitation. The join's content is carrier-independent, so the proposal survives
+either answer.
 
 What upstream submission changes:
 
