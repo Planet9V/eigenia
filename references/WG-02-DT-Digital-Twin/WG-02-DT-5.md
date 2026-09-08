@@ -163,7 +163,7 @@ practitioners reason from narratives when reality is governed by distributions.
 
 1. **Taleb, N. N.** *Fooled by Randomness: The Hidden Role of Chance in Life and in the Markets.* Texere, New York, 2001; second edition, Random House, New York, 2004, ISBN 0-8129-7521-9. Source for the claim that narrative-driven reasoning is comforting, socially rewarded, and operationally dangerous.
 2. **Taleb, N. N.** *The Black Swan: The Impact of the Highly Improbable.* Random House, New York, 2007; second edition 2010. Source for tails, hidden pathways, and the failure of induction over an unrepresentative sample.
-3. **Eigenia Labs.** The seven-layer cyber-physical and socio-technical graph, from universal equipment definitions through organizational and geopolitical dynamics. Enumerated L0 to L6 in section II of `WG-02-DT-1.md`, and applied in `WG-02-DT-4.md` and `MP-Math-Physics-Formula/MP_Mathematical_Models.md`. **Open: `MP_Mathematical_Models.md` describes a different seven-layer model under the same L-notation, a consequence cascade from physical process to temporal forecast, sharing no layer meaning with this one at any index.**
+3. **Eigenia Labs.** The seven-layer cyber-physical and socio-technical graph, from universal equipment definitions through organizational and geopolitical dynamics. Enumerated L0 to L6 in section II of `WG-02-DT-1.md`, and applied in `WG-02-DT-4.md` and `MP-Math-Physics-Formula/MP_Mathematical_Models.md`. `MP_Mathematical_Models.md` applies formulas across a separate eight-stage consequence cascade, now written `CS0` to `CS7`, which shares no meaning with this stack at any index.
 
 ### Note on this bibliography
 
