@@ -1,6 +1,6 @@
-| Working group | Document type | Primary sources cited | Classification |
-| :--- | :--- | :--- | :--- |
-| WG-04-CF Cascading Failures | Eigenia Labs working paper | AEMO, AEMC, EirGrid, ERCOT, NERC, ENTSO-E, National Grid ESO, Ofgem | Open, non-normative |
+| Working group | Document type | Primary sources cited |
+| :--- | :--- | :--- |
+| WG-04-CF Cascading Failures | Eigenia Labs working paper | AEMO, AEMC, EirGrid, ERCOT, NERC, ENTSO-E, National Grid ESO, Ofgem |
 
 ## 1. What this paper is, and what it is not
 

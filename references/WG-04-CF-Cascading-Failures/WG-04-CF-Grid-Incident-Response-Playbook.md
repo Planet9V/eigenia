@@ -1,6 +1,6 @@
-| Working group | Document type | Companion paper | Classification |
-| :--- | :--- | :--- | :--- |
-| WG-04-CF Cascading Failures | Eigenia Labs operational playbook | Cascading Failure Hypothesis | Open, non-normative |
+| Working group | Document type | Companion paper |
+| :--- | :--- | :--- |
+| WG-04-CF Cascading Failures | Eigenia Labs operational playbook | Cascading Failure Hypothesis |
 
 ## 1. Scope and Use
 

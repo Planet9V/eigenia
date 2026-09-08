@@ -199,9 +199,9 @@ type correctly every time.
   ```
 - If standalone normative metadata is required for offline export, it must be formatted as a compact Markdown table, never as loose unformatted text:
   ```markdown
-  | Document ID | Working Group | Normative Standards | Classification |
-  | :--- | :--- | :--- | :--- |
-  | EIGENIA-WG05-CAD-01 | WG-05-CAD | ISO 15926 / CycloneDX 1.6 | Open Technical Specification |
+  | Working group | Document type | Primary sources cited |
+  | :--- | :--- | :--- |
+  | WG-05-CAD DEXPI 2.0 and CAD Interoperability | Eigenia Labs working paper | ISO 15926-4, CycloneDX 1.6, IEC 61970-301 |
   ```
 
 ### 2. Heading and Body Decoupling Rule
