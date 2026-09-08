@@ -87,7 +87,7 @@ A specification that requires any of the three bodies to change its standard wil
 
 **CycloneDX.** CycloneDX has carried custom properties since version 1.3, and the project maintains a public property taxonomy in which a top-level namespace is registered by opening an issue, held as reserved, and confirmed once the taxonomy documentation is publicly available [10]. The join is delivered as a registered namespace under that process.
 
-**CIM.** CIM is profiled rather than extended, and the precedent is large and successful. The Common Grid Model Exchange Standard is a profile of CIM adopted by the IEC as IEC TS 61970-600-1 and IEC TS 61970-600-2, most recently in their 2021 editions [11]. A cyber-physical profile follows the same path. P2 defines it.
+**CIM.** CIM is profiled rather than extended, and the precedent is large and successful. The Common Grid Model Exchange Standard is a profile of CIM adopted by the IEC as IEC 61970-600-1 and IEC 61970-600-2, most recently in their 2021 editions [11]. A cyber-physical profile follows the same path. P2 defines it.
 
 So all three legs have a sanctioned extension point, nothing is forked, and every file stays conformant to its own specification. This is the difference between a proposal a body can adopt and one it must reject on governance grounds, and it is worth stating plainly, because governance rather than technique is what has killed the previous attempts.
 
@@ -305,7 +305,7 @@ R-30. An implementation MUST NOT claim CIM profile conformance on the basis of t
 
 ### 7.1 What P2 has to settle, and why it cannot be settled here
 
-CIM is large. Saying "add CIM" without naming a subset is an unbounded commitment, and unbounded commitments are how a specification becomes an aspiration. CGMES exists precisely because the same problem arose in grid model exchange and was answered by profiling the model down to a stated purpose, then standardising the profile as IEC TS 61970-600-1 and IEC TS 61970-600-2 [11]. That is the pattern P2 follows.
+CIM is large. Saying "add CIM" without naming a subset is an unbounded commitment, and unbounded commitments are how a specification becomes an aspiration. CGMES exists precisely because the same problem arose in grid model exchange and was answered by profiling the model down to a stated purpose, then standardising the profile as IEC 61970-600-1 and IEC 61970-600-2 [11]. That is the pattern P2 follows.
 
 Three questions are open and each has consequences a cyber-physical profile must weigh.
 
@@ -381,6 +381,6 @@ Each of the following is a thing this specification cannot do. They are stated b
 8. **Cheikes, B. A., Waltermire, D., and Scarfone, K.** *Common Platform Enumeration: Naming Specification Version 2.3.* NISTIR 7695, National Institute of Standards and Technology, August 2011.
 9. **International Electrotechnical Commission.** *IEC 61970-301: Energy management system application program interface (EMS-API), Part 301: Common information model (CIM) base.* International Standard.
 10. **CycloneDX Project.** *CycloneDX Property Taxonomy.* OWASP Foundation. Taxonomy of official CycloneDX property namespaces and names, including the top-level namespace registration process.
-11. **International Electrotechnical Commission.** *IEC TS 61970-600-1:2021 and IEC TS 61970-600-2:2021: Common Grid Model Exchange Standard (CGMES).* Technical Specifications, developed with ENTSO-E.
+11. **International Electrotechnical Commission.** *IEC 61970-600-1:2021 and IEC 61970-600-2:2021: Common Grid Model Exchange Standard (CGMES).* Technical Specifications, developed with ENTSO-E. First edition, published 4 June 2021, which cancels and replaces IEC TS 61970-600-1:2017 and IEC TS 61970-600-2:2017.
 12. **DEXPI e.V.** *DEXPI August 2026 Update.* dexpi.org, August 2026. States that DEXPI 2.0.1 is being prepared as an important update to the DEXPI 2.0 specification and that the Specification Teams are developing the DEXPI Profile, which extends the DEXPI specification with a mechanism for defining explicit constraints on classes and properties. Available at https://dexpi.org/dexpi-august-2026-update/ (accessed 7 September 2026).
 13. **Davis, K., Peabody, B., and Leach, P.** *Universally Unique IDentifiers (UUIDs).* RFC 9562, Internet Engineering Task Force, May 2024. Obsoletes RFC 4122.
