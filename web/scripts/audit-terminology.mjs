@@ -17,8 +17,11 @@
  */
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join, resolve, relative } from "node:path";
+import { resolveReferencesDir } from "./lib/references-dir.mjs";
 
-const ROOT = resolve(import.meta.dirname, "../..");
+const REFS_DIR = resolveReferencesDir(import.meta.dirname);
+// ROOT is only used to print paths as references/WG-.../file.md
+const ROOT = resolve(REFS_DIR, "..");
 const REGISTRY = join(import.meta.dirname, "terminology-registry.json");
 
 function walk(dir, out = []) {
@@ -54,7 +57,7 @@ console.log("TERMINOLOGY AUDIT");
 console.log("=".repeat(72) + "\n");
 
 let violations = 0;
-for (const file of walk(join(ROOT, "references"))) {
+for (const file of walk(REFS_DIR)) {
   const rel = relative(ROOT, file);
   const lines = readFileSync(file, "utf-8").split("\n");
   let inFence = false;

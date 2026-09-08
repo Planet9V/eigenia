@@ -17,8 +17,11 @@
  */
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join, resolve, relative } from "node:path";
+import { resolveReferencesDir } from "./lib/references-dir.mjs";
 
-const ROOT = resolve(import.meta.dirname, "../..");
+const REFS_DIR = resolveReferencesDir(import.meta.dirname);
+// ROOT is only used to print paths as references/WG-.../file.md
+const ROOT = resolve(REFS_DIR, "..");
 const WARN_ORPHANS = process.argv.includes("--warn-orphan-entries");
 
 function walk(dir, out = []) {
@@ -85,7 +88,7 @@ console.log("CITATION AUDIT");
 console.log("=".repeat(72) + "\n");
 
 let unresolved = 0, orphans = 0, clean = 0;
-for (const file of walk(join(ROOT, "references"))) {
+for (const file of walk(REFS_DIR)) {
   const rel = relative(ROOT, file);
   const text = readFileSync(file, "utf-8");
   const body = text.replace(/```[\s\S]*?```/g, " ");

@@ -24,9 +24,12 @@
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join, resolve, relative } from "node:path";
 import { JSDOM } from "jsdom";
+import { resolveReferencesDir } from "./lib/references-dir.mjs";
 
-const ROOT = resolve(import.meta.dirname, "../..");
-const REFS = join(ROOT, "references");
+const REFS_DIR = resolveReferencesDir(import.meta.dirname);
+// ROOT is only used to print paths as references/WG-.../file.md
+const ROOT = resolve(REFS_DIR, "..");
+const REFS = REFS_DIR;
 
 function walk(dir, out = []) {
   for (const e of readdirSync(dir)) {
