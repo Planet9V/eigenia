@@ -4,9 +4,10 @@ import React from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { getFeaturedDocuments, getAllWikiDocuments } from "@/lib/wikiRegistry";
+import { BUILD_ROTATION } from "@/lib/buildStamp";
 
 /**
- * Five featured papers, each led by its finding rather than its title.
+ * Thirteen featured papers, each led by its finding rather than its title.
  *
  * A strip of titles is a table of contents. A strip of findings is an argument,
  * which is why the hook renders large and the title small.
@@ -15,10 +16,16 @@ import { getFeaturedDocuments, getAllWikiDocuments } from "@/lib/wikiRegistry";
  * content bundle onto the most performance-sensitive route on the site.
  */
 export const FeaturedFindingsBand: React.FC = () => {
-  const featured = getFeaturedDocuments(5);
+  const ranked = getFeaturedDocuments();
   const total = getAllWikiDocuments().length;
 
-  if (featured.length === 0) return null;
+  if (ranked.length === 0) return null;
+
+  // Rotate which finding leads. BUILD_ROTATION is baked at build time, so the
+  // server render and the client render agree and there is no hydration
+  // mismatch and no post-mount reflow. Rotation is per deploy, not per visit.
+  const offset = BUILD_ROTATION % ranked.length;
+  const featured = [...ranked.slice(offset), ...ranked.slice(0, offset)];
 
   return (
     <section

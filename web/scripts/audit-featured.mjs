@@ -3,7 +3,7 @@
 // Discovered automatically by run-audits.mjs, so it runs in prebuild, in CI and
 // in the pre-push hook without being registered anywhere.
 //
-// Checks: exactly five documents are featured, each has a non-empty hook, no
+// Checks: exactly thirteen documents are featured, each has a non-empty hook, no
 // hook carries an em or en dash or a banned filler word, and every hook fits a
 // card.
 
@@ -11,7 +11,7 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
 const SRC = resolve(import.meta.dirname, "../src/lib/wikiRegistry.ts");
-const EXPECTED_FEATURED = 5;
+const EXPECTED_FEATURED = 13;
 const MAX_HOOK_CHARS = 140;
 const BANNED = [
   "leverage",
@@ -77,7 +77,14 @@ if (ranks.some((r) => r === null)) {
   }
 } else {
   const dupes = ranks.filter((r, i) => ranks.indexOf(r) !== i);
-  if (dupes.length) errors.push(`duplicate featuredRank values: ${[...new Set(dupes)].join(", ")}`);
+  if (dupes.length)
+    errors.push(`duplicate featuredRank values: ${[...new Set(dupes)].join(", ")}`);
+  // A contiguous 1..N sequence matters: the band rotates by offset, so a gap
+  // would make one card lead twice and another never lead at all.
+  const sorted = [...ranks].sort((a, b) => a - b);
+  const expected = sorted.map((_, i) => i + 1);
+  if (JSON.stringify(sorted) !== JSON.stringify(expected))
+    errors.push(`featuredRank must be a contiguous 1..${ranks.length} sequence, got ${sorted.join(", ")}`);
 }
 
 console.log("=".repeat(64));

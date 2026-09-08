@@ -47,7 +47,7 @@ neither.
 
 ### 1. FeaturedFindingsBand
 
-Five featured papers. Each card carries, in this order: the working group code and
+Thirteen featured papers, rotating. Each card carries, in this order: the working group code and
 badge, the **hook**, then the title.
 
 The hook leads. The title is the small print. A strip of titles is a table of
@@ -332,3 +332,39 @@ deliberate visual language and this has to sit inside it rather than beside it.
   content for search, so it is not a drive-by fix.
 - Any change to the curated card sets on `/unified-standard`. Their counts are
   editorial and stay literal.
+
+## Revision 2026-09-08: thirteen cards, rotating lead
+
+All thirteen hooks are now featured rather than five, and the card that leads
+rotates on every build.
+
+**Why all thirteen.** The original five were every one of them WG-05-CAD. A
+visitor saw a DEXPI shop, with the actuarial work at twelve papers, threat
+modelling at four and cascading failure at eight invisible. The band is a scroll
+strip, so thirteen cards cost nothing: the homepage route grew from 6.89 kB to
+6.91 kB and First Load JS did not move.
+
+**Why rotation is per deploy, not per visit.** The homepage is statically
+prerendered and the band is a client component, so a value that differs between
+the server render and the client render is a hydration mismatch. `Math.random()`
+in the component would produce exactly that. Shuffling after mount avoids it but
+costs a visible reflow on every load and shows crawlers an order no visitor sees.
+`scripts/stamp-build.mjs` writes a single integer to `src/lib/buildStamp.ts` at
+prebuild; both renders read the same number. Across thirteen builds every finding
+leads once.
+
+`buildStamp.ts` holds one integer and imports nothing. It must never import the
+generated content module, which pulls the 3.3 MB bundle.
+
+**Ranking, best judgement.** Rail leads at rank 1, then ATQ, manufacturing,
+ALE-ROSI and supply chain, which spreads the first five across four working
+groups. Three-Identity and the RefBESS specification sit late because a
+requirement count and a sourced-versus-modelled ratio are not findings. The
+conformance hook is last on purpose: "until they run, every finding in this
+programme is reasoned rather than observed" is the bravest line in the corpus and
+a poor first impression.
+
+`audit-featured` now requires thirteen, a hook on each, and a contiguous 1..13
+rank sequence. Contiguity matters because the band rotates by offset: a gap would
+make one card lead twice and another never lead at all. Verified by injecting a
+gap and watching it fail.
