@@ -14,9 +14,9 @@
   ],
   "audits": {
     "audit-ascii-art.mjs": {
-      "count": 51,
+      "count": 45,
       "countPattern": "Total: (\\d+) item\\(s\\)",
-      "reason": "51 fenced box-art diagrams across 15 documents predate this audit. Nothing detected them, so the conversion work stalled unnoticed. Frozen here so the gate is on today; the count ratchets to zero as the conversions land. Delete this entry when it reaches 0."
+      "reason": "45 fenced box-art diagrams remain, down from 51. Nothing detected them before this audit, so the conversion work stalled unnoticed. The count ratchets to zero as the conversions land. Delete this entry when it reaches 0."
     }
   }
 }

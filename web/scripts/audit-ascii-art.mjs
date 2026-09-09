@@ -64,32 +64,57 @@ function walk(dir, out = []) {
 }
 
 /**
+ * Blocks kept as drawn art by explicit decision, loaded from
+ * ascii-art-keep.json. See that file for why the list lives there and not as a
+ * comment in the markdown.
+ *
+ * Without this, a block that genuinely should stay as art would sit in
+ * known-failures.json forever and the count could never reach zero, which
+ * would make the ratchet a lie.
+ */
+let keeps = [];
+try {
+  const raw = JSON.parse(readFileSync(join(import.meta.dirname, "ascii-art-keep.json"), "utf-8"));
+  keeps = (raw.keeps ?? []).filter((k) => k.file && k.match && k.reason?.trim());
+} catch (e) {
+  console.error("ASCII ART AUDIT COULD NOT RUN: ascii-art-keep.json;", e.message);
+  process.exit(2);
+}
+
+/**
  * Returns { fenced: [{line, frames}], unfenced: [line] } for one document.
  * Fence state is tracked so a pipe inside a code block is not confused with a
  * pipe loose in prose; the two are different defects with different fixes.
  */
-function findArt(md) {
+function findArt(md, keepMatches = []) {
   const lines = md.split(/\r?\n/);
   const fenced = [];
   const unfenced = [];
   let inBlock = false;
   let blockStart = 0;
   let frames = 0;
+  let body = [];
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
     if (line.trimStart().startsWith("```")) {
       if (inBlock) {
-        if (frames >= MIN_FRAME_LINES) fenced.push({ line: blockStart, frames });
+        const text = body.join("\n");
+        const kept = keepMatches.some((m) => text.includes(m));
+        if (frames >= MIN_FRAME_LINES && !kept) {
+          fenced.push({ line: blockStart, frames });
+        }
         inBlock = false;
       } else {
         inBlock = true;
         blockStart = i + 2; // 1-indexed, first line after the fence
         frames = 0;
+        body = [];
       }
       continue;
     }
     if (inBlock) {
+      body.push(line);
       if (BOX_LINE.test(line)) frames++;
     } else if (BOX_LINE.test(line)) {
       unfenced.push(i + 1);
@@ -114,8 +139,12 @@ const ca = findArt(canaryAscii);
 const cu8 = findArt(canaryUnicode);
 const cu = findArt(canaryUnfenced);
 const ct = findArt(canaryTable);
+const ck = findArt(canaryAscii, ["A BOX LABEL"]);
+const cn = findArt(canaryAscii, ["SOMETHING ELSE"]);
 const selfTest = [
   ["ascii fenced", ca.fenced.length, 1],
+  ["keep entry honoured", ck.fenced.length, 0],
+  ["keep entry that does not match is ignored", cn.fenced.length, 1],
   ["unicode fenced", cu8.fenced.length, 1],
   ["unfenced", cu.unfenced.length, 1],
   ["leaked from fence", ca.unfenced.length, 0],
@@ -137,7 +166,8 @@ const report = [];
 
 for (const file of files) {
   const rel = relative(ROOT, file);
-  const { fenced, unfenced } = findArt(readFileSync(file, "utf-8"));
+  const matches = keeps.filter((k) => k.file === rel).map((k) => k.match);
+  const { fenced, unfenced } = findArt(readFileSync(file, "utf-8"), matches);
   if (!fenced.length && !unfenced.length) continue;
   fencedTotal += fenced.length;
   unfencedTotal += unfenced.length;

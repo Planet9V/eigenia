@@ -1,0 +1,25 @@
+{
+  "$comment": [
+    "Blocks that stay as drawn art, by decision, with the reason recorded.",
+    "",
+    "Not every box is a diagram waiting to be a flowchart. Mermaid lays a graph",
+    "out in ranks, so a figure whose meaning lives in its geometry can come out",
+    "saying something the paper does not.",
+    "",
+    "This lives here rather than as a comment in the markdown: an HTML comment",
+    "above a fence renders as visible text in MarkdownViewer and duplicates the",
+    "block beneath it. Published content should not carry build metadata.",
+    "",
+    "A keep needs a file, a distinctive string from inside the block, and a",
+    "reason. Blocks are matched by content, not line number, so they survive",
+    "edits above them. An entry with an empty reason is ignored, so a keep is",
+    "always a stated decision."
+  ],
+  "keeps": [
+    {
+      "file": "references/WG-02-DT-Digital-Twin/WG-02-DT-Cognitive-Digital-Twin.md",
+      "match": "LACANIAN CONTROL ROOM TOPOLOGY",
+      "reason": "The Borromean geometry is the content. The three registers are mutually linked, with none mediating the other two. Rendered as a mermaid graph, dagre ranks them into a top-to-bottom chain, which asserts exactly the hierarchy the figure exists to deny. Verified in the browser before deciding."
+    }
+  ]
+}
