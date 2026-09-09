@@ -44,10 +44,15 @@ The application is engineered for ultra-high performance, dark/light theme flexi
 ```
 / (Home)
 ├── /mission                        [Standalone Route: Sovereign Mission & Skin-in-the-Game]
-├── /tracks                         [Standalone Route: 7 Research Tracks Catalogue]
+├── /tracks                         [Standalone Route: 9 Research Tracks — renders the working groups]
 ├── /physics                        [Standalone Route: 9 Applied Physics Models Catalogue]
+├── /theory                         [Standalone Route: Applied Physics Models Index]
 ├── /collaborate                    [Standalone Route: Proposal Intake & Board Briefings]
-├── /wiki                           [Standalone Route: Sovereign Research Wiki — 25 Treatises, 8 Working Groups]
+├── /unified-standard               [Standalone Route: DEXPI 2.0 + CycloneDX Unification]
+├── /wiki                           [Standalone Route: Sovereign Research Wiki — 63 Treatises, 9 Working Groups]
+│
+├── /sitemap.xml                    [Generated: app/sitemap.ts]
+├── /robots.txt                     [Generated: app/robots.ts]
 │
 ├── /theory/[slug]                  [Dynamic Route: Applied Physics Deep Dives]
 │   ├── /theory/aeon-ggnn-gated-graph
@@ -88,20 +93,51 @@ All contact forms, pretotype modals (S-Curve Audit, Telemetry Sandbox, Executive
 ```
 eigenia/
 ├── README.md                          # This file — project overview
+├── CLAUDE.md                          # Agent rules — build artifacts, sourcing, style invariants
 ├── documentation/                     # Developer & support docs — see documentation/README.md
 ├── .gitignore                         # Git exclusion configuration
 │
+├── .github/workflows/ci.yml           # Audits, unit tests, types-and-build on every push
+├── .githooks/pre-push                 # Local gate: tsc, quick audits, unit tests
+│
 ├── references/                        # Working-group treatises & sourced external research (load-bearing — see documentation/ARCHITECTURE.md)
 │   ├── WG-01-UI-Underwriter-insurance/
-│   ├── WG-02-DT-.../
+│   ├── WG-02-DT-Digital-Twin/
+│   ├── WG-03-ML-Behaviorial_Modeling/
+│   ├── WG-04-CF-Cascading-Failures/
+│   ├── WG-05-CAD-DEXPI-2/
+│   ├── WG-07-TM-Threat-Modeling/
+│   ├── WG-08-MO-Monte-Carlo-Application/
+│   ├── MP-Math-Physics-Formula/
 │   ├── external-research/             # Sourced-but-not-WG-authored material, one file per source
-│   └── ... (8 working groups, 25 treatises total)
+│   └── ... (9 working groups, 63 treatises total)
+│
+├── scripts/                           # 20 compile_*.py build artifacts — each OVERWRITES a references/*.md
+│                                      # Check ownership before editing any treatise: grep -rln "<file>" scripts/
+├── papers-pre-publish/                # Source manuscripts; compile_r01/r03/r04 read from here at runtime
+├── notes/<YYYY-MM-DD>/                # Dated session scratch: task_plan.md, findings.md, progress.md
+├── reference_arches/                  # Reference facility architectures
+├── assets/                            # Background art and generators
 │
 └── web/                               # Next.js 15 Web Application
     ├── Dockerfile                     # Local-only container build — NOT what Railway uses, see documentation/DEPLOYMENT.md
     ├── docker-compose.yml             # Docker compose service configuration (local-only)
-    ├── package.json                   # Node dependencies and scripts
+    ├── package.json                   # Node dependencies and scripts (`npm run verify` runs everything)
     ├── next.config.ts                 # Next.js configuration
+    │
+    ├── scripts/                       # Build-time sync and the audit suite
+    │   ├── run-audits.mjs             # Discovers audit-*.{js,mjs} by filename; CI, prebuild and pre-push all use it
+    │   ├── known-failures.json        # The ratchet: frozen failures may shrink, never grow
+    │   ├── ascii-art-keep.json        # Blocks deliberately left as drawn art, with reasons
+    │   ├── audit-ascii-art.mjs        # Flags box-drawing art in published documents
+    │   ├── audit-mermaid.mjs          # Parses every diagram; requires accTitle and accDescr
+    │   ├── audit-citations.mjs        # Citation markers must resolve
+    │   ├── audit-terminology.mjs      # One term, one meaning across the corpus
+    │   ├── audit-featured.mjs         # Homepage featured-findings invariants
+    │   ├── audit-publications.js      # Registry word counts match the files
+    │   ├── audit-rendered-completeness.js # Source prose vs the rendered page (needs a dev server)
+    │   ├── sync-publications.js       # references/*.md -> generatedReferencesContent.json
+    │   └── stamp-build.mjs            # Rotates which featured finding leads the homepage
     │
     └── src/
         ├── app/                       # App Router page routes & API endpoints
@@ -110,16 +146,22 @@ eigenia/
         │   ├── mission/page.tsx       # Sovereign mission page
         │   ├── physics/page.tsx       # Applied physics catalogue
         │   ├── tracks/page.tsx        # Research tracks catalogue
+        │   ├── theory/page.tsx        # Applied physics models index
+        │   ├── unified-standard/page.tsx # DEXPI 2.0 + CycloneDX unification
         │   ├── wiki/page.tsx          # Sovereign Research Wiki dashboard
         │   ├── theory/[slug]/page.tsx # Applied physics deep dives
-        │   └── papers/[slug]/page.tsx # Long-form treatises viewer
+        │   ├── papers/[slug]/page.tsx # Long-form treatises viewer + ScholarlyArticle JSON-LD
+        │   ├── sitemap.ts             # Generated /sitemap.xml
+        │   └── robots.ts              # Generated /robots.txt
         │
         ├── components/                # React UI components & modals
         │   ├── SiteChrome.tsx         # Shared Navbar/Footer/Modal wrapper — see documentation/ARCHITECTURE.md
         │   ├── Navbar.tsx             # Title Case top navbar & light/dark toggle
         │   ├── Hero.tsx               # Homepage hero — scoped-dark background pattern
         │   ├── MarkdownViewer.tsx     # Full markdown & KaTeX formula renderer
+        │   ├── MermaidDiagram.tsx     # Lazy-loaded mermaid renderer and its shared theme config
         │   ├── TheoryCatalogue.tsx    # Applied physics models registry
+        │   ├── home/                  # FeaturedFindingsBand, WorkingGroupsStrip
         │   ├── theory-diagrams/       # Inline SVG diagram per physics model
         │   ├── PretotypeExperimentModal.tsx # Interactive audit & briefing modal
         │   ├── ImpressumModal.tsx     # EU statutory legal disclosure
@@ -127,7 +169,11 @@ eigenia/
         │
         ├── lib/
         │   ├── papers.ts              # Slug → references/*.md path lookup for /papers
-        │   ├── wiki.ts                # Slug → references/*.md path lookup for /wiki
+        │   ├── wiki.ts                # Slug → references/*.md content (pulls the 3.3 MB bundle — never import from the homepage)
+        │   ├── wikiRegistry.ts        # Metadata only: titles, authors, dates, working groups, featured hooks
+        │   ├── theoryModels.ts        # Applied physics model registry
+        │   ├── site.ts                # Canonical SITE_URL
+        │   ├── buildStamp.ts          # Generated by stamp-build.mjs — do not edit
         │   ├── mailer.ts              # Hostinger SMTP transporter
         │   └── useContactForm.ts      # Shared contact-form submit/error-state hook
         │
@@ -162,7 +208,14 @@ npm install
 npm run dev
 
 # 4. Open in browser
-# Navigate to http://localhost:3000
+# Navigate to http://localhost:4500   (package.json: next dev -p 4500)
+```
+
+### Enable the gates before your first push
+
+```bash
+# Point git at the repo's hooks: pre-push runs tsc, the quick audits and the tests
+git config core.hooksPath .githooks
 ```
 
 ### Building for Production
@@ -171,9 +224,13 @@ npm run dev
 # Compile TypeScript and build Next.js production bundle
 npm run build
 
-# Start production server locally
+# Start production server locally (also port 4500)
 npm run start
 ```
+
+`npm run build` is not just a build. `prebuild` runs `sync-publications.js`,
+then `stamp-build.mjs`, then the full audit suite, so a build fails if the
+corpus and the registries disagree or any gate is red.
 
 ---
 
@@ -190,7 +247,41 @@ Herengracht 450, 1017 CA Amsterdam, The Netherlands
 **Direct Board Intake:** [jim@eigenia.nl](mailto:jim@eigenia.nl)  
 **KvK Registered B.V. (Amsterdam, NL)** • BTW/VAT ID: `NL865421908B01`
 
-## Testing
+## Testing, gates, and the ratchet
 
-`cd web && npm run verify` runs everything: sync, typecheck, audit suite, unit
-tests. See [documentation/TESTING.md](documentation/TESTING.md).
+`cd web && npm run verify` runs everything: sync, typecheck, the audit suite,
+and the unit tests. Run it before you push. Full detail in
+[documentation/TESTING.md](documentation/TESTING.md).
+
+Three things worth knowing before changing anything here.
+
+**Adding a check is one file.** Drop `audit-<name>.mjs` into `web/scripts/`,
+exit 0 on success and non-zero on failure. `run-audits.mjs` discovers it by
+filename, so CI, `prebuild` and the pre-push hook all pick it up with no other
+edit.
+
+**`web/scripts/known-failures.json` is a ratchet.** Frozen failures may shrink,
+never grow. Never raise a count to make a build pass; if something new is
+broken, it is new, and it is yours. The file is empty today, which means
+nothing is frozen.
+
+**Green gates are not the same as a correct page.** A stray `**` once shipped
+to production with every audit passing, because the markdown was valid and only
+the renderer disagreed. For anything user-facing, still open a browser.
+
+### What each gate covers
+
+| Gate | Runs | Enforces |
+| :--- | :--- | :--- |
+| `audit-ascii-art.mjs` | audit suite | No box-drawing art in published documents. Proves no *box-cornered* drawing survives, not that no drawing survives; deliberate exceptions live in `ascii-art-keep.json` with reasons |
+| `audit-mermaid.mjs` | audit suite | Every diagram parses through the real mermaid library, and carries `accTitle` and `accDescr` |
+| `audit-citations.mjs` | audit suite | Citation markers resolve to a bibliography entry |
+| `audit-terminology.mjs` | audit suite | One term, one meaning across the corpus |
+| `audit-featured.mjs` | audit suite | Homepage featured-findings invariants |
+| `audit-publications.js` | audit suite | Registry word counts match the files on disk |
+| `audit-rendered-completeness.js` | audit suite | Source prose appears in the rendered page. **Needs a dev server**; it skips silently without one, and a skip is not a pass |
+| `.githooks/pre-push` | every push | `tsc`, quick audits, unit tests |
+| `.github/workflows/ci.yml` | every push and PR | Audits, unit tests, types-and-build on Node 20, matching the Dockerfile |
+
+Each audit carries a canary that proves it can fail. A validator that cannot
+fail is a broken validator, not a clean corpus.
