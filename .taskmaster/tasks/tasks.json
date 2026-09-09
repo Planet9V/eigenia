@@ -1,0 +1,87 @@
+{
+  "master": {
+    "tasks": [
+      {
+        "id": "1",
+        "title": "T1 /tracks page: one word per surface",
+        "description": "Replace the nine 'Working Group' card labels on /tracks with 'Research Track'",
+        "details": "app/tracks/page.tsx is titled 'Sovereign Research Tracks' but its body says 'Working Group' 9 times, one per card. QA GATE: live page shows 0 'Working Group' and >=9 'Research Track'; tsc 0; audits 7/7. || BLOCKED BY DESIGN GATE: evidence contradicts this task. Working Group is the ENTITY label (9 registry descriptions, 63 paper hero cards via workingGroupName, wiki sidebar, navbar, homepage strip). Research Track is the SECTION/ROUTE label (breadcrumb, page title, Return-to buttons, navbar menu). Relabelling the cards would strip the entity name and contradict PR 15. Real defect is narrower: the /tracks header stacks BOTH as competing headings. Awaiting decision A (keep two-level, fix header only) or B (collapse to one word sitewide). || RESOLVED option A (two-level convention kept). Original task was wrong and was blocked by the design gate. Actual fix: the eyebrow slot held a second NAME for the entity stacked above the h1. House pattern on /mission /physics /collaborate is eyebrow=describes scope, h1=names section. Eyebrow now Research Programme and Working Group Output. Cards and body prose keep Working Group, which is the entity term and matches PR 15. QA GATE PASSED: rendered eyebrow correct with a real ampersand not an escaped one, h1 unchanged, 9 group cards intact, tsc 0, audits 7/7 live server.",
+        "testStrategy": "",
+        "status": "done",
+        "dependencies": [],
+        "priority": "high",
+        "subtasks": [],
+        "updatedAt": "2026-09-09T12:56:33.782Z"
+      },
+      {
+        "id": "2",
+        "title": "T2 delete dead track translation keys",
+        "description": "Remove nav_track1..7 and nav_view_all_tracks from translations.ts (EN and NL)",
+        "details": "16 stale strings, none rendered by any tsx. They encode the wrong count 7 and the old category taxonomy. QA GATE: grep shows 0 tsx references and 0 keys remaining; tsc 0; 10 unit tests pass. || QA GATE PASSED (orchestrator-verified, not agent-claimed): scope=translations.ts only; 8 insertions/24 deletions; dead keys 0; nav_tracks retained x2; portal tags 8 Portal-prefixed / 0 Track-prefixed; portal_2_title and portal_2_desc untouched. Combined tsc+tests deferred until T3 lands in the same tree.",
+        "testStrategy": "",
+        "status": "done",
+        "dependencies": [],
+        "priority": "high",
+        "subtasks": [],
+        "updatedAt": "2026-09-09T12:49:14.943Z"
+      },
+      {
+        "id": "3",
+        "title": "T3 /collaborate: pathways are not tracks",
+        "description": "Rename const tracks -> pathways; relabel the 3-button 'Track N //' picker",
+        "details": "const tracks holds the 4 engagement pathways (probono/academic/commercial/sponsor); a separate 3-button picker reads 'Track 1 // Risk'. QA GATE: no 'Track N //' label on live /collaborate; tsc 0; form still submits pathway+subject. || QA GATE PASSED (orchestrator-verified): scope=collaborate/page.tsx only; ids risk/dexpi/actuarial preserved (they ship in the intake email); selectedTrack state intact (4 refs); no Track N // label; no track identifier. Gate CAUGHT a miss the agent left: stale comment \"4 tracks\" at line 219, fixed. Live behaviour proven: clicking DEXPI selects it and deselects the others. tsc 0, 10 tests, 7/7 audits with a live server.",
+        "testStrategy": "",
+        "status": "done",
+        "dependencies": [],
+        "priority": "medium",
+        "subtasks": [],
+        "updatedAt": "2026-09-09T12:51:40.803Z"
+      },
+      {
+        "id": "4",
+        "title": "T4 homepage portal tags are section counters",
+        "description": "Rename portal_1_tag..portal_4_tag so they do not read as research tracks",
+        "details": "'Track 01 // Sovereign'..'Track 04 // Defense' number the four homepage portals, not research tracks. EN and NL. QA GATE: live homepage shows 0 'Track 0N //'; tsc 0. || QA GATE PASSED (orchestrator-verified, not agent-claimed): scope=translations.ts only; 8 insertions/24 deletions; dead keys 0; nav_tracks retained x2; portal tags 8 Portal-prefixed / 0 Track-prefixed; portal_2_title and portal_2_desc untouched. Combined tsc+tests deferred until T3 lands in the same tree.",
+        "testStrategy": "",
+        "status": "done",
+        "dependencies": [],
+        "priority": "medium",
+        "subtasks": [],
+        "updatedAt": "2026-09-09T12:49:17.218Z"
+      },
+      {
+        "id": "5",
+        "title": "T5 delete dead LabsShowcase.tsx",
+        "description": "Remove the unreferenced component carrying four 'Track N //' tags",
+        "details": "EVIDENCE: zero external references to all three exports (ResearchTrack, researchTracksList, LabsShowcase); no dynamic import, no React.lazy, no barrel file; its unique strings ('Sovereign Defense Protocols', 'Explore Research Track') return 0 hits on six live pages. Fixing its labels would polish code nothing renders, so delete is the minimum change. QA GATE: tsc 0, build-relevant audits pass, no import breaks. || QA GATE PASSED: file deleted via git rm; tsc 0; no import breaks.",
+        "testStrategy": "",
+        "status": "done",
+        "dependencies": [],
+        "priority": "medium",
+        "subtasks": [],
+        "updatedAt": "2026-09-09T13:08:33.714Z"
+      },
+      {
+        "id": "6",
+        "title": "T6 papers hero: replace stale paper.number chip",
+        "description": "Swap paper.number for the per-document badge, then delete the field",
+        "details": "EVIDENCE REFUTING MY EARLIER CLAIM: paper.number is in NO url, route, slug, sitemap, robots or href; it is cited 0 times in references/*.md (ACTUARIAL/TRACK/TALEB patterns all 0); it has exactly 2 consumers, the hero chip and a metadata keyword. So 'renumbering breaks external references' was untested and is false. 41 of 63 prefixes contradict their group. REPLACEMENT: docMeta.badge is present on all 63, 63 distinct values, and workingGroupId agrees with its group for all 63 - so the chip becomes correct by construction and keeps per-document identity. QA GATE: 63/63 render a badge, 0 render ACTUARIAL/TRACK/TALEB, tsc 0, audits 7/7 live. || QA GATE PASSED: all 63 paper pages fetched from a live server, 0 still showing ACTUARIAL/TRACK/TALEB numbering, 63/63 render their badge. The 5 initially reported missing were a grep error on my side: their badges contain & which is served as &amp;. Browser-confirmed it displays as a real ampersand. tsc 0, 10 tests, audits 7/7 with nothing skipped.",
+        "testStrategy": "",
+        "status": "done",
+        "dependencies": [],
+        "priority": "medium",
+        "subtasks": [],
+        "updatedAt": "2026-09-09T13:08:36.153Z"
+      }
+    ],
+    "metadata": {
+      "version": "1.0.0",
+      "lastModified": "2026-09-09T13:08:36.153Z",
+      "taskCount": 6,
+      "completedCount": 6,
+      "tags": [
+        "master"
+      ]
+    }
+  }
+}
