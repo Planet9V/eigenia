@@ -72,7 +72,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       "OT Cybersecurity",
       "Industrial Control Systems",
       meta?.workingGroupName ?? "",
-      paper.number,
+      meta?.badge ?? "",
     ],
     authors: [{ name: "J. McKenney", url: SITE_URL }],
     creator: "Eigenia B.V.",
@@ -204,7 +204,7 @@ export default async function PaperDetailPage({ params }: PageProps) {
             <div className="max-w-4xl space-y-4">
               <div className="flex flex-wrap items-center gap-3">
                 <span className="font-mono text-xs text-dutchOrange font-bold uppercase tracking-wider bg-dutchOrange/10 px-3 py-1 rounded-lg border border-dutchOrange/30">
-                  {paper.number}
+                  {docMeta?.badge}
                 </span>
                 <span className="font-mono text-xs text-muted uppercase tracking-wider">
                   {docMeta?.workingGroupName}
