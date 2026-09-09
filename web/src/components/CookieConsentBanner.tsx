@@ -62,7 +62,7 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({
             <div className="flex items-start justify-between gap-3">
               <div className="flex items-center gap-2">
                 <Cookie className="w-5 h-5 text-dutchOrange flex-shrink-0" />
-                <h4 className="font-bold text-xs text-primary uppercase">{t("cookie_banner_title" as any)}</h4>
+                <h4 className="font-bold text-xs text-primary uppercase">{t("cookie_banner_title")}</h4>
               </div>
               <span className="text-xs font-mono text-dutchOrange font-normal inline-block">
                 EU ePrivacy
@@ -70,7 +70,7 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({
             </div>
 
             <p className="text-xs text-secondary leading-relaxed font-sans font-light">
-              {t("cookie_banner_desc" as any)}
+              {t("cookie_banner_desc")}
             </p>
 
             <div className="flex flex-wrap items-center justify-end gap-2 pt-2 border-t border-hairline font-mono text-xs">
@@ -78,14 +78,14 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({
                 onClick={() => setShowPreferences(true)}
                 className="py-2 px-3 rounded-xl bg-subtle text-secondary hover:text-primary transition-colors"
               >
-                {t("cookie_manage_prefs" as any)}
+                {t("cookie_manage_prefs")}
               </button>
 
               <button
                 onClick={handleAcceptAll}
                 className="py-2 px-4 rounded-xl bg-dutchOrange text-white font-bold hover:bg-dutchOrange/90 transition-colors shadow-md flex items-center gap-1.5"
               >
-                <Check className="w-3.5 h-3.5" /> {t("cookie_accept_all" as any)}
+                <Check className="w-3.5 h-3.5" /> {t("cookie_accept_all")}
               </button>
             </div>
           </div>

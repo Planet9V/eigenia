@@ -16,15 +16,15 @@ export const KnowledgeTransfer: React.FC = () => {
         {/* Header */}
         <div className="max-w-3xl space-y-3">
           <span className="font-mono text-[10px] sm:text-xs tracking-[0.2em] uppercase text-dutchOrange font-medium inline-block">
-            {t("kt_tag" as any)}
+            {t("kt_tag")}
           </span>
 
           <h2 className="font-sans text-xl sm:text-2xl lg:text-3xl font-semibold tracking-tight text-primary">
-            {t("kt_title" as any)}
+            {t("kt_title")}
           </h2>
 
           <p className="text-sm sm:text-base text-secondary font-light leading-relaxed">
-            {t("kt_desc" as any)}
+            {t("kt_desc")}
           </p>
         </div>
 
@@ -43,11 +43,11 @@ export const KnowledgeTransfer: React.FC = () => {
               </div>
 
               <h3 className="font-sans text-xl font-semibold text-primary group-hover:text-dutchOrange transition-colors">
-                {t("kt_step1_title" as any)}
+                {t("kt_step1_title")}
               </h3>
 
               <p className="text-sm text-secondary font-sans leading-relaxed font-light">
-                {t("kt_step1_desc" as any)}
+                {t("kt_step1_desc")}
               </p>
             </div>
           </div>
@@ -65,11 +65,11 @@ export const KnowledgeTransfer: React.FC = () => {
               </div>
 
               <h3 className="font-sans text-xl font-semibold text-primary group-hover:text-dutchOrange transition-colors">
-                {t("kt_step2_title" as any)}
+                {t("kt_step2_title")}
               </h3>
 
               <p className="text-sm text-secondary font-sans leading-relaxed font-light">
-                {t("kt_step2_desc" as any)}
+                {t("kt_step2_desc")}
               </p>
             </div>
           </div>
@@ -87,11 +87,11 @@ export const KnowledgeTransfer: React.FC = () => {
               </div>
 
               <h3 className="font-sans text-xl font-semibold text-primary group-hover:text-dutchOrange transition-colors">
-                {t("kt_step3_title" as any)}
+                {t("kt_step3_title")}
               </h3>
 
               <p className="text-sm text-secondary font-sans leading-relaxed font-light">
-                {t("kt_step3_desc" as any)}
+                {t("kt_step3_desc")}
               </p>
             </div>
           </div>
