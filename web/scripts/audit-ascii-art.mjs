@@ -28,8 +28,20 @@ const REFS_DIR = resolveReferencesDir(import.meta.dirname);
 // ROOT is only used to print paths as references/WG-.../file.md
 const ROOT = resolve(REFS_DIR, "..");
 
-/** A box-drawing rule or frame line: starts with + or |, then run of + - | space. */
-const BOX_LINE = /^\s*[+|][-+| ]{8,}/;
+/**
+ * A frame line from a drawn box, in either of the two styles the corpus uses.
+ *
+ * ASCII style requires a `+-` or `-+` corner. An earlier version of this rule
+ * accepted any run of pipes, dashes and spaces, which matched 27 perfectly
+ * ordinary markdown table rows: delimiters like `|---|---|`, and body rows
+ * whose first cell is empty. Markdown tables never put a `+` against a `-`,
+ * so the corner is what separates a drawn box from a table.
+ *
+ * Unicode style is the U+2500 box-drawing block, which the ASCII rule missed
+ * entirely. Three documents draw in it.
+ */
+const BOX_LINE =
+  /^\s*(?:[+|][-+| ]*(?:\+-|-\+)[-+| ]*|[\u2500-\u257F][\u2500-\u257F\s]*)/;
 
 /** A fenced block counts as art when at least two of its lines are frame lines. */
 const MIN_FRAME_LINES = 2;
@@ -88,18 +100,33 @@ function findArt(md) {
 
 // Prove the gate can fail before trusting a pass. A validator that cannot fail
 // is a broken validator, not a clean corpus.
-const canaryFenced = "```\n+-------------+\n| A BOX LABEL |\n+-------------+\n```\n";
+const canaryAscii = "```\n+-------------+\n| A BOX LABEL |\n+-------------+\n```\n";
+const canaryUnicode = "```\n\u250c\u2500\u2500\u2500\u2510\n\u2502 X \u2502\n\u2514\u2500\u2500\u2500\u2518\n```\n";
 // Only the frame rules match, not "| LOOSE BOX |": a line carrying letters is
 // text, and flagging the rules is enough to point at the art.
 const canaryUnfenced = "prose\n+-------------+\n| LOOSE BOX   |\n";
-const cf = findArt(canaryFenced);
+// A markdown table must NOT register. This is the false positive that made the
+// first version of this audit report 27 defects that did not exist.
+const canaryTable =
+  "| A | B |\n|---|---|\n|                          | T0886 | Remote Services |\n";
+
+const ca = findArt(canaryAscii);
+const cu8 = findArt(canaryUnicode);
 const cu = findArt(canaryUnfenced);
-if (cf.fenced.length !== 1 || cu.unfenced.length !== 1 || cf.unfenced.length !== 0) {
-  console.error(
-    `ASCII ART AUDIT COULD NOT RUN: self-test failed ` +
-      `(fenced=${cf.fenced.length}/1, unfenced=${cu.unfenced.length}/1, ` +
-      `leaked-from-fence=${cf.unfenced.length}/0)`
-  );
+const ct = findArt(canaryTable);
+const selfTest = [
+  ["ascii fenced", ca.fenced.length, 1],
+  ["unicode fenced", cu8.fenced.length, 1],
+  ["unfenced", cu.unfenced.length, 1],
+  ["leaked from fence", ca.unfenced.length, 0],
+  ["markdown table", ct.unfenced.length, 0],
+];
+const bad = selfTest.filter(([, got, want]) => got !== want);
+if (bad.length) {
+  console.error("ASCII ART AUDIT COULD NOT RUN: self-test failed");
+  for (const [name, got, want] of bad) {
+    console.error(`  ${name}: got ${got}, expected ${want}`);
+  }
   process.exit(2);
 }
 
