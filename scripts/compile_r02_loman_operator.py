@@ -24,27 +24,26 @@ We formulate the polyphonic phase space of the three staves, derive the coupled 
 
 Modern high-density data campuses, nuclear generation facilities, and regional transmission substations operate under intense supervisory automation. Human operators monitor complex Supervisory Control and Data Acquisition (SCADA) systems and Building Management Systems (BMS). When sophisticated cyber attacks manipulate sensory telemetry; such as injecting false temperature offsets or blinding safety alarms; operators enter an acute state of psychological entropy ($\Delta H \to \text{MAX}$).
 
-```
-+-------------------------------------------------------------------------+
-|                  THE PSYCHODYNAMIC BREAKDOWN CYCLE                      |
-+-------------------------------------------------------------------------+
-| STAGE 1: INTRUSION OF THE REAL (Telemetry Anomaly)                      |
-| Raw sensor variance spikes. Unexplained pressure and frequency drift.   |
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| STAGE 2: THE SYMBOLIC GAP (Signifier Fails to Name the Event)           |
-| Standard operating procedures provide no matching runbook.              |
-| The operator encounters the void: limit of comprehension.               |
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| STAGE 3: THE IMAGINARY PROSTHETIC (Denial & Re-Parameterization)        |
-| Operator attributes failure to faulty sensor or trivial local variable. |
-| Time is lost; physical equipment crosses the irreversible damage point. |
-+-------------------------------------------------------------------------+
+```mermaid
+flowchart TD
+    accTitle: The psychodynamic breakdown cycle
+    accDescr {
+      Three stages in sequence. Stage 1 is intrusion of the Real, a telemetry
+      anomaly: raw sensor variance spikes, with unexplained pressure and
+      frequency drift. Stage 2 is the Symbolic gap, where the signifier fails
+      to name the event: standard operating procedures provide no matching
+      runbook and the operator encounters the void, the limit of comprehension.
+      Stage 3 is the Imaginary prosthetic, denial and re-parameterization: the
+      operator attributes failure to a faulty sensor or trivial local variable,
+      time is lost, and physical equipment crosses the irreversible damage
+      point.
+    }
+    S1["<b>STAGE 1: INTRUSION OF THE REAL (Telemetry Anomaly)</b><br/>Raw sensor variance spikes. Unexplained pressure and frequency drift."]
+    S2["<b>STAGE 2: THE SYMBOLIC GAP (Signifier Fails to Name the Event)</b><br/>Standard operating procedures provide no matching runbook.<br/>The operator encounters the void: limit of comprehension."]
+    S3["<b>STAGE 3: THE IMAGINARY PROSTHETIC (Denial &amp; Re-Parameterization)</b><br/>Operator attributes failure to faulty sensor or trivial local variable.<br/>Time is lost; physical equipment crosses the irreversible damage point."]
+    S1 --> S2 --> S3
+    classDef stage fill:#1a1c1f,stroke:#E05A10,stroke-width:1px,color:#f5f3f0;
+    class S1,S2,S3 stage;
 ```
 
 Traditional engineering reliability models (e.g., MIL-HDBK-217F) model humans as static error probabilities ($\text{HEPs}$). This assumption is fatally flawed. Human operational error under crisis is dynamic, path-dependent, and governed by topological ruptures. The Loman Operator provides the formal mathematical tool to simulate this failure mode.
@@ -55,26 +54,21 @@ Traditional engineering reliability models (e.g., MIL-HDBK-217F) model humans as
 
 To ground behavioral phase space simulations in physical reality, the operator's decision envelope is cross-referenced with the plant's DEXPI 2.0 piping schematic, classed against the ISO 15926-4 reference data library, and CycloneDX 1.6+ multi-BOM specification:
 
-```
-+-------------------------------------------------------------------------+
-|            DEXPI-CYCLONEDX OPERATIONAL TOPOLOGY GRAPH                   |
-+-------------------------------------------------------------------------+
-| DEXPI 2.0 PIPING & HYDRAULIC NETWORK:                                   |
-| - Plant Subsystem: Secondary Coolant Loop, Chiller Compressors, BESS   |
-| - Physical Sensors: PT-101 (Pressure), TT-204 (Temperature), Flowmeter |
-+-------------------------------------------------------------------------+
-                                    |
-                    CROSS-DOMAIN DIGITAL TWIN BINDING
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| CYCLONEDX 1.6+ MULTI-BOM SPECIFICATION:                                 |
-| - HBOM: Silicon ASICs, Actuator Solenoids, Pump VFD Drives              |
-| - SBOM: PLC RTOS Firmware, Modbus Stack, Safety Interlock Logic         |
-| - CBOM: Mutual TLS Certificates, DICE Attestation Keys                  |
-| - OBOM: Operational Envelope Bounds (Flow >= 35 L/min, Temp <= 45°C)    |
-| - VEX:  Exploit Tracking Streams (CISA Advisories on SCADA Tampering)   |
-+-------------------------------------------------------------------------+
+```mermaid
+flowchart TD
+    accTitle: DEXPI to CycloneDX operational topology graph
+    accDescr {
+      The DEXPI 2.0 piping and hydraulic network binds to the CycloneDX 1.6+
+      multi-BOM specification through cross-domain digital twin binding. The
+      piping side carries the plant subsystem and its physical sensors. The
+      BOM side carries five bills of materials: hardware, software,
+      cryptography, operational envelope bounds, and VEX exploit tracking.
+    }
+    DEXPI["<b>DEXPI 2.0 PIPING &amp; HYDRAULIC NETWORK</b><br/>Plant Subsystem: Secondary Coolant Loop, Chiller Compressors, BESS<br/>Physical Sensors: PT-101 (Pressure), TT-204 (Temperature), Flowmeter"]
+    BOM["<b>CYCLONEDX 1.6+ MULTI-BOM SPECIFICATION</b><br/>HBOM: Silicon ASICs, Actuator Solenoids, Pump VFD Drives<br/>SBOM: PLC RTOS Firmware, Modbus Stack, Safety Interlock Logic<br/>CBOM: Mutual TLS Certificates, DICE Attestation Keys<br/>OBOM: Operational Envelope Bounds (Flow &gt;= 35 L/min, Temp &lt;= 45°C)<br/>VEX: Exploit Tracking Streams (CISA Advisories on SCADA Tampering)"]
+    DEXPI -->|CROSS-DOMAIN DIGITAL TWIN BINDING| BOM
+    classDef panel fill:#1a1c1f,stroke:#E05A10,stroke-width:1px,color:#f5f3f0;
+    class DEXPI,BOM panel;
 ```
 
 By mapping the DEXPI physical instrumentation tags directly into the L-gGNN input vector, the cognitive digital twin tracks the precise moment when the operator's internal belief state diverges from the physical operational envelope (OBOM).
@@ -87,28 +81,25 @@ The Loman Operator acts on the three-dimensional psychodynamic state vector $\Ps
 
 $$\hat{\mathcal{L}} \Psi(t) = \begin{bmatrix} \hat{\mathcal{L}}_{R} \, \psi_{R}(t) \\ \hat{\mathcal{L}}_{S} \, \psi_{S}(t) \\ \hat{\mathcal{L}}_{I} \, \psi_{I}(t) \end{bmatrix}$$
 
-```
-+-------------------------------------------------------------------------+
-|              THE THREE STAVES OF THE LOMAN OPERATOR                     |
-+-------------------------------------------------------------------------+
-| TOP STAFF (Real - R):                                                   |
-| - Continuous acoustic waveforms, thermal entropy, physical vibrations.  |
-| - Mathematical Form: Stochastic differential equations & Dirac deltas.  |
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| MIDDLE STAFF (Symbolic - S):                                            |
-| - Discrete signifiers, procedural alarms, legal codes, ladder logic.   |
-| - Mathematical Form: Boolean lattices, algebraic knots, Suture logic.   |
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| BOTTOM STAFF (Imaginary - I):                                           |
-| - Operator ego identity, mental models, specular illusions of safety.   |
-| - Mathematical Form: Euclidean geometry, projective coordinates.        |
-+-------------------------------------------------------------------------+
+```mermaid
+flowchart TD
+    accTitle: The three staves of the Loman Operator
+    accDescr {
+      Three staves read from top to bottom. The top staff is the Real:
+      continuous acoustic waveforms, thermal entropy and physical vibrations,
+      expressed as stochastic differential equations and Dirac deltas. The
+      middle staff is the Symbolic: discrete signifiers, procedural alarms,
+      legal codes and ladder logic, expressed as Boolean lattices, algebraic
+      knots and Suture logic. The bottom staff is the Imaginary: operator ego
+      identity, mental models and specular illusions of safety, expressed as
+      Euclidean geometry and projective coordinates.
+    }
+    R["<b>TOP STAFF (Real - R)</b><br/>Continuous acoustic waveforms, thermal entropy, physical vibrations.<br/>Mathematical Form: Stochastic differential equations &amp; Dirac deltas."]
+    S["<b>MIDDLE STAFF (Symbolic - S)</b><br/>Discrete signifiers, procedural alarms, legal codes, ladder logic.<br/>Mathematical Form: Boolean lattices, algebraic knots, Suture logic."]
+    I["<b>BOTTOM STAFF (Imaginary - I)</b><br/>Operator ego identity, mental models, specular illusions of safety.<br/>Mathematical Form: Euclidean geometry, projective coordinates."]
+    R --> S --> I
+    classDef staff fill:#1a1c1f,stroke:#E05A10,stroke-width:1px,color:#f5f3f0;
+    class R,S,I staff;
 ```
 
 ### 3.1 The Clefs: Governing Discourses
@@ -128,11 +119,7 @@ The state of the control room is tracked via two scalar potentials:
 
 To demonstrate the mathematical execution of the Loman Operator, we analyze the five canonical sequences of operational breakdown:
 
-```
-+-------------------------------------------------------------------------+
-|          TABLE 4.1: THE FIVE SEQUENCES OF PSYCHODYNAMIC BREAKDOWN       |
-+-------------------------------------------------------------------------+
-```
+**Table 4.1: The five sequences of psychodynamic breakdown.**
 
 | Sequence | Operational Phase | Real Register ($R$) | Symbolic Register ($S$) | Imaginary Register ($I$) | Cognitive State |
 |:---:|:---|:---|:---|:---|:---|
@@ -235,17 +222,15 @@ Where:
 - Heat flux exceeds $140\text{ W/cm}^2$.
 - Operating pressure is $6.0\text{ bar}$ with $38.5\text{ L/min}$ PG25 coolant.
 
-```
-+-------------------------------------------------------------------------+
-|                  THE 45-SECOND OPERATOR ACTION CLIFF                    |
-+-------------------------------------------------------------------------+
-| T = 0.0s: Primary pump trips. Volumetric flow collapses to zero.        |
-| T = 12.0s: Die temperature rate of change exceeds 4.2°C/s.             |
-| T = 20.0s: Operator notices alarm; attempts manual dashboard refresh.   |
-| T = 38.0s: Thermal throttling threshold (85°C) breached.                |
-| T = 45.0s: Irreversible silicon package delamination (> 94°C).         |
-+-------------------------------------------------------------------------+
-```
+**Table 6.1: The 45-second operator action cliff.**
+
+| Elapsed | Event |
+| :--- | :--- |
+| T = 0.0s | Primary pump trips. Volumetric flow collapses to zero. |
+| T = 12.0s | Die temperature rate of change exceeds 4.2°C/s. |
+| T = 20.0s | Operator notices alarm; attempts manual dashboard refresh. |
+| T = 38.0s | Thermal throttling threshold (85°C) breached. |
+| T = 45.0s | Irreversible silicon package delamination (> 94°C). |
 
 If the operator spends even thirty seconds rationalizing alarms or attempting software workarounds, the silicon package delaminates permanently. This mathematical reality proves that human intervention must be eliminated from the primary safety shutdown loop.
 
@@ -255,28 +240,26 @@ If the operator spends even thirty seconds rationalizing alarms or attempting so
 
 To counteract the failure modes modeled by the Loman Operator, systems assurance mandates three deterministic safeguards:
 
-```
-+-------------------------------------------------------------------------+
-|               DETERMINISTIC CONTROL ROOM SAFEGUARDS                     |
-+-------------------------------------------------------------------------+
-| SAFEGUARD 1: HARDWIRED ANALOG SIL-3 TRIP LOOPS                          |
-| Snap-action thermal switches and pressure burst discs wired directly to |
-| main breaker shunt trips, bypassing the operator entirely.              |
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| SAFEGUARD 2: IEC 62443 CONDUIT RATE-OF-CHANGE CLAMPS                    |
-| Programmable Logic Controllers reject setpoint writes that demand rate- |
-| of-change shifts exceeding safe thermodynamic envelopes.                |
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| SAFEGUARD 3: OPTICAL UNIDIRECTIONAL DATA DIODES                         |
-| Real-time telemetry passes to external monitoring via optical Tx-only  |
-| diodes (C_rev = 0.000 bps), preventing remote override of safety loops. |
-+-------------------------------------------------------------------------+
+```mermaid
+flowchart TD
+    accTitle: Deterministic control room safeguards
+    accDescr {
+      Three safeguards in sequence. Safeguard 1 is hardwired analog SIL-3 trip
+      loops: snap-action thermal switches and pressure burst discs wired
+      directly to main breaker shunt trips, bypassing the operator entirely.
+      Safeguard 2 is IEC 62443 conduit rate-of-change clamps: programmable
+      logic controllers reject setpoint writes demanding rate-of-change shifts
+      beyond safe thermodynamic envelopes. Safeguard 3 is optical
+      unidirectional data diodes: real-time telemetry passes to external
+      monitoring through transmit-only optical diodes at zero reverse capacity,
+      preventing remote override of safety loops.
+    }
+    G1["<b>SAFEGUARD 1: HARDWIRED ANALOG SIL-3 TRIP LOOPS</b><br/>Snap-action thermal switches and pressure burst discs wired directly to main breaker shunt trips, bypassing the operator entirely."]
+    G2["<b>SAFEGUARD 2: IEC 62443 CONDUIT RATE-OF-CHANGE CLAMPS</b><br/>Programmable Logic Controllers reject setpoint writes that demand rate-of-change shifts exceeding safe thermodynamic envelopes."]
+    G3["<b>SAFEGUARD 3: OPTICAL UNIDIRECTIONAL DATA DIODES</b><br/>Real-time telemetry passes to external monitoring via optical Tx-only diodes (C_rev = 0.000 bps), preventing remote override of safety loops."]
+    G1 --> G2 --> G3
+    classDef guard fill:#1a1c1f,stroke:#E05A10,stroke-width:1px,color:#f5f3f0;
+    class G1,G2,G3 guard;
 ```
 
 ---

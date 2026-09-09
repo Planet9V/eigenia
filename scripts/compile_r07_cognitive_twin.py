@@ -29,7 +29,6 @@ Coupled to physical infrastructure through DEXPI 2.0 piping schematics (ISO 1592
 The Cyber Digital Twin models the complete operational universe of a critical infrastructure asset. It spans seven interconnected layers formalized as a seven-voice polyphonic score:
 
 ```mermaid
-%%{init: {'flowchart': {'wrappingWidth': 620}}}%%
 graph BT
     accTitle: The seven architectural layers of the Cyber Digital Twin
     accDescr {
