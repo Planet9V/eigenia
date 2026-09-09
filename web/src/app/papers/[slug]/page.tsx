@@ -71,7 +71,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       "Clayton Copula",
       "OT Cybersecurity",
       "Industrial Control Systems",
-      paper.category,
+      meta?.workingGroupName ?? "",
       paper.number,
     ],
     authors: [{ name: "J. McKenney", url: SITE_URL }],
@@ -130,7 +130,10 @@ export default async function PaperDetailPage({ params }: PageProps) {
     "@type": "ScholarlyArticle",
     headline: paper.title,
     ...(docMeta?.subtitle ? { alternativeHeadline: docMeta.subtitle } : {}),
-    articleSection: paper.category,
+    // One taxonomy. paper.category was a second, hand-maintained one that had
+    // drifted: "Actuarial Re-Invention" spanned four working groups, and all
+    // seven Psychometrics papers carried it.
+    articleSection: docMeta?.workingGroupName ?? "",
     name: paper.title,
     author: {
       "@type": "Person",
@@ -155,7 +158,7 @@ export default async function PaperDetailPage({ params }: PageProps) {
       : {}),
     isPartOf: {
       "@type": "Periodical",
-      name: `${docMeta?.workingGroupName ?? paper.category}, Eigenia Labs`,
+      name: `${docMeta?.workingGroupName ?? ""}, Eigenia Labs`,
     },
     mainEntityOfPage: {
       "@type": "WebPage",
@@ -204,7 +207,7 @@ export default async function PaperDetailPage({ params }: PageProps) {
                   {paper.number}
                 </span>
                 <span className="font-mono text-xs text-muted uppercase tracking-wider">
-                  {paper.category}
+                  {docMeta?.workingGroupName}
                 </span>
               </div>
 
