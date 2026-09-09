@@ -83,28 +83,23 @@ Without a machine-readable bridge connecting DEXPI plant objects to CycloneDX co
 
 CycloneDX 1.6+ provides a unified, extensible data format capable of encoding multiple dimensions of an infrastructure asset within a single document. In the Eigenia Cyber Digital Twin, we integrate six distinct BOM layers to establish full-stack provenance.
 
-```
-+-------------------------------------------------------------------------+
-|                    EIGENIA MULTI-BOM ARCHITECTURE                       |
-+-------------------------------------------------------------------------+
-|  HBOM: Silicon Packages, Compute Trays, DPUs, Connectors (type: device) |
-|  SBOM: Caliptra RoT, OpenSIL, OpenBMC, Linux Kernel (type: firmware)   |
-|  CBOM: DICE Certificates, Asymmetric Keys, PQC Algorithms (type: crypto)|
-|  MBOM: Factory HSM Audits, Wafer Lots, ODM Provenance (type: component)|
-|  OBOM: Power Caps, Egress Rate Limits, Thermal Polices (type: data)     |
-|  SaaS: Redfish BMC APIs, Modbus Endpoints, Telemetry (type: service)    |
-|  VEX:  Real-Time Exploitability & Remediation State (type: vulnerability)|
-+-------------------------------------------------------------------------+
-                                    |
-                    UNIFIED SEMANTIC BRIDGE (dexpi:*)
-                                    |
-+-------------------------------------------------------------------------+
-|                  DEXPI 2.0 PHYSICAL PLANT ONTOLOGY                      |
-+-------------------------------------------------------------------------+
-|  Cooling Distribution Units, Heat Exchangers, Pumps (ISO 15926-4)       |
-|  Secondary Manifolds, Quick-Disconnect Ports, Flow Meters, Valves       |
-|  Fluid Dynamics: PG25 Volumetric Delivery, ΔT, Hydraulic Head Loss     |
-+-------------------------------------------------------------------------+
+```mermaid
+flowchart TD
+    accTitle: The Eigenia multi-BOM architecture bridged to the DEXPI plant ontology
+    accDescr {
+      Seven CycloneDX bills of materials, each with its component type: HBOM
+      for devices, SBOM for firmware, CBOM for cryptography, MBOM for
+      manufacturing provenance, OBOM for operational data, SaaS for services,
+      and VEX for vulnerability state. A unified semantic bridge, the dexpi
+      namespace, joins them to the DEXPI 2.0 physical plant ontology, which
+      holds the cooling equipment, the secondary distribution hardware, and
+      the fluid dynamics of the plant.
+    }
+    BOM["<b>EIGENIA MULTI-BOM ARCHITECTURE</b><br/>HBOM: Silicon Packages, Compute Trays, DPUs, Connectors (type: device)<br/>SBOM: Caliptra RoT, OpenSIL, OpenBMC, Linux Kernel (type: firmware)<br/>CBOM: DICE Certificates, Asymmetric Keys, PQC Algorithms (type: crypto)<br/>MBOM: Factory HSM Audits, Wafer Lots, ODM Provenance (type: component)<br/>OBOM: Power Caps, Egress Rate Limits, Thermal Polices (type: data)<br/>SaaS: Redfish BMC APIs, Modbus Endpoints, Telemetry (type: service)<br/>VEX: Real-Time Exploitability &amp; Remediation State (type: vulnerability)"]
+    DEXPI["<b>DEXPI 2.0 PHYSICAL PLANT ONTOLOGY</b><br/>Cooling Distribution Units, Heat Exchangers, Pumps (ISO 15926-4)<br/>Secondary Manifolds, Quick-Disconnect Ports, Flow Meters, Valves<br/>Fluid Dynamics: PG25 Volumetric Delivery, ΔT, Hydraulic Head Loss"]
+    BOM -->|"UNIFIED SEMANTIC BRIDGE (dexpi:*)"| DEXPI
+    classDef n fill:#1a1c1f,stroke:#E05A10,stroke-width:1px,color:#f5f3f0;
+    class BOM,DEXPI n;
 ```
 
 ### 2.1 The Six BOM Layers Defined
@@ -424,38 +419,33 @@ The right-hand column states modelled underwriting consequences. The 18% to 32% 
 
 To deploy this semantic bridge within production facilities, organizations follow a four-stage ingestion pipeline:
 
-```
-+---------------------+------+---------------------+
-| DEXPI 2.0 P&ID XML  |      | CycloneDX 1.6+ JSON |
-| (Mechanical CAD)    |      | (Multi-BOM Catalog) |
-+---------------------+------+---------------------+
-           |                            |
-           +------------+--+------------+
-                        |  |
-                        v  v
-        +-----------------------------------+
-        |  Semantic Normalization Engine     |
-        |  - Extract Equipment IDs & Nozzles|
-        |  - Extract PURLs, Hashes, & Keys  |
-        |  - Join via dexpi:plant:* mapping |
-        +-----------------------------------+
-                        |
-                        v
-        +-----------------------------------+
-        |  Eigenia Cyber Digital Twin Graph |
-        |  - 3.2M Multigraph Network        |
-        |  - Real-Time Telemetry Ingestion  |
-        |  - Physics Simulation (KaTeX Core)|
-        +-----------------------------------+
-                        |
-            +-----------+-----------+
-            |                       |
-            v                       v
-+-----------------------+-+-----------------------+
-| Operational Security  | | Actuarial Engine      |
-| - Machine-Speed VEX   | | - Dynamic Premiums    |
-| - Out-of-Band Defense | | - Lloyd's Y5381 Proof |
-+-----------------------+-+-----------------------+
+```mermaid
+flowchart TD
+    accTitle: The four-stage DEXPI to CycloneDX ingestion pipeline
+    accDescr {
+      Two inputs feed the semantic normalization engine: DEXPI 2.0 P and ID
+      XML from mechanical CAD, and the CycloneDX 1.6+ JSON multi-BOM catalog.
+      The engine extracts equipment identifiers and nozzles, extracts package
+      URLs, hashes and keys, and joins them through the dexpi plant mapping.
+      Its output builds the Eigenia Cyber Digital Twin graph, a 3.2 million
+      node multigraph with real-time telemetry ingestion and physics
+      simulation. The graph then feeds two consumers: operational security,
+      running machine-speed VEX and out-of-band defense, and the actuarial
+      engine, producing dynamic premiums and Lloyd's Y5381 proof.
+    }
+    XML["DEXPI 2.0 P&amp;ID XML<br/>(Mechanical CAD)"]
+    JSON["CycloneDX 1.6+ JSON<br/>(Multi-BOM Catalog)"]
+    NORM["<b>Semantic Normalization Engine</b><br/>Extract Equipment IDs &amp; Nozzles<br/>Extract PURLs, Hashes, &amp; Keys<br/>Join via dexpi:plant:* mapping"]
+    GRAPH["<b>Eigenia Cyber Digital Twin Graph</b><br/>3.2M Multigraph Network<br/>Real-Time Telemetry Ingestion<br/>Physics Simulation (KaTeX Core)"]
+    SEC["<b>Operational Security</b><br/>Machine-Speed VEX<br/>Out-of-Band Defense"]
+    ACT["<b>Actuarial Engine</b><br/>Dynamic Premiums<br/>Lloyd's Y5381 Proof"]
+    XML --> NORM
+    JSON --> NORM
+    NORM --> GRAPH
+    GRAPH --> SEC
+    GRAPH --> ACT
+    classDef n fill:#1a1c1f,stroke:#E05A10,stroke-width:1px,color:#f5f3f0;
+    class XML,JSON,NORM,GRAPH,SEC,ACT n;
 ```
 
 ### 8.1 Automated Ingestion Steps

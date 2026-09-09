@@ -38,32 +38,46 @@ Under ISO 15926-4, every physical entity, functional requirement, and topologica
 - `PipingNetworkSegment`: Discrete pipe runs bounded by equipment nozzles or branching fittings, governed by ISO 10628-2 taxonomy.
 - `Instrumentation`: Measurement sensors, transmitters, digital controllers, and final control elements (actuators).
 
-```
-+-------------------------------------------------------------------+
-|                     DEXPI 2.0 METAMODEL                           |
-+-------------------------------------------------------------------+
-|  [PlantArea]                                                      |
-|       |                                                           |
-|       +--> [ProcessUnit]                                          |
-|                 |                                                 |
-|                 +--> [Equipment] (e.g. Plate Heat Exchanger)      |
-|                 |         |                                       |
-|                 |         +--> [Nozzle] (Inlet / Outlet)          |
-|                 |                   ^                             |
-|                 +--> [PipingNetworkSystem]                        |
-|                           |                                       |
-|                           +--> [PipingNetworkSegment]             |
-|                                     |                             |
-|                                     +--> [PipingComponent] (Valve)|
-|                                     +--> [FlowDirection]          |
-|                                     +--> [FluidCode / Class]      |
-|                                                                   |
-|  [InstrumentationLoop] <-------------------+                     |
-|       |                                    |                      |
-|       +--> [SensorTransducer]              |                      |
-|       +--> [ControllerFunction]            |                      |
-|       +--> [ActuatingSystem] --------------+                      |
-+-------------------------------------------------------------------+
+```mermaid
+flowchart TD
+    accTitle: The DEXPI 2.0 metamodel
+    accDescr {
+      A plant area contains process units. Each process unit contains
+      equipment, such as a plate heat exchanger, which carries nozzles for
+      inlet and outlet, and a piping network system. The piping network system
+      contains piping network segments, and each segment carries piping
+      components such as valves, a flow direction, and a fluid code or class.
+      Separately, an instrumentation loop contains a sensor transducer, a
+      controller function and an actuating system, and the actuating system
+      closes the loop back to the instrumentation loop.
+    }
+    PA["PlantArea"]
+    PU["ProcessUnit"]
+    EQ["Equipment (e.g. Plate Heat Exchanger)"]
+    NZ["Nozzle (Inlet / Outlet)"]
+    PNS["PipingNetworkSystem"]
+    SEG["PipingNetworkSegment"]
+    PC["PipingComponent (Valve)"]
+    FD["FlowDirection"]
+    FC["FluidCode / Class"]
+    IL["InstrumentationLoop"]
+    ST["SensorTransducer"]
+    CF["ControllerFunction"]
+    AS["ActuatingSystem"]
+    PA --> PU
+    PU --> EQ
+    EQ --> NZ
+    PU --> PNS
+    PNS --> SEG
+    SEG --> PC
+    SEG --> FD
+    SEG --> FC
+    IL --> ST
+    IL --> CF
+    IL --> AS
+    AS --> IL
+    classDef n fill:#1a1c1f,stroke:#E05A10,stroke-width:1px,color:#f5f3f0;
+    class PA,PU,EQ,NZ,PNS,SEG,PC,FD,FC,IL,ST,CF,AS n;
 ```
 
 ### 2.2 Mathematical Representation of Plant Topology
@@ -90,36 +104,25 @@ A primary innovation of DEXPI 2.0 is the operational separation between engineer
 
 DEXPI solves this through a three-tier catalog architecture:
 
-```
-+-------------------------------------------------------------------------+
-|                  DEXPI THREE-TIER CATALOG MODEL                         |
-+-------------------------------------------------------------------------+
-|  TIER 1: REFERENCE REQUIREMENTS SPECIFICATION                           |
-|  - Functional Role: Secondary Coolant Distribution Pump                 |
-|  - Volumetric Flow Rate: Q_req >= 35.0 m^3/h                            |
-|  - Head Requirement: H_req >= 28.0 m                                    |
-|  - Safety Integrity Level: SIL-2 (IEC 61508)                            |
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-|  TIER 2: VENDOR EQUIPMENT CATALOG (MANUFACTURER SPEC)                   |
-|  - Manufacturer: Wilo SE                                                |
-|  - Model: Stratos MAXO 65/0.5-12 PN16                                   |
-|  - Impeller Diameter: 142 mm                                            |
-|  - Motor Efficiency Class: IE5 Ultra-Premium                            |
-|  - Communications Interface: Modbus TCP / BACnet IP / Ethernet          |
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-|  TIER 3: CUSTOMER CONFIGURED ASSET (AS-BUILT OPERATIONAL INSTANCE)      |
-|  - Plant Tag: PMP-SEC-04A                                               |
-|  - Location: Building B, Fluid Gallery East, Column 14                 |
-|  - IP Address: 10.14.22.105 (VLAN 402 - Cooling Primary Control)        |
-|  - Firmware Revision: v02.14.08                                         |
-|  - Operating Setpoint: Constant Pressure Delta_P = 220 kPa              |
-+-------------------------------------------------------------------------+
+```mermaid
+flowchart TD
+    accTitle: The DEXPI three-tier catalog model
+    accDescr {
+      Three tiers in sequence. Tier 1 is the reference requirements
+      specification, stating the functional role, required volumetric flow
+      rate, head requirement and safety integrity level, independently of any
+      manufacturer. Tier 2 is the vendor equipment catalog, naming the
+      manufacturer, model, impeller diameter, motor efficiency class and
+      communications interfaces. Tier 3 is the customer configured asset as
+      built, carrying the plant tag, physical location, IP address and VLAN,
+      firmware revision and operating setpoint.
+    }
+    T1["<b>TIER 1: REFERENCE REQUIREMENTS SPECIFICATION</b><br/>Functional Role: Secondary Coolant Distribution Pump<br/>Volumetric Flow Rate: Q_req &gt;= 35.0 m^3/h<br/>Head Requirement: H_req &gt;= 28.0 m<br/>Safety Integrity Level: SIL-2 (IEC 61508)"]
+    T2["<b>TIER 2: VENDOR EQUIPMENT CATALOG (MANUFACTURER SPEC)</b><br/>Manufacturer: Wilo SE<br/>Model: Stratos MAXO 65/0.5-12 PN16<br/>Impeller Diameter: 142 mm<br/>Motor Efficiency Class: IE5 Ultra-Premium<br/>Communications Interface: Modbus TCP / BACnet IP / Ethernet"]
+    T3["<b>TIER 3: CUSTOMER CONFIGURED ASSET (AS-BUILT OPERATIONAL INSTANCE)</b><br/>Plant Tag: PMP-SEC-04A<br/>Location: Building B, Fluid Gallery East, Column 14<br/>IP Address: 10.14.22.105 (VLAN 402 - Cooling Primary Control)<br/>Firmware Revision: v02.14.08<br/>Operating Setpoint: Constant Pressure Delta_P = 220 kPa"]
+    T1 --> T2 --> T3
+    classDef n fill:#1a1c1f,stroke:#E05A10,stroke-width:1px,color:#f5f3f0;
+    class T1,T2,T3 n;
 ```
 
 1. **Tier 1 (Requirements Tier)**: Captures process requirements independently of commercial manufacturers. Process chemists and thermodynamic modelers specify operating envelopes without knowing which vendor will win the bidding process.

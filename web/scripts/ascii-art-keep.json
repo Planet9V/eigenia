@@ -20,6 +20,16 @@
       "file": "references/WG-02-DT-Digital-Twin/WG-02-DT-Cognitive-Digital-Twin.md",
       "match": "LACANIAN CONTROL ROOM TOPOLOGY",
       "reason": "The Borromean geometry is the content. The three registers are mutually linked, with none mediating the other two. Rendered as a mermaid graph, dagre ranks them into a top-to-bottom chain, which asserts exactly the hierarchy the figure exists to deny. Verified in the browser before deciding."
+    },
+    {
+      "file": "references/WG-07-TM-Threat-Modeling/WG-07-TM-ATQ.md",
+      "match": "VOLT TYPHOON",
+      "reason": "A verbatim terminal transcript, not a diagram. Section 8 lists it as 'Raw ASCII console output: direct terminal export for CLI workflows' and the prose says it is 'printed exactly as the materialized view returned it'. Redrawing it would falsify that claim, and the bar glyphs are the score decomposition."
+    },
+    {
+      "file": "references/WG-03-ML-Behaviorial_Modeling/WG-03-ML-Musical-Psychometric-Notation.md",
+      "match": "LIVE SECURITY SCORE",
+      "reason": "A mock-up of the live dashboard, so the visual arrangement is the content: note positions along each instrument line carry the timing, and the bar meters carry the dissonance, health and arrhythmia readings. A node-and-edge graph cannot express either."
     }
   ]
 }

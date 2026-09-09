@@ -46,6 +46,9 @@ const BOX_LINE =
 /** A fenced block counts as art when at least two of its lines are frame lines. */
 const MIN_FRAME_LINES = 2;
 
+/** Fence info strings that can still hold a drawing rather than source code. */
+const PLAIN_INFO = new Set(["", "text", "txt", "plain", "plaintext", "ascii"]);
+
 /**
  * Evidence files record what an external source said, verbatim, including any
  * box art the source drew. They are not presentation surfaces and are not
@@ -94,6 +97,7 @@ function findArt(md, keepMatches = []) {
   let blockStart = 0;
   let frames = 0;
   let body = [];
+  let isCode = false;
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
@@ -101,7 +105,7 @@ function findArt(md, keepMatches = []) {
       if (inBlock) {
         const text = body.join("\n");
         const kept = keepMatches.some((m) => text.includes(m));
-        if (frames >= MIN_FRAME_LINES && !kept) {
+        if (frames >= MIN_FRAME_LINES && !kept && !isCode) {
           fenced.push({ line: blockStart, frames });
         }
         inBlock = false;
@@ -110,6 +114,12 @@ function findArt(md, keepMatches = []) {
         blockStart = i + 2; // 1-indexed, first line after the fence
         frames = 0;
         body = [];
+        // A fence that declares a language is code, whatever characters it
+        // contains. The Modbus hex dump in the grid playbook lives in a
+        // ```yaml detection rule and draws its byte annotations with U+2500
+        // leader lines; column alignment is the meaning there, and it is not
+        // a diagram. Only untagged or plain-text fences can hold box art.
+        isCode = !PLAIN_INFO.has(line.trimStart().slice(3).trim().toLowerCase());
       }
       continue;
     }
@@ -139,11 +149,14 @@ const ca = findArt(canaryAscii);
 const cu8 = findArt(canaryUnicode);
 const cu = findArt(canaryUnfenced);
 const ct = findArt(canaryTable);
+const canaryCode = "```yaml\n+-------------+\n| A BOX LABEL |\n+-------------+\n```\n";
+const cc = findArt(canaryCode);
 const ck = findArt(canaryAscii, ["A BOX LABEL"]);
 const cn = findArt(canaryAscii, ["SOMETHING ELSE"]);
 const selfTest = [
   ["ascii fenced", ca.fenced.length, 1],
   ["keep entry honoured", ck.fenced.length, 0],
+  ["language-tagged fence is code, not art", cc.fenced.length, 0],
   ["keep entry that does not match is ignored", cn.fenced.length, 1],
   ["unicode fenced", cu8.fenced.length, 1],
   ["unfenced", cu.unfenced.length, 1],

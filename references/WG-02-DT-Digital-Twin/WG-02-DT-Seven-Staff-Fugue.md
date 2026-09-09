@@ -139,24 +139,23 @@ Paths that minimize the action ($\delta S = 0$) correspond to the classical dete
 
 To ground the Seven-Staff Fugue in physical engineering reality, the musical staves are bound directly to plant piping schematics and multi-BOM specifications:
 
-```
-+-------------------------------------------------------------------------+
-|                  DIGITAL TWIN PROCESS INTEGRATION                       |
-+-------------------------------------------------------------------------+
-| DEXPI 2.0 PIPING SCHEMATIC (ISO 15926-4):                               |
-| - Staff 1 (Baritone) tracks physical fluid velocity and pressure:      |
-|   Coolant flow rate Q_vol >= 35 L/min PG25, P_operating <= 6.0 bar.    |
-+-------------------------------------------------------------------------+
-                                    |
-                    CROSS-LAYER CONTRAST BINDING
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| CYCLONEDX 1.6+ MULTI-BOM SPECIFICATIONS:                                |
-| - Staff 0 (Bass): HBOM silicon roots (Caliptra 2.0, OpenSIL, DICE).    |
-| - Staff 2 (Tenor): SBOM firmware hashes, kernel modules, VEX streams.  |
-| - Staff 6 (Descant): Actuarial risk bounds and reinsurance treaties.    |
-+-------------------------------------------------------------------------+
+```mermaid
+flowchart TD
+    accTitle: Digital twin process integration for the Seven-Staff Fugue
+    accDescr {
+      The DEXPI 2.0 piping schematic carries Staff 1, the baritone, which
+      tracks physical fluid velocity and pressure against the coolant flow
+      rate and operating pressure bounds. Cross-layer contrast binding ties it
+      to the CycloneDX 1.6+ multi-BOM specifications, which carry Staff 0, the
+      bass, holding the hardware silicon roots; Staff 2, the tenor, holding
+      firmware hashes, kernel modules and VEX streams; and Staff 6, the
+      descant, holding actuarial risk bounds and reinsurance treaties.
+    }
+    DEXPI["<b>DEXPI 2.0 PIPING SCHEMATIC (ISO 15926-4)</b><br/>Staff 1 (Baritone) tracks physical fluid velocity and pressure:<br/>Coolant flow rate Q_vol &gt;= 35 L/min PG25, P_operating &lt;= 6.0 bar."]
+    BOM["<b>CYCLONEDX 1.6+ MULTI-BOM SPECIFICATIONS</b><br/>Staff 0 (Bass): HBOM silicon roots (Caliptra 2.0, OpenSIL, DICE).<br/>Staff 2 (Tenor): SBOM firmware hashes, kernel modules, VEX streams.<br/>Staff 6 (Descant): Actuarial risk bounds and reinsurance treaties."]
+    DEXPI -->|CROSS-LAYER CONTRAST BINDING| BOM
+    classDef n fill:#1a1c1f,stroke:#E05A10,stroke-width:1px,color:#f5f3f0;
+    class DEXPI,BOM n;
 ```
 
 ### 6.1 The 45-Second Thermal Catastrophe in Liquid-Cooled Facilities

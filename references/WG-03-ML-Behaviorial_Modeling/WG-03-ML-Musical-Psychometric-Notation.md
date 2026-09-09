@@ -49,16 +49,14 @@ We formalize this into a complete notation system.
 
 Every MPN score begins with:
 
-```
-╔════════════════════════════════════════════════════════════════╗
-║ SCORE: [Organization/Team/Entity Name]                         ║
-║ DATE:  [ISO 8601 Timestamp]                                    ║
-║ CLEF:  [♯ War Room | ♭ Boardroom | ♮ Ops Floor]                ║
-║ KEY:   [Security Culture Signature]                            ║
-║ TIME:  [OODA Loop Signature]                                   ║
-║ TEMPO: [BPM / Descriptor]                                      ║
-╚════════════════════════════════════════════════════════════════╝
-```
+| Field | Value |
+| :--- | :--- |
+| **SCORE** | [Organization/Team/Entity Name] |
+| **DATE** | [ISO 8601 Timestamp] |
+| **CLEF** | [♯ War Room \| ♭ Boardroom \| ♮ Ops Floor] |
+| **KEY** | [Security Culture Signature] |
+| **TIME** | [OODA Loop Signature] |
+| **TEMPO** | [BPM / Descriptor] |
 
 ---
 
@@ -285,30 +283,33 @@ $$\text{Health} = \lfloor (1.0 - R) \times 10 \rfloor$$
 
 ### 3.1 Architecture
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                 MPN SONIFICATION ENGINE                     │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│  ┌─────────┐    ┌─────────┐    ┌─────────┐    ┌─────────┐  │
-│  │  Event  │───▶│  Score  │───▶│   MIDI  │───▶│  Audio  │  │
-│  │ Stream  │    │ Composer│    │ Renderer│    │  Output │  │
-│  └─────────┘    └─────────┘    └─────────┘    └─────────┘  │
-│       │              │              │              │        │
-│       │   ┌──────────┴──────────┐   │              │        │
-│       │   │  MPN State Machine  │   │              │        │
-│       │   │  - Clef selection   │   │              │        │
-│       │   │  - Key tracking     │   │              │        │
-│       │   │  - Dissonance calc  │   │              │        │
-│       │   └─────────────────────┘   │              │        │
-│       │                             │              │        │
-│       ▼                             ▼              ▼        │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │              NEO4J GRAPH DATABASE                    │   │
-│  │  (Actor profiles, Team structure, Event history)    │   │
-│  └─────────────────────────────────────────────────────┘   │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart LR
+    accTitle: The MPN sonification engine architecture
+    accDescr {
+      An event stream feeds a score composer, which feeds a MIDI renderer,
+      which feeds audio output. The score composer is coupled to the MPN state
+      machine, which handles clef selection, key tracking and dissonance
+      calculation. The event stream, the MIDI renderer and the audio output
+      each write to the Neo4j graph database, which holds actor profiles, team
+      structure and event history.
+    }
+    subgraph ENGINE["MPN SONIFICATION ENGINE"]
+        direction LR
+        EV["Event<br/>Stream"]
+        SC["Score<br/>Composer"]
+        MI["MIDI<br/>Renderer"]
+        AU["Audio<br/>Output"]
+        SM["<b>MPN State Machine</b><br/>Clef selection<br/>Key tracking<br/>Dissonance calc"]
+        DB["<b>NEO4J GRAPH DATABASE</b><br/>(Actor profiles, Team structure, Event history)"]
+        EV --> SC --> MI --> AU
+        SC --- SM
+        EV --> DB
+        MI --> DB
+        AU --> DB
+    end
+    classDef n fill:#1a1c1f,stroke:#E05A10,stroke-width:1px,color:#f5f3f0;
+    class EV,SC,MI,AU,SM,DB n;
 ```
 
 ### 3.2 Score Composer

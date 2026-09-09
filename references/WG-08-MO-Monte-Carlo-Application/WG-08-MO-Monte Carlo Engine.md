@@ -172,22 +172,18 @@ To demonstrate the concrete application of the unified graph schema, the engine 
 
 ### 3.2 Graph Edge Traversal Matrix (Table 2)
 
-```
-+---------------------------------------------------------------------------------------------------+
-| SUBSTATION & BESS ATTACK CONDUIT TOPOLOGY                                                          |
-+---------------------------------------------------------------------------------------------------+
-| Source Node     | Target Node     | Flow Classification | Protocol & Physical Conduit             |
-+-----------------+-----------------+---------------------+-----------------------------------------+
-| Vendor Engineer | MOD-01          | Remote Ingress      | Citrix Jump Host via HTTPS / SSH        |
-| MOD-01          | FW-01           | Ingress Conduit     | Encrypted IPsec Tunnel over Private APN |
-| FW-01           | RTU-VEN         | OT Control Plane    | Modbus TCP (Port 502) / Proprietary OEM |
-| RTU-VEN         | BMS-01          | Controller Link     | Modbus TCP / Unauthenticated RS-485     |
-| BMS-01          | PCS-01          | Actuator Setpoints  | CAN Bus 2.0B / Modbus RTU               |
-| PCS-01          | BAT-RACK-01     | Power Inversion     | Overvoltage Injection (> 4.4V/cell)     |
-| IED-01          | CB-01           | Protection Trip     | IEC 61850 GOOSE Trip Command            |
-| MU-01           | IED-01          | Analog Digitization | IEC 61850-9-2 Process Bus Sampled Values|
-+-----------------+-----------------+---------------------+-----------------------------------------+
-```
+**Table 2: Substation and BESS attack conduit topology.**
+
+| Source Node | Target Node | Flow Classification | Protocol & Physical Conduit |
+| :--- | :--- | :--- | :--- |
+| Vendor Engineer | MOD-01 | Remote Ingress | Citrix Jump Host via HTTPS / SSH |
+| MOD-01 | FW-01 | Ingress Conduit | Encrypted IPsec Tunnel over Private APN |
+| FW-01 | RTU-VEN | OT Control Plane | Modbus TCP (Port 502) / Proprietary OEM |
+| RTU-VEN | BMS-01 | Controller Link | Modbus TCP / Unauthenticated RS-485 |
+| BMS-01 | PCS-01 | Actuator Setpoints | CAN Bus 2.0B / Modbus RTU |
+| PCS-01 | BAT-RACK-01 | Power Inversion | Overvoltage Injection (> 4.4V/cell) |
+| IED-01 | CB-01 | Protection Trip | IEC 61850 GOOSE Trip Command |
+| MU-01 | IED-01 | Analog Digitization | IEC 61850-9-2 Process Bus Sampled Values |
 
 ---
 
