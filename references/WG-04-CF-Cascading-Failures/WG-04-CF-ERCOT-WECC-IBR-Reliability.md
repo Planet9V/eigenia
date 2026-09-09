@@ -109,6 +109,15 @@ NERC calls the event "a perfect illustration of the need for immediate industry 
 
 ```mermaid
 flowchart TD
+    accTitle: The Odessa disturbance of 4 June 2022
+    accDescr {
+      At 12:59:25 Central a surge arrester fails at a synchronous generation facility
+      near Odessa, causing a B phase to ground fault on the 345 kV system. Protection
+      operates correctly and clears it in three cycles. 333 MW disconnects with the
+      faulted section, 202 MW of other units at the same plant trip unexpectedly, 309
+      MW is lost at a synchronous plant in South Texas over 450 miles away, and 1,711
+      MW of solar PV reduces output.
+    }
   A["12:59:25 Central, 4 June 2022<br/>Surge arrester fails at a synchronous<br/>generation facility near Odessa"]
   B["B phase to ground fault<br/>on the 345 kV system"]
   C["Fault cleared in 3 cycles<br/>by correct protection operation"]

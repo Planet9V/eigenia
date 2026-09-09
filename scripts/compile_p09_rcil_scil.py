@@ -31,6 +31,12 @@ The total industrial facility asset inventory (pumps, valves, switchgear, relays
 
 ```mermaid
 flowchart LR
+    accTitle: Filtering the asset inventory into the reliability and safety critical lists
+    accDescr {
+      The total facility asset inventory passes an operational degradation filter to
+      give the Reliability Critical Items List. That list then passes an irreversible
+      physical damage filter to give the Safety Critical Items List.
+    }
     INV["Total facility<br/>asset inventory"] -->|"operational degradation filter"| RCIL["RCIL<br/>Reliability Critical Items List"]
     RCIL -->|"irreversible physical damage filter"| SCIL["SCIL<br/>Safety Critical Items List"]
 ```
@@ -56,6 +62,13 @@ To establish an auditable supply-chain and reliability graph, every RCIL and SCI
 
 ```mermaid
 flowchart LR
+    accTitle: Binding the plant schematic to reinsurance parameters
+    accDescr {
+      The DEXPI 2.0 piping and instrumentation model binds through cross-domain
+      digital twin binding to the CycloneDX 1.6+ multi-BOM record, which through
+      supply chain replacement exposure yields the logistics and reinsurance
+      parameters.
+    }
     DEXPI["DEXPI 2.0<br/>piping and instrumentation"] -->|"cross-domain digital twin binding"| CDX["CycloneDX 1.6+<br/>multi-BOM record"]
     CDX -->|"supply chain replacement exposure"| LOG["Logistics and<br/>reinsurance parameters"]
 ```
@@ -190,6 +203,12 @@ To ensure that components placed on the RCIL and SCIL do not introduce persisten
 
 ```mermaid
 flowchart LR
+    accTitle: The four contractual gates in order
+    accDescr {
+      Gate 1 is multi-BOM delivery, gate 2 is the hardware root of trust, gate 3 is
+      SIL-3 safety validation, and gate 4 is the vulnerability service level
+      agreement.
+    }
     G1["GATE 1<br/>Multi-BOM delivery"] --> G2["GATE 2<br/>Hardware root of trust"] --> G3["GATE 3<br/>SIL-3 safety validation"] --> G4["GATE 4<br/>Vulnerability SLA"]
 ```
 

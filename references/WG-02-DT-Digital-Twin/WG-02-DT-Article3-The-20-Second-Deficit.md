@@ -8,6 +8,16 @@ Under these conditions, control room operators face sensory and cognitive satura
 
 ```mermaid
 flowchart LR
+    accTitle: The fatal temporal collision between cognition and physics
+    accDescr {
+      Four events, each with its time horizon. Cryogenic LNG liquid slugging
+      produces a Joukowsky shock and mechanical rupture in 4.0 seconds. A 120 kW
+      direct-to-chip cooling thermal runaway reaches silicon delamination in 45.0
+      seconds. A calm operator acknowledges and triages in 12.0 seconds. Under
+      attack, Klein recognition-primed mental simulation takes 65 seconds or more,
+      which is cognitive paralysis. The physical horizons are shorter than the
+      saturated human one.
+    }
     Title["THE FATAL TEMPORAL COLLISION: COGNITION VS PHYSICS"]
 
     Title -->|"EVENT"| E1["Cryogenic LNG Liquid Slugging Joukowsky Shock"]
@@ -44,6 +54,15 @@ Where:
 
 ```mermaid
 flowchart TD
+    accTitle: How cognitive inputs drive the physical interlock decision
+    accDescr {
+      Layer 4 supplies three cognitive and psychometric inputs: the psychometric
+      tensor combining DISC and OCEAN, shift fatigue with circadian phase, and alarm
+      frequency. The psychometric tensor and fatigue drive Yerkes-Dodson arousal;
+      alarm frequency drives Sweller working memory load. Both feed Klein
+      recognition-primed mental simulation latency, which then meets the layer 1
+      physical interlock execution boundary.
+    }
     subgraph Layer4Input["Layer 4: Cognitive & Psychometric Inputs"]
         P1["Psychometric Tensor P_i = DISC (x) OCEAN"]
         P2["Shift Fatigue F_d(t) & Circadian Phase"]
@@ -136,6 +155,14 @@ Because operator decision latency $\tau_{\text{decision}} > 65\text{ seconds}$, 
 
 ```mermaid
 flowchart LR
+    accTitle: Temperature against time, from flow cut to silicon delamination
+    accDescr {
+      At time zero the flow is cut at 35 degrees C. By 12 seconds the rise rate
+      spikes and the temperature reaches 50 degrees C, still in the nominal band. At
+      38 seconds an alarm flood coincides with the 85 degree thermal trip threshold.
+      At 45 seconds silicon delaminates at 94 degrees. Human decision latency of over
+      65 seconds spans the whole interval, so the operator arrives after destruction.
+    }
     subgraph Plot["Temperature (°C) against Time (s)"]
         P0["t = 0<br/>Flow Cut<br/>35 °C"]
         P12["t = 12s<br/>Rise Rate Spike<br/>Nominal Operating Band, 50 °C"]
@@ -172,6 +199,16 @@ The mathematical proof of operator cognitive collapse under cyber interdiction m
 
 ```mermaid
 flowchart TD
+    accTitle: The three-tier hardwired autonomous protection boundary
+    accDescr {
+      Tier 1 is the Cyber Digital Twin providing topological early warning:
+      persistent homology detects cross-layer dissonance cycles in 1.8 seconds and
+      logs tamper-proof forensic telemetry. Tier 2 is hardwired SIL-3 physical
+      interlocks: bimetallic thermal switches and spring-loaded relief valves actuate
+      in under 100 milliseconds, bypassing all digital networks, PLCs and human
+      approval. Tier 3 is the human operator, removed from the trip loop and left
+      with post-trip investigation and safe state recovery.
+    }
     Title["THE HARDWIRED AUTONOMOUS PROTECTION BOUNDARY"]
     Title --> T1["TIER 1: THE CYBER DIGITAL TWIN (Topological Early Warning)<br/>Persistent homology algorithms detect cross-layer H_1 dissonance cycles in 1.8 seconds, alerting operators and logging tamper-proof forensic telemetry."]
     T1 --> T2["TIER 2: HARDWIRED SIL-3 PHYSICAL INTERLOCKS (Autonomous Cutout)<br/>Hardwired bimetallic thermal switches and spring-loaded pressure relief valves actuate in under 100 milliseconds, bypassing all digital networks, PLCs, and human approval loops."]

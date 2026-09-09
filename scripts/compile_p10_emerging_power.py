@@ -25,35 +25,26 @@ Hyperscale AI training clusters have outpaced regional transmission infrastructu
 - **The Interconnection Crisis:** In major data center corridors, regional transmission operators (RTOs) report interconnection study backlogs extending from four to eight years.
 - **The On-Site Generation Pivot:** To energize facilities immediately, hyperscale operators are building dedicated on-site generation islands. Facilities decouple from the bulk electric system, operating as autonomous islanded microgrids.
 
-```
-+-------------------------------------------------------------------------+
-|             THE EMERGING HYPERSCALE MICROGRID TOPOLOGY                  |
-+-------------------------------------------------------------------------+
-| GENERATION ASSETS:                                                      |
-| - Utility Interconnection: 230 kV / 34.5 kV Substation (IEC 61850)      |
-| - Utility-Scale BESS: 200 MWh Lithium Iron Phosphate (NFPA 855 / Zone 6)|
-| - Small Modular Reactor (SMR): 2x 150 MWt Light Water / High-Temp Gas   |
-| - Hydrogen Fuel Cells: 20 MW Rapid Peaking Bank                         |
-+-------------------------------------------------------------------------+
-                                    |
-                    INVERTER-BASED DISTRIBUTION BUSWAY
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| MICROGRID CONTROLLER (EMS / SCADA):                                     |
-| - Real-Time Frequency Regulation: Rate of Change of Frequency (RoCoF)   |
-| - Synthetic Inertia Emulation: Inverter Phase-Locked Loop (PLL)         |
-| - Automated Islanding Protection: Anti-Islanding Transfer Trip Breaker  |
-+-------------------------------------------------------------------------+
-                                    |
-                    MISSION-CRITICAL COMPUTE FACILITY
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| 100 MW HYPERSCALE DATA HALLS (120 kW / RACK DIRECT-TO-CHIP LIQUID):     |
-| - Primary / Secondary Fluid Heat Exchangers (38.5 L/min PG25 Coolant)   |
-| - 25,000 High-Density Accelerator ASICs ($375M Physical Asset Value)    |
-+-------------------------------------------------------------------------+
+```mermaid
+flowchart TD
+    accTitle: The emerging hyperscale microgrid topology
+    accDescr {
+      Generation assets feed a microgrid controller over an inverter-based
+      distribution busway, and the controller feeds the mission-critical
+      compute facility. Generation covers the utility interconnection, a
+      utility-scale battery energy storage system, small modular reactors and
+      hydrogen fuel cells. The controller handles frequency regulation,
+      synthetic inertia emulation and automated islanding protection. The
+      facility is 100 MW of hyperscale data halls on direct-to-chip liquid
+      cooling.
+    }
+    GEN["<b>GENERATION ASSETS</b><br/>Utility Interconnection: 230 kV / 34.5 kV Substation (IEC 61850)<br/>Utility-Scale BESS: 200 MWh Lithium Iron Phosphate (NFPA 855 / Zone 6)<br/>Small Modular Reactor (SMR): 2x 150 MWt Light Water / High-Temp Gas<br/>Hydrogen Fuel Cells: 20 MW Rapid Peaking Bank"]
+    EMS["<b>MICROGRID CONTROLLER (EMS / SCADA)</b><br/>Real-Time Frequency Regulation: Rate of Change of Frequency (RoCoF)<br/>Synthetic Inertia Emulation: Inverter Phase-Locked Loop (PLL)<br/>Automated Islanding Protection: Anti-Islanding Transfer Trip Breaker"]
+    HALL["<b>100 MW HYPERSCALE DATA HALLS (120 kW / RACK DIRECT-TO-CHIP LIQUID)</b><br/>Primary / Secondary Fluid Heat Exchangers (38.5 L/min PG25 Coolant)<br/>25,000 High-Density Accelerator ASICs ($375M Physical Asset Value)"]
+    GEN -->|INVERTER-BASED DISTRIBUTION BUSWAY| EMS
+    EMS -->|MISSION-CRITICAL COMPUTE FACILITY| HALL
+    classDef lvl fill:#1a1c1f,stroke:#E05A10,stroke-width:1px,color:#f5f3f0;
+    class GEN,EMS,HALL lvl;
 ```
 
 ### 1.1 The Collapse of Mechanical Inertia
@@ -67,26 +58,21 @@ In an inverter-dominated microgrid, mechanical inertia is replaced by synthetic 
 
 To model cascading electrical and thermal hazards, the microgrid architecture is structured across the DEXPI 2.0 piping and instrumentation standard, classed against the ISO 15926-4 reference data library, and the CycloneDX 1.6+ multi-BOM specification:
 
-```
-+-------------------------------------------------------------------------+
-|             CROSS-DOMAIN MICROGRID TOPOLOGY INTEGRATION                 |
-+-------------------------------------------------------------------------+
-| DEXPI 2.0 PHYSICAL PROCESS DIAGRAM:                                     |
-| - Equipment Nodes: BESS-CONT-01, SMR-HX-02, INV-MOD-04, SUB-TX-01       |
-| - Physical Parameters: 13.8 kV Bus, 4.5 bar Cooling, Liquid Sodium / H2O|
-+-------------------------------------------------------------------------+
-                                    |
-                    CROSS-DOMAIN CONDUIT BINDING
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| CYCLONEDX 1.6+ MULTI-BOM SPECIFICATION:                                 |
-| - HBOM: Silicon IGBTs, BMS Microcontrollers, Inverter DSP Chips         |
-| - SBOM: Inverter RTOS, IEC 61850 Communication Stacks, OpenSIL Drivers  |
-| - CBOM: Synchrocheck Signing Keys, DICE Identity Attestation            |
-| - OBOM: Operational Safety Envelopes (RoCoF <= 2.0 Hz/s, Vcell <= 3.65V)|
-| - VEX:  Real-Time CISA ICS Vulnerabilities (Modbus / DNP3 Exploits)     |
-+-------------------------------------------------------------------------+
+```mermaid
+flowchart TD
+    accTitle: Cross-domain microgrid topology integration
+    accDescr {
+      The DEXPI 2.0 physical process diagram, carrying the equipment nodes and
+      their physical parameters, binds through a cross-domain conduit to the
+      CycloneDX 1.6+ multi-BOM specification, which holds the hardware,
+      software, cryptography, operational safety envelope and VEX bills of
+      materials.
+    }
+    DEXPI["<b>DEXPI 2.0 PHYSICAL PROCESS DIAGRAM</b><br/>Equipment Nodes: BESS-CONT-01, SMR-HX-02, INV-MOD-04, SUB-TX-01<br/>Physical Parameters: 13.8 kV Bus, 4.5 bar Cooling, Liquid Sodium / H2O"]
+    BOM["<b>CYCLONEDX 1.6+ MULTI-BOM SPECIFICATION</b><br/>HBOM: Silicon IGBTs, BMS Microcontrollers, Inverter DSP Chips<br/>SBOM: Inverter RTOS, IEC 61850 Communication Stacks, OpenSIL Drivers<br/>CBOM: Synchrocheck Signing Keys, DICE Identity Attestation<br/>OBOM: Operational Safety Envelopes (RoCoF &lt;= 2.0 Hz/s, Vcell &lt;= 3.65V)<br/>VEX: Real-Time CISA ICS Vulnerabilities (Modbus / DNP3 Exploits)"]
+    DEXPI -->|CROSS-DOMAIN CONDUIT BINDING| BOM
+    classDef lvl fill:#1a1c1f,stroke:#E05A10,stroke-width:1px,color:#f5f3f0;
+    class DEXPI,BOM lvl;
 ```
 
 Integrating the DEXPI electrical schematic with CycloneDX bills of materials ensures that software controllers cannot issue inverter gating or contactor commands that breach physical mechanical and electrical limits.
@@ -97,39 +83,28 @@ Integrating the DEXPI electrical schematic with CycloneDX bills of materials ens
 
 Utility-scale BESS installations (Node N15, IEC 62443 Zone 6) provide fast frequency response and peak shaving. However, lithium-ion battery chemistry introduces an unprecedented cyber-physical catastrophe archetype: **the self-sustaining thermal runaway cascade.**
 
-```
-+-------------------------------------------------------------------------+
-|           THE CYBER-INDUCED BESS THERMAL RUNAWAY CASCADE                |
-+-------------------------------------------------------------------------+
-| STEP 1: ADVERSARIAL REGISTER MANIPULATION                                |
-| Attacker injects Modbus write commands to BMS holding registers.        |
-| Charge voltage ceiling raised from 3.65V to 4.35V; cooling fan stopped. |
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| STEP 2: SOLID ELECTROLYTE INTERPHASE (SEI) DECOMPOSITION (80°C - 120°C) |
-| Exothermic decomposition of protective layer begins; gas generation.    |
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| STEP 3: ANODE-ELECTROLYTE REACTION & SEPARATOR MELT (120°C - 180°C)     |
-| Separator collapses; internal microscopic electrical short-circuits.    |
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| STEP 4: CATHODE COLLAPSE & OXYGEN RELEASE (> 200°C)                     |
-| Metal oxide cathode releases oxygen; internal chemical deflagration.    |
-| Cell vents toxic hydrogen fluoride (HF), carbon monoxide (CO), and H2.  |
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| STEP 5: CELL-TO-CELL THERMAL PROPAGATION (TABLE B EXTREMISTAN EVENT)    |
-| Enclosure explodes; fire burns for days; facility evacuation mandated.  |
-+-------------------------------------------------------------------------+
+```mermaid
+flowchart TD
+    accTitle: The cyber-induced BESS thermal runaway cascade
+    accDescr {
+      Five steps in sequence. An attacker injects Modbus writes to the battery
+      management holding registers, raising the charge voltage ceiling and
+      stopping the cooling fan. The solid electrolyte interphase decomposes
+      between 80 and 120 degrees C. The anode-electrolyte reaction melts the
+      separator between 120 and 180 degrees C, causing internal short
+      circuits. Above 200 degrees C the cathode collapses and releases oxygen,
+      venting hydrogen fluoride, carbon monoxide and hydrogen. Finally the
+      heat propagates cell to cell, the enclosure explodes, and the facility
+      is evacuated.
+    }
+    P1["<b>STEP 1: ADVERSARIAL REGISTER MANIPULATION</b><br/>Attacker injects Modbus write commands to BMS holding registers.<br/>Charge voltage ceiling raised from 3.65V to 4.35V; cooling fan stopped."]
+    P2["<b>STEP 2: SOLID ELECTROLYTE INTERPHASE (SEI) DECOMPOSITION (80°C - 120°C)</b><br/>Exothermic decomposition of protective layer begins; gas generation."]
+    P3["<b>STEP 3: ANODE-ELECTROLYTE REACTION &amp; SEPARATOR MELT (120°C - 180°C)</b><br/>Separator collapses; internal microscopic electrical short-circuits."]
+    P4["<b>STEP 4: CATHODE COLLAPSE &amp; OXYGEN RELEASE (&gt; 200°C)</b><br/>Metal oxide cathode releases oxygen; internal chemical deflagration.<br/>Cell vents toxic hydrogen fluoride (HF), carbon monoxide (CO), and H2."]
+    P5["<b>STEP 5: CELL-TO-CELL THERMAL PROPAGATION (TABLE B EXTREMISTAN EVENT)</b><br/>Enclosure explodes; fire burns for days; facility evacuation mandated."]
+    P1 --> P2 --> P3 --> P4 --> P5
+    classDef step fill:#1a1c1f,stroke:#E05A10,stroke-width:1px,color:#f5f3f0;
+    class P1,P2,P3,P4,P5 step;
 ```
 
 ### 3.1 NFPA 855 and UL 9540A Safety Mandates
@@ -147,32 +122,25 @@ Under NFPA 855 (Standard for the Installation of Stationary Energy Storage Syste
 
 To achieve carbon-free baseload power, hyperscalers are entering power purchase agreements with Small Modular Reactor developers (100 to 300 MWe). SMRs integrate directly into campus microgrids, creating an unprecedented cyber-nuclear operational boundary:
 
-```
-+-------------------------------------------------------------------------+
-|             THE SMR-DATACENTER CYBER-NUCLEAR TRUST BOUNDARY             |
-+-------------------------------------------------------------------------+
-| NUCLEAR SAFETY DOMAIN (IEC 61513 / CLASS 1E / IEEE 603):                |
-| - Reactor Protection System (RPS): Hardwired Solid-State Analog Logic   |
-| - Control Rod Drive Mechanisms: Gravity Drop on Loss of Signal          |
-| - Primary Coolant Loop: Sealed Pressurized Vessel                       |
-+-------------------------------------------------------------------------+
-                                    |
-                    UNIDIRECTIONAL OPTICAL DATA DIODE (C_rev = 0)
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| ELECTRICAL BALANCE OF PLANT (BOP / IEC 62443 ZONE 2):                   |
-| - Steam Turbine Generator / Heat Exchanger Steam Bypass                 |
-| - Microgrid Synchronization Breaker & Inverters                         |
-+-------------------------------------------------------------------------+
-                                    |
-                    RESTRICTED INDUSTRIAL FIREWALL CONDUIT
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| HYPERSCALE COMPUTE FACILITY (ZONE 0 / ENTERPRISE SCADA):                |
-| - Cloud DCIM Telemetry & Compute Load Scheduling                        |
-+-------------------------------------------------------------------------+
+```mermaid
+flowchart TD
+    accTitle: The SMR to datacenter cyber-nuclear trust boundary
+    accDescr {
+      Three domains separated by two one-way crossings. The nuclear safety
+      domain holds the reactor protection system on hardwired analog logic,
+      gravity-drop control rods and the sealed primary coolant loop. Telemetry
+      leaves it only through a unidirectional optical data diode with zero
+      reverse capacity, reaching the electrical balance of plant. A restricted
+      industrial firewall conduit then connects that to the hyperscale compute
+      facility, which runs cloud telemetry and compute load scheduling.
+    }
+    NUC["<b>NUCLEAR SAFETY DOMAIN (IEC 61513 / CLASS 1E / IEEE 603)</b><br/>Reactor Protection System (RPS): Hardwired Solid-State Analog Logic<br/>Control Rod Drive Mechanisms: Gravity Drop on Loss of Signal<br/>Primary Coolant Loop: Sealed Pressurized Vessel"]
+    BOP["<b>ELECTRICAL BALANCE OF PLANT (BOP / IEC 62443 ZONE 2)</b><br/>Steam Turbine Generator / Heat Exchanger Steam Bypass<br/>Microgrid Synchronization Breaker &amp; Inverters"]
+    DC["<b>HYPERSCALE COMPUTE FACILITY (ZONE 0 / ENTERPRISE SCADA)</b><br/>Cloud DCIM Telemetry &amp; Compute Load Scheduling"]
+    NUC -->|"UNIDIRECTIONAL OPTICAL DATA DIODE (C_rev = 0)"| BOP
+    BOP -->|RESTRICTED INDUSTRIAL FIREWALL CONDUIT| DC
+    classDef dom fill:#1a1c1f,stroke:#E05A10,stroke-width:1px,color:#f5f3f0;
+    class NUC,BOP,DC dom;
 ```
 
 ### 4.1 The Nuclear Boundary Invariant
@@ -255,28 +223,25 @@ The control cost, the unmitigated annual loss expectancy and the residual loss e
 
 To eliminate Table B catastrophe risks across emerging power topologies, facility operators must implement three non-negotiable architectural invariants:
 
-```
-+-------------------------------------------------------------------------+
-|                  THE THREE MICROGRID RESILIENCE INVARIANTS              |
-+-------------------------------------------------------------------------+
-| INVARIANT 1: HARDWIRED ANALOG SAFETY ISOLATION (SIL-3)                  |
-| BESS over-voltage and thermal shunt-trips operate completely outside    |
-| software networks, cutting contactors via mechanical springs.           |
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| INVARIANT 2: UNIDIRECTIONAL OPTICAL GENERATION TELEMETRY                |
-| SMR and substation metering telemetry crosses an optical Tx-only diode  |
-| (C_rev = 0.000 bps). No remote network entity can command breakers.    |
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| INVARIANT 3: MECHANICAL SYNCHROCHECK INTERLOCKS                         |
-| Inverters and generator breakers locked by electromechanical coils.     |
-| Out-of-phase closure is physically impossible regardless of software.   |
-+-------------------------------------------------------------------------+
+```mermaid
+flowchart TD
+    accTitle: The three microgrid resilience invariants
+    accDescr {
+      Three invariants in sequence. The first is hardwired analog safety
+      isolation at SIL-3: battery over-voltage and thermal shunt-trips operate
+      entirely outside software networks, cutting contactors with mechanical
+      springs. The second is unidirectional optical generation telemetry:
+      reactor and substation metering crosses a transmit-only diode at zero
+      reverse capacity, so no remote entity can command breakers. The third is
+      mechanical synchrocheck interlocks: electromechanical coils make
+      out-of-phase closure physically impossible regardless of software.
+    }
+    I1["<b>INVARIANT 1: HARDWIRED ANALOG SAFETY ISOLATION (SIL-3)</b><br/>BESS over-voltage and thermal shunt-trips operate completely outside software networks, cutting contactors via mechanical springs."]
+    I2["<b>INVARIANT 2: UNIDIRECTIONAL OPTICAL GENERATION TELEMETRY</b><br/>SMR and substation metering telemetry crosses an optical Tx-only diode (C_rev = 0.000 bps). No remote network entity can command breakers."]
+    I3["<b>INVARIANT 3: MECHANICAL SYNCHROCHECK INTERLOCKS</b><br/>Inverters and generator breakers locked by electromechanical coils.<br/>Out-of-phase closure is physically impossible regardless of software."]
+    I1 --> I2 --> I3
+    classDef inv fill:#1a1c1f,stroke:#E05A10,stroke-width:1px,color:#f5f3f0;
+    class I1,I2,I3 inv;
 ```
 
 ### 6.1 Invariant 1: Hardwired Analog Safety Isolation (SIL-3)

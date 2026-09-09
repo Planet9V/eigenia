@@ -10,7 +10,17 @@ const MERMAID_CONFIG = {
   securityLevel: "strict" as const,
   theme: "base" as const,
   fontFamily: "var(--font-mono), 'JetBrains Mono', ui-monospace, monospace",
-  flowchart: { useMaxWidth: true, curve: "basis" as const, padding: 12 },
+  // wrappingWidth 620: at mermaid's default of 200 a node carrying a title and
+  // a line of description renders as a 264px column, so a seven-layer stack
+  // came out 1284px tall. The converted diagrams describe rather than label,
+  // and this is where a rendering default belongs, rather than repeated as an
+  // init directive in every published document.
+  flowchart: {
+    useMaxWidth: true,
+    curve: "basis" as const,
+    padding: 12,
+    wrappingWidth: 620,
+  },
   sequence: { useMaxWidth: true },
   themeVariables: {
     background: "#0B0C0E",

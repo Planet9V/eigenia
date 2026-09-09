@@ -10,6 +10,16 @@ Industrial cyber sabotage; observed from the Stuxnet centrifuge attacks to the T
 
 ```mermaid
 flowchart TD
+    accTitle: The Lacanian triad and the cyber-physical severance that breaks it
+    accDescr {
+      The Symbolic register holds Modbus registers, network packets and HMI
+      graphics. The Imaginary holds operator ego, mental schema and comforting
+      illusion. The Real holds unforgiving physical conservation laws. All three are
+      mutually linked. The severance runs alongside: adversary firmware manipulation
+      decouples telemetry from physics, leaving the operator trapped in a
+      symbolic-to-imaginary lag until the Real irrupts as pipe rupture or silicon
+      delamination.
+    }
     subgraph LacanBorromean["The Lacanian Triad in Critical Infrastructure"]
         S["THE SYMBOLIC REGISTER<br/>Modbus Registers, Network Packets, HMI Graphics"]
         I["THE IMAGINARY REGISTER<br/>Operator Ego, Mental Schema, Comforting Illusion"]
@@ -42,6 +52,16 @@ Lacan established that human subjectivity is organized across three inseparable 
 
 ```mermaid
 flowchart LR
+    accTitle: The three Lacanian registers mapped onto industrial OT
+    accDescr {
+      The Symbolic maps to digital network packets, Modbus registers, IEC 61850
+      GOOSE tags and SCADA HMI widgets; it is discrete, linguistic and rule-bound,
+      and easily forged from firmware. The Imaginary maps to operator mental models,
+      cognitive schemas, confirmation bias and the illusion of facility safety; it is
+      specular, narrative and defensive, the locus of ego preservation and trust. The
+      Real maps to thermodynamic law, acoustic shock waves and Joukowsky pressure
+      surges.
+    }
     subgraph Registers["THE THREE LACANIAN REGISTERS IN INDUSTRIAL OT"]
         direction LR
         Sym["The Symbolic<br/><br/>INDUSTRIAL OT MAPPING<br/>Digital network packets, Modbus registers,<br/>IEC 61850 GOOSE tags, SCADA HMI widgets.<br/><br/>CHARACTERISTICS<br/>Discrete, linguistic, rule-bound.<br/>Easily forged by Layer 2 firmware."]
@@ -83,6 +103,16 @@ The attacker achieves this by severing the knot between the Symbolic and the Rea
 
 ```mermaid
 flowchart LR
+    accTitle: How spoofed telemetry severs the operator from the physical process
+    accDescr {
+      The real process runs coolant stagnation from 85 to 94 degrees C with
+      cavitation waves. The symbolic HMI shows spoofed telemetry replaying 35.0
+      degrees C and a status of all green, so the link from process to display is
+      broken. The imaginary ego accepts that display, producing confirmation bias and
+      alarm dismissal. Both the untouched physical process and the unalarmed operator
+      arrive at the same endpoint: the irruption of the Real as explosion, fire or
+      delamination.
+    }
     subgraph RealCol["REAL PROCESS (Matter)"]
         R["Coolant Stagnation<br/>Temp: 85°C -> 94°C<br/>Cavitation Waves"]
     end
@@ -129,6 +159,17 @@ Where:
 
 ```mermaid
 flowchart TD
+    accTitle: The three phases of the Loman operator topology
+    accDescr {
+      Phase 1, alienation: the operator is subjugated to the primary signifier, the
+      compliance procedure and the green HMI indicator, and independent verification
+      is suppressed. Phase 2, separation, the specular tear: contradictory sensory
+      cues such as vibration and heat emerge, and the operator enters prolonged
+      cognitive dissonance trying to reconcile them with the HMI. Phase 3, the act:
+      the operator abandons procedural obedience and commands a manual emergency
+      shutdown, but in high-transient facilities this arrives long after physical
+      destruction.
+    }
     subgraph Loman["THE LOMAN OPERATOR TOPOLOGY"]
         P1["PHASE 1: ALIENATION ($ \to S_1)<br/>The operator is completely subjugated to the primary signifier (S_1: the compliance procedure and the green HMI indicator). Independent critical verification is suppressed."]
         P2["PHASE 2: SEPARATION (The Specular Tear)<br/>Contradictory sensory cues emerge (vibrations, heat). The operator attempts to reconcile reality with the HMI, entering prolonged cognitive dissonance (Klein RPD mental simulation)."]
@@ -154,6 +195,15 @@ The Cyber Digital Twin overcomes the limitations of human perception by continuo
 
 ```mermaid
 flowchart LR
+    accTitle: The cross-register comparator that detects symbolic severance
+    accDescr {
+      Layer 5 telemetry, the Modbus and HMI signifier, and layer 1 physical sensors
+      reading direct heat flux and pressure both feed a cross-register comparator
+      holding an energy conservation invariant. If the dissonance between them
+      exceeds a topological epsilon, symbolic severance is detected and an autonomous
+      SIL-3 relay actuates in under 100 milliseconds. Otherwise operation continues
+      nominally.
+    }
     L5["Layer 5 Telemetry<br/>Modbus / HMI Signifier"] --> Comp["Cross-Register Comparator<br/>Invariant Energy Conservation Balance"]
     L1["Layer 1 Physical Sensors<br/>Direct Heat Flux & Pressure"] --> Comp
     

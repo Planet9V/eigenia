@@ -15,6 +15,15 @@ The Eigenia Cyber Digital Twin (CDT) Monte Carlo Engine resolves these deficienc
 
 ```mermaid
 flowchart TD
+    accTitle: The Monte Carlo engine, from multi-modal ingestion onward
+    accDescr {
+      Ingestion draws on four sources: DEXPI 2.0 XML giving physical topology of
+      piping, vessels, valves and pumps; the CycloneDX 1.6+ five-BOM stack giving
+      digital provenance; the TACAM seven-dimensional spectral matrix giving threat
+      capability; and PostgreSQL analytics supplying eigenvector centrality and EPSS
+      velocity feeds. Those feed the subgraph builder and the simulation stages that
+      follow.
+    }
     subgraph Ingestion["1. Multi-Modal Graph Ingestion"]
         DEXPI["DEXPI 2.0 XML / ISO 15926<br/>Physical Topology (Piping, Vessels, Valves, Pumps)"]
         CDX["CycloneDX 1.6+ 5-BOM Stack<br/>Digital Provenance (HBOM, SBOM, CBOM, OBOM, VEX)"]
@@ -172,22 +181,18 @@ To demonstrate the concrete application of the unified graph schema, the engine 
 
 ### 3.2 Graph Edge Traversal Matrix (Table 2)
 
-```
-+---------------------------------------------------------------------------------------------------+
-| SUBSTATION & BESS ATTACK CONDUIT TOPOLOGY                                                          |
-+---------------------------------------------------------------------------------------------------+
-| Source Node     | Target Node     | Flow Classification | Protocol & Physical Conduit             |
-+-----------------+-----------------+---------------------+-----------------------------------------+
-| Vendor Engineer | MOD-01          | Remote Ingress      | Citrix Jump Host via HTTPS / SSH        |
-| MOD-01          | FW-01           | Ingress Conduit     | Encrypted IPsec Tunnel over Private APN |
-| FW-01           | RTU-VEN         | OT Control Plane    | Modbus TCP (Port 502) / Proprietary OEM |
-| RTU-VEN         | BMS-01          | Controller Link     | Modbus TCP / Unauthenticated RS-485     |
-| BMS-01          | PCS-01          | Actuator Setpoints  | CAN Bus 2.0B / Modbus RTU               |
-| PCS-01          | BAT-RACK-01     | Power Inversion     | Overvoltage Injection (> 4.4V/cell)     |
-| IED-01          | CB-01           | Protection Trip     | IEC 61850 GOOSE Trip Command            |
-| MU-01           | IED-01          | Analog Digitization | IEC 61850-9-2 Process Bus Sampled Values|
-+-----------------+-----------------+---------------------+-----------------------------------------+
-```
+**Table 2: Substation and BESS attack conduit topology.**
+
+| Source Node | Target Node | Flow Classification | Protocol & Physical Conduit |
+| :--- | :--- | :--- | :--- |
+| Vendor Engineer | MOD-01 | Remote Ingress | Citrix Jump Host via HTTPS / SSH |
+| MOD-01 | FW-01 | Ingress Conduit | Encrypted IPsec Tunnel over Private APN |
+| FW-01 | RTU-VEN | OT Control Plane | Modbus TCP (Port 502) / Proprietary OEM |
+| RTU-VEN | BMS-01 | Controller Link | Modbus TCP / Unauthenticated RS-485 |
+| BMS-01 | PCS-01 | Actuator Setpoints | CAN Bus 2.0B / Modbus RTU |
+| PCS-01 | BAT-RACK-01 | Power Inversion | Overvoltage Injection (> 4.4V/cell) |
+| IED-01 | CB-01 | Protection Trip | IEC 61850 GOOSE Trip Command |
+| MU-01 | IED-01 | Analog Digitization | IEC 61850-9-2 Process Bus Sampled Values |
 
 ---
 

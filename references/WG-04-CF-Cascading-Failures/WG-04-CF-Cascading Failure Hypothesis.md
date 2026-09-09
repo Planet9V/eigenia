@@ -318,6 +318,14 @@ While the full 54-battery fleet produces maximum power swing magnitude, geograph
 
 ```mermaid
 graph TB
+    accTitle: Sydney metro BESS cluster and its grid connections
+    accDescr {
+      Four battery clusters feed three Transgrid 132 kV terminals, which in turn
+      supply the Sydney CBD peak load of 2,500 MW. Canterbury contributes 30 MW and
+      Parramatta 25 MW, both through Sydney West Terminal. North Sydney contributes
+      20 MW through Rookwood substation, and the Eastern Suburbs 15 MW through
+      Beaconsfield.
+    }
     subgraph "Sydney Metro BESS Cluster"
         CBD[Sydney CBD Load<br/>Peak: 2,500 MW]
 
@@ -411,6 +419,16 @@ The diagram below traces the same attack through the two protection systems that
 
 ```mermaid
 graph TB
+    accTitle: Why absolute-frequency protection misses an oscillation that RoCoF catches
+    accDescr {
+      A fleet swing of plus or minus 540 MW drives a frequency deviation of plus or
+      minus 0.15 Hz in a resonance band from 0.3 to 1.2 Hz. Under-frequency
+      protection watches absolute hertz, and the frequency never leaves the normal
+      band, so the load-shedding setpoint is never reached and no trip occurs. RoCoF
+      protection watches the rate of change against a 1.0 Hz per second threshold:
+      at 0.3 Hz the rate is 0.28, at 1.0 Hz it is 0.94, both below threshold, and
+      only at 1.2 Hz does it reach 1.13 and trip the relay.
+    }
     OSC[Attack input<br/>BESS fleet swing +/- 540 MW<br/>Frequency deviation +/- 0.15 Hz<br/>Resonance band 0.3 to 1.2 Hz]
 
     OSC --> ABS[Absolute frequency<br/>stays 49.85 to 50.15 Hz]
@@ -689,6 +707,17 @@ The following diagram models the complete propagation chain from initial attack 
 
 ```mermaid
 graph TB
+    accTitle: The three-tier cascade from API compromise to regional outage
+    accDescr {
+      Tier 1, from time zero to fifteen minutes: a retailer API compromise injects
+      mass commands, 54 batteries oscillate at plus or minus 540 MW, grid frequency
+      deviation exceeds plus or minus 0.15 Hz, and a RoCoF relay trips while the
+      frequency itself stays in band. Tier 2, to thirty minutes: 200 MW of load
+      shedding causes a voltage sag, transformer protection activates, three
+      substations go offline and eight to twelve thousand customers lose power.
+      Tier 3, to sixty minutes: the sudden load drop overloads adjacent zones and
+      transmission thermal limits take further substations out.
+    }
     subgraph "Tier 1: Initial Attack - T+0 to T+15 min"
         A1[Retailer API Compromise] -->|Mass Command Injection| A2[54 BESS Oscillating<br/>+/- 540 MW Power Swing]
         A2 -->|Sustained Oscillation| A3[Grid Frequency Deviation<br/>Exceeds +/- 0.15 Hz]
@@ -734,6 +763,16 @@ The node chain above shows what connects to what. It does not show the causal or
 
 ```mermaid
 sequenceDiagram
+    accTitle: Attack sequence from OAuth compromise to regional cascade
+    accDescr {
+      A sequence over time between the attacker, the retailer API, the battery
+      fleet, grid frequency, protection relays, the distribution network and AEMO.
+      At time zero a compromised OAuth token drives a bulk dispatch to 54 assets,
+      producing a plus or minus 540 MW swing while frequency stays between 49.85 and
+      50.15 Hz. At fifteen minutes the rate of change passes 1.0 Hz per second and
+      RoCoF relays shed 200 MW. At thirty minutes voltage sag takes three substations
+      offline. At sixty minutes the cascade goes regional.
+    }
     participant AT as Attacker
     participant API as Retailer API
     participant BESS as BESS Fleet
@@ -842,6 +881,17 @@ As documented in EE-CTI-005 (Sandworm Energy Grid Campaign), the Russian GRU Uni
 
 ```mermaid
 graph TB
+    accTitle: Multi-phase attack combining oscillation with thermal initiation
+    accDescr {
+      Phase 1, to fifteen minutes: three initial compromises, a retailer API through
+      OAuth token theft, a vendor RTU through a 4G backdoor, and an engineering
+      workstation through lateral movement, giving access to DERMS control, the
+      battery network and the RTU network respectively. Phase 2, to thirty minutes:
+      synchronous commands to 54 batteries drive a 0.3 to 0.8 Hz frequency
+      oscillation and probe protection relay sensitivity. Phase 3, to forty-five
+      minutes: Modbus function code 6 manipulates thermal setpoints at fifteen sites,
+      combining overcharge with disabled cooling to begin thermal runaway.
+    }
     subgraph "Phase 1: T+0 to T+15 min - Initial Compromise"
         A1[Retailer API Compromise<br/>OAuth Token Theft]
         A2[Vendor RTU Compromise<br/>4G Backdoor Access]
@@ -1093,6 +1143,16 @@ Where the grid separates decides how many of those systems lose supply at once. 
 
 ```mermaid
 graph TB
+    accTitle: Interdependency of critical infrastructure on the primary grid
+    accDescr {
+      The primary grid covers 54 substations, 270 MW of battery storage and 1.2
+      million customers. Tier 1 direct dependencies are water supply across 87
+      pumping stations with a two to four hour tolerance, twelve major hospitals with
+      no tolerance, and 420 cell towers with a two hour tolerance. Tier 2 secondary
+      dependencies are transport with three rail lines and 1,240 signals at no
+      tolerance, financial services at four hours, and defence infrastructure at four
+      hours. These feed onward cascading consequences in healthcare and security.
+    }
     subgraph "Primary Grid"
         GRID[Electricity Distribution<br/>54 Substations, 270 MW BESS<br/>1.2M Customers]
     end
@@ -1382,6 +1442,17 @@ The cascade multiplier represents how failure in the dependent sector amplifies 
 
 ```mermaid
 gantt
+    accTitle: Seventy-two hour cascading infrastructure failure timeline
+    accDescr {
+      A timeline across four sections. The electrical grid loses 185 substations in
+      the first five minutes, frequency collapses over the following fifteen, and a
+      total blackout of 1.2 million customers runs for three days. Water holds
+      reservoir pressure for two hours, loses upper floor service by four, loses
+      pressure entirely to twelve hours, and reaches a hospital supply crisis at
+      twelve hours with wastewater backup from twenty-four. Medical systems run on
+      UPS for one hour, home oxygen patients become critical at one hour, diesel
+      depletion begins at four, and dialysis reaches crisis at forty-eight hours.
+    }
     title Cascading Infrastructure Failure Timeline (72-Hour Blackout Scenario)
     dateFormat HH:mm
     axisFormat %H:%M
@@ -1625,6 +1696,15 @@ This is the primary attack vector enabling the Death Wobble scenario. The attack
 
 ```mermaid
 graph LR
+    accTitle: The attack chain from reconnaissance to cascading blackout
+    accDescr {
+      Six stages in sequence. Reconnaissance through procurement documents yields the
+      architecture. Social engineering of a retailer employee yields credentials. API
+      access through an OAuth token allows asset discovery, mapping 54 batteries.
+      Oscillation calculation leads to a mass dispatch lasting thirty minutes, and
+      the resulting grid instability produces a cascading blackout affecting 1.2
+      million customers for twenty-four to seventy-two hours.
+    }
     A[Reconnaissance<br/>Procurement docs] -->|Architecture| B[Social Engineering<br/>Retailer employee]
     B -->|Credential Theft| C[API Access<br/>OAuth token]
     C -->|Asset Discovery| D[DER Enumeration<br/>54 BESS mapped]
@@ -1644,6 +1724,17 @@ The same six stages map onto the Purdue reference model, from enterprise systems
 
 ```mermaid
 graph TB
+    accTitle: The same attack chain mapped onto the Purdue model levels
+    accDescr {
+      At enterprise levels 4 and 5, reconnaissance leads to social engineering and
+      then credential theft of an OAuth token. At the IT to OT DMZ, level 3.5, the
+      retailer API accepts the bearer token with no multifactor authentication. At
+      level 3, operations, DERMS command injection dispatches to 54 batteries. At
+      level 2, supervisory control, setpoints are synchronised so all assets swing in
+      phase. At level 1, basic control, the controllers execute a plus or minus 540
+      MW swing. At level 0, process, grid frequency oscillates until the rate of
+      change crosses the 1.0 Hz per second threshold.
+    }
     subgraph "Level 4 and 5: Enterprise"
         S1[Reconnaissance<br/>Procurement and architecture docs]
         S2[Social engineering<br/>Retailer employee targeted]
@@ -1917,6 +2008,17 @@ The ongoing cyber and information security component of the sector-average CIRMP
 
 ```mermaid
 graph TB
+    accTitle: Five-layer defense-in-depth architecture
+    accDescr {
+      Layer 1, perimeter security, covers zero trust access through a bastion host
+      with multifactor authentication, just-in-time vendor access, and an API gateway
+      with rate limiting and a web application firewall. Layer 2, network
+      segmentation, covers an ICS firewall at the zone boundary, per-battery VLAN
+      access lists, and east-west firewall rules. Layer 3, protocol security, covers
+      TLS 1.3 for ICCP, IEC 62351-6 GOOSE signing, and a Modbus security gateway.
+      Layer 4 covers application security including physics-based validation, and
+      layer 5 covers monitoring and response.
+    }
     subgraph "Defense-in-Depth Architecture (Phase 2)"
         L1[Layer 1: Perimeter Security]
         L2[Layer 2: Network Segmentation]
@@ -1956,6 +2058,16 @@ graph TB
 
 ```mermaid
 graph LR
+    accTitle: The continuous improvement cycle
+    accDescr {
+      A closed loop of five stages: threat intelligence updates risk assessment,
+      which informs control implementation, which is validated by penetration
+      testing, whose findings drive remediation, whose lessons return to threat
+      intelligence. Four external inputs feed the loop: quarterly red teaming and
+      vendor patch management enter at control implementation, annual tabletop
+      exercises enter at risk assessment, and the training programme enters at
+      penetration testing.
+    }
     subgraph "Continuous Improvement Cycle (Ongoing)"
         A[Threat Intelligence] -->|Updates| B[Risk Assessment]
         B -->|Informs| C[Control Implementation]
@@ -1984,6 +2096,17 @@ The tree below orders the controls of section 9.2 by the network conditions that
 
 ```mermaid
 graph TB
+    accTitle: Cascading failure risk assessment decision tree
+    accDescr {
+      A branching assessment. If grid inertia is regularly below 3.0 seconds, death
+      wobble oscillation detection is critical priority at cost band C. Otherwise the
+      tree asks whether more than 100 MW of battery fleet is deployed; if not, the
+      recommendation is medium priority monitoring before that threshold is reached.
+      If it is, unencrypted Modbus TCP makes a security gateway critical priority.
+      If encrypted, unvalidated thermal limits in the battery management firmware
+      make firmware hardening high priority at cost band B, and the tree continues to
+      GOOSE authentication and substation count.
+    }
     Start[Cascading Failure Risk Assessment]
     Start --> Q1{Current Grid Inertia <br/>Regularly <3.0 seconds?}
 

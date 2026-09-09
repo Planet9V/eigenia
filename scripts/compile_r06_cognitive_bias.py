@@ -27,25 +27,25 @@ Coupled to physical infrastructure through DEXPI 2.0 piping schematics, classed 
 
 Human cognitive architecture is divided into two distinct modes of information processing (Kahneman & Tversky, 1974; Stanovich & West, 2000):
 
-```
-+-------------------------------------------------------------------------+
-|                  DUAL-PROCESS COGNITIVE ARCHITECTURE                    |
-+-------------------------------------------------------------------------+
-| SYSTEM 1 (Fast, Heuristic, Automatic):                                  |
-| - Low cognitive energy expenditure, pattern matching, intuitive leaps. |
-| - Dominated by affective heuristics, availability bias, and anchoring. |
-| - Operational Phase: Crisis response, alarm flood (> 150 alerts/min).   |
-+-------------------------------------------------------------------------+
-                                    |
-                    OPERATIONAL STRESS DRIFT (tau_stress)
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| SYSTEM 2 (Slow, Analytical, Deliberative):                              |
-| - High cognitive energy expenditure, deductive logic, rule validation. |
-| - Systematic cross-referencing of DEXPI schematics and sensor logs.     |
-| - Operational Phase: Routine maintenance, post-incident forensic audit. |
-+-------------------------------------------------------------------------+
+```mermaid
+flowchart TD
+    accTitle: Dual-process cognitive architecture
+    accDescr {
+      Two modes of information processing, with operational stress drift
+      carrying the operator from one to the other. System 1 is fast,
+      heuristic and automatic: low cognitive energy, pattern matching and
+      intuitive leaps, dominated by affective heuristics, availability bias
+      and anchoring, and it governs crisis response under alarm flood. System
+      2 is slow, analytical and deliberative: high cognitive energy, deductive
+      logic and rule validation, systematically cross-referencing schematics
+      and sensor logs, and it governs routine maintenance and post-incident
+      forensic audit.
+    }
+    S1["<b>SYSTEM 1 (Fast, Heuristic, Automatic)</b><br/>Low cognitive energy expenditure, pattern matching, intuitive leaps.<br/>Dominated by affective heuristics, availability bias, and anchoring.<br/>Operational Phase: Crisis response, alarm flood (&gt; 150 alerts/min)."]
+    S2["<b>SYSTEM 2 (Slow, Analytical, Deliberative)</b><br/>High cognitive energy expenditure, deductive logic, rule validation.<br/>Systematic cross-referencing of DEXPI schematics and sensor logs.<br/>Operational Phase: Routine maintenance, post-incident forensic audit."]
+    S1 -->|"OPERATIONAL STRESS DRIFT (tau_stress)"| S2
+    classDef mode fill:#1a1c1f,stroke:#E05A10,stroke-width:1px,color:#f5f3f0;
+    class S1,S2 mode;
 ```
 
 When an industrial facility operates within nominal parameters, personnel maintain supervisory control using analytical System 2 reasoning. However, when an adversary executes a coordinated cyber-physical assault; combining falsified SCADA alarms, spoofed management communications, and hydraulic valve manipulations; the incoming information rate exceeds human working memory capacity ($7 \pm 2$ chunks). 
@@ -58,26 +58,21 @@ The brain experiences cognitive overload, automatically shifting decision-making
 
 To model the physical impact of cognitive bias exploitation, operator decision vectors are mapped to plant piping and multi-BOM specifications:
 
-```
-+-------------------------------------------------------------------------+
-|            DEXPI-CYCLONEDX OPERATIONAL TOPOLOGY GRAPH                   |
-+-------------------------------------------------------------------------+
-| DEXPI 2.0 PIPING & HYDRAULIC NETWORK:                                   |
-| - Coolant Subsystem: Secondary Distribution Loop, Chilled Water Pumping|
-| - Instrumentation: FT-101 (Flowmeter), PT-202 (Pressure), TT-305 (Temp) |
-+-------------------------------------------------------------------------+
-                                    |
-                    CROSS-DOMAIN DIGITAL TWIN BINDING
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| CYCLONEDX 1.6+ MULTI-BOM SPECIFICATION:                                 |
-| - HBOM: Silicon ASICs, Pumping VFDs, Automatic Transfer Switches (ATS)  |
-| - SBOM: PLC Logic Firmware, SCADA HMI Server Binaries, Modbus Stacks    |
-| - CBOM: Mutual TLS Certificates, DICE Hardware Identity Credentials     |
-| - OBOM: Operational Envelope Bounds (Flow >= 35 L/min, Temp <= 45°C)    |
-| - VEX:  Machine-Readable Threat Exploit Feeds (CISA ICS Advisories)     |
-+-------------------------------------------------------------------------+
+```mermaid
+flowchart TD
+    accTitle: DEXPI to CycloneDX operational topology graph
+    accDescr {
+      The DEXPI 2.0 piping and hydraulic network, carrying the coolant
+      subsystem and its instrumentation, binds through cross-domain digital
+      twin binding to the CycloneDX 1.6+ multi-BOM specification, which holds
+      the hardware, software, cryptography, operational envelope and VEX bills
+      of materials.
+    }
+    DEXPI["<b>DEXPI 2.0 PIPING &amp; HYDRAULIC NETWORK</b><br/>Coolant Subsystem: Secondary Distribution Loop, Chilled Water Pumping<br/>Instrumentation: FT-101 (Flowmeter), PT-202 (Pressure), TT-305 (Temp)"]
+    BOM["<b>CYCLONEDX 1.6+ MULTI-BOM SPECIFICATION</b><br/>HBOM: Silicon ASICs, Pumping VFDs, Automatic Transfer Switches (ATS)<br/>SBOM: PLC Logic Firmware, SCADA HMI Server Binaries, Modbus Stacks<br/>CBOM: Mutual TLS Certificates, DICE Hardware Identity Credentials<br/>OBOM: Operational Envelope Bounds (Flow &gt;= 35 L/min, Temp &lt;= 45°C)<br/>VEX: Machine-Readable Threat Exploit Feeds (CISA ICS Advisories)"]
+    DEXPI -->|CROSS-DOMAIN DIGITAL TWIN BINDING| BOM
+    classDef lvl fill:#1a1c1f,stroke:#E05A10,stroke-width:1px,color:#f5f3f0;
+    class DEXPI,BOM lvl;
 ```
 
 When an adversary manipulates the human operator through cognitive bias, the operator issues unauthorized manual overrides that violate OBOM constraints, forcing physical equipment past its thermodynamic destruction limits.
@@ -97,11 +92,7 @@ Where:
 - $\text{Stress}_i(t) \in [0, 1]$ is the dynamic physiological and cognitive stress level at time $t$.
 - $\gamma \ge 0$ is the stress amplification coefficient ($\gamma \approx 1.85$).
 
-```
-+-------------------------------------------------------------------------+
-|             TABLE 3.1: COGNITIVE BIAS SUSCEPTIBILITY WEIGHTS            |
-+-------------------------------------------------------------------------+
-```
+**Table 3.1: Cognitive bias susceptibility weights.**
 
 | Bias Code | Cognitive Bias | Baseline Mechanism | Operational ICS Manifestation | Threat Weight ($w_b$) |
 |:---:|:---|:---|:---|:---:|
@@ -243,17 +234,15 @@ Where:
 - Heat flux exceeds $140\text{ W/cm}^2$.
 - Operating pressure is $6.0\text{ bar}$ with $38.5\text{ L/min}$ PG25 coolant.
 
-```
-+-------------------------------------------------------------------------+
-|                  COGNITIVE DELAY VS. SILICON SURVIVAL                   |
-+-------------------------------------------------------------------------+
-| T = 0.0s: Primary pump isolation valve closed by adversary exploit.     |
-| T = 12.0s: Die temperature rate of change exceeds 4.2°C/s.             |
-| T = 20.0s: Alarms trigger. Operator anchors on "sensor calibration."    |
-| T = 35.0s: Decision latency tau_delay continues; operator debating.    |
-| T = 45.0s: Silicon junction temperature breaches 94.0°C. DELAMINATION.|
-+-------------------------------------------------------------------------+
-```
+**Table 8.1: Cognitive delay versus silicon survival.**
+
+| Elapsed | Event |
+| :--- | :--- |
+| T = 0.0s | Primary pump isolation valve closed by adversary exploit. |
+| T = 12.0s | Die temperature rate of change exceeds 4.2°C/s. |
+| T = 20.0s | Alarms trigger. Operator anchors on "sensor calibration." |
+| T = 35.0s | Decision latency tau_delay continues; operator debating. |
+| T = 45.0s | Silicon junction temperature breaches 94.0°C. DELAMINATION. |
 
 If cognitive bias induces a decision latency $\tau_{\text{delay}} > 35\text{ seconds}$, the physical facility crosses the 45-second thermal trip cliff. The silicon packages experience irreversible thermal delamination before human operators execute manual breaker cutouts.
 
@@ -263,23 +252,13 @@ If cognitive bias induces a decision latency $\tau_{\text{delay}} > 35\text{ sec
 
 To eliminate the systemic failure modes introduced by cognitive bias, systems assurance mandates three deterministic architectural remediations:
 
-```
-+-------------------------------------------------------------------------+
-|                  DETERMINISTIC DEFENSIVE ARCHITECTURE                   |
-+-------------------------------------------------------------------------+
-| REMEDIATION 1: AUTOMATED TWO-PERSON INTEGRITY (TPI)                     |
-| Critical commands (valve bypasses, trip inhibitions) require dual-token  |
-| cryptographic attestation from independent physical terminals.          |
-+-------------------------------------------------------------------------+
-| REMEDIATION 2: HARDWIRED ANALOG SIL-3 TRIP LOOPS                        |
-| Snap-action thermal switches and pressure relief valves bypass operator |
-| HMI consoles entirely, executing physical trips at 85.0°C.             |
-+-------------------------------------------------------------------------+
-| REMEDIATION 3: INDEPENDENT CONTRAPUNTAL TELEMETRY                       |
-| Visual HMI dashboards are accompanied by spatial acoustic telemetry    |
-| (MPN), preventing visual anchoring and cognitive tunnel vision.         |
-+-------------------------------------------------------------------------+
-```
+**Table 9.1: Deterministic defensive architecture.**
+
+| Remediation | Mechanism |
+| :--- | :--- |
+| **1. Automated two-person integrity (TPI)** | Critical commands (valve bypasses, trip inhibitions) require dual-token cryptographic attestation from independent physical terminals. |
+| **2. Hardwired analog SIL-3 trip loops** | Snap-action thermal switches and pressure relief valves bypass operator HMI consoles entirely, executing physical trips at 85.0°C. |
+| **3. Independent contrapuntal telemetry** | Visual HMI dashboards are accompanied by spatial acoustic telemetry (MPN), preventing visual anchoring and cognitive tunnel vision. |
 
 ---
 

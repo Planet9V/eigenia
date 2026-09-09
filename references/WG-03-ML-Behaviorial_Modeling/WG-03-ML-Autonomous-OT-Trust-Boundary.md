@@ -21,23 +21,24 @@ Facility operators are deploying machine learning agents across five primary ope
 4. **Grid Interactive Demand Response:** Automated microgrid dispatch systems execute fast frequency response by synchronizing on-site generators, fuel cells, and grid-tie inverters with regional transmission organization (RTO) pricing signals.
 5. **Digital Twin Operational Feedback:** Physical plant telemetry ingested into real-time simulation models generates automated setpoint recommendations that are written back directly to supervisory SCADA servers.
 
-```
-+-------------------------------------------------------------------------+
-|                THE COLLAPSED TRUST HIERARCHY PROBLEM                    |
-+-------------------------------------------------------------------------+
-| TRADITIONAL HUMAN-IN-THE-LOOP CONTROL:                                  |
-| Human Operator ---> Engineering Console ---> BMS/SCADA ---> Field PLC   |
-| (Anomaly Detection: 'Did a certified human authorize this setpoint?')  |
-+-------------------------------------------------------------------------+
-                                    |
-                    ALGORITHMIC AUTOMATION TRANSITION
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| AUTONOMOUS AI-DRIVEN CONTROL (COLLAPSED BOUNDARY):                      |
-| RL Optimization Model ---> Enterprise API Conduit ---> Field PLC        |
-| (Syntactically Valid Commands Arrive Line-Rate with No Human Oversight) |
-+-------------------------------------------------------------------------+
+```mermaid
+flowchart TD
+    accTitle: The collapsed trust hierarchy problem
+    accDescr {
+      Traditional human-in-the-loop control runs from the human operator
+      through an engineering console and the BMS or SCADA layer to the field
+      PLC, and anomaly detection asks whether a certified human authorized the
+      setpoint. The algorithmic automation transition collapses that
+      hierarchy: autonomous AI-driven control runs from a reinforcement
+      learning optimization model through an enterprise API conduit straight
+      to the field PLC, so syntactically valid commands arrive at line rate
+      with no human oversight.
+    }
+    HUM["<b>TRADITIONAL HUMAN-IN-THE-LOOP CONTROL</b><br/>Human Operator ---&gt; Engineering Console ---&gt; BMS/SCADA ---&gt; Field PLC<br/>Anomaly Detection: 'Did a certified human authorize this setpoint?'"]
+    AUT["<b>AUTONOMOUS AI-DRIVEN CONTROL (COLLAPSED BOUNDARY)</b><br/>RL Optimization Model ---&gt; Enterprise API Conduit ---&gt; Field PLC<br/>Syntactically Valid Commands Arrive Line-Rate with No Human Oversight"]
+    HUM -->|ALGORITHMIC AUTOMATION TRANSITION| AUT
+    classDef n fill:#1a1c1f,stroke:#E05A10,stroke-width:1px,color:#f5f3f0;
+    class HUM,AUT n;
 ```
 
 ### 1.2 The Collapse of the Supervisory Trust Hierarchy
@@ -53,35 +54,27 @@ Deep packet inspection firewalls cannot inspect intent. If an algorithm hallucin
 
 To model and constrain autonomous facility control, the cyber-physical operational boundary is mapped across the DEXPI 2.0 plant schematic, classed against the ISO 15926-4 reference data library, and the CycloneDX 1.6+ multi-BOM specification:
 
-```
-+-------------------------------------------------------------------------+
-|                  AI-OT WRITE-ACCESS TRUST BOUNDARY                      |
-+-------------------------------------------------------------------------+
-| DEXPI 2.0 PHYSICAL ASSETS: Heat Exchangers, Manifolds, Inverters        |
-| (Fluid Dynamics: PG25 Coolant, Design Flow 38.5 L/min, Head Loss h_f)   |
-+-------------------------------------------------------------------------+
-                                    |
-                    READ-ONLY UNIDIRECTIONAL DIODE (C_rev = 0)
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| CYCLONEDX 1.6+ MULTI-BOM SPECIFICATION                                  |
-| - HBOM: Silicon ASICs, High-Density Trays, Microchannel Cold Plates    |
-| - SBOM: Caliptra Silicon RoT, OpenSIL Initializers, Linux OS            |
-| - CBOM: DICE Attestation Keys, PQC Cryptographic Signatures             |
-| - OBOM: Hardware Rate Limits (64 kbps), Thermal Trip Limits (94°C)      |
-| - VEX:  Machine-Readable Vulnerability Feeds & Exploit States           |
-+-------------------------------------------------------------------------+
-                                    |
-                    ISOLATED COMPUTATIONAL SHADOW
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| AI FACILITY OPTIMIZATION AGENT (ZONE 3 / ENTERPRISE CLOUD)              |
-| - Reinforcement Learning Policy Network                                 |
-| - PUE Minimization Objective Function                                   |
-| - Physical Bounds Checker (Hardware-Enforced Invalidation Gate)         |
-+-------------------------------------------------------------------------+
+```mermaid
+flowchart TD
+    accTitle: AI to OT write-access trust boundary
+    accDescr {
+      Three levels separated by two one-way crossings. The DEXPI 2.0 physical
+      assets carry the fluid dynamics of the plant. Telemetry leaves them only
+      through a read-only unidirectional diode with zero reverse capacity,
+      reaching the CycloneDX 1.6+ multi-BOM specification, which holds the
+      hardware, software, cryptography, operational bounds and VEX bills of
+      materials. An isolated computational shadow then feeds the AI facility
+      optimization agent in the enterprise cloud, which runs a reinforcement
+      learning policy network against a PUE minimization objective behind a
+      hardware-enforced physical bounds checker.
+    }
+    PHYS["<b>DEXPI 2.0 PHYSICAL ASSETS: Heat Exchangers, Manifolds, Inverters</b><br/>(Fluid Dynamics: PG25 Coolant, Design Flow 38.5 L/min, Head Loss h_f)"]
+    BOM["<b>CYCLONEDX 1.6+ MULTI-BOM SPECIFICATION</b><br/>HBOM: Silicon ASICs, High-Density Trays, Microchannel Cold Plates<br/>SBOM: Caliptra Silicon RoT, OpenSIL Initializers, Linux OS<br/>CBOM: DICE Attestation Keys, PQC Cryptographic Signatures<br/>OBOM: Hardware Rate Limits (64 kbps), Thermal Trip Limits (94°C)<br/>VEX: Machine-Readable Vulnerability Feeds &amp; Exploit States"]
+    AI["<b>AI FACILITY OPTIMIZATION AGENT (ZONE 3 / ENTERPRISE CLOUD)</b><br/>Reinforcement Learning Policy Network<br/>PUE Minimization Objective Function<br/>Physical Bounds Checker (Hardware-Enforced Invalidation Gate)"]
+    PHYS -->|"READ-ONLY UNIDIRECTIONAL DIODE (C_rev = 0)"| BOM
+    BOM -->|ISOLATED COMPUTATIONAL SHADOW| AI
+    classDef n fill:#1a1c1f,stroke:#E05A10,stroke-width:1px,color:#f5f3f0;
+    class PHYS,BOM,AI n;
 ```
 
 By mapping every physical DEXPI equipment nozzle to its CycloneDX HBOM and OBOM record, the digital twin verifies that software setpoint recommendations generated by the AI agent cannot exceed physical operational constraints.
@@ -110,11 +103,7 @@ In Extremistan, a single catastrophic event can bankrupt the enterprise, destroy
 
 Extending the CyHAZOP methodology to artificial intelligence control planes requires three new guide words to capture non-deterministic algorithmic failure modes:
 
-```
-+-------------------------------------------------------------------------+
-|              CYHAZOP EXTENSION: AI-SPECIFIC GUIDE WORDS                 |
-+-------------------------------------------------------------------------+
-```
+**Table 3.1: CyHAZOP extension, AI-specific guide words.**
 
 | Guide Word | Definition | Real-World Operational Mechanism | Consequence in 100 MW Compute Plant |
 |:---|:---|:---|:---|
@@ -199,28 +188,26 @@ Where isolating an autonomous facility with an optical data diode ($C_{\text{dio
 
 To safely deploy machine learning for facility optimization while eliminating Table B catastrophe risk, organizations must enforce three non-negotiable architectural invariants:
 
-```
-+-------------------------------------------------------------------------+
-|                  THE THREE ARCHITECTURAL INVARIANTS                     |
-+-------------------------------------------------------------------------+
-| INVARIANT 1: THE WRITE-ACCESS PROHIBITION                               |
-| AI models are permanently restricted to read-only digital twin mirrors. |
-| Telemetry crosses an optical Tx-only data diode (C_rev = 0.000 bps).    |
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| INVARIANT 2: THE PHYSICAL BOUNDS CHECKER                                 |
-| If supervisory recommendations are accepted, they pass through a        |
-| deterministic, hardwired PLC ladder logic envelope (Rate of Change, min)|
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| INVARIANT 3: INDEPENDENT SIL-3 HARDWIRED SAFETY INTERLOCKS              |
-| Mechanical pressure relief valves and bi-metallic thermal cutouts       |
-| operate completely outside software networks, cutting power on surge.  |
-+-------------------------------------------------------------------------+
+```mermaid
+flowchart TD
+    accTitle: The three architectural invariants
+    accDescr {
+      Three invariants in sequence. The first is the write-access
+      prohibition: AI models are permanently restricted to read-only digital
+      twin mirrors, with telemetry crossing a transmit-only optical data diode
+      at zero reverse capacity. The second is the physical bounds checker: any
+      accepted supervisory recommendation passes through a deterministic,
+      hardwired PLC ladder logic envelope. The third is independent SIL-3
+      hardwired safety interlocks: mechanical pressure relief valves and
+      bi-metallic thermal cutouts operate entirely outside software networks,
+      cutting power on surge.
+    }
+    V1["<b>INVARIANT 1: THE WRITE-ACCESS PROHIBITION</b><br/>AI models are permanently restricted to read-only digital twin mirrors.<br/>Telemetry crosses an optical Tx-only data diode (C_rev = 0.000 bps)."]
+    V2["<b>INVARIANT 2: THE PHYSICAL BOUNDS CHECKER</b><br/>If supervisory recommendations are accepted, they pass through a deterministic, hardwired PLC ladder logic envelope (Rate of Change, min)"]
+    V3["<b>INVARIANT 3: INDEPENDENT SIL-3 HARDWIRED SAFETY INTERLOCKS</b><br/>Mechanical pressure relief valves and bi-metallic thermal cutouts operate completely outside software networks, cutting power on surge."]
+    V1 --> V2 --> V3
+    classDef n fill:#1a1c1f,stroke:#E05A10,stroke-width:1px,color:#f5f3f0;
+    class V1,V2,V3 n;
 ```
 
 ### 6.1 Invariant 1: The Write-Access Prohibition (Read-Only Mirroring)

@@ -10,6 +10,18 @@ To bridge the historical chasm between semiconductor microarchitecture, server c
 
 ```mermaid
 graph LR
+    accTitle: The AI rack envelope under multi-vector facility pressure
+    accDescr {
+      An untrusted facility threat environment of chilled water and cooling
+      distribution units, 48 and 400 volt busbars, the building and power management
+      systems, and the facility LAN exerts multi-vector pressure at the boundary:
+      thermal shock, power transients, sideband sniffing and covert egress. Inside
+      the rack envelope, four layers nest in order: the physical and environmental
+      boundary, the facility conduit defense at an IEC 62443 SL-4 zone boundary, the
+      distrusted host node and out-of-band management tier, and the silicon root of
+      trust with its cryptographic accelerator enclave, reached only through SPDM 1.3
+      attestation and IDE encryption.
+    }
     subgraph FAC["FACILITY THREAT ENVIRONMENT (UNTRUSTED)"]
         F1["Chilled Water / CDUs"]
         F2["48V/400V Busbars"]
@@ -81,6 +93,15 @@ This multi-point cryptographic enclosure ensures that even if an adversary achie
 
 ```mermaid
 graph TB
+    accTitle: Four encryption points across the host and accelerator complex
+    accDescr {
+      A scale-out RDMA network on a MACsec-protected 800 gigabit to 1.6 terabit
+      fabric is point 4, feeding the untrusted host processing tier. Within that
+      tier, point 3 is NVMe storage under IEEE 1619 encryption. Point 2 is the
+      host-to-device bus, PCIe generation 5 or 6 with IDE and SPDM 1.3
+      authentication, reaching the trusted accelerator silicon complex. Point 1 is
+      the coherent scale-up fabric between accelerators, protected at line rate.
+    }
     P4["Point 4: Scale-Out RDMA Network<br/>MACsec / PSP 800G-1.6T Fabric"]
 
     subgraph HOST["HOST PROCESSING TIER (UNTRUSTED)"]
@@ -176,6 +197,16 @@ To construct a defensible architecture, this framework integrates **IEC 62443** 
 
 ```mermaid
 graph LR
+    accTitle: Four zones and three conduits from facility plant to silicon core
+    accDescr {
+      Zone 1 is the facility plant: chilled water and cooling distribution units, 48
+      volt DC switchgear, and the building and power management controllers. Conduit
+      A at SL-2 leads to zone 2, chassis management, holding the BMC, power
+      distribution units, sensors and environmental relays. Conduit B at SL-3 leads
+      to zone 3, the host operating system, kernel, drivers and orchestration pods.
+      Conduit C at SL-4 leads to zone 4, the silicon cryptographic core, holding the
+      root of trust, model weight registers and coherent tensor execution.
+    }
     Z1["ZONE 1: Facility Plant<br/>Chilled Water / CDUs<br/>48V DC Power Switchgear<br/>BMS / EPMS Controllers"]
     Z2["ZONE 2: Chassis Mgmt<br/>BMC / OpenBIC<br/>ePDUs / Sensors<br/>Environmental Relays"]
     Z3["ZONE 3: Host OS<br/>Host Kernel<br/>Device Drivers<br/>Orchestration Pods"]
@@ -239,6 +270,16 @@ To ensure that silicon components within the AI Rack Envelope execute exclusivel
 
 ```mermaid
 graph TB
+    accTitle: The immutable silicon core and the mutable firmware it measures
+    accDescr {
+      The hardware immutable core on the silicon die holds a 128 kilobyte mask ROM
+      carrying the first-stage bootloader, a cryptographic accelerator supporting
+      SHA384, ECC384, ML-DSA-87 and LMS, and a key vault holding the unique die
+      identity. A DICE measured boot transition carries control from that core to the
+      mutable active platform firmware, which holds the firmware engine that
+      validates the operating system and drivers, the runtime engine that monitors
+      bus state, and the SPDM 1.3 attestation core.
+    }
     subgraph CORE["HARDWARE IMMUTABLE CORE (Silicon Die)"]
         ROM["Mask ROM (128 KB)<br/>Immutable First-Stage<br/>Bootloader (ROM Code)"]
         CRY["Cryptographic Accelerator<br/>SHA384 / ECC384 /<br/>ML-DSA-87 / LMS"]
@@ -295,6 +336,13 @@ The AI Rack Envelope incorporates a continuous, machine-speed automated falsific
 
 ```mermaid
 graph LR
+    accTitle: Autonomous exploit generation, emulation, and mitigation synthesis
+    accDescr {
+      Three stages. Autonomous agentic exploit generation dispatches into
+      hardware-in-the-loop and FPGA digital twin emulation through high-speed
+      co-simulation. Formal falsification verification then carries results into
+      automated mitigation synthesis and firmware lockout.
+    }
     S1["1. Autonomous Agentic<br/>Exploit Generation"]
     S2["2. Hardware-in-the-Loop (HIL) and<br/>FPGA Digital Twin Emulation"]
     S3["3. Automated Mitigation Synthesis<br/>and Firmware Lockout"]

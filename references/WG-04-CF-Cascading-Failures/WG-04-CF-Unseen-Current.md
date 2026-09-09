@@ -111,6 +111,15 @@ The customer impact must be described accurately as well. The loads disconnected
 
 ```mermaid
 sequenceDiagram
+    accTitle: The system split as a sequence across four control areas
+    accDescr {
+      A sequence between the Croatian, Serbian and Romanian operators, the two areas
+      the system splits into, and the Turkish grid. At time zero the Ernestinovo
+      busbar coupler trips on overload. At 2.6 seconds both 400 to 110 kV
+      transformers trip. At 23 seconds the Subotica to Novi Sad 400 kV line trips.
+      Between 26 and 42.7 seconds ten further distance trips follow, and the
+      synchronous area separates.
+    }
     participant HOPS as HOPS Croatia
     participant EMS as EMS Serbia
     participant TEL as Transelectrica Romania

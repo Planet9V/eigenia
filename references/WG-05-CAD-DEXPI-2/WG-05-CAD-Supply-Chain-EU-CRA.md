@@ -22,20 +22,13 @@ The CRA applies to all products with digital elements whose intended or reasonab
 3. **Important Products with Digital Elements (Class II - Annex IV):**
    Reserved for highest-criticality assets: firewalls, intrusion detection systems, hardware security modules, smart meter gateways, tamper-resistant microprocessors, and hypervisors. Third-party conformity assessment by an accredited Notified Body is mandatory.
 
-```
-+-------------------------------------------------------------------------+
-|                  EU CYBER RESILIENCE ACT (REG 2024/2847)                |
-+-------------------------------------------------------------------------+
-| CLASS II (Annex IV): HSMs, Secure Silicon, Firewalls, Hypervisors      |
-| -> Mandatory Third-Party Notified Body Assessment (Module B+C / H)      |
-+-------------------------------------------------------------------------+
-| CLASS I (Annex III): PLCs, Industrial Microcontrollers, Baseboards      |
-| -> Harmonized Standards or Third-Party Notified Body Assessment         |
-+-------------------------------------------------------------------------+
-| DEFAULT PRODUCTS: General Software, Compute Trays, Support Utilities    |
-| -> Internal Production Control (Module A Self-Assessment)               |
-+-------------------------------------------------------------------------+
-```
+**Table 1.1: EU Cyber Resilience Act (Regulation 2024/2847) product classes.**
+
+| Class | Products | Conformity route |
+| :--- | :--- | :--- |
+| **Class II (Annex IV)** | HSMs, Secure Silicon, Firewalls, Hypervisors | Mandatory third-party notified body assessment (Module B+C / H) |
+| **Class I (Annex III)** | PLCs, Industrial Microcontrollers, Baseboards | Harmonized standards or third-party notified body assessment |
+| **Default products** | General Software, Compute Trays, Support Utilities | Internal production control (Module A self-assessment) |
 
 ### 1.2 Essential Cybersecurity Requirements (Annex I)
 Annex I of the regulation establishes non-negotiable requirements divided into two core sections:
@@ -67,13 +60,23 @@ The supply chain operates across four distinct tiers:
 - **Tier 2 (Original Design Manufacturer - ODM):** Physical assembly of server trays, cooling distribution manifolds, power supplies, and chassis backplanes. ODMs configure Baseboard Management Controllers and proprietary initialization code.
 - **Tier 3 (System Integrator and Data Center Facility):** Rack integration, fluid connection, 400V power hookup, and commissioning onto the operational technology network.
 
-```
-+---------------+-----+---------------+-----+---------------+-----+---------------+
-| TIER 0:       | --> | TIER 1:       | --> | TIER 2:       | --> | TIER 3:       |
-| Silicon Found |     | Silicon Mfr   |     | ODM Assembly  |     | Facility Site |
-| - Wafer Fab   |     | - Key Inject  |     | - Board SMT   |     | - Rack Deploy |
-| - Package Sub |     | - RoT Mask    |     | - BMC Flashing|     | - Fluid Hookup|
-+---------------+-----+---------------+-----+---------------+-----+---------------+
+```mermaid
+flowchart LR
+    accTitle: The four-tier silicon to facility supply chain
+    accDescr {
+      Four tiers in sequence. Tier 0 is the silicon foundry, covering wafer
+      fabrication and package substrate. Tier 1 is the silicon manufacturer,
+      covering key injection and the root-of-trust mask. Tier 2 is ODM
+      assembly, covering board surface-mount and BMC flashing. Tier 3 is the
+      facility site, covering rack deployment and fluid hookup.
+    }
+    T0["<b>TIER 0: Silicon Found</b><br/>Wafer Fab<br/>Package Sub"]
+    T1["<b>TIER 1: Silicon Mfr</b><br/>Key Inject<br/>RoT Mask"]
+    T2["<b>TIER 2: ODM Assembly</b><br/>Board SMT<br/>BMC Flashing"]
+    T3["<b>TIER 3: Facility Site</b><br/>Rack Deploy<br/>Fluid Hookup"]
+    T0 --> T1 --> T2 --> T3
+    classDef tier fill:#1a1c1f,stroke:#E05A10,stroke-width:1px,color:#f5f3f0;
+    class T0,T1,T2,T3 tier;
 ```
 
 ### 2.2 Physical Failure Coupling Induced by Supply Chain Tampering
@@ -100,26 +103,31 @@ During initial wafer probing at the foundry, the on-die physical unclonable func
 3. The provisioning station submits the public key to an audited Hardware Security Module (HSM) located within an accredited factory environment.
 4. The factory HSM signs an X.509 Device Identifier Composition Engine (DICE) certificate binding the chip's unique serial number, wafer lot identifier, and initial firmware measurement to the manufacturer root certificate authority.
 
-```
-+-------------------------------------------------------------------------+
-|                  ON-DIE SILICON CRYPTOGRAPHIC BOUNDARY                  |
-+-------------------------------------------------------------------------+
-|  [Internal PUF / Entropy] ---> [Unique Device Secret (UDS)]             |
-|                                         |                               |
-|                                         v                               |
-|  [On-Die Asymmetric Engine] -> [Generate Key Pair (Private / Public)]   |
-|                                 (Private Key NEVER Leaves Die)          |
-+-------------------------------------------------------------------------+
-                                         |
-                                         | Exports Public Key Only
-                                         v
-+-------------------------------------------------------------------------+
-|                  AUDITED FACTORY HSM (6 GLOBAL SITES)                   |
-+-------------------------------------------------------------------------+
-|  - Validates Wafer Lot & Physical Tester Hardware Integrity             |
-|  - Signs DICE Initial Device Identifier (IDevID) Certificate           |
-|  - Records Cryptographic Proof in Immutable CycloneDX MBOM Ledger       |
-+-------------------------------------------------------------------------+
+```mermaid
+flowchart TD
+    accTitle: On-die silicon cryptographic boundary and the factory HSM
+    accDescr {
+      Inside the die, an internal physically unclonable function and entropy
+      source produce the unique device secret, which drives an on-die
+      asymmetric engine to generate a key pair. The private key never leaves
+      the die. Only the public key is exported, crossing to the audited
+      factory HSM at six global sites, which validates the wafer lot and
+      tester hardware integrity, signs the DICE initial device identifier
+      certificate, and records cryptographic proof in the immutable CycloneDX
+      multi-BOM ledger.
+    }
+    subgraph DIE["ON-DIE SILICON CRYPTOGRAPHIC BOUNDARY"]
+        direction TB
+        PUF["Internal PUF / Entropy"]
+        UDS["Unique Device Secret (UDS)"]
+        ENG["On-Die Asymmetric Engine"]
+        KP["Generate Key Pair (Private / Public)<br/>Private Key NEVER Leaves Die"]
+        PUF --> UDS --> ENG --> KP
+    end
+    HSM["<b>AUDITED FACTORY HSM (6 GLOBAL SITES)</b><br/>Validates Wafer Lot &amp; Physical Tester Hardware Integrity<br/>Signs DICE Initial Device Identifier (IDevID) Certificate<br/>Records Cryptographic Proof in Immutable CycloneDX MBOM Ledger"]
+    KP -->|Exports Public Key Only| HSM
+    classDef n fill:#1a1c1f,stroke:#E05A10,stroke-width:1px,color:#f5f3f0;
+    class PUF,UDS,ENG,KP,HSM n;
 ```
 
 ### 3.2 Standardizing the 6-Site Audit Protocol
@@ -231,38 +239,33 @@ Article 14 of the Cyber Resilience Act mandates that manufacturers report active
 ### 5.1 The Automated Vulnerability Disclosure Report (VDR) Pipeline
 Under the unified framework, vulnerability tracking transitions to an automated machine-to-machine loop:
 
-```
-+---------------------+------+---------------------+
-| Upstream Threat /   |      | In-House Automated  |
-| NVD / CVE Stream    |      | Falsification Engine|
-+---------------------+------+---------------------+
-           |                            |
-           +------------+--+------------+
-                        |  |
-                        v  v
-        +-----------------------------------+
-        |  VEX / VDR Generation Engine      |
-        |  - Ingests CVE & CVSS Metrics     |
-        |  - Cross-references Active SBOMs  |
-        |  - Evaluates Physical Mitigations |
-        +-----------------------------------+
-                        |
-                        v
-        +-----------------------------------+
-        |  Cryptographically Signed VEX     |
-        |  - CycloneDX 1.6+ JSON Document   |
-        |  - State: 'not_affected' or 'aff' |
-        |  - Includes Justification Code    |
-        +-----------------------------------+
-                        |
-            +-----------+-----------+
-            |                       |
-            v                       v
-+-----------------------+-+-----------------------+
-| Operational DT Loader | | ENISA / CSIRT Portal  |
-| - Adjusts SL-T Bounds | | - Automated CRA 24-hr |
-| - Deploys Mitigation  | |   Notification Stream |
-+-----------------------+-+-----------------------+
+```mermaid
+flowchart TD
+    accTitle: The automated machine-to-machine VEX generation loop
+    accDescr {
+      Two inputs feed the VEX and VDR generation engine: the upstream threat,
+      NVD and CVE stream, and the in-house automated falsification engine. The
+      engine ingests CVE and CVSS metrics, cross-references active SBOMs and
+      evaluates physical mitigations, producing a cryptographically signed VEX
+      document in CycloneDX 1.6+ JSON carrying a state and a justification
+      code. That document fans out to two consumers: the operational digital
+      twin loader, which adjusts security level bounds and deploys
+      mitigations, and the ENISA and CSIRT portal, which drives the automated
+      24-hour notification stream required by the Cyber Resilience Act.
+    }
+    UP["Upstream Threat /<br/>NVD / CVE Stream"]
+    FAL["In-House Automated<br/>Falsification Engine"]
+    ENG["<b>VEX / VDR Generation Engine</b><br/>Ingests CVE &amp; CVSS Metrics<br/>Cross-references Active SBOMs<br/>Evaluates Physical Mitigations"]
+    SIG["<b>Cryptographically Signed VEX</b><br/>CycloneDX 1.6+ JSON Document<br/>State: 'not_affected' or 'aff'<br/>Includes Justification Code"]
+    DT["<b>Operational DT Loader</b><br/>Adjusts SL-T Bounds<br/>Deploys Mitigation"]
+    EN["<b>ENISA / CSIRT Portal</b><br/>Automated CRA 24-hr Notification Stream"]
+    UP --> ENG
+    FAL --> ENG
+    ENG --> SIG
+    SIG --> DT
+    SIG --> EN
+    classDef n fill:#1a1c1f,stroke:#E05A10,stroke-width:1px,color:#f5f3f0;
+    class UP,FAL,ENG,SIG,DT,EN n;
 ```
 
 ### 5.2 Concrete VEX Machine-Readable Implementation

@@ -22,6 +22,15 @@ Sections 2 through 5 were published as section 8 and appendices J, K and L of th
 
 ```mermaid
 gantt
+    accTitle: Grid restoration timeline after the attack
+    accDescr {
+      Emergency response runs from time zero: AEMO emergency protocols for the first
+      thirty minutes, then black start procedures at Shoalhaven over two hours.
+      Damage assessment overlaps from forty-five minutes, with twelve inspection
+      teams working in parallel for nine hours, equipment damage evaluation, grid
+      topology reconfiguration, and cyber forensics isolating the DERMS. Critical
+      restoration follows.
+    }
     title Grid Restoration Timeline Post-Attack
     dateFormat HH:mm
 
@@ -505,6 +514,14 @@ A total system blackout (black system) requires sequential restoration from blac
 
 ```mermaid
 gantt
+    accTitle: NSW black start and restoration under the catastrophic scenario
+    accDescr {
+      In the first four hours, Shoalhaven hydroelectric starts up over three hours,
+      station service power is established, and the first 132 kV transmission is
+      energised. From hour four to eight, Bayswater Unit 1 starts over five hours,
+      the Hunter Valley transmission corridor follows, and the Queensland
+      interconnector is restored.
+    }
     title NSW Grid Black Start and Restoration (Catastrophic Scenario)
     dateFormat HH:mm
     axisFormat %H:%M

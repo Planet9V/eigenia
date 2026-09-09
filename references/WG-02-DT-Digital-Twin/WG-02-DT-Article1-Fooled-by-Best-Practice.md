@@ -8,6 +8,17 @@ Industrial operators evaluate security maturity through visible artifacts: passe
 
 ```mermaid
 flowchart TD
+    accTitle: The two sides of the table, visible outcomes against probabilistic reality
+    accDescr {
+      The right side holds what is visible and produces a narrative fallacy: zero
+      breaches in 36 months, a 94% compliance score, and 480 unbreached vendor
+      deployments all feed the false conclusion that the defense-in-depth stack
+      works. The left side holds what is not visible: 999 unobserved counterfactual
+      trajectories, 20 breached peers silenced by NDAs, and latent architectural
+      drift and firmware decay, which together give the objective truth of high
+      exposure to rare multi-hop ruin. Epistemic blindness is what separates the
+      two sides.
+    }
     subgraph RightSide["The Right Side of the Table (Narrative Fallacy)"]
         R1["Visible Outcome: Zero Breaches in 36 Months"]
         R2["Compliance Score: 94% on IEC 62443 / NIST CSF"]
@@ -59,6 +70,19 @@ In industrial cybersecurity, the Left Side consists of:
 
 ```mermaid
 flowchart LR
+    accTitle: The epistemological partition in OT security
+    accDescr {
+      Six dimensions compared across two approaches. The conventional IT and OT
+      right side measures compliance percentage and passed audits, looks backward
+      through historical backtesting, reads zero breaches as effective controls,
+      takes conference testimonials as market evidence, represents people by annual
+      training completion rates, and models the boundary as a static reference
+      architecture. The Cyber Digital Twin left side measures a probability
+      distribution over futures, looks forward through Monte Carlo paths, reads zero
+      breaches as a lucky sample path, treats the silent cemetery of NDA settlements
+      as evidence, represents people through psychometric tensors and cognitive
+      drift, and models the boundary as a measured mathematical drift gap.
+    }
     Title["THE EPISTEMOLOGICAL PARTITION IN OT SECURITY"]
     Title --> RS["THE RIGHT SIDE (Conventional IT/OT)"]
     Title --> LS["THE LEFT SIDE (Cyber Digital Twin)"]
@@ -100,6 +124,14 @@ Every successful cyber attack against hardened critical infrastructure operates 
 
 ```mermaid
 flowchart TD
+    accTitle: The map and the territory, and who reads each
+    accDescr {
+      The map is the L0 blueprint layer: reference firmware, an air-gapped DMZ and
+      calibrated valves. The territory is L1 reality: an outdated binary build,
+      active cellular modems and eight percent mechanical play. The gap between them
+      is the drift delta. Compliance audits the map. The attacker exploits the
+      territory.
+    }
     MAP["MAP (L0: Blueprints)<br/>Reference Firmware<br/>Air-Gapped DMZ<br/>Calibrated Valves"]
     TERRITORY["TERRITORY (L1: Reality)<br/>Outdated Binary Build<br/>Cellular Modems Active<br/>Mechanical Play (+8%)"]
 
@@ -119,6 +151,13 @@ Taleb popularized Bertrand Russell's turkey problem: a turkey is fed by the farm
 
 ```mermaid
 flowchart LR
+    accTitle: The turkey problem, confidence rising to the day of eradication
+    accDescr {
+      Confidence begins at zero on day one and climbs along a steady feeding path,
+      reaching peak certainty of 1.0 on day 1,000. On day 1,001 the model is
+      eradicated in a terminal phase transition. The evidence that raised confidence
+      was the same evidence that concealed the risk.
+    }
     Start["Day 1<br/>Turkey Confidence 0.0"]
     Feeding["Turkey Confidence 0.5"]
     Peak["Day 1,000: Peak Certainty<br/>Turkey Confidence 1.0"]
@@ -145,6 +184,14 @@ Where:
 
 ```mermaid
 flowchart LR
+    accTitle: Defensive coherence as magnetization collapsing at a critical temperature
+    accDescr {
+      Magnetization m, standing for defensive coherence, starts at plus 1.0. Rising
+      temperature carries it into a metastable state that still looks compliant, and
+      then to the critical temperature T_c. At that point spontaneous demagnetization
+      is instantaneous, taking m from 0.0 to minus 1.0. Nothing gradual signals the
+      transition.
+    }
     M1["Magnetization m (Defensive Coherence)<br/>m = +1.0"]
     M2["(Metastable State: Looks Compliant)"]
     Tc["Critical Temperature T_c"]
@@ -172,6 +219,15 @@ The antidote to Right-Side deception is the computational exploration of the cou
 
 ```mermaid
 flowchart LR
+    accTitle: The AEON Monte Carlo engine and its posterior distribution
+    accDescr {
+      The current plant state, expressed in DEXPI 2.0 and CycloneDX 1.6, feeds the
+      AEON Monte Carlo engine over 1,000 forward iterations. Four paths emerge:
+      nominal absorption at probability 0.682, DMZ penetration at 0.224, safety loop
+      compromise at 0.073, and a bifurcation or Seldon crisis event at 0.021. The
+      bifurcation path yields the posterior probability distribution, with 95 percent
+      confidence bounds between 1.4 and 3.2 percent.
+    }
     State0["Current Plant State G(t=0)<br/>DEXPI 2.0 + CycloneDX 1.6"] --> Engine["AEON Monte Carlo Engine<br/>1,000 Forward Iterations"]
     
     Engine --> Sim1["Path 1: Nominal Absorption (p=0.682)"]
@@ -199,6 +255,17 @@ Taleb advocates asymmetric positioning: eliminating catastrophic ruin while refu
 
 ```mermaid
 flowchart LR
+    accTitle: The now, next, never action matrix
+    accDescr {
+      Three priority bands, each with a criterion and a concrete facility action.
+      Now covers what appears frequently in Monte Carlo failure paths with a direct
+      path to physical damage and quantifiable loss reduction per dollar: hardwire
+      analog SIL-3 overpressure interlocks on the compressor valves and sever
+      unauthenticated cellular roots. Next covers topological attack surface
+      reduction: micro-segment the fieldbus domains behind deterministic diodes and
+      patch deep transitive libraries. Never covers high compliance value with zero
+      marginal risk reduction: expanding corporate EDR agents into PLC subnets.
+    }
     Title["NOW / NEXT / NEVER ACTION MATRIX"]
     Title --> NOW["NOW"]
     Title --> NEXT["NEXT"]

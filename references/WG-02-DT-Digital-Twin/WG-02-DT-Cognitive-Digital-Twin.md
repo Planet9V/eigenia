@@ -16,31 +16,28 @@ Coupled to physical infrastructure through DEXPI 2.0 piping schematics (ISO 1592
 
 The Cyber Digital Twin models the complete operational universe of a critical infrastructure asset. It spans seven interconnected layers formalized as a seven-voice polyphonic score:
 
-```
-+-------------------------------------------------------------------------+
-|                  THE SEVEN ARCHITECTURAL LAYERS OF THE CDT              |
-+-------------------------------------------------------------------------+
-| Layer 6: PREDICTIONS & ACTUARIAL OUTCOMES                               |
-| Catastrophe probability, ALE drift, Lloyd's Y5381 risk accumulation.    |
-+-------------------------------------------------------------------------+
-| Layer 5: TELEMETRY & EVENT STREAMS                                      |
-| Sensor time series, Modbus registers, syslog events, micro-tonal drift. |
-+-------------------------------------------------------------------------+
-| Layer 4: HUMAN & PSYCHOMETRIC DYNAMICS (The Cognitive Dimension)        |
-| Operator cognitive load, psychometrics, OCEAN/DISC, Lacanian registers. |
-+-------------------------------------------------------------------------+
-| Layer 3: THREATS & ADVERSARY MANIFOLD                                   |
-| TACAM 7D spectral matrix, MITRE ATT&CK for ICS, exploit trajectories.   |
-+-------------------------------------------------------------------------+
-| Layer 2: SOFTWARE & SBOM LAYER                                          |
-| CycloneDX 1.6+ firmware binaries, container runtimes, VEX streams.      |
-+-------------------------------------------------------------------------+
-| Layer 1: EQUIPMENT & PHYSICAL PROCESSES                                 |
-| DEXPI 2.0 fluid mechanics, thermodynamics, BESS electrochemistry.       |
-+-------------------------------------------------------------------------+
-| Layer 0: HARDWARE CATALOG & SILICON ROOTS                               |
-| Physical chassis, Caliptra DICE keys, silicon boundaries, PCB layouts.  |
-+-------------------------------------------------------------------------+
+```mermaid
+graph BT
+    accTitle: The seven architectural layers of the Cyber Digital Twin
+    accDescr {
+      A stack of seven layers, numbered 0 at the base to 6 at the top. Layer 0
+      is the hardware catalog and silicon roots. Layer 1 is equipment and
+      physical processes. Layer 2 is software and the SBOM. Layer 3 is threats
+      and the adversary manifold. Layer 4 is human and psychometric dynamics,
+      the cognitive dimension. Layer 5 is telemetry and event streams. Layer 6
+      is predictions and actuarial outcomes. The layers are stacked rather than
+      sequenced: the diagram states their order, not a flow between them.
+    }
+    L0["<b>Layer 0: HARDWARE CATALOG &amp; SILICON ROOTS</b><br/>Physical chassis, Caliptra DICE keys, silicon boundaries, PCB layouts."]
+    L1["<b>Layer 1: EQUIPMENT &amp; PHYSICAL PROCESSES</b><br/>DEXPI 2.0 fluid mechanics, thermodynamics, BESS electrochemistry."]
+    L2["<b>Layer 2: SOFTWARE &amp; SBOM LAYER</b><br/>CycloneDX 1.6+ firmware binaries, container runtimes, VEX streams."]
+    L3["<b>Layer 3: THREATS &amp; ADVERSARY MANIFOLD</b><br/>TACAM 7D spectral matrix, MITRE ATT&amp;CK for ICS, exploit trajectories."]
+    L4["<b>Layer 4: HUMAN &amp; PSYCHOMETRIC DYNAMICS (The Cognitive Dimension)</b><br/>Operator cognitive load, psychometrics, OCEAN/DISC, Lacanian registers."]
+    L5["<b>Layer 5: TELEMETRY &amp; EVENT STREAMS</b><br/>Sensor time series, Modbus registers, syslog events, micro-tonal drift."]
+    L6["<b>Layer 6: PREDICTIONS &amp; ACTUARIAL OUTCOMES</b><br/>Catastrophe probability, ALE drift, Lloyd's Y5381 risk accumulation."]
+    L0 ~~~ L1 ~~~ L2 ~~~ L3 ~~~ L4 ~~~ L5 ~~~ L6
+    classDef layer fill:#1a1c1f,stroke:#E05A10,stroke-width:1px,color:#f5f3f0,text-align:left;
+    class L0,L1,L2,L3,L4,L5,L6 layer;
 ```
 
 ### 1.1 The Cognitive Dimension as an Integrated Layer
@@ -122,19 +119,21 @@ Where:
 - When $A_d(t) \in [0.40, 0.65]$, the operator functions in the optimal problem-solving band.
 - When $A_d(t) > 0.80$, the operator enters acute cognitive saturation, causing operational performance to degrade toward zero.
 
-```
-+-------------------------------------------------------------------------+
-|                  THE YERKES-DODSON PERFORMANCE CURVE                    |
-+-------------------------------------------------------------------------+
-| PERFORMANCE                                                             |
-|   1.0 |                ***** [OPTIMAL ZONE: 0.40 - 0.65]               |
-|       |             **       **                                         |
-|   0.6 |           **           **                                       |
-|       |         **               ** [ACUTE SATURATION / PANIC]          |
-|   0.2 |       **                   **                                   |
-|   0.0 +------+--------+--------+----+--------------------------->       |
-|      0.0    0.2      0.4      0.6  0.8      1.0  AROUSAL LEVEL (A)      |
-+-------------------------------------------------------------------------+
+```mermaid
+xychart-beta
+    accTitle: The Yerkes-Dodson performance curve
+    accDescr {
+      Defender performance plotted against arousal level from 0 to 1, computed from
+      the paper's own formulation with no accumulated fatigue. Performance rises from
+      zero at no arousal to a peak of 1.0 at an arousal of 0.50, then falls
+      symmetrically back to zero at full arousal. The optimal band the text states,
+      from 0.40 to 0.65, contains that peak; the chart type cannot shade it, so it is
+      stated in the prose above rather than drawn.
+    }
+    title "The Yerkes-Dodson performance curve"
+    x-axis "Arousal level A" [0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0]
+    y-axis "Defender performance P" 0.0 --> 1.0
+    line [0.0, 0.125, 0.279, 0.431, 0.572, 0.698, 0.804, 0.889, 0.95, 0.988, 1.0, 0.988, 0.95, 0.889, 0.804, 0.698, 0.572, 0.431, 0.279, 0.125, 0.0]
 ```
 
 ### 3.2 Cognitive Load Theory (Sweller Formulation)
@@ -184,21 +183,24 @@ The CDT parameterizes five distinct cognitive and group biases:
 
 Under emergency operational conditions, operators do not compare options using utility tables; they execute Gary Klein's **Recognition-Primed Decision (RPD)** model:
 
-```
-+-------------------------------------------------------------------------+
-|                  RECOGNITION-PRIMED DECISION (RPD) LOOP                 |
-+-------------------------------------------------------------------------+
-| STEP 1: PATTERN RECOGNITION                                             |
-| Does incoming telemetry match a prototype scenario in memory S_d?       |
-+-------------------------------------------------------------------------+
-       |                                           |
-    [MATCH]                                     [NO MATCH]
-       v                                           v
-+-----------------------------------+-----+-------------------------------+
-| SIMPLE RPD EXECUTION              |     | MENTAL SIMULATION & DRIFT     |
-| Immediately execute standard      |     | Defender attempts to construct|
-| procedural playbook. Delay: 8-12s.|     | novel explanation. Delay: >45s|
-+-----------------------------------+-----+-------------------------------+
+```mermaid
+flowchart TD
+    accTitle: The Recognition-Primed Decision loop and its two branches
+    accDescr {
+      Step 1 asks whether incoming telemetry matches a prototype scenario in
+      the defender memory S_d. On a match, the defender runs simple RPD
+      execution, immediately executing the standard procedural playbook, with a
+      delay of 8 to 12 seconds. On no match, the defender enters mental
+      simulation and drift, attempting to construct a novel explanation, with a
+      delay above 45 seconds.
+    }
+    STEP1["<b>STEP 1: PATTERN RECOGNITION</b><br/>Does incoming telemetry match a prototype scenario in memory S_d?"]
+    MATCH["<b>SIMPLE RPD EXECUTION</b><br/>Immediately execute standard procedural playbook.<br/>Delay: 8-12s."]
+    NOMATCH["<b>MENTAL SIMULATION &amp; DRIFT</b><br/>Defender attempts to construct novel explanation.<br/>Delay: &gt;45s."]
+    STEP1 -->|MATCH| MATCH
+    STEP1 -->|NO MATCH| NOMATCH
+    classDef step fill:#1a1c1f,stroke:#E05A10,stroke-width:1px,color:#f5f3f0;
+    class STEP1,MATCH,NOMATCH step;
 ```
 
 When an adversary executes a novel cyber-physical attack that violates standard operational templates, pattern matching fails. The operator enters mental simulation mode, attempting to construct a plausible narrative.
@@ -225,19 +227,17 @@ Where:
 - Heat flux exceeds $140\,\text{W/cm}^2$.
 - Operating pressure is $6.0\,\text{bar}$ with $38.5\,\text{L/min}$ PG25 coolant.
 
-```
-+-------------------------------------------------------------------------+
-|                  DEFENDER LATENCY VS. SILICON DESTRUCTION               |
-+-------------------------------------------------------------------------+
-| T = 0.0s: Primary coolant pump VFD tripped by malware command.          |
-| T = 12.0s: Volumetric flow drops; die temperature surges at 4.2°C/s.    |
-| T = 20.0s: Alarms sound. Defender enters RPD mental simulation.         |
-| T = 35.0s: Defender cognitive load peaks; debating manual restart.      |
-| T = 45.0s: Silicon junction temperature reaches 94.0°C. DELAMINATION.  |
-| T = 52.0s: Defender finally executes emergency manual breaker cutout.   |
-|            OUTCOME: Too late. 120 accelerator trays permanently ruined.  |
-+-------------------------------------------------------------------------+
-```
+**Table 6.1: Defender latency versus silicon destruction.**
+
+| Elapsed | Event |
+| :--- | :--- |
+| T = 0.0s | Primary coolant pump VFD tripped by malware command. |
+| T = 12.0s | Volumetric flow drops; die temperature surges at 4.2°C/s. |
+| T = 20.0s | Alarms sound. Defender enters RPD mental simulation. |
+| T = 35.0s | Defender cognitive load peaks; debating manual restart. |
+| T = 45.0s | Silicon junction temperature reaches 94.0°C. DELAMINATION. |
+| T = 52.0s | Defender finally executes emergency manual breaker cutout. |
+| **Outcome** | Too late. 120 accelerator trays permanently ruined. |
 
 The physical reality of the 45-second thermal cliff proves that relying on human operators to execute emergency trips in modern high-density facilities is mathematically impossible. The Cyber Digital Twin demonstrates that human intervention must be decoupled from the primary physical trip loop through deterministic SIL-3 physical interlocks.
 
@@ -247,23 +247,13 @@ The physical reality of the 45-second thermal cliff proves that relying on human
 
 The Layer 4 cognitive modeling identifies the exact failure envelopes of human operators, directing three deterministic systems assurance remediations:
 
-```
-+-------------------------------------------------------------------------+
-|                  DETERMINISTIC DEFENSIVE ARCHITECTURE                   |
-+-------------------------------------------------------------------------+
-| REMEDIATION 1: AUTONOMOUS SIL-3 PHYSICAL TRIP INTERLOCKS                |
-| Hardwired snap-action thermal switches and flow sensors trigger breaker |
-| shunt trips at 85.0°C, completely bypassing human defender approval.    |
-+-------------------------------------------------------------------------+
-| REMEDIATION 2: CONTRAPUNTAL MULTI-MODAL ALARMING                        |
-| Spatial acoustic sonification reduces extraneous cognitive load         |
-| C_extraneous by 72%, preserving operator working memory capacity.       |
-+-------------------------------------------------------------------------+
-| REMEDIATION 3: AUTOMATED TWO-PERSON INTEGRITY (TPI) GATES               |
-| Manual bypass commands during emergency alerts require dual-console     |
-| cryptographic token confirmation, preventing panic-induced errors.      |
-+-------------------------------------------------------------------------+
-```
+**Table 7.1: Deterministic defensive architecture.**
+
+| Remediation | Mechanism |
+| :--- | :--- |
+| **1. Autonomous SIL-3 physical trip interlocks** | Hardwired snap-action thermal switches and flow sensors trigger breaker shunt trips at 85.0°C, completely bypassing human defender approval. |
+| **2. Contrapuntal multi-modal alarming** | Spatial acoustic sonification reduces extraneous cognitive load $C_{\text{extraneous}}$ by 72%, preserving operator working memory capacity. |
+| **3. Automated two-person integrity (TPI) gates** | Manual bypass commands during emergency alerts require dual-console cryptographic token confirmation, preventing panic-induced errors. |
 
 ---
 

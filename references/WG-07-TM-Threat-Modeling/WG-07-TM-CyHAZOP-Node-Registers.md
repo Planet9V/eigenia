@@ -41,34 +41,25 @@ Baseboard Management Controllers (BMCs) operate an independent out-of-band manag
 
 To prevent disconnected analysis, every industrial register documented in this CyHAZOP drill-down is mapped directly to its physical DEXPI 2.0 equipment tag, classed against ISO 15926-4 reference data, and its CycloneDX 1.6+ multi-BOM component reference:
 
-```
-+-------------------------------------------------------------------------+
-|                  REGISTER-LEVEL UNIFIED DATA GRAPH                      |
-+-------------------------------------------------------------------------+
-| DEXPI 2.0 P&ID TAG: EQUIP-CDU-01, PUMP-101, VALVE-V102                  |
-| (Hydraulic Properties: PG25 Coolant, Volumetric Flow Rate, Bar)        |
-+-------------------------------------------------------------------------+
-                                    |
-                    EXPLICIT CONDUIT BINDING (Modbus / BACnet)
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| INDUSTRIAL CONTROL REGISTERS: 40102 (Speed), 40104 (Valve), 30201 (Flow)|
-| - Data Type: 16-bit unsigned integer / IEEE 754 float                   |
-| - Scaling Factor: 0.1x / 0.01x Engineering Units                        |
-+-------------------------------------------------------------------------+
-                                    |
-                    SILICON & PLATFORM CYCLONEDX MAPPING
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| CYCLONEDX 1.6+ MULTI-BOM CATALOG:                                       |
-| - HBOM: OCP ORV3 Compute Tray, Samtec Connectors, Caliptra RoT Die      |
-| - SBOM: OpenBMC Linux Kernel, Caliptra Mask ROM, OpenSIL Firmware       |
-| - CBOM: DICE Cryptographic Certificates, Post-Quantum ML-DSA Keys       |
-| - OBOM: Hardware Rate Limits (64 kbps), Thermal Trip Limits (94°C)      |
-| - VEX:  Machine-Readable Vulnerability Disclosures (CVE Exploitability) |
-+-------------------------------------------------------------------------+
+```mermaid
+flowchart TD
+    accTitle: Register-level unified data graph
+    accDescr {
+      Three levels bound together. The DEXPI 2.0 P and ID tags carry the
+      hydraulic properties of the equipment. Explicit conduit binding over
+      Modbus or BACnet ties those tags to the industrial control registers,
+      with their data types and scaling factors. Silicon and platform mapping
+      then ties those registers to the CycloneDX 1.6+ multi-BOM catalog, which
+      holds the hardware, software, cryptography, operational bounds and VEX
+      bills of materials.
+    }
+    DEXPI["<b>DEXPI 2.0 P&amp;ID TAG: EQUIP-CDU-01, PUMP-101, VALVE-V102</b><br/>(Hydraulic Properties: PG25 Coolant, Volumetric Flow Rate, Bar)"]
+    REG["<b>INDUSTRIAL CONTROL REGISTERS: 40102 (Speed), 40104 (Valve), 30201 (Flow)</b><br/>Data Type: 16-bit unsigned integer / IEEE 754 float<br/>Scaling Factor: 0.1x / 0.01x Engineering Units"]
+    BOM["<b>CYCLONEDX 1.6+ MULTI-BOM CATALOG</b><br/>HBOM: OCP ORV3 Compute Tray, Samtec Connectors, Caliptra RoT Die<br/>SBOM: OpenBMC Linux Kernel, Caliptra Mask ROM, OpenSIL Firmware<br/>CBOM: DICE Cryptographic Certificates, Post-Quantum ML-DSA Keys<br/>OBOM: Hardware Rate Limits (64 kbps), Thermal Trip Limits (94°C)<br/>VEX: Machine-Readable Vulnerability Disclosures (CVE Exploitability)"]
+    DEXPI -->|"EXPLICIT CONDUIT BINDING (Modbus / BACnet)"| REG
+    REG -->|"SILICON &amp; PLATFORM CYCLONEDX MAPPING"| BOM
+    classDef lvl fill:#1a1c1f,stroke:#E05A10,stroke-width:1px,color:#f5f3f0;
+    class DEXPI,REG,BOM lvl;
 ```
 
 ---
@@ -80,11 +71,7 @@ This section sets out the register mappings, their physical engineering interpre
 ### 3.1 Node 1: Secondary Cooling Loop (CDU & Manifold Registers)
 The Coolant Distribution Unit (CDU) manages heat rejection from compute trays to the primary facility water loop:
 
-```
-+-------------------------------------------------------------------------+
-|             NODE 1: CDU MODBUS TCP HOLDING REGISTER MAP                 |
-+-------------------------------------------------------------------------+
-```
+**Node 1: CDU Modbus TCP holding register map.**
 
 | Modbus Register | DEXPI Equipment Tag | Data Type & Scale | Engineering Parameter | Nominal Baseline | Malicious Setpoint Override | Physical Consequence | Severity |
 |:---|:---|:---|:---|:---|:---|:---|:---|
@@ -98,11 +85,7 @@ The Coolant Distribution Unit (CDU) manages heat rejection from compute trays to
 ### 3.2 Node 2: 400V/48V Power Train & Static Transfer Switch
 The electrical power train delivers three-phase utility power through distributed block UPS modules:
 
-```
-+-------------------------------------------------------------------------+
-|             NODE 2: STS & UPS MODBUS / BACNET REGISTER MAP              |
-+-------------------------------------------------------------------------+
-```
+**Node 2: STS and UPS Modbus / BACnet register map.**
 
 | Register / Point | Electrical Asset Tag | Protocol & Type | Engineering Parameter | Nominal Baseline | Malicious Setpoint Override | Physical Consequence | Severity |
 |:---|:---|:---|:---|:---|:---|:---|:---|
@@ -114,11 +97,7 @@ The electrical power train delivers three-phase utility power through distribute
 ### 3.3 Node 3: Building Management System & Fire Suppression
 The facility BMS oversees life safety, smoke purge systems, and clean-agent release:
 
-```
-+-------------------------------------------------------------------------+
-|             NODE 3: BMS BACNET LIFE SAFETY OBJECT MAP                   |
-+-------------------------------------------------------------------------+
-```
+**Node 3: BMS BACnet life safety object map.**
 
 | BACnet Object ID | Life Safety Tag | Object Type | Engineering Parameter | Nominal Baseline | Malicious Command Override | Physical Consequence | Severity |
 |:---|:---|:---|:---|:---|:---|:---|:---|
@@ -130,11 +109,7 @@ The facility BMS oversees life safety, smoke purge systems, and clean-agent rele
 ### 3.4 Node 4: Baseboard Management Controller & Silicon Sideband
 The BMC provides out-of-band server management via DMTF Redfish REST APIs and I2C/SMBus sideband:
 
-```
-+-------------------------------------------------------------------------+
-|             NODE 4: REDFISH REST & I2C SILICON REGISTER MAP             |
-+-------------------------------------------------------------------------+
-```
+**Node 4: Redfish REST and I2C silicon register map.**
 
 | Redfish JSON URI | Hardware Register | Bus & Protocol | Engineering Function | Nominal Value | Malicious Injection | Physical Consequence | Severity |
 |:---|:---|:---|:---|:---|:---|:---|:---|
