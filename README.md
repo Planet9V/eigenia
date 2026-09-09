@@ -44,7 +44,7 @@ The application is engineered for ultra-high performance, dark/light theme flexi
 ```
 / (Home)
 ├── /mission                        [Standalone Route: Sovereign Mission & Skin-in-the-Game]
-├── /tracks                         [Standalone Route: 7 Research Tracks Catalogue]
+├── /tracks                         [Standalone Route: 9 Research Tracks — renders the working groups]
 ├── /physics                        [Standalone Route: 9 Applied Physics Models Catalogue]
 ├── /theory                         [Standalone Route: Applied Physics Models Index]
 ├── /collaborate                    [Standalone Route: Proposal Intake & Board Briefings]
@@ -208,7 +208,14 @@ npm install
 npm run dev
 
 # 4. Open in browser
-# Navigate to http://localhost:3000
+# Navigate to http://localhost:4500   (package.json: next dev -p 4500)
+```
+
+### Enable the gates before your first push
+
+```bash
+# Point git at the repo's hooks: pre-push runs tsc, the quick audits and the tests
+git config core.hooksPath .githooks
 ```
 
 ### Building for Production
@@ -217,9 +224,13 @@ npm run dev
 # Compile TypeScript and build Next.js production bundle
 npm run build
 
-# Start production server locally
+# Start production server locally (also port 4500)
 npm run start
 ```
+
+`npm run build` is not just a build. `prebuild` runs `sync-publications.js`,
+then `stamp-build.mjs`, then the full audit suite, so a build fails if the
+corpus and the registries disagree or any gate is red.
 
 ---
 
@@ -236,7 +247,41 @@ Herengracht 450, 1017 CA Amsterdam, The Netherlands
 **Direct Board Intake:** [jim@eigenia.nl](mailto:jim@eigenia.nl)  
 **KvK Registered B.V. (Amsterdam, NL)** • BTW/VAT ID: `NL865421908B01`
 
-## Testing
+## Testing, gates, and the ratchet
 
-`cd web && npm run verify` runs everything: sync, typecheck, audit suite, unit
-tests. See [documentation/TESTING.md](documentation/TESTING.md).
+`cd web && npm run verify` runs everything: sync, typecheck, the audit suite,
+and the unit tests. Run it before you push. Full detail in
+[documentation/TESTING.md](documentation/TESTING.md).
+
+Three things worth knowing before changing anything here.
+
+**Adding a check is one file.** Drop `audit-<name>.mjs` into `web/scripts/`,
+exit 0 on success and non-zero on failure. `run-audits.mjs` discovers it by
+filename, so CI, `prebuild` and the pre-push hook all pick it up with no other
+edit.
+
+**`web/scripts/known-failures.json` is a ratchet.** Frozen failures may shrink,
+never grow. Never raise a count to make a build pass; if something new is
+broken, it is new, and it is yours. The file is empty today, which means
+nothing is frozen.
+
+**Green gates are not the same as a correct page.** A stray `**` once shipped
+to production with every audit passing, because the markdown was valid and only
+the renderer disagreed. For anything user-facing, still open a browser.
+
+### What each gate covers
+
+| Gate | Runs | Enforces |
+| :--- | :--- | :--- |
+| `audit-ascii-art.mjs` | audit suite | No box-drawing art in published documents. Proves no *box-cornered* drawing survives, not that no drawing survives; deliberate exceptions live in `ascii-art-keep.json` with reasons |
+| `audit-mermaid.mjs` | audit suite | Every diagram parses through the real mermaid library, and carries `accTitle` and `accDescr` |
+| `audit-citations.mjs` | audit suite | Citation markers resolve to a bibliography entry |
+| `audit-terminology.mjs` | audit suite | One term, one meaning across the corpus |
+| `audit-featured.mjs` | audit suite | Homepage featured-findings invariants |
+| `audit-publications.js` | audit suite | Registry word counts match the files on disk |
+| `audit-rendered-completeness.js` | audit suite | Source prose appears in the rendered page. **Needs a dev server**; it skips silently without one, and a skip is not a pass |
+| `.githooks/pre-push` | every push | `tsc`, quick audits, unit tests |
+| `.github/workflows/ci.yml` | every push and PR | Audits, unit tests, types-and-build on Node 20, matching the Dockerfile |
+
+Each audit carries a canary that proves it can fail. A validator that cannot
+fail is a broken validator, not a clean corpus.
