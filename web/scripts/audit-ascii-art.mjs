@@ -17,6 +17,14 @@
  *   UNFENCED box art in raw markdown. Bare pipes are parsed as table syntax, so
  *            the art does not merely overflow, it renders wrong.
  *
+ * KNOWN BLIND SPOT: art drawn with axis rules rather than box corners. The
+ * corner requirement (see BOX_LINE) exists because without it 27 ordinary
+ * markdown tables registered as defects, but it also means a sketched plot
+ * whose frame is a vertical axis and a horizontal baseline does not register.
+ * One such block exists, the Gordon-Loeb curve, and it is recorded in
+ * ascii-art-keep.json. A pass here is not proof that no drawing survives; it
+ * is proof that no box-cornered drawing does.
+ *
  * Usage: node scripts/audit-ascii-art.mjs
  * Exit:  0 clean, 1 art found, 2 could not run.
  */
