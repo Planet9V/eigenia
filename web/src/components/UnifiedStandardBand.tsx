@@ -36,7 +36,7 @@ export const UnifiedStandardBand: React.FC = () => {
               <div className="w-12 h-0.5 bg-dutchOrange/40 rounded-full my-3" />
 
               <p className="text-sm sm:text-base text-secondary font-light leading-relaxed">
-                Critical utilities and AI datacenters have long been trapped in proprietary CAD/BIM walled gardens. The Unified Standard bridges physical P&amp;ID equipment topology (ISO 15926 / DEXPI 2.0) with full-spectrum supply chain bill of materials transparency (OWASP CycloneDX 1.6+).
+                Critical utilities and AI datacenters have long been trapped in proprietary CAD/BIM walled gardens. The Unified Standard bridges physical P&amp;ID equipment topology (ISO 15926-4 / DEXPI 2.0) with full-spectrum supply chain bill of materials transparency (OWASP CycloneDX 1.6+).
               </p>
 
               <p className="text-xs sm:text-sm text-muted font-light leading-relaxed">

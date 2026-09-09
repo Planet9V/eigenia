@@ -72,13 +72,37 @@
         "priority": "medium",
         "subtasks": [],
         "updatedAt": "2026-09-09T13:08:36.153Z"
+      },
+      {
+        "id": "7",
+        "title": "T7 terminology audit covers web/src",
+        "description": "Add per-term scope; forbid 'Track N //' labels and Eigenia-owned 'workstream' in code",
+        "details": "EVIDENCE: existing registry applied to web/src yields 0 hits, so scanning is safe today; scope field added anyway so a future corpus term cannot leak into code. Corpus evidence: working group 150 occurrences vs research track 1, and all 4 workstream uses are ENTSO-E's with explicit non-affiliation, so workstream must NOT be blanket-forbidden. QA GATE: canary proves each new rule can fail; suite still passes on a clean tree. || QA GATE PASSED: extending the scan to web/src immediately found 7 genuine violations of the existing ISO 15926 part-number rule in user-facing pages; fixed to ISO 15926-4, the form the corpus uses 68 times. Both new rules proved able to fail by injecting the strings they forbid, then reverted.",
+        "testStrategy": "",
+        "status": "done",
+        "dependencies": [],
+        "priority": "medium",
+        "subtasks": [],
+        "updatedAt": "2026-09-09T13:42:22.316Z"
+      },
+      {
+        "id": "8",
+        "title": "T8 audit-counts: literal counts must not lie",
+        "description": "Any literal count of Treatises / Working Groups / Research Tracks must equal the registry",
+        "details": "EVIDENCE: every such number in this repo has been wrong at least once today - README said 25 treatises and 8 groups (real 63 and 9), a dead key said 7 Research Tracks, the homepage still says 3 Core Research Tracks. Derived values like {workingGroups.length} are not literals and are not checked. Scans web/src, README.md, documentation/. QA GATE: canary proves it fails on a wrong number; run against the tree and report real findings rather than tuning until green. || QA GATE PASSED: found 7 stale counts on first run, including documentation/ I had never audited. 5 were false positives on inspection (a section count of 5 Treatises, and prose quoting past wrong numbers) so the RULE was narrowed rather than the findings suppressed: comments skipped, 3 stated exceptions. 2 real defects fixed. KNOWN LIMIT: spelled-out numbers are not matched.",
+        "testStrategy": "",
+        "status": "done",
+        "dependencies": [],
+        "priority": "medium",
+        "subtasks": [],
+        "updatedAt": "2026-09-09T13:42:25.167Z"
       }
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-09-09T13:08:36.153Z",
-      "taskCount": 6,
-      "completedCount": 6,
+      "lastModified": "2026-09-09T13:42:25.167Z",
+      "taskCount": 8,
+      "completedCount": 8,
       "tags": [
         "master"
       ]

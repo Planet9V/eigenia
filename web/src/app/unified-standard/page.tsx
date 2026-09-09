@@ -88,7 +88,7 @@ export default function UnifiedStandardPage() {
               </h1>
 
               <p className="text-base sm:text-lg text-secondary font-light leading-relaxed max-w-3xl">
-                A single computable graph schema reconciling physical process engineering topology (ISO 15926 / DEXPI 2.0) with full-spectrum supply chain multi-BOM transparency (OWASP CycloneDX 1.6+). Breaking proprietary CAD monopolies through sovereign applied complexity science.
+                A single computable graph schema reconciling physical process engineering topology (ISO 15926-4 / DEXPI 2.0) with full-spectrum supply chain multi-BOM transparency (OWASP CycloneDX 1.6+). Breaking proprietary CAD monopolies through sovereign applied complexity science.
               </p>
             </div>
           </div>
@@ -99,7 +99,7 @@ export default function UnifiedStandardPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between gap-4 font-mono text-xs">
             <div className="flex items-center gap-2.5 sm:gap-3">
               <span className="w-2 h-2 rounded-full bg-dutchOrange animate-pulse" />
-              <span className="text-secondary font-medium">Schema G_CPDT • ISO 15926 &amp; CycloneDX 1.6+</span>
+              <span className="text-secondary font-medium">Schema G_CPDT • ISO 15926-4 &amp; CycloneDX 1.6+</span>
               <span className="hidden sm:inline text-hairline">|</span>
               <span className="hidden sm:inline text-muted">100% Air-Gapped Offline Operation</span>
             </div>
@@ -149,7 +149,7 @@ export default function UnifiedStandardPage() {
                   </p>
 
                   <p className="text-xs sm:text-sm text-muted leading-relaxed font-sans font-light">
-                    DEXPI 2.0 provides an open, vendor-neutral information model grounded in ISO 15926, serializing the plant as a machine-readable directed graph. OWASP CycloneDX 1.6+ provides full-spectrum transparency across hardware, software, runtime configurations, and cryptographic assets. By binding DEXPI equipment tags directly to CycloneDX component references, Eigenia delivers the complete cyber-physical state machine.
+                    DEXPI 2.0 provides an open, vendor-neutral information model grounded in ISO 15926-4, serializing the plant as a machine-readable directed graph. OWASP CycloneDX 1.6+ provides full-spectrum transparency across hardware, software, runtime configurations, and cryptographic assets. By binding DEXPI equipment tags directly to CycloneDX component references, Eigenia delivers the complete cyber-physical state machine.
                   </p>
                 </div>
 
@@ -446,7 +446,7 @@ export default function UnifiedStandardPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
             <div className="max-w-3xl space-y-2">
               <span className="font-mono text-[10px] sm:text-xs tracking-[0.2em] uppercase text-dutchOrange font-semibold block">
-                Standardized Data Architecture // ISO 15926 & CycloneDX
+                Standardized Data Architecture // ISO 15926-4 & CycloneDX
               </span>
               <h2 className="font-sans text-2xl sm:text-3xl font-semibold tracking-tight text-primary">
                 The Three-Tier Equipment Catalog
@@ -590,7 +590,7 @@ export default function UnifiedStandardPage() {
                   The Dual-View Cyber-Physical Bridge
                 </h3>
                 <p className="text-xs sm:text-sm text-secondary font-light leading-relaxed">
-                  The physical P&amp;ID layout (DEXPI 2.0 / ISO 15926) defines hydraulic conductivity, pipe schedules, and fail-safe valve states. The multi-BOM hierarchy (OWASP CycloneDX 1.6+) defines firmware libraries, silicon roots of trust, and cryptographic readiness.
+                  The physical P&amp;ID layout (DEXPI 2.0 / ISO 15926-4) defines hydraulic conductivity, pipe schedules, and fail-safe valve states. The multi-BOM hierarchy (OWASP CycloneDX 1.6+) defines firmware libraries, silicon roots of trust, and cryptographic readiness.
                 </p>
                 <div className="pt-2 font-mono text-[11px] text-muted space-y-1.5 border-t border-hairline/60">
                   <div className="flex items-center gap-2">
@@ -618,7 +618,7 @@ export default function UnifiedStandardPage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
                 <div className="absolute bottom-3 left-3 right-3 p-3 rounded-xl bg-black/75 backdrop-blur-md border border-white/10 font-mono text-[11px] text-zinc-300 flex items-center justify-between">
                   <span className="text-dutchOrange font-semibold">Schema G_CPDT</span>
-                  <span className="text-[10px] text-muted">ISO 15926 ⟷ CycloneDX 1.6+ Binding</span>
+                  <span className="text-[10px] text-muted">ISO 15926-4 ⟷ CycloneDX 1.6+ Binding</span>
                 </div>
               </div>
             </div>
