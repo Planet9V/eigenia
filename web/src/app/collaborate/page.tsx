@@ -102,7 +102,7 @@ export default function CollaboratePage() {
     );
   };
 
-  const tracks: { id: Pathway; tag: string; title: string; desc: string; f1: string; f2: string; f3: string; cta: string; icon: React.ReactNode }[] = [
+  const pathways: { id: Pathway; tag: string; title: string; desc: string; f1: string; f2: string; f3: string; cta: string; icon: React.ReactNode }[] = [
     {
       id: "probono",
       tag: t("collab_t1_tag"),
@@ -216,7 +216,7 @@ export default function CollaboratePage() {
           </div>
         </SectionBand>
 
-        {/* Collaboration Pathways Grid — 4 tracks */}
+        {/* Collaboration Pathways Grid — 4 pathways */}
         <SectionBand variant="subtle">
           <div className="text-center max-w-2xl mx-auto space-y-3 mb-12">
             <span className="font-mono text-xs text-dutchOrange uppercase tracking-widest font-semibold block">
@@ -229,42 +229,42 @@ export default function CollaboratePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {tracks.map((track) => (
+            {pathways.map((pathway) => (
               <Card
-                key={track.id}
+                key={pathway.id}
                 variant="elevated"
                 className="p-7 space-y-5 flex flex-col justify-between"
               >
                 <div className="space-y-4">
                   <div className="w-12 h-12 rounded-xl bg-dutchOrange/10 border border-dutchOrange/30 flex items-center justify-center text-dutchOrange">
-                    {track.icon}
+                    {pathway.icon}
                   </div>
                   <span className="font-mono text-[10px] tracking-[0.2em] text-dutchOrange uppercase font-medium block">
-                    {track.tag}
+                    {pathway.tag}
                   </span>
-                  <h3 className="font-sans text-lg font-semibold text-primary">{track.title}</h3>
-                  <p className="text-xs text-secondary font-sans leading-relaxed font-light">{track.desc}</p>
+                  <h3 className="font-sans text-lg font-semibold text-primary">{pathway.title}</h3>
+                  <p className="text-xs text-secondary font-sans leading-relaxed font-light">{pathway.desc}</p>
                   <ul className="space-y-2 text-xs text-muted font-sans border-t border-hairline pt-3">
                     <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-dutchOrange flex-shrink-0" /> {track.f1}
+                      <CheckCircle2 className="w-3.5 h-3.5 text-dutchOrange flex-shrink-0" /> {pathway.f1}
                     </li>
                     <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-dutchOrange flex-shrink-0" /> {track.f2}
+                      <CheckCircle2 className="w-3.5 h-3.5 text-dutchOrange flex-shrink-0" /> {pathway.f2}
                     </li>
                     <li className="flex items-center gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-dutchOrange flex-shrink-0" /> {track.f3}
+                      <CheckCircle2 className="w-3.5 h-3.5 text-dutchOrange flex-shrink-0" /> {pathway.f3}
                     </li>
                   </ul>
                 </div>
                 <button
                   type="button"
                   onClick={() => {
-                    setSelectedType(track.id);
+                    setSelectedType(pathway.id);
                     document.getElementById("collab-form")?.scrollIntoView({ behavior: "smooth", block: "start" });
                   }}
                   className="w-full py-2.5 rounded-xl bg-dutchOrange/10 border border-dutchOrange/30 text-dutchOrange text-xs font-semibold font-mono hover:bg-dutchOrange hover:text-white transition-all"
                 >
-                  {track.cta}
+                  {pathway.cta}
                 </button>
               </Card>
             ))}
@@ -345,21 +345,21 @@ export default function CollaboratePage() {
                       <label className="text-muted uppercase text-[11px] block">{t("collab_form_track_label")}</label>
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                         {[
-                          { id: "risk", label: "Track 1 // Risk" },
-                          { id: "dexpi", label: "Track 2 // DEXPI" },
-                          { id: "actuarial", label: "Track 3 // Actuarial" },
-                        ].map((track) => (
+                          { id: "risk", label: "Risk" },
+                          { id: "dexpi", label: "DEXPI" },
+                          { id: "actuarial", label: "Actuarial" },
+                        ].map((subject) => (
                           <button
-                            key={track.id}
+                            key={subject.id}
                             type="button"
-                            onClick={() => setSelectedTrack(track.id)}
+                            onClick={() => setSelectedTrack(subject.id)}
                             className={`p-3 rounded-xl transition-colors text-left ${
-                              selectedTrack === track.id
+                              selectedTrack === subject.id
                                 ? "bg-dutchOrange text-white font-bold"
                                 : "bg-subtle border border-hairline text-secondary hover:text-primary"
                             }`}
                           >
-                            {track.label}
+                            {subject.label}
                           </button>
                         ))}
                       </div>

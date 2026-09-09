@@ -65,7 +65,7 @@ export default function TracksPage() {
 
           <div className="mt-6 max-w-3xl space-y-3">
             <span className="font-mono text-xs uppercase tracking-wider font-semibold text-dutchOrange bg-dutchOrange/10 px-3 py-1 rounded-full border border-dutchOrange/30 inline-block">
-              Eigenia Lab Working Groups
+              Research Programme &amp; Working Group Output
             </span>
             <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-primary">
               Sovereign Research Tracks

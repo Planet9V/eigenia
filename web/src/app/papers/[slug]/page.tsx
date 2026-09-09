@@ -71,8 +71,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       "Clayton Copula",
       "OT Cybersecurity",
       "Industrial Control Systems",
-      paper.category,
-      paper.number,
+      meta?.workingGroupName ?? "",
+      meta?.badge ?? "",
     ],
     authors: [{ name: "J. McKenney", url: SITE_URL }],
     creator: "Eigenia B.V.",
@@ -130,7 +130,10 @@ export default async function PaperDetailPage({ params }: PageProps) {
     "@type": "ScholarlyArticle",
     headline: paper.title,
     ...(docMeta?.subtitle ? { alternativeHeadline: docMeta.subtitle } : {}),
-    articleSection: paper.category,
+    // One taxonomy. paper.category was a second, hand-maintained one that had
+    // drifted: "Actuarial Re-Invention" spanned four working groups, and all
+    // seven Psychometrics papers carried it.
+    articleSection: docMeta?.workingGroupName ?? "",
     name: paper.title,
     author: {
       "@type": "Person",
@@ -155,7 +158,7 @@ export default async function PaperDetailPage({ params }: PageProps) {
       : {}),
     isPartOf: {
       "@type": "Periodical",
-      name: `${docMeta?.workingGroupName ?? paper.category}, Eigenia Labs`,
+      name: `${docMeta?.workingGroupName ?? ""}, Eigenia Labs`,
     },
     mainEntityOfPage: {
       "@type": "WebPage",
@@ -201,10 +204,10 @@ export default async function PaperDetailPage({ params }: PageProps) {
             <div className="max-w-4xl space-y-4">
               <div className="flex flex-wrap items-center gap-3">
                 <span className="font-mono text-xs text-dutchOrange font-bold uppercase tracking-wider bg-dutchOrange/10 px-3 py-1 rounded-lg border border-dutchOrange/30">
-                  {paper.number}
+                  {docMeta?.badge}
                 </span>
                 <span className="font-mono text-xs text-muted uppercase tracking-wider">
-                  {paper.category}
+                  {docMeta?.workingGroupName}
                 </span>
               </div>
 
