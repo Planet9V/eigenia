@@ -30,6 +30,11 @@
       "file": "references/WG-03-ML-Behaviorial_Modeling/WG-03-ML-Musical-Psychometric-Notation.md",
       "match": "LIVE SECURITY SCORE",
       "reason": "A mock-up of the live dashboard, so the visual arrangement is the content: note positions along each instrument line carry the timing, and the bar meters carry the dissonance, health and arrhythmia readings. A node-and-edge graph cannot express either."
+    },
+    {
+      "file": "references/WG-02-DT-Digital-Twin/WG-02-DT-Article5-The-Barbell-Defense.md",
+      "match": "Gordon-Loeb Optimum",
+      "reason": "A sketched curve, not a plot of stated data. Gordon-Loeb gives a bound, S*(z) <= (1/e).v.L, not a function over this diagram's own x-axis, and that axis is 'Control Complexity' with no defined metric and three unquantified positions. xychart-beta could only render it by inventing points the paper never states. NOTE: the audit does not currently detect this block. Its frame is drawn with axis rules rather than box corners, and the corner requirement exists to keep markdown tables from registering. Recorded here so the decision is on file even though the gate is blind to it."
     }
   ]
 }

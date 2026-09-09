@@ -70,10 +70,10 @@ flowchart LR
       assembly, covering board surface-mount and BMC flashing. Tier 3 is the
       facility site, covering rack deployment and fluid hookup.
     }
-    T0["<b>TIER 0: Silicon Found</b><br/>Wafer Fab<br/>Package Sub"]
-    T1["<b>TIER 1: Silicon Mfr</b><br/>Key Inject<br/>RoT Mask"]
+    T0["<b>TIER 0: Silicon Foundry</b><br/>Wafer Fab<br/>Package Substrate"]
+    T1["<b>TIER 1: Silicon Mfr</b><br/>Key Injection<br/>RoT Mask"]
     T2["<b>TIER 2: ODM Assembly</b><br/>Board SMT<br/>BMC Flashing"]
-    T3["<b>TIER 3: Facility Site</b><br/>Rack Deploy<br/>Fluid Hookup"]
+    T3["<b>TIER 3: Facility Site</b><br/>Rack Deployment<br/>Fluid Hookup"]
     T0 --> T1 --> T2 --> T3
     classDef tier fill:#1a1c1f,stroke:#E05A10,stroke-width:1px,color:#f5f3f0;
     class T0,T1,T2,T3 tier;
