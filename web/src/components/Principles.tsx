@@ -43,15 +43,15 @@ export const Principles: React.FC = () => {
         {/* Header */}
         <div className="max-w-3xl space-y-3">
           <span className="font-mono text-[10px] sm:text-xs tracking-[0.2em] uppercase text-dutchOrange font-medium inline-block">
-            {t("pr_tag" as any)}
+            {t("pr_tag")}
           </span>
 
           <h2 className="font-sans text-xl sm:text-2xl lg:text-3xl font-semibold tracking-tight text-primary">
-            {t("pr_title" as any)}
+            {t("pr_title")}
           </h2>
 
           <p className="text-sm sm:text-base text-secondary font-light leading-relaxed">
-            {t("pr_desc" as any)}
+            {t("pr_desc")}
           </p>
         </div>
 

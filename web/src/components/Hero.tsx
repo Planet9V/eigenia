@@ -29,19 +29,19 @@ export const Hero: React.FC = () => {
           {/* Top Entity Label */}
           <div>
             <span className="font-mono text-[10px] sm:text-xs tracking-[0.2em] uppercase text-dutchOrange font-medium inline-block mb-1">
-              {t("hero_badge" as any)}
+              {t("hero_badge")}
             </span>
           </div>
 
           <h1 className="font-sans text-2xl sm:text-3xl lg:text-4xl font-semibold text-primary tracking-tight leading-[1.15]">
-            {t("hero_title_pre" as any)}{" "}
+            {t("hero_title_pre")}{" "}
             <span className="text-dutchOrange">
-              {t("hero_title_accent" as any)}
+              {t("hero_title_accent")}
             </span>.
           </h1>
 
           <p className="font-sans text-base sm:text-lg text-secondary font-light leading-relaxed max-w-3xl">
-            {t("hero_subtitle" as any)}
+            {t("hero_subtitle")}
           </p>
 
           <div className="pt-2 flex flex-wrap items-center gap-4">
@@ -49,7 +49,7 @@ export const Hero: React.FC = () => {
               href="/collaborate"
               className="px-6 py-3 rounded-xl bg-dutchOrange hover:bg-dutchOrange/90 text-white font-sans text-sm font-bold transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 inline-flex items-center gap-2"
             >
-              {t("hero_cta_briefing" as any)}
+              {t("hero_cta_briefing")}
               <ArrowRight className="w-4 h-4" />
             </Link>
 
@@ -57,13 +57,13 @@ export const Hero: React.FC = () => {
               href="#research-portals"
               className="px-6 py-3 rounded-xl border border-hairline bg-white/[0.02] text-primary font-sans text-sm font-semibold hover:border-dutchOrange hover:text-dutchOrange transition-all"
             >
-              {t("hero_cta_labs" as any)}
+              {t("hero_cta_labs")}
             </a>
           </div>
 
           <div className="pt-2 font-mono text-xs text-muted flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-dutchOrange inline-block animate-pulse"></span>
-            <span>{t("hero_tagline" as any)}</span>
+            <span>{t("hero_tagline")}</span>
           </div>
         </div>
       </div>
