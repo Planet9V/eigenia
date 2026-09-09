@@ -12,5 +12,11 @@
     "To retire an entry: fix the underlying problem, confirm the audit exits 0,",
     "then delete the entry. Never raise a count to make a build pass."
   ],
-  "audits": {}
+  "audits": {
+    "audit-ascii-art.mjs": {
+      "count": 74,
+      "countPattern": "Total: (\\d+) item\\(s\\)",
+      "reason": "47 fenced ASCII diagrams and 27 unfenced box-art lines predate this audit. Nothing detected them, so the conversion work stalled unnoticed. Frozen here so the gate is on today; the count ratchets to zero as the conversions land. Delete this entry when it reaches 0."
+    }
+  }
 }
