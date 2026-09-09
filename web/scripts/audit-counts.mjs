@@ -62,6 +62,15 @@ try {
   process.exit(2);
 }
 
+/**
+ * The repo layout and the Docker layout disagree, so a stored path must not be
+ * compared literally. Locally a file is web/src/..., but the Dockerfile does
+ * `COPY web ./` into /app, so the same file is app/src/... Dropping the leading
+ * web/ or app/ segment makes an exception match in both. This audit failed a
+ * Railway build for exactly this reason while CI stayed green.
+ */
+const canonical = (p) => p.replace(/\\/g, "/").replace(/^(?:web|app)\//, "");
+
 function walk(dir, out = []) {
   if (!existsSync(dir)) return out;
   for (const e of readdirSync(dir)) {
@@ -106,6 +115,18 @@ if (check(`${COUNTS.documents} Treatises across ${COUNTS.groups} Working Groups`
   process.exit(2);
 }
 
+// Prove the exception matcher survives both layouts before trusting it.
+for (const [a, b] of [
+  ["web/src/components/X.tsx", "app/src/components/X.tsx"],
+  ["documentation/TESTING.md", "documentation/TESTING.md"],
+]) {
+  if (canonical(a) !== canonical(b)) {
+    console.error(`COUNT AUDIT COULD NOT RUN: ${a} and ${b} must resolve alike,`);
+    console.error("otherwise an exception silently stops applying inside Docker.");
+    process.exit(2);
+  }
+}
+
 const files = [
   ...walk(join(WEB, "src")),
   ...walk(join(ROOT, "documentation")),
@@ -123,7 +144,7 @@ let bad = 0;
 for (const file of files) {
   const rel = relative(ROOT, file);
   const allowed = exceptions
-    .filter((a) => a.file === rel && a.reason?.trim())
+    .filter((a) => canonical(a.file) === canonical(rel) && a.reason?.trim())
     .map((a) => a.match);
   const hits = check(readFileSync(file, "utf-8"), allowed);
   for (const h of hits) {
