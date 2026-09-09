@@ -1251,3 +1251,18 @@ export function getFeaturedDocuments(): WikiDocumentMeta[] {
     .filter((d) => d.featured === true)
     .sort((a, b) => (a.featuredRank ?? 999) - (b.featuredRank ?? 999));
 }
+
+/**
+ * One document's metadata by its published slug.
+ *
+ * Used by the paper route for SEO: the subtitle becomes the meta description
+ * and the publication date becomes datePublished in the ScholarlyArticle
+ * schema. Both were previously absent, so every paper advertised the first 160
+ * characters of its own body, truncated mid-sentence, and no date at all.
+ *
+ * Reads metadata only. It must stay in this module rather than ./wiki, which
+ * pulls the generated content bundle.
+ */
+export function getWikiDocumentBySlug(slug: string): WikiDocumentMeta | undefined {
+  return getAllWikiDocuments().find((d) => d.slug === slug);
+}

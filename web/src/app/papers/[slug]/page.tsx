@@ -4,11 +4,26 @@ import { Navbar } from "@/components/Navbar";
 import { EuComplianceFooter } from "@/components/EuComplianceFooter";
 import { MarkdownViewer } from "@/components/MarkdownViewer";
 import { getPaperBySlug, getAllPaperSlugs } from "@/lib/papers";
-import { getAllWikiDocuments } from "@/lib/wikiRegistry";
+import { getAllWikiDocuments, getWikiDocumentBySlug } from "@/lib/wikiRegistry";
 import { ArrowLeft, BookOpen, FileText, CheckCircle2, ShieldCheck, Hash , Clock} from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SITE_URL } from "@/lib/site";
+
+/**
+ * Registry dates read "May 4, 2026". Schema.org wants ISO 8601.
+ *
+ * Returns undefined rather than a guess when the string does not parse, or when
+ * the registry holds something looser like "April 2024" with no day. A wrong
+ * datePublished is worse than an absent one: a crawler will believe it.
+ */
+function toIsoDate(human?: string): string | undefined {
+  if (!human) return undefined;
+  if (!/\d{1,2},\s*\d{4}/.test(human)) return undefined;
+  const parsed = new Date(`${human} UTC`);
+  if (Number.isNaN(parsed.getTime())) return undefined;
+  return parsed.toISOString().slice(0, 10);
+}
 
 export async function generateStaticParams() {
   const slugs = getAllPaperSlugs();
@@ -29,11 +44,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const cleanDescription = paper.content
-    .replace(/[#*`_~>]/g, "")
-    .replace(/\s+/g, " ")
-    .slice(0, 160)
-    .trim();
+  // Every document carries a hand-written subtitle in the wiki registry, written
+  // to be scannable. That is a better search snippet than the first 160
+  // characters of the body, which truncate mid-sentence. The body is kept only
+  // as a fallback for a document with no subtitle.
+  const meta = getWikiDocumentBySlug(paper.slug);
+  const cleanDescription =
+    meta?.subtitle?.trim() ||
+    paper.content
+      .replace(/[#*`_~>]/g, "")
+      .replace(/\s+/g, " ")
+      .slice(0, 160)
+      .trim();
 
   const paperUrl = `${SITE_URL}/papers/${paper.slug}`;
 
@@ -96,15 +118,23 @@ export default async function PaperDetailPage({ params }: PageProps) {
   }
 
   // Schema.org JSON-LD Structured Data for AI Crawlers (ScholarlyArticle)
+  //
+  // Everything below the title comes from the wiki registry, which is metadata
+  // only. Do not reach for @/lib/wiki here: it pulls the generated content
+  // bundle and would put roughly 3.3 MB on this route.
+  const docMeta = getWikiDocumentBySlug(paper.slug);
+  const publishedIso = toIsoDate(docMeta?.publicationDate);
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ScholarlyArticle",
     headline: paper.title,
+    ...(docMeta?.subtitle ? { alternativeHeadline: docMeta.subtitle } : {}),
     articleSection: paper.category,
     name: paper.title,
     author: {
       "@type": "Person",
-      name: "J. McKenney",
+      name: docMeta?.author ?? "J. McKenney",
       affiliation: {
         "@type": "Organization",
         name: "Eigenia B.V.",
@@ -117,10 +147,27 @@ export default async function PaperDetailPage({ params }: PageProps) {
       url: SITE_URL,
       logo: `${SITE_URL}/assets/logo_square_dark.svg`,
     },
+    // datePublished was absent entirely, so every treatise was undated to a
+    // crawler. Emitted only when the registry actually holds a date; an invented
+    // date is worse than none.
+    ...(publishedIso
+      ? { datePublished: publishedIso, dateModified: publishedIso }
+      : {}),
+    isPartOf: {
+      "@type": "Periodical",
+      name: `${docMeta?.workingGroupName ?? paper.category}, Eigenia Labs`,
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${SITE_URL}/papers/${paper.slug}`,
+    },
     url: `${SITE_URL}/papers/${paper.slug}`,
-    description: paper.content.slice(0, 200).replace(/[#*`_]/g, "").trim(),
+    description:
+      docMeta?.subtitle?.trim() ||
+      paper.content.slice(0, 200).replace(/[#*`_]/g, "").trim(),
     wordCount: paper.wordCount,
     inLanguage: "en-US",
+    license: "https://creativecommons.org/licenses/by/4.0/",
   };
 
   return (
