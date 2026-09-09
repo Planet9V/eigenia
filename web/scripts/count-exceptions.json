@@ -1,0 +1,32 @@
+{
+  "$comment": [
+    "Written counts that are correct even though they disagree with the registry.",
+    "",
+    "A bare number beside a noun is ambiguous: '5 Treatises' can count one",
+    "section rather than the corpus, and prose about a past mistake has to quote",
+    "the wrong number to make its point.",
+    "",
+    "Each entry needs a file, a distinctive string, and a reason. Matching is on",
+    "content, not line number, so an exception survives edits above it. An entry",
+    "with an empty reason is ignored, so every exception is a stated decision.",
+    "",
+    "Code comments are skipped wholesale and need no entry here."
+  ],
+  "allowed": [
+    {
+      "file": "web/src/components/TalebPapersSection.tsx",
+      "match": "Taleb Series Academic Publications (5 Treatises)",
+      "reason": "Counts the five papers in that one section, not the corpus. The component holds its own list of PAPER I through PAPER V and never reads the registry."
+    },
+    {
+      "file": "documentation/TESTING.md",
+      "match": "advertised 25 treatises while the real figure had climbed to 59",
+      "reason": "Quotes a past defect to explain why the count gate exists. Correcting the number would delete the lesson."
+    },
+    {
+      "file": "documentation/KNOWN_ISSUES.md",
+      "match": "translating 46 treatises is a content project",
+      "reason": "Prose about translation scope written at 46 documents. Stale, but it is describing a deferred content project rather than advertising the corpus size; left for whoever revisits that decision."
+    }
+  ]
+}

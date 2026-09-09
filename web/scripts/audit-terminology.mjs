@@ -20,6 +20,11 @@ import { join, resolve, relative } from "node:path";
 import { resolveReferencesDir } from "./lib/references-dir.mjs";
 
 const REFS_DIR = resolveReferencesDir(import.meta.dirname);
+// The UI carries taxonomy too. paper.category drifted until it spanned four
+// working groups; "Track N //" labelled four homepage counters and a subject
+// picker as research tracks. Prose rules and code rules are kept apart by the
+// per-entry `scope`, so a corpus term cannot start failing on a variable name.
+const SRC_DIR = resolve(import.meta.dirname, "../src");
 // ROOT is only used to print paths as references/WG-.../file.md
 const ROOT = resolve(REFS_DIR, "..");
 const REGISTRY = join(import.meta.dirname, "terminology-registry.json");
@@ -28,7 +33,7 @@ function walk(dir, out = []) {
   for (const e of readdirSync(dir)) {
     const p = join(dir, e);
     if (statSync(p).isDirectory()) walk(p, out);
-    else if (e.endsWith(".md")) out.push(p);
+    else if (/\.(md|ts|tsx)$/.test(e)) out.push(p);
   }
   return out;
 }
@@ -46,6 +51,23 @@ const canary = "This text uses Component BOM which is a forbidden variant.";
 const canaryHit = registry.terms.some((t) =>
   (t.variants || []).some((v) => canary.includes(v))
 );
+// Every forbidden pattern must prove it still matches the string it was written
+// for. A rule that silently stops matching is worse than no rule: the suite
+// goes green and the defect walks back in.
+const PATTERN_CANARIES = {
+  "Track \\d+ ?//": "tag: \"Track 02 // Research\",",
+  "ISO 15926": "grounded in ISO 15926, serializing the plant",
+  "workstreams?": "A separate Eigenia workstream is in preparation",
+};
+for (const b of registry.bare_forms_forbidden || []) {
+  const probe = Object.entries(PATTERN_CANARIES).find(([k]) => b.pattern.includes(k));
+  if (probe && !new RegExp(b.pattern).test(probe[1])) {
+    console.error(`TERMINOLOGY AUDIT ABORTED: pattern ${b.pattern}`);
+    console.error(`no longer matches its canary ${JSON.stringify(probe[1])},`);
+    console.error("so a green result would not prove the rule is live.");
+    process.exit(2);
+  }
+}
 if (!canaryHit) {
   console.error("TERMINOLOGY AUDIT ABORTED: the gate did not flag a known-bad string,");
   console.error("so a green result here would prove nothing.");
@@ -56,8 +78,16 @@ console.log("\n" + "=".repeat(72));
 console.log("TERMINOLOGY AUDIT");
 console.log("=".repeat(72) + "\n");
 
+/** Entries default to references-only, which is what every existing term wants. */
+const inScope = (entry, area) => (entry.scope ?? "references") === area
+  || (entry.scope ?? "references") === "all";
+
 let violations = 0;
-for (const file of walk(REFS_DIR)) {
+const targets = [
+  ...walk(REFS_DIR).map((f) => [f, "references"]),
+  ...walk(SRC_DIR).map((f) => [f, "web"]),
+];
+for (const [file, area] of targets) {
   const rel = relative(ROOT, file);
   const lines = readFileSync(file, "utf-8").split("\n");
   let inFence = false;

@@ -53,6 +53,16 @@
           "reason": "references/WG-05-CAD-DEXPI-2/WG-05-CAD-DEXPI-Open-Standard-Position-Paper.md line 19. The phrase sits inside an attributed pull quote from a mechanical engineer. The speaker did not state a part. Editing quoted speech to satisfy a lint rule falsifies the quotation, which is a worse fault than an imprecise citation, so the quote stands and the exception is recorded here instead. The carve-out is pinned to this exact wording: a bare \"ISO 15926\" anywhere else, including \"ISO 15926 / Proteus XML\" without the \"DEXPI 2.0 (\" prefix, still fails."
         }
       ]
+    },
+    {
+      "pattern": "Track \\d+ ?//",
+      "scope": "web",
+      "message": "\"Track N //\" labelled four homepage section counters and a three-button subject picker as research tracks. Research Track names the section and the route; a numbered counter is not one. Use Portal 0N // for section counters, or no prefix at all."
+    },
+    {
+      "pattern": "(?:Eigenia|our|its|the lab['\u2019]?s)[^.]{0,24}\\bworkstreams?\\b",
+      "scope": "all",
+      "message": "Eigenia's unit is a Working Group. \"Workstream\" appears in the corpus only for ENTSO-E's, each with an explicit non-affiliation note, and must not be adopted for Eigenia's own output."
     }
   ]
 }
