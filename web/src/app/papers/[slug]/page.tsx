@@ -5,7 +5,7 @@ import { EuComplianceFooter } from "@/components/EuComplianceFooter";
 import { MarkdownViewer } from "@/components/MarkdownViewer";
 import { getPaperBySlug, getAllPaperSlugs } from "@/lib/papers";
 import { getAllWikiDocuments } from "@/lib/wikiRegistry";
-import { ArrowLeft, BookOpen, FileText, CheckCircle2, ShieldCheck, Hash } from "lucide-react";
+import { ArrowLeft, BookOpen, FileText, CheckCircle2, ShieldCheck, Hash , Clock} from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SITE_URL } from "@/lib/site";
@@ -171,13 +171,8 @@ export default async function PaperDetailPage({ params }: PageProps) {
                   <CheckCircle2 className="w-3.5 h-3.5" /> 100% Complete & Untruncated
                 </span>
                 <span className="flex items-center gap-1.5 bg-subtle px-3 py-1.5 rounded-lg border border-hairline">
-                  <Hash className="w-3.5 h-3.5 text-dutchOrange" /> {paper.charCount.toLocaleString()} Characters
-                </span>
-                <span className="flex items-center gap-1.5 bg-subtle px-3 py-1.5 rounded-lg border border-hairline">
-                  <FileText className="w-3.5 h-3.5 text-dutchOrange" /> {paper.lineCount.toLocaleString()} Lines
-                </span>
-                <span className="flex items-center gap-1.5 bg-subtle px-3 py-1.5 rounded-lg border border-hairline">
-                  <BookOpen className="w-3.5 h-3.5 text-dutchOrange" /> {paper.wordCount.toLocaleString()} Words
+                  <Clock className="w-3.5 h-3.5 text-dutchOrange" />{" "}
+                  {Math.max(1, Math.round(paper.wordCount / 225))} min read
                 </span>
               </div>
             </div>

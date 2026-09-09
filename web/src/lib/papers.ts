@@ -153,6 +153,30 @@ export const PAPERS_REGISTRY: Record<string, { title: string; category: string; 
     number: "TRACK 02-N",
     relativePath: "references/WG-05-CAD-DEXPI-2/WG-05-CAD-Blast-Radius-Three-Ontologies.md",
   },
+  "fooled-by-best-practice": {
+    title: "Fooled by Best Practice: The Epistemological Fraud of OT Cybersecurity",
+    category: "Digital Twin & Taleb Series",
+    number: "TRACK 02-O",
+    relativePath: "references/WG-02-DT-Digital-Twin/WG-02-DT-Article1-Fooled-by-Best-Practice.md",
+  },
+  "the-20-second-deficit": {
+    title: "The 20 Second Deficit: Decision Latency Against a 45 Second Thermal Cliff",
+    category: "Digital Twin & Taleb Series",
+    number: "TRACK 02-P",
+    relativePath: "references/WG-02-DT-Digital-Twin/WG-02-DT-Article3-The-20-Second-Deficit.md",
+  },
+  "lacan-in-the-control-room": {
+    title: "Lacan in the Control Room: Symbolic Severance and the Irruption of the Real",
+    category: "Digital Twin & Taleb Series",
+    number: "TRACK 02-Q",
+    relativePath: "references/WG-02-DT-Digital-Twin/WG-02-DT-Article4-Lacan-in-the-Control-Room.md",
+  },
+  "the-barbell-defense": {
+    title: "The Barbell Defense: Deterministic Physics Against Software Snake Oil",
+    category: "Digital Twin & Taleb Series",
+    number: "TRACK 02-R",
+    relativePath: "references/WG-02-DT-Digital-Twin/WG-02-DT-Article5-The-Barbell-Defense.md",
+  },
 
   // Track 3: Actuarial Re-Invention & Underwriter Treatises
   "1-underwriter-overview": {

@@ -21,7 +21,6 @@ const BANNED = [
   "foster",
   "streamline",
   "at its core",
-  "landscape",
   "beacon",
   "game-changing",
   "harness",

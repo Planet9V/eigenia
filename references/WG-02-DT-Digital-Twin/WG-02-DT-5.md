@@ -77,7 +77,7 @@ Taleb’s antidote to being fooled is not “be smarter.” It’s **change the 
 
 That is exactly what OXOT does with the **CBER Cyber Digital Twin** and the **AEON engine**:
 
-- The twin builds a **seven-layer, cyber-physical + socio-technical graph** from universal equipment definitions through organizational and geopolitical dynamics.[6]
+- The twin builds a **seven-layer, cyber-physical + socio-technical graph** from universal equipment definitions through organizational and geopolitical dynamics.[3]
 - The AEON engine runs **Monte Carlo trajectory sampling** over that graph to produce a posterior distribution of future security states, with explicit entropy and confidence intervals.
 
 - Instead of asking “are we compliant?” it asks a Taleb-style question:  
@@ -105,7 +105,7 @@ In Taleb’s terms: OXOT doesn’t merely track “risk factors.” It models th
 
 Attackers win because complex environments contain many **multi-hop compositions**; paths that only exist when you consider equipment + software + configuration + human workflow + organizational constraints together.
 
-CDTs treat the facility as a living graph and uses **AEON Gated Graph Neural Networks** to propagate and update state across the graph while controlling what information “flows” between layers and time-scales.[6] That matters because:
+CDTs treat the facility as a living graph and uses **AEON Gated Graph Neural Networks** to propagate and update state across the graph while controlling what information “flows” between layers and time-scales.[3] That matters because:
 - Some signals are fast (new CVEs, campaigns).  
 - Some signals are slow (culture, fatigue, organizational temperature).  
 - Some signals are structural (network topology, dependency chains).
@@ -152,3 +152,23 @@ In OT cyber-physical security, CDTs ask the equivalent:
 **“Are you secure; or are you merely untested by the specific tail that will break your facility?”**
 
 That is the paradigm shift prospective buyers need to understand. CDTs are not “more security tooling.” It is a move from narrative-driven security to distribution-driven resilience; Taleb’s worldview, rebuilt for the cyber-physical world.
+
+---
+
+## References
+
+Taleb is cited for the framing rather than the invention. The underlying
+statistical points predate him; the contribution is the argument that
+practitioners reason from narratives when reality is governed by distributions.
+
+1. **Taleb, N. N.** *Fooled by Randomness: The Hidden Role of Chance in Life and in the Markets.* Texere, New York, 2001; second edition, Random House, New York, 2004, ISBN 0-8129-7521-9. Source for the claim that narrative-driven reasoning is comforting, socially rewarded, and operationally dangerous.
+2. **Taleb, N. N.** *The Black Swan: The Impact of the Highly Improbable.* Random House, New York, 2007; second edition 2010. Source for tails, hidden pathways, and the failure of induction over an unrepresentative sample.
+3. **Eigenia Labs.** The seven-layer cyber-physical and socio-technical graph, from universal equipment definitions through organizational and geopolitical dynamics. Enumerated L0 to L6 in section II of `WG-02-DT-1.md`, and applied in `WG-02-DT-4.md` and `MP-Math-Physics-Formula/MP_Mathematical_Models.md`. `MP_Mathematical_Models.md` applies formulas across a separate eight-stage consequence cascade, now written `CS0` to `CS7`, which shares no meaning with this stack at any index.
+
+### Note on this bibliography
+
+The original source list was not preserved with the document. Markers one and two sat
+interchangeably on one body of Taleb argument, and the marker formerly numbered
+six has been renumbered three so the sequence is contiguous and no entry is
+orphaned. Each entry names a work checked to contain the claim it is
+cited for.

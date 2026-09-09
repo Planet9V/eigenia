@@ -12,17 +12,5 @@
     "To retire an entry: fix the underlying problem, confirm the audit exits 0,",
     "then delete the entry. Never raise a count to make a build pass."
   ],
-  "audits": {
-    "audit-citations.mjs": {
-      "count": 12,
-      "countPattern": "CITATION AUDIT FAILED: (\\d+) marker",
-      "reason": "Citation markers with no bibliography entry, in two WG-02-DT documents that are byte-identical to main. Pre-existing content debt, not a code fault.",
-      "frozen": [
-        "references/WG-02-DT-Digital-Twin/WG-02-DT-1.md: 9 markers (1-9)",
-        "references/WG-02-DT-Digital-Twin/WG-02-DT-5.md: 3 markers (1, 2, 6)"
-      ],
-      "recordedOn": "2026-09-08",
-      "toFix": "Add a References section to both documents, or remove the unresolved markers. Then delete this entry."
-    }
-  }
+  "audits": {}
 }

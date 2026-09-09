@@ -7,7 +7,7 @@ In 2001, Nassim Nicholas Taleb published *Fooled by Randomness* and detonated a 
 
 Taleb watched traders with three-year winning streaks collect eight-figure bonuses, absolutely certain their returns were products of intelligence, methodology, and discipline. He watched risk committees approve strategies on the strength of decades of historical backtesting, treating a long run of survived years as if it settled the question. He watched an entire industry evaluate itself by the *outcomes it could see*; the profits, the returns, the track records; while remaining structurally blind to the *outcomes it could not see*: the parallel universes where those same strategies produced catastrophic losses, the cemetery of blown-up funds that disappeared from the database, the rare events that historical data didn't contain because they hadn't happened yet. [3][4] Backtesting shows only that a strategy did not fail inside the sample it was run against. It stays silent about the states that sample never contained, which is the entire population of states the committee is being paid to worry about.
 
-He called this living on the **wrong side of the table**. [1]
+Taleb called the missing states silent evidence [1]. This paper calls the place you are standing when you cannot see them the **wrong side of the table**.
 
 One side of the table; the left; is where reality actually operates: probabilistic, fat-tailed, nonlinear, full of events that defy historical pattern. The other side; the right; is where humans *believe* they operate: a world of clean narratives, recognizable patterns, cause and effect, and the comforting illusion that past performance indicates future results. [2][1]
 
@@ -216,3 +216,37 @@ The Eigenia Cyber Digital Twin, powered by the AEON engine and the McKenney-Laca
 ---
 
 *Eigenia Cyber Digital Twin; See the left side of the table.*
+---
+
+## References
+
+Taleb's work is cited for the framing, not the invention. Survivorship bias,
+counterfactual evaluation of decisions, and barbell portfolio construction all
+predate him; what the Incerto contributes is the argument that practitioners
+systematically fail to reason about the unobserved population of outcomes, and
+the vocabulary that made the failure legible.
+
+1. **Taleb, N. N.** *Fooled by Randomness: The Hidden Role of Chance in Life and in the Markets.* Texere, New York, 2001; second edition, Random House, New York, 2004, ISBN 0-8129-7521-9. Source for silent evidence, the cemetery of failed track records, and alternative histories.
+2. **Taleb, N. N.** *The Black Swan: The Impact of the Highly Improbable.* Random House, New York, 2007; second edition 2010. Source for the rare event absent from the sample, and for the limits of induction over historical data.
+3. **Taleb, N. N.** *Fooled by Randomness*, on survivorship bias in fund performance: the losing funds close and leave no record, so the surviving track record is selected rather than earned.
+4. **Taleb, N. N.** *The Black Swan*, on backtesting and in-sample survival: a strategy that has not failed inside its sample is not thereby shown to be safe outside it.
+5. **Taleb, N. N.** *Fooled by Randomness*, on risk systems as architectures of self-deception, and on mistaking the visible outcomes of randomness for evidence of a working method.
+6. **Eigenia Labs.** The seven-layer Cyber Digital Twin and the AEON engine that operates over it. The layers are enumerated in section II of this document: reference equipment (L0), deployed equipment with its drift (L1), the software dependency chain (L2), the mapped threat landscape (L3), the psychology of defenders and attackers (L4), the real-time information environment (L5), and the predictive layer (L6). Applied further in `WG-02-DT-4.md`, `WG-02-DT-Seven-Staff-Fugue.md` and `MP-Math-Physics-Formula/MP_Mathematical_Models.md`. `MP_Mathematical_Models.md` applies formulas across a separate eight-stage consequence cascade, now written `CS0` to `CS7` so the two are no longer confusable. That cascade traces how a disturbance propagates outward; the model in this document is an asset and evidence stack. They share no meaning at any index: `L1` here is deployed equipment, `CS1` there is cyber detection.
+7. **Taleb, N. N.** *Fooled by Randomness*, on alternative histories: judging a decision by the distribution of states it could have produced rather than the one that happened to occur.
+8. **Eigenia Labs.** *Monte Carlo Engine: Importance Sampling and Graph Random Walks.* `WG-08-MO-Monte-Carlo-Application/WG-08-MO-Monte Carlo Engine.md`. The computational form of the alternative-histories argument.
+9. **Taleb, N. N.** *Antifragile: Things That Gain from Disorder.* Random House, New York, 2012, ISBN 978-1-4000-6782-4. Source for the barbell: bounded downside, open-ended upside, and the avoidance of strategies that look good on average while carrying hidden ruin.
+
+### Note on this bibliography
+
+The markers `[1]` through `[9]` were placed against a source list that was not
+preserved with the document, and entries 1 through 5 are used interchangeably
+across a single body of Taleb argument rather than one marker to one work. The
+entries above were reconstructed from what each marker is asked to support, and
+each names a work that demonstrably contains that claim. Where a claim appears in
+more than one Incerto volume, the entry names the volume that develops it. No
+marker was assigned to a work whose contents were not checked.
+
+Entry 6 carries seventeen of this document's citations. The architecture is
+specified here in section II, and the separate cascade it was previously
+confusable with has been renumbered `CS0` to `CS7`, so `L0` to `L6` now means
+one thing across the corpus.

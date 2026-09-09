@@ -1,6 +1,6 @@
-| Working group | Document type | Primary sources cited | Classification |
-| :--- | :--- | :--- | :--- |
-| WG-04-CF Cascading Failures | Eigenia Labs working paper | ERCOT, NERC, Texas RE, WECC, LBNL, AEMC, National Grid ESO | Open, non-normative |
+| Working group | Document type | Primary sources cited |
+| :--- | :--- | :--- |
+| WG-04-CF Cascading Failures | Eigenia Labs working paper | ERCOT, NERC, Texas RE, WECC, LBNL, AEMC, National Grid ESO |
 
 ## 1. Scope, and three corrections issued with it
 

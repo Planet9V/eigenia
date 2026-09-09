@@ -199,9 +199,9 @@ type correctly every time.
   ```
 - If standalone normative metadata is required for offline export, it must be formatted as a compact Markdown table, never as loose unformatted text:
   ```markdown
-  | Document ID | Working Group | Normative Standards | Classification |
-  | :--- | :--- | :--- | :--- |
-  | EIGENIA-WG05-CAD-01 | WG-05-CAD | ISO 15926 / CycloneDX 1.6 | Open Technical Specification |
+  | Working group | Document type | Primary sources cited |
+  | :--- | :--- | :--- |
+  | WG-05-CAD DEXPI 2.0 and CAD Interoperability | Eigenia Labs working paper | ISO 15926-4, CycloneDX 1.6, IEC 61970-301 |
   ```
 
 ### 2. Heading and Body Decoupling Rule
@@ -229,7 +229,8 @@ type correctly every time.
 
 ### 4. Continuous Style Invariants
 - **Zero em dashes:** Strictly replace all `—` and `--` with semicolons, colons, commas, or parentheses.
-- **Zero prohibited AI filler words:** No `leverage`, `utilize`, `pivotal`, `testament to`, `foster`, `streamline`, `at its core`, `landscape`, `beacon`, `game-changing`, `harness`, `furthermore`, `robust`.
+- **`landscape` is permitted.** `threat landscape` is standard domain usage in this field and reads as precise, not as filler. Do not flag it.
+- **Zero prohibited AI filler words:** No `leverage`, `utilize`, `pivotal`, `testament to`, `foster`, `streamline`, `at its core`, `beacon`, `game-changing`, `harness`, `furthermore`, `robust`.
 <!-- END academic-publication-formatting-rules (managed) -->
 
 ## Testing, and the one command that matters

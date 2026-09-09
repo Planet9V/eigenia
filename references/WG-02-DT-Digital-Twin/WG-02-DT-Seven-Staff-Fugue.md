@@ -15,31 +15,22 @@ Coupled to physical infrastructure through DEXPI 2.0 piping schematics, classed 
 
 Critical operational technology (OT) infrastructure operates across wildly disparate temporal and spatial scales. Nanosecond clock cycles in silicon microprocessors coexist with millisecond network packet propagation, multi-second thermal fluid transients, minute-scale human operator decision cycles, and multi-year asset depreciation schedules. 
 
-```
-+-------------------------------------------------------------------------+
-|                  THE SEVEN ARCHITECTURAL STAVES                         |
-+-------------------------------------------------------------------------+
-| STAFF 6: L6 - PREDICTIONS & ACTUARIAL OUTCOMES (Descant Voice)          |
-| Catastrophe probability, ALE drift, Lloyd's Y5381 accumulation.         |
-+-------------------------------------------------------------------------+
-| STAFF 5: L5 - TELEMETRY & EVENT STREAMS (Soprano Voice)                 |
-| Sensor time series, Modbus registers, syslog events, micro-tonal drift. |
-+-------------------------------------------------------------------------+
-| STAFF 4: L4 - HUMAN & PSYCHOMETRIC DYNAMICS (Mezzo-Soprano Voice)       |
-| Operator cognitive load, Loman Operator psi, DISC/OCEAN stress vectors. |
-+-------------------------------------------------------------------------+
-| STAFF 3: L3 - THREATS & ADVERSARY MANIFOLD (Alto Voice)                 |
-| MITRE ATT&CK for ICS vectors, exploit injection, adversary desire paths. |
-+-------------------------------------------------------------------------+
-| STAFF 2: L2 - SOFTWARE & SBOM LAYER (Tenor Voice)                       |
-| Firmware binaries, container runtime, API boundaries, VEX streams.      |
-+-------------------------------------------------------------------------+
-| STAFF 1: L1 - EQUIPMENT & PHYSICAL PROCESSES (Baritone Voice)           |
-| Hydraulic flow, thermodynamic heat flux, BESS charge, grid inertia.     |
-+-------------------------------------------------------------------------+
-| STAFF 0: L0 - HARDWARE CATALOG & SILICON ROOTS (Bass / Ground Voice)    |
-| Physical chassis, Caliptra DICE keys, silicon boundaries, structural P&ID.|
-+-------------------------------------------------------------------------+
+```mermaid
+graph BT
+    subgraph Staves["THE SEVEN ARCHITECTURAL STAVES"]
+        S0["STAFF 0: L0 - HARDWARE CATALOG &amp; SILICON ROOTS (Bass / Ground Voice)<br/>Physical chassis, Caliptra DICE keys, silicon boundaries, structural P&amp;ID."]
+        S1["STAFF 1: L1 - EQUIPMENT &amp; PHYSICAL PROCESSES (Baritone Voice)<br/>Hydraulic flow, thermodynamic heat flux, BESS charge, grid inertia."]
+        S2["STAFF 2: L2 - SOFTWARE &amp; SBOM LAYER (Tenor Voice)<br/>Firmware binaries, container runtime, API boundaries, VEX streams."]
+        S3["STAFF 3: L3 - THREATS &amp; ADVERSARY MANIFOLD (Alto Voice)<br/>MITRE ATT&amp;CK for ICS vectors, exploit injection, adversary desire paths."]
+        S4["STAFF 4: L4 - HUMAN &amp; PSYCHOMETRIC DYNAMICS (Mezzo-Soprano Voice)<br/>Operator cognitive load, Loman Operator psi, DISC/OCEAN stress vectors."]
+        S5["STAFF 5: L5 - TELEMETRY &amp; EVENT STREAMS (Soprano Voice)<br/>Sensor time series, Modbus registers, syslog events, micro-tonal drift."]
+        S6["STAFF 6: L6 - PREDICTIONS &amp; ACTUARIAL OUTCOMES (Descant Voice)<br/>Catastrophe probability, ALE drift, Lloyd's Y5381 accumulation."]
+
+        S0 --> S1 --> S2 --> S3 --> S4 --> S5 --> S6
+    end
+
+    classDef layer fill:#1a1c1f,stroke:#E05A10,stroke-width:1px,color:#f5f3f0;
+    class S0,S1,S2,S3,S4,S5,S6 layer;
 ```
 
 When an adversary initiates a sophisticated multi-stage cyber-physical attack, the operational state does not jump instantaneously from secure to broken. Instead, the incident unfolds as a fugue: an initial subject introduced in one voice (e.g., L3 threat injection) is answered in another voice (e.g., L2 firmware modification), establishing countersubjects in L1 (thermal fluid stagnation) and L4 (operator denial), culminating in a climactic stretto where all seven voices converge toward catastrophic failure.
@@ -67,33 +58,15 @@ Between any two staves $L_j$ and $L_k$, the instantaneous state defines an inter
 
 Heinrich Schenker revolutionized music theory by demonstrating that complex tonal masterworks are hierarchical elaborations of a simple underlying structural framework: the **Ursatz** (Fundamental Structure), consisting of the **Bassbrechung** (harmonic bass arpeggiation, typically $I - V - I$) and the **Urlinie** (fundamental descending melodic line, $\hat{3} - \hat{2} - \hat{1}$ or $\hat{5} - \hat{4} - \hat{3} - \hat{2} - \hat{1}$).
 
-```
-+-------------------------------------------------------------------------+
-|                  SCHENKERIAN CYBER-PHYSICAL MAPPING                     |
-+-------------------------------------------------------------------------+
-| SURFACE LEVEL (Vordergrund):                                            |
-| - High-frequency sensor noise, transient network jitters, alerts.       |
-| - Easily distracted by false flags or surface-level anomalies.          |
-+-------------------------------------------------------------------------+
-                                    |
-                            REDUCTION LEVEL 1
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| MIDDLEGROUND (Mittelgrund):                                             |
-| - Prolongations, secondary sequences, cyclic thermal expansions.        |
-| - Multi-hour demand response cycles, diurnal ambient temperature drift. |
-+-------------------------------------------------------------------------+
-                                    |
-                            REDUCTION LEVEL 2
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| FUNDAMENTAL STRUCTURE (Hintergrund / Ursatz):                           |
-| - The Bassbrechung: Continuous physical energy balance (L0/L1 baseline).|
-| - The Urlinie: Structural thermodynamic capacity margin descending      |
-|   from nominal operating headroom (3) to trip threshold (1).           |
-+-------------------------------------------------------------------------+
+```mermaid
+flowchart TD
+    Title["SCHENKERIAN CYBER-PHYSICAL MAPPING"]
+    Title --> Surface["SURFACE LEVEL (Vordergrund):<br/>High-frequency sensor noise, transient network jitters, alerts.<br/>Easily distracted by false flags or surface-level anomalies."]
+    Surface -->|"REDUCTION LEVEL 1"| Middle["MIDDLEGROUND (Mittelgrund):<br/>Prolongations, secondary sequences, cyclic thermal expansions.<br/>Multi-hour demand response cycles, diurnal ambient temperature drift."]
+    Middle -->|"REDUCTION LEVEL 2"| Ursatz["FUNDAMENTAL STRUCTURE (Hintergrund / Ursatz):<br/>The Bassbrechung: Continuous physical energy balance (L0/L1 baseline).<br/>The Urlinie: Structural thermodynamic capacity margin descending from nominal operating headroom (3) to trip threshold (1)."]
+
+    classDef layer fill:#1a1c1f,stroke:#E05A10,stroke-width:1px,color:#f5f3f0;
+    class Ursatz layer;
 ```
 
 ### 3.1 The Cyber-Physical Urlinie
@@ -117,7 +90,7 @@ $$X(t) = \{ \mathbf{x}_0(t), \mathbf{x}_1(t), \mathbf{x}_2(t), \mathbf{x}_3(t), 
 
 We construct a Vietoris-Rips simplicial complex $\mathcal{VR}(X, \epsilon)$ parameterized by a proximity threshold $\epsilon \ge 0$:
 - A $0$-simplex is a single architectural stave.
-- A $1$-simplex (edge) connects two staves whose cross-layer dissonance $|x_j - x_k| \le \epsilon$.
+- A $1$-simplex (edge) connects two staves whose cross-layer dissonance satisfies $\| \mathbf{x}_j - \mathbf{x}_k \| \le \epsilon$.
 - A $2$-simplex (triangle) forms when three staves achieve mutual contrapuntal coherence.
 
 ### 4.2 Barcode Intervals and Betti Numbers
@@ -125,22 +98,17 @@ As $\epsilon$ increases, topological features (connected components $H_0$, cycle
 
 $$\text{PD}_k = \{ (b_i, d_i) \mid b_i = \text{birth parameter}, \, d_i = \text{death parameter} \}$$
 
-```
-+-------------------------------------------------------------------------+
-|                  TOPOLOGICAL BARCODE COLLAPSE SEQUENCE                  |
-+-------------------------------------------------------------------------+
-| EPSILON = 0.1: All staves disconnected. Seven independent H_0 bars.     |
-| EPSILON = 0.5: Consonant staves merge. L0-L1 and L5-L6 form components.  |
-| EPSILON = 1.2: Normal operational coherence. 1 dominant H_0 bar.        |
-|                                                                         |
-| UNDER CYBER-PHYSICAL INTERDICTION:                                      |
-| - Persistent H_1 cycle opens between L1 (Physics), L3 (Attack), L4 (Ego)|
-| - Persistence length (d_i - b_i) exceeds critical threshold tau_crit.   |
-| - Mathematical proof of unresolvable structural dissonance.             |
-+-------------------------------------------------------------------------+
+```mermaid
+flowchart LR
+    E0["Epsilon = 0.1<br/>All staves disconnected<br/>Seven independent H_0 bars"] --> E1["Epsilon = 0.5<br/>Consonant staves merge<br/>L0-L1 and L5-L6 form components"]
+    E1 --> E2["Epsilon = 1.2<br/>Normal operational coherence<br/>1 dominant H_0 bar"]
+    E2 -.->|"Cyber-physical interdiction"| Barcode["Unresolvable structural dissonance<br/>Persistent H_1 cycle opens between L1 (Physics), L3 (Attack), L4 (Ego)<br/>Persistence length (d_i - b_i) exceeds 2.5 sigma"]
+
+    classDef layer fill:#1a1c1f,stroke:#E05A10,stroke-width:1px,color:#f5f3f0;
+    class Barcode layer;
 ```
 
-When a persistent 1-cycle $H_1$ exhibits a lifespan $\ell_i = d_i - b_i > 2.5\sigma$, the system has entered an irreversible failure loop. This topological barcode provides an automated, noise-immune trigger for autonomous plant isolation.
+When a persistent 1-cycle $H_1$ exhibits a lifespan $\ell_i = d_i - b_i > 2.5\sigma$, the system has entered an irreversible failure loop. That lifespan is measured in units of the filtration parameter $\epsilon$, so $\sigma$ is the standard deviation of the cross-layer dissonance distribution and not an interval of time. This topological barcode provides an automated, noise-immune trigger for autonomous plant isolation. The wall-clock dwell that converts the trigger into a breaker operation is a separate rule, set out in Section 7.
 
 ---
 
@@ -216,25 +184,18 @@ In the fugue, this failure manifests as a violent dissonant clash between Staff 
 
 To ensure that the Seven-Staff Fugue operates as an active defensive control system rather than a passive visualization, systems assurance dictates three structural remediations:
 
+```mermaid
+flowchart TD
+    Title["DETERMINISTIC DEFENSIVE CONTROLS"]
+    Title --> R1["REMEDIATION 1: AUTONOMOUS TOPOLOGICAL TRIP CUTOUTS<br/>A cross-layer H_1 cycle whose persistence length ell_i exceeds 2.5 sigma raises the topological trigger. Once that trigger has held for a dwell time t_dwell of 1.8 seconds, hardwired SIL-3 relays trip the main circuit breakers, completely bypassing the L4 human operator."]
+    Title --> R2["REMEDIATION 2: SCHENKERIAN BASELINE ENFORCEMENT<br/>Industrial control valves reject firmware setpoints that force contrary motion against the physical Ursatz energy conservation boundary."]
+    Title --> R3["REMEDIATION 3: UNIDIRECTIONAL MULTI-LAYER TELEMETRY<br/>Telemetry flows from lower staves (L0, L1) to upper staves (L5, L6) via optical data diodes, ensuring that upper-layer software compromise cannot corrupt physical measurement roots of trust."]
+
+    classDef layer fill:#1a1c1f,stroke:#E05A10,stroke-width:1px,color:#f5f3f0;
+    class Title layer;
 ```
-+-------------------------------------------------------------------------+
-|                  DETERMINISTIC DEFENSIVE CONTROLS                       |
-+-------------------------------------------------------------------------+
-| REMEDIATION 1: AUTONOMOUS TOPOLOGICAL TRIP CUTOUTS                      |
-| If the persistent homology persistence length ell_i of any cross-layer  |
-| H_1 cycle exceeds 1.8 seconds, hardwired SIL-3 relays trip the main     |
-| circuit breakers, completely bypassing the L4 human operator.           |
-+-------------------------------------------------------------------------+
-| REMEDIATION 2: SCHENKERIAN BASELINE ENFORCEMENT                         |
-| Industrial control valves reject firmware setpoints that force contrary |
-| motion against the physical Ursatz energy conservation boundary.        |
-+-------------------------------------------------------------------------+
-| REMEDIATION 3: UNIDIRECTIONAL MULTI-LAYER TELEMETRY                     |
-| Telemetry flows from lower staves (L0, L1) to upper staves (L5, L6) via|
-| optical data diodes, ensuring that upper-layer software compromise      |
-| cannot corrupt physical measurement roots of trust.                     |
-+-------------------------------------------------------------------------+
-```
+
+The two thresholds in Remediation 1 measure different quantities and are not interchangeable. The $2.5\sigma$ persistence length is a topological quantity expressed in units of the filtration parameter $\epsilon$; it decides whether an irreversible failure loop exists. The $1.8\text{ s}$ dwell is a timing rule in wall-clock seconds; it decides when the relay is allowed to fire. Applied to the interdiction sequence in Section 6.1, the trigger raises at $t = 8.5\text{ s}$ and the dwell expires at $t = 10.3\text{ s}$, leaving 34.7 seconds before silicon delamination.
 
 ---
 

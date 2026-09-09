@@ -1,5 +1,20 @@
 # CDT Mathematical Models; Complete Formula Reference
- The Cyber Digital Twin (CDT) implements 40 mathematical formulas across six computational engines. These models span the full 7-layer ontology (L0 Physical through L7 Temporal), connecting physical process dynamics to economic quantification and predictive forecasting.
+ The Cyber Digital Twin (CDT) implements 40 mathematical formulas across six computational engines. These models span the full eight-stage consequence cascade (CS0 Physical Process through CS7 Temporal Forecast), connecting physical process dynamics to economic quantification and predictive forecasting.
+
+> [!note] Notation, and why it is not `L0` to `L6`
+> The stages below are a **consequence cascade**: they trace how a disturbance
+> propagates outward from physical process to economic and temporal effect. They
+> are written `CS0` to `CS7`.
+>
+> This is a different model from the **seven-layer Cyber Digital Twin graph**
+> described in `WG-02-DT-Digital-Twin/WG-02-DT-1.md` and `WG-02-DT-4.md`, which
+> runs `L0` hardware catalog through `L6` predictions and is an asset and
+> evidence stack rather than a propagation path. The two share no meaning at any
+> index: `L1` is deployed equipment, `CS1` is cyber detection.
+>
+> Both were previously written with `L` prefixes, which made them look like one
+> ontology miscounted rather than two models. A third and unrelated scheme uses
+> `L0` to `L4` in `WG-05-CAD` for CPAI completeness levels.
 
 ## Monte Carlo Walk Engine
 
@@ -10,7 +25,7 @@ The engines and their  roles:
 | Monte Carlo Walk | `mc-engine.ts` | Boltzmann-weighted random walks on attack graphs |
 | Edge Weight Composition | `mc-weights.ts` | 14-dimension edge weight calculation |
 | Hawkes Cascade | `mc-hawkes.ts` | Self-exciting point process for correlated losses |
-| Structural Causal Model | `mc-scm.ts` | 7-layer Pearl do-calculus propagation |
+| Structural Causal Model | `mc-scm.ts` | Eight-stage Pearl do-calculus propagation across CS0 to CS7 |
 | ALE Insurance Engine | `ale-engine.ts` | Poisson-Pareto Monte Carlo for annual loss expectancy |
 | ATQ Actor Scoring | `atq-migration.sql` | 8-component actor threat quotient (Postgres stored procedures) |
 
@@ -177,10 +192,10 @@ Modifies edge weight when crossing between CDT layers using pre-calibrated trans
 
 ```typescript
 const LAYER_CPT: Record<string, number> = {
-    "L1->L2": 0.40, "L2->L0": 0.25, "L0->L3": 0.70, "L1->L3": 0.60,
-    "L3->L5": 0.85, "L5->L4": 0.15, "L1->L6": 0.30, "L3->L7": 0.50,
-    "L1->L0": 0.35, "L2->L3": 0.55, "L4->L1": 0.45, "L6->L1": 0.40,
-    "L7->L5": 0.35, "L0->L2": 0.50, "L3->L4": 0.20, "L5->L7": 0.30,
+    "CS1->CS2": 0.40, "CS2->CS0": 0.25, "CS0->CS3": 0.70, "CS1->CS3": 0.60,
+    "CS3->CS5": 0.85, "CS5->CS4": 0.15, "CS1->CS6": 0.30, "CS3->CS7": 0.50,
+    "CS1->CS0": 0.35, "CS2->CS3": 0.55, "CS4->CS1": 0.45, "CS6->CS1": 0.40,
+    "CS7->CS5": 0.35, "CS0->CS2": 0.50, "CS3->CS4": 0.20, "CS5->CS7": 0.30,
 };
 // Edge weight adjusted: w_adjusted = w_raw * CPT[src_layer -> tgt_layer]
 // Default 0.3 for unmapped transitions
@@ -366,7 +381,7 @@ $$P(\text{recover by time } t) = 1 - \exp\left(-\frac{t - t_{infected}}{72}\righ
 
 Pearl's do-calculus implemented as layer-specific causal mechanisms. Each layer receives upstream variables and propagates downstream with exogenous noise `U ~ Uniform(0,1)`.
 
-### F20. L0 ; Physical Process (Bernoulli Flow)
+### F20. CS0 ; Physical Process (Bernoulli Flow)
 
 **File:** `mc-scm.ts:50-69`
 
@@ -375,7 +390,7 @@ $$Q = v_{pos} \times 95$$
 $$\Delta T = \begin{cases} \Delta P \times 0.3 & \text{if } |\Delta P| > 50 \\ 0 & \text{otherwise} \end{cases}$$
 $$\text{interlock} = \begin{cases} 1 & \text{if } \Delta P > 80 \\ 0 & \text{otherwise} \end{cases}$$
 
-### F21. L1 ; Cyber Detection (EPSS-Calibrated)
+### F21. CS1 ; Cyber Detection (EPSS-Calibrated)
 
 **File:** `mc-scm.ts:71-93`
 
@@ -383,7 +398,7 @@ $$P_{alarm} = \min\left(1, \ \frac{|\Delta P|}{100} \times 0.8 + U \times 0.1\ri
 $$P_{exploit} = EPSS_{base} \times \left(1 + \frac{|\Delta P|}{200}\right)$$
 $$t_{response} = \begin{cases} 2\text{ min} & \text{if interlock triggered} \\ 15 + U \times 30 & \text{otherwise} \end{cases}$$
 
-### F22. L2 ; OT/ICS Isolation (IEC 62443 Zone Model)
+### F22. CS2 ; OT/ICS Isolation (IEC 62443 Zone Model)
 
 **File:** `mc-scm.ts:95-116`
 
@@ -392,7 +407,7 @@ $$\text{conduit\_blocked} = P_{isolate} > 0.6$$
 $$P_{lateral} = \begin{cases} 0.1 & \text{if blocked} \\ P_{exploit} \times 0.7 & \text{otherwise} \end{cases}$$
 $$\text{defense\_effectiveness} = \frac{SL\text{-}T}{4}$$
 
-### F23. L3 ; Organizational Impact (Business Continuity)
+### F23. CS3 ; Organizational Impact (Business Continuity)
 
 **File:** `mc-scm.ts:118-142`
 
@@ -400,7 +415,7 @@ $$t_{down} = \begin{cases} \max(2, \ t_{contain} \times 0.3) & \text{if isolated
 $$\text{production\_loss\_\%} = \min(100, \ t_{down} \times 2 + P_{lateral} \times 30)$$
 $$\text{workforce\_impact} = \begin{cases} 0.8 & t_{down} > 48\text{h} \\ 0.3 & t_{down} > 8\text{h} \\ 0.05 & \text{otherwise} \end{cases}$$
 
-### F24. L4 ; Geopolitical Propagation (Leontief Input-Output)
+### F24. CS4 ; Geopolitical Propagation (Leontief Input-Output)
 
 **File:** `mc-scm.ts:144-174`
 
@@ -409,7 +424,7 @@ $$\text{geo\_amplifier} = g_{risk} \times (1 + P_{cascade} \times 0.5)$$
 
 Where `g_risk` is the mean `g_risk_multiplier` from `public.governance_risk`.
 
-### F25. L5 ; Economic Quantification (ALE Model)
+### F25. CS5 ; Economic Quantification (ALE Model)
 
 **File:** `mc-scm.ts:176-207`
 
@@ -421,7 +436,7 @@ $$\text{total\_impact} = \text{breach} + \text{BI} + \text{fine} + \text{supply}
 
 All values in $M. Premium multiplier: `1.3 + P_cascade * 0.7`. Insurance coverage: 60% typical.
 
-### F26. L6 ; Psychographic Shift (ERIKA Quantum State)
+### F26. CS6 ; Psychographic Shift (ERIKA Quantum State)
 
 **File:** `mc-scm.ts:209-230`
 
@@ -429,7 +444,7 @@ $$\Delta_{activation} = \begin{cases} 0.3 + U \times 0.2 & \text{if impact > \$2
 $$P_{copycat} = \begin{cases} 0.4 + U \times 0.3 & \text{if impact > \$30M} \\ 0.1 & \text{otherwise} \end{cases}$$
 $$\text{SE\_boost} = \begin{cases} 1.3 & \text{if } \Delta_{act} > 0.2 \\ 1.0 & \text{otherwise} \end{cases}$$
 
-### F27. L7 ; Temporal Forecast (Seldon Prediction)
+### F27. CS7 ; Temporal Forecast (Seldon Prediction)
 
 **File:** `mc-scm.ts:232-254`
 
@@ -645,7 +660,7 @@ Clamped to `[0, 100]`.
 
 ### Component Formulas (C1-C8)
 
-#### C1: EIC Composite (L6 Psychographic)
+#### C1: EIC Composite (CS6 Psychographic)
 
 **File:** `atq-migration.sql:178-208`
 
@@ -653,7 +668,7 @@ $$C_1 = \min\left(1, \ 0.40 I + 0.35 C + 0.25 O + 0.15 D\right)$$
 
 Where `I` = intent, `C` = capability, `O` = opportunity (from `actor_eic`), `D` = Dark Triad d_factor (from `psychometric_profiles`).
 
-#### C2: TACAM Affinity (L1-L2 Cyber-Physical)
+#### C2: TACAM Affinity (CS1-CS2 Cyber-Physical)
 
 **File:** `atq-migration.sql:213-258`
 
@@ -665,7 +680,7 @@ Where:
 - `protocol_reach = distinct_protocols(score > 0.3) / 12`
 - `kill_chain_completeness = distinct_tactics / 14`
 
-#### C3: Temporal Momentum (L7 Temporal)
+#### C3: Temporal Momentum (CS7 Temporal)
 
 **File:** `atq-migration.sql:283-337`
 
@@ -677,7 +692,7 @@ Where:
 - $V_{technique} = \min\left(\frac{\text{techniques\_added\_last\_year}}{10}, 1\right)$
 - $R_{incident} = \exp\left(-\frac{\ln 2 \times \Delta t}{180 \text{ days}}\right)$ (half-life 180 days)
 
-#### C4: Incident Evidence (L5 Economic)
+#### C4: Incident Evidence (CS5 Economic)
 
 **File:** `atq-migration.sql:342-381`
 
@@ -688,7 +703,7 @@ Where:
 - $S = \min(1, \ \text{pct}_{crit} \times 1.0 + \text{pct}_{high} \times 0.7 + \text{pct}_{med} \times 0.3)$
 - $K = \min\left(\frac{\log_{10}(\text{total\_cost\_m} + 1)}{4}, 1\right)$
 
-#### C5: Exploit Economics Index (L5/L7)
+#### C5: Exploit Economics Index (CS5/CS7)
 
 **File:** `atq-migration.sql:386-427`
 
@@ -696,7 +711,7 @@ With direct EEI data: $C_5 = \min(1, \ 0.60 \times EEI + 0.40 \times EPSS_{avg})
 
 With EPSS proxy: $C_5 = \min(1, \ EPSS_{avg} \times 1.5 + \frac{KEV_{count}}{CWE_{count}} \times 0.2)$
 
-#### C6: Discourse Dynamics (L6 Psychographic)
+#### C6: Discourse Dynamics (CS6 Psychographic)
 
 **File:** `atq-migration.sql:431-468`
 
@@ -707,7 +722,7 @@ Where:
 - `B_bifurcation = 0.15` if `beta_tension < 0.15` or `near_bifurcation = true`, else 0
 - `M_stability = 0.10 * (1 - beta_tension)`
 
-#### C7: Geopolitical Pressure (L4 Geopolitical)
+#### C7: Geopolitical Pressure (CS4 Geopolitical)
 
 **File:** `atq-migration.sql:472-511`
 
@@ -718,7 +733,7 @@ Where:
 - `T_target = avg(geo_risk_score * target_weight)` for target > 0.1
 - `C_conflict = (conflict_exposure + state_sponsorship_likelihood) / 2` from geopolitical_field
 
-#### C8: Kramers Barrier Penetration (L0-L2 Physics)
+#### C8: Kramers Barrier Penetration (CS0-CS2 Physics)
 
 **File:** `atq-migration.sql:515-561`
 
@@ -774,50 +789,50 @@ See F11 above. EPSS velocity data is sourced from `seldon.epss_trajectory` (555,
 | # | Formula | File | Line | Layer |
 | :--- | :--- | :--- | :--- | :--- |
 | F1 | Mulberry32 PRNG | `mc-engine.ts` | 27 | ; |
-| F2 | Boltzmann Distribution | `mc-engine.ts` | 320 | L1-L2 |
-| F3 | Pareto Sampling | `mc-engine.ts` | 348 | L5 |
-| F4 | Hill Estimator | `mc-engine.ts` | 355 | L5 |
-| F5 | CVaR (Conditional VaR) | `mc-engine.ts` | 705 | L5 |
-| F6 | Gaussian vs Pareto Ratio | `mc-engine.ts` | 776 | L5 |
-| F7 | Antifragility Score | `mc-engine.ts` | 791 | L2 |
-| F8 | Barbell Score (CoV) | `mc-engine.ts` | 814 | L5 |
-| F9 | Layer CPT | `mc-engine.ts` | 196 | L0-L7 |
-| F10 | 14-Dimension Edge Weight | `mc-weights.ts` | 137 | L0-L7 |
-| F11 | EPSS Velocity Boost | `mc-weights.ts` | 239 | L7 |
-| F12 | TACAM Recency Modifier | `mc-weights.ts` | 296 | L7 |
-| F13 | Spectral Vulnerability Boost | `mc-engine.ts` | 174 | L1-L2 |
-| F14 | Hawkes Intensity | `mc-hawkes.ts` | 74 | L7 |
-| F15 | R0 (Reproduction Number) | `mc-hawkes.ts` | 294 | L7 |
-| F16 | GPD Severity Sampling | `mc-hawkes.ts` | 96 | L5 |
-| F17 | Ogata Thinning Algorithm | `mc-hawkes.ts` | 110 | L7 |
-| F18 | Hawkes-SIR Cost Boost | `mc-hawkes.ts` | 251 | L5 |
-| F19 | SIR Recovery Model | `mc-hawkes.ts` | 197 | L3 |
-| F20 | L0 Physical Process | `mc-scm.ts` | 50 | L0 |
-| F21 | L1 Cyber Detection | `mc-scm.ts` | 71 | L1 |
-| F22 | L2 OT/ICS Isolation | `mc-scm.ts` | 95 | L2 |
-| F23 | L3 Organizational Impact | `mc-scm.ts` | 118 | L3 |
-| F24 | L4 Geopolitical Propagation | `mc-scm.ts` | 144 | L4 |
-| F25 | L5 Economic Quantification | `mc-scm.ts` | 176 | L5 |
-| F26 | L6 Psychographic Shift | `mc-scm.ts` | 209 | L6 |
-| F27 | L7 Temporal Forecast | `mc-scm.ts` | 232 | L7 |
-| F28 | Poisson-Pareto ALE | `ale-engine.ts` | 894 | L5 |
-| F29 | Frequency Adjustment | `ale-engine.ts` | 791 | L5 |
-| F30 | Percentile Tail Estimator | `ale-engine.ts` | 830 | L5 |
-| F31 | Reporting Bias Correction | `ale-engine.ts` | 854 | L5 |
-| F32 | KS Goodness-of-Fit | `ale-engine.ts` | 225 | L5 |
-| F33 | Gordon-Loeb Optimal | `ale-engine.ts` | 978 | L5 |
-| F34 | Premium Calculation | `ale-engine.ts` | 967 | L5 |
-| F35 | Y5381 Attribution | `ale-engine.ts` | 706 | L4-L5 |
-| F36 | Loss Development Factors | `ale-engine.ts` | 283 | L5 |
+| F2 | Boltzmann Distribution | `mc-engine.ts` | 320 | CS1-CS2 |
+| F3 | Pareto Sampling | `mc-engine.ts` | 348 | CS5 |
+| F4 | Hill Estimator | `mc-engine.ts` | 355 | CS5 |
+| F5 | CVaR (Conditional VaR) | `mc-engine.ts` | 705 | CS5 |
+| F6 | Gaussian vs Pareto Ratio | `mc-engine.ts` | 776 | CS5 |
+| F7 | Antifragility Score | `mc-engine.ts` | 791 | CS2 |
+| F8 | Barbell Score (CoV) | `mc-engine.ts` | 814 | CS5 |
+| F9 | Layer CPT | `mc-engine.ts` | 196 | CS0-CS7 |
+| F10 | 14-Dimension Edge Weight | `mc-weights.ts` | 137 | CS0-CS7 |
+| F11 | EPSS Velocity Boost | `mc-weights.ts` | 239 | CS7 |
+| F12 | TACAM Recency Modifier | `mc-weights.ts` | 296 | CS7 |
+| F13 | Spectral Vulnerability Boost | `mc-engine.ts` | 174 | CS1-CS2 |
+| F14 | Hawkes Intensity | `mc-hawkes.ts` | 74 | CS7 |
+| F15 | R0 (Reproduction Number) | `mc-hawkes.ts` | 294 | CS7 |
+| F16 | GPD Severity Sampling | `mc-hawkes.ts` | 96 | CS5 |
+| F17 | Ogata Thinning Algorithm | `mc-hawkes.ts` | 110 | CS7 |
+| F18 | Hawkes-SIR Cost Boost | `mc-hawkes.ts` | 251 | CS5 |
+| F19 | SIR Recovery Model | `mc-hawkes.ts` | 197 | CS3 |
+| F20 | CS0 Physical Process | `mc-scm.ts` | 50 | CS0 |
+| F21 | CS1 Cyber Detection | `mc-scm.ts` | 71 | CS1 |
+| F22 | CS2 OT/ICS Isolation | `mc-scm.ts` | 95 | CS2 |
+| F23 | CS3 Organizational Impact | `mc-scm.ts` | 118 | CS3 |
+| F24 | CS4 Geopolitical Propagation | `mc-scm.ts` | 144 | CS4 |
+| F25 | CS5 Economic Quantification | `mc-scm.ts` | 176 | CS5 |
+| F26 | CS6 Psychographic Shift | `mc-scm.ts` | 209 | CS6 |
+| F27 | CS7 Temporal Forecast | `mc-scm.ts` | 232 | CS7 |
+| F28 | Poisson-Pareto ALE | `ale-engine.ts` | 894 | CS5 |
+| F29 | Frequency Adjustment | `ale-engine.ts` | 791 | CS5 |
+| F30 | Percentile Tail Estimator | `ale-engine.ts` | 830 | CS5 |
+| F31 | Reporting Bias Correction | `ale-engine.ts` | 854 | CS5 |
+| F32 | KS Goodness-of-Fit | `ale-engine.ts` | 225 | CS5 |
+| F33 | Gordon-Loeb Optimal | `ale-engine.ts` | 978 | CS5 |
+| F34 | Premium Calculation | `ale-engine.ts` | 967 | CS5 |
+| F35 | Y5381 Attribution | `ale-engine.ts` | 706 | CS4-CS5 |
+| F36 | Loss Development Factors | `ale-engine.ts` | 283 | CS5 |
 | F37 | xoshiro128** PRNG | `ale-engine.ts` | 366 | ; |
-| F38 | ATQ Sigmoid + Weights | `atq-migration.sql` | 598 | L0-L7 |
+| F38 | ATQ Sigmoid + Weights | `atq-migration.sql` | 598 | CS0-CS7 |
 | F38a | ATQ Confidence Interval | `atq-migration.sql` | 614 | ; |
-| F39 | Detection Probability | `mc-engine.ts` | 598 | L2 |
-| C1 | EIC Composite | `atq-migration.sql` | 178 | L6 |
-| C2 | TACAM Affinity | `atq-migration.sql` | 213 | L1-L2 |
-| C3 | Temporal Momentum | `atq-migration.sql` | 283 | L7 |
-| C4 | Incident Evidence | `atq-migration.sql` | 342 | L5 |
-| C5 | Exploit Economics Index | `atq-migration.sql` | 386 | L5/L7 |
-| C6 | Discourse Dynamics | `atq-migration.sql` | 431 | L6 |
-| C7 | Geopolitical Pressure | `atq-migration.sql` | 472 | L4 |
-| C8 | Kramers Barrier | `atq-migration.sql` | 515 | L0-L2 |
+| F39 | Detection Probability | `mc-engine.ts` | 598 | CS2 |
+| C1 | EIC Composite | `atq-migration.sql` | 178 | CS6 |
+| C2 | TACAM Affinity | `atq-migration.sql` | 213 | CS1-CS2 |
+| C3 | Temporal Momentum | `atq-migration.sql` | 283 | CS7 |
+| C4 | Incident Evidence | `atq-migration.sql` | 342 | CS5 |
+| C5 | Exploit Economics Index | `atq-migration.sql` | 386 | CS5/CS7 |
+| C6 | Discourse Dynamics | `atq-migration.sql` | 431 | CS6 |
+| C7 | Geopolitical Pressure | `atq-migration.sql` | 472 | CS4 |
+| C8 | Kramers Barrier | `atq-migration.sql` | 515 | CS0-CS2 |
