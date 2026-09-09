@@ -31,6 +31,14 @@ Without rigorous financial quantification, cybersecurity requests are treated as
 
 ```mermaid
 flowchart LR
+    accTitle: Translating engineering findings into capital allocation
+    accDescr {
+      The CyHAZOP and FMECA engineering layer supplies node deviations, physical
+      units and a cyber risk priority number of 567. An actuarial formulation
+      translation converts those into the CFO and underwriting capital allocation
+      layer: single loss expectancy, annualised loss expectancy, return on security
+      investment, the Gordon-Loeb ceiling and the Taleb fat-tail correction.
+    }
   subgraph ENG["CyHAZOP and FMECA engineering layer"]
     direction TB
     E1["node deviations"]
@@ -77,6 +85,12 @@ Accurately calculating Asset Value (AV) and Exposure Factor (EF) requires synchr
 
 ```mermaid
 flowchart LR
+    accTitle: From physical assets to business interruption exposure
+    accDescr {
+      DEXPI 2.0 physical infrastructure assets carry a concurrent IT compute payload,
+      expressed as CycloneDX 1.6+ assets, whose revenue impact valuation gives the
+      business interruption exposure.
+    }
   A["DEXPI 2.0 physical infrastructure assets"]
   B["CycloneDX 1.6+ compute payload assets"]
   C["business interruption exposure"]
@@ -165,7 +179,7 @@ The following worked financial analysis evaluates the six high-consequence CyHAZ
 | **N8: Facility BMS** | Ransomware encrypts supervisory SCADA; lights-out fail-safe collapse | $25,000,000 | 0.50 | $12,500,000 | 0.20 | **$2,500,000** |
 | **N10: Fire Suppression** | Inadvertent clean-agent release and HVAC emergency shutdown | $15,000,000 | 0.40 | $6,000,000 | 0.10 | **$600,000** |
 | **N12: Server BMC** | Supply chain firmware backdoor kills 2,000 accelerator nodes | $48,000,000 | 0.70 | $33,600,000 | 0.08 | **$2,688,000** |
-| **TOTALS** | **Baseline 100 MW Hyperscale Infrastructure** | **—** | **—** | **—** | **—** | **$17,403,000** |
+| **TOTALS** | **Baseline 100 MW Hyperscale Infrastructure** | **; ** | **; ** | **; ** | **; ** | **$17,403,000** |
 
 ---
 
@@ -183,7 +197,7 @@ To mitigate the $17.40\text{M USD}$ annual loss exposure, the facility deploys a
 | **N8: BMS** | IEC 62443 zone segmentation, air-gapped immutable backup server | $350,000 | 0.020 | $250,000 | $2,250,000 | **543%** |
 | **N10: Fire** | Hardwired mechanical abort buttons, isolated fire signaling conduit | $120,000 | 0.010 | $60,000 | $540,000 | **350%** |
 | **N12: BMC** | Caliptra 2.0 Silicon RoT, DICE firmware signing, 802.1AR auth | $280,000 | 0.030 | $1,008,000 | $1,680,000 | **500%** |
-| **TOTALS** | **Comprehensive OT Systems Assurance Programme** | **$1,600,000** | **—** | **$2,052,750** | **$15,350,250** | **859%** |
+| **TOTALS** | **Comprehensive OT Systems Assurance Programme** | **$1,600,000** | **; ** | **$2,052,750** | **$15,350,250** | **859%** |
 
 ### 5.1 Programme Evaluation Against the Gordon-Loeb Ceiling
 Evaluating the total programme against the Gordon-Loeb theorem:

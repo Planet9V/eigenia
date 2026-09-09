@@ -87,7 +87,7 @@ console.log("\n" + "=".repeat(70));
 console.log("MERMAID DIAGRAM AUDIT");
 console.log("=".repeat(70) + "\n");
 
-let total = 0, bad = 0;
+let total = 0, bad = 0, inaccessible = 0;
 for (const file of walk(REFS)) {
   const blocks = extractBlocks(readFileSync(file, "utf-8"));
   if (!blocks.length) continue;
@@ -98,6 +98,13 @@ for (const file of walk(REFS)) {
       bad++;
       console.log(`FAIL  ${rel}:${b.line}  unterminated \`\`\`mermaid fence`);
       continue;
+    }
+    // Accessibility metadata is not decoration. A mermaid SVG without it is
+    // announced to a screen reader as an unlabelled image, which is worse than
+    // the ASCII art it replaced: that at least got read out, however badly.
+    if (!/^\s*accTitle\s*:/m.test(b.code) || !/^\s*accDescr\s*[:{]/m.test(b.code)) {
+      inaccessible++;
+      console.log(`FAIL  ${rel}:${b.line}  missing accTitle or accDescr`);
     }
     try {
       await mermaid.parse(b.code);
@@ -113,11 +120,19 @@ for (const file of walk(REFS)) {
 }
 
 console.log("\n" + "=".repeat(70));
+if (inaccessible) {
+  console.error(
+    `MERMAID AUDIT FAILED: ${inaccessible} of ${total} diagrams carry no accTitle/accDescr.`
+  );
+  console.error("Give the diagram a stated title and a described structure.");
+  console.log("=".repeat(70) + "\n");
+  process.exit(1);
+}
 if (bad) {
   console.error(`MERMAID AUDIT FAILED: ${bad} of ${total} diagrams do not parse.`);
   console.error("These render as a plain <pre> fallback on the live site.");
   console.log("=".repeat(70) + "\n");
   process.exit(1);
 }
-console.log(`MERMAID AUDIT PASSED: all ${total} diagrams parse.`);
+console.log(`MERMAID AUDIT PASSED: all ${total} diagrams parse and carry accTitle/accDescr.`);
 console.log("=".repeat(70) + "\n");

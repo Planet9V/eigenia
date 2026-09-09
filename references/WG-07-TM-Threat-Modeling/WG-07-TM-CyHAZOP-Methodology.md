@@ -41,6 +41,13 @@ Traditional HAZOP fails in computing environments because engineers lack a unifi
 
 ```mermaid
 flowchart LR
+    accTitle: Binding DEXPI P and ID nodes to the CycloneDX multi-BOM
+    accDescr {
+      Three DEXPI 2.0 nodes, heat exchanger HEX-201, pump P-101 and the manifolds,
+      all pass through a cross-domain conduit binding, which fans out to the five
+      CycloneDX 1.6+ bills of materials: hardware, software, cryptography,
+      operational bounds and VEX.
+    }
     subgraph L["DEXPI 2.0 P&ID nodes (ISO 15926-4)"]
         HEX["Heat exchanger HEX-201"]
         PUMP["Pump P-101"]
@@ -85,6 +92,13 @@ The CyHAZOP study is executed by a multidisciplinary team; mechanical process en
 
 ```mermaid
 flowchart LR
+    accTitle: The four phases of the CyHAZOP methodology
+    accDescr {
+      Phase 1 is system definition and node delineation. Phase 2 executes the
+      parameter and guide word matrix. Phase 3 evaluates consequences and
+      safeguards. Phase 4 covers remediation, safety instrumented system hardening
+      and verification.
+    }
     P1["Phase 1<br/>System definition and<br/>node delineation"]
     P2["Phase 2<br/>Parameter and guide<br/>word matrix execution"]
     P3["Phase 3<br/>Consequence and<br/>safeguard evaluation"]
@@ -291,6 +305,16 @@ CyHAZOP gives an engineering justification for where the zone boundaries fall. E
 
 ```mermaid
 flowchart LR
+    accTitle: Four zones and their conduits, from supervisory down to silicon
+    accDescr {
+      Zone 3, the enterprise BMS and DCIM supervisory layer, sits at target security
+      level 2 and reaches zone 2 only through a unidirectional data diode. Zone 2,
+      facility OT with the CDU master PLCs and switchgear relays, sits at level 3 and
+      reaches zone 1 through encrypted mutual TLS and signed Modbus. Zone 1, the
+      field actuators, motor controllers and cold plates, also sits at level 3 and
+      reaches zone 0 through a hardwired analog SIL-3 safety loop. Zone 0 is the
+      physical silicon, heat flux and busbars, at level 4.
+    }
     Z3["Zone 3<br/>Enterprise BMS / DCIM supervisory<br/>SL-T 2"]
     Z2["Zone 2<br/>Facility OT / CDU master PLCs / switchgear relays<br/>SL-T 3"]
     Z1["Zone 1<br/>Field actuators / VFD motor controllers / cold plates<br/>SL-T 3"]

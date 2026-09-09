@@ -8,6 +8,17 @@ Enterprise IT tools were engineered for an environment where data confidentialit
 
 ```mermaid
 flowchart TD
+    accTitle: How the fragile middle produces physical equipment destruction
+    accDescr {
+      Four enterprise IT products form the fragile middle: user-space EDR agents on
+      real-time operating systems, active network vulnerability scanners,
+      cloud-tethered SIEM collectors spanning the Purdue model, and complex heuristic
+      deep packet inspection firewalls. All four converge on physical disruption
+      risk, which fans out into four destruction modes: scan cycle preemption
+      tripping a compressor, TCP floods crashing serial bridges and causing loss of
+      view, kernel driver faults, and a packet validated as syntactically legal while
+      a valve closes on an exothermic reaction.
+    }
     subgraph FragileMiddle["The Fragile Middle: Enterprise IT Snake Oil"]
         F1["User-Space EDR Agents on Real-Time Operating Systems"]
         F2["Active Network Vulnerability Port Scanners (Nmap/Nessus)"]
@@ -72,6 +83,18 @@ In finance, the Barbell Strategy rejects the middle ground. An investor avoids "
 
 ```mermaid
 flowchart LR
+    accTitle: The Taleb cyber-physical barbell architecture
+    accDescr {
+      Three positions. The first extreme, holding ninety percent, is deterministic
+      physical grounding: zero software, zero microprocessors, zero networks,
+      hardwired bimetallic thermal cutouts, spring-loaded relief valves, rupture
+      discs, hydraulic dampers and hardware optical data diodes. The rejected middle,
+      holding nothing, is enterprise EDR agents on control workstations,
+      cloud-tethered collectors inside the lower Purdue levels, heuristic deep packet
+      inspection guessing at intent, and compliance checklists standing in for
+      physical safety. The second extreme, holding ten percent, is supervisory
+      computation decoupled from the write loop.
+    }
     subgraph Barbell["THE TALEB CYBER-PHYSICAL BARBELL ARCHITECTURE"]
         direction LR
 
@@ -151,6 +174,15 @@ Underwriting syndicates in the Lloyd's of London cyber insurance market have int
 
 ```mermaid
 flowchart LR
+    accTitle: Underwriting verification under Lloyd's Y5381, two approaches compared
+    accDescr {
+      The conventional enterprise IT approach carries high vulnerability to
+      state-sponsored zero-days, software failure causing physical asset
+      delamination, punitive deductibles of 25 to 50 million dollars, and exposure to
+      war exclusion clause litigation. The barbell defense carries zero software
+      dependency for the trip, analog relays guaranteeing containment, deductibles
+      compressed by up to ninety percent, and an affirmative SFAIRP legal defense.
+    }
     subgraph Y5381["LLOYD'S Y5381 UNDERWRITING VERIFICATION"]
         direction LR
 

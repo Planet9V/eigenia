@@ -135,6 +135,16 @@ That statement is load-bearing and this paper does not soften it: the event show
 
 ```mermaid
 flowchart TD
+    accTitle: The Continental Europe system split of 8 January 2021
+    accDescr {
+      At 14:04:25.9 the Ernestinovo 400 kV busbar coupler trips on overload
+      protection. Two seconds later both 400 to 110 kV transformers trip on overload.
+      At 14:04:48.9 the Subotica to Novi Sad 400 kV line trips on a twenty second
+      second-zone overload, followed between 14:04:51.9 and 14:05:08.6 by ten further
+      distance protection trips across Romania, Bosnia and Croatia. At 14:05:08 the
+      synchronous area splits in two with a 5.8 GW imbalance each way, the north-west
+      area seeing a rate of change of minus 60 millihertz per second.
+    }
   A["14:04:25.9<br/>Ernestinovo 400 kV busbar coupler<br/>overload protection trips"]
   B["14:04:28.0<br/>Overload protection of both<br/>400 to 110 kV transformers"]
   C["14:04:48.9<br/>Subotica to Novi Sad 400 kV trips<br/>on 20 s second zone overload"]

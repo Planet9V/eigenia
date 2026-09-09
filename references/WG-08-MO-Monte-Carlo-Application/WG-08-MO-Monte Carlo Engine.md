@@ -15,6 +15,15 @@ The Eigenia Cyber Digital Twin (CDT) Monte Carlo Engine resolves these deficienc
 
 ```mermaid
 flowchart TD
+    accTitle: The Monte Carlo engine, from multi-modal ingestion onward
+    accDescr {
+      Ingestion draws on four sources: DEXPI 2.0 XML giving physical topology of
+      piping, vessels, valves and pumps; the CycloneDX 1.6+ five-BOM stack giving
+      digital provenance; the TACAM seven-dimensional spectral matrix giving threat
+      capability; and PostgreSQL analytics supplying eigenvector centrality and EPSS
+      velocity feeds. Those feed the subgraph builder and the simulation stages that
+      follow.
+    }
     subgraph Ingestion["1. Multi-Modal Graph Ingestion"]
         DEXPI["DEXPI 2.0 XML / ISO 15926<br/>Physical Topology (Piping, Vessels, Valves, Pumps)"]
         CDX["CycloneDX 1.6+ 5-BOM Stack<br/>Digital Provenance (HBOM, SBOM, CBOM, OBOM, VEX)"]

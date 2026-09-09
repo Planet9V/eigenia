@@ -21,6 +21,14 @@ Without rigorous financial quantification, cybersecurity requests are treated as
 
 ```mermaid
 flowchart LR
+    accTitle: Translating engineering findings into capital allocation
+    accDescr {
+      The CyHAZOP and FMECA engineering layer supplies node deviations, physical
+      units and a cyber risk priority number of 567. An actuarial formulation
+      translation converts those into the CFO and underwriting capital allocation
+      layer: single loss expectancy, annualised loss expectancy, return on security
+      investment, the Gordon-Loeb ceiling and the Taleb fat-tail correction.
+    }
   subgraph ENG["CyHAZOP and FMECA engineering layer"]
     direction TB
     E1["node deviations"]
@@ -67,6 +75,12 @@ Accurately calculating Asset Value (AV) and Exposure Factor (EF) requires synchr
 
 ```mermaid
 flowchart LR
+    accTitle: From physical assets to business interruption exposure
+    accDescr {
+      DEXPI 2.0 physical infrastructure assets carry a concurrent IT compute payload,
+      expressed as CycloneDX 1.6+ assets, whose revenue impact valuation gives the
+      business interruption exposure.
+    }
   A["DEXPI 2.0 physical infrastructure assets"]
   B["CycloneDX 1.6+ compute payload assets"]
   C["business interruption exposure"]

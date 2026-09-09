@@ -29,6 +29,14 @@ Critical operational technology (OT) infrastructure operates across wildly dispa
 
 ```mermaid
 graph BT
+    accTitle: The seven architectural staves as voices in a score
+    accDescr {
+      Seven layers, each given a voice. Staff 0, the bass, is the hardware catalog
+      and silicon roots. Staff 1, baritone, is equipment and physical processes.
+      Staff 2, tenor, is software and the SBOM layer. Staff 3, alto, is threats and
+      the adversary manifold. The remaining staves carry the human, telemetry and
+      actuarial voices, stacked from the physical ground upward.
+    }
     subgraph Staves["THE SEVEN ARCHITECTURAL STAVES"]
         S0["STAFF 0: L0 - HARDWARE CATALOG &amp; SILICON ROOTS (Bass / Ground Voice)<br/>Physical chassis, Caliptra DICE keys, silicon boundaries, structural P&amp;ID."]
         S1["STAFF 1: L1 - EQUIPMENT &amp; PHYSICAL PROCESSES (Baritone Voice)<br/>Hydraulic flow, thermodynamic heat flux, BESS charge, grid inertia."]
@@ -72,6 +80,16 @@ Heinrich Schenker revolutionized music theory by demonstrating that complex tona
 
 ```mermaid
 flowchart TD
+    accTitle: Schenkerian reduction applied to cyber-physical signals
+    accDescr {
+      Three levels of reduction. The surface level holds high-frequency sensor
+      noise, transient network jitter and alerts, where false flags distract. The
+      first reduction reaches the middleground: prolongations, secondary sequences,
+      cyclic thermal expansion, multi-hour demand response and diurnal ambient
+      drift. The second reduction reaches the fundamental structure, where the
+      continuous physical energy balance is the bass line and the structural
+      thermodynamic capacity margin is the descending upper line.
+    }
     Title["SCHENKERIAN CYBER-PHYSICAL MAPPING"]
     Title --> Surface["SURFACE LEVEL (Vordergrund):<br/>High-frequency sensor noise, transient network jitters, alerts.<br/>Easily distracted by false flags or surface-level anomalies."]
     Surface -->|"REDUCTION LEVEL 1"| Middle["MIDDLEGROUND (Mittelgrund):<br/>Prolongations, secondary sequences, cyclic thermal expansions.<br/>Multi-hour demand response cycles, diurnal ambient temperature drift."]
@@ -112,6 +130,15 @@ $$\text{PD}_k = \{ (b_i, d_i) \mid b_i = \text{birth parameter}, \, d_i = \text{
 
 ```mermaid
 flowchart LR
+    accTitle: Persistent homology of the staves as the filtration threshold rises
+    accDescr {
+      At epsilon 0.1 all staves are disconnected, giving seven independent
+      components. At epsilon 0.5 consonant staves merge, joining the hardware and
+      physical layers and the telemetry and actuarial layers. At epsilon 1.2 normal
+      operational coherence leaves one dominant component. A cyber-physical
+      interdiction instead opens a persistent cycle between physics, attack and ego,
+      whose persistence length exceeds 2.5 sigma and does not resolve.
+    }
     E0["Epsilon = 0.1<br/>All staves disconnected<br/>Seven independent H_0 bars"] --> E1["Epsilon = 0.5<br/>Consonant staves merge<br/>L0-L1 and L5-L6 form components"]
     E1 --> E2["Epsilon = 1.2<br/>Normal operational coherence<br/>1 dominant H_0 bar"]
     E2 -.->|"Cyber-physical interdiction"| Barcode["Unresolvable structural dissonance<br/>Persistent H_1 cycle opens between L1 (Physics), L3 (Attack), L4 (Ego)<br/>Persistence length (d_i - b_i) exceeds 2.5 sigma"]
@@ -197,6 +224,16 @@ To ensure that the Seven-Staff Fugue operates as an active defensive control sys
 
 ```mermaid
 flowchart TD
+    accTitle: Three deterministic defensive controls
+    accDescr {
+      The first is autonomous topological trip cutouts: a cross-layer cycle whose
+      persistence exceeds 2.5 sigma raises a trigger, and once it has held for a
+      dwell time of 1.8 seconds, hardwired SIL-3 relays trip the main breakers,
+      bypassing the human operator. The second is Schenkerian baseline enforcement:
+      control valves reject firmware setpoints that force contrary motion against the
+      energy conservation boundary. The third is unidirectional multi-layer
+      telemetry.
+    }
     Title["DETERMINISTIC DEFENSIVE CONTROLS"]
     Title --> R1["REMEDIATION 1: AUTONOMOUS TOPOLOGICAL TRIP CUTOUTS<br/>A cross-layer H_1 cycle whose persistence length ell_i exceeds 2.5 sigma raises the topological trigger. Once that trigger has held for a dwell time t_dwell of 1.8 seconds, hardwired SIL-3 relays trip the main circuit breakers, completely bypassing the L4 human operator."]
     Title --> R2["REMEDIATION 2: SCHENKERIAN BASELINE ENFORCEMENT<br/>Industrial control valves reject firmware setpoints that force contrary motion against the physical Ursatz energy conservation boundary."]

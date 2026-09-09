@@ -35,6 +35,14 @@ To execute real-time thermal digital twin simulations, the hydraulic plant is ma
 
 ```mermaid
 flowchart LR
+    accTitle: The hydraulic network bound to the multi-BOM record
+    accDescr {
+      The DEXPI 2.0 hydraulic network runs from the primary chilled water supply
+      through the cooling distribution unit plate heat exchanger to the secondary
+      loop. Cross-domain digital twin binding ties that network to the CycloneDX
+      1.6+ multi-BOM, holding the hardware, software, cryptography, operational
+      bounds and VEX records.
+    }
   subgraph DEXPI["DEXPI 2.0 hydraulic network"]
     direction LR
     FWS["FWS<br/>primary chilled water"] --> HX["CDU<br/>plate heat exchanger"] --> TCS["TCS<br/>secondary loop"]
@@ -98,6 +106,12 @@ The critical vulnerability of Direct-to-Chip cooling is the total absence of phy
 
 ```mermaid
 flowchart LR
+    accTitle: The forty-five second thermal timeline after a cyber interdiction
+    accDescr {
+      At time zero the cyber interdiction occurs. Fluid stagnation follows at 1.5
+      seconds, a silicon temperature excursion at 12.0 seconds, throttling at 85
+      degrees C by 38.0 seconds, and shutdown at 94 degrees C by 45.0 seconds.
+    }
   T0["T = 0.0 s<br/>cyber interdiction"] --> T1["T = 1.5 s<br/>fluid stagnation"] --> T2["T = 12.0 s<br/>silicon excursion"] --> T3["T = 38.0 s<br/>throttle at 85°C"] --> T4["T = 45.0 s<br/>shutdown at 94°C"]
 ```
 
@@ -166,6 +180,11 @@ To eliminate the 45-second thermal trip cliff, systems assurance leads mandate t
 
 ```mermaid
 flowchart LR
+    accTitle: Three protective gates in order
+    accDescr {
+      Gate 1 is a bi-metallic cutout rated SIL-3. Gate 2 is the zone 1 conduit,
+      enforced by a data diode. Gate 3 is a relief valve set at 5.5 bar.
+    }
   G1["GATE 1<br/>bi-metallic cutout<br/>SIL-3"] --> G2["GATE 2<br/>Zone 1 conduit<br/>data diode"] --> G3["GATE 3<br/>relief valve<br/>5.5 bar"]
 ```
 

@@ -121,6 +121,15 @@ Where:
 
 ```mermaid
 xychart-beta
+    accTitle: The Yerkes-Dodson performance curve
+    accDescr {
+      Defender performance plotted against arousal level from 0 to 1, computed from
+      the paper's own formulation with no accumulated fatigue. Performance rises from
+      zero at no arousal to a peak of 1.0 at an arousal of 0.50, then falls
+      symmetrically back to zero at full arousal. The optimal band the text states,
+      from 0.40 to 0.65, contains that peak; the chart type cannot shade it, so it is
+      stated in the prose above rather than drawn.
+    }
     title "The Yerkes-Dodson performance curve"
     x-axis "Arousal level A" [0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0]
     y-axis "Defender performance P" 0.0 --> 1.0

@@ -38,6 +38,12 @@ To execute automated cyber-physical FMECA within the Cyber Digital Twin, every f
 
 ```mermaid
 flowchart LR
+    accTitle: Binding a mechanical asset through its conduit to the multi-BOM
+    accDescr {
+      A DEXPI 2.0 mechanical asset connects through cross-domain conduit binding to
+      the industrial control conduit, which through silicon and platform mapping
+      connects to the CycloneDX 1.6+ multi-BOM.
+    }
   A["DEXPI 2.0<br/>mechanical asset"]
   B["Industrial control<br/>conduit"]
   C["CycloneDX 1.6+<br/>multi-BOM"]
@@ -182,6 +188,12 @@ To drive cyber RPNs back toward manageable mechanical baselines, systems assuran
 
 ```mermaid
 flowchart LR
+    accTitle: The four verification gates in order
+    accDescr {
+      Gate 1 is cryptographic protocol enforcement, gate 2 hardwired analog safety
+      interlocks, gate 3 unidirectional optical telemetry diodes, and gate 4
+      immutable hardware roots of trust.
+    }
   G1["Gate 1<br/>Cryptographic protocol<br/>enforcement"]
   G2["Gate 2<br/>Hardwired analog<br/>safety interlocks"]
   G3["Gate 3<br/>Unidirectional optical<br/>telemetry diodes"]

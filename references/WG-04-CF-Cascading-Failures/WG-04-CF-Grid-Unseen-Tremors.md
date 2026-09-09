@@ -72,6 +72,16 @@ AEMO publishes the same relation as a planning table of rate against time to fal
 
 ```mermaid
 flowchart TD
+    accTitle: How displacing synchronous plant raises the rate of change of frequency
+    accDescr {
+      Synchronous plant displaced by inverter-based resources reduces the summed
+      inertia of synchronised machines. The disturbance size is unchanged, so the
+      initial rate of change of frequency rises in inverse proportion. That has two
+      consequences: less time before frequency reaches a defence-plan threshold, so
+      under-frequency load shedding fires sooner and deeper; and rate-of-change relays
+      see a larger rate at unchanged settings, so healthy generation disconnects on
+      protection.
+    }
   A[Synchronous plant displaced by inverter-based resources] --> B[Sum of H times S over synchronised machines falls]
   B --> C[Disturbance size Pk is unchanged]
   C --> D[Initial rate of change of frequency rises in inverse proportion]
@@ -105,6 +115,16 @@ A protection setting is a number an engineer entered into a relay; it states the
 
 ```mermaid
 flowchart LR
+    accTitle: Two protection principles compared, and why a published number is a setting
+    accDescr {
+      A frequency disturbance meets one of two protection principles. Absolute
+      frequency protection compares frequency against a set value such as 49.0 Hz and
+      acts only if that value is actually crossed. Rate-of-change protection computes
+      the derivative over a stated window and acts on rate alone, even inside the
+      normal operating band. Both converge on the same point: the published number is
+      a setting chosen by an engineer, whereas a measurement requires an instrument,
+      a window and a source.
+    }
   S[Frequency disturbance] --> T{Which protection principle}
   T -->|Absolute frequency| U[Compare f against a set value such as 49.0 Hz]
   T -->|Rate of change| V[Compute df dt over a stated window then compare against a set value]
