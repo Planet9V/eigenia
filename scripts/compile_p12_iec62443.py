@@ -31,28 +31,36 @@ In industrial infrastructure, a profound disconnect separates theoretical standa
 - **The Procurement Disconnect:** When the mechanical and electrical teams issue Request for Proposal (RFP) tenders for Coolant Distribution Units (CDUs), switchgear, and chiller controllers, the cybersecurity specifications are omitted. Equipment arrives on site with cleartext Modbus TCP, unauthenticated web consoles, and zero component-level certifications.
 - **The Construction Laydown Hazard:** Equipment sits in unsealed construction laydown yards for nine months, connected to temporary contractor networks, operating with factory-default passwords before commissioning begins.
 
-```
-+-------------------------------------------------------------------------+
-|                  THE IEC 62443 DELIVERY PARADOX                         |
-+-------------------------------------------------------------------------+
-| THE STANDARD AS PUBLISHED:                                              |
-| IEC 62443-3-2 (Risk Assessment) ---> IEC 62443-3-3 (System Specs)       |
-| (Defines Deliverables, but No Project Management Delivery Framework)    |
-+-------------------------------------------------------------------------+
-                                    |
-                    OPERATIONAL PROGRAMME FAILURE
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| THE SFAIR OPERATIONALIZED FRAMEWORK:                                    |
-| Stage S (Scope) ---> Stage F (Find) ---> Stage A (Assess)               |
-|      |                    |                   |                         |
-|    ZCR-1                ZCR-2/3             ZCR-4                       |
-|      v                    v                   v                         |
-| Stage I (Implement) ---> Stage R (Review) ---> Continuous Re-Audit      |
-|      |                    |                                             |
-|    ZCR-5/6              ZCR-7 (Third-Party Director Acceptance Gate)    |
-+-------------------------------------------------------------------------+
+```mermaid
+flowchart TD
+    accTitle: The IEC 62443 delivery paradox
+    accDescr {
+      The standard as published runs from IEC 62443-3-2 risk assessment to IEC
+      62443-3-3 system specifications. It defines deliverables but no project
+      management delivery framework, and that gap is where operational
+      programmes fail. The SFAIR framework operationalizes it as seven
+      stage-gated phases: Scope, Find, Assess, Implement, Review, then
+      continuous re-audit, each stage concluding at a Zone Conformance Review
+      gate numbered ZCR-1 through ZCR-7.
+    }
+    PUB["<b>THE STANDARD AS PUBLISHED</b><br/>IEC 62443-3-2 (Risk Assessment) to IEC 62443-3-3 (System Specs)<br/>Defines deliverables, but no project management delivery framework."]
+    subgraph SFAIR["THE SFAIR OPERATIONALIZED FRAMEWORK"]
+        direction TB
+        S["Stage S (Scope)"]
+        F["Stage F (Find)"]
+        A["Stage A (Assess)"]
+        I["Stage I (Implement)"]
+        R["Stage R (Review)"]
+        C["Continuous Re-Audit"]
+        S -->|ZCR-1| F
+        F -->|ZCR-2/3| A
+        A -->|ZCR-4| I
+        I -->|ZCR-5/6| R
+        R -->|"ZCR-7 (Third-Party Director Acceptance Gate)"| C
+    end
+    PUB -->|OPERATIONAL PROGRAMME FAILURE| S
+    classDef panel fill:#1a1c1f,stroke:#E05A10,stroke-width:1px,color:#f5f3f0;
+    class PUB,S,F,A,I,R,C panel;
 ```
 
 ---
@@ -61,36 +69,26 @@ In industrial infrastructure, a profound disconnect separates theoretical standa
 
 To enforce IEC 62443 requirements systematically, the cyber-physical architecture couples the DEXPI 2.0 plant schematic, whose equipment classes come from the ISO 15926-4 reference data library, with the CycloneDX 1.6+ multi-BOM specification:
 
-```
-+-------------------------------------------------------------------------+
-|            DEXPI-CYCLONEDX ZONE & CONDUIT BINDING GRAPH                 |
-+-------------------------------------------------------------------------+
-| DEXPI 2.0 PIPING & INSTRUMENTATION DIAGRAM:                             |
-| - Plant Area: Zone 1 (BMS/HVAC), Zone 2 (Electrical), Zone 6 (BESS)    |
-| - Physical Conduit: C1-2 (BMS to Electrical), C1-6 (BMS to BESS)        |
-+-------------------------------------------------------------------------+
-                                    |
-                    CROSS-DOMAIN DIGITAL TWIN BINDING
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| CYCLONEDX 1.6+ MULTI-BOM SPECIFICATION:                                 |
-| - HBOM: Controller ASIC, Network PHY Chip, SPI Flash Die                |
-| - SBOM: FreeRTOS Kernel, lwIP TCP/IP Stack, Modbus Slave Driver         |
-| - CBOM: Mutual TLS 1.3 Keys, DICE Device Attestation Certificate        |
-| - OBOM: Hard Rate Limits (64 kbps), Operational Bounds (Flow >= 35 L/m) |
-| - VEX:  Machine-Readable CVE Tracking Feeds (CISA ICS-CERT Advisories)   |
-+-------------------------------------------------------------------------+
-                                    |
-                    CONTRACTUAL SPECIFICATION BINDING
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| SECRACS CONTRACTUAL COMPLIANCE SPECIFICATION:                           |
-| - Assigned SL-T per Zone (SL-T 2 for BMS, SL-T 3 for CDU Secondary)     |
-| - Mandatory Capability Requirements: CR 1.1, CR 1.2, CR 3.1, CR 7.1     |
-| - Verification Gate: ZCR-5 Factory Acceptance Testing (FAT) Protocol   |
-+-------------------------------------------------------------------------+
+```mermaid
+flowchart TD
+    accTitle: DEXPI to CycloneDX zone and conduit binding graph
+    accDescr {
+      Three levels bound in sequence. The DEXPI 2.0 piping and instrumentation
+      diagram carries the plant areas and the physical conduits between them.
+      Cross-domain digital twin binding ties those to the CycloneDX 1.6+
+      multi-BOM specification, holding the hardware, software, cryptography,
+      operational bounds and VEX bills of materials. Contractual specification
+      binding then ties those to the SecRACS compliance specification, which
+      assigns a target security level per zone, names the mandatory capability
+      requirements, and sets the factory acceptance verification gate.
+    }
+    DEXPI["<b>DEXPI 2.0 PIPING &amp; INSTRUMENTATION DIAGRAM</b><br/>Plant Area: Zone 1 (BMS/HVAC), Zone 2 (Electrical), Zone 6 (BESS)<br/>Physical Conduit: C1-2 (BMS to Electrical), C1-6 (BMS to BESS)"]
+    BOM["<b>CYCLONEDX 1.6+ MULTI-BOM SPECIFICATION</b><br/>HBOM: Controller ASIC, Network PHY Chip, SPI Flash Die<br/>SBOM: FreeRTOS Kernel, lwIP TCP/IP Stack, Modbus Slave Driver<br/>CBOM: Mutual TLS 1.3 Keys, DICE Device Attestation Certificate<br/>OBOM: Hard Rate Limits (64 kbps), Operational Bounds (Flow &gt;= 35 L/m)<br/>VEX: Machine-Readable CVE Tracking Feeds (CISA ICS-CERT Advisories)"]
+    SEC["<b>SECRACS CONTRACTUAL COMPLIANCE SPECIFICATION</b><br/>Assigned SL-T per Zone (SL-T 2 for BMS, SL-T 3 for CDU Secondary)<br/>Mandatory Capability Requirements: CR 1.1, CR 1.2, CR 3.1, CR 7.1<br/>Verification Gate: ZCR-5 Factory Acceptance Testing (FAT) Protocol"]
+    DEXPI -->|CROSS-DOMAIN DIGITAL TWIN BINDING| BOM
+    BOM -->|CONTRACTUAL SPECIFICATION BINDING| SEC
+    classDef lvl fill:#1a1c1f,stroke:#E05A10,stroke-width:1px,color:#f5f3f0;
+    class DEXPI,BOM,SEC lvl;
 ```
 
 By binding DEXPI physical tags to CycloneDX multi-BOM manifests, the digital twin automatically verifies whether a delivered physical component satisfies the specific IEC 62443-4-2 component security requirements (CRs) demanded by its zone conduit assignment.
@@ -101,11 +99,7 @@ By binding DEXPI physical tags to CycloneDX multi-BOM manifests, the digital twi
 
 The SFAIR methodology structures IEC 62443 delivery into seven stage-gated phases, each concluding with a formal Zone Completion Review (ZCR):
 
-```
-+-------------------------------------------------------------------------+
-|          TABLE 18.1: THE SFAIR SEVEN-STAGE DELIVERY METHODOLOGY         |
-+-------------------------------------------------------------------------+
-```
+**Table 18.1: The SFAIR seven-stage delivery methodology.**
 
 | Stage | Name | Key Engineering Activities | Primary Deliverables | Stage Gate |
 |:---|:---|:---|:---|:---:|
@@ -123,31 +117,25 @@ The SFAIR methodology structures IEC 62443 delivery into seven stage-gated phase
 
 Security Level Targets (SL-T) assigned during risk assessments are useless if system integrators and equipment vendors do not build them into physical equipment. SecRACS (Security Requirements Allocation and Compliance Specification) converts IEC 62443 requirements into binding legal contract addenda:
 
-```
-+-------------------------------------------------------------------------+
-|               SECRACS CONTRACTUAL ENFORCEMENT STRUCTURE                 |
-+-------------------------------------------------------------------------+
-| SECTION 1: ZONE ASSIGNMENT & TARGET SECURITY LEVEL                      |
-| Asset Tag: CDU-PLC-01 | Zone: Zone 1 (BMS/HVAC) | Target: SL-T 3        |
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| SECTION 2: MANDATORY COMPONENT REQUIREMENTS (IEC 62443-4-2)             |
-| - CR 1.1 (Human Identification & Authentication): Multifactor via PAM   |
-| - CR 1.2 (Software Process & Device Identification): 802.1AR / DICE     |
-| - CR 3.1 (Communication Integrity): Mutual TLS 1.3 (ChaCha20-Poly1305)  |
-| - CR 3.14 (Integrity of Boot Process): Caliptra 2.0 Silicon RoT         |
-| - CR 7.1 (Denial of Service Protection): Hardware Rate Limiter (64 kbps)|
-+-------------------------------------------------------------------------+
-                                    |
-                                    v
-+-------------------------------------------------------------------------+
-| SECTION 3: CONTRACTUAL ACCEPTANCE & PENALTY TERMS                       |
-| - Mandatory CycloneDX 1.6+ Multi-BOM Delivery with Authenticated Hash   |
-| - Failure to pass ZCR-5 FAT halts 20% milestone capital payment         |
-| - Non-compliance indemnification backed by EU CRA Article 64 fines     |
-+-------------------------------------------------------------------------+
+```mermaid
+flowchart TD
+    accTitle: SecRACS contractual enforcement structure
+    accDescr {
+      Three sections in sequence. Section 1 assigns the zone and target
+      security level for an asset tag. Section 2 lists the mandatory component
+      requirements drawn from IEC 62443-4-2, covering identification and
+      authentication, device identification, communication integrity, boot
+      process integrity and denial of service protection. Section 3 sets the
+      contractual acceptance and penalty terms, including mandatory multi-BOM
+      delivery, a milestone payment held against the factory acceptance gate,
+      and indemnification backed by EU CRA Article 64.
+    }
+    S1["<b>SECTION 1: ZONE ASSIGNMENT &amp; TARGET SECURITY LEVEL</b><br/>Asset Tag: CDU-PLC-01 | Zone: Zone 1 (BMS/HVAC) | Target: SL-T 3"]
+    S2["<b>SECTION 2: MANDATORY COMPONENT REQUIREMENTS (IEC 62443-4-2)</b><br/>CR 1.1 (Human Identification &amp; Authentication): Multifactor via PAM<br/>CR 1.2 (Software Process &amp; Device Identification): 802.1AR / DICE<br/>CR 3.1 (Communication Integrity): Mutual TLS 1.3 (ChaCha20-Poly1305)<br/>CR 3.14 (Integrity of Boot Process): Caliptra 2.0 Silicon RoT<br/>CR 7.1 (Denial of Service Protection): Hardware Rate Limiter (64 kbps)"]
+    S3["<b>SECTION 3: CONTRACTUAL ACCEPTANCE &amp; PENALTY TERMS</b><br/>Mandatory CycloneDX 1.6+ Multi-BOM Delivery with Authenticated Hash<br/>Failure to pass ZCR-5 FAT halts 20% milestone capital payment<br/>Non-compliance indemnification backed by EU CRA Article 64 fines"]
+    S1 --> S2 --> S3
+    classDef sec fill:#1a1c1f,stroke:#E05A10,stroke-width:1px,color:#f5f3f0;
+    class S1,S2,S3 sec;
 ```
 
 ### 4.1 Security-Related Application Conditions (SecRACs)
@@ -227,11 +215,7 @@ This figure is modelled, not measured. Three inputs drive it and the working gro
 
 The authoritative output of Stage 4 (Assess) is the Consolidated Master Hazard Register, mapping every facility node across CyHAZOP guide words, EMB3D threat properties, and MITRE ATT&CK for ICS techniques:
 
-```
-+-------------------------------------------------------------------------+
-|             TABLE 18.2: CONSOLIDATED MASTER HAZARD REGISTER             |
-+-------------------------------------------------------------------------+
-```
+**Table 18.2: Consolidated master hazard register.**
 
 | Hazard ID | Node | Component | Deviation Mode | MITRE ATT&CK | EMB3D Property | SL-T | S | $O_c$ | $D_c$ | $\text{RPN}_c$ | Table |
 |:---|:---|:---|:---|:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|
