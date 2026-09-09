@@ -14,9 +14,9 @@
   ],
   "audits": {
     "audit-ascii-art.mjs": {
-      "count": 24,
+      "count": 11,
       "countPattern": "Total: (\\d+) item\\(s\\)",
-      "reason": "24 fenced box-art diagrams remain, down from 51. Nothing detected them before this audit, so the conversion work stalled unnoticed. The count ratchets to zero as the conversions land. Deliberate keeps live in ascii-art-keep.json, not here. Delete this entry when it reaches 0."
+      "reason": "11 fenced box-art diagrams remain, down from 51. Nothing detected them before this audit, so the conversion work stalled unnoticed. The count ratchets to zero as the conversions land. Deliberate keeps live in ascii-art-keep.json, not here. Delete this entry when it reaches 0."
     }
   }
 }

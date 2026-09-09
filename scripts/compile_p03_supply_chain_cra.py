@@ -9,7 +9,7 @@ import re
 
 dest_path = 'references/WG-05-CAD-DEXPI-2/WG-05-CAD-Supply-Chain-EU-CRA.md'
 
-content = """## Abstract
+content = r"""## Abstract
 
 On September 13, 2024, the European Union published Regulation (EU) 2024/2847, the Cyber Resilience Act (CRA), establishing mandatory cybersecurity requirements for products with digital elements placed on the Single Market. With full enforcement commencing on September 11, 2026, the era of voluntary cybersecurity questionnaires and qualitative vendor self-attestations is definitively closed. Article 13, Article 14, and Annex I mandate machine-readable Software Bills of Materials (SBOMs), Hardware Bills of Materials (HBOMs), 24-hour vulnerability notification cadences, and supply chain provenance the manufacturer must be able to evidence on demand to a notified body. Violations trigger severe statutory penalties under Article 64: administrative fines up to 15,000,000 EUR or 2.5% of worldwide annual turnover.
 
@@ -33,20 +33,13 @@ The CRA applies to all products with digital elements whose intended or reasonab
 3. **Important Products with Digital Elements (Class II - Annex IV):**
    Reserved for highest-criticality assets: firewalls, intrusion detection systems, hardware security modules, smart meter gateways, tamper-resistant microprocessors, and hypervisors. Third-party conformity assessment by an accredited Notified Body is mandatory.
 
-```
-+-------------------------------------------------------------------------+
-|                  EU CYBER RESILIENCE ACT (REG 2024/2847)                |
-+-------------------------------------------------------------------------+
-| CLASS II (Annex IV): HSMs, Secure Silicon, Firewalls, Hypervisors      |
-| -> Mandatory Third-Party Notified Body Assessment (Module B+C / H)      |
-+-------------------------------------------------------------------------+
-| CLASS I (Annex III): PLCs, Industrial Microcontrollers, Baseboards      |
-| -> Harmonized Standards or Third-Party Notified Body Assessment         |
-+-------------------------------------------------------------------------+
-| DEFAULT PRODUCTS: General Software, Compute Trays, Support Utilities    |
-| -> Internal Production Control (Module A Self-Assessment)               |
-+-------------------------------------------------------------------------+
-```
+**Table 1.1: EU Cyber Resilience Act (Regulation 2024/2847) product classes.**
+
+| Class | Products | Conformity route |
+| :--- | :--- | :--- |
+| **Class II (Annex IV)** | HSMs, Secure Silicon, Firewalls, Hypervisors | Mandatory third-party notified body assessment (Module B+C / H) |
+| **Class I (Annex III)** | PLCs, Industrial Microcontrollers, Baseboards | Harmonized standards or third-party notified body assessment |
+| **Default products** | General Software, Compute Trays, Support Utilities | Internal production control (Module A self-assessment) |
 
 ### 1.2 Essential Cybersecurity Requirements (Annex I)
 Annex I of the regulation establishes non-negotiable requirements divided into two core sections:
@@ -78,22 +71,32 @@ The supply chain operates across four distinct tiers:
 - **Tier 2 (Original Design Manufacturer - ODM):** Physical assembly of server trays, cooling distribution manifolds, power supplies, and chassis backplanes. ODMs configure Baseboard Management Controllers and proprietary initialization code.
 - **Tier 3 (System Integrator and Data Center Facility):** Rack integration, fluid connection, 400V power hookup, and commissioning onto the operational technology network.
 
-```
-+---------------+-----+---------------+-----+---------------+-----+---------------+
-| TIER 0:       | --> | TIER 1:       | --> | TIER 2:       | --> | TIER 3:       |
-| Silicon Found |     | Silicon Mfr   |     | ODM Assembly  |     | Facility Site |
-| - Wafer Fab   |     | - Key Inject  |     | - Board SMT   |     | - Rack Deploy |
-| - Package Sub |     | - RoT Mask    |     | - BMC Flashing|     | - Fluid Hookup|
-+---------------+-----+---------------+-----+---------------+-----+---------------+
+```mermaid
+flowchart LR
+    accTitle: The four-tier silicon to facility supply chain
+    accDescr {
+      Four tiers in sequence. Tier 0 is the silicon foundry, covering wafer
+      fabrication and package substrate. Tier 1 is the silicon manufacturer,
+      covering key injection and the root-of-trust mask. Tier 2 is ODM
+      assembly, covering board surface-mount and BMC flashing. Tier 3 is the
+      facility site, covering rack deployment and fluid hookup.
+    }
+    T0["<b>TIER 0: Silicon Found</b><br/>Wafer Fab<br/>Package Sub"]
+    T1["<b>TIER 1: Silicon Mfr</b><br/>Key Inject<br/>RoT Mask"]
+    T2["<b>TIER 2: ODM Assembly</b><br/>Board SMT<br/>BMC Flashing"]
+    T3["<b>TIER 3: Facility Site</b><br/>Rack Deploy<br/>Fluid Hookup"]
+    T0 --> T1 --> T2 --> T3
+    classDef tier fill:#1a1c1f,stroke:#E05A10,stroke-width:1px,color:#f5f3f0;
+    class T0,T1,T2,T3 tier;
 ```
 
 ### 2.2 Physical Failure Coupling Induced by Supply Chain Tampering
 When an adversary compromises a firmware module in an ODM-flashed microcontroller; such as an unauthenticated Modbus TCP interface or an unencrypted I2C thermal fan controller; the compromise couples directly to the physical facility:
 
-1. **Hydraulic Manifold Starvation:** The compromised firmware commands proportional valves to throttle volumetric delivery below the calibrated design flow rate of $38.5\\text{ L/min}$ PG25 (25% propylene glycol). Secondary pressure collapses from $3.2\\text{ bar}$ to $< 0.8\\text{ bar}$, inducing pump cavitation.
-2. **Convective Heat Transfer Collapse:** The convective heat transfer coefficient $h_{\\text{conv}}$ plummets as fluid flow drops out of the turbulent regime (Reynolds number $\\text{Re} < 2,300$). The rate of change of silicon junction temperature exceeds $4.5^\\circ\\text{C/s}$.
-3. **Thermal Runaway and Die Warpage:** Heat flux across the accelerator package surpasses $100\\text{ W/cm}^2$. Silicon junction temperature $T_j$ surges beyond the physical trip threshold of $94.0^\\circ\\text{C}$ within $14.8\\text{ seconds}$, causing irreversible package delamination.
-4. **Electrical Power Infeed Surge:** A synchronous trip across twenty compute trays dumps $240\\text{ kW}$ of electrical load instantaneously, inducing high-voltage inductive kickback across rack busbars and tripping upstream $2.5\\text{ MW}$ facility transformers.
+1. **Hydraulic Manifold Starvation:** The compromised firmware commands proportional valves to throttle volumetric delivery below the calibrated design flow rate of $38.5\text{ L/min}$ PG25 (25% propylene glycol). Secondary pressure collapses from $3.2\text{ bar}$ to $< 0.8\text{ bar}$, inducing pump cavitation.
+2. **Convective Heat Transfer Collapse:** The convective heat transfer coefficient $h_{\text{conv}}$ plummets as fluid flow drops out of the turbulent regime (Reynolds number $\text{Re} < 2,300$). The rate of change of silicon junction temperature exceeds $4.5^\circ\text{C/s}$.
+3. **Thermal Runaway and Die Warpage:** Heat flux across the accelerator package surpasses $100\text{ W/cm}^2$. Silicon junction temperature $T_j$ surges beyond the physical trip threshold of $94.0^\circ\text{C}$ within $14.8\text{ seconds}$, causing irreversible package delamination.
+4. **Electrical Power Infeed Surge:** A synchronous trip across twenty compute trays dumps $240\text{ kW}$ of electrical load instantaneously, inducing high-voltage inductive kickback across rack busbars and tripping upstream $2.5\text{ MW}$ facility transformers.
 
 ---
 
@@ -111,26 +114,31 @@ During initial wafer probing at the foundry, the on-die physical unclonable func
 3. The provisioning station submits the public key to an audited Hardware Security Module (HSM) located within an accredited factory environment.
 4. The factory HSM signs an X.509 Device Identifier Composition Engine (DICE) certificate binding the chip's unique serial number, wafer lot identifier, and initial firmware measurement to the manufacturer root certificate authority.
 
-```
-+-------------------------------------------------------------------------+
-|                  ON-DIE SILICON CRYPTOGRAPHIC BOUNDARY                  |
-+-------------------------------------------------------------------------+
-|  [Internal PUF / Entropy] ---> [Unique Device Secret (UDS)]             |
-|                                         |                               |
-|                                         v                               |
-|  [On-Die Asymmetric Engine] -> [Generate Key Pair (Private / Public)]   |
-|                                 (Private Key NEVER Leaves Die)          |
-+-------------------------------------------------------------------------+
-                                         |
-                                         | Exports Public Key Only
-                                         v
-+-------------------------------------------------------------------------+
-|                  AUDITED FACTORY HSM (6 GLOBAL SITES)                   |
-+-------------------------------------------------------------------------+
-|  - Validates Wafer Lot & Physical Tester Hardware Integrity             |
-|  - Signs DICE Initial Device Identifier (IDevID) Certificate           |
-|  - Records Cryptographic Proof in Immutable CycloneDX MBOM Ledger       |
-+-------------------------------------------------------------------------+
+```mermaid
+flowchart TD
+    accTitle: On-die silicon cryptographic boundary and the factory HSM
+    accDescr {
+      Inside the die, an internal physically unclonable function and entropy
+      source produce the unique device secret, which drives an on-die
+      asymmetric engine to generate a key pair. The private key never leaves
+      the die. Only the public key is exported, crossing to the audited
+      factory HSM at six global sites, which validates the wafer lot and
+      tester hardware integrity, signs the DICE initial device identifier
+      certificate, and records cryptographic proof in the immutable CycloneDX
+      multi-BOM ledger.
+    }
+    subgraph DIE["ON-DIE SILICON CRYPTOGRAPHIC BOUNDARY"]
+        direction TB
+        PUF["Internal PUF / Entropy"]
+        UDS["Unique Device Secret (UDS)"]
+        ENG["On-Die Asymmetric Engine"]
+        KP["Generate Key Pair (Private / Public)<br/>Private Key NEVER Leaves Die"]
+        PUF --> UDS --> ENG --> KP
+    end
+    HSM["<b>AUDITED FACTORY HSM (6 GLOBAL SITES)</b><br/>Validates Wafer Lot &amp; Physical Tester Hardware Integrity<br/>Signs DICE Initial Device Identifier (IDevID) Certificate<br/>Records Cryptographic Proof in Immutable CycloneDX MBOM Ledger"]
+    KP -->|Exports Public Key Only| HSM
+    classDef n fill:#1a1c1f,stroke:#E05A10,stroke-width:1px,color:#f5f3f0;
+    class PUF,UDS,ENG,KP,HSM n;
 ```
 
 ### 3.2 Standardizing the 6-Site Audit Protocol
@@ -150,86 +158,86 @@ Major semiconductor vendors distribute manufacturing and packaging across global
 To transition systems assurance from subjective debate into deterministic mathematics, the regulatory and supply chain model is governed by six formulations.
 
 ### 4.1 Statutory Fine Exposure Formulation (CRA Article 64)
-Under EU Regulation 2024/2847, the legal financial exposure $\\Phi_{\\text{CRA}}$ resulting from non-compliance with Annex I essential requirements is calculated as:
+Under EU Regulation 2024/2847, the legal financial exposure $\Phi_{\text{CRA}}$ resulting from non-compliance with Annex I essential requirements is calculated as:
 
-$$\\Phi_{\\text{CRA}} = \\max\\left(15 \\times 10^6 \\text{ EUR}, \\; \\alpha_{\\text{statutory}} \\cdot \\text{Turnover}_{\\text{worldwide}}\\right)$$
+$$\Phi_{\text{CRA}} = \max\left(15 \times 10^6 \text{ EUR}, \; \alpha_{\text{statutory}} \cdot \text{Turnover}_{\text{worldwide}}\right)$$
 
 Where:
-- $\\alpha_{\\text{statutory}} = 0.025$ (2.5% of total worldwide annual turnover for the preceding financial year).
-- $\\text{Turnover}_{\\text{worldwide}}$ is the gross consolidated revenue of the parent undertaking.
+- $\alpha_{\text{statutory}} = 0.025$ (2.5% of total worldwide annual turnover for the preceding financial year).
+- $\text{Turnover}_{\text{worldwide}}$ is the gross consolidated revenue of the parent undertaking.
 
 For a multinational enterprise generating 24,000,000,000 EUR in global annual revenue, the statutory financial exposure under Tier 1 is:
 
-$$\\Phi_{\\text{CRA}} = \\max\\left(15 \\times 10^6, \\; 0.025 \\times 24 \\times 10^9\\right) = \\max\\left(15\\text{M}, \\; 600\\text{M}\\right) = 600,000,000 \\text{ EUR}$$
+$$\Phi_{\text{CRA}} = \max\left(15 \times 10^6, \; 0.025 \times 24 \times 10^9\right) = \max\left(15\text{M}, \; 600\text{M}\right) = 600,000,000 \text{ EUR}$$
 
 This catastrophic exposure shifts supply chain assurance from a technical overhead concern into an existential fiduciary duty for executive leadership.
 
 ### 4.2 The ALARP Risk-Justification Formulation for IEC 62443 SL-T Deviations
 Under the As Low As Reasonably Practicable (ALARP) principle, an engineering team may only justify a deviation from a normative Security Level Target (for example, accepting SL-T 2 instead of SL-T 3 on a legacy building management controller) if the financial or operational cost of implementing the higher control is grossly disproportionate to the risk reduction achieved:
 
-$$\\frac{\\Delta C_{\\text{control}}}{\\Delta \\mathcal{R}_{\\text{risk}}} > \\gamma_{\\text{disproportion}}$$
+$$\frac{\Delta C_{\text{control}}}{\Delta \mathcal{R}_{\text{risk}}} > \gamma_{\text{disproportion}}$$
 
 Where:
-- $\\Delta C_{\\text{control}}$ is the total cost of implementing the additional mitigation (including hardware redesign, procurement, downtime, and operational burden).
-- $\\Delta \\mathcal{R}_{\\text{risk}}$ is the incremental reduction in annual risk exposure.
-- $\\gamma_{\\text{disproportion}}$ is the disproportion factor (typically $\\gamma \\ge 3$ for low consequence risks, and $\\gamma \\ge 10$ for catastrophic critical infrastructure hazards).
+- $\Delta C_{\text{control}}$ is the total cost of implementing the additional mitigation (including hardware redesign, procurement, downtime, and operational burden).
+- $\Delta \mathcal{R}_{\text{risk}}$ is the incremental reduction in annual risk exposure.
+- $\gamma_{\text{disproportion}}$ is the disproportion factor (typically $\gamma \ge 3$ for low consequence risks, and $\gamma \ge 10$ for catastrophic critical infrastructure hazards).
 
-The incremental risk reduction $\\Delta \\mathcal{R}_{\\text{risk}}$ is formulated across all realistic threat scenarios $\\mathcal{S}$:
+The incremental risk reduction $\Delta \mathcal{R}_{\text{risk}}$ is formulated across all realistic threat scenarios $\mathcal{S}$:
 
-$$\\Delta \\mathcal{R}_{\\text{risk}} = \\sum_{s \\in \\mathcal{S}} \\left( P_{\\text{exploit}}(s \\mid \\text{baseline}) - P_{\\text{exploit}}(s \\mid \\text{mitigated}) \\right) \\cdot \\mathcal{C}_{\\text{consequence}}(s)$$
+$$\Delta \mathcal{R}_{\text{risk}} = \sum_{s \in \mathcal{S}} \left( P_{\text{exploit}}(s \mid \text{baseline}) - P_{\text{exploit}}(s \mid \text{mitigated}) \right) \cdot \mathcal{C}_{\text{consequence}}(s)$$
 
-Where $P_{\\text{exploit}}$ is the modelled likelihood of attack success and $\\mathcal{C}_{\\text{consequence}}$ is the direct financial loss. The analyst sets $P_{\\text{exploit}}$ from exploit prediction percentile and the coverage of the controls already in place; it is an assumption entered into the relation, not a frequency counted from attempts against this facility. State the value used and the reasoning behind it alongside every disproportion argument, because the whole SFAIRP test turns on it. If $\\frac{\\Delta C}{\\Delta \\mathcal{R}} \\le \\gamma$, the deviation is legally and technically non-conforming; the higher control must be implemented.
+Where $P_{\text{exploit}}$ is the modelled likelihood of attack success and $\mathcal{C}_{\text{consequence}}$ is the direct financial loss. The analyst sets $P_{\text{exploit}}$ from exploit prediction percentile and the coverage of the controls already in place; it is an assumption entered into the relation, not a frequency counted from attempts against this facility. State the value used and the reasoning behind it alongside every disproportion argument, because the whole SFAIRP test turns on it. If $\frac{\Delta C}{\Delta \mathcal{R}} \le \gamma$, the deviation is legally and technically non-conforming; the higher control must be implemented.
 
 ### 4.3 Multi-Tier Supply Chain Compromise Probability
-The cumulative probability $P_{\\text{chain}}$ that an infrastructure rack contains at least one compromised hardware, firmware, or software element across $M$ distinct supply chain tiers is formulated as:
+The cumulative probability $P_{\text{chain}}$ that an infrastructure rack contains at least one compromised hardware, firmware, or software element across $M$ distinct supply chain tiers is formulated as:
 
-$$P_{\\text{chain}} = 1 - \\prod_{j=1}^M \\prod_{k=1}^{N_j} \\left( 1 - \\theta_{j,k} \\cdot \\left(1 - \\alpha_{\\text{assurance},j,k}\\right) \\right)$$
+$$P_{\text{chain}} = 1 - \prod_{j=1}^M \prod_{k=1}^{N_j} \left( 1 - \theta_{j,k} \cdot \left(1 - \alpha_{\text{assurance},j,k}\right) \right)$$
 
 Where:
 - $M$ is the number of supply chain tiers ($M = 4$: silicon, vendor, ODM, facility).
 - $N_j$ is the number of distinct components integrated at tier $j$.
-- $\\theta_{j,k}$ is the baseline compromise probability of supplier $k$ at tier $j$ (reflecting geographic jurisdiction, adversary targeting, and corporate security posture).
-- $\\alpha_{\\text{assurance},j,k} \\in [0, 1]$ is the systems assurance factor, an analyst-assigned score for how much independent evidence backs supplier $k$ at tier $j$ (where $\\alpha = 0$ corresponds to an unevidenced supplier questionnaire, and $\\alpha = 0.99$ corresponds to FIPS 140-3 HSM attestation plus a continuous machine-readable VEX feed). The endpoints are the working group's own calibration. No study is cited that maps an attestation regime onto a compromise probability, and none is claimed.
+- $\theta_{j,k}$ is the baseline compromise probability of supplier $k$ at tier $j$ (reflecting geographic jurisdiction, adversary targeting, and corporate security posture).
+- $\alpha_{\text{assurance},j,k} \in [0, 1]$ is the systems assurance factor, an analyst-assigned score for how much independent evidence backs supplier $k$ at tier $j$ (where $\alpha = 0$ corresponds to an unevidenced supplier questionnaire, and $\alpha = 0.99$ corresponds to FIPS 140-3 HSM attestation plus a continuous machine-readable VEX feed). The endpoints are the working group's own calibration. No study is cited that maps an attestation regime onto a compromise probability, and none is claimed.
 
-When an operator relies on static PDF questionnaires ($\\alpha \\le 0.15$) across 150 components, $P_{\\text{chain}}$ asymptotically approaches $1.0$ ($100\\%$ certainty of compromise). Enforcing automated, machine-verifiable CycloneDX schemas elevates $\\alpha \\to 0.98$, suppressing systemic compromise probability across the multi-tier fabric.
+When an operator relies on static PDF questionnaires ($\alpha \le 0.15$) across 150 components, $P_{\text{chain}}$ asymptotically approaches $1.0$ ($100\%$ certainty of compromise). Enforcing automated, machine-verifiable CycloneDX schemas elevates $\alpha \to 0.98$, suppressing systemic compromise probability across the multi-tier fabric.
 
 ### 4.4 Thermodynamic Junction Surge & Convective Dissipation
-When firmware tampering throttles volumetric liquid coolant delivery $\\dot{Q}_{\\text{vol}}$, the transient rate of change of silicon junction temperature $T_j(t)$ is governed by convective dissipation and internal die capacitance:
+When firmware tampering throttles volumetric liquid coolant delivery $\dot{Q}_{\text{vol}}$, the transient rate of change of silicon junction temperature $T_j(t)$ is governed by convective dissipation and internal die capacitance:
 
-$$\\frac{dT_j(t)}{dt} = \\frac{P_{\\text{die}} - h_{\\text{conv}}(\\dot{Q}_{\\text{vol}}) \\cdot A_{\\text{contact}} \\cdot (T_j(t) - T_{\\text{coolant}})}{C_{\\text{thermal}}}$$
+$$\frac{dT_j(t)}{dt} = \frac{P_{\text{die}} - h_{\text{conv}}(\dot{Q}_{\text{vol}}) \cdot A_{\text{contact}} \cdot (T_j(t) - T_{\text{coolant}})}{C_{\text{thermal}}}$$
 
-$$h_{\\text{conv}}(\\dot{Q}_{\\text{vol}}) = \\text{Nu} \\cdot \\frac{k_{\\text{fluid}}}{D_h} = 0.023 \\cdot \\text{Re}^{0.8} \\cdot \\text{Pr}^{0.4} \\cdot \\frac{k_{\\text{fluid}}}{D_h}$$
+$$h_{\text{conv}}(\dot{Q}_{\text{vol}}) = \text{Nu} \cdot \frac{k_{\text{fluid}}}{D_h} = 0.023 \cdot \text{Re}^{0.8} \cdot \text{Pr}^{0.4} \cdot \frac{k_{\text{fluid}}}{D_h}$$
 
 Where:
-- $P_{\\text{die}}$ is the active compute power dissipation per package ($1,200\\text{ W}$).
-- $h_{\\text{conv}}$ is the convective heat transfer coefficient.
-- $\\text{Re} = \\frac{\\rho v D_h}{\\mu}$ is the Reynolds number governing fluid turbulence in the microchannel cold plate.
-- $\\text{Pr}$ is the Prandtl number of the PG25 coolant mixture ($\\text{Pr} \\approx 18.5$ at $35^\\circ\\text{C}$).
-- $C_{\\text{thermal}}$ is the thermal capacitance of the copper heat spreader ($C \\approx 142\\text{ J/K}$).
+- $P_{\text{die}}$ is the active compute power dissipation per package ($1,200\text{ W}$).
+- $h_{\text{conv}}$ is the convective heat transfer coefficient.
+- $\text{Re} = \frac{\rho v D_h}{\mu}$ is the Reynolds number governing fluid turbulence in the microchannel cold plate.
+- $\text{Pr}$ is the Prandtl number of the PG25 coolant mixture ($\text{Pr} \approx 18.5$ at $35^\circ\text{C}$).
+- $C_{\text{thermal}}$ is the thermal capacitance of the copper heat spreader ($C \approx 142\text{ J/K}$).
 
-When flow drops below $5.0\\text{ L/min}$, $\\text{Re}$ collapses into laminar flow, reducing $h_{\\text{conv}}$ by $78\\%$. Within $14.8\\text{ seconds}$, $T_j(t)$ crosses the irreversible catastrophic junction trip limit ($94.0^\\circ\\text{C}$), halting compute operations.
+When flow drops below $5.0\text{ L/min}$, $\text{Re}$ collapses into laminar flow, reducing $h_{\text{conv}}$ by $78\%$. Within $14.8\text{ seconds}$, $T_j(t)$ crosses the irreversible catastrophic junction trip limit ($94.0^\circ\text{C}$), halting compute operations.
 
 ### 4.5 Cumulative Catastrophe Loss Function with Statutory Penalties
-For insurance underwriters and balance sheet risk modeling, the comprehensive financial Single Loss Expectancy ($\\text{SLE}$) resulting from a cyber-physical breach involving regulatory non-compliance is formulated as:
+For insurance underwriters and balance sheet risk modeling, the comprehensive financial Single Loss Expectancy ($\text{SLE}$) resulting from a cyber-physical breach involving regulatory non-compliance is formulated as:
 
-$$\\text{SLE}_{\\text{event}} = \\text{SLE}_{\\text{physical}} + \\text{SLE}_{\\text{business\\_interruption}} + \\Phi_{\\text{CRA}} + \\int_0^{T_{\\text{remediation}}} \\dot{C}_{\\text{forensic}}(t) \\, dt$$
+$$\text{SLE}_{\text{event}} = \text{SLE}_{\text{physical}} + \text{SLE}_{\text{business\_interruption}} + \Phi_{\text{CRA}} + \int_0^{T_{\text{remediation}}} \dot{C}_{\text{forensic}}(t) \, dt$$
 
-$$\\text{ALE}_{\\text{portfolio}} = \\text{SLE}_{\\text{event}} \\times \\text{ARO}$$
+$$\text{ALE}_{\text{portfolio}} = \text{SLE}_{\text{event}} \times \text{ARO}$$
 
 Where:
-- $\\text{SLE}_{\\text{physical}}$ represents the replacement cost of ruined physical assets (such as warped cold plates, burned pump motors, and degraded silicon chiplets).
-- $\\text{SLE}_{\\text{business\\_interruption}}$ represents unserved inference SLAs and contract breach damages.
-- $\\Phi_{\\text{CRA}}$ is the administrative fine levied under CRA Article 64.
-- $\\dot{C}_{\\text{forensic}}(t)$ is the hourly rate of external incident response, legal counsel, and regulatory defense.
-- $T_{\\text{remediation}}$ is the time required to regain regulatory certification and complete full firmware reflashing.
-- $\\text{ARO}$ is the Annualised Rate of Occurrence, and $\\text{ALE}$ is the Annualised Loss Expectancy.
+- $\text{SLE}_{\text{physical}}$ represents the replacement cost of ruined physical assets (such as warped cold plates, burned pump motors, and degraded silicon chiplets).
+- $\text{SLE}_{\text{business\_interruption}}$ represents unserved inference SLAs and contract breach damages.
+- $\Phi_{\text{CRA}}$ is the administrative fine levied under CRA Article 64.
+- $\dot{C}_{\text{forensic}}(t)$ is the hourly rate of external incident response, legal counsel, and regulatory defense.
+- $T_{\text{remediation}}$ is the time required to regain regulatory certification and complete full firmware reflashing.
+- $\text{ARO}$ is the Annualised Rate of Occurrence, and $\text{ALE}$ is the Annualised Loss Expectancy.
 
 ### 4.6 Return on Security Investment (ROSI) for Automated Supply Chain Controls
 The financial return on deploying automated machine-readable Bills of Materials and 6-site HSM audits is quantified through the Return on Security Investment:
 
-$$\\text{ROSI} = \\frac{(\\text{ALE}_{\\text{unverified}} - \\text{ALE}_{\\text{attested}}) - C_{\\text{BOM\\_controls}}}{C_{\\text{BOM\\_controls}}}$$
+$$\text{ROSI} = \frac{(\text{ALE}_{\text{unverified}} - \text{ALE}_{\text{attested}}) - C_{\text{BOM\_controls}}}{C_{\text{BOM\_controls}}}$$
 
-For a hyperscale infrastructure portfolio with an unattested baseline $\\text{ALE}_{\\text{unverified}} = 48.5\\text{M EUR}$, implementing automated multi-BOM transparency reduces the post-control loss expectancy to $\\text{ALE}_{\\text{attested}} = 3.2\\text{M EUR}$ at an annual control cost $C_{\\text{BOM\\_controls}} = 4.5\\text{M EUR}$, giving a modelled $\\text{ROSI} = 907\\%$.
+For a hyperscale infrastructure portfolio with an unattested baseline $\text{ALE}_{\text{unverified}} = 48.5\text{M EUR}$, implementing automated multi-BOM transparency reduces the post-control loss expectancy to $\text{ALE}_{\text{attested}} = 3.2\text{M EUR}$ at an annual control cost $C_{\text{BOM\_controls}} = 4.5\text{M EUR}$, giving a modelled $\text{ROSI} = 907\%$.
 
 All three inputs are the working group's assumptions for a portfolio of this size. The 48.5M EUR baseline is not a measured loss run, the 3.2M EUR residual is not a post-implementation observation, and the 4.5M EUR control cost is an engineering estimate of tooling, staffing and audit travel. The division is exact and reproduces to 906.67%. Exactness of the arithmetic says nothing about the three numbers going in, so the figure belongs in a business case only after each input has been replaced by the operator's own.
 
@@ -242,38 +250,33 @@ Article 14 of the Cyber Resilience Act mandates that manufacturers report active
 ### 5.1 The Automated Vulnerability Disclosure Report (VDR) Pipeline
 Under the unified framework, vulnerability tracking transitions to an automated machine-to-machine loop:
 
-```
-+---------------------+------+---------------------+
-| Upstream Threat /   |      | In-House Automated  |
-| NVD / CVE Stream    |      | Falsification Engine|
-+---------------------+------+---------------------+
-           |                            |
-           +------------+--+------------+
-                        |  |
-                        v  v
-        +-----------------------------------+
-        |  VEX / VDR Generation Engine      |
-        |  - Ingests CVE & CVSS Metrics     |
-        |  - Cross-references Active SBOMs  |
-        |  - Evaluates Physical Mitigations |
-        +-----------------------------------+
-                        |
-                        v
-        +-----------------------------------+
-        |  Cryptographically Signed VEX     |
-        |  - CycloneDX 1.6+ JSON Document   |
-        |  - State: 'not_affected' or 'aff' |
-        |  - Includes Justification Code    |
-        +-----------------------------------+
-                        |
-            +-----------+-----------+
-            |                       |
-            v                       v
-+-----------------------+-+-----------------------+
-| Operational DT Loader | | ENISA / CSIRT Portal  |
-| - Adjusts SL-T Bounds | | - Automated CRA 24-hr |
-| - Deploys Mitigation  | |   Notification Stream |
-+-----------------------+-+-----------------------+
+```mermaid
+flowchart TD
+    accTitle: The automated machine-to-machine VEX generation loop
+    accDescr {
+      Two inputs feed the VEX and VDR generation engine: the upstream threat,
+      NVD and CVE stream, and the in-house automated falsification engine. The
+      engine ingests CVE and CVSS metrics, cross-references active SBOMs and
+      evaluates physical mitigations, producing a cryptographically signed VEX
+      document in CycloneDX 1.6+ JSON carrying a state and a justification
+      code. That document fans out to two consumers: the operational digital
+      twin loader, which adjusts security level bounds and deploys
+      mitigations, and the ENISA and CSIRT portal, which drives the automated
+      24-hour notification stream required by the Cyber Resilience Act.
+    }
+    UP["Upstream Threat /<br/>NVD / CVE Stream"]
+    FAL["In-House Automated<br/>Falsification Engine"]
+    ENG["<b>VEX / VDR Generation Engine</b><br/>Ingests CVE &amp; CVSS Metrics<br/>Cross-references Active SBOMs<br/>Evaluates Physical Mitigations"]
+    SIG["<b>Cryptographically Signed VEX</b><br/>CycloneDX 1.6+ JSON Document<br/>State: 'not_affected' or 'aff'<br/>Includes Justification Code"]
+    DT["<b>Operational DT Loader</b><br/>Adjusts SL-T Bounds<br/>Deploys Mitigation"]
+    EN["<b>ENISA / CSIRT Portal</b><br/>Automated CRA 24-hr Notification Stream"]
+    UP --> ENG
+    FAL --> ENG
+    ENG --> SIG
+    SIG --> DT
+    SIG --> EN
+    classDef n fill:#1a1c1f,stroke:#E05A10,stroke-width:1px,color:#f5f3f0;
+    class UP,FAL,ENG,SIG,DT,EN n;
 ```
 
 ### 5.2 Concrete VEX Machine-Readable Implementation
@@ -356,7 +359,7 @@ Lloyd's Market Association Bulletin Y5381 mandates that cyber policies exclude l
 | **Statutory Fine Coverage** | Excluded. Standard cyber policies do not indemnify unhedged regulatory fines. | Attested compliance under Annex VII satisfies due diligence standards; fines mitigated. | Insurers offer sub-limited regulatory defense and fine coverage extensions. |
 | **Probable Maximum Loss (PML)** | Subjective site estimates ($100M+ unconstrained accumulation). | Mathematically bounded failure propagation modeling physical manifold isolation. | PML reduced by 42%; reinsurance capital release achieved. |
 | **State-Backed Attack Attribution** | Ambiguous. Disputed claims lead to protracted coverage litigation under Y5381. | Attested hardware zero trust (Caliptra RoT, DICE) proves breach isolation. | Policyholders maintain affirmative coverage; war exclusion waivers granted. |
-| **Physical Consequential Loss** | Property and cyber policies engage in mutual coverage disputes over kinetic loss. | Multi-BOM digital twin models explicit physical damage boundaries ($h_f$, $\\Delta T$). | Integrated Property-Cyber endorsements written with clear indemnity attachment points. |
+| **Physical Consequential Loss** | Property and cyber policies engage in mutual coverage disputes over kinetic loss. | Multi-BOM digital twin models explicit physical damage boundaries ($h_f$, $\Delta T$). | Integrated Property-Cyber endorsements written with clear indemnity attachment points. |
 | **Deductible Sizing** | High static deductibles ($10M to $50M) reflecting unquantified supply chain risk. | Dynamic deductibles indexed to continuous VEX feed status and to HSM provenance the buyer has audited under the Annex 7 audit right. | Working capital requirements reduced; premium credits up to 28% achieved. |
 
 The percentages in the right-hand column are modelled outcomes, not quoted terms. The 42% reduction in probable maximum loss and the 28% premium credit express what this working group judges a complete multi-BOM evidence package to be worth at placement. No broker submission, bound slip or treaty wording is cited for either number, and neither should be carried into a board paper without a broker testing it against the current market.
