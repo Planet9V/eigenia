@@ -33,8 +33,16 @@ Products in neither category are a residual the Regulation does not name; the
 Commission calls it "the default category of products". Article 6 is
 "Requirements for products with digital elements" and does not classify.
 
-So there are three named designations and **four distinct conformity routes**,
-because important splits in two.
+The Regulation names **two** designations, important and critical. Article 7(2)
+divides important into class I and class II. Counting the unnamed residual, that
+gives **four distinct conformity routes** but only two statutory designations;
+saying "three tiers" is common shorthand and is not what the text names.
+
+**No "stricter category governs" rule exists.** Overlaps are resolved by core
+functionality under Article 7(1), and IR 2025/2392 separates class I from class II
+tamper-resistant parts by assurance level rather than by any precedence rule. A
+widely-repeated secondary framing asserts a stricter-wins tiebreak; it has no
+basis in either instrument.
 
 ### Which annex holds which
 
@@ -160,9 +168,15 @@ the support period shall correspond to the expected use time."
 
 Medical devices under MDR/IVDR, civil aviation, motor vehicles under the
 type-approval regime, marine equipment, products developed exclusively for
-national security or defence, spare parts made to the same specifications as the
-components they replace, and non-commercial open-source software. Open-source
-stewards carry a lighter tailored set of obligations.
+national security or defence, and spare parts made to the same specifications as
+the components they replace.
+
+**Article 2 does not mention open-source software.** The non-commercial
+open-source carve-out arises from Article 3(2), which defines making available on
+the market as supply "in the course of a commercial activity", together with
+recitals 15, 18 and 19. Open-source stewards carry their own lighter set of
+obligations. Attributing this to Article 2 is a common error; it was made in the
+first version of this file.
 
 ## Secondary sources found to be wrong, recorded so they are not re-used
 
