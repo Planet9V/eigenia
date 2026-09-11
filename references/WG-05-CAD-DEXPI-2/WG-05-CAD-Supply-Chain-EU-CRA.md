@@ -10,7 +10,7 @@ This paper provides a complete systems assurance blueprint for implementing mach
 
 ## 1. Regulatory Architecture: The Cyber Resilience Act (Regulation 2024/2847)
 
-The Cyber Resilience Act fundamentally restructures product liability for hardware and software in the European Union. Unlike the Network and Information Security Directive (NIS2), which governs the operational security of essential entities, the CRA places direct legal obligations on economic operators: manufacturers, importers, and distributors.
+The Cyber Resilience Act fundamentally restructures product liability for hardware and software in the European Union. Unlike Directive (EU) 2022/2555 (NIS2), which governs the operational security of essential and important entities, the CRA places direct legal obligations on economic operators: manufacturers, importers, and distributors.
 
 ### 1.1 Scope and Product Classifications
 The CRA applies to products with digital elements whose intended or reasonably foreseeable use includes a direct or indirect logical or physical data connection to a device or network. Article 2 carves out several sectors already governed by equivalent rules: medical devices under the MDR and IVDR, civil aviation, motor vehicles under the type-approval regime, marine equipment, products developed exclusively for national security or defence, and spare parts made to the same specifications as the components they replace. Non-commercial open-source software sits outside the Regulation by a different route, not by an Article 2 exclusion: Article 3(2) defines making available on the market as supply in the course of a commercial activity, and open-source stewards carry their own lighter set of obligations.
@@ -40,13 +40,13 @@ A programmable logic controller illustrates why core functionality governs. A PL
 | **Default** | neither | General software, compute trays, support utilities, PLCs without a listed core function | Free choice of module A internal control, B+C, H, or a certification scheme |
 
 ### 1.2 Essential Cybersecurity Requirements (Annex I)
-Annex I of the regulation establishes non-negotiable requirements divided into two core sections:
+Annex I sets the essential cybersecurity requirements in two parts. They are not unconditional: Part I point 2 applies "on the basis of the cybersecurity risk assessment referred to in Article 13(2) and where applicable", and Article 13(4) lets a manufacturer document why a given requirement does not apply to a product.
 
-- **Part I: Security by design and by default:** Products must be delivered with a secure by default configuration and free from known exploitable vulnerabilities. Annex I Part I requires protection of the confidentiality and integrity of stored, transmitted and processed data, protection against unauthorised access through appropriate control mechanisms including authentication and identity management, minimisation of the attack surface, mitigation of the impact of an incident through exploitation mitigation techniques, and the recording and monitoring of relevant internal activity.
-- **Part II: Vulnerability Handling Processes:** Manufacturers must establish and maintain continuous vulnerability handling throughout the expected product support period (minimum five years). This mandates automated intake mechanisms, machine-readable vulnerability disclosures, free security patches without feature regressions, and immediate notification of actively exploited vulnerabilities.
+- **Part I, cybersecurity requirements relating to the properties of products with digital elements:** Products must be delivered with a secure by default configuration and free from known exploitable vulnerabilities. Annex I Part I requires protection of the confidentiality and integrity of stored, transmitted and processed data, protection against unauthorised access through appropriate control mechanisms including authentication and identity management, minimisation of the attack surface, mitigation of the impact of an incident through exploitation mitigation techniques, and the recording and monitoring of relevant internal activity.
+- **Part II, vulnerability handling requirements:** Manufacturers must identify and document vulnerabilities and components, address and remediate them without delay, apply effective and regular tests, publicly disclose information about fixed vulnerabilities once a security update is available, enforce a coordinated vulnerability disclosure policy, provide a contact address for reporting vulnerabilities, and, where technically feasible, provide security updates separately from functionality updates. These obligations run for the support period, which Article 13(8) sets at **at least five years** unless the product is expected to be in use for less time, in which case it matches the expected use time. Notification of an actively exploited vulnerability is a separate obligation under Article 14, not part of Annex I.
 
-### 1.3 Statutory Penalty Tiers (Articles 64 through 68)
-Article 64 establishes three administrative fine tiers enforced by national market surveillance authorities:
+### 1.3 Statutory Penalty Tiers (Article 64)
+Article 64 establishes three administrative fine ceilings enforced by national market surveillance authorities. Articles 65 through 68 are not penalty provisions: Article 65 concerns representative actions, and Articles 66 to 68 amend Regulation (EU) 2019/1020, Directive (EU) 2020/1828 and Regulation (EU) No 168/2013 respectively.
 
 1. **Tier 1 (Article 64(2)): the essential requirements and the Article 13 and 14 obligations.**
    Infringement of the essential cybersecurity requirements in Annex I, or of the manufacturer obligations in Articles 13 and 14; including secure development, vulnerability handling, and technical documentation such as a machine-readable SBOM; results in administrative fines up to 15,000,000 EUR or 2.5 % of worldwide annual turnover for the preceding financial year, whichever is higher.
@@ -142,7 +142,7 @@ flowchart TD
 ```
 
 ### 3.2 Standardizing the 6-Site Audit Protocol
-Major semiconductor vendors distribute manufacturing and packaging across global sites (for example, Austin, Santa Clara, Penang, Hsinchu, Tainan, and Dresden). To satisfy EU CRA Annex VII technical documentation requirements, systems assurance leads mandate a six-point audit checklist across every facility:
+Major semiconductor vendors distribute manufacturing and packaging across global sites (for example, Austin, Santa Clara, Penang, Hsinchu, Tainan, and Dresden). Annex VII prescribes the *content* of the technical documentation, not an audit regime; it requires none of what follows. The six-point checklist below is this working group's own architecture for producing evidence that will satisfy Annex VII, and is presented as such:
 
 1. **FIPS 140-3 Level 4 Physical HSM Validation:** Verification that all manufacturing key injection engines reside within tamper-responsive, dual-control hardware security modules.
 2. **Zero Shared Storage:** Prohibition of local key caching or plaintext secret storage on factory floor automated test equipment (ATE).
@@ -164,13 +164,13 @@ $$\Phi_{\text{CRA}} = \max\left(15 \times 10^6 \text{ EUR}, \; \alpha_{\text{sta
 
 Where:
 - $\alpha_{\text{statutory}} = 0.025$ (2.5% of total worldwide annual turnover for the preceding financial year).
-- $\text{Turnover}_{\text{worldwide}}$ is the gross consolidated revenue of the parent undertaking.
+- $\text{Turnover}_{\text{worldwide}}$ is the offending undertaking's own total worldwide annual turnover for the preceding financial year, in the words of Article 64(2). The Regulation does not substitute a parent undertaking's consolidated revenue, and for a subsidiary the two differ materially.
 
 For a multinational enterprise generating 24,000,000,000 EUR in global annual revenue, the statutory financial exposure under Tier 1 is:
 
 $$\Phi_{\text{CRA}} = \max\left(15 \times 10^6, \; 0.025 \times 24 \times 10^9\right) = \max\left(15\text{M}, \; 600\text{M}\right) = 600,000,000 \text{ EUR}$$
 
-This catastrophic exposure shifts supply chain assurance from a technical overhead concern into an existential fiduciary duty for executive leadership.
+This is the statutory **ceiling**, not an expected loss. Article 64(2) sets fines of "up to" the greater of the two figures, and Article 64(5) requires the market surveillance authority to scale the amount by the nature, gravity and duration of the infringement, any previous fines, and the size and market share of the operator. Article 64(10) removes the paragraph 3 to 9 fines entirely for open-source software stewards and disapplies the Article 14 deadlines for micro and small manufacturers. Read as a bound on the tail rather than a point estimate, it still moves supply chain assurance from technical overhead into a fiduciary concern for executive leadership.
 
 ### 4.2 The ALARP Risk-Justification Formulation for IEC 62443 SL-T Deviations
 Under the As Low As Reasonably Practicable (ALARP) principle, an engineering team may only justify a deviation from a normative Security Level Target (for example, accepting SL-T 2 instead of SL-T 3 on a legacy building management controller) if the financial or operational cost of implementing the higher control is grossly disproportionate to the risk reduction achieved:
@@ -267,7 +267,7 @@ flowchart TD
     UP["Upstream Threat /<br/>NVD / CVE Stream"]
     FAL["In-House Automated<br/>Falsification Engine"]
     ENG["<b>VEX / VDR Generation Engine</b><br/>Ingests CVE &amp; CVSS Metrics<br/>Cross-references Active SBOMs<br/>Evaluates Physical Mitigations"]
-    SIG["<b>Cryptographically Signed VEX</b><br/>CycloneDX 1.6+ JSON Document<br/>State: 'not_affected' or 'aff'<br/>Includes Justification Code"]
+    SIG["<b>Cryptographically Signed VEX</b><br/>CycloneDX 1.6+ JSON Document<br/>State: 'not_affected' or 'exploitable'<br/>Includes Justification Code"]
     DT["<b>Operational DT Loader</b><br/>Adjusts SL-T Bounds<br/>Deploys Mitigation"]
     EN["<b>ENISA / CSIRT Portal</b><br/>Automated CRA 24-hr Notification Stream"]
     UP --> ENG
@@ -299,11 +299,10 @@ The following JSON document illustrates an authoritative CycloneDX 1.6 Vulnerabi
   },
   "vulnerabilities": [
     {
-      "bom-ref": "VEX-CVE-2026-44012",
-      "id": "CVE-2026-44012",
+      "bom-ref": "VEX-CVE-XXXX-NNNNN",
+      "id": "CVE-XXXX-NNNNN",
       "source": {
-        "name": "NVD",
-        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-44012"
+        "name": "NVD"
       },
       "ratings": [
         {
@@ -316,7 +315,7 @@ The following JSON document illustrates an authoritative CycloneDX 1.6 Vulnerabi
       ],
       "analysis": {
         "state": "not_affected",
-        "justification": "vulnerable_code_cannot_be_controlled_by_adversary",
+        "justification": "protected_at_perimeter",
         "response": ["can_not_fix"],
         "detail": "Vulnerable telemetry parsing routine is physically isolated behind an FPGA-enforced unidirectional data diode. External network traffic cannot reach the vulnerable register."
       },
@@ -332,7 +331,9 @@ The following JSON document illustrates an authoritative CycloneDX 1.6 Vulnerabi
 
 ---
 
-## 6. Contractual Enforcement: Annex 7 Supply Chain Covenants
+## 6. Contractual Enforcement: the Annex 7 Supply Chain Covenants
+
+A note on naming, because two unrelated instruments sit one character apart in this paper. **Annex 7** below is this working group's model procurement annex, a contractual artifact. **Annex VII** is the technical documentation annex of Regulation (EU) 2024/2847. Where this paper says Annex VII it means the Regulation; where it says Annex 7 it means the covenant.
 
 Technical specifications alone are insufficient to guarantee supply chain integrity. They must be legally enforced across procurement agreements with Original Design Manufacturers, silicon vendors, and maintenance contractors.
 
@@ -341,7 +342,7 @@ Annex 7 binds all value chain participants to verifiable security deliverables:
 
 1. **Mandatory Machine-Readable Deliverables:** Every hardware delivery must include a CycloneDX 1.6+ document signed by the supplier, containing HBOM, SBOM, CBOM, and MBOM tiers, whose signature the buyer checks against the supplier's enrolled key before the goods are accepted. Deliveries lacking valid machine-readable documentation are rejected at the loading dock without payment release.
 2. **Factory HSM Audit Rights:** The buyer reserves the right to conduct independent physical and cryptographic audits of the supplier's manufacturing facilities and key injection infrastructure.
-3. **24-Hour Vulnerability Escalation SLA:** Suppliers must contractually commit to notifying the buyer within twelve hours of discovering any critical vulnerability or active exploit affecting delivered hardware or firmware.
+3. **Twelve-Hour Vulnerability Escalation SLA:** Suppliers must contractually commit to notifying the buyer within twelve hours of discovering any critical vulnerability or active exploit affecting delivered hardware or firmware.
 4. **Indemnification for Regulatory Fines:** If a regulatory penalty under CRA Article 64 is levied against the operator due to an undisclosed vulnerability, falsified SBOM, or backdoored component provided by the supplier, the supplier contractually assumes full financial liability.
 5. **Open Platform Initialization Commitment:** Suppliers agree to phase out proprietary firmware binary blobs within eighteen months, transitioning to open-source OpenSIL and coreboot initialization libraries.
 
@@ -352,11 +353,11 @@ Annex 7 binds all value chain participants to verifiable security deliverables:
 The convergence of statutory regulatory penalties and physical supply chain vulnerabilities fundamentally transforms the underwriting of cyber insurance and property catastrophe treaties. Underwriters evaluating facility portfolios must account for common-cause accumulation across identical ODM server trays:
 
 ### 7.1 Reinsurance Treaty Structuring under Lloyd's Y5381
-Lloyd's Market Association Bulletin Y5381 mandates that cyber policies exclude losses arising from war and state-backed cyber attacks. In high-density compute facilities and critical infrastructure, state-sponsored actors frequently exploit supply chain backdoors to achieve physical destruction or model weight theft:
+Lloyd's Market Bulletin Y5381, issued by the Corporation of Lloyd's on 16 August 2022, requires that stand-alone cyber-attack policies written or renewed from 31 March 2023 exclude losses arising from war and from state-backed cyber attacks that significantly impair the ability of a state to function or that significantly impair the security capabilities of a state. It is narrower than a blanket exclusion of all state-backed activity, it was issued by the Corporation rather than the Lloyd's Market Association, which publishes the LMA model clauses, and it has since been revisited by bulletin Y5433. In high-density compute facilities and critical infrastructure, state-sponsored actors frequently exploit supply chain backdoors to achieve physical destruction or model weight theft:
 
 | Underwriting Dimension | Traditional Procurement (Qualitative) | Audited Supply Chain (DEXPI + CycloneDX) | Actuarial Impact |
 |:---|:---|:---|:---|
-| **Statutory Fine Coverage** | Excluded. Standard cyber policies do not indemnify unhedged regulatory fines. | Attested compliance under Annex VII satisfies due diligence standards; fines mitigated. | Insurers offer sub-limited regulatory defense and fine coverage extensions. |
+| **Statutory Fine Coverage** | Excluded. Standard cyber policies do not indemnify unhedged regulatory fines. | Annex VII conformity is a documentation obligation, not a fine-mitigation mechanism; Article 64(5) is, and it weighs the nature, gravity and duration of the infringement. Attested documentation is evidence an authority can weigh there. | Insurers offer sub-limited regulatory defense and fine coverage extensions. |
 | **Probable Maximum Loss (PML)** | Subjective site estimates ($100M+ unconstrained accumulation). | Mathematically bounded failure propagation modeling physical manifold isolation. | PML reduced by 42%; reinsurance capital release achieved. |
 | **State-Backed Attack Attribution** | Ambiguous. Disputed claims lead to protracted coverage litigation under Y5381. | Attested hardware zero trust (Caliptra RoT, DICE) proves breach isolation. | Policyholders maintain affirmative coverage; war exclusion waivers granted. |
 | **Physical Consequential Loss** | Property and cyber policies engage in mutual coverage disputes over kinetic loss. | Multi-BOM digital twin models explicit physical damage boundaries ($h_f$, $\Delta T$). | Integrated Property-Cyber endorsements written with clear indemnity attachment points. |
