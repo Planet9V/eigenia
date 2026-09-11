@@ -3,6 +3,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import {
   BookOpen,
+  Network,
   ChevronDown,
   ChevronRight,
   Search,
@@ -40,6 +41,7 @@ const WG_ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> =
   "WG-05-CAD": Cpu,
   "WG-07-TM": Boxes,
   "WG-08-MO": Sparkles,
+  "WG-10-AN": Network,
   "MP-MATH": FileText,
 };
 

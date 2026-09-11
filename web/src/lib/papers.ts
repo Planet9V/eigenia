@@ -283,6 +283,18 @@ export const PAPERS_REGISTRY: Record<string, { title: string; relativePath: stri
     title: "External Research Sourcing & Attribution Methodology",
     relativePath: "references/external-research/README.md",
   },
+  "multigraph-engine": {
+    title: "The G_CPDT Multigraph Engine: Dual-Representation Storage and Cypher Query Algebra",
+    relativePath: "references/WG-05-CAD-DEXPI-2/WG-05-CAD-Multigraph-Engine.md",
+  },
+  "kinetic-blast-radius": {
+    title: "Non-Linear Cyber-to-Physical Consequence Dynamics: Saddle-Node Bifurcations and Kinetic Blast Radii",
+    relativePath: "references/WG-05-CAD-DEXPI-2/WG-05-CAD-Kinetic-Blast-Radius.md",
+  },
+  "cra-product-assurance": {
+    title: "Statutory Product Assurance: EU Cyber Resilience Act (CRA) & Machine-Speed VEX Falsification",
+    relativePath: "references/WG-06-CRA-Product-Assurance/WG-06-CRA-Product-Assurance.md",
+  },
 };
 
 export function getAllPaperSlugs(): string[] {
