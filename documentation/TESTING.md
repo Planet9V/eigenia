@@ -139,3 +139,20 @@ the Dockerfile too, or the Railway build breaks where your machine does not.
 declared in `package.json`. It worked by accident on one machine and would have failed
 on the first CI run. It is declared now. If you add an audit that needs a package,
 declare it.
+
+## The memory gate (added 2026-09-11)
+
+`TASKS.md` at the repo root is the project's memory of record; line 1 carries
+`<!-- verified: YYYY-MM-DD <sha> -->`. `scripts/audit-tasks-stamp.mjs` fails the
+audit suite when that stamp is missing, not a real commit, more than 15 commits
+behind `HEAD`, or older than 7 days. It skips loudly in the Docker image, where
+`TASKS.md` is not copied, and checks the date only on a shallow clone (CI's
+Audits job uses `fetch-depth: 0` so it can measure commit distance).
+
+Three Claude Code hooks in `.claude/settings.json` (tracked) close the loop on
+the agent side: `scripts/hooks/session-start.mjs` prints the Active list and the
+stamp into every session's context; `scripts/hooks/stop-check.mjs` refuses to
+end a session that changed tracked files or landed commits without touching
+`TASKS.md`; `scripts/hooks/deny-gateway-store.mjs` blocks
+`mcp__super-intelligence__memory_store` so decisions land in `memory/` instead.
+The reasoning is in `memory/context/working-agreement.md`.

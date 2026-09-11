@@ -1,0 +1,15 @@
+# Glossary — Eigenia website
+- **Eigenia B.V.** — Dutch holding company and applied-complexity think tank, Herengracht 450, Amsterdam; KvK-registered; BTW NL865421908B01. Named after the eigenvector.
+- **Eigenia Labs** — open-research arm publishing working-group output.
+- **Working groups (WG)** — WG-01-UI Underwriter/insurance; WG-02-DT Digital Twin; WG-03-ML Behavioural Modeling; WG-04-CF Cascading Failures; WG-05-CAD DEXPI 2.0; WG-07-TM Threat Modeling; WG-08-MO Monte Carlo Application; MP Math-Physics-Formula.
+- **Treatise** — a published working-group paper; Eigenia Labs synthesis, not peer review; must trace named external methods to a source.
+- **CyHAZOPs** — cyber-physical hazard analysis for hyperscale datacentre OT; integrates reliability engineering (HAZOP/FMECA) with IEC 62443; the "Taleb Test" for fat-tail risk; RCIL/SCIL registers; MoR (minimum operating requirements).
+- **Physics models** (at /theory/[slug]) — aeon-ggnn-gated-graph; l0-l1-gap-calculus; mckenney-lacan-psychometric-tensor; interaction-hamiltonian; kramers-barrier-escape; sir-compartmental-model; clayton-copula-actuarial; hawkes-self-exciting-process; pareto-pot-evt-model.
+- **Papers** (at /papers/[slug]) — taleb-fooled-by-randomness (Treatises I–V); dexpi-cyclonedx-standards; 4-underwriter-cyber-risk-underwriting; tacam-deep-dive; atq-deep-dive; monte-carlo-engine; death-wobble-frequency-instability.
+- **Lower tail dependence (λL > 0)** — the site's core argument: industrial failures cascade rather than behaving as independent trials.
+- **Pretotype modals** — S-Curve Audit, Telemetry Sandbox, Executive Briefings intake modals.
+- **p-series / r-series** — compile_p01…p12 and compile_atq_academic (embed papers as Python strings); compile_r01…r07 (read papers-pre-publish/, clean, write references/).
+- **sync-publications.js / audit-publications.js** — build-time sync of references into generatedReferencesContent.ts and word-for-word fidelity audit.
+- **`npm run verify`** — sync, typecheck, audit suite, unit tests (Vitest); pre-push hook and GitHub Actions run it.
+- **SITE_URL** — https://eigenia.nl by default (web/src/lib/site.ts).
+- **super-intelligence gateway** — cross-session memory/code-graph MCP the repo's CLAUDE.md asks agents to use with project="eigenia".

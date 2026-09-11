@@ -9,6 +9,48 @@ The core work here is two things, not one: publishing the think tank's
 working-group output as a polished public site, and keeping that output
 honest about what's sourced versus what's the working group's own synthesis.
 
+## Working memory — read this block first, every session
+
+@TASKS.md
+
+The task list above is imported from `TASKS.md` at the repo root; it is the
+state of this project. Line 1 of that file is a machine-read stamp
+(`<!-- verified: YYYY-MM-DD <sha> -->`). **Whichever session does work updates
+`TASKS.md` before it ends and refreshes the stamp** — a `Stop` hook refuses
+to end a session that changed tracked files or landed commits without
+touching it, and `web/scripts/audit-tasks-stamp.mjs` fails CI when the stamp
+is more than 7 days or 15 commits stale. The rules of engagement are in
+`memory/context/working-agreement.md`; read it before a Stitch or content task.
+
+**Me.** Jim McKenney, owner of Eigenia B.V. (board intake jim@eigenia.nl),
+also Tetrel Security; Kansas City area (America/Chicago). Author of the
+working-group output.
+
+**Memory of record** (decided 2026-09-11): `TASKS.md`, `memory/` and this
+block, in this repo. `notes/<YYYY-MM-DD>/` is per-session scratch and plans.
+Everything else that looks like memory (`.taskmaster/`, `.remember/`,
+`.claude/memory.db`, `.swarm/`, `ruvector.db`, the gateway's `memory_store`)
+is a tool cache: never read it to learn state, never make it the only copy of
+a decision. `memory/context/gateway-evaluation.md` has the evidence.
+
+**Terms that trip new sessions** (full list: `memory/glossary.md`):
+
+| Term | Meaning |
+|------|---------|
+| Research Track vs Working Group | settled 2026-09-09: **Research Track names the section and the route** (breadcrumb, page title); **Working Group names the entity** (registry prose, sidebar, navbar, paper hero cards). Two levels, not two taxonomies |
+| Workstream | ENTSO-E's word only; `audit-terminology.mjs` forbids it for Eigenia output |
+| WG-01 … WG-08, MP-MATH, GOV-RES | folders give 7 working groups, the registry gives 9 — counts come from `web/src/lib/wikiRegistry.ts`, never typed |
+| treatise | a published working-group paper under `references/<WG>/`, rendered at /papers/[slug] and /wiki |
+| p-series / r-series | `scripts/compile_*.py` that overwrite specific `references/*.md`; r-series read `papers-pre-publish/` |
+
+**Decisions in force** (details and dates in `memory/`):
+
+- Counts are derived, never typed; `audit-counts.mjs` checks written counts against the registry.
+- Any new audit is checked in the Docker layout (`COPY web ./` puts `web/*` at `/app`) — two Railway builds broke on 2026-09-09 while CI stayed green.
+- Done = `npm run verify` green, PR CI green, **and Jim signs off in the browser, light and dark, EN and NL**. No agent declares a page done.
+- Stitch pass scope is **Home only** until one page has gone design → PR → production under the working agreement. A `.stitch/designs/*.html` is a spec, never code to paste.
+- Every new UI string is a `t()` key with EN and NL in the same commit.
+
 ## PRODUCTION SITE — `references/*.md` paths are load-bearing, not just research material
 
 This is a live, production site (Railway, built from the root `Dockerfile`,
@@ -122,6 +164,17 @@ site is that it looks right:
   trying to establish.
 
 ## Also available: the super-intelligence-framework MCP gateway, and the full global toolset
+
+> **Status 2026-09-11 — query tool, not memory.** The gateway's `graph_*` and
+> `memory_search` calls stay available and are useful for impact analysis before
+> touching a shared component. Its `memory_store` is **denied by a `PreToolUse`
+> hook** (`.claude/settings.json`): decisions go in `memory/` and `TASKS.md`
+> here, where every session reads them automatically. The graph covers `web/src`
+> only, is a snapshot (run `graph_index(project="eigenia")` first if `stale`),
+> and in 34 notes files had been queried zero times — see
+> `memory/context/gateway-evaluation.md`. The rest of this section is the
+> original contract and still describes the tools accurately.
+
 
 Nothing here is scoped down. There is no project `.mcp.json` restricting
 which servers are available, and it should stay that way — this agent has

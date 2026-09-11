@@ -28,7 +28,11 @@ jobs:
     name: Audits
     runs-on: ubuntu-latest
     steps:
+      # Full history: audit-tasks-stamp.mjs measures how far the TASKS.md stamp
+      # is behind HEAD. On a depth-1 checkout it can only check the date.
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:
