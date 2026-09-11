@@ -18,14 +18,53 @@
       "Bash(docker logs *)",
       "Bash(curl -s -o /dev/null -w * http://localhost:*)",
       "mcp__super-intelligence__graph_query",
+      "mcp__super-intelligence__graph_semantic_query",
       "mcp__super-intelligence__graph_path",
       "mcp__super-intelligence__graph_explain",
       "mcp__super-intelligence__graph_index",
       "mcp__super-intelligence__memory_search",
-      "mcp__super-intelligence__memory_store",
       "mcp__serena__activate_project",
       "mcp__serena__find_symbol",
       "mcp__serena__find_referencing_symbols"
+    ],
+    "deny": [
+      "mcp__super-intelligence__memory_store"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/scripts/hooks/session-start.mjs\"",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/scripts/hooks/stop-check.mjs\"",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "mcp__super-intelligence__memory_store",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/scripts/hooks/deny-gateway-store.mjs\"",
+            "timeout": 5
+          }
+        ]
+      }
     ]
   }
 }

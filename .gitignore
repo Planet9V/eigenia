@@ -34,7 +34,9 @@ Thumbs.db
 *.tsbuildinfo
 
 # Local Agent Caches & Databases
-.claude/
+# .claude/settings.json is tracked (hooks + permissions travel with the repo); everything else in .claude/ is local
+.claude/*
+!.claude/settings.json
 .claude-flow/
 .swarm/
 *.db
@@ -60,3 +62,6 @@ dev-debug.log
 
 # Task Master: task definitions and config are tracked; local run state is not.
 .taskmaster/state.json
+
+# Productivity dashboard: a local viewer for TASKS.md, not part of the site
+/dashboard.html
