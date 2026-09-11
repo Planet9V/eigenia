@@ -11,7 +11,7 @@ dest_path = 'references/WG-05-CAD-DEXPI-2/WG-05-CAD-Supply-Chain-EU-CRA.md'
 
 content = r"""## Abstract
 
-On September 13, 2024, the European Union published Regulation (EU) 2024/2847, the Cyber Resilience Act (CRA), establishing mandatory cybersecurity requirements for products with digital elements placed on the Single Market. With full enforcement commencing on September 11, 2026, the era of voluntary cybersecurity questionnaires and qualitative vendor self-attestations is definitively closed. Article 13, Article 14, and Annex I mandate machine-readable Software Bills of Materials (SBOMs), Hardware Bills of Materials (HBOMs), 24-hour vulnerability notification cadences, and supply chain provenance the manufacturer must be able to evidence on demand to a notified body. Violations trigger severe statutory penalties under Article 64: administrative fines up to 15,000,000 EUR or 2.5% of worldwide annual turnover.
+Regulation (EU) 2024/2847, the Cyber Resilience Act (CRA), was adopted on 23 October 2024, published in the Official Journal on 20 November 2024, and entered into force on 10 December 2024. It establishes mandatory cybersecurity requirements for products with digital elements placed on the Single Market. Article 71(2) staggers application: Chapter IV applies from 11 June 2026, the Article 14 reporting obligations from 11 September 2026, and the Regulation in full from 11 December 2027. The era of voluntary cybersecurity questionnaires and qualitative vendor self-attestations is closing on a fixed schedule. Article 13, Article 14 and Annex I mandate a machine-readable Software Bill of Materials (SBOM) covering at least the top-level dependencies, a 24-hour early warning followed by notification within 72 hours, and supply chain provenance the manufacturer must be able to produce on a reasoned request from a market surveillance authority. Violations trigger statutory penalties under Article 64(2): administrative fines up to 15,000,000 EUR or 2.5 % of worldwide annual turnover, whichever is higher.
 
 For critical infrastructure operators, industrial automation vendors, and high-density AI compute providers, compliance cannot be achieved through manual audits. Modern infrastructure depends on multi-tiered supply chains spanning overseas Original Design Manufacturers (ODMs), sub-tier silicon foundries, open-source firmware repositories, and third-party commercial software dependencies. A vulnerability introduced at any stage; whether a backdoored Baseboard Management Controller (BMC) image, an unverified field-programmable gate array bitstream, or a shared manufacturing symmetric key; compromises the entire operational technology perimeter. When such firmware overrides secondary cooling manifold valves or voltage regulators, the failure mode is not purely digital; it triggers physical hydraulic cavitation, thermodynamic heat flux runaway, and catastrophic transformer stress.
 
@@ -24,38 +24,49 @@ This paper provides a complete systems assurance blueprint for implementing mach
 The Cyber Resilience Act fundamentally restructures product liability for hardware and software in the European Union. Unlike the Network and Information Security Directive (NIS2), which governs the operational security of essential entities, the CRA places direct legal obligations on economic operators: manufacturers, importers, and distributors.
 
 ### 1.1 Scope and Product Classifications
-The CRA applies to all products with digital elements whose intended or reasonably foreseeable use includes a direct or indirect logical or physical data connection to a device or network. The regulation establishes a three-tier risk hierarchy:
+The CRA applies to products with digital elements whose intended or reasonably foreseeable use includes a direct or indirect logical or physical data connection to a device or network. Article 2 carves out several sectors already governed by equivalent rules: medical devices under the MDR and IVDR, civil aviation, motor vehicles under the type-approval regime, marine equipment, products developed exclusively for national security or defence, spare parts made to the same specifications as the components they replace, and non-commercial open-source software.
 
-1. **Default Category (Standard Products with Digital Elements):**
-   Comprises the majority of software applications and consumer hardware. Manufacturers may demonstrate conformity through internal control procedures (Module A self-assessment) based on harmonized European standards.
-2. **Important Products with Digital Elements (Class I - Annex III):**
-   Includes microprocessors, programmable logic controllers (PLCs), industrial automation systems, operating systems, network routers, and identity management systems. Compliance requires either the application of harmonized standards or third-party conformity assessment via a Notified Body (Module B + C or Module H).
-3. **Important Products with Digital Elements (Class II - Annex IV):**
-   Reserved for highest-criticality assets: firewalls, intrusion detection systems, hardware security modules, smart meter gateways, tamper-resistant microprocessors, and hypervisors. Third-party conformity assessment by an accredited Notified Body is mandatory.
+Article 7 designates **important** products, subdivided into class I and class II, and Article 8 designates **critical** products. Products matching neither are a residual the Regulation does not name; the Commission calls it the default category. Classification follows the product's **core functionality**, not an incidental feature, and where more than one category could apply the stricter one governs. The result is three named designations and four distinct conformity routes:
+
+1. **Default category (not listed in either annex):**
+   The majority of software applications and consumer hardware. Under Article 32(1) the manufacturer has a free choice of four procedures: module A internal control, module B plus C, module H, or a European cybersecurity certification scheme where one is available and applicable. Module A is available irrespective of the technical specification used.
+2. **Important products with digital elements, class I (Annex III):**
+   Nineteen named categories, including identity and privileged access management, standalone and embedded browsers, password managers, VPN products, network management systems, SIEM systems, boot managers, public key infrastructure software, operating systems, routers, modems and switches, and microprocessors, microcontrollers, ASICs and FPGAs with security-related functionalities. Under Article 32(2) module A remains available only where harmonised standards, common specifications, or a certification scheme at assurance level at least 'substantial' have been applied **in full**; otherwise module B plus C, or module H, is required.
+3. **Important products with digital elements, class II (Annex III):**
+   Four named categories: hypervisors and container runtime systems, firewalls and intrusion detection and prevention systems, tamper-resistant microprocessors, and tamper-resistant microcontrollers. Article 32(3) removes module A entirely; the routes are module B plus C, module H, or a certification scheme at least 'substantial'.
+4. **Critical products with digital elements (Annex IV):**
+   Three named categories: hardware devices with security boxes, which the implementing regulation states includes hardware security modules that generate and manage cryptographic elements; smart meter gateways and other devices for secure cryptoprocessing; and smartcards and similar devices including secure elements. Article 32(4) puts a European cybersecurity certification scheme under Article 8(1) first, falling back to the Article 32(3) procedures where the Article 8(1) conditions are not met.
+
+The technical descriptions of these categories are given in Commission Implementing Regulation (EU) 2025/2392, adopted 28 November 2025: its Annex I describes the Annex III classes, its Annex II the Annex IV categories. Twenty-six categories are named in total, nineteen in class I, four in class II and three critical.
+
+A programmable logic controller illustrates why core functionality governs. A PLC is squarely in scope of the CRA, but neither Annex III nor Annex IV names programmable logic controllers or industrial automation systems, so a PLC is a default-category product unless its core functionality matches a listed category, for example a microcontroller with security-related functionalities.
 
 **Table 1.1: EU Cyber Resilience Act (Regulation 2024/2847) product classes.**
 
-| Class | Products | Conformity route |
-| :--- | :--- | :--- |
-| **Class II (Annex IV)** | HSMs, Secure Silicon, Firewalls, Hypervisors | Mandatory third-party notified body assessment (Module B+C / H) |
-| **Class I (Annex III)** | PLCs, Industrial Microcontrollers, Baseboards | Harmonized standards or third-party notified body assessment |
-| **Default products** | General Software, Compute Trays, Support Utilities | Internal production control (Module A self-assessment) |
+| Designation | Annex | Example products | Conformity route (Article 32) |
+| :--- | :--- | :--- | :--- |
+| **Critical** | IV | Hardware security modules, smart meter gateways, secure elements | Certification scheme under Article 8(1); where its conditions are unmet, the Article 32(3) procedures |
+| **Important, class II** | III | Hypervisors, firewalls, intrusion detection and prevention, tamper-resistant microprocessors | Module B+C, module H, or a certification scheme at least 'substantial'. No module A |
+| **Important, class I** | III | Operating systems, routers and switches, microcontrollers with security-related functionalities, identity management | Module A only where harmonised standards, common specifications or a certification scheme are applied in full; otherwise B+C or H |
+| **Default** | neither | General software, compute trays, support utilities, PLCs without a listed core function | Free choice of module A internal control, B+C, H, or a certification scheme |
 
 ### 1.2 Essential Cybersecurity Requirements (Annex I)
 Annex I of the regulation establishes non-negotiable requirements divided into two core sections:
 
-- **Part I: Security by Design and Default:** Products must be delivered free from known exploitable vulnerabilities, enforce zero-trust network boundaries, protect confidentiality and integrity of stored and transmitted data via modern cryptography, implement line-rate hardware access controls, and restrict attack surfaces by disabling unnecessary services.
+- **Part I: Security by design and by default:** Products must be delivered with a secure by default configuration and free from known exploitable vulnerabilities. Annex I Part I requires protection of the confidentiality and integrity of stored, transmitted and processed data, protection against unauthorised access through appropriate control mechanisms including authentication and identity management, minimisation of the attack surface, mitigation of the impact of an incident through exploitation mitigation techniques, and the recording and monitoring of relevant internal activity.
 - **Part II: Vulnerability Handling Processes:** Manufacturers must establish and maintain continuous vulnerability handling throughout the expected product support period (minimum five years). This mandates automated intake mechanisms, machine-readable vulnerability disclosures, free security patches without feature regressions, and immediate notification of actively exploited vulnerabilities.
 
 ### 1.3 Statutory Penalty Tiers (Articles 64 through 68)
 Article 64 establishes three administrative fine tiers enforced by national market surveillance authorities:
 
-1. **Tier 1 (Article 64(3)): Non-Compliance with Essential Requirements or Obligations.**
-   Infringement of the essential cybersecurity requirements in Annex I; including secure development, vulnerability handling, and technical documentation such as machine-readable SBOMs; results in administrative fines up to 15,000,000 EUR or 2.5% of worldwide annual turnover for the preceding financial year, whichever is higher.
-2. **Tier 2 (Article 64(4)): Infringement of General Obligations.**
-   Breaches of other statutory provisions (such as CE marking formalities, distributor verification duties, or importer record-keeping) trigger fines up to 10,000,000 EUR or 2.0% of worldwide annual turnover.
-3. **Tier 3 (Article 64(5)): False or Misleading Information.**
-   Supplying false, incomplete, or misleading information to market surveillance authorities or Notified Bodies triggers fines up to 5,000,000 EUR or 1.0% of worldwide annual turnover.
+1. **Tier 1 (Article 64(2)): the essential requirements and the Article 13 and 14 obligations.**
+   Infringement of the essential cybersecurity requirements in Annex I, or of the manufacturer obligations in Articles 13 and 14; including secure development, vulnerability handling, and technical documentation such as a machine-readable SBOM; results in administrative fines up to 15,000,000 EUR or 2.5 % of worldwide annual turnover for the preceding financial year, whichever is higher.
+2. **Tier 2 (Article 64(3)): other obligations under the Regulation.**
+   Breaches of other statutory provisions (such as CE marking formalities, distributor verification duties, or importer record-keeping) trigger fines up to 10,000,000 EUR or 2 % of worldwide annual turnover, whichever is higher.
+3. **Tier 3 (Article 64(4)): incorrect, incomplete or misleading information.**
+   Supplying incorrect, incomplete or misleading information to notified bodies or market surveillance authorities triggers fines up to 5,000,000 EUR or 1 % of worldwide annual turnover, whichever is higher.
+
+Article 64(5) is not a fourth tier; it lists the aggravating and mitigating factors a market surveillance authority weighs when setting the amount.
 
 ---
 
