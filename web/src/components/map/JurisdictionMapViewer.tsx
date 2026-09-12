@@ -348,46 +348,46 @@ export function JurisdictionMapViewer({
       switch (activeDimension) {
         case "incident_clock": {
           const hours = country.incident_disclosure_hours;
-          if (hours <= 2) return "#e11d48"; // 1h-2h Critical Fast Clock: deep crimson rose
-          if (hours <= 6) return "#ea580c"; // 6h Fast Clock: burnished dark orange
-          if (hours <= 12) return "#d97706"; // 12h: deep amber
-          if (hours <= 24) return "#ca8a04"; // 24h Early Warning: warm metallic gold
-          if (hours <= 72) return "#64748b"; // 72h Standard: platinum slate
-          return "#334155"; // >72h Extended: dark graphite
+          if (hours <= 2) return "#E05A10"; // <= 2h Critical Fast Clock: Dutch Orange
+          if (hours <= 6) return "#C2410C"; // <= 6h Fast Clock: deep burnt orange
+          if (hours <= 12) return "#9A3412"; // <= 12h: deep rust
+          if (hours <= 24) return "#64748B"; // <= 24h Early Warning: platinum slate
+          if (hours <= 72) return "#475569"; // <= 72h Standard: dark slate
+          return "#1E293B"; // >72h Extended: dark graphite
         }
         case "default_password": {
-          return country.default_password_ban ? "#059669" : "#1e293b";
+          return country.default_password_ban ? "#E05A10" : "#1E293B";
         }
         case "sbom_mandate": {
-          if (country.sbom_required && country.cbom_required) return "#7c3aed"; // Full SBOM + CBOM: royal violet
-          if (country.sbom_required) return "#6366f1"; // SBOM required: indigo
-          return "#1e293b"; // Voluntary / Discretionary
+          if (country.sbom_required && country.cbom_required) return "#FFFFFF"; // Full SBOM + CBOM: titanium white
+          if (country.sbom_required) return "#E05A10"; // SBOM required: Dutch orange
+          return "#1E293B"; // Voluntary / Discretionary: dark graphite
         }
         case "data_localization": {
           if (country.data_localization_required) {
             return country.localization_scope.toLowerCase().includes("all") ||
               country.localization_scope.toLowerCase().includes("strict")
-              ? "#991b1b" // Deep ruby
-              : "#b45309"; // Amber brown
+              ? "#E05A10" // Strict local storage: Dutch orange
+              : "#9A3412"; // Sectoral: deep rust
           }
           if (country.cross_border_transfer_mechanism.toLowerCase().includes("adequacy")) {
-            return "#475569";
+            return "#64748B"; // Adequacy: slate
           }
-          return "#1e293b";
+          return "#1E293B";
         }
         case "crypto_controls": {
-          if (country.crypto_import_license_required) return "#9333ea";
-          if (country.crypto_export_controls.toLowerCase().includes("wassenaar")) return "#475569";
-          return "#1e293b";
+          if (country.crypto_import_license_required) return "#E05A10"; // Strict license: Dutch orange
+          if (country.crypto_export_controls.toLowerCase().includes("wassenaar")) return "#64748B"; // Wassenaar: slate
+          return "#1E293B";
         }
         case "penalties": {
-          if (country.criminal_liability_directors) return "#dc2626";
-          if (country.max_turnover_percentage >= 4) return "#c2410c";
-          if (country.max_turnover_percentage >= 1) return "#d97706";
-          return "#475569";
+          if (country.criminal_liability_directors) return "#E05A10"; // Director criminal liability: Dutch orange
+          if (country.max_turnover_percentage >= 4) return "#C2410C"; // Turnover >= 4%: deep burnt orange
+          if (country.max_turnover_percentage >= 1) return "#94A3B8"; // Turnover 1% - 3%: light slate
+          return "#475569"; // Fixed fines: slate
         }
         default:
-          return "#1e293b";
+          return "#1E293B";
       }
     },
     [activeDimension, activeSector]
@@ -624,18 +624,18 @@ export function JurisdictionMapViewer({
         const ringRadius = 6 + beaconPulse * 22;
         const ringOpacity = (1 - beaconPulse) * 0.9;
 
-        // Expanding sonar ring
+        // Expanding sonar ring in Dutch Orange
         ctx.beginPath();
         ctx.arc(bx, by, ringRadius, 0, 2 * Math.PI);
-        ctx.strokeStyle = `rgba(255, 255, 255, ${ringOpacity})`;
+        ctx.strokeStyle = `rgba(224, 90, 16, ${ringOpacity})`;
         ctx.lineWidth = 1.5;
         ctx.stroke();
 
-        // Inner beacon core
+        // Inner beacon core in glowing Dutch Orange
         ctx.beginPath();
         ctx.arc(bx, by, 4, 0, 2 * Math.PI);
-        ctx.fillStyle = "#ffffff";
-        ctx.shadowColor = "rgba(255, 255, 255, 0.9)";
+        ctx.fillStyle = "#E05A10";
+        ctx.shadowColor = "rgba(224, 90, 16, 0.9)";
         ctx.shadowBlur = 10;
         ctx.fill();
         ctx.shadowBlur = 0;
@@ -653,7 +653,7 @@ export function JurisdictionMapViewer({
           ctx.lineWidth = 1.6;
           ctx.strokeStyle =
             corridor.activeStatus === "CAB Audit Pending"
-              ? "rgba(245, 158, 11, 0.85)"
+              ? "rgba(224, 90, 16, 0.85)"
               : "rgba(248, 250, 252, 0.75)";
           ctx.stroke();
           ctx.restore();
@@ -684,16 +684,16 @@ export function JurisdictionMapViewer({
 
         ctx.beginPath();
         ctx.arc(fx, fy, pulseRadius, 0, 2 * Math.PI);
-        ctx.strokeStyle = fac.criticality === "Critical" ? `rgba(239, 68, 68, ${pulseOpacity})` : `rgba(255, 255, 255, ${pulseOpacity})`;
+        ctx.strokeStyle = fac.criticality === "Critical" ? `rgba(224, 90, 16, ${pulseOpacity})` : `rgba(255, 255, 255, ${pulseOpacity})`;
         ctx.lineWidth = 1.5;
         ctx.stroke();
 
         ctx.beginPath();
         ctx.arc(fx, fy, 4, 0, 2 * Math.PI);
-        ctx.fillStyle = fac.criticality === "Critical" ? "#ef4444" : "#ffffff";
+        ctx.fillStyle = fac.criticality === "Critical" ? "#E05A10" : "#ffffff";
         ctx.fill();
         ctx.lineWidth = 1.2;
-        ctx.strokeStyle = "#090d16";
+        ctx.strokeStyle = "#0B0C0E";
         ctx.stroke();
       });
 
@@ -981,58 +981,58 @@ export function JurisdictionMapViewer({
         return {
           title: "Incident Notification SLA",
           items: [
-            { label: "≤ 2 Hours (Critical)", color: "#ef4444" },
-            { label: "6 Hours", color: "#f97316" },
-            { label: "12 Hours", color: "#fb923c" },
-            { label: "24 Hours (NIS2 Early)", color: "#eab308" },
-            { label: "72 Hours (GDPR / CIRCL)", color: "#06b6d4" },
-            { label: "> 72 Hours / Unspecified", color: "#64748b" }
+            { label: "≤ 2 Hours (Critical Fast Clock)", color: "#E05A10" },
+            { label: "6 Hours", color: "#C2410C" },
+            { label: "12 Hours", color: "#9A3412" },
+            { label: "24 Hours (NIS2 Early Warning)", color: "#64748B" },
+            { label: "72 Hours (GDPR / Standard)", color: "#475569" },
+            { label: "> 72 Hours / Extended", color: "#1E293B" }
           ]
         };
       case "default_password":
         return {
           title: "Default Password Prohibition",
           items: [
-            { label: "Statutory Ban (CRA / PSTI)", color: "#10b981" },
-            { label: "Voluntary / Discretionary", color: "#334155" }
+            { label: "Statutory Ban (CRA / PSTI)", color: "#E05A10" },
+            { label: "Discretionary / No Ban", color: "#1E293B" }
           ]
         };
       case "sbom_mandate":
         return {
           title: "Software & Cryptographic BOM Mandates",
           items: [
-            { label: "Mandatory SBOM + CBOM", color: "#8b5cf6" },
-            { label: "Mandatory SBOM Only", color: "#6366f1" },
-            { label: "Voluntary / Unspecified", color: "#334155" }
+            { label: "Mandatory SBOM + CBOM", color: "#FFFFFF" },
+            { label: "Mandatory SBOM Only", color: "#E05A10" },
+            { label: "Voluntary / Unspecified", color: "#1E293B" }
           ]
         };
       case "data_localization":
         return {
           title: "Data Sovereignty & Localization",
           items: [
-            { label: "Strict Local Storage Required", color: "#be123c" },
-            { label: "Sectoral (Financial/Health)", color: "#d97706" },
-            { label: "Adequacy / Transfer Safeguards", color: "#0284c7" },
-            { label: "Minimal Restrictions", color: "#334155" }
+            { label: "Strict Local Storage Required", color: "#E05A10" },
+            { label: "Sectoral Restrictions", color: "#9A3412" },
+            { label: "Adequacy Safeguards", color: "#64748B" },
+            { label: "Minimal Restrictions", color: "#1E293B" }
           ]
         };
       case "crypto_controls":
         return {
           title: "Cryptographic Import/Export & PQC",
           items: [
-            { label: "Strict Import License / PQC", color: "#a855f7" },
-            { label: "Dual-Use Export Controls (Wassenaar)", color: "#3b82f6" },
-            { label: "Standard Commercial Crypto", color: "#475569" }
+            { label: "Strict Import License / PQC", color: "#E05A10" },
+            { label: "Dual-Use Export Controls (Wassenaar)", color: "#64748B" },
+            { label: "Standard Commercial Crypto", color: "#1E293B" }
           ]
         };
       case "penalties":
         return {
           title: "Enforcement Severity & Liability",
           items: [
-            { label: "Director Criminal Liability", color: "#dc2626" },
-            { label: "Turnover ≥ 4% or Tier 1", color: "#ea580c" },
-            { label: "Turnover 1% - 3%", color: "#f59e0b" },
-            { label: "Fixed Fines / Discretionary", color: "#0284c7" }
+            { label: "Director Criminal Liability", color: "#E05A10" },
+            { label: "Turnover ≥ 4% or Tier 1", color: "#C2410C" },
+            { label: "Turnover 1% - 3%", color: "#94A3B8" },
+            { label: "Fixed Fines / Discretionary", color: "#475569" }
           ]
         };
     }
@@ -1076,40 +1076,40 @@ export function JurisdictionMapViewer({
             left: Math.min(dimensions.width - 290, Math.max(16, hoverState.x + 14)),
             top: Math.min(dimensions.height - 210, Math.max(16, hoverState.y + 14))
           }}
-          className="absolute z-20 pointer-events-none w-72 bg-cardSurface/95 backdrop-blur-md border border-cardBorder rounded-xl p-3.5 shadow-2xl transition-transform duration-75 text-xs font-mono"
+          className="absolute z-20 pointer-events-none w-72 bg-[#0B0C0E]/95 backdrop-blur-md border border-white/10 rounded-xl p-3.5 shadow-2xl transition-transform duration-75 text-xs font-mono"
         >
-          <div className="flex items-start justify-between pb-2 border-b border-cardBorder">
+          <div className="flex items-start justify-between pb-2 border-b border-white/10">
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-bold text-sm text-primary">
+                <span className="font-bold text-sm text-white">
                   {hoverState.country.country_name}
                 </span>
-                <span className="text-[10px] px-1.5 py-0.5 rounded bg-subtle text-muted">
+                <span className="text-[10px] px-1.5 py-0.5 rounded bg-white/10 text-white/70 border border-white/10">
                   {hoverState.country.iso2} / {hoverState.country.iso3}
                 </span>
               </div>
-              <span className="text-[10px] text-muted">{hoverState.country.continent} • {hoverState.country.region}</span>
+              <span className="text-[10px] text-white/60">{hoverState.country.continent} • {hoverState.country.region}</span>
             </div>
             <div className="w-2.5 h-2.5 rounded-full bg-dutchOrange animate-ping" />
           </div>
 
           <div className="py-2 space-y-1.5 text-[11px]">
             <div className="flex items-center justify-between">
-              <span className="text-secondary flex items-center gap-1">
+              <span className="text-white/60 flex items-center gap-1">
                 <Clock className="w-3 h-3 text-dutchOrange" /> Incident SLA:
               </span>
-              <span className="font-bold text-primary">
+              <span className="font-bold text-white">
                 {hoverState.country.incident_disclosure_hours} Hours
               </span>
             </div>
 
             <div className="flex items-center justify-between">
-              <span className="text-secondary flex items-center gap-1">
-                <Key className="w-3 h-3 text-emerald-400" /> Default Passwords:
+              <span className="text-white/60 flex items-center gap-1">
+                <Key className="w-3 h-3 text-white/70" /> Default Passwords:
               </span>
               <span
                 className={`font-semibold ${
-                  hoverState.country.default_password_ban ? "text-emerald-400" : "text-amber-400"
+                  hoverState.country.default_password_ban ? "text-dutchOrange" : "text-white/40"
                 }`}
               >
                 {hoverState.country.default_password_ban ? "Statutorily Banned" : "Discretionary"}
@@ -1117,12 +1117,12 @@ export function JurisdictionMapViewer({
             </div>
 
             <div className="flex items-center justify-between">
-              <span className="text-secondary flex items-center gap-1">
-                <ShieldAlert className="w-3 h-3 text-violet-400" /> SBOM Mandate:
+              <span className="text-white/60 flex items-center gap-1">
+                <ShieldAlert className="w-3 h-3 text-white/70" /> SBOM Mandate:
               </span>
               <span
                 className={`font-semibold ${
-                  hoverState.country.sbom_required ? "text-violet-400" : "text-muted"
+                  hoverState.country.sbom_required ? "text-white" : "text-white/40"
                 }`}
               >
                 {hoverState.country.sbom_required ? "Mandatory" : "Voluntary"}
@@ -1130,12 +1130,12 @@ export function JurisdictionMapViewer({
             </div>
 
             <div className="flex items-center justify-between">
-              <span className="text-secondary flex items-center gap-1">
-                <Lock className="w-3 h-3 text-amber-400" /> Localization:
+              <span className="text-white/60 flex items-center gap-1">
+                <Lock className="w-3 h-3 text-white/70" /> Localization:
               </span>
               <span
                 className={`font-semibold ${
-                  hoverState.country.data_localization_required ? "text-amber-400" : "text-sky-400"
+                  hoverState.country.data_localization_required ? "text-dutchOrange" : "text-white/70"
                 }`}
               >
                 {hoverState.country.data_localization_required ? "Strict / Sector" : "Adequacy Rules"}
@@ -1143,7 +1143,7 @@ export function JurisdictionMapViewer({
             </div>
           </div>
 
-          <div className="pt-2 border-t border-cardBorder flex items-center justify-between text-[10px] text-dutchOrange font-sans font-medium">
+          <div className="pt-2 border-t border-white/10 flex items-center justify-between text-[10px] text-dutchOrange font-sans font-medium">
             <span>Click to inspect regulatory dossier</span>
             <ArrowRight className="w-3 h-3" />
           </div>
@@ -1151,11 +1151,11 @@ export function JurisdictionMapViewer({
       )}
 
       {/* Floating Canvas Controls (Zoom, Reset, Corridors, Keyboard) */}
-      <div className="absolute top-4 right-4 z-20 flex flex-col gap-1.5 bg-cardSurface/90 backdrop-blur-md p-1 rounded-xl border border-cardBorder shadow-xl">
+      <div className="absolute top-4 right-4 z-20 flex flex-col gap-1.5 bg-[#0B0C0E]/90 backdrop-blur-md p-1 rounded-xl border border-white/10 shadow-xl">
         <button
           onClick={() => setZoomScale((prev) => Math.min(3.5, prev + 0.3))}
           title="Zoom In (+)"
-          className="p-2 rounded-lg text-secondary hover:text-primary hover:bg-subtle transition-colors"
+          className="p-2 rounded-lg text-white/60 hover:text-white hover:bg-white/10 transition-colors"
           aria-label="Zoom in"
         >
           <ZoomIn className="w-4 h-4" />
@@ -1163,7 +1163,7 @@ export function JurisdictionMapViewer({
         <button
           onClick={() => setZoomScale((prev) => Math.max(0.7, prev - 0.3))}
           title="Zoom Out (-)"
-          className="p-2 rounded-lg text-secondary hover:text-primary hover:bg-subtle transition-colors"
+          className="p-2 rounded-lg text-white/60 hover:text-white hover:bg-white/10 transition-colors"
           aria-label="Zoom out"
         >
           <ZoomOut className="w-4 h-4" />
@@ -1171,18 +1171,18 @@ export function JurisdictionMapViewer({
         <button
           onClick={handleResetOrientation}
           title="Reset Orientation (R)"
-          className="p-2 rounded-lg text-secondary hover:text-primary hover:bg-subtle transition-colors"
+          className="p-2 rounded-lg text-white/60 hover:text-white hover:bg-white/10 transition-colors"
           aria-label="Reset orientation"
         >
           <RotateCcw className="w-4 h-4" />
         </button>
-        <div className="h-px bg-cardBorder my-0.5" />
+        <div className="h-px bg-white/10 my-0.5" />
         {onToggleCorridors && (
           <button
             onClick={onToggleCorridors}
             title={showCorridors ? "Hide Supply Chain Corridors" : "Show Supply Chain Corridors"}
             className={`p-2 rounded-lg transition-colors ${
-              showCorridors ? "text-sky-400 bg-sky-500/10" : "text-secondary hover:text-primary hover:bg-subtle"
+              showCorridors ? "text-dutchOrange bg-dutchOrange/10 border border-dutchOrange/30" : "text-white/60 hover:text-white hover:bg-white/10"
             }`}
             aria-label="Toggle supply chain corridors"
           >
@@ -1193,7 +1193,7 @@ export function JurisdictionMapViewer({
           onClick={() => setShowKeyboardHelp((prev) => !prev)}
           title="Keyboard Shortcuts (?)"
           className={`p-2 rounded-lg transition-colors ${
-            showKeyboardHelp ? "text-dutchOrange bg-dutchOrange/10" : "text-secondary hover:text-primary hover:bg-subtle"
+            showKeyboardHelp ? "text-dutchOrange bg-dutchOrange/10" : "text-white/60 hover:text-white hover:bg-white/10"
           }`}
           aria-label="Keyboard shortcuts"
         >
@@ -1203,40 +1203,40 @@ export function JurisdictionMapViewer({
 
       {/* Keyboard Shortcuts Helper Modal */}
       {showKeyboardHelp && (
-        <div className="absolute inset-0 z-30 bg-obsidian/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-cardSurface border border-cardBorder rounded-2xl max-w-sm w-full p-5 shadow-2xl space-y-4 font-mono">
-            <div className="flex items-center justify-between border-b border-cardBorder pb-3">
-              <div className="flex items-center gap-2 text-primary font-bold text-sm">
+        <div className="absolute inset-0 z-30 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-[#0B0C0E] border border-white/10 rounded-2xl max-w-sm w-full p-5 shadow-2xl space-y-4 font-mono text-white">
+            <div className="flex items-center justify-between border-b border-white/10 pb-3">
+              <div className="flex items-center gap-2 text-white font-bold text-sm">
                 <Keyboard className="w-4 h-4 text-dutchOrange" />
                 <span>Keyboard Shortcuts</span>
               </div>
               <button
                 onClick={() => setShowKeyboardHelp(false)}
-                className="text-xs text-muted hover:text-primary px-2 py-1 rounded hover:bg-subtle"
+                className="text-xs text-white/60 hover:text-white px-2 py-1 rounded hover:bg-white/10"
               >
                 Close (Esc)
               </button>
             </div>
             <div className="space-y-2 text-xs">
               <div className="flex items-center justify-between">
-                <span className="text-secondary">Rotate / Pan Globe:</span>
-                <span className="px-2 py-0.5 rounded bg-subtle text-primary border border-hairline">Arrow Keys</span>
+                <span className="text-white/70">Rotate / Pan Globe:</span>
+                <span className="px-2 py-0.5 rounded bg-white/10 text-white border border-white/10">Arrow Keys</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-secondary">Zoom In / Out:</span>
-                <span className="px-2 py-0.5 rounded bg-subtle text-primary border border-hairline">+ / -</span>
+                <span className="text-white/70">Zoom In / Out:</span>
+                <span className="px-2 py-0.5 rounded bg-white/10 text-white border border-white/10">+ / -</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-secondary">Reset Orientation:</span>
-                <span className="px-2 py-0.5 rounded bg-subtle text-primary border border-hairline">R</span>
+                <span className="text-white/70">Reset Orientation:</span>
+                <span className="px-2 py-0.5 rounded bg-white/10 text-white border border-white/10">R</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-secondary">Toggle Shortcuts:</span>
-                <span className="px-2 py-0.5 rounded bg-subtle text-primary border border-hairline">?</span>
+                <span className="text-white/70">Toggle Shortcuts:</span>
+                <span className="px-2 py-0.5 rounded bg-white/10 text-white border border-white/10">?</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-secondary">Dismiss / Clear:</span>
-                <span className="px-2 py-0.5 rounded bg-subtle text-primary border border-hairline">Esc</span>
+                <span className="text-white/70">Dismiss / Clear:</span>
+                <span className="px-2 py-0.5 rounded bg-white/10 text-white border border-white/10">Esc</span>
               </div>
             </div>
           </div>
@@ -1244,8 +1244,8 @@ export function JurisdictionMapViewer({
       )}
 
       {/* Bottom Floating Legend */}
-      <div className="absolute bottom-4 left-4 z-20 bg-cardSurface/90 backdrop-blur-md p-3 rounded-xl border border-cardBorder shadow-xl max-w-xs pointer-events-auto">
-        <div className="flex items-center gap-1.5 text-xs font-bold text-primary mb-2 font-mono">
+      <div className="absolute bottom-4 left-4 z-20 bg-[#0B0C0E]/90 backdrop-blur-md p-3 rounded-xl border border-white/10 shadow-xl max-w-xs pointer-events-auto">
+        <div className="flex items-center gap-1.5 text-xs font-bold text-white mb-2 font-mono">
           <Layers className="w-3.5 h-3.5 text-dutchOrange" />
           <span>{legendConfig.title}</span>
         </div>
@@ -1256,23 +1256,23 @@ export function JurisdictionMapViewer({
                 className="w-2.5 h-2.5 rounded-full shrink-0"
                 style={{ backgroundColor: item.color }}
               />
-              <span className="text-secondary truncate">{item.label}</span>
+              <span className="text-white/70 truncate">{item.label}</span>
             </div>
           ))}
         </div>
       </div>
 
       {/* Mode & Navigation Tip Pill */}
-      <div className="absolute top-4 left-4 z-20 bg-cardSurface/80 backdrop-blur-md px-3 py-1.5 rounded-xl border border-cardBorder text-[11px] font-mono text-muted flex items-center gap-2">
-        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+      <div className="absolute top-4 left-4 z-20 bg-[#0B0C0E]/80 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/10 text-[11px] font-mono text-white/70 flex items-center gap-2">
+        <span className="w-2 h-2 rounded-full bg-dutchOrange animate-pulse" />
         <span>
           {projectionMode === "globe" ? "3D Rotating Globe" : "2D Natural Earth Projection"}
         </span>
         <span className="px-1.5 py-0.5 rounded bg-white/10 text-white font-semibold text-[10px] tracking-wide border border-white/10">
           50m Ultra-HD Vector Mesh
         </span>
-        <span className="text-hairline">|</span>
-        <span className="text-secondary hidden sm:inline">Drag to rotate, scroll to zoom, click nation</span>
+        <span className="text-white/30">|</span>
+        <span className="text-white/50 hidden sm:inline">Drag to rotate, scroll to zoom, click nation</span>
       </div>
     </div>
   );

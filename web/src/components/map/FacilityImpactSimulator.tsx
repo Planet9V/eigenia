@@ -103,12 +103,12 @@ export function FacilityImpactSimulator({
   };
 
   return (
-    <div className="bg-[#090d16]/90 border border-white/10 rounded-2xl p-4 backdrop-blur-xl shadow-2xl max-w-xl text-xs space-y-3 pointer-events-auto">
+    <div className="bg-[#0B0C0E]/90 border border-white/10 rounded-2xl p-4 backdrop-blur-xl shadow-2xl max-w-xl text-xs space-y-3 pointer-events-auto">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Factory className="w-4 h-4 text-cyan-400" />
+          <Factory className="w-4 h-4 text-dutchOrange" />
           <h3 className="font-bold text-white uppercase tracking-wider font-mono">
-            Facility & Facility Impact Simulator
+            Facility & Asset Impact Simulator
           </h3>
         </div>
         <button
@@ -131,14 +131,14 @@ export function FacilityImpactSimulator({
                 onClick={() => setSelectedPresetId(preset.id)}
                 className={`p-2 rounded-lg text-left transition-all flex items-start justify-between ${
                   selectedPresetId === preset.id
-                    ? "bg-cyan-950/40 border border-cyan-500/40 text-white"
+                    ? "bg-dutchOrange/10 border border-dutchOrange/50 text-white"
                     : "bg-black/30 border border-white/5 text-slate-400 hover:text-slate-200"
                 }`}
               >
                 <div>
                   <div className="font-bold text-xs flex items-center gap-1.5">
                     {preset.name}
-                    <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-slate-800 text-cyan-300">
+                    <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-white/10 text-white/80">
                       {preset.sector}
                     </span>
                   </div>
@@ -154,7 +154,7 @@ export function FacilityImpactSimulator({
       <div className="p-3 rounded-xl bg-black/40 border border-white/5 space-y-2.5">
         <div className="flex items-center justify-between">
           <span className="text-slate-300 font-medium">Active Facility:</span>
-          <span className="text-cyan-400 font-mono font-bold">{activePreset.name}</span>
+          <span className="text-dutchOrange font-mono font-bold">{activePreset.name}</span>
         </div>
 
         <div className="grid grid-cols-3 gap-2 text-center text-[11px] font-mono">
@@ -164,13 +164,13 @@ export function FacilityImpactSimulator({
           </div>
           <div className="p-2 rounded bg-white/[0.02] border border-white/5">
             <span className="text-slate-400 block text-[9px] uppercase">&le; 24h Clock</span>
-            <span className="text-sm font-bold text-amber-400">
+            <span className="text-sm font-bold text-dutchOrange">
               {impactedCountries.filter((c) => c.incident_disclosure_hours <= 24).length}
             </span>
           </div>
           <div className="p-2 rounded bg-white/[0.02] border border-white/5">
             <span className="text-slate-400 block text-[9px] uppercase">CAB Audit Gate</span>
-            <span className="text-sm font-bold text-rose-400">
+            <span className="text-sm font-bold text-white">
               {impactedCountries.filter((c) => c.sbom_required).length}
             </span>
           </div>
@@ -179,7 +179,7 @@ export function FacilityImpactSimulator({
         <div className="flex items-center gap-2 pt-1">
           <button
             onClick={handleApply}
-            className="flex-1 flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/40 text-xs font-mono font-medium transition-colors"
+            className="flex-1 flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg bg-dutchOrange hover:bg-dutchOrange/90 text-white border border-dutchOrange/50 text-xs font-mono font-medium shadow-[0_0_15px_rgba(224,90,16,0.25)] transition-all cursor-pointer"
           >
             <Sparkles className="w-3.5 h-3.5" />
             Highlight Impacted Nations on Map

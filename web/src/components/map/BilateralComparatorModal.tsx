@@ -8,6 +8,7 @@ import {
   Clock,
   Key,
   Shield,
+  ShieldAlert,
   Lock,
   Layers,
   AlertTriangle,
@@ -123,25 +124,25 @@ export function BilateralComparatorModal({
         if (e.key === "Escape") onClose();
       }}
     >
-      <div className="relative w-full max-w-5xl max-h-[92vh] flex flex-col bg-cardSurface border border-cardBorder rounded-2xl shadow-2xl overflow-hidden font-sans text-white">
+      <div className="relative w-full max-w-5xl max-h-[92vh] flex flex-col bg-[#0B0C0E] border border-white/10 rounded-2xl shadow-2xl overflow-hidden font-sans text-white">
         {/* Header Bar */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-cardBorder bg-subtle/50">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-[#121417]">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-lg bg-dutchOrange/10 border border-dutchOrange/30 flex items-center justify-center text-dutchOrange">
               <Scale className="w-4 h-4" />
             </div>
             <div>
-              <h2 id="comparator-title" className="text-base font-bold text-primary font-mono">
+              <h2 id="comparator-title" className="text-base font-bold text-white font-mono">
                 Bilateral Regulatory Delta Comparator
               </h2>
-              <p className="text-xs text-muted">
+              <p className="text-xs text-white/60">
                 Side-by-side statutory diffing across 7 statutory dimensions
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-muted hover:text-primary hover:bg-subtle transition-colors"
+            className="p-1.5 rounded-lg text-white/60 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
             aria-label="Close comparator"
           >
             <X className="w-5 h-5" />
@@ -149,16 +150,16 @@ export function BilateralComparatorModal({
         </div>
 
         {/* Quick Presets Strip */}
-        <div className="flex flex-wrap items-center gap-2 px-6 py-2.5 bg-obsidian border-b border-hairline text-xs font-mono">
-          <span className="text-muted">Bilateral Presets:</span>
+        <div className="flex flex-wrap items-center gap-2 px-6 py-2.5 bg-[#0B0C0E] border-b border-white/10 text-xs font-mono">
+          <span className="text-white/50">Bilateral Presets:</span>
           {PRESETS.map((preset, idx) => (
             <button
               key={idx}
               onClick={() => handleSelectPreset(preset)}
-              className={`px-2.5 py-1 rounded-md border text-[11px] transition-colors ${
+              className={`px-2.5 py-1 rounded-md border text-[11px] transition-colors cursor-pointer ${
                 isoA === preset.isoA && isoB === preset.isoB
-                  ? "bg-dutchOrange/20 border-dutchOrange text-dutchOrange font-semibold"
-                  : "bg-subtle border-cardBorder text-secondary hover:text-primary hover:border-hairline"
+                  ? "bg-dutchOrange/20 border-dutchOrange text-dutchOrange font-semibold shadow-[0_0_10px_rgba(224,90,16,0.2)]"
+                  : "bg-white/[0.04] border-white/10 text-white/70 hover:text-white hover:border-white/20"
               }`}
             >
               {preset.name}
@@ -167,14 +168,14 @@ export function BilateralComparatorModal({
         </div>
 
         {/* Country Selectors Ribbon */}
-        <div className="grid grid-cols-1 md:grid-cols-11 gap-3 items-center px-6 py-4 border-b border-cardBorder bg-subtle/30 font-mono">
+        <div className="grid grid-cols-1 md:grid-cols-11 gap-3 items-center px-6 py-4 border-b border-white/10 bg-[#121417] font-mono">
           {/* Country A Selector */}
           <div className="md:col-span-5 space-y-1.5">
-            <label className="text-xs text-muted block">Jurisdiction A (Primary Benchmark)</label>
+            <label className="text-xs text-white/60 block">Jurisdiction A (Primary Benchmark)</label>
             <select
               value={isoA}
               onChange={(e) => setIsoA(e.target.value)}
-              className="w-full bg-obsidian border border-cardBorder rounded-lg px-3 py-2 text-sm text-primary focus:outline-none focus:border-dutchOrange"
+              className="w-full bg-[#0B0C0E] border border-white/15 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-dutchOrange"
             >
               {countries.map((c) => (
                 <option key={c.iso2} value={c.iso2}>
@@ -183,9 +184,9 @@ export function BilateralComparatorModal({
               ))}
             </select>
             {countryA && (
-              <div className="text-[11px] text-muted flex items-center gap-2 pt-0.5">
+              <div className="text-[11px] text-white/50 flex items-center gap-2 pt-0.5">
                 <span>Statute:</span>
-                <span className="text-secondary truncate">{countryA.primary_cyber_statute || "General Cyber Law"}</span>
+                <span className="text-white/80 truncate">{countryA.primary_cyber_statute || "General Cyber Law"}</span>
               </div>
             )}
           </div>
@@ -195,7 +196,7 @@ export function BilateralComparatorModal({
             <button
               onClick={handleSwap}
               title="Swap Benchmarks"
-              className="p-2 rounded-full bg-cardSurface border border-cardBorder text-secondary hover:text-dutchOrange hover:border-dutchOrange/40 transition-colors shadow-md"
+              className="p-2 rounded-full bg-[#1E293B] border border-white/20 text-white hover:text-dutchOrange hover:border-dutchOrange/40 transition-colors shadow-md cursor-pointer"
               aria-label="Swap jurisdictions"
             >
               <ArrowLeftRight className="w-4 h-4" />
@@ -204,11 +205,11 @@ export function BilateralComparatorModal({
 
           {/* Country B Selector */}
           <div className="md:col-span-5 space-y-1.5">
-            <label className="text-xs text-muted block">Jurisdiction B (Counterparty Mandate)</label>
+            <label className="text-xs text-white/60 block">Jurisdiction B (Counterparty Mandate)</label>
             <select
               value={isoB}
               onChange={(e) => setIsoB(e.target.value)}
-              className="w-full bg-obsidian border border-cardBorder rounded-lg px-3 py-2 text-sm text-primary focus:outline-none focus:border-dutchOrange"
+              className="w-full bg-[#0B0C0E] border border-white/15 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-dutchOrange"
             >
               {countries.map((c) => (
                 <option key={c.iso2} value={c.iso2}>
@@ -217,9 +218,9 @@ export function BilateralComparatorModal({
               ))}
             </select>
             {countryB && (
-              <div className="text-[11px] text-muted flex items-center gap-2 pt-0.5">
+              <div className="text-[11px] text-white/50 flex items-center gap-2 pt-0.5">
                 <span>Statute:</span>
-                <span className="text-secondary truncate">{countryB.primary_cyber_statute || "General Cyber Law"}</span>
+                <span className="text-white/80 truncate">{countryB.primary_cyber_statute || "General Cyber Law"}</span>
               </div>
             )}
           </div>
@@ -228,36 +229,36 @@ export function BilateralComparatorModal({
         {/* Comparative Delta Matrix Table (Scrollable) */}
         <div className="flex-1 overflow-y-auto px-6 py-4 space-y-4 font-mono text-xs">
           {/* Incident Clock Dimension */}
-          <div className="p-4 rounded-xl bg-obsidian border border-cardBorder space-y-2">
+          <div className="p-4 rounded-xl bg-[#121417] border border-white/10 space-y-2">
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2 font-bold text-primary">
+              <div className="flex items-center gap-2 font-bold text-white">
                 <Clock className="w-4 h-4 text-dutchOrange" />
                 <span>Incident Notification Clock</span>
               </div>
               <span
                 className={`px-2 py-0.5 rounded text-[10px] font-semibold ${
                   clockDivergence === "Critical"
-                    ? "bg-rose-500/20 text-rose-400 border border-rose-500/30"
+                    ? "bg-dutchOrange/20 text-dutchOrange border border-dutchOrange/40"
                     : clockDivergence === "Moderate"
-                    ? "bg-amber-500/20 text-amber-400 border border-amber-500/30"
-                    : "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
+                    ? "bg-white/10 text-white border border-white/20"
+                    : "bg-white/5 text-slate-300 border border-white/10"
                 }`}
               >
                 {clockDeltaText}
               </span>
             </div>
             <div className="grid grid-cols-2 gap-4 pt-1">
-              <div className="p-2.5 rounded-lg bg-subtle border border-hairline">
-                <span className="text-[10px] text-muted block mb-0.5">{countryA.country_name}:</span>
-                <span className="text-base font-bold text-primary">{clockA} Hours</span>
-                <span className="text-[10px] text-secondary block mt-1">
+              <div className="p-3 rounded-lg bg-[#0B0C0E] border border-white/10">
+                <span className="text-[10px] text-white/50 block mb-0.5">{countryA.country_name}:</span>
+                <span className="text-base font-bold text-white">{clockA} Hours</span>
+                <span className="text-[10px] text-white/60 block mt-1">
                   Supervisory Authority: {countryA.supervisory_dpa || "National CSIRT"}
                 </span>
               </div>
-              <div className="p-2.5 rounded-lg bg-subtle border border-hairline">
-                <span className="text-[10px] text-muted block mb-0.5">{countryB.country_name}:</span>
-                <span className="text-base font-bold text-primary">{clockB} Hours</span>
-                <span className="text-[10px] text-secondary block mt-1">
+              <div className="p-3 rounded-lg bg-[#0B0C0E] border border-white/10">
+                <span className="text-[10px] text-white/50 block mb-0.5">{countryB.country_name}:</span>
+                <span className="text-base font-bold text-white">{clockB} Hours</span>
+                <span className="text-[10px] text-white/60 block mt-1">
                   Supervisory Authority: {countryB.supervisory_dpa || "National CSIRT"}
                 </span>
               </div>
@@ -265,46 +266,46 @@ export function BilateralComparatorModal({
           </div>
 
           {/* Software & Cryptographic BOM Mandates */}
-          <div className="p-4 rounded-xl bg-obsidian border border-cardBorder space-y-2">
+          <div className="p-4 rounded-xl bg-[#121417] border border-white/10 space-y-2">
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2 font-bold text-primary">
-                <Shield className="w-4 h-4 text-violet-400" />
+              <div className="flex items-center gap-2 font-bold text-white">
+                <Shield className="w-4 h-4 text-white" />
                 <span>Software & Cryptographic BOMs (SBOM / CBOM)</span>
               </div>
               <span
                 className={`px-2 py-0.5 rounded text-[10px] font-semibold ${
                   countryA.sbom_required === countryB.sbom_required
-                    ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
-                    : "bg-amber-500/20 text-amber-400 border border-amber-500/30"
+                    ? "bg-white/10 text-white border border-white/20"
+                    : "bg-dutchOrange/20 text-dutchOrange border border-dutchOrange/40"
                 }`}
               >
                 {countryA.sbom_required === countryB.sbom_required ? "Bilateral Parity" : "Statutory Gap"}
               </span>
             </div>
             <div className="grid grid-cols-2 gap-4 pt-1">
-              <div className="p-2.5 rounded-lg bg-subtle border border-hairline">
-                <span className="text-[10px] text-muted block mb-0.5">{countryA.country_name}:</span>
+              <div className="p-3 rounded-lg bg-[#0B0C0E] border border-white/10">
+                <span className="text-[10px] text-white/50 block mb-0.5">{countryA.country_name}:</span>
                 <span
                   className={`text-sm font-bold ${
-                    countryA.sbom_required ? "text-violet-400" : "text-muted"
+                    countryA.sbom_required ? "text-white" : "text-white/40"
                   }`}
                 >
                   {countryA.sbom_required ? "Mandatory Machine-Readable SBOM" : "Voluntary / Recommended"}
                 </span>
-                <span className="text-[10px] text-secondary block mt-1">
+                <span className="text-[10px] text-white/60 block mt-1">
                   CBOM Primitive Tracking: {countryA.cbom_required ? "Required" : "Discretionary"}
                 </span>
               </div>
-              <div className="p-2.5 rounded-lg bg-subtle border border-hairline">
-                <span className="text-[10px] text-muted block mb-0.5">{countryB.country_name}:</span>
+              <div className="p-3 rounded-lg bg-[#0B0C0E] border border-white/10">
+                <span className="text-[10px] text-white/50 block mb-0.5">{countryB.country_name}:</span>
                 <span
                   className={`text-sm font-bold ${
-                    countryB.sbom_required ? "text-violet-400" : "text-muted"
+                    countryB.sbom_required ? "text-white" : "text-white/40"
                   }`}
                 >
                   {countryB.sbom_required ? "Mandatory Machine-Readable SBOM" : "Voluntary / Recommended"}
                 </span>
-                <span className="text-[10px] text-secondary block mt-1">
+                <span className="text-[10px] text-white/60 block mt-1">
                   CBOM Primitive Tracking: {countryB.cbom_required ? "Required" : "Discretionary"}
                 </span>
               </div>
@@ -312,38 +313,38 @@ export function BilateralComparatorModal({
           </div>
 
           {/* Default Password Ban */}
-          <div className="p-4 rounded-xl bg-obsidian border border-cardBorder space-y-2">
+          <div className="p-4 rounded-xl bg-[#121417] border border-white/10 space-y-2">
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2 font-bold text-primary">
-                <Key className="w-4 h-4 text-emerald-400" />
+              <div className="flex items-center gap-2 font-bold text-white">
+                <Key className="w-4 h-4 text-dutchOrange" />
                 <span>Factory Default Password Prohibition</span>
               </div>
               <span
                 className={`px-2 py-0.5 rounded text-[10px] font-semibold ${
                   countryA.default_password_ban === countryB.default_password_ban
-                    ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
-                    : "bg-rose-500/20 text-rose-400 border border-rose-500/30"
+                    ? "bg-white/10 text-white border border-white/20"
+                    : "bg-dutchOrange/20 text-dutchOrange border border-dutchOrange/40"
                 }`}
               >
                 {countryA.default_password_ban === countryB.default_password_ban ? "Aligned" : "Asymmetrical"}
               </span>
             </div>
             <div className="grid grid-cols-2 gap-4 pt-1">
-              <div className="p-2.5 rounded-lg bg-subtle border border-hairline">
-                <span className="text-[10px] text-muted block mb-0.5">{countryA.country_name}:</span>
+              <div className="p-3 rounded-lg bg-[#0B0C0E] border border-white/10">
+                <span className="text-[10px] text-white/50 block mb-0.5">{countryA.country_name}:</span>
                 <span
                   className={`text-sm font-bold ${
-                    countryA.default_password_ban ? "text-emerald-400" : "text-amber-400"
+                    countryA.default_password_ban ? "text-dutchOrange" : "text-white/40"
                   }`}
                 >
                   {countryA.default_password_ban ? "Statutorily Banned" : "Discretionary Guideline"}
                 </span>
               </div>
-              <div className="p-2.5 rounded-lg bg-subtle border border-hairline">
-                <span className="text-[10px] text-muted block mb-0.5">{countryB.country_name}:</span>
+              <div className="p-3 rounded-lg bg-[#0B0C0E] border border-white/10">
+                <span className="text-[10px] text-white/50 block mb-0.5">{countryB.country_name}:</span>
                 <span
                   className={`text-sm font-bold ${
-                    countryB.default_password_ban ? "text-emerald-400" : "text-amber-400"
+                    countryB.default_password_ban ? "text-dutchOrange" : "text-white/40"
                   }`}
                 >
                   {countryB.default_password_ban ? "Statutorily Banned" : "Discretionary Guideline"}
@@ -353,75 +354,101 @@ export function BilateralComparatorModal({
           </div>
 
           {/* Data Localization Scope */}
-          <div className="p-4 rounded-xl bg-obsidian border border-cardBorder space-y-2">
+          <div className="p-4 rounded-xl bg-[#121417] border border-white/10 space-y-2">
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2 font-bold text-primary">
-                <Lock className="w-4 h-4 text-amber-400" />
+              <div className="flex items-center gap-2 font-bold text-white">
+                <Lock className="w-4 h-4 text-white/70" />
                 <span>Data Sovereignty & Localization Scope</span>
               </div>
-              <span className="text-[11px] text-muted">
+              <span className="text-[11px] text-white/50">
                 Cross-border transfer safeguards
               </span>
             </div>
             <div className="grid grid-cols-2 gap-4 pt-1">
-              <div className="p-2.5 rounded-lg bg-subtle border border-hairline">
-                <span className="text-[10px] text-muted block mb-0.5">{countryA.country_name}:</span>
-                <span className="text-sm font-bold text-primary">
-                  {countryA.data_localization_required ? "Local Residency Required" : "Adequacy Model"}
+              <div className="p-3 rounded-lg bg-[#0B0C0E] border border-white/10">
+                <span className="text-[10px] text-white/50 block mb-0.5">{countryA.country_name}:</span>
+                <span className="text-sm font-bold text-white">
+                  {countryA.data_localization_required ? "Strict Local Storage Required" : "Standard Transfer Clauses"}
                 </span>
-                <span className="text-[10px] text-secondary block mt-1">
-                  Scope: {countryA.localization_scope || "Standard Adequacy"}
+                <span className="text-[10px] text-white/60 block mt-1">
+                  Scope: {countryA.localization_scope}
                 </span>
               </div>
-              <div className="p-2.5 rounded-lg bg-subtle border border-hairline">
-                <span className="text-[10px] text-muted block mb-0.5">{countryB.country_name}:</span>
-                <span className="text-sm font-bold text-primary">
-                  {countryB.data_localization_required ? "Local Residency Required" : "Adequacy Model"}
+              <div className="p-3 rounded-lg bg-[#0B0C0E] border border-white/10">
+                <span className="text-[10px] text-white/50 block mb-0.5">{countryB.country_name}:</span>
+                <span className="text-sm font-bold text-white">
+                  {countryB.data_localization_required ? "Strict Local Storage Required" : "Standard Transfer Clauses"}
                 </span>
-                <span className="text-[10px] text-secondary block mt-1">
-                  Scope: {countryB.localization_scope || "Standard Adequacy"}
+                <span className="text-[10px] text-white/60 block mt-1">
+                  Scope: {countryB.localization_scope}
                 </span>
               </div>
             </div>
           </div>
 
-          {/* Penalties & Executive Liability */}
-          <div className="p-4 rounded-xl bg-obsidian border border-cardBorder space-y-2">
+          {/* Cryptography & PQC Roadmap */}
+          <div className="p-4 rounded-xl bg-[#121417] border border-white/10 space-y-2">
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2 font-bold text-primary">
-                <Scale className="w-4 h-4 text-rose-400" />
-                <span>Administrative Fines & Director Criminal Liability</span>
+              <div className="flex items-center gap-2 font-bold text-white">
+                <ShieldAlert className="w-4 h-4 text-dutchOrange" />
+                <span>Cryptography Export Controls & Post-Quantum</span>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-4 pt-1">
-              <div className="p-2.5 rounded-lg bg-subtle border border-hairline">
-                <span className="text-[10px] text-muted block mb-0.5">{countryA.country_name}:</span>
-                <div className="text-sm font-bold text-rose-400">
+              <div className="p-3 rounded-lg bg-[#0B0C0E] border border-white/10">
+                <span className="text-[10px] text-white/50 block mb-0.5">{countryA.country_name}:</span>
+                <div className="text-xs font-mono font-medium text-white">
+                  {countryA.crypto_export_controls}
+                </div>
+                <div className="text-[10px] text-white/60 mt-1">
+                  PQC Status: <span className="text-white font-bold">{countryA.post_quantum_mandate}</span>
+                </div>
+              </div>
+              <div className="p-3 rounded-lg bg-[#0B0C0E] border border-white/10">
+                <span className="text-[10px] text-white/50 block mb-0.5">{countryB.country_name}:</span>
+                <div className="text-xs font-mono font-medium text-white">
+                  {countryB.crypto_export_controls}
+                </div>
+                <div className="text-[10px] text-white/60 mt-1">
+                  PQC Status: <span className="text-white font-bold">{countryB.post_quantum_mandate}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Maximum Turnover Enforcement Sanctions */}
+          <div className="p-4 rounded-xl bg-[#121417] border border-white/10 space-y-2">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2 font-bold text-white">
+                <Scale className="w-4 h-4 text-dutchOrange" />
+                <span>Maximum Turnover Enforcement Sanctions</span>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-4 pt-1">
+              <div className="p-3 rounded-lg bg-[#0B0C0E] border border-white/10">
+                <span className="text-[10px] text-white/50 block mb-0.5">{countryA.country_name}:</span>
+                <div className="text-sm font-bold font-mono text-white">
                   {countryA.max_turnover_percentage > 0
-                    ? `Up to ${countryA.max_turnover_percentage}% Global Turnover`
-                    : countryA.max_administrative_fine_fixed > 0
-                    ? `Up to ${countryA.fine_currency} ${countryA.max_administrative_fine_fixed.toLocaleString()}`
+                    ? `${countryA.max_turnover_percentage}% Annual Global Turnover`
                     : "Statutory Cap Discretionary"}
                 </div>
-                <div className="text-[10px] text-secondary mt-1 flex items-center gap-1.5">
-                  <span className="text-muted">Executive Liability:</span>
-                  <span className={countryA.criminal_liability_directors ? "text-rose-400 font-bold" : "text-muted"}>
+                <div className="text-[10px] text-white/60 mt-1 flex items-center gap-1.5">
+                  <span className="text-white/50">Executive Liability:</span>
+                  <span className={countryA.criminal_liability_directors ? "text-dutchOrange font-bold" : "text-white/40"}>
                     {countryA.criminal_liability_directors ? "Personal Criminal Liability" : "Corporate Only"}
                   </span>
                 </div>
               </div>
-              <div className="p-2.5 rounded-lg bg-subtle border border-hairline">
-                <span className="text-[10px] text-muted block mb-0.5">{countryB.country_name}:</span>
-                <div className="text-sm font-bold text-rose-400">
+              <div className="p-3 rounded-lg bg-[#0B0C0E] border border-white/10">
+                <span className="text-[10px] text-white/50 block mb-0.5">{countryB.country_name}:</span>
+                <div className="text-sm font-bold font-mono text-white">
                   {countryB.max_turnover_percentage > 0
-                    ? `Up to ${countryB.max_turnover_percentage}% Global Turnover`
-                    : countryB.max_administrative_fine_fixed > 0
-                    ? `Up to ${countryB.fine_currency} ${countryB.max_administrative_fine_fixed.toLocaleString()}`
+                    ? `${countryB.max_turnover_percentage}% Annual Global Turnover`
                     : "Statutory Cap Discretionary"}
                 </div>
-                <div className="text-[10px] text-secondary mt-1 flex items-center gap-1.5">
-                  <span className="text-muted">Executive Liability:</span>
-                  <span className={countryB.criminal_liability_directors ? "text-rose-400 font-bold" : "text-muted"}>
+                <div className="text-[10px] text-white/60 mt-1 flex items-center gap-1.5">
+                  <span className="text-white/50">Executive Liability:</span>
+                  <span className={countryB.criminal_liability_directors ? "text-dutchOrange font-bold" : "text-white/40"}>
                     {countryB.criminal_liability_directors ? "Personal Criminal Liability" : "Corporate Only"}
                   </span>
                 </div>
@@ -430,16 +457,16 @@ export function BilateralComparatorModal({
           </div>
 
           {/* Sector Applicability Comparison */}
-          <div className="p-4 rounded-xl bg-obsidian border border-cardBorder space-y-2">
+          <div className="p-4 rounded-xl bg-[#121417] border border-white/10 space-y-2">
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2 font-bold text-primary">
-                <Building2 className="w-4 h-4 text-sky-400" />
+              <div className="flex items-center gap-2 font-bold text-white">
+                <Building2 className="w-4 h-4 text-white/70" />
                 <span>Sector Obligation Scope Comparison</span>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-4 pt-1">
               <div className="space-y-1">
-                <span className="text-[10px] text-muted block">{countryA.country_name} In-Scope Sectors:</span>
+                <span className="text-[10px] text-white/50 block">{countryA.country_name} In-Scope Sectors:</span>
                 <div className="flex flex-wrap gap-1">
                   {sectors.map((sec) => {
                     const inScope = Boolean(countryA.sector_applicability[sec]);
@@ -448,8 +475,8 @@ export function BilateralComparatorModal({
                         key={sec}
                         className={`px-2 py-0.5 rounded text-[10px] ${
                           inScope
-                            ? "bg-sky-500/10 text-sky-400 border border-sky-500/30"
-                            : "bg-subtle text-muted line-through"
+                            ? "bg-white/10 text-white border border-white/20 font-mono"
+                            : "bg-white/[0.03] text-white/30 line-through border border-transparent"
                         }`}
                       >
                         {sec}
@@ -459,7 +486,7 @@ export function BilateralComparatorModal({
                 </div>
               </div>
               <div className="space-y-1">
-                <span className="text-[10px] text-muted block">{countryB.country_name} In-Scope Sectors:</span>
+                <span className="text-[10px] text-white/50 block">{countryB.country_name} In-Scope Sectors:</span>
                 <div className="flex flex-wrap gap-1">
                   {sectors.map((sec) => {
                     const inScope = Boolean(countryB.sector_applicability[sec]);
@@ -468,8 +495,8 @@ export function BilateralComparatorModal({
                         key={sec}
                         className={`px-2 py-0.5 rounded text-[10px] ${
                           inScope
-                            ? "bg-sky-500/10 text-sky-400 border border-sky-500/30"
-                            : "bg-subtle text-muted line-through"
+                            ? "bg-white/10 text-white border border-white/20 font-mono"
+                            : "bg-white/[0.03] text-white/30 line-through border border-transparent"
                         }`}
                       >
                         {sec}
@@ -483,13 +510,13 @@ export function BilateralComparatorModal({
         </div>
 
         {/* Footer Actions */}
-        <div className="px-6 py-3 border-t border-cardBorder bg-subtle/50 flex items-center justify-between font-mono text-xs">
-          <span className="text-muted text-[11px]">
+        <div className="px-6 py-3 border-t border-white/10 bg-[#121417] flex items-center justify-between font-mono text-xs">
+          <span className="text-white/50 text-[11px]">
             WG-10-AN Sovereign Assurance Benchmark Engine
           </span>
           <button
             onClick={onClose}
-            className="px-4 py-1.5 rounded-lg bg-dutchOrange hover:bg-dutchOrangeLight text-white font-semibold transition-colors"
+            className="px-4 py-2 rounded-lg bg-dutchOrange hover:bg-dutchOrange/90 text-white font-mono font-medium shadow-[0_0_15px_rgba(224,90,16,0.25)] transition-all cursor-pointer"
           >
             Dismiss Comparator
           </button>

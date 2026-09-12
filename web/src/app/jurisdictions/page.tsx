@@ -92,7 +92,7 @@ export default function JurisdictionsShowcasePage() {
           {/* =========================================================================
               HERO SECTION: Deep Obsidian Background with Statutory Metrics Strip
           ========================================================================= */}
-          <section className="relative overflow-hidden border-b border-cardBorder pt-28 pb-12 bg-obsidian text-white">
+          <section className="relative overflow-hidden border-b border-white/10 pt-28 pb-12 bg-obsidian text-white">
             <div className="absolute inset-0 bg-gradient-to-b from-obsidian via-[#070b16] to-obsidian pointer-events-none" />
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-dutchOrange/10 via-transparent to-transparent pointer-events-none" />
 
@@ -113,7 +113,7 @@ export default function JurisdictionsShowcasePage() {
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white font-sans">
                   Global Statutory Jurisdiction Matrix
                 </h1>
-                <p className="text-secondary text-sm sm:text-base leading-relaxed">
+                <p className="text-white/70 text-sm sm:text-base leading-relaxed">
                   Authoritative geospatial visualization of statutory cybersecurity, digital product assurance,
                   data sovereignty, and incident disclosure mandates across all 249 ISO 3166-1 sovereign jurisdictions.
                 </p>
@@ -121,74 +121,41 @@ export default function JurisdictionsShowcasePage() {
 
               {/* Metrics Strip */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4">
-                <div className="p-4 rounded-xl bg-cardSurface/90 border border-cardBorder shadow-lg">
-                  <div className="flex items-center justify-between text-muted mb-1 text-xs font-mono">
+                <div className="p-4 rounded-xl bg-[#121417] border border-white/10 shadow-lg">
+                  <div className="flex items-center justify-between text-white/50 mb-1 text-xs font-mono">
                     <span>Coverage</span>
                     <Globe className="w-4 h-4 text-dutchOrange" />
                   </div>
-                  <div className="text-2xl font-bold font-mono text-primary">249</div>
-                  <div className="text-[11px] text-secondary">Sovereign Jurisdictions (100% ISO 3166-1)</div>
+                  <div className="text-2xl font-bold font-mono text-white">249</div>
+                  <div className="text-[11px] text-white/60">Sovereign Jurisdictions (100% ISO 3166-1)</div>
                 </div>
 
-                <div className="p-4 rounded-xl bg-cardSurface/90 border border-cardBorder shadow-lg">
-                  <div className="flex items-center justify-between text-muted mb-1 text-xs font-mono">
+                <div className="p-4 rounded-xl bg-[#121417] border border-white/10 shadow-lg">
+                  <div className="flex items-center justify-between text-white/50 mb-1 text-xs font-mono">
                     <span>Statutory Acts</span>
-                    <FileText className="w-4 h-4 text-sky-400" />
+                    <FileText className="w-4 h-4 text-white/60" />
                   </div>
-                  <div className="text-2xl font-bold font-mono text-primary">580+</div>
-                  <div className="text-[11px] text-secondary">Binding Frameworks & Directives</div>
+                  <div className="text-2xl font-bold font-mono text-white">580+</div>
+                  <div className="text-[11px] text-white/60">Binding Frameworks & Directives</div>
                 </div>
 
-                <div className="p-4 rounded-xl bg-cardSurface/90 border border-cardBorder shadow-lg">
-                  <div className="flex items-center justify-between text-muted mb-1 text-xs font-mono">
+                <div className="p-4 rounded-xl bg-[#121417] border border-white/10 shadow-lg">
+                  <div className="flex items-center justify-between text-white/50 mb-1 text-xs font-mono">
                     <span>Critical Sectors</span>
-                    <Layers className="w-4 h-4 text-violet-400" />
+                    <Layers className="w-4 h-4 text-white/60" />
                   </div>
-                  <div className="text-2xl font-bold font-mono text-primary">7</div>
-                  <div className="text-[11px] text-secondary">Energy, Water, Health, OT, Telecom, Finance</div>
+                  <div className="text-2xl font-bold font-mono text-white">7</div>
+                  <div className="text-[11px] text-white/60">Energy, Water, Health, OT, Telecom, Finance</div>
                 </div>
 
-                <div className="p-4 rounded-xl bg-cardSurface/90 border border-cardBorder shadow-lg">
-                  <div className="flex items-center justify-between text-muted mb-1 text-xs font-mono">
+                <div className="p-4 rounded-xl bg-[#121417] border border-white/10 shadow-lg">
+                  <div className="flex items-center justify-between text-white/50 mb-1 text-xs font-mono">
                     <span>Breach Clocks</span>
-                    <Clock className="w-4 h-4 text-amber-400" />
+                    <Clock className="w-4 h-4 text-white/60" />
                   </div>
-                  <div className="text-2xl font-bold font-mono text-primary">1h - 96h</div>
-                  <div className="text-[11px] text-secondary">Statutory Early Notification SLAs</div>
+                  <div className="text-2xl font-bold font-mono text-white">1h - 96h</div>
+                  <div className="text-[11px] text-white/60">Statutory Early Notification SLAs</div>
                 </div>
-              </div>
-
-              {/* Quick Action Navigation Bar */}
-              <div className="flex flex-wrap items-center gap-3 pt-2">
-                <button
-                  data-tour="tour-launcher-btn"
-                  onClick={() => setIsTourActive(true)}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-dutchOrange text-white text-xs font-bold font-sans shadow-lg shadow-dutchOrange/20 hover:bg-dutchOrange/90 hover:shadow-dutchOrange/30 transition-all cursor-pointer"
-                >
-                  <Sparkles className="w-4 h-4" />
-                  <span>Launch Interactive Showcase Tour</span>
-                </button>
-
-                <button
-                  data-tour="compare-launcher-btn"
-                  onClick={() => setIsComparatorOpen(true)}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-cardSurface/90 hover:bg-cardSurface border border-cardBorder text-slate-200 text-xs font-semibold font-sans transition-all cursor-pointer"
-                >
-                  <Scale className="w-4 h-4 text-sky-400" />
-                  <span>Compare Sovereign Jurisdictions</span>
-                </button>
-
-                <button
-                  onClick={() => setShowCorridors(!showCorridors)}
-                  className={`inline-flex items-center gap-2 px-3 py-2 rounded-xl border text-xs font-mono transition-all cursor-pointer ${
-                    showCorridors
-                      ? "bg-cyan-950/40 border-cyan-500/40 text-cyan-300"
-                      : "bg-cardSurface/60 border-cardBorder text-slate-400 hover:text-slate-200"
-                  }`}
-                >
-                  <Workflow className="w-3.5 h-3.5" />
-                  <span>Supply Chain Corridors: {showCorridors ? "ON" : "OFF"}</span>
-                </button>
               </div>
             </div>
           </section>
@@ -243,17 +210,17 @@ export default function JurisdictionsShowcasePage() {
               </div>
 
           {/* Regulatory Regime Comparison Table */}
-          <div className="p-6 rounded-2xl bg-cardSurface/90 border border-cardBorder shadow-md space-y-4 text-white">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-cardBorder">
+          <div className="p-6 rounded-2xl bg-[#121417] border border-white/10 shadow-md space-y-4 text-white">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-white/10">
               <div>
-                <h2 className="text-lg font-bold font-sans text-primary">
+                <h2 className="text-lg font-bold font-sans text-white">
                   Anchor Regulatory Frameworks Across Primary Economic Blocs
                 </h2>
-                <p className="text-xs text-secondary font-mono">
+                <p className="text-xs text-white/60 font-mono">
                   Cross-jurisdictional synthesis of statutory baselines, mandatory certification modules, and supervisory agencies.
                 </p>
               </div>
-              <span className="text-[11px] font-mono text-muted bg-subtle px-2.5 py-1 rounded-md self-start sm:self-auto">
+              <span className="text-[11px] font-mono text-white/60 bg-white/5 border border-white/10 px-2.5 py-1 rounded-md self-start sm:self-auto">
                 PostgreSQL assurance_network
               </span>
             </div>
@@ -261,7 +228,7 @@ export default function JurisdictionsShowcasePage() {
             <div className="overflow-x-auto">
               <table className="w-full text-xs font-mono text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-cardBorder bg-subtle/30 text-muted">
+                  <tr className="border-b border-white/10 bg-white/[0.02] text-white/60">
                     <th className="py-2.5 px-3 font-semibold">Jurisdiction</th>
                     <th className="py-2.5 px-3 font-semibold">Primary Cyber Statute</th>
                     <th className="py-2.5 px-3 font-semibold">Incident SLA</th>
@@ -271,26 +238,34 @@ export default function JurisdictionsShowcasePage() {
                     <th className="py-2.5 px-3 font-semibold">Action</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-cardBorder">
+                <tbody className="divide-y divide-white/10">
                   {/* EU / Germany */}
-                  <tr className="hover:bg-subtle/30 transition-colors">
-                    <td className="py-3 px-3 font-bold text-primary flex items-center gap-2">
+                  <tr className="hover:bg-white/[0.03] transition-colors">
+                    <td className="py-3 px-3 font-bold text-white flex items-center gap-2">
                       <span>🇩🇪</span> Germany / EU
                     </td>
-                    <td className="py-3 px-3 text-secondary">
+                    <td className="py-3 px-3 text-slate-300 font-mono">
                       BSI IT-SiG 2.0 / EU CRA 2024/2847 / NIS2
                     </td>
-                    <td className="py-3 px-3 font-bold text-amber-500">24h / 72h</td>
-                    <td className="py-3 px-3 text-emerald-400 font-semibold">Statutory Ban</td>
-                    <td className="py-3 px-3 text-violet-400 font-semibold">Mandatory SBOM + CBOM</td>
-                    <td className="py-3 px-3 text-sky-400">GDPR Adequacy / SCCs</td>
+                    <td className="py-3 px-3">
+                      <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-white font-mono font-medium">
+                        24h / 72h
+                      </span>
+                    </td>
+                    <td className="py-3 px-3">
+                      <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-slate-200 font-mono">
+                        Statutory Ban
+                      </span>
+                    </td>
+                    <td className="py-3 px-3 text-white font-medium font-mono">Mandatory SBOM + CBOM</td>
+                    <td className="py-3 px-3 text-slate-400 font-mono">GDPR Adequacy / SCCs</td>
                     <td className="py-3 px-3">
                       <button
                         onClick={() => {
                           const de = countriesList.find((c) => c.iso2 === "DE");
                           if (de) handleSelectCountry(de);
                         }}
-                        className="text-dutchOrange hover:underline flex items-center gap-1 text-[11px]"
+                        className="text-dutchOrange hover:text-white transition-colors flex items-center gap-1 text-[11px] font-mono cursor-pointer"
                       >
                         Inspect <ArrowRight className="w-3 h-3" />
                       </button>
@@ -298,24 +273,32 @@ export default function JurisdictionsShowcasePage() {
                   </tr>
 
                   {/* United States */}
-                  <tr className="hover:bg-subtle/30 transition-colors">
-                    <td className="py-3 px-3 font-bold text-primary flex items-center gap-2">
+                  <tr className="hover:bg-white/[0.03] transition-colors">
+                    <td className="py-3 px-3 font-bold text-white flex items-center gap-2">
                       <span>🇺🇸</span> United States
                     </td>
-                    <td className="py-3 px-3 text-secondary">
+                    <td className="py-3 px-3 text-slate-300 font-mono">
                       CIRCIA / NERC CIP / EO 14028 / FDA 524B
                     </td>
-                    <td className="py-3 px-3 font-bold text-amber-500">24h / 72h</td>
-                    <td className="py-3 px-3 text-emerald-400 font-semibold">Statutory Ban (NIST)</td>
-                    <td className="py-3 px-3 text-violet-400 font-semibold">Mandatory Federal SBOM</td>
-                    <td className="py-3 px-3 text-secondary">Sectoral / State Privacy</td>
+                    <td className="py-3 px-3">
+                      <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-white font-mono font-medium">
+                        24h / 72h
+                      </span>
+                    </td>
+                    <td className="py-3 px-3">
+                      <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-slate-200 font-mono">
+                        Statutory Ban (NIST)
+                      </span>
+                    </td>
+                    <td className="py-3 px-3 text-white font-medium font-mono">Mandatory Federal SBOM</td>
+                    <td className="py-3 px-3 text-slate-400 font-mono">Sectoral / State Privacy</td>
                     <td className="py-3 px-3">
                       <button
                         onClick={() => {
                           const us = countriesList.find((c) => c.iso2 === "US");
                           if (us) handleSelectCountry(us);
                         }}
-                        className="text-dutchOrange hover:underline flex items-center gap-1 text-[11px]"
+                        className="text-dutchOrange hover:text-white transition-colors flex items-center gap-1 text-[11px] font-mono cursor-pointer"
                       >
                         Inspect <ArrowRight className="w-3 h-3" />
                       </button>
@@ -323,24 +306,32 @@ export default function JurisdictionsShowcasePage() {
                   </tr>
 
                   {/* Netherlands */}
-                  <tr className="hover:bg-subtle/30 transition-colors">
-                    <td className="py-3 px-3 font-bold text-primary flex items-center gap-2">
+                  <tr className="hover:bg-white/[0.03] transition-colors">
+                    <td className="py-3 px-3 font-bold text-white flex items-center gap-2">
                       <span>🇳🇱</span> Netherlands
                     </td>
-                    <td className="py-3 px-3 text-secondary">
+                    <td className="py-3 px-3 text-slate-300 font-mono">
                       Cyberbeveiligingswet (NIS2) / CRA
                     </td>
-                    <td className="py-3 px-3 font-bold text-amber-500">24h / 72h</td>
-                    <td className="py-3 px-3 text-emerald-400 font-semibold">Statutory Ban</td>
-                    <td className="py-3 px-3 text-violet-400 font-semibold">Mandatory SBOM + CBOM</td>
-                    <td className="py-3 px-3 text-sky-400">EU Data Sovereignty</td>
+                    <td className="py-3 px-3">
+                      <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-white font-mono font-medium">
+                        24h / 72h
+                      </span>
+                    </td>
+                    <td className="py-3 px-3">
+                      <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-slate-200 font-mono">
+                        Statutory Ban
+                      </span>
+                    </td>
+                    <td className="py-3 px-3 text-white font-medium font-mono">Mandatory SBOM + CBOM</td>
+                    <td className="py-3 px-3 text-slate-400 font-mono">EU Data Sovereignty</td>
                     <td className="py-3 px-3">
                       <button
                         onClick={() => {
                           const nl = countriesList.find((c) => c.iso2 === "NL");
                           if (nl) handleSelectCountry(nl);
                         }}
-                        className="text-dutchOrange hover:underline flex items-center gap-1 text-[11px]"
+                        className="text-dutchOrange hover:text-white transition-colors flex items-center gap-1 text-[11px] font-mono cursor-pointer"
                       >
                         Inspect <ArrowRight className="w-3 h-3" />
                       </button>
@@ -348,24 +339,32 @@ export default function JurisdictionsShowcasePage() {
                   </tr>
 
                   {/* Singapore */}
-                  <tr className="hover:bg-subtle/30 transition-colors">
-                    <td className="py-3 px-3 font-bold text-primary flex items-center gap-2">
+                  <tr className="hover:bg-white/[0.03] transition-colors">
+                    <td className="py-3 px-3 font-bold text-white flex items-center gap-2">
                       <span>🇸🇬</span> Singapore
                     </td>
-                    <td className="py-3 px-3 text-secondary">
+                    <td className="py-3 px-3 text-slate-300 font-mono">
                       Cybersecurity Act 2024 / PDPA
                     </td>
-                    <td className="py-3 px-3 font-bold text-red-400">2h / 24h</td>
-                    <td className="py-3 px-3 text-emerald-400 font-semibold">Statutory Ban (CLS)</td>
-                    <td className="py-3 px-3 text-secondary">Cyber Labelling Scheme</td>
-                    <td className="py-3 px-3 text-amber-400 font-semibold">Sectoral CII Controls</td>
+                    <td className="py-3 px-3">
+                      <span className="px-2 py-0.5 rounded bg-dutchOrange/15 border border-dutchOrange/40 text-dutchOrange font-bold font-mono">
+                        2h / 24h
+                      </span>
+                    </td>
+                    <td className="py-3 px-3">
+                      <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-slate-200 font-mono">
+                        Statutory Ban (CLS)
+                      </span>
+                    </td>
+                    <td className="py-3 px-3 text-slate-300 font-mono">Cyber Labelling Scheme</td>
+                    <td className="py-3 px-3 text-slate-400 font-mono">Sectoral CII Controls</td>
                     <td className="py-3 px-3">
                       <button
                         onClick={() => {
                           const sg = countriesList.find((c) => c.iso2 === "SG");
                           if (sg) handleSelectCountry(sg);
                         }}
-                        className="text-dutchOrange hover:underline flex items-center gap-1 text-[11px]"
+                        className="text-dutchOrange hover:text-white transition-colors flex items-center gap-1 text-[11px] font-mono cursor-pointer"
                       >
                         Inspect <ArrowRight className="w-3 h-3" />
                       </button>
@@ -373,24 +372,32 @@ export default function JurisdictionsShowcasePage() {
                   </tr>
 
                   {/* United Kingdom */}
-                  <tr className="hover:bg-subtle/30 transition-colors">
-                    <td className="py-3 px-3 font-bold text-primary flex items-center gap-2">
+                  <tr className="hover:bg-white/[0.03] transition-colors">
+                    <td className="py-3 px-3 font-bold text-white flex items-center gap-2">
                       <span>🇬🇧</span> United Kingdom
                     </td>
-                    <td className="py-3 px-3 text-secondary">
+                    <td className="py-3 px-3 text-slate-300 font-mono">
                       PSTI Act 2022 / NIS Regulations 2018
                     </td>
-                    <td className="py-3 px-3 font-bold text-sky-400">72 Hours</td>
-                    <td className="py-3 px-3 text-emerald-400 font-semibold">Statutory Ban (PSTI)</td>
-                    <td className="py-3 px-3 text-secondary">Recommended Standards</td>
-                    <td className="py-3 px-3 text-sky-400">UK GDPR Adequacy</td>
+                    <td className="py-3 px-3">
+                      <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-white font-mono font-medium">
+                        72 Hours
+                      </span>
+                    </td>
+                    <td className="py-3 px-3">
+                      <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-slate-200 font-mono">
+                        Statutory Ban (PSTI)
+                      </span>
+                    </td>
+                    <td className="py-3 px-3 text-slate-300 font-mono">Recommended Standards</td>
+                    <td className="py-3 px-3 text-slate-400 font-mono">UK GDPR Adequacy</td>
                     <td className="py-3 px-3">
                       <button
                         onClick={() => {
                           const gb = countriesList.find((c) => c.iso2 === "GB");
                           if (gb) handleSelectCountry(gb);
                         }}
-                        className="text-dutchOrange hover:underline flex items-center gap-1 text-[11px]"
+                        className="text-dutchOrange hover:text-white transition-colors flex items-center gap-1 text-[11px] font-mono cursor-pointer"
                       >
                         Inspect <ArrowRight className="w-3 h-3" />
                       </button>
@@ -398,24 +405,32 @@ export default function JurisdictionsShowcasePage() {
                   </tr>
 
                   {/* Japan */}
-                  <tr className="hover:bg-subtle/30 transition-colors">
-                    <td className="py-3 px-3 font-bold text-primary flex items-center gap-2">
+                  <tr className="hover:bg-white/[0.03] transition-colors">
+                    <td className="py-3 px-3 font-bold text-white flex items-center gap-2">
                       <span>🇯🇵</span> Japan
                     </td>
-                    <td className="py-3 px-3 text-secondary">
+                    <td className="py-3 px-3 text-slate-300 font-mono">
                       Economic Security Promotion Act / Basic Act
                     </td>
-                    <td className="py-3 px-3 font-bold text-sky-400">72 Hours</td>
-                    <td className="py-3 px-3 text-emerald-400 font-semibold">Statutory Ban (NISC)</td>
-                    <td className="py-3 px-3 text-secondary">METI Guidelines</td>
-                    <td className="py-3 px-3 text-sky-400">APPI Mutual Adequacy</td>
+                    <td className="py-3 px-3">
+                      <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-white font-mono font-medium">
+                        72 Hours
+                      </span>
+                    </td>
+                    <td className="py-3 px-3">
+                      <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-slate-200 font-mono">
+                        Statutory Ban (NISC)
+                      </span>
+                    </td>
+                    <td className="py-3 px-3 text-slate-300 font-mono">METI Guidelines</td>
+                    <td className="py-3 px-3 text-slate-400 font-mono">APPI Mutual Adequacy</td>
                     <td className="py-3 px-3">
                       <button
                         onClick={() => {
                           const jp = countriesList.find((c) => c.iso2 === "JP");
                           if (jp) handleSelectCountry(jp);
                         }}
-                        className="text-dutchOrange hover:underline flex items-center gap-1 text-[11px]"
+                        className="text-dutchOrange hover:text-white transition-colors flex items-center gap-1 text-[11px] font-mono cursor-pointer"
                       >
                         Inspect <ArrowRight className="w-3 h-3" />
                       </button>
@@ -427,17 +442,17 @@ export default function JurisdictionsShowcasePage() {
           </div>
 
           {/* Research Treatise Reference Card */}
-          <div className="p-6 rounded-2xl bg-cardSurface/90 border border-cardBorder text-white space-y-4">
+          <div className="p-6 rounded-2xl bg-[#121417] border border-white/10 text-white space-y-4">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div className="space-y-1">
                 <div className="flex items-center gap-2 text-dutchOrange text-xs font-mono font-semibold">
                   <Database className="w-3.5 h-3.5" />
                   <span>AUTHORITATIVE RESEARCH CORPUS</span>
                 </div>
-                <h3 className="text-base font-bold font-sans text-primary">
+                <h3 className="text-base font-bold font-sans text-white">
                   Working Group 10 // Treatise AN-03: Sovereign Jurisdiction Registry
                 </h3>
-                <p className="text-xs text-secondary max-w-2xl font-mono leading-relaxed">
+                <p className="text-xs text-white/60 max-w-2xl font-mono leading-relaxed">
                   The complete normative specification, statutory citations, and database schema mappings are codified in
                   treatise WG-10-AN-03. Covers all 249 ISO jurisdictions with deterministic regulatory scoring.
                 </p>

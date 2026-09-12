@@ -121,20 +121,20 @@ export function JurisdictionDossierDrawer({ country, activeSector, onClose }: Pr
           initial={{ opacity: 0, scale: 0.9, y: -10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: -10 }}
-          className="fixed top-24 right-4 sm:right-6 z-[70] pointer-events-auto bg-[#090d16]/95 border border-cyan-500/30 hover:border-cyan-400/60 rounded-2xl p-3 shadow-2xl backdrop-blur-xl flex items-center gap-3 text-white transition-all cursor-pointer group"
+          className="fixed top-24 right-4 sm:right-6 z-[70] pointer-events-auto bg-[#0B0C0E]/95 border border-white/20 hover:border-dutchOrange/60 rounded-2xl p-3 shadow-2xl backdrop-blur-xl flex items-center gap-3 text-white transition-all cursor-pointer group"
           onClick={() => setIsMinimized(false)}
         >
-          <div className="w-9 h-9 rounded-xl bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center font-mono font-bold text-sm text-cyan-300">
+          <div className="w-9 h-9 rounded-xl bg-dutchOrange/15 border border-dutchOrange/40 flex items-center justify-center font-mono font-bold text-sm text-dutchOrange">
             {country.iso2}
           </div>
           <div className="text-left">
             <div className="font-bold text-xs flex items-center gap-2">
               <span>{country.country_name}</span>
-              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-500/30">
+              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-white/10 text-white border border-white/20">
                 {country.incident_disclosure_hours}h Clock
               </span>
             </div>
-            <span className="text-[10px] text-slate-400 font-mono flex items-center gap-1 group-hover:text-cyan-300 transition-colors">
+            <span className="text-[10px] text-slate-400 font-mono flex items-center gap-1 group-hover:text-dutchOrange transition-colors">
               <span>Expand Full Dossier</span>
               <Maximize2 className="w-3 h-3" />
             </span>
@@ -165,12 +165,12 @@ export function JurisdictionDossierDrawer({ country, activeSector, onClose }: Pr
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="w-screen max-w-xl xl:max-w-2xl bg-[#090d16]/95 border-l border-white/10 shadow-2xl z-10 flex flex-col h-full overflow-hidden text-white pointer-events-auto backdrop-blur-xl"
+            className="w-screen max-w-xl xl:max-w-2xl bg-[#0B0C0E]/95 border-l border-white/10 shadow-2xl z-10 flex flex-col h-full overflow-hidden text-white pointer-events-auto backdrop-blur-xl"
           >
             {/* Header Bar */}
             <div className="flex items-center justify-between p-5 border-b border-white/10 bg-white/[0.02]">
               <div className="flex items-center gap-3">
-                <div className="w-11 h-11 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center font-mono font-bold text-lg text-cyan-400">
+                <div className="w-11 h-11 rounded-xl bg-dutchOrange/10 border border-dutchOrange/30 flex items-center justify-center font-mono font-bold text-lg text-dutchOrange">
                   {country.iso2}
                 </div>
                 <div>
@@ -194,7 +194,7 @@ export function JurisdictionDossierDrawer({ country, activeSector, onClose }: Pr
                   title="Export Structured JSON Profile"
                   className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white transition-colors border border-white/10 text-xs font-mono cursor-pointer"
                 >
-                  <Download className="w-3.5 h-3.5 text-sky-400" />
+                  <Download className="w-3.5 h-3.5 text-white/70" />
                   <span className="hidden sm:inline">Export JSON</span>
                 </button>
                 <button
@@ -227,25 +227,25 @@ export function JurisdictionDossierDrawer({ country, activeSector, onClose }: Pr
           <div className="grid grid-cols-4 gap-2 p-4 bg-black/40 border-b border-white/5 text-center text-xs">
             <div className="p-2 rounded bg-white/[0.02] border border-white/5">
               <span className="text-slate-400 block text-[10px] uppercase font-mono">Incident Clock</span>
-              <span className={`font-bold font-mono text-sm ${country.incident_disclosure_hours <= 6 ? "text-rose-400" : country.incident_disclosure_hours <= 24 ? "text-amber-400" : "text-cyan-400"}`}>
+              <span className={`font-bold font-mono text-sm ${country.incident_disclosure_hours <= 6 ? "text-dutchOrange" : country.incident_disclosure_hours <= 24 ? "text-dutchOrange" : "text-white"}`}>
                 {country.incident_disclosure_hours}h
               </span>
             </div>
             <div className="p-2 rounded bg-white/[0.02] border border-white/5">
               <span className="text-slate-400 block text-[10px] uppercase font-mono">Default Password</span>
-              <span className={`font-bold text-xs ${country.default_password_ban ? "text-emerald-400" : "text-slate-400"}`}>
+              <span className={`font-bold text-xs ${country.default_password_ban ? "text-dutchOrange" : "text-slate-400"}`}>
                 {country.default_password_ban ? "Banned" : "Discretionary"}
               </span>
             </div>
             <div className="p-2 rounded bg-white/[0.02] border border-white/5">
               <span className="text-slate-400 block text-[10px] uppercase font-mono">SBOM Mandate</span>
-              <span className={`font-bold text-xs ${country.sbom_required ? "text-violet-400" : "text-slate-400"}`}>
+              <span className={`font-bold text-xs ${country.sbom_required ? "text-white" : "text-slate-400"}`}>
                 {country.sbom_required ? "Required" : "Optional"}
               </span>
             </div>
             <div className="p-2 rounded bg-white/[0.02] border border-white/5">
               <span className="text-slate-400 block text-[10px] uppercase font-mono">Max Turnover Fine</span>
-              <span className="font-bold text-xs text-amber-300 font-mono">
+              <span className="font-bold text-xs text-white font-mono">
                 {country.max_turnover_percentage > 0 ? `${country.max_turnover_percentage}%` : "Fixed Fine"}
               </span>
             </div>
@@ -259,7 +259,7 @@ export function JurisdictionDossierDrawer({ country, activeSector, onClose }: Pr
                 onClick={() => setActiveTab(tab.id)}
                 className={`flex items-center gap-1.5 px-3 py-3 text-xs font-medium border-b-2 whitespace-nowrap transition-colors ${
                   activeTab === tab.id
-                    ? "border-cyan-400 text-cyan-400 bg-cyan-400/5"
+                    ? "border-dutchOrange text-white bg-white/[0.04]"
                     : "border-transparent text-slate-400 hover:text-slate-200 hover:border-slate-600"
                 }`}
               >
@@ -273,8 +273,8 @@ export function JurisdictionDossierDrawer({ country, activeSector, onClose }: Pr
           <div className="flex-1 overflow-y-auto p-6 space-y-6 text-sm">
             {activeTab === "overview" && (
               <div className="space-y-6">
-                <div className="rounded-xl p-4 bg-gradient-to-br from-cyan-950/20 to-slate-900/40 border border-cyan-500/20 space-y-3">
-                  <h3 className="text-xs font-mono uppercase tracking-wider text-cyan-300">
+                <div className="rounded-xl p-4 bg-cardSurface border border-cardBorder space-y-3">
+                  <h3 className="text-xs font-mono uppercase tracking-wider text-white">
                     Sovereign Jurisdiction Profile
                   </h3>
                   <div className="grid grid-cols-2 gap-3 text-xs">
@@ -288,7 +288,7 @@ export function JurisdictionDossierDrawer({ country, activeSector, onClose }: Pr
                     </div>
                     <div>
                       <span className="text-slate-400 block">Primary Cyber Legislation:</span>
-                      <span className="font-medium text-cyan-400">{country.primary_cyber_statute}</span>
+                      <span className="font-medium text-white font-mono">{country.primary_cyber_statute}</span>
                     </div>
                     <div>
                       <span className="text-slate-400 block">Primary Privacy Legislation:</span>
@@ -305,7 +305,7 @@ export function JurisdictionDossierDrawer({ country, activeSector, onClose }: Pr
                     <div className="flex items-center justify-between p-3 rounded-lg bg-white/[0.02] border border-white/5">
                       <span className="text-slate-300 flex items-center gap-2">
                         {country.default_password_ban ? (
-                          <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                          <CheckCircle2 className="w-4 h-4 text-dutchOrange" />
                         ) : (
                           <XCircle className="w-4 h-4 text-slate-500" />
                         )}
@@ -319,7 +319,7 @@ export function JurisdictionDossierDrawer({ country, activeSector, onClose }: Pr
                     <div className="flex items-center justify-between p-3 rounded-lg bg-white/[0.02] border border-white/5">
                       <span className="text-slate-300 flex items-center gap-2">
                         {country.sbom_required ? (
-                          <CheckCircle2 className="w-4 h-4 text-violet-400" />
+                          <CheckCircle2 className="w-4 h-4 text-white" />
                         ) : (
                           <XCircle className="w-4 h-4 text-slate-500" />
                         )}
@@ -333,9 +333,9 @@ export function JurisdictionDossierDrawer({ country, activeSector, onClose }: Pr
                     <div className="flex items-center justify-between p-3 rounded-lg bg-white/[0.02] border border-white/5">
                       <span className="text-slate-300 flex items-center gap-2">
                         {country.data_localization_required ? (
-                          <AlertTriangle className="w-4 h-4 text-amber-400" />
+                          <AlertTriangle className="w-4 h-4 text-dutchOrange" />
                         ) : (
-                          <CheckCircle2 className="w-4 h-4 text-sky-400" />
+                          <CheckCircle2 className="w-4 h-4 text-white/60" />
                         )}
                         Data Localization Requirements
                       </span>
@@ -347,9 +347,9 @@ export function JurisdictionDossierDrawer({ country, activeSector, onClose }: Pr
                     <div className="flex items-center justify-between p-3 rounded-lg bg-white/[0.02] border border-white/5">
                       <span className="text-slate-300 flex items-center gap-2">
                         {country.criminal_liability_directors ? (
-                          <AlertTriangle className="w-4 h-4 text-rose-400" />
+                          <AlertTriangle className="w-4 h-4 text-dutchOrange" />
                         ) : (
-                          <CheckCircle2 className="w-4 h-4 text-slate-400" />
+                          <CheckCircle2 className="w-4 h-4 text-white/40" />
                         )}
                         Director Personal Liability
                       </span>
@@ -383,10 +383,10 @@ export function JurisdictionDossierDrawer({ country, activeSector, onClose }: Pr
                             <span
                               className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${
                                 item.priority === "High"
-                                  ? "bg-rose-500/20 text-rose-400 border border-rose-500/30"
+                                  ? "bg-dutchOrange/20 text-dutchOrange border border-dutchOrange/40"
                                   : item.priority === "Medium"
-                                  ? "bg-amber-500/20 text-amber-400 border border-amber-500/30"
-                                  : "bg-sky-500/20 text-sky-400 border border-sky-500/30"
+                                  ? "bg-white/10 text-white border border-white/20"
+                                  : "bg-white/5 text-slate-300 border border-white/10"
                               }`}
                             >
                               {item.priority}
@@ -400,14 +400,14 @@ export function JurisdictionDossierDrawer({ country, activeSector, onClose }: Pr
                         </p>
                         <div className="pt-1.5 border-t border-white/5 flex items-center justify-between text-[10px] text-slate-400">
                           <span>Statute: {item.statuteRef}</span>
-                          <span className="text-cyan-400">{item.category}</span>
+                          <span className="text-white/70">{item.category}</span>
                         </div>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <div className="p-4 rounded-xl bg-slate-900/60 border border-white/10 space-y-2">
+                <div className="p-4 rounded-xl bg-cardSurface border border-cardBorder space-y-2">
                   <h4 className="text-xs font-mono uppercase tracking-wider text-slate-400">
                     Treatise Reference
                   </h4>
@@ -416,7 +416,7 @@ export function JurisdictionDossierDrawer({ country, activeSector, onClose }: Pr
                   </p>
                   <a
                     href="/references/WG-10-AN-03-Jurisdiction-Registry-Index"
-                    className="inline-flex items-center gap-1 text-xs text-cyan-400 hover:text-cyan-300 underline pt-1 font-mono"
+                    className="inline-flex items-center gap-1 text-xs text-dutchOrange hover:text-dutchOrange/80 underline pt-1 font-mono"
                   >
                     View WG-10-AN-03 Treatise Section <ExternalLink className="w-3 h-3" />
                   </a>
@@ -432,7 +432,7 @@ export function JurisdictionDossierDrawer({ country, activeSector, onClose }: Pr
                 {country.statutory_frameworks.map((statute, idx) => (
                   <div key={idx} className="p-4 rounded-xl bg-white/[0.02] border border-white/10 space-y-2">
                     <div className="flex items-start justify-between gap-2">
-                      <span className="text-xs font-bold text-cyan-300 font-mono">
+                      <span className="text-xs font-bold text-white font-mono">
                         {statute.short_name}
                       </span>
                       <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
@@ -472,7 +472,7 @@ export function JurisdictionDossierDrawer({ country, activeSector, onClose }: Pr
                     Sector Specific Obligations
                   </h3>
                   {activeSector !== "All" && (
-                    <span className="text-xs px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 font-mono">
+                    <span className="text-xs px-2.5 py-0.5 rounded-full bg-dutchOrange/20 text-dutchOrange border border-dutchOrange/40 font-mono font-semibold">
                       Filtered: {activeSector}
                     </span>
                   )}
@@ -486,7 +486,7 @@ export function JurisdictionDossierDrawer({ country, activeSector, onClose }: Pr
                         key={idx}
                         className={`p-4 rounded-xl border ${
                           sec === activeSector
-                            ? "bg-cyan-950/20 border-cyan-500/40"
+                            ? "bg-dutchOrange/5 border-dutchOrange/40"
                             : "bg-white/[0.02] border-white/10"
                         } space-y-2`}
                       >
@@ -494,7 +494,7 @@ export function JurisdictionDossierDrawer({ country, activeSector, onClose }: Pr
                           <span className="text-xs font-bold text-white uppercase tracking-wider font-mono">
                             {sec}
                           </span>
-                          <span className="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-cyan-400 font-mono border border-slate-700">
+                          <span className="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-white font-mono border border-slate-700">
                             {data.scope_classification}
                           </span>
                         </div>
@@ -516,7 +516,7 @@ export function JurisdictionDossierDrawer({ country, activeSector, onClose }: Pr
                 {country.cyber_security_mandates.map((mandate, idx) => (
                   <div key={idx} className="p-4 rounded-xl bg-white/[0.02] border border-white/10 space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-cyan-400 font-mono">
+                      <span className="text-xs font-bold text-white font-mono">
                         Domain: {mandate.target_domain}
                       </span>
                       <span className="text-[11px] text-slate-400 font-mono">
@@ -557,13 +557,13 @@ export function JurisdictionDossierDrawer({ country, activeSector, onClose }: Pr
 
                   <div>
                     <span className="text-slate-400 block text-[11px]">Supervisory Data Protection Authority (DPA)</span>
-                    <span className="text-cyan-300 font-mono">{country.supervisory_dpa}</span>
+                    <span className="text-white font-mono">{country.supervisory_dpa}</span>
                   </div>
 
                   <div className="p-3 rounded-lg bg-black/40 border border-white/5 space-y-2">
                     <div className="flex items-center justify-between">
                       <span className="text-slate-400">Localization Mandate:</span>
-                      <span className={`font-mono font-bold ${country.data_localization_required ? "text-amber-400" : "text-slate-300"}`}>
+                      <span className={`font-mono font-bold ${country.data_localization_required ? "text-dutchOrange" : "text-slate-300"}`}>
                         {country.data_localization_required ? "Active Requirement" : "No Omnibus Mandate"}
                       </span>
                     </div>
@@ -602,7 +602,7 @@ export function JurisdictionDossierDrawer({ country, activeSector, onClose }: Pr
                 <div className="p-4 rounded-xl bg-white/[0.02] border border-white/10 space-y-3 text-xs">
                   <div>
                     <span className="text-slate-400 block text-[11px]">Export Control Regime</span>
-                    <span className="text-cyan-300 font-mono">{country.crypto_export_controls}</span>
+                    <span className="text-white font-mono">{country.crypto_export_controls}</span>
                   </div>
 
                   <div className="p-3 rounded-lg bg-black/40 border border-white/5 space-y-2 font-mono">
@@ -612,7 +612,7 @@ export function JurisdictionDossierDrawer({ country, activeSector, onClose }: Pr
                     </div>
                     <div>
                       <span className="text-slate-400">Post-Quantum Roadmap: </span>
-                      <span className="text-emerald-400">{country.post_quantum_mandate}</span>
+                      <span className="text-dutchOrange">{country.post_quantum_mandate}</span>
                     </div>
                     <div>
                       <span className="text-slate-400">Regulating Agency: </span>
@@ -637,9 +637,9 @@ export function JurisdictionDossierDrawer({ country, activeSector, onClose }: Pr
                           {rule.breach_type}
                         </span>
                         <span className={`text-xs font-mono font-bold px-2 py-0.5 rounded ${
-                          rule.notification_timeline_hours <= 6 ? "bg-rose-500/20 text-rose-300 border border-rose-500/30" :
-                          rule.notification_timeline_hours <= 24 ? "bg-amber-500/20 text-amber-300 border border-amber-500/30" :
-                          "bg-cyan-500/20 text-cyan-300 border border-cyan-500/30"
+                          rule.notification_timeline_hours <= 6 ? "bg-dutchOrange/20 text-dutchOrange border border-dutchOrange/40" :
+                          rule.notification_timeline_hours <= 24 ? "bg-white/10 text-white border border-white/20" :
+                          "bg-white/5 text-slate-300 border border-white/10"
                         }`}>
                           {rule.notification_timeline_hours} Hours
                         </span>
@@ -655,7 +655,7 @@ export function JurisdictionDossierDrawer({ country, activeSector, onClose }: Pr
                           <span className="text-slate-300">{rule.recipient_authorities.join(", ")}</span>
                         </div>
                         {rule.ransomware_payment_reporting && (
-                          <div className="text-rose-400 font-bold">
+                          <div className="text-dutchOrange font-bold">
                             &bull; Mandatory Ransomware Payment Disclosure Required
                           </div>
                         )}
@@ -678,7 +678,7 @@ export function JurisdictionDossierDrawer({ country, activeSector, onClose }: Pr
                       <div className="grid grid-cols-2 gap-3 text-xs font-mono">
                         <div className="p-3 rounded bg-black/40 border border-white/5">
                           <span className="text-slate-400 block text-[10px]">Maximum Fixed Fine</span>
-                          <span className="text-base font-bold text-amber-400">
+                          <span className="text-base font-bold text-white">
                             {p.max_administrative_fine_fixed > 0
                               ? `${p.max_administrative_fine_fixed.toLocaleString()} ${p.fine_currency}`
                               : "Discretionary / No Ceiling"}
@@ -686,7 +686,7 @@ export function JurisdictionDossierDrawer({ country, activeSector, onClose }: Pr
                         </div>
                         <div className="p-3 rounded bg-black/40 border border-white/5">
                           <span className="text-slate-400 block text-[10px]">Turnover Percentage</span>
-                          <span className="text-base font-bold text-rose-400">
+                          <span className="text-base font-bold text-dutchOrange">
                             {p.max_turnover_percentage > 0 ? `${p.max_turnover_percentage}% Global Turnover` : "Fixed Fine Only"}
                           </span>
                         </div>
@@ -695,13 +695,13 @@ export function JurisdictionDossierDrawer({ country, activeSector, onClose }: Pr
                       <div className="space-y-2 text-xs pt-1">
                         <div className="flex items-center justify-between text-slate-300">
                           <span>Director Criminal Sanctions:</span>
-                          <span className={`font-mono font-bold ${p.criminal_liability_directors ? "text-rose-400" : "text-slate-400"}`}>
+                          <span className={`font-mono font-bold ${p.criminal_liability_directors ? "text-dutchOrange" : "text-slate-400"}`}>
                             {p.criminal_liability_directors ? "Enforceable Liability" : "Corporate Only"}
                           </span>
                         </div>
                         <div className="flex items-center justify-between text-slate-300">
                           <span>Border Seizure / Market Withdrawal:</span>
-                          <span className={`font-mono font-bold ${p.market_withdrawal_sanctions ? "text-amber-400" : "text-slate-400"}`}>
+                          <span className={`font-mono font-bold ${p.market_withdrawal_sanctions ? "text-white" : "text-slate-400"}`}>
                             {p.market_withdrawal_sanctions ? "Authorized Powers" : "None"}
                           </span>
                         </div>

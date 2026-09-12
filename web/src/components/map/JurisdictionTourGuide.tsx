@@ -313,12 +313,12 @@ export function JurisdictionTourGuide({
               >
                 {isAutoPlaying ? (
                   <>
-                    <Pause className="w-3.5 h-3.5 text-amber-400" />
+                    <Pause className="w-3.5 h-3.5 text-white" />
                     <span className="text-[10px]">Pause</span>
                   </>
                 ) : (
                   <>
-                    <Play className="w-3.5 h-3.5 text-emerald-400" />
+                    <Play className="w-3.5 h-3.5 text-dutchOrange" />
                     <span className="text-[10px]">Auto-Play</span>
                   </>
                 )}
