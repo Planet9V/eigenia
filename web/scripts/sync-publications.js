@@ -110,6 +110,9 @@ function run() {
     "cdt-mathematical-models": "MP_Mathematical_Models",
     "graph-universe-visualizer": "WG-02-DT-Applied-Physics",
     "research-sourcing-governance": "README",
+    "g-cpdt-multigraph-engine": "WG-05-CAD-Multigraph-Engine",
+    "kinetic-blast-radius": "WG-05-CAD-Kinetic-Blast-Radius",
+    "dexpi2-xml-metamodel-pipelines": "WG-05-CAD-DEXPI-XML-Metamodel",
   };
 
   for (const [slug, baseName] of Object.entries(slugToBaseMap)) {

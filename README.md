@@ -49,7 +49,7 @@ The application is engineered for ultra-high performance, dark/light theme flexi
 ├── /theory                         [Standalone Route: Applied Physics Models Index]
 ├── /collaborate                    [Standalone Route: Proposal Intake & Board Briefings]
 ├── /unified-standard               [Standalone Route: DEXPI 2.0 + CycloneDX Unification]
-├── /wiki                           [Standalone Route: Sovereign Research Wiki — 63 Treatises, 9 Working Groups]
+├── /wiki                           [Standalone Route: Sovereign Research Wiki — 66 Treatises, 9 Working Groups]
 │
 ├── /sitemap.xml                    [Generated: app/sitemap.ts]
 ├── /robots.txt                     [Generated: app/robots.ts]
@@ -110,7 +110,7 @@ eigenia/
 │   ├── WG-08-MO-Monte-Carlo-Application/
 │   ├── MP-Math-Physics-Formula/
 │   ├── external-research/             # Sourced-but-not-WG-authored material, one file per source
-│   └── ... (9 working groups, 63 treatises total)
+│   └── ... (9 working groups, 66 treatises total)
 │
 ├── scripts/                           # 20 compile_*.py build artifacts — each OVERWRITES a references/*.md
 │                                      # Check ownership before editing any treatise: grep -rln "<file>" scripts/

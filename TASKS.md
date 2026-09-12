@@ -1,7 +1,7 @@
-<!-- verified: 2026-09-11 f655255 -->
+<!-- verified: 2026-09-12 56f2010 -->
 # Tasks
 
-_Last brought current: 2026-09-11 by the Cowork session, verified against main at `f655255` (2026-09-10 15:41 -0500). The HTML comment on line 1 is machine-read by `web/scripts/audit-tasks-stamp.mjs` and `scripts/hooks/`; update it every time this file is brought current._
+_Last brought current: 2026-09-12 verified against main at `56f2010`. The HTML comment on line 1 is machine-read by `web/scripts/audit-tasks-stamp.mjs` and `scripts/hooks/`; update it every time this file is brought current._
 _Counts here are checked against `web/src/lib/wikiRegistry.ts`, not typed from memory._
 _Memory of record (decided 2026-09-11): this file and `memory/` at the repo root. `.taskmaster/`, `.remember/`, `.claude/memory.db`, `.swarm/` and the gateway's `memory_store` are tool caches, not sources. Rules: `memory/context/working-agreement.md`._
 
