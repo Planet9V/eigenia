@@ -20,7 +20,8 @@ import {
   Sparkles,
   CheckCircle2,
   AlertTriangle,
-  ArrowRight
+  ArrowRight,
+  Workflow
 } from "lucide-react";
 import { SiteChrome } from "@/components/SiteChrome";
 import { Breadcrumb } from "@/components/Breadcrumb";
@@ -28,6 +29,8 @@ import { MapControlBar } from "@/components/map/MapControlBar";
 import { JurisdictionMapViewer } from "@/components/map/JurisdictionMapViewer";
 import { JurisdictionDossierDrawer } from "@/components/map/JurisdictionDossierDrawer";
 import { FacilityImpactSimulator } from "@/components/map/FacilityImpactSimulator";
+import { BilateralComparatorModal } from "@/components/map/BilateralComparatorModal";
+import { JurisdictionTourGuide } from "@/components/map/JurisdictionTourGuide";
 import {
   MapProjectionMode,
   RegulatoryDimension,
@@ -48,6 +51,12 @@ export default function JurisdictionsShowcasePage() {
   const [autoRotate, setAutoRotate] = useState<boolean>(true);
   const [selectedCountry, setSelectedCountry] = useState<CountryJurisdictionData | null>(null);
   const [highlightedIso2List, setHighlightedIso2List] = useState<string[]>([]);
+
+  // Next-Wave Enhancement states
+  const [isTourActive, setIsTourActive] = useState<boolean>(false);
+  const [isComparatorOpen, setIsComparatorOpen] = useState<boolean>(false);
+  const [showCorridors, setShowCorridors] = useState<boolean>(true);
+  const [cameraOverride, setCameraOverride] = useState<{ yaw: number; pitch: number; zoom: number } | null>(null);
 
   useEffect(() => {
     async function loadData() {
@@ -148,6 +157,39 @@ export default function JurisdictionsShowcasePage() {
                   <div className="text-[11px] text-secondary">Statutory Early Notification SLAs</div>
                 </div>
               </div>
+
+              {/* Quick Action Navigation Bar */}
+              <div className="flex flex-wrap items-center gap-3 pt-2">
+                <button
+                  data-tour="tour-launcher-btn"
+                  onClick={() => setIsTourActive(true)}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-dutchOrange text-white text-xs font-bold font-sans shadow-lg shadow-dutchOrange/20 hover:bg-dutchOrange/90 hover:shadow-dutchOrange/30 transition-all cursor-pointer"
+                >
+                  <Sparkles className="w-4 h-4" />
+                  <span>Launch Interactive Showcase Tour</span>
+                </button>
+
+                <button
+                  data-tour="compare-launcher-btn"
+                  onClick={() => setIsComparatorOpen(true)}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-cardSurface/90 hover:bg-cardSurface border border-cardBorder text-slate-200 text-xs font-semibold font-sans transition-all cursor-pointer"
+                >
+                  <Scale className="w-4 h-4 text-sky-400" />
+                  <span>Compare Sovereign Jurisdictions</span>
+                </button>
+
+                <button
+                  onClick={() => setShowCorridors(!showCorridors)}
+                  className={`inline-flex items-center gap-2 px-3 py-2 rounded-xl border text-xs font-mono transition-all cursor-pointer ${
+                    showCorridors
+                      ? "bg-cyan-950/40 border-cyan-500/40 text-cyan-300"
+                      : "bg-cardSurface/60 border-cardBorder text-slate-400 hover:text-slate-200"
+                  }`}
+                >
+                  <Workflow className="w-3.5 h-3.5" />
+                  <span>Supply Chain Corridors: {showCorridors ? "ON" : "OFF"}</span>
+                </button>
+              </div>
             </div>
           </section>
 
@@ -156,42 +198,49 @@ export default function JurisdictionsShowcasePage() {
           ========================================================================= */}
           <section className="bg-[#0B0C0E] text-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
-          {/* Top Control Bar */}
-          <MapControlBar
-            projectionMode={projectionMode}
-            onToggleProjection={setProjectionMode}
-            activeDimension={activeDimension}
-            onChangeDimension={setActiveDimension}
-            activeSector={activeSector}
-            onChangeSector={setActiveSector}
-            autoRotate={autoRotate}
-            onToggleAutoRotate={() => setAutoRotate(!autoRotate)}
-            countries={countriesList}
-            onSelectCountry={handleSelectCountry}
-            selectedIso2={selectedCountry?.iso2}
-          />
+              {/* Top Control Bar */}
+              <MapControlBar
+                projectionMode={projectionMode}
+                onToggleProjection={setProjectionMode}
+                activeDimension={activeDimension}
+                onChangeDimension={setActiveDimension}
+                activeSector={activeSector}
+                onChangeSector={setActiveSector}
+                autoRotate={autoRotate}
+                onToggleAutoRotate={() => setAutoRotate(!autoRotate)}
+                countries={countriesList}
+                onSelectCountry={handleSelectCountry}
+                selectedIso2={selectedCountry?.iso2}
+                onOpenComparator={() => setIsComparatorOpen(true)}
+                onStartTour={() => setIsTourActive(true)}
+                showCorridors={showCorridors}
+                onToggleCorridors={() => setShowCorridors(!showCorridors)}
+              />
 
-          {/* Canvas Map Viewer Container */}
-          <div className="relative">
-            <JurisdictionMapViewer
-              projectionMode={projectionMode}
-              activeDimension={activeDimension}
-              activeSector={activeSector}
-              autoRotate={autoRotate}
-              onSelectCountry={handleSelectCountry}
-              selectedIso2={selectedCountry?.iso2}
-              highlightedIso2List={highlightedIso2List}
-            />
-          </div>
+              {/* Canvas Map Viewer Container with Tour Target */}
+              <div className="relative" data-tour="map-container">
+                <JurisdictionMapViewer
+                  projectionMode={projectionMode}
+                  activeDimension={activeDimension}
+                  activeSector={activeSector}
+                  autoRotate={autoRotate}
+                  onSelectCountry={handleSelectCountry}
+                  selectedIso2={selectedCountry?.iso2}
+                  highlightedIso2List={highlightedIso2List}
+                  showCorridors={showCorridors}
+                  onToggleCorridors={() => setShowCorridors(!showCorridors)}
+                  cameraOverride={cameraOverride}
+                />
+              </div>
 
-          {/* Industrial Facility Impact Simulator */}
-          <div className="pt-4">
-            <FacilityImpactSimulator
-              countries={countriesList}
-              onHighlightJurisdictions={setHighlightedIso2List}
-              onSelectCountry={handleSelectCountry}
-            />
-          </div>
+              {/* Industrial Facility Impact Simulator with Tour Target */}
+              <div className="pt-4" data-tour="facility-simulator">
+                <FacilityImpactSimulator
+                  countries={countriesList}
+                  onHighlightJurisdictions={setHighlightedIso2List}
+                  onSelectCountry={handleSelectCountry}
+                />
+              </div>
 
           {/* Regulatory Regime Comparison Table */}
           <div className="p-6 rounded-2xl bg-cardSurface/90 border border-cardBorder shadow-md space-y-4 text-white">
@@ -414,6 +463,35 @@ export default function JurisdictionsShowcasePage() {
       country={selectedCountry}
       activeSector={activeSector}
       onClose={handleCloseDrawer}
+    />
+
+    {/* =========================================================================
+        BILATERAL REGULATORY DELTA COMPARATOR MODAL
+    ========================================================================= */}
+    <BilateralComparatorModal
+      isOpen={isComparatorOpen}
+      onClose={() => setIsComparatorOpen(false)}
+      countries={countriesList}
+      initialCountryA={countriesList.find((c) => c.iso2 === "DE") || null}
+      initialCountryB={countriesList.find((c) => c.iso2 === "US") || null}
+    />
+
+    {/* =========================================================================
+        INTERACTIVE SHOWCASE TOUR GUIDE
+    ========================================================================= */}
+    <JurisdictionTourGuide
+      isActive={isTourActive}
+      onClose={() => {
+        setIsTourActive(false);
+        setCameraOverride(null);
+      }}
+      onStepChangeCamera={(cam) => setCameraOverride(cam)}
+      onTriggerDimension={(dim) => setActiveDimension(dim)}
+      onOpenComparator={() => setIsComparatorOpen(true)}
+      onSelectCountryIso2={(iso2) => {
+        const country = countriesList.find((c) => c.iso2 === iso2);
+        if (country) handleSelectCountry(country);
+      }}
     />
   </SiteChrome>
 </main>

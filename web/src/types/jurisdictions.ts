@@ -129,3 +129,59 @@ export interface FacilityMarker {
   criticality: "High" | "Critical";
   details: string;
 }
+
+export interface SupplyChainCorridor {
+  id: string;
+  sourceFacilityId: string;
+  sourceName: string;
+  sourceCoords: [number, number]; // [lng, lat]
+  targetIso2: string;
+  targetCountryName: string;
+  targetCoords: [number, number]; // [lng, lat]
+  corridorType: "Component Supply" | "Telemetry Relay" | "Grid Intertie" | "Subsea Transit";
+  statutoryGate: string;
+  activeStatus: "Operational" | "CAB Audit Pending";
+}
+
+export interface ComplianceActionItem {
+  id: string;
+  priority: "High" | "Medium" | "Standard";
+  title: string;
+  statuteRef: string;
+  timeframe: string;
+  actionRequired: string;
+  category: "Access Control" | "Software Assurance" | "Incident Response" | "Data Residency";
+}
+
+export interface BilateralComparisonDelta {
+  dimension: string;
+  label: string;
+  countryAValue: string | number | boolean;
+  countryBValue: string | number | boolean;
+  deltaText: string;
+  divergenceLevel: "Aligned" | "Moderate" | "Critical";
+}
+
+export interface TourStep {
+  id: string;
+  stepNumber: number;
+  totalSteps: number;
+  title: string;
+  badge: string;
+  description: string;
+  targetSelector?: string;
+  targetCamera?: {
+    yaw: number;
+    pitch: number;
+    zoom: number;
+  };
+  simulatedAction?: {
+    type: "click" | "select_dimension" | "select_facility" | "select_country" | "open_comparator";
+    targetIso2?: string;
+    dimension?: RegulatoryDimension;
+    facilityId?: string;
+    description: string;
+  };
+  tooltipPlacement: "bottom" | "top" | "left" | "right" | "center";
+}
+

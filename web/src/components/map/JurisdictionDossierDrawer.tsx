@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   X,
@@ -15,9 +15,12 @@ import {
   CheckCircle2,
   XCircle,
   Building2,
-  Scale
+  Scale,
+  Download,
+  Printer,
+  CheckSquare
 } from "lucide-react";
-import { CountryJurisdictionData, SectorFilter } from "@/types/jurisdictions";
+import { CountryJurisdictionData, SectorFilter, ComplianceActionItem } from "@/types/jurisdictions";
 
 interface Props {
   country: CountryJurisdictionData | null;
@@ -29,6 +32,90 @@ type DrawerTab = "overview" | "statutes" | "sectors" | "cyber" | "privacy" | "cr
 
 export function JurisdictionDossierDrawer({ country, activeSector, onClose }: Props) {
   const [activeTab, setActiveTab] = useState<DrawerTab>("overview");
+
+  const handleExportJson = () => {
+    if (!country) return;
+    const blob = new Blob([JSON.stringify(country, null, 2)], {
+      type: "application/json"
+    });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `jurisdiction-${country.iso2}-${country.country_name.toLowerCase().replace(/\s+/g, "-")}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  const handlePrint = () => {
+    window.print();
+  };
+
+  const complianceChecklist: ComplianceActionItem[] = useMemo(() => {
+    if (!country) return [];
+    const items: ComplianceActionItem[] = [];
+
+    if (country.default_password_ban) {
+      items.push({
+        id: "chk_pwd",
+        priority: "High",
+        category: "Access Control",
+        title: "Factory Default Password Phase-Out",
+        statuteRef: country.primary_cyber_statute || "Statutory Cybersecurity Standard",
+        timeframe: "Immediate / Pre-Commissioning",
+        actionRequired: "Enforce unique cryptographically generated credentials across all Level 1 and Level 2 industrial controllers before connecting to site networks."
+      });
+    }
+
+    if (country.incident_disclosure_hours <= 24) {
+      items.push({
+        id: "chk_csirt",
+        priority: "High",
+        category: "Incident Response",
+        title: `${country.incident_disclosure_hours}h CSIRT Notification Readiness`,
+        statuteRef: `${country.supervisory_dpa || "National CSIRT"} Statutory Mandatory Reporting`,
+        timeframe: `${country.incident_disclosure_hours} Hours from Incident Detection`,
+        actionRequired: `Calibrate automated triage playbooks to dispatch statutory early warning reports to ${country.supervisory_dpa || "National CSIRT"} within ${country.incident_disclosure_hours} hours.`
+      });
+    }
+
+    if (country.sbom_required) {
+      items.push({
+        id: "chk_sbom",
+        priority: "Medium",
+        category: "Software Assurance",
+        title: "ECMA-424 CycloneDX SBOM & CBOM Generation",
+        statuteRef: country.primary_cyber_statute || "Digital Product Assurance Mandate",
+        timeframe: "Continuous / Build Pipeline Gate",
+        actionRequired: "Generate machine-readable Software and Cryptography Bill of Materials with SHA-256 digests and post-quantum primitive inventories for all firmware releases."
+      });
+    }
+
+    if (country.data_localization_required) {
+      items.push({
+        id: "chk_loc",
+        priority: "Medium",
+        category: "Data Residency",
+        title: "Sovereign Telemetry & Storage Residency Audit",
+        statuteRef: country.primary_privacy_statute || "Data Localization Mandate",
+        timeframe: "Quarterly Audit",
+        actionRequired: `Audit all operational historian telemetry, off-site replication targets, and cloud services against localized data residency rules for ${country.country_name}.`
+      });
+    }
+
+    items.push({
+      id: "chk_audit",
+      priority: "Standard",
+      category: "Access Control",
+      title: "Statutory Defense-in-Depth Verification",
+      statuteRef: country.primary_cyber_statute || "Industrial Cyber Security Standard",
+      timeframe: "Annual Certification",
+      actionRequired: "Conduct annual third-party independent conformity assessments verifying network segmentation, boundary protection, and patch SLA compliance."
+    });
+
+    return items;
+  }, [country]);
 
   if (!country) return null;
 
@@ -45,7 +132,7 @@ export function JurisdictionDossierDrawer({ country, activeSector, onClose }: Pr
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-y-0 right-0 z-50 flex max-w-full pl-10 pointer-events-auto">
+      <div className="fixed inset-y-0 right-0 z-[80] flex max-w-full pl-10 pointer-events-auto">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -58,17 +145,17 @@ export function JurisdictionDossierDrawer({ country, activeSector, onClose }: Pr
           initial={{ x: "100%" }}
           animate={{ x: 0 }}
           exit={{ x: "100%" }}
-          transition={{ type: "spring", damping: 28, stiffness: 280 }}
-          className="relative w-screen max-w-2xl bg-[#090d16]/95 border-l border-cyan-500/20 shadow-2xl backdrop-blur-xl flex flex-col text-slate-100 z-10"
+          transition={{ type: "spring", damping: 25, stiffness: 200 }}
+          className="w-screen max-w-2xl bg-[#090d16] border-l border-white/10 shadow-2xl z-10 flex flex-col h-full overflow-hidden text-white"
         >
-          {/* Header */}
-          <div className="p-6 border-b border-white/10 flex items-start justify-between bg-white/[0.02]">
-            <div>
-              <div className="flex items-center gap-3">
-                <span className="text-2xl font-mono px-2.5 py-1 rounded bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-bold">
-                  {country.iso2}
-                </span>
-                <div>
+          {/* Header Bar */}
+          <div className="flex items-center justify-between p-6 border-b border-white/10 bg-white/[0.02]">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center font-mono font-bold text-xl text-cyan-400">
+                {country.iso2}
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
                   <h2 className="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
                     {country.country_name}
                     <span className="text-xs font-mono px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 border border-slate-700">
@@ -82,13 +169,31 @@ export function JurisdictionDossierDrawer({ country, activeSector, onClose }: Pr
               </div>
             </div>
 
-            <button
-              onClick={onClose}
-              className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-colors border border-white/10"
-              aria-label="Close drawer"
-            >
-              <X className="w-5 h-5" />
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={handleExportJson}
+                title="Export Structured JSON Profile"
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white transition-colors border border-white/10 text-xs font-mono"
+              >
+                <Download className="w-3.5 h-3.5 text-sky-400" />
+                <span className="hidden sm:inline">Export JSON</span>
+              </button>
+              <button
+                onClick={handlePrint}
+                title="Print Executive Memorandum"
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white transition-colors border border-white/10 text-xs font-mono"
+              >
+                <Printer className="w-3.5 h-3.5 text-dutchOrange" />
+                <span className="hidden sm:inline">Print Brief</span>
+              </button>
+              <button
+                onClick={onClose}
+                className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-colors border border-white/10"
+                aria-label="Close drawer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
           </div>
 
           {/* Quick Stats Grid */}
@@ -225,6 +330,53 @@ export function JurisdictionDossierDrawer({ country, activeSector, onClose }: Pr
                         {country.criminal_liability_directors ? "Personal Criminal / Civil Sanctions" : "Corporate Level Only"}
                       </span>
                     </div>
+                  </div>
+                </div>
+
+                {/* Operational Compliance Readiness Checklist */}
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h4 className="text-xs font-mono uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+                      <CheckSquare className="w-3.5 h-3.5 text-dutchOrange" />
+                      <span>Operational Compliance Action Plan</span>
+                    </h4>
+                    <span className="text-[10px] font-mono text-slate-400">
+                      {complianceChecklist.length} Priority Items
+                    </span>
+                  </div>
+
+                  <div className="space-y-2">
+                    {complianceChecklist.map((item) => (
+                      <div
+                        key={item.id}
+                        className="p-3.5 rounded-xl bg-black/40 border border-white/10 space-y-1.5 text-xs font-mono"
+                      >
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <span
+                              className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${
+                                item.priority === "High"
+                                  ? "bg-rose-500/20 text-rose-400 border border-rose-500/30"
+                                  : item.priority === "Medium"
+                                  ? "bg-amber-500/20 text-amber-400 border border-amber-500/30"
+                                  : "bg-sky-500/20 text-sky-400 border border-sky-500/30"
+                              }`}
+                            >
+                              {item.priority}
+                            </span>
+                            <span className="font-bold text-white">{item.title}</span>
+                          </div>
+                          <span className="text-[10px] text-slate-400">{item.timeframe}</span>
+                        </div>
+                        <p className="text-[11px] text-slate-300 leading-relaxed font-sans">
+                          {item.actionRequired}
+                        </p>
+                        <div className="pt-1.5 border-t border-white/5 flex items-center justify-between text-[10px] text-slate-400">
+                          <span>Statute: {item.statuteRef}</span>
+                          <span className="text-cyan-400">{item.category}</span>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
 

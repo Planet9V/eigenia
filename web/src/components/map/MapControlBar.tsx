@@ -13,7 +13,9 @@ import {
   Key,
   Shield,
   Lock,
-  Scale
+  Scale,
+  Sparkles,
+  Workflow
 } from "lucide-react";
 import {
   MapProjectionMode,
@@ -34,6 +36,10 @@ interface Props {
   countries: CountryJurisdictionData[];
   onSelectCountry: (country: CountryJurisdictionData) => void;
   selectedIso2?: string | null;
+  onOpenComparator?: () => void;
+  onStartTour?: () => void;
+  showCorridors?: boolean;
+  onToggleCorridors?: () => void;
 }
 
 export function MapControlBar({
@@ -47,7 +53,11 @@ export function MapControlBar({
   onToggleAutoRotate,
   countries,
   onSelectCountry,
-  selectedIso2
+  selectedIso2,
+  onOpenComparator,
+  onStartTour,
+  showCorridors,
+  onToggleCorridors
 }: Props) {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchOpen, setSearchOpen] = useState(false);
@@ -97,7 +107,7 @@ export function MapControlBar({
 
   return (
     <div className="flex flex-col gap-3 w-full max-w-5xl mx-auto z-20 pointer-events-auto">
-      {/* Top Bar: Projection Switch, Search, Auto-Rotate */}
+      {/* Top Bar: Projection Switch, Search, Auto-Rotate, Actions */}
       <div className="flex flex-wrap items-center justify-between gap-3 p-2.5 rounded-2xl bg-[#090d16]/90 border border-white/10 backdrop-blur-xl shadow-2xl">
         {/* 2D / 3D Projection Toggle */}
         <div className="flex items-center p-1 rounded-xl bg-black/50 border border-white/5">
@@ -140,8 +150,51 @@ export function MapControlBar({
           </button>
         )}
 
+        {/* Action Buttons: Tour, Compare, Corridors */}
+        <div className="flex items-center gap-2">
+          {onStartTour && (
+            <button
+              onClick={onStartTour}
+              data-tour="tour-launcher-btn"
+              title="Start Interactive Showcase Tour"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-dutchOrange/10 border border-dutchOrange/30 text-dutchOrange hover:bg-dutchOrange/20 text-xs font-semibold font-mono transition-all shadow-sm"
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Interactive Tour</span>
+            </button>
+          )}
+
+          {onOpenComparator && (
+            <button
+              onClick={onOpenComparator}
+              data-tour="compare-launcher-btn"
+              title="Compare Bilateral Regulatory Frameworks"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-slate-300 hover:text-white hover:bg-white/10 text-xs font-medium font-mono transition-all"
+            >
+              <Scale className="w-3.5 h-3.5 text-sky-400" />
+              <span className="hidden sm:inline">Compare</span>
+            </button>
+          )}
+
+          {onToggleCorridors && (
+            <button
+              onClick={onToggleCorridors}
+              data-tour="corridor-toggle-btn"
+              title={showCorridors ? "Hide Supply Chain Corridors" : "Show Supply Chain Corridors"}
+              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border text-xs font-medium font-mono transition-all ${
+                showCorridors
+                  ? "bg-sky-500/10 border-sky-500/30 text-sky-400"
+                  : "bg-white/5 border-white/10 text-slate-400 hover:text-slate-200"
+              }`}
+            >
+              <Workflow className="w-3.5 h-3.5" />
+              <span className="hidden md:inline">Corridors</span>
+            </button>
+          )}
+        </div>
+
         {/* Search Jump Input */}
-        <div ref={searchRef} className="relative flex-1 min-w-[240px]">
+        <div ref={searchRef} data-tour="search-input" className="relative flex-1 min-w-[220px]">
           <div className="relative flex items-center">
             <Search className="w-4 h-4 text-slate-400 absolute left-3 pointer-events-none" />
             <input
@@ -186,7 +239,7 @@ export function MapControlBar({
       </div>
 
       {/* Secondary Bar: Regulatory Dimension Selector */}
-      <div className="flex flex-wrap items-center justify-between gap-2 p-2 rounded-xl bg-[#090d16]/80 border border-white/10 backdrop-blur-md">
+      <div data-tour="dimension-bar" className="flex flex-wrap items-center justify-between gap-2 p-2 rounded-xl bg-[#090d16]/80 border border-white/10 backdrop-blur-md">
         <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar w-full md:w-auto">
           <span className="text-[10px] uppercase font-mono text-slate-400 px-2 flex items-center gap-1">
             <Filter className="w-3 h-3 text-cyan-400" />

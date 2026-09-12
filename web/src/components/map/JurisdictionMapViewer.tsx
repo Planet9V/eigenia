@@ -8,6 +8,7 @@ import {
   geoGraticule10,
   geoContains,
   geoCentroid,
+  geoInterpolate,
   GeoProjection,
   GeoPath
 } from "d3-geo";
@@ -18,7 +19,8 @@ import {
   SectorFilter,
   CountryJurisdictionData,
   JurisdictionMatrixDataset,
-  FacilityMarker
+  FacilityMarker,
+  SupplyChainCorridor
 } from "@/types/jurisdictions";
 import {
   Maximize2,
@@ -33,7 +35,9 @@ import {
   Lock,
   Scale,
   Layers,
-  ArrowRight
+  ArrowRight,
+  Workflow,
+  Keyboard
 } from "lucide-react";
 
 interface Props {
@@ -45,6 +49,9 @@ interface Props {
   selectedIso2?: string | null;
   highlightedIso2List?: string[];
   facilityMarkers?: FacilityMarker[];
+  showCorridors?: boolean;
+  onToggleCorridors?: () => void;
+  cameraOverride?: { yaw: number; pitch: number; zoom?: number } | null;
 }
 
 interface HoverState {
@@ -117,6 +124,57 @@ const DEFAULT_FACILITIES: FacilityMarker[] = [
   }
 ];
 
+export const DEFAULT_CORRIDORS: SupplyChainCorridor[] = [
+  {
+    id: "corr_rotterdam_de",
+    sourceFacilityId: "fac_rotterdam",
+    sourceName: "Port of Rotterdam Petrochemical Hub",
+    sourceCoords: [4.4777, 51.9244],
+    targetIso2: "DE",
+    targetCountryName: "Germany",
+    targetCoords: [10.4515, 51.1657],
+    corridorType: "Component Supply",
+    statutoryGate: "EU CRA Essential Entity Component Assurance",
+    activeStatus: "Operational"
+  },
+  {
+    id: "corr_tennet_nl",
+    sourceFacilityId: "fac_tennet_offshore",
+    sourceName: "Tennet BorWin5 Offshore HVDC Converter",
+    sourceCoords: [6.5, 54.0],
+    targetIso2: "NL",
+    targetCountryName: "Netherlands",
+    targetCoords: [5.2913, 52.1326],
+    corridorType: "Grid Intertie",
+    statutoryGate: "BSI IT-SiG 2.0 / Dutch Security of Network Interconnects",
+    activeStatus: "Operational"
+  },
+  {
+    id: "corr_singapore_jp",
+    sourceFacilityId: "fac_singapore_jurong",
+    sourceName: "Jurong Island Integrated Water & Energy Complex",
+    sourceCoords: [103.7, 1.2667],
+    targetIso2: "JP",
+    targetCountryName: "Japan",
+    targetCoords: [138.2529, 36.2048],
+    corridorType: "Telemetry Relay",
+    statutoryGate: "Singapore Cybersecurity Act 2024 / Japan Economic Security",
+    activeStatus: "CAB Audit Pending"
+  },
+  {
+    id: "corr_tokyo_us",
+    sourceFacilityId: "fac_tokyo_otn",
+    sourceName: "Tokyo-Chiba Pacific Subsea Cable Gateway",
+    sourceCoords: [140.1065, 35.6074],
+    targetIso2: "US",
+    targetCountryName: "United States",
+    targetCoords: [-95.7129, 37.0902],
+    corridorType: "Subsea Transit",
+    statutoryGate: "US-Japan Bilateral Critical Telecom Intercept Protection",
+    activeStatus: "Operational"
+  }
+];
+
 export function JurisdictionMapViewer({
   projectionMode,
   activeDimension,
@@ -125,7 +183,10 @@ export function JurisdictionMapViewer({
   onSelectCountry,
   selectedIso2,
   highlightedIso2List = [],
-  facilityMarkers = DEFAULT_FACILITIES
+  facilityMarkers = DEFAULT_FACILITIES,
+  showCorridors = true,
+  onToggleCorridors,
+  cameraOverride
 }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -142,6 +203,7 @@ export function JurisdictionMapViewer({
   const [pitch, setPitch] = useState<number>(-15);
   const [zoomScale, setZoomScale] = useState<number>(1);
   const [panOffset, setPanOffset] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [showKeyboardHelp, setShowKeyboardHelp] = useState(false);
 
   // Drag interaction state
   const isDraggingRef = useRef(false);
@@ -150,6 +212,48 @@ export function JurisdictionMapViewer({
   const dragInitialPanRef = useRef({ x: 0, y: 0 });
   const animFrameIdRef = useRef<number | null>(null);
   const targetRotationRef = useRef<{ yaw: number; pitch: number } | null>(null);
+  const hoverDebounceTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Clean up timer on unmount
+  useEffect(() => {
+    return () => {
+      if (hoverDebounceTimerRef.current) {
+        clearTimeout(hoverDebounceTimerRef.current);
+      }
+    };
+  }, []);
+
+  // Handle cameraOverride if provided (e.g. from guided tour flight)
+  useEffect(() => {
+    if (cameraOverride) {
+      targetRotationRef.current = {
+        yaw: cameraOverride.yaw,
+        pitch: cameraOverride.pitch
+      };
+      if (cameraOverride.zoom) {
+        setZoomScale(cameraOverride.zoom);
+      }
+    }
+  }, [cameraOverride]);
+
+  // Pre-calculate Great-Circle LineStrings
+  const corridorLineStrings = useMemo(() => {
+    return DEFAULT_CORRIDORS.map((corridor) => {
+      const interpolate = geoInterpolate(corridor.sourceCoords, corridor.targetCoords);
+      const steps = 48;
+      const coords: [number, number][] = [];
+      for (let i = 0; i <= steps; i++) {
+        coords.push(interpolate(i / steps));
+      }
+      return {
+        corridor,
+        geoJson: {
+          type: "LineString" as const,
+          coordinates: coords
+        }
+      };
+    });
+  }, []);
 
   // Load TopoJSON and Matrix Dataset on mount
   useEffect(() => {
@@ -443,8 +547,27 @@ export function JurisdictionMapViewer({
         }
       });
 
-      // 4. Draw Facility Pins with Animated Pulse Radar
+      // 4. Draw Great-Circle Supply Chain Corridors
       const timeMs = Date.now();
+      if (showCorridors && projectionMode === "globe" && corridorLineStrings.length > 0) {
+        const dashOffset = (timeMs / 25) % 1000;
+        corridorLineStrings.forEach(({ corridor, geoJson }) => {
+          ctx.save();
+          ctx.beginPath();
+          pathGenerator(geoJson);
+          ctx.setLineDash([8, 12]);
+          ctx.lineDashOffset = -dashOffset;
+          ctx.lineWidth = 2.0;
+          ctx.strokeStyle =
+            corridor.activeStatus === "CAB Audit Pending"
+              ? "rgba(245, 158, 11, 0.85)"
+              : "rgba(56, 189, 248, 0.85)";
+          ctx.stroke();
+          ctx.restore();
+        });
+      }
+
+      // 5. Draw Facility Pins with Animated Pulse Radar
       facilityMarkers.forEach((fac) => {
         const coords = projection([fac.lng, fac.lat]);
         if (!coords) return;
@@ -514,6 +637,8 @@ export function JurisdictionMapViewer({
     selectedIso2,
     hoverState,
     facilityMarkers,
+    showCorridors,
+    corridorLineStrings,
     getCountryColor
   ]);
 
@@ -604,12 +729,21 @@ export function JurisdictionMapViewer({
     }
 
     if (foundCountry) {
-      setHoverState({
-        x: mouseX,
-        y: mouseY,
-        country: foundCountry
-      });
+      if (hoverDebounceTimerRef.current) {
+        clearTimeout(hoverDebounceTimerRef.current);
+      }
+      const targetCountry = foundCountry;
+      hoverDebounceTimerRef.current = setTimeout(() => {
+        setHoverState({
+          x: mouseX,
+          y: mouseY,
+          country: targetCountry
+        });
+      }, 90);
     } else {
+      if (hoverDebounceTimerRef.current) {
+        clearTimeout(hoverDebounceTimerRef.current);
+      }
       setHoverState(null);
     }
   };
@@ -639,6 +773,50 @@ export function JurisdictionMapViewer({
     targetRotationRef.current = { yaw: 0, pitch: -15 };
     setZoomScale(1);
     setPanOffset({ x: 0, y: 0 });
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    switch (e.key) {
+      case "ArrowLeft":
+        e.preventDefault();
+        setYaw((prev) => (prev - 10) % 360);
+        break;
+      case "ArrowRight":
+        e.preventDefault();
+        setYaw((prev) => (prev + 10) % 360);
+        break;
+      case "ArrowUp":
+        e.preventDefault();
+        setPitch((prev) => Math.min(85, prev + 8));
+        break;
+      case "ArrowDown":
+        e.preventDefault();
+        setPitch((prev) => Math.max(-85, prev - 8));
+        break;
+      case "+":
+      case "=":
+        e.preventDefault();
+        setZoomScale((prev) => Math.min(3.5, prev + 0.25));
+        break;
+      case "-":
+      case "_":
+        e.preventDefault();
+        setZoomScale((prev) => Math.max(0.7, prev - 0.25));
+        break;
+      case "r":
+      case "R":
+        e.preventDefault();
+        handleResetOrientation();
+        break;
+      case "?":
+        e.preventDefault();
+        setShowKeyboardHelp((prev) => !prev);
+        break;
+      case "Escape":
+        setHoverState(null);
+        setShowKeyboardHelp(false);
+        break;
+    }
   };
 
   // Dimension explanation legend items
@@ -708,7 +886,11 @@ export function JurisdictionMapViewer({
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-[620px] rounded-2xl overflow-hidden bg-obsidian border border-hairline shadow-2xl flex items-center justify-center select-none"
+      tabIndex={0}
+      onKeyDown={handleKeyDown}
+      role="region"
+      aria-label="Interactive Sovereign Jurisdiction Map"
+      className="relative w-full h-[620px] rounded-2xl overflow-hidden bg-obsidian border border-hairline shadow-2xl flex items-center justify-center select-none outline-none focus-visible:ring-2 focus-visible:ring-dutchOrange/70"
     >
       {/* Loading Overlay */}
       {isLoading && (
@@ -772,10 +954,10 @@ export function JurisdictionMapViewer({
               </span>
               <span
                 className={`font-semibold ${
-                  hoverState.country.default_password_ban ? "text-emerald-400" : "text-muted"
+                  hoverState.country.default_password_ban ? "text-emerald-400" : "text-amber-400"
                 }`}
               >
-                {hoverState.country.default_password_ban ? "Statutory Ban" : "Discretionary"}
+                {hoverState.country.default_password_ban ? "Statutorily Banned" : "Discretionary"}
               </span>
             </div>
 
@@ -813,11 +995,11 @@ export function JurisdictionMapViewer({
         </div>
       )}
 
-      {/* Floating Canvas Controls (Zoom, Reset, Orientation) */}
+      {/* Floating Canvas Controls (Zoom, Reset, Corridors, Keyboard) */}
       <div className="absolute top-4 right-4 z-20 flex flex-col gap-1.5 bg-cardSurface/90 backdrop-blur-md p-1 rounded-xl border border-cardBorder shadow-xl">
         <button
           onClick={() => setZoomScale((prev) => Math.min(3.5, prev + 0.3))}
-          title="Zoom In"
+          title="Zoom In (+)"
           className="p-2 rounded-lg text-secondary hover:text-primary hover:bg-subtle transition-colors"
           aria-label="Zoom in"
         >
@@ -825,7 +1007,7 @@ export function JurisdictionMapViewer({
         </button>
         <button
           onClick={() => setZoomScale((prev) => Math.max(0.7, prev - 0.3))}
-          title="Zoom Out"
+          title="Zoom Out (-)"
           className="p-2 rounded-lg text-secondary hover:text-primary hover:bg-subtle transition-colors"
           aria-label="Zoom out"
         >
@@ -833,13 +1015,78 @@ export function JurisdictionMapViewer({
         </button>
         <button
           onClick={handleResetOrientation}
-          title="Reset Orientation"
+          title="Reset Orientation (R)"
           className="p-2 rounded-lg text-secondary hover:text-primary hover:bg-subtle transition-colors"
           aria-label="Reset orientation"
         >
           <RotateCcw className="w-4 h-4" />
         </button>
+        <div className="h-px bg-cardBorder my-0.5" />
+        {onToggleCorridors && (
+          <button
+            onClick={onToggleCorridors}
+            title={showCorridors ? "Hide Supply Chain Corridors" : "Show Supply Chain Corridors"}
+            className={`p-2 rounded-lg transition-colors ${
+              showCorridors ? "text-sky-400 bg-sky-500/10" : "text-secondary hover:text-primary hover:bg-subtle"
+            }`}
+            aria-label="Toggle supply chain corridors"
+          >
+            <Workflow className="w-4 h-4" />
+          </button>
+        )}
+        <button
+          onClick={() => setShowKeyboardHelp((prev) => !prev)}
+          title="Keyboard Shortcuts (?)"
+          className={`p-2 rounded-lg transition-colors ${
+            showKeyboardHelp ? "text-dutchOrange bg-dutchOrange/10" : "text-secondary hover:text-primary hover:bg-subtle"
+          }`}
+          aria-label="Keyboard shortcuts"
+        >
+          <Keyboard className="w-4 h-4" />
+        </button>
       </div>
+
+      {/* Keyboard Shortcuts Helper Modal */}
+      {showKeyboardHelp && (
+        <div className="absolute inset-0 z-30 bg-obsidian/80 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-cardSurface border border-cardBorder rounded-2xl max-w-sm w-full p-5 shadow-2xl space-y-4 font-mono">
+            <div className="flex items-center justify-between border-b border-cardBorder pb-3">
+              <div className="flex items-center gap-2 text-primary font-bold text-sm">
+                <Keyboard className="w-4 h-4 text-dutchOrange" />
+                <span>Keyboard Shortcuts</span>
+              </div>
+              <button
+                onClick={() => setShowKeyboardHelp(false)}
+                className="text-xs text-muted hover:text-primary px-2 py-1 rounded hover:bg-subtle"
+              >
+                Close (Esc)
+              </button>
+            </div>
+            <div className="space-y-2 text-xs">
+              <div className="flex items-center justify-between">
+                <span className="text-secondary">Rotate / Pan Globe:</span>
+                <span className="px-2 py-0.5 rounded bg-subtle text-primary border border-hairline">Arrow Keys</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-secondary">Zoom In / Out:</span>
+                <span className="px-2 py-0.5 rounded bg-subtle text-primary border border-hairline">+ / -</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-secondary">Reset Orientation:</span>
+                <span className="px-2 py-0.5 rounded bg-subtle text-primary border border-hairline">R</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-secondary">Toggle Shortcuts:</span>
+                <span className="px-2 py-0.5 rounded bg-subtle text-primary border border-hairline">?</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-secondary">Dismiss / Clear:</span>
+                <span className="px-2 py-0.5 rounded bg-subtle text-primary border border-hairline">Esc</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Bottom Floating Legend */}
       <div className="absolute bottom-4 left-4 z-20 bg-cardSurface/90 backdrop-blur-md p-3 rounded-xl border border-cardBorder shadow-xl max-w-xs pointer-events-auto">
