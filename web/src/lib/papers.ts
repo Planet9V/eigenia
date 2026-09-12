@@ -60,7 +60,7 @@ export const PAPERS_REGISTRY: Record<string, { title: string; relativePath: stri
     relativePath: "references/WG-05-CAD-DEXPI-2/WG-05-CAD-Frontier-AI-Hardware-Security.md",
   },
   "unified-dexpi-cyclonedx-standards": {
-    title: "Unified DEXPI 2.0 & CycloneDX 1.6+ Semantic Bridge",
+    title: "Unified DEXPI 2.0 & CycloneDX 1.6+ Specification",
     relativePath: "references/WG-05-CAD-DEXPI-2/WG-05-CAD-Unified-DEXPI-CycloneDX.md",
   },
   "supply-chain-eu-cra-standards": {

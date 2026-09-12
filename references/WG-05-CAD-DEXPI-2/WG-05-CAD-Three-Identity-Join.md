@@ -1,23 +1,55 @@
-| Field | Value |
-|:---|:---|
-| Designation | P1, foundational specification of the three-schema programme |
-| Status | Draft for submission |
-| Normative language | RFC 2119 |
-| Licence | Creative Commons Attribution 4.0 International (CC BY 4.0) |
-| Extends | The Unified DEXPI 2.0 and CycloneDX 1.6 Semantic Bridge |
-| Target bodies | DEXPI e.V.; the CycloneDX project; IEC TC 57 |
+# The Three-Identity Join Across DEXPI 2.0, CycloneDX, and CIM
 
-## 1. Scope, and what this specification does not do
+## 1. Executive Summary & Scope
 
 Three open standards describe the same physical asset. DEXPI 2.0 describes its process topology. CycloneDX 1.6 describes the software and hardware it is built from. IEC 61970 CIM describes the electrical network that supplies it. Each standard is complete within its own discipline and none of them can answer the question an operator asks after a vulnerability disclosure lands: if this is exploited, what physically happens downstream?
 
 The obstacle is identity. A pump carries a tag. Its controller firmware carries a package URL. Its feeder carries a master resource identifier. No identifier survives across all three. That is the whole problem, and it is smaller and more tractable than it is usually made to sound.
 
-This specification defines a mapping between the three identity systems. It defines the form of a join assertion, the vocabulary of relations that assertion may declare, the rules a producer follows when writing one, and the rules a consumer follows when reading one. It defines how the assertion is carried inside a DEXPI file, inside a CycloneDX document, and inside a CIM model, using each standard's own sanctioned extension point.
+This specification (Designation P1, foundational specification of the three-schema programme) establishes the normative foundation for **Schema G_CPDT** (Graph of Cyber-Physical Digital Twins). It defines the form of a join assertion, the vocabulary of relations that assertion may declare, the rules a producer follows when writing one, and the rules a consumer follows when reading one. It defines how the assertion is carried inside a DEXPI file, inside a CycloneDX document, and inside a CIM model, using each standard's own sanctioned extension point.
+
+```mermaid
+graph TD
+    accTitle: The Three-Identity Join Architecture
+    accDescr {
+      The three-identity join coordinates three separate standard representations of an
+      industrial asset through an asset reference identifier. DEXPI 2.0 represents the
+      process topology using a TagName and ISO 15926-4 equipment class. CycloneDX 1.6
+      represents the component supply chain using a bom-ref and purl. IEC 61970 CIM
+      represents the electrical network using an mRID UUID. The G_CPDT schema binds all three
+      into a unified traversable multigraph without mutating any underlying standard.
+    }
+    AR["RFC 9562 Asset Reference<br/>(Shared Binding Identifier)"]
+    
+    subgraph DEXPI["DEXPI 2.0 / ISO 15926-4<br/>(Process Topology)"]
+        D1["TagName: P-101"]
+        D2["Class: CentrifugalPump"]
+        D3["DEXPI Attribute: dexpi:AssetRef"]
+    end
+
+    subgraph CDX["CycloneDX 1.6 / ECMA-424<br/>(Component Supply Chain)"]
+        C1["bom-ref: vfd-ctrl-01"]
+        C2["purl: pkg:deb/debian/systemd@252"]
+        C3["Property: g_cpdt:asset_ref"]
+    end
+
+    subgraph CIM["IEC 61970 CIM<br/>(Electrical Network)"]
+        M1["mRID: 7f8c1..."]
+        M2["Class: EnergyConsumer / Motor"]
+        M3["Extension: cim:AssetCyberLink"]
+    end
+
+    AR --- D3
+    AR --- C3
+    AR --- M3
+    D3 --> D1
+    C3 --> C1
+    M3 --> M1
+```
 
 The key words MUST, MUST NOT, SHOULD, SHOULD NOT and MAY in this document are to be interpreted as described in RFC 2119 [1]. Requirements are numbered R-1 through R-35 so that a conformance rule can be written against each one individually.
 
-This specification is offered under the Creative Commons Attribution 4.0 International licence (CC BY 4.0) [2]. That is the licence under which DEXPI e.V. publishes the DEXPI 2.0 Specification on GitLab [3], so the DEXPI leg of this work can be merged into a DEXPI artefact without a licence conflict. Where a receiving body's contribution policy requires different terms, the authors hold the copyright and will grant those terms on request.
+This specification is offered under the Creative Commons Attribution 4.0 International licence (CC BY 4.0) [2] for submission to DEXPI e.V., the CycloneDX project, and IEC TC 57. That is the licence under which DEXPI e.V. publishes the DEXPI 2.0 Specification on GitLab [3], so the DEXPI leg of this work can be merged into a DEXPI artefact without a licence conflict. Where a receiving body's contribution policy requires different terms, the authors hold the copyright and will grant those terms on request.
 
 ### 1.1 What this specification does not do
 
@@ -32,6 +64,8 @@ It does not define the conformance test suite. The requirements in section 8 say
 It does not verify that any of the three files is true. That limitation is central rather than incidental and section 9 treats it at length.
 
 ### 1.2 Terms
+
+**G_CPDT (Graph of Cyber-Physical Digital Twins).** The unified, traversable multigraph schema instantiated by binding physical process topology (DEXPI 2.0 / ISO 15926-4), component supply-chain hierarchy (OWASP CycloneDX 1.6+ / ECMA-424), and electrical network topology (IEC 61970 CIM) via decoupled RFC 9562 asset references without mutating or forking any underlying standard.
 
 **Asset.** The smallest physical object that at least two of the three participating schemas can name. A centrifugal pump is an asset. A firmware image is not, because DEXPI and CIM have nothing to say about it; it is a constituent of one.
 

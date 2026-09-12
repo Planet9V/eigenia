@@ -52,7 +52,7 @@
     },
     "cyberTopology": {
       "type": "object",
-      "description": "OWASP CycloneDX 1.6+ multi-BOM containing HBOM, SBOM, OBOM, CBOM, and SaaSBOM",
+      "description": "OWASP CycloneDX 1.6+ multi-BOM containing HBOM, SBOM, CBOM, MBOM (formulation), OBOM, and SaaSBOM",
       "required": ["bomFormat", "specVersion", "components"],
       "properties": {
         "bomFormat": { "type": "string", "const": "CycloneDX" },
@@ -64,6 +64,11 @@
           "items": {
             "$ref": "#/$defs/CycloneDXComponent"
           }
+        },
+        "formulation": {
+          "type": "array",
+          "description": "CycloneDX 1.6 formulation workflows capturing the Manufacturer BOM (MBOM), build recipes, toolchains, hardware assembly, and factory HSM key injection logs",
+          "items": { "type": "object" }
         },
         "vulnerabilities": {
           "type": "array",

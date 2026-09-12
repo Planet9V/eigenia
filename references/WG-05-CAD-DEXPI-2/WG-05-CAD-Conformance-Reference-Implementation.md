@@ -1,17 +1,50 @@
-| Field | Value |
-|:---|:---|
-| Designation | P3, conformance suite and reference implementation of the three-schema programme |
-| Status | Draft for submission |
-| Normative language | RFC 2119 |
-| Licence | Creative Commons Attribution 4.0 International (CC BY 4.0) |
-| Tests | P1, The Three-Identity Join, requirements R-1 to R-35 |
-| Target bodies | DEXPI e.V.; the CycloneDX project; IEC TC 57 |
+# Schema G_CPDT Conformance Suite and Reference Implementation
 
-## 1. Scope
+## 1. Executive Summary & Scope
 
-P1 defines the three-identity join and numbers its obligations R-1 to R-35 so that a conformance rule can be written against each one individually [1]. This document writes those rules. It supplies a validation rule for every requirement that can carry one, names the requirements that cannot carry one and says what a human reviewer must do instead, gives test vectors a validator can consume without further interpretation, and defines the three round-trip cases P1 section 8.3 defers to this paper.
+P1 defines the three-identity join and numbers its obligations R-1 to R-35 so that a conformance rule can be written against each one individually [1]. This document (Designation P3, conformance suite and reference implementation of the three-schema programme) writes those rules. It supplies a validation rule for every requirement that can carry one, names the requirements that cannot carry one and says what a human reviewer must do instead, gives test vectors a validator can consume without further interpretation, and defines the three round-trip cases P1 section 8.3 defers to this paper.
 
-The key words MUST, MUST NOT, SHOULD, SHOULD NOT and MAY are to be interpreted as described in RFC 2119 [2]. This document is offered under the Creative Commons Attribution 4.0 International licence [15], the same licence P1 carries, so a receiving body can merge either paper without a licence conflict.
+```mermaid
+flowchart TD
+    accTitle: Conformance Validation Pipeline Architecture
+    accDescr {
+      The conformance validation pipeline ingests leg files from DEXPI 2.0, CycloneDX 1.6,
+      and IEC 61970 CIM. It runs single-file mechanical rules V-01 through V-13 checking
+      asset reference UUID formats, relation vocabularies, and authority signatures.
+      Cross-corpus rules V-14 and round-trip verifications RT-1 through RT-3 test
+      multigraph join consistency, producing a standardized machine-readable conformance report.
+    }
+    subgraph INGEST["INPUT CORPUS UNDER TEST"]
+        D_FILE["DEXPI 2.0 P&ID File"]
+        C_FILE["CycloneDX 1.6 BOM"]
+        M_FILE["IEC 61970 CIM Model"]
+    end
+
+    subgraph ISOLATION["STAGE 1: SINGLE-LEG ISOLATION VALIDATION"]
+        V_SYNTAX["Underlying Standard Validation<br/>(DEXPI XML / CycloneDX CLI / CIM RDF)"]
+        V_TUPLE["Join Assertion Tuple Check<br/>(Rules V-01..V-06)"]
+        V_UUID["RFC 9562 UUIDv4 Validation<br/>(Rules V-07..V-10)"]
+        V_REL["Closed Relation Vocabulary Check<br/>(supplies, feeds, controls, monitors, partOf)"]
+    end
+
+    subgraph CROSS["STAGE 2: MULTIGRAPH JOIN CONSISTENCY"]
+        V_CROSS["Cross-Corpus Integrity (V-14)<br/>Referential Consistency Check"]
+        RT_TEST["Round-Trip Verification Suite<br/>(RT-1: P&ID to BOM, RT-2: BOM to CIM, RT-3: Trilateral)"]
+    end
+
+    subgraph REPORT["STAGE 3: CONFORMANCE VERDICT"]
+        VERDICT["Machine-Readable Conformance Statement<br/>JSON Output with Provable Pass/Fail Vectors"]
+    end
+
+    INGEST --> V_SYNTAX
+    V_SYNTAX --> V_TUPLE
+    V_TUPLE --> V_UUID
+    V_UUID --> V_REL
+    V_REL --> CROSS
+    CROSS --> REPORT
+```
+
+The key words MUST, MUST NOT, SHOULD, SHOULD NOT and MAY are to be interpreted as described in RFC 2119 [2]. This document is offered under the Creative Commons Attribution 4.0 International licence (CC BY 4.0) [15], the same licence P1 carries, so a receiving body can merge either paper without a licence conflict.
 
 P3 sits ahead of P2 in this programme's sequence. A specification submitted without a conformance suite and test vectors is admired and not adopted, because no reviewer can tell what an implementer would have to build. The CIM profile P2 defines is the larger piece of work, and it cannot be tested until a test method exists.
 
@@ -29,7 +62,7 @@ This suite is written against the P1 text current at 7 September 2026, in which 
 
 ## 2. What a conformant unified file is
 
-There is no unified file in the sense of a merged document, and P1 rules one out for good reasons [1]. What this suite calls a unified file is a single file of a single leg, valid against its own specification, carrying one or more join assertions. Conformance is a property of that file, of the process that wrote it, or of the process that reads it, and the three are tested differently.
+There is no unified file in the sense of a merged document, and P1 rules one out for good reasons [1]. What this suite calls a unified file is a single file of a single leg, valid against its own specification, carrying one or more join assertions under Schema G_CPDT (Graph of Cyber-Physical Digital Twins). Conformance is a property of that file, of the process that wrote it, or of the process that reads it, and the three are tested differently.
 
 ### 2.1 The unit under test
 
