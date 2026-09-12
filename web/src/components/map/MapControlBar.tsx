@@ -115,7 +115,7 @@ export function MapControlBar({
             onClick={() => onToggleProjection("globe")}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
               projectionMode === "globe"
-                ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-sm"
+                ? "bg-white/15 text-white border border-white/30 shadow-sm"
                 : "text-slate-400 hover:text-slate-200"
             }`}
           >
@@ -126,7 +126,7 @@ export function MapControlBar({
             onClick={() => onToggleProjection("flat")}
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
               projectionMode === "flat"
-                ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-sm"
+                ? "bg-white/15 text-white border border-white/30 shadow-sm"
                 : "text-slate-400 hover:text-slate-200"
             }`}
           >

@@ -6,6 +6,7 @@ import {
   geoNaturalEarth1,
   geoPath,
   geoGraticule10,
+  geoGraticule,
   geoContains,
   geoCentroid,
   geoInterpolate,
@@ -261,12 +262,14 @@ export function JurisdictionMapViewer({
     let isMounted = true;
     async function loadData() {
       try {
-        const [topoRes, matrixRes] = await Promise.all([
-          fetch("/data/world-110m.json"),
+        let topoRes = await fetch("/data/world-50m.json");
+        if (!topoRes.ok) {
+          topoRes = await fetch("/data/world-110m.json");
+        }
+        const [topoJson, matrixRes] = await Promise.all([
+          topoRes.json(),
           import("@/data/jurisdictions-matrix.json")
         ]);
-
-        const topoJson = await topoRes.json();
         const countriesGeo = (feature(topoJson, topoJson.objects.countries as any) as any).features;
 
         if (isMounted) {
@@ -328,63 +331,63 @@ export function JurisdictionMapViewer({
     }
   }, [selectedIso2, matrixData, topoFeatures]);
 
-  // Color mapping logic based on statutory dimensions
+  // Color mapping logic based on statutory dimensions: Dark Luxury Executive Palette
   const getCountryColor = useCallback(
     (country: CountryJurisdictionData | undefined, isHighlighted: boolean, isDimmed: boolean) => {
-      if (!country) return "#1e293b";
+      if (!country) return "#151b2a";
 
       if (isDimmed) {
-        return "#131b2e";
+        return "#0a0e17";
       }
 
       // Filter by sector applicability if a sector is chosen
       if (activeSector !== "All" && !country.sector_applicability[activeSector]) {
-        return "#1a2234";
+        return "#0f1422";
       }
 
       switch (activeDimension) {
         case "incident_clock": {
           const hours = country.incident_disclosure_hours;
-          if (hours <= 2) return "#ef4444"; // 1h-2h Critical Fast Clock
-          if (hours <= 6) return "#f97316"; // 6h Fast Clock
-          if (hours <= 12) return "#fb923c"; // 12h
-          if (hours <= 24) return "#eab308"; // 24h Early Warning
-          if (hours <= 72) return "#06b6d4"; // 72h Standard
-          return "#64748b"; // >72h Extended
+          if (hours <= 2) return "#e11d48"; // 1h-2h Critical Fast Clock: deep crimson rose
+          if (hours <= 6) return "#ea580c"; // 6h Fast Clock: burnished dark orange
+          if (hours <= 12) return "#d97706"; // 12h: deep amber
+          if (hours <= 24) return "#ca8a04"; // 24h Early Warning: warm metallic gold
+          if (hours <= 72) return "#64748b"; // 72h Standard: platinum slate
+          return "#334155"; // >72h Extended: dark graphite
         }
         case "default_password": {
-          return country.default_password_ban ? "#10b981" : "#334155";
+          return country.default_password_ban ? "#059669" : "#1e293b";
         }
         case "sbom_mandate": {
-          if (country.sbom_required && country.cbom_required) return "#8b5cf6"; // Full SBOM + CBOM
-          if (country.sbom_required) return "#6366f1"; // SBOM required
-          return "#334155"; // Voluntary / Discretionary
+          if (country.sbom_required && country.cbom_required) return "#7c3aed"; // Full SBOM + CBOM: royal violet
+          if (country.sbom_required) return "#6366f1"; // SBOM required: indigo
+          return "#1e293b"; // Voluntary / Discretionary
         }
         case "data_localization": {
           if (country.data_localization_required) {
             return country.localization_scope.toLowerCase().includes("all") ||
               country.localization_scope.toLowerCase().includes("strict")
-              ? "#be123c"
-              : "#d97706";
+              ? "#991b1b" // Deep ruby
+              : "#b45309"; // Amber brown
           }
           if (country.cross_border_transfer_mechanism.toLowerCase().includes("adequacy")) {
-            return "#0284c7";
+            return "#475569";
           }
-          return "#334155";
+          return "#1e293b";
         }
         case "crypto_controls": {
-          if (country.crypto_import_license_required) return "#a855f7";
-          if (country.crypto_export_controls.toLowerCase().includes("wassenaar")) return "#3b82f6";
-          return "#475569";
+          if (country.crypto_import_license_required) return "#9333ea";
+          if (country.crypto_export_controls.toLowerCase().includes("wassenaar")) return "#475569";
+          return "#1e293b";
         }
         case "penalties": {
           if (country.criminal_liability_directors) return "#dc2626";
-          if (country.max_turnover_percentage >= 4) return "#ea580c";
-          if (country.max_turnover_percentage >= 1) return "#f59e0b";
-          return "#0284c7";
+          if (country.max_turnover_percentage >= 4) return "#c2410c";
+          if (country.max_turnover_percentage >= 1) return "#d97706";
+          return "#475569";
         }
         default:
-          return "#334155";
+          return "#1e293b";
       }
     },
     [activeDimension, activeSector]
@@ -406,7 +409,7 @@ export function JurisdictionMapViewer({
       const ctx = canvas.getContext("2d");
       if (!ctx) return;
 
-      const dpr = window.devicePixelRatio || 1;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2.5);
       const width = dimensions.width;
       const height = dimensions.height;
 
@@ -455,63 +458,108 @@ export function JurisdictionMapViewer({
       }
 
       const pathGenerator: GeoPath = geoPath(projection, ctx);
+      const timeMs = Date.now();
 
-      // 1. Draw Globe Atmosphere Halo and Ocean Background
+      // 1. Draw Globe Atmosphere Halo and Spherical Ocean Background
       if (projectionMode === "globe") {
-        // Outer atmospheric rim glow
-        const glowRadius = baseRadius + 14;
-        const grad = ctx.createRadialGradient(cx, cy, baseRadius * 0.94, cx, cy, glowRadius);
-        grad.addColorStop(0, "rgba(56, 189, 248, 0.08)");
-        grad.addColorStop(0.6, "rgba(224, 90, 16, 0.06)");
-        grad.addColorStop(1, "rgba(0, 0, 0, 0)");
+        // Multi-stop celestial atmosphere corona (pure light white to subtle slate)
+        const glowRadius = baseRadius + 22;
+        const coronaGrad = ctx.createRadialGradient(cx, cy, baseRadius * 0.94, cx, cy, glowRadius);
+        coronaGrad.addColorStop(0, "rgba(255, 255, 255, 0.12)");
+        coronaGrad.addColorStop(0.25, "rgba(203, 213, 225, 0.05)");
+        coronaGrad.addColorStop(0.65, "rgba(100, 116, 139, 0.015)");
+        coronaGrad.addColorStop(1, "rgba(0, 0, 0, 0)");
 
         ctx.beginPath();
         ctx.arc(cx, cy, glowRadius, 0, 2 * Math.PI);
-        ctx.fillStyle = grad;
+        ctx.fillStyle = coronaGrad;
         ctx.fill();
 
-        // Inner globe sphere
+        // 3D Spherical depth shaded ocean core (light source at upper-left)
         ctx.beginPath();
         ctx.arc(cx, cy, baseRadius, 0, 2 * Math.PI);
         const oceanGrad = ctx.createRadialGradient(
-          cx - baseRadius * 0.2,
-          cy - baseRadius * 0.2,
-          baseRadius * 0.1,
+          cx - baseRadius * 0.32,
+          cy - baseRadius * 0.32,
+          baseRadius * 0.05,
           cx,
           cy,
           baseRadius
         );
-        oceanGrad.addColorStop(0, "#09101f");
-        oceanGrad.addColorStop(1, "#040711");
+        oceanGrad.addColorStop(0, "#121828"); // Direct illuminated zone
+        oceanGrad.addColorStop(0.35, "#0b101c"); // Mid-depth obsidian
+        oceanGrad.addColorStop(0.75, "#060912"); // Limb falloff
+        oceanGrad.addColorStop(1, "#020306"); // Dark limb terminator
         ctx.fillStyle = oceanGrad;
         ctx.fill();
 
-        // Globe boundary stroke
-        ctx.lineWidth = 1.5;
-        ctx.strokeStyle = "rgba(56, 189, 248, 0.25)";
+        // Directional ocean specular highlight glint
+        const glintGrad = ctx.createRadialGradient(
+          cx - baseRadius * 0.32,
+          cy - baseRadius * 0.32,
+          0,
+          cx - baseRadius * 0.32,
+          cy - baseRadius * 0.32,
+          baseRadius * 0.5
+        );
+        glintGrad.addColorStop(0, "rgba(255, 255, 255, 0.08)");
+        glintGrad.addColorStop(0.4, "rgba(255, 255, 255, 0.02)");
+        glintGrad.addColorStop(1, "rgba(255, 255, 255, 0)");
+        ctx.beginPath();
+        ctx.arc(cx, cy, baseRadius, 0, 2 * Math.PI);
+        ctx.fillStyle = glintGrad;
+        ctx.fill();
+
+        // Atmospheric Fresnel rim ring (inner glow on silhouette)
+        const rimGrad = ctx.createRadialGradient(cx, cy, baseRadius * 0.88, cx, cy, baseRadius);
+        rimGrad.addColorStop(0, "rgba(255, 255, 255, 0)");
+        rimGrad.addColorStop(1, "rgba(255, 255, 255, 0.14)");
+        ctx.beginPath();
+        ctx.arc(cx, cy, baseRadius, 0, 2 * Math.PI);
+        ctx.fillStyle = rimGrad;
+        ctx.fill();
+
+        // Globe perimeter boundary hairline
+        ctx.lineWidth = 1.0;
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.25)";
         ctx.stroke();
       } else {
-        // Flat earth planar subtle container
+        // Flat earth planar container with deep obsidian background
         ctx.beginPath();
         pathGenerator({ type: "Sphere" });
-        ctx.fillStyle = "#070b16";
+        ctx.fillStyle = "#070b14";
         ctx.fill();
         ctx.lineWidth = 1;
-        ctx.strokeStyle = "rgba(56, 189, 248, 0.2)";
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
         ctx.stroke();
       }
 
-      // 2. Draw Graticules (Latitude / Longitude grid)
+      // 2. Draw Cartographic Precision Graticules
+      // 10-degree minor grid
       ctx.beginPath();
       pathGenerator(geoGraticule10());
       ctx.lineWidth = 0.5;
-      ctx.strokeStyle = "rgba(148, 163, 184, 0.08)";
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.038)";
       ctx.stroke();
 
-      // 3. Draw Sovereign Country Polygons
-      const hasHighlightList = highlightedIso2List.length > 0;
+      // Equator & Prime Meridian major telemetry lines
+      ctx.beginPath();
+      pathGenerator({
+        type: "MultiLineString",
+        coordinates: [
+          Array.from({ length: 361 }, (_, i) => [i - 180, 0]),
+          Array.from({ length: 181 }, (_, i) => [0, i - 90])
+        ]
+      });
+      ctx.lineWidth = 0.8;
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
+      ctx.stroke();
 
-      topoFeatures.forEach((feat: any) => {
+      // 3. Draw Sovereign Country Polygons (High-Res 50m Vector Mesh)
+      const hasHighlightList = highlightedIso2List.length > 0;
+      let selectedCentroidCoords: [number, number] | null = null;
+
+      for (const feat of topoFeatures as any[]) {
         const numId = String(feat.id).padStart(3, "0");
         const iso2 = matrixData?.by_numeric[numId];
         const country = iso2 ? matrixData?.countries[iso2] : undefined;
@@ -524,45 +572,89 @@ export function JurisdictionMapViewer({
         ctx.beginPath();
         pathGenerator(feat);
 
-        // Fill polygon
-        ctx.fillStyle = getCountryColor(country, isHighlighted, isDimmed);
-        ctx.fill();
-
-        // Polygon border stroke
         if (isSelected) {
+          // Track centroid for radiant beacon pin
+          const c = geoCentroid(feat);
+          if (c && !isNaN(c[0]) && !isNaN(c[1])) {
+            const projected = projection(c);
+            if (projected) selectedCentroidCoords = projected;
+          }
+
+          // Radiant pure white / luminous diamond fill for selected nation
+          ctx.fillStyle = "#ffffff";
+          ctx.fill();
+
+          // Luminous white glowing stroke
+          ctx.save();
+          ctx.shadowColor = "rgba(255, 255, 255, 0.75)";
+          ctx.shadowBlur = 14;
           ctx.lineWidth = 2.5;
-          ctx.strokeStyle = "#E05A10"; // Dutch orange glowing highlight
+          ctx.strokeStyle = "#ffffff";
           ctx.stroke();
+          ctx.restore();
         } else if (isHovered) {
-          ctx.lineWidth = 2;
-          ctx.strokeStyle = "#38bdf8"; // Cyan highlight
-          ctx.stroke();
-        } else if (isHighlighted) {
-          ctx.lineWidth = 1.5;
-          ctx.strokeStyle = "rgba(245, 158, 11, 0.8)"; // Amber highlight
+          // Frosted titanium silver hover state
+          ctx.fillStyle = "#cbd5e1";
+          ctx.fill();
+          ctx.lineWidth = 1.8;
+          ctx.strokeStyle = "#ffffff";
           ctx.stroke();
         } else {
-          ctx.lineWidth = 0.4;
-          ctx.strokeStyle = "rgba(255, 255, 255, 0.12)";
-          ctx.stroke();
-        }
-      });
+          // Regular polygon fill from executive palette
+          ctx.fillStyle = getCountryColor(country, isHighlighted, isDimmed);
+          ctx.fill();
 
-      // 4. Draw Great-Circle Supply Chain Corridors
-      const timeMs = Date.now();
+          // Crisp fine hairline border
+          if (isHighlighted) {
+            ctx.lineWidth = 1.5;
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.85)";
+            ctx.stroke();
+          } else {
+            ctx.lineWidth = 0.4;
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.14)";
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Luminous concentric beacon on selected nation centroid
+      if (selectedCentroidCoords && projectionMode === "globe") {
+        const [bx, by] = selectedCentroidCoords;
+        const beaconPulse = (timeMs % 1600) / 1600;
+        const ringRadius = 6 + beaconPulse * 22;
+        const ringOpacity = (1 - beaconPulse) * 0.9;
+
+        // Expanding sonar ring
+        ctx.beginPath();
+        ctx.arc(bx, by, ringRadius, 0, 2 * Math.PI);
+        ctx.strokeStyle = `rgba(255, 255, 255, ${ringOpacity})`;
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        // Inner beacon core
+        ctx.beginPath();
+        ctx.arc(bx, by, 4, 0, 2 * Math.PI);
+        ctx.fillStyle = "#ffffff";
+        ctx.shadowColor = "rgba(255, 255, 255, 0.9)";
+        ctx.shadowBlur = 10;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+
+      // 4. Draw Great-Circle Supply Chain Corridors with Animated Photon Pulses
       if (showCorridors && projectionMode === "globe" && corridorLineStrings.length > 0) {
-        const dashOffset = (timeMs / 25) % 1000;
+        const dashOffset = (timeMs / 28) % 1000;
         corridorLineStrings.forEach(({ corridor, geoJson }) => {
           ctx.save();
           ctx.beginPath();
           pathGenerator(geoJson);
-          ctx.setLineDash([8, 12]);
+          ctx.setLineDash([6, 12]);
           ctx.lineDashOffset = -dashOffset;
-          ctx.lineWidth = 2.0;
+          ctx.lineWidth = 1.6;
           ctx.strokeStyle =
             corridor.activeStatus === "CAB Audit Pending"
               ? "rgba(245, 158, 11, 0.85)"
-              : "rgba(56, 189, 248, 0.85)";
+              : "rgba(248, 250, 252, 0.75)";
           ctx.stroke();
           ctx.restore();
         });
@@ -576,36 +668,32 @@ export function JurisdictionMapViewer({
         // In 3D globe mode, skip facilities around the dark side of the globe
         if (projectionMode === "globe") {
           const center = [-yaw, -pitch];
-          // Check if coordinate is visible on the front facing hemisphere
           const rad = (Math.PI / 180);
           const p1 = [fac.lng * rad, fac.lat * rad];
           const p0 = [center[0] * rad, center[1] * rad];
           const cosDist =
             Math.sin(p0[1]) * Math.sin(p1[1]) +
             Math.cos(p0[1]) * Math.cos(p1[1]) * Math.cos(p1[0] - p0[0]);
-          if (cosDist < 0) return; // Hidden behind horizon
+          if (cosDist < 0) return;
         }
 
         const [fx, fy] = coords;
-
-        // Pulse wave
         const pulseRatio = (timeMs % 2000) / 2000;
         const pulseRadius = 4 + pulseRatio * 14;
-        const pulseOpacity = (1 - pulseRatio) * 0.7;
+        const pulseOpacity = (1 - pulseRatio) * 0.75;
 
         ctx.beginPath();
         ctx.arc(fx, fy, pulseRadius, 0, 2 * Math.PI);
-        ctx.strokeStyle = `rgba(224, 90, 16, ${pulseOpacity})`;
+        ctx.strokeStyle = fac.criticality === "Critical" ? `rgba(239, 68, 68, ${pulseOpacity})` : `rgba(255, 255, 255, ${pulseOpacity})`;
         ctx.lineWidth = 1.5;
         ctx.stroke();
 
-        // Pin core
         ctx.beginPath();
         ctx.arc(fx, fy, 4, 0, 2 * Math.PI);
-        ctx.fillStyle = fac.criticality === "Critical" ? "#ef4444" : "#E05A10";
+        ctx.fillStyle = fac.criticality === "Critical" ? "#ef4444" : "#ffffff";
         ctx.fill();
-        ctx.lineWidth = 1.5;
-        ctx.strokeStyle = "#ffffff";
+        ctx.lineWidth = 1.2;
+        ctx.strokeStyle = "#090d16";
         ctx.stroke();
       });
 
@@ -1179,6 +1267,9 @@ export function JurisdictionMapViewer({
         <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
         <span>
           {projectionMode === "globe" ? "3D Rotating Globe" : "2D Natural Earth Projection"}
+        </span>
+        <span className="px-1.5 py-0.5 rounded bg-white/10 text-white font-semibold text-[10px] tracking-wide border border-white/10">
+          50m Ultra-HD Vector Mesh
         </span>
         <span className="text-hairline">|</span>
         <span className="text-secondary hidden sm:inline">Drag to rotate, scroll to zoom, click nation</span>
