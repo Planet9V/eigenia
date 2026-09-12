@@ -162,6 +162,22 @@ export const Navbar: React.FC = () => {
               )}
             </Link>
 
+            {/* Category 3.5: Jurisdictions Map Showcase */}
+            <Link
+              href="/jurisdictions"
+              className={`relative py-5 transition-colors ${
+                pathname === "/jurisdictions" ? "text-dutchOrange font-bold" : "hover:text-dutchOrange"
+              }`}
+            >
+              <span>{t("nav_jurisdictions")}</span>
+              {pathname === "/jurisdictions" && (
+                <motion.div
+                  layoutId="activeNav"
+                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-dutchOrange"
+                />
+              )}
+            </Link>
+
             {/* Category 4: Applied Physics Frameworks Dropdown */}
             <div
               className="relative py-5 cursor-pointer"
@@ -399,6 +415,14 @@ export const Navbar: React.FC = () => {
               className="block py-2 text-primary font-medium hover:text-dutchOrange"
             >
               {t("nav_unified_standard")}
+            </Link>
+
+            <Link
+              href="/jurisdictions"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block py-2 text-primary font-medium hover:text-dutchOrange"
+            >
+              {t("nav_jurisdictions")}
             </Link>
 
             <Link
