@@ -295,6 +295,38 @@ export const PAPERS_REGISTRY: Record<string, { title: string; relativePath: stri
     title: "External Research Sourcing & Attribution Methodology",
     relativePath: "references/external-research/README.md",
   },
+
+  // Track: Statutory Product Conformance (WG-06-SC)
+  "cra-product-assurance": {
+    title: "Automated CRA Article 14 Compliance & VEX Falsification",
+    relativePath: "references/WG-06-CRA-Product-Assurance/WG-06-CRA-Product-Assurance.md",
+  },
+
+  // Track: Product Assurance Network (WG-10-AN)
+  "pan-architecture-charter": {
+    title: "The Transparent Product Assurance Network: Economic Charter and Architecture",
+    relativePath: "references/WG-10-Assurance-Network/WG-10-AN-01-Architecture-Charter.md",
+  },
+  "pan-unified-data-contract": {
+    title: "Schema G_CPDT: The Unified Interoperability Specification for Product Assurance",
+    relativePath: "references/WG-10-Assurance-Network/WG-10-AN-02-Unified-Data-Contract.md",
+  },
+  "pan-jurisdiction-registry-index": {
+    title: "Global Statutory Jurisdiction Matrix and Regulatory Gap Analysis Engine",
+    relativePath: "references/WG-10-Assurance-Network/WG-10-AN-03-Jurisdiction-Registry-Index.md",
+  },
+  "pan-verification-bidding-marketplace": {
+    title: "The Conformity Assessment Bidding Marketplace and VEX Falsification Protocol",
+    relativePath: "references/WG-10-Assurance-Network/WG-10-AN-04-Verification-Bidding-Marketplace.md",
+  },
+  "pan-procurement-api-specification": {
+    title: "The Machine-Readable Procurement API and Cryptographic Ingestion Standard",
+    relativePath: "references/WG-10-Assurance-Network/WG-10-AN-05-Procurement-API-Specification.md",
+  },
+  "pan-supply-chain-transparency-use-cases": {
+    title: "Five Industrial Supply Chain Assurance Use Cases: From OEM to Operator",
+    relativePath: "references/WG-10-Assurance-Network/WG-10-AN-06-Supply-Chain-Transparency-Use-Cases.md",
+  },
 };
 
 export function getAllPaperSlugs(): string[] {

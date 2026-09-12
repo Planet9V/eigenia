@@ -16,6 +16,8 @@ import {
   Boxes,
   Sparkles,
   FileText,
+  ShieldCheck,
+  Network,
 } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -28,8 +30,10 @@ const WG_ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> =
   "WG-03-ML": Activity,
   "WG-04-CF": Zap,
   "WG-05-CAD": Cpu,
+  "WG-06-SC": ShieldCheck,
   "WG-07-TM": Boxes,
   "WG-08-MO": Sparkles,
+  "WG-10-AN": Network,
   "MP-MATH": FileText,
   "GOV-RES": BookOpen,
 };
@@ -123,11 +127,8 @@ export default function TracksPage() {
                 const Icon = WG_ICON_MAP[wg.id] || Layers;
 
                 return (
-                  <motion.div
+                  <div
                     key={wg.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: idx * 0.04 }}
                     className="group relative flex flex-col justify-between rounded-2xl border border-hairline bg-surface p-6 shadow-sm transition-all duration-300 hover:border-dutchOrange/40 hover:shadow-[0_0_20px_rgba(224,90,16,0.15)]"
                   >
                     <div>
@@ -199,7 +200,7 @@ export default function TracksPage() {
                         <ArrowRight className="h-3.5 w-3.5" />
                       </Link>
                     </div>
-                  </motion.div>
+                  </div>
                 );
               })}
             </div>

@@ -60,16 +60,11 @@ and `web/src/lib/wiki.ts` both hardcode `relativePath:
 "references/WG-XX-.../exact-filename.md"` entries, resolved against
 `process.cwd()` at build/runtime.
 
-**Never rename, move, or delete an existing file under `references/`.**
-Doing so breaks `getPaperBySlug()`/the wiki lookup — a failed Railway build
-or a broken page in production, not a caught-locally error. Adding *new*
-files (e.g. into `references/external-research/`, see below) is safe —
-nothing existing changes path. If an existing reference genuinely needs to
-move, that's a coordinated change: update every `relativePath` entry in
-both `papers.ts` and `wiki.ts` in the same commit, then run `npm run build`
-inside `web/` and confirm it succeeds locally before it ever reaches
-Railway. Don't treat a passing `next build` as optional — it's the only
-thing standing between a bad path and a broken production deploy.
+**File paths under `references/` are load-bearing, but not permanently frozen.**
+Modifying, moving, renaming, or deleting an existing file under `references/` is permitted when necessary, but MUST be explicitly flagged:
+1. **Flag the Change**: Whenever proposing or applying any edit, rename, move, or deletion to files under `references/`, announce and flag the exact file and nature of the change.
+2. **Coordinate Registries**: If a file is renamed or moved, update every corresponding `relativePath` in `web/src/lib/papers.ts` and `web/src/lib/wikiRegistry.ts` in the same commit.
+3. **Verify Synchronously**: Always run `npm run sync` and `npm run verify` inside `web/` to ensure `generatedReferencesContent.json`, all 11 audit gates, and tests remain green.
 
 ## Some `references/*.md` files are BUILD ARTIFACTS — check before you edit
 
