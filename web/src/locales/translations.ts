@@ -237,6 +237,19 @@ export const translations = {
     wiki_next_doc: "Next Treatise",
     wiki_return_tracks: "Return to Research Tracks",
     footer_rights: "All rights reserved. Applied Complexity Science Think Tank.",
+
+    // Tracks Page UI Keys
+    tracks_page_eyebrow: "Research Programme & Working Group Output",
+    tracks_page_title: "Sovereign Research Tracks",
+    tracks_page_desc: "Explore all 11 Eigenia Lab Working Groups spanning 73 published treatises. Select any Working Group card below to open the complete Research Wiki Engine.",
+    tracks_open_wiki_btn: "Open Research Wiki (73 Treatises)",
+    tracks_view_bento: "Bento Grid View",
+    tracks_view_lines: "Lines / List View",
+    tracks_published_treatises: "Published Treatises",
+    tracks_more: "more",
+    tracks_treatises_suffix: "treatise(s)",
+    tracks_open_wiki: "Open Wiki",
+    tracks_treatises_caps: "Treatises",
   },
 
   nl: {
@@ -475,5 +488,18 @@ export const translations = {
     wiki_next_doc: "Volgende Verhandeling",
     wiki_return_tracks: "Terug naar Onderzoekstracks",
     footer_rights: "Alle rechten voorbehouden. Denktank voor Toegepaste Complexiteitswetenschap.",
+
+    // Tracks Page UI Keys
+    tracks_page_eyebrow: "Onderzoeksprogramma & Werkgroepen Output",
+    tracks_page_title: "Soevereine Onderzoekstracks",
+    tracks_page_desc: "Ontdek alle 11 Eigenia Lab Werkgroepen met 73 gepubliceerde verhandelingen. Selecteer een onderstaande werkgroepkaart om de volledige Research Wiki Engine te openen.",
+    tracks_open_wiki_btn: "Open Onderzoeks-Wiki (73 Verhandelingen)",
+    tracks_view_bento: "Bento-raster Weergave",
+    tracks_view_lines: "Lijstweergave",
+    tracks_published_treatises: "Inbegrepen Verhandelingen",
+    tracks_more: "meer",
+    tracks_treatises_suffix: "verhandeling(en)",
+    tracks_open_wiki: "Open Wiki",
+    tracks_treatises_caps: "Verhandelingen",
   },
 };

@@ -65,17 +65,17 @@ export default function TracksPage() {
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16">
-          <Breadcrumb items={[{ label: "Research Tracks" }]} />
+          <Breadcrumb items={[{ label: t("nav_tracks") }]} />
 
           <div className="mt-6 max-w-3xl space-y-3">
             <span className="font-mono text-xs uppercase tracking-wider font-semibold text-dutchOrange bg-dutchOrange/10 px-3 py-1 rounded-full border border-dutchOrange/30 inline-block">
-              Research Programme &amp; Working Group Output
+              {t("tracks_page_eyebrow")}
             </span>
             <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-primary">
-              Sovereign Research Tracks
+              {t("tracks_page_title")}
             </h1>
             <p className="text-sm sm:text-base text-secondary max-w-3xl leading-relaxed">
-              Explore all {workingGroups.length} Eigenia Lab Working Groups spanning {totalDocuments} published treatises. Select any Working Group card below to open the complete Research Wiki Engine.
+              {t("tracks_page_desc")}
             </p>
           </div>
         </div>
@@ -89,7 +89,7 @@ export default function TracksPage() {
             className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-dutchOrange hover:bg-dutchOrange-600 text-white font-medium text-xs shadow-md shadow-dutchOrange/20 transition-all"
           >
             <BookOpen className="h-4 w-4" />
-            <span>Open Research Wiki ({totalDocuments} Treatises)</span>
+            <span>{t("tracks_open_wiki_btn")}</span>
           </Link>
 
           <div className="flex items-center rounded-xl border border-hairline bg-surface p-1 shadow-sm">
@@ -100,7 +100,7 @@ export default function TracksPage() {
                   ? "bg-dutchOrange/15 text-dutchOrange border border-dutchOrange/30"
                   : "text-muted hover:text-primary"
               }`}
-              title="Bento Grid View"
+              title={t("tracks_view_bento")}
             >
               <LayoutGrid className="h-4 w-4" />
             </button>
@@ -111,7 +111,7 @@ export default function TracksPage() {
                   ? "bg-dutchOrange/15 text-dutchOrange border border-dutchOrange/30"
                   : "text-muted hover:text-primary"
               }`}
-              title="Lines / List View"
+              title={t("tracks_view_lines")}
             >
               <List className="h-4 w-4" />
             </button>
@@ -161,7 +161,7 @@ export default function TracksPage() {
                       {/* Treatise Preview Chips */}
                       <div className="mb-6 pt-3 border-t border-hairline/60">
                         <span className="font-mono text-[10px] uppercase tracking-wider text-muted font-semibold block mb-2">
-                          {language === "nl" ? "Inbegrepen Verhandelingen" : "Published Treatises"}:
+                          {t("tracks_published_treatises")}:
                         </span>
                         <div className="flex flex-wrap gap-1.5">
                           {wg.documents.slice(0, 3).map((doc) => (
@@ -179,7 +179,7 @@ export default function TracksPage() {
                               href={`/wiki?wg=${encodeURIComponent(wg.id)}&doc=${encodeURIComponent(wg.documents[0]?.id || "")}`}
                               className="inline-block text-[10px] font-mono font-medium px-1.5 py-0.5 rounded-md bg-dutchOrange/5 border border-dutchOrange/20 text-dutchOrange hover:bg-dutchOrange/10 transition-colors"
                             >
-                              +{wg.documents.length - 3} {language === "nl" ? "meer" : "more"}
+                              +{wg.documents.length - 3} {t("tracks_more")}
                             </Link>
                           )}
                         </div>
@@ -189,14 +189,14 @@ export default function TracksPage() {
                     {/* Footer Action Link */}
                     <div className="pt-4 border-t border-hairline flex items-center justify-between mt-auto">
                       <span className="font-mono text-[11px] text-muted font-medium">
-                        {wg.documents.length} {language === "nl" ? "verhandeling(en)" : "treatise(s)"}
+                        {wg.documents.length} {t("tracks_treatises_suffix")}
                       </span>
 
                       <Link
                         href={`/wiki?wg=${encodeURIComponent(wg.id)}&doc=${encodeURIComponent(wg.documents[0]?.id || "")}`}
                         className="inline-flex items-center gap-1.5 text-xs font-semibold text-dutchOrange group-hover:translate-x-0.5 transition-transform"
                       >
-                        <span>Open Wiki</span>
+                        <span>{t("tracks_open_wiki")}</span>
                         <ArrowRight className="h-3.5 w-3.5" />
                       </Link>
                     </div>
@@ -239,7 +239,7 @@ export default function TracksPage() {
                         href={`/wiki?wg=${encodeURIComponent(wg.id)}&doc=${encodeURIComponent(wg.documents[0]?.id || "")}`}
                         className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold bg-dutchOrange/10 text-dutchOrange border border-dutchOrange/30 hover:bg-dutchOrange/20 transition-all shrink-0"
                       >
-                        <span>Open Wiki ({wg.documents.length} {language === "nl" ? "Verhandelingen" : "Treatises"})</span>
+                        <span>{t("tracks_open_wiki")} ({wg.documents.length} {t("tracks_treatises_caps")})</span>
                         <ArrowRight className="h-3.5 w-3.5" />
                       </Link>
                     </div>
@@ -251,7 +251,7 @@ export default function TracksPage() {
                     {/* All Treatises direct pills in List View */}
                     <div className="mt-4 pt-3 border-t border-hairline/60 flex flex-wrap items-center gap-1.5">
                       <span className="font-mono text-[10px] uppercase tracking-wider text-muted font-semibold mr-1">
-                        {language === "nl" ? "Verhandelingen" : "Treatises"}:
+                        {t("tracks_treatises_caps")}:
                       </span>
                       {wg.documents.map((doc) => (
                         <Link

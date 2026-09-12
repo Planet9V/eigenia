@@ -1,13 +1,12 @@
-<!-- verified: 2026-09-12 a66c5de -->
+<!-- verified: 2026-09-12 6c327a1 -->
 # Tasks
 
-_Last brought current: 2026-09-12 verified against main at `56f2010`. The HTML comment on line 1 is machine-read by `web/scripts/audit-tasks-stamp.mjs` and `scripts/hooks/`; update it every time this file is brought current._
+_Last brought current: 2026-09-12 verified against main at `6c327a1`. The HTML comment on line 1 is machine-read by `web/scripts/audit-tasks-stamp.mjs` and `scripts/hooks/`; update it every time this file is brought current._
 _Counts here are checked against `web/src/lib/wikiRegistry.ts`, not typed from memory._
 _Memory of record (decided 2026-09-11): this file and `memory/` at the repo root. `.taskmaster/`, `.remember/`, `.claude/memory.db`, `.swarm/` and the gateway's `memory_store` are tool caches, not sources. Rules: `memory/context/working-agreement.md`._
 
 ## Active
 
-- [ ] **The `/tracks` header is hardcoded English on a bilingual site** - eyebrow "Research Programme & Working Group Output", h1 "Sovereign Research Tracks" and the body paragraph do not use `t()` (`web/src/app/tracks/page.tsx` lines 66-75, still true after `62729f8`). Switching to NL leaves the header English while the nav translates
 - [ ] **Wire PretotypeExperimentModal** - bound to `useContactForm`, imported by no page (re-verified 2026-09-11: 0 importers)
 - [ ] **Triage the 23 untracked files** - `web/AGENTS.md` and `web/CLAUDE.md` (written by `next dev`; the AGENTS.md block says commit it to keep the tree clean), `.env.example`, `.stitch/designs/` (three Stitch page designs + preview/console HTML, 2026-09-09), `assets/backgrounds/` extraction material, and new `papers-pre-publish/` drafts (TACAM x5, DEXPI 2 x6, ATQ-1, CDT-7). Decide commit / ignore / move for each; nothing should sit untracked for a week
 - [ ] **`feat/what-eigenia-does`** - branch cut from main, 0 commits, no local edits. State its intent here or delete it
@@ -28,6 +27,9 @@ _Memory of record (decided 2026-09-11): this file and `memory/` at the repo root
 - [ ] **Stale local branches** - 17 local branches, most merged (deps/*, fix/*, feat/ascii-to-mermaid, docs/readme-accuracy, chore/taskmaster-tracking, pr1-local, probe/next16). Prune after confirming each is merged
 
 ## Done
+
+### 2026-09-12
+- [x] **Tracks header bilingual support** - wired `t()` translation keys (`tracks_page_eyebrow`, `tracks_page_title`, `tracks_page_desc`, `tracks_open_wiki_btn`, etc.) into `web/src/app/tracks/page.tsx` and symmetrical keys in `web/src/locales/translations.ts`. Verified with Playwright visual snapshot tests across EN/NL and light/dark modes.
 
 ### 2026-09-10
 - [x] **Dependency and hardening PRs** (#21, #23, #24, #26) - next ^16.3.4, nodemailer ^9.1.1, vitest ^4.1.11; `/api/contact` now validates and rate-limits (`0b92c11`)
