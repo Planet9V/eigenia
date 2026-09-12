@@ -107,6 +107,18 @@ export const PAPERS_REGISTRY: Record<string, { title: string; relativePath: stri
     title: "Blast Radius Across Three Ontologies",
     relativePath: "references/WG-05-CAD-DEXPI-2/WG-05-CAD-Blast-Radius-Three-Ontologies.md",
   },
+  "g-cpdt-multigraph-engine": {
+    title: "G_CPDT Multigraph Storage Engine and Blast Radius Traversal",
+    relativePath: "references/WG-05-CAD-DEXPI-2/WG-05-CAD-Multigraph-Engine.md",
+  },
+  "kinetic-blast-radius": {
+    title: "Non-Linear Consequence Dynamics and Kinetic Blast Radius",
+    relativePath: "references/WG-05-CAD-DEXPI-2/WG-05-CAD-Kinetic-Blast-Radius.md",
+  },
+  "dexpi2-xml-metamodel-pipelines": {
+    title: "DEXPI 2.0 Information Model, DEXPI XML Serialization, and Graph Generation Pipelines",
+    relativePath: "references/WG-05-CAD-DEXPI-2/WG-05-CAD-DEXPI-XML-Metamodel.md",
+  },
   "fooled-by-best-practice": {
     title: "Fooled by Best Practice: The Epistemological Fraud of OT Cybersecurity",
     relativePath: "references/WG-02-DT-Digital-Twin/WG-02-DT-Article1-Fooled-by-Best-Practice.md",
