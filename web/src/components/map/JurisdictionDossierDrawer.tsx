@@ -18,7 +18,9 @@ import {
   Scale,
   Download,
   Printer,
-  CheckSquare
+  CheckSquare,
+  Minimize2,
+  Maximize2
 } from "lucide-react";
 import { CountryJurisdictionData, SectorFilter, ComplianceActionItem } from "@/types/jurisdictions";
 
@@ -32,6 +34,7 @@ type DrawerTab = "overview" | "statutes" | "sectors" | "cyber" | "privacy" | "cr
 
 export function JurisdictionDossierDrawer({ country, activeSector, onClose }: Props) {
   const [activeTab, setActiveTab] = useState<DrawerTab>("overview");
+  const [isMinimized, setIsMinimized] = useState<boolean>(false);
 
   const handleExportJson = () => {
     if (!country) return;
@@ -54,67 +57,46 @@ export function JurisdictionDossierDrawer({ country, activeSector, onClose }: Pr
 
   const complianceChecklist: ComplianceActionItem[] = useMemo(() => {
     if (!country) return [];
-    const items: ComplianceActionItem[] = [];
-
-    if (country.default_password_ban) {
-      items.push({
-        id: "chk_pwd",
-        priority: "High",
-        category: "Access Control",
+    return [
+      {
+        id: "act_pwd",
+        priority: country.default_password_ban ? "High" : "Standard",
         title: "Factory Default Password Phase-Out",
         statuteRef: country.primary_cyber_statute || "Statutory Cybersecurity Standard",
         timeframe: "Immediate / Pre-Commissioning",
-        actionRequired: "Enforce unique cryptographically generated credentials across all Level 1 and Level 2 industrial controllers before connecting to site networks."
-      });
-    }
-
-    if (country.incident_disclosure_hours <= 24) {
-      items.push({
-        id: "chk_csirt",
+        actionRequired: "Enforce unique cryptographically generated credentials across all Level 1 and Level 2 industrial controllers before connecting to site networks.",
+        category: "Access Control"
+      },
+      {
+        id: "act_sbom",
+        priority: country.sbom_required ? "High" : "Medium",
+        title: "CycloneDX 1.6+ Cryptography BOM (CBOM) Generation",
+        statuteRef: `${country.country_name} Sovereign Digital Assurance Standard`,
+        timeframe: "T-30 Days before Release",
+        actionRequired: "Produce machine-readable ECMA-424 compliant SBOMs cataloguing every software component, microcode version, and post-quantum cryptographic primitive.",
+        category: "Software Assurance"
+      },
+      {
+        id: "act_incident",
         priority: "High",
-        category: "Incident Response",
         title: `${country.incident_disclosure_hours}h CSIRT Notification Readiness`,
-        statuteRef: `${country.supervisory_dpa || "National CSIRT"} Statutory Mandatory Reporting`,
+        statuteRef: country.primary_cyber_statute || "Statutory Cybersecurity Standard",
         timeframe: `${country.incident_disclosure_hours} Hours from Incident Detection`,
-        actionRequired: `Calibrate automated triage playbooks to dispatch statutory early warning reports to ${country.supervisory_dpa || "National CSIRT"} within ${country.incident_disclosure_hours} hours.`
-      });
-    }
-
-    if (country.sbom_required) {
-      items.push({
-        id: "chk_sbom",
-        priority: "Medium",
-        category: "Software Assurance",
-        title: "ECMA-424 CycloneDX SBOM & CBOM Generation",
-        statuteRef: country.primary_cyber_statute || "Digital Product Assurance Mandate",
-        timeframe: "Continuous / Build Pipeline Gate",
-        actionRequired: "Generate machine-readable Software and Cryptography Bill of Materials with SHA-256 digests and post-quantum primitive inventories for all firmware releases."
-      });
-    }
-
-    if (country.data_localization_required) {
-      items.push({
-        id: "chk_loc",
-        priority: "Medium",
-        category: "Data Residency",
-        title: "Sovereign Telemetry & Storage Residency Audit",
+        actionRequired: `Calibrate automated triage playbooks to dispatch statutory early warning reports to ${country.supervisory_dpa || "designated CSIRT/supervisory authority"} within the binding ${country.incident_disclosure_hours}-hour deadline.`,
+        category: "Incident Response"
+      },
+      {
+        id: "act_localization",
+        priority: country.data_localization_required ? "High" : "Standard",
+        title: "Data Sovereignty & Boundary Audit",
         statuteRef: country.primary_privacy_statute || "Data Localization Mandate",
         timeframe: "Quarterly Audit",
-        actionRequired: `Audit all operational historian telemetry, off-site replication targets, and cloud services against localized data residency rules for ${country.country_name}.`
-      });
-    }
-
-    items.push({
-      id: "chk_audit",
-      priority: "Standard",
-      category: "Access Control",
-      title: "Statutory Defense-in-Depth Verification",
-      statuteRef: country.primary_cyber_statute || "Industrial Cyber Security Standard",
-      timeframe: "Annual Certification",
-      actionRequired: "Conduct annual third-party independent conformity assessments verifying network segmentation, boundary protection, and patch SLA compliance."
-    });
-
-    return items;
+        actionRequired: country.data_localization_required
+          ? "Verify that telemetry caches, operator access logs, and process historian archives remain strictly within sovereign boundaries."
+          : "Review cross-border data transfer adequacy contracts and standard contractual clauses (SCCs) for international engineering access.",
+        category: "Data Residency"
+      }
+    ];
   }, [country]);
 
   if (!country) return null;
@@ -132,69 +114,114 @@ export function JurisdictionDossierDrawer({ country, activeSector, onClose }: Pr
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-y-0 right-0 z-[80] flex max-w-full pl-10 pointer-events-auto">
+      {/* Minimized Docked Badge View */}
+      {isMinimized ? (
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
-          onClick={onClose}
-        />
-
-        <motion.div
-          initial={{ x: "100%" }}
-          animate={{ x: 0 }}
-          exit={{ x: "100%" }}
-          transition={{ type: "spring", damping: 25, stiffness: 200 }}
-          className="w-screen max-w-2xl bg-[#090d16] border-l border-white/10 shadow-2xl z-10 flex flex-col h-full overflow-hidden text-white"
+          key="minimized-dock"
+          initial={{ opacity: 0, scale: 0.9, y: -10 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.9, y: -10 }}
+          className="fixed top-24 right-4 sm:right-6 z-[70] pointer-events-auto bg-[#090d16]/95 border border-cyan-500/30 hover:border-cyan-400/60 rounded-2xl p-3 shadow-2xl backdrop-blur-xl flex items-center gap-3 text-white transition-all cursor-pointer group"
+          onClick={() => setIsMinimized(false)}
         >
-          {/* Header Bar */}
-          <div className="flex items-center justify-between p-6 border-b border-white/10 bg-white/[0.02]">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center font-mono font-bold text-xl text-cyan-400">
-                {country.iso2}
-              </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <h2 className="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
-                    {country.country_name}
-                    <span className="text-xs font-mono px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 border border-slate-700">
-                      ISO 3166-1 {country.iso3} ({country.numeric_code})
-                    </span>
-                  </h2>
-                  <p className="text-sm text-slate-400">
+          <div className="w-9 h-9 rounded-xl bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center font-mono font-bold text-sm text-cyan-300">
+            {country.iso2}
+          </div>
+          <div className="text-left">
+            <div className="font-bold text-xs flex items-center gap-2">
+              <span>{country.country_name}</span>
+              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-500/30">
+                {country.incident_disclosure_hours}h Clock
+              </span>
+            </div>
+            <span className="text-[10px] text-slate-400 font-mono flex items-center gap-1 group-hover:text-cyan-300 transition-colors">
+              <span>Expand Full Dossier</span>
+              <Maximize2 className="w-3 h-3" />
+            </span>
+          </div>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onClose();
+            }}
+            className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-colors ml-1"
+            aria-label="Close dossier"
+          >
+            <X className="w-3.5 h-3.5" />
+          </button>
+        </motion.div>
+      ) : (
+        /* Full Inspector Panel: Modeless & Non-blocking to Map Canvas */
+        <div className="fixed inset-y-0 right-0 z-[70] flex max-w-full pointer-events-none">
+          {/* Mobile-only subtle touch dismiss backdrop */}
+          <div
+            className="md:hidden fixed inset-0 bg-black/40 backdrop-blur-xs pointer-events-auto"
+            onClick={onClose}
+          />
+
+          <motion.div
+            key="expanded-drawer"
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            className="w-screen max-w-xl xl:max-w-2xl bg-[#090d16]/95 border-l border-white/10 shadow-2xl z-10 flex flex-col h-full overflow-hidden text-white pointer-events-auto backdrop-blur-xl"
+          >
+            {/* Header Bar */}
+            <div className="flex items-center justify-between p-5 border-b border-white/10 bg-white/[0.02]">
+              <div className="flex items-center gap-3">
+                <div className="w-11 h-11 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center font-mono font-bold text-lg text-cyan-400">
+                  {country.iso2}
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h2 className="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+                      {country.country_name}
+                      <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 border border-slate-700">
+                        {country.iso3} ({country.numeric_code})
+                      </span>
+                    </h2>
+                  </div>
+                  <p className="text-xs text-slate-400">
                     {country.continent} &bull; {country.region} &bull; {country.sovereign_status}
                   </p>
                 </div>
               </div>
-            </div>
 
-            <div className="flex items-center gap-2">
-              <button
-                onClick={handleExportJson}
-                title="Export Structured JSON Profile"
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white transition-colors border border-white/10 text-xs font-mono"
-              >
-                <Download className="w-3.5 h-3.5 text-sky-400" />
-                <span className="hidden sm:inline">Export JSON</span>
-              </button>
-              <button
-                onClick={handlePrint}
-                title="Print Executive Memorandum"
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white transition-colors border border-white/10 text-xs font-mono"
-              >
-                <Printer className="w-3.5 h-3.5 text-dutchOrange" />
-                <span className="hidden sm:inline">Print Brief</span>
-              </button>
-              <button
-                onClick={onClose}
-                className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-colors border border-white/10"
-                aria-label="Close drawer"
-              >
-                <X className="w-5 h-5" />
-              </button>
+              <div className="flex items-center gap-1.5">
+                <button
+                  onClick={handleExportJson}
+                  title="Export Structured JSON Profile"
+                  className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white transition-colors border border-white/10 text-xs font-mono cursor-pointer"
+                >
+                  <Download className="w-3.5 h-3.5 text-sky-400" />
+                  <span className="hidden sm:inline">Export JSON</span>
+                </button>
+                <button
+                  onClick={handlePrint}
+                  title="Print Executive Memorandum"
+                  className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white transition-colors border border-white/10 text-xs font-mono cursor-pointer"
+                >
+                  <Printer className="w-3.5 h-3.5 text-dutchOrange" />
+                  <span className="hidden sm:inline">Print Brief</span>
+                </button>
+                <button
+                  onClick={() => setIsMinimized(true)}
+                  title="Minimize to Floating Dock"
+                  className="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-colors border border-white/10 cursor-pointer"
+                  aria-label="Minimize drawer"
+                >
+                  <Minimize2 className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={onClose}
+                  className="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-colors border border-white/10 cursor-pointer"
+                  aria-label="Close drawer"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
             </div>
-          </div>
 
           {/* Quick Stats Grid */}
           <div className="grid grid-cols-4 gap-2 p-4 bg-black/40 border-b border-white/5 text-center text-xs">
@@ -687,6 +714,7 @@ export function JurisdictionDossierDrawer({ country, activeSector, onClose }: Pr
           </div>
         </motion.div>
       </div>
+      )}
     </AnimatePresence>
   );
 }

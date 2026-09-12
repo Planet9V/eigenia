@@ -108,7 +108,7 @@ export function MapControlBar({
   return (
     <div className="flex flex-col gap-3 w-full max-w-5xl mx-auto z-20 pointer-events-auto">
       {/* Top Bar: Projection Switch, Search, Auto-Rotate, Actions */}
-      <div className="flex flex-wrap items-center justify-between gap-3 p-2.5 rounded-2xl bg-[#090d16]/90 border border-white/10 backdrop-blur-xl shadow-2xl">
+      <div className="relative z-30 flex flex-wrap items-center justify-between gap-3 p-2.5 rounded-2xl bg-[#090d16]/90 border border-white/10 backdrop-blur-xl shadow-2xl">
         {/* 2D / 3D Projection Toggle */}
         <div className="flex items-center p-1 rounded-xl bg-black/50 border border-white/5">
           <button

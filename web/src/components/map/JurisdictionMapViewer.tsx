@@ -207,6 +207,7 @@ export function JurisdictionMapViewer({
 
   // Drag interaction state
   const isDraggingRef = useRef(false);
+  const dragDistanceRef = useRef(0);
   const dragStartRef = useRef({ x: 0, y: 0 });
   const dragInitialAnglesRef = useRef({ yaw: 0, pitch: 0 });
   const dragInitialPanRef = useRef({ x: 0, y: 0 });
@@ -642,9 +643,60 @@ export function JurisdictionMapViewer({
     getCountryColor
   ]);
 
+  // Synchronous country hit-test helper
+  const hitTestCountry = useCallback((clientX: number, clientY: number): CountryJurisdictionData | null => {
+    const canvas = canvasRef.current;
+    if (!canvas || !matrixData || topoFeatures.length === 0) return null;
+
+    const rect = canvas.getBoundingClientRect();
+    if (rect.width === 0 || rect.height === 0) return null;
+
+    const scaleX = dimensions.width / rect.width;
+    const scaleY = dimensions.height / rect.height;
+    const mouseX = (clientX - rect.left) * scaleX;
+    const mouseY = (clientY - rect.top) * scaleY;
+
+    const baseRadius = Math.min(dimensions.width, dimensions.height) * 0.42 * zoomScale;
+    const cx = dimensions.width / 2 + panOffset.x;
+    const cy = dimensions.height / 2 + panOffset.y;
+
+    let projection: GeoProjection;
+    if (projectionMode === "globe") {
+      projection = geoOrthographic()
+        .scale(baseRadius)
+        .translate([cx, cy])
+        .rotate([yaw, pitch, 0])
+        .clipAngle(90);
+
+      const distFromCenter = Math.hypot(mouseX - cx, mouseY - cy);
+      if (distFromCenter > baseRadius + 2) return null;
+    } else {
+      projection = geoNaturalEarth1()
+        .scale(baseRadius * 0.65)
+        .translate([cx, cy])
+        .rotate([yaw, 0, 0]);
+    }
+
+    const inverted = projection.invert ? projection.invert([mouseX, mouseY]) : null;
+    if (!inverted || isNaN(inverted[0]) || isNaN(inverted[1])) return null;
+
+    for (let i = 0; i < topoFeatures.length; i++) {
+      const f = topoFeatures[i];
+      if (geoContains(f, inverted)) {
+        const numId = String(f.id).padStart(3, "0");
+        const iso2 = matrixData.by_numeric[numId];
+        if (iso2 && matrixData.countries[iso2]) {
+          return matrixData.countries[iso2];
+        }
+      }
+    }
+    return null;
+  }, [matrixData, topoFeatures, dimensions, zoomScale, panOffset, projectionMode, yaw, pitch]);
+
   // Pointer Interaction Handlers
   const handlePointerDown = (e: React.PointerEvent<HTMLCanvasElement>) => {
     isDraggingRef.current = true;
+    dragDistanceRef.current = 0;
     dragStartRef.current = { x: e.clientX, y: e.clientY };
     dragInitialAnglesRef.current = { yaw, pitch };
     dragInitialPanRef.current = { ...panOffset };
@@ -656,12 +708,15 @@ export function JurisdictionMapViewer({
     if (!canvas || !matrixData) return;
 
     const rect = canvas.getBoundingClientRect();
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
+    const scaleX = rect.width ? dimensions.width / rect.width : 1;
+    const scaleY = rect.height ? dimensions.height / rect.height : 1;
+    const mouseX = (e.clientX - rect.left) * scaleX;
+    const mouseY = (e.clientY - rect.top) * scaleY;
 
     if (isDraggingRef.current) {
       const dx = e.clientX - dragStartRef.current.x;
       const dy = e.clientY - dragStartRef.current.y;
+      dragDistanceRef.current = Math.hypot(dx, dy);
 
       if (projectionMode === "globe") {
         const sensitivity = 0.35 / zoomScale;
@@ -758,8 +813,20 @@ export function JurisdictionMapViewer({
   };
 
   const handleClick = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    // If pointer was dragged to rotate the globe, do not trigger country selection
+    if (dragDistanceRef.current > 6) {
+      return;
+    }
+
     if (hoverState) {
       onSelectCountry(hoverState.country);
+      return;
+    }
+
+    // Direct synchronous hit-test on click so map selection is instant
+    const country = hitTestCountry(e.clientX, e.clientY);
+    if (country) {
+      onSelectCountry(country);
     }
   };
 
