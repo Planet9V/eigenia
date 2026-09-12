@@ -112,7 +112,7 @@ The Reset Gate determines how much of the past hidden state $h_{t-1}$ is used to
 
   where $\lambda_O$ is a scaling factor.  
   * High Openness: $r_t \to 1$. The system fully integrates history with new input.  
-  * Low Openness (Rigidity/Repression): $r_t \to 0$. The system "forgets" or "represses" the connection to the past state when processing new input. The candidate state $\tilde{h}_t$ becomes purely reactive to the input $x_t$, lacking historical depth. This simulates Repression ($Verdrängung$); the severing of the link between the affect and the representation.
+  * Low Openness (Rigidity/Repression): $r_t \to 0$. The system "forgets" or "represses" the connection to the past state when processing new input. The candidate state $\tilde{h}_t$ becomes purely reactive to the input $x_t$, lacking historical depth. This simulates Repression (*Verdrängung*); the severing of the link between the affect and the representation.
 
 ### The Update Gate ($z_t$) and the Function of Stability
 
@@ -206,7 +206,7 @@ $$F = \mathbb{E}_q [\ln q(\theta) - \ln p(\theta, \text{data})]$$
 * The Conflict: The Subject tries to match $q$ to $p$. When $a$ (surplus entropy) is present, $F$ increases.  
 * Anxiety: We define Anxiety in the simulation as the integral of Free Energy over time.
 
-  $$\text{Anxiety} = \int_{t=0}^{T} F(t) \\, dt$$
+  $$\text{Anxiety} = \int_{t=0}^{T} F(t) \, dt$$
 
 ### Scansion and Catastrophe Theory
 
