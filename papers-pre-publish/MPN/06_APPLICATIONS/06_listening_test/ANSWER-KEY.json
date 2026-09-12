@@ -1,0 +1,118 @@
+{
+ "Set-1": {
+  "A": {
+   "internal": "D6",
+   "degrees": "1 2 b3 4 5 b6 b7",
+   "true_name": "Aeolian",
+   "brightness": -3,
+   "tritone": false,
+   "perfect_fifth": true
+  },
+  "B": {
+   "internal": "D5",
+   "degrees": "1 2 3 4 5 6 b7",
+   "true_name": "Mixolydian",
+   "brightness": -1,
+   "tritone": false,
+   "perfect_fifth": true
+  },
+  "C": {
+   "internal": "D3",
+   "degrees": "1 b2 b3 4 5 b6 b7",
+   "true_name": "Phrygian",
+   "brightness": -4,
+   "tritone": false,
+   "perfect_fifth": true
+  },
+  "D": {
+   "internal": "D1",
+   "degrees": "1 2 3 4 5 6 7",
+   "true_name": "Ionian",
+   "brightness": 0,
+   "tritone": false,
+   "perfect_fifth": true
+  },
+  "E": {
+   "internal": "D2",
+   "degrees": "1 2 b3 4 5 6 b7",
+   "true_name": "Dorian",
+   "brightness": -2,
+   "tritone": false,
+   "perfect_fifth": true
+  },
+  "F": {
+   "internal": "D4",
+   "degrees": "1 2 3 #4 5 6 7",
+   "true_name": "Lydian",
+   "brightness": 1,
+   "tritone": true,
+   "perfect_fifth": true
+  },
+  "G": {
+   "internal": "D7",
+   "degrees": "1 b2 b3 4 b5 b6 b7",
+   "true_name": "Locrian",
+   "brightness": -5,
+   "tritone": true,
+   "perfect_fifth": false
+  }
+ },
+ "Set-2": {
+  "A": {
+   "internal": "X1",
+   "degrees": "1 b2 3 4 5 b6 7",
+   "true_name": "(unnamed rotation)",
+   "brightness": -2,
+   "tritone": false,
+   "perfect_fifth": true
+  },
+  "B": {
+   "internal": "X7",
+   "degrees": "1 b2 bb3 4 b5 b6 bb7",
+   "true_name": "(unnamed rotation)",
+   "brightness": -5,
+   "tritone": true,
+   "perfect_fifth": false
+  },
+  "C": {
+   "internal": "X5",
+   "degrees": "1 b2 3 4 b5 6 b7",
+   "true_name": "(unnamed rotation)",
+   "brightness": -3,
+   "tritone": true,
+   "perfect_fifth": false
+  },
+  "D": {
+   "internal": "X3",
+   "degrees": "1 b2 b3 b4 5 b6 bb7",
+   "true_name": "(unnamed rotation)",
+   "brightness": -5,
+   "tritone": false,
+   "perfect_fifth": true
+  },
+  "E": {
+   "internal": "X6",
+   "degrees": "1 #2 3 4 #5 6 7",
+   "true_name": "(unnamed rotation)",
+   "brightness": 2,
+   "tritone": false,
+   "perfect_fifth": false
+  },
+  "F": {
+   "internal": "X4",
+   "degrees": "1 2 b3 #4 5 b6 7",
+   "true_name": "(unnamed rotation)",
+   "brightness": -1,
+   "tritone": true,
+   "perfect_fifth": true
+  },
+  "G": {
+   "internal": "X2",
+   "degrees": "1 #2 3 #4 5 #6 7",
+   "true_name": "(unnamed rotation)",
+   "brightness": 3,
+   "tritone": true,
+   "perfect_fifth": true
+  }
+ }
+}

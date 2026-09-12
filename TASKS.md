@@ -1,14 +1,14 @@
-<!-- verified: 2026-09-12 6c327a1 -->
+<!-- verified: 2026-09-12 60fadbb -->
 # Tasks
 
-_Last brought current: 2026-09-12 verified against main at `6c327a1`. The HTML comment on line 1 is machine-read by `web/scripts/audit-tasks-stamp.mjs` and `scripts/hooks/`; update it every time this file is brought current._
+_Last brought current: 2026-09-12 verified against main at `60fadbb`. The HTML comment on line 1 is machine-read by `web/scripts/audit-tasks-stamp.mjs` and `scripts/hooks/`; update it every time this file is brought current._
 _Counts here are checked against `web/src/lib/wikiRegistry.ts`, not typed from memory._
 _Memory of record (decided 2026-09-11): this file and `memory/` at the repo root. `.taskmaster/`, `.remember/`, `.claude/memory.db`, `.swarm/` and the gateway's `memory_store` are tool caches, not sources. Rules: `memory/context/working-agreement.md`._
 
 ## Active
 
 - [ ] **Wire PretotypeExperimentModal** - bound to `useContactForm`, imported by no page (re-verified 2026-09-11: 0 importers)
-- [ ] **Triage the 23 untracked files** - `web/AGENTS.md` and `web/CLAUDE.md` (written by `next dev`; the AGENTS.md block says commit it to keep the tree clean), `.env.example`, `.stitch/designs/` (three Stitch page designs + preview/console HTML, 2026-09-09), `assets/backgrounds/` extraction material, and new `papers-pre-publish/` drafts (TACAM x5, DEXPI 2 x6, ATQ-1, CDT-7). Decide commit / ignore / move for each; nothing should sit untracked for a week
+- [ ] **Triage remaining untracked files** - `web/AGENTS.md`, `web/CLAUDE.md`, `.env.example`, `.stitch/designs/`, `assets/backgrounds/` extraction material. (`papers-pre-publish/` triaged, deduplicated, and 4 core treatises promoted to `references/` on 2026-09-12).
 - [ ] **`feat/what-eigenia-does`** - branch cut from main, 0 commits, no local edits. State its intent here or delete it
 - [ ] **Push `chore/memory-enforcement` and open the PR** - branch is prepared in the working tree (Cowork could not commit: `.git/index.lock` cannot be removed from its shell). Jim: `rm .git/index.lock`, `git checkout -b chore/memory-enforcement`, `git add -A -- TASKS.md memory CLAUDE.md .claude/settings.json .gitignore scripts/hooks web/scripts/audit-tasks-stamp.mjs .github/workflows/ci.yml documentation/TESTING.md`, commit, push, PR
 - [ ] **Home page: Stitch delta note** - `notes/<date>/home-stitch-delta.md` from `.stitch/designs/b89d8258…_home_unified_engagement.html` against `web/src/app/page.tsx`, per working-agreement §3; then one PR per section, hero first
@@ -29,6 +29,7 @@ _Memory of record (decided 2026-09-11): this file and `memory/` at the repo root
 ## Done
 
 ### 2026-09-12
+- [x] **Pre-publish triage & core treatise publication** - triaged `papers-pre-publish/`, safely removed empty scraps and identical duplicates; promoted 4 foundational treatises into `references/` (`WG-02-DT-Seven-Layer-Architecture`, `WG-01-UI-Actor-Threat-Quotient-Production`, `WG-05-CAD-Substation-BESS-Graph-Topology`, `WG-07-TM-Black-Swan-Simulation`); expanded wiki catalog from 73 to 77 treatises across 11 Working Groups; synced `wikiRegistry.ts`, `papers.ts`, `translations.ts`, and documentation; verified all 11 audit gates, TypeScript, Vitest, and Turbopack static build.
 - [x] **Tracks header bilingual support** - wired `t()` translation keys (`tracks_page_eyebrow`, `tracks_page_title`, `tracks_page_desc`, `tracks_open_wiki_btn`, etc.) into `web/src/app/tracks/page.tsx` and symmetrical keys in `web/src/locales/translations.ts`. Verified with Playwright visual snapshot tests across EN/NL and light/dark modes.
 
 ### 2026-09-10

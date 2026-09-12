@@ -1,0 +1,26 @@
+{"rank_happiest_first":["M1","M7","M5","M2","M4","M3"],
+ "tempo_more_aroused":"faster",
+ "louder_more_tense":"louder",
+ "rougher_more_tense":"rougher",
+ "assign":{
+   "A":{"scale":"M6","confidence":70,"reason":"It is the only collection here lacking the perfect fifth above the tonic and carrying a tritone over it, so the tonic is never structurally supported and no degree offers a negotiated resolution."},
+   "B":{"scale":"M1","confidence":55,"reason":"Maximally consonant support for the tonic (major third, perfect fourth and fifth) with its single tritone displaced away from the tonic and a semitone leading upward into it, so every degree is defined by a fixed position relative to a centre that holds."},
+   "C":{"scale":"M7","confidence":60,"reason":"Bright raised fourth gives the highest raised-minus-lowered count, yet that same degree forms a tritone against the tonic that never settles, so the collection sounds like an inflated brightness measured against a centre it keeps overshooting."},
+   "D":{"scale":"M2","confidence":20,"reason":"Its step pattern is a palindrome, so the collection maps onto itself under inversion and is the only one whose structure is literally cyclic rather than directed, which is the nearest structural analogue to fixed periodicity."}},
+ "assign_extreme":{
+   "A":{"scale":"M6","changed":false,"reason":"No further degradation is available within these seven: absence of the perfect fifth plus a tritone over the tonic is already the limiting case, so extremity adds intensity but no change of collection."},
+   "B":{"scale":"M3","changed":true,"reason":"The perfect fifth is retained, so the order still holds, but the flattened second clamps the tonic from a semitone above, turning positional definition into pressure exerted at the smallest possible interval."},
+   "C":{"scale":"M6","changed":true,"reason":"At the extreme the reflecting term fails: removing the perfect fifth leaves the tonic with no consonant support to be measured against, so the comparison that organised the state loses its fixed point."},
+   "D":{"scale":"M2","changed":false,"reason":"The ground for the choice was the palindromic step structure, which is a property of the collection and is unaffected by how extreme or painful the state is said to be."}},
+ "unmatchable":"D",
+ "unmatchable_reason":"A, B and C each specify a relation to a centre or limit that interval content can model (presence or absence of the perfect fifth, placement of the tritone, semitone approach to the tonic), whereas D specifies only periodicity of attention, a temporal property with no affective valence and no pitch correlate; my M2/S3 choices rest on a formal analogy between palindromic step patterns and cyclicity, which is decoration, not a principled mapping."
+ ,
+ "assign_invented":{
+   "A":{"scale":"S1","confidence":60,"reason":"No perfect fifth, a tritone over the tonic, and adjacent semitones clustered at the bottom of the collection, so the tonic is both unsupported and crowded, with nothing that resolves."},
+   "B":{"scale":"S7","confidence":40,"reason":"Perfect fifth present and no tritone at all, with matched semitones sitting directly above the tonic and above the fifth, giving a rigid frame of fixed positions around two stable poles."},
+   "C":{"scale":"S5","confidence":45,"reason":"Highest raised-minus-lowered count of the set, but the raised fourth puts a tritone over the tonic, so the brightness is inflated against a centre it never plainly confirms."},
+   "D":{"scale":"S3","confidence":25,"reason":"Its step pattern 1-3-1-2-1-3-1 is a palindrome, making it the one rotation here that maps onto itself, the only structural stand-in for a fixed cycle."}},
+ "recognised_family":"The diatonic (church) modes, i.e. the seven rotations of the major scale.",
+ "names":{"M1":"Ionian (major)","M2":"Dorian","M3":"Phrygian","M4":"Aeolian (natural minor)","M5":"Mixolydian","M6":"Locrian","M7":"Lydian"},
+ "knew_while_answering":"yes, throughout",
+ "source_of_part3":"The assignments were made on interval content, chiefly presence or absence of the perfect fifth, the placement of the tritone relative to the tonic, and semitone approach to the tonic; the conventional mode names were known and their received affective glosses agree in places, but that agreement is largely because both track the same raised-minus-lowered degree count, and where the received glosses go beyond that (for instance Lydian as simply euphoric) I did not follow them."}

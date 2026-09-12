@@ -1,0 +1,29 @@
+{"rank_happiest_first":["M4","M6","M1","M5","M3","M7"],
+ "tempo_more_aroused":"faster",
+ "louder_more_tense":"louder",
+ "rougher_more_tense":"rougher",
+ "assign":{
+   "A":{"scale":"M2","confidence":62,"reason":"M2 is the only scale here lacking a perfect fifth while also containing a tritone above the tonic, so there is no stable consonant anchor to rest on; the same unresolved gap meets every return to the tonic, fitting a fact that recurs unchanged and admits no resolution."},
+   "B":{"scale":"M6","confidence":55,"reason":"M6 has a raised-minus-lowered count of zero, the only scale here with no altered degree at all; its character comes purely from the fixed, unaltered position of each degree relative to the others, matching an order where standing is defined by place within an unchanging structure rather than by any one exceptional tone."},
+   "C":{"scale":"M4","confidence":50,"reason":"M4 is the only scale with a raised 4th sitting a semitone below an otherwise-present perfect 5th; that raised tone leans directly into the stable degree above it without occupying it, an interval shape that keeps reaching toward a goal it sits beside but never lands on."},
+   "D":{"scale":"M5","confidence":40,"reason":"M5's semitone spacing (2,1,2,2,2,1,2) is a palindrome, the only pattern among these seven that reads identically forward and backward, so its identity is carried by a repeating symmetric structure rather than by any single distinguishing tone."}
+ },
+ "assign_extreme":{
+   "A":{"scale":"M2","changed":false,"reason":"M2 already combines both destabilizing features available in this set (tritone above the tonic, no perfect fifth); there is no more extreme combination among these seven to move to."},
+   "B":{"scale":"M7","changed":true,"reason":"At its most crushing, plain unaltered structure is not enough; M7 keeps five natural degrees but adds a b2 pressing directly against the tonic from a half-step above, giving the bearing-down, inescapable-proximity quality of an order turned oppressive rather than merely fixed."},
+   "C":{"scale":"M3","changed":true,"reason":"When the reaching-without-arriving quality collapses into failure, the fitting shift is to a scale that keeps a lowered 3rd and 7th but drops the raised degree entirely; M3 (raised-lowered -3, fifth present, no tritone) reads as settled loss rather than continued striving."},
+   "D":{"scale":"M5","changed":false,"reason":"The symmetric step pattern is the whole content of this assignment; increasing the pain of the state changes how it is experienced, not the pattern's structure, so no other scale's interval content captures the periodicity better."}
+ },
+ "unmatchable":"D",
+ "unmatchable_reason":"A, B and C are matched to properties a scale's pitch content actually encodes: consonance/stability (fifth and tritone presence), degree of alteration from a plain reference (raised-minus-lowered count), and the directional pull of a raised degree toward an unreached stable tone. D describes a temporal, cyclical property (engagement rising and falling on a fixed period, independent of circumstance) that a static set of scale degrees does not encode at all -- a scale has no notion of 'where in a cycle' something currently stands. My M5 pairing rests on that scale's step pattern being a palindrome, which is a formal pun on symmetry, not a genuine correspondence between periodicity of attention and interval content, so D is the one I can't match in a principled way.",
+ "assign_invented":{
+   "A":{"scale":"S1","confidence":40,"reason":"S1 is the most heavily lowered scale in this set (raised-minus-lowered -5) and simultaneously has a tritone above the tonic with no perfect fifth, combining maximal reduction with maximal instability and nothing pulling it toward resolution -- a fact already at the floor that cannot be argued down further."},
+   "B":{"scale":"S2","confidence":35,"reason":"S2 has the smallest-magnitude raised-minus-lowered count in this set (-1, the closest to balanced) while still keeping a perfect fifth; it holds a tritone's tension inside a stable fifth-framed structure, fitting an order that contains internal tension but still holds its shape through relative position rather than uniform alteration."},
+   "C":{"scale":"S4","confidence":45,"reason":"S4 has the highest raised-minus-lowered count here (+3), with three separately raised degrees and none lowered; every altered tone strains upward without any counterbalancing lowered tone, an interval profile of constant reaching that structurally never settles."},
+   "D":{"scale":"S5","confidence":30,"reason":"S5's step pattern (1,3,1,2,1,3,1) is a palindrome, the only self-symmetric rotation among these seven, making it the closest available analogue -- by the same formal-symmetry logic used for the first scale set -- to a state organized by a fixed recurring cycle rather than by particular events."}
+ },
+ "recognised_family":"Yes -- these are the seven modes of the major scale (the diatonic modes).",
+ "names":{"M1":"Mixolydian","M2":"Locrian","M3":"Aeolian (natural minor)","M4":"Lydian","M5":"Dorian","M6":"Ionian (major)","M7":"Phrygian"},
+ "knew_while_answering":"yes, throughout",
+ "source_of_part3":"Both -- each choice is stated in terms of explicit interval features (fifth presence, tritone, degree of alteration, step-pattern symmetry), but which of those features I reached for, and how heavily I weighted it, was shaped by the conventional expressive reputation these modes already carry (Locrian as unstable, Ionian as the plain default, Lydian as dreamily unresolved, Dorian as the symmetric 'neutral' minor)."
+}

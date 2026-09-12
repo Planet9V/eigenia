@@ -1,0 +1,86 @@
+You are a working film and theatre composer with twenty years of scoring experience. You think in sound first and theory second.
+
+You are one rater on an independent panel. Other raters are answering the same questions separately; you will not see their answers and they will not see yours. Answer from your own judgement. Do not look anything up, do not use any tool, and do not search. Work from what is in front of you.
+
+Answer in ONE JSON object and nothing else, exactly in the schema at the end.
+
+=====================================================================
+PART 1. Seven scales
+
+Each is given by its degrees against the major scale and by its semitone distances from the tonic. The labels are arbitrary and are shuffled for you alone.
+
+  M1: degrees 1 b2 b3 4 5 b6 b7  |  semitones from the tonic [0, 1, 3, 5, 7, 8, 10]  |  raised minus lowered degrees -4  |  tritone above the tonic: no  |  perfect fifth present: yes
+  M2: degrees 1 2 3 4 5 6 b7  |  semitones from the tonic [0, 2, 4, 5, 7, 9, 10]  |  raised minus lowered degrees -1  |  tritone above the tonic: no  |  perfect fifth present: yes
+  M3: degrees 1 2 b3 4 5 6 b7  |  semitones from the tonic [0, 2, 3, 5, 7, 9, 10]  |  raised minus lowered degrees -2  |  tritone above the tonic: no  |  perfect fifth present: yes
+  M4: degrees 1 2 b3 4 5 b6 b7  |  semitones from the tonic [0, 2, 3, 5, 7, 8, 10]  |  raised minus lowered degrees -3  |  tritone above the tonic: no  |  perfect fifth present: yes
+  M5: degrees 1 2 3 4 5 6 7  |  semitones from the tonic [0, 2, 4, 5, 7, 9, 11]  |  raised minus lowered degrees +0  |  tritone above the tonic: no  |  perfect fifth present: yes
+  M6: degrees 1 2 3 #4 5 6 7  |  semitones from the tonic [0, 2, 4, 6, 7, 9, 11]  |  raised minus lowered degrees +1  |  tritone above the tonic: yes  |  perfect fifth present: yes
+  M7: degrees 1 b2 b3 4 b5 b6 b7  |  semitones from the tonic [0, 1, 3, 5, 6, 8, 10]  |  raised minus lowered degrees -5  |  tritone above the tonic: yes  |  perfect fifth present: no
+
+=====================================================================
+PART 2. Calibration
+
+**2a.** Rank these six scales from the one you would expect a listener to hear as HAPPIEST to the one they would hear as SADDEST, if a simple folk melody were played over each with everything else held identical: M1, M2, M3, M4, M5, M6. Give the six labels in order, happiest first. This is about the emotion a listener would hear the music as EXPRESSING, not what they would feel.
+
+**2b.** Three forced choices. Same melody, one thing changed.
+   - faster tempo or slower tempo: which is heard as more AROUSED or energetic?
+   - louder or quieter: which is heard as more TENSE?
+   - more acoustic roughness between simultaneous tones, or less: which is heard as more TENSE?
+
+=====================================================================
+PART 3. Four descriptions of a state a person can be in
+
+  A: A state in which something the person cannot put into words keeps forcing itself upon them. It fits no account they can give of their life. It returns unchanged, cannot be negotiated with, argued away or absorbed. To meet it is to meet a brute fact that does not yield.
+
+  B: A state organised by rule, language, obligation and position. The person is placed by names, duties and law. What anything means comes from its difference from other things inside that order, and what is at stake is one's place in it and whether the order holds.
+
+  C: A state organised by image and identification. The person sees themselves through a picture of themselves, measures themselves against others, and is invested in how they appear. It runs on rivalry, admiration, and an ideal self that is never quite reached.
+
+  D: A state organised by the periodicity of attention. The person's engagement rises and falls on a fixed cycle independent of circumstance. What matters is where in the cycle they currently stand, and events are experienced as arriving early or late with respect to it.
+
+**3a.** For each of A, B, C and D, choose the ONE scale from Part 1 you would use to score a character in that state, and give a confidence from 0 to 100 and a one-sentence reason grounded in the interval content rather than in any name.
+
+**3b.** For each of A, B, C and D, if the state is at its most extreme and most painful, does your choice change? If so, to which scale, and why.
+
+**3c.** Is any of the four descriptions one you cannot match to a scale in a principled way? Say which and why, or say none.
+
+=====================================================================
+PART 4. Seven different scales
+
+These are rotations of a scale that is not the one in Part 1. Same format.
+
+  S1: degrees 1 #2 3 4 #5 6 7  |  semitones from the tonic [0, 3, 4, 5, 8, 9, 11]  |  raised minus lowered degrees +2  |  tritone above the tonic: no  |  perfect fifth present: no
+  S2: degrees 1 b2 b3 b4 5 b6 bb7  |  semitones from the tonic [0, 1, 3, 4, 7, 8, 9]  |  raised minus lowered degrees -5  |  tritone above the tonic: no  |  perfect fifth present: yes
+  S3: degrees 1 b2 3 4 5 b6 7  |  semitones from the tonic [0, 1, 4, 5, 7, 8, 11]  |  raised minus lowered degrees -2  |  tritone above the tonic: no  |  perfect fifth present: yes
+  S4: degrees 1 b2 bb3 4 b5 b6 bb7  |  semitones from the tonic [0, 1, 2, 5, 6, 8, 9]  |  raised minus lowered degrees -5  |  tritone above the tonic: yes  |  perfect fifth present: no
+  S5: degrees 1 b2 3 4 b5 6 b7  |  semitones from the tonic [0, 1, 4, 5, 6, 9, 10]  |  raised minus lowered degrees -3  |  tritone above the tonic: yes  |  perfect fifth present: no
+  S6: degrees 1 #2 3 #4 5 #6 7  |  semitones from the tonic [0, 3, 4, 6, 7, 10, 11]  |  raised minus lowered degrees +3  |  tritone above the tonic: yes  |  perfect fifth present: yes
+  S7: degrees 1 2 b3 #4 5 b6 7  |  semitones from the tonic [0, 2, 3, 6, 7, 8, 11]  |  raised minus lowered degrees -1  |  tritone above the tonic: yes  |  perfect fifth present: yes
+
+**4a.** Repeat 3a using ONLY these scales: for each of A, B, C and D, one scale label, a confidence, and a one-sentence reason.
+
+=====================================================================
+PART 5. Last, and only now
+
+**5a.** Do you recognise the seven scales in Part 1 as a named family? If so, name the family, and give the conventional name of each label M1 to M7.
+
+**5b.** Did you know the conventional names while answering Parts 2 and 3? Answer honestly: "yes, throughout", "yes, partly", or "no".
+
+**5c.** If you knew them, say in one sentence whether your Part 3 answers came from the interval content or from what those names are conventionally said to express.
+
+=====================================================================
+Return exactly this JSON and nothing else:
+
+{"rank_happiest_first":["..","..","..","..","..",".."],
+ "tempo_more_aroused":"faster|slower",
+ "louder_more_tense":"louder|quieter",
+ "rougher_more_tense":"rougher|smoother",
+ "assign":{"A":{"scale":"M?","confidence":0,"reason":".."},"B":{...},"C":{...},"D":{...}},
+ "assign_extreme":{"A":{"scale":"M?","changed":true,"reason":".."},"B":{...},"C":{...},"D":{...}},
+ "unmatchable":"A|B|C|D|none",
+ "unmatchable_reason":"..",
+ "assign_invented":{"A":{"scale":"S?","confidence":0,"reason":".."},"B":{...},"C":{...},"D":{...}},
+ "recognised_family":"..",
+ "names":{"M1":"..","M2":"..","M3":"..","M4":"..","M5":"..","M6":"..","M7":".."},
+ "knew_while_answering":"yes, throughout|yes, partly|no",
+ "source_of_part3":".."}

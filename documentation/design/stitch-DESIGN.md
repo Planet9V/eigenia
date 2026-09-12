@@ -21,7 +21,7 @@ Two named moods, one system:
 - **Light, "Warm Academic Monograph"**: warm off-white paper, near-black ink, hairline rules the colour of aged card stock, and a single burnt-orange accent. Reads like a printed research paper with a web layout.
 - **Dark, "Obsidian Cyber-Physical Command Centre"**: near-black obsidian canvas, graphite surfaces, white text, the same orange accent carrying more weight. The hero is always rendered in this dark mood, even on the light theme (the hero section carries the `dark` class).
 
-The overall impression: exact, calm, credible. The only light in the system is orange: a soft Dutch Orange glow marks the element that matters. Nothing bounces. Numbers on screen are real (11 Research Tracks, 73 treatises as of 2026-09-12) and come from the registry, never invented.
+The overall impression: exact, calm, credible. The only light in the system is orange: a soft Dutch Orange glow marks the element that matters. Nothing bounces. Numbers on screen are real (11 Research Tracks, 77 treatises as of 2026-09-12) and come from the registry, never invented.
 
 ## 2. Color Palette & Roles
 ### Light theme

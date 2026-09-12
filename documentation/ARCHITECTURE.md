@@ -28,7 +28,7 @@ backgrounds" below).
 │                               sponsor), trust signals, contact form
 ├── /unified-standard          DEXPI 2.0 + CycloneDX 1.6 standard, 3-tier catalog
 │                               tabs, sliding quote rail, 7-paper suite
-├── /wiki                      Sovereign Research Wiki — 73 treatises across 11 Working Groups
+├── /wiki                      Sovereign Research Wiki — 77 treatises across 11 Working Groups
 ├── /theory/[slug]              9 dynamic routes, one per physics model
 └── /papers/[slug]              46 dynamic routes, one per long-form paper
 ```

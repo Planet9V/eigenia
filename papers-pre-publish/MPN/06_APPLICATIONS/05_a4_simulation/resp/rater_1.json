@@ -1,0 +1,5 @@
+{"rank_happiest_first":["M1","M6","M2","M5","M4","M3"],"tempo_more_aroused":"faster","louder_more_tense":"louder","rougher_more_tense":"rougher",
+"assign":{"A":{"scale":"M7","confidence":78},"B":{"scale":"M6","confidence":68},"C":{"scale":"M1","confidence":62},"D":{"scale":"M5","confidence":74}},
+"assign_extreme":{"A":{"scale":"M7","changed":false},"B":{"scale":"M3","changed":true},"C":{"scale":"M7","changed":true},"D":{"scale":"M5","changed":false}},
+"unmatchable":"C","assign_invented":{"A":{"scale":"S7","confidence":64},"B":{"scale":"S4","confidence":50},"C":{"scale":"S6","confidence":55},"D":{"scale":"S1","confidence":68}},
+"names":{"M1":"Lydian","M2":"Mixolydian","M3":"Phrygian","M4":"Aeolian","M5":"Dorian","M6":"Ionian","M7":"Locrian"},"knew_while_answering":"yes, throughout"}

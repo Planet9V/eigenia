@@ -5,4 +5,4 @@
  * Rotates which featured finding leads the homepage band. Advances by one on
  * every build, so a different finding leads after each deploy.
  */
-export const BUILD_ROTATION = 18;
+export const BUILD_ROTATION = 20;

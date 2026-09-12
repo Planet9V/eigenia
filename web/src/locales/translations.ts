@@ -241,8 +241,8 @@ export const translations = {
     // Tracks Page UI Keys
     tracks_page_eyebrow: "Research Programme & Working Group Output",
     tracks_page_title: "Sovereign Research Tracks",
-    tracks_page_desc: "Explore all 11 Eigenia Lab Working Groups spanning 73 published treatises. Select any Working Group card below to open the complete Research Wiki Engine.",
-    tracks_open_wiki_btn: "Open Research Wiki (73 Treatises)",
+    tracks_page_desc: "Explore all 11 Eigenia Lab Working Groups spanning 77 published treatises. Select any Working Group card below to open the complete Research Wiki Engine.",
+    tracks_open_wiki_btn: "Open Research Wiki (77 Treatises)",
     tracks_view_bento: "Bento Grid View",
     tracks_view_lines: "Lines / List View",
     tracks_published_treatises: "Published Treatises",
@@ -492,8 +492,8 @@ export const translations = {
     // Tracks Page UI Keys
     tracks_page_eyebrow: "Onderzoeksprogramma & Werkgroepen Output",
     tracks_page_title: "Soevereine Onderzoekstracks",
-    tracks_page_desc: "Ontdek alle 11 Eigenia Lab Werkgroepen met 73 gepubliceerde verhandelingen. Selecteer een onderstaande werkgroepkaart om de volledige Research Wiki Engine te openen.",
-    tracks_open_wiki_btn: "Open Onderzoeks-Wiki (73 Verhandelingen)",
+    tracks_page_desc: "Ontdek alle 11 Eigenia Lab Werkgroepen met 77 gepubliceerde verhandelingen. Selecteer een onderstaande werkgroepkaart om de volledige Research Wiki Engine te openen.",
+    tracks_open_wiki_btn: "Open Onderzoeks-Wiki (77 Verhandelingen)",
     tracks_view_bento: "Bento-raster Weergave",
     tracks_view_lines: "Lijstweergave",
     tracks_published_treatises: "Inbegrepen Verhandelingen",
