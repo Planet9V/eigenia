@@ -16,6 +16,8 @@ import {
   Boxes,
   Sparkles,
   FileText,
+  ShieldCheck,
+  Network,
 } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -28,8 +30,10 @@ const WG_ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> =
   "WG-03-ML": Activity,
   "WG-04-CF": Zap,
   "WG-05-CAD": Cpu,
+  "WG-06-SC": ShieldCheck,
   "WG-07-TM": Boxes,
   "WG-08-MO": Sparkles,
+  "WG-10-AN": Network,
   "MP-MATH": FileText,
   "GOV-RES": BookOpen,
 };

@@ -1,4 +1,4 @@
-<!-- verified: 2026-09-12 56f2010 -->
+<!-- verified: 2026-09-12 a66c5de -->
 # Tasks
 
 _Last brought current: 2026-09-12 verified against main at `56f2010`. The HTML comment on line 1 is machine-read by `web/scripts/audit-tasks-stamp.mjs` and `scripts/hooks/`; update it every time this file is brought current._
