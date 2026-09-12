@@ -1,17 +1,56 @@
-| Field | Value |
-|:---|:---|
-| Designation | P2, the CIM profile of the three-schema programme |
-| Status | Draft for submission |
-| Normative language | RFC 2119 |
-| Licence | Creative Commons Attribution 4.0 International (CC BY 4.0) |
-| Defines | The CIM leg P1 section 7 defers, satisfying R-27 to R-30 |
-| Target body | IEC TC 57 |
+# Cyber-Physical Asset Identity Profile for IEC 61970 CIM
 
-## 1. Scope, and the IEC 61850 versus IEC 61970 distinction
+## 1. Executive Summary & Scope
 
-P1 defines a join across three identity systems and states four boundary requirements at the CIM edge, R-27 through R-30 [1]. It does not define the profile those requirements presuppose. This document defines it. P3 records R-27 as one of four requirements carrying no mechanical validation rule, for the single reason that P2 does not exist [2]. Publishing this document removes that entry.
+This specification (Designation P2, the CIM profile of the three-schema programme) establishes the normative definition of the Cyber-Physical Asset Identity profile (CPAI) for IEC 61970 CIM. P1 defines a join across three identity systems and states four boundary requirements at the CIM edge, R-27 through R-30 [1]. It does not define the profile those requirements presuppose. This document defines it, satisfying requirements R-27 to R-30 under RFC 2119 normative language [6] and offered under the Creative Commons Attribution 4.0 International licence (CC BY 4.0) [7] for formal submission to IEC TC 57. P3 records R-27 as one of four requirements carrying no mechanical validation rule, for the single reason that P2 did not yet exist [2]. Publishing this document removes that omission.
 
-The profile defined here is the Cyber-Physical Asset Identity profile, CPAI throughout. It is a subset of IEC 61970-301 [3] admitted for one purpose: binding a CIM object to an asset reference so that a consequence question asked of a plant asset can reach the electrical network feeding it, and back.
+The profile defined here is a subset of IEC 61970-301 [3] admitted for one purpose: binding a CIM object to an asset reference under Schema G_CPDT (Graph of Cyber-Physical Digital Twins) so that a consequence question asked of a plant asset can reach the electrical network feeding it, and back.
+
+```mermaid
+classDiagram
+    accTitle: The CPAI Profile Class Hierarchy and Asset Binding
+    accDescr {
+      Class diagram showing the IEC 61970 CIM classes included in the CPAI profile
+      and their inheritance from IdentifiedObject down to ConductingEquipment,
+      PowerTransformer, and ProtectionEquipment, along with the cim:AssetCyberLink
+      extension binding to the RFC 9562 Asset Reference.
+    }
+    class IdentifiedObject {
+        +mRID : UUID
+        +name : String
+        +description : String
+    }
+    class PowerSystemResource {
+    }
+    class Equipment {
+        +inService : Boolean
+    }
+    class ConductingEquipment {
+    }
+    class EnergyConsumer {
+        +p : Float
+        +q : Float
+    }
+    class Switch {
+        +open : Boolean
+    }
+    class ProtectionEquipment {
+        +relayDelayTime : Seconds
+    }
+    class AssetReferenceBinding {
+        +assetRef : UUID
+        +relation : String
+        +assertedBy : String
+    }
+
+    IdentifiedObject <|-- PowerSystemResource
+    PowerSystemResource <|-- Equipment
+    Equipment <|-- ConductingEquipment
+    ConductingEquipment <|-- EnergyConsumer
+    ConductingEquipment <|-- Switch
+    Equipment <|-- ProtectionEquipment
+    IdentifiedObject --> AssetReferenceBinding : binds via AssetCyberLink
+```
 
 First, a distinction the reader must hold, because getting it wrong makes every later section unreadable.
 
@@ -75,7 +114,9 @@ Three properties of CGMES are worth taking, and one is worth leaving.
 
 **Leave the subject matter.** CGMES exists to exchange a network so another party can solve it, and its centre of gravity is impedance, injection, tap position and load flow result. CPAI exists to bind identity. It needs the network's shape and none of its numbers, which section 6 makes explicit.
 
-## 4. The profile: classes, associations, and why each is in or out
+## 4. Profile Classes and Associations
+
+This section evaluates each class and association under the CPAI profile, stating the precise criteria for inclusion or exclusion.
 
 ### 4.1 The profile, class by class
 

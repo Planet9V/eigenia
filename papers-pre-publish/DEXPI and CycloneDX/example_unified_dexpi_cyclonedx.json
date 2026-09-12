@@ -50,6 +50,12 @@
         "name": "Frontier ODM Solutions"
       },
       "description": "HBOM: Compute tray hosting 8x Frontier OAM Accelerators, 2x Host Server CPUs, and 2x Hardware DPUs.",
+      "externalReferences": [
+        {
+          "type": "formulation",
+          "url": "urn:cdx:7f3b890a-5c12-4d9e-9988-12ab34cd56ef/1#formula-tray-r04-t02"
+        }
+      ],
       "properties": [
         {
           "name": "dexpi:plant:equipmentId",
@@ -86,6 +92,10 @@
         {
           "name": "dexpi:zone:purdueLevel",
           "value": "Zone-1"
+        },
+        {
+          "name": "dexpi:manufacturing:formulaRef",
+          "value": "formula-tray-r04-t02"
         }
       ]
     },
@@ -193,6 +203,172 @@
       ],
       "dependsOn": [
         "caliptra-rom-firmware"
+      ]
+    }
+  ],
+  "formulation": [
+    {
+      "bom-ref": "formula-tray-r04-t02",
+      "components": [
+        {
+          "type": "file",
+          "bom-ref": "file-smt-pick-and-place",
+          "name": "tray-r04-t02-smt-placement.ipc2581",
+          "version": "Rev-3B.1",
+          "hashes": [
+            {
+              "alg": "SHA-384",
+              "content": "3b2c1d0a9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3b2a1f0e9d8c7b6a5f4e3d2c1b0a9f8e7d6c5b4a3f2e1d0c9b8a7f6e"
+            }
+          ],
+          "properties": [
+            {
+              "name": "cdx:mbom:smtLineId",
+              "value": "SMT-LINE-TAIPEI-04"
+            },
+            {
+              "name": "cdx:mbom:aoiPassRate",
+              "value": "99.98%"
+            }
+          ]
+        },
+        {
+          "type": "application",
+          "bom-ref": "tool-cross-compiler-gcc",
+          "name": "riscv64-unknown-elf-gcc",
+          "version": "14.2.0-baremetal",
+          "hashes": [
+            {
+              "alg": "SHA-384",
+              "content": "8a7b6c5d4e3f2a1b0c9d8e7f6a5b4c3d2e1f0a9b8c7d6e5f4a3b2c1d0e9f8a7b6c5d4e3f2a1b0c9d8e7f6a5b4c3d2e1f"
+            }
+          ]
+        },
+        {
+          "type": "hardware",
+          "bom-ref": "silicon-wafer-lot-asic",
+          "name": "Frontier AI Accelerator Silicon Die",
+          "properties": [
+            {
+              "name": "cdx:mbom:foundryId",
+              "value": "TSMC-FAB-18A"
+            },
+            {
+              "name": "cdx:mbom:waferLotId",
+              "value": "LOT-2026-W8842"
+            },
+            {
+              "name": "cdx:mbom:waferIndex",
+              "value": "14"
+            },
+            {
+              "name": "cdx:mbom:dieXCoord",
+              "value": "128"
+            },
+            {
+              "name": "cdx:mbom:dieYCoord",
+              "value": "094"
+            },
+            {
+              "name": "cdx:mbom:siliconStepping",
+              "value": "B2"
+            }
+          ]
+        }
+      ],
+      "workflows": [
+        {
+          "bom-ref": "workflow-manufacturing-tray-02",
+          "uid": "urn:uuid:8a2c3bf8-77fe-4c1d-849b-c534abc73aee",
+          "name": "Compute Tray Assembly & Secure Provisioning Workflow",
+          "taskTypes": [
+            "build",
+            "test",
+            "key-injection",
+            "sign",
+            "package"
+          ],
+          "tasks": [
+            {
+              "bom-ref": "task-smt-pcba-assembly",
+              "uid": "urn:uuid:11223344-5566-7788-99aa-bbccddeeff00",
+              "name": "SMT PCBA Surface Mount Placement",
+              "taskTypes": [
+                "build"
+              ],
+              "steps": [
+                {
+                  "name": "Execute High-Speed SMT Placement",
+                  "commands": [
+                    {
+                      "executed": "fuji-nxt-iii --program tray-r04-t02-smt-placement.ipc2581 --verify"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "bom-ref": "task-hsm-key-injection",
+              "uid": "urn:uuid:22334455-6677-8899-aabb-ccddeeff0011",
+              "name": "Factory HSM Cryptographic Key Injection & eFuse Blow",
+              "taskTypes": [
+                "key-injection",
+                "sign"
+              ],
+              "description": "Injects Caliptra UDS/CDI seeds, burns production fuses, and signs initial DICE IDevID certificate.",
+              "steps": [
+                {
+                  "name": "Provision Device Root Secret via FIPS 140-3 Level 4 HSM",
+                  "commands": [
+                    {
+                      "executed": "hsm-prov-tool --slot 1 --fuse-burn --gen-dice-alias --cert-out dice-alias-cert.der"
+                    }
+                  ]
+                }
+              ],
+              "properties": [
+                {
+                  "name": "cdx:mbom:hsmModel",
+                  "value": "Thales Luna PCIe HSM 7.8"
+                },
+                {
+                  "name": "cdx:mbom:hsmSerialNumber",
+                  "value": "HSM-LUNA-PROV-009"
+                },
+                {
+                  "name": "cdx:mbom:fuseVerificationStatus",
+                  "value": "PRODUCTION_LOCKED"
+                },
+                {
+                  "name": "cdx:mbom:hsmAttestationSignature",
+                  "value": "MEQCIG7x8kL...signed-by-oem-root"
+                }
+              ]
+            },
+            {
+              "bom-ref": "task-transit-packaging",
+              "uid": "urn:uuid:33445566-7788-99aa-bbcc-ddeeff001122",
+              "name": "Tamper-Evident Packaging & Logistics Sealing",
+              "taskTypes": [
+                "package"
+              ],
+              "properties": [
+                {
+                  "name": "cdx:mbom:tamperSealSerial",
+                  "value": "SEAL-2026-EU-99214"
+                },
+                {
+                  "name": "cdx:mbom:packagingInspectorId",
+                  "value": "QA-INSP-8472"
+                },
+                {
+                  "name": "cdx:mbom:carrierBillOfLading",
+                  "value": "BOL-DHL-SEC-9928174"
+                }
+              ]
+            }
+          ]
+        }
       ]
     }
   ],
