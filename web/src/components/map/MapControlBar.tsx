@@ -106,7 +106,7 @@ export function MapControlBar({
   ];
 
   return (
-    <div className="flex flex-col gap-2.5 w-full max-w-5xl mx-auto z-20 pointer-events-auto font-sans">
+    <div className="flex flex-col gap-2.5 w-full z-20 pointer-events-auto font-sans">
       {/* Unified Command Deck */}
       <div className="relative z-30 p-3 rounded-2xl bg-[#0B0C0E]/90 border border-white/10 backdrop-blur-2xl shadow-[0_8px_32px_rgba(0,0,0,0.6)] space-y-3">
         {/* Top Tier: Projection Toggle, Global Utilities, Sovereign Search */}
@@ -196,7 +196,7 @@ export function MapControlBar({
           </div>
 
           {/* Search Jump Input */}
-          <div ref={searchRef} data-tour="search-input" className="relative flex-1 min-w-[200px] max-w-xs">
+          <div ref={searchRef} data-tour="search-input" className="relative flex-1 sm:flex-none sm:w-72 lg:w-80">
             <div className="relative flex items-center">
               <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 pointer-events-none" />
               <input

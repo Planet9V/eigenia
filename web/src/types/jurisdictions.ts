@@ -135,12 +135,26 @@ export interface SupplyChainCorridor {
   sourceFacilityId: string;
   sourceName: string;
   sourceCoords: [number, number]; // [lng, lat]
+  sourceIso2?: string;
+  sourceRegime?: string;
+  sourceSlaHours?: number;
   targetIso2: string;
   targetCountryName: string;
   targetCoords: [number, number]; // [lng, lat]
-  corridorType: "Component Supply" | "Telemetry Relay" | "Grid Intertie" | "Subsea Transit";
+  targetRegime?: string;
+  targetSlaHours?: number;
+  sector?: SectorFilter;
+  corridorType: "Component Supply" | "Telemetry Relay" | "Grid Intertie" | "Subsea Transit" | "Pipeline Interconnect";
   statutoryGate: string;
-  activeStatus: "Operational" | "CAB Audit Pending";
+  statutoryArticleRef?: string;
+  activeStatus: "Operational" | "CAB Audit Pending" | "Statutory Review";
+  clockDeltaHours?: number;
+  customsDwellRiskDays?: number;
+  preClearanceHours?: number;
+  article19LiabilityEurM?: number;
+  complianceParityScore?: number;
+  componentClasses?: string[];
+  panTokenStatus?: "VERIFIED" | "PENDING_SBOM" | "UNDER_AUDIT";
 }
 
 export interface ComplianceActionItem {

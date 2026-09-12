@@ -23,6 +23,8 @@ import {
   FacilityMarker,
   SupplyChainCorridor
 } from "@/types/jurisdictions";
+import { STATUTORY_CORRIDORS } from "@/data/statutoryCorridors";
+import { CorridorAssuranceInspector } from "./CorridorAssuranceInspector";
 import {
   Maximize2,
   Minimize2,
@@ -125,56 +127,7 @@ const DEFAULT_FACILITIES: FacilityMarker[] = [
   }
 ];
 
-export const DEFAULT_CORRIDORS: SupplyChainCorridor[] = [
-  {
-    id: "corr_rotterdam_de",
-    sourceFacilityId: "fac_rotterdam",
-    sourceName: "Port of Rotterdam Petrochemical Hub",
-    sourceCoords: [4.4777, 51.9244],
-    targetIso2: "DE",
-    targetCountryName: "Germany",
-    targetCoords: [10.4515, 51.1657],
-    corridorType: "Component Supply",
-    statutoryGate: "EU CRA Essential Entity Component Assurance",
-    activeStatus: "Operational"
-  },
-  {
-    id: "corr_tennet_nl",
-    sourceFacilityId: "fac_tennet_offshore",
-    sourceName: "Tennet BorWin5 Offshore HVDC Converter",
-    sourceCoords: [6.5, 54.0],
-    targetIso2: "NL",
-    targetCountryName: "Netherlands",
-    targetCoords: [5.2913, 52.1326],
-    corridorType: "Grid Intertie",
-    statutoryGate: "BSI IT-SiG 2.0 / Dutch Security of Network Interconnects",
-    activeStatus: "Operational"
-  },
-  {
-    id: "corr_singapore_jp",
-    sourceFacilityId: "fac_singapore_jurong",
-    sourceName: "Jurong Island Integrated Water & Energy Complex",
-    sourceCoords: [103.7, 1.2667],
-    targetIso2: "JP",
-    targetCountryName: "Japan",
-    targetCoords: [138.2529, 36.2048],
-    corridorType: "Telemetry Relay",
-    statutoryGate: "Singapore Cybersecurity Act 2024 / Japan Economic Security",
-    activeStatus: "CAB Audit Pending"
-  },
-  {
-    id: "corr_tokyo_us",
-    sourceFacilityId: "fac_tokyo_otn",
-    sourceName: "Tokyo-Chiba Pacific Subsea Cable Gateway",
-    sourceCoords: [140.1065, 35.6074],
-    targetIso2: "US",
-    targetCountryName: "United States",
-    targetCoords: [-95.7129, 37.0902],
-    corridorType: "Subsea Transit",
-    statutoryGate: "US-Japan Bilateral Critical Telecom Intercept Protection",
-    activeStatus: "Operational"
-  }
-];
+export const DEFAULT_CORRIDORS: SupplyChainCorridor[] = STATUTORY_CORRIDORS;
 
 export function JurisdictionMapViewer({
   projectionMode,
@@ -197,6 +150,9 @@ export function JurisdictionMapViewer({
   const [matrixData, setMatrixData] = useState<JurisdictionMatrixDataset | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [hoverState, setHoverState] = useState<HoverState | null>(null);
+  const [selectedCorridor, setSelectedCorridor] = useState<SupplyChainCorridor | null>(null);
+  const [hoveredCorridor, setHoveredCorridor] = useState<SupplyChainCorridor | null>(null);
+  const [corridorTooltipPos, setCorridorTooltipPos] = useState<{ x: number; y: number } | null>(null);
 
   // Viewport / Camera state
   const [dimensions, setDimensions] = useState({ width: 900, height: 550 });
@@ -238,9 +194,16 @@ export function JurisdictionMapViewer({
     }
   }, [cameraOverride]);
 
-  // Pre-calculate Great-Circle LineStrings
+  // Pre-calculate Great-Circle LineStrings with dynamic sector filtering
+  const visibleCorridors = useMemo(() => {
+    if (activeSector === "All") {
+      return STATUTORY_CORRIDORS;
+    }
+    return STATUTORY_CORRIDORS.filter((corridor) => corridor.sector === activeSector);
+  }, [activeSector]);
+
   const corridorLineStrings = useMemo(() => {
-    return DEFAULT_CORRIDORS.map((corridor) => {
+    return visibleCorridors.map((corridor) => {
       const interpolate = geoInterpolate(corridor.sourceCoords, corridor.targetCoords);
       const steps = 48;
       const coords: [number, number][] = [];
@@ -252,10 +215,11 @@ export function JurisdictionMapViewer({
         geoJson: {
           type: "LineString" as const,
           coordinates: coords
-        }
+        },
+        coords
       };
     });
-  }, []);
+  }, [visibleCorridors]);
 
   // Load TopoJSON and Matrix Dataset on mount
   useEffect(() => {
@@ -604,14 +568,14 @@ export function JurisdictionMapViewer({
           ctx.fillStyle = getCountryColor(country, isHighlighted, isDimmed);
           ctx.fill();
 
-          // Crisp fine hairline border
+          // Crisp fine hairline border (elevated visibility: visible but restrained)
           if (isHighlighted) {
             ctx.lineWidth = 1.5;
             ctx.strokeStyle = "rgba(255, 255, 255, 0.85)";
             ctx.stroke();
           } else {
-            ctx.lineWidth = 0.4;
-            ctx.strokeStyle = "rgba(255, 255, 255, 0.14)";
+            ctx.lineWidth = 0.55;
+            ctx.strokeStyle = "rgba(255, 255, 255, 0.22)";
             ctx.stroke();
           }
         }
@@ -642,21 +606,63 @@ export function JurisdictionMapViewer({
       }
 
       // 4. Draw Great-Circle Supply Chain Corridors with Animated Photon Pulses
-      if (showCorridors && projectionMode === "globe" && corridorLineStrings.length > 0) {
+      if (showCorridors && corridorLineStrings.length > 0) {
         const dashOffset = (timeMs / 28) % 1000;
         corridorLineStrings.forEach(({ corridor, geoJson }) => {
+          const isSelected = selectedCorridor?.id === corridor.id;
+          const isHovered = hoveredCorridor?.id === corridor.id;
+          const isHighlighted = isSelected || isHovered;
+
           ctx.save();
           ctx.beginPath();
           pathGenerator(geoJson);
-          ctx.setLineDash([6, 12]);
-          ctx.lineDashOffset = -dashOffset;
-          ctx.lineWidth = 1.6;
-          ctx.strokeStyle =
-            corridor.activeStatus === "CAB Audit Pending"
-              ? "rgba(224, 90, 16, 0.85)"
-              : "rgba(248, 250, 252, 0.75)";
+
+          if (isHighlighted) {
+            ctx.setLineDash([8, 8]);
+            ctx.lineDashOffset = -dashOffset * 1.5;
+            ctx.lineWidth = 3.2;
+            ctx.strokeStyle = "#E05A10";
+            ctx.shadowColor = "rgba(224, 90, 16, 0.75)";
+            ctx.shadowBlur = 12;
+          } else {
+            ctx.setLineDash([6, 12]);
+            ctx.lineDashOffset = -dashOffset;
+            ctx.lineWidth = 1.6;
+            ctx.strokeStyle =
+              corridor.panTokenStatus === "VERIFIED"
+                ? "rgba(248, 250, 252, 0.75)"
+                : corridor.panTokenStatus === "PENDING_SBOM"
+                ? "rgba(224, 90, 16, 0.85)"
+                : "rgba(148, 163, 184, 0.65)";
+          }
           ctx.stroke();
           ctx.restore();
+
+          // Draw Terminal Hub Pins
+          [corridor.sourceCoords, corridor.targetCoords].forEach((coords, ptIdx) => {
+            const pt = projection(coords);
+            if (!pt) return;
+
+            if (projectionMode === "globe") {
+              const center = [-yaw, -pitch];
+              const rad = Math.PI / 180;
+              const p1 = [coords[0] * rad, coords[1] * rad];
+              const p0 = [center[0] * rad, center[1] * rad];
+              const cosDist =
+                Math.sin(p0[1]) * Math.sin(p1[1]) +
+                Math.cos(p0[1]) * Math.cos(p1[1]) * Math.cos(p1[0] - p0[0]);
+              if (cosDist < 0) return;
+            }
+
+            const [hx, hy] = pt;
+            ctx.beginPath();
+            ctx.arc(hx, hy, isHighlighted ? 4.5 : 2.8, 0, 2 * Math.PI);
+            ctx.fillStyle = isHighlighted ? "#E05A10" : ptIdx === 0 ? "#FFFFFF" : "#94A3B8";
+            ctx.fill();
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = "#0B0C0E";
+            ctx.stroke();
+          });
         });
       }
 
@@ -725,6 +731,8 @@ export function JurisdictionMapViewer({
     highlightedIso2List,
     selectedIso2,
     hoverState,
+    selectedCorridor,
+    hoveredCorridor,
     facilityMarkers,
     showCorridors,
     corridorLineStrings,
@@ -781,6 +789,73 @@ export function JurisdictionMapViewer({
     return null;
   }, [matrixData, topoFeatures, dimensions, zoomScale, panOffset, projectionMode, yaw, pitch]);
 
+  // Synchronous corridor hit-test helper
+  const hitTestCorridor = useCallback((clientX: number, clientY: number): SupplyChainCorridor | null => {
+    const canvas = canvasRef.current;
+    if (!canvas || !showCorridors || corridorLineStrings.length === 0) return null;
+
+    const rect = canvas.getBoundingClientRect();
+    if (rect.width === 0 || rect.height === 0) return null;
+
+    const scaleX = dimensions.width / rect.width;
+    const scaleY = dimensions.height / rect.height;
+    const mouseX = (clientX - rect.left) * scaleX;
+    const mouseY = (clientY - rect.top) * scaleY;
+
+    const baseRadius = Math.min(dimensions.width, dimensions.height) * 0.42 * zoomScale;
+    const cx = dimensions.width / 2 + panOffset.x;
+    const cy = dimensions.height / 2 + panOffset.y;
+
+    let projection: GeoProjection;
+    if (projectionMode === "globe") {
+      projection = geoOrthographic()
+        .scale(baseRadius)
+        .translate([cx, cy])
+        .rotate([yaw, pitch, 0])
+        .clipAngle(90);
+    } else {
+      projection = geoNaturalEarth1()
+        .scale(baseRadius * 0.65)
+        .translate([cx, cy])
+        .rotate([yaw, 0, 0]);
+    }
+
+    const isVisibleOnGlobe = (coords: [number, number]) => {
+      if (projectionMode !== "globe") return true;
+      const center = [-yaw, -pitch];
+      const rad = Math.PI / 180;
+      const p1 = [coords[0] * rad, coords[1] * rad];
+      const p0 = [center[0] * rad, center[1] * rad];
+      return (
+        Math.sin(p0[1]) * Math.sin(p1[1]) +
+        Math.cos(p0[1]) * Math.cos(p1[1]) * Math.cos(p1[0] - p0[0]) >= 0
+      );
+    };
+
+    for (const item of corridorLineStrings) {
+      // Test endpoints (source and target hubs)
+      const sPt = projection(item.corridor.sourceCoords);
+      if (sPt && isVisibleOnGlobe(item.corridor.sourceCoords) && Math.hypot(mouseX - sPt[0], mouseY - sPt[1]) < 16) {
+        return item.corridor;
+      }
+      const tPt = projection(item.corridor.targetCoords);
+      if (tPt && isVisibleOnGlobe(item.corridor.targetCoords) && Math.hypot(mouseX - tPt[0], mouseY - tPt[1]) < 16) {
+        return item.corridor;
+      }
+
+      // Test along sampled arc points
+      for (let step = 0; step < item.coords.length; step += 2) {
+        const pt = item.coords[step];
+        if (!isVisibleOnGlobe(pt)) continue;
+        const screenPt = projection(pt);
+        if (screenPt && Math.hypot(mouseX - screenPt[0], mouseY - screenPt[1]) < 12) {
+          return item.corridor;
+        }
+      }
+    }
+    return null;
+  }, [showCorridors, corridorLineStrings, dimensions, zoomScale, panOffset, projectionMode, yaw, pitch]);
+
   // Pointer Interaction Handlers
   const handlePointerDown = (e: React.PointerEvent<HTMLCanvasElement>) => {
     isDraggingRef.current = true;
@@ -821,7 +896,19 @@ export function JurisdictionMapViewer({
       return;
     }
 
-    // Hit testing for hover
+    // Hit testing for supply chain corridors
+    const hitCorridor = hitTestCorridor(e.clientX, e.clientY);
+    if (hitCorridor) {
+      setHoveredCorridor(hitCorridor);
+      setCorridorTooltipPos({ x: mouseX, y: mouseY });
+      setHoverState(null);
+      return;
+    } else if (hoveredCorridor) {
+      setHoveredCorridor(null);
+      setCorridorTooltipPos(null);
+    }
+
+    // Hit testing for countries
     const baseRadius = Math.min(dimensions.width, dimensions.height) * 0.42 * zoomScale;
     const cx = dimensions.width / 2 + panOffset.x;
     const cy = dimensions.height / 2 + panOffset.y;
@@ -856,7 +943,7 @@ export function JurisdictionMapViewer({
       }
     }
 
-    // Mathematical polygon containment test
+    // Find country polygon containing coordinate
     let foundCountry: CountryJurisdictionData | null = null;
 
     for (let i = 0; i < topoFeatures.length; i++) {
@@ -872,21 +959,12 @@ export function JurisdictionMapViewer({
     }
 
     if (foundCountry) {
-      if (hoverDebounceTimerRef.current) {
-        clearTimeout(hoverDebounceTimerRef.current);
-      }
-      const targetCountry = foundCountry;
-      hoverDebounceTimerRef.current = setTimeout(() => {
-        setHoverState({
-          x: mouseX,
-          y: mouseY,
-          country: targetCountry
-        });
-      }, 90);
+      setHoverState({
+        country: foundCountry,
+        x: mouseX,
+        y: mouseY
+      });
     } else {
-      if (hoverDebounceTimerRef.current) {
-        clearTimeout(hoverDebounceTimerRef.current);
-      }
       setHoverState(null);
     }
   };
@@ -903,6 +981,17 @@ export function JurisdictionMapViewer({
   const handleClick = (e: React.MouseEvent<HTMLCanvasElement>) => {
     // If pointer was dragged to rotate the globe, do not trigger country selection
     if (dragDistanceRef.current > 6) {
+      return;
+    }
+
+    // Corridor click takes precedence
+    const clickedCorridor = hoveredCorridor || hitTestCorridor(e.clientX, e.clientY);
+    if (clickedCorridor) {
+      setSelectedCorridor(clickedCorridor);
+      targetRotationRef.current = {
+        yaw: -clickedCorridor.sourceCoords[0],
+        pitch: Math.max(-60, Math.min(60, -clickedCorridor.sourceCoords[1] + 15))
+      };
       return;
     }
 
@@ -969,6 +1058,8 @@ export function JurisdictionMapViewer({
         break;
       case "Escape":
         setHoverState(null);
+        setSelectedCorridor(null);
+        setHoveredCorridor(null);
         setShowKeyboardHelp(false);
         break;
     }
@@ -1150,6 +1241,60 @@ export function JurisdictionMapViewer({
         </div>
       )}
 
+      {/* Floating Corridor Hover Tooltip */}
+      {hoveredCorridor && !selectedCorridor && corridorTooltipPos && (
+        <div
+          style={{
+            left: Math.min(dimensions.width - 310, Math.max(16, corridorTooltipPos.x + 14)),
+            top: Math.min(dimensions.height - 150, Math.max(16, corridorTooltipPos.y + 14))
+          }}
+          className="absolute z-20 pointer-events-none w-72 bg-[#0B0C0E]/95 backdrop-blur-md border border-[#E05A10]/40 rounded-xl p-3 shadow-2xl transition-transform duration-75 text-xs font-mono space-y-1.5 text-white animate-in fade-in zoom-in-95 duration-100"
+        >
+          <div className="flex items-center justify-between gap-2 border-b border-white/10 pb-1.5">
+            <span className="text-[10px] font-mono font-semibold uppercase text-[#E05A10]">
+              {hoveredCorridor.sector || "OT/Industrial"}
+            </span>
+            <span className="text-[10px] font-mono text-slate-300 bg-white/5 px-1.5 py-0.5 rounded border border-white/10">
+              {hoveredCorridor.corridorType}
+            </span>
+          </div>
+          <div className="text-xs font-semibold text-white leading-tight">
+            {hoveredCorridor.sourceName} <span className="text-[#E05A10]">→</span> {hoveredCorridor.targetCountryName}
+          </div>
+          <div className="grid grid-cols-2 gap-1 text-[10px] text-slate-400 pt-0.5">
+            <div>
+              SLA Delta: <span className="text-white font-bold">{hoveredCorridor.clockDeltaHours ?? 0}h</span>
+            </div>
+            <div>
+              Customs: <span className="text-white font-bold">{hoveredCorridor.preClearanceHours ?? 3}h</span> <span className="text-slate-500">({hoveredCorridor.customsDwellRiskDays ?? 8}d)</span>
+            </div>
+          </div>
+          <div className="text-[9px] text-[#E05A10] flex items-center justify-between pt-1 border-t border-white/5 font-sans font-medium">
+            <span>Click to inspect assurance dossier</span>
+            <ArrowRight className="w-2.5 h-2.5" />
+          </div>
+        </div>
+      )}
+
+      {/* Floating Corridor Assurance Inspector Deck */}
+      {selectedCorridor && (
+        <CorridorAssuranceInspector
+          corridor={selectedCorridor}
+          onClose={() => setSelectedCorridor(null)}
+          onFocusOrigin={(coords) => {
+            targetRotationRef.current = { yaw: -coords[0], pitch: Math.max(-60, Math.min(60, -coords[1] + 15)) };
+          }}
+          onFocusTarget={(coords) => {
+            targetRotationRef.current = { yaw: -coords[0], pitch: Math.max(-60, Math.min(60, -coords[1] + 15)) };
+          }}
+          onSelectCountry={(iso2) => {
+            if (matrixData?.countries[iso2]) {
+              onSelectCountry(matrixData.countries[iso2]);
+            }
+          }}
+        />
+      )}
+
       {/* Floating Canvas Controls (Zoom, Reset, Corridors, Keyboard) */}
       <div className="absolute top-4 right-4 z-20 flex flex-col gap-1.5 bg-[#0B0C0E]/90 backdrop-blur-md p-1 rounded-xl border border-white/10 shadow-xl">
         <button
@@ -1271,8 +1416,17 @@ export function JurisdictionMapViewer({
         <span className="px-1.5 py-0.5 rounded bg-white/10 text-white font-semibold text-[10px] tracking-wide border border-white/10">
           50m Ultra-HD Vector Mesh
         </span>
+        {showCorridors && (
+          <>
+            <span className="text-white/30">|</span>
+            <span className="flex items-center gap-1.5 text-dutchOrange font-semibold">
+              <Workflow className="w-3 h-3" />
+              <span>{visibleCorridors.length} Assurance Corridors</span>
+            </span>
+          </>
+        )}
         <span className="text-white/30">|</span>
-        <span className="text-white/50 hidden sm:inline">Drag to rotate, scroll to zoom, click nation</span>
+        <span className="text-white/50 hidden sm:inline">Drag to rotate, scroll to zoom, click nation or corridor</span>
       </div>
     </div>
   );
