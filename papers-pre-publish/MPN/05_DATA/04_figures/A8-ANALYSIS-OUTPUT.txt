@@ -1,0 +1,145 @@
+A8 candidate-form analysis.
+
+THE QUESTION. The theory selects the fragmentation stage by 0.6H + 0.4*tau and
+the orchestration density level by 0.7*tau + 0.3H. These are two convex
+combinations of the same two variables with weights close enough that they may
+be near-collinear as a matter of algebra rather than as a property of any
+corpus. This script measures that and evaluates candidate replacements.
+
+PRIMARY SET, AND NOT EVIDENCE EITHER: `01_scores/hand_annotated_frames.csv`,
+232 frames across thirteen works, extracted from `literary_data.ts` (119) and
+`additional_plays.ts` (113) in the reference implementation. The scene prose and
+chord labels are the author's; the TRAUMA and ENTROPY values were produced by the
+application's own text analyser and calculus, run over that prose, as the author
+confirms. They are therefore the system's reading of the author's commentary, not
+an independent annotation. The file name is kept for continuity and is a misnomer.
+
+SECOND CONTROL, ALSO NOT EVIDENCE: `01_scores/MCKENNEY_LACAN_SCORE_*.csv`, seven
+files, 31,078 rows. These are NOT annotations. `03_generators/
+batch_process_classic_plays.py` computes
+
+    TRAUMA_R  = (beat / total_beats) * 0.8 + (count of 8 keywords) * 0.1
+    ENTROPY_H = 0.30 + 0.20*count('?') + 0.15*count('!')
+                     + 0.10*(count('--') + count('...'))
+
+so trauma is the beat index (it correlates with beat position at 0.995 to 0.999
+in every file) and entropy is a punctuation tally reproducible from the TEXT
+column with zero error, 72.8 per cent of rows sitting at its 0.30 floor. No
+register values appear in these files, and the ALL-CAPS speaker parser assigns
+every one of King Lear's 3,425 rows to "STAGE". Neither set is evidence about drama. Both are run here to show that the
+collinearity is a property of the two formulae and survives any choice of
+inputs, which is the whole of the argument; every figure from the second set
+is labelled GENERATED.
+
+
+==============================================================================
+PRIMARY SET: 232 frames, 13 works (system-produced, not evidence)
+==============================================================================
+n = 232   works = 13
+  tau : distinct=  12  mean=0.5974 sd=0.2496 range 0.10-1.00
+  H   : distinct=  10  mean=0.5237 sd=0.1925 range 0.10-1.00
+  corr(tau, H) = +0.2802
+
+                         form       r  spearman     PC1  cells/25 meets criterion
+shipped 0.6H+0.4t / 0.7t+0.3H +0.9150   +0.8957 +0.9575        10              no
+           C1 pure separation +0.2802   +0.2523 +0.6401        19             yes
+      C2 knee-shift + concave +0.5650   +0.5272 +0.7825        19             yes
+       C3 opposed cross-terms +0.2947   +0.3353 +0.6474        19             yes
+ADOPTED orthogonal complement +0.0571   +0.0216 +0.5285        14              no
+
+-- why the shipped pair cannot dissociate --
+  sample r(frag, dens)                         : 0.9150
+  from sd(H)=0.1925, sd(tau)=0.2496, rho=+0.2802 : 0.9150
+  These agree to machine precision because the expression is an IDENTITY
+  for two exact linear combinations. It could not have failed to match.
+  What it establishes is that r depends on nothing else about the data:
+  not on the plays, not on the annotator, not on the sample size.
+
+  equal variances and tau independent of H     : 0.8376
+  corpus would need corr(tau,H) < -0.525 for r < 0.65
+  corpus would need corr(tau,H) < -0.204 for r < 0.80
+  Both require trauma and entropy to be strongly ANTI-correlated, which
+  would refute A5's independence claim rather than rescue A8.
+
+  A5 succeeding forces A8 to fail: the better tau and H separate, the
+  more tightly two similar reweightings of them must track.
+
+-- per-work correlation, shipped pair vs candidates --
+                                 shipped 0.6H+0.4t / 0.7t+0.3H  C1 pure separation  C2 knee-shift + concave  C3 opposed cross-terms  ADOPTED orthogonal complement
+A Doll's House                                         +0.9678             +0.6558                  +0.8247                 +0.6951                        +0.2729
+Antigone                                               +0.8897             +0.1432                  +0.5176                 +0.2115                        -0.0169
+Hamlet                                                 +0.9540             +0.5771                  +0.7137                 +0.5123                        +0.4071
+Hedda Gabler                                           +0.9251             +0.2780                  +0.6041                 +0.3405                        -0.0481
+King Lear                                              +0.9232             +0.3268                  +0.6427                 +0.3176                        +0.0862
+Macbeth                                                +0.9375             +0.4357                  +0.6582                 +0.4039                        +0.1666
+Medea                                                  +0.9190             +0.3340                  +0.6375                 +0.2195                        +0.2315
+Miss Julie                                             +0.7403             -0.4933                  +0.0178                 -0.2917                        -0.6162
+Oedipus Rex                                            +0.8900             +0.1398                  +0.4750                 +0.1726                        -0.0208
+Othello                                                +0.8347             -0.1523                  +0.3009                 -0.0136                        -0.3223
+The Importance of Being Earnest                        +0.9557             +0.6042                  +0.6729                 +0.6019                        +0.5599
+The Seagull                                            +0.8360             -0.2936                  +0.3036                 -0.0166                        -0.5174
+Uncle Vanya                                            +0.9604             +0.6223                  +0.6522                 +0.5178                        +0.4088
+
+-- criterion (STIPULATED, not derived): r < 0.65 and cells >= 18 of 25 --
+
+-- linear-family scan: frag = H + kf(t-0.5), dens = t + kd(H-0.5) --
+      kd:     0.00    0.10    0.20    0.30    0.40    0.50
+kf=0.0    +0.280  +0.344  +0.403  +0.456  +0.501  +0.542
+kf=0.1    +0.391  +0.452  +0.508  +0.558  +0.600  +0.638
+kf=0.2    +0.488  +0.546  +0.599  +0.645  +0.684  +0.718
+kf=0.3    +0.569  +0.624  +0.674  +0.716  +0.752  +0.783
+kf=0.4    +0.638  +0.689  +0.735  +0.775  +0.807  +0.835
+kf=0.5    +0.695  +0.743  +0.785  +0.822  +0.851  +0.876
+
+==============================================================================
+SECOND CONTROL: batch-generated score files [GENERATED, NOT EVIDENCE]
+==============================================================================
+n = 31078   works = 7
+  tau : distinct=  93  mean=0.4034 sd=0.2317 range 0.00-0.98
+  H   : distinct=  14  mean=0.3549 sd=0.1023 range 0.30-1.00
+  corr(tau, H) = -0.0256
+
+                         form       r  spearman     PC1  cells/25 meets criterion
+shipped 0.6H+0.4t / 0.7t+0.3H +0.9191   +0.9323 +0.9596        11              no
+           C1 pure separation -0.0256   -0.0197 +0.5128        18             yes
+      C2 knee-shift + concave +0.4853   +0.6496 +0.7427        24             yes
+       C3 opposed cross-terms +0.4039   +0.5605 +0.7020        18             yes
+ADOPTED orthogonal complement -0.5493   -0.6537 +0.7746        17              no
+
+  The same collinearity appears in a corpus built from a beat counter
+  and a punctuation tally, which is the point: it is a property of the
+  two formulae and survives any choice of inputs.
+
+  wrote 04_figures/a8-curves-hamlet.png
+  wrote 04_figures/a8-curves-macbeth.png
+==============================================================================
+COMMENSURABILITY on the 232 frames
+==============================================================================
+sd(H)=0.1925  sd(tau)=0.2496  ratio 1.297
+
+-- nominal weight vs effective contribution --
+  fragmentation  nominal H  60% / tau  40%   effective H 53.6% / tau 46.4%
+  density        nominal H  30% / tau  70%   effective H 24.8% / tau 75.2%
+
+-- fixing dispersion does not fix collinearity --
+  as shipped                       r = 0.9150   cells 11 of 25
+  H rescaled from its 0.30 floor   r = 0.9075   cells 12 of 25
+  both standardised                r = 0.9046   cells 11 of 25
+
+-- the variance budget: what the combination discards --
+  state (H, tau)        PC1  68.6%   PC2  31.4%
+  scalars (frag, dens)  PC1  95.8%   PC2  4.16%
+  second dimension retained 13.2%; the combination discards 86.8% of it
+
+-- the orthogonal basis: u = total disturbance, v = weight vs disorder --
+  density <- u, fragmentation <- -v :  r = -0.2640   cells 17 of 25
+  v is the Real-versus-Symbolic balance the theory already names.
+
+-- sign-pattern taxonomy: minimum |r| achievable over all weights --
+  both increasing in both (as shipped)   min |r| = 0.2828
+  density insensitive to entropy         min |r| = 0.2805
+  density DECREASING in entropy (C3)     min |r| = 0.0002
+  The first floor equals corr(tau, H) and is reached only where each scalar
+  reads one variable and ignores the other. Blending and dissociating are
+  incompatible unless one scalar is non-monotone.
+

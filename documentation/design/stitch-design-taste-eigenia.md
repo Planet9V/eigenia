@@ -35,7 +35,7 @@ Design system: [paste DESIGN.md]
 Page: eigenia.nl Home, section: [hero | working groups strip | featured findings | physics models | collaborate CTA]
 Theme: render light and dark.
 Language: EN, with one NL variant of the headline and subtitle.
-Content (real): 11 Research Tracks, 73 treatises, 9 physics models (as of 2026-09-12); working group names: WG-01 Underwriter … WG-10 Assurance Network, MP-MATH, GOV-RES.
+Content (real): 11 Research Tracks, 77 treatises, 9 physics models (as of 2026-09-12); working group names: WG-01 Underwriter … WG-10 Assurance Network, MP-MATH, GOV-RES.
 Constraints: Inter + JetBrains Mono only; one accent #E05A10; radii ≤ 16px; left-aligned dark hero with primary + ghost CTA; orange glow (0 0 20px rgba(224,90,16,0.15)) on one focal element only, no other glow, no gradient text, no emojis, no placeholder names or counts; no em dashes in copy.
 Output: one screen per theme, annotated with the token used for every colour and the component reused for every block.
 ```

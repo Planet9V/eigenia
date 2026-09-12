@@ -65,3 +65,9 @@ dev-debug.log
 
 # Productivity dashboard: a local viewer for TASKS.md, not part of the site
 /dashboard.html
+
+# Pre-publish raw snapshots, archives and credentials scratchpads (preserved locally, excluded from git)
+papers-pre-publish/MPN/09_SNAPSHOTS/
+papers-pre-publish/MPN/_attic/
+papers-pre-publish/**/API and claude deve*.md
+papers-pre-publish/**/api-keys.txt

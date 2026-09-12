@@ -1,0 +1,29 @@
+{"rank_happiest_first":["M7","M6","M5","M4","M3","M1"],
+ "tempo_more_aroused":"faster",
+ "louder_more_tense":"louder",
+ "rougher_more_tense":"rougher",
+ "assign":{
+   "A":{"scale":"M2","confidence":72,"reason":"M2 lacks a perfect fifth and carries a tritone directly above the tonic, so there is no stable consonance to rest on and no leading tone resolving it away - the ear is handed a fact it cannot resolve or renegotiate, only endure."},
+   "B":{"scale":"M6","confidence":66,"reason":"M6 is the zero point of the whole set (raised-minus-lowered = 0) - every other scale here is defined only as a difference from it, which is exactly a system where identity comes from one's position inside a fixed order of differences."},
+   "C":{"scale":"M7","confidence":62,"reason":"M7 differs from the stable M6 by exactly one raised degree, the sharp 4th, producing a scale that is almost the ordinary major but held up by a single idealized, slightly-too-bright note that keeps it from ever landing back on the ordinary."},
+   "D":{"scale":"M4","confidence":55,"reason":"M4's step pattern (2-1-2-2-2-1-2 semitones) is a palindrome, identical read forward or backward, so the scale carries no built-in beginning or end, only a fixed recurring shape you are always somewhere inside of."}
+ },
+ "assign_extreme":{
+   "A":{"scale":"M2","changed":false,"reason":"At its worst the state doesn't turn into a different kind of sound, it just presses harder on the same one - M2 is already the limit case in this set (no fifth, tritone on the tonic), so there's nowhere further inside these seven for it to go."},
+   "B":{"scale":"M1","changed":true,"reason":"Pushed to its most oppressive, the order stops being a neutral reference point and becomes a closing wall - M1's b2 sits a half-step directly above the tonic, the tightest confinement of the tonic available in this set, which is what a rule feels like when felt only as constraint."},
+   "C":{"scale":"M3","changed":true,"reason":"At its most painful this state is not the shimmer of the ideal but the flat fact of having missed it - M3 is what M7 becomes with its one raised, aspirational degree removed and only the plain lowered 6th and 7th left, the idealized picture collapsed into ordinary loss."},
+   "D":{"scale":"M4","changed":false,"reason":"The pain here is that the cycle keeps being exactly itself no matter how much it hurts - M4's palindrome doesn't distort under pressure, which is the point; only the way it is played changes, not the shape itself."}
+ },
+ "unmatchable":"D",
+ "unmatchable_reason":"A, B and C are about how tones relate to one another at a single moment - resolved or not, hierarchical or not, idealized or not - which is exactly what a scale is. D is about the arrangement of moments across time, a periodicity of attention; a scale of pitches has no time built into it, so any match for D, including the palindrome I gave, is smuggling in a claim about rhythm or form under cover of pitch content rather than a principled fit of the kind A, B and C get.",
+ "assign_invented":{
+   "A":{"scale":"S3","confidence":55,"reason":"S3 has no perfect fifth and a tritone above the tonic together with the most heavily lowered profile in the set (raised-minus-lowered -5, including a doubly-diminished third and seventh), leaving no stable consonant frame to rest in - a sound that imposes itself rather than resolving."},
+   "B":{"scale":"S2","confidence":55,"reason":"S2 is the most balanced member of the set (raised-minus-lowered -1, nearest to neutral) while still carrying both a stable fifth and an internal tritone, giving it a fixed frame plus a directional pull, the way a rule compels a specific resolution rather than merely existing."},
+   "C":{"scale":"S5","confidence":55,"reason":"S5 is the most raised member of the set (+3), an inflated, reaching color that still keeps an unresolved tritone even with the fifth intact, so the brightness never fully settles - apt for an ideal image that is admired but never actually inhabited."},
+   "D":{"scale":"S6","confidence":65,"reason":"S6's step pattern (1-3-1-2-1-3-1 semitones) is a palindrome, identical forward or backward, so the scale has no directional story of its own, only a position within a fixed, self-mirroring cycle - a structure organized by where you stand in a period rather than by where you are going."}
+ },
+ "recognised_family":"the seven diatonic modes of the major scale (the church/Greek modal system)",
+ "names":{"M1":"Phrygian","M2":"Locrian","M3":"Aeolian","M4":"Dorian","M5":"Mixolydian","M6":"Ionian","M7":"Lydian"},
+ "knew_while_answering":"yes, throughout",
+ "source_of_part3":"Both at once and I don't think they can be cleanly separated - the interval facts I actually cited (no fifth plus a tritone for M2, zero alteration for M6, one raised degree for M7, a palindromic step pattern for M4) are the very facts that gave these modes their conventional expressive reputations in film-scoring practice, so the convention is downstream of the structure, not a separate source I was drawing on instead of it."
+}

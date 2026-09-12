@@ -1,0 +1,293 @@
+{
+ "diatonic": {
+  "D1": {
+   "true_name": "Ionian",
+   "semitones_from_tonic": [
+    0,
+    2,
+    4,
+    5,
+    7,
+    9,
+    11
+   ],
+   "degree_formula": "1 2 3 4 5 6 7",
+   "altered_vs_major": 0,
+   "has_tritone_above_tonic": false,
+   "has_perfect_fifth": true,
+   "has_minor_second": false,
+   "has_major_third": true,
+   "has_minor_third": false,
+   "has_major_seventh": true,
+   "brightness_raised_minus_lowered": 0
+  },
+  "D2": {
+   "true_name": "Dorian",
+   "semitones_from_tonic": [
+    0,
+    2,
+    3,
+    5,
+    7,
+    9,
+    10
+   ],
+   "degree_formula": "1 2 b3 4 5 6 b7",
+   "altered_vs_major": 2,
+   "has_tritone_above_tonic": false,
+   "has_perfect_fifth": true,
+   "has_minor_second": false,
+   "has_major_third": false,
+   "has_minor_third": true,
+   "has_major_seventh": false,
+   "brightness_raised_minus_lowered": -2
+  },
+  "D3": {
+   "true_name": "Phrygian",
+   "semitones_from_tonic": [
+    0,
+    1,
+    3,
+    5,
+    7,
+    8,
+    10
+   ],
+   "degree_formula": "1 b2 b3 4 5 b6 b7",
+   "altered_vs_major": 4,
+   "has_tritone_above_tonic": false,
+   "has_perfect_fifth": true,
+   "has_minor_second": true,
+   "has_major_third": false,
+   "has_minor_third": true,
+   "has_major_seventh": false,
+   "brightness_raised_minus_lowered": -4
+  },
+  "D4": {
+   "true_name": "Lydian",
+   "semitones_from_tonic": [
+    0,
+    2,
+    4,
+    6,
+    7,
+    9,
+    11
+   ],
+   "degree_formula": "1 2 3 #4 5 6 7",
+   "altered_vs_major": 1,
+   "has_tritone_above_tonic": true,
+   "has_perfect_fifth": true,
+   "has_minor_second": false,
+   "has_major_third": true,
+   "has_minor_third": false,
+   "has_major_seventh": true,
+   "brightness_raised_minus_lowered": 1
+  },
+  "D5": {
+   "true_name": "Mixolydian",
+   "semitones_from_tonic": [
+    0,
+    2,
+    4,
+    5,
+    7,
+    9,
+    10
+   ],
+   "degree_formula": "1 2 3 4 5 6 b7",
+   "altered_vs_major": 1,
+   "has_tritone_above_tonic": false,
+   "has_perfect_fifth": true,
+   "has_minor_second": false,
+   "has_major_third": true,
+   "has_minor_third": false,
+   "has_major_seventh": false,
+   "brightness_raised_minus_lowered": -1
+  },
+  "D6": {
+   "true_name": "Aeolian",
+   "semitones_from_tonic": [
+    0,
+    2,
+    3,
+    5,
+    7,
+    8,
+    10
+   ],
+   "degree_formula": "1 2 b3 4 5 b6 b7",
+   "altered_vs_major": 3,
+   "has_tritone_above_tonic": false,
+   "has_perfect_fifth": true,
+   "has_minor_second": false,
+   "has_major_third": false,
+   "has_minor_third": true,
+   "has_major_seventh": false,
+   "brightness_raised_minus_lowered": -3
+  },
+  "D7": {
+   "true_name": "Locrian",
+   "semitones_from_tonic": [
+    0,
+    1,
+    3,
+    5,
+    6,
+    8,
+    10
+   ],
+   "degree_formula": "1 b2 b3 4 b5 b6 b7",
+   "altered_vs_major": 5,
+   "has_tritone_above_tonic": true,
+   "has_perfect_fifth": false,
+   "has_minor_second": true,
+   "has_major_third": false,
+   "has_minor_third": true,
+   "has_major_seventh": false,
+   "brightness_raised_minus_lowered": -5
+  }
+ },
+ "invented": {
+  "X1": {
+   "semitones_from_tonic": [
+    0,
+    1,
+    4,
+    5,
+    7,
+    8,
+    11
+   ],
+   "degree_formula": "1 b2 3 4 5 b6 7",
+   "altered_vs_major": 2,
+   "has_tritone_above_tonic": false,
+   "has_perfect_fifth": true,
+   "has_minor_second": true,
+   "has_major_third": true,
+   "has_minor_third": false,
+   "has_major_seventh": true,
+   "brightness_raised_minus_lowered": -2
+  },
+  "X2": {
+   "semitones_from_tonic": [
+    0,
+    3,
+    4,
+    6,
+    7,
+    10,
+    11
+   ],
+   "degree_formula": "1 #2 3 #4 5 #6 7",
+   "altered_vs_major": 3,
+   "has_tritone_above_tonic": true,
+   "has_perfect_fifth": true,
+   "has_minor_second": false,
+   "has_major_third": true,
+   "has_minor_third": true,
+   "has_major_seventh": true,
+   "brightness_raised_minus_lowered": 3
+  },
+  "X3": {
+   "semitones_from_tonic": [
+    0,
+    1,
+    3,
+    4,
+    7,
+    8,
+    9
+   ],
+   "degree_formula": "1 b2 b3 b4 5 b6 bb7",
+   "altered_vs_major": 5,
+   "has_tritone_above_tonic": false,
+   "has_perfect_fifth": true,
+   "has_minor_second": true,
+   "has_major_third": true,
+   "has_minor_third": true,
+   "has_major_seventh": false,
+   "brightness_raised_minus_lowered": -5
+  },
+  "X4": {
+   "semitones_from_tonic": [
+    0,
+    2,
+    3,
+    6,
+    7,
+    8,
+    11
+   ],
+   "degree_formula": "1 2 b3 #4 5 b6 7",
+   "altered_vs_major": 3,
+   "has_tritone_above_tonic": true,
+   "has_perfect_fifth": true,
+   "has_minor_second": false,
+   "has_major_third": false,
+   "has_minor_third": true,
+   "has_major_seventh": true,
+   "brightness_raised_minus_lowered": -1
+  },
+  "X5": {
+   "semitones_from_tonic": [
+    0,
+    1,
+    4,
+    5,
+    6,
+    9,
+    10
+   ],
+   "degree_formula": "1 b2 3 4 b5 6 b7",
+   "altered_vs_major": 3,
+   "has_tritone_above_tonic": true,
+   "has_perfect_fifth": false,
+   "has_minor_second": true,
+   "has_major_third": true,
+   "has_minor_third": false,
+   "has_major_seventh": false,
+   "brightness_raised_minus_lowered": -3
+  },
+  "X6": {
+   "semitones_from_tonic": [
+    0,
+    3,
+    4,
+    5,
+    8,
+    9,
+    11
+   ],
+   "degree_formula": "1 #2 3 4 #5 6 7",
+   "altered_vs_major": 2,
+   "has_tritone_above_tonic": false,
+   "has_perfect_fifth": false,
+   "has_minor_second": false,
+   "has_major_third": true,
+   "has_minor_third": true,
+   "has_major_seventh": true,
+   "brightness_raised_minus_lowered": 2
+  },
+  "X7": {
+   "semitones_from_tonic": [
+    0,
+    1,
+    2,
+    5,
+    6,
+    8,
+    9
+   ],
+   "degree_formula": "1 b2 bb3 4 b5 b6 bb7",
+   "altered_vs_major": 5,
+   "has_tritone_above_tonic": true,
+   "has_perfect_fifth": false,
+   "has_minor_second": true,
+   "has_major_third": false,
+   "has_minor_third": false,
+   "has_major_seventh": false,
+   "brightness_raised_minus_lowered": -5
+  }
+ }
+}

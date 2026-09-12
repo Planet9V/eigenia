@@ -1,0 +1,233 @@
+SOURCE_FILE,WORK,FRAME,TRAUMA,ENTROPY
+literary_data.ts,Hamlet,Battlements Watch,0.1,0.2
+literary_data.ts,Hamlet,Horatio Arrives,0.1,0.3
+literary_data.ts,Hamlet,Ghost Appears,0.4,0.4
+literary_data.ts,Hamlet,Ghost Stalks Away,0.5,0.5
+literary_data.ts,Hamlet,Claudius Court,0.2,0.1
+literary_data.ts,Hamlet,Too Much Sun,0.3,0.6
+literary_data.ts,Hamlet,Solid Flesh,0.7,0.5
+literary_data.ts,Hamlet,Frailty,0.6,0.7
+literary_data.ts,Hamlet,Horatio\,0.3,0.4
+literary_data.ts,Hamlet,Hamlet Watch,0.4,0.4
+literary_data.ts,Hamlet,Ghost Re-enters,0.8,0.6
+literary_data.ts,Hamlet,Ghost Beckons,0.6,0.8
+literary_data.ts,Hamlet,I am thy Father,0.7,0.3
+literary_data.ts,Hamlet,Murder Most Foul,0.9,0.4
+literary_data.ts,Hamlet,Remember Me,0.6,0.6
+literary_data.ts,Hamlet,Swear,0.5,0.8
+literary_data.ts,Hamlet,Ophelia\,0.4,0.6
+literary_data.ts,Hamlet,Polonius Theory,0.2,0.3
+literary_data.ts,Hamlet,Fishmonger,0.3,0.7
+literary_data.ts,Hamlet,Prison,0.5,0.5
+literary_data.ts,Hamlet,Quintessence of Dust,0.6,0.8
+literary_data.ts,Hamlet,Players Arrive,0.3,0.4
+literary_data.ts,Hamlet,Hecuba,0.5,0.6
+literary_data.ts,Hamlet,The Trap Plan,0.4,0.3
+literary_data.ts,Hamlet,To Be or Not To Be,0.7,0.9
+literary_data.ts,Hamlet,Nunnery Scene,0.8,0.7
+literary_data.ts,Hamlet,Kings Conscience,0.5,0.5
+literary_data.ts,Hamlet,The Mousetrap,0.7,0.6
+literary_data.ts,Hamlet,The King Rises,0.9,0.8
+literary_data.ts,Hamlet,Prayer Scene,0.6,0.5
+literary_data.ts,Hamlet,Closet Scene Begins,0.7,0.6
+literary_data.ts,Hamlet,Rat in the Arras,0.8,0.7
+literary_data.ts,Hamlet,Two Pictures,0.6,0.5
+literary_data.ts,Hamlet,Ghost Intervenes,0.8,0.6
+literary_data.ts,Hamlet,Body in Scene,0.6,0.8
+literary_data.ts,Hamlet,Exile to England,0.5,0.5
+literary_data.ts,Hamlet,Ophelia\,0.8,0.9
+literary_data.ts,Hamlet,Laertes Returns,0.7,0.4
+literary_data.ts,Hamlet,Ophelia\,0.9,0.3
+literary_data.ts,Hamlet,Gravediggers,0.4,0.6
+literary_data.ts,Hamlet,Yorick,0.7,0.5
+literary_data.ts,Hamlet,Funeral Fight,0.8,0.8
+literary_data.ts,Hamlet,Osric,0.3,0.7
+literary_data.ts,Hamlet,Fall of a Sparrow,0.5,0.2
+literary_data.ts,Hamlet,The Duel Begins,0.6,0.5
+literary_data.ts,Hamlet,Queen Drinks,0.8,0.7
+literary_data.ts,Hamlet,Both Hit,0.9,0.8
+literary_data.ts,Hamlet,King Dies,0.9,0.9
+literary_data.ts,Hamlet,Hamlet Dies,1.0,1.0
+literary_data.ts,Hamlet,Fortinbras,0.2,0.1
+literary_data.ts,Oedipus Rex,The Suppliants,0.2,0.3
+literary_data.ts,Oedipus Rex,Oedipus Promises,0.3,0.4
+literary_data.ts,Oedipus Rex,Creon Returns,0.3,0.5
+literary_data.ts,Oedipus Rex,The Promise,0.4,0.3
+literary_data.ts,Oedipus Rex,Tiresias Called,0.4,0.6
+literary_data.ts,Oedipus Rex,Refusal to Speak,0.5,0.6
+literary_data.ts,Oedipus Rex,Oedipus Rage,0.6,0.7
+literary_data.ts,Oedipus Rex,The Accusation,0.8,0.5
+literary_data.ts,Oedipus Rex,The Riddle,0.7,0.8
+literary_data.ts,Oedipus Rex,Creon Confronted,0.5,0.6
+literary_data.ts,Oedipus Rex,Jocasta Intervenes,0.4,0.4
+literary_data.ts,Oedipus Rex,Jocasta\,0.5,0.3
+literary_data.ts,Oedipus Rex,Oedipus Fear,0.6,0.5
+literary_data.ts,Oedipus Rex,Corinthian Messenger,0.4,0.4
+literary_data.ts,Oedipus Rex,Not Your Father,0.7,0.5
+literary_data.ts,Oedipus Rex,Foundling,0.6,0.6
+literary_data.ts,Oedipus Rex,Jocasta Realizes,0.9,0.4
+literary_data.ts,Oedipus Rex,Jocasta Flees,0.8,0.5
+literary_data.ts,Oedipus Rex,Herdsman Arrives,0.6,0.3
+literary_data.ts,Oedipus Rex,Torture,0.8,0.7
+literary_data.ts,Oedipus Rex,The Revelation,0.95,0.2
+literary_data.ts,Oedipus Rex,ANAGNORISIS,1.0,0.1
+literary_data.ts,Oedipus Rex,The Scream,1.0,0.5
+literary_data.ts,Oedipus Rex,Jocasta Dead,0.9,0.6
+literary_data.ts,Oedipus Rex,The Blinding,0.95,0.8
+literary_data.ts,Oedipus Rex,Blind Entry,0.8,0.4
+literary_data.ts,Oedipus Rex,Meeting Creon,0.6,0.3
+literary_data.ts,Oedipus Rex,Daughters,0.7,0.5
+literary_data.ts,Oedipus Rex,Exile,0.5,0.4
+literary_data.ts,Oedipus Rex,Final Chorus,0.4,0.2
+literary_data.ts,Macbeth,Weird Sisters,0.2,0.3
+literary_data.ts,Macbeth,Bloody Sergeant,0.3,0.5
+literary_data.ts,Macbeth,Macbeth Arrives,0.2,0.4
+literary_data.ts,Macbeth,Prophecies,0.3,0.6
+literary_data.ts,Macbeth,Into Thin Air,0.4,0.7
+literary_data.ts,Macbeth,Ross Arrives,0.3,0.4
+literary_data.ts,Macbeth,Dark Thoughts,0.5,0.5
+literary_data.ts,Macbeth,Prince of Cumberland,0.4,0.5
+literary_data.ts,Macbeth,Lady Macbeth Reads,0.2,0.3
+literary_data.ts,Macbeth,Unsex Me Here,0.6,0.6
+literary_data.ts,Macbeth,Duncan Arrives,0.1,0.2
+literary_data.ts,Macbeth,If It Were Done,0.5,0.5
+literary_data.ts,Macbeth,Screw Your Courage,0.6,0.4
+literary_data.ts,Macbeth,Dagger Vision,0.7,0.7
+literary_data.ts,Macbeth,The Bell,0.8,0.5
+literary_data.ts,Macbeth,The Murder,0.9,0.6
+literary_data.ts,Macbeth,Sleep No More,0.9,0.8
+literary_data.ts,Macbeth,Knocking,0.8,0.9
+literary_data.ts,Macbeth,Porter Scene,0.4,0.7
+literary_data.ts,Macbeth,Discovery,0.95,0.8
+literary_data.ts,Macbeth,Fears in Banquo,0.4,0.5
+literary_data.ts,Macbeth,To Be Thus,0.6,0.4
+literary_data.ts,Macbeth,Banquo Murder,0.8,0.7
+literary_data.ts,Macbeth,Banquet Ghost,0.9,0.8
+literary_data.ts,Macbeth,Blood will have Blood,0.7,0.6
+literary_data.ts,Macbeth,Hecate,0.3,0.7
+literary_data.ts,Macbeth,Apparitions,0.5,0.8
+literary_data.ts,Macbeth,Line of Kings,0.8,0.5
+literary_data.ts,Macbeth,Macduff Family,1.0,0.9
+literary_data.ts,Macbeth,Macduff Grief,0.9,0.4
+literary_data.ts,Macbeth,Lady Macbeth Madness,0.8,0.8
+literary_data.ts,Macbeth,Way to Dusty Death,0.6,0.9
+literary_data.ts,Macbeth,Signifying Nothing,1.0,1.0
+literary_data.ts,Macbeth,Birnam Wood,0.7,0.5
+literary_data.ts,Macbeth,Bear-like,0.8,0.5
+literary_data.ts,Macbeth,Macduff Confronts,0.9,0.6
+literary_data.ts,Macbeth,Untimely Ripped,0.95,0.4
+literary_data.ts,Macbeth,Lay On,0.9,0.2
+literary_data.ts,Macbeth,Tyrant Dead,0.5,0.1
+additional_plays.ts,Medea,Nurse Lament,0.4,0.3
+additional_plays.ts,Medea,Medea Wails,0.8,0.7
+additional_plays.ts,Medea,Jason Arrives,0.6,0.5
+additional_plays.ts,Medea,Medea Confronts,0.9,0.6
+additional_plays.ts,Medea,Aegeus Promise,0.3,0.4
+additional_plays.ts,Medea,The Plan,0.7,0.8
+additional_plays.ts,Medea,Children Sent,0.85,0.5
+additional_plays.ts,Medea,Bride Dies,1.0,0.4
+additional_plays.ts,Medea,Medea Decides,1.0,0.9
+additional_plays.ts,Medea,Children Cry,1.0,0.2
+additional_plays.ts,Medea,Jason Returns,0.9,0.6
+additional_plays.ts,Medea,Medea Triumphant,0.5,0.3
+additional_plays.ts,Antigone,Sisters Debate,0.4,0.5
+additional_plays.ts,Antigone,Ismene Refuses,0.3,0.4
+additional_plays.ts,Antigone,Creon Decree,0.2,0.2
+additional_plays.ts,Antigone,Burial Discovered,0.6,0.7
+additional_plays.ts,Antigone,Antigone Caught,0.7,0.5
+additional_plays.ts,Antigone,Antigone Defiant,0.5,0.3
+additional_plays.ts,Antigone,Creon Enraged,0.7,0.4
+additional_plays.ts,Antigone,Haemon Pleads,0.6,0.6
+additional_plays.ts,Antigone,Tiresias Warning,0.8,0.5
+additional_plays.ts,Antigone,Creon Yields,0.7,0.8
+additional_plays.ts,Antigone,Triple Death,1.0,0.4
+additional_plays.ts,Antigone,Creon Broken,0.9,0.2
+additional_plays.ts,Othello,Iago,0.3,0.6
+additional_plays.ts,Othello,Othello/Desdemona,0.1,0.3
+additional_plays.ts,Othello,Honest Iago,0.2,0.4
+additional_plays.ts,Othello,Cassio Cashiered,0.5,0.7
+additional_plays.ts,Othello,Iago Plants Seed,0.6,0.6
+additional_plays.ts,Othello,Handkerchief,0.5,0.5
+additional_plays.ts,Othello,Green-Eyed Monster,0.8,0.6
+additional_plays.ts,Othello,Ocular Proof,0.7,0.5
+additional_plays.ts,Othello,Iago,0.9,0.4
+additional_plays.ts,Othello,Kill Her,0.95,0.3
+additional_plays.ts,Othello,Willow Song,0.6,0.7
+additional_plays.ts,Othello,Put Out the Light,0.9,0.3
+additional_plays.ts,Othello,Desdemona Dies,1.0,0.2
+additional_plays.ts,Othello,Emilia Reveals,0.85,0.9
+additional_plays.ts,Othello,Othello,0.9,0.3
+additional_plays.ts,King Lear,Love Test,0.2,0.3
+additional_plays.ts,King Lear,Cordelia Silent,0.5,0.4
+additional_plays.ts,King Lear,Banishment,0.6,0.5
+additional_plays.ts,King Lear,Edmund,0.4,0.7
+additional_plays.ts,King Lear,Daughters Turn,0.7,0.6
+additional_plays.ts,King Lear,Storm,0.9,0.9
+additional_plays.ts,King Lear,Poor Tom,0.8,0.8
+additional_plays.ts,King Lear,Gloucester Blinded,1.0,0.5
+additional_plays.ts,King Lear,Dover Cliff,0.6,0.6
+additional_plays.ts,King Lear,Lear/Gloucester Meet,0.8,0.7
+additional_plays.ts,King Lear,Cordelia Returns,0.4,0.4
+additional_plays.ts,King Lear,Battle Lost,0.7,0.5
+additional_plays.ts,King Lear,Howl Howl Howl,1.0,0.3
+additional_plays.ts,A Doll's House,Christmas Eve,0.1,0.2
+additional_plays.ts,A Doll's House,Skylark,0.2,0.3
+additional_plays.ts,A Doll's House,The Secret,0.5,0.5
+additional_plays.ts,A Doll's House,Krogstad Threatens,0.7,0.6
+additional_plays.ts,A Doll's House,Tarantella,0.6,0.8
+additional_plays.ts,A Doll's House,Letter Arrives,0.8,0.5
+additional_plays.ts,A Doll's House,Torvald Reads,0.9,0.7
+additional_plays.ts,A Doll's House,Second Letter,0.4,0.6
+additional_plays.ts,A Doll's House,Nora Changes,0.3,0.4
+additional_plays.ts,A Doll's House,The Talk,0.6,0.5
+additional_plays.ts,A Doll's House,Strangers,0.7,0.4
+additional_plays.ts,A Doll's House,Door Slam,0.5,0.3
+additional_plays.ts,Hedda Gabler,Morning After Honeymoon,0.2,0.4
+additional_plays.ts,Hedda Gabler,Pistols,0.4,0.3
+additional_plays.ts,Hedda Gabler,Lovborg Returns,0.5,0.6
+additional_plays.ts,Hedda Gabler,Vine Leaves,0.3,0.5
+additional_plays.ts,Hedda Gabler,Manuscript Revealed,0.4,0.4
+additional_plays.ts,Hedda Gabler,Burned,0.9,0.6
+additional_plays.ts,Hedda Gabler,Pistol Given,0.8,0.7
+additional_plays.ts,Hedda Gabler,Lovborg Dies,0.9,0.8
+additional_plays.ts,Hedda Gabler,Brack,0.7,0.5
+additional_plays.ts,Hedda Gabler,Hedda,1.0,0.2
+additional_plays.ts,The Seagull,Konstantin,0.5,0.6
+additional_plays.ts,The Seagull,Arkadina Mocks,0.6,0.5
+additional_plays.ts,The Seagull,Nina Inspired,0.3,0.5
+additional_plays.ts,The Seagull,Trigorin,0.4,0.4
+additional_plays.ts,The Seagull,Dead Bird,0.6,0.6
+additional_plays.ts,The Seagull,Trigorin,0.5,0.5
+additional_plays.ts,The Seagull,Nina/Trigorin,0.6,0.7
+additional_plays.ts,The Seagull,Two Years Later,0.7,0.6
+additional_plays.ts,The Seagull,Nina Returns,0.8,0.5
+additional_plays.ts,The Seagull,Konstantin,1.0,0.3
+additional_plays.ts,Uncle Vanya,The Professor Arrives,0.3,0.4
+additional_plays.ts,Uncle Vanya,Astrov,0.4,0.5
+additional_plays.ts,Uncle Vanya,Elena,0.3,0.6
+additional_plays.ts,Uncle Vanya,Vanya,0.6,0.5
+additional_plays.ts,Uncle Vanya,Sonya,0.5,0.4
+additional_plays.ts,Uncle Vanya,Property Sale,0.8,0.7
+additional_plays.ts,Uncle Vanya,Vanya Shoots,0.9,0.9
+additional_plays.ts,Uncle Vanya,Astrov Leaves,0.5,0.4
+additional_plays.ts,Uncle Vanya,We Must Work,0.6,0.3
+additional_plays.ts,Miss Julie,Midsummer Eve,0.2,0.5
+additional_plays.ts,Miss Julie,Julie Descends,0.4,0.6
+additional_plays.ts,Miss Julie,Jean,0.3,0.5
+additional_plays.ts,Miss Julie,Seduction,0.6,0.8
+additional_plays.ts,Miss Julie,After,0.8,0.6
+additional_plays.ts,Miss Julie,Escape Plan,0.5,0.7
+additional_plays.ts,Miss Julie,Bird Killed,0.9,0.5
+additional_plays.ts,Miss Julie,Father Returns,0.7,0.4
+additional_plays.ts,Miss Julie,The Razor,0.95,0.3
+additional_plays.ts,Miss Julie,Julie Exits,1.0,0.2
+additional_plays.ts,The Importance of Being Earnest,Bunburying,0.1,0.6
+additional_plays.ts,The Importance of Being Earnest,Ernest in Town,0.2,0.5
+additional_plays.ts,The Importance of Being Earnest,Gwendolen,0.2,0.4
+additional_plays.ts,The Importance of Being Earnest,Lady Bracknell Interview,0.4,0.7
+additional_plays.ts,The Importance of Being Earnest,Cecily,0.2,0.6
+additional_plays.ts,The Importance of Being Earnest,Two Ernests,0.5,0.8
+additional_plays.ts,The Importance of Being Earnest,Muffins,0.3,0.7
+additional_plays.ts,The Importance of Being Earnest,Miss Prism Identified,0.4,0.5
+additional_plays.ts,The Importance of Being Earnest,Jack is Ernest,0.3,0.4
+additional_plays.ts,The Importance of Being Earnest,Vital Importance,0.1,0.3

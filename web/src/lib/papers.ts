@@ -119,6 +119,10 @@ export const PAPERS_REGISTRY: Record<string, { title: string; relativePath: stri
     title: "DEXPI 2.0 Information Model, DEXPI XML Serialization, and Graph Generation Pipelines",
     relativePath: "references/WG-05-CAD-DEXPI-2/WG-05-CAD-DEXPI-XML-Metamodel.md",
   },
+  "substation-bess-graph-topology": {
+    title: "Substation & BESS Node-Edge Interface Graph for Cyber Digital Twins",
+    relativePath: "references/WG-05-CAD-DEXPI-2/WG-05-CAD-Substation-BESS-Graph-Topology.md",
+  },
   "fooled-by-best-practice": {
     title: "Fooled by Best Practice: The Epistemological Fraud of OT Cybersecurity",
     relativePath: "references/WG-02-DT-Digital-Twin/WG-02-DT-Article1-Fooled-by-Best-Practice.md",
@@ -134,6 +138,10 @@ export const PAPERS_REGISTRY: Record<string, { title: string; relativePath: stri
   "the-barbell-defense": {
     title: "The Barbell Defense: Deterministic Physics Against Software Snake Oil",
     relativePath: "references/WG-02-DT-Digital-Twin/WG-02-DT-Article5-The-Barbell-Defense.md",
+  },
+  "seven-layer-digital-twin-architecture": {
+    title: "The Seven-Layer Cyber Digital Twin: Mathematical Formalization & Inter-Layer Mechanics",
+    relativePath: "references/WG-02-DT-Digital-Twin/WG-02-DT-Seven-Layer-Architecture.md",
   },
 
   // Track 3: Actuarial Re-Invention & Underwriter Treatises
@@ -221,6 +229,10 @@ export const PAPERS_REGISTRY: Record<string, { title: string; relativePath: stri
     title: "Treatise 15: Reliability & Safety Critical Items Lists (RCIL / SCIL) for Reinsurance",
     relativePath: "references/WG-01-UI-Underwriter-insurance/WG-01-UI-RCIL-SCIL-Reinsurance.md",
   },
+  "actor-threat-quotient-production": {
+    title: "Actor Threat Quotient: Production Mathematical Formulation",
+    relativePath: "references/WG-01-UI-Underwriter-insurance/WG-01-UI-Actor-Threat-Quotient-Production.md",
+  },
 
   // Track 4: TACAM Threat Matrix & CyHAZOP
   "tacam-deep-dive": {
@@ -234,6 +246,10 @@ export const PAPERS_REGISTRY: Record<string, { title: string; relativePath: stri
   "cyhazop-node-registers": {
     title: "CyHAZOP System Drill-Down: Node Registers for Power, Cooling, and Safety",
     relativePath: "references/WG-07-TM-Threat-Modeling/WG-07-TM-CyHAZOP-Node-Registers.md",
+  },
+  "black-swan-simulation-engine": {
+    title: "Black Swan Risk Simulation: Graph Importance Random Walks in Extremistan",
+    relativePath: "references/WG-07-TM-Threat-Modeling/WG-07-TM-Black-Swan-Simulation.md",
   },
 
   // Track 5: Threat Scoring
