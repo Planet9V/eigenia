@@ -12,10 +12,10 @@ _Memory of record (decided 2026-09-11): this file and `memory/` at the repo root
     - `WG-06-SC-02`: OT Hardware CRA Applicability & Cyber Resilience Act Compliance Architecture
     - `WG-07-TM-06`: Algorithmic Random Walks, Thermodynamic Boltzmann Shocks & Taleb Extremes in OT Graphs
     - `MP-MATH-03`: Cellular Sheaf Cohomology & Topological Fault Detection in Industrial Infrastructure
-  - [ ] **Batch 2 (OT Architecture & Human-Cyber Triad to 83 Treatises)**:
-    - `WG-02-DT-03`: Tier Classification, Redundancy Topologies & Critical Path Graph Analytics
-    - `WG-01-UI-03`: Concept of Operations & Minimum Operating Requirements Under Degraded Network States
-    - `WG-04-CF-03`: Organisational Design for OT Security, Cognitive Load & The People Problem
+  - [x] **Batch 2 (OT Architecture & Human-Cyber Triad Promoted to 83 Treatises)**:
+    - `WG-02-DT-Tier-Redundancy-Common-Mode-Failures`: Tier Classification, Redundancy Topologies & Common-Mode Failures
+    - `WG-01-UI-Concept-of-Operations-Minimum-Operating-Requirements`: Concept of Operations (ConOps) & Minimum Operating Requirements (MoR)
+    - `WG-03-ML-Organisational-Engineering-OT-Security`: Organisational Engineering for OT Security: Operational Authority & Cognitive Load
   - [ ] **Batch 3 (Physics & Quantitative Rigor Triad to 86 Treatises)**:
     - `MP-MATH-04`: Thermodynamic Entropy Production & Irreversible Dissipation in Cascading Grid Failures
     - `WG-05-CAD-02`: DEXPI 2.0 Extended Semantic Schema & CycloneDX 1.6 Hardware BOM Joint Graph Validation
@@ -41,6 +41,7 @@ _Memory of record (decided 2026-09-11): this file and `memory/` at the repo root
 ## Done
 
 ### 2026-09-13
+- [x] **Batch 2 Publication: OT Architecture & Human-Cyber Triad (83 Treatises)** - Promoted and integrated 3 foundational treatises (`WG-02-DT-Tier-Redundancy-Common-Mode-Failures`, `WG-01-UI-Concept-of-Operations-Minimum-Operating-Requirements`, `WG-03-ML-Organisational-Engineering-OT-Security`) with 15 rounds of sequential thinking, Valyu citations, J. McKenney primary attribution, KaTeX math formulas, and 100% accessible Mermaid diagrams; expanded catalog to 83 treatises across 11 Working Groups; updated registry, papers hub, and translations; passed 11/11 audit gates, Vitest, and TypeScript.
 - [x] **Canonical Treatises Hub (`/papers`) & Batch 1 Publication (80 Treatises)** - Delivered canonical research hub with filterable matrix, bento view, deep search, working group pills, and bilingual EN/NL support; drafted and promoted Batch 1 triad (`WG-06-SC-02`, `WG-07-TM-06`, `MP-MATH-03`) with 5 rounds of sequential thinking, Valyu citations, J. McKenney primary attribution, and 0 missing prose lines; updated catalog count to 80 treatises across 11 Working Groups; passed all 11 audit gates, Vitest, and TypeScript.
 
 ### 2026-09-12

@@ -355,6 +355,18 @@ export const PAPERS_REGISTRY: Record<string, { title: string; relativePath: stri
     title: "Sheaf Cohomology & Topological Fault Localization in Cyber-Physical Distribution Graphs",
     relativePath: "references/MP-Math-Physics-Formula/MP-MATH-03-Sheaf-Cohomology-Topological-Faults.md",
   },
+  "concept-of-operations-minimum-operating-requirements": {
+    title: "Concept of Operations (ConOps) & Minimum Operating Requirements (MoR)",
+    relativePath: "references/WG-01-UI-Underwriter-insurance/WG-01-UI-Concept-of-Operations-Minimum-Operating-Requirements.md",
+  },
+  "tier-redundancy-common-mode-failures": {
+    title: "Tier Classification, Redundancy Topologies & Common-Mode Failures",
+    relativePath: "references/WG-02-DT-Digital-Twin/WG-02-DT-Tier-Redundancy-Common-Mode-Failures.md",
+  },
+  "organisational-engineering-ot-security": {
+    title: "Organisational Engineering for OT Security: Operational Authority & Cognitive Load",
+    relativePath: "references/WG-03-ML-Behaviorial_Modeling/WG-03-ML-Organisational-Engineering-OT-Security.md",
+  },
 };
 
 export function getAllPaperSlugs(): string[] {
