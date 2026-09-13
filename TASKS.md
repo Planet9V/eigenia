@@ -28,10 +28,14 @@ _Memory of record (decided 2026-09-11): this file and `memory/` at the repo root
     - `MP-MATH-05-Gauge-Symmetries-Topological-Currents-OT-Microgrids`: Non-Abelian Gauge Symmetries & Conserved Topological Currents in Interconnected OT Microgrids
     - `WG-02-DT-Antifragile-Topologies-Convex-Response`: Antifragile OT Network Topologies: Convex Response to Adversarial Shock and Self-Stabilizing Microgrids
     - `WG-05-CAD-Category-Theoretic-Functors-DEXPI-CycloneDX`: Category-Theoretic Functors between DEXPI 2.0 P&ID Topologies and CycloneDX 1.6 5-BOM Schemas
-  - [ ] **Batch 6 (Sovereign Infrastructure & Kinetic Assurance Triad to 95 Treatises)**:
-    - `WG-01-UI-05`: Non-Linear Actuarial Damage Functions & Clayton Copula Tail Dependency in Interconnected Power Outages
-    - `WG-04-CF-10`: NSW Transmission Network Frequency Instability & Synthetic Inertia Deficit under High-Penetration IBR
-    - `WG-10-AN-07`: Cryptographic Root-of-Trust & Hardware Attestation in IEC 62443 Certified Substation Gateways
+  - [x] **Batch 6 (Sovereign Infrastructure & Kinetic Assurance Triad Promoted to 95 Treatises)**:
+    - `WG-01-UI-Physics-Grounded-Cyber-Underwriting`: Physics-Grounded Cyber Underwriting: Deriving Single Loss Expectancy (SLE) and Annualised Loss Expectancy (ALE) from Unified BIM+BOM Asset Registers
+    - `WG-04-CF-NSW-Transmission-Synthetic-Inertia`: NSW Transmission Network Frequency Instability & Synthetic Inertia Deficit under High-Penetration IBR
+    - `WG-10-AN-07-Omnipresent-BOM-CycloneDX-Assurance`: The Omnipresent Bill of Materials: Full-Spectrum CycloneDX 1.6+ for Offline Systems Assurance
+  - [ ] **Batch 7 (Active Next - Expanding toward 98 Treatises)**:
+    - `WG-05-CAD-03`: Formal Category-Theoretic Pushouts & Pullbacks in Digital Twin Graph Synthesis
+    - `WG-08-MO-02`: Monte Carlo Attack Graph Path Sampling with Stratified Latin Hypercube Convergence
+    - `WG-07-TM-08`: Dynamic Adversarial Game Theory & Nash Equilibrium Defense Horizons in Purdue Model Enclaves
 - [ ] **Wire PretotypeExperimentModal** - bound to `useContactForm`, imported by no page (re-verified 2026-09-11: 0 importers)
 - [ ] **`feat/what-eigenia-does`** - branch cut from main, 0 commits, no local edits. State its intent here or delete it
 - [ ] **Push `chore/memory-enforcement` and open the PR** - branch is prepared in the working tree (Cowork could not commit: `.git/index.lock` cannot be removed from its shell). Jim: `rm .git/index.lock`, `git checkout -b chore/memory-enforcement`, `git add -A -- TASKS.md memory CLAUDE.md .claude/settings.json .gitignore scripts/hooks web/scripts/audit-tasks-stamp.mjs .github/workflows/ci.yml documentation/TESTING.md`, commit, push, PR

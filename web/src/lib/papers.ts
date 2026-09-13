@@ -403,6 +403,18 @@ export const PAPERS_REGISTRY: Record<string, { title: string; relativePath: stri
     title: "Non-Abelian Gauge Symmetries & Conserved Topological Currents in Interconnected OT Microgrids",
     relativePath: "references/MP-Math-Physics-Formula/MP-MATH-05-Gauge-Symmetries-Topological-Currents-OT-Microgrids.md",
   },
+  "physics-grounded-cyber-underwriting": {
+    title: "Physics-Grounded Cyber Underwriting: Deriving Single Loss Expectancy (SLE) and Annualised Loss Expectancy (ALE) from Unified BIM+BOM Asset Registers",
+    relativePath: "references/WG-01-UI-Underwriter-insurance/WG-01-UI-Physics-Grounded-Cyber-Underwriting.md",
+  },
+  "nsw-transmission-frequency-instability-synthetic-inertia": {
+    title: "NSW Transmission Network Frequency Instability & Synthetic Inertia Deficit under High-Penetration IBR",
+    relativePath: "references/WG-04-CF-Cascading-Failures/WG-04-CF-NSW-Transmission-Synthetic-Inertia.md",
+  },
+  "omnipresent-bom-cyclonedx-systems-assurance": {
+    title: "The Omnipresent Bill of Materials: Full-Spectrum CycloneDX 1.6+ for Offline Systems Assurance",
+    relativePath: "references/WG-10-Assurance-Network/WG-10-AN-07-Omnipresent-BOM-CycloneDX-Assurance.md",
+  },
 };
 
 export function getAllPaperSlugs(): string[] {
