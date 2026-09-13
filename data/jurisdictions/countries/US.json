@@ -1,0 +1,205 @@
+{
+  "jurisdiction": {
+    "country_name": "United States",
+    "iso2": "US",
+    "iso3": "USA",
+    "numeric_code": "840",
+    "continent": "North America",
+    "region": "Northern America",
+    "sub_region": "North America",
+    "sovereign_status": "UN Member State",
+    "capital": "Washington, D.C.",
+    "currency": "USD"
+  },
+  "supervisory_authorities": {
+    "dpa": "Federal Trade Commission (FTC) / State Attorneys General",
+    "csirt": "Cybersecurity and Infrastructure Security Agency (CISA Central)",
+    "crypto_agency": "Bureau of Industry and Security (BIS) / NSA"
+  },
+  "statutory_frameworks": [
+    {
+      "official_title": "Cyber Incident Reporting for Critical Infrastructure Act of 2022 (CIRCIA)",
+      "short_name": "US CIRCIA",
+      "statute_type": "Act",
+      "legal_citation": "Public Law 117-108, 6 U.S.C. 681 et seq.",
+      "enactment_date": "2022-03-15",
+      "effective_date": "2024-04-04",
+      "enforcement_deadline": "2026-05-01",
+      "supervisory_authority": "Cybersecurity and Infrastructure Security Agency (CISA)",
+      "status": "Final Rulemaking Pending Enforcement 2026",
+      "metadata": {
+        "covered_entities": "Covered critical infrastructure across all 16 PPD-21 sectors"
+      }
+    },
+    {
+      "official_title": "Executive Order 14028: Improving the Nation's Cybersecurity",
+      "short_name": "EO 14028",
+      "statute_type": "Executive Order",
+      "legal_citation": "EO 14028, 86 FR 26633",
+      "enactment_date": "2021-05-12",
+      "effective_date": "2021-05-12",
+      "enforcement_deadline": "2022-09-14",
+      "supervisory_authority": "CISA / OMB / NIST",
+      "status": "In Force",
+      "metadata": {
+        "mandates": "NIST SSDF compliance, mandatory Software Bill of Materials (SBOM) for federal procurement"
+      }
+    },
+    {
+      "official_title": "Consolidated Appropriations Act 2023, Section 524B: Ensuring Cybersecurity of Medical Devices",
+      "short_name": "FDA 524B",
+      "statute_type": "Act",
+      "legal_citation": "21 U.S.C. 360d(b)",
+      "enactment_date": "2022-12-29",
+      "effective_date": "2023-03-29",
+      "enforcement_deadline": "2023-10-01",
+      "supervisory_authority": "Food and Drug Administration (FDA)",
+      "status": "In Force",
+      "metadata": {
+        "mandates": "Refusal to accept medical device 510(k) or PMA submissions lacking complete SBOM, vulnerability disclosure, and post-market patch plan"
+      }
+    },
+    {
+      "official_title": "CISA Binding Operational Directive 22-01: Reducing the Significant Risk of Known Exploited Vulnerabilities",
+      "short_name": "CISA BOD 22-01",
+      "statute_type": "Binding Operational Directive",
+      "legal_citation": "CISA BOD 22-01",
+      "enactment_date": "2021-11-03",
+      "effective_date": "2021-11-03",
+      "enforcement_deadline": "Ongoing",
+      "supervisory_authority": "CISA",
+      "status": "In Force",
+      "metadata": {
+        "remediation_sla": "14-21 days for KEV catalog entries"
+      }
+    },
+    {
+      "official_title": "California Consumer Privacy Act of 2018 as amended by California Privacy Rights Act (CPRA)",
+      "short_name": "CCPA/CPRA",
+      "statute_type": "Act",
+      "legal_citation": "Cal. Civ. Code 1798.100 et seq.",
+      "enactment_date": "2020-11-03",
+      "effective_date": "2023-01-01",
+      "enforcement_deadline": "2023-07-01",
+      "supervisory_authority": "California Privacy Protection Agency (CPPA)",
+      "status": "In Force",
+      "metadata": {
+        "scope": "Omnibus state consumer privacy legislation"
+      }
+    }
+  ],
+  "cyber_security_mandates": [
+    {
+      "target_domain": "Industrial OT/ICS & Federal Systems",
+      "baseline_standard_ref": "NIST SP 800-82r3 / NIST SP 800-53r5 / IEC 62443",
+      "mandatory_certifications": "NIST SP 800-161r1 supply chain risk assessment; CMMC 2.0 Level 2/3 third-party assessment for defense industrial base",
+      "default_password_ban": true,
+      "sbom_required": true,
+      "cbom_required": true,
+      "patch_management_sla_days": 14,
+      "details": "Strict compliance with CISA KEV timeline (14-21 days); NIST SP 800-218 Secure Software Development Framework (SSDF) attestation required on CISA Form."
+    }
+  ],
+  "data_privacy_sovereignty": [
+    {
+      "primary_privacy_law": "Sectoral Federal (HIPAA, GLBA, COPPA) + 18 State Omnibus Laws (CCPA, VCDPA, CPA, CTDPA, etc.)",
+      "supervisory_dpa": "FTC / CPPA / State Attorneys General",
+      "data_localization_required": false,
+      "localization_scope": "No federal omnibus localization. International Data Transfer Executive Order 14117 restricts transfer of bulk sensitive personal data to countries of concern (China, Russia, Iran, North Korea, Cuba, Venezuela).",
+      "cross_border_transfer_mechanism": "EU-U.S. Data Privacy Framework (Adequacy), Contractual Safeguards, OECD Principles",
+      "sensitive_data_categories": [
+        "Biometrics",
+        "Precise Geolocation",
+        "Health Records",
+        "Financial Account Credentials",
+        "Government ID",
+        "Racial/Ethnic Origin"
+      ]
+    }
+  ],
+  "cryptography_controls": [
+    {
+      "crypto_import_license_required": false,
+      "crypto_export_controls": "Export Administration Regulations (EAR) 15 CFR Part 774, Commerce Control List Category 5 Part 2 (Information Security). Licence Exception ENC.",
+      "mandatory_government_access_or_escrow": false,
+      "approved_encryption_standards": "FIPS 140-3 validated cryptographic modules, AES-GCM (128/256), SHA-2/SHA-3, CNSA 2.0 Quantum-Resistant Algorithms (ML-KEM, ML-DSA)",
+      "post_quantum_mandate": "National Security Memorandum 10 (NSM-10) and OMB M-23-02: Federal agencies and critical infrastructure contractors must complete cryptographic discovery (CBOM) and transition firmware to post-quantum algorithms by 2030-2033.",
+      "regulatory_agency": "Bureau of Industry and Security (BIS) / NIST"
+    }
+  ],
+  "incident_disclosure_rules": [
+    {
+      "breach_type": "Covered Cyber Incident in Critical Infrastructure",
+      "notification_timeline_hours": 72,
+      "second_stage_timeline_hours": 24,
+      "final_report_timeline_days": 30,
+      "recipient_authorities": [
+        "CISA Central"
+      ],
+      "ransomware_payment_reporting": true,
+      "threshold_trigger_definition": "CIRCIA: Any substantial cyber incident affecting covered critical infrastructure, or payment of any ransom within 24 hours of disbursement."
+    },
+    {
+      "breach_type": "SEC Material Cybersecurity Incident (Public Companies)",
+      "notification_timeline_hours": 96,
+      "second_stage_timeline_hours": null,
+      "final_report_timeline_days": 4,
+      "recipient_authorities": [
+        "Securities and Exchange Commission (SEC Form 8-K Item 1.05)"
+      ],
+      "ransomware_payment_reporting": true,
+      "threshold_trigger_definition": "Item 1.05 of Form 8-K: Determination that a cybersecurity incident experienced by the registrant is material."
+    }
+  ],
+  "penalty_structures": [
+    {
+      "max_administrative_fine_fixed": 10000000.0,
+      "fine_currency": "USD",
+      "max_turnover_percentage": 0.0,
+      "criminal_liability_directors": true,
+      "market_withdrawal_sanctions": true
+    }
+  ],
+  "sector_applicability": [
+    {
+      "sector": "Energy",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Generation, transmission, distribution, and pipeline SCADA integrity."
+    },
+    {
+      "sector": "Water",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Water treatment, distribution telemetry, and environmental control."
+    },
+    {
+      "sector": "Healthcare",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Hospital systems, medical device cybersecurity, and EHR data protection."
+    },
+    {
+      "sector": "Financial Services",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Payment systems, banking core networks, and cyber resilience audits."
+    },
+    {
+      "sector": "Telecom",
+      "scope_classification": "Essential Infrastructure",
+      "specific_obligations": "Public telecommunications networks, submarine cables, and 5G security."
+    },
+    {
+      "sector": "OT/Industrial",
+      "scope_classification": "Industrial Manufacturing",
+      "specific_obligations": "Machinery safety, industrial robotics, PLC programming, and safety instrumented systems."
+    },
+    {
+      "sector": "Transport",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Rail signaling, air traffic management, maritime port terminals, and connected vehicles."
+    }
+  ],
+  "enrichment_metadata": {
+    "iterations_completed": 4,
+    "last_enriched_at": "2026-09-12T02:14:21.062767+00:00",
+    "enrichment_pipeline": "Valyu-Perplexity-MultiAgent-v4"
+  }
+}

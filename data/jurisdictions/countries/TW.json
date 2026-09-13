@@ -1,0 +1,161 @@
+{
+  "jurisdiction": {
+    "country_name": "Taiwan",
+    "iso2": "TW",
+    "iso3": "TWN",
+    "numeric_code": "158",
+    "continent": "Asia",
+    "region": "Eastern Asia",
+    "sub_region": "East Asia",
+    "sovereign_status": "Special Status",
+    "capital": "Taipei",
+    "currency": "TWD"
+  },
+  "supervisory_authorities": {
+    "dpa": "National Data Protection Authority of Taiwan",
+    "csirt": "National Computer Emergency Response Team of Taiwan (TW-CERT)",
+    "crypto_agency": "Ministry of Telecommunications & Trade of Taiwan"
+  },
+  "statutory_frameworks": [
+    {
+      "official_title": "Cyber Security Management Act (CSMA)",
+      "short_name": "Taiwan CSMA",
+      "statute_type": "Act",
+      "legal_citation": "Presidential Order Hua-Zong-1-Yi-Zi No. 10700062401",
+      "enactment_date": "2018-06-06",
+      "effective_date": "2019-01-01",
+      "enforcement_deadline": "2019-01-01",
+      "supervisory_authority": "Administration for Cyber Security (ACS / Ministry of Digital Affairs)",
+      "status": "In Force",
+      "metadata": {
+        "critical_infrastructure": "8 critical infrastructure domains classified Level A, B, C"
+      }
+    },
+    {
+      "official_title": "Personal Data Protection Act as amended (PDPA)",
+      "short_name": "Taiwan PDPA",
+      "statute_type": "Act",
+      "legal_citation": "Presidential Order Hua-Zong-1-Jing-Zi No. 11200045431",
+      "enactment_date": "2010-05-26",
+      "effective_date": "2012-10-01",
+      "enforcement_deadline": "2023-05-31",
+      "supervisory_authority": "Preparatory Office of the Personal Data Protection Commission",
+      "status": "In Force",
+      "metadata": {
+        "independent_dpa": "Establishment of independent Personal Data Protection Commission"
+      }
+    }
+  ],
+  "cyber_security_mandates": [
+    {
+      "target_domain": "Critical Infrastructure & Government Information Systems",
+      "baseline_standard_ref": "Taiwan Cyber Security Control Standards / CNS 27001 / IEC 62443",
+      "mandatory_certifications": "Level A and B entities must obtain third-party ISO/IEC 27001 or IEC 62443 certification within 2 years",
+      "default_password_ban": true,
+      "sbom_required": true,
+      "cbom_required": false,
+      "patch_management_sla_days": 14,
+      "details": "Prohibition of hardware and software originating from entities posing national security concerns; strict IoT cybersecurity labeling compliance."
+    }
+  ],
+  "data_privacy_sovereignty": [
+    {
+      "primary_privacy_law": "Data Protection and Privacy Act of Taiwan",
+      "supervisory_dpa": "National Data Protection Authority of Taiwan",
+      "data_localization_required": false,
+      "localization_scope": "Sector-specific financial and government data localization where applicable.",
+      "cross_border_transfer_mechanism": "Adequacy, Contractual Guarantees, DPA Authorization",
+      "sensitive_data_categories": [
+        "Biometrics",
+        "Health Data",
+        "Criminal Records"
+      ]
+    }
+  ],
+  "cryptography_controls": [
+    {
+      "crypto_import_license_required": false,
+      "crypto_export_controls": "National Customs & Dual-Use Export Control Regime.",
+      "mandatory_government_access_or_escrow": false,
+      "approved_encryption_standards": "AES-256, FIPS 140-2/3, ISO/IEC 18033",
+      "post_quantum_mandate": "Monitoring international standard bodies (ISO/IEC JTC 1 / ITU-T).",
+      "regulatory_agency": "Ministry of Telecommunications & Trade of Taiwan"
+    }
+  ],
+  "incident_disclosure_rules": [
+    {
+      "breach_type": "Level 3 or 4 Cyber Security Incident",
+      "notification_timeline_hours": 1,
+      "second_stage_timeline_hours": 24,
+      "final_report_timeline_days": 30,
+      "recipient_authorities": [
+        "Administration for Cyber Security (ACS) / TWCERT/CC"
+      ],
+      "ransomware_payment_reporting": true,
+      "threshold_trigger_definition": "CSMA Enforcement Rules: Level 3 or 4 incidents causing critical service interruption or core system compromise must be notified within 1 hour."
+    },
+    {
+      "breach_type": "Personal Data Breach",
+      "notification_timeline_hours": 72,
+      "second_stage_timeline_hours": null,
+      "final_report_timeline_days": 30,
+      "recipient_authorities": [
+        "Competent Authority / PDPC"
+      ],
+      "ransomware_payment_reporting": false,
+      "threshold_trigger_definition": "Any personal data infringement that harms the rights and interests of data subjects."
+    }
+  ],
+  "penalty_structures": [
+    {
+      "max_administrative_fine_fixed": 15000000.0,
+      "fine_currency": "TWD",
+      "max_turnover_percentage": 0.0,
+      "criminal_liability_directors": true,
+      "market_withdrawal_sanctions": true
+    }
+  ],
+  "sector_applicability": [
+    {
+      "sector": "Energy",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Generation, transmission, distribution, and pipeline SCADA integrity."
+    },
+    {
+      "sector": "Water",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Water treatment, distribution telemetry, and environmental control."
+    },
+    {
+      "sector": "Healthcare",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Hospital systems, medical device cybersecurity, and EHR data protection."
+    },
+    {
+      "sector": "Financial Services",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Payment systems, banking core networks, and cyber resilience audits."
+    },
+    {
+      "sector": "Telecom",
+      "scope_classification": "Essential Infrastructure",
+      "specific_obligations": "Public telecommunications networks, submarine cables, and 5G security."
+    },
+    {
+      "sector": "OT/Industrial",
+      "scope_classification": "Industrial Manufacturing",
+      "specific_obligations": "Machinery safety, industrial robotics, PLC programming, and safety instrumented systems."
+    },
+    {
+      "sector": "Transport",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Rail signaling, air traffic management, maritime port terminals, and connected vehicles."
+    }
+  ],
+  "enrichment_metadata": {
+    "iterations_completed": 4,
+    "last_enriched_at": "2026-09-12T02:14:21.077379+00:00",
+    "enrichment_pipeline": "Valyu-Perplexity-MultiAgent-v4",
+    "enrichment_status": "DEEP_SPECIALIZED_ENRICHMENT_COMPLETE"
+  }
+}

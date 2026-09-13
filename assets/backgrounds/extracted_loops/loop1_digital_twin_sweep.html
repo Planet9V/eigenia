@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>OXOT Loop 1 — Digital Twin Search Sweep (100% Seamless)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #07080a;
+      color: #BEC3CB;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "JetBrains Mono", monospace;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      padding: 24px;
+    }
+    .stage-container {
+      width: 100%;
+      max-width: 1440px;
+      background: #101216;
+      border: 1px solid #23262c;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+    }
+    .header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      background: #0e1014;
+      border-bottom: 1px solid #23262c;
+      font-size: 13px;
+    }
+    .badge {
+      background: #E05A10;
+      color: #0B0C0E;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 3px;
+    }
+    .title {
+      color: #e8e4dc;
+      font-weight: 600;
+      font-size: 15px;
+      margin-left: 8px;
+    }
+    .subtitle {
+      color: #6b6f76;
+      font-size: 12px;
+      margin-left: 12px;
+    }
+    .controls {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+    }
+    .canvas-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1440 / 560;
+      background: #0B0C0E;
+    }
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .hud-overlay {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      color: rgba(255,255,255,0.4);
+      pointer-events: none;
+    }
+    .info-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 24px;
+      background: #0a0b0d;
+      border-top: 1px solid #1a1d23;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+      color: #6b6f76;
+    }
+    .btn {
+      background: #181b22;
+      color: #d1d5db;
+      border: 1px solid #2e333d;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 11px;
+      transition: all 0.2s;
+    }
+    .btn:hover { background: #232833; color: #fff; border-color: #4b5563; }
+    .btn.active { background: #E05A10; color: #000; border-color: #E05A10; font-weight: 700; }
+</style>
+</head>
+<body>
+  <div class="stage-container">
+    <div class="header-bar">
+      <div style="display: flex; align-items: center;">
+        <span class="badge">L1</span>
+        <span class="title">Digital Twin — Search Sweep</span>
+        <span class="subtitle">Drifting topological network · spotlight searches 5 clusters · 100% periodic loop</span>
+      </div>
+      <div class="controls">
+        <button class="btn" id="playPauseBtn">Pause</button>
+        <span>Loop: <strong id="durLabel">12s</strong></span>
+        <input type="range" id="durSlider" min="4" max="24" step="1" value="12" style="accent-color:#E05A10; cursor:pointer;">
+        <span>φ: <strong id="phaseLabel" style="color:#E05A10; min-width:38px; display:inline-block;">0.00</strong></span>
+      </div>
+    </div>
+    <div class="canvas-wrapper">
+      <canvas id="loopCanvas" width="2880" height="1120"></canvas>
+      <div class="hud-overlay" id="fpsHud">60 FPS · 2880×1120 RETINA</div>
+    </div>
+    <div class="info-footer">
+      <div>
+        <span>Accent: </span>
+        <button class="btn active" data-color="#E05A10">Dutch Orange (#E05A10)</button>
+        <button class="btn" data-color="#FF7A1A">Bright Orange (#FF7A1A)</button>
+        <button class="btn" data-color="#5FB8C9">Electric Cyan (#5FB8C9)</button>
+        <button class="btn" data-color="#D9A441">Fiduciary Amber (#D9A441)</button>
+      </div>
+      <div>100% Mathematically Seamless (φ 0.00 ≡ φ 1.00)</div>
+    </div>
+  </div>
+  <script>
+
+  function rng(seed) {
+    let s = seed;
+    return () => (s = (s * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
+  }
+
+  function vnoise(x, y, seed) {
+    const hh = (a, b) => { const n = Math.sin(a * 127.1 + b * 311.7 + seed * 47.3) * 43758.5453; return n - Math.floor(n); };
+    const xi = Math.floor(x), yi = Math.floor(y), xf = x - xi, yf = y - yi;
+    const u = xf * xf * (3 - 2 * xf), v = yf * yf * (3 - 2 * yf);
+    return (hh(xi, yi) * (1 - u) + hh(xi + 1, yi) * u) * (1 - v) + (hh(xi, yi + 1) * (1 - u) + hh(xi + 1, yi + 1) * u) * v;
+  }
+
+  function fbm(x, y, seed) {
+    let v = 0, a = 0.5, f = 1;
+    for (let i = 0; i < 4; i++) { v += a * vnoise(x * f, y * f, seed + i * 11); a *= 0.5; f *= 2; }
+    return v;
+  }
+
+  function rgba(hex, a) {
+    const n = parseInt(hex.slice(1), 16);
+    return 'rgba(' + (n >> 16) + ',' + ((n >> 8) & 255) + ',' + (n & 255) + ',' + a + ')';
+  }
+
+  function vignette(ctx, W, H, inner) {
+    const g = ctx.createRadialGradient(W / 2, H / 2, H * inner, W / 2, H / 2, H * 1.02);
+    g.addColorStop(0, 'rgba(11,12,14,0)');
+    g.addColorStop(1, 'rgba(11,12,14,1)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, H);
+  }
+
+
+  const W = 1440, H = 560;
+  const canvas = document.getElementById('loopCanvas');
+  const ctx = canvas.getContext('2d');
+
+  let accent = '#E05A10';
+  let loopSeconds = 12;
+  let spotlightReach = 9;
+  let motion = 7;
+  let isPaused = false;
+  let pauseTime = 0;
+  let t0 = performance.now();
+
+  const r = rng(20260812);
+  const pts = [];
+  const centers = [];
+  for (let c = 0; c < 54; c++) {
+    const cx = 60 + r() * (W - 120), cy = 40 + r() * (H - 80);
+    centers.push([cx, cy]);
+    const n = 8 + (r() * 18) | 0;
+    for (let i = 0; i < n; i++) {
+      const a = r() * 6.283, rad = Math.pow(r(), 0.6) * (24 + r() * 40);
+      pts.push({ x: cx + Math.cos(a) * rad, y: cy + Math.sin(a) * rad * 0.8, w: r() * 6.283 });
+    }
+  }
+
+  const pairs = [];
+  for (let i = 0; i < pts.length; i++) {
+    for (let j = i + 1; j < Math.min(pts.length, i + 24); j++) {
+      const d = Math.hypot(pts[j].x - pts[i].x, pts[j].y - pts[i].y);
+      if (d < 56) pairs.push([i, j, d]);
+    }
+  }
+
+  const inner = centers.filter(c => c[0] > 150 && c[0] < W - 150 && c[1] > 100 && c[1] < H - 100);
+  const spread = [];
+  for (let minD = 380; minD >= 120 && spread.length < 5; minD -= 40) {
+    spread.length = 0;
+    for (const c of inner) {
+      if (spread.every(s => Math.hypot(s[0] - c[0], s[1] - c[1]) > minD)) spread.push(c);
+      if (spread.length === 5) break;
+    }
+  }
+  while (spread.length < 5 && inner.length) spread.push(inner[spread.length % inner.length]);
+  const stops = spread.slice(0, 5);
+
+  function draw(ph) {
+    ctx.setTransform(canvas.width / W, 0, 0, canvas.height / H, 0, 0);
+    ctx.fillStyle = '#0B0C0E';
+    ctx.fillRect(0, 0, W, H);
+    ctx.font = '11px "JetBrains Mono", monospace';
+
+    const th = ph * 6.283, acc = accent;
+    const S = stops, n = S.length;
+    const seg = ph * n, k = Math.floor(seg), u = seg - k;
+    const from = S[k % n], to = S[(k + 1) % n];
+    const travel = 0.45;
+    const moving = u < travel;
+    const e = moving ? (t => t * t * (3 - 2 * t))(u / travel) : 1;
+    const dwell = moving ? 0 : (u - travel) / (1 - travel);
+    const sx = from[0] + (to[0] - from[0]) * e, sy = from[1] + (to[1] - from[1]) * e;
+    const base = spotlightReach;
+    const reach = base * (moving ? 0.72 : 1 + 0.1 * Math.sin(dwell * 12.566));
+    const drift = motion;
+
+    const P = pts.map(p => {
+      const s1 = th + p.w, s2 = th + p.x * 0.006 + p.y * 0.004;
+      const x = p.x + drift * Math.sin(s1) + drift * 0.8 * Math.sin(s2);
+      const y = p.y + drift * 0.7 * Math.cos(s1) + drift * 0.6 * Math.cos(s2 * 1.0 + 1.1);
+      return { x, y, g: Math.max(0, 1 - Math.hypot(x - sx, y - sy) / reach) };
+    });
+
+    const linkR = 48 + 7 * Math.sin(th);
+    ctx.lineWidth = 0.6;
+    for (const [i, j] of pairs) {
+      const a = P[i], b = P[j];
+      const d = Math.hypot(b.x - a.x, b.y - a.y);
+      if (d > linkR) continue;
+      const g = Math.max(a.g, b.g);
+      ctx.strokeStyle = g > 0.02 ? rgba(acc, 0.06 + 0.6 * g * g) : 'rgba(150,156,166,' + (0.045 + 0.08 * (1 - d / linkR)) + ')';
+      ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+    }
+
+    for (const p of P) {
+      ctx.fillStyle = p.g > 0.02 ? rgba(acc, 0.35 + 0.65 * p.g) : 'rgba(190,195,203,.42)';
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.g > 0.3 ? 1.5 + p.g : 1.1, 0, 6.3); ctx.fill();
+    }
+
+    const halo = ctx.createRadialGradient(sx, sy, 0, sx, sy, reach);
+    halo.addColorStop(0, rgba(acc, 0.1)); halo.addColorStop(1, rgba(acc, 0));
+    ctx.fillStyle = halo; ctx.fillRect(0, 0, W, H);
+    vignette(ctx, W, H, 0.34);
+
+    const R = reach * 0.86;
+    ctx.strokeStyle = rgba(acc, moving ? 0.3 : 0.6); ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.arc(sx, sy, R, 0, 6.3); ctx.stroke();
+
+    const br = R + 9;
+    ctx.strokeStyle = rgba(acc, moving ? 0.25 : 0.75); ctx.lineWidth = 1.4;
+    for (const [dx, dy] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) {
+      ctx.beginPath();
+      ctx.moveTo(sx + dx * br, sy + dy * br - dy * 9);
+      ctx.lineTo(sx + dx * br, sy + dy * br);
+      ctx.lineTo(sx + dx * br - dx * 9, sy + dy * br);
+      ctx.stroke();
+    }
+
+    if (moving) {
+      ctx.strokeStyle = rgba(acc, 0.22); ctx.setLineDash([5, 7]); ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(from[0], from[1]); ctx.lineTo(to[0], to[1]); ctx.stroke(); ctx.setLineDash([]);
+    } else {
+      for (const p of [0, 0.5]) {
+        const t = (dwell + p) % 1;
+        ctx.strokeStyle = rgba(acc, 0.45 * (1 - t));
+        ctx.lineWidth = 1.2;
+        ctx.beginPath(); ctx.arc(sx, sy, R * (0.2 + 1.5 * t), 0, 6.3); ctx.stroke();
+      }
+      const sweep = -1.571 + dwell * 6.283;
+      ctx.strokeStyle = rgba(acc, 0.5); ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(sx, sy); ctx.lineTo(sx + Math.cos(sweep) * R, sy + Math.sin(sweep) * R); ctx.stroke();
+      ctx.fillStyle = rgba(acc, 0.85);
+      ctx.fillText('ANALYSING  SUB-' + (100 + (k % n) * 7), sx + br + 12, sy - br + 12);
+      ctx.fillStyle = '#6B6F76';
+      ctx.fillText(Math.round(dwell * 100) + '%', sx + br + 12, sy - br + 30);
+    }
+
+    ctx.fillStyle = '#4A4E55';
+    ctx.fillText('fragment: 3.2 × 10⁶ nodes · sweep ' + ((k % n) + 1) + '/' + n, 22, H - 18);
+  }
+
+  let frameCount = 0, lastFpsTime = performance.now();
+  function animate(now) {
+    requestAnimationFrame(animate);
+    if (isPaused) return;
+
+    const ph = ((now - t0) / 1000 / loopSeconds) % 1;
+    draw(ph);
+
+    document.getElementById('phaseLabel').textContent = ph.toFixed(2);
+    frameCount++;
+    if (now - lastFpsTime >= 1000) {
+      const fps = Math.round((frameCount * 1000) / (now - lastFpsTime));
+      document.getElementById('fpsHud').textContent = fps + ' FPS · 2880×1120 RETINA';
+      frameCount = 0;
+      lastFpsTime = now;
+    }
+  }
+  requestAnimationFrame(animate);
+
+  const playPauseBtn = document.getElementById('playPauseBtn');
+  playPauseBtn.addEventListener('click', () => {
+    isPaused = !isPaused;
+    if (isPaused) {
+      pauseTime = performance.now();
+      playPauseBtn.textContent = 'Play';
+      playPauseBtn.classList.add('active');
+    } else {
+      t0 += (performance.now() - pauseTime);
+      playPauseBtn.textContent = 'Pause';
+      playPauseBtn.classList.remove('active');
+    }
+  });
+
+  const durSlider = document.getElementById('durSlider');
+  durSlider.addEventListener('input', (e) => {
+    loopSeconds = parseFloat(e.target.value);
+    document.getElementById('durLabel').textContent = loopSeconds + 's';
+  });
+
+  document.querySelectorAll('[data-color]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-color]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      accent = btn.getAttribute('data-color');
+    });
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.code === 'Space') {
+      e.preventDefault();
+      playPauseBtn.click();
+    }
+  });
+
+  </script>
+</body>
+</html>

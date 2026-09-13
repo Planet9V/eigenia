@@ -1,0 +1,150 @@
+{
+  "jurisdiction": {
+    "country_name": "Nigeria",
+    "iso2": "NG",
+    "iso3": "NGA",
+    "numeric_code": "566",
+    "continent": "Africa",
+    "region": "Western Africa",
+    "sub_region": "ECOWAS",
+    "sovereign_status": "UN Member State",
+    "capital": "Abuja",
+    "currency": "NGN"
+  },
+  "supervisory_authorities": {
+    "dpa": "Nigeria Data Protection Commission (NDPC)",
+    "csirt": "ngCERT / Office of the National Security Adviser",
+    "crypto_agency": "National Information Technology Development Agency (NITDA)"
+  },
+  "statutory_frameworks": [
+    {
+      "official_title": "Nigeria Data Protection Act 2023 (NDPA)",
+      "short_name": "Nigeria NDPA 2023",
+      "statute_type": "Act",
+      "legal_citation": "Act No. 34 of 2023",
+      "enactment_date": "2023-06-12",
+      "effective_date": "2023-06-12",
+      "enforcement_deadline": "2024-06-12",
+      "supervisory_authority": "Nigeria Data Protection Commission (NDPC)",
+      "status": "In Force",
+      "metadata": {
+        "scope": "Establishes independent commission replacing previous NDPR guidelines"
+      }
+    },
+    {
+      "official_title": "Cybercrimes (Prohibition, Prevention, etc.) Act 2015 as amended by Cybercrimes (Amendment) Act 2024",
+      "short_name": "Nigeria Cybercrimes Act",
+      "statute_type": "Act",
+      "legal_citation": "Act No. 17 of 2015 / Amendment Act 2024",
+      "enactment_date": "2015-05-15",
+      "effective_date": "2015-05-15",
+      "enforcement_deadline": "2024-02-28",
+      "supervisory_authority": "Office of the National Security Adviser (ONSA) / ngCERT",
+      "status": "In Force",
+      "metadata": {
+        "cni_protection": "Designation of Critical National Information Infrastructure (CNII)"
+      }
+    }
+  ],
+  "cyber_security_mandates": [
+    {
+      "target_domain": "Critical National Information Infrastructure (CNII)",
+      "baseline_standard_ref": "Nigeria Cybersecurity Policy and Strategy / ISO/IEC 27001 / IEC 62443",
+      "mandatory_certifications": "Annual Data Protection Compliance Audit (CAR); ngCERT CNII audit registration",
+      "default_password_ban": true,
+      "sbom_required": false,
+      "cbom_required": false,
+      "patch_management_sla_days": 30,
+      "details": "Designated CNII operators must register with ONSA, implement continuous incident monitoring, and conduct mandatory annual vulnerability audits."
+    }
+  ],
+  "data_privacy_sovereignty": [
+    {
+      "primary_privacy_law": "Data Protection and Privacy Act of Nigeria",
+      "supervisory_dpa": "Nigeria Data Protection Commission (NDPC)",
+      "data_localization_required": false,
+      "localization_scope": "Sector-specific financial and government data localization where applicable.",
+      "cross_border_transfer_mechanism": "Adequacy, Contractual Guarantees, DPA Authorization",
+      "sensitive_data_categories": [
+        "Biometrics",
+        "Health Data",
+        "Criminal Records"
+      ]
+    }
+  ],
+  "cryptography_controls": [
+    {
+      "crypto_import_license_required": false,
+      "crypto_export_controls": "National Customs & Dual-Use Export Control Regime.",
+      "mandatory_government_access_or_escrow": false,
+      "approved_encryption_standards": "AES-256, FIPS 140-2/3, ISO/IEC 18033",
+      "post_quantum_mandate": "Monitoring international standard bodies (ISO/IEC JTC 1 / ITU-T).",
+      "regulatory_agency": "National Information Technology Development Agency (NITDA)"
+    }
+  ],
+  "incident_disclosure_rules": [
+    {
+      "breach_type": "Personal Data Breach",
+      "notification_timeline_hours": 72,
+      "second_stage_timeline_hours": null,
+      "final_report_timeline_days": 30,
+      "recipient_authorities": [
+        "Nigeria Data Protection Commission (NDPC)"
+      ],
+      "ransomware_payment_reporting": false,
+      "threshold_trigger_definition": "NDPA Section 40: Data breach that is likely to result in risk to the rights and freedoms of the data subject."
+    }
+  ],
+  "penalty_structures": [
+    {
+      "max_administrative_fine_fixed": 10000000.0,
+      "fine_currency": "NGN",
+      "max_turnover_percentage": 2.0,
+      "criminal_liability_directors": true,
+      "market_withdrawal_sanctions": false
+    }
+  ],
+  "sector_applicability": [
+    {
+      "sector": "Energy",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Generation, transmission, distribution, and pipeline SCADA integrity."
+    },
+    {
+      "sector": "Water",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Water treatment, distribution telemetry, and environmental control."
+    },
+    {
+      "sector": "Healthcare",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Hospital systems, medical device cybersecurity, and EHR data protection."
+    },
+    {
+      "sector": "Financial Services",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Payment systems, banking core networks, and cyber resilience audits."
+    },
+    {
+      "sector": "Telecom",
+      "scope_classification": "Essential Infrastructure",
+      "specific_obligations": "Public telecommunications networks, submarine cables, and 5G security."
+    },
+    {
+      "sector": "OT/Industrial",
+      "scope_classification": "Industrial Manufacturing",
+      "specific_obligations": "Machinery safety, industrial robotics, PLC programming, and safety instrumented systems."
+    },
+    {
+      "sector": "Transport",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Rail signaling, air traffic management, maritime port terminals, and connected vehicles."
+    }
+  ],
+  "enrichment_metadata": {
+    "iterations_completed": 4,
+    "last_enriched_at": "2026-09-12T02:14:21.089239+00:00",
+    "enrichment_pipeline": "Valyu-Perplexity-MultiAgent-v4",
+    "enrichment_status": "DEEP_SPECIALIZED_ENRICHMENT_COMPLETE"
+  }
+}

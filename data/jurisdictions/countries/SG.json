@@ -1,0 +1,161 @@
+{
+  "jurisdiction": {
+    "country_name": "Singapore",
+    "iso2": "SG",
+    "iso3": "SGP",
+    "numeric_code": "702",
+    "continent": "Asia",
+    "region": "South-eastern Asia",
+    "sub_region": "ASEAN",
+    "sovereign_status": "UN Member State",
+    "capital": "Singapore",
+    "currency": "SGD"
+  },
+  "supervisory_authorities": {
+    "dpa": "Personal Data Protection Commission (PDPC)",
+    "csirt": "Singapore Computer Emergency Response Team (SingCERT / CSA)",
+    "crypto_agency": "Cyber Security Agency of Singapore (CSA)"
+  },
+  "statutory_frameworks": [
+    {
+      "official_title": "Cybersecurity Act 2018 as amended by Cybersecurity (Amendment) Act 2024",
+      "short_name": "Singapore Cyber Act 2024",
+      "statute_type": "Act",
+      "legal_citation": "Act 9 of 2018 / Act 13 of 2024",
+      "enactment_date": "2024-04-03",
+      "effective_date": "2024-05-08",
+      "enforcement_deadline": "2024-05-08",
+      "supervisory_authority": "Cyber Security Agency of Singapore (CSA)",
+      "status": "In Force",
+      "metadata": {
+        "scope": "Expands regulation beyond Critical Information Infrastructure (CII) to Foundational Digital Infrastructure (FDI) and Entities of Special Cybersecurity Interest (ESCI)"
+      }
+    },
+    {
+      "official_title": "Personal Data Protection Act 2012 as amended (PDPA)",
+      "short_name": "Singapore PDPA",
+      "statute_type": "Act",
+      "legal_citation": "Act 26 of 2012",
+      "enactment_date": "2012-10-15",
+      "effective_date": "2014-07-02",
+      "enforcement_deadline": "2021-02-01",
+      "supervisory_authority": "Personal Data Protection Commission (PDPC)",
+      "status": "In Force",
+      "metadata": {
+        "mandatory_breach_reporting": "Mandatory breach reporting within 3 days (72h)"
+      }
+    }
+  ],
+  "cyber_security_mandates": [
+    {
+      "target_domain": "Connected Devices & Critical Digital Infrastructure",
+      "baseline_standard_ref": "Cybersecurity Labelling Scheme (CLS IoT / CLS Medical Devices) / CSA CCoP 2.0 / IEC 62443",
+      "mandatory_certifications": "CLS Level 1-4 (Level 3 requires third-party binary software assessment; Level 4 requires structured penetration testing)",
+      "default_password_ban": true,
+      "sbom_required": true,
+      "cbom_required": true,
+      "patch_management_sla_days": 14,
+      "details": "Cybersecurity Code of Practice (CCoP 2.0) requires multi-factor authentication, network segregation for OT, and formal vulnerability disclosure program."
+    }
+  ],
+  "data_privacy_sovereignty": [
+    {
+      "primary_privacy_law": "Personal Data Protection Act 2012 (PDPA)",
+      "supervisory_dpa": "Personal Data Protection Commission (PDPC)",
+      "data_localization_required": false,
+      "localization_scope": "No general data localization.",
+      "cross_border_transfer_mechanism": "Comparable Protection Standard, APEC CBPR / PRP Certification, Binding Corporate Rules, Transfer Agreements",
+      "sensitive_data_categories": [
+        "National ID Numbers (NRIC)",
+        "Financial Records",
+        "Medical Records",
+        "Biometrics"
+      ]
+    }
+  ],
+  "cryptography_controls": [
+    {
+      "crypto_import_license_required": false,
+      "crypto_export_controls": "Strategic Goods (Control) Act (SGCA) Category 5 Part 2. Licence issued by Singapore Customs.",
+      "mandatory_government_access_or_escrow": false,
+      "approved_encryption_standards": "AES-256, FIPS 140-3, CSA Cryptographic Guidelines",
+      "post_quantum_mandate": "Monetary Authority of Singapore (MAS) circular on quantum risk: Financial institutions must maintain CBOM and plan PQC transition.",
+      "regulatory_agency": "Cyber Security Agency of Singapore (CSA) / Customs"
+    }
+  ],
+  "incident_disclosure_rules": [
+    {
+      "breach_type": "Critical Information Infrastructure / Foundational Digital Infrastructure Incident",
+      "notification_timeline_hours": 2,
+      "second_stage_timeline_hours": 24,
+      "final_report_timeline_days": 14,
+      "recipient_authorities": [
+        "Cyber Security Agency of Singapore (CSA) / SingCERT"
+      ],
+      "ransomware_payment_reporting": true,
+      "threshold_trigger_definition": "Cybersecurity Act 2024: Any incident affecting the availability or integrity of CII or FDI must be notified within 2 hours of awareness."
+    },
+    {
+      "breach_type": "Personal Data Breach",
+      "notification_timeline_hours": 72,
+      "second_stage_timeline_hours": null,
+      "final_report_timeline_days": 30,
+      "recipient_authorities": [
+        "Personal Data Protection Commission (PDPC)"
+      ],
+      "ransomware_payment_reporting": false,
+      "threshold_trigger_definition": "Significant harm to affected individuals, or scale affecting 500 or more individuals."
+    }
+  ],
+  "penalty_structures": [
+    {
+      "max_administrative_fine_fixed": 1000000.0,
+      "fine_currency": "SGD",
+      "max_turnover_percentage": 10.0,
+      "criminal_liability_directors": true,
+      "market_withdrawal_sanctions": true
+    }
+  ],
+  "sector_applicability": [
+    {
+      "sector": "Energy",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Generation, transmission, distribution, and pipeline SCADA integrity."
+    },
+    {
+      "sector": "Water",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Water treatment, distribution telemetry, and environmental control."
+    },
+    {
+      "sector": "Healthcare",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Hospital systems, medical device cybersecurity, and EHR data protection."
+    },
+    {
+      "sector": "Financial Services",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Payment systems, banking core networks, and cyber resilience audits."
+    },
+    {
+      "sector": "Telecom",
+      "scope_classification": "Essential Infrastructure",
+      "specific_obligations": "Public telecommunications networks, submarine cables, and 5G security."
+    },
+    {
+      "sector": "OT/Industrial",
+      "scope_classification": "Industrial Manufacturing",
+      "specific_obligations": "Machinery safety, industrial robotics, PLC programming, and safety instrumented systems."
+    },
+    {
+      "sector": "Transport",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Rail signaling, air traffic management, maritime port terminals, and connected vehicles."
+    }
+  ],
+  "enrichment_metadata": {
+    "iterations_completed": 4,
+    "last_enriched_at": "2026-09-12T02:14:21.076946+00:00",
+    "enrichment_pipeline": "Valyu-Perplexity-MultiAgent-v4"
+  }
+}

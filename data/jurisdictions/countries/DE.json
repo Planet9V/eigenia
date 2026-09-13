@@ -1,0 +1,154 @@
+{
+  "jurisdiction": {
+    "country_name": "Germany",
+    "iso2": "DE",
+    "iso3": "DEU",
+    "numeric_code": "276",
+    "continent": "Europe",
+    "region": "Western Europe",
+    "sub_region": "European Union",
+    "sovereign_status": "UN Member State",
+    "capital": "Berlin",
+    "currency": "EUR"
+  },
+  "supervisory_authorities": {
+    "dpa": "Federal Commissioner for Data Protection and Freedom of Information (BfDI)",
+    "csirt": "CERT-Bund / Federal Office for Information Security (BSI)",
+    "crypto_agency": "Federal Office for Information Security (BSI)"
+  },
+  "statutory_frameworks": [
+    {
+      "official_title": "Gesetz uber das Bundesamt fur Sicherheit in der Informationstechnik (BSI-Gesetz, BSIG) as amended by NIS-2-Umsetzungs- und Cybersicherheitsstarkungsgesetz (NIS2UmsuCG)",
+      "short_name": "Germany BSIG / NIS2UmsuCG",
+      "statute_type": "Act",
+      "legal_citation": "BGBl. I 2009 S. 2821 / NIS2UmsuCG",
+      "enactment_date": "2009-08-14",
+      "effective_date": "2024-10-18",
+      "enforcement_deadline": "2025-03-01",
+      "supervisory_authority": "Bundesamt fur Sicherheit in der Informationstechnik (BSI)",
+      "status": "In Force",
+      "metadata": {
+        "kritis_scope": "Energy, Water, Food, Health, Finance, Insurance, IT/Telecom, Transport, Municipal Waste"
+      }
+    },
+    {
+      "official_title": "Bundesdatenschutzgesetz (BDSG) in conjunction with Regulation (EU) 2016/679 (GDPR)",
+      "short_name": "Germany BDSG / GDPR",
+      "statute_type": "Act",
+      "legal_citation": "BGBl. I 2017 S. 2097",
+      "enactment_date": "2017-06-30",
+      "effective_date": "2018-05-25",
+      "enforcement_deadline": "2018-05-25",
+      "supervisory_authority": "Der Bundesbeauftragte fur den Datenschutz und die Informationsfreiheit (BfDI) and State DPAs",
+      "status": "In Force",
+      "metadata": {
+        "special_provisions": "Employee data protection section 26 BDSG, video surveillance section 4 BDSG"
+      }
+    }
+  ],
+  "cyber_security_mandates": [
+    {
+      "target_domain": "KRITIS & Particularly Important Entities (Besonders wichtige Einrichtungen)",
+      "baseline_standard_ref": "BSI IT-Grundschutz / BSI TR-02102 / IEC 62443 / ISO/IEC 27001",
+      "mandatory_certifications": "Section 8a BSIG Audit Certification every 2 years; mandatory Systeme zur Angriffserkennung (SzaE / Attack Detection Systems)",
+      "default_password_ban": true,
+      "sbom_required": true,
+      "cbom_required": true,
+      "patch_management_sla_days": 14,
+      "details": "KRITIS operators must operate qualified attack detection systems with automated log inspection. Management board bears direct personal liability for implementation."
+    }
+  ],
+  "data_privacy_sovereignty": [
+    {
+      "primary_privacy_law": "Regulation (EU) 2016/679 (GDPR)",
+      "supervisory_dpa": "Federal Commissioner for Data Protection and Freedom of Information (BfDI)",
+      "data_localization_required": false,
+      "localization_scope": "No general localization within EU/EEA. Transfers outside EEA strictly conditional under Chapter V.",
+      "cross_border_transfer_mechanism": "Adequacy Decisions (Art 45), Standard Contractual Clauses (SCCs, Art 46), Binding Corporate Rules (BCRs, Art 47), Derogations (Art 49)",
+      "sensitive_data_categories": [
+        "Biometrics",
+        "Genetic Data",
+        "Health Data",
+        "Trade Union Membership",
+        "Political Opinions",
+        "Sexual Orientation",
+        "Criminal Convictions"
+      ]
+    }
+  ],
+  "cryptography_controls": [
+    {
+      "crypto_import_license_required": false,
+      "crypto_export_controls": "EU Dual-Use Regulation (EU) 2021/821 Annex I Category 5 Part 2 (Information Security). Wassenaar Arrangement member.",
+      "mandatory_government_access_or_escrow": false,
+      "approved_encryption_standards": "AES-256, RSA >= 3072, ECC (NIST P-256/P-384, Ed25519), BSI TR-02102-1, SOG-IS Agreed Cryptographic Mechanisms",
+      "post_quantum_mandate": "BSI Technical Guideline TR-02102-1 and ANSSI PQC migration recommendation: hybrid post-quantum key encapsulation (ML-KEM / Kyber) required for long-term secure communications by 2026-2030.",
+      "regulatory_agency": "Federal Office for Information Security (BSI)"
+    }
+  ],
+  "incident_disclosure_rules": [
+    {
+      "breach_type": "Significant Incident in KRITIS / Essential Entity",
+      "notification_timeline_hours": 24,
+      "second_stage_timeline_hours": 72,
+      "final_report_timeline_days": 30,
+      "recipient_authorities": [
+        "BSI / CERT-Bund"
+      ],
+      "ransomware_payment_reporting": true,
+      "threshold_trigger_definition": "Section 8b BSIG: Any malfunction, breakdown, or significant security breach affecting KRITIS services or digital infrastructure."
+    }
+  ],
+  "penalty_structures": [
+    {
+      "max_administrative_fine_fixed": 20000000.0,
+      "fine_currency": "EUR",
+      "max_turnover_percentage": 2.0,
+      "criminal_liability_directors": true,
+      "market_withdrawal_sanctions": true
+    }
+  ],
+  "sector_applicability": [
+    {
+      "sector": "Energy",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Generation, transmission, distribution, and pipeline SCADA integrity."
+    },
+    {
+      "sector": "Water",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Water treatment, distribution telemetry, and environmental control."
+    },
+    {
+      "sector": "Healthcare",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Hospital systems, medical device cybersecurity, and EHR data protection."
+    },
+    {
+      "sector": "Financial Services",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Payment systems, banking core networks, and cyber resilience audits."
+    },
+    {
+      "sector": "Telecom",
+      "scope_classification": "Essential Infrastructure",
+      "specific_obligations": "Public telecommunications networks, submarine cables, and 5G security."
+    },
+    {
+      "sector": "OT/Industrial",
+      "scope_classification": "Industrial Manufacturing",
+      "specific_obligations": "Machinery safety, industrial robotics, PLC programming, and safety instrumented systems."
+    },
+    {
+      "sector": "Transport",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Rail signaling, air traffic management, maritime port terminals, and connected vehicles."
+    }
+  ],
+  "enrichment_metadata": {
+    "iterations_completed": 4,
+    "last_enriched_at": "2026-09-12T02:14:21.046175+00:00",
+    "enrichment_pipeline": "Valyu-Perplexity-MultiAgent-v4",
+    "enrichment_status": "DEEP_SPECIALIZED_ENRICHMENT_COMPLETE"
+  }
+}

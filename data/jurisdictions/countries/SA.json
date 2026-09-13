@@ -1,0 +1,161 @@
+{
+  "jurisdiction": {
+    "country_name": "Saudi Arabia",
+    "iso2": "SA",
+    "iso3": "SAU",
+    "numeric_code": "682",
+    "continent": "Asia",
+    "region": "Western Asia",
+    "sub_region": "GCC",
+    "sovereign_status": "UN Member State",
+    "capital": "Riyadh",
+    "currency": "SAR"
+  },
+  "supervisory_authorities": {
+    "dpa": "Saudi Data and Artificial Intelligence Authority (SDAIA)",
+    "csirt": "National Computer Emergency Response Team (CERT-SA / NCA)",
+    "crypto_agency": "National Cybersecurity Authority (NCA)"
+  },
+  "statutory_frameworks": [
+    {
+      "official_title": "National Cybersecurity Authority Regulatory Framework: Essential Cybersecurity Controls (ECC-1:2018) & Critical Systems Cybersecurity Controls (CSCC-1:2019)",
+      "short_name": "Saudi Arabia NCA ECC/CSCC",
+      "statute_type": "Regulation",
+      "legal_citation": "Royal Decree No. 110 / NCA Regulations",
+      "enactment_date": "2018-10-21",
+      "effective_date": "2019-01-01",
+      "enforcement_deadline": "2020-01-01",
+      "supervisory_authority": "National Cybersecurity Authority (NCA)",
+      "status": "In Force",
+      "metadata": {
+        "controls": "ECC has 5 domains, 29 subdomains, 114 controls; CSCC has 4 domains, 33 subdomains"
+      }
+    },
+    {
+      "official_title": "Personal Data Protection Law (PDPL)",
+      "short_name": "Saudi Arabia PDPL",
+      "statute_type": "Act",
+      "legal_citation": "Royal Decree No. M/19 of 9/2/1443H as amended by M/148",
+      "enactment_date": "2021-09-16",
+      "effective_date": "2023-09-14",
+      "enforcement_deadline": "2024-09-14",
+      "supervisory_authority": "Saudi Data and Artificial Intelligence Authority (SDAIA)",
+      "status": "In Force",
+      "metadata": {
+        "localization": "Transfers outside the Kingdom require adequacy or compliance with Executive Regulations"
+      }
+    }
+  ],
+  "cyber_security_mandates": [
+    {
+      "target_domain": "Government & Critical National Infrastructure (CNI)",
+      "baseline_standard_ref": "NCA ECC-1:2018 / NCA CSCC-1:2019 / NCA CCC-1:2020 (Cloud) / IEC 62443",
+      "mandatory_certifications": "Mandatory compliance assessment registered on NCA compliance portal; third-party audit for critical systems",
+      "default_password_ban": true,
+      "sbom_required": true,
+      "cbom_required": false,
+      "patch_management_sla_days": 14,
+      "details": "NCA controls require strict isolation of operational technology (OT) from corporate networks, multi-factor authentication, and data encryption at rest and in transit."
+    }
+  ],
+  "data_privacy_sovereignty": [
+    {
+      "primary_privacy_law": "Data Protection and Privacy Act of Saudi Arabia",
+      "supervisory_dpa": "Saudi Data and Artificial Intelligence Authority (SDAIA)",
+      "data_localization_required": false,
+      "localization_scope": "Sector-specific financial and government data localization where applicable.",
+      "cross_border_transfer_mechanism": "Adequacy, Contractual Guarantees, DPA Authorization",
+      "sensitive_data_categories": [
+        "Biometrics",
+        "Health Data",
+        "Criminal Records"
+      ]
+    }
+  ],
+  "cryptography_controls": [
+    {
+      "crypto_import_license_required": false,
+      "crypto_export_controls": "National Customs & Dual-Use Export Control Regime.",
+      "mandatory_government_access_or_escrow": false,
+      "approved_encryption_standards": "AES-256, FIPS 140-2/3, ISO/IEC 18033",
+      "post_quantum_mandate": "Monitoring international standard bodies (ISO/IEC JTC 1 / ITU-T).",
+      "regulatory_agency": "National Cybersecurity Authority (NCA)"
+    }
+  ],
+  "incident_disclosure_rules": [
+    {
+      "breach_type": "Critical or High Severity Cybersecurity Incident",
+      "notification_timeline_hours": 2,
+      "second_stage_timeline_hours": 24,
+      "final_report_timeline_days": 14,
+      "recipient_authorities": [
+        "National Cybersecurity Authority (NCA) / Saudi CERT"
+      ],
+      "ransomware_payment_reporting": true,
+      "threshold_trigger_definition": "NCA ECC Sub-domain 3-3-3: Incidents causing disruption to critical infrastructure, sensitive data leakage, or active cyber intrusion."
+    },
+    {
+      "breach_type": "Personal Data Breach",
+      "notification_timeline_hours": 72,
+      "second_stage_timeline_hours": null,
+      "final_report_timeline_days": 30,
+      "recipient_authorities": [
+        "Saudi Data and Artificial Intelligence Authority (SDAIA)"
+      ],
+      "ransomware_payment_reporting": false,
+      "threshold_trigger_definition": "Breach of personal data resulting in potential harm to data subjects or violation of rights."
+    }
+  ],
+  "penalty_structures": [
+    {
+      "max_administrative_fine_fixed": 5000000.0,
+      "fine_currency": "SAR",
+      "max_turnover_percentage": 0.0,
+      "criminal_liability_directors": true,
+      "market_withdrawal_sanctions": true
+    }
+  ],
+  "sector_applicability": [
+    {
+      "sector": "Energy",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Generation, transmission, distribution, and pipeline SCADA integrity."
+    },
+    {
+      "sector": "Water",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Water treatment, distribution telemetry, and environmental control."
+    },
+    {
+      "sector": "Healthcare",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Hospital systems, medical device cybersecurity, and EHR data protection."
+    },
+    {
+      "sector": "Financial Services",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Payment systems, banking core networks, and cyber resilience audits."
+    },
+    {
+      "sector": "Telecom",
+      "scope_classification": "Essential Infrastructure",
+      "specific_obligations": "Public telecommunications networks, submarine cables, and 5G security."
+    },
+    {
+      "sector": "OT/Industrial",
+      "scope_classification": "Industrial Manufacturing",
+      "specific_obligations": "Machinery safety, industrial robotics, PLC programming, and safety instrumented systems."
+    },
+    {
+      "sector": "Transport",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Rail signaling, air traffic management, maritime port terminals, and connected vehicles."
+    }
+  ],
+  "enrichment_metadata": {
+    "iterations_completed": 4,
+    "last_enriched_at": "2026-09-12T02:14:21.079616+00:00",
+    "enrichment_pipeline": "Valyu-Perplexity-MultiAgent-v4",
+    "enrichment_status": "DEEP_SPECIALIZED_ENRICHMENT_COMPLETE"
+  }
+}

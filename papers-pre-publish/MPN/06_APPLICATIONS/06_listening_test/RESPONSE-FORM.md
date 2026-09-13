@@ -34,6 +34,15 @@ Ties, if any: _______________________________________________
 | Situation 3 | | |
 | Situation 4 | | |
 
+**Darker, or elsewhere?** When a situation goes to its worst, does the music want a darker version of the same colour, or does it break to a different quality altogether? Tick one per situation, and say if it depends.
+
+| | Darker version of the same | Breaks to somewhere else | Depends, how |
+|:---|:---|:---|:---|
+| Situation 1 | | | |
+| Situation 2 | | | |
+| Situation 3 | | | |
+| Situation 4 | | | |
+
 **Home or passing.** For each letter you chose, would you write the cue in it, or touch it and leave?
 
 | | Home key / passing colour / neither | Note |

@@ -1,0 +1,183 @@
+{
+  "jurisdiction": {
+    "country_name": "China",
+    "iso2": "CN",
+    "iso3": "CHN",
+    "numeric_code": "156",
+    "continent": "Asia",
+    "region": "Eastern Asia",
+    "sub_region": "East Asia",
+    "sovereign_status": "UN Member State",
+    "capital": "Beijing",
+    "currency": "CNY"
+  },
+  "supervisory_authorities": {
+    "dpa": "Cyberspace Administration of China (CAC)",
+    "csirt": "National Computer Network Emergency Response Technical Team (CNCERT/CC)",
+    "crypto_agency": "State Cryptography Administration (SCA)"
+  },
+  "statutory_frameworks": [
+    {
+      "official_title": "Personal Information Protection Law of the People's Republic of China (PIPL)",
+      "short_name": "China PIPL",
+      "statute_type": "Act",
+      "legal_citation": "Presidential Decree No. 91",
+      "enactment_date": "2021-08-20",
+      "effective_date": "2021-11-01",
+      "enforcement_deadline": "2021-11-01",
+      "supervisory_authority": "Cyberspace Administration of China (CAC)",
+      "status": "In Force",
+      "metadata": {
+        "scope": "Comprehensive privacy legislation with strict cross-border security assessment"
+      }
+    },
+    {
+      "official_title": "Data Security Law of the People's Republic of China (DSL)",
+      "short_name": "China DSL",
+      "statute_type": "Act",
+      "legal_citation": "Presidential Decree No. 84",
+      "enactment_date": "2021-06-10",
+      "effective_date": "2021-09-01",
+      "enforcement_deadline": "2021-09-01",
+      "supervisory_authority": "CAC / Ministry of Industry and Information Technology (MIIT)",
+      "status": "In Force",
+      "metadata": {
+        "data_classification": "Core Data, Important Data, General Data"
+      }
+    },
+    {
+      "official_title": "Cybersecurity Law of the People's Republic of China (CSL) & Multi-Level Protection Scheme (MLPS 2.0)",
+      "short_name": "China CSL / MLPS 2.0",
+      "statute_type": "Act",
+      "legal_citation": "Presidential Decree No. 53 / GB/T 22239-2019",
+      "enactment_date": "2016-11-07",
+      "effective_date": "2017-06-01",
+      "enforcement_deadline": "2019-12-01",
+      "supervisory_authority": "Ministry of Public Security (MPS) / CAC",
+      "status": "In Force",
+      "metadata": {
+        "grading": "Levels 1-5 security grades; Level 3+ requires mandatory security assessment and domestic hardware"
+      }
+    },
+    {
+      "official_title": "Cryptography Law of the People's Republic of China",
+      "short_name": "China Cryptography Law",
+      "statute_type": "Act",
+      "legal_citation": "Presidential Decree No. 35",
+      "enactment_date": "2019-10-26",
+      "effective_date": "2020-01-01",
+      "enforcement_deadline": "2020-01-01",
+      "supervisory_authority": "State Cryptography Administration (SCA)",
+      "status": "In Force",
+      "metadata": {
+        "classification": "Core Cryptography, Ordinary Cryptography, Commercial Cryptography"
+      }
+    }
+  ],
+  "cyber_security_mandates": [
+    {
+      "target_domain": "Critical Information Infrastructure & Industrial Networks",
+      "baseline_standard_ref": "GB/T 22239-2019 (MLPS 2.0 Level 3/4) / GB/T 36572 (Industrial Control Systems)",
+      "mandatory_certifications": "Critical Information Infrastructure National Security Review; China Compulsory Certification (CCC) for safety/security parts",
+      "default_password_ban": true,
+      "sbom_required": true,
+      "cbom_required": true,
+      "patch_management_sla_days": 14,
+      "details": "MLPS 2.0 Level 3 requires security management center, trusted computing baseline (TPM/TCM), strict domestic commercial cryptography, and annual cybersecurity audit."
+    }
+  ],
+  "data_privacy_sovereignty": [
+    {
+      "primary_privacy_law": "Personal Information Protection Law (PIPL)",
+      "supervisory_dpa": "Cyberspace Administration of China (CAC)",
+      "data_localization_required": true,
+      "localization_scope": "Strict localization for Critical Information Infrastructure Operators (CIIOs) and processors processing over 1 million individuals' data.",
+      "cross_border_transfer_mechanism": "CAC Security Assessment, CAC Standard Contract, Personal Information Protection Certification",
+      "sensitive_data_categories": [
+        "Biometrics",
+        "Religious Beliefs",
+        "Specific Identity",
+        "Medical Health",
+        "Financial Accounts",
+        "Location Tracking",
+        "Minors under 14"
+      ]
+    }
+  ],
+  "cryptography_controls": [
+    {
+      "crypto_import_license_required": true,
+      "crypto_export_controls": "Dual-Use Items Export Control List (Ministry of Commerce / SCA). Mandatory export licence for commercial crypto algorithms.",
+      "mandatory_government_access_or_escrow": true,
+      "approved_encryption_standards": "Commercial Cryptography Algorithms (ShangMi): SM2 (Elliptic Curve), SM3 (Hash), SM4 (Block Cipher), SM9 (Identity-based)",
+      "post_quantum_mandate": "National PQC standardization roadmap under SCA / Chinese Association for Cryptologic Research (CACR).",
+      "regulatory_agency": "State Cryptography Administration (SCA)"
+    }
+  ],
+  "incident_disclosure_rules": [
+    {
+      "breach_type": "Cybersecurity Incident & Product Vulnerability",
+      "notification_timeline_hours": 2,
+      "second_stage_timeline_hours": 24,
+      "final_report_timeline_days": 5,
+      "recipient_authorities": [
+        "CAC",
+        "Ministry of Public Security",
+        "National Computer Network Emergency Response Technical Team (CNCERT/CC)"
+      ],
+      "ransomware_payment_reporting": true,
+      "threshold_trigger_definition": "Provisions on the Management of Network Product Security Vulnerabilities: Vulnerabilities must be submitted to MIIT within 2 days; incidents must be reported immediately."
+    }
+  ],
+  "penalty_structures": [
+    {
+      "max_administrative_fine_fixed": 50000000.0,
+      "fine_currency": "CNY",
+      "max_turnover_percentage": 5.0,
+      "criminal_liability_directors": true,
+      "market_withdrawal_sanctions": true
+    }
+  ],
+  "sector_applicability": [
+    {
+      "sector": "Energy",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Generation, transmission, distribution, and pipeline SCADA integrity."
+    },
+    {
+      "sector": "Water",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Water treatment, distribution telemetry, and environmental control."
+    },
+    {
+      "sector": "Healthcare",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Hospital systems, medical device cybersecurity, and EHR data protection."
+    },
+    {
+      "sector": "Financial Services",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Payment systems, banking core networks, and cyber resilience audits."
+    },
+    {
+      "sector": "Telecom",
+      "scope_classification": "Essential Infrastructure",
+      "specific_obligations": "Public telecommunications networks, submarine cables, and 5G security."
+    },
+    {
+      "sector": "OT/Industrial",
+      "scope_classification": "Industrial Manufacturing",
+      "specific_obligations": "Machinery safety, industrial robotics, PLC programming, and safety instrumented systems."
+    },
+    {
+      "sector": "Transport",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Rail signaling, air traffic management, maritime port terminals, and connected vehicles."
+    }
+  ],
+  "enrichment_metadata": {
+    "iterations_completed": 4,
+    "last_enriched_at": "2026-09-12T02:14:21.076340+00:00",
+    "enrichment_pipeline": "Valyu-Perplexity-MultiAgent-v4"
+  }
+}
