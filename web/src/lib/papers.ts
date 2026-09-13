@@ -391,6 +391,18 @@ export const PAPERS_REGISTRY: Record<string, { title: string; relativePath: stri
     title: "Epidemic Thresholds & Spectral Radius Dynamics in Industrial OT Conduits",
     relativePath: "references/WG-07-TM-Threat-Modeling/WG-07-TM-Epidemic-Threshold-OT-Conduits.md",
   },
+  "antifragile-ot-network-topologies": {
+    title: "Antifragile OT Network Topologies: Convex Response to Adversarial Shock and Self-Stabilizing Microgrids",
+    relativePath: "references/WG-02-DT-Digital-Twin/WG-02-DT-Antifragile-Topologies-Convex-Response.md",
+  },
+  "category-theoretic-functors-dexpi-cyclonedx": {
+    title: "Category-Theoretic Functors between DEXPI 2.0 P&ID Topologies and CycloneDX 1.6 5-BOM Schemas",
+    relativePath: "references/WG-05-CAD-DEXPI-2/WG-05-CAD-Category-Theoretic-Functors-DEXPI-CycloneDX.md",
+  },
+  "gauge-symmetries-topological-currents-microgrids": {
+    title: "Non-Abelian Gauge Symmetries & Conserved Topological Currents in Interconnected OT Microgrids",
+    relativePath: "references/MP-Math-Physics-Formula/MP-MATH-05-Gauge-Symmetries-Topological-Currents-OT-Microgrids.md",
+  },
 };
 
 export function getAllPaperSlugs(): string[] {

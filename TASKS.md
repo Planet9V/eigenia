@@ -24,10 +24,14 @@ _Memory of record (decided 2026-09-11): this file and `memory/` at the repo root
     - `WG-06-SC-03-Automated-CRA-Article-14-Reporting`: Automated CRA Article 14 Reporting: Machine-Verifiable 24-Hour CSIRT Notifications and VEX/VDR Pipelines
     - `WG-04-CF-Percolation-Thresholds`: Percolation Thresholds & Discontinuous Phase Transitions in Interdependent Utilities
     - `WG-07-TM-Epidemic-Threshold-OT-Conduits`: Epidemic Thresholds & Spectral Radius Dynamics in Industrial OT Conduits
-  - [ ] **Batch 5 (Advanced Theoretical & Topological Triad to 92 Treatises)**:
-    - `MP-MATH-05`: Non-Abelian Gauge Symmetries & Conserved Topological Currents in Interconnected OT Microgrids
-    - `WG-02-DT-05`: Antifragile OT Network Topologies: Convex Response to Adversarial Shock and Self-Stabilizing Microgrids
-    - `WG-05-CAD-03`: Category-Theoretic Functors between DEXPI 2.0 P&ID Topologies and CycloneDX 1.6 5-BOM Schemas
+  - [x] **Batch 5 (Advanced Theoretical & Topological Triad Promoted to 92 Treatises)**:
+    - `MP-MATH-05-Gauge-Symmetries-Topological-Currents-OT-Microgrids`: Non-Abelian Gauge Symmetries & Conserved Topological Currents in Interconnected OT Microgrids
+    - `WG-02-DT-Antifragile-Topologies-Convex-Response`: Antifragile OT Network Topologies: Convex Response to Adversarial Shock and Self-Stabilizing Microgrids
+    - `WG-05-CAD-Category-Theoretic-Functors-DEXPI-CycloneDX`: Category-Theoretic Functors between DEXPI 2.0 P&ID Topologies and CycloneDX 1.6 5-BOM Schemas
+  - [ ] **Batch 6 (Sovereign Infrastructure & Kinetic Assurance Triad to 95 Treatises)**:
+    - `WG-01-UI-05`: Non-Linear Actuarial Damage Functions & Clayton Copula Tail Dependency in Interconnected Power Outages
+    - `WG-04-CF-10`: NSW Transmission Network Frequency Instability & Synthetic Inertia Deficit under High-Penetration IBR
+    - `WG-10-AN-07`: Cryptographic Root-of-Trust & Hardware Attestation in IEC 62443 Certified Substation Gateways
 - [ ] **Wire PretotypeExperimentModal** - bound to `useContactForm`, imported by no page (re-verified 2026-09-11: 0 importers)
 - [ ] **`feat/what-eigenia-does`** - branch cut from main, 0 commits, no local edits. State its intent here or delete it
 - [ ] **Push `chore/memory-enforcement` and open the PR** - branch is prepared in the working tree (Cowork could not commit: `.git/index.lock` cannot be removed from its shell). Jim: `rm .git/index.lock`, `git checkout -b chore/memory-enforcement`, `git add -A -- TASKS.md memory CLAUDE.md .claude/settings.json .gitignore scripts/hooks web/scripts/audit-tasks-stamp.mjs .github/workflows/ci.yml documentation/TESTING.md`, commit, push, PR
@@ -49,6 +53,7 @@ _Memory of record (decided 2026-09-11): this file and `memory/` at the repo root
 ## Done
 
 ### 2026-09-13
+- [x] **Batch 5 Publication: Advanced Theoretical & Topological Triad (92 Treatises)** - Promoted and integrated 3 foundational treatises (`MP-MATH-05-Gauge-Symmetries-Topological-Currents-OT-Microgrids`, `WG-02-DT-Antifragile-Topologies-Convex-Response`, `WG-05-CAD-Category-Theoretic-Functors-DEXPI-CycloneDX`) with 15 rounds of sequential thinking, Valyu citations, J. McKenney primary attribution, KaTeX math formulas, and 100% accessible Mermaid diagrams; expanded catalog to 92 treatises across 11 Working Groups; updated registry, papers hub, and translations; passed 11/11 audit gates, Vitest, and TypeScript.
 - [x] **Batch 4 Publication: Corpus Scaling Triad (89 Treatises)** - Promoted and integrated 3 foundational treatises (`WG-06-SC-03-Automated-CRA-Article-14-Reporting`, `WG-04-CF-Percolation-Thresholds-Interdependent-Collapse`, `WG-07-TM-Epidemic-Threshold-OT-Conduits`) with 15 rounds of sequential thinking, Valyu citations, J. McKenney primary attribution, KaTeX math formulas, and 100% accessible Mermaid diagrams; expanded catalog to 89 treatises across 11 Working Groups; updated registry, papers hub, and translations; passed 11/11 audit gates, Vitest, and TypeScript.
 - [x] **Batch 3 Publication: Physics & Quantitative Rigor Triad (86 Treatises)** - Promoted and integrated 3 foundational treatises (`MP-MATH-04-Thermodynamic-Entropy-Production-Grid-Failures`, `WG-05-CAD-DEXPI-CycloneDX-Joint-Graph-Validation`, `WG-03-ML-GNN-Process-Anomaly-Localization`) with 15 rounds of sequential thinking, Valyu citations, J. McKenney primary attribution, KaTeX math formulas, and 100% accessible Mermaid diagrams; expanded catalog to 86 treatises across 11 Working Groups; updated registry, papers hub, and translations; passed 11/11 audit gates, Vitest, and TypeScript.
 - [x] **Batch 2 Publication: OT Architecture & Human-Cyber Triad (83 Treatises)** - Promoted and integrated 3 foundational treatises (`WG-02-DT-Tier-Redundancy-Common-Mode-Failures`, `WG-01-UI-Concept-of-Operations-Minimum-Operating-Requirements`, `WG-03-ML-Organisational-Engineering-OT-Security`) with 15 rounds of sequential thinking, Valyu citations, J. McKenney primary attribution, KaTeX math formulas, and 100% accessible Mermaid diagrams; expanded catalog to 83 treatises across 11 Working Groups; updated registry, papers hub, and translations; passed 11/11 audit gates, Vitest, and TypeScript.
