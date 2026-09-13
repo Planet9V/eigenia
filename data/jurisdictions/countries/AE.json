@@ -1,0 +1,161 @@
+{
+  "jurisdiction": {
+    "country_name": "United Arab Emirates",
+    "iso2": "AE",
+    "iso3": "ARE",
+    "numeric_code": "784",
+    "continent": "Asia",
+    "region": "Western Asia",
+    "sub_region": "GCC",
+    "sovereign_status": "UN Member State",
+    "capital": "Abu Dhabi",
+    "currency": "AED"
+  },
+  "supervisory_authorities": {
+    "dpa": "UAE Data Office",
+    "csirt": "aeCERT / UAE Cyber Security Council",
+    "crypto_agency": "Telecommunications and Digital Government Regulatory Authority (TDRA)"
+  },
+  "statutory_frameworks": [
+    {
+      "official_title": "Federal Decree-Law No. 45 of 2021 on the Protection of Personal Data (UAE PDPL)",
+      "short_name": "UAE PDPL",
+      "statute_type": "Federal Decree-Law",
+      "legal_citation": "Federal Decree-Law No. 45/2021",
+      "enactment_date": "2021-09-20",
+      "effective_date": "2022-01-02",
+      "enforcement_deadline": "2022-09-20",
+      "supervisory_authority": "UAE Data Office / Telecommunications and Digital Government Regulatory Authority (TDRA)",
+      "status": "In Force",
+      "metadata": {
+        "scope": "Federal data protection onshore, excluding financial free zones ADGM and DIFC"
+      }
+    },
+    {
+      "official_title": "National Electronic Security Authority Information Assurance Standards (NESA IAS) & Dubai Electronic Security Center ISR v2",
+      "short_name": "UAE NESA IAS / DESC ISR",
+      "statute_type": "Regulation",
+      "legal_citation": "Cabinet Resolution No. 21 of 2013 / DESC ISR v2",
+      "enactment_date": "2014-05-15",
+      "effective_date": "2014-05-15",
+      "enforcement_deadline": "Ongoing",
+      "supervisory_authority": "UAE Cybersecurity Council / Dubai Electronic Security Center (DESC)",
+      "status": "In Force",
+      "metadata": {
+        "critical_sectors": "Energy, Transport, Finance, Telecommunications, Government"
+      }
+    }
+  ],
+  "cyber_security_mandates": [
+    {
+      "target_domain": "Critical National Services & Government Cloud",
+      "baseline_standard_ref": "NESA IAS / DESC ISR v2 / Dubai Cyber Security Standard / IEC 62443",
+      "mandatory_certifications": "DESC CSP (Cloud Service Provider) Security Certification; NESA tier compliance audits",
+      "default_password_ban": true,
+      "sbom_required": true,
+      "cbom_required": false,
+      "patch_management_sla_days": 14,
+      "details": "DESC ISR v2 enforces strict cryptographic key management, mandatory penetration testing, and zero trust architecture for critical services."
+    }
+  ],
+  "data_privacy_sovereignty": [
+    {
+      "primary_privacy_law": "Data Protection and Privacy Act of United Arab Emirates",
+      "supervisory_dpa": "UAE Data Office",
+      "data_localization_required": false,
+      "localization_scope": "Sector-specific financial and government data localization where applicable.",
+      "cross_border_transfer_mechanism": "Adequacy, Contractual Guarantees, DPA Authorization",
+      "sensitive_data_categories": [
+        "Biometrics",
+        "Health Data",
+        "Criminal Records"
+      ]
+    }
+  ],
+  "cryptography_controls": [
+    {
+      "crypto_import_license_required": false,
+      "crypto_export_controls": "National Customs & Dual-Use Export Control Regime.",
+      "mandatory_government_access_or_escrow": false,
+      "approved_encryption_standards": "AES-256, FIPS 140-2/3, ISO/IEC 18033",
+      "post_quantum_mandate": "Monitoring international standard bodies (ISO/IEC JTC 1 / ITU-T).",
+      "regulatory_agency": "Telecommunications and Digital Government Regulatory Authority (TDRA)"
+    }
+  ],
+  "incident_disclosure_rules": [
+    {
+      "breach_type": "Cyber Security Incident in Critical Infrastructure",
+      "notification_timeline_hours": 24,
+      "second_stage_timeline_hours": null,
+      "final_report_timeline_days": 14,
+      "recipient_authorities": [
+        "UAE Cybersecurity Council / aeCERT / DESC"
+      ],
+      "ransomware_payment_reporting": true,
+      "threshold_trigger_definition": "Incidents that threaten the security of electronic services or critical infrastructure."
+    },
+    {
+      "breach_type": "Personal Data Breach",
+      "notification_timeline_hours": 72,
+      "second_stage_timeline_hours": null,
+      "final_report_timeline_days": 30,
+      "recipient_authorities": [
+        "UAE Data Office"
+      ],
+      "ransomware_payment_reporting": false,
+      "threshold_trigger_definition": "Any breach that infringes on the privacy, confidentiality, or security of personal data."
+    }
+  ],
+  "penalty_structures": [
+    {
+      "max_administrative_fine_fixed": 10000000.0,
+      "fine_currency": "AED",
+      "max_turnover_percentage": 0.0,
+      "criminal_liability_directors": true,
+      "market_withdrawal_sanctions": true
+    }
+  ],
+  "sector_applicability": [
+    {
+      "sector": "Energy",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Generation, transmission, distribution, and pipeline SCADA integrity."
+    },
+    {
+      "sector": "Water",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Water treatment, distribution telemetry, and environmental control."
+    },
+    {
+      "sector": "Healthcare",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Hospital systems, medical device cybersecurity, and EHR data protection."
+    },
+    {
+      "sector": "Financial Services",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Payment systems, banking core networks, and cyber resilience audits."
+    },
+    {
+      "sector": "Telecom",
+      "scope_classification": "Essential Infrastructure",
+      "specific_obligations": "Public telecommunications networks, submarine cables, and 5G security."
+    },
+    {
+      "sector": "OT/Industrial",
+      "scope_classification": "Industrial Manufacturing",
+      "specific_obligations": "Machinery safety, industrial robotics, PLC programming, and safety instrumented systems."
+    },
+    {
+      "sector": "Transport",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Rail signaling, air traffic management, maritime port terminals, and connected vehicles."
+    }
+  ],
+  "enrichment_metadata": {
+    "iterations_completed": 4,
+    "last_enriched_at": "2026-09-12T02:14:21.079866+00:00",
+    "enrichment_pipeline": "Valyu-Perplexity-MultiAgent-v4",
+    "enrichment_status": "DEEP_SPECIALIZED_ENRICHMENT_COMPLETE"
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "jurisdiction": {
+    "country_name": "Canada",
+    "iso2": "CA",
+    "iso3": "CAN",
+    "numeric_code": "124",
+    "continent": "North America",
+    "region": "Northern America",
+    "sub_region": "North America",
+    "sovereign_status": "UN Member State",
+    "capital": "Ottawa",
+    "currency": "CAD"
+  },
+  "supervisory_authorities": {
+    "dpa": "Office of the Privacy Commissioner of Canada (OPC)",
+    "csirt": "Canadian Centre for Cyber Security (CCCS / CSE)",
+    "crypto_agency": "Global Affairs Canada / CCCS"
+  },
+  "statutory_frameworks": [
+    {
+      "official_title": "An Act respecting cyber security, amending the Telecommunications Act and making consequential amendments to other Acts (Bill C-26 / CCSPA)",
+      "short_name": "Canada CCSPA / Bill C-26",
+      "statute_type": "Act",
+      "legal_citation": "Bill C-26 (44th Parliament)",
+      "enactment_date": "2024-06-20",
+      "effective_date": "2025-01-01",
+      "enforcement_deadline": "2025-06-01",
+      "supervisory_authority": "Canadian Centre for Cyber Security (CCCS / CSE) / Minister of Public Safety",
+      "status": "In Force",
+      "metadata": {
+        "mandate": "Requires designated vital operators to establish Cyber Security Programs (CSPs) within 90 days, mitigate supply chain risks, and report cyber incidents to CSE within 72 hours."
+      }
+    },
+    {
+      "official_title": "Personal Information Protection and Electronic Documents Act (PIPEDA) as modernized by Digital Charter Implementation Act (Bill C-27 / CPPA)",
+      "short_name": "Canada PIPEDA / CPPA",
+      "statute_type": "Act",
+      "legal_citation": "S.C. 2000, c. 5 / Bill C-27",
+      "enactment_date": "2000-04-13",
+      "effective_date": "2001-01-01",
+      "enforcement_deadline": "2025-01-01",
+      "supervisory_authority": "Office of the Privacy Commissioner of Canada (OPC)",
+      "status": "In Force (Modernization Pending)",
+      "metadata": {
+        "adequacy": "Maintains reciprocal adequacy with European Union"
+      }
+    }
+  ],
+  "cyber_security_mandates": [
+    {
+      "target_domain": "Critical Cyber Systems (Energy, Telecom, Finance, Transport)",
+      "baseline_standard_ref": "CCCS Cyber Security Audit Framework / ITSG-33 / IEC 62443",
+      "mandatory_certifications": "Mandatory written Cyber Security Program (CSP) approved by designated regulator; third-party supply chain audits",
+      "default_password_ban": true,
+      "sbom_required": true,
+      "cbom_required": false,
+      "patch_management_sla_days": 30,
+      "details": "CCSPA Section 15 requires vital operators to identify cyber risks arising from products, services, and supply chains, with binding ministerial orders to disconnect non-compliant high-risk vendor equipment."
+    }
+  ],
+  "data_privacy_sovereignty": [
+    {
+      "primary_privacy_law": "Data Protection and Privacy Act of Canada",
+      "supervisory_dpa": "Office of the Privacy Commissioner of Canada (OPC)",
+      "data_localization_required": false,
+      "localization_scope": "Sector-specific financial and government data localization where applicable.",
+      "cross_border_transfer_mechanism": "Adequacy, Contractual Guarantees, DPA Authorization",
+      "sensitive_data_categories": [
+        "Biometrics",
+        "Health Data",
+        "Criminal Records"
+      ]
+    }
+  ],
+  "cryptography_controls": [
+    {
+      "crypto_import_license_required": false,
+      "crypto_export_controls": "National Customs & Dual-Use Export Control Regime.",
+      "mandatory_government_access_or_escrow": false,
+      "approved_encryption_standards": "AES-256, FIPS 140-2/3, ISO/IEC 18033",
+      "post_quantum_mandate": "Monitoring international standard bodies (ISO/IEC JTC 1 / ITU-T).",
+      "regulatory_agency": "Global Affairs Canada / CCCS"
+    }
+  ],
+  "incident_disclosure_rules": [
+    {
+      "breach_type": "Critical Cyber Incident Affecting Vital System",
+      "notification_timeline_hours": 72,
+      "second_stage_timeline_hours": null,
+      "final_report_timeline_days": 30,
+      "recipient_authorities": [
+        "Canadian Centre for Cyber Security (CCCS / CSE)"
+      ],
+      "ransomware_payment_reporting": true,
+      "threshold_trigger_definition": "Any cybersecurity incident that interferes or could interfere with the confidentiality, integrity, or availability of a critical cyber system."
+    }
+  ],
+  "penalty_structures": [
+    {
+      "max_administrative_fine_fixed": 15000000.0,
+      "fine_currency": "CAD",
+      "max_turnover_percentage": 3.0,
+      "criminal_liability_directors": true,
+      "market_withdrawal_sanctions": true
+    }
+  ],
+  "sector_applicability": [
+    {
+      "sector": "Energy",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Generation, transmission, distribution, and pipeline SCADA integrity."
+    },
+    {
+      "sector": "Water",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Water treatment, distribution telemetry, and environmental control."
+    },
+    {
+      "sector": "Healthcare",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Hospital systems, medical device cybersecurity, and EHR data protection."
+    },
+    {
+      "sector": "Financial Services",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Payment systems, banking core networks, and cyber resilience audits."
+    },
+    {
+      "sector": "Telecom",
+      "scope_classification": "Essential Infrastructure",
+      "specific_obligations": "Public telecommunications networks, submarine cables, and 5G security."
+    },
+    {
+      "sector": "OT/Industrial",
+      "scope_classification": "Industrial Manufacturing",
+      "specific_obligations": "Machinery safety, industrial robotics, PLC programming, and safety instrumented systems."
+    },
+    {
+      "sector": "Transport",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Rail signaling, air traffic management, maritime port terminals, and connected vehicles."
+    }
+  ],
+  "enrichment_metadata": {
+    "iterations_completed": 4,
+    "last_enriched_at": "2026-09-12T02:14:21.063052+00:00",
+    "enrichment_pipeline": "Valyu-Perplexity-MultiAgent-v4",
+    "enrichment_status": "DEEP_SPECIALIZED_ENRICHMENT_COMPLETE"
+  }
+}

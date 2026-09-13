@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>OXOT Loop 3 — Streamlines Comets (100% Seamless)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #07080a;
+      color: #BEC3CB;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "JetBrains Mono", monospace;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      padding: 24px;
+    }
+    .stage-container {
+      width: 100%;
+      max-width: 1440px;
+      background: #101216;
+      border: 1px solid #23262c;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+    }
+    .header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      background: #0e1014;
+      border-bottom: 1px solid #23262c;
+      font-size: 13px;
+    }
+    .badge {
+      background: #E05A10;
+      color: #0B0C0E;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 3px;
+    }
+    .title {
+      color: #e8e4dc;
+      font-weight: 600;
+      font-size: 15px;
+      margin-left: 8px;
+    }
+    .subtitle {
+      color: #6b6f76;
+      font-size: 12px;
+      margin-left: 12px;
+    }
+    .controls {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+    }
+    .canvas-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1440 / 560;
+      background: #0B0C0E;
+    }
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .hud-overlay {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      color: rgba(255,255,255,0.4);
+      pointer-events: none;
+    }
+    .info-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 24px;
+      background: #0a0b0d;
+      border-top: 1px solid #1a1d23;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+      color: #6b6f76;
+    }
+    .btn {
+      background: #181b22;
+      color: #d1d5db;
+      border: 1px solid #2e333d;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 11px;
+      transition: all 0.2s;
+    }
+    .btn:hover { background: #232833; color: #fff; border-color: #4b5563; }
+    .btn.active { background: #E05A10; color: #000; border-color: #E05A10; font-weight: 700; }
+</style>
+</head>
+<body>
+  <div class="stage-container">
+    <div class="header-bar">
+      <div style="display: flex; align-items: center;">
+        <span class="badge">L3</span>
+        <span class="title">Streamlines — Comets Along Fixed Paths</span>
+        <span class="subtitle">Turbulent vector field · glowing particle tails · 100% periodic loop</span>
+      </div>
+      <div class="controls">
+        <button class="btn" id="playPauseBtn">Pause</button>
+        <span>Loop: <strong id="durLabel">12s</strong></span>
+        <input type="range" id="durSlider" min="4" max="24" step="1" value="12" style="accent-color:#E05A10; cursor:pointer;">
+        <span>φ: <strong id="phaseLabel" style="color:#E05A10; min-width:38px; display:inline-block;">0.00</strong></span>
+      </div>
+    </div>
+    <div class="canvas-wrapper">
+      <canvas id="loopCanvas" width="2880" height="1120"></canvas>
+      <div class="hud-overlay" id="fpsHud">60 FPS · 2880×1120 RETINA</div>
+    </div>
+    <div class="info-footer">
+      <div>
+        <span>Accent: </span>
+        <button class="btn active" data-color="#E05A10">Dutch Orange (#E05A10)</button>
+        <button class="btn" data-color="#FF7A1A">Bright Orange (#FF7A1A)</button>
+        <button class="btn" data-color="#5FB8C9">Electric Cyan (#5FB8C9)</button>
+        <button class="btn" data-color="#D9A441">Fiduciary Amber (#D9A441)</button>
+      </div>
+      <div>100% Mathematically Seamless (Particle travel = (φ + offset) mod 1)</div>
+    </div>
+  </div>
+  <script>
+
+  function rng(seed) {
+    let s = seed;
+    return () => (s = (s * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
+  }
+
+  function vnoise(x, y, seed) {
+    const hh = (a, b) => { const n = Math.sin(a * 127.1 + b * 311.7 + seed * 47.3) * 43758.5453; return n - Math.floor(n); };
+    const xi = Math.floor(x), yi = Math.floor(y), xf = x - xi, yf = y - yi;
+    const u = xf * xf * (3 - 2 * xf), v = yf * yf * (3 - 2 * yf);
+    return (hh(xi, yi) * (1 - u) + hh(xi + 1, yi) * u) * (1 - v) + (hh(xi, yi + 1) * (1 - u) + hh(xi + 1, yi + 1) * u) * v;
+  }
+
+  function fbm(x, y, seed) {
+    let v = 0, a = 0.5, f = 1;
+    for (let i = 0; i < 4; i++) { v += a * vnoise(x * f, y * f, seed + i * 11); a *= 0.5; f *= 2; }
+    return v;
+  }
+
+  function rgba(hex, a) {
+    const n = parseInt(hex.slice(1), 16);
+    return 'rgba(' + (n >> 16) + ',' + ((n >> 8) & 255) + ',' + (n & 255) + ',' + a + ')';
+  }
+
+  function vignette(ctx, W, H, inner) {
+    const g = ctx.createRadialGradient(W / 2, H / 2, H * inner, W / 2, H / 2, H * 1.02);
+    g.addColorStop(0, 'rgba(11,12,14,0)');
+    g.addColorStop(1, 'rgba(11,12,14,1)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, H);
+  }
+
+
+  const W = 1440, H = 560;
+  const canvas = document.getElementById('loopCanvas');
+  const ctx = canvas.getContext('2d');
+
+  let accent = '#E05A10';
+  let loopSeconds = 12;
+  let isPaused = false;
+  let pauseTime = 0;
+  let t0 = performance.now();
+
+  const r2 = rng(7717);
+  const paths = [];
+  for (let p = 0; p < 620; p++) {
+    let x = r2() * W, y = r2() * H;
+    const pts = [[x, y]];
+    for (let k = 0; k < 54; k++) {
+      const a = fbm(x / W * 2.1, y / H * 1.5, 12) * Math.PI * 3;
+      x += Math.cos(a) * 5; y += Math.sin(a) * 5;
+      if (x < -20 || x > W + 20 || y < -20 || y > H + 20) break;
+      pts.push([x, y]);
+    }
+    if (pts.length > 14) paths.push({ pts, off: r2() });
+  }
+
+  function draw(ph) {
+    ctx.setTransform(canvas.width / W, 0, 0, canvas.height / H, 0, 0);
+    ctx.fillStyle = '#0B0C0E';
+    ctx.fillRect(0, 0, W, H);
+    ctx.font = '11px "JetBrains Mono", monospace';
+
+    const acc = accent;
+    ctx.lineWidth = 0.6;
+    ctx.strokeStyle = 'rgba(186,192,201,.11)';
+    ctx.beginPath();
+    for (const p of paths) {
+      p.pts.forEach((q, i) => i ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1]));
+    }
+    ctx.stroke();
+
+    const tail = 9;
+    for (const p of paths) {
+      const n = p.pts.length;
+      const head = ((ph + p.off) % 1) * (n - 1);
+      for (let k = 0; k < tail; k++) {
+        const i = Math.floor(head) - k;
+        if (i < 1) continue;
+        const a = (1 - k / tail) * 0.75;
+        ctx.strokeStyle = rgba(acc, a * 0.9);
+        ctx.lineWidth = 1.5 * (1 - k / tail) + 0.4;
+        ctx.beginPath();
+        ctx.moveTo(p.pts[i - 1][0], p.pts[i - 1][1]);
+        ctx.lineTo(p.pts[i][0], p.pts[i][1]);
+        ctx.stroke();
+      }
+    }
+
+    vignette(ctx, W, H, 0.3);
+
+    ctx.fillStyle = '#4A4E55';
+    ctx.fillText('vector field · ' + paths.length + ' streamlines (offset-cyclic)', 22, H - 18);
+  }
+
+  let frameCount = 0, lastFpsTime = performance.now();
+  function animate(now) {
+    requestAnimationFrame(animate);
+    if (isPaused) return;
+
+    const ph = ((now - t0) / 1000 / loopSeconds) % 1;
+    draw(ph);
+
+    document.getElementById('phaseLabel').textContent = ph.toFixed(2);
+    frameCount++;
+    if (now - lastFpsTime >= 1000) {
+      const fps = Math.round((frameCount * 1000) / (now - lastFpsTime));
+      document.getElementById('fpsHud').textContent = fps + ' FPS · 2880×1120 RETINA';
+      frameCount = 0;
+      lastFpsTime = now;
+    }
+  }
+  requestAnimationFrame(animate);
+
+  const playPauseBtn = document.getElementById('playPauseBtn');
+  playPauseBtn.addEventListener('click', () => {
+    isPaused = !isPaused;
+    if (isPaused) {
+      pauseTime = performance.now();
+      playPauseBtn.textContent = 'Play';
+      playPauseBtn.classList.add('active');
+    } else {
+      t0 += (performance.now() - pauseTime);
+      playPauseBtn.textContent = 'Pause';
+      playPauseBtn.classList.remove('active');
+    }
+  });
+
+  const durSlider = document.getElementById('durSlider');
+  durSlider.addEventListener('input', (e) => {
+    loopSeconds = parseFloat(e.target.value);
+    document.getElementById('durLabel').textContent = loopSeconds + 's';
+  });
+
+  document.querySelectorAll('[data-color]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-color]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      accent = btn.getAttribute('data-color');
+    });
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.code === 'Space') {
+      e.preventDefault();
+      playPauseBtn.click();
+    }
+  });
+
+  </script>
+</body>
+</html>

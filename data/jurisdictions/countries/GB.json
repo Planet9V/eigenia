@@ -1,0 +1,176 @@
+{
+  "jurisdiction": {
+    "country_name": "United Kingdom",
+    "iso2": "GB",
+    "iso3": "GBR",
+    "numeric_code": "826",
+    "continent": "Europe",
+    "region": "Northern Europe",
+    "sub_region": "Western Europe",
+    "sovereign_status": "UN Member State",
+    "capital": "London",
+    "currency": "GBP"
+  },
+  "supervisory_authorities": {
+    "dpa": "Information Commissioner's Office (ICO)",
+    "csirt": "National Cyber Security Centre (NCSC UK)",
+    "crypto_agency": "Export Control Joint Unit (ECJU) / NCSC"
+  },
+  "statutory_frameworks": [
+    {
+      "official_title": "Product Security and Telecommunications Infrastructure Act 2022 (PSTI)",
+      "short_name": "UK PSTI",
+      "statute_type": "Act",
+      "legal_citation": "2022 c. 46",
+      "enactment_date": "2022-12-06",
+      "effective_date": "2024-04-29",
+      "enforcement_deadline": "2024-04-29",
+      "supervisory_authority": "Office for Product Safety and Standards (OPSS)",
+      "status": "In Force",
+      "metadata": {
+        "mandates": "Universal default passwords banned, mandatory vulnerability disclosure policy, minimum security update periods declared"
+      }
+    },
+    {
+      "official_title": "Data Protection Act 2018 and UK General Data Protection Regulation",
+      "short_name": "UK GDPR",
+      "statute_type": "Act",
+      "legal_citation": "2018 c. 12",
+      "enactment_date": "2018-05-23",
+      "effective_date": "2018-05-25",
+      "enforcement_deadline": "2018-05-25",
+      "supervisory_authority": "Information Commissioner's Office (ICO)",
+      "status": "In Force",
+      "metadata": {
+        "scope": "UK data protection post-Brexit"
+      }
+    },
+    {
+      "official_title": "Network and Information Systems Regulations 2018 as amended (UK NIS)",
+      "short_name": "UK NIS",
+      "statute_type": "Statutory Instrument",
+      "legal_citation": "SI 2018/506",
+      "enactment_date": "2018-04-20",
+      "effective_date": "2018-05-10",
+      "enforcement_deadline": "2018-05-10",
+      "supervisory_authority": "National Cyber Security Centre (NCSC) / Sector Regulators (Ofgem, Ofwat, CAA)",
+      "status": "In Force",
+      "metadata": {
+        "scope": "Operators of Essential Services (OES) and Relevant Digital Service Providers (RDSPs)"
+      }
+    }
+  ],
+  "cyber_security_mandates": [
+    {
+      "target_domain": "Connected Consumer & Industrial Digital Products",
+      "baseline_standard_ref": "ETSI EN 303 645 / ISO/IEC 29147 / IEC 62443",
+      "mandatory_certifications": "Declaration of Conformity (DoC) under PSTI; UKCA marking",
+      "default_password_ban": true,
+      "sbom_required": true,
+      "cbom_required": false,
+      "patch_management_sla_days": 30,
+      "details": "PSTI Schedule 1 strictly outlaws factory default passwords (must be unique per device or generated upon initialization) and mandates published support period for security updates."
+    }
+  ],
+  "data_privacy_sovereignty": [
+    {
+      "primary_privacy_law": "Data Protection Act 2018 / UK GDPR",
+      "supervisory_dpa": "Information Commissioner's Office (ICO)",
+      "data_localization_required": false,
+      "localization_scope": "No general localization. Adequate with EU under reciprocal European Commission Adequacy Decision.",
+      "cross_border_transfer_mechanism": "UK Adequacy Regulations, International Data Transfer Agreement (IDTA), UK Addendum to EU SCCs",
+      "sensitive_data_categories": [
+        "Biometrics",
+        "Health Data",
+        "Race/Ethnicity",
+        "Trade Union",
+        "Criminal Records"
+      ]
+    }
+  ],
+  "cryptography_controls": [
+    {
+      "crypto_import_license_required": false,
+      "crypto_export_controls": "Export Control Order 2008 Category 5 Part 2. Open General Export Licence (Cryptographic Development).",
+      "mandatory_government_access_or_escrow": false,
+      "approved_encryption_standards": "AES-256, NCSC Commercial Product Assurance (CPA) cryptographic primitives, FIPS 140-3",
+      "post_quantum_mandate": "NCSC Guidance: Migration to post-quantum cryptography in critical systems starting 2025; stateful hash-based signatures for firmware signing.",
+      "regulatory_agency": "Export Control Joint Unit (ECJU) / NCSC"
+    }
+  ],
+  "incident_disclosure_rules": [
+    {
+      "breach_type": "Personal Data Breach",
+      "notification_timeline_hours": 72,
+      "second_stage_timeline_hours": null,
+      "final_report_timeline_days": 30,
+      "recipient_authorities": [
+        "Information Commissioner's Office (ICO)"
+      ],
+      "ransomware_payment_reporting": false,
+      "threshold_trigger_definition": "Risk to rights and freedoms of individuals."
+    },
+    {
+      "breach_type": "NIS Operator of Essential Services Incident",
+      "notification_timeline_hours": 72,
+      "second_stage_timeline_hours": null,
+      "final_report_timeline_days": 30,
+      "recipient_authorities": [
+        "Designated Sector Regulator (Ofgem/Ofwat) / NCSC"
+      ],
+      "ransomware_payment_reporting": false,
+      "threshold_trigger_definition": "Significant impact on the continuity of the essential service."
+    }
+  ],
+  "penalty_structures": [
+    {
+      "max_administrative_fine_fixed": 10000000.0,
+      "fine_currency": "GBP",
+      "max_turnover_percentage": 4.0,
+      "criminal_liability_directors": true,
+      "market_withdrawal_sanctions": true
+    }
+  ],
+  "sector_applicability": [
+    {
+      "sector": "Energy",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Generation, transmission, distribution, and pipeline SCADA integrity."
+    },
+    {
+      "sector": "Water",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Water treatment, distribution telemetry, and environmental control."
+    },
+    {
+      "sector": "Healthcare",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Hospital systems, medical device cybersecurity, and EHR data protection."
+    },
+    {
+      "sector": "Financial Services",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Payment systems, banking core networks, and cyber resilience audits."
+    },
+    {
+      "sector": "Telecom",
+      "scope_classification": "Essential Infrastructure",
+      "specific_obligations": "Public telecommunications networks, submarine cables, and 5G security."
+    },
+    {
+      "sector": "OT/Industrial",
+      "scope_classification": "Industrial Manufacturing",
+      "specific_obligations": "Machinery safety, industrial robotics, PLC programming, and safety instrumented systems."
+    },
+    {
+      "sector": "Transport",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Rail signaling, air traffic management, maritime port terminals, and connected vehicles."
+    }
+  ],
+  "enrichment_metadata": {
+    "iterations_completed": 4,
+    "last_enriched_at": "2026-09-12T02:14:21.047264+00:00",
+    "enrichment_pipeline": "Valyu-Perplexity-MultiAgent-v4"
+  }
+}

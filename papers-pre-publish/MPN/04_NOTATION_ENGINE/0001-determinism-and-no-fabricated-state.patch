@@ -1,0 +1,663 @@
+diff --git a/.gitignore b/.gitignore
+index fa5345f..6bc2e8c 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -10,7 +10,12 @@ dist/
+ downloads/
+ eggs/
+ .eggs/
+-lib/
++# Narrowed 2026-09-12: a bare `lib/` also matched `src/lib/`, which holds
++# play_parser.ts, leitmotif_transformation_rules.ts and deterministic.ts. Those
++# files were tracked only because someone force-added them, and any NEW file in
++# src/lib/ was silently untracked and would never reach the repository. Anchored
++# to the root so it means the build output it was written for.
++/lib/
+ lib64/
+ parts/
+ sdist/
+diff --git a/src/app/api/analyze-character-psychometrics/route.ts b/src/app/api/analyze-character-psychometrics/route.ts
+index 49e6b56..ae95dde 100644
+--- a/src/app/api/analyze-character-psychometrics/route.ts
++++ b/src/app/api/analyze-character-psychometrics/route.ts
+@@ -46,7 +46,10 @@ interface FullPsychometrics {
+     darkTriad: DarkTriadProfile;
+     rsi: RSIProfile;
+     trauma: number;
+-    entropy: number;
++    // Nullable since 2026-09-12. This endpoint has no instrument for entropy, and
++    // a value drawn from a random band would be indistinguishable downstream from a
++    // measured one. Consumers must decide what an absent reading means.
++    entropy: number | null;
+ }
+ 
+ interface AnalysisResult {
+@@ -248,7 +251,9 @@ function generateHeuristicProfile(characterName: string, lines: string[]): Analy
+         darkTriad,
+         rsi,
+         trauma: normalize(traumaWords),
+-        entropy: Math.random() * 0.3 + 0.2
++        // Decision of 2026-09-12: an entropy drawn from a random band inside a
++        // psychometric profile is a fabricated measurement. Left absent.
++        entropy: null
+     };
+ 
+     // Determine instrument recommendations based on dominant DISC
+@@ -271,7 +276,16 @@ function generateHeuristicProfile(characterName: string, lines: string[]): Analy
+         arcEvolution: [
+             { actIndex: 1, psychometrics: recommended, narrative: 'Introduction' },
+             { actIndex: 2, psychometrics: { ...recommended, trauma: recommended.trauma * 1.2 }, narrative: 'Rising action' },
+-            { actIndex: 3, psychometrics: { ...recommended, entropy: recommended.entropy * 1.3 }, narrative: 'Resolution' }
++            {
++                actIndex: 3,
++                psychometrics: {
++                    ...recommended,
++                    // An absent entropy cannot be scaled. Absence propagates rather
++                    // than becoming a number somewhere further down the arc.
++                    entropy: recommended.entropy === null ? null : recommended.entropy * 1.3
++                },
++                narrative: 'Resolution'
++            }
+         ],
+         instrumentRecommendations: {
+             ...instRec,
+diff --git a/src/app/api/process-play/route.ts b/src/app/api/process-play/route.ts
+index d00e985..1036f59 100644
+--- a/src/app/api/process-play/route.ts
++++ b/src/app/api/process-play/route.ts
+@@ -44,8 +44,10 @@ function analyzePsychometrics(text: string, style: MusicalStyle) {
+     // Length correlates to Entropy?
+     const lengthEntropy = Math.min(text.length / 200, 1);
+ 
+-    // Random perturbation
+-    const trauma = Math.random() * 0.8 + 0.1;
++    // Decision of 2026-09-12: do not invent state. This endpoint has no instrument
++    // for trauma, so it must not produce a number that reads downstream as measured.
++    // TASK (open): derive from text under a published protocol, or take from the user.
++    const trauma: number | null = null;
+ 
+     // Style influence
+     // High Density style -> Higher Entropy baseline
+@@ -92,7 +94,12 @@ export async function POST(req: NextRequest) {
+             return {
+                 name: `Scene ${i + 1}`,
+                 description: rf.description,
+-                trauma: parseFloat(metrics.trauma.toFixed(2)),
++                // trauma is null when nothing measured it. A frame with no trauma
++                // reading is scored at the neutral baseline rather than at an
++                // invented value, and the absence is preserved in `traumaMeasured`
++                // so that a downstream consumer can tell the two apart.
++                trauma: metrics.trauma === null ? 0 : parseFloat(metrics.trauma.toFixed(2)),
++                traumaMeasured: metrics.trauma !== null,
+                 entropy: parseFloat(metrics.entropy.toFixed(2)),
+                 focusLayer: i % 7, // Cycle through layers
+                 script: {
+diff --git a/src/app/play-library/import/page.tsx b/src/app/play-library/import/page.tsx
+index 4c19062..415cb4b 100644
+--- a/src/app/play-library/import/page.tsx
++++ b/src/app/play-library/import/page.tsx
+@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
+ import AIScriptValidator from '@/components/mpn-lab/AIScriptValidator';
+ import ProcessingWizard from '@/components/mpn-lab/ProcessingWizard';
+ import ProcessingReport from '@/components/mpn-lab/ProcessingReport';
++import { pick } from '@/lib/deterministic';
+ 
+ interface ParsedFrame {
+     speaker: string;
+@@ -138,12 +139,13 @@ export default function ImportPlayPage() {
+                     title,
+                     author: author || 'Unknown',
+                     theme: theme || 'Drama',
+-                    color: colors[Math.floor(Math.random() * colors.length)],
++                    color: pick(colors, parseResult.id ?? parseResult.title ?? 'play', 'colour') ?? colors[0],
+                     frames: parseResult.fullFrames.map((frame, i) => ({
+                         name: `Scene ${i + 1}`,
+                         description: frame.description,
+-                        trauma: Math.random(),
+-                        entropy: Math.random(),
++                        // Decision of 2026-09-12: not invented. See TASK: state instrument.
++                        trauma: null,
++                        entropy: null,
+                         focusLayer: i % 7,
+                         script: {
+                             speaker: frame.speaker,
+@@ -423,7 +425,7 @@ export default function ImportPlayPage() {
+                             title,
+                             author: author || 'Unknown',
+                             theme: theme || 'Drama',
+-                            color: colors[Math.floor(Math.random() * colors.length)],
++                            color: pick(colors, parseResult.id ?? parseResult.title ?? 'play', 'colour') ?? colors[0],
+                             structure: validatedScript,
+                             stylePreset: config.stylePreset,
+                             characters: config.characters,
+diff --git a/src/components/mpn-lab/GeniusComposer.ts b/src/components/mpn-lab/GeniusComposer.ts
+index b3e9cca..d16de0e 100644
+--- a/src/components/mpn-lab/GeniusComposer.ts
++++ b/src/components/mpn-lab/GeniusComposer.ts
+@@ -54,6 +54,7 @@ interface VoiceLeadingState {
+ 
+ import { AIMusicClient, AIMelodyResponse } from '@/lib/ai_music_client';
+ import { PsychoscoreClient, PsychoscoreRequest } from '@/lib/psychoscore_client';
++import { rand, randInt, chance, UNKEYED } from '@/lib/deterministic';
+ 
+ /**
+  * AI Model Source Selection
+@@ -151,7 +152,8 @@ export class GeniusComposer {
+         startBeat: number,
+         intensity: number, // 0-1 (derived from trauma/entropy)
+         trauma: number = intensity, // Explicit trauma for transformations
+-        entropy: number = 0.5 // Explicit entropy for transformations
++        entropy: number = 0.5, // Explicit entropy for transformations
++        seedKey: string = UNKEYED // frameKey(work, character, frameIndex); see src/lib/deterministic.ts
+     ): Promise<NoteEvent[]> {
+         // ==================================================================
+         // APPLY PROFESSIONAL LEITMOTIF TRANSFORMATIONS (Williams/Shore)
+@@ -348,17 +350,17 @@ export class GeniusComposer {
+                 let note = pitches[pitchIdx];
+ 
+                 // Variation: Octave jumps for high intensity
+-                if (intensity > 0.7 && Math.random() > 0.6) {
++                if (intensity > 0.7 && rand(seedKey, 'melody.accentHigh', cycle, i) > 0.6) {
+                     note += 12;
+                 }
+ 
+                 // Variation: Lower octave for low intensity
+-                if (intensity < 0.3 && Math.random() > 0.7) {
++                if (intensity < 0.3 && rand(seedKey, 'melody.accentLow', cycle, i) > 0.7) {
+                     note -= 12;
+                 }
+ 
+                 // Passing tones between structural notes
+-                if (i > 0 && Math.random() > 0.7 && intensity > 0.4) {
++                if (i > 0 && rand(seedKey, 'melody.ornament', cycle, i) > 0.7 && intensity > 0.4) {
+                     const prevNote = pitches[(pitchIdx - 1 + pitches.length) % pitches.length];
+                     note = Math.round((note + prevNote) / 2);
+                 }
+@@ -368,7 +370,7 @@ export class GeniusComposer {
+                     midiNote: note,
+                     duration: noteDuration,
+                     startBeat: currentBeat,
+-                    velocity: params.dynamic * (0.8 + Math.random() * 0.2),
++                    velocity: params.dynamic * (0.8 + rand(seedKey, 'melody.velocity', cycle, i) * 0.2),
+                     articulation: this.selectArticulation(intensity, i, rhythmPattern.length)
+                 });
+ 
+@@ -400,23 +402,23 @@ export class GeniusComposer {
+         const baseDuration = 4.0 / baseDivision; // 4->1.0, 8->0.5, 16->0.25, 32->0.125
+ 
+         // Generate pattern based on style + intensity
+-        const patternLength = Math.floor(4 + Math.random() * 4); // 4-8 notes
++        const patternLength = 4 + randInt(4, seedKey, 'rhythm.patternLength'); // 4-8 notes
+         const pattern: number[] = [];
+ 
+         for (let i = 0; i < patternLength; i++) {
+             let duration = baseDuration;
+ 
+             // Intensity modulation
+-            if (intensity > 0.7 && Math.random() < 0.4) {
++            if (intensity > 0.7 && chance(0.4, seedKey, 'rhythm.fast', i)) {
+                 // Higher intensity = faster notes
+                 duration = baseDuration / 2;
+-            } else if (intensity < 0.3 && Math.random() < 0.3) {
++            } else if (intensity < 0.3 && chance(0.3, seedKey, 'rhythm.slow', i)) {
+                 // Lower intensity = longer notes
+                 duration = baseDuration * 2;
+             }
+ 
+             // Apply syncopation
+-            if (syncopation > Math.random()) {
++            if (syncopation > rand(seedKey, 'rhythm.syncopation', i)) {
+                 // Off-beat emphasis: shorten this note, lengthen next
+                 duration *= 0.75;
+                 if (i < patternLength - 1) {
+@@ -536,7 +538,7 @@ export class GeniusComposer {
+         // Apply dissonance tolerance for alterations
+         if (style.dissonance_tolerance > 0.6) {
+             // Add chromatic tensions
+-            if (Math.random() < style.dissonance_tolerance - 0.5) {
++            if (rand(seedKey, 'voicing.flatNine') < style.dissonance_tolerance - 0.5) {
+                 // Flatten 9th (dark jazz sound)
+                 const ninthIndex = offsets.indexOf(14);
+                 if (ninthIndex > -1) {
+diff --git a/src/components/mpn-lab/psychometric_calculus.ts b/src/components/mpn-lab/psychometric_calculus.ts
+index 442dc25..e238e07 100644
+--- a/src/components/mpn-lab/psychometric_calculus.ts
++++ b/src/components/mpn-lab/psychometric_calculus.ts
+@@ -22,6 +22,7 @@ import {
+ // ============================================================================
+ 
+ import { ParameterAdjustment } from './mpn_reference_types';
++import { rand, pick, UNKEYED } from '@/lib/deterministic';
+ 
+ export interface PsychometricState {
+     trauma: number;     // 0-1
+@@ -200,7 +201,10 @@ export function rsiToMode(rsi: { real: number; symbolic: number; imaginary: numb
+ /**
+  * Convert DISC profile to instrument
+  */
+-export function discToInstrument(disc?: { D: number; I: number; S: number; C: number }): string {
++export function discToInstrument(
++    disc?: { D: number; I: number; S: number; C: number } | null,
++    seedKey: string = UNKEYED // characterKey(work, character); stable across a work
++): string {
+     if (!disc) return 'piano';
+ 
+     // Find dominant trait
+@@ -212,8 +216,10 @@ export function discToInstrument(disc?: { D: number; I: number; S: number; C: nu
+     const instruments = lookupInstrument(trait);
+     if (instruments.length === 0) return 'piano';
+ 
+-    // Return a random selection from the approved palette
+-    return instruments[Math.floor(Math.random() * instruments.length)];
++    // Pick from the approved palette, keyed by the CHARACTER rather than the frame.
++    // Keying this per frame reassigned a character's instrument on every frame,
++    // which was a musical bug as well as a determinism one.
++    return pick(instruments, seedKey, 'instrument') ?? 'piano';
+ }
+ 
+ /**
+@@ -287,7 +293,11 @@ export function tensionToChordType(tension: number): string {
+ /**
+  * Full psychometric state to musical parameters conversion
+  */
+-export function psychometricToMusical(state: PsychometricState, adjustments?: Record<string, ParameterAdjustment>): MusicalParams {
++export function psychometricToMusical(
++    state: PsychometricState,
++    adjustments?: Record<string, ParameterAdjustment>,
++    seedKey: string = UNKEYED // characterKey(work, character)
++): MusicalParams {
+     // 1. Dynamics (Trauma)
+     const dynamics = traumaToDynamics(state.trauma, adjustments);
+ 
+@@ -303,7 +313,7 @@ export function psychometricToMusical(state: PsychometricState, adjustments?: Re
+     const mode = lookupMode(likelyEmotion, state.rsi, adjustments);
+ 
+     // 4. Instrument/Timbre (DISC)
+-    const instrument = discToInstrument(state.disc);
++    const instrument = discToInstrument(state.disc, seedKey);
+ 
+     // 5. Tension (Calculated from Register conflict)
+     // High Real = High Tension. High Symbolic = Low Tension (Order). High Imaginary = Moderate (Fantasy)
+@@ -385,7 +395,10 @@ export function psychometricToMusical(state: PsychometricState, adjustments?: Re
+ /**
+  * Original function signature for backwards compatibility
+  */
+-export function calculatePsychometricForce(script: { chord: string; analysis: string } | undefined): PsychometricForce {
++export function calculatePsychometricForce(
++    script: { chord: string; analysis: string } | undefined,
++    seedKey: string = UNKEYED // frameKey(work, character, frameIndex)
++): PsychometricForce {
+     if (!script) {
+         return {
+             tension: 0.1,
+@@ -408,7 +421,7 @@ export function calculatePsychometricForce(script: { chord: string; analysis: st
+     if (chord.includes('Swell') || chord.includes('Rise')) libido += 0.2;
+ 
+     const forceVector = new Vector3(
+-        (Math.random() - 0.5) * tension,
++        (rand(seedKey, 'force.x') - 0.5) * tension,
+         (attractors.symbolic - attractors.real) * libido,
+         attractors.imaginary * libido
+     );
+diff --git a/src/lib/__tests__/deterministic.test.ts b/src/lib/__tests__/deterministic.test.ts
+new file mode 100644
+index 0000000..6769c44
+--- /dev/null
++++ b/src/lib/__tests__/deterministic.test.ts
+@@ -0,0 +1,135 @@
++/**
++ * These tests are the evidence for A11. They are not unit tests in the usual
++ * sense: each one pins a property the theory asserts, and if one fails the
++ * corresponding claim in the paper is false.
++ */
++import {
++    rand, randInt, chance, pick, characterKey, frameKey,
++    SEED_ALGORITHM_VERSION,
++} from '../deterministic';
++
++describe('A11: the same state produces the same output', () => {
++    it('is stable across calls', () => {
++        const k = frameKey('hamlet', 'ophelia', 12);
++        expect(rand(k, 'melody.ornament', 0, 3)).toBe(rand(k, 'melody.ornament', 0, 3));
++    });
++
++    it('is stable across a thousand repetitions', () => {
++        const k = frameKey('macbeth', 'lady-macbeth', 4);
++        const first = rand(k, 'rhythm.syncopation', 2);
++        for (let i = 0; i < 1000; i++) {
++            expect(rand(k, 'rhythm.syncopation', 2)).toBe(first);
++        }
++    });
++});
++
++describe('A11: the output does not depend on call order', () => {
++    it('gives each character the same value whichever is drawn first', () => {
++        const a = frameKey('lear', 'cordelia', 7);
++        const b = frameKey('lear', 'goneril', 7);
++        const forwards = [rand(a, 'melody.velocity', 0, 1), rand(b, 'melody.velocity', 0, 1)];
++        const backwards = [rand(b, 'melody.velocity', 0, 1), rand(a, 'melody.velocity', 0, 1)];
++        expect(forwards[0]).toBe(backwards[1]);
++        expect(forwards[1]).toBe(backwards[0]);
++    });
++
++    it('is unaffected by unrelated draws made in between', () => {
++        const k = frameKey('oedipus', 'creon', 2);
++        const before = rand(k, 'voicing.flatNine');
++        for (let i = 0; i < 50; i++) rand(k, 'something.else', i);
++        expect(rand(k, 'voicing.flatNine')).toBe(before);
++    });
++});
++
++describe('change locality: adding a call site must not move existing stimuli', () => {
++    it('gives a new purpose string its own value', () => {
++        const k = frameKey('miss-julie', 'julie', 1);
++        const existing = rand(k, 'melody.ornament', 0, 0);
++        const added = rand(k, 'melody.ornamentSecondPass', 0, 0);
++        expect(added).not.toBe(existing);
++        expect(rand(k, 'melody.ornament', 0, 0)).toBe(existing);
++    });
++});
++
++describe('key scopes', () => {
++    it('holds a character choice steady across frames', () => {
++        const k = characterKey('hamlet', 'horatio');
++        expect(rand(k, 'instrument')).toBe(rand(k, 'instrument'));
++    });
++
++    it('separates characters', () => {
++        expect(rand(characterKey('hamlet', 'horatio'), 'instrument'))
++            .not.toBe(rand(characterKey('hamlet', 'hamlet'), 'instrument'));
++    });
++
++    it('lets a performance choice move between frames', () => {
++        expect(rand(frameKey('hamlet', 'hamlet', 1), 'melody.ornament', 0, 0))
++            .not.toBe(rand(frameKey('hamlet', 'hamlet', 2), 'melody.ornament', 0, 0));
++    });
++});
++
++describe('distribution is good enough for the use it is put to', () => {
++    it('is uniform within tolerance over ten thousand draws', () => {
++        const n = 10000;
++        const bins = new Array(10).fill(0);
++        for (let i = 0; i < n; i++) bins[Math.floor(rand('uniformity', i) * 10)]++;
++        for (const b of bins) expect(Math.abs(b - n / 10)).toBeLessThan(n / 10 * 0.15);
++    });
++
++    it('stays inside [0, 1)', () => {
++        for (let i = 0; i < 10000; i++) {
++            const v = rand('range', i);
++            expect(v).toBeGreaterThanOrEqual(0);
++            expect(v).toBeLessThan(1);
++        }
++    });
++
++    it('does not correlate consecutive keys', () => {
++        const xs: number[] = [], ys: number[] = [];
++        for (let i = 0; i < 5000; i++) { xs.push(rand('corr', i)); ys.push(rand('corr', i + 1)); }
++        const mx = xs.reduce((a, b) => a + b) / xs.length;
++        const my = ys.reduce((a, b) => a + b) / ys.length;
++        let num = 0, dx = 0, dy = 0;
++        for (let i = 0; i < xs.length; i++) {
++            num += (xs[i] - mx) * (ys[i] - my);
++            dx += (xs[i] - mx) ** 2; dy += (ys[i] - my) ** 2;
++        }
++        expect(Math.abs(num / Math.sqrt(dx * dy))).toBeLessThan(0.05);
++    });
++});
++
++describe('helpers stay in range', () => {
++    it('randInt', () => {
++        for (let i = 0; i < 2000; i++) {
++            const v = randInt(7, 'int', i);
++            expect(v).toBeGreaterThanOrEqual(0);
++            expect(v).toBeLessThan(7);
++            expect(Number.isInteger(v)).toBe(true);
++        }
++    });
++    it('randInt of zero is safe', () => expect(randInt(0, 'zero')).toBe(0));
++    it('chance is monotone in p', () => {
++        const count = (p: number) => {
++            let c = 0;
++            for (let i = 0; i < 3000; i++) if (chance(p, 'chance', i)) c++;
++            return c;
++        };
++        expect(count(0.2)).toBeLessThan(count(0.8));
++    });
++    it('pick of an empty list is undefined', () => expect(pick([], 'empty')).toBeUndefined());
++});
++
++describe('the algorithm is pinned to its version', () => {
++    it('has not changed without the version being bumped', () => {
++        // If these fail, someone changed the hash. Every stimulus rendered under
++        // version SEED_ALGORITHM_VERSION is now a different stimulus. Either revert,
++        // or bump the version deliberately and replace these values, and say so in
++        // the paper, because previously rendered cues are no longer citable.
++        // Pinned explicitly rather than by snapshot, because a snapshot can be
++        // regenerated silently with -u and these values must not be.
++        expect(SEED_ALGORITHM_VERSION).toBe(1);
++        expect(rand('golden', 'a')).toBeCloseTo(0.8563087894581258, 15);
++        expect(rand(frameKey('hamlet', 'ophelia', 12), 'melody.ornament', 0, 3))
++            .toBeCloseTo(0.23955746344290674, 15);
++    });
++});
+diff --git a/src/lib/deterministic.ts b/src/lib/deterministic.ts
+new file mode 100644
+index 0000000..a6289e3
+--- /dev/null
++++ b/src/lib/deterministic.ts
+@@ -0,0 +1,159 @@
++/**
++ * Deterministic keyed randomness.
++ *
++ * WHY THIS EXISTS
++ * ---------------
++ * The theory's assertion A11 says the transformation from psychological state to
++ * musical parameters is total, deterministic and decomposable. Before this module
++ * the composer and the calculus made eleven unseeded calls to Math.random(), so
++ * the same state did not produce the same score and a user discovered it by
++ * pressing render twice. That blocked every listening study in the programme,
++ * because a stimulus that cannot be reproduced cannot be cited.
++ *
++ * WHY NOT ONE SEEDED STREAM
++ * -------------------------
++ * The obvious fix is a single global generator seeded once at startup. It makes a
++ * run reproducible and it is the wrong fix, for two reasons.
++ *
++ * First, it makes the output a function of state AND CALL ORDER. Render character
++ * A then B and you get a different result than B then A, because they draw from
++ * the same stream. A11 asserts a function of state. A global stream gives a
++ * function of state and position in the queue, which is a different and weaker
++ * claim, and one that breaks silently the moment anything renders concurrently.
++ *
++ * Second, it makes every previously rendered stimulus invalid whenever anyone adds
++ * a draw anywhere. Insert one ornament decision early in the composer and every
++ * subsequent draw in the whole run shifts. In a research programme where rendered
++ * cues have to stay citable across code changes, that is fatal.
++ *
++ * WHAT THIS DOES INSTEAD
++ * ----------------------
++ * Every draw is a pure function of its own coordinates. There is no stream and no
++ * state. `rand('hamlet', 'ophelia', 12, 'ornament')` returns the same number
++ * forever, regardless of what else was drawn, in what order, or whether other call
++ * sites were added or removed. Two consequences worth having:
++ *
++ *   - Order independence is structural rather than a property anyone has to
++ *     maintain. Concurrent rendering is safe.
++ *   - Change locality. Adding a draw with a new purpose string leaves every
++ *     existing draw untouched, so a cue rendered last month still renders the same
++ *     today.
++ *
++ * TWO KEY SCOPES
++ * --------------
++ * S1 section 6 already draws the line this module implements: the transformation
++ * is deterministic, and any stochastic element "sits downstream of the
++ * transformation, in performance rather than in composition."
++ *
++ *   characterKey(work, character)          stable for a character across a work
++ *   frameKey(work, character, frameIndex)  varies per frame
++ *
++ * Choices belonging to a character use the character scope. A character's
++ * instrument is the clear case, and keying it per frame was a musical bug as well
++ * as a determinism one: it reassigned the instrument on every frame.
++ *
++ * Choices belonging to a moment of performance, ornament, syncopation, velocity
++ * inflection, voicing alteration, use the frame scope. None of them changes a
++ * named musical parameter of the theory; mode, dynamics, the fragmentation stage
++ * and the density level are computed and never drawn.
++ *
++ * VERSIONING
++ * ----------
++ * SEED_ALGORITHM_VERSION is part of every key. Changing the hash changes every
++ * rendered stimulus in the programme, so it must be a deliberate, visible act
++ * rather than a side effect of a refactor. Bumping it is how you say "these are
++ * new stimuli"; leaving it alone is how a rendered cue stays the cue it was.
++ * `src/lib/__tests__/deterministic.test.ts` pins exact values against this
++ * version and will fail if anyone changes the algorithm without bumping it.
++ */
++
++/** Bump ONLY to deliberately invalidate every previously rendered stimulus. */
++export const SEED_ALGORITHM_VERSION = 1;
++
++/** Unit separator. Cannot occur in an id, so keys are unambiguous. */
++const SEP = '';
++
++/** Used when a call site has not been given a key. Deterministic, not random. */
++export const UNKEYED = 'UNKEYED';
++
++let warnedUnkeyed = false;
++
++/**
++ * xmur3 string hash. Integer arithmetic only, via Math.imul and >>> 0, so the
++ * result is identical on every JavaScript engine. Floating point anywhere in a
++ * hash makes it engine dependent, which would make stimuli unciteable across
++ * browsers.
++ */
++function xmur3(str: string): number {
++    let h = 1779033703 ^ str.length;
++    for (let i = 0; i < str.length; i++) {
++        h = Math.imul(h ^ str.charCodeAt(i), 3432918353);
++        h = (h << 13) | (h >>> 19);
++    }
++    h = Math.imul(h ^ (h >>> 16), 2246822507);
++    h = Math.imul(h ^ (h >>> 13), 3266489909);
++    return (h ^ (h >>> 16)) >>> 0;
++}
++
++/** splitmix32 finaliser. One integer in, one uniform float in [0, 1) out. */
++function splitmix32(seed: number): number {
++    let a = (seed + 0x9e3779b9) | 0;
++    let t = a ^ (a >>> 16);
++    t = Math.imul(t, 0x21f0aaad);
++    t = t ^ (t >>> 15);
++    t = Math.imul(t, 0x735a2d97);
++    t = t ^ (t >>> 15);
++    return (t >>> 0) / 4294967296;
++}
++
++function buildKey(parts: Array<string | number>): string {
++    if (parts.length === 0 || parts[0] === UNKEYED) {
++        if (!warnedUnkeyed && typeof console !== 'undefined') {
++            warnedUnkeyed = true;
++            console.warn(
++                '[deterministic] a draw was made with no seed key. Output is still ' +
++                'reproducible, but every unkeyed call site shares one key, so ' +
++                'different characters will receive identical performance choices. ' +
++                'Thread a characterKey or frameKey through to this call site.'
++            );
++        }
++    }
++    return String(SEED_ALGORITHM_VERSION) + SEP + parts.join(SEP);
++}
++
++/** A uniform float in [0, 1), a pure function of the coordinates given. */
++export function rand(...parts: Array<string | number>): number {
++    return splitmix32(xmur3(buildKey(parts)));
++}
++
++/** An integer in [0, n), a pure function of the coordinates given. */
++export function randInt(n: number, ...parts: Array<string | number>): number {
++    if (n <= 0) return 0;
++    return Math.floor(rand(...parts) * n);
++}
++
++/** A float in [lo, hi), a pure function of the coordinates given. */
++export function randRange(lo: number, hi: number, ...parts: Array<string | number>): number {
++    return lo + rand(...parts) * (hi - lo);
++}
++
++/** True with probability p, a pure function of the coordinates given. */
++export function chance(p: number, ...parts: Array<string | number>): boolean {
++    return rand(...parts) < p;
++}
++
++/** Pick one element, a pure function of the coordinates given. Never empty-unsafe. */
++export function pick<T>(items: readonly T[], ...parts: Array<string | number>): T | undefined {
++    if (items.length === 0) return undefined;
++    return items[randInt(items.length, ...parts)];
++}
++
++/** Stable for a character across a whole work. Use for instrument and register. */
++export function characterKey(workId: string, characterId: string): string {
++    return `${workId}${SEP}${characterId}`;
++}
++
++/** Varies per frame. Use for performance choices inside one moment. */
++export function frameKey(workId: string, characterId: string, frameIndex: number): string {
++    return `${workId}${SEP}${characterId}${SEP}${frameIndex}`;
++}
+diff --git a/src/lib/play_parser.ts b/src/lib/play_parser.ts
+index 56e6989..077dc72 100644
+--- a/src/lib/play_parser.ts
++++ b/src/lib/play_parser.ts
+@@ -25,8 +25,12 @@ export interface CharacterProfile {
+     id: string;
+     name: string;
+     lineCount: number;
+-    disc: { D: number; I: number; S: number; C: number };
+-    darkTriad: { machiavellianism: number; narcissism: number; psychopathy: number };
++    // NOT SET by the parser. Nothing in a play text measures these, and inventing
++    // them with Math.random() was worse than leaving them absent, because an
++    // invented value is indistinguishable downstream from a measured one.
++    // Decision of 2026-09-12: leave unset. See TASK: DISC/Dark Triad instrument.
++    disc: { D: number; I: number; S: number; C: number } | null;
++    darkTriad: { machiavellianism: number; narcissism: number; psychopathy: number } | null;
+     archetype: string;
+     instrument: string;
+ }
+@@ -247,24 +251,20 @@ function romanToInt(roman: string): number {
+     return result;
+ }
+ 
+-function inferDISC(name: string, avgTrauma: number): CharacterProfile['disc'] {
+-    // Simple heuristic based on trauma level
+-    const high = avgTrauma > 0.5;
+-    return {
+-        D: high ? 0.6 + Math.random() * 0.3 : 0.3 + Math.random() * 0.3,
+-        I: high ? 0.3 + Math.random() * 0.3 : 0.5 + Math.random() * 0.3,
+-        S: high ? 0.2 + Math.random() * 0.3 : 0.5 + Math.random() * 0.3,
+-        C: 0.4 + Math.random() * 0.3
+-    };
++function inferDISC(_name: string, _avgTrauma: number): CharacterProfile['disc'] {
++    // TASK (open): build an instrument that either derives DISC from the text under
++    // a stated, published protocol, or takes it from the user. Until one exists this
++    // returns null and every consumer must handle an absent profile. The previous
++    // implementation banded four values off average trauma and filled the band with
++    // Math.random(), so four of the nine state components were fabricated per
++    // character and were then indistinguishable from measured ones.
++    return null;
+ }
+ 
+-function inferDarkTriad(avgTrauma: number): CharacterProfile['darkTriad'] {
+-    const base = avgTrauma * 0.5;
+-    return {
+-        machiavellianism: Math.min(1, base + Math.random() * 0.3),
+-        narcissism: Math.min(1, base * 0.8 + Math.random() * 0.2),
+-        psychopathy: Math.min(1, base * 0.6 + Math.random() * 0.2)
+-    };
++function inferDarkTriad(_avgTrauma: number): CharacterProfile['darkTriad'] {
++    // TASK (open): same as inferDISC. A research instrument is never an operational
++    // flag, and a Dark Triad score derived from a keyword count is neither.
++    return null;
+ }
+ 
+ function inferArchetype(avgTrauma: number): string {

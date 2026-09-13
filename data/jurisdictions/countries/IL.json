@@ -1,0 +1,150 @@
+{
+  "jurisdiction": {
+    "country_name": "Israel",
+    "iso2": "IL",
+    "iso3": "ISR",
+    "numeric_code": "376",
+    "continent": "Asia",
+    "region": "Western Asia",
+    "sub_region": "Middle East",
+    "sovereign_status": "UN Member State",
+    "capital": "Jerusalem",
+    "currency": "ILS"
+  },
+  "supervisory_authorities": {
+    "dpa": "Privacy Protection Authority (PPA)",
+    "csirt": "Israel National Cyber Directorate (INCD / CERT-IL)",
+    "crypto_agency": "Ministry of Defense (DECA)"
+  },
+  "statutory_frameworks": [
+    {
+      "official_title": "Cyber Defense and National Cyber Directorate Law (Government Resolutions 2443 & 2444)",
+      "short_name": "Israel Cyber Defense Directives",
+      "statute_type": "Regulation",
+      "legal_citation": "Government Resolution 2444 / INCD Orders",
+      "enactment_date": "2015-02-15",
+      "effective_date": "2015-02-15",
+      "enforcement_deadline": "Ongoing",
+      "supervisory_authority": "Israel National Cyber Directorate (INCD)",
+      "status": "In Force",
+      "metadata": {
+        "cni_mandate": "Direct regulatory powers over Critical National Infrastructure (CNI) under Regulation of Security in Public Bodies Law 1998"
+      }
+    },
+    {
+      "official_title": "Protection of Privacy Law 5741-1981 as modernized by Privacy Protection Regulations (Data Security) 5777-2017 and Amendment 13 (2024)",
+      "short_name": "Israel Privacy Protection Law",
+      "statute_type": "Act",
+      "legal_citation": "5741-1981 / Regulations 5777-2017 / Amendment 13",
+      "enactment_date": "1981-02-23",
+      "effective_date": "2018-05-08",
+      "enforcement_deadline": "2025-08-01",
+      "supervisory_authority": "Privacy Protection Authority (PPA)",
+      "status": "In Force",
+      "metadata": {
+        "adequacy": "Maintains reciprocal adequacy decision with European Union"
+      }
+    }
+  ],
+  "cyber_security_mandates": [
+    {
+      "target_domain": "Critical Infrastructure, Telecom, Defense Industry",
+      "baseline_standard_ref": "INCD Defense Methodology / ISO/IEC 27001 / IEC 62443",
+      "mandatory_certifications": "INCD Qualified Infrastructure Security Program; annual penetration testing",
+      "default_password_ban": true,
+      "sbom_required": true,
+      "cbom_required": false,
+      "patch_management_sla_days": 14,
+      "details": "Mandatory deployment of verified anomaly detection systems in SCADA networks; annual third-party external penetration tests."
+    }
+  ],
+  "data_privacy_sovereignty": [
+    {
+      "primary_privacy_law": "Data Protection and Privacy Act of Israel",
+      "supervisory_dpa": "Privacy Protection Authority (PPA)",
+      "data_localization_required": false,
+      "localization_scope": "Sector-specific financial and government data localization where applicable.",
+      "cross_border_transfer_mechanism": "Adequacy, Contractual Guarantees, DPA Authorization",
+      "sensitive_data_categories": [
+        "Biometrics",
+        "Health Data",
+        "Criminal Records"
+      ]
+    }
+  ],
+  "cryptography_controls": [
+    {
+      "crypto_import_license_required": false,
+      "crypto_export_controls": "National Customs & Dual-Use Export Control Regime.",
+      "mandatory_government_access_or_escrow": false,
+      "approved_encryption_standards": "AES-256, FIPS 140-2/3, ISO/IEC 18033",
+      "post_quantum_mandate": "Monitoring international standard bodies (ISO/IEC JTC 1 / ITU-T).",
+      "regulatory_agency": "Ministry of Defense (DECA)"
+    }
+  ],
+  "incident_disclosure_rules": [
+    {
+      "breach_type": "Severe Security Incident (Data Security Regulations)",
+      "notification_timeline_hours": 24,
+      "second_stage_timeline_hours": 72,
+      "final_report_timeline_days": 14,
+      "recipient_authorities": [
+        "Privacy Protection Authority (PPA) / INCD CERT-IL"
+      ],
+      "ransomware_payment_reporting": true,
+      "threshold_trigger_definition": "Severe incident involving unauthorized use or exposure of high-security level database."
+    }
+  ],
+  "penalty_structures": [
+    {
+      "max_administrative_fine_fixed": 3200000.0,
+      "fine_currency": "ILS",
+      "max_turnover_percentage": 0.0,
+      "criminal_liability_directors": true,
+      "market_withdrawal_sanctions": true
+    }
+  ],
+  "sector_applicability": [
+    {
+      "sector": "Energy",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Generation, transmission, distribution, and pipeline SCADA integrity."
+    },
+    {
+      "sector": "Water",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Water treatment, distribution telemetry, and environmental control."
+    },
+    {
+      "sector": "Healthcare",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Hospital systems, medical device cybersecurity, and EHR data protection."
+    },
+    {
+      "sector": "Financial Services",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Payment systems, banking core networks, and cyber resilience audits."
+    },
+    {
+      "sector": "Telecom",
+      "scope_classification": "Essential Infrastructure",
+      "specific_obligations": "Public telecommunications networks, submarine cables, and 5G security."
+    },
+    {
+      "sector": "OT/Industrial",
+      "scope_classification": "Industrial Manufacturing",
+      "specific_obligations": "Machinery safety, industrial robotics, PLC programming, and safety instrumented systems."
+    },
+    {
+      "sector": "Transport",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Rail signaling, air traffic management, maritime port terminals, and connected vehicles."
+    }
+  ],
+  "enrichment_metadata": {
+    "iterations_completed": 4,
+    "last_enriched_at": "2026-09-12T02:14:21.080082+00:00",
+    "enrichment_pipeline": "Valyu-Perplexity-MultiAgent-v4",
+    "enrichment_status": "DEEP_SPECIALIZED_ENRICHMENT_COMPLETE"
+  }
+}

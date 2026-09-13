@@ -1,0 +1,1868 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Eigenia B.V. — Applied Complexity Science &amp; Operational Capabilities</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+  @layer base {
+    html, body { margin: 0; padding: 0; }
+    body { overscroll-behavior: none; }
+  }
+  ::-webkit-scrollbar { display: none; }
+</style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "background": "#111317",
+        "surface": "#111317",
+        "carbon-base": "#0c0e12",
+        "carbon-surface": "#14171d",
+        "carbon-elevated": "#1a1c20",
+        "slate-line": "#2d333b",
+        "slate-subtle": "#444c56",
+        "slate-text-muted": "#768390",
+        "slate-text-secondary": "#adbac7",
+        "off-white-primary": "#f4f6f8",
+        "primary": "#ffb595",
+        "primary-container": "#f2640f",
+        "dutch-orange-deep": "#d9531e",
+        "secondary": "#9bcbfd",
+        "steel-blue-soft": "#5c88b0",
+        "tertiary": "#98d599",
+        "sage-green-soft": "#58a65c",
+        "technical-amber": "#c69214",
+        "error": "#ffb4ab",
+        "error-container": "#93000a",
+        "on-primary": "#571e00",
+        "on-surface": "#e2e2e8"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.125rem",
+        "lg": "0.25rem",
+        "xl": "0.5rem",
+        "full": "0.75rem"
+      },
+      "spacing": {
+        "space-2xs": "0.25rem",
+        "space-xs": "0.5rem",
+        "space-sm": "0.75rem",
+        "space-md": "1rem",
+        "space-lg": "1.5rem",
+        "space-xl": "2rem",
+        "space-2xl": "3rem",
+        "space-3xl": "4rem",
+        "margin-desktop": "3rem",
+        "gutter-desktop": "1.5rem"
+      },
+      "fontFamily": {
+        "display-hero": ["Geist"],
+        "headline-xl": ["Geist"],
+        "headline-lg": ["Geist"],
+        "headline-md": ["Geist"],
+        "body-lg": ["Inter"],
+        "body-md": ["Inter"],
+        "body-sm": ["Inter"],
+        "code-formula": ["JetBrains Mono"],
+        "eyebrow-tag": ["JetBrains Mono"],
+        "badge-code": ["JetBrains Mono"],
+        "label-telemetry": ["JetBrains Mono"]
+      },
+      "fontSize": {
+        "display-hero": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.03em", "fontWeight": "600" }],
+        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+        "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "500" }],
+        "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+        "body-lg": ["17px", { "lineHeight": "28px", "letterSpacing": "-0.005em", "fontWeight": "400" }],
+        "body-md": ["15px", { "lineHeight": "24px", "fontWeight": "400" }],
+        "body-sm": ["13px", { "lineHeight": "20px", "fontWeight": "400" }],
+        "code-formula": ["14px", { "lineHeight": "22px", "fontWeight": "400" }],
+        "eyebrow-tag": ["11px", { "lineHeight": "16px", "letterSpacing": "0.12em", "fontWeight": "600" }],
+        "badge-code": ["10px", { "lineHeight": "12px", "letterSpacing": "0.08em", "fontWeight": "600" }],
+        "label-telemetry": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500" }]
+      }
+    }
+  }
+};
+</script>
+</head>
+<body class="bg-background font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-white">
+<!-- PRESERVED TOP NAVIGATION BAR -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-carbon-surface/95 backdrop-blur-md border-b border-slate-line">
+<div class="max-w-[1440px] mx-auto px-margin-desktop h-16 flex items-center justify-between gap-space-lg">
+<div class="flex items-center">
+<a class="flex flex-col group" data-path="home" href="#">
+<div class="flex items-center gap-1.5">
+<span class="font-code-formula text-[15px] font-bold tracking-[0.25em] text-off-white-primary leading-none uppercase">E I G E N I A &nbsp;B.V.</span>
+<span class="text-[10px] font-mono font-bold text-primary-container leading-none uppercase ml-0.5">NL</span>
+</div>
+<span class="font-code-formula text-[11px] text-slate-text-muted tracking-wider mt-1">Applied Complexity Science</span>
+</a>
+</div>
+<nav class="hidden lg:flex items-center gap-8 xl:gap-10">
+<a class="font-code-formula text-[14px] text-slate-text-secondary hover:text-off-white-primary transition-colors tracking-normal" data-path="mission" href="#mission">Mission</a>
+<div class="flex items-center gap-1 cursor-pointer group">
+<a class="font-code-formula text-[14px] text-slate-text-secondary group-hover:text-off-white-primary transition-colors tracking-normal" data-path="research-tracks" href="#capabilities">Research Tracks</a>
+<span class="material-symbols-outlined text-[16px] text-primary-container">expand_more</span>
+</div>
+<a class="font-code-formula text-[14px] text-slate-text-secondary hover:text-off-white-primary transition-colors tracking-normal" data-path="unified-standard" href="#unified-standard">Unified Standard</a>
+<div class="flex items-center gap-1 cursor-pointer group">
+<a class="font-code-formula text-[14px] text-slate-text-secondary group-hover:text-off-white-primary transition-colors tracking-normal" data-path="applied-physics" href="#s-curve-simulator">Applied Physics</a>
+<span class="material-symbols-outlined text-[16px] text-primary-container">expand_more</span>
+</div>
+<div class="relative py-1">
+<a class="font-code-formula text-[14px] text-primary-container font-medium tracking-normal transition-colors" data-path="collaborate" href="#briefing-terminal">Collaborate</a>
+<span class="absolute bottom-0 left-0 right-0 h-[2px] bg-primary-container"></span>
+</div>
+</nav>
+<div class="flex items-center gap-3.5">
+<button aria-label="Toggle color mode" class="w-9 h-9 rounded-full border border-slate-line bg-carbon-base flex items-center justify-center text-primary-container hover:text-off-white-primary hover:border-slate-subtle transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">light_mode</span>
+</button>
+<a class="inline-flex items-center justify-center px-5 py-2 rounded-full bg-primary-container text-white font-code-formula text-[13px] font-semibold tracking-wide hover:bg-dutch-orange-deep transition-colors shadow-sm" data-path="request-briefing" href="#briefing-terminal">Request Briefing</a>
+<div class="flex items-center rounded-full border border-slate-line bg-carbon-base p-0.5 font-code-formula text-[11px] font-semibold tracking-wider">
+<button class="px-2.5 py-1 rounded-full bg-primary-container text-white font-bold transition-colors" type="button">EN</button>
+<button class="px-2.5 py-1 rounded-full text-slate-text-muted hover:text-off-white-primary transition-colors" type="button">NL</button>
+</div>
+</div>
+</div>
+</header>
+<main class="w-full pt-16 bg-background min-h-screen">
+<!-- SECTION 1: MISSION HERO - THE THREE VITAL ASSETS & CORE IDENTITY -->
+<section class="relative w-full overflow-hidden bg-carbon-surface border-b border-slate-line" id="mission">
+<!-- Abstract Field Lines -->
+<div class="absolute inset-0 pointer-events-none opacity-30">
+<svg class="w-full h-full object-cover" fill="none" viewBox="0 0 1440 680" xmlns="http://www.w3.org/2000/svg">
+<g stroke="#d9531e" stroke-opacity="0.3" stroke-width="0.75">
+<path d="M-100 320 C 300 320, 500 120, 720 120 C 940 120, 1140 320, 1540 320"></path>
+<path d="M-100 360 C 320 360, 520 160, 720 160 C 920 160, 1120 360, 1540 360"></path>
+<path d="M-100 400 C 340 400, 540 200, 720 200 C 900 200, 1100 400, 1540 400"></path>
+</g>
+<g stroke="#5c88b0" stroke-opacity="0.2" stroke-width="0.5">
+<circle cx="720" cy="320" r="180" stroke-dasharray="4 6"></circle>
+<circle cx="720" cy="320" r="80"></circle>
+<circle cx="720" cy="320" fill="#f2640f" r="3.5"></circle>
+</g>
+</svg>
+</div>
+<div class="absolute inset-0 bg-gradient-to-b from-carbon-surface/80 via-transparent to-carbon-base pointer-events-none"></div>
+<div class="relative max-w-[1360px] mx-auto px-margin-desktop py-space-3xl flex flex-col items-start">
+<!-- Eyebrow -->
+<div class="flex items-center gap-space-xs px-space-sm py-space-2xs bg-carbon-elevated border border-slate-line mb-space-lg">
+<span class="w-2 h-2 bg-primary-container inline-block"></span>
+<span class="font-eyebrow-tag text-eyebrow-tag uppercase text-primary tracking-widest">EIGENIA B.V. • SOVEREIGN THINK TANK &amp; OPERATIONAL LABS</span>
+<span class="text-slate-line">/</span>
+<span class="font-badge-code text-badge-code text-slate-text-muted">JURISDICTION NL (KvK 84920148)</span>
+</div>
+<!-- Headline -->
+<h1 class="font-display-hero text-display-hero text-off-white-primary max-w-4xl tracking-tight leading-none mb-space-md">
+        Applied Complexity Science for <span class="text-primary-container">Critical Infrastructure.</span>
+</h1>
+<!-- Exact Core Subhead -->
+<p class="font-body-lg text-body-lg text-slate-text-secondary max-w-3xl mb-space-xl">
+        Replacing fragile compliance checklists with reproducible mathematical physics, open standards, and catastrophe-calibrated risk models to insulate vital societal assets under sovereign European verification protocols.
+      </p>
+<!-- Dual CTAs -->
+<div class="flex flex-wrap items-center gap-space-md mb-space-2xl">
+<a class="inline-flex items-center justify-center gap-space-xs px-space-lg py-space-sm bg-primary-container text-white font-code-formula text-body-md font-semibold tracking-tight shadow-md hover:bg-dutch-orange-deep transition-colors group" href="#briefing-terminal">
+<span>Request Board Briefing</span>
+<span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+<a class="inline-flex items-center justify-center gap-space-xs px-space-lg py-space-sm bg-carbon-elevated border border-slate-line text-off-white-primary font-code-formula text-body-md hover:border-primary-container hover:text-primary transition-colors" href="#research-treatises">
+<span>Explore Research Tracks</span>
+<span class="text-slate-text-muted font-badge-code">[59 PAPERS]</span>
+</a>
+<div class="hidden lg:flex items-center gap-space-xs px-space-md py-space-xs bg-carbon-base border border-slate-line text-slate-text-muted font-badge-code text-badge-code uppercase tracking-wider">
+<span class="w-1.5 h-1.5 bg-sage-green-soft"></span>
+<span>100% Air-Gapped Sovereign Ready // Open Standards</span>
+</div>
+</div>
+<!-- The 3 Core Pillars Prominently Visualized -->
+<div class="w-full grid grid-cols-1 md:grid-cols-3 gap-space-md pt-space-xs">
+<!-- Pillar 1: Water -->
+<div class="p-space-lg bg-carbon-elevated/80 border border-slate-line hover:border-secondary transition-all group">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="w-10 h-10 bg-secondary/10 border border-secondary/30 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[22px]">water_drop</span>
+</div>
+<span class="font-badge-code text-badge-code text-secondary uppercase font-semibold">PILLAR 01</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-off-white-primary mb-space-xs group-hover:text-secondary transition-colors">
+            Clean Water Security
+          </h3>
+<p class="font-body-sm text-body-sm text-slate-text-secondary mb-space-sm">
+            SCADA/PLC deterministic control loop defense, dosing pump telemetry validation, and municipal wastewater treatment resilience against covert actuation tampering.
+          </p>
+<div class="pt-space-xs border-t border-slate-line flex items-center justify-between text-slate-text-muted font-badge-code text-badge-code">
+<span>DETERMINISTIC VERIFICATION</span>
+<span class="text-secondary font-mono">FLOW &lt; 0.4ms</span>
+</div>
+</div>
+<!-- Pillar 2: Energy -->
+<div class="p-space-lg bg-carbon-elevated/80 border border-slate-line hover:border-primary-container transition-all group">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="w-10 h-10 bg-primary-container/10 border border-primary-container/30 flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-[22px]">bolt</span>
+</div>
+<span class="font-badge-code text-badge-code text-primary-container uppercase font-semibold">PILLAR 02</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-off-white-primary mb-space-xs group-hover:text-primary transition-colors">
+            Sustainable Energy Grids
+          </h3>
+<p class="font-body-sm text-body-sm text-slate-text-secondary mb-space-sm">
+            BESS substation dynamic cascade mitigation, high-voltage busbar Kramers escape barrier calculations, and inverter firmware multi-tenant supply chain attestation.
+          </p>
+<div class="pt-space-xs border-t border-slate-line flex items-center justify-between text-slate-text-muted font-badge-code text-badge-code">
+<span>REFBESS-250MW SPEC</span>
+<span class="text-primary font-mono">t_crit = 18.4s</span>
+</div>
+</div>
+<!-- Pillar 3: Food -->
+<div class="p-space-lg bg-carbon-elevated/80 border border-slate-line hover:border-tertiary transition-all group">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="w-10 h-10 bg-tertiary/10 border border-tertiary/30 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[22px]">agriculture</span>
+</div>
+<span class="font-badge-code text-badge-code text-tertiary uppercase font-semibold">PILLAR 03</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-off-white-primary mb-space-xs group-hover:text-tertiary transition-colors">
+            Healthy Food Systems
+          </h3>
+<p class="font-body-sm text-body-sm text-slate-text-secondary mb-space-sm">
+            Agricultural distribution cold-chain safety, climate-controlled greenhouse robotics verification, and Dutch agro-corridor cyber-physical topology guarantees.
+          </p>
+<div class="pt-space-xs border-t border-slate-line flex items-center justify-between text-slate-text-muted font-badge-code text-badge-code">
+<span>AGRI-NET PROTOCOL</span>
+<span class="text-tertiary font-mono">SUPPLY CLUSTER</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 2: "WHAT EIGENIA DOES" - OPERATIONAL CAPABILITIES (3-COLUMN MATRIX) -->
+<section class="w-full bg-carbon-base py-space-3xl border-b border-slate-line" id="capabilities">
+<div class="max-w-[1360px] mx-auto px-margin-desktop">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-space-2xl gap-space-md">
+<div>
+<div class="flex items-center gap-space-xs mb-space-2xs">
+<span class="font-eyebrow-tag text-eyebrow-tag uppercase text-primary tracking-widest">// OPERATIONAL CAPABILITIES MATRIX</span>
+<span class="px-space-2xs bg-carbon-elevated text-slate-text-muted font-badge-code text-badge-code">EMPIRICAL METHODOLOGY</span>
+</div>
+<h2 class="font-headline-xl text-headline-xl text-off-white-primary tracking-tight">
+            What Eigenia Does.
+          </h2>
+</div>
+<p class="font-body-md text-body-md text-slate-text-secondary max-w-xl">
+          Traditional compliance treats security as static administrative questionnaires. Eigenia operates an empirical, physics-grounded operational engineering framework for sovereign infrastructure.
+        </p>
+</div>
+<!-- 3-Column Matrix with Contrast State Indicator -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-space-md">
+<!-- Column A: Public Utility Defense -->
+<div class="bg-carbon-surface border border-slate-line p-space-lg flex flex-col justify-between hover:border-slate-subtle transition-all">
+<div>
+<div class="flex items-center justify-between pb-space-xs mb-space-md border-b border-slate-line">
+<span class="font-badge-code text-badge-code text-primary uppercase font-bold tracking-wider">CAPABILITY A</span>
+<span class="px-space-xs py-0.5 bg-carbon-base text-sage-green-soft font-badge-code text-[10px] uppercase">100% Pro-Bono</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-off-white-primary mb-space-xs">
+              Public Utility Defense
+            </h3>
+<p class="font-body-sm text-body-sm text-slate-text-secondary mb-space-md">
+              Pro-bono sovereign resilience engagements for certified public water, grid, and wastewater operators across the Netherlands and allied European nations.
+            </p>
+<!-- Contrast Comparison Block -->
+<div class="space-y-space-xs mb-space-md font-code-formula text-[12px]">
+<div class="p-space-xs bg-carbon-base/70 border-l-2 border-red-500/60">
+<span class="text-error uppercase block font-semibold text-[10px]">Fragile Compliance:</span>
+<span class="text-slate-text-muted">5x5 color risk matrix, annual checklist audit, zero validation of live PLC logic loops.</span>
+</div>
+<div class="p-space-xs bg-carbon-base/70 border-l-2 border-primary-container">
+<span class="text-primary uppercase block font-semibold text-[10px]">Eigenia Applied Physics:</span>
+<span class="text-off-white-primary">Non-destructive physical SCADA audits, air-gapped node isolation, deterministic signal proving.</span>
+</div>
+</div>
+<ul class="space-y-1.5 font-code-formula text-body-sm text-slate-text-muted mb-space-md">
+<li class="flex items-center gap-2"><span class="text-primary">•</span> Air-gapped on-premise daemon audit</li>
+<li class="flex items-center gap-2"><span class="text-primary">•</span> No active fuzzing over production loops</li>
+<li class="flex items-center gap-2"><span class="text-primary">•</span> Certified NIS2 / CER Article 21 validation</li>
+</ul>
+</div>
+<div class="pt-space-sm border-t border-slate-line flex items-center justify-between font-badge-code text-badge-code text-slate-text-muted">
+<span>INTAKE: CERTIFIED OPERATORS</span>
+<a class="text-primary hover:underline" href="#briefing-terminal">Request Audit →</a>
+</div>
+</div>
+<!-- Column B: Applied Mathematics & Digital Twins -->
+<div class="bg-carbon-surface border border-slate-line p-space-lg flex flex-col justify-between hover:border-slate-subtle transition-all">
+<div>
+<div class="flex items-center justify-between pb-space-xs mb-space-md border-b border-slate-line">
+<span class="font-badge-code text-badge-code text-secondary uppercase font-bold tracking-wider">CAPABILITY B</span>
+<span class="px-space-xs py-0.5 bg-carbon-base text-secondary font-badge-code text-[10px] uppercase">G_CPDT Graph Engine</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-off-white-primary mb-space-xs">
+              Applied Mathematics &amp; Digital Twins
+            </h3>
+<p class="font-body-sm text-body-sm text-slate-text-secondary mb-space-md">
+              Coupling physical fluid dynamics, thermodynamics, and electrical power-flow directly to silicon microcode state machines in unified graph representations.
+            </p>
+<!-- Contrast Comparison Block -->
+<div class="space-y-space-xs mb-space-md font-code-formula text-[12px]">
+<div class="p-space-xs bg-carbon-base/70 border-l-2 border-red-500/60">
+<span class="text-error uppercase block font-semibold text-[10px]">Fragile Compliance:</span>
+<span class="text-slate-text-muted">Separate IT and OT silos; network diagram stored as out-of-date static PDF CAD prints.</span>
+</div>
+<div class="p-space-xs bg-carbon-base/70 border-l-2 border-secondary">
+<span class="text-secondary uppercase block font-semibold text-[10px]">Eigenia Applied Physics:</span>
+<span class="text-off-white-primary">Single computable G_CPDT schema uniting DEXPI 2.0 P&amp;ID with CycloneDX 1.6+ software/hardware BOM.</span>
+</div>
+</div>
+<ul class="space-y-1.5 font-code-formula text-body-sm text-slate-text-muted mb-space-md">
+<li class="flex items-center gap-2"><span class="text-secondary">•</span> Gated Graph Neural Networks (GGNN)</li>
+<li class="flex items-center gap-2"><span class="text-secondary">•</span> Sub-second transient state solving</li>
+<li class="flex items-center gap-2"><span class="text-secondary">•</span> Multi-machine Kramers escape basins</li>
+</ul>
+</div>
+<div class="pt-space-sm border-t border-slate-line flex items-center justify-between font-badge-code text-badge-code text-slate-text-muted">
+<span>MODELS: 9 RATIFIED SCHEMAS</span>
+<a class="text-secondary hover:underline" href="#unified-standard">Inspect Graph →</a>
+</div>
+</div>
+<!-- Column C: Catastrophe Actuarial Engineering -->
+<div class="bg-carbon-surface border border-slate-line p-space-lg flex flex-col justify-between hover:border-slate-subtle transition-all">
+<div>
+<div class="flex items-center justify-between pb-space-xs mb-space-md border-b border-slate-line">
+<span class="font-badge-code text-badge-code text-tertiary uppercase font-bold tracking-wider">CAPABILITY C</span>
+<span class="px-space-xs py-0.5 bg-carbon-base text-tertiary font-badge-code text-[10px] uppercase">Actuarial EVT</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-off-white-primary mb-space-xs">
+              Catastrophe Actuarial Engineering
+            </h3>
+<p class="font-body-sm text-body-sm text-slate-text-secondary mb-space-md">
+              Rigorous cyber insurance underwriting engines replacing naive Gaussian distributions with Taleb fat-tail Pareto distributions and rotated Clayton copulas.
+            </p>
+<!-- Contrast Comparison Block -->
+<div class="space-y-space-xs mb-space-md font-code-formula text-[12px]">
+<div class="p-space-xs bg-carbon-base/70 border-l-2 border-red-500/60">
+<span class="text-error uppercase block font-semibold text-[10px]">Fragile Compliance:</span>
+<span class="text-slate-text-muted">Thin-tail Bell curves that assume systemic outage events are independent Gaussian variables.</span>
+</div>
+<div class="p-space-xs bg-carbon-base/70 border-l-2 border-tertiary">
+<span class="text-tertiary uppercase block font-semibold text-[10px]">Eigenia Applied Physics:</span>
+<span class="text-off-white-primary">Rotated Clayton Copula dependency capturing cascading common-mode power and cooling failures.</span>
+</div>
+</div>
+<ul class="space-y-1.5 font-code-formula text-body-sm text-slate-text-muted mb-space-md">
+<li class="flex items-center gap-2"><span class="text-tertiary">•</span> Lloyd's Y5381 tail-risk conformity</li>
+<li class="flex items-center gap-2"><span class="text-tertiary">•</span> Aggregate Loss Exceedance (ALE)</li>
+<li class="flex items-center gap-2"><span class="text-tertiary">•</span> Modelled +859% Return on Security Inv.</li>
+</ul>
+</div>
+<div class="pt-space-sm border-t border-slate-line flex items-center justify-between font-badge-code text-badge-code text-slate-text-muted">
+<span>PORTFOLIO: TALEB ROTATED COPULA</span>
+<a class="text-tertiary hover:underline" href="#research-treatises">View Treatise →</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 3: WHY PHYSICS MATTERS - INTERACTIVE S-CURVE SIMULATOR -->
+<section class="w-full bg-carbon-surface py-space-3xl border-b border-slate-line" id="s-curve-simulator">
+<div class="max-w-[1360px] mx-auto px-margin-desktop">
+<div class="flex flex-col lg:flex-row items-start justify-between gap-space-lg mb-space-xl">
+<div>
+<div class="flex items-center gap-space-xs mb-space-xs">
+<span class="font-eyebrow-tag text-eyebrow-tag text-primary uppercase tracking-widest">// WHY COMPLIANCE FAILS: NON-LINEAR DEGRADATION</span>
+<span class="px-space-2xs bg-carbon-elevated text-slate-text-muted font-badge-code text-badge-code uppercase">WG-04-CF</span>
+</div>
+<h2 class="font-headline-xl text-headline-xl text-off-white-primary tracking-tight">
+            Physical Plant S-Curve Failure Trajectories
+          </h2>
+</div>
+<p class="font-body-md text-body-md text-slate-text-secondary max-w-xl">
+          Industrial control systems do not degrade linearly. Under compounding adversary perturbations or wear, system stability maintains an illusion of equilibrium before reaching the critical threshold <code class="font-code-formula text-primary text-body-sm">x_c = 0.742</code>, triggering sudden systemic collapse.
+        </p>
+</div>
+<!-- S-Curve Interactive Board -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md bg-carbon-base border border-slate-line p-space-lg">
+<!-- Interactive Chart Display (8 cols) -->
+<div class="lg:col-span-8 flex flex-col justify-between bg-carbon-surface border border-slate-line p-space-md">
+<div class="flex flex-wrap items-center justify-between gap-2 mb-space-sm">
+<div class="flex items-center gap-space-xs font-code-formula text-body-sm text-off-white-primary">
+<span class="text-primary font-semibold">S(x)</span>
+<span class="text-slate-text-muted">=</span>
+<span>1 / [1 + e<sup class="text-primary">-k(x - x_c)</sup>]</span>
+</div>
+<div class="flex items-center gap-space-sm font-badge-code text-badge-code">
+<span class="text-slate-text-muted">INTERACTIVE SIMULATION</span>
+<span class="px-space-xs py-0.5 bg-carbon-elevated text-secondary font-mono border border-slate-line">k = 12.5</span>
+<span class="px-space-xs py-0.5 bg-carbon-elevated text-primary font-mono border border-slate-line">x_c = 0.742</span>
+</div>
+</div>
+<!-- SVG Phase Transition Plot -->
+<div class="relative w-full h-72 sm:h-80 bg-carbon-base/90 overflow-hidden flex items-center justify-center border border-slate-line">
+<svg class="w-full h-full" id="s-curve-svg" preserveAspectRatio="none" viewBox="0 0 800 320">
+<!-- Grid Lines -->
+<line stroke="#2d333b" stroke-width="1" x1="60" x2="60" y1="30" y2="280"></line>
+<line stroke="#2d333b" stroke-width="1" x1="60" x2="780" y1="280" y2="280"></line>
+<line stroke="#1c2027" stroke-dasharray="3 3" stroke-width="1" x1="60" x2="780" y1="155" y2="155"></line>
+<line stroke="#1c2027" stroke-dasharray="3 3" stroke-width="1" x1="60" x2="780" y1="50" y2="50"></line>
+<!-- Critical Threshold Guideline (x_c = 0.742 -> x = 594) -->
+<line stroke="#d9531e" stroke-dasharray="4 4" stroke-width="1.5" x1="594" x2="594" y1="30" y2="280"></line>
+<text class="font-badge-code text-[10px]" fill="#d9531e" x="600" y="45">CRITICAL BIFURCATION (x_c = 0.742)</text>
+<!-- State Zone Labels -->
+<rect fill="#14171d" height="22" width="130" x="70" y="245"></rect>
+<text class="font-badge-code text-[10px] tracking-wider" fill="#768390" x="76" y="260">ZONE I: APPARENT CALM</text>
+<rect fill="#14171d" height="22" width="140" x="370" y="160"></rect>
+<text class="font-badge-code text-[10px] tracking-wider" fill="#c69214" x="376" y="175">ZONE II: LATENT SHEAR</text>
+<rect fill="#1c2027" height="22" width="160" x="615" y="65"></rect>
+<text class="font-badge-code text-[10px] tracking-wider" fill="#ffb4ab" x="621" y="80">ZONE III: CASCADING TEAR</text>
+<!-- S-Curve Dynamic Path -->
+<path d="M 60 276 C 300 275, 520 260, 594 155 C 650 60, 700 45, 780 40" fill="none" id="curve-path" stroke="#f2640f" stroke-width="3"></path>
+<!-- Perturbation Point Marker (Dynamic) -->
+<circle cx="594.24" cy="158" fill="#ffdbcd" id="perturb-point" r="6" stroke="#f2640f" stroke-width="2"></circle>
+<line id="perturb-cross-v" stroke="#9bcbfd" stroke-opacity="0.4" stroke-width="1" x1="594.24" x2="594.24" y1="30" y2="280"></line>
+</svg>
+</div>
+<!-- Interactive Controls & Axis Meta -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-space-md pt-space-sm bg-carbon-surface">
+<div class="flex items-center gap-space-sm w-full sm:w-auto">
+<label class="font-label-telemetry text-label-telemetry uppercase text-slate-text-secondary whitespace-nowrap" for="perturb-slider">Compounding Perturbation (x):</label>
+<input class="w-full sm:w-52 accent-primary-container bg-carbon-elevated h-1.5 cursor-pointer" id="perturb-slider" max="100" min="0" type="range" value="74">
+<span class="font-code-formula text-body-sm text-off-white-primary font-semibold" id="perturb-val-display">0.742</span>
+</div>
+<div class="flex items-center gap-space-md text-slate-text-muted font-badge-code text-badge-code">
+<span>SYSTEM: NON-LINEAR TANGENT</span>
+<button class="text-primary hover:text-off-white-primary uppercase underline" id="perturb-reset-btn">Reset Baseline</button>
+</div>
+</div>
+</div>
+<!-- Real-Time Telemetry & Actuarial Breakdown (4 cols) -->
+<div class="lg:col-span-4 flex flex-col justify-between bg-carbon-elevated border border-slate-line p-space-md">
+<div>
+<div class="flex items-center justify-between pb-space-xs mb-space-sm border-b border-slate-line">
+<span class="font-eyebrow-tag text-eyebrow-tag uppercase text-slate-text-secondary">// ACTUARIAL STATE TELEMETRY</span>
+<span class="px-space-xs py-0.5 bg-primary-container/20 text-primary-container font-badge-code text-badge-code uppercase font-semibold animate-pulse" id="stability-status-pill">CRITICAL BIFURCATION (x_c)</span>
+</div>
+<div class="space-y-space-sm mb-space-md">
+<div class="bg-carbon-base border border-slate-line p-space-xs flex justify-between items-center">
+<span class="font-label-telemetry text-label-telemetry text-slate-text-muted">Remaining Stability S(x):</span>
+<span class="font-code-formula text-headline-md text-off-white-primary font-semibold" id="telemetry-stability">0.500</span>
+</div>
+<div class="bg-carbon-base border border-slate-line p-space-xs flex justify-between items-center">
+<span class="font-label-telemetry text-label-telemetry text-slate-text-muted">Variance Acceleration (d²S/dx²):</span>
+<span class="font-code-formula text-body-sm text-primary" id="telemetry-variance">+365.2% [COLLAPSE]</span>
+</div>
+<div class="bg-carbon-base border border-slate-line p-space-xs flex justify-between items-center">
+<span class="font-label-telemetry text-label-telemetry text-slate-text-muted">Taleb Fat-Tail Alpha (α):</span>
+<span class="font-code-formula text-body-sm text-secondary" id="telemetry-alpha">1.18 [Heavy Tail]</span>
+</div>
+<div class="bg-carbon-base border border-slate-line p-space-xs flex justify-between items-center">
+<span class="font-label-telemetry text-label-telemetry text-slate-text-muted">Failure Horizon Time:</span>
+<span class="font-code-formula text-body-sm text-error" id="telemetry-horizon">t &lt; 18.4 seconds</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-slate-text-muted">
+              Standard compliance matrices assume proportional damage. In physical fluids and high-voltage grids, nonlinear differential couplings keep systems deceptively quiet until passing the point of no return.
+            </p>
+</div>
+<div class="pt-space-sm border-t border-slate-line">
+<a class="w-full flex items-center justify-between p-space-xs bg-carbon-base border border-slate-line text-off-white-primary font-code-formula text-body-sm hover:text-primary transition-colors" href="#unified-standard">
+<span>View Mathematical Coupling Standard</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 4: THE UNIFIED STANDARD (G_CPDT COMPUTABLE GRAPH) -->
+<section class="w-full bg-carbon-base py-space-3xl border-b border-slate-line" id="unified-standard">
+<div class="max-w-[1360px] mx-auto px-margin-desktop">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-desktop items-center">
+<!-- Content Block (6 cols) -->
+<div class="lg:col-span-6 flex flex-col items-start">
+<div class="flex items-center gap-space-xs mb-space-xs">
+<span class="font-eyebrow-tag text-eyebrow-tag text-primary uppercase tracking-widest">// THE UNIFIED STANDARD MATRIX</span>
+<span class="px-space-2xs bg-carbon-surface text-slate-text-muted font-badge-code text-badge-code uppercase">WG-05-CAD</span>
+</div>
+<h2 class="font-headline-xl text-headline-xl text-off-white-primary mb-space-md tracking-tight">
+            Topological BIM &amp; Hierarchical BOM: G_CPDT Graph
+          </h2>
+<p class="font-body-md text-body-md text-slate-text-secondary mb-space-md">
+            Critical utilities are trapped in proprietary binary CAD silos. The Unified Standard binds physical equipment topology (<code class="font-code-formula text-primary text-body-sm">ISO 15926 / DEXPI 2.0</code>) with hierarchical multi-tier software/hardware supply chain transparency (<code class="font-code-formula text-secondary text-body-sm">OWASP CycloneDX 1.6+</code>).
+          </p>
+<p class="font-body-md text-body-md text-slate-text-muted mb-space-lg">
+            Through the single computable graph schema <code class="font-code-formula text-primary text-body-sm">G_CPDT = (V_phy ∪ V_dig, E_topo ∪ E_comm)</code>, an operator models how an unpatched vulnerability in an embedded RTOS microcode chip directly causes thermodynamic valve overpressurization.
+          </p>
+<div class="grid grid-cols-3 gap-space-sm w-full mb-space-xl">
+<div class="bg-carbon-surface border border-slate-line p-space-sm">
+<span class="font-badge-code text-badge-code text-slate-text-muted uppercase block">DEPLOYMENT</span>
+<span class="font-headline-md text-headline-md text-off-white-primary font-semibold">100% Offline</span>
+<span class="font-label-telemetry text-label-telemetry text-slate-text-secondary block">Air-Gapped Daemon</span>
+</div>
+<div class="bg-carbon-surface border border-slate-line p-space-sm">
+<span class="font-badge-code text-badge-code text-slate-text-muted uppercase block">BOM SUITE</span>
+<span class="font-headline-md text-headline-md text-primary font-semibold">5-BOM</span>
+<span class="font-label-telemetry text-label-telemetry text-slate-text-secondary block">Silicon to Cloud</span>
+</div>
+<div class="bg-carbon-surface border border-slate-line p-space-sm">
+<span class="font-badge-code text-badge-code text-slate-text-muted uppercase block">TREATISES</span>
+<span class="font-headline-md text-headline-md text-secondary font-semibold">14 Papers</span>
+<span class="font-label-telemetry text-label-telemetry text-slate-text-secondary block">WG-05 Ratified</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<a class="inline-flex items-center gap-space-xs px-space-md py-space-xs bg-primary-container text-white font-code-formula text-body-sm font-semibold hover:bg-dutch-orange-deep transition-colors" href="#research-treatises">
+<span>Explore WG-05 Treatises</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+<span class="font-badge-code text-badge-code text-slate-text-muted">35 INTEROPERABILITY RULES</span>
+</div>
+</div>
+<!-- Interactive SVG Graph Schema Bridge (6 cols) -->
+<div class="lg:col-span-6 bg-carbon-surface border border-slate-line p-space-lg">
+<div class="flex items-center justify-between pb-space-xs mb-space-md border-b border-slate-line">
+<span class="font-badge-code text-badge-code uppercase tracking-wider text-slate-text-secondary">INTERACTIVE G_CPDT NODE INSPECTION</span>
+<span class="font-badge-code text-badge-code text-sage-green-soft">CLICK A NODE TO INSPECT</span>
+</div>
+<!-- Interactive Node Inspector Box -->
+<div class="space-y-space-sm mb-space-md">
+<!-- Node 1: DEXPI 2.0 Physical -->
+<div class="p-space-sm bg-carbon-base border border-slate-line hover:border-primary cursor-pointer transition-all node-inspect-btn" data-node="pump">
+<div class="flex items-center justify-between mb-1">
+<div class="flex items-center gap-2 text-primary font-semibold font-code-formula text-body-sm">
+<span class="material-symbols-outlined text-[16px]">schema</span>
+<span>NODE PHY_01: Centrifugal Water Pump (DN150)</span>
+</div>
+<span class="px-space-xs py-0.5 bg-carbon-elevated text-primary font-badge-code text-badge-code">ISO 15926</span>
+</div>
+<p class="font-body-sm text-body-sm text-slate-text-muted">Operating head: 42.8m, Flow: 280 m³/h, DexpiID: PUMP-4102-A</p>
+</div>
+<!-- Inter-Join Indicator -->
+<div class="flex items-center justify-center gap-space-sm text-slate-text-muted font-badge-code text-badge-code py-0.5">
+<span class="material-symbols-outlined text-[16px] text-primary">swap_vert</span>
+<span class="text-primary font-mono font-semibold">BINDING EDGE: G_CPDT TRAVERSAL (PHYSICAL → DIGITAL)</span>
+<span class="material-symbols-outlined text-[16px] text-primary">swap_vert</span>
+</div>
+<!-- Node 2: OWASP CycloneDX 1.6+ BOM -->
+<div class="p-space-sm bg-carbon-base border border-slate-line hover:border-secondary cursor-pointer transition-all node-inspect-btn" data-node="controller">
+<div class="flex items-center justify-between mb-1">
+<div class="flex items-center gap-2 text-secondary font-semibold font-code-formula text-body-sm">
+<span class="material-symbols-outlined text-[16px]">memory</span>
+<span>NODE DIG_01: STM32F407 Microcontroller [FreeRTOS v10.4]</span>
+</div>
+<span class="px-space-xs py-0.5 bg-carbon-elevated text-secondary font-badge-code text-badge-code">CYCLONEDX 1.6</span>
+</div>
+<p class="font-body-sm text-body-sm text-slate-text-muted">Silicon Hash: 0x9f4a12, Cryptographic SBOM provenance attested</p>
+</div>
+<!-- Node 3: IEC 61970 CIM Electrical -->
+<div class="p-space-sm bg-carbon-base border border-slate-line hover:border-tertiary cursor-pointer transition-all node-inspect-btn" data-node="relay">
+<div class="flex items-center justify-between mb-1">
+<div class="flex items-center gap-2 text-tertiary font-semibold font-code-formula text-body-sm">
+<span class="material-symbols-outlined text-[16px]">bolt</span>
+<span>NODE ELEC_01: IEC 61850 Substation Protective Relay</span>
+</div>
+<span class="px-space-xs py-0.5 bg-carbon-elevated text-tertiary font-badge-code text-badge-code">IEC 61970 CIM</span>
+</div>
+<p class="font-body-sm text-body-sm text-slate-text-muted">Phasor sync: 50.02 Hz, Trip threshold curve: ANSI 51 Inverse Time</p>
+</div>
+</div>
+<!-- Dynamic Inspection Drawer -->
+<div class="p-space-sm bg-carbon-elevated border border-slate-line" id="node-detail-panel">
+<span class="font-badge-code text-badge-code text-primary uppercase block mb-1" id="detail-title">INSPECTOR: SELECT ANY COMPONENT ABOVE</span>
+<p class="font-code-formula text-body-sm text-off-white-primary" id="detail-body">
+              Clicking a node highlights its transitive dependency chain: physical cavitation stresses, firmware buffer limits, and power-grid trip vectors.
+            </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 5: RESEARCH TREATISES & WORKING GROUPS EXPLORER -->
+<section class="w-full bg-carbon-surface py-space-3xl border-b border-slate-line" id="research-treatises">
+<div class="max-w-[1360px] mx-auto px-margin-desktop">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-space-xl gap-space-md"><div class="max-w-3xl">
+<div class="flex items-center gap-space-xs mb-space-2xs flex-wrap">
+<span class="font-eyebrow-tag text-eyebrow-tag uppercase text-primary tracking-widest">// ACTIVE RESEARCH &amp; COLLABORATIVE INQUIRY</span>
+<span class="text-slate-line">//</span>
+<span class="font-badge-code text-badge-code text-tertiary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span> 9 WORKING GROUPS ACTIVE
+</span>
+<span class="text-slate-line">//</span>
+<span class="px-space-2xs bg-carbon-elevated text-slate-text-muted font-badge-code text-badge-code uppercase">CONTINUOUS OPEN SCIENCE</span>
+</div>
+<h2 class="font-headline-xl text-headline-xl text-off-white-primary tracking-tight mb-space-xs">
+Active Working Groups &amp; Open Treatises.
+</h2>
+<p class="font-body-md text-body-md text-slate-text-secondary leading-relaxed">
+Eigenia Labs working groups do not maintain static whitepapers—we are actively investigating, formulating mathematical proofs, and deploying applied industrial physics in real time. We invite complexity scientists, control loop engineers, and academic fellows to join our working groups and co-author applied science.
+</p>
+</div>
+<div class="flex flex-col items-start md:items-end gap-2 shrink-0">
+<div class="relative w-full md:w-auto">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-text-muted text-[16px]">search</span>
+<input class="bg-carbon-base border border-slate-line text-off-white-primary text-body-sm font-code-formula pl-8 pr-3 py-2 focus:border-primary-container focus:outline-none placeholder:text-slate-text-muted w-full md:w-80" id="treatise-search" placeholder="Search ongoing research, DOIs, formulas..." type="text">
+</div>
+<span class="font-badge-code text-badge-code text-slate-text-muted flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span> LIVE REPOSITORY // CONTINUOUS COMMITS
+</span>
+</div></div>
+<!-- Tabbed Working Groups Bar (All 10 Tabs) -->
+<div class="w-full mb-space-xl p-space-lg bg-carbon-base border border-primary-container/30 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-96 h-full bg-gradient-to-l from-primary-container/10 via-transparent to-transparent pointer-events-none"></div>
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-lg relative z-10">
+<div class="max-w-3xl">
+<div class="flex items-center gap-2 mb-space-2xs">
+<span class="px-2 py-0.5 bg-primary-container/20 text-primary font-badge-code text-[11px] uppercase tracking-wider font-semibold border border-primary-container/30 flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span> OPEN COLLABORATIVE CALL
+</span>
+<span class="font-badge-code text-badge-code text-slate-text-muted uppercase tracking-wider">Weekly Inquiries • Peer Review in Progress</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-off-white-primary tracking-tight mb-space-xs">
+Contribute to Sovereign Infrastructure Science
+</h3>
+<p class="font-body-md text-body-md text-slate-text-secondary leading-relaxed">
+Our working groups convene weekly to tackle open theoretical problems (algebraic topology, non-linear cascades, copula risk) and build field-deployed open standards (DEXPI, CycloneDX). We provide visiting fellow compute grants, peer-reviewed co-authorship, and open dataset access.
+</p>
+</div>
+<div class="flex flex-wrap sm:flex-nowrap items-center gap-space-sm shrink-0">
+<a class="inline-flex items-center justify-center gap-2 px-space-lg py-space-sm bg-primary-container hover:bg-dutch-orange-deep text-white font-code-formula text-body-sm font-semibold tracking-tight shadow-md transition-all whitespace-nowrap" href="#briefing-terminal">
+<span>Join a Working Group →</span>
+</a>
+<a class="inline-flex items-center justify-center gap-2 px-space-md py-space-sm bg-carbon-elevated hover:bg-carbon-surface border border-slate-line hover:border-slate-subtle text-off-white-primary font-code-formula text-body-sm transition-all whitespace-nowrap" href="#briefing-terminal">
+<span>Propose a Joint Track</span>
+</a>
+</div>
+</div>
+</div><div class="w-full mb-space-lg overflow-x-auto pb-1 border-b border-slate-line">
+<div class="flex items-stretch gap-1 min-w-max" id="wg-tabs-container"><button class="wg-tab active px-3.5 py-2.5 font-code-formula text-[13px] font-semibold border-b-2 border-primary-container bg-carbon-base text-off-white-primary transition-all flex items-center gap-2" data-wg="ALL">
+<span>All Treatises</span>
+<span class="px-1.5 py-0.5 rounded-full bg-primary-container text-white font-badge-code text-[10px]">59</span>
+</button>
+<button class="wg-tab px-3.5 py-2.5 font-code-formula text-[13px] border-b-2 border-transparent text-slate-text-secondary hover:text-off-white-primary hover:bg-carbon-base/60 transition-all flex items-center gap-2 group" data-wg="WG-01-UI">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+<span>WG-01 Underwriting</span>
+<span class="px-1.5 py-0.5 bg-carbon-elevated text-slate-text-muted font-badge-code text-[10px]">12</span>
+<span class="text-[10px] text-tertiary font-mono hidden xl:inline">Tuesdays</span>
+</button>
+<button class="wg-tab px-3.5 py-2.5 font-code-formula text-[13px] border-b-2 border-transparent text-slate-text-secondary hover:text-off-white-primary hover:bg-carbon-base/60 transition-all flex items-center gap-2 group" data-wg="WG-02-DT">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>
+<span>WG-02 Digital Twin</span>
+<span class="px-1.5 py-0.5 bg-carbon-elevated text-slate-text-muted font-badge-code text-[10px]">10</span>
+<span class="text-[10px] text-primary font-mono hidden xl:inline">Live Sprint</span>
+</button>
+<button class="wg-tab px-3.5 py-2.5 font-code-formula text-[13px] border-b-2 border-transparent text-slate-text-secondary hover:text-off-white-primary hover:bg-carbon-base/60 transition-all flex items-center gap-2 group" data-wg="WG-03-ML">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+<span>WG-03 Psychometrics</span>
+<span class="px-1.5 py-0.5 bg-carbon-elevated text-slate-text-muted font-badge-code text-[10px]">7</span>
+<span class="text-[10px] text-tertiary font-mono hidden xl:inline">Weekly</span>
+</button>
+<button class="wg-tab px-3.5 py-2.5 font-code-formula text-[13px] border-b-2 border-transparent text-slate-text-secondary hover:text-off-white-primary hover:bg-carbon-base/60 transition-all flex items-center gap-2 group" data-wg="WG-04-CF">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>
+<span>WG-04 Cascades</span>
+<span class="px-1.5 py-0.5 bg-carbon-elevated text-slate-text-muted font-badge-code text-[10px]">8</span>
+<span class="text-[10px] text-primary font-mono hidden xl:inline">Live Sprint</span>
+</button>
+<button class="wg-tab px-3.5 py-2.5 font-code-formula text-[13px] border-b-2 border-transparent text-slate-text-secondary hover:text-off-white-primary hover:bg-carbon-base/60 transition-all flex items-center gap-2 group" data-wg="WG-05-CAD">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span>WG-05 DEXPI &amp; CAD</span>
+<span class="px-1.5 py-0.5 bg-carbon-elevated text-slate-text-muted font-badge-code text-[10px]">14</span>
+<span class="text-[10px] text-secondary font-mono hidden xl:inline">Standards Sync</span>
+</button>
+<button class="wg-tab px-3.5 py-2.5 font-code-formula text-[13px] border-b-2 border-transparent text-slate-text-secondary hover:text-off-white-primary hover:bg-carbon-base/60 transition-all flex items-center gap-2 group" data-wg="WG-07-TM">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+<span>WG-07 Threat TACAM</span>
+<span class="px-1.5 py-0.5 bg-carbon-elevated text-slate-text-muted font-badge-code text-[10px]">4</span>
+<span class="text-[10px] text-tertiary font-mono hidden xl:inline">Bi-weekly</span>
+</button>
+<button class="wg-tab px-3.5 py-2.5 font-code-formula text-[13px] border-b-2 border-transparent text-slate-text-secondary hover:text-off-white-primary hover:bg-carbon-base/60 transition-all flex items-center gap-2 group" data-wg="WG-08-MO">
+<span class="w-1.5 h-1.5 rounded-full bg-slate-subtle"></span>
+<span>WG-08 Monte Carlo</span>
+<span class="px-1.5 py-0.5 bg-carbon-elevated text-slate-text-muted font-badge-code text-[10px]">1</span>
+</button>
+<button class="wg-tab px-3.5 py-2.5 font-code-formula text-[13px] border-b-2 border-transparent text-slate-text-secondary hover:text-off-white-primary hover:bg-carbon-base/60 transition-all flex items-center gap-2 group" data-wg="MP-MATH">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+<span>MP-MATH Physics</span>
+<span class="px-1.5 py-0.5 bg-carbon-elevated text-slate-text-muted font-badge-code text-[10px]">2</span>
+<span class="text-[10px] text-tertiary font-mono hidden xl:inline">Colloquium</span>
+</button>
+<button class="wg-tab px-3.5 py-2.5 font-code-formula text-[13px] border-b-2 border-transparent text-slate-text-secondary hover:text-off-white-primary hover:bg-carbon-base/60 transition-all flex items-center gap-2 group" data-wg="GOV-RES">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+<span>GOV-RES Governance</span>
+<span class="px-1.5 py-0.5 bg-carbon-elevated text-slate-text-muted font-badge-code text-[10px]">1</span>
+</button></div>
+</div>
+<!-- Category & Status Meta Bar -->
+<div class="flex items-center justify-between pb-space-sm mb-space-md text-slate-text-muted font-badge-code text-badge-code uppercase tracking-wider"><div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-container inline-block animate-pulse"></span>
+<span id="active-category-label">SHOWING ALL ACTIVE WORKING GROUPS // 59 FORMAL PAPERS + LIVE SPRINTS</span>
+</div>
+<div class="flex items-center gap-3">
+<span id="rendered-count-label">DISPLAYING 11 LIVE RESEARCH TREATISES</span>
+<span class="text-slate-line">|</span>
+<span class="text-tertiary flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> PEER REVIEW &amp; CO-AUTHORSHIP OPEN</span>
+</div></div>
+<!-- Real-time Filtered Treatises Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-md" id="treatises-grid"><!-- Paper 1: WG-07-TM Threat Modeling -->
+<div class="treatise-card bg-carbon-base border border-slate-line p-space-lg flex flex-col justify-between hover:border-slate-subtle transition-all group" data-keywords="adversary threat quotient atq variance scoring decile substation" data-wg="WG-07-TM">
+<div>
+<div class="flex items-center justify-between mb-space-sm font-badge-code text-badge-code">
+<div class="flex items-center gap-1.5">
+<span class="px-space-xs py-0.5 bg-carbon-elevated text-primary font-semibold">[WG-07-TM]</span>
+<span class="text-slate-text-muted">THREAT MODELING</span>
+</div>
+<span class="px-1.5 py-0.5 bg-tertiary/10 text-tertiary border border-tertiary/30 text-[10px] flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Working Group Active
+</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-off-white-primary mb-space-xs group-hover:text-primary transition-colors">
+Adversary Threat Quotient (ATQ): A Twelve-Factor Scoring Model
+</h3>
+<p class="font-body-sm text-body-sm text-slate-text-secondary mb-space-md">
+Three hundred and sixty-five percent more variance in the top decile, cleanly separating a dormant actor from one already positioned across physical substations.
+</p>
+<div class="bg-carbon-surface border border-slate-line p-space-xs mb-space-md">
+<div class="flex items-center justify-between">
+<span class="font-badge-code text-badge-code text-slate-text-muted uppercase">EMPIRICAL RESULT</span>
+<span class="font-badge-code text-[10px] text-primary">SPRINT: EXPANDING TO CER ART 21</span>
+</div>
+<span class="font-code-formula text-body-sm text-off-white-primary">Top Decile Variance: +365% Δ</span>
+</div>
+</div>
+<div class="pt-space-sm border-t border-slate-line flex items-center justify-between font-badge-code text-badge-code">
+<span class="text-slate-text-muted">DOI: 10.5281/EIG-07-TM-24</span>
+<a class="text-primary hover:underline flex items-center gap-1 font-semibold" href="#briefing-terminal">
+Participate in WG-07 →
+</a>
+</div>
+</div>
+<!-- Paper 2: WG-08-MO Monte Carlo -->
+<div class="treatise-card bg-carbon-base border border-slate-line p-space-lg flex flex-col justify-between hover:border-slate-subtle transition-all group" data-keywords="monte carlo biased importance sampling markov walks simulation" data-wg="WG-08-MO">
+<div>
+<div class="flex items-center justify-between mb-space-sm font-badge-code text-badge-code">
+<div class="flex items-center gap-1.5">
+<span class="px-space-xs py-0.5 bg-carbon-elevated text-secondary font-semibold">[WG-08-MO]</span>
+<span class="text-slate-text-muted">MONTE CARLO</span>
+</div>
+<span class="px-1.5 py-0.5 bg-secondary/10 text-secondary border border-secondary/30 text-[10px] flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Open For Co-Authors
+</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-off-white-primary mb-space-xs group-hover:text-primary transition-colors">
+Eigenia CDT Monte Carlo Engine: Technical Investigation
+</h3>
+<p class="font-body-sm text-body-sm text-slate-text-secondary mb-space-md">
+Uniform sampling almost never walks into catastrophic collapse paths. This engine uses biased importance sampling to weight Markov walks directly into systemic boundaries.
+</p>
+<div class="bg-carbon-surface border border-slate-line p-space-xs mb-space-md">
+<div class="flex items-center justify-between">
+<span class="font-badge-code text-badge-code text-slate-text-muted uppercase">SAMPLING CONVERGENCE</span>
+<span class="font-badge-code text-[10px] text-secondary">COLLOQUIUM: MARCH 2026</span>
+</div>
+<span class="font-code-formula text-body-sm text-secondary">Importance Sampling: 1,000+ SIM/DAY</span>
+</div>
+</div>
+<div class="pt-space-sm border-t border-slate-line flex items-center justify-between font-badge-code text-badge-code">
+<span class="text-slate-text-muted">DOI: 10.5281/EIG-08-MO-11</span>
+<a class="text-primary hover:underline flex items-center gap-1 font-semibold" href="#briefing-terminal">
+Participate in WG-08 →
+</a>
+</div>
+</div>
+<!-- Paper 3: WG-05-CAD Three-Identity Join -->
+<div class="treatise-card bg-carbon-base border border-slate-line p-space-lg flex flex-col justify-between hover:border-slate-subtle transition-all group" data-keywords="dexpi cyclonedx iec 61970 three-identity join graph topology pim bom" data-wg="WG-05-CAD">
+<div>
+<div class="flex items-center justify-between mb-space-sm font-badge-code text-badge-code">
+<div class="flex items-center gap-1.5">
+<span class="px-space-xs py-0.5 bg-carbon-elevated text-tertiary font-semibold">[WG-05-CAD]</span>
+<span class="text-slate-text-muted">THREE-SCHEMA JOIN</span>
+</div>
+<span class="px-1.5 py-0.5 bg-primary-container/20 text-primary border border-primary-container/30 text-[10px] flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span> Active Standard Sprint
+</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-off-white-primary mb-space-xs group-hover:text-primary transition-colors">
+The Three-Identity Join: DEXPI 2.0, CycloneDX 1.6, &amp; IEC 61970
+</h3>
+<p class="font-body-sm text-body-sm text-slate-text-secondary mb-space-md">
+Three schemas, three identifiers, and zero vendor files permitted to hold another's. Thirty-five engineering requirements formalize the join across OT plant layers.
+</p>
+<div class="bg-carbon-surface border border-slate-line p-space-xs mb-space-md">
+<div class="flex items-center justify-between">
+<span class="font-badge-code text-badge-code text-slate-text-muted uppercase">INTEROP RULES</span>
+<span class="font-badge-code text-[10px] text-tertiary">CALL: OPEN-SOURCE VALIDATORS</span>
+</div>
+<span class="font-code-formula text-body-sm text-tertiary">35 Formal Graph Constraints</span>
+</div>
+</div>
+<div class="pt-space-sm border-t border-slate-line flex items-center justify-between font-badge-code text-badge-code">
+<span class="text-slate-text-muted">DOI: 10.5281/EIG-05-CAD-35</span>
+<a class="text-primary hover:underline flex items-center gap-1 font-semibold" href="#briefing-terminal">
+Participate in WG-05 →
+</a>
+</div>
+</div>
+<!-- Paper 4: WG-01-UI Underwriting / ROSI -->
+<div class="treatise-card bg-carbon-base border border-slate-line p-space-lg flex flex-col justify-between hover:border-slate-subtle transition-all group" data-keywords="ale rosi underwriting actuarial catastrophe tails pareto value at risk" data-wg="WG-01-UI">
+<div>
+<div class="flex items-center justify-between mb-space-sm font-badge-code text-badge-code">
+<div class="flex items-center gap-1.5">
+<span class="px-space-xs py-0.5 bg-carbon-elevated text-primary font-semibold">[WG-01-UI]</span>
+<span class="text-slate-text-muted">ACTUARIAL MODELS</span>
+</div>
+<span class="px-1.5 py-0.5 bg-tertiary/10 text-tertiary border border-tertiary/30 text-[10px] flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Working Group Active
+</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-off-white-primary mb-space-xs group-hover:text-primary transition-colors">
+Annualised Loss Expectancy &amp; Return on Security Investment (ROSI)
+</h3>
+<p class="font-body-sm text-body-sm text-slate-text-secondary mb-space-md">
+A modeled 859 percent return, alongside mathematical sections explaining rigorously why standard corporate accounting frameworks understate catastrophe tails.
+</p>
+<div class="bg-carbon-surface border border-slate-line p-space-xs mb-space-md">
+<div class="flex items-center justify-between">
+<span class="font-badge-code text-badge-code text-slate-text-muted uppercase">ACTUARIAL GAIN</span>
+<span class="font-badge-code text-[10px] text-primary">WEEKLY TUESDAY SESSIONS</span>
+</div>
+<span class="font-code-formula text-body-sm text-primary">+859% Modelled ROSI</span>
+</div>
+</div>
+<div class="pt-space-sm border-t border-slate-line flex items-center justify-between font-badge-code text-badge-code">
+<span class="text-slate-text-muted">DOI: 10.5281/EIG-01-UI-08</span>
+<a class="text-primary hover:underline flex items-center gap-1 font-semibold" href="#briefing-terminal">
+Participate in WG-01 →
+</a>
+</div>
+</div>
+<!-- Paper 5: WG-05-CAD RefBESS-250MW -->
+<div class="treatise-card bg-carbon-base border border-slate-line p-space-lg flex flex-col justify-between hover:border-slate-subtle transition-all group" data-keywords="refbess bess battery storage 250mw utility asset synthetic empirical" data-wg="WG-05-CAD">
+<div>
+<div class="flex items-center justify-between mb-space-sm font-badge-code text-badge-code">
+<div class="flex items-center gap-1.5">
+<span class="px-space-xs py-0.5 bg-carbon-elevated text-secondary font-semibold">[WG-05-CAD]</span>
+<span class="text-slate-text-muted">REFERENCE ASSET</span>
+</div>
+<span class="px-1.5 py-0.5 bg-secondary/10 text-secondary border border-secondary/30 text-[10px] flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Live Dataset Ingest
+</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-off-white-primary mb-space-xs group-hover:text-primary transition-colors">
+RefBESS-250MW: Synthetic Battery Storage Architecture
+</h3>
+<p class="font-body-sm text-body-sm text-slate-text-secondary mb-space-md">
+Fifteen parameters sourced from live installations, thirty-five rigorously modelled, and every database row explicitly indicating empirical versus synthetic origin.
+</p>
+<div class="bg-carbon-surface border border-slate-line p-space-xs mb-space-md">
+<div class="flex items-center justify-between">
+<span class="font-badge-code text-badge-code text-slate-text-muted uppercase">TARGET SCALE</span>
+<span class="font-badge-code text-[10px] text-secondary">DUTCH GRID BENCHMARK</span>
+</div>
+<span class="font-code-formula text-body-sm text-secondary">250 Megawatt Utility Asset</span>
+</div>
+</div>
+<div class="pt-space-sm border-t border-slate-line flex items-center justify-between font-badge-code text-badge-code">
+<span class="text-slate-text-muted">DOI: 10.5281/EIG-05-BESS-01</span>
+<a class="text-primary hover:underline flex items-center gap-1 font-semibold" href="#briefing-terminal">
+Participate in WG-05 →
+</a>
+</div>
+</div>
+<!-- Paper 6: WG-04-CF Cascading Failures -->
+<div class="treatise-card bg-carbon-base border border-slate-line p-space-lg flex flex-col justify-between hover:border-slate-subtle transition-all group" data-keywords="thermal catastrophe 140 kw ai racks datacenter cascade phase transition" data-wg="WG-04-CF">
+<div>
+<div class="flex items-center justify-between mb-space-sm font-badge-code text-badge-code">
+<div class="flex items-center gap-1.5">
+<span class="px-space-xs py-0.5 bg-carbon-elevated text-error font-semibold">[WG-04-CF]</span>
+<span class="text-slate-text-muted">CASCADING FAILURES</span>
+</div>
+<span class="px-1.5 py-0.5 bg-error/10 text-error border border-error/30 text-[10px] flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-error animate-pulse"></span> High-Priority Research
+</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-off-white-primary mb-space-xs group-hover:text-primary transition-colors">
+Thermal Catastrophe in 140 kW AI Racks: Phase Bifurcations
+</h3>
+<p class="font-body-sm text-body-sm text-slate-text-secondary mb-space-md">
+Compounding chilled water valve latency under high-density compute loads precipitates catastrophic heat runaways past threshold within 18.4 seconds.
+</p>
+<div class="bg-carbon-surface border border-slate-line p-space-xs mb-space-md">
+<div class="flex items-center justify-between">
+<span class="font-badge-code text-badge-code text-slate-text-muted uppercase">CRITICAL BIFURCATION TIME</span>
+<span class="font-badge-code text-[10px] text-error">CALL FOR THERMODYNAMICISTS</span>
+</div>
+<span class="font-code-formula text-body-sm text-error">t_crit = 18.4s to Thermal Runaway</span>
+</div>
+</div>
+<div class="pt-space-sm border-t border-slate-line flex items-center justify-between font-badge-code text-badge-code">
+<span class="text-slate-text-muted">DOI: 10.5281/EIG-04-CF-07</span>
+<a class="text-primary hover:underline flex items-center gap-1 font-semibold" href="#briefing-terminal">
+Participate in WG-04 →
+</a>
+</div>
+</div>
+<!-- Paper 7: WG-02-DT Cyber-Physical Digital Twin -->
+<div class="treatise-card bg-carbon-base border border-slate-line p-space-lg flex flex-col justify-between hover:border-slate-subtle transition-all group" data-keywords="digital twin g_cpdt air gapped scada telemetry state machine determinism" data-wg="WG-02-DT">
+<div>
+<div class="flex items-center justify-between mb-space-sm font-badge-code text-badge-code">
+<div class="flex items-center gap-1.5">
+<span class="px-space-xs py-0.5 bg-carbon-elevated text-secondary font-semibold">[WG-02-DT]</span>
+<span class="text-slate-text-muted">DIGITAL TWIN TWIN-NET</span>
+</div>
+<span class="px-1.5 py-0.5 bg-tertiary/10 text-tertiary border border-tertiary/30 text-[10px] flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Working Group Active
+</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-off-white-primary mb-space-xs group-hover:text-primary transition-colors">
+Deterministic Cyber-Physical Digital Twin Graph (G_CPDT)
+</h3>
+<p class="font-body-sm text-body-sm text-slate-text-secondary mb-space-md">
+Mathematical coupling between physical flow telemetry and stateful OT relay logic over deterministic message channels without external synchronisation loops.
+</p>
+<div class="bg-carbon-surface border border-slate-line p-space-xs mb-space-md">
+<div class="flex items-center justify-between">
+<span class="font-badge-code text-badge-code text-slate-text-muted uppercase">TOPOLOGICAL CONVERGENCE</span>
+<span class="font-badge-code text-[10px] text-secondary">WEEKLY THURSDAY CO-DESIGN</span>
+</div>
+<span class="font-code-formula text-body-sm text-secondary">&lt;4.2ms Synchronization Delta</span>
+</div>
+</div>
+<div class="pt-space-sm border-t border-slate-line flex items-center justify-between font-badge-code text-badge-code">
+<span class="text-slate-text-muted">DOI: 10.5281/EIG-02-DT-03</span>
+<a class="text-primary hover:underline flex items-center gap-1 font-semibold" href="#briefing-terminal">
+Participate in WG-02 →
+</a>
+</div>
+</div>
+<!-- Paper 8: WG-03-ML Psychometrics -->
+<div class="treatise-card bg-carbon-base border border-slate-line p-space-lg flex flex-col justify-between hover:border-slate-subtle transition-all group" data-keywords="mckenney lacan tensor psychometric insider threat ot operator stress cognitive load" data-wg="WG-03-ML">
+<div>
+<div class="flex items-center justify-between mb-space-sm font-badge-code text-badge-code">
+<div class="flex items-center gap-1.5">
+<span class="px-space-xs py-0.5 bg-carbon-elevated text-primary font-semibold">[WG-03-ML]</span>
+<span class="text-slate-text-muted">PSYCHOMETRICS</span>
+</div>
+<span class="px-1.5 py-0.5 bg-primary-container/20 text-primary border border-primary-container/30 text-[10px] flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span> Open Call For Fellows
+</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-off-white-primary mb-space-xs group-hover:text-primary transition-colors">
+McKenney-Lacan Psychometric Actor Tensor for OT Operators
+</h3>
+<p class="font-body-sm text-body-sm text-slate-text-secondary mb-space-md">
+High-stress SCADA control desk cognitive load models revealing non-linear operator response lapses during multi-stage physical grid perturbations.
+</p>
+<div class="bg-carbon-surface border border-slate-line p-space-xs mb-space-md">
+<div class="flex items-center justify-between">
+<span class="font-badge-code text-badge-code text-slate-text-muted uppercase">ACTOR STRESS CALIBRATION</span>
+<span class="font-badge-code text-[10px] text-primary">HUMAN-IN-THE-LOOP SIM</span>
+</div>
+<span class="font-code-formula text-body-sm text-primary">Tensor Rank-4 Operator Manifold</span>
+</div>
+</div>
+<div class="pt-space-sm border-t border-slate-line flex items-center justify-between font-badge-code text-badge-code">
+<span class="text-slate-text-muted">DOI: 10.5281/EIG-03-ML-19</span>
+<a class="text-primary hover:underline flex items-center gap-1 font-semibold" href="#briefing-terminal">
+Participate in WG-03 →
+</a>
+</div>
+</div>
+<!-- Paper 9: WG-05-CAD CRA Supply Chain -->
+<div class="treatise-card bg-carbon-base border border-slate-line p-space-lg flex flex-col justify-between hover:border-slate-subtle transition-all group" data-keywords="cyber resilience act cra nis2 supply chain provenance odm foundry 24 hour" data-wg="WG-05-CAD">
+<div>
+<div class="flex items-center justify-between mb-space-sm font-badge-code text-badge-code">
+<div class="flex items-center gap-1.5">
+<span class="px-space-xs py-0.5 bg-carbon-elevated text-technical-amber font-semibold">[WG-05-CAD]</span>
+<span class="text-slate-text-muted">REGULATORY ENFORCEMENT</span>
+</div>
+<span class="px-1.5 py-0.5 bg-tertiary/10 text-tertiary border border-tertiary/30 text-[10px] flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Working Group Active
+</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-off-white-primary mb-space-xs group-hover:text-primary transition-colors">
+Supply Chain Transparency &amp; EU Cyber Resilience Act (CRA)
+</h3>
+<p class="font-body-sm text-body-sm text-slate-text-secondary mb-space-md">
+Twenty-four hours to notify, and sub-tier provenance evidenced on demand down through ODMs and semiconductor foundries under European NIS2 enforcement.
+</p>
+<div class="bg-carbon-surface border border-slate-line p-space-xs mb-space-md">
+<div class="flex items-center justify-between">
+<span class="font-badge-code text-badge-code text-slate-text-muted uppercase">NOTIFICATION TIMEFRAME</span>
+<span class="font-badge-code text-[10px] text-technical-amber">EU DIRECTIVE ALIGNMENT</span>
+</div>
+<span class="font-code-formula text-body-sm text-technical-amber">24-Hour Mandatory SLA</span>
+</div>
+</div>
+<div class="pt-space-sm border-t border-slate-line flex items-center justify-between font-badge-code text-badge-code">
+<span class="text-slate-text-muted">DOI: 10.5281/EIG-05-CRA-04</span>
+<a class="text-primary hover:underline flex items-center gap-1 font-semibold" href="#briefing-terminal">
+Participate in WG-05 →
+</a>
+</div>
+</div>
+<!-- Paper 10: MP-MATH Mathematical Physics -->
+<div class="treatise-card bg-carbon-base border border-slate-line p-space-lg flex flex-col justify-between hover:border-slate-subtle transition-all group" data-keywords="kramers barrier escape langevin stochastics meta stability potential well physics" data-wg="MP-MATH">
+<div>
+<div class="flex items-center justify-between mb-space-sm font-badge-code text-badge-code">
+<div class="flex items-center gap-1.5">
+<span class="px-space-xs py-0.5 bg-carbon-elevated text-secondary font-semibold">[MP-MATH]</span>
+<span class="text-slate-text-muted">MATHEMATICAL PHYSICS</span>
+</div>
+<span class="px-1.5 py-0.5 bg-secondary/10 text-secondary border border-secondary/30 text-[10px] flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Theory Colloquium
+</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-off-white-primary mb-space-xs group-hover:text-primary transition-colors">
+Kramers Barrier Escape in Multi-Machine Electrical Grids
+</h3>
+<p class="font-body-sm text-body-sm text-slate-text-secondary mb-space-md">
+Stochastic Langevin potential equations proving how non-Gaussian noise transitions synchronous power machines out of metastable potential wells.
+</p>
+<div class="bg-carbon-surface border border-slate-line p-space-xs mb-space-md">
+<div class="flex items-center justify-between">
+<span class="font-badge-code text-badge-code text-slate-text-muted uppercase">EQUATION OF MOTION</span>
+<span class="font-badge-code text-[10px] text-secondary">CONTINUOUS RE-PROOFING</span>
+</div>
+<span class="font-code-formula text-body-sm text-secondary">dx_t = -∇V(x_t)dt + σ(x_t)dW_t</span>
+</div>
+</div>
+<div class="pt-space-sm border-t border-slate-line flex items-center justify-between font-badge-code text-badge-code">
+<span class="text-slate-text-muted">DOI: 10.5281/EIG-MP-MATH-02</span>
+<a class="text-primary hover:underline flex items-center gap-1 font-semibold" href="#briefing-terminal">
+Participate in MP-MATH →
+</a>
+</div>
+</div>
+<!-- Paper 11: GOV-RES Research Governance -->
+<div class="treatise-card bg-carbon-base border border-slate-line p-space-lg flex flex-col justify-between hover:border-slate-subtle transition-all group" data-keywords="research governance sovereign dual use charter non state defense academic ethics" data-wg="GOV-RES">
+<div>
+<div class="flex items-center justify-between mb-space-sm font-badge-code text-badge-code">
+<div class="flex items-center gap-1.5">
+<span class="px-space-xs py-0.5 bg-carbon-elevated text-sage-green-soft font-semibold">[GOV-RES]</span>
+<span class="text-slate-text-muted">GOVERNANCE &amp; ETHICS</span>
+</div>
+<span class="px-1.5 py-0.5 bg-tertiary/10 text-tertiary border border-tertiary/30 text-[10px] flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Working Group Active
+</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-off-white-primary mb-space-xs group-hover:text-primary transition-colors">
+Sovereign Verification Protocols &amp; Open Dual-Use Defense
+</h3>
+<p class="font-body-sm text-body-sm text-slate-text-secondary mb-space-md">
+Constitutional governance requirements ensuring critical infrastructure security findings remain open, verifiable, and free of private IP monopolisation.
+</p>
+<div class="bg-carbon-surface border border-slate-line p-space-xs mb-space-md">
+<div class="flex items-center justify-between">
+<span class="font-badge-code text-badge-code text-slate-text-muted uppercase">CHARTER RATIFICATION</span>
+<span class="font-badge-code text-[10px] text-sage-green-soft">SOVEREIGN ALLIANCE SYNC</span>
+</div>
+<span class="font-code-formula text-body-sm text-sage-green-soft">KvK 84920148 Sovereign Mandate</span>
+</div>
+</div>
+<div class="pt-space-sm border-t border-slate-line flex items-center justify-between font-badge-code text-badge-code">
+<span class="text-slate-text-muted">DOI: 10.5281/EIG-GOV-RES-01</span>
+<a class="text-primary hover:underline flex items-center gap-1 font-semibold" href="#briefing-terminal">
+Participate in GOV-RES →
+</a>
+</div>
+</div></div>
+<!-- Empty State Feedback when Search has no results -->
+<div class="hidden w-full py-16 bg-carbon-base text-center p-space-lg border border-slate-line mt-space-md" id="no-results-msg">
+<span class="material-symbols-outlined text-[36px] text-slate-text-muted mb-2">find_in_page</span>
+<h4 class="font-headline-md text-off-white-primary mb-1">No matching treatises discovered</h4>
+<p class="font-body-sm text-slate-text-muted max-w-md mx-auto mb-4">No published papers match your filter criteria in this working group track.</p>
+<button class="px-4 py-2 bg-carbon-elevated hover:bg-carbon-surface text-primary font-code-formula text-body-sm border border-slate-line" id="reset-filter-btn">Reset Search &amp; Show All</button>
+</div><div class="w-full mt-space-2xl p-space-xl bg-carbon-base border border-slate-line relative overflow-hidden">
+<div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-space-lg relative z-10">
+<div class="max-w-3xl">
+<div class="flex items-center gap-space-xs mb-space-2xs">
+<span class="w-2 h-2 bg-primary-container inline-block animate-pulse"></span>
+<span class="font-eyebrow-tag text-eyebrow-tag uppercase text-primary tracking-widest">// ACTIVE RESEARCH COHORT &amp; CALL FOR FELLOWS</span>
+<span class="px-space-2xs bg-carbon-elevated text-slate-text-muted font-badge-code text-badge-code">CYCLE 2026.1</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-off-white-primary tracking-tight mb-space-xs">
+Current Focus: Q2/Q3 2026 Open Working Group Sprints
+</h3>
+<p class="font-body-md text-body-md text-slate-text-secondary leading-relaxed mb-space-sm">
+Actively recruiting Lead Fellows for: <strong class="text-off-white-primary font-medium">Non-Linear Fluid Transients (WG-04)</strong>, <strong class="text-off-white-primary font-medium">Multi-BOM CycloneDX Schema (WG-05)</strong>, and <strong class="text-off-white-primary font-medium">Extreme Value Copula Underwriting (WG-01)</strong>. Fellows receive direct access to simulated Dutch grid telemetry, high-performance compute clusters, and sovereign non-disclosure shielding.
+</p>
+<div class="flex flex-wrap items-center gap-space-md font-badge-code text-badge-code text-slate-text-muted">
+<span class="flex items-center gap-1"><span class="text-tertiary">•</span> Fully Air-Gapped Workstations</span>
+<span class="flex items-center gap-1"><span class="text-primary">•</span> Co-Authorship Protocol</span>
+<span class="flex items-center gap-1"><span class="text-secondary">•</span> ArXiv &amp; Academic Deposition</span>
+</div>
+</div>
+<div class="shrink-0 w-full sm:w-auto">
+<a class="inline-flex items-center justify-center gap-space-xs px-space-xl py-space-md bg-primary-container hover:bg-dutch-orange-deep text-white font-code-formula text-body-md font-semibold transition-all shadow-md w-full sm:w-auto text-center" href="#briefing-terminal">
+<span>Apply for Academic Fellowship →</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 6: KNOWLEDGE TRANSFER PIPELINE & BRIEFING INTAKE -->
+<section class="w-full bg-carbon-base py-space-3xl border-b border-slate-line">
+<div class="max-w-[1360px] mx-auto px-margin-desktop">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-space-2xl gap-space-md">
+<div>
+<span class="font-eyebrow-tag text-eyebrow-tag uppercase text-primary tracking-widest">// KNOWLEDGE TRANSFER PIPELINE</span>
+<h2 class="font-headline-xl text-headline-xl text-off-white-primary tracking-tight mt-space-2xs">
+            From Open Science to Sovereign Operational Defense
+          </h2>
+</div>
+<p class="font-body-md text-body-md text-slate-text-secondary max-w-lg">
+          The 3-stage sovereign cycle translating open theoretical formulations into field-hardened public utility defenses.
+        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- Step 01 -->
+<div class="bg-carbon-surface border border-slate-line p-space-xl flex flex-col justify-between hover:border-slate-subtle transition-all">
+<div>
+<div class="flex items-center justify-between mb-space-lg font-badge-code text-badge-code">
+<span class="px-space-xs py-space-2xs bg-carbon-elevated text-primary font-semibold">STAGE 01</span>
+<span class="text-slate-text-muted">OPEN VERIFICATION</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-off-white-primary mb-space-xs">
+              Open Science Publications
+            </h3>
+<p class="font-body-md text-body-md text-slate-text-secondary mb-space-md">
+              Foundational mathematical formulas, topological schemas, and software BOM models are published openly for rigorous peer review and sovereign European validation.
+            </p>
+</div>
+<div class="pt-space-md bg-carbon-base border border-slate-line p-space-sm font-badge-code text-badge-code text-slate-text-muted">
+            OUTPUT: Open GitHub Schemas, ArXiv Treatises, LaTeX Frameworks
+          </div>
+</div>
+<!-- Step 02 -->
+<div class="bg-carbon-surface border border-slate-line p-space-xl flex flex-col justify-between hover:border-slate-subtle transition-all">
+<div>
+<div class="flex items-center justify-between mb-space-lg font-badge-code text-badge-code">
+<span class="px-space-xs py-space-2xs bg-carbon-elevated text-secondary font-semibold">STAGE 02</span>
+<span class="text-slate-text-muted">EMPIRICAL AUDITING</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-off-white-primary mb-space-xs">
+              Commercial &amp; Plant Audits
+            </h3>
+<p class="font-body-md text-body-md text-slate-text-secondary mb-space-md">
+              Conducting non-destructive physical SCADA loop, DCS wiring, and DEXPI equipment topology safety assessments across commercial utilities and municipal networks.
+            </p>
+</div>
+<div class="pt-space-md bg-carbon-base border border-slate-line p-space-sm font-badge-code text-badge-code text-slate-text-muted">
+            OUTPUT: Actuarial ROSI Matrices, Gap Analysis, Topology Proofs
+          </div>
+</div>
+<!-- Step 03 -->
+<div class="bg-carbon-surface border border-slate-line p-space-xl flex flex-col justify-between hover:border-slate-subtle transition-all">
+<div>
+<div class="flex items-center justify-between mb-space-lg font-badge-code text-badge-code">
+<span class="px-space-xs py-space-2xs bg-carbon-elevated text-primary-container font-semibold">STAGE 03</span>
+<span class="text-slate-text-muted">SOVEREIGN RESILIENCE</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-off-white-primary mb-space-xs">
+              Sovereign Capability Transfer
+            </h3>
+<p class="font-body-md text-body-md text-slate-text-secondary mb-space-md">
+              Deploying self-hosted, air-gapped digital twin simulation appliances directly into utility control stations for autonomous real-time defense without cloud exposure.
+            </p>
+</div>
+<div class="pt-space-md bg-carbon-base border border-slate-line p-space-sm font-badge-code text-badge-code text-slate-text-muted">
+            OUTPUT: Air-Gapped Appliances, Certified Defense Node 04
+          </div>
+</div>
+</div>
+</div>
+</section>
+<!-- BOARD BRIEFING INTAKE TERMINAL -->
+<section class="w-full bg-carbon-surface py-space-3xl border-b border-slate-line" id="briefing-terminal">
+<div class="max-w-[1360px] mx-auto px-margin-desktop">
+<!-- Part 1: Connect, Subscribe & Engage Console -->
+<div class="mb-space-2xl">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-space-lg gap-space-md">
+<div>
+<div class="flex items-center gap-space-xs mb-space-2xs">
+<span class="w-2 h-2 bg-primary-container inline-block animate-pulse"></span>
+<span class="font-eyebrow-tag text-eyebrow-tag uppercase text-primary tracking-widest">// ENGAGEMENT &amp; DISPATCH CONSOLE</span>
+<span class="px-space-2xs bg-carbon-elevated text-slate-text-muted font-badge-code text-badge-code uppercase">OPEN ACCESS</span>
+</div>
+<h2 class="font-headline-xl text-headline-xl text-off-white-primary tracking-tight">
+Connect, Subscribe &amp; Engage.
+</h2>
+</div>
+<p class="font-body-md text-body-md text-slate-text-secondary max-w-lg">
+Direct mathematical preprints, sovereign cyber-physical telemetry alerts, and peer-reviewed working group colloquia open to European academic and industrial researchers.
+</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-space-md">
+<!-- Sub-panel 1: Subscribe to Research Dispatches -->
+<div class="bg-carbon-base border border-slate-line p-space-lg flex flex-col justify-between hover:border-slate-subtle transition-all">
+<div>
+<div class="flex items-center justify-between pb-space-xs mb-space-sm border-b border-slate-line">
+<span class="font-badge-code text-badge-code text-primary uppercase font-bold tracking-wider">DISPATCH 01</span>
+<span class="px-space-xs py-0.5 bg-carbon-elevated text-secondary font-badge-code text-[10px] uppercase font-mono">WEEKLY ARRANGE</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-off-white-primary mb-space-xs">
+Subscribe // Research &amp; Mathematical Treatises
+</h3>
+<p class="font-body-sm text-body-sm text-slate-text-secondary mb-space-md">
+Receive weekly sprint updates, new arXiv prepresses, and CVE/physical vulnerability disclosures across DEXPI, CycloneDX, and Kramers potential barrier proofs.
+</p>
+<div class="space-y-space-xs mb-space-md font-badge-code text-[11px] text-slate-text-muted">
+<div class="flex items-center gap-2"><span class="text-primary">✓</span> No marketing, purely empirical formulations</div>
+<div class="flex items-center gap-2"><span class="text-primary">✓</span> Cryptographically signed PDF releases</div>
+</div>
+</div>
+<div>
+<form class="flex flex-col gap-2" onsubmit="event.preventDefault(); const btn=this.querySelector('button'); btn.textContent='Subscribed // Key Verified'; btn.classList.add('bg-tertiary','text-carbon-base');">
+<div class="relative w-full">
+<input class="bg-carbon-surface border border-slate-line text-off-white-primary text-body-sm font-code-formula px-3 py-2 w-full focus:border-primary-container focus:outline-none placeholder:text-slate-text-muted" placeholder="researcher@institution.eu" required="" type="email">
+</div>
+<button class="w-full py-2 bg-primary-container hover:bg-dutch-orange-deep text-white font-code-formula text-body-sm font-semibold transition-colors flex items-center justify-center gap-2" type="submit">
+<span>Subscribe to Open Dispatches</span>
+<span class="material-symbols-outlined text-[16px]">mail</span>
+</button>
+</form>
+</div>
+</div>
+<!-- Sub-panel 2: Sovereign Knowledge Network -->
+<div class="bg-carbon-base border border-slate-line p-space-lg flex flex-col justify-between hover:border-slate-subtle transition-all">
+<div>
+<div class="flex items-center justify-between pb-space-xs mb-space-sm border-b border-slate-line">
+<span class="font-badge-code text-badge-code text-secondary uppercase font-bold tracking-wider">NETWORK 02</span>
+<span class="px-space-xs py-0.5 bg-carbon-elevated text-sage-green-soft font-badge-code text-[10px] uppercase font-mono">AIR-GAPPED READY</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-off-white-primary mb-space-xs">
+Connect // Sovereign Knowledge Network
+</h3>
+<p class="font-body-sm text-body-sm text-slate-text-secondary mb-space-md">
+Direct cryptographically attested channels for confidential peer review, bilateral incident disclosure, and syndicated academic indexing.
+</p>
+<div class="space-y-space-xs mb-space-md">
+<a class="p-space-xs bg-carbon-surface border border-slate-line hover:border-secondary flex items-center justify-between transition-colors group" href="mailto:jim@eigenia.nl">
+<div class="flex items-center gap-2 font-code-formula text-body-sm text-off-white-primary">
+<span class="material-symbols-outlined text-[16px] text-secondary">lock</span>
+<span>Secure PGP / Direct Dispatch</span>
+</div>
+<span class="font-badge-code text-[10px] text-slate-text-muted group-hover:text-secondary">jim@eigenia.nl</span>
+</a>
+<div class="p-space-xs bg-carbon-surface border border-slate-line flex items-center justify-between">
+<div class="flex items-center gap-2 font-code-formula text-body-sm text-off-white-primary">
+<span class="material-symbols-outlined text-[16px] text-tertiary">rss_feed</span>
+<span>RSS &amp; Atom Syndication Feed</span>
+</div>
+<span class="font-badge-code text-[10px] text-tertiary font-mono">/feed.xml</span>
+</div>
+<div class="p-space-xs bg-carbon-surface border border-slate-line flex items-center justify-between">
+<div class="flex items-center gap-2 font-code-formula text-body-sm text-off-white-primary">
+<span class="material-symbols-outlined text-[16px] text-primary">hub</span>
+<span>Academic Matrix / Mastodon</span>
+</div>
+<span class="font-badge-code text-[10px] text-slate-text-muted font-mono">#eigenia:matrix.org</span>
+</div>
+</div>
+</div>
+<div class="pt-space-xs border-t border-slate-line flex items-center justify-between font-badge-code text-badge-code text-slate-text-muted">
+<span>PGP: 0x9482F1E4B3</span>
+<span class="text-secondary font-mono font-semibold">CLEARANCE LEVEL 3</span>
+</div>
+</div>
+<!-- Sub-panel 3: Colloquia & Sprints -->
+<div class="bg-carbon-base border border-slate-line p-space-lg flex flex-col justify-between hover:border-slate-subtle transition-all">
+<div>
+<div class="flex items-center justify-between pb-space-xs mb-space-sm border-b border-slate-line">
+<span class="font-badge-code text-badge-code text-tertiary uppercase font-bold tracking-wider">SCHEDULE 03</span>
+<span class="px-space-xs py-0.5 bg-carbon-elevated text-primary-container font-badge-code text-[10px] uppercase font-mono animate-pulse">LIVE CALENDAR</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-off-white-primary mb-space-xs">
+Events &amp; Working Sessions // Colloquia
+</h3>
+<p class="font-body-sm text-body-sm text-slate-text-secondary mb-space-md">
+Participate in active research defenses, theorem workshops, and bilateral executive cyber-physical stress-testing simulations.
+</p>
+<div class="space-y-space-xs mb-space-md font-code-formula text-[12px]">
+<div class="p-space-xs bg-carbon-surface border-l-2 border-primary-container">
+<div class="flex items-center justify-between text-[11px] mb-0.5">
+<span class="text-primary font-semibold">COLLOQUIUM</span>
+<span class="text-slate-text-muted">THURSDAYS 16:00 CET</span>
+</div>
+<div class="text-off-white-primary font-medium text-body-sm">Q3 Sovereign Cyber-Physical Colloquium</div>
+<div class="text-slate-text-muted text-[11px]">Topic: Non-Linear Fluid Transients (WG-04)</div>
+</div>
+<div class="p-space-xs bg-carbon-surface border-l-2 border-secondary">
+<div class="flex items-center justify-between text-[11px] mb-0.5">
+<span class="text-secondary font-semibold">WORKING SPRINT</span>
+<span class="text-slate-text-muted">BI-WEEKLY TUESDAYS</span>
+</div>
+<div class="text-off-white-primary font-medium text-body-sm">WG-01 Copula Tail-Risk Underwriting</div>
+<div class="text-slate-text-muted text-[11px]">Topic: Lloyd's Y5381 Stress Testing Benchmark</div>
+</div>
+</div>
+</div>
+<div class="pt-space-xs border-t border-slate-line flex items-center justify-between font-badge-code text-badge-code">
+<span class="text-slate-text-muted">HYBRID / THE HAGUE &amp; SECURE LINK</span>
+<a class="text-primary hover:underline font-semibold" href="#briefing-terminal" onclick="selectEngagementPathway('pathway-colloquium');">RSVP for Session →</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Part 2 & 3: Unified Collaboration & Intake Hub (6 Pathways + Interactive Router) -->
+<div class="bg-carbon-base border border-slate-line p-space-xl lg:p-space-2xl">
+<div class="max-w-3xl mb-space-xl">
+<div class="flex items-center gap-space-xs mb-space-2xs">
+<span class="w-2 h-2 bg-primary-container inline-block"></span>
+<span class="font-eyebrow-tag text-eyebrow-tag uppercase tracking-widest text-primary">ENCRYPTED PROTOCOL INTAKE // SOVEREIGN HUB</span>
+<span class="text-slate-text-muted font-badge-code text-badge-code">// KvK: 84920148</span>
+</div>
+<h2 class="font-headline-xl text-headline-xl text-off-white-primary tracking-tight mb-space-xs">
+Unified Collaboration &amp; Intake Hub
+</h2>
+<p class="font-body-lg text-body-lg text-slate-text-secondary leading-relaxed">
+Select one of the 6 sovereign engagement pathways below to initialize a direct bilateral channel with Eigenia's principal scientists, utility engineering fellows, or supervisory briefers.
+</p>
+</div>
+<!-- 6 Engagement Pathways Matrix -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-md mb-space-xl">
+<!-- Pathway 01 -->
+<div class="p-space-md bg-carbon-surface border border-slate-line hover:border-primary-container transition-all cursor-pointer group flex flex-col justify-between" onclick="selectEngagementPathway('working-group');">
+<div>
+<div class="flex items-center justify-between mb-space-xs font-badge-code text-badge-code">
+<span class="text-primary font-semibold">PATHWAY 01</span>
+<span class="px-1.5 py-0.5 bg-primary-container/20 text-primary">CO-AUTHOR</span>
+</div>
+<h4 class="font-headline-md text-headline-md text-off-white-primary mb-1 group-hover:text-primary transition-colors">
+Join an Active Working Group
+</h4>
+<p class="font-body-sm text-body-sm text-slate-text-secondary mb-space-sm">
+Co-author mathematical treatises, propose joint tracks, and deploy applied open standards (WG-01 through WG-08).
+</p>
+</div>
+<div class="font-badge-code text-[11px] text-primary flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+<span>Select Pathway 01</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</div>
+</div>
+<!-- Pathway 02 -->
+<div class="p-space-md bg-carbon-surface border border-slate-line hover:border-secondary transition-all cursor-pointer group flex flex-col justify-between" onclick="selectEngagementPathway('scada-audit');">
+<div>
+<div class="flex items-center justify-between mb-space-xs font-badge-code text-badge-code">
+<span class="text-secondary font-semibold">PATHWAY 02</span>
+<span class="px-1.5 py-0.5 bg-secondary/10 text-secondary">100% PRO-BONO</span>
+</div>
+<h4 class="font-headline-md text-headline-md text-off-white-primary mb-1 group-hover:text-secondary transition-colors">
+Pro-Bono SCADA &amp; Utility Defense
+</h4>
+<p class="font-body-sm text-body-sm text-slate-text-secondary mb-space-sm">
+Non-destructive audits and deterministic signal proving for public water, power grids, and agri-logistics operators.
+</p>
+</div>
+<div class="font-badge-code text-[11px] text-secondary flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+<span>Select Pathway 02</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</div>
+</div>
+<!-- Pathway 03 -->
+<div class="p-space-md bg-carbon-surface border border-slate-line hover:border-tertiary transition-all cursor-pointer group flex flex-col justify-between" onclick="selectEngagementPathway('fellowship');">
+<div>
+<div class="flex items-center justify-between mb-space-xs font-badge-code text-badge-code">
+<span class="text-tertiary font-semibold">PATHWAY 03</span>
+<span class="px-1.5 py-0.5 bg-tertiary/10 text-tertiary">CYCLE 2026.1</span>
+</div>
+<h4 class="font-headline-md text-headline-md text-off-white-primary mb-1 group-hover:text-tertiary transition-colors">
+Academic Fellowship &amp; Scholar
+</h4>
+<p class="font-body-sm text-body-sm text-slate-text-secondary mb-space-sm">
+Visiting fellowships for PhD/postdoctoral researchers in complexity physics, compute grants, and air-gapped lab access.
+</p>
+</div>
+<div class="font-badge-code text-[11px] text-tertiary flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+<span>Select Pathway 03</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</div>
+</div>
+<!-- Pathway 04 -->
+<div class="p-space-md bg-carbon-surface border border-slate-line hover:border-primary transition-all cursor-pointer group flex flex-col justify-between" onclick="selectEngagementPathway('board-briefing');">
+<div>
+<div class="flex items-center justify-between mb-space-xs font-badge-code text-badge-code">
+<span class="text-primary font-semibold">PATHWAY 04</span>
+<span class="px-1.5 py-0.5 bg-carbon-elevated text-primary">NIS2 / CER</span>
+</div>
+<h4 class="font-headline-md text-headline-md text-off-white-primary mb-1 group-hover:text-primary transition-colors">
+Executive Board Briefing
+</h4>
+<p class="font-body-sm text-body-sm text-slate-text-secondary mb-space-sm">
+Bespoke in-person technical briefings for supervisory boards, plant directors, and lead industrial cyber-physical engineers.
+</p>
+</div>
+<div class="font-badge-code text-[11px] text-primary flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+<span>Select Pathway 04</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</div>
+</div>
+<!-- Pathway 05 -->
+<div class="p-space-md bg-carbon-surface border border-slate-line hover:border-technical-amber transition-all cursor-pointer group flex flex-col justify-between" onclick="selectEngagementPathway('actuarial-validation');">
+<div>
+<div class="flex items-center justify-between mb-space-xs font-badge-code text-badge-code">
+<span class="text-technical-amber font-semibold">PATHWAY 05</span>
+<span class="px-1.5 py-0.5 bg-carbon-elevated text-technical-amber">LLOYD'S Y5381</span>
+</div>
+<h4 class="font-headline-md text-headline-md text-off-white-primary mb-1 group-hover:text-technical-amber transition-colors">
+Actuarial Portfolio Validation
+</h4>
+<p class="font-body-sm text-body-sm text-slate-text-secondary mb-space-sm">
+Rotated Clayton copula tail-risk stress testing and quantitative aggregate loss exceedance (ALE) for reinsurers.
+</p>
+</div>
+<div class="font-badge-code text-[11px] text-technical-amber flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+<span>Select Pathway 05</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</div>
+</div>
+<!-- Pathway 06 -->
+<div class="p-space-md bg-carbon-surface border border-slate-line hover:border-sage-green-soft transition-all cursor-pointer group flex flex-col justify-between" onclick="selectEngagementPathway('sponsor-lab');">
+<div>
+<div class="flex items-center justify-between mb-space-xs font-badge-code text-badge-code">
+<span class="text-sage-green-soft font-semibold">PATHWAY 06</span>
+<span class="px-1.5 py-0.5 bg-carbon-elevated text-sage-green-soft">PHILANTHROPIC</span>
+</div>
+<h4 class="font-headline-md text-headline-md text-off-white-primary mb-1 group-hover:text-sage-green-soft transition-colors">
+Sponsor &amp; Fund the Lab
+</h4>
+<p class="font-body-sm text-body-sm text-slate-text-secondary mb-space-sm">
+Endow non-dilutive sovereign compute grants, open-source verification pipelines, and permanent public-good tooling.
+</p>
+</div>
+<div class="font-badge-code text-[11px] text-sage-green-soft flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+<span>Select Pathway 06</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- Interactive Intake Selection Pill Bar & Dynamic Form Routing -->
+<div class="bg-carbon-surface border border-slate-line p-space-lg" id="intake-form-container">
+<div class="flex flex-col gap-space-md">
+<div>
+<span class="font-badge-code text-badge-code text-slate-text-muted uppercase tracking-wider block mb-space-xs">STEP 1 // SELECT ACTIVE OBJECTIVE</span>
+<div class="flex flex-wrap gap-2" id="pathway-pill-selector">
+<button class="px-3 py-1.5 font-code-formula text-[12px] font-semibold border border-primary-container bg-primary-container text-white transition-all pathway-pill active" data-target="working-group" type="button">Join Working Group</button>
+<button class="px-3 py-1.5 font-code-formula text-[12px] font-semibold border border-slate-line bg-carbon-base text-slate-text-secondary hover:text-off-white-primary hover:border-slate-subtle transition-all pathway-pill" data-target="scada-audit" type="button">Pro-Bono SCADA Audit</button>
+<button class="px-3 py-1.5 font-code-formula text-[12px] font-semibold border border-slate-line bg-carbon-base text-slate-text-secondary hover:text-off-white-primary hover:border-slate-subtle transition-all pathway-pill" data-target="fellowship" type="button">Academic Fellowship</button>
+<button class="px-3 py-1.5 font-code-formula text-[12px] font-semibold border border-slate-line bg-carbon-base text-slate-text-secondary hover:text-off-white-primary hover:border-slate-subtle transition-all pathway-pill" data-target="board-briefing" type="button">Executive Briefing</button>
+<button class="px-3 py-1.5 font-code-formula text-[12px] font-semibold border border-slate-line bg-carbon-base text-slate-text-secondary hover:text-off-white-primary hover:border-slate-subtle transition-all pathway-pill" data-target="actuarial-validation" type="button">Actuarial Validation</button>
+<button class="px-3 py-1.5 font-code-formula text-[12px] font-semibold border border-slate-line bg-carbon-base text-slate-text-secondary hover:text-off-white-primary hover:border-slate-subtle transition-all pathway-pill" data-target="sponsor-lab" type="button">Sponsor the Lab</button>
+</div>
+</div>
+<div class="border-t border-slate-line pt-space-md">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md items-center">
+<div class="lg:col-span-8">
+<div class="flex items-center gap-2 mb-1">
+<span class="font-badge-code text-badge-code text-primary uppercase font-mono" id="active-pathway-badge">[PATHWAY 01 // WG-01 TO WG-08]</span>
+<span class="font-badge-code text-[11px] text-sage-green-soft">Direct Air-Gapped Transmission</span>
+</div>
+<h4 class="font-headline-md text-off-white-primary mb-1" id="active-pathway-heading">Join an Active Working Group &amp; Research Track</h4>
+<p class="font-body-sm text-slate-text-muted mb-space-xs" id="active-pathway-desc">Initiate formal intake to collaborate on active mathematical proofs, empirical test benches, or propose a novel critical infrastructure track.</p>
+<div class="flex flex-wrap items-center gap-space-md font-badge-code text-[11px] text-slate-text-muted">
+<span>SECURE DISPATCH: jim@eigenia.nl</span>
+<span>•</span>
+<span>CLEARANCE: LEVEL 3 READY</span>
+<span>•</span>
+<span>BILATERAL NDA COVERED</span>
+</div>
+</div>
+<div class="lg:col-span-4 flex flex-col gap-2">
+<a class="inline-flex items-center justify-center gap-space-xs px-space-xl py-space-md bg-primary-container text-white font-code-formula text-body-md font-semibold hover:bg-dutch-orange-deep transition-colors shadow-lg text-center" href="mailto:jim@eigenia.nl?subject=%5BWorking%20Group%20Intake%5D%20Eigenia%20B.V.%20Collaboration%20Protocol" id="active-pathway-cta">
+<span id="active-pathway-btn-text">Submit Intake Request</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+<a class="inline-flex items-center justify-center gap-1.5 font-code-formula text-body-sm text-slate-text-secondary hover:text-primary transition-colors py-1 text-center" data-path="collaborate" href="#briefing-terminal">
+<span>Open Full Sovereign Collaboration Terminal →</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- FOOTER -->
+<footer class="w-full bg-carbon-base border-t border-slate-line">
+<div class="max-w-[1360px] mx-auto px-margin-desktop py-space-2xl">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-gutter-desktop pb-space-2xl border-b border-slate-line">
+<div class="lg:col-span-4 flex flex-col gap-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="w-2 h-2 bg-primary-container inline-block"></span>
+<span class="font-code-formula text-body-sm font-semibold text-off-white-primary tracking-wider uppercase">EIGENIA B.V. [NL]</span>
+</div>
+<p class="font-body-sm text-body-sm text-slate-text-muted max-w-sm">
+          Sovereign Applied Complexity Science Think Tank &amp; Mathematical Physics Laboratories. Modeling non-linear dynamical criticalities and sovereign computing fabrics under Dutch KvK charter.
+        </p>
+<div class="pt-space-xs flex flex-col gap-space-2xs font-badge-code text-badge-code text-slate-text-muted uppercase tracking-wider">
+<span>Registration: KvK 84920148 // The Hague</span>
+<span>Security &amp; Regulatory: NIS2 / CER Directive Compliant</span>
+<span>Facility Clearance: Sovereign EU Node 04</span>
+</div>
+</div>
+<div class="lg:col-span-3 flex flex-col gap-space-sm">
+<span class="font-eyebrow-tag text-eyebrow-tag uppercase tracking-widest text-slate-text-secondary">// Research Tracks</span>
+<ul class="flex flex-col gap-space-2xs font-body-sm text-body-sm text-slate-text-muted">
+<li><a class="hover:text-off-white-primary transition-colors flex items-center gap-space-2xs" href="#capabilities"><span class="text-slate-line">01</span> Clean Water SCADA Integrity</a></li>
+<li><a class="hover:text-off-white-primary transition-colors flex items-center gap-space-2xs" href="#capabilities"><span class="text-slate-line">02</span> High-Voltage Grid Cascade Models</a></li>
+<li><a class="hover:text-off-white-primary transition-colors flex items-center gap-space-2xs" href="#capabilities"><span class="text-slate-line">03</span> Agricultural Supply Logistics</a></li>
+<li><a class="hover:text-off-white-primary transition-colors flex items-center gap-space-2xs" href="#capabilities"><span class="text-slate-line">04</span> Sovereign Air-Gapped Appliances</a></li>
+</ul>
+</div>
+<div class="lg:col-span-2 flex flex-col gap-space-sm">
+<span class="font-eyebrow-tag text-eyebrow-tag uppercase tracking-widest text-slate-text-secondary">// Standards &amp; Labs</span>
+<ul class="flex flex-col gap-space-2xs font-body-sm text-body-sm text-slate-text-muted">
+<li><a class="hover:text-off-white-primary transition-colors" href="#unified-standard">Unified Standard Matrix</a></li>
+<li><a class="hover:text-off-white-primary transition-colors" href="#s-curve-simulator">Applied Physics Lab</a></li>
+<li><a class="hover:text-off-white-primary transition-colors" href="#mission">Sovereign Charter</a></li>
+<li><a class="hover:text-off-white-primary transition-colors" href="#research-treatises">59 Ratified Papers</a></li>
+</ul>
+</div>
+<div class="lg:col-span-3 flex flex-col gap-space-sm">
+<span class="font-eyebrow-tag text-eyebrow-tag uppercase tracking-widest text-slate-text-secondary">// Secure Dispatch</span>
+<p class="font-body-sm text-body-sm text-slate-text-muted">Direct encrypted briefing intake and technical correspondence:</p>
+<div class="bg-carbon-surface border border-slate-line p-space-sm">
+<span class="font-eyebrow-tag text-eyebrow-tag uppercase text-slate-text-muted block">Primary Communication Dispatch</span>
+<a class="font-code-formula text-body-sm text-primary hover:text-off-white-primary transition-colors break-all" href="mailto:jim@eigenia.nl">jim@eigenia.nl</a>
+</div>
+<span class="font-badge-code text-badge-code text-slate-text-muted uppercase tracking-wider">PGP Fingerprint: 0x9482F1E4B3 // Formal Deposition</span>
+</div>
+</div>
+<div class="pt-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md font-badge-code text-badge-code text-slate-text-muted uppercase tracking-widest">
+<span>© 2025 E I G E N I A B.V. All sovereign rights reserved. Archival Ref: EIG-NL-2025.</span>
+<div class="flex items-center gap-space-md">
+<span>Classification: SOVEREIGN ASSURED / CER Level 3</span>
+<span>Jurisdiction: Netherlands // EU</span>
+</div>
+</div>
+</div>
+</footer>
+<!-- VANILLA JS MICRO-INTERACTIONS -->
+<script>
+  // 1. S-Curve Dynamic Simulator
+  (function() {
+    const slider = document.getElementById('perturb-slider');
+    const perturbDisplay = document.getElementById('perturb-val-display');
+    const perturbPoint = document.getElementById('perturb-point');
+    const perturbCrossV = document.getElementById('perturb-cross-v');
+    const stabilityOut = document.getElementById('telemetry-stability');
+    const varianceOut = document.getElementById('telemetry-variance');
+    const alphaOut = document.getElementById('telemetry-alpha');
+    const horizonOut = document.getElementById('telemetry-horizon');
+    const statusPill = document.getElementById('stability-status-pill');
+    const resetBtn = document.getElementById('perturb-reset-btn');
+
+    if (!slider || !perturbPoint) return;
+
+    const xc = 0.742;
+    const k = 12.5;
+    const plotMinX = 60;
+    const plotMaxX = 780;
+    const plotMinY = 40;
+    const plotMaxY = 276;
+
+    function computeSigmoid(x) {
+      return 1 / (1 + Math.exp(-k * (x - xc)));
+    }
+
+    function updateSimulation(xVal) {
+      perturbDisplay.textContent = xVal.toFixed(3);
+      const s = computeSigmoid(xVal);
+      const stability = Math.max(0, 1 - s);
+      stabilityOut.textContent = stability.toFixed(3);
+
+      const currentSvgX = plotMinX + xVal * (plotMaxX - plotMinX);
+      const currentSvgY = plotMaxY - s * (plotMaxY - plotMinY);
+
+      perturbPoint.setAttribute('cx', currentSvgX.toString());
+      perturbPoint.setAttribute('cy', currentSvgY.toString());
+
+      if (perturbCrossV) {
+        perturbCrossV.setAttribute('x1', currentSvgX.toString());
+        perturbCrossV.setAttribute('x2', currentSvgX.toString());
+      }
+
+      if (xVal < 0.55) {
+        statusPill.textContent = 'ZONE I: APPARENT CALM';
+        statusPill.className = 'px-space-xs py-0.5 bg-sage-green-soft/20 text-sage-green-soft font-badge-code text-badge-code uppercase font-semibold';
+        varianceOut.textContent = '+12.4% [STABLE]';
+        varianceOut.className = 'font-code-formula text-body-sm text-sage-green-soft';
+        alphaOut.textContent = '2.40 [Thin Tail]';
+        alphaOut.className = 'font-code-formula text-body-sm text-sage-green-soft';
+        horizonOut.textContent = 't > 480 hours';
+        horizonOut.className = 'font-code-formula text-body-sm text-slate-text-secondary';
+      } else if (xVal >= 0.55 && xVal < 0.72) {
+        statusPill.textContent = 'ZONE II: LATENT SHEAR';
+        statusPill.className = 'px-space-xs py-0.5 bg-technical-amber/20 text-technical-amber font-badge-code text-badge-code uppercase font-semibold';
+        varianceOut.textContent = '+118.8% [SHEAR]';
+        varianceOut.className = 'font-code-formula text-body-sm text-technical-amber';
+        alphaOut.textContent = '1.65 [Transition]';
+        alphaOut.className = 'font-code-formula text-body-sm text-technical-amber';
+        horizonOut.textContent = 't ~ 12.5 minutes';
+        horizonOut.className = 'font-code-formula text-body-sm text-technical-amber';
+      } else if (xVal >= 0.72 && xVal <= 0.78) {
+        statusPill.textContent = 'CRITICAL BIFURCATION (x_c)';
+        statusPill.className = 'px-space-xs py-0.5 bg-primary-container/20 text-primary-container font-badge-code text-badge-code uppercase font-semibold animate-pulse';
+        varianceOut.textContent = '+365.2% [COLLAPSE]';
+        varianceOut.className = 'font-code-formula text-body-sm text-primary';
+        alphaOut.textContent = '1.18 [Heavy Tail]';
+        alphaOut.className = 'font-code-formula text-body-sm text-secondary';
+        horizonOut.textContent = 't < 18.4 seconds';
+        horizonOut.className = 'font-code-formula text-body-sm text-error';
+      } else {
+        statusPill.textContent = 'ZONE III: CASCADING TEAR';
+        statusPill.className = 'px-space-xs py-0.5 bg-error-container text-white font-badge-code text-badge-code uppercase font-semibold';
+        varianceOut.textContent = '+892.0% [SYSTEMIC RUNAWAY]';
+        varianceOut.className = 'font-code-formula text-body-sm text-error';
+        alphaOut.textContent = '0.94 [Extreme Fat Tail]';
+        alphaOut.className = 'font-code-formula text-body-sm text-error';
+        horizonOut.textContent = 'CATASTROPHIC PLANT TRIP';
+        horizonOut.className = 'font-code-formula text-body-sm text-error font-bold';
+      }
+    }
+
+    slider.addEventListener('input', function(e) {
+      const xVal = parseFloat(e.target.value) / 100;
+      updateSimulation(xVal);
+    });
+
+    if (resetBtn) {
+      resetBtn.addEventListener('click', function() {
+        slider.value = '74';
+        updateSimulation(0.742);
+      });
+    }
+
+    updateSimulation(0.742);
+  })();
+
+  // 2. Interactive G_CPDT Node Inspection
+  (function() {
+    const inspectButtons = document.querySelectorAll('.node-inspect-btn');
+    const title = document.getElementById('detail-title');
+    const body = document.getElementById('detail-body');
+
+    const nodeData = {
+      'pump': {
+        title: 'INSPECTING: CENTRIFUGAL WATER PUMP DN150 (ISO 15926)',
+        desc: 'Binding edge translates pump impeller RPM and mechanical seal head pressure (42.8m) directly into digital PLC register address 0x3012. Cavitation vibration triggers automatic shutoff in <12ms.'
+      },
+      'controller': {
+        title: 'INSPECTING: STM32F407 MICROCONTROLLER [CYCLONEDX 1.6+]',
+        desc: 'Hierarchical 5-BOM attests silicon foundry hash, cryptographic FreeRTOS v10.4 kernel binary, and C library vulnerabilities directly linked to mechanical actuator trip routines without external cloud verification.'
+      },
+      'relay': {
+        title: 'INSPECTING: IEC 61850 SUBSTATION PROTECTIVE RELAY',
+        desc: 'Coupled to high-voltage busbar models via IEC 61970 CIM. If physical temperature exceeds threshold during grid frequency drift (50.02 Hz), relay trips the BESS 250MW circuit within 2 cycles.'
+      }
+    };
+
+    inspectButtons.forEach(btn => {
+      btn.addEventListener('click', function() {
+        const nodeKey = this.getAttribute('data-node');
+        if (nodeData[nodeKey]) {
+          title.textContent = nodeData[nodeKey].title;
+          body.textContent = nodeData[nodeKey].desc;
+        }
+      });
+    });
+  })();
+
+  // 3. Tabbed Working Groups Explorer & Real-Time Search
+  (function() {
+    const tabs = document.querySelectorAll('.wg-tab');
+    const cards = document.querySelectorAll('.treatise-card');
+    const searchInput = document.getElementById('treatise-search');
+    const activeLabel = document.getElementById('active-category-label');
+    const countLabel = document.getElementById('rendered-count-label');
+    const emptyMsg = document.getElementById('no-results-msg');
+    const resetFilterBtn = document.getElementById('reset-filter-btn');
+
+    const descriptions = {
+      'ALL': 'SHOWING ALL WORKING GROUPS (59 PAPERS)',
+      'WG-01-UI': 'WG-01 UNDERWRITING // CATASTROPHE ACTUARIAL MODELS (12 PAPERS)',
+      'WG-02-DT': 'WG-02 DIGITAL TWIN // G_CPDT COMPUTABLE GRAPH SCHEMA (10 PAPERS)',
+      'WG-03-ML': 'WG-03 PSYCHOMETRICS // OPERATOR COGNITIVE LOAD TENSORS (7 PAPERS)',
+      'WG-04-CF': 'WG-04 CASCADING FAILURES // PHASE BIFURCATIONS (8 PAPERS)',
+      'WG-05-CAD': 'WG-05 DEXPI & CAD // THREE-IDENTITY INTEROP STANDARDS (14 PAPERS)',
+      'WG-07-TM': 'WG-07 THREAT TACAM // ADVERSARY THREAT QUOTIENTS (4 PAPERS)',
+      'WG-08-MO': 'WG-08 MONTE CARLO // IMPORTANCE SAMPLING MARKOV ENGINE (1 PAPER)',
+      'MP-MATH': 'MP-MATH MATHEMATICAL PHYSICS // MULTI-MACHINE POTENTIALS (2 PAPERS)',
+      'GOV-RES': 'GOV-RES RESEARCH GOVERNANCE // SOVEREIGN DUAL-USE PROTOCOLS (1 PAPER)'
+    };
+
+    let currentWg = 'ALL';
+    let currentQuery = '';
+
+    function filterCards() {
+      let visibleCount = 0;
+      cards.forEach(card => {
+        const cardWg = card.getAttribute('data-wg');
+        const cardText = (card.textContent + ' ' + (card.getAttribute('data-keywords') || '')).toLowerCase();
+
+        const matchesWg = (currentWg === 'ALL') || (cardWg === currentWg);
+        const matchesQuery = !currentQuery || cardText.includes(currentQuery);
+
+        if (matchesWg && matchesQuery) {
+          card.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      if (activeLabel) {
+        activeLabel.textContent = descriptions[currentWg] || `FILTER: ${currentWg}`;
+      }
+      if (countLabel) {
+        countLabel.textContent = `DISPLAYING ${visibleCount} RESEARCH ${visibleCount === 1 ? 'TREATISE' : 'TREATISES'}`;
+      }
+
+      if (emptyMsg) {
+        if (visibleCount === 0) {
+          emptyMsg.classList.remove('hidden');
+        } else {
+          emptyMsg.classList.add('hidden');
+        }
+      }
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', function() {
+        const wg = this.getAttribute('data-wg');
+        currentWg = wg;
+        tabs.forEach(t => {
+          if (t.getAttribute('data-wg') === wg) {
+            t.className = 'wg-tab active px-3.5 py-2.5 font-code-formula text-[13px] font-semibold border-b-2 border-primary-container bg-carbon-base text-off-white-primary transition-all flex items-center gap-2';
+          } else {
+            t.className = 'wg-tab px-3.5 py-2.5 font-code-formula text-[13px] border-b-2 border-transparent text-slate-text-secondary hover:text-off-white-primary hover:bg-carbon-base/60 transition-all flex items-center gap-2';
+          }
+        });
+        filterCards();
+      });
+    });
+
+    if (searchInput) {
+      searchInput.addEventListener('input', function(e) {
+        currentQuery = e.target.value.toLowerCase().trim();
+        filterCards();
+      });
+    }
+
+    if (resetFilterBtn) {
+      resetFilterBtn.addEventListener('click', function() {
+        if (searchInput) searchInput.value = '';
+        currentQuery = '';
+        currentWg = 'ALL';
+        tabs.forEach((t, idx) => {
+          if (idx === 0) {
+            t.className = 'wg-tab active px-3.5 py-2.5 font-code-formula text-[13px] font-semibold border-b-2 border-primary-container bg-carbon-base text-off-white-primary transition-all flex items-center gap-2';
+          } else {
+            t.className = 'wg-tab px-3.5 py-2.5 font-code-formula text-[13px] border-b-2 border-transparent text-slate-text-secondary hover:text-off-white-primary hover:bg-carbon-base/60 transition-all flex items-center gap-2';
+          }
+        });
+        filterCards();
+      });
+    }
+  })();
+</script>
+<script>
+  // 4. Interactive Engagement Hub Pathway Selector
+  const pathwayConfig = {
+    'working-group': {
+      badge: '[PATHWAY 01 // WG-01 TO WG-08]',
+      heading: 'Join an Active Working Group & Research Track',
+      desc: 'Initiate formal intake to collaborate on active mathematical proofs, empirical test benches, or propose a novel critical infrastructure track.',
+      subject: '[Working Group Intake] Eigenia B.V. Collaboration Protocol',
+      btnText: 'Submit Working Group Intake'
+    },
+    'scada-audit': {
+      badge: '[PATHWAY 02 // 100% PRO-BONO UTILITY AUDIT]',
+      heading: 'Pro-Bono SCADA & Utility Defense Audit',
+      desc: 'For public water, power grids, and municipal wastewater operators in the EU. Air-gapped on-premise passive loop validation.',
+      subject: '[Pro-Bono SCADA Audit] Public Utility Verification Intake',
+      btnText: 'Request Pro-Bono SCADA Audit'
+    },
+    'fellowship': {
+      badge: '[PATHWAY 03 // ACADEMIC COHORT 2026.1]',
+      heading: 'Academic Fellowship & Visiting Scholar Application',
+      desc: 'Computational grants, high-performance simulation clusters, and co-authorship for PhD and postdoctoral complexity researchers.',
+      subject: '[Academic Fellowship] Cycle 2026.1 Research Application',
+      btnText: 'Apply for Academic Fellowship'
+    },
+    'board-briefing': {
+      badge: '[PATHWAY 04 // NIS2 & CER STATUTORY COMPLIANCE]',
+      heading: 'Executive Board & Engineering Briefing',
+      desc: 'Tailored closed-door technical briefings for supervisory boards, plant directors, and chief resilience officers on systemic physical risks.',
+      subject: '[Executive Briefing] Supervisory Board Technical Session',
+      btnText: 'Request Board Briefing'
+    },
+    'actuarial-validation': {
+      badge: '[PATHWAY 05 // LLOYD\'S Y5381 COPULA STRESS TEST]',
+      heading: 'Actuarial Portfolio Validation & Stress-Testing',
+      desc: 'Rotated Clayton copula tail-risk evaluations, aggregate loss exceedance (ALE) modeling, and empirical cyber underwriting validation.',
+      subject: '[Actuarial Validation] Underwriting & Tail Risk Audit',
+      btnText: 'Request Actuarial Validation'
+    },
+    'sponsor-lab': {
+      badge: '[PATHWAY 06 // NON-DILUTIVE PHILANTHROPIC GRANTS]',
+      heading: 'Sponsor & Fund the Sovereign Lab',
+      desc: 'Endow open-source verification pipelines, high-density telemetry hardware, and non-commercial scientific public goods under Dutch KvK charter.',
+      subject: '[Philanthropic Support] Sponsoring Sovereign Open Science',
+      btnText: 'Discuss Lab Sponsorship'
+    },
+    'pathway-colloquium': {
+      badge: '[COLLOQUIUM RSVP // Q3 CYBER-PHYSICAL]',
+      heading: 'Register for Sovereign Cyber-Physical Colloquium',
+      desc: 'Receive closed-circuit teleconference credentials and pre-session mathematical proof drafts for upcoming Thursday sessions.',
+      subject: '[Colloquium RSVP] Attendance Request - Q3 Colloquium',
+      btnText: 'Register for Next Colloquium'
+    }
+  };
+
+  function selectEngagementPathway(key) {
+    const config = pathwayConfig[key] || pathwayConfig['working-group'];
+    const badge = document.getElementById('active-pathway-badge');
+    const heading = document.getElementById('active-pathway-heading');
+    const desc = document.getElementById('active-pathway-desc');
+    const cta = document.getElementById('active-pathway-cta');
+    const btnText = document.getElementById('active-pathway-btn-text');
+    const pills = document.querySelectorAll('.pathway-pill');
+
+    if (badge) badge.textContent = config.badge;
+    if (heading) heading.textContent = config.heading;
+    if (desc) desc.textContent = config.desc;
+    if (btnText) btnText.textContent = config.btnText;
+    if (cta) cta.setAttribute('href', 'mailto:jim@eigenia.nl?subject=' + encodeURIComponent(config.subject));
+
+    pills.forEach(p => {
+      if (p.getAttribute('data-target') === key) {
+        p.className = 'px-3 py-1.5 font-code-formula text-[12px] font-semibold border border-primary-container bg-primary-container text-white transition-all pathway-pill active';
+      } else {
+        p.className = 'px-3 py-1.5 font-code-formula text-[12px] font-semibold border border-slate-line bg-carbon-base text-slate-text-secondary hover:text-off-white-primary hover:border-slate-subtle transition-all pathway-pill';
+      }
+    });
+
+    const container = document.getElementById('intake-form-container');
+    if (container) {
+      container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
+
+  document.querySelectorAll('.pathway-pill').forEach(pill => {
+    pill.addEventListener('click', function() {
+      const target = this.getAttribute('data-target');
+      selectEngagementPathway(target);
+    });
+  });
+</script></body></html>

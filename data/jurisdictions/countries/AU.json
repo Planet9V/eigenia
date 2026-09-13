@@ -1,0 +1,161 @@
+{
+  "jurisdiction": {
+    "country_name": "Australia",
+    "iso2": "AU",
+    "iso3": "AUS",
+    "numeric_code": "036",
+    "continent": "Oceania",
+    "region": "Australia and New Zealand",
+    "sub_region": "Australasia",
+    "sovereign_status": "UN Member State",
+    "capital": "Canberra",
+    "currency": "AUD"
+  },
+  "supervisory_authorities": {
+    "dpa": "Office of the Australian Information Commissioner (OAIC)",
+    "csirt": "Australian Cyber Security Centre (ACSC / ASD)",
+    "crypto_agency": "Defence Export Controls (DEC) / ASD"
+  },
+  "statutory_frameworks": [
+    {
+      "official_title": "Security of Critical Infrastructure Act 2018 as amended by SOCI Reforms 2021-2024",
+      "short_name": "Australia SOCI Act",
+      "statute_type": "Act",
+      "legal_citation": "Act No. 29 of 2018 as amended",
+      "enactment_date": "2018-04-11",
+      "effective_date": "2022-04-08",
+      "enforcement_deadline": "2024-08-17",
+      "supervisory_authority": "Cyber and Infrastructure Security Centre (CISC / Department of Home Affairs) / ACSC",
+      "status": "In Force",
+      "metadata": {
+        "mandate": "Part 2A mandates Critical Infrastructure Risk Management Program (CIRMP) Section 30AC/30AD; Part 2B mandatory cyber incident reporting."
+      }
+    },
+    {
+      "official_title": "Privacy Act 1988 as amended by Privacy Legislation Amendment (Enforcement and Other Measures) Act",
+      "short_name": "Australia Privacy Act",
+      "statute_type": "Act",
+      "legal_citation": "Act No. 119 of 1988 as amended",
+      "enactment_date": "1988-12-09",
+      "effective_date": "1989-01-01",
+      "enforcement_deadline": "2023-01-01",
+      "supervisory_authority": "Office of the Australian Information Commissioner (OAIC)",
+      "status": "In Force",
+      "metadata": {
+        "notifiable_data_breaches": "Part IIIC Notifiable Data Breaches (NDB) scheme"
+      }
+    }
+  ],
+  "cyber_security_mandates": [
+    {
+      "target_domain": "Critical Infrastructure Assets (11 Sectors / 22 Asset Classes)",
+      "baseline_standard_ref": "Essential Eight Maturity Model / ISO/IEC 27001 / IEC 62443 / NIST CSF",
+      "mandatory_certifications": "CIRMP Annual Board Attestation under Section 30AG; ACSC System of National Significance (SoNS) Enhanced Cybersecurity Obligations",
+      "default_password_ban": true,
+      "sbom_required": true,
+      "cbom_required": false,
+      "patch_management_sla_days": 14,
+      "details": "Australian entities responsible for critical infrastructure must enforce application control, patch applications within 48 hours for extreme risk vulnerabilities (Essential Eight Level 3), and submit annual board-approved compliance reports."
+    }
+  ],
+  "data_privacy_sovereignty": [
+    {
+      "primary_privacy_law": "Data Protection and Privacy Act of Australia",
+      "supervisory_dpa": "Office of the Australian Information Commissioner (OAIC)",
+      "data_localization_required": false,
+      "localization_scope": "Sector-specific financial and government data localization where applicable.",
+      "cross_border_transfer_mechanism": "Adequacy, Contractual Guarantees, DPA Authorization",
+      "sensitive_data_categories": [
+        "Biometrics",
+        "Health Data",
+        "Criminal Records"
+      ]
+    }
+  ],
+  "cryptography_controls": [
+    {
+      "crypto_import_license_required": false,
+      "crypto_export_controls": "National Customs & Dual-Use Export Control Regime.",
+      "mandatory_government_access_or_escrow": false,
+      "approved_encryption_standards": "AES-256, FIPS 140-2/3, ISO/IEC 18033",
+      "post_quantum_mandate": "Monitoring international standard bodies (ISO/IEC JTC 1 / ITU-T).",
+      "regulatory_agency": "Defence Export Controls (DEC) / ASD"
+    }
+  ],
+  "incident_disclosure_rules": [
+    {
+      "breach_type": "Critical Cyber Incident (Significant Impact)",
+      "notification_timeline_hours": 12,
+      "second_stage_timeline_hours": 24,
+      "final_report_timeline_days": 14,
+      "recipient_authorities": [
+        "Australian Cyber Security Centre (ACSC / ASD)"
+      ],
+      "ransomware_payment_reporting": true,
+      "threshold_trigger_definition": "SOCI Act Section 30BC: Incident that has a significant impact on the availability, integrity, or reliability of the asset must be reported within 12 hours."
+    },
+    {
+      "breach_type": "Other Cyber Incident (Relevant Impact)",
+      "notification_timeline_hours": 72,
+      "second_stage_timeline_hours": null,
+      "final_report_timeline_days": 30,
+      "recipient_authorities": [
+        "ACSC / ASD"
+      ],
+      "ransomware_payment_reporting": false,
+      "threshold_trigger_definition": "SOCI Act Section 30BD: Incident that has a relevant impact on the asset."
+    }
+  ],
+  "penalty_structures": [
+    {
+      "max_administrative_fine_fixed": 50000000.0,
+      "fine_currency": "AUD",
+      "max_turnover_percentage": 10.0,
+      "criminal_liability_directors": true,
+      "market_withdrawal_sanctions": true
+    }
+  ],
+  "sector_applicability": [
+    {
+      "sector": "Energy",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Generation, transmission, distribution, and pipeline SCADA integrity."
+    },
+    {
+      "sector": "Water",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Water treatment, distribution telemetry, and environmental control."
+    },
+    {
+      "sector": "Healthcare",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Hospital systems, medical device cybersecurity, and EHR data protection."
+    },
+    {
+      "sector": "Financial Services",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Payment systems, banking core networks, and cyber resilience audits."
+    },
+    {
+      "sector": "Telecom",
+      "scope_classification": "Essential Infrastructure",
+      "specific_obligations": "Public telecommunications networks, submarine cables, and 5G security."
+    },
+    {
+      "sector": "OT/Industrial",
+      "scope_classification": "Industrial Manufacturing",
+      "specific_obligations": "Machinery safety, industrial robotics, PLC programming, and safety instrumented systems."
+    },
+    {
+      "sector": "Transport",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Rail signaling, air traffic management, maritime port terminals, and connected vehicles."
+    }
+  ],
+  "enrichment_metadata": {
+    "iterations_completed": 4,
+    "last_enriched_at": "2026-09-12T02:14:21.103585+00:00",
+    "enrichment_pipeline": "Valyu-Perplexity-MultiAgent-v4",
+    "enrichment_status": "DEEP_SPECIALIZED_ENRICHMENT_COMPLETE"
+  }
+}

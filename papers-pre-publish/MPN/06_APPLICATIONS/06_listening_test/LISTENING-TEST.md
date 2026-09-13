@@ -3,7 +3,7 @@
 | **What this is** | A listening test for working composers, pianists and music directors |
 | **How long** | About 25 minutes |
 | **What you need** | Headphones or decent speakers. A piano is useful for Part 4 but not required |
-| **Who is asking** | J. McKenney, for a research project on whether the choice of scale in dramatic scoring can be written down as a rule |
+| **Who is asking** | Jim McKenney, for a research project on whether the choice of scale in dramatic scoring can be written down as a rule |
 | **What you get** | The results, and credit if you want it |
 
 # Which scale fits which kind of character?
@@ -59,6 +59,8 @@ For each of the four, listening to all seven of **Set 1** (A to G), answer:
 - **Why**, in one sentence. Say what it is about the sound, not what the scale is called.
 - **At its worst.** If that situation is at its most extreme and most painful, does your answer change? To which letter, and why.
 
+- **And if it changes, how does it change?** This is the question we most want a professional to settle, so it gets its own answer. When a situation goes to its worst, does the music want a *darker version of the same thing*, the same colour deepened, or does it want to *break to somewhere else entirely*, a different quality rather than a lower one? One of the theories under test says the first, that each kind of character has a pair of scales and extremity picks the darker of the pair. Something in our early results says the second, that extremity jumps to a different place altogether and the pair is the wrong idea. You are better placed to answer that than anyone, and either answer is useful. If it depends on which situation, say which and why.
+
 And one question a composer can answer that nobody else can:
 
 - **Would you set the cue in it, or pass through it?** For your chosen letter, would you write the cue in that scale as its home, or would you touch it and leave? This matters because the theory assumes the scale is where the cue lives, and if that is not how you work, the theory is asking the wrong question.
@@ -101,5 +103,6 @@ If enough people do this, it becomes the first piece of evidence in the project 
 | Notation, Set 1 | `scores/SET-1-all-scores.pdf` (do not open before Part 4) |
 | Notation, Set 2 | `scores/SET-2-all-scores.pdf` (do not open before Part 4) |
 | Response form | `RESPONSE-FORM.md` |
+| For music therapists | `THERAPIST-SECTION.md`, an additional set of questions |
 
 The melody, tempo, key, register, pedal and tone are identical in all fourteen files. If you hear a difference in any of those, tell us, because it would be a fault in the test.

@@ -1,0 +1,161 @@
+{
+  "jurisdiction": {
+    "country_name": "Switzerland",
+    "iso2": "CH",
+    "iso3": "CHE",
+    "numeric_code": "756",
+    "continent": "Europe",
+    "region": "Western Europe",
+    "sub_region": "EFTA",
+    "sovereign_status": "UN Member State",
+    "capital": "Bern",
+    "currency": "CHF"
+  },
+  "supervisory_authorities": {
+    "dpa": "Federal Data Protection and Information Commissioner (FDPIC)",
+    "csirt": "National Cyber Security Centre (NCSC Switzerland)",
+    "crypto_agency": "State Secretariat for Economic Affairs (SECO)"
+  },
+  "statutory_frameworks": [
+    {
+      "official_title": "Federal Act on Information Security (Information Security Act, ISA / ISG)",
+      "short_name": "Switzerland ISA",
+      "statute_type": "Act",
+      "legal_citation": "SR 128",
+      "enactment_date": "2020-12-18",
+      "effective_date": "2024-01-01",
+      "enforcement_deadline": "2025-01-01",
+      "supervisory_authority": "National Cyber Security Centre (NCSC Switzerland)",
+      "status": "In Force",
+      "metadata": {
+        "reporting": "Mandatory cyber incident reporting for operators of critical infrastructure within 24 hours"
+      }
+    },
+    {
+      "official_title": "Federal Act on Data Protection (revised FADP / revDSG)",
+      "short_name": "Switzerland revFADP",
+      "statute_type": "Act",
+      "legal_citation": "SR 235.1",
+      "enactment_date": "2020-09-25",
+      "effective_date": "2023-09-01",
+      "enforcement_deadline": "2023-09-01",
+      "supervisory_authority": "Federal Data Protection and Information Commissioner (FDPIC)",
+      "status": "In Force",
+      "metadata": {
+        "adequacy": "Recognized as adequate by European Commission"
+      }
+    }
+  ],
+  "cyber_security_mandates": [
+    {
+      "target_domain": "Critical Infrastructure & Federal IT Systems",
+      "baseline_standard_ref": "Swiss Cyber Risk Minimal Standard / ISO/IEC 27001 / IEC 62443",
+      "mandatory_certifications": "Federal Office for National Economic Supply (FONES) sector assessments",
+      "default_password_ban": true,
+      "sbom_required": true,
+      "cbom_required": false,
+      "patch_management_sla_days": 30,
+      "details": "Under ISA, operators of critical infrastructure (energy, transport, health, telecom) must implement minimum cybersecurity baselines and report security incidents to NCSC within 24 hours."
+    }
+  ],
+  "data_privacy_sovereignty": [
+    {
+      "primary_privacy_law": "Data Protection and Privacy Act of Switzerland",
+      "supervisory_dpa": "Federal Data Protection and Information Commissioner (FDPIC)",
+      "data_localization_required": false,
+      "localization_scope": "Sector-specific financial and government data localization where applicable.",
+      "cross_border_transfer_mechanism": "Adequacy, Contractual Guarantees, DPA Authorization",
+      "sensitive_data_categories": [
+        "Biometrics",
+        "Health Data",
+        "Criminal Records"
+      ]
+    }
+  ],
+  "cryptography_controls": [
+    {
+      "crypto_import_license_required": false,
+      "crypto_export_controls": "National Customs & Dual-Use Export Control Regime.",
+      "mandatory_government_access_or_escrow": false,
+      "approved_encryption_standards": "AES-256, FIPS 140-2/3, ISO/IEC 18033",
+      "post_quantum_mandate": "Monitoring international standard bodies (ISO/IEC JTC 1 / ITU-T).",
+      "regulatory_agency": "State Secretariat for Economic Affairs (SECO)"
+    }
+  ],
+  "incident_disclosure_rules": [
+    {
+      "breach_type": "Critical Infrastructure Cyber Attack",
+      "notification_timeline_hours": 24,
+      "second_stage_timeline_hours": null,
+      "final_report_timeline_days": 14,
+      "recipient_authorities": [
+        "National Cyber Security Centre (NCSC Switzerland)"
+      ],
+      "ransomware_payment_reporting": true,
+      "threshold_trigger_definition": "Article 73a ISA: Cyber attacks causing physical damage, critical service interruption, or extortion."
+    },
+    {
+      "breach_type": "Personal Data Breach",
+      "notification_timeline_hours": 72,
+      "second_stage_timeline_hours": null,
+      "final_report_timeline_days": 30,
+      "recipient_authorities": [
+        "Federal Data Protection and Information Commissioner (FDPIC)"
+      ],
+      "ransomware_payment_reporting": false,
+      "threshold_trigger_definition": "Article 24 revFADP: Data security breach leading to a high risk for the personality or fundamental rights of the data subject."
+    }
+  ],
+  "penalty_structures": [
+    {
+      "max_administrative_fine_fixed": 250000.0,
+      "fine_currency": "CHF",
+      "max_turnover_percentage": 0.0,
+      "criminal_liability_directors": true,
+      "market_withdrawal_sanctions": false
+    }
+  ],
+  "sector_applicability": [
+    {
+      "sector": "Energy",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Generation, transmission, distribution, and pipeline SCADA integrity."
+    },
+    {
+      "sector": "Water",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Water treatment, distribution telemetry, and environmental control."
+    },
+    {
+      "sector": "Healthcare",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Hospital systems, medical device cybersecurity, and EHR data protection."
+    },
+    {
+      "sector": "Financial Services",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Payment systems, banking core networks, and cyber resilience audits."
+    },
+    {
+      "sector": "Telecom",
+      "scope_classification": "Essential Infrastructure",
+      "specific_obligations": "Public telecommunications networks, submarine cables, and 5G security."
+    },
+    {
+      "sector": "OT/Industrial",
+      "scope_classification": "Industrial Manufacturing",
+      "specific_obligations": "Machinery safety, industrial robotics, PLC programming, and safety instrumented systems."
+    },
+    {
+      "sector": "Transport",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Rail signaling, air traffic management, maritime port terminals, and connected vehicles."
+    }
+  ],
+  "enrichment_metadata": {
+    "iterations_completed": 4,
+    "last_enriched_at": "2026-09-12T02:14:21.049138+00:00",
+    "enrichment_pipeline": "Valyu-Perplexity-MultiAgent-v4",
+    "enrichment_status": "DEEP_SPECIALIZED_ENRICHMENT_COMPLETE"
+  }
+}

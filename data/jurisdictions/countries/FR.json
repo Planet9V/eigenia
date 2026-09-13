@@ -1,0 +1,154 @@
+{
+  "jurisdiction": {
+    "country_name": "France",
+    "iso2": "FR",
+    "iso3": "FRA",
+    "numeric_code": "250",
+    "continent": "Europe",
+    "region": "Western Europe",
+    "sub_region": "European Union",
+    "sovereign_status": "UN Member State",
+    "capital": "Paris",
+    "currency": "EUR"
+  },
+  "supervisory_authorities": {
+    "dpa": "Commission Nationale de l'Informatique et des Libertes (CNIL)",
+    "csirt": "CERT-FR / Agence nationale de la securite des systemes d'information (ANSSI)",
+    "crypto_agency": "ANSSI"
+  },
+  "statutory_frameworks": [
+    {
+      "official_title": "Loi de Programmation Militaire (LPM) and Transposition of Directive (EU) 2022/2555 (NIS2)",
+      "short_name": "France LPM / NIS2",
+      "statute_type": "Act",
+      "legal_citation": "Loi n 2013-1168 / Code de la defense L. 1332-1",
+      "enactment_date": "2013-12-18",
+      "effective_date": "2024-10-18",
+      "enforcement_deadline": "2025-01-01",
+      "supervisory_authority": "Agence nationale de la securite des systemes d'information (ANSSI)",
+      "status": "In Force",
+      "metadata": {
+        "oiv_scope": "Operateurs d'Importance Vitale (OIV) and Operateurs de Services Essentiels (OSE)"
+      }
+    },
+    {
+      "official_title": "Loi n 78-17 relative a l'informatique, aux fichiers et aux libertes as amended (Data Protection Act / RGPD)",
+      "short_name": "France Informatique et Libertes",
+      "statute_type": "Act",
+      "legal_citation": "Loi n 78-17",
+      "enactment_date": "1978-01-06",
+      "effective_date": "2018-05-25",
+      "enforcement_deadline": "2018-05-25",
+      "supervisory_authority": "Commission Nationale de l'Informatique et des Libertes (CNIL)",
+      "status": "In Force",
+      "metadata": {
+        "gdpr_harmonization": "Harmonized with European Regulation (EU) 2016/679"
+      }
+    }
+  ],
+  "cyber_security_mandates": [
+    {
+      "target_domain": "Operateurs d'Importance Vitale (OIV) and Regulated Cloud Services",
+      "baseline_standard_ref": "ANSSI Security Rules for Vital Operators / SecNumCloud / CSPN / IEC 62443",
+      "mandatory_certifications": "ANSSI Qualification de Securite de Premier Niveau (CSPN) or Common Criteria EAL3+/EAL4+; SecNumCloud 3.2 for sovereign cloud",
+      "default_password_ban": true,
+      "sbom_required": true,
+      "cbom_required": true,
+      "patch_management_sla_days": 14,
+      "details": "OIVs must deploy ANSSI-qualified intrusion detection probes on vital sub-networks, enforce physical and logical network separation, and restrict remote maintenance."
+    }
+  ],
+  "data_privacy_sovereignty": [
+    {
+      "primary_privacy_law": "Regulation (EU) 2016/679 (GDPR)",
+      "supervisory_dpa": "Commission Nationale de l'Informatique et des Libertes (CNIL)",
+      "data_localization_required": false,
+      "localization_scope": "No general localization within EU/EEA. Transfers outside EEA strictly conditional under Chapter V.",
+      "cross_border_transfer_mechanism": "Adequacy Decisions (Art 45), Standard Contractual Clauses (SCCs, Art 46), Binding Corporate Rules (BCRs, Art 47), Derogations (Art 49)",
+      "sensitive_data_categories": [
+        "Biometrics",
+        "Genetic Data",
+        "Health Data",
+        "Trade Union Membership",
+        "Political Opinions",
+        "Sexual Orientation",
+        "Criminal Convictions"
+      ]
+    }
+  ],
+  "cryptography_controls": [
+    {
+      "crypto_import_license_required": false,
+      "crypto_export_controls": "EU Dual-Use Regulation (EU) 2021/821 Annex I Category 5 Part 2 (Information Security). Wassenaar Arrangement member.",
+      "mandatory_government_access_or_escrow": false,
+      "approved_encryption_standards": "AES-256, RSA >= 3072, ECC (NIST P-256/P-384, Ed25519), BSI TR-02102-1, SOG-IS Agreed Cryptographic Mechanisms",
+      "post_quantum_mandate": "BSI Technical Guideline TR-02102-1 and ANSSI PQC migration recommendation: hybrid post-quantum key encapsulation (ML-KEM / Kyber) required for long-term secure communications by 2026-2030.",
+      "regulatory_agency": "ANSSI"
+    }
+  ],
+  "incident_disclosure_rules": [
+    {
+      "breach_type": "Major Incident affecting Critical Operator or Essential Entity",
+      "notification_timeline_hours": 24,
+      "second_stage_timeline_hours": 72,
+      "final_report_timeline_days": 30,
+      "recipient_authorities": [
+        "ANSSI / CERT-FR"
+      ],
+      "ransomware_payment_reporting": true,
+      "threshold_trigger_definition": "Code de la defense L. 1332-6-1: Any security incident affecting the operational capability or integrity of vital information systems."
+    }
+  ],
+  "penalty_structures": [
+    {
+      "max_administrative_fine_fixed": 10000000.0,
+      "fine_currency": "EUR",
+      "max_turnover_percentage": 2.0,
+      "criminal_liability_directors": true,
+      "market_withdrawal_sanctions": true
+    }
+  ],
+  "sector_applicability": [
+    {
+      "sector": "Energy",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Generation, transmission, distribution, and pipeline SCADA integrity."
+    },
+    {
+      "sector": "Water",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Water treatment, distribution telemetry, and environmental control."
+    },
+    {
+      "sector": "Healthcare",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Hospital systems, medical device cybersecurity, and EHR data protection."
+    },
+    {
+      "sector": "Financial Services",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Payment systems, banking core networks, and cyber resilience audits."
+    },
+    {
+      "sector": "Telecom",
+      "scope_classification": "Essential Infrastructure",
+      "specific_obligations": "Public telecommunications networks, submarine cables, and 5G security."
+    },
+    {
+      "sector": "OT/Industrial",
+      "scope_classification": "Industrial Manufacturing",
+      "specific_obligations": "Machinery safety, industrial robotics, PLC programming, and safety instrumented systems."
+    },
+    {
+      "sector": "Transport",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Rail signaling, air traffic management, maritime port terminals, and connected vehicles."
+    }
+  ],
+  "enrichment_metadata": {
+    "iterations_completed": 4,
+    "last_enriched_at": "2026-09-12T02:14:21.047038+00:00",
+    "enrichment_pipeline": "Valyu-Perplexity-MultiAgent-v4",
+    "enrichment_status": "DEEP_SPECIALIZED_ENRICHMENT_COMPLETE"
+  }
+}

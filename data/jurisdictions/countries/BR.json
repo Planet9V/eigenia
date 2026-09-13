@@ -1,0 +1,150 @@
+{
+  "jurisdiction": {
+    "country_name": "Brazil",
+    "iso2": "BR",
+    "iso3": "BRA",
+    "numeric_code": "076",
+    "continent": "South America",
+    "region": "South America",
+    "sub_region": "Mercosur",
+    "sovereign_status": "UN Member State",
+    "capital": "Brasilia",
+    "currency": "BRL"
+  },
+  "supervisory_authorities": {
+    "dpa": "Autoridade Nacional de Protecao de Dados (ANPD)",
+    "csirt": "Centro de Prevencao, Tratamento e Resposta a Incidentes Ciberneticos (CTIR Gov)",
+    "crypto_agency": "Agencia Nacional de Telecomunicacoes (ANATEL)"
+  },
+  "statutory_frameworks": [
+    {
+      "official_title": "Lei Geral de Protecao de Dados Pessoais (LGPD)",
+      "short_name": "Brazil LGPD",
+      "statute_type": "Act",
+      "legal_citation": "Lei No 13.709/2018",
+      "enactment_date": "2018-08-14",
+      "effective_date": "2020-09-18",
+      "enforcement_deadline": "2021-08-01",
+      "supervisory_authority": "Autoridade Nacional de Protecao de Dados (ANPD)",
+      "status": "In Force",
+      "metadata": {
+        "gdpr_alignment": "Structured around European GDPR architecture"
+      }
+    },
+    {
+      "official_title": "ANATEL Resolution No. 740: Regulation on Cybersecurity for Telecommunications Networks",
+      "short_name": "ANATEL Cyber Reg",
+      "statute_type": "Regulation",
+      "legal_citation": "Resolucao No 740/2020",
+      "enactment_date": "2020-12-21",
+      "effective_date": "2021-01-04",
+      "enforcement_deadline": "2024-01-01",
+      "supervisory_authority": "Agencia Nacional de Telecomunicacoes (ANATEL)",
+      "status": "In Force",
+      "metadata": {
+        "cyber_certification": "Mandatory cybersecurity compliance certification for telecommunications and IoT devices"
+      }
+    }
+  ],
+  "cyber_security_mandates": [
+    {
+      "target_domain": "Telecommunications & Connected IoT Assets",
+      "baseline_standard_ref": "ANATEL Act 77/2021 (Cybersecurity Requirements for Telecom Equipment) / ISO/IEC 27001",
+      "mandatory_certifications": "ANATEL Homologation & Cybersecurity Certificate of Conformity issued by Designated Certification Body (OCD)",
+      "default_password_ban": true,
+      "sbom_required": true,
+      "cbom_required": false,
+      "patch_management_sla_days": 30,
+      "details": "Act 77/2021 mandates no hardcoded passwords, encrypted communication channels, secure boot mechanisms, and prompt vulnerability remediation."
+    }
+  ],
+  "data_privacy_sovereignty": [
+    {
+      "primary_privacy_law": "Data Protection and Privacy Act of Brazil",
+      "supervisory_dpa": "Autoridade Nacional de Protecao de Dados (ANPD)",
+      "data_localization_required": false,
+      "localization_scope": "Sector-specific financial and government data localization where applicable.",
+      "cross_border_transfer_mechanism": "Adequacy, Contractual Guarantees, DPA Authorization",
+      "sensitive_data_categories": [
+        "Biometrics",
+        "Health Data",
+        "Criminal Records"
+      ]
+    }
+  ],
+  "cryptography_controls": [
+    {
+      "crypto_import_license_required": false,
+      "crypto_export_controls": "National Customs & Dual-Use Export Control Regime.",
+      "mandatory_government_access_or_escrow": false,
+      "approved_encryption_standards": "AES-256, FIPS 140-2/3, ISO/IEC 18033",
+      "post_quantum_mandate": "Monitoring international standard bodies (ISO/IEC JTC 1 / ITU-T).",
+      "regulatory_agency": "Agencia Nacional de Telecomunicacoes (ANATEL)"
+    }
+  ],
+  "incident_disclosure_rules": [
+    {
+      "breach_type": "Security Incident involving Personal Data",
+      "notification_timeline_hours": 72,
+      "second_stage_timeline_hours": null,
+      "final_report_timeline_days": 30,
+      "recipient_authorities": [
+        "Autoridade Nacional de Protecao de Dados (ANPD)"
+      ],
+      "ransomware_payment_reporting": false,
+      "threshold_trigger_definition": "Incidents that may create relevant risk or damage to data subjects (ANPD Resolution CD/ANPD No. 15/2024 requires notification within 3 working days)."
+    }
+  ],
+  "penalty_structures": [
+    {
+      "max_administrative_fine_fixed": 50000000.0,
+      "fine_currency": "BRL",
+      "max_turnover_percentage": 2.0,
+      "criminal_liability_directors": false,
+      "market_withdrawal_sanctions": true
+    }
+  ],
+  "sector_applicability": [
+    {
+      "sector": "Energy",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Generation, transmission, distribution, and pipeline SCADA integrity."
+    },
+    {
+      "sector": "Water",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Water treatment, distribution telemetry, and environmental control."
+    },
+    {
+      "sector": "Healthcare",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Hospital systems, medical device cybersecurity, and EHR data protection."
+    },
+    {
+      "sector": "Financial Services",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Payment systems, banking core networks, and cyber resilience audits."
+    },
+    {
+      "sector": "Telecom",
+      "scope_classification": "Essential Infrastructure",
+      "specific_obligations": "Public telecommunications networks, submarine cables, and 5G security."
+    },
+    {
+      "sector": "OT/Industrial",
+      "scope_classification": "Industrial Manufacturing",
+      "specific_obligations": "Machinery safety, industrial robotics, PLC programming, and safety instrumented systems."
+    },
+    {
+      "sector": "Transport",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Rail signaling, air traffic management, maritime port terminals, and connected vehicles."
+    }
+  ],
+  "enrichment_metadata": {
+    "iterations_completed": 4,
+    "last_enriched_at": "2026-09-12T02:14:21.072501+00:00",
+    "enrichment_pipeline": "Valyu-Perplexity-MultiAgent-v4",
+    "enrichment_status": "DEEP_SPECIALIZED_ENRICHMENT_COMPLETE"
+  }
+}

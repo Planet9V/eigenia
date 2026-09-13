@@ -1,0 +1,1190 @@
+import os
+
+out_dir = '/Users/jimmcknney/jim_private/eigenia/assets/backgrounds/extracted_loops'
+os.makedirs(out_dir, exist_ok=True)
+
+# Shared math & helper functions
+common_helpers = """
+  function rng(seed) {
+    let s = seed;
+    return () => (s = (s * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
+  }
+
+  function vnoise(x, y, seed) {
+    const hh = (a, b) => { const n = Math.sin(a * 127.1 + b * 311.7 + seed * 47.3) * 43758.5453; return n - Math.floor(n); };
+    const xi = Math.floor(x), yi = Math.floor(y), xf = x - xi, yf = y - yi;
+    const u = xf * xf * (3 - 2 * xf), v = yf * yf * (3 - 2 * yf);
+    return (hh(xi, yi) * (1 - u) + hh(xi + 1, yi) * u) * (1 - v) + (hh(xi, yi + 1) * (1 - u) + hh(xi + 1, yi + 1) * u) * v;
+  }
+
+  function fbm(x, y, seed) {
+    let v = 0, a = 0.5, f = 1;
+    for (let i = 0; i < 4; i++) { v += a * vnoise(x * f, y * f, seed + i * 11); a *= 0.5; f *= 2; }
+    return v;
+  }
+
+  function rgba(hex, a) {
+    const n = parseInt(hex.slice(1), 16);
+    return 'rgba(' + (n >> 16) + ',' + ((n >> 8) & 255) + ',' + (n & 255) + ',' + a + ')';
+  }
+
+  function vignette(ctx, W, H, inner) {
+    const g = ctx.createRadialGradient(W / 2, H / 2, H * inner, W / 2, H / 2, H * 1.02);
+    g.addColorStop(0, 'rgba(11,12,14,0)');
+    g.addColorStop(1, 'rgba(11,12,14,1)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, H);
+  }
+"""
+
+css_styles = """
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #07080a;
+      color: #BEC3CB;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "JetBrains Mono", monospace;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      padding: 24px;
+    }
+    .stage-container {
+      width: 100%;
+      max-width: 1440px;
+      background: #101216;
+      border: 1px solid #23262c;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+    }
+    .header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      background: #0e1014;
+      border-bottom: 1px solid #23262c;
+      font-size: 13px;
+    }
+    .badge {
+      background: #E05A10;
+      color: #0B0C0E;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 3px;
+    }
+    .title {
+      color: #e8e4dc;
+      font-weight: 600;
+      font-size: 15px;
+      margin-left: 8px;
+    }
+    .subtitle {
+      color: #6b6f76;
+      font-size: 12px;
+      margin-left: 12px;
+    }
+    .controls {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+    }
+    .canvas-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1440 / 560;
+      background: #0B0C0E;
+    }
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .hud-overlay {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      color: rgba(255,255,255,0.4);
+      pointer-events: none;
+    }
+    .info-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 24px;
+      background: #0a0b0d;
+      border-top: 1px solid #1a1d23;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+      color: #6b6f76;
+    }
+    .btn {
+      background: #181b22;
+      color: #d1d5db;
+      border: 1px solid #2e333d;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 11px;
+      transition: all 0.2s;
+    }
+    .btn:hover { background: #232833; color: #fff; border-color: #4b5563; }
+    .btn.active { background: #E05A10; color: #000; border-color: #E05A10; font-weight: 700; }
+"""
+
+# ==============================================================================
+# 1. LOOP 1: DIGITAL TWIN SWEEP
+# ==============================================================================
+loop1_js = """
+  const W = 1440, H = 560;
+  const canvas = document.getElementById('loopCanvas');
+  const ctx = canvas.getContext('2d');
+
+  let accent = '#E05A10';
+  let loopSeconds = 12;
+  let spotlightReach = 9;
+  let motion = 7;
+  let isPaused = false;
+  let pauseTime = 0;
+  let t0 = performance.now();
+
+  const r = rng(20260812);
+  const pts = [];
+  const centers = [];
+  for (let c = 0; c < 54; c++) {
+    const cx = 60 + r() * (W - 120), cy = 40 + r() * (H - 80);
+    centers.push([cx, cy]);
+    const n = 8 + (r() * 18) | 0;
+    for (let i = 0; i < n; i++) {
+      const a = r() * 6.283, rad = Math.pow(r(), 0.6) * (24 + r() * 40);
+      pts.push({ x: cx + Math.cos(a) * rad, y: cy + Math.sin(a) * rad * 0.8, w: r() * 6.283 });
+    }
+  }
+
+  const pairs = [];
+  for (let i = 0; i < pts.length; i++) {
+    for (let j = i + 1; j < Math.min(pts.length, i + 24); j++) {
+      const d = Math.hypot(pts[j].x - pts[i].x, pts[j].y - pts[i].y);
+      if (d < 56) pairs.push([i, j, d]);
+    }
+  }
+
+  const inner = centers.filter(c => c[0] > 150 && c[0] < W - 150 && c[1] > 100 && c[1] < H - 100);
+  const spread = [];
+  for (let minD = 380; minD >= 120 && spread.length < 5; minD -= 40) {
+    spread.length = 0;
+    for (const c of inner) {
+      if (spread.every(s => Math.hypot(s[0] - c[0], s[1] - c[1]) > minD)) spread.push(c);
+      if (spread.length === 5) break;
+    }
+  }
+  while (spread.length < 5 && inner.length) spread.push(inner[spread.length % inner.length]);
+  const stops = spread.slice(0, 5);
+
+  function draw(ph) {
+    ctx.setTransform(canvas.width / W, 0, 0, canvas.height / H, 0, 0);
+    ctx.fillStyle = '#0B0C0E';
+    ctx.fillRect(0, 0, W, H);
+    ctx.font = '11px "JetBrains Mono", monospace';
+
+    const th = ph * 6.283, acc = accent;
+    const S = stops, n = S.length;
+    const seg = ph * n, k = Math.floor(seg), u = seg - k;
+    const from = S[k % n], to = S[(k + 1) % n];
+    const travel = 0.45;
+    const moving = u < travel;
+    const e = moving ? (t => t * t * (3 - 2 * t))(u / travel) : 1;
+    const dwell = moving ? 0 : (u - travel) / (1 - travel);
+    const sx = from[0] + (to[0] - from[0]) * e, sy = from[1] + (to[1] - from[1]) * e;
+    const base = spotlightReach;
+    const reach = base * (moving ? 0.72 : 1 + 0.1 * Math.sin(dwell * 12.566));
+    const drift = motion;
+
+    const P = pts.map(p => {
+      const s1 = th + p.w, s2 = th + p.x * 0.006 + p.y * 0.004;
+      const x = p.x + drift * Math.sin(s1) + drift * 0.8 * Math.sin(s2);
+      const y = p.y + drift * 0.7 * Math.cos(s1) + drift * 0.6 * Math.cos(s2 * 1.0 + 1.1);
+      return { x, y, g: Math.max(0, 1 - Math.hypot(x - sx, y - sy) / reach) };
+    });
+
+    const linkR = 48 + 7 * Math.sin(th);
+    ctx.lineWidth = 0.6;
+    for (const [i, j] of pairs) {
+      const a = P[i], b = P[j];
+      const d = Math.hypot(b.x - a.x, b.y - a.y);
+      if (d > linkR) continue;
+      const g = Math.max(a.g, b.g);
+      ctx.strokeStyle = g > 0.02 ? rgba(acc, 0.06 + 0.6 * g * g) : 'rgba(150,156,166,' + (0.045 + 0.08 * (1 - d / linkR)) + ')';
+      ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+    }
+
+    for (const p of P) {
+      ctx.fillStyle = p.g > 0.02 ? rgba(acc, 0.35 + 0.65 * p.g) : 'rgba(190,195,203,.42)';
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.g > 0.3 ? 1.5 + p.g : 1.1, 0, 6.3); ctx.fill();
+    }
+
+    const halo = ctx.createRadialGradient(sx, sy, 0, sx, sy, reach);
+    halo.addColorStop(0, rgba(acc, 0.1)); halo.addColorStop(1, rgba(acc, 0));
+    ctx.fillStyle = halo; ctx.fillRect(0, 0, W, H);
+    vignette(ctx, W, H, 0.34);
+
+    const R = reach * 0.86;
+    ctx.strokeStyle = rgba(acc, moving ? 0.3 : 0.6); ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.arc(sx, sy, R, 0, 6.3); ctx.stroke();
+
+    const br = R + 9;
+    ctx.strokeStyle = rgba(acc, moving ? 0.25 : 0.75); ctx.lineWidth = 1.4;
+    for (const [dx, dy] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) {
+      ctx.beginPath();
+      ctx.moveTo(sx + dx * br, sy + dy * br - dy * 9);
+      ctx.lineTo(sx + dx * br, sy + dy * br);
+      ctx.lineTo(sx + dx * br - dx * 9, sy + dy * br);
+      ctx.stroke();
+    }
+
+    if (moving) {
+      ctx.strokeStyle = rgba(acc, 0.22); ctx.setLineDash([5, 7]); ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(from[0], from[1]); ctx.lineTo(to[0], to[1]); ctx.stroke(); ctx.setLineDash([]);
+    } else {
+      for (const p of [0, 0.5]) {
+        const t = (dwell + p) % 1;
+        ctx.strokeStyle = rgba(acc, 0.45 * (1 - t));
+        ctx.lineWidth = 1.2;
+        ctx.beginPath(); ctx.arc(sx, sy, R * (0.2 + 1.5 * t), 0, 6.3); ctx.stroke();
+      }
+      const sweep = -1.571 + dwell * 6.283;
+      ctx.strokeStyle = rgba(acc, 0.5); ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(sx, sy); ctx.lineTo(sx + Math.cos(sweep) * R, sy + Math.sin(sweep) * R); ctx.stroke();
+      ctx.fillStyle = rgba(acc, 0.85);
+      ctx.fillText('ANALYSING  SUB-' + (100 + (k % n) * 7), sx + br + 12, sy - br + 12);
+      ctx.fillStyle = '#6B6F76';
+      ctx.fillText(Math.round(dwell * 100) + '%', sx + br + 12, sy - br + 30);
+    }
+
+    ctx.fillStyle = '#4A4E55';
+    ctx.fillText('fragment: 3.2 × 10⁶ nodes · sweep ' + ((k % n) + 1) + '/' + n, 22, H - 18);
+  }
+
+  let frameCount = 0, lastFpsTime = performance.now();
+  function animate(now) {
+    requestAnimationFrame(animate);
+    if (isPaused) return;
+
+    const ph = ((now - t0) / 1000 / loopSeconds) % 1;
+    draw(ph);
+
+    document.getElementById('phaseLabel').textContent = ph.toFixed(2);
+    frameCount++;
+    if (now - lastFpsTime >= 1000) {
+      const fps = Math.round((frameCount * 1000) / (now - lastFpsTime));
+      document.getElementById('fpsHud').textContent = fps + ' FPS · 2880×1120 RETINA';
+      frameCount = 0;
+      lastFpsTime = now;
+    }
+  }
+  requestAnimationFrame(animate);
+
+  const playPauseBtn = document.getElementById('playPauseBtn');
+  playPauseBtn.addEventListener('click', () => {
+    isPaused = !isPaused;
+    if (isPaused) {
+      pauseTime = performance.now();
+      playPauseBtn.textContent = 'Play';
+      playPauseBtn.classList.add('active');
+    } else {
+      t0 += (performance.now() - pauseTime);
+      playPauseBtn.textContent = 'Pause';
+      playPauseBtn.classList.remove('active');
+    }
+  });
+
+  const durSlider = document.getElementById('durSlider');
+  durSlider.addEventListener('input', (e) => {
+    loopSeconds = parseFloat(e.target.value);
+    document.getElementById('durLabel').textContent = loopSeconds + 's';
+  });
+
+  document.querySelectorAll('[data-color]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-color]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      accent = btn.getAttribute('data-color');
+    });
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.code === 'Space') {
+      e.preventDefault();
+      playPauseBtn.click();
+    }
+  });
+"""
+
+html_1 = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>OXOT Loop 1 — Digital Twin Search Sweep (100% Seamless)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>{css_styles}</style>
+</head>
+<body>
+  <div class="stage-container">
+    <div class="header-bar">
+      <div style="display: flex; align-items: center;">
+        <span class="badge">L1</span>
+        <span class="title">Digital Twin — Search Sweep</span>
+        <span class="subtitle">Drifting topological network · spotlight searches 5 clusters · 100% periodic loop</span>
+      </div>
+      <div class="controls">
+        <button class="btn" id="playPauseBtn">Pause</button>
+        <span>Loop: <strong id="durLabel">12s</strong></span>
+        <input type="range" id="durSlider" min="4" max="24" step="1" value="12" style="accent-color:#E05A10; cursor:pointer;">
+        <span>φ: <strong id="phaseLabel" style="color:#E05A10; min-width:38px; display:inline-block;">0.00</strong></span>
+      </div>
+    </div>
+    <div class="canvas-wrapper">
+      <canvas id="loopCanvas" width="2880" height="1120"></canvas>
+      <div class="hud-overlay" id="fpsHud">60 FPS · 2880×1120 RETINA</div>
+    </div>
+    <div class="info-footer">
+      <div>
+        <span>Accent: </span>
+        <button class="btn active" data-color="#E05A10">Dutch Orange (#E05A10)</button>
+        <button class="btn" data-color="#FF7A1A">Bright Orange (#FF7A1A)</button>
+        <button class="btn" data-color="#5FB8C9">Electric Cyan (#5FB8C9)</button>
+        <button class="btn" data-color="#D9A441">Fiduciary Amber (#D9A441)</button>
+      </div>
+      <div>100% Mathematically Seamless (φ 0.00 ≡ φ 1.00)</div>
+    </div>
+  </div>
+  <script>
+{common_helpers}
+{loop1_js}
+  </script>
+</body>
+</html>
+"""
+
+# ==============================================================================
+# 2. LOOP 2: ISOLINE FIELD (DRIFTING LEVELS)
+# ==============================================================================
+loop2_js = """
+  const W = 1440, H = 560, step = 6;
+  const canvas = document.getElementById('loopCanvas');
+  const ctx = canvas.getContext('2d');
+
+  let accent = '#E05A10';
+  let loopSeconds = 12;
+  let isPaused = false;
+  let pauseTime = 0;
+  let t0 = performance.now();
+
+  const levels = 20;
+  const cols = Math.ceil(W / step), rows = Math.ceil(H / step);
+  const field = new Float32Array((cols + 1) * (rows + 1));
+  for (let j = 0; j <= rows; j++) {
+    for (let i = 0; i <= cols; i++) {
+      field[j * (cols + 1) + i] = fbm(i * step / W * 3.1, j * step / H * 1.9, 9);
+    }
+  }
+  const at = (i, j) => field[j * (cols + 1) + i];
+
+  function draw(ph) {
+    ctx.setTransform(canvas.width / W, 0, 0, canvas.height / H, 0, 0);
+    ctx.fillStyle = '#0B0C0E';
+    ctx.fillRect(0, 0, W, H);
+    ctx.font = '11px "JetBrains Mono", monospace';
+
+    const th = ph * 6.283, acc = accent;
+
+    for (let l = 0; l < levels; l++) {
+      const t = ((l + ph) % levels) / levels;
+      const hot = Math.abs(t - 0.55) < 0.03;
+      ctx.strokeStyle = hot ? rgba(acc, 0.85) : 'rgba(186,192,201,' + (0.09 + 0.15 * (1 - Math.abs(t - 0.5) * 2)) + ')';
+      ctx.lineWidth = hot ? 1.6 : 0.7;
+      ctx.beginPath();
+      for (let j = 0; j < rows; j++) {
+        for (let i = 0; i < cols; i++) {
+          const a = at(i, j), b = at(i + 1, j), c = at(i + 1, j + 1), d = at(i, j + 1);
+          const x0 = i * step, y0 = j * step, sg = [];
+          if ((a < t) !== (b < t)) sg.push([x0 + step * (t - a) / (b - a), y0]);
+          if ((b < t) !== (c < t)) sg.push([x0 + step, y0 + step * (t - b) / (c - b)]);
+          if ((c < t) !== (d < t)) sg.push([x0 + step * (1 - (t - d) / (c - d)), y0 + step]);
+          if ((d < t) !== (a < t)) sg.push([x0, y0 + step * (t - a) / (d - a)]);
+          if (sg.length >= 2) {
+            ctx.moveTo(sg[0][0], sg[0][1]);
+            ctx.lineTo(sg[1][0], sg[1][1]);
+          }
+        }
+      }
+      ctx.stroke();
+    }
+
+    const sx = W / 2 + W * 0.3 * Math.cos(th), sy = H / 2 + H * 0.24 * Math.sin(2 * th);
+    const halo = ctx.createRadialGradient(sx, sy, 0, sx, sy, 260);
+    halo.addColorStop(0, rgba(acc, 0.07)); halo.addColorStop(1, rgba(acc, 0));
+    ctx.fillStyle = halo; ctx.fillRect(0, 0, W, H);
+
+    vignette(ctx, W, H, 0.36);
+
+    ctx.fillStyle = '#4A4E55';
+    ctx.fillText('scalar field · ' + levels + ' isolines (phase-cyclic)', 22, H - 18);
+  }
+
+  let frameCount = 0, lastFpsTime = performance.now();
+  function animate(now) {
+    requestAnimationFrame(animate);
+    if (isPaused) return;
+
+    const ph = ((now - t0) / 1000 / loopSeconds) % 1;
+    draw(ph);
+
+    document.getElementById('phaseLabel').textContent = ph.toFixed(2);
+    frameCount++;
+    if (now - lastFpsTime >= 1000) {
+      const fps = Math.round((frameCount * 1000) / (now - lastFpsTime));
+      document.getElementById('fpsHud').textContent = fps + ' FPS · 2880×1120 RETINA';
+      frameCount = 0;
+      lastFpsTime = now;
+    }
+  }
+  requestAnimationFrame(animate);
+
+  const playPauseBtn = document.getElementById('playPauseBtn');
+  playPauseBtn.addEventListener('click', () => {
+    isPaused = !isPaused;
+    if (isPaused) {
+      pauseTime = performance.now();
+      playPauseBtn.textContent = 'Play';
+      playPauseBtn.classList.add('active');
+    } else {
+      t0 += (performance.now() - pauseTime);
+      playPauseBtn.textContent = 'Pause';
+      playPauseBtn.classList.remove('active');
+    }
+  });
+
+  const durSlider = document.getElementById('durSlider');
+  durSlider.addEventListener('input', (e) => {
+    loopSeconds = parseFloat(e.target.value);
+    document.getElementById('durLabel').textContent = loopSeconds + 's';
+  });
+
+  document.querySelectorAll('[data-color]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-color]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      accent = btn.getAttribute('data-color');
+    });
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.code === 'Space') {
+      e.preventDefault();
+      playPauseBtn.click();
+    }
+  });
+"""
+
+html_2 = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>OXOT Loop 2 — Isoline Field Drifting Levels (100% Seamless)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>{css_styles}</style>
+</head>
+<body>
+  <div class="stage-container">
+    <div class="header-bar">
+      <div style="display: flex; align-items: center;">
+        <span class="badge">L2</span>
+        <span class="title">Isoline Field — Drifting Levels</span>
+        <span class="subtitle">Marching-squares scalar potential field · active critical contour · 100% periodic loop</span>
+      </div>
+      <div class="controls">
+        <button class="btn" id="playPauseBtn">Pause</button>
+        <span>Loop: <strong id="durLabel">12s</strong></span>
+        <input type="range" id="durSlider" min="4" max="24" step="1" value="12" style="accent-color:#E05A10; cursor:pointer;">
+        <span>φ: <strong id="phaseLabel" style="color:#E05A10; min-width:38px; display:inline-block;">0.00</strong></span>
+      </div>
+    </div>
+    <div class="canvas-wrapper">
+      <canvas id="loopCanvas" width="2880" height="1120"></canvas>
+      <div class="hud-overlay" id="fpsHud">60 FPS · 2880×1120 RETINA</div>
+    </div>
+    <div class="info-footer">
+      <div>
+        <span>Accent: </span>
+        <button class="btn active" data-color="#E05A10">Dutch Orange (#E05A10)</button>
+        <button class="btn" data-color="#FF7A1A">Bright Orange (#FF7A1A)</button>
+        <button class="btn" data-color="#5FB8C9">Electric Cyan (#5FB8C9)</button>
+        <button class="btn" data-color="#D9A441">Fiduciary Amber (#D9A441)</button>
+      </div>
+      <div>100% Mathematically Seamless (Threshold advances 1 level / cycle)</div>
+    </div>
+  </div>
+  <script>
+{common_helpers}
+{loop2_js}
+  </script>
+</body>
+</html>
+"""
+
+# ==============================================================================
+# 3. LOOP 3: STREAMLINES (COMETS)
+# ==============================================================================
+loop3_js = """
+  const W = 1440, H = 560;
+  const canvas = document.getElementById('loopCanvas');
+  const ctx = canvas.getContext('2d');
+
+  let accent = '#E05A10';
+  let loopSeconds = 12;
+  let isPaused = false;
+  let pauseTime = 0;
+  let t0 = performance.now();
+
+  const r2 = rng(7717);
+  const paths = [];
+  for (let p = 0; p < 620; p++) {
+    let x = r2() * W, y = r2() * H;
+    const pts = [[x, y]];
+    for (let k = 0; k < 54; k++) {
+      const a = fbm(x / W * 2.1, y / H * 1.5, 12) * Math.PI * 3;
+      x += Math.cos(a) * 5; y += Math.sin(a) * 5;
+      if (x < -20 || x > W + 20 || y < -20 || y > H + 20) break;
+      pts.push([x, y]);
+    }
+    if (pts.length > 14) paths.push({ pts, off: r2() });
+  }
+
+  function draw(ph) {
+    ctx.setTransform(canvas.width / W, 0, 0, canvas.height / H, 0, 0);
+    ctx.fillStyle = '#0B0C0E';
+    ctx.fillRect(0, 0, W, H);
+    ctx.font = '11px "JetBrains Mono", monospace';
+
+    const acc = accent;
+    ctx.lineWidth = 0.6;
+    ctx.strokeStyle = 'rgba(186,192,201,.11)';
+    ctx.beginPath();
+    for (const p of paths) {
+      p.pts.forEach((q, i) => i ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1]));
+    }
+    ctx.stroke();
+
+    const tail = 9;
+    for (const p of paths) {
+      const n = p.pts.length;
+      const head = ((ph + p.off) % 1) * (n - 1);
+      for (let k = 0; k < tail; k++) {
+        const i = Math.floor(head) - k;
+        if (i < 1) continue;
+        const a = (1 - k / tail) * 0.75;
+        ctx.strokeStyle = rgba(acc, a * 0.9);
+        ctx.lineWidth = 1.5 * (1 - k / tail) + 0.4;
+        ctx.beginPath();
+        ctx.moveTo(p.pts[i - 1][0], p.pts[i - 1][1]);
+        ctx.lineTo(p.pts[i][0], p.pts[i][1]);
+        ctx.stroke();
+      }
+    }
+
+    vignette(ctx, W, H, 0.3);
+
+    ctx.fillStyle = '#4A4E55';
+    ctx.fillText('vector field · ' + paths.length + ' streamlines (offset-cyclic)', 22, H - 18);
+  }
+
+  let frameCount = 0, lastFpsTime = performance.now();
+  function animate(now) {
+    requestAnimationFrame(animate);
+    if (isPaused) return;
+
+    const ph = ((now - t0) / 1000 / loopSeconds) % 1;
+    draw(ph);
+
+    document.getElementById('phaseLabel').textContent = ph.toFixed(2);
+    frameCount++;
+    if (now - lastFpsTime >= 1000) {
+      const fps = Math.round((frameCount * 1000) / (now - lastFpsTime));
+      document.getElementById('fpsHud').textContent = fps + ' FPS · 2880×1120 RETINA';
+      frameCount = 0;
+      lastFpsTime = now;
+    }
+  }
+  requestAnimationFrame(animate);
+
+  const playPauseBtn = document.getElementById('playPauseBtn');
+  playPauseBtn.addEventListener('click', () => {
+    isPaused = !isPaused;
+    if (isPaused) {
+      pauseTime = performance.now();
+      playPauseBtn.textContent = 'Play';
+      playPauseBtn.classList.add('active');
+    } else {
+      t0 += (performance.now() - pauseTime);
+      playPauseBtn.textContent = 'Pause';
+      playPauseBtn.classList.remove('active');
+    }
+  });
+
+  const durSlider = document.getElementById('durSlider');
+  durSlider.addEventListener('input', (e) => {
+    loopSeconds = parseFloat(e.target.value);
+    document.getElementById('durLabel').textContent = loopSeconds + 's';
+  });
+
+  document.querySelectorAll('[data-color]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-color]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      accent = btn.getAttribute('data-color');
+    });
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.code === 'Space') {
+      e.preventDefault();
+      playPauseBtn.click();
+    }
+  });
+"""
+
+html_3 = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>OXOT Loop 3 — Streamlines Comets (100% Seamless)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>{css_styles}</style>
+</head>
+<body>
+  <div class="stage-container">
+    <div class="header-bar">
+      <div style="display: flex; align-items: center;">
+        <span class="badge">L3</span>
+        <span class="title">Streamlines — Comets Along Fixed Paths</span>
+        <span class="subtitle">Turbulent vector field · glowing particle tails · 100% periodic loop</span>
+      </div>
+      <div class="controls">
+        <button class="btn" id="playPauseBtn">Pause</button>
+        <span>Loop: <strong id="durLabel">12s</strong></span>
+        <input type="range" id="durSlider" min="4" max="24" step="1" value="12" style="accent-color:#E05A10; cursor:pointer;">
+        <span>φ: <strong id="phaseLabel" style="color:#E05A10; min-width:38px; display:inline-block;">0.00</strong></span>
+      </div>
+    </div>
+    <div class="canvas-wrapper">
+      <canvas id="loopCanvas" width="2880" height="1120"></canvas>
+      <div class="hud-overlay" id="fpsHud">60 FPS · 2880×1120 RETINA</div>
+    </div>
+    <div class="info-footer">
+      <div>
+        <span>Accent: </span>
+        <button class="btn active" data-color="#E05A10">Dutch Orange (#E05A10)</button>
+        <button class="btn" data-color="#FF7A1A">Bright Orange (#FF7A1A)</button>
+        <button class="btn" data-color="#5FB8C9">Electric Cyan (#5FB8C9)</button>
+        <button class="btn" data-color="#D9A441">Fiduciary Amber (#D9A441)</button>
+      </div>
+      <div>100% Mathematically Seamless (Particle travel = (φ + offset) mod 1)</div>
+    </div>
+  </div>
+  <script>
+{common_helpers}
+{loop3_js}
+  </script>
+</body>
+</html>
+"""
+
+# ==============================================================================
+# 4. ALL-IN-ONE TESTBENCH
+# ==============================================================================
+testbench_html = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>OXOT Cyber Digital Twin — 3 Hero Loop Backgrounds Testbench</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * {{ margin: 0; padding: 0; box-sizing: border-box; }}
+    body {{
+      background: #07080a;
+      color: #BEC3CB;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "JetBrains Mono", monospace;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 16px;
+    }}
+    .dashboard-header {{
+      width: 100%;
+      max-width: 1440px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-bottom: 1px solid #1f232b;
+      padding-bottom: 20px;
+    }}
+    .dash-title {{
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }}
+    .dash-desc {{
+      font-size: 13px;
+      color: #717680;
+      margin-top: 6px;
+      font-family: "JetBrains Mono", monospace;
+    }}
+    .global-controls {{
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+    }}
+    .plate-card {{
+      width: 100%;
+      max-width: 1440px;
+      background: #101216;
+      border: 1px solid #23262c;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 32px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+    }}
+    .plate-head {{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 24px;
+      background: #0e1014;
+      border-bottom: 1px solid #23262c;
+    }}
+    .plate-badge {{
+      background: #E05A10;
+      color: #0B0C0E;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 3px;
+    }}
+    .plate-title {{
+      font-size: 15px;
+      font-weight: 600;
+      color: #e8e4dc;
+      margin-left: 10px;
+    }}
+    .plate-rec {{
+      font-size: 12px;
+      color: #E05A10;
+      font-family: "JetBrains Mono", monospace;
+      background: rgba(224,90,16,0.1);
+      padding: 3px 10px;
+      border-radius: 4px;
+      border: 1px solid rgba(224,90,16,0.3);
+      margin-left: 16px;
+    }}
+    .canvas-box {{
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1440 / 560;
+      background: #0B0C0E;
+    }}
+    canvas {{
+      width: 100%;
+      height: 100%;
+      display: block;
+    }}
+    .hud {{
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      color: rgba(255,255,255,0.4);
+      pointer-events: none;
+    }}
+    .btn {{
+      background: #181b22;
+      color: #d1d5db;
+      border: 1px solid #2e333d;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 11px;
+      transition: all 0.2s;
+    }}
+    .btn:hover {{ background: #232833; color: #fff; border-color: #4b5563; }}
+    .btn.active {{ background: #E05A10; color: #000; border-color: #E05A10; font-weight: 700; }}
+  </style>
+</head>
+<body>
+
+  <div class="dashboard-header">
+    <div>
+      <div class="dash-title">
+        <span>OXOT Cyber Digital Twin</span>
+        <span style="color:#6b6f76; font-size:16px; font-weight:400;">/</span>
+        <span style="color:#E05A10;">3 Background Loops Master Testbench</span>
+      </div>
+      <div class="dash-desc">High-Fidelity 2880×1120 Canvas Extraction · 100% Mathematically Seamless Periodic Loops</div>
+    </div>
+    <div class="global-controls">
+      <button class="btn" id="globalPlayPause">Pause All</button>
+      <span>Loop: <strong id="globalDurLabel">12s</strong></span>
+      <input type="range" id="globalDurSlider" min="4" max="24" step="1" value="12" style="accent-color:#E05A10; cursor:pointer;">
+      <span>φ: <strong id="globalPhaseLabel" style="color:#E05A10; min-width:38px; display:inline-block;">0.00</strong></span>
+    </div>
+  </div>
+
+  <!-- Plate 1 -->
+  <div class="plate-card">
+    <div class="plate-head">
+      <div style="display:flex; align-items:center;">
+        <span class="plate-badge">L1</span>
+        <span class="plate-title">Digital Twin — Search Sweep</span>
+        <span class="plate-rec">RECOMMENDED FOR: Homepage Hero</span>
+      </div>
+      <span style="color:#6b6f76; font-size:12px; font-family:'JetBrains Mono',monospace;">Traverse, Dwell, Telemetry Sweep HUD</span>
+    </div>
+    <div class="canvas-box">
+      <canvas id="c1" width="2880" height="1120"></canvas>
+      <div class="hud" id="hud1">60 FPS</div>
+    </div>
+  </div>
+
+  <!-- Plate 2 -->
+  <div class="plate-card">
+    <div class="plate-head">
+      <div style="display:flex; align-items:center;">
+        <span class="plate-badge">L2</span>
+        <span class="plate-title">Isoline Field — Drifting Levels</span>
+        <span class="plate-rec">RECOMMENDED FOR: Product / Engineering Architecture Hero</span>
+      </div>
+      <span style="color:#6b6f76; font-size:12px; font-family:'JetBrains Mono',monospace;">20 Marching-Squares Contours · Hot Potential Ridge</span>
+    </div>
+    <div class="canvas-box">
+      <canvas id="c2" width="2880" height="1120"></canvas>
+      <div class="hud" id="hud2">60 FPS</div>
+    </div>
+  </div>
+
+  <!-- Plate 3 -->
+  <div class="plate-card">
+    <div class="plate-head">
+      <div style="display:flex; align-items:center;">
+        <span class="plate-badge">L3</span>
+        <span class="plate-title">Streamlines — Comets Along Fixed Paths</span>
+        <span class="plate-rec">RECOMMENDED FOR: Services & Sovereign Deployment Hero</span>
+      </div>
+      <span style="color:#6b6f76; font-size:12px; font-family:'JetBrains Mono',monospace;">620 Vector Streamlines · Moving Orange Comets</span>
+    </div>
+    <div class="canvas-box">
+      <canvas id="c3" width="2880" height="1120"></canvas>
+      <div class="hud" id="hud3">60 FPS</div>
+    </div>
+  </div>
+
+  <script>
+{common_helpers}
+
+  const W = 1440, H = 560;
+  const c1 = document.getElementById('c1'), ctx1 = c1.getContext('2d');
+  const c2 = document.getElementById('c2'), ctx2 = c2.getContext('2d');
+  const c3 = document.getElementById('c3'), ctx3 = c3.getContext('2d');
+
+  let accent = '#E05A10';
+  let loopSeconds = 12;
+  let isPaused = false;
+  let pauseTime = 0;
+  let t0 = performance.now();
+
+  // --- BUILD L1 ---
+  const r1 = rng(20260812);
+  const pts = [], centers = [];
+  for (let c = 0; c < 54; c++) {{
+    const cx = 60 + r1() * (W - 120), cy = 40 + r1() * (H - 80);
+    centers.push([cx, cy]);
+    const n = 8 + (r1() * 18) | 0;
+    for (let i = 0; i < n; i++) {{
+      const a = r1() * 6.283, rad = Math.pow(r1(), 0.6) * (24 + r1() * 40);
+      pts.push({{ x: cx + Math.cos(a) * rad, y: cy + Math.sin(a) * rad * 0.8, w: r1() * 6.283 }});
+    }}
+  }}
+  const pairs = [];
+  for (let i = 0; i < pts.length; i++) {{
+    for (let j = i + 1; j < Math.min(pts.length, i + 24); j++) {{
+      const d = Math.hypot(pts[j].x - pts[i].x, pts[j].y - pts[i].y);
+      if (d < 56) pairs.push([i, j, d]);
+    }}
+  }}
+  const inner = centers.filter(c => c[0] > 150 && c[0] < W - 150 && c[1] > 100 && c[1] < H - 100);
+  const spread = [];
+  for (let minD = 380; minD >= 120 && spread.length < 5; minD -= 40) {{
+    spread.length = 0;
+    for (const c of inner) {{
+      if (spread.every(s => Math.hypot(s[0] - c[0], s[1] - c[1]) > minD)) spread.push(c);
+      if (spread.length === 5) break;
+    }}
+  }}
+  while (spread.length < 5 && inner.length) spread.push(inner[spread.length % inner.length]);
+  const stops = spread.slice(0, 5);
+
+  // --- BUILD L2 ---
+  const step = 6, levels = 20;
+  const cols = Math.ceil(W / step), rows = Math.ceil(H / step);
+  const field = new Float32Array((cols + 1) * (rows + 1));
+  for (let j = 0; j <= rows; j++) {{
+    for (let i = 0; i <= cols; i++) {{
+      field[j * (cols + 1) + i] = fbm(i * step / W * 3.1, j * step / H * 1.9, 9);
+    }}
+  }}
+  const at = (i, j) => field[j * (cols + 1) + i];
+
+  // --- BUILD L3 ---
+  const r3 = rng(7717);
+  const paths = [];
+  for (let p = 0; p < 620; p++) {{
+    let x = r3() * W, y = r3() * H;
+    const pathPts = [[x, y]];
+    for (let k = 0; k < 54; k++) {{
+      const a = fbm(x / W * 2.1, y / H * 1.5, 12) * Math.PI * 3;
+      x += Math.cos(a) * 5; y += Math.sin(a) * 5;
+      if (x < -20 || x > W + 20 || y < -20 || y > H + 20) break;
+      pathPts.push([x, y]);
+    }}
+    if (pathPts.length > 14) paths.push({{ pts: pathPts, off: r3() }});
+  }}
+
+  // DRAW L1
+  function draw1(ph) {{
+    ctx1.setTransform(c1.width / W, 0, 0, c1.height / H, 0, 0);
+    ctx1.fillStyle = '#0B0C0E'; ctx1.fillRect(0, 0, W, H);
+    ctx1.font = '11px "JetBrains Mono", monospace';
+
+    const th = ph * 6.283, acc = accent, S = stops, n = S.length;
+    const seg = ph * n, k = Math.floor(seg), u = seg - k;
+    const from = S[k % n], to = S[(k + 1) % n];
+    const travel = 0.45;
+    const moving = u < travel;
+    const e = moving ? (t => t * t * (3 - 2 * t))(u / travel) : 1;
+    const dwell = moving ? 0 : (u - travel) / (1 - travel);
+    const sx = from[0] + (to[0] - from[0]) * e, sy = from[1] + (to[1] - from[1]) * e;
+    const reach = 9 * (moving ? 0.72 : 1 + 0.1 * Math.sin(dwell * 12.566));
+    const drift = 7;
+
+    const P = pts.map(p => {{
+      const s1 = th + p.w, s2 = th + p.x * 0.006 + p.y * 0.004;
+      const x = p.x + drift * Math.sin(s1) + drift * 0.8 * Math.sin(s2);
+      const y = p.y + drift * 0.7 * Math.cos(s1) + drift * 0.6 * Math.cos(s2 * 1.0 + 1.1);
+      return {{ x, y, g: Math.max(0, 1 - Math.hypot(x - sx, y - sy) / reach) }};
+    }});
+
+    const linkR = 48 + 7 * Math.sin(th);
+    ctx1.lineWidth = 0.6;
+    for (const [i, j] of pairs) {{
+      const a = P[i], b = P[j];
+      const d = Math.hypot(b.x - a.x, b.y - a.y);
+      if (d > linkR) continue;
+      const g = Math.max(a.g, b.g);
+      ctx1.strokeStyle = g > 0.02 ? rgba(acc, 0.06 + 0.6 * g * g) : 'rgba(150,156,166,' + (0.045 + 0.08 * (1 - d / linkR)) + ')';
+      ctx1.beginPath(); ctx1.moveTo(a.x, a.y); ctx1.lineTo(b.x, b.y); ctx1.stroke();
+    }}
+
+    for (const p of P) {{
+      ctx1.fillStyle = p.g > 0.02 ? rgba(acc, 0.35 + 0.65 * p.g) : 'rgba(190,195,203,.42)';
+      ctx1.beginPath(); ctx1.arc(p.x, p.y, p.g > 0.3 ? 1.5 + p.g : 1.1, 0, 6.3); ctx1.fill();
+    }}
+
+    const halo = ctx1.createRadialGradient(sx, sy, 0, sx, sy, reach);
+    halo.addColorStop(0, rgba(acc, 0.1)); halo.addColorStop(1, rgba(acc, 0));
+    ctx1.fillStyle = halo; ctx1.fillRect(0, 0, W, H);
+    vignette(ctx1, W, H, 0.34);
+
+    const R = reach * 0.86;
+    ctx1.strokeStyle = rgba(acc, moving ? 0.3 : 0.6); ctx1.lineWidth = 1;
+    ctx1.beginPath(); ctx1.arc(sx, sy, R, 0, 6.3); ctx1.stroke();
+
+    const br = R + 9;
+    ctx1.strokeStyle = rgba(acc, moving ? 0.25 : 0.75); ctx1.lineWidth = 1.4;
+    for (const [dx, dy] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) {{
+      ctx1.beginPath();
+      ctx1.moveTo(sx + dx * br, sy + dy * br - dy * 9);
+      ctx1.lineTo(sx + dx * br, sy + dy * br);
+      ctx1.lineTo(sx + dx * br - dx * 9, sy + dy * br);
+      ctx1.stroke();
+    }}
+
+    if (moving) {{
+      ctx1.strokeStyle = rgba(acc, 0.22); ctx1.setLineDash([5, 7]); ctx1.lineWidth = 1;
+      ctx1.beginPath(); ctx1.moveTo(from[0], from[1]); ctx1.lineTo(to[0], to[1]); ctx1.stroke(); ctx1.setLineDash([]);
+    }} else {{
+      for (const p of [0, 0.5]) {{
+        const t = (dwell + p) % 1;
+        ctx1.strokeStyle = rgba(acc, 0.45 * (1 - t)); ctx1.lineWidth = 1.2;
+        ctx1.beginPath(); ctx1.arc(sx, sy, R * (0.2 + 1.5 * t), 0, 6.3); ctx1.stroke();
+      }}
+      const sweep = -1.571 + dwell * 6.283;
+      ctx1.strokeStyle = rgba(acc, 0.5); ctx1.lineWidth = 1;
+      ctx1.beginPath(); ctx1.moveTo(sx, sy); ctx1.lineTo(sx + Math.cos(sweep) * R, sy + Math.sin(sweep) * R); ctx1.stroke();
+      ctx1.fillStyle = rgba(acc, 0.85);
+      ctx1.fillText('ANALYSING  SUB-' + (100 + (k % n) * 7), sx + br + 12, sy - br + 12);
+      ctx1.fillStyle = '#6B6F76';
+      ctx1.fillText(Math.round(dwell * 100) + '%', sx + br + 12, sy - br + 30);
+    }}
+    ctx1.fillStyle = '#4A4E55';
+    ctx1.fillText('fragment: 3.2 × 10⁶ nodes · sweep ' + ((k % n) + 1) + '/' + n, 22, H - 18);
+  }}
+
+  // DRAW L2
+  function draw2(ph) {{
+    ctx2.setTransform(c2.width / W, 0, 0, c2.height / H, 0, 0);
+    ctx2.fillStyle = '#0B0C0E'; ctx2.fillRect(0, 0, W, H);
+    ctx2.font = '11px "JetBrains Mono", monospace';
+
+    const th = ph * 6.283, acc = accent;
+    for (let l = 0; l < levels; l++) {{
+      const t = ((l + ph) % levels) / levels;
+      const hot = Math.abs(t - 0.55) < 0.03;
+      ctx2.strokeStyle = hot ? rgba(acc, 0.85) : 'rgba(186,192,201,' + (0.09 + 0.15 * (1 - Math.abs(t - 0.5) * 2)) + ')';
+      ctx2.lineWidth = hot ? 1.6 : 0.7;
+      ctx2.beginPath();
+      for (let j = 0; j < rows; j++) {{
+        for (let i = 0; i < cols; i++) {{
+          const a = at(i, j), b = at(i + 1, j), c = at(i + 1, j + 1), d = at(i, j + 1);
+          const x0 = i * step, y0 = j * step, sg = [];
+          if ((a < t) !== (b < t)) sg.push([x0 + step * (t - a) / (b - a), y0]);
+          if ((b < t) !== (c < t)) sg.push([x0 + step, y0 + step * (t - b) / (c - b)]);
+          if ((c < t) !== (d < t)) sg.push([x0 + step * (1 - (t - d) / (c - d)), y0 + step]);
+          if ((d < t) !== (a < t)) sg.push([x0, y0 + step * (t - a) / (d - a)]);
+          if (sg.length >= 2) {{ ctx2.moveTo(sg[0][0], sg[0][1]); ctx2.lineTo(sg[1][0], sg[1][1]); }}
+        }}
+      }}
+      ctx2.stroke();
+    }}
+    const sx = W / 2 + W * 0.3 * Math.cos(th), sy = H / 2 + H * 0.24 * Math.sin(2 * th);
+    const halo = ctx2.createRadialGradient(sx, sy, 0, sx, sy, 260);
+    halo.addColorStop(0, rgba(acc, 0.07)); halo.addColorStop(1, rgba(acc, 0));
+    ctx2.fillStyle = halo; ctx2.fillRect(0, 0, W, H);
+    vignette(ctx2, W, H, 0.36);
+    ctx2.fillStyle = '#4A4E55';
+    ctx2.fillText('scalar field · ' + levels + ' isolines', 22, H - 18);
+  }}
+
+  // DRAW L3
+  function draw3(ph) {{
+    ctx3.setTransform(c3.width / W, 0, 0, c3.height / H, 0, 0);
+    ctx3.fillStyle = '#0B0C0E'; ctx3.fillRect(0, 0, W, H);
+    ctx3.font = '11px "JetBrains Mono", monospace';
+
+    const acc = accent;
+    ctx3.lineWidth = 0.6; ctx3.strokeStyle = 'rgba(186,192,201,.11)';
+    ctx3.beginPath();
+    for (const p of paths) {{
+      p.pts.forEach((q, i) => i ? ctx3.lineTo(q[0], q[1]) : ctx3.moveTo(q[0], q[1]));
+    }}
+    ctx3.stroke();
+
+    const tail = 9;
+    for (const p of paths) {{
+      const n = p.pts.length;
+      const head = ((ph + p.off) % 1) * (n - 1);
+      for (let k = 0; k < tail; k++) {{
+        const i = Math.floor(head) - k;
+        if (i < 1) continue;
+        const a = (1 - k / tail) * 0.75;
+        ctx3.strokeStyle = rgba(acc, a * 0.9);
+        ctx3.lineWidth = 1.5 * (1 - k / tail) + 0.4;
+        ctx3.beginPath(); ctx3.moveTo(p.pts[i - 1][0], p.pts[i - 1][1]); ctx3.lineTo(p.pts[i][0], p.pts[i][1]); ctx3.stroke();
+      }}
+    }}
+    vignette(ctx3, W, H, 0.3);
+    ctx3.fillStyle = '#4A4E55';
+    ctx3.fillText('vector field · ' + paths.length + ' streamlines', 22, H - 18);
+  }}
+
+  // MASTER ANIMATION LOOP
+  let frameCount = 0, lastFpsTime = performance.now();
+  function animate(now) {{
+    requestAnimationFrame(animate);
+    if (isPaused) return;
+
+    const ph = ((now - t0) / 1000 / loopSeconds) % 1;
+    draw1(ph);
+    draw2(ph);
+    draw3(ph);
+
+    document.getElementById('globalPhaseLabel').textContent = ph.toFixed(2);
+    frameCount++;
+    if (now - lastFpsTime >= 1000) {{
+      const fps = Math.round((frameCount * 1000) / (now - lastFpsTime));
+      document.getElementById('hud1').textContent = fps + ' FPS · 2880×1120';
+      document.getElementById('hud2').textContent = fps + ' FPS · 2880×1120';
+      document.getElementById('hud3').textContent = fps + ' FPS · 2880×1120';
+      frameCount = 0;
+      lastFpsTime = now;
+    }}
+  }}
+  requestAnimationFrame(animate);
+
+  const globalPlayPause = document.getElementById('globalPlayPause');
+  globalPlayPause.addEventListener('click', () => {{
+    isPaused = !isPaused;
+    if (isPaused) {{
+      pauseTime = performance.now();
+      globalPlayPause.textContent = 'Play All';
+      globalPlayPause.classList.add('active');
+    }} else {{
+      t0 += (performance.now() - pauseTime);
+      globalPlayPause.textContent = 'Pause All';
+      globalPlayPause.classList.remove('active');
+    }}
+  }});
+
+  const globalDurSlider = document.getElementById('globalDurSlider');
+  globalDurSlider.addEventListener('input', (e) => {{
+    loopSeconds = parseFloat(e.target.value);
+    document.getElementById('globalDurLabel').textContent = loopSeconds + 's';
+  }});
+  </script>
+</body>
+</html>
+"""
+
+with open(os.path.join(out_dir, 'loop1_digital_twin_sweep.html'), 'w', encoding='utf-8') as f:
+    f.write(html_1)
+print('Wrote loop1_digital_twin_sweep.html')
+
+with open(os.path.join(out_dir, 'loop2_isoline_field.html'), 'w', encoding='utf-8') as f:
+    f.write(html_2)
+print('Wrote loop2_isoline_field.html')
+
+with open(os.path.join(out_dir, 'loop3_streamlines_comets.html'), 'w', encoding='utf-8') as f:
+    f.write(html_3)
+print('Wrote loop3_streamlines_comets.html')
+
+with open(os.path.join(out_dir, 'all_background_loops_testbench.html'), 'w', encoding='utf-8') as f:
+    f.write(testbench_html)
+print('Wrote all_background_loops_testbench.html')

@@ -1,0 +1,241 @@
+{
+  "jurisdiction": {
+    "country_name": "Austria",
+    "iso2": "AT",
+    "iso3": "AUT",
+    "numeric_code": "040",
+    "continent": "Europe",
+    "region": "Central Europe",
+    "sub_region": "European Union",
+    "sovereign_status": "UN Member State",
+    "capital": "Vienna",
+    "currency": "EUR"
+  },
+  "supervisory_authorities": {
+    "dpa": "National Data Protection Authority of Austria",
+    "csirt": "National Computer Emergency Response Team of Austria (AT-CERT)",
+    "crypto_agency": "Ministry of Telecommunications & Trade of Austria"
+  },
+  "statutory_frameworks": [
+    {
+      "official_title": "Regulation (EU) 2024/2847 on horizontal cybersecurity requirements for products with digital elements (Cyber Resilience Act)",
+      "short_name": "EU CRA",
+      "statute_type": "Regulation",
+      "legal_citation": "Regulation (EU) 2024/2847",
+      "enactment_date": "2024-11-20",
+      "effective_date": "2024-12-10",
+      "enforcement_deadline": "2026-09-11",
+      "supervisory_authority": "European Commission / Market Surveillance Authority of Austria and National Computer Emergency Response Team of Austria (AT-CERT)",
+      "status": "Partially Applicable (Art 14 live Sep 2026; full application Dec 2027)",
+      "metadata": {
+        "key_deadlines": {
+          "cab_notification_chapter_iv": "2026-06-11",
+          "vulnerability_reporting_article_14": "2026-09-11",
+          "full_ce_marking_compliance": "2027-12-11"
+        },
+        "reporting_portal": "ENISA Single Reporting Platform + National CSIRT"
+      }
+    },
+    {
+      "official_title": "Directive (EU) 2022/2555 on measures for a high common level of cybersecurity across the Union (NIS2 Directive)",
+      "short_name": "EU NIS2",
+      "statute_type": "Directive",
+      "legal_citation": "Directive (EU) 2022/2555",
+      "enactment_date": "2022-12-14",
+      "effective_date": "2023-01-16",
+      "enforcement_deadline": "2024-10-17",
+      "supervisory_authority": "National Computer Emergency Response Team of Austria (AT-CERT)",
+      "status": "In Force (Transposed Nationally)",
+      "metadata": {
+        "scope": "Essential and Important Entities across 18 sectors"
+      }
+    },
+    {
+      "official_title": "Regulation (EU) 2016/679 on the protection of natural persons with regard to the processing of personal data (General Data Protection Regulation)",
+      "short_name": "EU GDPR",
+      "statute_type": "Regulation",
+      "legal_citation": "Regulation (EU) 2016/679",
+      "enactment_date": "2016-04-27",
+      "effective_date": "2016-05-24",
+      "enforcement_deadline": "2018-05-25",
+      "supervisory_authority": "National Data Protection Authority of Austria",
+      "status": "In Force",
+      "metadata": {
+        "territorial_scope": "Global extraterritorial effect for EU data subjects"
+      }
+    },
+    {
+      "official_title": "Regulation (EU) 2022/2554 on digital operational resilience for the financial sector (DORA)",
+      "short_name": "EU DORA",
+      "statute_type": "Regulation",
+      "legal_citation": "Regulation (EU) 2022/2554",
+      "enactment_date": "2022-12-14",
+      "effective_date": "2023-01-16",
+      "enforcement_deadline": "2025-01-17",
+      "supervisory_authority": "European Supervisory Authorities (EBA, EIOPA, ESMA) / National Competent Authority",
+      "status": "In Force",
+      "metadata": {
+        "scope": "Financial entities and ICT critical third-party service providers"
+      }
+    },
+    {
+      "official_title": "Directive 2014/53/EU and Delegated Regulation (EU) 2022/30 (Radio Equipment Directive Cybersecurity)",
+      "short_name": "EU RED Delegated",
+      "statute_type": "Regulation",
+      "legal_citation": "Delegated Regulation (EU) 2022/30",
+      "enactment_date": "2021-10-29",
+      "effective_date": "2022-02-01",
+      "enforcement_deadline": "2025-08-01",
+      "supervisory_authority": "Telecommunications Market Surveillance Authority of Austria",
+      "status": "In Force",
+      "metadata": {
+        "mandates": "Articles 3(3)(d), 3(3)(e), 3(3)(f) network protection, personal data, and fraud prevention"
+      }
+    }
+  ],
+  "cyber_security_mandates": [
+    {
+      "target_domain": "Digital Equipment & Connected Products",
+      "baseline_standard_ref": "CEN/CENELEC Harmonized Standards under CRA / IEC 62443-4-1 / IEC 62443-4-2 / ETSI EN 303 645",
+      "mandatory_certifications": "Important Class I (Module B+C or Harmonized Standard self-assessment); Important Class II (Mandatory Module B+C or Module H CAB examination); Critical (European Cybersecurity Certificate)",
+      "default_password_ban": true,
+      "sbom_required": true,
+      "cbom_required": true,
+      "patch_management_sla_days": 14,
+      "details": "Under CRA Annex I, products with digital elements must be delivered without known exploitable vulnerabilities, with automatic security updates enabled by default, zero hardcoded universal credentials, and machine-readable SBOM/CBOM. Article 14 requires 24h notification of active exploitation."
+    },
+    {
+      "target_domain": "ICS/OT & Critical Infrastructure",
+      "baseline_standard_ref": "IEC 62443-3-3 / IEC 62443-2-1 / ISO/IEC 27001",
+      "mandatory_certifications": "National Critical Infrastructure Audits; Mandatory Security Assessment by accredited CAB every 24 months under NIS2",
+      "default_password_ban": true,
+      "sbom_required": true,
+      "cbom_required": false,
+      "patch_management_sla_days": 30,
+      "details": "NIS2 Article 21 mandates risk management policies, supply chain security audits, zero-trust network segregation, and business continuity management for essential and important entities."
+    }
+  ],
+  "data_privacy_sovereignty": [
+    {
+      "primary_privacy_law": "Regulation (EU) 2016/679 (GDPR)",
+      "supervisory_dpa": "National Data Protection Authority of Austria",
+      "data_localization_required": false,
+      "localization_scope": "No general localization within EU/EEA. Transfers outside EEA strictly conditional under Chapter V.",
+      "cross_border_transfer_mechanism": "Adequacy Decisions (Art 45), Standard Contractual Clauses (SCCs, Art 46), Binding Corporate Rules (BCRs, Art 47), Derogations (Art 49)",
+      "sensitive_data_categories": [
+        "Biometrics",
+        "Genetic Data",
+        "Health Data",
+        "Trade Union Membership",
+        "Political Opinions",
+        "Sexual Orientation",
+        "Criminal Convictions"
+      ]
+    }
+  ],
+  "cryptography_controls": [
+    {
+      "crypto_import_license_required": false,
+      "crypto_export_controls": "EU Dual-Use Regulation (EU) 2021/821 Annex I Category 5 Part 2 (Information Security). Wassenaar Arrangement member.",
+      "mandatory_government_access_or_escrow": false,
+      "approved_encryption_standards": "AES-256, RSA >= 3072, ECC (NIST P-256/P-384, Ed25519), BSI TR-02102-1, SOG-IS Agreed Cryptographic Mechanisms",
+      "post_quantum_mandate": "BSI Technical Guideline TR-02102-1 and ANSSI PQC migration recommendation: hybrid post-quantum key encapsulation (ML-KEM / Kyber) required for long-term secure communications by 2026-2030.",
+      "regulatory_agency": "Ministry of Telecommunications & Trade of Austria"
+    }
+  ],
+  "incident_disclosure_rules": [
+    {
+      "breach_type": "Actively Exploited Vulnerability in Product",
+      "notification_timeline_hours": 24,
+      "second_stage_timeline_hours": 72,
+      "final_report_timeline_days": 14,
+      "recipient_authorities": [
+        "Designated National CSIRT",
+        "ENISA Single Reporting Platform"
+      ],
+      "ransomware_payment_reporting": false,
+      "threshold_trigger_definition": "Article 14(1) CRA: Any actively exploited vulnerability in a product with digital elements placed on the single market."
+    },
+    {
+      "breach_type": "Significant Incident in Critical Infrastructure / Essential Entity",
+      "notification_timeline_hours": 24,
+      "second_stage_timeline_hours": 72,
+      "final_report_timeline_days": 30,
+      "recipient_authorities": [
+        "National Computer Emergency Response Team of Austria (AT-CERT)",
+        "National Competent Authority"
+      ],
+      "ransomware_payment_reporting": true,
+      "threshold_trigger_definition": "Article 23 NIS2: Any incident causing severe operational disruption or material financial/physical damage to third parties."
+    },
+    {
+      "breach_type": "Personal Data Breach",
+      "notification_timeline_hours": 72,
+      "second_stage_timeline_hours": null,
+      "final_report_timeline_days": 30,
+      "recipient_authorities": [
+        "National Data Protection Authority of Austria"
+      ],
+      "ransomware_payment_reporting": false,
+      "threshold_trigger_definition": "Article 33 GDPR: Breach of security leading to accidental or unlawful destruction, loss, alteration, or unauthorized disclosure of personal data."
+    }
+  ],
+  "penalty_structures": [
+    {
+      "max_administrative_fine_fixed": 15000000.0,
+      "fine_currency": "EUR",
+      "max_turnover_percentage": 2.5,
+      "criminal_liability_directors": true,
+      "market_withdrawal_sanctions": true
+    },
+    {
+      "max_administrative_fine_fixed": 20000000.0,
+      "fine_currency": "EUR",
+      "max_turnover_percentage": 4.0,
+      "criminal_liability_directors": false,
+      "market_withdrawal_sanctions": false
+    }
+  ],
+  "sector_applicability": [
+    {
+      "sector": "Energy",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Generation, transmission, distribution, and pipeline SCADA integrity."
+    },
+    {
+      "sector": "Water",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Water treatment, distribution telemetry, and environmental control."
+    },
+    {
+      "sector": "Healthcare",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Hospital systems, medical device cybersecurity, and EHR data protection."
+    },
+    {
+      "sector": "Financial Services",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Payment systems, banking core networks, and cyber resilience audits."
+    },
+    {
+      "sector": "Telecom",
+      "scope_classification": "Essential Infrastructure",
+      "specific_obligations": "Public telecommunications networks, submarine cables, and 5G security."
+    },
+    {
+      "sector": "OT/Industrial",
+      "scope_classification": "Industrial Manufacturing",
+      "specific_obligations": "Machinery safety, industrial robotics, PLC programming, and safety instrumented systems."
+    },
+    {
+      "sector": "Transport",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Rail signaling, air traffic management, maritime port terminals, and connected vehicles."
+    }
+  ],
+  "enrichment_metadata": {
+    "iterations_completed": 4,
+    "last_enriched_at": "2026-09-12T02:14:21.049474+00:00",
+    "enrichment_pipeline": "Valyu-Perplexity-MultiAgent-v4"
+  }
+}

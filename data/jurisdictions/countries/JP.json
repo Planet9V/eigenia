@@ -1,0 +1,165 @@
+{
+  "jurisdiction": {
+    "country_name": "Japan",
+    "iso2": "JP",
+    "iso3": "JPN",
+    "numeric_code": "392",
+    "continent": "Asia",
+    "region": "Eastern Asia",
+    "sub_region": "East Asia",
+    "sovereign_status": "UN Member State",
+    "capital": "Tokyo",
+    "currency": "JPY"
+  },
+  "supervisory_authorities": {
+    "dpa": "Personal Information Protection Commission (PPC)",
+    "csirt": "JPCERT/CC / National center of Incident readiness and Strategy for Cybersecurity (NISC)",
+    "crypto_agency": "Ministry of Economy, Trade and Industry (METI)"
+  },
+  "statutory_frameworks": [
+    {
+      "official_title": "Act on the Protection of Personal Information (APPI)",
+      "short_name": "Japan APPI",
+      "statute_type": "Act",
+      "legal_citation": "Act No. 57 of 2003 as amended",
+      "enactment_date": "2003-05-30",
+      "effective_date": "2022-04-01",
+      "enforcement_deadline": "2022-04-01",
+      "supervisory_authority": "Personal Information Protection Commission (PPC)",
+      "status": "In Force",
+      "metadata": {
+        "adequacy": "Mutual adequacy decision with European Union"
+      }
+    },
+    {
+      "official_title": "Cybersecurity Basic Act and Critical Infrastructure Cybersecurity Guidelines",
+      "short_name": "Japan Cyber Basic Act",
+      "statute_type": "Act",
+      "legal_citation": "Act No. 104 of 2014 as amended",
+      "enactment_date": "2014-11-12",
+      "effective_date": "2015-01-09",
+      "enforcement_deadline": "2015-01-09",
+      "supervisory_authority": "National center of Incident readiness and Strategy for Cybersecurity (NISC)",
+      "status": "In Force",
+      "metadata": {
+        "critical_sectors": "14 designated critical infrastructure sectors"
+      }
+    },
+    {
+      "official_title": "Economic Security Promotion Act (Key Infrastructure Safety Assurance)",
+      "short_name": "Japan ESPA",
+      "statute_type": "Act",
+      "legal_citation": "Act No. 43 of 2022",
+      "enactment_date": "2022-05-18",
+      "effective_date": "2024-05-17",
+      "enforcement_deadline": "2024-05-17",
+      "supervisory_authority": "Cabinet Office / Relevant Ministries (METI, MLIT, MIC, FSA)",
+      "status": "In Force",
+      "metadata": {
+        "mandates": "Prior screening of critical infrastructure suppliers, hardware, and maintenance vendors"
+      }
+    }
+  ],
+  "cyber_security_mandates": [
+    {
+      "target_domain": "Industrial OT & IoT Equipment",
+      "baseline_standard_ref": "Cyber/Physical Security Framework (CPSF) / METI IoT Security Guidelines / IEC 62443",
+      "mandatory_certifications": "Prior equipment screening under Economic Security Promotion Act; JC3/J-CSIP coordination",
+      "default_password_ban": true,
+      "sbom_required": true,
+      "cbom_required": false,
+      "patch_management_sla_days": 30,
+      "details": "Under METI Cyber/Physical Security Framework, vendors in supply chains for energy, telecom, and transport must provide verified component bill of materials and firmware integrity guarantees."
+    }
+  ],
+  "data_privacy_sovereignty": [
+    {
+      "primary_privacy_law": "Act on the Protection of Personal Information (APPI)",
+      "supervisory_dpa": "Personal Information Protection Commission (PPC)",
+      "data_localization_required": false,
+      "localization_scope": "No general data localization requirement.",
+      "cross_border_transfer_mechanism": "White-list Adequacy (EU/UK), PPC Standard Equivalent Rules, Prior Consent with Foreign Regime Disclosure",
+      "sensitive_data_categories": [
+        "Race",
+        "Creed",
+        "Social Status",
+        "Medical History",
+        "Criminal Record"
+      ]
+    }
+  ],
+  "cryptography_controls": [
+    {
+      "crypto_import_license_required": false,
+      "crypto_export_controls": "Foreign Exchange and Foreign Trade Act (FEFTA) Export Control Order. Wassenaar member.",
+      "mandatory_government_access_or_escrow": false,
+      "approved_encryption_standards": "CRYPTREC Ciphers List (Electronic Government Recommended Ciphers: Camellia, AES, SHA-2/3, RSA, ECDSA)",
+      "post_quantum_mandate": "CRYPTREC PQC evaluation committee establishing transition path for government electronic systems by 2030.",
+      "regulatory_agency": "Ministry of Economy, Trade and Industry (METI)"
+    }
+  ],
+  "incident_disclosure_rules": [
+    {
+      "breach_type": "Personal Data Breach",
+      "notification_timeline_hours": 72,
+      "second_stage_timeline_hours": null,
+      "final_report_timeline_days": 30,
+      "recipient_authorities": [
+        "Personal Information Protection Commission (PPC)"
+      ],
+      "ransomware_payment_reporting": false,
+      "threshold_trigger_definition": "Breaches involving sensitive personal data, financial harm risk, or affecting >1,000 data subjects."
+    }
+  ],
+  "penalty_structures": [
+    {
+      "max_administrative_fine_fixed": 100000000.0,
+      "fine_currency": "JPY",
+      "max_turnover_percentage": 0.0,
+      "criminal_liability_directors": true,
+      "market_withdrawal_sanctions": true
+    }
+  ],
+  "sector_applicability": [
+    {
+      "sector": "Energy",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Generation, transmission, distribution, and pipeline SCADA integrity."
+    },
+    {
+      "sector": "Water",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Water treatment, distribution telemetry, and environmental control."
+    },
+    {
+      "sector": "Healthcare",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Hospital systems, medical device cybersecurity, and EHR data protection."
+    },
+    {
+      "sector": "Financial Services",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Payment systems, banking core networks, and cyber resilience audits."
+    },
+    {
+      "sector": "Telecom",
+      "scope_classification": "Essential Infrastructure",
+      "specific_obligations": "Public telecommunications networks, submarine cables, and 5G security."
+    },
+    {
+      "sector": "OT/Industrial",
+      "scope_classification": "Industrial Manufacturing",
+      "specific_obligations": "Machinery safety, industrial robotics, PLC programming, and safety instrumented systems."
+    },
+    {
+      "sector": "Transport",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Rail signaling, air traffic management, maritime port terminals, and connected vehicles."
+    }
+  ],
+  "enrichment_metadata": {
+    "iterations_completed": 4,
+    "last_enriched_at": "2026-09-12T02:14:21.076568+00:00",
+    "enrichment_pipeline": "Valyu-Perplexity-MultiAgent-v4"
+  }
+}

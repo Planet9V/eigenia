@@ -1,0 +1,161 @@
+{
+  "jurisdiction": {
+    "country_name": "Korea (Republic of)",
+    "iso2": "KR",
+    "iso3": "KOR",
+    "numeric_code": "410",
+    "continent": "Asia",
+    "region": "Eastern Asia",
+    "sub_region": "East Asia",
+    "sovereign_status": "UN Member State",
+    "capital": "Seoul",
+    "currency": "KRW"
+  },
+  "supervisory_authorities": {
+    "dpa": "Personal Information Protection Commission (PIPC)",
+    "csirt": "Korea Internet & Security Agency (KrCERT/CC / KISA)",
+    "crypto_agency": "National Intelligence Service (NIS) / KISA"
+  },
+  "statutory_frameworks": [
+    {
+      "official_title": "Personal Information Protection Act as amended (PIPA)",
+      "short_name": "Korea PIPA",
+      "statute_type": "Act",
+      "legal_citation": "Act No. 10465 as amended",
+      "enactment_date": "2011-03-29",
+      "effective_date": "2023-09-15",
+      "enforcement_deadline": "2024-03-15",
+      "supervisory_authority": "Personal Information Protection Commission (PIPC)",
+      "status": "In Force",
+      "metadata": {
+        "adequacy": "Mutual adequacy decision with European Union"
+      }
+    },
+    {
+      "official_title": "Act on the Protection of Information and Communications Infrastructure (CIIA)",
+      "short_name": "Korea CIIA",
+      "statute_type": "Act",
+      "legal_citation": "Act No. 6360 as amended",
+      "enactment_date": "2001-01-16",
+      "effective_date": "2001-07-17",
+      "enforcement_deadline": "Ongoing",
+      "supervisory_authority": "Ministry of Science and ICT (MSIT) / KISA",
+      "status": "In Force",
+      "metadata": {
+        "mandate": "Annual vulnerability assessment and protection plan for critical infrastructure"
+      }
+    }
+  ],
+  "cyber_security_mandates": [
+    {
+      "target_domain": "IT & Industrial Critical Infrastructure",
+      "baseline_standard_ref": "ISMS-P (Information Security and Personal Information Management System) / KISA Guidelines",
+      "mandatory_certifications": "Mandatory ISMS-P certification for major cloud providers, hospitals, universities, and revenue-qualifying tech firms",
+      "default_password_ban": true,
+      "sbom_required": true,
+      "cbom_required": false,
+      "patch_management_sla_days": 14,
+      "details": "Mandatory KISA IoT Cybersecurity Certification; strict boundary controls on telecommunications and critical energy systems."
+    }
+  ],
+  "data_privacy_sovereignty": [
+    {
+      "primary_privacy_law": "Data Protection and Privacy Act of Korea (Republic of)",
+      "supervisory_dpa": "Personal Information Protection Commission (PIPC)",
+      "data_localization_required": false,
+      "localization_scope": "Sector-specific financial and government data localization where applicable.",
+      "cross_border_transfer_mechanism": "Adequacy, Contractual Guarantees, DPA Authorization",
+      "sensitive_data_categories": [
+        "Biometrics",
+        "Health Data",
+        "Criminal Records"
+      ]
+    }
+  ],
+  "cryptography_controls": [
+    {
+      "crypto_import_license_required": false,
+      "crypto_export_controls": "Foreign Trade Act Strategic Items Control List. Wassenaar member.",
+      "mandatory_government_access_or_escrow": false,
+      "approved_encryption_standards": "KCMVP (Korea Cryptographic Module Validation Program): ARIA, SEED, LEA, HIGHT",
+      "post_quantum_mandate": "K-PQC transition plan led by National Intelligence Service (NIS) targeting public sector migration by 2030.",
+      "regulatory_agency": "National Intelligence Service (NIS) / KISA"
+    }
+  ],
+  "incident_disclosure_rules": [
+    {
+      "breach_type": "Personal Data Breach",
+      "notification_timeline_hours": 72,
+      "second_stage_timeline_hours": null,
+      "final_report_timeline_days": 30,
+      "recipient_authorities": [
+        "PIPC / KISA"
+      ],
+      "ransomware_payment_reporting": false,
+      "threshold_trigger_definition": "Any unauthorized access or leakage of personal information affecting 1,000 or more individuals, or sensitive personal information."
+    },
+    {
+      "breach_type": "Critical Infrastructure Cyber Attack",
+      "notification_timeline_hours": 24,
+      "second_stage_timeline_hours": null,
+      "final_report_timeline_days": 14,
+      "recipient_authorities": [
+        "KISA KrCERT/CC / MSIT"
+      ],
+      "ransomware_payment_reporting": true,
+      "threshold_trigger_definition": "Any disruption or cyber penetration affecting designated critical information infrastructure."
+    }
+  ],
+  "penalty_structures": [
+    {
+      "max_administrative_fine_fixed": 2000000000.0,
+      "fine_currency": "KRW",
+      "max_turnover_percentage": 3.0,
+      "criminal_liability_directors": true,
+      "market_withdrawal_sanctions": true
+    }
+  ],
+  "sector_applicability": [
+    {
+      "sector": "Energy",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Generation, transmission, distribution, and pipeline SCADA integrity."
+    },
+    {
+      "sector": "Water",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Water treatment, distribution telemetry, and environmental control."
+    },
+    {
+      "sector": "Healthcare",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Hospital systems, medical device cybersecurity, and EHR data protection."
+    },
+    {
+      "sector": "Financial Services",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Payment systems, banking core networks, and cyber resilience audits."
+    },
+    {
+      "sector": "Telecom",
+      "scope_classification": "Essential Infrastructure",
+      "specific_obligations": "Public telecommunications networks, submarine cables, and 5G security."
+    },
+    {
+      "sector": "OT/Industrial",
+      "scope_classification": "Industrial Manufacturing",
+      "specific_obligations": "Machinery safety, industrial robotics, PLC programming, and safety instrumented systems."
+    },
+    {
+      "sector": "Transport",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Rail signaling, air traffic management, maritime port terminals, and connected vehicles."
+    }
+  ],
+  "enrichment_metadata": {
+    "iterations_completed": 4,
+    "last_enriched_at": "2026-09-12T02:14:21.077188+00:00",
+    "enrichment_pipeline": "Valyu-Perplexity-MultiAgent-v4",
+    "enrichment_status": "DEEP_SPECIALIZED_ENRICHMENT_COMPLETE"
+  }
+}

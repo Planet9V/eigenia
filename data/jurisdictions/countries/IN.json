@@ -1,0 +1,150 @@
+{
+  "jurisdiction": {
+    "country_name": "India",
+    "iso2": "IN",
+    "iso3": "IND",
+    "numeric_code": "356",
+    "continent": "Asia",
+    "region": "Southern Asia",
+    "sub_region": "South Asia",
+    "sovereign_status": "UN Member State",
+    "capital": "New Delhi",
+    "currency": "INR"
+  },
+  "supervisory_authorities": {
+    "dpa": "Data Protection Board of India (DPBI)",
+    "csirt": "Indian Computer Emergency Response Team (CERT-In)",
+    "crypto_agency": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  "statutory_frameworks": [
+    {
+      "official_title": "Digital Personal Data Protection Act 2023 (DPDPA)",
+      "short_name": "India DPDPA 2023",
+      "statute_type": "Act",
+      "legal_citation": "Act No. 22 of 2023",
+      "enactment_date": "2023-08-11",
+      "effective_date": "2024-04-01",
+      "enforcement_deadline": "2025-01-01",
+      "supervisory_authority": "Data Protection Board of India (DPBI)",
+      "status": "In Force",
+      "metadata": {
+        "fines": "Fines up to INR 250 Crore for failure to prevent breaches"
+      }
+    },
+    {
+      "official_title": "CERT-In Directions under Section 70B of Information Technology Act 2000",
+      "short_name": "India CERT-In Directions",
+      "statute_type": "Ministerial Order",
+      "legal_citation": "No. 20(3)/2022-CERT-In",
+      "enactment_date": "2022-04-28",
+      "effective_date": "2022-06-27",
+      "enforcement_deadline": "2022-09-25",
+      "supervisory_authority": "Indian Computer Emergency Response Team (CERT-In / MeitY)",
+      "status": "In Force",
+      "metadata": {
+        "log_retention": "Mandatory 180-day log retention within Indian jurisdiction; mandatory time sync with NTP"
+      }
+    }
+  ],
+  "cyber_security_mandates": [
+    {
+      "target_domain": "Critical Information Infrastructure & Telecom Networks",
+      "baseline_standard_ref": "NCIIPC Guidelines for Critical Information Infrastructure / BIS IS 17025 / IEC 62443",
+      "mandatory_certifications": "Mandatory Testing and Certification of Telecom Equipment (MTCTE) by TEC; STQC audit certification",
+      "default_password_ban": true,
+      "sbom_required": true,
+      "cbom_required": false,
+      "patch_management_sla_days": 14,
+      "details": "Mandatory deployment of Trusted Telecom equipment certified by National Cyber Security Coordinator (NCSC India). Strict restrictions on untrusted foreign vendors."
+    }
+  ],
+  "data_privacy_sovereignty": [
+    {
+      "primary_privacy_law": "Data Protection and Privacy Act of India",
+      "supervisory_dpa": "Data Protection Board of India (DPBI)",
+      "data_localization_required": false,
+      "localization_scope": "Sector-specific financial and government data localization where applicable.",
+      "cross_border_transfer_mechanism": "Adequacy, Contractual Guarantees, DPA Authorization",
+      "sensitive_data_categories": [
+        "Biometrics",
+        "Health Data",
+        "Criminal Records"
+      ]
+    }
+  ],
+  "cryptography_controls": [
+    {
+      "crypto_import_license_required": false,
+      "crypto_export_controls": "National Customs & Dual-Use Export Control Regime.",
+      "mandatory_government_access_or_escrow": false,
+      "approved_encryption_standards": "AES-256, FIPS 140-2/3, ISO/IEC 18033",
+      "post_quantum_mandate": "Monitoring international standard bodies (ISO/IEC JTC 1 / ITU-T).",
+      "regulatory_agency": "Ministry of Electronics and Information Technology (MeitY)"
+    }
+  ],
+  "incident_disclosure_rules": [
+    {
+      "breach_type": "Cybersecurity Incident (20 Specific Types)",
+      "notification_timeline_hours": 6,
+      "second_stage_timeline_hours": 24,
+      "final_report_timeline_days": 15,
+      "recipient_authorities": [
+        "Indian Computer Emergency Response Team (CERT-In)"
+      ],
+      "ransomware_payment_reporting": true,
+      "threshold_trigger_definition": "CERT-In Directions: Mandatory reporting within 6 hours of noticing incident (includes ransomware, unauthorized access, identity theft, denial of service, SCADA compromise)."
+    }
+  ],
+  "penalty_structures": [
+    {
+      "max_administrative_fine_fixed": 2500000000.0,
+      "fine_currency": "INR",
+      "max_turnover_percentage": 0.0,
+      "criminal_liability_directors": true,
+      "market_withdrawal_sanctions": true
+    }
+  ],
+  "sector_applicability": [
+    {
+      "sector": "Energy",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Generation, transmission, distribution, and pipeline SCADA integrity."
+    },
+    {
+      "sector": "Water",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Water treatment, distribution telemetry, and environmental control."
+    },
+    {
+      "sector": "Healthcare",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Hospital systems, medical device cybersecurity, and EHR data protection."
+    },
+    {
+      "sector": "Financial Services",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Payment systems, banking core networks, and cyber resilience audits."
+    },
+    {
+      "sector": "Telecom",
+      "scope_classification": "Essential Infrastructure",
+      "specific_obligations": "Public telecommunications networks, submarine cables, and 5G security."
+    },
+    {
+      "sector": "OT/Industrial",
+      "scope_classification": "Industrial Manufacturing",
+      "specific_obligations": "Machinery safety, industrial robotics, PLC programming, and safety instrumented systems."
+    },
+    {
+      "sector": "Transport",
+      "scope_classification": "Critical Infrastructure",
+      "specific_obligations": "Rail signaling, air traffic management, maritime port terminals, and connected vehicles."
+    }
+  ],
+  "enrichment_metadata": {
+    "iterations_completed": 4,
+    "last_enriched_at": "2026-09-12T02:14:21.076768+00:00",
+    "enrichment_pipeline": "Valyu-Perplexity-MultiAgent-v4",
+    "enrichment_status": "DEEP_SPECIALIZED_ENRICHMENT_COMPLETE"
+  }
+}
