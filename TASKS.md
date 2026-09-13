@@ -1,12 +1,13 @@
-<!-- verified: 2026-09-12 a73d7c5 -->
+<!-- verified: 2026-09-13 1525988 -->
 # Tasks
 
-_Last brought current: 2026-09-12 verified against main at `a73d7c5`. The HTML comment on line 1 is machine-read by `web/scripts/audit-tasks-stamp.mjs` and `scripts/hooks/`; update it every time this file is brought current._
+_Last brought current: 2026-09-13 verified against main at `1525988`. The HTML comment on line 1 is machine-read by `web/scripts/audit-tasks-stamp.mjs` and `scripts/hooks/`; update it every time this file is brought current._
 _Counts here are checked against `web/src/lib/wikiRegistry.ts`, not typed from memory._
 _Memory of record (decided 2026-09-11): this file and `memory/` at the repo root. `.taskmaster/`, `.remember/`, `.claude/memory.db`, `.swarm/` and the gateway's `memory_store` are tool caches, not sources. Rules: `memory/context/working-agreement.md`._
 
 ## Active
 
+- [ ] **Master Scientific Corpus Expansion (Unconstrained Roadmap)** - Phased promotion of candidate monographs across Hyperscale (8 chapters), TACAM (3 chapters), Multi-BOM CRA (5 chapters), Research Equations (7 chapters), and OT Workbooks (3 chapters). Mandatory gates: 5 rounds of sequential thinking per paper, Valyu research for gaps, J. McKenney primary author, 0 ASCII art, 0 broken LaTeX, IMRAD long-form prose, bilingual metadata, and strict MPN quarantine.
 - [ ] **Wire PretotypeExperimentModal** - bound to `useContactForm`, imported by no page (re-verified 2026-09-11: 0 importers)
 - [ ] **`feat/what-eigenia-does`** - branch cut from main, 0 commits, no local edits. State its intent here or delete it
 - [ ] **Push `chore/memory-enforcement` and open the PR** - branch is prepared in the working tree (Cowork could not commit: `.git/index.lock` cannot be removed from its shell). Jim: `rm .git/index.lock`, `git checkout -b chore/memory-enforcement`, `git add -A -- TASKS.md memory CLAUDE.md .claude/settings.json .gitignore scripts/hooks web/scripts/audit-tasks-stamp.mjs .github/workflows/ci.yml documentation/TESTING.md`, commit, push, PR
