@@ -379,6 +379,18 @@ export const PAPERS_REGISTRY: Record<string, { title: string; relativePath: stri
     title: "Gated Graph Neural Networks & Temporal Graph Attention for Real-Time Process Anomaly Localization",
     relativePath: "references/WG-03-ML-Behaviorial_Modeling/WG-03-ML-GNN-Process-Anomaly-Localization.md",
   },
+  "percolation-thresholds-interdependent-collapse": {
+    title: "Percolation Thresholds & Discontinuous Phase Transitions in Interdependent Utilities",
+    relativePath: "references/WG-04-CF-Cascading-Failures/WG-04-CF-Percolation-Thresholds-Interdependent-Collapse.md",
+  },
+  "automated-cra-article-14-reporting": {
+    title: "Automated CRA Article 14 Reporting: Machine-Verifiable 24-Hour CSIRT Notifications and VEX/VDR Pipelines",
+    relativePath: "references/WG-06-CRA-Product-Assurance/WG-06-SC-03-Automated-CRA-Article-14-Reporting.md",
+  },
+  "epidemic-thresholds-ot-conduits": {
+    title: "Epidemic Thresholds & Spectral Radius Dynamics in Industrial OT Conduits",
+    relativePath: "references/WG-07-TM-Threat-Modeling/WG-07-TM-Epidemic-Threshold-OT-Conduits.md",
+  },
 };
 
 export function getAllPaperSlugs(): string[] {
