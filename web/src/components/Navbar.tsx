@@ -102,6 +102,14 @@ export const Navbar: React.FC = () => {
                     </Link>
 
                     <Link
+                      href="/papers"
+                      className="block p-2.5 rounded-xl bg-surface border border-hairline hover:bg-subtle transition-colors"
+                    >
+                      <span className="text-dutchOrange font-bold block text-[11px]">Treatises Hub // Canonical Index</span>
+                      <span className="text-primary block font-sans text-xs">Searchable table & canonical URIs for all {TOTAL_TREATISES} papers</span>
+                    </Link>
+
+                    <Link
                       href="/wiki?wg=WG-01-UI"
                       className="block p-2.5 rounded-xl hover:bg-subtle transition-colors"
                     >
