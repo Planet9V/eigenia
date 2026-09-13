@@ -1,13 +1,25 @@
-<!-- verified: 2026-09-13 1525988 -->
+<!-- verified: 2026-09-13 3a8492c -->
 # Tasks
 
-_Last brought current: 2026-09-13 verified against main at `1525988`. The HTML comment on line 1 is machine-read by `web/scripts/audit-tasks-stamp.mjs` and `scripts/hooks/`; update it every time this file is brought current._
+_Last brought current: 2026-09-13 verified against main at `3a8492c`. The HTML comment on line 1 is machine-read by `web/scripts/audit-tasks-stamp.mjs` and `scripts/hooks/`; update it every time this file is brought current._
 _Counts here are checked against `web/src/lib/wikiRegistry.ts`, not typed from memory._
 _Memory of record (decided 2026-09-11): this file and `memory/` at the repo root. `.taskmaster/`, `.remember/`, `.claude/memory.db`, `.swarm/` and the gateway's `memory_store` are tool caches, not sources. Rules: `memory/context/working-agreement.md`._
 
 ## Active
 
 - [ ] **Master Scientific Corpus Expansion (Unconstrained Roadmap)** - Phased promotion of candidate monographs across Hyperscale (8 chapters), TACAM (3 chapters), Multi-BOM CRA (5 chapters), Research Equations (7 chapters), and OT Workbooks (3 chapters). Mandatory gates: 5 rounds of sequential thinking per paper, Valyu research for gaps, J. McKenney primary author, 0 ASCII art, 0 broken LaTeX, IMRAD long-form prose, bilingual metadata, and strict MPN quarantine.
+  - [x] **Batch 1 (High-Impact Triad Promoted to 80 Treatises)**:
+    - `WG-06-SC-02`: OT Hardware CRA Applicability & Cyber Resilience Act Compliance Architecture
+    - `WG-07-TM-06`: Algorithmic Random Walks, Thermodynamic Boltzmann Shocks & Taleb Extremes in OT Graphs
+    - `MP-MATH-03`: Cellular Sheaf Cohomology & Topological Fault Detection in Industrial Infrastructure
+  - [ ] **Batch 2 (OT Architecture & Human-Cyber Triad to 83 Treatises)**:
+    - `WG-02-DT-03`: Tier Classification, Redundancy Topologies & Critical Path Graph Analytics
+    - `WG-01-UI-03`: Concept of Operations & Minimum Operating Requirements Under Degraded Network States
+    - `WG-04-CF-03`: Organisational Design for OT Security, Cognitive Load & The People Problem
+  - [ ] **Batch 3 (Physics & Quantitative Rigor Triad to 86 Treatises)**:
+    - `MP-MATH-04`: Thermodynamic Entropy Production & Irreversible Dissipation in Cascading Grid Failures
+    - `WG-05-CAD-02`: DEXPI 2.0 Extended Semantic Schema & CycloneDX 1.6 Hardware BOM Joint Graph Validation
+    - `WG-03-ML-02`: Gated Graph Neural Networks & Temporal Graph Attention for Real-Time Process Anomaly Localization
 - [ ] **Wire PretotypeExperimentModal** - bound to `useContactForm`, imported by no page (re-verified 2026-09-11: 0 importers)
 - [ ] **`feat/what-eigenia-does`** - branch cut from main, 0 commits, no local edits. State its intent here or delete it
 - [ ] **Push `chore/memory-enforcement` and open the PR** - branch is prepared in the working tree (Cowork could not commit: `.git/index.lock` cannot be removed from its shell). Jim: `rm .git/index.lock`, `git checkout -b chore/memory-enforcement`, `git add -A -- TASKS.md memory CLAUDE.md .claude/settings.json .gitignore scripts/hooks web/scripts/audit-tasks-stamp.mjs .github/workflows/ci.yml documentation/TESTING.md`, commit, push, PR
@@ -27,6 +39,9 @@ _Memory of record (decided 2026-09-11): this file and `memory/` at the repo root
 - [ ] **Stale local branches** - 17 local branches, most merged (deps/*, fix/*, feat/ascii-to-mermaid, docs/readme-accuracy, chore/taskmaster-tracking, pr1-local, probe/next16). Prune after confirming each is merged
 
 ## Done
+
+### 2026-09-13
+- [x] **Canonical Treatises Hub (`/papers`) & Batch 1 Publication (80 Treatises)** - Delivered canonical research hub with filterable matrix, bento view, deep search, working group pills, and bilingual EN/NL support; drafted and promoted Batch 1 triad (`WG-06-SC-02`, `WG-07-TM-06`, `MP-MATH-03`) with 5 rounds of sequential thinking, Valyu citations, J. McKenney primary attribution, and 0 missing prose lines; updated catalog count to 80 treatises across 11 Working Groups; passed all 11 audit gates, Vitest, and TypeScript.
 
 ### 2026-09-12
 - [x] **Workspace hygiene & untracked assets triage** - triaged and committed remaining untracked root assets: `.env.example`, `.stitch/designs/`, `assets/backgrounds/` extraction scripts, `data/jurisdictions/` (250 country statutory datasets), `database/migrations/`, `docs/superpowers/plans/`, `notes/` (session deconstructions), and `research/g-cpdt-unified-standard/` (6-part publication master plan); removed stale `_to_delete/`; restored all active editor draft paths in `papers-pre-publish/` (`TACAM-walks.md`, `TACAM-technical-walks.md`, `DEXPI2_SPECS.md`, `DEXPI2__spec_`).

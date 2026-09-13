@@ -343,6 +343,18 @@ export const PAPERS_REGISTRY: Record<string, { title: string; relativePath: stri
     title: "Five Industrial Supply Chain Assurance Use Cases: From OEM to Operator",
     relativePath: "references/WG-10-Assurance-Network/WG-10-AN-06-Supply-Chain-Transparency-Use-Cases.md",
   },
+  "ot-hardware-cra-applicability": {
+    title: "OT Hardware Applicability & Supply Chain Transparency under the EU CRA (Regulation (EU) 2024/2847)",
+    relativePath: "references/WG-06-CRA-Product-Assurance/WG-06-SC-02-OT-Hardware-CRA-Applicability.md",
+  },
+  "algorithmic-random-walks-and-graph-synthesis": {
+    title: "TACAM Algorithmic Random Walks & Sector-CPE Knowledge Graph Synthesis",
+    relativePath: "references/WG-07-TM-Threat-Modeling/WG-07-TM-06-Algorithmic-Random-Walks.md",
+  },
+  "sheaf-cohomology-topological-faults": {
+    title: "Sheaf Cohomology & Topological Fault Localization in Cyber-Physical Distribution Graphs",
+    relativePath: "references/MP-Math-Physics-Formula/MP-MATH-03-Sheaf-Cohomology-Topological-Faults.md",
+  },
 };
 
 export function getAllPaperSlugs(): string[] {
