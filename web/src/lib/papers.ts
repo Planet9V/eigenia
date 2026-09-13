@@ -367,6 +367,18 @@ export const PAPERS_REGISTRY: Record<string, { title: string; relativePath: stri
     title: "Organisational Engineering for OT Security: Operational Authority & Cognitive Load",
     relativePath: "references/WG-03-ML-Behaviorial_Modeling/WG-03-ML-Organisational-Engineering-OT-Security.md",
   },
+  "thermodynamic-entropy-production-grid-failures": {
+    title: "Thermodynamic Entropy Production & Irreversible Dissipation in Cascading Grid Failures",
+    relativePath: "references/MP-Math-Physics-Formula/MP-MATH-04-Thermodynamic-Entropy-Production-Grid-Failures.md",
+  },
+  "dexpi-cyclonedx-joint-graph-validation": {
+    title: "DEXPI 2.0 Extended Semantic Schema & CycloneDX 1.6 Hardware BOM Joint Graph Validation",
+    relativePath: "references/WG-05-CAD-DEXPI-2/WG-05-CAD-DEXPI-CycloneDX-Joint-Graph-Validation.md",
+  },
+  "gnn-process-anomaly-localization": {
+    title: "Gated Graph Neural Networks & Temporal Graph Attention for Real-Time Process Anomaly Localization",
+    relativePath: "references/WG-03-ML-Behaviorial_Modeling/WG-03-ML-GNN-Process-Anomaly-Localization.md",
+  },
 };
 
 export function getAllPaperSlugs(): string[] {
