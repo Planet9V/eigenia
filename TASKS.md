@@ -1,7 +1,7 @@
-<!-- verified: 2026-09-14 c2d4a04 -->
+<!-- verified: 2026-09-14 b393cd2 -->
 # Tasks
 
-_Last brought current: 2026-09-14 verified against main at `c2d4a04`. The HTML comment on line 1 is machine-read by `web/scripts/audit-tasks-stamp.mjs` and `scripts/hooks/`; update it every time this file is brought current._
+_Last brought current: 2026-09-14 verified against main at `b393cd2`. The HTML comment on line 1 is machine-read by `web/scripts/audit-tasks-stamp.mjs` and `scripts/hooks/`; update it every time this file is brought current._
 _Counts here are checked against `web/src/lib/wikiRegistry.ts`, not typed from memory._
 _Memory of record (decided 2026-09-11): this file and `memory/` at the repo root. `.taskmaster/`, `.remember/`, `.claude/memory.db`, `.swarm/` and the gateway's `memory_store` are tool caches, not sources. Rules: `memory/context/working-agreement.md`._
 
@@ -60,10 +60,14 @@ _Memory of record (decided 2026-09-11): this file and `memory/` at the repo root
     - `WG-02-DT-08`: Non-Abelian Holonomy & Geometric Phase Shifts in Microgrid Reconfigurations
     - `WG-07-TM-11`: Bayesian Stackelberg Security Games & Strategic Asset Hardening under Epistemic Uncertainty
     - `WG-08-MO-04`: Thermodynamic Simulated Annealing with Levy Flights for Global Grid Islanding Resilience
-  - [ ] **Batch 14 (Candidate Next - Tensor Spectral Blackouts, Neuromorphic SNN & Automated Smart Legal Contracts)**:
+  - [x] **Batch 14 (Tensor Spectral Blackouts, Neuromorphic SNN & Automated Smart Legal Contracts Promoted to 119 Treatises)**:
     - `WG-04-CF-06`: Higher-Order Tensor Spectral Analysis of Cascading Blackout Propagation in Continental Grids
     - `WG-03-ML-08`: Neuromorphic Spiking Neural Networks for Sub-Microsecond Arc Flash and Transient Cyber Detection
     - `WG-06-SC-05`: Autonomous Statutory Conformance Auditing via Formally Verified Smart Legal Contracts and CycloneDX VEX
+  - [ ] **Batch 15 (Candidate Next - Homological Sensor Invariants, Copula Solvency & Byzantine Consensus)**:
+    - `WG-05-CAD-05`: Differential Form Sheaves & Homological Sensor Invariants across DEXPI 2.0 and CycloneDX Graph Embeddings
+    - `WG-01-UI-06`: Extreme Value Copula Distributions for Correlated Kinetic-Cyber Catastrophic Solvency
+    - `WG-02-DT-09`: Asynchronous Distributed Consensus & Kalman Consensus Filters under Byzantine Adversaries in Substation Automation
 - [ ] **Wire PretotypeExperimentModal** - bound to `useContactForm`, imported by no page (re-verified 2026-09-11: 0 importers)
 - [ ] **`feat/what-eigenia-does`** - branch cut from main, 0 commits, no local edits. State its intent here or delete it
 - [ ] **Push `chore/memory-enforcement` and open the PR** - branch is prepared in the working tree (Cowork could not commit: `.git/index.lock` cannot be removed from its shell). Jim: `rm .git/index.lock`, `git checkout -b chore/memory-enforcement`, `git add -A -- TASKS.md memory CLAUDE.md .claude/settings.json .gitignore scripts/hooks web/scripts/audit-tasks-stamp.mjs .github/workflows/ci.yml documentation/TESTING.md`, commit, push, PR
@@ -85,6 +89,7 @@ _Memory of record (decided 2026-09-11): this file and `memory/` at the repo root
 ## Done
 
 ### 2026-09-14
+- [x] **Batch 14 Publication: Tensor Spectral Blackouts, Neuromorphic SNN & Automated Smart Legal Contracts Triad (119 Treatises)** - Promoted and integrated 3 foundational treatises (`WG-04-CF-06-Tensor-Spectral-Blackout-Propagation`, `WG-03-ML-08-Neuromorphic-Spiking-Networks-Transient-Detection`, `WG-06-SC-05-Automated-Smart-Legal-Contracts-VEX`) with 8 rounds of sequential thinking, Valyu citations, J. McKenney primary attribution, KaTeX math formulas, and 100% accessible Mermaid diagrams; expanded catalog to 119 treatises across 11 Working Groups; updated registry, papers hub, and translations; passed 11/11 audit gates, Vitest, and TypeScript.
 - [x] **Batch 13 Publication: Geometric Holonomy, Stackelberg Games & Thermodynamic Annealing Triad (116 Treatises)** - Promoted and integrated 3 foundational treatises (`WG-02-DT-08-Non-Abelian-Holonomy-Microgrids`, `WG-07-TM-11-Bayesian-Stackelberg-Security-Games`, `WG-08-MO-04-Thermodynamic-Annealing-Levy-Flights`) with 8 rounds of sequential thinking, Valyu citations, J. McKenney primary attribution, KaTeX math formulas, and 100% accessible Mermaid diagrams; expanded catalog to 116 treatises across 11 Working Groups; updated registry, papers hub, and translations; passed 11/11 audit gates, Vitest, and TypeScript.
 - [x] **Batch 12 Publication: Operator Cognition, Multi-Layer Interdependency & Clean Energy Attestations Triad (113 Treatises)** - Promoted and integrated 3 foundational treatises (`WG-01-UI-05-Operator-Cognitive-Workload-Ergonomics`, `WG-05-CAD-04-Differential-Geometry-Gas-Electric-Interdependency`, `WG-10-AN-09-Distributed-ZK-Attestation-Clean-Energy`) with 8 rounds of sequential thinking, Valyu citations, J. McKenney primary attribution, KaTeX math formulas, and 100% accessible Mermaid diagrams; expanded catalog to 113 treatises across 11 Working Groups; updated registry, papers hub, and translations; passed 11/11 audit gates, Vitest, and TypeScript.
 
