@@ -511,6 +511,18 @@ export const PAPERS_REGISTRY: Record<string, { title: string; relativePath: stri
     title: "Autonomous Statutory Conformance Auditing via Formally Verified Smart Legal Contracts and CycloneDX VEX",
     relativePath: "references/WG-06-SC-Supply-Chain-CRA/WG-06-SC-05-Automated-Smart-Legal-Contracts-VEX.md",
   },
+  "differential-form-sheaves-homological-invariants": {
+    title: "Differential Form Sheaves & Homological Sensor Invariants across DEXPI 2.0 and CycloneDX Graph Embeddings",
+    relativePath: "references/WG-05-CAD-DEXPI-2/WG-05-CAD-05-Differential-Form-Sheaves-Homological-Invariants.md",
+  },
+  "extreme-value-copulas-catastrophic-solvency": {
+    title: "Extreme Value Copula Distributions for Correlated Kinetic-Cyber Catastrophic Solvency",
+    relativePath: "references/WG-01-UI-Underwriter-insurance/WG-01-UI-06-Extreme-Value-Copulas-Catastrophic-Solvency.md",
+  },
+  "asynchronous-consensus-kalman-byzantine": {
+    title: "Asynchronous Distributed Consensus & Kalman Consensus Filters under Byzantine Adversaries in Substation Automation",
+    relativePath: "references/WG-02-DT-Digital-Twin/WG-02-DT-09-Asynchronous-Consensus-Kalman-Byzantine.md",
+  },
 };
 
 export function getAllPaperSlugs(): string[] {
