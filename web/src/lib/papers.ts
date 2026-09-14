@@ -499,6 +499,18 @@ export const PAPERS_REGISTRY: Record<string, { title: string; relativePath: stri
     title: "Thermodynamic Simulated Annealing with Levy Flights for Global Grid Islanding Resilience",
     relativePath: "references/WG-08-MO-Monte-Carlo-Application/WG-08-MO-04-Thermodynamic-Annealing-Levy-Flights.md",
   },
+  "tensor-spectral-blackout-propagation": {
+    title: "Higher-Order Tensor Spectral Analysis of Cascading Blackout Propagation in Continental Grids",
+    relativePath: "references/WG-04-CF-Cascading-Failures/WG-04-CF-06-Tensor-Spectral-Blackout-Propagation.md",
+  },
+  "neuromorphic-spiking-networks-transient-detection": {
+    title: "Neuromorphic Spiking Neural Networks for Sub-Microsecond Arc Flash and Transient Cyber Detection",
+    relativePath: "references/WG-03-ML-Behaviorial_Modeling/WG-03-ML-08-Neuromorphic-Spiking-Networks-Transient-Detection.md",
+  },
+  "automated-smart-legal-contracts-vex": {
+    title: "Autonomous Statutory Conformance Auditing via Formally Verified Smart Legal Contracts and CycloneDX VEX",
+    relativePath: "references/WG-06-SC-Supply-Chain-CRA/WG-06-SC-05-Automated-Smart-Legal-Contracts-VEX.md",
+  },
 };
 
 export function getAllPaperSlugs(): string[] {
