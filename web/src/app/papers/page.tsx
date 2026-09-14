@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect, useRef, Suspense } from "react";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { SiteChrome } from "@/components/SiteChrome";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import {
@@ -11,10 +12,11 @@ import {
   ExternalLink,
   ShieldCheck,
   ArrowRight,
+  ArrowUp,
+  ArrowDown,
   ArrowUpDown,
   Sparkles,
   Clock,
-  Hash,
   Network,
   Cpu,
   Zap,
@@ -25,6 +27,8 @@ import {
   Copy,
   Table as TableIcon,
   LayoutGrid,
+  Quote,
+  Command,
 } from "lucide-react";
 import Link from "next/link";
 import {
@@ -33,7 +37,12 @@ import {
   WikiDocumentMeta,
   WorkingGroupCategory,
 } from "@/lib/wikiRegistry";
+import {
+  getTreatiseWordCount,
+  formatReadingTime,
+} from "@/lib/wordCounts";
 import { useLanguage } from "@/context/LanguageContext";
+import CitationModal from "@/components/papers/CitationModal";
 
 const WG_ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   "WG-01-UI": ShieldAlert,
@@ -63,17 +72,114 @@ const WG_COLOR_MAP: Record<string, { badge: string; bg: string; border: string; 
   "GOV-RES": { badge: "bg-zinc-500/10 text-zinc-400 border-zinc-500/30", bg: "hover:bg-zinc-500/5", border: "border-zinc-500/20", text: "text-zinc-400" },
 };
 
-export default function PapersHubPage() {
+const QUICK_TOPICS = [
+  "DEXPI 2.0",
+  "Clayton Copula",
+  "TACAM Matrix",
+  "Taleb Series",
+  "EU CRA",
+  "Digital Twin",
+  "FMECA",
+];
+
+function PapersHubContent() {
   const { language, t } = useLanguage();
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedWg, setSelectedWg] = useState<string>("ALL");
-  const [viewMode, setViewMode] = useState<"table" | "grid">("table");
-  const [sortKey, setSortKey] = useState<"id" | "title" | "wg">("wg");
-  const [sortAsc, setSortAsc] = useState(true);
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  // Read initial values from URL query parameters
+  const paramWg = searchParams.get("wg") || "ALL";
+  const paramQ = searchParams.get("q") || "";
+  const paramView = (searchParams.get("view") === "grid" ? "grid" : "table") as "table" | "grid";
+  const paramSort = (searchParams.get("sort") || "wg") as "id" | "title" | "wg" | "words";
+  const paramDir = searchParams.get("dir") === "desc" ? false : true;
+
+  const [searchQuery, setSearchQuery] = useState(paramQ);
+  const [selectedWg, setSelectedWg] = useState<string>(paramWg);
+  const [viewMode, setViewMode] = useState<"table" | "grid">(paramView);
+  const [sortKey, setSortKey] = useState<"id" | "title" | "wg" | "words">(paramSort);
+  const [sortAsc, setSortAsc] = useState(paramDir);
   const [copiedSlug, setCopiedSlug] = useState<string | null>(null);
+  const [citingDoc, setCitingDoc] = useState<WikiDocumentMeta | null>(null);
 
   const allDocs = useMemo(() => getAllWikiDocuments(language), [language]);
   const workingGroups = useMemo(() => getAllWorkingGroups(language), [language]);
+
+  // Synchronize state with URL parameters
+  const updateUrl = (newParams: { wg?: string; q?: string; view?: string; sort?: string; dir?: string }) => {
+    const current = new URLSearchParams(Array.from(searchParams.entries()));
+
+    if (newParams.wg !== undefined) {
+      if (newParams.wg === "ALL") current.delete("wg");
+      else current.set("wg", newParams.wg);
+    }
+    if (newParams.q !== undefined) {
+      if (!newParams.q.trim()) current.delete("q");
+      else current.set("q", newParams.q.trim());
+    }
+    if (newParams.view !== undefined) {
+      if (newParams.view === "table") current.delete("view");
+      else current.set("view", newParams.view);
+    }
+    if (newParams.sort !== undefined) {
+      if (newParams.sort === "wg") current.delete("sort");
+      else current.set("sort", newParams.sort);
+    }
+    if (newParams.dir !== undefined) {
+      if (newParams.dir === "asc") current.delete("dir");
+      else current.set("dir", newParams.dir);
+    }
+
+    const searchStr = current.toString();
+    const query = searchStr ? `?${searchStr}` : "";
+    router.replace(`${pathname}${query}`, { scroll: false });
+  };
+
+  // Keep state synchronized with browser back/forward buttons
+  useEffect(() => {
+    const wg = searchParams.get("wg") || "ALL";
+    const q = searchParams.get("q") || "";
+    const view = (searchParams.get("view") === "grid" ? "grid" : "table") as "table" | "grid";
+    const sort = (searchParams.get("sort") || "wg") as "id" | "title" | "wg" | "words";
+    const dir = searchParams.get("dir") !== "desc";
+
+    setSelectedWg(wg);
+    setSearchQuery(q);
+    setViewMode(view);
+    setSortKey(sort);
+    setSortAsc(dir);
+  }, [searchParams]);
+
+  // Keyboard shortcut listener: '/' or 'Cmd+K' / 'Ctrl+K' focuses search; 'Escape' clears
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const isInputActive =
+        document.activeElement?.tagName === "INPUT" || document.activeElement?.tagName === "TEXTAREA";
+
+      if (
+        (e.key === "/" && !isInputActive) ||
+        ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k")
+      ) {
+        e.preventDefault();
+        searchInputRef.current?.focus();
+        searchInputRef.current?.select();
+      } else if (e.key === "Escape") {
+        if (document.activeElement === searchInputRef.current) {
+          if (searchQuery) {
+            setSearchQuery("");
+            updateUrl({ q: "" });
+          } else {
+            searchInputRef.current?.blur();
+          }
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [searchQuery]);
 
   const copyCanonicalUrl = (slug: string, e: React.MouseEvent) => {
     e.preventDefault();
@@ -123,18 +229,50 @@ export default function PapersHubPage() {
         comparison = titleA.localeCompare(titleB);
       } else if (sortKey === "wg") {
         comparison = a.workingGroupId.localeCompare(b.workingGroupId) || a.id.localeCompare(b.id);
+      } else if (sortKey === "words") {
+        const wordsA = getTreatiseWordCount(a.slug);
+        const wordsB = getTreatiseWordCount(b.slug);
+        comparison = wordsA - wordsB;
       }
       return sortAsc ? comparison : -comparison;
     });
   }, [allDocs, selectedWg, searchQuery, sortKey, sortAsc, language]);
 
-  const toggleSort = (key: "id" | "title" | "wg") => {
+  const toggleSort = (key: "id" | "title" | "wg" | "words") => {
+    let newDir = true;
     if (sortKey === key) {
-      setSortAsc(!sortAsc);
+      newDir = !sortAsc;
+      setSortAsc(newDir);
     } else {
       setSortKey(key);
       setSortAsc(true);
     }
+    updateUrl({ sort: key, dir: newDir ? "asc" : "desc" });
+  };
+
+  const handleSelectWg = (wgId: string) => {
+    setSelectedWg(wgId);
+    updateUrl({ wg: wgId });
+  };
+
+  const handleSearchChange = (query: string) => {
+    setSearchQuery(query);
+    updateUrl({ q: query });
+  };
+
+  const handleSelectTopic = (topic: string) => {
+    if (searchQuery.toLowerCase() === topic.toLowerCase()) {
+      setSearchQuery("");
+      updateUrl({ q: "" });
+    } else {
+      setSearchQuery(topic);
+      updateUrl({ q: topic });
+    }
+  };
+
+  const handleToggleView = (mode: "table" | "grid") => {
+    setViewMode(mode);
+    updateUrl({ view: mode });
   };
 
   return (
@@ -206,24 +344,31 @@ export default function PapersHubPage() {
         <section className="sticky top-16 z-40 bg-surface/90 backdrop-blur-md border-b border-hairline py-4 shadow-sm transition-colors">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-3">
             <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
-              {/* Search Bar */}
+              {/* Search Bar with Keyboard Hotkey Indicator */}
               <div className="relative flex-1">
                 <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" />
                 <input
+                  ref={searchInputRef}
                   type="text"
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={(e) => handleSearchChange(e.target.value)}
                   placeholder={t("papers_search_placeholder")}
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-canvas border border-hairline text-sm text-primary placeholder-muted focus:outline-none focus:ring-2 focus:ring-dutchOrange/50 transition-all"
+                  className="w-full pl-10 pr-24 py-2.5 rounded-xl bg-canvas border border-hairline text-sm text-primary placeholder-muted focus:outline-none focus:ring-2 focus:ring-dutchOrange/50 transition-all"
                 />
-                {searchQuery && (
-                  <button
-                    onClick={() => setSearchQuery("")}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-mono text-muted hover:text-primary"
-                  >
-                    Clear
-                  </button>
-                )}
+                <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
+                  {searchQuery ? (
+                    <button
+                      onClick={() => handleSearchChange("")}
+                      className="text-xs font-mono text-muted hover:text-primary px-1"
+                    >
+                      Clear
+                    </button>
+                  ) : (
+                    <span className="hidden sm:inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[10px] font-mono bg-surface border border-hairline rounded text-muted">
+                      <Command className="w-2.5 h-2.5" /> K
+                    </span>
+                  )}
+                </div>
               </div>
 
               {/* View Switcher & Result Count */}
@@ -234,7 +379,7 @@ export default function PapersHubPage() {
 
                 <div className="flex items-center bg-canvas border border-hairline rounded-xl p-0.5">
                   <button
-                    onClick={() => setViewMode("table")}
+                    onClick={() => handleToggleView("table")}
                     className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${
                       viewMode === "table"
                         ? "bg-surface shadow-sm text-dutchOrange font-bold"
@@ -246,7 +391,7 @@ export default function PapersHubPage() {
                     <span className="hidden md:inline">{t("papers_view_table")}</span>
                   </button>
                   <button
-                    onClick={() => setViewMode("grid")}
+                    onClick={() => handleToggleView("grid")}
                     className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${
                       viewMode === "grid"
                         ? "bg-surface shadow-sm text-dutchOrange font-bold"
@@ -261,10 +406,33 @@ export default function PapersHubPage() {
               </div>
             </div>
 
+            {/* Quick-Pill Search Tags */}
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs font-mono scrollbar-none">
+              <span className="text-muted text-[11px] whitespace-nowrap mr-1 hidden sm:inline">
+                {t("papers_quick_topics")}
+              </span>
+              {QUICK_TOPICS.map((topic) => {
+                const isActive = searchQuery.toLowerCase() === topic.toLowerCase();
+                return (
+                  <button
+                    key={topic}
+                    onClick={() => handleSelectTopic(topic)}
+                    className={`px-2.5 py-1 rounded-lg text-[11px] whitespace-nowrap border transition-all ${
+                      isActive
+                        ? "bg-dutchOrange text-white border-dutchOrange font-bold shadow-sm"
+                        : "bg-surface/60 border-hairline text-muted hover:text-primary hover:border-muted"
+                    }`}
+                  >
+                    {topic}
+                  </button>
+                );
+              })}
+            </div>
+
             {/* Working Group Horizontal Filter Pills */}
             <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs font-mono scrollbar-none">
               <button
-                onClick={() => setSelectedWg("ALL")}
+                onClick={() => handleSelectWg("ALL")}
                 className={`px-3 py-1.5 rounded-lg whitespace-nowrap border transition-all ${
                   selectedWg === "ALL"
                     ? "bg-primary text-canvas border-primary font-bold shadow-sm"
@@ -282,7 +450,7 @@ export default function PapersHubPage() {
                 return (
                   <button
                     key={wg.id}
-                    onClick={() => setSelectedWg(wg.id)}
+                    onClick={() => handleSelectWg(wg.id)}
                     className={`px-3 py-1.5 rounded-lg whitespace-nowrap border transition-all flex items-center gap-1.5 ${
                       isSelected
                         ? `${colors.badge} border-current font-bold shadow-sm`
@@ -309,6 +477,7 @@ export default function PapersHubPage() {
                 onClick={() => {
                   setSearchQuery("");
                   setSelectedWg("ALL");
+                  updateUrl({ q: "", wg: "ALL" });
                 }}
                 className="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-dutchOrange text-white font-mono text-xs font-bold hover:bg-dutchOrange/90 transition-colors shadow-sm"
               >
@@ -321,33 +490,74 @@ export default function PapersHubPage() {
               <table className="w-full text-left border-collapse">
                 <thead>
                   <tr className="border-b border-hairline bg-canvas/60 text-[11px] font-mono text-muted uppercase tracking-wider">
+                    {/* Sortable Ref Code */}
                     <th
-                      className="py-3.5 px-4 cursor-pointer hover:text-primary transition-colors"
+                      className="py-3.5 px-4 cursor-pointer hover:text-primary transition-colors whitespace-nowrap"
                       onClick={() => toggleSort("id")}
                     >
                       <div className="flex items-center gap-1.5">
-                        <span>{t("papers_col_id")}</span>
-                        <ArrowUpDown className="w-3 h-3" />
+                        <span className={sortKey === "id" ? "text-dutchOrange font-bold" : ""}>
+                          {t("papers_col_id")}
+                        </span>
+                        {sortKey === "id" ? (
+                          sortAsc ? <ArrowUp className="w-3.5 h-3.5 text-dutchOrange" /> : <ArrowDown className="w-3.5 h-3.5 text-dutchOrange" />
+                        ) : (
+                          <ArrowUpDown className="w-3 h-3 text-muted/60 opacity-60" />
+                        )}
                       </div>
                     </th>
+
+                    {/* Sortable Title */}
                     <th
                       className="py-3.5 px-4 cursor-pointer hover:text-primary transition-colors"
                       onClick={() => toggleSort("title")}
                     >
                       <div className="flex items-center gap-1.5">
-                        <span>{t("papers_col_title")}</span>
-                        <ArrowUpDown className="w-3 h-3" />
+                        <span className={sortKey === "title" ? "text-dutchOrange font-bold" : ""}>
+                          {t("papers_col_title")}
+                        </span>
+                        {sortKey === "title" ? (
+                          sortAsc ? <ArrowUp className="w-3.5 h-3.5 text-dutchOrange" /> : <ArrowDown className="w-3.5 h-3.5 text-dutchOrange" />
+                        ) : (
+                          <ArrowUpDown className="w-3 h-3 text-muted/60 opacity-60" />
+                        )}
                       </div>
                     </th>
+
+                    {/* Sortable Working Group */}
                     <th
-                      className="py-3.5 px-4 cursor-pointer hover:text-primary transition-colors"
+                      className="py-3.5 px-4 cursor-pointer hover:text-primary transition-colors whitespace-nowrap"
                       onClick={() => toggleSort("wg")}
                     >
                       <div className="flex items-center gap-1.5">
-                        <span>{t("papers_col_wg")}</span>
-                        <ArrowUpDown className="w-3 h-3" />
+                        <span className={sortKey === "wg" ? "text-dutchOrange font-bold" : ""}>
+                          {t("papers_col_wg")}
+                        </span>
+                        {sortKey === "wg" ? (
+                          sortAsc ? <ArrowUp className="w-3.5 h-3.5 text-dutchOrange" /> : <ArrowDown className="w-3.5 h-3.5 text-dutchOrange" />
+                        ) : (
+                          <ArrowUpDown className="w-3 h-3 text-muted/60 opacity-60" />
+                        )}
                       </div>
                     </th>
+
+                    {/* Sortable Read Time & Words */}
+                    <th
+                      className="py-3.5 px-4 cursor-pointer hover:text-primary transition-colors whitespace-nowrap hidden sm:table-cell"
+                      onClick={() => toggleSort("words")}
+                    >
+                      <div className="flex items-center gap-1.5">
+                        <span className={sortKey === "words" ? "text-dutchOrange font-bold" : ""}>
+                          {t("papers_col_read_time")}
+                        </span>
+                        {sortKey === "words" ? (
+                          sortAsc ? <ArrowUp className="w-3.5 h-3.5 text-dutchOrange" /> : <ArrowDown className="w-3.5 h-3.5 text-dutchOrange" />
+                        ) : (
+                          <ArrowUpDown className="w-3 h-3 text-muted/60 opacity-60" />
+                        )}
+                      </div>
+                    </th>
+
                     <th className="py-3.5 px-4 hidden lg:table-cell">{t("papers_col_canonical")}</th>
                     <th className="py-3.5 px-4 text-right">{t("papers_col_actions")}</th>
                   </tr>
@@ -363,6 +573,7 @@ export default function PapersHubPage() {
                     const subtitle = language === "nl" && doc.subtitleNl ? doc.subtitleNl : doc.subtitle;
                     const badge = language === "nl" && doc.badgeNl ? doc.badgeNl : doc.badge;
                     const isCopied = copiedSlug === doc.slug;
+                    const wordCount = getTreatiseWordCount(doc.slug);
 
                     return (
                       <tr
@@ -423,6 +634,16 @@ export default function PapersHubPage() {
                           </div>
                         </td>
 
+                        {/* Reading Time & Words Column */}
+                        <td className="py-4 px-4 align-top whitespace-nowrap hidden sm:table-cell">
+                          <div className="text-xs font-mono font-semibold text-primary">
+                            {formatReadingTime(wordCount, language)}
+                          </div>
+                          <div className="text-[10px] font-mono text-muted mt-0.5">
+                            {wordCount.toLocaleString()} {t("papers_words")}
+                          </div>
+                        </td>
+
                         {/* Canonical URL Column */}
                         <td className="py-4 px-4 align-top hidden lg:table-cell whitespace-nowrap">
                           <div className="flex items-center gap-1.5">
@@ -445,7 +666,18 @@ export default function PapersHubPage() {
 
                         {/* Actions Column */}
                         <td className="py-4 px-4 align-top text-right whitespace-nowrap">
-                          <div className="flex items-center justify-end gap-2">
+                          <div className="flex items-center justify-end gap-1.5">
+                            {/* Cite Button */}
+                            <button
+                              onClick={() => setCitingDoc(doc)}
+                              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-canvas border border-hairline text-muted hover:text-dutchOrange text-xs font-mono transition-colors"
+                              title={t("papers_cite_title")}
+                            >
+                              <Quote className="w-3 h-3" />
+                              <span className="hidden xl:inline">{t("papers_cite_btn")}</span>
+                            </button>
+
+                            {/* Read Paper Link */}
                             <Link
                               href={`/papers/${doc.slug}`}
                               className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-dutchOrange/10 border border-dutchOrange/30 text-dutchOrange text-xs font-mono font-semibold hover:bg-dutchOrange hover:text-white transition-all shadow-sm"
@@ -453,12 +685,13 @@ export default function PapersHubPage() {
                               <span>{t("papers_btn_read")}</span>
                               <ArrowRight className="w-3 h-3" />
                             </Link>
+
+                            {/* Wiki Link */}
                             <Link
                               href={`/wiki?slug=${doc.slug}`}
-                              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-canvas border border-hairline text-muted hover:text-primary text-xs font-mono transition-colors"
+                              className="inline-flex items-center gap-1 px-2 py-1.5 rounded-lg bg-canvas border border-hairline text-muted hover:text-primary text-xs font-mono transition-colors"
                               title={t("papers_btn_wiki")}
                             >
-                              <span>{t("papers_btn_wiki")}</span>
                               <ExternalLink className="w-3 h-3" />
                             </Link>
                           </div>
@@ -483,6 +716,7 @@ export default function PapersHubPage() {
                 const subtitle = language === "nl" && doc.subtitleNl ? doc.subtitleNl : doc.subtitle;
                 const badge = language === "nl" && doc.badgeNl ? doc.badgeNl : doc.badge;
                 const isCopied = copiedSlug === doc.slug;
+                const wordCount = getTreatiseWordCount(doc.slug);
 
                 return (
                   <div
@@ -492,12 +726,20 @@ export default function PapersHubPage() {
                     <div>
                       {/* Card Header */}
                       <div className="flex items-center justify-between gap-2 mb-3">
-                        <span className={`text-[10px] font-mono font-medium px-2 py-0.5 rounded border ${colors.badge}`}>
-                          {doc.workingGroupId}
-                        </span>
-                        <div className="flex items-center gap-1 text-muted text-xs font-mono">
+                        <div className="flex items-center gap-1.5">
+                          <span className={`text-[10px] font-mono font-medium px-2 py-0.5 rounded border ${colors.badge}`}>
+                            {doc.workingGroupId}
+                          </span>
+                          <span className="font-mono text-[11px] text-muted">
+                            {doc.id}
+                          </span>
+                        </div>
+                        <div
+                          className="flex items-center gap-1 text-muted text-xs font-mono"
+                          title={`${wordCount.toLocaleString()} ${t("papers_words")}`}
+                        >
                           <Clock className="w-3 h-3" />
-                          <span>8 min</span>
+                          <span>{formatReadingTime(wordCount, language)}</span>
                         </div>
                       </div>
 
@@ -536,7 +778,17 @@ export default function PapersHubPage() {
                         </button>
                       </div>
 
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-1.5">
+                        {/* Cite Button */}
+                        <button
+                          onClick={() => setCitingDoc(doc)}
+                          className="p-2 rounded-lg bg-canvas border border-hairline text-muted hover:text-dutchOrange transition-colors"
+                          title={t("papers_cite_title")}
+                        >
+                          <Quote className="w-3.5 h-3.5" />
+                        </button>
+
+                        {/* Wiki Link */}
                         <Link
                           href={`/wiki?slug=${doc.slug}`}
                           className="p-2 rounded-lg bg-canvas border border-hairline text-muted hover:text-primary transition-colors"
@@ -544,6 +796,8 @@ export default function PapersHubPage() {
                         >
                           <BookOpen className="w-3.5 h-3.5" />
                         </Link>
+
+                        {/* Read Link */}
                         <Link
                           href={`/papers/${doc.slug}`}
                           className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-dutchOrange text-white text-xs font-mono font-semibold hover:bg-dutchOrange/90 transition-colors shadow-sm"
@@ -558,33 +812,34 @@ export default function PapersHubPage() {
               })}
             </div>
           )}
-
-          {/* Canonical Index Explanatory Note */}
-          <div className="mt-16 p-6 sm:p-8 rounded-2xl bg-surface border border-hairline">
-            <div className="flex items-start gap-4">
-              <div className="p-2.5 rounded-xl bg-dutchOrange/10 border border-dutchOrange/30 text-dutchOrange shrink-0">
-                <ShieldCheck className="w-5 h-5" />
-              </div>
-              <div>
-                <h4 className="text-sm font-bold text-primary font-mono tracking-wide uppercase">
-                  Canonical Citation Protocol & Immutable URI Standards
-                </h4>
-                <p className="mt-2 text-xs sm:text-sm text-muted leading-relaxed">
-                  Every document listed in this index serves as the definitive, peer-reviewed canonical source for academic, regulatory, and actuarial citation. All papers are published under the open-access Eigenia Research Initiative. While the interactive wiki at{" "}
-                  <Link href="/wiki" className="text-dutchOrange hover:underline font-mono">
-                    /wiki
-                  </Link>{" "}
-                  offers a live workspace and hierarchical table of contents, every canonical paper at{" "}
-                  <code className="text-xs font-mono text-primary bg-canvas px-1.5 py-0.5 rounded border border-hairline">
-                    https://eigenia.nl/papers/[slug]
-                  </code>{" "}
-                  guarantees permanent, version-controlled reference endpoints for legal compliance and Lloyd&apos;s reinsurance underwriting.
-                </p>
-              </div>
-            </div>
-          </div>
         </main>
+
+        {/* Global Citation Modal */}
+        <CitationModal
+          doc={citingDoc}
+          isOpen={!!citingDoc}
+          onClose={() => setCitingDoc(null)}
+        />
       </SiteChrome>
     </div>
+  );
+}
+
+function PapersHubLoading() {
+  return (
+    <div className="min-h-screen bg-canvas flex items-center justify-center font-mono text-xs text-primary">
+      <div className="flex items-center gap-2">
+        <Layers className="h-4 w-4 animate-spin text-dutchOrange" />
+        <span>Loading Treatises Hub...</span>
+      </div>
+    </div>
+  );
+}
+
+export default function PapersHubPage() {
+  return (
+    <Suspense fallback={<PapersHubLoading />}>
+      <PapersHubContent />
+    </Suspense>
   );
 }
