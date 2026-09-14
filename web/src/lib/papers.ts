@@ -451,6 +451,18 @@ export const PAPERS_REGISTRY: Record<string, { title: string; relativePath: stri
     title: "Quantum-Accelerated Annealing & Ising Hamiltonians for Optimal Grid Islanding Schedules",
     relativePath: "references/WG-08-MO-Monte-Carlo-Application/WG-08-MO-03-Quantum-Annealing-Ising-Grid-Islanding.md",
   },
+  "actuarial-solvency-catastrophe-bonds-microgrids": {
+    title: "Actuarial Solvency & Dynamic Catastrophe Bonds for Renewable Microgrids",
+    relativePath: "references/WG-01-UI-Underwriter-insurance/WG-01-UI-04-Actuarial-Solvency-Catastrophe-Bonds-Microgrids.md",
+  },
+  "cryptographic-firmware-provenance-hardware-rot": {
+    title: "Cryptographic Firmware Provenance & Hardware Root of Trust under CRA Essential Requirements",
+    relativePath: "references/WG-06-SC-Supply-Chain-CRA/WG-06-SC-04-Cryptographic-Firmware-Provenance-Hardware-RoT.md",
+  },
+  "symplectic-cohomology-floer-homology-invariant-manifolds": {
+    title: "Symplectic Cohomology & Floer Homology in Cyber-Physical Invariant Manifolds",
+    relativePath: "references/MP-Math-Physics-Formula/MP-MATH-06-Symplectic-Cohomology-Floer-Homology-Invariant-Manifolds.md",
+  },
 };
 
 export function getAllPaperSlugs(): string[] {
