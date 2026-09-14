@@ -29,6 +29,7 @@ import {
   LayoutGrid,
   Quote,
   Command,
+  Radio,
 } from "lucide-react";
 import Link from "next/link";
 import {
@@ -53,6 +54,8 @@ const WG_ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> =
   "WG-06-SC": ShieldCheck,
   "WG-07-TM": Boxes,
   "WG-08-MO": Sparkles,
+  "WG-09-MPN": Radio,
+  "WG-09": Radio,
   "WG-10-AN": Network,
   "MP-MATH": FileText,
   "GOV-RES": BookOpen,
@@ -67,6 +70,8 @@ const WG_COLOR_MAP: Record<string, { badge: string; bg: string; border: string; 
   "WG-06-SC": { badge: "bg-orange-500/10 text-orange-500 border-orange-500/30", bg: "hover:bg-orange-500/5", border: "border-orange-500/20", text: "text-orange-500" },
   "WG-07-TM": { badge: "bg-cyan-500/10 text-cyan-500 border-cyan-500/30", bg: "hover:bg-cyan-500/5", border: "border-cyan-500/20", text: "text-cyan-500" },
   "WG-08-MO": { badge: "bg-indigo-500/10 text-indigo-500 border-indigo-500/30", bg: "hover:bg-indigo-500/5", border: "border-indigo-500/20", text: "text-indigo-500" },
+  "WG-09-MPN": { badge: "bg-violet-500/10 text-violet-500 border-violet-500/30", bg: "hover:bg-violet-500/5", border: "border-violet-500/20", text: "text-violet-500" },
+  "WG-09": { badge: "bg-violet-500/10 text-violet-500 border-violet-500/30", bg: "hover:bg-violet-500/5", border: "border-violet-500/20", text: "text-violet-500" },
   "WG-10-AN": { badge: "bg-teal-500/10 text-teal-500 border-teal-500/30", bg: "hover:bg-teal-500/5", border: "border-teal-500/20", text: "text-teal-500" },
   "MP-MATH": { badge: "bg-rose-500/10 text-rose-500 border-rose-500/30", bg: "hover:bg-rose-500/5", border: "border-rose-500/20", text: "text-rose-500" },
   "GOV-RES": { badge: "bg-zinc-500/10 text-zinc-400 border-zinc-500/30", bg: "hover:bg-zinc-500/5", border: "border-zinc-500/20", text: "text-zinc-400" },

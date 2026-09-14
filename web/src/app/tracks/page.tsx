@@ -148,6 +148,11 @@ export default function TracksPage() {
                             <h3 className="text-base font-bold text-primary leading-tight">
                               {wg.title}
                             </h3>
+                            {wg.subtitle && (
+                              <p className="text-xs text-dutchOrange font-medium mt-0.5 leading-snug">
+                                {language === "nl" && wg.subtitleNl ? wg.subtitleNl : wg.subtitle}
+                              </p>
+                            )}
                           </div>
                         </div>
 
@@ -235,6 +240,11 @@ export default function TracksPage() {
                           <h3 className="text-base font-bold text-primary">
                             {wg.title}
                           </h3>
+                          {wg.subtitle && (
+                            <p className="text-xs text-dutchOrange font-medium mt-0.5 leading-snug">
+                              {language === "nl" && wg.subtitleNl ? wg.subtitleNl : wg.subtitle}
+                            </p>
+                          )}
                         </div>
                       </div>
 
