@@ -1,12 +1,13 @@
-<!-- verified: 2026-09-14 235d89f -->
+<!-- verified: 2026-09-14 f8297ac -->
 # Tasks
 
-_Last brought current: 2026-09-14 verified against main at `235d89f`. The HTML comment on line 1 is machine-read by `web/scripts/audit-tasks-stamp.mjs` and `scripts/hooks/`; update it every time this file is brought current._
+_Last brought current: 2026-09-14 verified against main at `f8297ac`. The HTML comment on line 1 is machine-read by `web/scripts/audit-tasks-stamp.mjs` and `scripts/hooks/`; update it every time this file is brought current._
 _Counts here are checked against `web/src/lib/wikiRegistry.ts`, not typed from memory._
 _Memory of record (decided 2026-09-11): this file and `memory/` at the repo root. `.taskmaster/`, `.remember/`, `.claude/memory.db`, `.swarm/` and the gateway's `memory_store` are tool caches, not sources. Rules: `memory/context/working-agreement.md`._
 
 ## Active
 
+- [x] **Working Group Restructure & 122 Treatises Re-Parenting (Option A, WG-09-MPN)** — Merged PR #54 (`f8297ac`). Restructured working groups onto the Instrument-and-Outcome taxonomy scheme, inaugurated `WG-09-MPN` (McKenney-Lacanian Psychometric Notation, 5 treatises), retained `WG-08-MO` (Monte Carlo / Annealing, 4 treatises per Option A), re-parented `supply-chain-eu-cra-standards` to `WG-06-SC` (Option A), and re-parented 2 operator decision treatises to `WG-03-ML`. All 7 mathematical invariants verified (0 file moves, 0 URL changes, 0 lost treatises, 12 groups, 122 total treatises).
 - [ ] **Master Scientific Corpus Expansion (Unconstrained Roadmap)** - Phased promotion of candidate monographs across Hyperscale (8 chapters), TACAM (3 chapters), Multi-BOM CRA (5 chapters), Research Equations (7 chapters), and OT Workbooks (3 chapters). Mandatory gates: 5 rounds of sequential thinking per paper, Valyu research for gaps, J. McKenney primary author, 0 ASCII art, 0 broken LaTeX, IMRAD long-form prose, bilingual metadata, and strict MPN quarantine.
   - [x] **Batch 1 (High-Impact Triad Promoted to 80 Treatises)**:
     - `WG-06-SC-02`: OT Hardware CRA Applicability & Cyber Resilience Act Compliance Architecture
