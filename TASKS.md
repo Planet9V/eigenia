@@ -36,10 +36,14 @@ _Memory of record (decided 2026-09-11): this file and `memory/` at the repo root
     - `WG-05-CAD-03`: Formal Category-Theoretic Pushouts & Pullbacks in Digital Twin Graph Synthesis
     - `WG-08-MO-02`: Monte Carlo Attack Graph Path Sampling with Stratified Latin Hypercube Convergence
     - `WG-07-TM-08`: Dynamic Adversarial Game Theory & Nash Equilibrium Defense Horizons in Purdue Model Enclaves
-  - [ ] **Batch 8 (Active Next - Expanding toward 101 Treatises)**:
-    - `WG-03-ML-07`: Latent Dirichlet Allocation & Bayesian Belief Networks for Operator Cyber-Physical Fatigue Detection
-    - `WG-04-CF-04`: Soliton Wavefront Propagation in High-Voltage Direct Current (HVDC) Interconnects
+  - [x] **Batch 8 (Operator Cognition, Non-Linear Dynamics & Zero-Knowledge Assurance Triad Promoted to 101 Treatises)**:
+    - `WG-03-ML-07`: Latent Dirichlet Allocation & Dynamic Bayesian Networks for Operator Cyber-Physical Fatigue Detection
+    - `WG-04-CF-04`: Soliton Wavefront Propagation & Non-Linear Shock Dynamics in High-Voltage Direct Current (HVDC) Interconnects
     - `WG-10-AN-08`: Programmatic Procurement Verification APIs & Zero-Knowledge Attestations for Industrial Machinery
+  - [ ] **Batch 9 (Candidate Next - Expanding toward 104 Treatises)**:
+    - `WG-02-DT-06`: Symplectic Integrators & Energy-Conserving Hamiltonian Physics Engines for Substation Digital Twins
+    - `WG-07-TM-09`: Hypergraph Percolation & Higher-Order Simplicial Contagion in Air-Gapped Industrial Networks
+    - `WG-08-MO-03`: Quantum-Accelerated Annealing & Ising Hamiltonians for Optimal Grid Islanding Schedules
 - [ ] **Wire PretotypeExperimentModal** - bound to `useContactForm`, imported by no page (re-verified 2026-09-11: 0 importers)
 - [ ] **`feat/what-eigenia-does`** - branch cut from main, 0 commits, no local edits. State its intent here or delete it
 - [ ] **Push `chore/memory-enforcement` and open the PR** - branch is prepared in the working tree (Cowork could not commit: `.git/index.lock` cannot be removed from its shell). Jim: `rm .git/index.lock`, `git checkout -b chore/memory-enforcement`, `git add -A -- TASKS.md memory CLAUDE.md .claude/settings.json .gitignore scripts/hooks web/scripts/audit-tasks-stamp.mjs .github/workflows/ci.yml documentation/TESTING.md`, commit, push, PR
