@@ -415,6 +415,18 @@ export const PAPERS_REGISTRY: Record<string, { title: string; relativePath: stri
     title: "The Omnipresent Bill of Materials: Full-Spectrum CycloneDX 1.6+ for Offline Systems Assurance",
     relativePath: "references/WG-10-Assurance-Network/WG-10-AN-07-Omnipresent-BOM-CycloneDX-Assurance.md",
   },
+  "categorical-pushouts-pullbacks-digital-twin": {
+    title: "Category-Theoretic Pushouts & Pullbacks in Digital Twin Graph Synthesis",
+    relativePath: "references/WG-05-CAD-DEXPI-2/WG-05-CAD-Categorical-Pushouts-Pullbacks-Digital-Twin.md",
+  },
+  "stratified-latin-hypercube-attack-graphs": {
+    title: "Graph-Structured Latin Hypercube Sampling: Accelerated Monte Carlo Convergence on Industrial Attack Graphs",
+    relativePath: "references/WG-08-MO-Monte-Carlo-Application/WG-08-MO-02-Stratified-Latin-Hypercube-Attack-Graphs.md",
+  },
+  "adversarial-game-theory-purdue-enclaves": {
+    title: "Dynamic Adversarial Game Theory & Nash Equilibrium Defense Horizons in Purdue Model Enclaves",
+    relativePath: "references/WG-07-TM-Threat-Modeling/WG-07-TM-08-Adversarial-Game-Theory-Purdue-Enclaves.md",
+  },
 };
 
 export function getAllPaperSlugs(): string[] {
