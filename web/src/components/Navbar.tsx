@@ -113,32 +113,56 @@ export const Navbar: React.FC = () => {
                       href="/wiki?wg=WG-01-UI"
                       className="block p-2.5 rounded-xl hover:bg-subtle transition-colors"
                     >
-                      <span className="text-dutchOrange font-bold block text-[11px]">WG-01 // Actuarial & Underwriting</span>
-                      <span className="text-primary block font-sans text-xs">{wgCount("WG-01-UI")} Treatises: COPE, Clayton Copulas, War Exclusions</span>
+                      <span className="text-dutchOrange font-bold block text-[11px]">WG-01 // ALE / ROSI</span>
+                      <span className="text-primary block font-sans text-xs">{wgCount("WG-01-UI")} Treatises: Physical Asset Risk & Underwriting</span>
                     </Link>
 
                     <Link
                       href="/wiki?wg=WG-02-DT"
                       className="block p-2.5 rounded-xl hover:bg-subtle transition-colors"
                     >
-                      <span className="text-dutchOrange font-bold block text-[11px]">WG-02 // Digital Twin & Taleb Series</span>
-                      <span className="text-primary block font-sans text-xs">{wgCount("WG-02-DT")} Treatises: Taleb Series I-V, 3.2M Graph Topology</span>
+                      <span className="text-dutchOrange font-bold block text-[11px]">WG-02 // Digital Twin Foundations</span>
+                      <span className="text-primary block font-sans text-xs">{wgCount("WG-02-DT")} Treatises: Taleb Series & 7-Layer Physics</span>
+                    </Link>
+
+                    <Link
+                      href="/wiki?wg=WG-05-CAD"
+                      className="block p-2.5 rounded-xl hover:bg-subtle transition-colors"
+                    >
+                      <span className="text-dutchOrange font-bold block text-[11px]">WG-05 // G_CPDT</span>
+                      <span className="text-primary block font-sans text-xs">{wgCount("WG-05-CAD")} Treatises: Multigraph & DEXPI Standards</span>
+                    </Link>
+
+                    <Link
+                      href="/wiki?wg=WG-06-SC"
+                      className="block p-2.5 rounded-xl hover:bg-subtle transition-colors"
+                    >
+                      <span className="text-dutchOrange font-bold block text-[11px]">WG-06 // CRA / Supply Chain</span>
+                      <span className="text-primary block font-sans text-xs">{wgCount("WG-06-SC")} Treatises: Statutory Conformance & CycloneDX</span>
                     </Link>
 
                     <Link
                       href="/wiki?wg=WG-07-TM"
                       className="block p-2.5 rounded-xl hover:bg-subtle transition-colors"
                     >
-                      <span className="text-dutchOrange font-bold block text-[11px]">WG-07 // Threat Modeling & TACAM</span>
-                      <span className="text-primary block font-sans text-xs">TACAM 7D Matrix & ATQ 12-Factor Scoring</span>
+                      <span className="text-dutchOrange font-bold block text-[11px]">WG-07 // TACAM / ATQ</span>
+                      <span className="text-primary block font-sans text-xs">{wgCount("WG-07-TM")} Treatises: TACAM Matrix & Adversary Scoring</span>
                     </Link>
 
                     <Link
                       href="/wiki?wg=WG-04-CF"
                       className="block p-2.5 rounded-xl hover:bg-subtle transition-colors"
                     >
-                      <span className="text-dutchOrange font-bold block text-[11px]">WG-04 // Cascading Failures</span>
-                      <span className="text-primary block font-sans text-xs">Death Wobble & Energy Grid Instability</span>
+                      <span className="text-dutchOrange font-bold block text-[11px]">WG-04 // Grid Dynamics</span>
+                      <span className="text-primary block font-sans text-xs">{wgCount("WG-04-CF")} Treatises: Cascading Failure & Continental Grids</span>
+                    </Link>
+
+                    <Link
+                      href="/wiki?wg=WG-09-MPN"
+                      className="block p-2.5 rounded-xl hover:bg-subtle transition-colors"
+                    >
+                      <span className="text-dutchOrange font-bold block text-[11px]">WG-09 // MPN</span>
+                      <span className="text-primary block font-sans text-xs">{wgCount("WG-09-MPN")} Treatises: McKenney-Lacan Notation</span>
                     </Link>
 
                     <div className="pt-2 border-t border-hairline text-center">
