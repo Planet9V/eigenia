@@ -463,6 +463,18 @@ export const PAPERS_REGISTRY: Record<string, { title: string; relativePath: stri
     title: "Symplectic Cohomology & Floer Homology in Cyber-Physical Invariant Manifolds",
     relativePath: "references/MP-Math-Physics-Formula/MP-MATH-06-Symplectic-Cohomology-Floer-Homology-Invariant-Manifolds.md",
   },
+  "lie-algebraic-symmetries-invariant-observers": {
+    title: "Lie-Algebraic Symmetries & Invariant Energy Observers for Converter-Dominated Distribution Grids",
+    relativePath: "references/WG-02-DT-Digital-Twin/WG-02-DT-07-Lie-Algebraic-Symmetries-Invariant-Observers.md",
+  },
+  "algorithmic-mechanism-design-bayesian-persuasion": {
+    title: "Algorithmic Mechanism Design & Bayesian Persuasion in Adversarial Incident Disclosure",
+    relativePath: "references/WG-07-TM-Threat-Modeling/WG-07-TM-10-Algorithmic-Mechanism-Design-Bayesian-Persuasion.md",
+  },
+  "nonlinear-soliton-shocks-viscoelastic-damping": {
+    title: "Non-Linear Soliton Shocks & Fractional Viscoelastic Damping in Gas Pipeline Networks",
+    relativePath: "references/WG-04-CF-Cascading-Failures/WG-04-CF-05-Nonlinear-Soliton-Shocks-Viscoelastic-Damping.md",
+  },
 };
 
 export function getAllPaperSlugs(): string[] {
