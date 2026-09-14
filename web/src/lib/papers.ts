@@ -427,6 +427,18 @@ export const PAPERS_REGISTRY: Record<string, { title: string; relativePath: stri
     title: "Dynamic Adversarial Game Theory & Nash Equilibrium Defense Horizons in Purdue Model Enclaves",
     relativePath: "references/WG-07-TM-Threat-Modeling/WG-07-TM-08-Adversarial-Game-Theory-Purdue-Enclaves.md",
   },
+  "operator-fatigue-alarm-floods-bayesian": {
+    title: "Latent Dirichlet Allocation & Dynamic Bayesian Networks for Operator Cyber-Physical Fatigue Detection",
+    relativePath: "references/WG-03-ML-Behaviorial_Modeling/WG-03-ML-07-Operator-Fatigue-Alarm-Floods-Bayesian.md",
+  },
+  "soliton-wavefront-hvdc-interconnects": {
+    title: "Soliton Wavefront Propagation & Non-Linear Shock Dynamics in High-Voltage Direct Current (HVDC) Interconnects",
+    relativePath: "references/WG-04-CF-Cascading-Failures/WG-04-CF-04-Soliton-Wavefront-HVDC-Interconnects.md",
+  },
+  "zero-knowledge-procurement-attestations": {
+    title: "Programmatic Procurement Verification APIs & Zero-Knowledge Attestations for Industrial Machinery",
+    relativePath: "references/WG-10-Assurance-Network/WG-10-AN-08-Zero-Knowledge-Procurement-Attestations.md",
+  },
 };
 
 export function getAllPaperSlugs(): string[] {
