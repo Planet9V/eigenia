@@ -241,8 +241,10 @@ export const translations = {
     // Tracks Page UI Keys
     tracks_page_eyebrow: "Research Programme & Working Group Output",
     tracks_page_title: "Sovereign Research Tracks",
-    tracks_page_desc: "Explore all 11 Eigenia Lab Working Groups spanning 113 published treatises. Select any Working Group card below to open the complete Research Wiki Engine.",
-    tracks_open_wiki_btn: "Open Research Wiki (113 Treatises)",
+    tracks_page_desc: "Explore all 11 Eigenia Lab Working Groups spanning 116 published treatises. Select any Working Group card below to open the complete Research Wiki Engine.",
+    tracks_open_wiki_btn: "Open Research Wiki (116 Treatises)",
+    tracks_card_click_hint: "Click to explore treatises in Research Wiki",
+    tracks_view_all_link: "Open Sovereign Research Wiki →",
     tracks_view_bento: "Bento Grid View",
     tracks_view_lines: "Lines / List View",
     tracks_published_treatises: "Published Treatises",
@@ -253,8 +255,10 @@ export const translations = {
 
     // Papers Hub UI Keys
     papers_hub_eyebrow: "Canonical Research Corpus // Open Treatises Hub",
-    papers_hub_title: "Eigenia Treatises Hub",
-    papers_hub_desc: "Canonical index of all 113 peer-assessed scientific treatises across 11 Working Groups. Every paper is published with an immutable canonical URI, full mathematical formalization, and cross-ontology links.",
+    papers_hub_title: "Eigenia Research Treatises Hub",
+    papers_hub_subtitle: "Peer-Assessed Scientific Papers, Applied Mathematical Physics & Technical Standards",
+    papers_hub_badge: "Canonical Publications",
+    papers_hub_desc: "Canonical index of all 116 peer-assessed scientific treatises across 11 Working Groups. Every paper is published with an immutable canonical URI, full mathematical formalization, and cross-ontology links.",
     papers_hub_stat_treatises: "Canonical Treatises",
     papers_hub_stat_groups: "Working Groups",
     papers_hub_stat_words: "Corpus Words",
@@ -516,8 +520,10 @@ export const translations = {
     // Tracks Page UI Keys
     tracks_page_eyebrow: "Onderzoeksprogramma & Werkgroepen Output",
     tracks_page_title: "Soevereine Onderzoekstracks",
-    tracks_page_desc: "Ontdek alle 11 Eigenia Lab Werkgroepen met 113 gepubliceerde verhandelingen. Selecteer een onderstaande werkgroepkaart om de volledige Research Wiki Engine te openen.",
-    tracks_open_wiki_btn: "Open Onderzoeks-Wiki (113 Verhandelingen)",
+    tracks_page_desc: "Ontdek alle 11 Eigenia Lab Werkgroepen met 116 gepubliceerde verhandelingen. Selecteer een onderstaande werkgroepkaart om de volledige Research Wiki Engine te openen.",
+    tracks_open_wiki_btn: "Open Onderzoeks-Wiki (116 Verhandelingen)",
+    tracks_card_click_hint: "Klik om verhandelingen in de Research Wiki te ontdekken",
+    tracks_view_all_link: "Open Soevereine Onderzoeks-Wiki →",
     tracks_view_bento: "Bento-raster Weergave",
     tracks_view_lines: "Lijstweergave",
     tracks_published_treatises: "Inbegrepen Verhandelingen",
@@ -528,8 +534,10 @@ export const translations = {
 
     // Papers Hub UI Keys
     papers_hub_eyebrow: "Canonieke Onderzoekscorpus // Open Verhandelingen Hub",
-    papers_hub_title: "Eigenia Verhandelingen Hub",
-    papers_hub_desc: "Canonieke index van alle 113 collegiaal getoetste wetenschappelijke verhandelingen over 11 werkgroepen. Elk artikel is gepubliceerd met een onveranderlijke canonieke URI, volledige wiskundige formalisering en kruis-ontologische links.",
+    papers_hub_title: "Eigenia Research Verhandelingen Hub",
+    papers_hub_subtitle: "Collegiaal Beoordeelde Wetenschappelijke Artikelen, Toegepaste Wiskundige Fysica & Technische Standaarden",
+    papers_hub_badge: "Canonieke Publicaties",
+    papers_hub_desc: "Canonieke index van alle 116 collegiaal getoetste wetenschappelijke verhandelingen over 11 werkgroepen. Elk artikel is gepubliceerd met een onveranderlijke canonieke URI, volledige wiskundige formalisering en kruis-ontologische links.",
     papers_hub_stat_treatises: "Canonieke Verhandelingen",
     papers_hub_stat_groups: "Werkgroepen",
     papers_hub_stat_words: "Corpus Woorden",

@@ -487,6 +487,18 @@ export const PAPERS_REGISTRY: Record<string, { title: string; relativePath: stri
     title: "Distributed Zero-Knowledge Attestation Protocol for Sovereign Clean Energy Certificates",
     relativePath: "references/WG-10-Assurance-Network/WG-10-AN-09-Distributed-ZK-Attestation-Clean-Energy.md",
   },
+  "non-abelian-holonomy-microgrids": {
+    title: "Non-Abelian Holonomy & Geometric Phase Shifts in Microgrid Reconfigurations",
+    relativePath: "references/WG-02-DT-Digital-Twin/WG-02-DT-08-Non-Abelian-Holonomy-Microgrids.md",
+  },
+  "bayesian-stackelberg-security-games": {
+    title: "Bayesian Stackelberg Security Games & Strategic Asset Hardening under Epistemic Uncertainty",
+    relativePath: "references/WG-07-TM-Threat-Modeling/WG-07-TM-11-Bayesian-Stackelberg-Security-Games.md",
+  },
+  "thermodynamic-annealing-levy-flights": {
+    title: "Thermodynamic Simulated Annealing with Levy Flights for Global Grid Islanding Resilience",
+    relativePath: "references/WG-08-MO-Monte-Carlo-Application/WG-08-MO-04-Thermodynamic-Annealing-Levy-Flights.md",
+  },
 };
 
 export function getAllPaperSlugs(): string[] {
