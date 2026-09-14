@@ -48,10 +48,14 @@ _Memory of record (decided 2026-09-11): this file and `memory/` at the repo root
     - `WG-01-UI-04`: Actuarial Solvency & Dynamic Catastrophe Bonds for Renewable Microgrids
     - `WG-06-SC-04`: Cryptographic Firmware Provenance & Hardware Root of Trust under CRA Essential Requirements
     - `MP-MATH-06`: Symplectic Cohomology & Floer Homology in Cyber-Physical Invariant Manifolds
-  - [ ] **Batch 11 (Candidate Next - Expanding toward 110 Treatises)**:
+  - [x] **Batch 11 (Lie Symmetries, Bayesian Persuasion & Gas Shockwaves Promoted to 110 Treatises)**:
     - `WG-02-DT-07`: Lie-Algebraic Symmetries & Invariant Energy Observers for Converter-Dominated Distribution Grids
     - `WG-07-TM-10`: Algorithmic Mechanism Design & Bayesian Persuasion in Adversarial Incident Disclosure
     - `WG-04-CF-05`: Non-Linear Soliton Shocks & Fractional Viscoelastic Damping in Gas Pipeline Networks
+  - [ ] **Batch 12 (Candidate Next - Operator Cognition, Multi-Layer Interdependency & Clean Energy Attestations)**:
+    - `WG-01-UI-05`: Operator Cognitive Workload & Real-time Ergonomics in Cyber-Physical Operations Centres
+    - `WG-05-CAD-04`: Differential Geometry of Multi-Layer Gas-Electric Interdependency Networks
+    - `WG-10-AN-09`: Distributed Zero-Knowledge Attestation Protocol for Sovereign Clean Energy Certificates
 - [ ] **Wire PretotypeExperimentModal** - bound to `useContactForm`, imported by no page (re-verified 2026-09-11: 0 importers)
 - [ ] **`feat/what-eigenia-does`** - branch cut from main, 0 commits, no local edits. State its intent here or delete it
 - [ ] **Push `chore/memory-enforcement` and open the PR** - branch is prepared in the working tree (Cowork could not commit: `.git/index.lock` cannot be removed from its shell). Jim: `rm .git/index.lock`, `git checkout -b chore/memory-enforcement`, `git add -A -- TASKS.md memory CLAUDE.md .claude/settings.json .gitignore scripts/hooks web/scripts/audit-tasks-stamp.mjs .github/workflows/ci.yml documentation/TESTING.md`, commit, push, PR
@@ -73,6 +77,7 @@ _Memory of record (decided 2026-09-11): this file and `memory/` at the repo root
 ## Done
 
 ### 2026-09-13
+- [x] **Batch 11 Publication: Lie Symmetries, Bayesian Persuasion & Gas Shockwaves Triad (110 Treatises)** - Promoted and integrated 3 foundational treatises (`WG-02-DT-07-Lie-Algebraic-Symmetries-Invariant-Observers`, `WG-07-TM-10-Algorithmic-Mechanism-Design-Bayesian-Persuasion`, `WG-04-CF-05-Nonlinear-Soliton-Shocks-Viscoelastic-Damping`) with 8 rounds of sequential thinking, Valyu citations, J. McKenney primary attribution, KaTeX math formulas, and 100% accessible Mermaid diagrams; expanded catalog to 110 treatises across 11 Working Groups; updated registry, papers hub, and translations; passed 11/11 audit gates, Vitest, and TypeScript.
 - [x] **Batch 10 Publication: Actuarial Solvency, Cryptographic Provenance & Floer Homology Triad (107 Treatises)** - Promoted and integrated 3 foundational treatises (`WG-01-UI-04-Actuarial-Solvency-Catastrophe-Bonds-Microgrids`, `WG-06-SC-04-Cryptographic-Firmware-Provenance-Hardware-RoT`, `MP-MATH-06-Symplectic-Cohomology-Floer-Homology-Invariant-Manifolds`) with 15 rounds of sequential thinking, Valyu citations, J. McKenney primary attribution, KaTeX math formulas, and 100% accessible Mermaid diagrams; expanded catalog to 107 treatises across 11 Working Groups; updated registry, papers hub, and translations; passed 11/11 audit gates, Vitest, and TypeScript.
 - [x] **Batch 9 Publication: Hamiltonian Mechanics, Hypergraphs & Quantum Annealing Triad (104 Treatises)** - Promoted and integrated 3 foundational treatises (`WG-02-DT-06-Symplectic-Integrators-Substation-Physics`, `WG-07-TM-09-Hypergraph-Percolation-Simplicial-Contagion`, `WG-08-MO-03-Quantum-Annealing-Ising-Grid-Islanding`) with 15 rounds of sequential thinking, Valyu citations, J. McKenney primary attribution, KaTeX math formulas, and 100% accessible Mermaid diagrams; expanded catalog to 104 treatises across 11 Working Groups; updated registry, papers hub, and translations; passed 11/11 audit gates, Vitest, and TypeScript.
 - [x] **Batch 8 Publication: Operator Cognition, Non-Linear Dynamics & Zero-Knowledge Assurance Triad (101 Treatises)** - Promoted and integrated 3 foundational treatises (`WG-03-ML-07-Operator-Fatigue-Alarm-Floods-Bayesian`, `WG-04-CF-04-Soliton-Wavefront-HVDC-Interconnects`, `WG-10-AN-08-Zero-Knowledge-Procurement-Attestations`) with 15 rounds of sequential thinking, Valyu citations, J. McKenney primary attribution, KaTeX math formulas, and 100% accessible Mermaid diagrams; expanded catalog to 101 treatises across 11 Working Groups; updated registry, papers hub, and translations; passed 11/11 audit gates, Vitest, and TypeScript.
