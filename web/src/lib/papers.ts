@@ -475,6 +475,18 @@ export const PAPERS_REGISTRY: Record<string, { title: string; relativePath: stri
     title: "Non-Linear Soliton Shocks & Fractional Viscoelastic Damping in Gas Pipeline Networks",
     relativePath: "references/WG-04-CF-Cascading-Failures/WG-04-CF-05-Nonlinear-Soliton-Shocks-Viscoelastic-Damping.md",
   },
+  "operator-cognitive-workload-ergonomics": {
+    title: "Operator Cognitive Workload & Real-time Ergonomics in Cyber-Physical Operations Centres",
+    relativePath: "references/WG-01-UI-Underwriter-insurance/WG-01-UI-05-Operator-Cognitive-Workload-Ergonomics.md",
+  },
+  "differential-geometry-gas-electric-interdependency": {
+    title: "Differential Geometry of Multi-Layer Gas-Electric Interdependency Networks",
+    relativePath: "references/WG-05-CAD-DEXPI-2/WG-05-CAD-04-Differential-Geometry-Gas-Electric-Interdependency.md",
+  },
+  "distributed-zk-attestation-clean-energy": {
+    title: "Distributed Zero-Knowledge Attestation Protocol for Sovereign Clean Energy Certificates",
+    relativePath: "references/WG-10-Assurance-Network/WG-10-AN-09-Distributed-ZK-Attestation-Clean-Energy.md",
+  },
 };
 
 export function getAllPaperSlugs(): string[] {
