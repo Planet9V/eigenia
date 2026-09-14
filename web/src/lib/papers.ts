@@ -439,6 +439,18 @@ export const PAPERS_REGISTRY: Record<string, { title: string; relativePath: stri
     title: "Programmatic Procurement Verification APIs & Zero-Knowledge Attestations for Industrial Machinery",
     relativePath: "references/WG-10-Assurance-Network/WG-10-AN-08-Zero-Knowledge-Procurement-Attestations.md",
   },
+  "symplectic-integrators-substation-physics": {
+    title: "Symplectic Integrators & Energy-Conserving Hamiltonian Physics Engines for Substation Digital Twins",
+    relativePath: "references/WG-02-DT-Digital-Twin/WG-02-DT-06-Symplectic-Integrators-Substation-Physics.md",
+  },
+  "hypergraph-percolation-simplicial-contagion": {
+    title: "Hypergraph Percolation & Higher-Order Simplicial Contagion in Air-Gapped Industrial Networks",
+    relativePath: "references/WG-07-TM-Threat-Modeling/WG-07-TM-09-Hypergraph-Percolation-Simplicial-Contagion.md",
+  },
+  "quantum-annealing-ising-grid-islanding": {
+    title: "Quantum-Accelerated Annealing & Ising Hamiltonians for Optimal Grid Islanding Schedules",
+    relativePath: "references/WG-08-MO-Monte-Carlo-Application/WG-08-MO-03-Quantum-Annealing-Ising-Grid-Islanding.md",
+  },
 };
 
 export function getAllPaperSlugs(): string[] {
