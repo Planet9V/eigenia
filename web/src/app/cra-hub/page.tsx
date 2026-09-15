@@ -198,49 +198,51 @@ const TOOLS_DATABASE: ToolItem[] = [
 ];
 
 const STATUTORY_FLOW_CHART = `flowchart TD
-    Start[Product with Digital Elements Placed on EU Market] --> ScopeCheck{Annex III or IV Product?}
+    Start["PDE Placed on EU Market"] --> Scope{"Annex III or IV Scope?"}
     
-    ScopeCheck -->|No: Standard PDE ~90%| ModA[Module A: Internal Production Control]
-    ModA --> ModASteps[1. Fulfill Annex I Security Reqs<br/>2. Compile 10-Yr Annex VII Technical File<br/>3. Continuous SBOM & Article 14 Reporting<br/>4. Sign EU DoC & Affix CE Mark]
+    Scope -->|"No: Standard (~90%)"| ModA["Module A: Self-Assessment"]
+    ModA --> Steps["• Meet Annex I Baselines<br/>• Compile Annex VII Dossier<br/>• Continuous SBOM & Art. 14<br/>• Sign DoC & Affix CE Mark"]
     
-    ScopeCheck -->|Annex III: Important Class I| ClassICheck{Harmonised Standards Exist?}
-    ClassICheck -->|Yes: Full Standard Conformance| ModA
-    ClassICheck -->|No or Partial Standard| ThirdPartyCheck[Third-Party Notified Body Audit Required]
+    Scope -->|"Annex III: Class I"| StdCheck{"Harmonised Std?"}
+    StdCheck -->|"Full Standard"| ModA
+    StdCheck -->|"No Standard"| Audit["Third-Party Audit Required"]
     
-    ScopeCheck -->|Annex IV: Important Class II| ThirdPartyCheck
-    ThirdPartyCheck --> CABAudit[Module B + C: EU-Type Examination<br/>OR Module H: Full Quality Assurance]
-    CABAudit --> CEPass[Issue EU-Type Certificate -> CE Mark]
+    Scope -->|"Annex IV: Class II"| Audit
+    Audit --> CAB["Module B+C or H Assessment"]
+    CAB --> Cert["EU-Type Certificate & CE Mark"]
     
-    ModASteps --> MarketLive[Legal EU Single Market Access]
-    CEPass --> MarketLive
+    Steps --> Market(["Legal EU Single Market Access"])
+    Cert --> Market
     
     classDef highlight fill:#E05A10,stroke:#E05A10,color:#fff;
     classDef box fill:#131519,stroke:#22252C,color:#E8E3DA;
-    class Start,ThirdPartyCheck highlight;
-    class ModA,ModASteps,CABAudit,CEPass,MarketLive box;`;
+    classDef pill fill:#181B22,stroke:#E05A10,color:#E8E3DA;
+    class Start,Audit highlight;
+    class ModA,Steps,CAB,Cert box;
+    class Market pill;`;
 
 const ENISA_INCIDENT_CHART = `sequenceDiagram
     autonumber
-    participant M as Manufacturer Incident Team
-    participant SRP as ENISA Single Reporting Platform
-    participant CSIRT as National CSIRT (MS of Origin)
-    participant AllCSIRTs as Affected Member State CSIRTs
-    participant Users as Product Users / Customers
+    actor M as Manufacturer
+    participant SRP as ENISA SRP
+    participant CSIRT as National CSIRT
+    participant EU_CSIRTs as EU CSIRTs
+    actor Users as Customers
 
-    Note over M: Detection of Actively Exploited Vulnerability
-    M->>SRP: 24h Early Warning Notification (Art. 14.2)
-    SRP-->>CSIRT: Encrypted Routing to National CSIRT
-    SRP-->>AllCSIRTs: Encrypted Broadcast to Affected MS CSIRTs
+    Note over M: Active Exploit Detected
+    M->>SRP: 24h Early Warning (Art. 14.2)
+    SRP-->>CSIRT: Encrypted Routing
+    SRP-->>EU_CSIRTs: Cross-Border Alert
     
-    Note over M: Forensic Root Cause Analysis & Mitigation authoring
-    M->>SRP: 72h Detailed Vulnerability Notification (Art. 14.3)
-    opt User Mitigation Required
-        M->>Users: Immediate User Workaround Advisory (Art. 14.5)
+    Note over M: Root Cause Analysis
+    M->>SRP: 72h Technical Dossier (Art. 14.3)
+    opt Workaround Needed
+        M->>Users: Immediate Advisory (Art. 14.5)
     end
     
-    Note over M: Security Patch Compiled and Tested
-    M->>Users: Distribute Security Patch / Firmware Update
-    M->>SRP: Final Incident & Corrective Action Report (within 14 days)`;
+    Note over M: Security Patch Released
+    M->>Users: Deploy Security Patch
+    M->>SRP: Final Report (within 14 days)`;
 
 export default function CraConformityHubPage() {
   const [activeSegment, setActiveSegment] = useState<string>("All");
@@ -284,82 +286,76 @@ export default function CraConformityHubPage() {
                 </p>
               </div>
 
-              {/* Scientific Engine Profile Card */}
-              <div className="p-5 rounded-2xl bg-canvas border border-hairline shadow-sm space-y-3 min-w-[300px]">
-                <div className="flex items-center justify-between">
-                  <span className="font-mono text-xs text-muted uppercase tracking-wider">Engine Profile</span>
-                  <span className="flex h-2 w-2 relative">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              {/* Scientific Engine Profile & Quick Status Card */}
+              <div className="p-5 rounded-2xl bg-canvas border border-hairline shadow-sm space-y-3 w-full lg:max-w-md shrink-0">
+                <div className="flex items-center justify-between border-b border-hairline pb-2">
+                  <div className="flex items-center gap-2">
+                    <span className="flex h-2 w-2 relative">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                    <span className="font-mono text-xs font-bold text-primary uppercase tracking-wider">
+                      Engine Profile // Quick Status
+                    </span>
+                  </div>
+                  <span className="font-mono text-[10px] text-dutchOrange font-bold px-2 py-0.5 rounded bg-dutchOrange/10 border border-dutchOrange/20">
+                    Reg (EU) 2024/2847
                   </span>
                 </div>
-                <div className="space-y-1.5 font-mono text-xs">
-                  <div className="flex items-center justify-between py-1 border-b border-hairline">
-                    <span className="text-muted">Target Statute:</span>
-                    <span className="font-bold text-primary">Reg (EU) 2024/2847</span>
+
+                <div className="flex items-center justify-between text-xs font-mono text-muted py-0.5">
+                  <span>PDE Scope:</span>
+                  <span className="text-primary font-medium">All Hardware & Software</span>
+                </div>
+
+                {/* 4 Core Quick Status Telemetry Metrics */}
+                <div className="grid grid-cols-2 gap-2 pt-1 font-mono">
+                  <div className="p-2.5 rounded-xl bg-surface border border-hairline">
+                    <div className="flex items-center gap-1 text-[10px] text-muted mb-0.5">
+                      <TrendingUp className="w-3 h-3 text-dutchOrange" />
+                      <span>EU Tooling TAM</span>
+                    </div>
+                    <div className="text-sm font-bold text-primary">€1.397B</div>
+                    <span className="text-[9px] text-muted block">Verified Bottom-Up</span>
                   </div>
-                  <div className="flex items-center justify-between py-1 border-b border-hairline">
-                    <span className="text-muted">Scope of Law:</span>
-                    <span className="font-bold text-primary">All Hardware & Software PDE</span>
+
+                  <div className="p-2.5 rounded-xl bg-surface border border-hairline">
+                    <div className="flex items-center gap-1 text-[10px] text-muted mb-0.5">
+                      <Building className="w-3 h-3 text-dutchOrange" />
+                      <span>Impacted Entities</span>
+                    </div>
+                    <div className="text-sm font-bold text-primary">446,500</div>
+                    <span className="text-[9px] text-muted block">Hardware & Software</span>
                   </div>
-                  <div className="flex items-center justify-between py-1">
-                    <span className="text-muted">Evaluations:</span>
-                    <span className="font-bold text-dutchOrange">18 Tools • 5 Segments</span>
+
+                  <div className="p-2.5 rounded-xl bg-surface border border-hairline">
+                    <div className="flex items-center gap-1 text-[10px] text-muted mb-0.5">
+                      <AlertTriangle className="w-3 h-3 text-amber-500" />
+                      <span>NANDO Bodies</span>
+                    </div>
+                    <div className="text-sm font-bold text-amber-500">0 Designated</div>
+                    <span className="text-[9px] text-muted block">Audit Bottleneck</span>
+                  </div>
+
+                  <div className="p-2.5 rounded-xl bg-surface border border-hairline">
+                    <div className="flex items-center gap-1 text-[10px] text-muted mb-0.5">
+                      <Clock className="w-3 h-3 text-red-500" />
+                      <span>Article 14 Gate</span>
+                    </div>
+                    <div className="text-sm font-bold text-red-500">Sep 11, 2026</div>
+                    <span className="text-[9px] text-muted block">24h Early Warning</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* 5-Pillar Direct Navigation Cards */}
-            <PillarCardsNav activePillarId={1} />
+            {/* 4-Pillar Direct Navigation Cards */}
+            <PillarCardsNav />
           </div>
         </section>
 
         {/* Dual-Column Interactive Statutory Timeline & Compact 3D Extraterritorial Globe Section */}
         <StatutoryTimelineSection />
-
-        {/* Empirical Research & Econometric Telemetry Bar */}
-        <section className="py-8 bg-canvas border-b border-hairline">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 font-mono">
-              <div className="p-4 rounded-xl bg-surface border border-hairline">
-                <div className="flex items-center gap-1.5 text-xs text-muted mb-1">
-                  <TrendingUp className="w-3.5 h-3.5 text-dutchOrange" />
-                  <span>EU Tooling TAM</span>
-                </div>
-                <div className="text-xl font-bold text-primary">€1.397 Billion</div>
-                <span className="text-[10px] text-muted block mt-0.5">Bottom-up verified</span>
-              </div>
-
-              <div className="p-4 rounded-xl bg-surface border border-hairline">
-                <div className="flex items-center gap-1.5 text-xs text-muted mb-1">
-                  <Building className="w-3.5 h-3.5 text-dutchOrange" />
-                  <span>Impacted Entities</span>
-                </div>
-                <div className="text-xl font-bold text-primary">446,500</div>
-                <span className="text-[10px] text-muted block mt-0.5">Hardware & software OEMs</span>
-              </div>
-
-              <div className="p-4 rounded-xl bg-surface border border-hairline">
-                <div className="flex items-center gap-1.5 text-xs text-muted mb-1">
-                  <AlertTriangle className="w-3.5 h-3.5 text-amber-500" />
-                  <span>NANDO Notified Bodies</span>
-                </div>
-                <div className="text-xl font-bold text-amber-500">0 Designated</div>
-                <span className="text-[10px] text-muted block mt-0.5">Severe audit bottleneck</span>
-              </div>
-
-              <div className="p-4 rounded-xl bg-surface border border-hairline">
-                <div className="flex items-center gap-1.5 text-xs text-muted mb-1">
-                  <Clock className="w-3.5 h-3.5 text-red-500" />
-                  <span>Article 14 Gate</span>
-                </div>
-                <div className="text-xl font-bold text-red-500">24 Hours</div>
-                <span className="text-[10px] text-muted block mt-0.5">ENISA mandatory notice</span>
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* Live Diagram Section 1: Conformity Assessment Flowchart */}
         <section className="py-12 bg-surface/30 border-b border-hairline">
@@ -378,8 +374,7 @@ export default function CraConformityHubPage() {
                 href="/cra-hub/requirements" 
                 className="text-xs font-mono text-dutchOrange font-bold hover:underline inline-flex items-center gap-1"
               >
-                <span>Full Clause-by-Clause Explorer</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <span>Full Clause-by-Clause Explorer →</span>
               </Link>
             </div>
 
