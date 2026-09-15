@@ -29,8 +29,8 @@ import {
   Globe,
   Compass
 } from "lucide-react";
-import { PillarInteractiveNav } from "@/components/cra/PillarInteractiveNav";
-import { StatutoryRadarSection } from "@/components/cra/StatutoryRadarSection";
+import { PillarCardsNav } from "@/components/cra/PillarCardsNav";
+import { StatutoryTimelineSection } from "@/components/cra/StatutoryTimelineSection";
 
 interface ToolItem {
   name: string;
@@ -284,10 +284,10 @@ export default function CraConformityHubPage() {
                 </p>
               </div>
 
-              {/* Statutory Readiness Summary Pill */}
+              {/* Scientific Engine Profile Card */}
               <div className="p-5 rounded-2xl bg-canvas border border-hairline shadow-sm space-y-3 min-w-[300px]">
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-xs text-muted uppercase tracking-wider">Statutory Status</span>
+                  <span className="font-mono text-xs text-muted uppercase tracking-wider">Engine Profile</span>
                   <span className="flex h-2 w-2 relative">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
@@ -295,28 +295,28 @@ export default function CraConformityHubPage() {
                 </div>
                 <div className="space-y-1.5 font-mono text-xs">
                   <div className="flex items-center justify-between py-1 border-b border-hairline">
-                    <span className="text-muted">Enacted Law:</span>
+                    <span className="text-muted">Target Statute:</span>
                     <span className="font-bold text-primary">Reg (EU) 2024/2847</span>
                   </div>
                   <div className="flex items-center justify-between py-1 border-b border-hairline">
-                    <span className="text-muted">Active Gate:</span>
-                    <span className="font-bold text-red-500">Art. 14 24h SRP</span>
+                    <span className="text-muted">Scope of Law:</span>
+                    <span className="font-bold text-primary">All Hardware & Software PDE</span>
                   </div>
                   <div className="flex items-center justify-between py-1">
-                    <span className="text-muted">CE Mark Deadline:</span>
-                    <span className="font-bold text-dutchOrange">Dec 11, 2027</span>
+                    <span className="text-muted">Evaluations:</span>
+                    <span className="font-bold text-dutchOrange">18 Tools • 5 Segments</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Interactive 5-Pillar Navigation Bar */}
-            <PillarInteractiveNav activePillarId={1} />
+            {/* 5-Pillar Direct Navigation Cards */}
+            <PillarCardsNav activePillarId={1} />
           </div>
         </section>
 
-        {/* Dual-Column Interactive Statutory Radar & 3D Extraterritorial Globe Section */}
-        <StatutoryRadarSection />
+        {/* Dual-Column Interactive Statutory Timeline & Compact 3D Extraterritorial Globe Section */}
+        <StatutoryTimelineSection />
 
         {/* Empirical Research & Econometric Telemetry Bar */}
         <section className="py-8 bg-canvas border-b border-hairline">
