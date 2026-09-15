@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import {
   geoOrthographic,
   geoPath,
@@ -13,15 +12,7 @@ import { feature } from "topojson-client";
 import {
   Clock,
   ArrowRight,
-  RotateCw,
-  RotateCcw,
-  ShieldCheck,
-  ShieldAlert,
-  AlertTriangle,
-  Scale,
-  Compass,
-  CheckCircle2,
-  ExternalLink
+  ShieldCheck
 } from "lucide-react";
 
 interface MilestoneCardData {
@@ -161,19 +152,10 @@ const TRADE_CORRIDORS: TradeCorridor[] = [
 ];
 
 export function StatutoryTimelineSection() {
-  const [flippedCards, setFlippedCards] = useState<Record<string, boolean>>({});
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [worldData, setWorldData] = useState<any>(null);
   const rotationRef = useRef<[number, number]>([-15, -30]);
   const animationFrameRef = useRef<number | null>(null);
-
-  // Toggle single card flip
-  const toggleCard = (id: string) => {
-    setFlippedCards((prev) => ({
-      ...prev,
-      [id]: !prev[id]
-    }));
-  };
 
   // Fetch world topography for compact 3D globe preview
   useEffect(() => {
@@ -321,7 +303,7 @@ export function StatutoryTimelineSection() {
             </h2>
             <p className="text-xs sm:text-sm text-white/70 leading-relaxed">
               Chronological roadmap of binding compliance gates under Regulation (EU) 2024/2847. 
-              Click any card to flip and inspect mandatory engineering actions, statutory deliverables, and penalty frameworks.
+              Explore pre-application collision gates, statutory deliverables, and extraterritorial trade corridors.
             </p>
           </div>
 
@@ -337,190 +319,117 @@ export function StatutoryTimelineSection() {
         </div>
 
         {/* Dual-Column Layout: Left (7 cols) Interactive Timeline Cards | Right (5 cols) Compact 3D Globe Teaser */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Left Column: Interactive Milestone Cards (7 Cols) */}
-          <div className="lg:col-span-7 space-y-4">
-            <div className="flex items-center justify-between font-mono text-xs text-white/50 pb-1">
-              <span>Binding Statutory Gates (Click card to flip details)</span>
-              <span>3 Primary Deadlines</span>
-            </div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+          {/* Left Column: Statutory Enforcement Roadmap Teaser (7 Cols) */}
+          <div className="lg:col-span-7 flex flex-col justify-between space-y-4">
+            <div className="space-y-3">
+              <div className="flex items-center justify-between font-mono text-xs text-white/50 pb-1">
+                <span>Binding Regulatory Milestones</span>
+                <span>Pillar 2 Gateway</span>
+              </div>
 
-            <div className="space-y-4">
-              {STATUTORY_MILESTONES.map((m) => {
-                const isFlipped = !!flippedCards[m.id];
-
-                return (
-                  <div
+              <div className="space-y-3">
+                {STATUTORY_MILESTONES.map((m) => (
+                  <Link
                     key={m.id}
-                    onClick={() => toggleCard(m.id)}
-                    className="relative cursor-pointer select-none perspective group"
-                    style={{ perspective: "1200px" }}
+                    href="/cra-hub/timeline"
+                    className={`block p-4 sm:p-5 rounded-2xl border transition-all group ${
+                      m.badgeType === "active"
+                        ? "bg-[#14171c] border-red-500/40 hover:border-red-500/80 hover:bg-[#181b22] shadow-sm"
+                        : m.badgeType === "collision"
+                        ? "bg-[#14171c] border-amber-500/40 hover:border-amber-500/80 hover:bg-[#181b22] shadow-sm"
+                        : "bg-[#14171c] border-white/10 hover:border-dutchOrange/60 hover:bg-[#181b22] shadow-sm"
+                    }`}
                   >
-                    <motion.div
-                      animate={{ rotateY: isFlipped ? 180 : 0 }}
-                      transition={{ duration: 0.5, ease: "easeInOut" }}
-                      style={{ transformStyle: "preserve-3d" }}
-                      className="relative rounded-2xl"
-                    >
-                      {/* FRONT OF CARD (Overview & Highlights) */}
-                      <div
-                        style={{ backfaceVisibility: "hidden" }}
-                        className={`p-5 rounded-2xl border transition-all ${
-                          m.badgeType === "active"
-                            ? "bg-[#14171c] border-red-500/40 hover:border-red-500/70 shadow-sm"
-                            : m.badgeType === "collision"
-                            ? "bg-[#14171c] border-dutchOrange/40 hover:border-dutchOrange/70 shadow-sm"
-                            : "bg-[#14171c] border-white/10 hover:border-white/30 shadow-sm"
-                        }`}
-                      >
-                        <div className="flex items-start justify-between gap-4">
-                          <div className="space-y-1">
-                            <div className="flex flex-wrap items-center gap-2">
-                              <span
-                                className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold ${
-                                  m.badgeType === "active"
-                                    ? "bg-red-500 text-white"
-                                    : m.badgeType === "collision"
-                                    ? "bg-dutchOrange/20 text-dutchOrange border border-dutchOrange/30"
-                                    : "bg-white/10 text-white/90 border border-white/15"
-                                }`}
-                              >
-                                {m.badge}
-                              </span>
-                              <span className="font-mono text-xs text-white/90 font-bold">
-                                {m.date}
-                              </span>
-                            </div>
-
-                            <h3 className="text-base font-bold text-white group-hover:text-dutchOrange transition-colors pt-1">
-                              {m.title}
-                            </h3>
-                            <p className="font-mono text-[11px] text-white/50">
-                              {m.citation}
-                            </p>
-                          </div>
-
-                          <div className="flex flex-col items-end gap-1 shrink-0">
-                            <span
-                              className={`text-[10px] font-mono font-bold ${
-                                m.badgeType === "active"
-                                  ? "text-red-400"
-                                  : m.badgeType === "collision"
-                                  ? "text-dutchOrange"
-                                  : "text-white/60"
-                              }`}
-                            >
-                              {m.leadTime}
-                            </span>
-                            <span className="text-[10px] font-mono text-white/40 group-hover:text-dutchOrange inline-flex items-center gap-1 transition-colors">
-                              <span>Flip Details</span>
-                              <RotateCw className="w-2.5 h-2.5" />
-                            </span>
-                          </div>
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="space-y-1">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <span
+                            className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold ${
+                              m.badgeType === "active"
+                                ? "bg-red-500 text-white"
+                                : m.badgeType === "collision"
+                                ? "bg-amber-500 text-black font-bold"
+                                : "bg-dutchOrange text-white"
+                            }`}
+                          >
+                            {m.badge}
+                          </span>
+                          <span className="font-mono text-xs text-white/90 font-bold">
+                            {m.date}
+                          </span>
                         </div>
 
-                        <p className="text-xs text-white/70 leading-relaxed mt-3 pt-2 border-t border-white/10">
-                          {m.summary}
+                        <h3 className="text-base font-bold text-white group-hover:text-dutchOrange transition-colors pt-1">
+                          {m.title}
+                        </h3>
+                        <p className="font-mono text-[11px] text-white/50">
+                          {m.citation}
                         </p>
-
-                        <div className="flex flex-wrap gap-2 mt-3 pt-2">
-                          {m.highlights.map((h, i) => (
-                            <span
-                              key={i}
-                              className="px-2 py-1 rounded-md bg-white/[0.04] border border-white/10 text-[11px] font-mono text-white/80"
-                            >
-                              ✓ {h}
-                            </span>
-                          ))}
-                        </div>
                       </div>
 
-                      {/* BACK OF CARD (Flipped: Deep Mandatory Actions & Penalties) */}
-                      <div
-                        style={{
-                          backfaceVisibility: "hidden",
-                          transform: "rotateY(180deg)"
-                        }}
-                        className="absolute inset-0 p-5 rounded-2xl bg-[#171b22] border border-dutchOrange/50 shadow-md flex flex-col justify-between overflow-y-auto"
-                      >
-                        <div className="space-y-3">
-                          <div className="flex items-center justify-between border-b border-white/10 pb-2">
-                            <div>
-                              <span className="font-mono text-[10px] text-dutchOrange font-bold uppercase tracking-wider">
-                                Statutory Deliverables & Legal Dossier
-                              </span>
-                              <h4 className="text-sm font-bold text-white">
-                                {m.title}
-                              </h4>
-                            </div>
-
-                            <button
-                              type="button"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                toggleCard(m.id);
-                              }}
-                              className="px-2 py-1 rounded bg-white/10 hover:bg-white/20 text-[10px] font-mono text-white flex items-center gap-1 transition-colors"
-                            >
-                              <span>Return</span>
-                              <RotateCcw className="w-2.5 h-2.5" />
-                            </button>
-                          </div>
-
-                          <div className="space-y-1.5">
-                            <span className="font-mono text-[10px] text-white/50 uppercase tracking-wider block">
-                              Mandatory Engineering Requirements:
-                            </span>
-                            <ul className="space-y-1">
-                              {m.mandatoryActions.map((act, idx) => (
-                                <li
-                                  key={idx}
-                                  className="text-xs text-white/85 flex items-start gap-1.5 leading-snug"
-                                >
-                                  <span className="text-dutchOrange font-bold">•</span>
-                                  <span>{act}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        </div>
-
-                        <div className="pt-3 mt-2 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-[11px] font-mono">
-                          <div className="text-red-400 font-semibold flex items-center gap-1.5">
-                            <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
-                            <span className="line-clamp-1">{m.penalties}</span>
-                          </div>
-
-                          {m.guideLink && (
-                            <Link
-                              href={m.guideLink.href}
-                              onClick={(e) => e.stopPropagation()}
-                              className="text-dutchOrange hover:underline font-bold inline-flex items-center gap-1 shrink-0"
-                            >
-                              <span>{m.guideLink.label}</span>
-                              <ArrowRight className="w-3 h-3" />
-                            </Link>
-                          )}
-                        </div>
+                      <div className="flex flex-col items-end gap-1 shrink-0">
+                        <span
+                          className={`text-[10px] font-mono font-bold ${
+                            m.badgeType === "active"
+                              ? "text-red-400"
+                              : m.badgeType === "collision"
+                              ? "text-amber-400"
+                              : "text-dutchOrange"
+                          }`}
+                        >
+                          {m.leadTime}
+                        </span>
+                        <ArrowRight className="w-4 h-4 text-white/40 group-hover:text-dutchOrange group-hover:translate-x-1 transition-all" />
                       </div>
-                    </motion.div>
-                  </div>
-                );
-              })}
+                    </div>
+
+                    <p className="text-xs text-white/70 leading-relaxed mt-2.5 pt-2 border-t border-white/10">
+                      {m.summary}
+                    </p>
+
+                    <div className="flex flex-wrap gap-1.5 mt-2.5">
+                      {m.highlights.map((h, i) => (
+                        <span
+                          key={i}
+                          className="px-2 py-0.5 rounded-md bg-white/[0.04] border border-white/10 text-[11px] font-mono text-white/80"
+                        >
+                          ✓ {h}
+                        </span>
+                      ))}
+                    </div>
+                  </Link>
+                ))}
+              </div>
             </div>
+
+            {/* Prominent CTA to Dedicated Timeline Page */}
+            <Link
+              href="/cra-hub/timeline"
+              className="py-3 px-5 rounded-xl bg-dutchOrange text-white font-mono text-xs font-bold flex items-center justify-between hover:bg-dutchOrange/90 transition-all shadow-md group"
+            >
+              <span className="flex items-center gap-2">
+                <Clock className="w-4 h-4" />
+                <span>Open Full Interactive Enforcement Timeline & Action Dossiers</span>
+              </span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
           </div>
 
-          {/* Right Column: Compact, Tasteful 3D Globe Teaser (5 Cols) */}
-          <div className="lg:col-span-5 flex flex-col gap-4">
-            <div className="p-5 rounded-2xl bg-[#111317] border border-white/10 hover:border-dutchOrange/40 transition-colors flex flex-col justify-between group shadow-sm space-y-4">
+          {/* Right Column: Compact, Tasteful & Clickable 3D Globe Teaser (5 Cols) */}
+          <div className="lg:col-span-5 flex flex-col">
+            <Link
+              href="/jurisdictions"
+              className="p-5 rounded-2xl bg-[#111317] border border-white/10 hover:border-dutchOrange/60 hover:shadow-[0_0_25px_rgba(224,90,16,0.15)] transition-all duration-300 flex flex-col justify-between group cursor-pointer h-full space-y-4"
+            >
               {/* Header */}
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between">
-                  <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-white/5 border border-white/10 text-dutchOrange uppercase tracking-wider">
+                  <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-white/5 border border-white/10 text-dutchOrange uppercase tracking-wider group-hover:border-dutchOrange/40 transition-colors">
                     Extraterritorial Scope
                   </span>
-                  <span className="text-[11px] font-mono text-white/50">
-                    Art. 11 & 13
+                  <span className="text-[11px] font-mono text-white/50 group-hover:text-white/80 transition-colors">
+                    Art. 11 & 13 →
                   </span>
                 </div>
 
@@ -533,9 +442,9 @@ export function StatutoryTimelineSection() {
                 </p>
               </div>
 
-              {/* Compact 3D Globe Canvas (Tasteful & Small) */}
+              {/* Compact 3D Globe Canvas (Tasteful, Small, Interactive) */}
               <div className="relative w-full py-2 flex flex-col items-center justify-center">
-                <div className="relative w-[210px] h-[210px] rounded-full overflow-hidden border border-white/15 bg-black/40 shadow-inner flex items-center justify-center">
+                <div className="relative w-[210px] h-[210px] rounded-full overflow-hidden border border-white/15 group-hover:border-dutchOrange/50 group-hover:shadow-[0_0_25px_rgba(224,90,16,0.25)] bg-black/40 transition-all flex items-center justify-center">
                   <canvas
                     ref={canvasRef}
                     width={210}
@@ -543,23 +452,23 @@ export function StatutoryTimelineSection() {
                     className="w-full h-full block"
                   />
                   {/* Subtle overlay badge */}
-                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-full bg-black/70 backdrop-blur-sm border border-white/10 text-[9px] font-mono text-white/60 pointer-events-none">
-                    Rotating Preview
+                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full bg-black/80 backdrop-blur-sm border border-white/15 group-hover:border-dutchOrange/60 text-[9px] font-mono text-white/70 group-hover:text-dutchOrange transition-colors pointer-events-none whitespace-nowrap">
+                    Click to Open 3D Globe
                   </div>
                 </div>
               </div>
 
               {/* Telemetry Numbers */}
               <div className="grid grid-cols-3 gap-2 pt-1 font-mono text-center">
-                <div className="p-2 rounded-lg bg-white/[0.03] border border-white/10">
+                <div className="p-2 rounded-lg bg-white/[0.03] border border-white/10 group-hover:border-white/20 transition-colors">
                   <div className="text-base font-bold text-white">249</div>
                   <div className="text-[9px] text-white/50">ISO Territories</div>
                 </div>
-                <div className="p-2 rounded-lg bg-white/[0.03] border border-white/10">
+                <div className="p-2 rounded-lg bg-white/[0.03] border border-white/10 group-hover:border-white/20 transition-colors">
                   <div className="text-base font-bold text-white">580+</div>
                   <div className="text-[9px] text-white/50">Statutes</div>
                 </div>
-                <div className="p-2 rounded-lg bg-white/[0.03] border border-white/10">
+                <div className="p-2 rounded-lg bg-white/[0.03] border border-white/10 group-hover:border-dutchOrange/30 transition-colors">
                   <div className="text-base font-bold text-dutchOrange">1h–96h</div>
                   <div className="text-[9px] text-white/50">Breach Clocks</div>
                 </div>
@@ -567,34 +476,31 @@ export function StatutoryTimelineSection() {
 
               {/* Corridors Highlight List */}
               <div className="space-y-1.5 text-xs font-mono">
-                <div className="flex items-center justify-between p-2 rounded-lg bg-white/[0.02] border border-white/5">
+                <div className="flex items-center justify-between p-2 rounded-lg bg-white/[0.02] border border-white/5 group-hover:border-white/10 transition-colors">
                   <span className="text-white/80">🇺🇸 United States ↔ EU</span>
                   <span className="text-[10px] text-sky-400">FDA 524B & CIRCIA</span>
                 </div>
-                <div className="flex items-center justify-between p-2 rounded-lg bg-white/[0.02] border border-white/5">
+                <div className="flex items-center justify-between p-2 rounded-lg bg-white/[0.02] border border-white/5 group-hover:border-white/10 transition-colors">
                   <span className="text-white/80">🇬🇧 United Kingdom ↔ EU</span>
                   <span className="text-[10px] text-emerald-400">PSTI Act 2022</span>
                 </div>
-                <div className="flex items-center justify-between p-2 rounded-lg bg-white/[0.02] border border-white/5">
+                <div className="flex items-center justify-between p-2 rounded-lg bg-white/[0.02] border border-white/5 group-hover:border-white/10 transition-colors">
                   <span className="text-white/80">🇯🇵🇸🇬 APAC Hubs ↔ EU</span>
                   <span className="text-[10px] text-purple-400">Cybersecurity Acts</span>
                 </div>
               </div>
 
               {/* Action Call to Action Button */}
-              <div className="pt-2 space-y-2">
-                <Link
-                  href="/jurisdictions"
-                  className="w-full py-2.5 px-4 rounded-xl bg-dutchOrange text-white font-mono text-xs font-bold flex items-center justify-center gap-2 hover:bg-dutchOrange/90 transition-all shadow-md group/btn"
-                >
+              <div className="pt-1 space-y-1.5">
+                <div className="w-full py-2.5 px-4 rounded-xl bg-white/10 group-hover:bg-dutchOrange text-white font-mono text-xs font-bold flex items-center justify-center gap-2 transition-colors shadow-sm">
                   <span>Launch Interactive 3D Globe & Corridors</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
-                </Link>
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                </div>
                 <p className="text-[10px] text-white/50 text-center font-mono leading-tight">
                   Opens full geospatial engine with 3D camera tours and bilateral legal comparators
                 </p>
               </div>
-            </div>
+            </Link>
           </div>
         </div>
       </div>

@@ -18,14 +18,22 @@ const MERMAID_CONFIG = {
   flowchart: {
     useMaxWidth: true,
     curve: "basis" as const,
-    padding: 12,
-    wrappingWidth: 620,
+    padding: 10,
+    nodeSpacing: 26,
+    rankSpacing: 30,
+    wrappingWidth: 420,
   },
-  sequence: { useMaxWidth: true },
+  sequence: {
+    useMaxWidth: true,
+    actorMargin: 32,
+    messageMargin: 26,
+    boxMargin: 8,
+    bottomMarginAdj: 10,
+  },
   themeVariables: {
     background: "#0B0C0E",
     fontFamily: "var(--font-mono), 'JetBrains Mono', ui-monospace, monospace",
-    fontSize: "13px",
+    fontSize: "12px",
     primaryColor: "#131519",
     primaryTextColor: "#E8E3DA",
     primaryBorderColor: "#E05A10",
@@ -115,11 +123,14 @@ export const MermaidDiagram: React.FC<{ chart: string }> = ({ chart }) => {
 
   return (
     <figure
-      className="mermaid-figure my-6 rounded-2xl bg-[#0B0C0E] border border-[#22252C] px-5 py-6 shadow-xl overflow-x-auto"
+      className="mermaid-figure my-6 rounded-2xl bg-[#0B0C0E] border border-[#22252C] px-4 sm:px-6 py-6 shadow-xl overflow-x-auto"
       aria-label="Diagram"
     >
       {svg ? (
-        <div className="flex justify-center [&_svg]:max-w-full [&_svg]:h-auto" dangerouslySetInnerHTML={{ __html: svg }} />
+        <div
+          className="w-full flex justify-center items-center overflow-x-auto [&_svg]:max-w-full [&_svg]:w-auto [&_svg]:h-auto [&_svg]:max-h-[620px] [&_svg]:mx-auto"
+          dangerouslySetInnerHTML={{ __html: svg }}
+        />
       ) : (
         <div className="h-24 flex items-center justify-center font-mono text-[10px] uppercase tracking-widest text-[#71717A]">
           rendering diagram

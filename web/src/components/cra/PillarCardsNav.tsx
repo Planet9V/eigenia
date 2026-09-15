@@ -23,39 +23,31 @@ export interface PillarItem {
 export const CRA_PILLARS: PillarItem[] = [
   {
     id: 1,
-    label: "1. Hub Overview",
-    href: "/cra-hub",
-    icon: ShieldCheck,
-    tagline: "Architecture & Corridors",
-    description: "Statutory flowcharts, extraterritorial reach, and core conformity routing."
-  },
-  {
-    id: 2,
-    label: "2. Requirements",
+    label: "1. Requirements",
     href: "/cra-hub/requirements",
     icon: Scale,
     tagline: "Statutory Clauses",
     description: "Clause-by-clause Annex I cybersecurity and vulnerability handling requirements."
   },
   {
-    id: 3,
-    label: "3. Timeline",
+    id: 2,
+    label: "2. Statutory Timeline",
     href: "/cra-hub/timeline",
     icon: Clock,
     tagline: "Enforcement Milestones",
     description: "36-month regulatory calendar, multi-law collisions, and countdown clocks."
   },
   {
-    id: 4,
-    label: "4. 18-Tool Directory",
+    id: 3,
+    label: "3. 18-Tool Directory",
     href: "/cra-hub/directory",
     icon: Database,
     tagline: "Evaluated Platforms",
     description: "Commercial and open-source compliance platforms across 5 market segments."
   },
   {
-    id: 5,
-    label: "5. Deep Guides",
+    id: 4,
+    label: "4. Deep Guides",
     href: "/cra-hub/guides",
     icon: FileText,
     tagline: "Peer-Reviewed Playbooks",
@@ -67,19 +59,19 @@ interface Props {
   activePillarId?: number;
 }
 
-export function PillarCardsNav({ activePillarId = 1 }: Props) {
+export function PillarCardsNav({ activePillarId }: Props) {
   return (
     <div className="w-full pt-6">
       <div className="flex items-center justify-between pb-3">
         <span className="font-mono text-xs uppercase tracking-wider text-muted font-semibold">
-          CRA Conformity Framework // 5 Core Pillars
+          CRA Conformity Framework // 4 Core Pillars
         </span>
         <span className="font-mono text-[11px] text-muted hidden sm:inline">
-          Click to navigate directly to each pillar
+          Click to navigate directly to each dedicated pillar
         </span>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {CRA_PILLARS.map((pillar) => {
           const isActive = pillar.id === activePillarId;
           const Icon = pillar.icon;
