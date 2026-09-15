@@ -1,0 +1,562 @@
+{
+ "atlas": {
+  "CB-001": {
+   "name": "Confirmation Bias",
+   "domain": "PERC",
+   "source": "catalog"
+  },
+  "CB-002": {
+   "name": "Normalcy Bias",
+   "domain": "PERC",
+   "source": "catalog"
+  },
+  "CB-003": {
+   "name": "Anchoring Bias",
+   "domain": "PERC",
+   "source": "catalog"
+  },
+  "CB-004": {
+   "name": "Survivorship Bias",
+   "domain": "PERC",
+   "source": "catalog"
+  },
+  "CB-005": {
+   "name": "Availability Heuristic",
+   "domain": "PERC",
+   "source": "catalog"
+  },
+  "CB-006": {
+   "name": "Sunk Cost Fallacy",
+   "domain": "DEC",
+   "source": "catalog"
+  },
+  "CB-007": {
+   "name": "Loss Aversion",
+   "domain": "DEC",
+   "source": "catalog"
+  },
+  "CB-008": {
+   "name": "Present Bias",
+   "domain": "DEC",
+   "source": "catalog"
+  },
+  "CB-009": {
+   "name": "Overconfidence Effect",
+   "domain": "DEC",
+   "source": "catalog"
+  },
+  "CB-010": {
+   "name": "Gambler'S Fallacy",
+   "domain": "DEC",
+   "source": "catalog"
+  },
+  "CB-011": {
+   "name": "Groupthink",
+   "domain": "SOC",
+   "source": "catalog"
+  },
+  "CB-012": {
+   "name": "Authority Bias",
+   "domain": "SOC",
+   "source": "catalog"
+  },
+  "CB-013": {
+   "name": "Halo Effect",
+   "domain": "SOC",
+   "source": "catalog"
+  },
+  "CB-014": {
+   "name": "In-Group Bias",
+   "domain": "SOC",
+   "source": "catalog"
+  },
+  "CB-015": {
+   "name": "Hindsight Bias",
+   "domain": "MEM",
+   "source": "catalog"
+  },
+  "CB-016": {
+   "name": "Peak-End Rule",
+   "domain": "MEM",
+   "source": "catalog"
+  },
+  "CB-017": {
+   "name": "Framing Effect",
+   "domain": null,
+   "source": "expanded"
+  },
+  "CB-018": {
+   "name": "Status Quo Bias",
+   "domain": null,
+   "source": "expanded"
+  },
+  "CB-019": {
+   "name": "Negativity Bias",
+   "domain": null,
+   "source": "expanded"
+  },
+  "CB-020": {
+   "name": "Bandwagon Effect",
+   "domain": null,
+   "source": "expanded"
+  },
+  "CB-021": {
+   "name": "Blind Spot Bias",
+   "domain": null,
+   "source": "expanded"
+  },
+  "CB-022": {
+   "name": "Choice-Supportive",
+   "domain": null,
+   "source": "expanded"
+  },
+  "CB-023": {
+   "name": "Ostrich Effect",
+   "domain": null,
+   "source": "expanded"
+  },
+  "CB-024": {
+   "name": "Outcome Bias",
+   "domain": null,
+   "source": "expanded"
+  },
+  "CB-025": {
+   "name": "Zero-Risk Bias",
+   "domain": null,
+   "source": "expanded"
+  },
+  "CB-026": {
+   "name": "Recency Bias",
+   "domain": null,
+   "source": "expanded"
+  },
+  "CB-027": {
+   "name": "Planning Fallacy",
+   "domain": null,
+   "source": "expanded"
+  },
+  "CB-028": {
+   "name": "Representativeness",
+   "domain": null,
+   "source": "expanded"
+  },
+  "CB-029": {
+   "name": "Information Bias",
+   "domain": null,
+   "source": "expanded"
+  },
+  "CB-030": {
+   "name": "Fundamental Attribution",
+   "domain": null,
+   "source": "expanded"
+  }
+ },
+ "impl": [
+  {
+   "id": "bias-001",
+   "trait": "Authority",
+   "category": "TIMBRE",
+   "element": "Deep Brass/Organ Pedal",
+   "strength": 0.95
+  },
+  {
+   "id": "bias-002",
+   "trait": "Scarcity",
+   "category": "RHYTHM",
+   "element": "Accelerando (speeding up)",
+   "strength": 0.9
+  },
+  {
+   "id": "bias-003",
+   "trait": "SocialProof",
+   "category": "TEXTURE",
+   "element": "Tutti/Unison Passage",
+   "strength": 0.9
+  },
+  {
+   "id": "bias-004",
+   "trait": "Anchoring",
+   "category": "HARMONY",
+   "element": "Sustained Pedal Tone",
+   "strength": 0.85
+  },
+  {
+   "id": "bias-005",
+   "trait": "Confirmation",
+   "category": "MELODY",
+   "element": "Ostinato Pattern (repeating)",
+   "strength": 0.9
+  },
+  {
+   "id": "bias-006",
+   "trait": "Availability",
+   "category": "DYNAMICS",
+   "element": "Sforzando (sudden loud accent)",
+   "strength": 0.85
+  },
+  {
+   "id": "bias-007",
+   "trait": "Reciprocity",
+   "category": "MELODY",
+   "element": "Call and Response Pattern",
+   "strength": 0.8
+  },
+  {
+   "id": "bias-008",
+   "trait": "Commitment",
+   "category": "RHYTHM",
+   "element": "Strict Tempo (no rubato)",
+   "strength": 0.8
+  },
+  {
+   "id": "bias-009",
+   "trait": "Liking",
+   "category": "HARMONY",
+   "element": "Warm Major Chords with Richer Voicing",
+   "strength": 0.75
+  },
+  {
+   "id": "bias-010",
+   "trait": "Framing",
+   "category": "MODE",
+   "element": "Major Mode (same data, positive frame)",
+   "strength": 0.9
+  },
+  {
+   "id": "bias-011",
+   "trait": "Framing",
+   "category": "MODE",
+   "element": "Minor Mode (same data, negative frame)",
+   "strength": 0.9
+  },
+  {
+   "id": "bias-012",
+   "trait": "Optimism",
+   "category": "MELODY",
+   "element": "Ascending Melody with Crescendo",
+   "strength": 0.85
+  },
+  {
+   "id": "bias-013",
+   "trait": "DunningKruger",
+   "category": "TEXTURE",
+   "element": "Solo Dominating Over Ensemble",
+   "strength": 0.9
+  },
+  {
+   "id": "bias-014",
+   "trait": "StatusQuo",
+   "category": "HARMONY",
+   "element": "No Modulation (stays in tonic)",
+   "strength": 0.85
+  },
+  {
+   "id": "bias-015",
+   "trait": "SunkCost",
+   "category": "MELODY",
+   "element": "Forced Motif Development Despite Dissonance",
+   "strength": 0.8
+  },
+  {
+   "id": "bias-016",
+   "trait": "HyperbolicDiscounting",
+   "category": "RHYTHM",
+   "element": "Short Notes for Immediate, Long for Future",
+   "strength": 0.8
+  },
+  {
+   "id": "bias-017",
+   "trait": "Affect",
+   "category": "DYNAMICS",
+   "element": "Extreme Dynamic Swings",
+   "strength": 0.85
+  },
+  {
+   "id": "bias-018",
+   "trait": "IllusionOfControl",
+   "category": "RHYTHM",
+   "element": "Overcomplex Polyrhythms",
+   "strength": 0.75
+  },
+  {
+   "id": "bias-019",
+   "trait": "Ambiguity",
+   "category": "MODE",
+   "element": "Chromatic Uncertainty",
+   "strength": 0.8
+  },
+  {
+   "id": "bias-020",
+   "trait": "Bandwagon",
+   "category": "TEXTURE",
+   "element": "Tutti Crescendo (everyone getting louder)",
+   "strength": 0.85
+  },
+  {
+   "id": "bias-021",
+   "trait": "ChoiceOverload",
+   "category": "TEXTURE",
+   "element": "Cluttered Polyphonic Density",
+   "strength": 0.8
+  },
+  {
+   "id": "bias-022",
+   "trait": "CognitiveDissonance",
+   "category": "INTERVALS",
+   "element": "Unresolved Dissonance",
+   "strength": 0.9
+  },
+  {
+   "id": "bias-023",
+   "trait": "DecisionFatigue",
+   "category": "RHYTHM",
+   "element": "Ritardando from Fatigue",
+   "strength": 0.8
+  },
+  {
+   "id": "bias-024",
+   "trait": "BiasBlindSpot",
+   "category": "MELODY",
+   "element": "Mirror Inversion (self-blind)",
+   "strength": 0.85
+  },
+  {
+   "id": "bias-025",
+   "trait": "CompassionFade",
+   "category": "DYNAMICS",
+   "element": "Gradual Decrescendo (fading compassion)",
+   "strength": 0.75
+  },
+  {
+   "id": "bias-026",
+   "trait": "ActionBias",
+   "category": "RHYTHM",
+   "element": "Continuous Fast Notes (no rests)",
+   "strength": 0.8
+  },
+  {
+   "id": "bias-027",
+   "trait": "Hindsight",
+   "category": "HARMONY",
+   "element": "Strong Perfect Cadence (I know how it ends)",
+   "strength": 0.8
+  },
+  {
+   "id": "bias-028",
+   "trait": "FundamentalAttribution",
+   "category": "TEXTURE",
+   "element": "Solo Success, Ensemble Failure Attribution",
+   "strength": 0.8
+  },
+  {
+   "id": "bias-029",
+   "trait": "Primacy",
+   "category": "DYNAMICS",
+   "element": "Crescendo on First Mention Only",
+   "strength": 0.8
+  },
+  {
+   "id": "bias-030",
+   "trait": "Recency",
+   "category": "MELODY",
+   "element": "Strong Final Note Emphasis",
+   "strength": 0.8
+  }
+ ],
+ "strict": {
+  "Confirmation": "CB-001",
+  "Anchoring": "CB-003",
+  "Availability": "CB-005",
+  "SunkCost": "CB-006",
+  "HyperbolicDiscounting": "CB-008",
+  "DunningKruger": "CB-009",
+  "Authority": "CB-012",
+  "Hindsight": "CB-015",
+  "Framing": "CB-017",
+  "StatusQuo": "CB-018",
+  "Bandwagon": "CB-020",
+  "BiasBlindSpot": "CB-021",
+  "Recency": "CB-026",
+  "FundamentalAttribution": "CB-030"
+ },
+ "draft_mappings": {
+  "CB-002": {
+   "name": "Normalcy",
+   "category": "RHYTHM",
+   "element": "Metre held through a metric disturbance",
+   "rides": "entropy",
+   "reason": "The bias is the refusal to register that conditions have changed. Musically that is the accompaniment keeping its metre while the melody crosses a barline that should have moved it: the listener hears the failure to adjust rather than an event."
+  },
+  "CB-004": {
+   "name": "Survivorship",
+   "category": "TEXTURE",
+   "element": "Missing voice, never re-entered",
+   "rides": "fragmentation",
+   "reason": "The bias is reasoning from what remains. The texture states a line, drops it, and continues as though the remaining voices were the whole; the absence is audible only if the line was heard first, which is the bias exactly."
+  },
+  "CB-007": {
+   "name": "Loss Aversion",
+   "category": "DYNAMICS",
+   "element": "Asymmetric envelope, fast decay and slow recovery",
+   "rides": "trauma",
+   "reason": "Losses weigh about twice gains. A dynamic envelope that falls quickly and returns slowly gives the asymmetry directly, and the ratio of the two times is the one number the mapping has to state."
+  },
+  "CB-010": {
+   "name": "Gambler's Fallacy",
+   "category": "MELODY",
+   "element": "Sequence expecting an inversion that does not come",
+   "rides": "entropy",
+   "reason": "The bias is the belief that a run must reverse. A melodic sequence that repeats a figure in one direction while the listener waits for the answering inversion puts the expectation in the ear rather than in the notes."
+  },
+  "CB-011": {
+   "name": "Groupthink",
+   "category": "TEXTURE",
+   "element": "Unison with the dissenting voice absorbed mid-phrase",
+   "rides": "register: Symbolic",
+   "reason": "Distinct from social proof, which is joining. Groupthink is a voice that was separate and stops being separate: the second part doubles the first part in the middle of a phrase and does not return."
+  },
+  "CB-013": {
+   "name": "Halo Effect",
+   "category": "HARMONY",
+   "element": "One voice's consonance imposed on the whole chord",
+   "rides": "register: Imaginary",
+   "reason": "A single favourable impression colours every later judgement. The chord is voiced so that one line is consonant with the bass and the inner parts are bent to agree with it rather than with each other."
+  },
+  "CB-014": {
+   "name": "In-Group Bias",
+   "category": "TEXTURE",
+   "element": "Two groups with incompatible tuning or articulation",
+   "rides": "register: Symbolic",
+   "reason": "Tribalism is not disagreement about content but about the terms of playing. Two subsets of the ensemble articulate differently, and neither adapts; the split is audible before any dissonance is."
+  },
+  "CB-016": {
+   "name": "Peak-End Rule",
+   "category": "DYNAMICS",
+   "element": "Loudest bar and final bar marked, middle levelled",
+   "rides": "trauma",
+   "reason": "An experience is judged by its peak and its end. The dynamic profile of a scene is flattened except at its maximum and its last bar, so the shape a listener retains is the shape the rule predicts."
+  },
+  "CB-019": {
+   "name": "Negativity Bias",
+   "category": "INTERVALS",
+   "element": "Dissonances sustained, consonances passed through",
+   "rides": "trauma",
+   "reason": "Negative events weigh more. Holding every dissonant interval to its full value while consonances are taken as passing notes weights the same material without adding any."
+  },
+  "CB-022": {
+   "name": "Choice-Supportive",
+   "category": "HARMONY",
+   "element": "Retrospective reharmonisation of a phrase already heard",
+   "rides": "entropy",
+   "reason": "The bias is remembering a choice as better than it was. Restating an earlier phrase with its harmony improved, rather than as first heard, is that operation in sound and is checkable against the first statement."
+  },
+  "CB-023": {
+   "name": "Ostrich Effect",
+   "category": "TEXTURE",
+   "element": "Registral gap where a voice should answer",
+   "rides": "register: Real",
+   "reason": "Ignoring information is not silence but a hole in a specific place. The answering voice does not enter, and the gap sits in the register the answer would have occupied."
+  },
+  "CB-024": {
+   "name": "Outcome Bias",
+   "category": "HARMONY",
+   "element": "Cadence justified after the fact by its resolution",
+   "rides": "register: Symbolic",
+   "reason": "Judging the decision by the result. A progression that was irregular resolves conventionally, and the conventional resolution is what a listener remembers about the progression."
+  },
+  "CB-025": {
+   "name": "Zero-Risk Bias",
+   "category": "HARMONY",
+   "element": "Complete triad preferred over a richer incomplete voicing",
+   "rides": "entropy",
+   "reason": "A small certainty preferred to a large probability. The voicing takes the closed, fully stated triad in place of an open voicing that would carry more and risk more."
+  },
+  "CB-027": {
+   "name": "Planning Fallacy",
+   "category": "RHYTHM",
+   "element": "Phrase begun at a tempo it cannot finish in",
+   "rides": "entropy",
+   "reason": "Underestimating time. The phrase is set out at a rate that requires a rallentando or an extra bar to complete, and the correction is the audible content."
+  },
+  "CB-028": {
+   "name": "Representativeness",
+   "category": "MELODY",
+   "element": "Figure treated as a familiar type and completed wrongly",
+   "rides": "register: Imaginary",
+   "reason": "Stereotyping probability. A motif whose opening resembles a common figure is continued as that figure rather than as itself, so the listener hears the category override the particular."
+  },
+  "CB-029": {
+   "name": "Information Bias",
+   "category": "TEXTURE",
+   "element": "Accumulating countermelodies that change no decision",
+   "rides": "entropy",
+   "reason": "Seeking more information than can be used. Voices are added, each idiomatic, none altering the harmonic path; the texture thickens and the argument does not move."
+  }
+ },
+ "draft_domains": {
+  "CB-017": [
+   "PERC",
+   "Framing acts on how the datum is presented, before any calculation. The input layer."
+  ],
+  "CB-018": [
+   "DEC",
+   "Status quo bias is a weighting of the default option in the calculation of risk, not a filter on what arrives."
+  ],
+  "CB-019": [
+   "PERC",
+   "Negativity bias weights incoming events by valence at the point of intake."
+  ],
+  "CB-020": [
+   "SOC",
+   "The bandwagon effect is conformity to the observed behaviour of others. The network layer."
+  ],
+  "CB-021": [
+   "MEM",
+   "The blind spot is a failure in the account one holds of oneself, which is the storage layer, not the filter."
+  ],
+  "CB-022": [
+   "MEM",
+   "Choice-supportive bias rewrites the record of a past decision. Storage."
+  ],
+  "CB-023": [
+   "PERC",
+   "The ostrich effect is a refusal at intake: the information is available and is not taken in."
+  ],
+  "CB-024": [
+   "MEM",
+   "Outcome bias re-reads a past decision in the light of its result. Storage, not calculation."
+  ],
+  "CB-025": [
+   "DEC",
+   "Zero-risk bias is a distortion of the probability calculation itself."
+  ],
+  "CB-026": [
+   "MEM",
+   "Recency is a weighting of the store by age."
+  ],
+  "CB-027": [
+   "DEC",
+   "The planning fallacy is an error in the estimate, which is the processing layer."
+  ],
+  "CB-028": [
+   "DEC",
+   "Representativeness substitutes similarity for probability in the calculation."
+  ],
+  "CB-029": [
+   "DEC",
+   "Information bias is a distortion of what the calculation requires before it will conclude."
+  ],
+  "CB-030": [
+   "SOC",
+   "Fundamental attribution is a judgement about another agent. The network layer."
+  ]
+ },
+ "influence": [
+  "Scarcity",
+  "SocialProof",
+  "Reciprocity",
+  "Commitment",
+  "Liking",
+  "Authority"
+ ]
+}

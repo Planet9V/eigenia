@@ -13,13 +13,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tracks",
     "/physics",
     "/collaborate",
+    "/listening-pack",
     "/unified-standard",
+    "/cra-hub",
+    "/cra-hub/requirements",
+    "/cra-hub/timeline",
+    "/cra-hub/directory",
+    "/cra-hub/guides",
+    "/cra-hub/guides/tools-comparison",
+    "/cra-hub/guides/industrial-ot",
+    "/cra-hub/guides/article-14-playbook",
     "/wiki",
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
-    priority: route === "" ? 1.0 : 0.8,
+    priority: route === "" ? 1.0 : route.startsWith("/cra-hub") ? 0.95 : 0.8,
   }));
 
   // Dynamic Papers Routes (one per PAPERS_REGISTRY entry)

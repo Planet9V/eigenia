@@ -1,0 +1,164 @@
+{
+ "set3": [
+  {
+   "label": "B1",
+   "file": "Set-3-A.mp3"
+  },
+  {
+   "label": "B2",
+   "file": "Set-3-B.mp3"
+  },
+  {
+   "label": "B3",
+   "file": "Set-3-C.mp3"
+  },
+  {
+   "label": "B4",
+   "file": "Set-3-G.mp3"
+  },
+  {
+   "label": "B5",
+   "file": "Set-3-E.mp3"
+  },
+  {
+   "label": "B6",
+   "file": "Set-3-F.mp3"
+  },
+  {
+   "label": "B7",
+   "file": "Set-3-D.mp3"
+  }
+ ],
+ "set4canon": [
+  {
+   "label": "V1",
+   "file": "Set-4-F.mp3"
+  },
+  {
+   "label": "V2",
+   "file": "Set-4-B.mp3"
+  },
+  {
+   "label": "V3",
+   "file": "Set-4-D.mp3"
+  },
+  {
+   "label": "V4",
+   "file": "Set-4-C.mp3"
+  },
+  {
+   "label": "V5",
+   "file": "Set-4-A.mp3"
+  },
+  {
+   "label": "V6",
+   "file": "Set-4-E.mp3"
+  }
+ ],
+ "set4ladder": [
+  {
+   "label": "D1",
+   "file": "Set-4-L7.mp3"
+  },
+  {
+   "label": "D2",
+   "file": "Set-4-L8.mp3"
+  },
+  {
+   "label": "D3",
+   "file": "Set-4-L2.mp3"
+  },
+  {
+   "label": "D4",
+   "file": "Set-4-L1.mp3"
+  },
+  {
+   "label": "D5",
+   "file": "Set-4-L3.mp3"
+  },
+  {
+   "label": "D6",
+   "file": "Set-4-L6.mp3"
+  },
+  {
+   "label": "D7",
+   "file": "Set-4-L5.mp3"
+  },
+  {
+   "label": "D8",
+   "file": "Set-4-L4.mp3"
+  }
+ ],
+ "set5": [
+  {
+   "label": "C1",
+   "file": "Set-5-10.mp3"
+  },
+  {
+   "label": "C2",
+   "file": "Set-5-09.mp3"
+  },
+  {
+   "label": "C3",
+   "file": "Set-5-08.mp3"
+  },
+  {
+   "label": "C4",
+   "file": "Set-5-03.mp3"
+  },
+  {
+   "label": "C5",
+   "file": "Set-5-05.mp3"
+  },
+  {
+   "label": "C6",
+   "file": "Set-5-01.mp3"
+  },
+  {
+   "label": "C7",
+   "file": "Set-5-07.mp3"
+  },
+  {
+   "label": "C8",
+   "file": "Set-5-02.mp3"
+  },
+  {
+   "label": "C9",
+   "file": "Set-5-04.mp3"
+  },
+  {
+   "label": "C10",
+   "file": "Set-5-06.mp3"
+  }
+ ],
+ "set1": [
+  {
+   "label": "A",
+   "file": "Set-1-A.mp3"
+  },
+  {
+   "label": "B",
+   "file": "Set-1-B.mp3"
+  },
+  {
+   "label": "C",
+   "file": "Set-1-C.mp3"
+  },
+  {
+   "label": "D",
+   "file": "Set-1-D.mp3"
+  },
+  {
+   "label": "E",
+   "file": "Set-1-E.mp3"
+  },
+  {
+   "label": "F",
+   "file": "Set-1-F.mp3"
+  },
+  {
+   "label": "G",
+   "file": "Set-1-G.mp3"
+  }
+ ]
+}

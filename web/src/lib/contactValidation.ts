@@ -46,8 +46,13 @@ export interface Validated {
   message: string;
 }
 
-/** Deliberately simple: one @, no spaces, something either side, a dot after. */
-const EMAIL = /^[^\s@]{1,64}@[^\s@.]+(?:\.[^\s@.]+)+$/;
+/**
+ * Deliberately simple: one @, no spaces, something either side, a dot after.
+ * Exported because the listening intake takes an optional return address and
+ * must agree with this route about what an address is, rather than keeping a
+ * second pattern that drifts.
+ */
+export const EMAIL_PATTERN = /^[^\s@]{1,64}@[^\s@.]+(?:\.[^\s@.]+)+$/;
 
 export type ValidationResult =
   | { ok: true; value: Validated }
@@ -78,7 +83,7 @@ export function validateContact(body: unknown): ValidationResult {
   }
 
   if (!out.email) return { ok: false, reason: "email is required" };
-  if (!EMAIL.test(out.email)) return { ok: false, reason: "email is not a valid address" };
+  if (!EMAIL_PATTERN.test(out.email)) return { ok: false, reason: "email is not a valid address" };
   if (!out.message) return { ok: false, reason: "message is required" };
 
   return { ok: true, value: out };

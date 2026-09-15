@@ -1,5 +1,5 @@
 /**
- * Lightweight static word count map for all 122 canonical treatises.
+ * Lightweight static word count map for all 128 canonical treatises.
  *
  * Generated directly from references corpus metadata so client routes like /papers
  * do not need to bundle generatedReferencesContent.json (~3.3 MB).
@@ -128,6 +128,12 @@ export const TREATISE_WORD_COUNTS: Record<string, number> = {
   "gauge-symmetries-topological-currents-microgrids": 2778,
   "symplectic-cohomology-floer-homology-invariant-manifolds": 2644,
   "research-sourcing-governance": 93,
+  "mpn-s1-psychometric-calculus-theory": 10566,
+  "mpn-s2-formal-apparatus": 11365,
+  "mpn-s3-mapping-state-to-musical-material": 19094,
+  "mpn-s4-conductor-implementation-audit": 13265,
+  "mpn-s5-dialogue-use-cases": 16434,
+  "mpn-s6-expression-aid": 11804,
 };
 
 /**

@@ -1,0 +1,532 @@
+{
+ "set3_margin_and_rounding": {
+  "tie_state": [
+   0.45,
+   0.45,
+   0.1
+  ],
+  "near_tie_state": [
+   0.46,
+   0.43,
+   0.11
+  ],
+  "table": [
+   "Dorian",
+   "Lydian",
+   "Phrygian"
+  ],
+  "delta_separation_cents": 17.4,
+  "question": "whether the blend is heard as a third scale or as a mistuned version of an input; whether the two margins are distinguishable; and whether either rounding of the blend is distinguishable from the pure modes",
+  "note": "Set-3-E and Set-3-G carry the SAME scale. Rounding half up at an exact tie returns one of the two inputs exactly, which makes that pair a built-in catch trial as well as a result.",
+  "items": {
+   "Set-3-A": {
+    "file": "Set-3-A.mp3",
+    "bytes": 246745,
+    "sha256": "3c0514b2e013d13aa0e4a41dacad4f32e35dc10cb9895f521a633e3d7a2786be",
+    "scale": [
+     0.0,
+     2.0,
+     3.0,
+     5.0,
+     7.0,
+     9.0,
+     10.0
+    ],
+    "state": [
+     0.45,
+     0.45,
+     0.1
+    ],
+    "note": "pure Dorian, what argmax would choose"
+   },
+   "Set-3-B": {
+    "file": "Set-3-B.mp3",
+    "bytes": 246745,
+    "sha256": "8224df8bb33ee92923fcc096e5c2efd0b14bcd8559da05a073c1fcf4ae7e0a46",
+    "scale": [
+     0.0,
+     2.0,
+     3.5,
+     5.5,
+     7.0,
+     9.0,
+     10.5
+    ],
+    "state": [
+     0.45,
+     0.45,
+     0.1
+    ],
+    "note": "exact tie, blended, exact cents. Both deltas give this"
+   },
+   "Set-3-C": {
+    "file": "Set-3-C.mp3",
+    "bytes": 246745,
+    "sha256": "cdb7a9b29b39795f2eb34b632fe9d625771414b84e06104a6efe2b667c46e158",
+    "scale": [
+     0.0,
+     2.0,
+     3.2857,
+     5.2857,
+     7.0,
+     9.0,
+     10.2857
+    ],
+    "state": [
+     0.46,
+     0.43,
+     0.11
+    ],
+    "note": "near tie, delta = 0.05, exact cents"
+   },
+   "Set-3-D": {
+    "file": "Set-3-D.mp3",
+    "bytes": 246745,
+    "sha256": "8f0fc80414dce64ade7dc9335284b1e4625a24dc149358ce1d066b33864433c1",
+    "scale": [
+     0.0,
+     2.0,
+     3.4595,
+     5.4595,
+     7.0,
+     9.0,
+     10.4595
+    ],
+    "state": [
+     0.46,
+     0.43,
+     0.11
+    ],
+    "note": "near tie, delta = 0.20, exact cents"
+   },
+   "Set-3-E": {
+    "file": "Set-3-E.mp3",
+    "bytes": 246745,
+    "sha256": "af6e460b8ddb828a12300a25e7a419a49d48dfa0b63f9f27989b163c71d0ea16",
+    "scale": [
+     0.0,
+     2.0,
+     4.0,
+     6.0,
+     7.0,
+     9.0,
+     11.0
+    ],
+    "state": [
+     0.45,
+     0.45,
+     0.1
+    ],
+    "note": "exact tie, blended, rounded half up"
+   },
+   "Set-3-F": {
+    "file": "Set-3-F.mp3",
+    "bytes": 246745,
+    "sha256": "55de6821fbd4cef3fef7ebcfdeaab86fb330feb449a96c62d5e2b2d64ad6fcde",
+    "scale": [
+     0.0,
+     2.0,
+     4.0,
+     6.0,
+     7.0,
+     9.0,
+     10.0
+    ],
+    "state": [
+     0.45,
+     0.45,
+     0.1
+    ],
+    "note": "exact tie, blended, bankers rounding"
+   },
+   "Set-3-G": {
+    "file": "Set-3-G.mp3",
+    "bytes": 246745,
+    "sha256": "af6e460b8ddb828a12300a25e7a419a49d48dfa0b63f9f27989b163c71d0ea16",
+    "scale": [
+     0.0,
+     2.0,
+     4.0,
+     6.0,
+     7.0,
+     9.0,
+     11.0
+    ],
+    "state": [
+     0.45,
+     0.45,
+     0.1
+    ],
+    "note": "pure Lydian, the other input"
+   }
+  }
+ },
+ "set4_timbre": {
+  "dimensions": {
+   "c1": "log attack time, 3 ms to 150 ms",
+   "c2": "spectral centroid, via harmonic rolloff exponent 0.7 to 2.4",
+   "c3": "even-harmonic attenuation, 0 dB to -18 dB"
+  },
+  "canonical": {
+   "Set-4-A": {
+    "file": "Set-4-A.mp3",
+    "bytes": 20107,
+    "sha256": "261e4ffb5628e1369a6bf4d9eb5169c3d3019d7447ba76d910404b07273b712f",
+    "profile": "DI-high",
+    "disc": [
+     1,
+     1,
+     0,
+     0
+    ],
+    "contrasts": [
+     1.0,
+     0.0,
+     0.0
+    ]
+   },
+   "Set-4-B": {
+    "file": "Set-4-B.mp3",
+    "bytes": 20107,
+    "sha256": "a5610c450ca4c5d1528f430bac45b0fc56effaa9b25f74297f10ada4f24a1ba3",
+    "profile": "DS-high",
+    "disc": [
+     1,
+     0,
+     1,
+     0
+    ],
+    "contrasts": [
+     0.0,
+     1.0,
+     0.0
+    ]
+   },
+   "Set-4-C": {
+    "file": "Set-4-C.mp3",
+    "bytes": 20107,
+    "sha256": "a07b1cf842a654a3207788bd025d3a330502b808c0a43825417899ae97564915",
+    "profile": "DC-high",
+    "disc": [
+     1,
+     0,
+     0,
+     1
+    ],
+    "contrasts": [
+     0.0,
+     0.0,
+     1.0
+    ]
+   },
+   "Set-4-D": {
+    "file": "Set-4-D.mp3",
+    "bytes": 20107,
+    "sha256": "af4824c14c6c9f3fd6ef8ad4a58bab9d2f31d9e30feeca90255cb3425f85299d",
+    "profile": "IS-high",
+    "disc": [
+     0,
+     1,
+     1,
+     0
+    ],
+    "contrasts": [
+     0.0,
+     0.0,
+     -1.0
+    ]
+   },
+   "Set-4-E": {
+    "file": "Set-4-E.mp3",
+    "bytes": 20107,
+    "sha256": "02d11bea2aa8d92e39fd33e8ff1770e80f7c361de71038368e3771a1db5eb6df",
+    "profile": "IC-high",
+    "disc": [
+     0,
+     1,
+     0,
+     1
+    ],
+    "contrasts": [
+     0.0,
+     -1.0,
+     0.0
+    ]
+   },
+   "Set-4-F": {
+    "file": "Set-4-F.mp3",
+    "bytes": 20107,
+    "sha256": "409bc4854ebebe411043427717f1fd71047a1338faea0dcaf7fecfe951ba44e3",
+    "profile": "SC-high",
+    "disc": [
+     0,
+     0,
+     1,
+     1
+    ],
+    "contrasts": [
+     -1.0,
+     0.0,
+     0.0
+    ]
+   }
+  },
+  "ladder": {
+   "Set-4-L1": {
+    "file": "Set-4-L1.mp3",
+    "bytes": 45184,
+    "sha256": "b33446d8a71800da597ddcc8519ae87be46b32806c6e1ebd5f2ac3166b59ef99",
+    "separation_requested": 0.0,
+    "separation_actual": 0.0,
+    "axis": "c1 attack time",
+    "same": true
+   },
+   "Set-4-L2": {
+    "file": "Set-4-L2.mp3",
+    "bytes": 45184,
+    "sha256": "b33446d8a71800da597ddcc8519ae87be46b32806c6e1ebd5f2ac3166b59ef99",
+    "separation_requested": 0.0,
+    "separation_actual": 0.0,
+    "axis": "c2 spectral centroid",
+    "same": true
+   },
+   "Set-4-L3": {
+    "file": "Set-4-L3.mp3",
+    "bytes": 45184,
+    "sha256": "638f512be05d8c674bbc945f1acfa78e17100fb325390475b27bbd67d31174a8",
+    "separation_requested": 0.25,
+    "separation_actual": 0.25,
+    "axis": "c1 attack time",
+    "same": false
+   },
+   "Set-4-L4": {
+    "file": "Set-4-L4.mp3",
+    "bytes": 45184,
+    "sha256": "d6476aa7e95241e985336856de73917ed5386d781fa5285cd475bba4a20dccf6",
+    "separation_requested": 0.5,
+    "separation_actual": 0.5,
+    "axis": "c2 spectral centroid",
+    "same": false
+   },
+   "Set-4-L5": {
+    "file": "Set-4-L5.mp3",
+    "bytes": 45184,
+    "sha256": "8da77f5d4dc216f5c29406a56c28e93a23edf775f3dc506cd24914cd385eb11f",
+    "separation_requested": 0.75,
+    "separation_actual": 0.75,
+    "axis": "c3 spectrum fine structure",
+    "same": false
+   },
+   "Set-4-L6": {
+    "file": "Set-4-L6.mp3",
+    "bytes": 45184,
+    "sha256": "adca96ed18a3c8a5ea3c23831e14787d12f2fb2273e9bd8edff3fb54abc74820",
+    "separation_requested": 1.0,
+    "separation_actual": 1.0,
+    "axis": "c1 attack time",
+    "same": false
+   },
+   "Set-4-L7": {
+    "file": "Set-4-L7.mp3",
+    "bytes": 45184,
+    "sha256": "b672da1287be75b157a90be34313ed703c2e37d3ffc7fba7f6314253930a16c3",
+    "separation_requested": 1.4142,
+    "separation_actual": 1.4142,
+    "axis": "c2 spectral centroid",
+    "same": false
+   },
+   "Set-4-L8": {
+    "file": "Set-4-L8.mp3",
+    "bytes": 45184,
+    "sha256": "154946c6e26c30b51d4b370d9de1fbe76c50a3a1cfa4572b4ff5da223acadf61",
+    "separation_requested": 2.0,
+    "separation_actual": 2.0,
+    "axis": "c3 spectrum fine structure",
+    "same": false
+   }
+  },
+  "question": "the separation in contrast units at which same and different reach chance, which closes the capacity table of design 5b.3"
+ },
+ "set5_cayley": {
+  "question": "do listeners rank pairs of chords by the Cayley distance between them, which is S3 section 2.5 stated falsification test",
+  "items": {
+   "Set-5-01": {
+    "file": "Set-5-01.mp3",
+    "bytes": 48319,
+    "sha256": "bbb5a5131e35b1b1c981644c707a159bc276427128e4a1df6e7579b03ed02c67",
+    "from_triad": "C major",
+    "to_triad": "C minor",
+    "cayley_distance": 1
+   },
+   "Set-5-02": {
+    "file": "Set-5-02.mp3",
+    "bytes": 48319,
+    "sha256": "ccaf4f8c005cd4575e2a7dffdfd1e15485ebd3c9ba5887f91deaabe3fa5cdd79",
+    "from_triad": "G major",
+    "to_triad": "E minor",
+    "cayley_distance": 1
+   },
+   "Set-5-03": {
+    "file": "Set-5-03.mp3",
+    "bytes": 48319,
+    "sha256": "e23503d0a1de2c725b15af86018ac1065be2e6b1d1eafc64d99cfd08d0defd15",
+    "from_triad": "C major",
+    "to_triad": "D# major",
+    "cayley_distance": 2
+   },
+   "Set-5-04": {
+    "file": "Set-5-04.mp3",
+    "bytes": 48319,
+    "sha256": "78d7fd6572a78e11bd83089aca96e38f2dd7eb08a4dc7f9cfe8c73fd162f6371",
+    "from_triad": "G major",
+    "to_triad": "C major",
+    "cayley_distance": 2
+   },
+   "Set-5-05": {
+    "file": "Set-5-05.mp3",
+    "bytes": 48319,
+    "sha256": "1fda73c9de44bb4edf85576c42c0fc28ffc96d1e884df4537554c79efc5616eb",
+    "from_triad": "C major",
+    "to_triad": "C# minor",
+    "cayley_distance": 3
+   },
+   "Set-5-06": {
+    "file": "Set-5-06.mp3",
+    "bytes": 48319,
+    "sha256": "c5613498a0283b14dbdbc6c134ebbe20475a9a5138336e94cf006c0d07169764",
+    "from_triad": "G major",
+    "to_triad": "C minor",
+    "cayley_distance": 3
+   },
+   "Set-5-07": {
+    "file": "Set-5-07.mp3",
+    "bytes": 48319,
+    "sha256": "3ef8b29cf11b01d860c43ed35accbc9cf3027a09e8126f5c4f3d0f3554c2892b",
+    "from_triad": "C major",
+    "to_triad": "C# major",
+    "cayley_distance": 4
+   },
+   "Set-5-08": {
+    "file": "Set-5-08.mp3",
+    "bytes": 48319,
+    "sha256": "1edd04f6b8661e8a190e1ed7d765e322c6a6f6afc307c902d545964c1bea258a",
+    "from_triad": "G major",
+    "to_triad": "C# major",
+    "cayley_distance": 4
+   },
+   "Set-5-09": {
+    "file": "Set-5-09.mp3",
+    "bytes": 48319,
+    "sha256": "7fa3054019fe237af97eb410b2b7e9f169c0c4dcc61bf2e0eb3d21cff59543a0",
+    "from_triad": "C major",
+    "to_triad": "A# minor",
+    "cayley_distance": 5
+   },
+   "Set-5-10": {
+    "file": "Set-5-10.mp3",
+    "bytes": 48319,
+    "sha256": "1ace13d8e655659d2407f04f87d36c3fd47210f60e377f5e5a60058f793b46e5",
+    "from_triad": "G major",
+    "to_triad": "F minor",
+    "cayley_distance": 5
+   }
+  }
+ },
+ "provenance": {
+  "generator": "s7_listening_stimuli.py",
+  "randomness": "none drawn anywhere; the set is a pure function of this script",
+  "sample_rate": 44100,
+  "bpm": 100,
+  "encoding": "mp3, 96 kbps mono",
+  "melody_degrees": [
+   [
+    1,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    3,
+    2
+   ],
+   [
+    4,
+    1
+   ],
+   [
+    3,
+    1
+   ],
+   [
+    2,
+    2
+   ],
+   [
+    5,
+    1
+   ],
+   [
+    4,
+    1
+   ],
+   [
+    3,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    3,
+    4
+   ],
+   [
+    5,
+    1
+   ],
+   [
+    6,
+    1
+   ],
+   [
+    7,
+    2
+   ],
+   [
+    8,
+    1
+   ],
+   [
+    7,
+    1
+   ],
+   [
+    6,
+    2
+   ],
+   [
+    5,
+    1
+   ],
+   [
+    4,
+    1
+   ],
+   [
+    3,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    1,
+    4
+   ]
+  ]
+ }
+}
