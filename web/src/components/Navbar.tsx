@@ -40,23 +40,8 @@ export const Navbar: React.FC = () => {
             </span>
           </Link>
 
-          {/* Desktop Navigation - 4 Standalone Route Links in Title Case */}
+          {/* Desktop Navigation - Standalone Route Links in Title Case */}
           <div className="hidden lg:flex items-center gap-8 text-xs font-mono text-secondary relative">
-            {/* Category 1: Mission Route */}
-            <Link
-              href="/mission"
-              className={`relative py-5 transition-colors ${
-                pathname === "/mission" ? "text-dutchOrange font-bold" : "hover:text-dutchOrange"
-              }`}
-            >
-              <span>{t("nav_mission")}</span>
-              {pathname === "/mission" && (
-                <motion.div
-                  layoutId="activeNav"
-                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-dutchOrange"
-                />
-              )}
-            </Link>
 
             {/* Category 2: Research Tracks Dropdown */}
             <div
@@ -194,36 +179,15 @@ export const Navbar: React.FC = () => {
               )}
             </Link>
 
-            {/* Category 3.5: Jurisdictions Map Showcase */}
-            <Link
-              href="/jurisdictions"
-              className={`relative py-5 transition-colors ${
-                pathname === "/jurisdictions" ? "text-dutchOrange font-bold" : "hover:text-dutchOrange"
-              }`}
-            >
-              <span>{t("nav_jurisdictions")}</span>
-              {pathname === "/jurisdictions" && (
-                <motion.div
-                  layoutId="activeNav"
-                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-dutchOrange"
-                />
-              )}
-            </Link>
-
-            {/* Category 3.7: CRA Hub */}
+            {/* Category 3.5: CRA Hub Route */}
             <Link
               href="/cra-hub"
               className={`relative py-5 transition-colors ${
-                pathname === "/cra-hub" ? "text-dutchOrange font-bold" : "hover:text-dutchOrange"
+                pathname?.startsWith("/cra-hub") ? "text-dutchOrange font-bold" : "hover:text-dutchOrange"
               }`}
             >
-              <span className="flex items-center gap-1.5">
-                {t("nav_cra_hub")}
-                <span className="px-1.5 py-0.5 rounded bg-dutchOrange/10 text-dutchOrange text-[9px] font-bold border border-dutchOrange/30">
-                  EU
-                </span>
-              </span>
-              {pathname === "/cra-hub" && (
+              <span>{t("nav_cra")}</span>
+              {pathname?.startsWith("/cra-hub") && (
                 <motion.div
                   layoutId="activeNav"
                   className="absolute bottom-0 left-0 right-0 h-0.5 bg-dutchOrange"
@@ -446,13 +410,6 @@ export const Navbar: React.FC = () => {
             exit={{ opacity: 0, height: 0 }}
             className="lg:hidden bg-canvas font-sans text-xs p-6 space-y-4 shadow-2xl border-b border-hairline"
           >
-            <Link
-              href="/mission"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-primary font-medium hover:text-dutchOrange"
-            >
-              {t("nav_mission")}
-            </Link>
 
             <Link
               href="/tracks"
@@ -471,19 +428,11 @@ export const Navbar: React.FC = () => {
             </Link>
 
             <Link
-              href="/jurisdictions"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-primary font-medium hover:text-dutchOrange"
-            >
-              {t("nav_jurisdictions")}
-            </Link>
-
-            <Link
               href="/cra-hub"
               onClick={() => setMobileMenuOpen(false)}
               className="block py-2 text-primary font-medium hover:text-dutchOrange flex items-center justify-between"
             >
-              <span>{t("nav_cra_hub")}</span>
+              <span>{t("nav_cra")}</span>
               <span className="px-1.5 py-0.5 rounded bg-dutchOrange/10 text-dutchOrange text-[10px] font-mono font-bold border border-dutchOrange/30">
                 EU Portal
               </span>
