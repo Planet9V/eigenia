@@ -29,6 +29,8 @@ import {
   Globe,
   Compass
 } from "lucide-react";
+import { PillarInteractiveNav } from "@/components/cra/PillarInteractiveNav";
+import { StatutoryRadarSection } from "@/components/cra/StatutoryRadarSection";
 
 interface ToolItem {
   name: string;
@@ -282,107 +284,39 @@ export default function CraConformityHubPage() {
                 </p>
               </div>
 
-              {/* Enforcement Countdown Card */}
-              <div className="p-6 rounded-2xl bg-canvas border border-hairline shadow-lg space-y-4 min-w-[320px]">
+              {/* Statutory Readiness Summary Pill */}
+              <div className="p-5 rounded-2xl bg-canvas border border-hairline shadow-sm space-y-3 min-w-[300px]">
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-xs text-muted uppercase tracking-wider">Statutory Enforcement Radar</span>
+                  <span className="font-mono text-xs text-muted uppercase tracking-wider">Statutory Status</span>
                   <span className="flex h-2 w-2 relative">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                   </span>
                 </div>
-
-                <div className="space-y-3 font-mono text-xs">
-                  <div className="p-2.5 rounded-xl bg-red-500/10 border border-red-500/30">
-                    <span className="text-red-500 font-bold block">ACTIVE LAW TODAY</span>
-                    <span className="text-primary text-[11px] block mt-0.5">Article 14 ENISA SRP (Sep 11, 2026)</span>
-                    <span className="text-muted text-[10px]">24h Mandatory Vulnerability Early Warning</span>
+                <div className="space-y-1.5 font-mono text-xs">
+                  <div className="flex items-center justify-between py-1 border-b border-hairline">
+                    <span className="text-muted">Enacted Law:</span>
+                    <span className="font-bold text-primary">Reg (EU) 2024/2847</span>
                   </div>
-
-                  <div className="p-2.5 rounded-xl bg-subtle border border-hairline">
-                    <span className="text-dutchOrange font-semibold block">Jan 20, 2027</span>
-                    <span className="text-primary text-[11px] block mt-0.5">Machinery Reg (EU) 2023/1230</span>
-                    <span className="text-muted text-[10px]">Industrial Machine Cybersecurity</span>
+                  <div className="flex items-center justify-between py-1 border-b border-hairline">
+                    <span className="text-muted">Active Gate:</span>
+                    <span className="font-bold text-red-500">Art. 14 24h SRP</span>
                   </div>
-
-                  <div className="p-2.5 rounded-xl bg-subtle border border-hairline">
-                    <span className="text-secondary font-semibold block">Dec 11, 2027</span>
-                    <span className="text-primary text-[11px] block mt-0.5">Full CRA Application</span>
-                    <span className="text-muted text-[10px]">Mandatory CE Marking for all PDE</span>
+                  <div className="flex items-center justify-between py-1">
+                    <span className="text-muted">CE Mark Deadline:</span>
+                    <span className="font-bold text-dutchOrange">Dec 11, 2027</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Five Pillars Navigation Bar */}
-            <div className="pt-6 border-t border-hairline grid grid-cols-2 sm:grid-cols-5 gap-2 font-mono text-xs">
-              <Link 
-                href="/cra-hub" 
-                className="p-3 rounded-xl bg-dutchOrange/10 border border-dutchOrange/30 text-dutchOrange font-bold text-center flex flex-col items-center gap-1 shadow-sm"
-              >
-                <ShieldCheck className="w-4 h-4" />
-                <span>1. Hub Overview</span>
-              </Link>
-              <Link 
-                href="/cra-hub/requirements" 
-                className="p-3 rounded-xl bg-surface border border-hairline hover:border-dutchOrange/50 text-primary text-center flex flex-col items-center gap-1 transition-colors"
-              >
-                <Scale className="w-4 h-4 text-dutchOrange" />
-                <span>2. Requirements</span>
-              </Link>
-              <Link 
-                href="/cra-hub/timeline" 
-                className="p-3 rounded-xl bg-surface border border-hairline hover:border-dutchOrange/50 text-primary text-center flex flex-col items-center gap-1 transition-colors"
-              >
-                <Clock className="w-4 h-4 text-dutchOrange" />
-                <span>3. Timeline</span>
-              </Link>
-              <Link 
-                href="/cra-hub/directory" 
-                className="p-3 rounded-xl bg-surface border border-hairline hover:border-dutchOrange/50 text-primary text-center flex flex-col items-center gap-1 transition-colors"
-              >
-                <Database className="w-4 h-4 text-dutchOrange" />
-                <span>4. 18-Tool Directory</span>
-              </Link>
-              <Link 
-                href="/cra-hub/guides" 
-                className="p-3 rounded-xl bg-surface border border-hairline hover:border-dutchOrange/50 text-primary text-center flex flex-col items-center gap-1 transition-colors col-span-2 sm:col-span-1"
-              >
-                <FileText className="w-4 h-4 text-dutchOrange" />
-                <span>5. Deep Guides</span>
-              </Link>
-            </div>
-
-            {/* Global Scope Quick-Bridge Ribbon */}
-            <div className="pt-2">
-              <Link
-                href="/jurisdictions"
-                className="group flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 rounded-xl bg-surface/80 border border-hairline hover:border-dutchOrange/50 transition-all shadow-sm cursor-pointer"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-dutchOrange/10 border border-dutchOrange/30 flex items-center justify-center text-dutchOrange shrink-0">
-                    <Globe className="w-4 h-4 group-hover:rotate-12 transition-transform duration-300" />
-                  </div>
-                  <div>
-                    <span className="text-xs font-mono font-bold text-primary flex items-center gap-2">
-                      Extraterritorial Scope: 249 Sovereign Jurisdictions & Trade Corridors
-                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-dutchOrange/10 text-dutchOrange font-semibold">
-                        Article 11 Non-EU Importers
-                      </span>
-                    </span>
-                    <span className="text-[11px] text-muted block">
-                      Inspect binding statutory cross-border correlations between US CIRCIA, UK PSTI, Singapore CLS, and EU CRA 2024/2847.
-                    </span>
-                  </div>
-                </div>
-                <div className="flex items-center gap-1.5 text-xs font-mono text-dutchOrange font-semibold shrink-0">
-                  <span>Explore 3D Globe & Corridors</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </Link>
-            </div>
+            {/* Interactive 5-Pillar Navigation Bar */}
+            <PillarInteractiveNav activePillarId={1} />
           </div>
         </section>
+
+        {/* Dual-Column Interactive Statutory Radar & 3D Extraterritorial Globe Section */}
+        <StatutoryRadarSection />
 
         {/* Empirical Research & Econometric Telemetry Bar */}
         <section className="py-8 bg-canvas border-b border-hairline">
@@ -479,166 +413,7 @@ export default function CraConformityHubPage() {
           </div>
         </section>
 
-        {/* Extraterritorial Reach & Global Regulatory Corridors Section */}
-        <section className="py-16 bg-[#0B0C0E] border-b border-hairline relative overflow-hidden text-white">
-          {/* Subtle background ambiance */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-dutchOrange/10 via-transparent to-transparent pointer-events-none" />
 
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 relative z-10">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-              <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-dutchOrange/10 border border-dutchOrange/30 text-dutchOrange text-xs font-mono font-semibold mb-2">
-                  <Globe className="w-3.5 h-3.5" />
-                  <span>Global Supply Chain Corridors // Articles 11 & 13 Extraterritorial Reach</span>
-                </div>
-                <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-white font-sans">
-                  Non-EU Manufacturers & Bilateral Regulatory Corridors
-                </h2>
-                <p className="text-sm text-white/70 mt-1 max-w-3xl leading-relaxed">
-                  Regulation (EU) 2024/2847 is not restricted to European borders. Any foreign manufacturer exporting digital products into the EU single market must designate an EU Authorised Representative and satisfy stringent Annex I conformity. Discover how 249 sovereign jurisdictions interface with the CRA.
-                </p>
-              </div>
-
-              <Link 
-                href="/jurisdictions" 
-                className="px-4 py-2.5 rounded-xl bg-dutchOrange hover:bg-dutchOrange/90 text-white font-mono text-xs font-bold inline-flex items-center gap-2 shadow-lg transition-all shrink-0 cursor-pointer"
-              >
-                <span>Launch 3D Interactive Global Matrix</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-
-            {/* Bento Grid: 1 Hero Teaser + 3 Key Corridors */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-              {/* Main Visual Teaser Card (7 columns) */}
-              <div className="lg:col-span-7 rounded-2xl bg-[#121417] border border-white/10 p-6 sm:p-8 flex flex-col justify-between space-y-6 shadow-xl relative overflow-hidden group">
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between text-xs font-mono text-white/60">
-                    <span className="flex items-center gap-2 text-dutchOrange">
-                      <Compass className="w-4 h-4" />
-                      Sovereign Assurance Network // WG-10-AN-03
-                    </span>
-                    <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-[11px]">
-                      3D WebGL / Canvas
-                    </span>
-                  </div>
-
-                  <h3 className="text-lg sm:text-xl font-bold text-white leading-snug font-sans">
-                    Interactive Geospatial Intelligence: 249 Sovereign Jurisdictions
-                  </h3>
-
-                  <p className="text-xs sm:text-sm text-white/70 leading-relaxed">
-                    Evaluate statutory breach clocks (1h to 96h), data sovereignty constraints, SBOM/CBOM mandates, and default password bans across all 249 ISO 3166-1 territories. Features dynamic bilateral trade corridor arcs, facility risk simulations, and side-by-side legal comparators.
-                  </p>
-                </div>
-
-                {/* Telemetry Stat Grid */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
-                  <div className="p-3 rounded-xl bg-white/[0.03] border border-white/10">
-                    <div className="text-xl font-bold font-mono text-white">249</div>
-                    <div className="text-[10px] text-white/60">ISO Territories</div>
-                  </div>
-                  <div className="p-3 rounded-xl bg-white/[0.03] border border-white/10">
-                    <div className="text-xl font-bold font-mono text-white">580+</div>
-                    <div className="text-[10px] text-white/60">Binding Acts</div>
-                  </div>
-                  <div className="p-3 rounded-xl bg-white/[0.03] border border-white/10">
-                    <div className="text-xl font-bold font-mono text-white">1h - 96h</div>
-                    <div className="text-[10px] text-white/60">Breach Clocks</div>
-                  </div>
-                  <div className="p-3 rounded-xl bg-white/[0.03] border border-white/10">
-                    <div className="text-xl font-bold font-mono text-dutchOrange">7</div>
-                    <div className="text-[10px] text-white/60">Critical Sectors</div>
-                  </div>
-                </div>
-
-                {/* Bottom Action Footer */}
-                <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-t border-white/10 text-xs font-mono">
-                  <span className="text-white/50 text-[11px]">Includes Facility Impact Simulator & Bilateral Diff Modal</span>
-                  <Link 
-                    href="/jurisdictions"
-                    className="text-dutchOrange hover:text-white transition-colors font-bold inline-flex items-center gap-1.5 cursor-pointer"
-                  >
-                    <span>Inspect 3D Globe & Corridors</span>
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </div>
-              </div>
-
-              {/* 3 Corridor Spotlight Cards (5 columns) */}
-              <div className="lg:col-span-5 flex flex-col gap-4">
-                {/* Corridor 1: Transatlantic Bridge */}
-                <div className="p-4 rounded-xl bg-[#121417] border border-white/10 hover:border-dutchOrange/40 transition-colors space-y-2">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2 text-xs font-bold text-white">
-                      <span>🇺🇸</span>
-                      <span>United States ↔ EU</span>
-                    </div>
-                    <span className="px-2 py-0.5 rounded bg-blue-500/10 border border-blue-500/30 text-blue-400 font-mono text-[10px]">
-                      Transatlantic Bridge
-                    </span>
-                  </div>
-                  <p className="text-[11px] text-white/70 leading-relaxed">
-                    <strong className="text-white">Regulatory Nexus:</strong> US FDA 524B medical device SBOMs & EO 14028 vs EU CRA Annex I. CIRCIA 72h / 24h ransom reporting interacts directly with CRA Article 14 ENISA early warning.
-                  </p>
-                  <div className="flex items-center justify-between text-[10px] font-mono text-white/50 pt-1">
-                    <span>Obligation: Art. 11 EU Representative</span>
-                    <Link href="/jurisdictions" className="text-dutchOrange hover:underline flex items-center gap-0.5">
-                      <span>View Corridor</span>
-                      <ArrowRight className="w-2.5 h-2.5" />
-                    </Link>
-                  </div>
-                </div>
-
-                {/* Corridor 2: Post-Brexit Alignment */}
-                <div className="p-4 rounded-xl bg-[#121417] border border-white/10 hover:border-dutchOrange/40 transition-colors space-y-2">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2 text-xs font-bold text-white">
-                      <span>🇬🇧</span>
-                      <span>United Kingdom ↔ EU</span>
-                    </div>
-                    <span className="px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-[10px]">
-                      PSTI Act Alignment
-                    </span>
-                  </div>
-                  <p className="text-[11px] text-white/70 leading-relaxed">
-                    <strong className="text-white">Regulatory Nexus:</strong> UK PSTI Act 2022 mandates statutory default password bans and security contacts, but CRA expands scope to all software PDE and strict 24h ENISA notifications.
-                  </p>
-                  <div className="flex items-center justify-between text-[10px] font-mono text-white/50 pt-1">
-                    <span>Obligation: CE Mark vs UKCA</span>
-                    <Link href="/jurisdictions" className="text-dutchOrange hover:underline flex items-center gap-0.5">
-                      <span>View Corridor</span>
-                      <ArrowRight className="w-2.5 h-2.5" />
-                    </Link>
-                  </div>
-                </div>
-
-                {/* Corridor 3: Asia-Pacific Hardware Hubs */}
-                <div className="p-4 rounded-xl bg-[#121417] border border-white/10 hover:border-dutchOrange/40 transition-colors space-y-2">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2 text-xs font-bold text-white">
-                      <span>🇯🇵🇸🇬</span>
-                      <span>Japan & Singapore ↔ EU</span>
-                    </div>
-                    <span className="px-2 py-0.5 rounded bg-purple-500/10 border border-purple-500/30 text-purple-400 font-mono text-[10px]">
-                      APAC Tech Corridor
-                    </span>
-                  </div>
-                  <p className="text-[11px] text-white/70 leading-relaxed">
-                    <strong className="text-white">Regulatory Nexus:</strong> Singapore Cybersecurity Act 2024 (2h CII clock) and Cyber Labelling Scheme (CLS) vs CRA CE marking. Harmonized standards CEN/CENELEC alignment.
-                  </p>
-                  <div className="flex items-center justify-between text-[10px] font-mono text-white/50 pt-1">
-                    <span>Obligation: Importer Verification</span>
-                    <Link href="/jurisdictions" className="text-dutchOrange hover:underline flex items-center gap-0.5">
-                      <span>View Corridor</span>
-                      <ArrowRight className="w-2.5 h-2.5" />
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* Directory Preview Section */}
         <section className="py-16 bg-surface">
