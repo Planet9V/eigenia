@@ -2,7 +2,7 @@
 
 ## Abstract
 
-The European Union Cyber Resilience Act (Regulation (EU) 2024/2847) imposes statutory obligations on manufacturers of products with digital elements, establishing strict, legally binding incident and vulnerability notification timelines. Under Article 14(1), manufacturers must submit an early warning to the designated national Computer Security Incident Response Team (CSIRT) and the European Union Agency for Cybersecurity (ENISA) within 24 hours of becoming aware of an actively exploited vulnerability. Failure to comply exposes manufacturers to administrative fines under Article 64(3) reaching up to €15,000,000 or 2.5% of total worldwide annual turnover. In complex cyber-physical operational technology (OT) and industrial control systems (ICS), manual vulnerability triage and statutory compliance workflows are incapable of meeting a 24-hour deadline without generating catastrophic false-positive regulatory disclosures or suffering punitive enforcement penalties.
+The European Union Cyber Resilience Act (Regulation (EU) 2024/2847) imposes statutory obligations on manufacturers of products with digital elements, establishing strict, legally binding incident and vulnerability notification timelines. Under Article 14(1), manufacturers must submit an early warning to the designated national Computer Security Incident Response Team (CSIRT) and the European Union Agency for Cybersecurity (ENISA) within 24 hours of becoming aware of an actively exploited vulnerability. Failure to comply exposes manufacturers to administrative fines under Article 64(2) reaching up to €15,000,000 or 2.5 % of total worldwide annual turnover, whichever is higher. In complex cyber-physical operational technology (OT) and industrial control systems (ICS), manual vulnerability triage and statutory compliance workflows are incapable of meeting a 24-hour deadline without generating catastrophic false-positive regulatory disclosures or suffering punitive enforcement penalties.
 
 This treatise, authored by J. McKenney as part of the Eigenia Research program, formalizes the first end-to-end, machine-verifiable architecture for automated CRA Article 14 compliance. By unifying CycloneDX 1.6+ Vulnerability Exploitability eXchange (VEX) schemas, OASIS Common Security Advisory Framework (CSAF 2.0) data models, and deterministic cyber-physical multigraph reachability algorithms, we construct an automated pipeline that ingests upstream software bills of materials (SBOMs) and hardware bills of materials (HBOMs), evaluates topological exploit reachability across the physical plant, and dispatches authenticated, cryptographically signed CSIRT disclosures within milliseconds of verified active exploitation. We define the mathematical reachability calculus, establish unambiguous decision boundaries between actively exploited and non-affected components, and present the regulatory economics governing optimal statutory disclosure timing.
 
@@ -49,7 +49,7 @@ sequenceDiagram
 
 1. **The 24-Hour Early Warning (Article 14(1))**: The manufacturer must submit an early warning notification to the CSIRT designated as coordinator and to ENISA via the secure single reporting platform within **24 hours** of becoming aware of an actively exploited vulnerability. The early warning must state whether the vulnerability is actively exploited and whether it appears to have been triggered by unlawful conduct.
 2. **The 72-Hour Vulnerability Notification (Article 14(2))**: Within **72 hours** of becoming aware, the manufacturer must provide detailed technical information, including general descriptions of the vulnerability, its severity, sensitivity markers, and any initial corrective or mitigating measures implemented.
-3. **The 1-Month Final Report (Article 14(3))**: No later than **one month** after the initial notification (or upon availability of a permanent corrective patch), the manufacturer must deliver a final report detailing the technical root cause, exploitation vectors, affected software versions, and permanent remediation measures.
+3. **The Final Report (Article 14(3))**: Two clocks run here and they are commonly conflated. For an **actively exploited vulnerability**, the final report is due within **14 days** of a corrective or mitigating measure becoming available. For a **severe incident** affecting the security of the product, it is due within **one month** of the incident notification. In both cases the report details the technical root cause, exploitation vectors, affected versions and permanent remediation measures.
 
 ### 1.2 Penalty Exposure under Article 64
 
@@ -57,9 +57,17 @@ Article 64 of the CRA establishes three distinct administrative fine tiers:
 
 | Statutory Fine Tier | Governing Article | Statutory Breach Description | Maximum Administrative Fine |
 |---|:---:|---|:---|
-| **Tier 1: Essential Requirements & Vulnerability Handling** | Art. 64(3) | Non-compliance with essential cybersecurity requirements in Annex I (secure design, vulnerability handling, SBOM transparency) or failure to notify under Art. 14 | Up to **€15,000,000** or **2.5% of total worldwide annual turnover**, whichever is higher |
-| **Tier 2: General Statutory Obligations** | Art. 64(4) | Breach of general CE marking obligations, distributor duties, or conformity assessment procedures outside Annex I | Up to **€10,000,000** or **2.0% of total worldwide annual turnover**, whichever is higher |
-| **Tier 3: Misleading Information** | Art. 64(5) | Supplying incorrect, incomplete, or misleading information to notified bodies, CSIRTs, or market surveillance authorities | Up to **€5,000,000** or **1.0% of total worldwide annual turnover**, whichever is higher |
+| **Tier 1: Essential Requirements & Vulnerability Handling** | Art. 64(2) | Non-compliance with essential cybersecurity requirements in Annex I, or with the manufacturer obligations in Articles 13 and 14 | Up to **€15,000,000** or **2.5 % of total worldwide annual turnover**, whichever is higher |
+| **Tier 2: Other Obligations under the Regulation** | Art. 64(3) | Breach of other statutory provisions, including CE marking formalities, distributor duties and conformity assessment procedures | Up to **€10,000,000** or **2 % of total worldwide annual turnover**, whichever is higher |
+| **Tier 3: Incorrect or Misleading Information** | Art. 64(4) | Supplying incorrect, incomplete or misleading information to notified bodies or market surveillance authorities | Up to **€5,000,000** or **1 % of total worldwide annual turnover**, whichever is higher |
+
+Two provisions qualify the table above and are routinely omitted from summaries of the
+Regulation. **Article 64(5)** is not a fourth tier: it lists the factors a market
+surveillance authority weighs when setting an amount within a ceiling, including the
+nature, gravity and duration of the infringement, any previous fines, and the size and
+market share of the operator. **Article 64(10)** disapplies the fines in paragraphs 3
+to 9 entirely for open-source software stewards, and disapplies the Article 14
+deadlines for micro and small manufacturers.
 
 The financial exposure of Tier 1 breaches guarantees that automated, deterministic verification is not merely an operational efficiency tool, but a mandatory balance-sheet risk control mechanism.
 
@@ -268,11 +276,15 @@ The automated dispatcher synthesizes standardized, machine-readable payloads con
 
 ---
 
-## 4. Empirical Evaluation & Benchmarks
+## 4. Simulated Evaluation
 
-To validate that the automated architecture outperforms human compliance teams while eliminating false-positive regulatory exposure, the pipeline was benchmarked against synthetic and real-world industrial plant configurations.
+The figures in this section come from a **simulation**, not from a deployment. They are
+the working group's own result on a synthetic plant of its own construction, and they
+should be read as evidence that the calculus in Section 2 behaves as specified on a
+known input, not as a measurement of field performance. Section 4.4 states what the
+simulation cannot show.
 
-### 4.1 Evaluation Setup
+### 4.1 Simulation Setup
 
 We simulated a high-density industrial control plant comprising:
 - **Total Multigraph Nodes ($|\mathcal{V}|$):** 3,420 (including 1,280 physical piping/instrumentation assets and 2,140 digital controllers, PLCs, and network switches).
@@ -282,13 +294,33 @@ We simulated a high-density industrial control plant comprising:
 
 ### 4.2 Triage Velocity & Accuracy Comparison
 
-| Metric | Manual Engineering Compliance Team | Legacy GRC Workflow Tool | Eigenia Automated CRA Engine |
+| Metric | Manual compliance team *(assumed)* | Legacy GRC workflow *(assumed)* | This pipeline *(simulated)* |
 |---|:---:|:---:|:---:|
-| **Mean Time to Triage (MTTT)** | 38.4 hours | 14.2 hours | **148 milliseconds** |
-| **CRA Article 14(1) Compliance Rate (<24h)** | 18.2% | 64.0% | **100.0%** |
-| **False Positive Regulatory Notifications** | 42.1% | 28.5% | **0.0%** (Topologically Grounded) |
-| **False Negative Non-Disclosures (Art. 64 Risk)** | 8.4% | 3.1% | **0.0%** (Provably Sound) |
-| **Cryptographic Attestation Verification** | Manual audit | Periodic PDF export | **Real-Time Zero-Knowledge Proof** |
+| **Mean time to triage** | 38.4 hours | 14.2 hours | **148 milliseconds** |
+| **Notifications dispatched inside the 24-hour window** | 18.2 % | 64.0 % | **all 120 exploited-marker events** |
+| **Notifications raised for components the calculus had ruled unreachable** | 42.1 % | 28.5 % | **none** |
+| **Exploited-marker events the calculus failed to escalate** | 8.4 % | 3.1 % | **none** |
+| **Attestation of the dispatched record** | Manual audit | Periodic PDF export | **Signed at dispatch, verifiable offline** |
+
+Three things about this table need saying plainly, because the table is the part of a
+paper a reader is most likely to quote.
+
+The two comparator columns are **assumptions, not measurements**. No manual team and no
+commercial GRC product was instrumented for this work. They are the working group's
+estimate of current practice, stated so the reader can substitute their own figures,
+and nothing in the argument depends on them.
+
+The third column reports **what happened on this input**. Every exploited-marker event
+in the injected set was escalated and every escalation was traceable to a reachable
+path, so on this plant the pipeline produced no missed escalations and no escalations
+for components it had ruled out. That is a property of a 1,000-event synthetic corpus
+with a known ground truth, which is exactly the condition under which such a result is
+achievable and exactly why it does not generalise on its own.
+
+The earlier version of this table reported the last two rows as "0.0 % (Provably
+Sound)" and the attestation row as a zero-knowledge proof. Neither was supportable: a
+simulation cannot establish soundness, and no zero-knowledge construction appears
+anywhere in the architecture described in Section 3. Both claims have been withdrawn.
 
 ```mermaid
 quadrantChart
@@ -319,6 +351,38 @@ In simulated incident scenario CS-2026-88:
 
 ---
 
+### 4.4 What this simulation does not establish
+
+Stated here rather than left to the reader, because the preceding tables are the part of
+this treatise most likely to be quoted out of context.
+
+**It is a simulation with a known ground truth.** The 1,000 injected events carry
+exploitation markers assigned by the harness, so the pipeline is measured against the
+same labels the harness used. A field deployment has no such oracle, and establishing
+whether an escalation was correct is precisely the hard part that this setup removes.
+
+**The plant is synthetic and singular.** One topology of 3,420 nodes and 8,640 conduits.
+No claim is made that the result holds on a different topology, at a different scale, or
+on an asset whose electrical or process description is thinner.
+
+**The comparator columns are assumptions.** No manual team and no commercial product was
+instrumented. Substitute your own figures; the architecture's case does not rest on them.
+
+**Reachability is a property of the model, not of the plant.** The calculus decides on
+the graph it is given. An undocumented network path, an undeclared conduit or a bill of
+materials that omits a dependency will produce a confident answer that is wrong, and no
+amount of topological rigour inside the model detects an omission outside it. This is
+the dominant real-world failure mode and it is not exercised here at all.
+
+**Timing measures computation, not process.** The 148 millisecond figure is the calculus
+and dispatch path. It is not the time from a vulnerability existing to a regulator being
+notified, which is governed by how quickly an organisation becomes aware, and awareness
+is where the 24-hour clock actually starts under Article 14(1).
+
+**No regulator has accepted a notification produced this way.** The dispatch format
+follows CSAF 2.0 and the reporting platform's published expectations. Acceptance in
+practice is untested.
+
 ## 5. Economic & Actuarial Implications for Industrial Operators
 
 The automation of CRA Article 14 reporting directly transforms the balance-sheet risk posture of critical infrastructure operators.
@@ -340,9 +404,24 @@ By deploying an automated, machine-verifiable pipeline that drives $P(\text{fail
 
 ### 5.2 Reinsurance Treaties under Lloyd's Market Bulletin Y5381
 
-Under Lloyd's Market Bulletin Y5381, cyber insurance syndicates exclude coverage for losses caused by state-backed cyber attacks or catastrophic supply chain failures unless the insured entity maintains verifiable, audited asset inventories and vulnerability remediation processes.
+Lloyd's Market Bulletin Y5381 was issued by the Corporation of Lloyd's on 16 August
+2022. It requires that stand-alone cyber-attack policies written or renewed from 31
+March 2023 exclude losses arising from war, and from state-backed cyber attacks that
+significantly impair the ability of a state to function or significantly impair its
+security capabilities. It has since been revisited by bulletin Y5433.
 
-The machine-verifiable VEX/VDR audit trail produced by this pipeline fulfills the strict evidentiary standards required by Lloyd's syndicates, unlocking preferential premium rates and affirmative cyber-physical property coverage.
+Two clarifications matter here, because this bulletin is widely paraphrased into
+something it does not say. Y5381 does **not** condition coverage on the insured
+maintaining audited asset inventories, and it does not address supply chain failure. It
+mandates a war and state-backed-attack exclusion, and the drafting of that exclusion is
+left to the syndicate through the LMA model clauses.
+
+What the audit trail produced by this pipeline does is narrower and still useful. Where
+an insured must demonstrate, after the fact, which components were present in an asset
+and when a vulnerability became known and was addressed, a signed VEX and VDR record is
+evidence of exactly that. Whether such evidence attracts preferential terms is a
+commercial matter between insured and underwriter, and this treatise makes no claim
+about pricing.
 
 ---
 
@@ -358,6 +437,19 @@ By coupling:
 manufacturers and operators can deterministically satisfy all statutory obligations, eliminate multimillion-euro regulatory fine exposures, and guarantee verifiable cyber-physical resilience across the European single market.
 
 ---
+
+## Document provenance
+
+| Field | Value |
+| :--- | :--- |
+| Working group | WG-06-SC Supply Chain and CRA Product Assurance |
+| Document type | Eigenia Labs working paper |
+| Author | J. McKenney |
+| Fact-checked | M. Piscula, 14 September 2026 |
+| Statutory basis | Regulation (EU) 2024/2847; Commission Implementing Regulation (EU) 2025/2392 |
+| Evidence status | Section 4 is a simulation on a synthetic plant. Limitations at section 4.4 |
+| Funding | Cyber Digital Twin platform development supported under CIF-NL 2025, administered by RVO |
+| Licence | Creative Commons Attribution 4.0 International (CC BY 4.0) |
 
 ## References
 

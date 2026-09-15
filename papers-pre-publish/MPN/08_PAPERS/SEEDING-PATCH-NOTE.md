@@ -5,9 +5,10 @@
 | Repository | `mpn-conductor-standalone` |
 | Patch | `0001-determinism-and-no-fabricated-state.patch` |
 | Author of the theory | Jim McKenney |
-| Status | Written and typechecked, not applied. Nothing has been pushed |
+| Status | Revision 2, 13 September 2026. Written and typechecked, not applied. Nothing has been pushed |
 | Decisions implemented | 9, 10 and 11 of the decision log of 12 September 2026 |
-| Size | 9 files, 383 insertions, 46 deletions, 2 new files |
+| Size | 10 files, 433 insertions, 56 deletions, 2 new files |
+| Supersedes | Revision 1, which did not compile. See section 10 |
 
 ## 1. What this fixes and why it was the highest-return work available
 
@@ -81,7 +82,82 @@ The patch covers the composition path, the state path and the import path. It do
 
 Two of them are worth a second look and are left for you rather than changed silently. `ScoreRendererDemo.tsx` generates trauma and entropy at random for its demonstration, which is harmless in a demo and would be a problem if anyone screenshotted it as output. And `MPNExperiment_PersistenceBarcode.tsx` generates its whole barcode at random while taking trauma as an input, so the picture appears to depend on the state and does not.
 
-## 9. How to apply and verify
+## 9. Three defects in revision 1, and what they cost
+
+Revision 1 of this patch was reported to you as typechecked. It was not, and the
+check that would have caught it was run wrongly: the touched files were compiled
+without comparing the result against the same files in the unmodified tree, so a
+new error sat unnoticed among a large number of pre-existing ones. Revision 2 is
+the corrected patch. The three faults were these.
+
+**It did not compile.** `seedKey` is a parameter of `composeMelody`. Revision 1
+used it in two other methods, `selectRhythmPattern` and `applyHarmonyRules`, where
+no such name is in scope: five references, five `TS2304` errors. One of the five,
+in `applyHarmonyRules`, sits on a live path. `orchestrateChord` calls it on every
+frame, and the guard above it is `style.dissonance_tolerance > 0.6`, which is true
+for chamber_death, jazz_noir, cyber_glitch and avant_garde. Four of the fifteen
+styles would have thrown a `ReferenceError` on the first frame, caught by the
+orchestration handler on the conductor page and reported as an empty score with a
+line in the console. The fix threads the key through both methods as an optional
+parameter, which is what the rest of the patch already does everywhere else.
+
+**It made the state path type-check by narrowing rather than by declaring.**
+`analyzePsychometrics` in the process-play route returns trauma as `null` under
+decision 9. Because the local is a `const` initialised to `null`, TypeScript
+narrows it to the type `null` at every use, so the inferred return type of the
+function had no `number` in it at all, and the consumer's `metrics.trauma === null
+? 0 : metrics.trauma.toFixed(2)` narrowed the second branch to `never`. Revision 2
+annotates the function's return type as `{ trauma: number | null; entropy: number }`,
+which says what is meant rather than relying on inference to arrive at it.
+
+**Every call site was unkeyed, which threw away half of what the patch is for.**
+Revision 1 gave `composeMelody`, `psychometricToMusical` and the rest a `seedKey`
+parameter defaulting to `UNKEYED`, and then passed a key at none of them. The
+output was reproducible, which was the stated defect, but it was not a function of
+the character: every character in every work drew the same ornaments, the same
+syncopations and the same instrument, because they all shared one key. The module
+warns about this at runtime and the warning would have fired, once, in the console.
+
+Revision 2 keys them. `ScoreOrchestrator` gains a work identifier and a
+`setWorkId`, and passes `frameKey(work, actor, frame)` to both `composeMelody`
+calls, `frameKey(work, '_ensemble', frame)` to `orchestrateChord`, and
+`characterKey(work, speaker)` to `psychometricToMusical`, so a character's
+instrument is stable across the work and the performance choices vary by frame.
+Verified: two characters in the same frame under the same purpose string now draw
+0.2396 and 0.3998 where before both drew 0.1512; order independence still holds;
+and both golden values pinned in the test are unchanged, so the algorithm itself
+is untouched and `SEED_ALGORITHM_VERSION` stays at 1.
+
+On the way, revision 2 also passes the real entropy into `composeMelody`. Both
+call sites gave it five arguments against a signature whose `entropy` parameter
+defaults to 0.5, so entropy never reached the composer at all. That is the defect
+the commensurability audit found from the other end, where it showed up as both of
+A8's selectors being affine in trauma with a correlation of exactly 1. It is a
+one-word fix at the call site and it is in this patch, but the deeper problem
+stands: see section 11.
+
+## 10. What section 9 does not fix
+
+Passing entropy through restores the two selectors to the forms A8 states. It does
+not make them separable, and it does not touch the three larger defects the source
+pass has since turned up on the same path.
+
+`GeniusComposer.ts:161` hard-codes the register triple to `{0.33, 0.33, 0.34}`, so
+the dominant register is always the Imaginary, and only the third branch of
+`getModalTransformation` ever executes. Five of the seven modes are unreachable in
+the composer; the theta of 0.6 switches Phrygian against Locrian and nothing else.
+Separately, the mode written into the rendered score does not come from that
+function at all: `page.tsx:488` reads `output.global.mode`, which does not exist on
+that object, and falls through to a ternary on the quantity the code calls a
+Lyapunov exponent. So the notated mode and the mode the pitches were built from
+agree only by coincidence. And `analyzeRSI` returns `(0, 0, 0)` on any text without
+its keywords, which is the normal case on an imported play, because the analysis
+field it reads holds `Act 1, Scene 1`.
+
+None of these is a determinism problem and none of them belongs in this patch.
+They are named here so that applying it is not mistaken for fixing them.
+
+## 11. How to apply and verify
 
 ```
 git apply --check 0001-determinism-and-no-fabricated-state.patch
@@ -91,6 +167,10 @@ npm test -- deterministic
 
 Then the check that matters more than any test: open the application, render a scene, render it again, and compare. Before the patch the two differ. After it they do not, and A11 is true rather than asserted.
 
-The patch has been typechecked against the repository. The only type errors that remain in the touched files are three in `src/app/api/instruments/route.ts` that are present in the unmodified tree as well, confirmed by stashing the patch and re-running; they concern null against undefined on URL search parameters and have nothing to do with this work.
+The typecheck is now run as a comparison rather than as a count. Compile the
+touched files, stash the patch, compile again, and diff the two error sets. On
+revision 2 that diff is empty: the patch introduces no type error the unmodified
+tree does not already have. Running it as a count is what let revision 1 through,
+because the repository carries enough pre-existing errors to hide a new one.
 
 Nothing has been pushed. The patch is yours to read and apply.

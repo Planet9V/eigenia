@@ -1,0 +1,969 @@
+================================================================================
+VERIFICATION-2026-09-14
+Every figure confirmed or corrected on 14 September 2026, with the command that
+produced it, so that a reader can re-run any single number on its own.
+
+Role:      code architect. Generators changed, numbers verified. No paper text.
+Governed:  DECISION-LOG-2026-09-14.md (decisions A and B, taken)
+           ARBITRATION-DESIGN-R7.md   (rulings A to D, 45 required changes)
+           MPN-S3-BL1-DRAFT.md, MPN-S3-BL2-DRAFT.md
+Rule kept: no unseeded randomness anywhere; where a predicted number and a
+           computed number disagree, the computation wins and it is said so.
+================================================================================
+
+FILES CHANGED OR ADDED
+
+  /home/claude/gen6/s6_bias_layer.py            changed  (jobs 1 and 2)
+  /home/claude/gen6/s6_timbre_capacity.py       changed  (job 3c)
+  /home/claude/gen6/s6_corpus_recount.py        ADDED    (jobs 3a and 3b)
+  /home/claude/gen6/s3_bias_reconciliation.json ADDED    (a copy, see NOTE 1)
+  /home/claude/gen6/VERIFICATION-2026-09-14.txt ADDED    (this file)
+
+NOTE 1. s6_bias_layer.py's docstring claims the reconciliation is committed
+beside it; it was not, and the resolver fell through to an absolute machine
+path. The JSON is now beside the script, so the script runs from the corpus
+alone with no environment variable. The absolute path at s6_bias_layer.py line
+~59 is still in the resolver list; deleting it is change 43 and is left for
+whoever works change 43, because it is not one of these four jobs.
+
+
+================================================================================
+SECTION A.  JOB 1 -- BL-1, THE FOURTEEN INHERITED COORDINATES
+================================================================================
+
+COMMAND (this one command produces every figure in this section):
+
+    python3 /home/claude/gen6/s6_bias_layer.py
+
+  Runs from the corpus alone. Reads gen6/s3_bias_reconciliation.json. Set
+  MPN_RECON to override. No randomness of any kind in this script.
+
+A.1  THE FOURTEEN COORDINATES AS LOADED
+     Source: MPN-S3-BL1-DRAFT.md section 3, table of fourteen rows.
+     Carried in INHERITED_RIDES at the top of s6_bias_layer.py.
+     A row marked FLAGGED carries BOTH coordinates as a tuple; the script
+     reports those three separately and never picks one silently.
+
+       CB-001  Confirmation Bias         MELODY    register: Symbolic   FLAGGED
+       CB-003  Anchoring Bias            HARMONY   entropy
+       CB-005  Availability Heuristic    DYNAMICS  trauma
+       CB-006  Sunk Cost Fallacy         MELODY    trauma
+       CB-008  Present Bias              RHYTHM    entropy
+       CB-009  Overconfidence Effect     TEXTURE   register: Imaginary
+       CB-012  Authority Bias            TIMBRE    register: Symbolic
+       CB-015  Hindsight Bias            HARMONY   register: Symbolic
+       CB-017  Framing Effect            MODE      register: Imaginary  FLAGGED
+       CB-018  Status Quo Bias           HARMONY   trauma               FLAGGED
+       CB-020  Bandwagon Effect          TEXTURE   register: Symbolic
+       CB-021  Blind Spot Bias           MELODY    register: Imaginary
+       CB-026  Recency Bias              MELODY    entropy
+       CB-030  Fundamental Attribution   TEXTURE   register: Imaginary
+
+     THE THREE FLAGGED, BOTH COORDINATES CARRIED:
+       CB-001  drafted register: Symbolic   against  entropy, SIGN REVERSED
+       CB-017  drafted register: Imaginary  against  trauma
+       CB-018  drafted trauma               against  register: Symbolic
+     The alternative is stored as a bare coordinate so that it lands on the
+     right signature; the sign reversal on CB-001 is carried in FLAGGED_NOTE,
+     because a sign does not change which entries collide.
+
+A.2  THE COUNT THE DRAFT SAYS THE SCRIPT MUST PRINT
+       drafted:  fourteen inherited mappings now naming a coordinate, zero none
+       computed: mappings naming a coordinate 30, mappings naming none 0,
+                 of which inherited from the implementation 0
+       CONFIRMED.
+
+A.3  THE COLLISION FIGURES
+       BL-1 draft section 5 predicts 18 signatures, 8 collisions,
+       20 of 30 entries involved.
+
+       computed, over all thirty with the drafted (first) coordinate:
+         entries naming a coordinate                            30
+         distinct (channel, coordinate) signatures              18
+         signatures carrying more than one bias                  8
+         entries involved in a collision                    20 of 30
+       CONFIRMED, all three, exactly.
+
+       The baseline the draft compares against also reproduces:
+         signatures before BL-1  12      collisions before BL-1  4
+         entries involved before BL-1  8 of 16
+         collisions created by BL-1  4
+       CONFIRMED (the draft says four of the eight are created by the drafting).
+
+       The eight signatures, and all eight match the draft's table row for row:
+         DYNAMICS off trauma              CB-005 CB-007 CB-016   widened
+         HARMONY  off entropy             CB-003 CB-022 CB-025   widened
+         HARMONY  off register: Symbolic  CB-015 CB-024          NEW
+         MELODY   off entropy             CB-010 CB-026          NEW
+         MELODY   off register: Imaginary CB-021 CB-028          NEW
+         RHYTHM   off entropy             CB-002 CB-008 CB-027   widened
+         TEXTURE  off register: Imaginary CB-009 CB-030          NEW
+         TEXTURE  off register: Symbolic  CB-011 CB-014 CB-020   widened
+
+A.4  WHAT THE FLAGGED ALTERNATIVES WOULD DO (reported, not decided)
+       Each flagged row recomputed on its own, everything else held:
+         CB-001 on register: Symbolic   18 sigs,  8 colls, 20 involved  (drafted)
+         CB-001 on entropy              17 sigs,  8 colls, 21 involved
+         CB-017 on register: Imaginary  18 sigs,  8 colls, 20 involved  (drafted)
+         CB-017 on trauma               18 sigs,  8 colls, 20 involved
+         CB-018 on trauma               18 sigs,  8 colls, 20 involved  (drafted)
+         CB-018 on register: Symbolic   17 sigs,  8 colls, 21 involved
+       So two of the three flags move the count and one does not. Taking
+       CB-001 on entropy makes MELODY off entropy a three-way with CB-010 and
+       CB-026, which is the pairing the draft's section 6 warns about. Taking
+       CB-018 on the Symbolic makes HARMONY off register: Symbolic a three-way
+       with CB-015 and CB-024. Taking CB-017 on trauma changes nothing in the
+       count, because MODE carries one entry either way.
+
+A.5  THE EDIT NOT MADE, AND THE INVARIANT THAT SAYS SO
+       The fourteen are NOT in DRAFT_MAPPINGS. s3_bias_reconcile.py line 281
+       asserts set(DRAFT_MAPPINGS) | set(struck) == set(unmapped) over the
+       sixteen Atlas entries with no musical mapping; the fourteen are mapped
+       by strict name match, so any of them there raises. s6_bias_layer.py now
+       asserts the disjointness itself:
+         assert not (set(INHERITED_RIDES) & set(DRAFT))
+       so the wrong edit fails in this file rather than in the reconciler.
+
+A.6  THE THREE HARDCODED STRINGS THE DRAFT SAYS WILL CONTRADICT THE DATA
+       (i)   section 2's heading, "...AND THE FOURTEEN THAT RIDE ON NOTHING"
+             -> retitled "2. WHAT EACH DEVICE RIDES ON"; every count derived.
+       (ii)  section 2's closing paragraph, "present in fourteen of thirty
+             entries ... Supplying the fourteen coordinates is the first item"
+             -> replaced by a derived paragraph that names len(no_rides) and
+             states what a struck row does.
+       (iii) section 4's "entries involved in a collision: N of 16"
+             -> now "N of {entries naming a coordinate}", derived; the adjacent
+             prose "Computed over the sixteen entries" is also derived.
+       All three verified by striking a row (test below) and watching every
+       count move together.
+
+A.7  THE STRIKE TEST (the draft's section 9 behaviour, checked)
+       COMMAND:
+         sed "/'CB-020': 'register: Symbolic',/d" \
+           /home/claude/gen6/s6_bias_layer.py > /tmp/striketest.py \
+           && python3 /tmp/striketest.py | grep -E "naming|involved|BL-1 "
+       RESULT: mappings naming a coordinate 29, naming none 1, CB-020 reappears
+       in the list, entries involved 19 of 29, and the BL-1 queue line flips
+       from CLOSED to OPEN naming CB-020. The script keeps running. As drafted.
+
+
+================================================================================
+SECTION B.  JOB 2 -- THE TWO DECISIONS, APPLIED TO THE SAME SCRIPT
+================================================================================
+
+COMMAND: python3 /home/claude/gen6/s6_bias_layer.py
+
+B.1  RULING A / D-2026-09-14-A. THE LAYER NO LONGER RENDERS MUSIC.
+     Docstring rewritten: Layer 3 detector, output is a marked textual proposal
+     beside the Layer 0 turn, no musical rendering in version one, BL-8 is what
+     would unblock one. "Rides on" is restated as a plausibility claim.
+
+B.2  RULING B / CHANGE 2. SECTION 3 IS NOW A CENSUS.
+     Heading: "3. THE CHANNEL CENSUS: WHICH PHI CHANNEL EACH DEVICE WAS WRITTEN
+     FOR". The table is unchanged in its numbers (TEXTURE 8, HARMONY 7,
+     MELODY 6, RHYTHM 3, DYNAMICS 3, TIMBRE 1, MODE 1, INTERVALS 1, total 30)
+     and is relabelled as history, not allocation. KEPT, as instructed.
+     DELETED: "RULE: the bias layer is a MODULATION and never an assignment."
+     REPLACED BY: BL-2's rationale as change 2 fixes it -- CB-017 sets the
+     mode, and no channel allocation is available on which setting the mode is
+     admissible. The mode observation itself is kept.
+
+B.3  CHANGE 3. THE PERTURBATION BUDGET IS STRUCK.
+     DELETED, with nothing put in their place as numbers:
+         0.0333    the per-bias dynamics budget in trauma
+         3.6       the same bound in MIDI velocity units on v = 20 + 107*tau
+         0.73      the per-bias rhythm budget in discrimination thresholds
+     Also deleted with the section: change 12's two adjacent hardcoded strings
+     that disagreed about whether five or six channels lack stated band widths.
+     Neither was derived from the data the script loads, and both are gone with
+     the section that carried them. CHANGE 12 IS THEREBY DISCHARGED.
+     REPLACED BY the note change 3 retains, printed in full by the script:
+       no bound written in a state coordinate can be safe.
+       - the MODE jump surface is at tau = 0.6 (S3 2.3); a bound of 0.0333
+         spans [0.5667, 0.6333], so it changes the mode by itself;
+       - both TEXTURE ladders are stated at even fifths, cuts at 0.2, 0.4, 0.6,
+         0.8 of the ladder value; density = 0.3H + 0.7tau moves 0.0233 per
+         0.0333 of trauma, 11.7 per cent of a stage, and fragmentation =
+         max(0, 0.7H - 0.3tau)/0.7 moves 0.0143, 7.1 per cent of a stage. Both
+         derivatives are strictly positive, so both ladders have states where
+         the bound crosses a cut;
+       - therefore no smaller bound is safe either, since the surfaces are
+         properties of the state coordinate and not of the channel.
+       One rate is printed as an illustration and labelled as one: a trauma
+       uniform on [0,1] lies within 0.0333 of the mode surface on 6.7 per cent
+       of frames. It is not a budget and no budget is proposed.
+     KEPT, as instructed: the channel census (B.2), the collisions (A.3), the
+     locality partition (22 frame-local, 8 historical -- unchanged).
+
+B.4  CHANGE 10. BL-3.
+     BL-3 is marked DISCHARGED as a dependency and struck as a budget. The
+     script prints the discharge in the direction that would have kept the
+     divisor, derived from the data rather than asserted:
+         all 3 RHYTHM   entries ride on entropy:  CB-002, CB-008, CB-027
+         all 3 DYNAMICS entries ride on trauma:   CB-005, CB-007, CB-016
+     so the divisor of three was a divisor at signature level, not only at
+     channel level. Printed as a note for the replacement, not a restoration.
+
+B.5  CHANGE 7. FIFTEEN OF SIXTEEN, CB-004 NAMED.
+     COMPUTED from the reconciliation, not restated:
+         of the 16 mappings S3 section 4.2 drafts, 15 name a state coordinate
+         and 1 does not; the count is 15 of 16, not 16 of 16.
+         CB-004 Survivorship Bias rides on "fragmentation", which is a Phi
+         OUTPUT on TEXTURE, the same channel the device writes to.
+     CONFIRMED against the arbitration's change 7 and finding S15. The script
+     derives the exception by testing each drafted ride against
+     PHI_OUTPUTS = {fragmentation, density}; it does not name CB-004 by hand.
+     Also printed: none of the BL-1 fourteen rides on a Phi output, which is
+     the BL-1 draft's section 7 position.
+
+B.6  CHANGE 8. THE CLASS THE NEGATIVE CLAIM COVERS.
+     COMPUTED from the projection itself:
+         the projection carries 5 fields on every record:
+           category, element, id, strength, trait
+         strength is present on 30 of 30 entries, in [0.75, 0.95]
+         distinct values: 0.75, 0.80, 0.85, 0.90, 0.95
+     CONFIRMED against change 8's "a strength in [0.75, 0.95] on all thirty
+     entries which the script does not read".
+     The script now states, in its docstring and in section 2, that it reads a
+     five-field JSON projection and never opens the reference implementation,
+     that strength is present and unread, and WHY it is set aside: it is an
+     authored confidence in the device, not a state dependence, so it cannot be
+     the coordinate BL-1 is about; the Atlas's activation ordinal, which the
+     projection drops entirely, is the better prior for the firing rate change
+     28 still owes. Finding S12.
+
+B.7  THE WORK QUEUE (section 8), rewritten from the data:
+       BL-1 CLOSED as drafted, with the 3 flagged ids named as still open
+       BL-2 rationale as change 2 fixes it
+       BL-3 DISCHARGED and struck (B.4)
+       BL-4 8 collisions, 4 of them created by BL-1 and strikeable
+       BL-5 named as the detection rate on which BL-8 reopens
+       BL-6 22 frame-local, 8 passage-pair
+       BL-7 unchanged
+       BL-8 ADDED per change 5, with D-2026-09-14-A's option (e) recorded,
+            its reopening condition, and "the fourth stave and not
+            articulation" if it reopens
+     Plus a closing note that change 28 is still owed: abstention rule, may the
+     layer return nothing, how many of the thirty may fire on one turn.
+
+
+================================================================================
+SECTION C.  JOB 3(a) -- COVERAGE.  CONFIRMED.
+================================================================================
+
+COMMAND:
+
+    python3 /home/claude/gen6/s6_corpus_recount.py
+
+  Default MPN_SCORES is
+  /mnt/user-data/uploads/eigenia/papers-pre-publish/MPN/05_DATA/01_scores
+  Set MPN_SCORES to override. No randomness. Independent of s6_three_clef.py:
+  the CSVs are re-read and the counts recomputed from scratch.
+
+THE ARBITRATION GIVES: 39.0 to 69.2 per cent, one of three below half,
+measured on the three files that are single plays.
+
+COMPUTED, top-two-speaker share, denominator = rows with a non-empty SPEAKER:
+
+    A_DOLLS_HOUSE    14 speakers   69.231 %   SINGLE PLAY
+    HAMLET           44 speakers   50.113 %   SINGLE PLAY
+    MACBETH          49 speakers   39.007 %   SINGLE PLAY
+
+    range 39.0 to 69.2 per cent, 1 of 3 below half (Macbeth).
+
+CONFIRMED, to the decimal place the arbitration states.
+
+The three anthology files, reported separately and labelled as the ruling
+requires, and NOT coverage figures for any play:
+
+    CHERRY_ORCHARD   82 speakers    8.171 %   anthology, 8 works, 8 casts
+    MISS_JULIE       28 speakers   26.243 %   anthology, 5 works
+    OEDIPUS_REX      20 speakers   48.087 %   anthology, 3 works
+
+WHAT IS WITHDRAWN AND WHAT REPLACES IT. "Between 8 and 69 per cent" and "four
+of the six less than half" are withdrawn. The 8 per cent anchor is 8.171 per
+cent, the top-two share of a file holding eight plays with eight disjoint casts
+and 82 speakers counted as one cast; it measures the anthology. It is replaced
+by 39.0 to 69.2 per cent on three single plays, one of three below half.
+
+ONE CONVENTION WORTH RECORDING. The denominator counts every non-empty SPEAKER
+value, including the non-speaker token STAGE, which is the convention
+s6_three_clef.py already used and is the one that reproduces the arbitration's
+figures. Excluding STAGE instead gives 69.340, 50.818 and 39.951 per cent, so
+the headline range and the one-of-three-below-half both survive the choice.
+Recompute either way with:
+
+    python3 - <<'EOF'
+    import csv,os,collections
+    S=os.environ.get('MPN_SCORES','/mnt/user-data/uploads/eigenia/papers-pre-publish/MPN/05_DATA/01_scores')
+    for f in ('A_DOLLS_HOUSE','HAMLET','MACBETH'):
+        rows=list(csv.DictReader(open(f'{S}/MCKENNEY_LACAN_SCORE_{f}.csv',encoding='utf-8',newline='')))
+        for drop in ((),('STAGE',)):
+            c=collections.Counter(s for r in rows
+                                  for s in [(r.get('SPEAKER') or '').strip()]
+                                  if s and s not in drop)
+            n=sum(c.values()); t=c.most_common(2)
+            print(f, 'ex'+str(drop), f'{sum(x[1] for x in t)/n:.3%}')
+    EOF
+
+
+================================================================================
+SECTION D.  JOB 3(b) -- EVENT DENSITY.  CONFIRMED.
+================================================================================
+
+COMMAND: python3 /home/claude/gen6/s6_corpus_recount.py     (section 2 of its output)
+
+THE EXCLUSION, VERIFIED RATHER THAN ASSUMED:
+    KING_LEAR: 3425 rows, of which 3424 carry the non-speaker SPEAKER "STAGE".
+    The one remaining row is {'FINIS': 1}.
+    CONFIRMED against S4 section 3.3's "3,424 of its 3,425 rows are non-speaker".
+
+    rows read 31078   rows excluded 3425   rows retained 27653
+
+THE ARBITRATION GIVES: 4.5, 33.9 and 26.6 per cent with King Lear excluded.
+
+COMPUTED, change rate row to row under S3's normative laws (eight dynamic
+markings off TRAUMA_R; three tempo bands and four metre cuts off ENTROPY_H):
+
+                          dynamics     tempo band    metre
+    all seven files       4.5500 %     32.2425 %     25.7039 %
+    SIX, KL excluded      4.4952 %     33.8963 %     26.6491 %
+                          -> 4.5 %     -> 33.9 %     -> 26.6 %
+
+CONFIRMED, all three. The all-seven baseline the arbitration quotes also
+reproduces exactly: 4.5 unchanged, tempo 32.2 -> 33.9, metre 25.7 -> 26.6.
+
+WHAT MUST BE PRINTED BESIDE THEM (ruling C, finding S19), computed here:
+    ENTROPY_H takes 14 distinct values over all 31,078 rows.
+    It is exactly 0.3 on 22,611 of them, 72.8 per cent.
+    Of the 10,020 tempo-band changes, 9,482 have 0.3 on one side, 94.6 per cent.
+    CONFIRMED against the arbitration's own figures, cell for cell.
+    So all three event-density figures are properties of one generator's
+    output distribution and not of S3's laws.
+
+TWO FURTHER FIGURES THE SAME COMMAND CHECKS, because they are cheap and they
+are in the same neighbourhood of the arbitration:
+
+  change 16, metre reaches four of five labels and never m1:
+    m1 0, m2 23086, m3 3229, m4 1182, m5 156 rows on the retained six files.
+    Tempo bands reached: slow 19568, middle 7517, fast 568 -- THREE bands, so
+    TWO cuts and not three. CONFIRMED.
+
+  change 15, dynamics does not ratchet on this corpus:
+    within-speaker steps 27416; marking FALLS on 597, RISES on 827;
+    raw TRAUMA_R falls on 822 of the same steps.
+    CONFIRMED, all four figures, against change 15's 597 / 27,416 / 827 / 822.
+
+
+================================================================================
+SECTION E.  JOB 3(c) -- TIMBRE.  ONE CONFIRMED, ONE CORRECTED, ONE UPHELD.
+================================================================================
+
+E.1  THE UNCONVERGED PUBLISHED RUN, REPRODUCED FIRST.
+
+     COMMAND (the pre-14-September procedure, 60 restarts of 1,500 steps,
+     three seeds, exactly as s6_timbre_capacity.py had it):
+
+       python3 - <<'EOF'
+       import numpy as np
+       _R=np.array([(0.5,0.5,-0.5,-0.5),(0.5,-0.5,0.5,-0.5),(0.5,-0.5,-0.5,0.5)])
+       def mp(P):
+           T=P@_R.T; d=np.linalg.norm(T[:,None,:]-T[None,:,:],axis=2)
+           np.fill_diagonal(d,np.inf); return d.min()
+       def opt(n,restarts,steps,seed):
+           rng=np.random.default_rng(seed+n); bv=-1.0
+           for _ in range(restarts):
+               P=rng.random((n,4)); cur=mp(P); step=0.35
+               for s in range(steps):
+                   i=rng.integers(n); k=rng.integers(4); old=P[i,k]
+                   P[i,k]=min(1.0,max(0.0,old+rng.normal(0,step)))
+                   v=mp(P)
+                   if v>cur: cur=v
+                   else: P[i,k]=old
+                   if s%300==299: step*=0.6
+               bv=max(bv,cur)
+           return float(bv)
+       for seed in (20260913,11111,99991):
+           r={n:round(opt(n,60,1500,seed),4) for n in range(2,9)}
+           print(seed,r,'violations at N=',[n for n in range(2,8) if r[n]<r[n+1]-1e-12])
+       EOF
+
+     RESULT:
+       20260913 {2:2.0, 3:1.5126, 4:1.4231, 5:1.4142, 6:1.4142, 7:1.0123, 8:0.9019}  none
+       11111    {2:2.0, 3:1.5127, 4:1.4225, 5:1.4057, 6:1.4142, 7:0.9556, 8:0.8886}  N=5
+       99991    {2:2.0, 3:1.5119, 4:1.4233, 5:1.4142, 6:1.3722, 7:0.9927, 8:0.9101}  none
+
+     The published table (1.4231 at N=4, 1.4142 at 5 and 6, 1.0123 at 7)
+     reproduces cell for cell at the published seed, and the monotonicity
+     violation reproduces at seed 11111: N=5 returns 1.4057, BELOW its own N=6
+     of 1.4142. That is impossible for the true optimum, since any optimal
+     six-set contains a five-set. CONFIRMED, the convergence failure is real.
+
+E.2  THE EXHAUSTIVE CORNER SEARCH.  EXACT, NO SEED.  CONFIRMED.
+
+     COMMAND (section 4 of the script; or on its own):
+
+       python3 - <<'EOF'
+       import itertools, math
+       R=[(0.5,0.5,-0.5,-0.5),(0.5,-0.5,0.5,-0.5),(0.5,-0.5,-0.5,0.5)]
+       h=lambda p: tuple(sum(r[i]*p[i] for i in range(4)) for r in R)
+       C=[tuple(map(float,e)) for e in itertools.product((0.,1.),repeat=4)]
+       T=[h(c) for c in C]
+       D=[[math.dist(a,b) for b in T] for a in T]
+       for n in range(2,9):
+           print(n, round(max(min(D[a][b] for a,b in itertools.combinations(c,2))
+                              for c in itertools.combinations(range(16),n)), 6))
+       EOF
+
+     RESULT:  N=2 2.000000
+              N=3 1.414214   N=4 1.414214   N=5 1.414214   N=6 1.414214
+              N=7 1.000000   N=8 1.000000
+
+     CONFIRMED against ruling D's "returns 1.414214 at N = 3, 4, 5 and 6 and
+     exactly 1.0 at N = 7 and 8". The flat at sqrt(2) up to six is EXACT and
+     needs no search and no seed. The six far vertices of the rhombic
+     dodecahedron are an optimal six.
+
+E.3  1.414214 AT N = 5 AND N = 6 UNDER A HARD SEARCH.  CONFIRMED.
+E.4  1.053712 AT N = 7.  CORRECTED -- IT IS NOT REPRODUCIBLE AND IT IS LOW.
+
+     COMMAND (the converged run in the updated script):
+
+       python3 /home/claude/gen6/s6_timbre_capacity.py
+
+     COMMAND (the same table repeated at three seeds, with cell-by-cell
+     agreement asserted in the script):
+
+       python3 /home/claude/gen6/s6_timbre_capacity.py --reseed
+
+     CONVERGED TABLE, identical at seeds 20260913, 11111 and 99991:
+
+        N   corners (exact)   whole cube (converged)
+        2      2.000000            2.000000
+        3      1.414214            1.512776
+        4      1.414214            1.424955
+        5      1.414214            1.414214
+        6      1.414214            1.414214
+        7      1.000000            1.089845
+        8      1.000000            1.000000
+        9      0.866025            0.976561
+       10      0.866025            0.927764
+       11      0.866025            0.898979
+       12      0.866025            0.898979
+       13      0.866025            0.866743
+       14      0.866025            0.866025
+
+     N = 5 and N = 6 both 1.414214.  CONFIRMED, and now doubly, because the
+     exhaustive corner search reaches the same value with no seed at all.
+
+     N = 7:  the arbitration reports 1.053712.  CORRECTED to 1.089845.
+       Two separate findings here and both are said loudly.
+       (i)  1.053712 DOES NOT REPRODUCE. Running the arbitration's own stated
+            procedure -- the script's coordinate search at 1,200 restarts of
+            4,000 steps, seed 20260913 + N -- returns 1.032925 at N = 7, not
+            1.053712. Command:
+              (the E.1 block, with opt(7,1200,4000,20260913); ~95 seconds)
+            Three other seeds under the same procedure returned 1.031153,
+            1.027706 and 1.019204. I could not reproduce 1.053712 by raising
+            the restart count at any seed I tried.
+       (ii) IT IS BEATEN ANYWAY. A multi-start search with an SLSQP polish at
+            each start returns 1.089845 at N = 7, identically at all three
+            seeds and from only 40 starts upward. That is above the published
+            1.0123, above the Skeptic's 1.0360, and above the arbitration's
+            1.053712.
+       So the N = 7 value has now moved four times: 1.0123 -> 1.0360 ->
+       1.053712 -> 1.089845. The arbitration's conclusion is UPHELD and
+       strengthened by its own reasoning turned on its own number.
+
+E.5  THE STABLE CLAIM, STATED EXACTLY.
+
+     WHAT IS DELETED: "falls 28 per cent at the seventh", from the status block
+     and from D50, and every percentage drop from N = 6 to N = 7 anywhere. It
+     is deleted and NOT corrected, because it is a lower bound that has risen
+     under every harder search so far, so no value can be printed that the next
+     search will not move. The script prints the four values above as the
+     reason it prints no percentage.
+
+     WHAT REPLACES IT, and this is what may be claimed:
+
+       (a) THE EXACT PART, established without a seed by the exhaustive corner
+           search and confirmed by the converged continuous search: the max-min
+           timbre separation of this map is FLAT AT sqrt(2) = 1.414214 from
+           N = 3 to N = 6 and strictly lower at N = 7. The curve has exactly
+           one sharp kink and it is between six and seven. That is a fact about
+           packing in a rhombic dodecahedron and it does not depend on a search.
+
+       (b) THE CONDITIONAL PART, and the conditional belongs where it is: SIX
+           IS THE LARGEST CAST THAT COSTS NOTHING A FIVE-CHARACTER CAST DOES
+           NOT ALREADY COST, CONDITIONAL ON THE PERCEPTUAL RESOLUTION eps
+           LYING AT OR BELOW sqrt(2). "The capacity is six" is not a claim this
+           script supports: six is the answer only for eps in the window
+           (1.0898, 1.4142], a window of width 0.3244 in a space of diameter 2,
+           and the lower edge of that window RISES whenever the search
+           improves, so the window narrows with every improvement rather than
+           widening. It was (1.0537, 1.4142] for the arbitration and it is
+           narrower now.
+
+       (c) The experiment of 5b.5, which fixes eps, is no longer the cheapest
+           outstanding experiment; it is the one the whole section's claim now
+           rests on, because without it "six" has no status at all.
+
+E.6  WHAT WAS CHANGED IN s6_timbre_capacity.py, AND WHY THE SEARCH CHANGED.
+
+     (1) MONOTONICITY IS ASSERTED. assert_monotone() checks f(N) >= f(N+1) on
+         both tables and raises with the offending pair rather than printing.
+         This is the assertion that caught the unconverged run, and it now runs
+         on every publication of this script.
+     (2) THE EXHAUSTIVE CORNER SEARCH IS IN THE SCRIPT, for every N, printed
+         beside the continuous table. It needs no seed and no scipy.
+     (3) A SECOND ASSERTION: the continuous table must dominate the corner
+         table at every N, since the corners lie in the cube.
+     (4) --reseed REPEATS THE WHOLE TABLE AT THREE SEEDS and asserts every cell
+         agrees to 1e-6, failing with the offending cell if not.
+     (5) THE RESTART COUNT IS 600 polished starts per N (MPN_STARTS overrides).
+         At 200 starts every cell agrees across the three seeds except N = 13;
+         at 600 every cell agrees. That is the count at which re-seeding
+         changes nothing, which is the convergence test the job asked for.
+
+     WHY THE SEARCH ITSELF WAS REPLACED, SAID PLAINLY. The job asked for the
+     restart count to be raised until three seeds agree. RAISING THE RESTART
+     COUNT ALONE DOES NOT GET THERE: the old coordinate-jitter search at 1,200
+     restarts of 4,000 steps still returns 1.0329 at N = 7 and costs 95 seconds
+     for that one cell. What converges is polishing each start. The polish is
+     legitimate and is not a change of problem:
+       - section 2 of the same script already proves h is an orthogonal
+         projection followed by an isometry, so the min pairwise timbre
+         distance depends on the profiles only through their timbre images;
+       - the reachable set T = h(cube) is exactly the rhombic dodecahedron
+         {x : |x_i +- x_j| <= 1}, so the problem is a 3-D packing problem;
+       - each start is polished by SLSQP on the epigraph form, maximise t
+         subject to ||x_a - x_b||^2 >= t and x in T;
+       - the DISC profile is recovered by walking the fibre, which section 2(b)
+         proves is a straight segment in the direction (1,1,1,1)/2. The
+         recovery is ASSERTED in the script, not assumed: the profile must lie
+         in [0,1]^4 and must map back to the timbre point to 1e-9.
+     DEPENDENCY, STATED AS THE RULES REQUIRE. The polish needs scipy; the rest
+     of the script needs numpy; the corner search needs neither. If scipy is
+     absent the script says so loudly, falls back to the old coordinate search,
+     and labels its table as unconverged lower bounds. No behaviour is silent.
+     Every seed is fixed. There is no unseeded randomness in any script here.
+
+E.7a KNOCK-ON IN SECTION 5, RECORDED BECAUSE IT SHARPENS A FINDING RATHER THAN
+     SOFTENING ONE. Converging the search changed the optimal sets themselves:
+     the N = 5 and N = 6 sets are now five and six of the six FAR VERTICES of
+     the rhombic dodecahedron, i.e. corners of the DISC cube with two
+     coordinates at 1 and two at 0. Every one of them therefore sits on an
+     exact argmax tie, and the script now prints, at 600 starts:
+         N=4: distinct families 3/4, profiles within 0.05 of a tie: 3
+         N=5: distinct families 3/5, profiles within 0.05 of a tie: 5
+         N=6: distinct families 3/6, profiles within 0.05 of a tie: 6
+     against the unconverged run's smaller tie counts. The section's own rule,
+     that maximum continuous separation does not imply distinct families and
+     that a near-tie makes the family label unstable, is now true of EVERY
+     profile in the optimal set rather than some of them. That is the argmax
+     tie of section 5b.4 and finding S11, and it is worse than it looked.
+     The constrained figure is relabelled as a lower bound from a seeded
+     search, and is 1.3956 against an unconstrained N = 4 of 1.424955, a cost
+     of 2.1 per cent.
+
+E.7b THE CONVERGED RUN, END TO END, PASSED EVERY ASSERTION IN THE SCRIPT.
+     COMMAND: python3 /home/claude/gen6/s6_timbre_capacity.py --reseed
+     (about seventeen minutes; about four and a half without --reseed)
+     Printed, verbatim:
+       seed 20260913: 2.000000 1.512776 1.424955 1.414214 1.414214 1.089845
+                      1.000000 0.976561 0.927764 0.898979 0.898979 0.866743 0.866025
+       seed 11111:    (identical)
+       seed 99991:    (identical)
+       every cell agrees to 1e-6 across 3 seeds at 600 starts. CONVERGED.
+     The monotonicity assertion, the corner-dominance assertion, the fibre
+     assertions and the seed-agreement assertion all passed.
+
+E.7  A FIGURE DELETED WITH SOMETHING PUT IN ITS PLACE, RECORDED AS THE RULES ASK.
+       DELETED  "falls 28 per cent at the seventh"
+       REPLACED BY  E.5(a), the exact flat at sqrt(2) from N=3 to N=6 with a
+                    single kink, and E.5(b), the conditional six.
+       DELETED  the published N = 4 entry 1.4231
+       REPLACED BY  1.424955, converged and seed-stable (the arbitration said
+                    "rises to at least 1.4247"; CONFIRMED and tightened).
+       DELETED  "SIX IS THE CHANNEL'S NATURAL CAPACITY"
+       REPLACED BY  E.5(b).
+
+
+================================================================================
+SECTION F.  SUMMARY TABLE
+================================================================================
+
+  figure                                       status      where
+  -------------------------------------------- ----------- ----------------
+  14 inherited mappings naming a coordinate    CONFIRMED   A.2
+  0 naming none                                CONFIRMED   A.2
+  18 signatures                                CONFIRMED   A.3
+  8 collisions                                 CONFIRMED   A.3
+  20 of 30 entries involved                    CONFIRMED   A.3
+  12 / 4 / 8 of 16 before BL-1                 CONFIRMED   A.3
+  4 collisions created by BL-1                 CONFIRMED   A.3
+  15 of 16 coordinate-free count, CB-004       CONFIRMED   B.5
+  strength in [0.75, 0.95] on all 30, 5 fields CONFIRMED   B.6
+  coverage 69.2 / 50.1 / 39.0, 1 of 3 below 1/2 CONFIRMED  C
+  8.2 per cent is an anthology figure          CONFIRMED   C
+  event density 4.5 / 33.9 / 26.6              CONFIRMED   D
+  entropy floor 72.8 per cent, 94.6 per cent   CONFIRMED   D
+  King Lear 3,424 of 3,425 non-speaker         CONFIRMED   D
+  27,416 steps, 597 falls, 827 rises, 822 raw  CONFIRMED   D
+  metre 4 of 5 labels, 2 tempo cuts            CONFIRMED   D
+  timbre 1.414214 at N = 5 and N = 6           CONFIRMED   E.2, E.3
+  exhaustive corners 1.414214 (3-6), 1.0 (7-8) CONFIRMED   E.2
+  the N = 5 monotonicity violation at seed 11111 CONFIRMED E.1
+  timbre 1.053712 at N = 7                     CORRECTED   E.4  -> 1.089845
+                                                                (and 1.053712
+                                                                did not
+                                                                reproduce)
+  "falls 28 per cent at the seventh"           DELETED     E.5, E.7
+  N = 4 entry 1.4231 ("rises to at least 1.4247") CORRECTED E.7  -> 1.424955
+  three seeds agree at every N, 600 starts      CONFIRMED  E.7b
+  all in-script assertions pass on the published run       E.7b
+
+
+================================================================================
+SECTION G.  WHAT IS STILL OPEN, NAMED RATHER THAN LEFT
+================================================================================
+
+  1. s6_three_clef.py is untouched. It still carries assert TOTAL == 31078,
+     which change 18 requires be replaced by an assertion over the rows
+     retained after the design's own exclusion rule, with the exclusions
+     printed; it still calls the rows beats throughout; and its MPN_SCORES
+     default points at a path that does not exist here (change 43). None of
+     those is one of these four jobs. s6_corpus_recount.py does not replace it:
+     it recomputes two of its three quantities independently as a check, and
+     leaves dyad churn and the information budget where they are.
+
+  2. BL-2 is not decided here and this script does not decide it. CB-017 stays
+     in INHERITED_RIDES with both its coordinates, and the script prints
+     change 2's rationale rather than an outcome. MPN-S3-BL2-DRAFT.md holds the
+     two options and the recommendation.
+
+  3. The three flagged rows are the author's. Nothing in any script picks one.
+
+  4. Change 28's abstention rule and firing rate are printed as owed at the end
+     of the work queue and are not supplied.
+
+  5. The absolute machine path in s6_bias_layer.py's resolver is still there
+     (NOTE 1). The script no longer needs it, because the reconciliation is now
+     committed beside it.
+
+================================================================================
+SECTION H.  REPAIRS OF 14 SEPTEMBER, SECOND PASS
+================================================================================
+
+Two jobs, both closing items opened in section G: the three defects in
+s6_three_clef.py (G.1, arbitration changes 18 and 43), and the unresolved
+reference [7] with a link check over the whole of revision 8 (change 43).
+
+--------------------------------------------------------------------------------
+H.1  s6_three_clef.py -- ALL THREE DEFECTS REPAIRED.  BOTH FIGURE SETS CONFIRMED.
+--------------------------------------------------------------------------------
+
+COMMAND:
+
+    python3 /home/claude/gen6/s6_three_clef.py
+
+  No arguments, no environment variable needed, no randomness of any kind.
+
+(a) THE PATH RESOLVER.  The old default was a single hardcoded
+    ~/mnt/eigenia/... string that does not resolve in this container. It is
+    replaced by a probe over a candidate list, the pattern s6_bias_layer.py
+    and s3_bias_reconcile.py already use: MPN_SCORES overrides; otherwise the
+    first candidate that actually holds MCKENNEY_LACAN_SCORE_HAMLET.csv wins.
+    Both failure paths name what was looked for:
+
+      $ MPN_SCORES=/nonexistent python3 s6_three_clef.py
+      MPN_SCORES is set to /nonexistent but that folder does not contain
+      MCKENNEY_LACAN_SCORE_HAMLET.csv. It must be the folder holding the seven
+      MCKENNEY_LACAN_SCORE_*.csv score files.
+
+      (with every candidate absent)
+      the score files were not found. This script needs the folder holding the
+      seven MCKENNEY_LACAN_SCORE_*.csv files, identified by
+      MCKENNEY_LACAN_SCORE_HAMLET.csv. It looked, in order, in: <list>
+      Set MPN_SCORES to that folder.
+
+    The candidates, in order, are the staged container copy, the author's
+    ~/mnt/eigenia/... mount, ~/eigenia/... and /home/claude/mpn-scores.
+
+(b) THE ASSERTION.  `assert TOTAL == 31078` is gone. In its place, four
+    assertions, so that a change of corpus fails the script rather than the
+    paper:
+
+        rows read      31078
+        rows excluded   3425   (KING_LEAR)
+        rows retained  27653
+        and KING_LEAR's STAGE count == 3424
+
+    The exclusion is verified in the script, not assumed: KING_LEAR is 3,425
+    rows of which 3,424 carry the non-speaker token STAGE and the remaining one
+    is {'FINIS': 1}. Change 18's ground -- that the product this design
+    specifies would refuse the file under its own section 4.1 -- is printed
+    beside the counts. The read total 31,078 is retained as one of the four, so
+    the corpus identity S1 to S4 cite is still guarded; what is no longer
+    guarded is the contamination.
+
+(c) THE NAMING.  Every "beat" and every "play" used of these rows and files is
+    gone. Rows are rows, files are score files, and every per-file count names
+    which of the seven it belongs to. The only surviving occurrences of the
+    word beat are in the paragraph that states S4 section 3.5's rule and
+    reserves the word for the engine's own column name.
+
+BOTH VERSIONS OF EVERY TABLE ARE NOW PRINTED, all seven files and King Lear
+excluded, as the job required.
+
+EVENT DENSITY.  THE ARBITRATION GIVES 4.5, 33.9 and 26.6 per cent with King
+Lear excluded, and 4.55, 32.24 and 25.70 per cent on all seven.
+
+COMPUTED, change rate row to row under S3's normative laws (eight dynamic
+markings off TRAUMA_R; three tempo bands and four metre cuts off ENTROPY_H):
+
+                          dynamics     tempo band    metre
+    all seven files       4.5500 %     32.2425 %     25.7039 %
+    SIX, KL excluded      4.4952 %     33.8963 %     26.6491 %
+
+BOTH SETS CONFIRMED, to the precision the arbitration states each at. Nothing
+is corrected. This reproduces section D cell for cell from a second script that
+re-reads the CSVs independently, which is the check section D said it wanted.
+
+The two distributional facts ruling C requires beside them are now printed by
+this script as well: ENTROPY_H takes 14 distinct values over the 31,078 rows
+read, is exactly 0.3 on 22,611 of them (72.8 per cent), and 9,482 of the 10,020
+tempo-band changes have 0.3 on one side (94.6 per cent).  CONFIRMED.
+
+COVERAGE, SPLIT INTO TWO BLOCKS AS THE RULING REQUIRES.
+
+  BLOCK ONE -- THE THREE SINGLE PLAYS.  These are coverage figures.
+
+    score file       speakers   top-1     TOP-2     top-3
+    A_DOLLS_HOUSE        14     45.2 %    69.231 %  80.4 %
+    HAMLET               44     36.1 %    50.113 %  58.5 %
+    MACBETH              49     28.8 %    39.007 %  47.5 %
+
+    Range 39.0 to 69.2 per cent, 1 of 3 below half (Macbeth).
+    THE ARBITRATION GIVES 39.0 to 69.2 per cent.  CONFIRMED.
+
+  BLOCK TWO -- THE THREE ANTHOLOGIES.  LABELLED IN THE SCRIPT'S OWN OUTPUT AS
+  NOT COVERAGE FIGURES.  Each is the top-two share of a file holding several
+  plays with disjoint casts, and measures the anthology and not any play:
+
+    CHERRY_ORCHARD       82      4.1 %     8.2 %    12.1 %   8 works
+    MISS_JULIE           28     15.7 %    26.2 %    36.7 %   5 works
+    OEDIPUS_REX          20     25.7 %    48.1 %    59.3 %   3 works
+
+  THE SEVENTH FILE carries no coverage figure at all: KING_LEAR has two
+  distinct SPEAKER values and 3,424 of 3,425 rows on STAGE.
+
+  The 8 per cent anchor is 8.2 per cent and it is the CHERRY_ORCHARD row.
+  Withdrawn as a coverage figure, replaced by 39.0 to 69.2 per cent.  CONFIRMED.
+
+DYAD CHURN AND THE INFORMATION BUDGET, the two quantities s6_corpus_recount.py
+left where they were, are now printed in both versions too. The two versions are
+identical, and the reason is itself a result: KING_LEAR yields too few speaker
+changes to produce a dyad sequence at all, which is the parse failure showing up
+a third time. Churn 8.8 to 44.1 per cent; busiest speaker in 10.2 to 87.0 per
+cent of all active pairs. Change 19's limit -- that none of the seven is a
+moderated exchange, so neither range corroborates a claim about moderated panels
+-- is now printed beside them. The information budget is unchanged at eighteen
+quantities against six to nine, and the script now says explicitly that this one
+section does not depend on the corpus and the exclusion does not touch it.
+
+G.1 IS CLOSED.  Reference [11] may drop its three-part caveat, and change 18's
+"applied in part" in the section 13 audit may become applied in full.
+
+--------------------------------------------------------------------------------
+H.2  REFERENCE [7] -- RESOLVED.  THE PATH EXISTS AND THE SCRIPT RUNS.
+--------------------------------------------------------------------------------
+
+REVISION 8 RECORDS [7] AS UNRESOLVED, on the Constraint Guardian's finding that
+05_DATA/03_generators/ does not hold s5_salvage.py and that no verified path
+appears in [13].
+
+THE RESOLVED PATH IS
+
+    05_DATA/03_generators/s5_salvage.py
+
+and it exists in the author's corpus. Read on the author's machine at
+~/mnt/eigenia/papers-pre-publish/MPN/05_DATA/03_generators/s5_salvage.py:
+7,098 bytes, 149 lines, dated 13 September 2026 18:42, SHA-256
+
+    1a63dbf732f56612f2764625c34e0de50a59d7c6b68023c8c5627d4571c9d1cb
+
+The container copy at /home/claude/gen4/s5_salvage.py is BYTE-IDENTICAL: same
+length, same line count, same SHA-256. There is a third identical copy at
+/mnt/attach/outputs/gen/s5_salvage.py.
+
+IT RUNS.  `MPN_REPO=/home/claude/mpn-conductor-standalone python3
+gen4/s5_salvage.py` exits 0 and prints the nineteen-artefact manifest with the
+PORT / REPAIR / REWRITE / DROP verdicts and the warrant beside each. It needs
+the Conductor working tree and says so in its docstring and by its MPN_REPO
+default.
+
+WHY THE GUARDIAN'S FINDING WAS WRONG, stated plainly because it is the kind of
+error that repeats. The container's staged snapshot of the corpus, at
+/mnt/user-data/uploads/eigenia/papers-pre-publish/MPN/05_DATA/03_generators/,
+is dated 12 September 2026 20:04 and holds exactly ONE file, a8_form_analysis.py.
+The author's own 03_generators holds fifty entries, including every generator
+this programme has written. The finding was made against the stale snapshot and
+reported as a fact about the corpus. THE CITATION 05_DATA/03_generators/ WAS
+CORRECT ALL ALONG for [7], and revision 8 withdrew a good path.
+
+A CONSEQUENCE FOR [9] TO [13], AND IT POINTS THE OTHER WAY.  Change 43 also had
+[9], [10] and [11] "corrected" off 05_DATA/03_generators/ onto gen6/. There is
+no gen6/ anywhere on the author's machine. All six of those files --
+s6_bias_layer.py, s3_bias_reconciliation.json, s6_timbre_capacity.py,
+s6_three_clef.py, s6_corpus_recount.py and VERIFICATION-2026-09-14.txt -- sit in
+05_DATA/03_generators/ in the corpus. So the gen6/ prefix resolves in this
+container and NOWHERE in the corpus the paper is published from, and the
+pre-change-43 citation was the right one. The recommendation is to restore
+05_DATA/03_generators/ on [7], [9], [10], [11], [12] and [13] and to delete the
+bolded withdrawal sentence from [7].
+
+ONE STALENESS NOTE, NOT A BROKEN LINK.  The corpus copy of s6_three_clef.py is
+dated 13 September 2026 21:50 at 12,034 bytes, which is the version repaired in
+H.1 above. The repaired script is at /home/claude/gen6/s6_three_clef.py and has
+not been copied into the corpus by this pass.
+
+--------------------------------------------------------------------------------
+H.3  THE LINK CHECK.  46 PATHS CHECKED, 3 BROKEN.
+--------------------------------------------------------------------------------
+
+SCOPE: every path cited in revision 8's reference list [1] to [21] and in the
+body of DESIGN-UNIFIED-FRAMEWORK-rev8.md -- 22 document paths, 7 generator
+paths, 4 directory paths, 4 source-file paths, 8 source line anchors, 1 URL.
+
+THE ORIGINAL PROGRAMME PLAN CLAIMED 75 PATHS WITH 0 BROKEN. That number is not
+reproducible from revision 8, which cites 46 distinct paths. The 75 is
+withdrawn; 46 is what the document actually carries and 46 is what was checked.
+The claim of 0 broken is also withdrawn: there are three.
+
+THE THREE BROKEN PATHS, ALL LINE ANCHORS INTO ONE FILE, all three broken in the
+container AND in the author's corpus, since both read the same reference
+implementation:
+
+  1. src/components/mpn-lab/psychometric_calculus.ts:204
+     cited in [21] and in the body of section 5b for "the null return of
+     inferDISC".
+     LINE 204 IS `export function discToInstrument(`.
+     inferDISC is not in this file at all. It is at
+     src/lib/play_parser.ts:254, which revision 8 ALREADY cites in [21] without
+     saying what is there. The two citations should be merged onto the
+     play_parser line.
+     This also reverses revision 8's own "citation correction": the paragraph
+     at section 5b that says two of the Guardian's references wrongly give the
+     directory as `src/lib` is itself wrong for this reference. The Guardian's
+     src/lib was RIGHT for inferDISC. Change 39 and [21] both assert "the line
+     numbers are right"; for this one they are not.
+
+  2. src/components/mpn-lab/psychometric_calculus.ts:316
+     cited for "the pickers type a profile as a single letter".
+     LINE 316 IS `const instrument = discToInstrument(state.disc, seedKey);`.
+     The single-letter typing in the PICKERS is at
+     src/components/mpn-lab/ActorInstrumentPicker.tsx:37 and :49 and
+     src/components/mpn-lab/wizard/TimbreInstrumentPicker.tsx:18 and :27.
+     The same narrowing inside the calculus is at psychometric_calculus.ts:213,
+     `const trait = dominant[0] as 'D' | 'I' | 'S' | 'C';`.
+     THE CLAIM IS TRUE; ONLY THE ANCHOR IS WRONG.
+
+  3. src/components/mpn-lab/psychometric_calculus.ts:326 to :340
+     cited for "the argmax family selector".
+     LINES 326 TO 340 ARE the base timbre object literal and the Dark Triad
+     modulation.
+     The argmax is at psychometric_calculus.ts:211 to :212, inside
+     discToInstrument: `const dominant = traits.reduce((a, b) => a[1] > b[1] ?
+     a : b);`.
+     AGAIN THE CLAIM IS TRUE AND ONLY THE ANCHOR IS WRONG. Section 5b.4's
+     diagnosis and change 41 stand.
+
+THE FIVE ANCHORS THAT DO RESOLVE, checked the same way and passing:
+    psychometric_calculus.ts:310   confirmation-bias wiring into the mode
+                                   selector                            OK
+    page.tsx:96                    the substitution table (it opens at :98,
+                                   inside the function that begins at :96) OK
+    page.tsx:115                   the flat default, D=I=S=C=0.5        OK
+    play_parser.ts:254             inferDISC returning null             OK
+    mpn_reference_lookup.ts:183 to :214   the trauma gate ahead of the bias
+                                   loop in lookupArticulation           OK
+
+ONE FIGURE CORRECTION FOUND WHILE CHECKING ANCHOR 4, recorded because the rules
+say the computation wins. [21] and section 5b both call the table at page.tsx
+":96" A FOURTEEN-NAME SUBSTITUTION TABLE. IT HOLDS THIRTEEN: hamlet, claudius,
+ophelia, ghost, gertrude, oedipus, jocasta, creon, tiresias, macbeth, lady
+macbeth, priest, chorus. FOURTEEN IS CORRECTED TO THIRTEEN. The adjacent
+DISC_INSTRUMENTS map at :88 holds four entries, which is the likely source of
+the miscount. Nothing in the argument turns on it: the finding is the flat
+default for every name NOT in the table, and that is unaffected.
+
+TWO ROOT-DEPENDENT RESULTS, reported separately because neither is a broken
+path and both would be misread as one:
+
+  * MPN-NOTE-05-blocking-numbers.md, cited in [16], resolves in the author's
+    corpus at 08_PAPERS/MPN-NOTE-05-blocking-numbers.md, 12,423 bytes. It is
+    the one cited document with no copy in this container's ms-drafts. NOT
+    BROKEN.
+
+  * The seven gen6/-prefixed citations -- the directory itself plus the six
+    files in [9] to [13] -- resolve in this container and in no corpus. See
+    H.2. They are broken FROM THE CORPUS and sound FROM HERE, which is the
+    argument for restoring 05_DATA/03_generators/ on all of them.
+
+The one URL in [6], the THWS summary of the Improvisation Assessment Profiles,
+is not resolvable offline and is not counted either way.
+
+RESULT: 46 CHECKED, 3 BROKEN, all three line anchors into
+src/components/mpn-lab/psychometric_calculus.ts, at :204, :316 and :326-:340.
+Every document path, generator path, directory and source file resolves.
+
+TO RE-RUN THE ANCHOR HALF, which is the half that failed:
+
+    python3 - <<'EOF'
+    R = '/home/claude/mpn-conductor-standalone'
+    CHECKS = [
+        ('src/components/mpn-lab/psychometric_calculus.ts', 204, 'inferDISC'),
+        ('src/components/mpn-lab/psychometric_calculus.ts', 310, 'Confirmation Bias'),
+        ('src/components/mpn-lab/psychometric_calculus.ts', 316, "'D' | 'I' | 'S' | 'C'"),
+        ('src/components/mpn-lab/psychometric_calculus.ts', 326, 'reduce'),
+        ('src/app/mpn-conductor/page.tsx', 96, 'archetypes'),
+        ('src/app/mpn-conductor/page.tsx', 115, 'archetypes[key] ||'),
+        ('src/lib/play_parser.ts', 254, 'inferDISC'),
+        ('src/components/mpn-lab/mpn_reference_lookup.ts', 183, 'lookupArticulation'),
+    ]
+    import os
+    for path, ln, needle in CHECKS:
+        full = os.path.join(R, path)
+        if not os.path.exists(full):
+            print('NO FILE', path); continue
+        L = open(full, encoding='utf-8').read().split('\n')
+        win = L[ln-1:ln+15] if ln in (326, 183, 96) else [L[ln-1]]
+        ok = any(needle in x for x in win)
+        print(('OK     ' if ok else 'BROKEN '), f'{path}:{ln}',
+              '' if ok else '-- line is: ' + L[ln-1].strip()[:80])
+    EOF
+
+--------------------------------------------------------------------------------
+H.4  WHAT SECTION G STILL LEAVES OPEN AFTER THIS PASS
+--------------------------------------------------------------------------------
+
+  G.1 is CLOSED (H.1).
+  G.2, G.3 and G.4 are unchanged: BL-2 undecided, the three flagged rows are
+      the author's, change 28's abstention rule is still owed.
+  G.5 is unchanged: the absolute machine path in s6_bias_layer.py's resolver.
+      It was not in scope for this pass and s6_bias_layer.py was not edited.
+
+  NEW, opened by this pass and owed to revision 9:
+  H.a  Restore 05_DATA/03_generators/ on references [7], [9], [10], [11], [12]
+       and [13], and delete [7]'s unresolved-citation sentence. The path is
+       confirmed (H.2).
+  H.b  Repoint the three broken anchors (H.3) and reverse the src/lib
+       "correction" for inferDISC.
+  H.c  Correct "fourteen-name substitution table" to thirteen (H.3).
+  H.d  Copy the repaired s6_three_clef.py into the corpus, where the 13
+       September version is still the one on disk.
+
+================================================================================
+END
+================================================================================

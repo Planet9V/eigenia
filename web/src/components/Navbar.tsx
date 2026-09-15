@@ -210,6 +210,27 @@ export const Navbar: React.FC = () => {
               )}
             </Link>
 
+            {/* Category 3.7: CRA Hub */}
+            <Link
+              href="/cra-hub"
+              className={`relative py-5 transition-colors ${
+                pathname === "/cra-hub" ? "text-dutchOrange font-bold" : "hover:text-dutchOrange"
+              }`}
+            >
+              <span className="flex items-center gap-1.5">
+                {t("nav_cra_hub")}
+                <span className="px-1.5 py-0.5 rounded bg-dutchOrange/10 text-dutchOrange text-[9px] font-bold border border-dutchOrange/30">
+                  EU
+                </span>
+              </span>
+              {pathname === "/cra-hub" && (
+                <motion.div
+                  layoutId="activeNav"
+                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-dutchOrange"
+                />
+              )}
+            </Link>
+
             {/* Category 4: Applied Physics Frameworks Dropdown */}
             <div
               className="relative py-5 cursor-pointer"
@@ -455,6 +476,17 @@ export const Navbar: React.FC = () => {
               className="block py-2 text-primary font-medium hover:text-dutchOrange"
             >
               {t("nav_jurisdictions")}
+            </Link>
+
+            <Link
+              href="/cra-hub"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block py-2 text-primary font-medium hover:text-dutchOrange flex items-center justify-between"
+            >
+              <span>{t("nav_cra_hub")}</span>
+              <span className="px-1.5 py-0.5 rounded bg-dutchOrange/10 text-dutchOrange text-[10px] font-mono font-bold border border-dutchOrange/30">
+                EU Portal
+              </span>
             </Link>
 
             <Link

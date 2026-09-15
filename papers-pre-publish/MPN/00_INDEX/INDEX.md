@@ -54,3 +54,54 @@ Two results already established on this data: trauma and entropy are independent
 ## Related
 
 OT engineering material that used to live inside this archive is now at `../OT`, with its own index.
+
+## S3, added 13 September 2026
+
+- `08_PAPERS/S3-mapping-phi.md` MPN-S3, the mapping from psychological state to musical material
+- `08_PAPERS/ARBITRATION-S3.md` The S3 gate ruling: accept with eleven conditions, plus a length addendum
+- `08_PAPERS/MPN-S3-AMENDMENTS.md` Replacement text for A4, A8 and B4 and two commensurability-audit corrections
+- `08_PAPERS/MPN-NOTE-03-implementation-audit.md` The chains and the search method behind S3 sections 2.1, 2.3 and 2.4
+- `05_DATA/03_generators/s3_frames.py` The single correct reader of the 232-frame library; six other scripts call it
+- `05_DATA/03_generators/S3-GENERATORS-README.md` How to run the S3 generators and what each establishes
+
+## S4, added 13 September 2026
+
+- `08_PAPERS/S4-application.md` MPN-S4, the application: what it implements, what it stubs, what is dead, and what the seven score files actually are
+- `08_PAPERS/ARBITRATION-S4.md` The S4 gate ruling: accept with six conditions, and the ruling that closes the four-paper series
+- `08_PAPERS/MPN-S4-AMENDMENTS.md` Corrections to S1 arising from S4, with replacement text for the frame-provenance passages and the four moved figures
+- `05_DATA/03_generators/s4_score_provenance.py` What text the seven score files contain: the contents-block test, the anthology spans and the licence blocks
+- `05_DATA/03_generators/s4_frame_provenance.py` Which frame-library state values are the author's literals and which the analyser computes
+- `05_DATA/03_generators/s4_dead_paths.py` Every public definition in `mpn_engine` and its use sites, from the parse tree
+- `05_DATA/03_generators/s4_leitmotif.py` The leitmotif transformations, run under node, and the selector's reachable outputs
+- `05_DATA/03_generators/s4_score_laws.py` The six computed columns reconstructed from the engine's own formulae
+- `05_DATA/03_generators/s4_two_engines.py` The Conductor and `mpn_engine` compared, with the corrections S4 revision 2 forced
+- `05_DATA/03_generators/s4_determinism.py` The keyed generator, and where the 54 unseeded draws are
+- `05_DATA/03_generators/s4_claims_check.py` The eleven deconstruction findings rechecked against the pinned tree
+- `05_DATA/03_generators/s4_scores.py` The column census over the seven score files
+
+S2 carries a post-acceptance correction of 13 September 2026 in its metadata, applying the S3 amendments' section 3 to its section 4.4 figures.
+
+One obligation is open across papers: S1 has not yet been revised to revision 4 from `MPN-S4-AMENDMENTS.md`, and should be before it is next cited. The full list of cross-paper obligations is section 6 of `08_PAPERS/ARBITRATION-S4.md`.
+
+## The PRD, added 13 September 2026
+
+The four papers audited a theory and two proofs of concept. This is the first document in the programme that specifies what to build.
+
+- `08_PAPERS/PRD-MPN-THERAPY.md` MPN-PRD-01, the instrument: the two-node case of the MPN framework, rated rather than inferred. Draft 6, under the scope ruling of 13 September 2026. Section 7.6 is the timbre channel, live because a synthetic character's DISC profile is assigned; section 14's first open question is answered by MPN-DESIGN-01 section 11
+- `05_DATA/03_generators/s5_salvage.py` The carry-over manifest of PRD section 9: nineteen artefacts, four ported, seven repaired, two rewritten, six dropped, each with its warrant, asserting that every path it names exists
+
+The PRD locks four decisions of the author's: a non-device practitioner tool, dual input with therapist override, a rebuild with the proofs of concept as reference, and every quantity renamed to what it measures. It puts `mpn_engine` outside the programme, which resolves S4-2 on its second branch, and it inherits ARBITRATION-S3's bar on implementing any modal table until question 5a returns.
+
+## The unified framework design, added 13 September 2026
+
+The PRD specified one surface. This specifies the framework all of them sit on, and it went through the same four-reviewer gate the papers did.
+
+- `08_PAPERS/DESIGN-UNIFIED-FRAMEWORK.md` MPN-DESIGN-01, one engine and four surfaces: dialogue decomposed into an interaction network and expressed as graph, score and sound. Revision 7, 56 decisions and 4 rejections logged. Revision 6 removed the regulatory apparatus built on a false premise; revision 7 specifies the six capabilities that premise had cut: the bias layer (section 5a), the DISC timbre channel (5b), the three-clef live score (6.2), participant mode (7.4), live capture (7.6) and an ungated Layer 3 (4.4)
+- `05_DATA/03_generators/s6_bias_layer.py` The bias layer computed from the Atlas reconciliation: fourteen of thirty mappings naming no state coordinate, one writing to the mode channel A4 depends on, four collisions, the per-channel perturbation budgets, and the twenty-two by eight partition into frame-local and historical biases
+- `05_DATA/03_generators/s6_timbre_capacity.py` The timbre channel's geometry and capacity: the reachable set is a rhombic dodecahedron of volume 2 and diameter 2, the mean fibre is 0.5 and the longest is the full diameter of DISC space, six is the channel's natural capacity, and the optimal six profiles are the six with two coordinates high and two low. Seeded
+- `05_DATA/03_generators/s6_three_clef.py` The three-clef score's legibility measured on the 31,078 beats: dynamics changes on 4.5 per cent of beats, tempo on 32.2 and metre on 25.7; two staves cover between 8 and 69 per cent of a work; dyad churn runs 8.8 to 44.1 per cent while the busiest speaker sits in up to 87 per cent of active pairs
+- `08_PAPERS/REVIEW-DESIGN-skeptic.md` STOP, 25 findings
+- `08_PAPERS/REVIEW-DESIGN-constraints.md` REJECT, 16 findings, six of them blocking, each with its source
+- `08_PAPERS/REVIEW-DESIGN-user.md` REVISE, 15 findings
+
+Section 11 rules on the open question the PRD left: the human-rated Autonomy-to-register mapping survives, and Partner takes no dead band. Section 10a carries the implementation order, which builds the shared spine and the security programme first and ships nothing with a musical output until Ψ is specified and listener-tested.

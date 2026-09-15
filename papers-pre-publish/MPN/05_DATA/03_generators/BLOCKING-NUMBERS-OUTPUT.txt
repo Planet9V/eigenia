@@ -1,0 +1,194 @@
+==============================================================================
+PART 1. THE ROUNDING RULE
+==============================================================================
+  simplex grid: 20,301 points at a step of 1/200
+  live pitch table, trauma at or below 0.6 so the modes are
+  Real Dorian, Symbolic Lydian, Imaginary Phrygian
+
+  delta | in margin | rounding moves | rounded differs | mean |err| | max |err|
+        |           | a degree       | from argmax     | in cents  | in cents
+  ------|-----------|----------------|-----------------|-----------|----------
+   0.02 |    3.44%  |    100.00%     |      14.74%     |    34.69  |   50.00
+   0.05 |    9.21%  |    100.00%     |       6.96%     |    32.39  |   50.00
+   0.10 |   18.41%  |    100.00%     |       5.72%     |    31.79  |   50.00
+   0.15 |   27.13%  |    100.00%     |       6.39%     |    31.72  |   50.00
+   0.20 |   35.36%  |    100.00%     |       8.62%     |    31.80  |   50.00
+   0.30 |   50.33%  |    100.00%     |      11.76%     |    32.11  |   50.00
+
+  THE COLUMN THAT DECIDES IT is the fourth. It is the share of points
+  inside the margin where the ROUNDED blend is a different scale from
+  the one argmax would have chosen. Where it is zero, rounding has
+  snapped every blended degree back onto the winning mode and the
+  interpolation has bought nothing that reaches a notated pitch.
+
+  Multiply the first column by the fourth and the finding is plain:
+    delta 0.05: rounding leaves a scale different from argmax on 0.64% of the whole simplex
+    delta 0.20: rounding leaves a scale different from argmax on 3.05% of the whole simplex
+  So rounding inside Phi snaps the blend back onto the winning mode
+  almost everywhere. The interpolation S3 chose over hysteresis and a
+  dead band survives into a notated pitch on under one per cent of
+  states at delta = 0.05. Rounding does not degrade the interpolation.
+  It very nearly deletes it.
+
+  AND THE TIE IS EXACTLY WHERE THE ROUNDING CONVENTION DECIDES THE
+  SCALE. At a two-way tie the weights are 0.5 and 0.5, so every degree
+  on which the two modes differ by one semitone lands on a half. Take
+  the Real and Symbolic tie on the live table, Dorian against Lydian:
+    Dorian            [0, 2, 3, 5, 7, 9, 10]
+    Lydian            [0, 2, 4, 6, 7, 9, 11]
+    blend at the tie  [0.0, 2.0, 3.5, 5.5, 7.0, 9.0, 10.5]
+    round half up     [0, 2, 4, 6, 7, 9, 11]  -> Lydian
+    bankers rounding  [0, 2, 4, 6, 7, 9, 10]  -> not one of the seven
+  One convention returns one of the two inputs; the other returns a
+  scale that is neither. The round built in to Python is the second.
+  This is not a detail to leave to a language. Whichever rule is
+  adopted decides the scale at precisely the states interpolation was
+  chosen for, and it has to be written down.
+
+  cross-check against S2's closed form for the margin area, 2d - d^2:
+    delta 0.05: measured 0.0921, closed form 0.0975, difference 0.0054
+    delta 0.20: measured 0.3536, closed form 0.3600, difference 0.0064
+  The grid and the closed form agree, so the margin is being computed
+  the way S2 and S3 describe it and the rest of the table can be read.
+
+  THE RECOMMENDATION FOLLOWS FROM THE TABLE AND FROM ONE PRECEDENT.
+  S3 section 2.1 already settles the same question for dynamics: "The
+  output of Phi is the marking, not the velocity: the velocity interval
+  is the pre-image." Do the same here. Phi emits the blended degree as a
+  continuous value in cents; the NOTATED pitch is its rounded pre-image,
+  a rendering property of the notation path and not a property of the
+  mapping. Then:
+    - the jump set of the mode parameter stays the single surface
+      tau = 0.6 and nothing on the simplex, which is what S3 proves and
+      what rounding inside Phi would destroy;
+    - the audio path carries the exact value through pitch bend, so the
+      delta experiment runs on a synthesiser that takes cents and needs
+      no microtonal notation renderer, which S3 says does not exist;
+    - the rounding rule stops being a blocking number for the THEORY and
+      becomes a setting on one renderer;
+    - and the cost is bounded and stated: notation and audio disagree by
+      at most a quarter tone, only inside the margin, on the share of
+      the simplex the first column gives.
+
+==============================================================================
+PART 2. K_MAX, AND WHETHER THE HARMONIC PARAMETER CAN REJOIN A11
+==============================================================================
+  generators are involutions: True; fixed-point free: True
+  action transitive: True; Cayley diameter: 5
+  distance distribution over all 576 ordered pairs: [24, 72, 144, 192, 120, 24]
+  S3 section 2.5 gives 24, 72, 144, 192, 120, 24. Reproduced above, so
+  the graph this script reasons on is the graph S3 reasons on.
+  the LR alternation visits all 24 triads exactly once and closes: True
+
+  S3 records that the harmonic parameter is a function on P x P and on
+  the chord already sounding, which is exactly the dependency it uses to
+  rule out hysteresis and a dead band for the mode selector, and that it
+  has the first-frame problem too. It then asks, in one sentence and
+  without computing it, whether the parameter can be re-expressed as a
+  function of the current state alone. It can, and the computation says
+  at what value of k_max.
+
+  ABSOLUTE form: position = round(k_max * f(state)) around the LR cycle,
+  from a fixed origin. A function on P alone. No previous chord, no
+  previous state, no first frame problem, A11 intact.
+  RELATIVE form: the shipped proposal. A change of size d moves the
+  chord round(k_max * d) positions from wherever it is.
+
+  The two agree on the SIZE of every move by construction. Where they
+  part company is REACH, and reach is computable:
+
+   k_max | chords the absolute form can ever visit | of 24 | full cycle
+  -------|-----------------------------------------|-------|-----------
+       1 |                   2                     |  8.3% | no
+       4 |                   5                     | 20.8% | no
+       5 |                   6                     | 25.0% | no
+      10 |                  11                     | 45.8% | no
+      11 |                  12                     | 50.0% | no
+      12 |                  13                     | 54.2% | no
+      13 |                  14                     | 58.3% | no
+      16 |                  17                     | 70.8% | no
+      20 |                  21                     | 87.5% | no
+      22 |                  23                     | 95.8% | no
+      23 |                  24                     | 100.0% | yes
+      24 |                  24                     | 100.0% | yes
+
+  The relative form reaches all 24 by accumulating moves whatever k_max
+  is. The absolute form reaches min(k_max + 1, 24). So the two
+  formulations have the same codomain at exactly one value, k_max = 23,
+  and at 24 and above the absolute form wraps, which is the artefact S3
+  already rules out.
+
+  And the value has to clear S3's own constraint, which is about the
+  metric rather than the cycle: how far along the Cayley graph a full
+  trauma sweep can carry a character, from every starting triad.
+
+   k_max | greatest Cayley distance a full sweep reaches | from how many
+         | (worst starting triad)                       | triads is the
+         |                                              | antipode reached
+  -------|----------------------------------------------|---------------
+       5 |                     4                        |       0 of 24
+      10 |                     4                        |       0 of 24
+      11 |                     4                        |      12 of 24
+      12 |                     4                        |      12 of 24
+      13 |                     5                        |      24 of 24
+      16 |                     5                        |      24 of 24
+      20 |                     5                        |      24 of 24
+      23 |                     5                        |      24 of 24
+
+  Reproduces S3 section 2.5: nothing below 11 reaches the diameter from
+  any triad, nothing below 13 reaches it from every triad, and the
+  defensible range is 13 to 23.
+
+  THE RECOMMENDATION. k_max = 23, and with it the absolute form.
+  Three independent reasons, none of them a taste judgement:
+    1. It is the only value at which the state-only formulation has the
+       same reachable set as the change-based one, so adopting it is
+       what lets the harmonic parameter be re-expressed as a function of
+       the current state. That restores A11 decomposability for the one
+       parameter of the six that lacks it, and removes the first-frame
+       problem, which in therapy is the opening of every session.
+    2. It is at the top of S3's own defensible range, so a destroyed
+       character can arrive at the far side of the harmonic space from
+       every starting triad rather than from half of them.
+    3. It is the largest value that stays injective. At 24 the map wraps
+       by an artefact of the modulus.
+
+  WHAT IT DOES NOT FIX, and the estimate is worth nothing if this is
+  not said with it. S3 finds that chain position and Cayley distance do
+  not rise together, so a larger change in trauma can produce a smaller
+  harmonic move. k_max = 23 does not repair that and makes the worst
+  case plainest: at a sweep of 23 positions the character ends ONE
+  generator from where they started.
+
+   positions moved along the chain | Cayley distance, from C major
+  ---------------------------------|-------------------------------
+     1                             |   1
+     2                             |   2
+     3                             |   3
+     4                             |   4
+     5                             |   3
+     6                             |   2
+     7                             |   3
+     8                             |   2
+     9                             |   3
+    10                             |   4
+    11                             |   3
+    12                             |   4
+    13                             |   5
+    14                             |   4
+    15                             |   3
+    16                             |   2
+    17                             |   1
+    18                             |   2
+    19                             |   3
+    20                             |   4
+    21                             |   3
+    22                             |   2
+    23                             |   1
+
+  Read that column downward. It is not monotone and it is not close to
+  monotone. Choosing k_max does not decide whether the harmonic move
+  carries a magnitude or an index, which is S3's open repair and stays
+  the author's. What k_max = 23 does is make the parameter a function of
+  the state, which is the thing A11 needs and the thing no other value
+  delivers.

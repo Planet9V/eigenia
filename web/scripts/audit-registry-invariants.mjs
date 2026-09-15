@@ -98,8 +98,8 @@ const dup = (arr) => [...new Set(arr.filter((v, i) => arr.indexOf(v) !== i))];
 const violations = [];
 
 // Invariant 1: Document count must match 122
-if (allDocs.length !== 122) {
-  violations.push(`INV-1: Expected exactly 122 documents, found ${allDocs.length}`);
+if (allDocs.length !== 128) {
+  violations.push(`INV-1: Expected exactly 128 documents, found ${allDocs.length}`);
 }
 
 // Invariant 2: Zero missing files on disk
@@ -163,6 +163,6 @@ if (violations.length > 0) {
   process.exit(1);
 }
 
-console.log("\nREGISTRY INVARIANTS AUDIT PASSED: All 122 documents and groups conform.");
+console.log("\nREGISTRY INVARIANTS AUDIT PASSED: All 128 documents and groups conform.");
 console.log("========================================================================");
 process.exit(0);

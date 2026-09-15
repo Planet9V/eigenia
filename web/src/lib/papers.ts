@@ -523,6 +523,32 @@ export const PAPERS_REGISTRY: Record<string, { title: string; relativePath: stri
     title: "Asynchronous Distributed Consensus & Kalman Consensus Filters under Byzantine Adversaries in Substation Automation",
     relativePath: "references/WG-02-DT-Digital-Twin/WG-02-DT-09-Asynchronous-Consensus-Kalman-Byzantine.md",
   },
+
+  // WG-09 MPN: the McKenney-Lacan notation series, S1 to S6.
+  "mpn-s1-psychometric-calculus-theory": {
+    title: "The McKenney-Lacan Psychometric Calculus: A Theory of Musical Representation for Psychological State",
+    relativePath: "references/WG-09-MPN-McKenney-Lacan-Notation/WG-09-MPN-S1-Psychometric-Calculus-Theory.md",
+  },
+  "mpn-s2-formal-apparatus": {
+    title: "The Formal Apparatus of the McKenney-Lacan Psychometric Calculus: State Space, Simplex, Scalarisation, and What the Dynamics Apparatus Is Waiting For",
+    relativePath: "references/WG-09-MPN-McKenney-Lacan-Notation/WG-09-MPN-S2-Formal-Apparatus.md",
+  },
+  "mpn-s3-mapping-state-to-musical-material": {
+    title: "The Mapping: From Psychological State to Musical Material, Parameter by Parameter",
+    relativePath: "references/WG-09-MPN-McKenney-Lacan-Notation/WG-09-MPN-S3-Mapping-State-To-Musical-Material.md",
+  },
+  "mpn-s4-conductor-implementation-audit": {
+    title: "The Application: What the MPN Conductor Implements, What It Stubs, and What the Seven Score Files Actually Contain",
+    relativePath: "references/WG-09-MPN-McKenney-Lacan-Notation/WG-09-MPN-S4-Conductor-Implementation-Audit.md",
+  },
+  "mpn-s5-dialogue-use-cases": {
+    title: "Decomposing Dialogue: Four Use Cases for One Engine, and What Each of Them Needs from Psi",
+    relativePath: "references/WG-09-MPN-McKenney-Lacan-Notation/WG-09-MPN-S5-Dialogue-Use-Cases.md",
+  },
+  "mpn-s6-expression-aid": {
+    title: "The Expression Surface: What a Tool That Renders the Shape of a Conversation May Show, and What It Would Have to Get Right First",
+    relativePath: "references/WG-09-MPN-McKenney-Lacan-Notation/WG-09-MPN-S6-Expression-Aid.md",
+  },
 };
 
 export function getAllPaperSlugs(): string[] {

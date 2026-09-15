@@ -1,0 +1,227 @@
+{
+ "hamlet": {
+  "file": "hamlet.txt",
+  "gutenberg_id": 1524,
+  "group": "lacan",
+  "chars": 177958,
+  "lines": 6696,
+  "sha256_16": "445bbb0ab53d60c0",
+  "note": "Whole work. Seminar VI, Desire and its Interpretation, 1958-59"
+ },
+ "antigone": {
+  "file": "antigone.txt",
+  "gutenberg_id": 31,
+  "group": "lacan",
+  "chars": 57795,
+  "lines": 2200,
+  "sha256_16": "e4b1bcda771a7cfe",
+  "note": "Extracted from The Oedipus Trilogy, F. Storr translation. Seminar VII, The Ethics of Psychoanalysis, 1959-60"
+ },
+ "oedipus_rex": {
+  "file": "oedipus_rex.txt",
+  "gutenberg_id": 31,
+  "group": "lacan",
+  "chars": 70623,
+  "lines": 2928,
+  "sha256_16": "164e3618f3b9077f",
+  "note": "Extracted from The Oedipus Trilogy, F. Storr translation. Referred to throughout the Seminars"
+ },
+ "oedipus_at_colonus": {
+  "file": "oedipus_at_colonus.txt",
+  "gutenberg_id": 31,
+  "group": "lacan",
+  "chars": 80019,
+  "lines": 3504,
+  "sha256_16": "93e93fc031cb4abc",
+  "note": "Extracted from The Oedipus Trilogy, F. Storr translation. Seminar VII, on the boundary between life and death"
+ },
+ "electra": {
+  "file": "electra.txt",
+  "gutenberg_id": 14484,
+  "group": "lacan",
+  "chars": 68988,
+  "lines": 2042,
+  "sha256_16": "fbda8c2db1f6f9c1",
+  "note": "Extracted from The Seven Plays in English Verse, Lewis Campbell translation. Quoted in Seminar VII on Ate"
+ },
+ "awakening_of_spring": {
+  "file": "awakening_of_spring.txt",
+  "gutenberg_id": 35242,
+  "group": "lacan",
+  "chars": 118217,
+  "lines": 4346,
+  "sha256_16": "b85a5dafb0714521",
+  "note": "Whole play, Francis J. Ziegler translation. Preface a L'Eveil du printemps, 1 September 1974, in Autres ecrits p. 561"
+ },
+ "king_lear": {
+  "file": "king_lear.txt",
+  "gutenberg_id": 1532,
+  "group": "library",
+  "chars": 155355,
+  "lines": 6107,
+  "sha256_16": "7af42d74a0657fb4",
+  "note": "Whole work. Modernised spelling, matching the other three Shakespeare plays. PG 1128, the First Folio old-spelling text used previously, is not comparable with them"
+ },
+ "macbeth": {
+  "file": "macbeth.txt",
+  "gutenberg_id": 1533,
+  "group": "library",
+  "chars": 104475,
+  "lines": 4163,
+  "sha256_16": "192242697ae6c84b",
+  "note": "Whole work"
+ },
+ "othello": {
+  "file": "othello.txt",
+  "gutenberg_id": 1531,
+  "group": "library",
+  "chars": 154224,
+  "lines": 6280,
+  "sha256_16": "05ed9ac9dbd24d70",
+  "note": "Whole work"
+ },
+ "a_dolls_house": {
+  "file": "a_dolls_house.txt",
+  "gutenberg_id": 2542,
+  "group": "library",
+  "chars": 142227,
+  "lines": 5165,
+  "sha256_16": "055e4f62e703f4cd",
+  "note": "Whole work"
+ },
+ "hedda_gabler": {
+  "file": "hedda_gabler.txt",
+  "gutenberg_id": 4093,
+  "group": "library",
+  "chars": 152778,
+  "lines": 9410,
+  "sha256_16": "6d1b9743529f7e64",
+  "note": "Whole work"
+ },
+ "the_seagull": {
+  "file": "the_seagull.txt",
+  "gutenberg_id": 1754,
+  "group": "library",
+  "chars": 102268,
+  "lines": 2538,
+  "sha256_16": "5d3671c220b93bad",
+  "note": "Whole work"
+ },
+ "uncle_vanya": {
+  "file": "uncle_vanya.txt",
+  "gutenberg_id": 1756,
+  "group": "library",
+  "chars": 89458,
+  "lines": 2227,
+  "sha256_16": "0391526d40e33cd2",
+  "note": "Whole work"
+ },
+ "medea": {
+  "file": "medea.txt",
+  "gutenberg_id": 35451,
+  "group": "library",
+  "chars": 97140,
+  "lines": 2864,
+  "sha256_16": "4ecde339a7229a26",
+  "note": "Whole play, Gilbert Murray verse translation"
+ },
+ "importance_of_being_earnest": {
+  "file": "importance_of_being_earnest.txt",
+  "gutenberg_id": 844,
+  "group": "library",
+  "chars": 117287,
+  "lines": 3884,
+  "sha256_16": "c89baeb2febea37c",
+  "note": "Whole work"
+ },
+ "the_cherry_orchard": {
+  "file": "the_cherry_orchard.txt",
+  "gutenberg_id": 7986,
+  "group": "library",
+  "chars": 96847,
+  "lines": 2446,
+  "sha256_16": "ed61e8cc886cf363",
+  "note": "Extracted from Plays by Chekhov, Second Series, Constance Garnett translation"
+ },
+ "miss_julie": {
+  "file": "miss_julie.txt",
+  "gutenberg_id": 14347,
+  "group": "library",
+  "chars": 76248,
+  "lines": 2070,
+  "sha256_16": "a760ae750d0e8124",
+  "note": "Extracted from Plays by August Strindberg, Second Series, Edwin Bjorkman translation. Titled Miss Julia in this translation"
+ },
+ "prometheus_bound": {
+  "file": "prometheus_bound.txt",
+  "gutenberg_id": 27458,
+  "group": "chosen",
+  "chars": 56247,
+  "lines": 1102,
+  "sha256_16": "0ed5a0c7f7ec3039",
+  "note": "Extracted from Prometheus Bound and The Seven Against Thebes, Theodore Alois Buckley translation. Chosen as the Real at its limit: a subject fixed in place, addressing what cannot answer"
+ },
+ "agamemnon": {
+  "file": "agamemnon.txt",
+  "gutenberg_id": 14417,
+  "group": "chosen",
+  "chars": 83474,
+  "lines": 2530,
+  "sha256_16": "900282b71ad24cf8",
+  "note": "Whole play, Gilbert Murray translation, the same translator as Medea and The Bacchae. Chosen as the Symbolic at its limit: every character positioned by house, oath, rank and debt"
+ },
+ "the_bacchae": {
+  "file": "the_bacchae.txt",
+  "gutenberg_id": 35173,
+  "group": "chosen",
+  "chars": 87654,
+  "lines": 2882,
+  "sha256_16": "d719d03f52d4491e",
+  "note": "Whole play, Gilbert Murray translation. Chosen for entropy: a play whose action is the dissolution of a coherent subject"
+ },
+ "ghosts": {
+  "file": "ghosts.txt",
+  "gutenberg_id": 2467,
+  "group": "chosen",
+  "chars": 123663,
+  "lines": 3458,
+  "sha256_16": "2dfcf5683467a81a",
+  "note": "Whole work, R. Farquharson Sharp translation. Chosen for the trauma ratchet: inherited damage that never discharges"
+ },
+ "the_wild_duck": {
+  "file": "the_wild_duck.txt",
+  "gutenberg_id": 73631,
+  "group": "chosen",
+  "chars": 177353,
+  "lines": 5377,
+  "sha256_16": "7a95ac8f28aaaa31",
+  "note": "Whole play, Eleanor Marx Aveling translation. Chosen for the Imaginary, and as a same-author control against Ghosts"
+ },
+ "the_stronger": {
+  "file": "the_stronger.txt",
+  "gutenberg_id": 14347,
+  "group": "chosen",
+  "chars": 10496,
+  "lines": 207,
+  "sha256_16": "fc1be1b41a6c1f4f",
+  "note": "Extracted from Plays by August Strindberg, Second Series, Edwin Bjorkman translation. Chosen as the dyadic test for B3: two characters, one of whom never speaks"
+ },
+ "philoctetes": {
+  "file": "philoctetes.txt",
+  "gutenberg_id": 14484,
+  "group": "chosen",
+  "chars": 68294,
+  "lines": 1991,
+  "sha256_16": "3b138daf1459702d",
+  "note": "Extracted from The Seven Plays in English Verse, Lewis Campbell translation, the same volume and translator as Electra. Chosen for sustained physical pain as a state the calculus must carry, and as a translation control against Electra"
+ },
+ "everyman": {
+  "file": "everyman.txt",
+  "gutenberg_id": 19481,
+  "group": "chosen",
+  "chars": 38255,
+  "lines": 1138,
+  "sha256_16": "1b26bce816be73bf",
+  "note": "Extracted from Everyman, with Other Interludes. Chosen as the negative control: allegorical figures are not subjects, and a calculus of subjectivity should register that or be wrong"
+ }
+}

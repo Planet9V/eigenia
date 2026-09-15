@@ -1,0 +1,393 @@
+{
+ "note": "Presentation order is a fixed seeded permutation. This file is the key and is NOT shipped inside the listening pack. The six canonical timbres are shown as V1..V6 on the page. Set 1 (labels A to G, the seven modes of Part A) is folded in from the first pack build so Part A can be decoded from the corpus alone.",
+ "seed": 20260914,
+ "key": {
+  "B1": {
+   "source_id": "Set-3-A",
+   "scale": [
+    0.0,
+    2.0,
+    3.0,
+    5.0,
+    7.0,
+    9.0,
+    10.0
+   ],
+   "state": [
+    0.45,
+    0.45,
+    0.1
+   ],
+   "note": "pure Dorian, what argmax would choose"
+  },
+  "B2": {
+   "source_id": "Set-3-B",
+   "scale": [
+    0.0,
+    2.0,
+    3.5,
+    5.5,
+    7.0,
+    9.0,
+    10.5
+   ],
+   "state": [
+    0.45,
+    0.45,
+    0.1
+   ],
+   "note": "exact tie, blended, exact cents. Both deltas give this"
+  },
+  "B3": {
+   "source_id": "Set-3-C",
+   "scale": [
+    0.0,
+    2.0,
+    3.2857,
+    5.2857,
+    7.0,
+    9.0,
+    10.2857
+   ],
+   "state": [
+    0.46,
+    0.43,
+    0.11
+   ],
+   "note": "near tie, delta = 0.05, exact cents"
+  },
+  "B4": {
+   "source_id": "Set-3-G",
+   "scale": [
+    0.0,
+    2.0,
+    4.0,
+    6.0,
+    7.0,
+    9.0,
+    11.0
+   ],
+   "state": [
+    0.45,
+    0.45,
+    0.1
+   ],
+   "note": "pure Lydian, the other input"
+  },
+  "B5": {
+   "source_id": "Set-3-E",
+   "scale": [
+    0.0,
+    2.0,
+    4.0,
+    6.0,
+    7.0,
+    9.0,
+    11.0
+   ],
+   "state": [
+    0.45,
+    0.45,
+    0.1
+   ],
+   "note": "exact tie, blended, rounded half up"
+  },
+  "B6": {
+   "source_id": "Set-3-F",
+   "scale": [
+    0.0,
+    2.0,
+    4.0,
+    6.0,
+    7.0,
+    9.0,
+    10.0
+   ],
+   "state": [
+    0.45,
+    0.45,
+    0.1
+   ],
+   "note": "exact tie, blended, bankers rounding"
+  },
+  "B7": {
+   "source_id": "Set-3-D",
+   "scale": [
+    0.0,
+    2.0,
+    3.4595,
+    5.4595,
+    7.0,
+    9.0,
+    10.4595
+   ],
+   "state": [
+    0.46,
+    0.43,
+    0.11
+   ],
+   "note": "near tie, delta = 0.20, exact cents"
+  },
+  "V1": {
+   "source_id": "Set-4-F",
+   "profile": "SC-high",
+   "disc": [
+    0,
+    0,
+    1,
+    1
+   ],
+   "contrasts": [
+    -1.0,
+    0.0,
+    0.0
+   ]
+  },
+  "V2": {
+   "source_id": "Set-4-B",
+   "profile": "DS-high",
+   "disc": [
+    1,
+    0,
+    1,
+    0
+   ],
+   "contrasts": [
+    0.0,
+    1.0,
+    0.0
+   ]
+  },
+  "V3": {
+   "source_id": "Set-4-D",
+   "profile": "IS-high",
+   "disc": [
+    0,
+    1,
+    1,
+    0
+   ],
+   "contrasts": [
+    0.0,
+    0.0,
+    -1.0
+   ]
+  },
+  "V4": {
+   "source_id": "Set-4-C",
+   "profile": "DC-high",
+   "disc": [
+    1,
+    0,
+    0,
+    1
+   ],
+   "contrasts": [
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
+  "V5": {
+   "source_id": "Set-4-A",
+   "profile": "DI-high",
+   "disc": [
+    1,
+    1,
+    0,
+    0
+   ],
+   "contrasts": [
+    1.0,
+    0.0,
+    0.0
+   ]
+  },
+  "V6": {
+   "source_id": "Set-4-E",
+   "profile": "IC-high",
+   "disc": [
+    0,
+    1,
+    0,
+    1
+   ],
+   "contrasts": [
+    0.0,
+    -1.0,
+    0.0
+   ]
+  },
+  "D1": {
+   "source_id": "Set-4-L7",
+   "separation_actual": 1.4142,
+   "axis": "c2 spectral centroid",
+   "same": false
+  },
+  "D2": {
+   "source_id": "Set-4-L8",
+   "separation_actual": 2.0,
+   "axis": "c3 spectrum fine structure",
+   "same": false
+  },
+  "D3": {
+   "source_id": "Set-4-L2",
+   "separation_actual": 0.0,
+   "axis": "c2 spectral centroid",
+   "same": true
+  },
+  "D4": {
+   "source_id": "Set-4-L1",
+   "separation_actual": 0.0,
+   "axis": "c1 attack time",
+   "same": true
+  },
+  "D5": {
+   "source_id": "Set-4-L3",
+   "separation_actual": 0.25,
+   "axis": "c1 attack time",
+   "same": false
+  },
+  "D6": {
+   "source_id": "Set-4-L6",
+   "separation_actual": 1.0,
+   "axis": "c1 attack time",
+   "same": false
+  },
+  "D7": {
+   "source_id": "Set-4-L5",
+   "separation_actual": 0.75,
+   "axis": "c3 spectrum fine structure",
+   "same": false
+  },
+  "D8": {
+   "source_id": "Set-4-L4",
+   "separation_actual": 0.5,
+   "axis": "c2 spectral centroid",
+   "same": false
+  },
+  "C1": {
+   "source_id": "Set-5-10",
+   "from_triad": "G major",
+   "to_triad": "F minor",
+   "cayley_distance": 5
+  },
+  "C2": {
+   "source_id": "Set-5-09",
+   "from_triad": "C major",
+   "to_triad": "A# minor",
+   "cayley_distance": 5
+  },
+  "C3": {
+   "source_id": "Set-5-08",
+   "from_triad": "G major",
+   "to_triad": "C# major",
+   "cayley_distance": 4
+  },
+  "C4": {
+   "source_id": "Set-5-03",
+   "from_triad": "C major",
+   "to_triad": "D# major",
+   "cayley_distance": 2
+  },
+  "C5": {
+   "source_id": "Set-5-05",
+   "from_triad": "C major",
+   "to_triad": "C# minor",
+   "cayley_distance": 3
+  },
+  "C6": {
+   "source_id": "Set-5-01",
+   "from_triad": "C major",
+   "to_triad": "C minor",
+   "cayley_distance": 1
+  },
+  "C7": {
+   "source_id": "Set-5-07",
+   "from_triad": "C major",
+   "to_triad": "C# major",
+   "cayley_distance": 4
+  },
+  "C8": {
+   "source_id": "Set-5-02",
+   "from_triad": "G major",
+   "to_triad": "E minor",
+   "cayley_distance": 1
+  },
+  "C9": {
+   "source_id": "Set-5-04",
+   "from_triad": "G major",
+   "to_triad": "C major",
+   "cayley_distance": 2
+  },
+  "C10": {
+   "source_id": "Set-5-06",
+   "from_triad": "G major",
+   "to_triad": "C minor",
+   "cayley_distance": 3
+  },
+  "A": {
+   "source_id": "Set-1-A",
+   "set": "set1",
+   "true_name": "Aeolian",
+   "degrees": "1 2 b3 4 5 b6 b7",
+   "brightness_raised_minus_lowered": -3,
+   "tritone": false,
+   "perfect_fifth": true
+  },
+  "B": {
+   "source_id": "Set-1-B",
+   "set": "set1",
+   "true_name": "Mixolydian",
+   "degrees": "1 2 3 4 5 6 b7",
+   "brightness_raised_minus_lowered": -1,
+   "tritone": false,
+   "perfect_fifth": true
+  },
+  "C": {
+   "source_id": "Set-1-C",
+   "set": "set1",
+   "true_name": "Phrygian",
+   "degrees": "1 b2 b3 4 5 b6 b7",
+   "brightness_raised_minus_lowered": -4,
+   "tritone": false,
+   "perfect_fifth": true
+  },
+  "D": {
+   "source_id": "Set-1-D",
+   "set": "set1",
+   "true_name": "Ionian",
+   "degrees": "1 2 3 4 5 6 7",
+   "brightness_raised_minus_lowered": 0,
+   "tritone": false,
+   "perfect_fifth": true
+  },
+  "E": {
+   "source_id": "Set-1-E",
+   "set": "set1",
+   "true_name": "Dorian",
+   "degrees": "1 2 b3 4 5 6 b7",
+   "brightness_raised_minus_lowered": -2,
+   "tritone": false,
+   "perfect_fifth": true
+  },
+  "F": {
+   "source_id": "Set-1-F",
+   "set": "set1",
+   "true_name": "Lydian",
+   "degrees": "1 2 3 #4 5 6 7",
+   "brightness_raised_minus_lowered": 1,
+   "tritone": true,
+   "perfect_fifth": true
+  },
+  "G": {
+   "source_id": "Set-1-G",
+   "set": "set1",
+   "true_name": "Locrian",
+   "degrees": "1 b2 b3 4 b5 b6 b7",
+   "brightness_raised_minus_lowered": -5,
+   "tritone": true,
+   "perfect_fifth": false
+  }
+ }
+}

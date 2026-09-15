@@ -66,6 +66,38 @@ function bibliographyIndices(text) {
   return idx;
 }
 
+/**
+ * Prose only. A citation marker is a claim about a source, so anything that is
+ * code is not one.
+ *
+ * Fenced blocks were always stripped. Inline spans were not, and an array index
+ * written in backticks reads as a marker: `motif.pitchClasses[0]` was reported
+ * as citation 0 resolving to nothing, in a paper whose bibliography is complete
+ * and correct. Corpus-wide this hides exactly that one token and no real
+ * marker, which was measured before the rule was widened.
+ *
+ * Fences first, then inline spans, or the backticks opening a fence pair off
+ * with the ones closing it and the block survives.
+ */
+function stripCode(text) {
+  return text.replace(/```[\s\S]*?```/g, " ").replace(/`[^`\n]*`/g, " ");
+}
+
+// Stripping must remove code without eating the prose around it. A rule that
+// removed too much would hide real unresolved markers and report green.
+const CODE_CANARIES = [
+  ["an index `pitchClasses[0]` here", false, "inline code index is not a marker"],
+  ["as Wagner has it [1] here", true, "a bare marker in prose survives"],
+  ["```\nfoo[2]\n```", false, "a fenced block is still stripped"],
+];
+for (const [sample, shouldMatch, why] of CODE_CANARIES) {
+  if (/\[(\d{1,3})\]/.test(stripCode(sample)) !== shouldMatch) {
+    console.error(`CITATION AUDIT ABORTED: code stripping canary failed, ${why}.`);
+    console.error("A green result here would prove nothing.");
+    process.exit(2);
+  }
+}
+
 // Prove the gate can fail before trusting a pass. Each case below corresponds to
 // a false positive this gate actually produced; if any stops parsing, the gate
 // has silently narrowed and its green results are not trustworthy.
@@ -91,7 +123,7 @@ let unresolved = 0, orphans = 0, clean = 0;
 for (const file of walk(REFS_DIR)) {
   const rel = relative(ROOT, file);
   const text = readFileSync(file, "utf-8");
-  const body = text.replace(/```[\s\S]*?```/g, " ");
+  const body = stripCode(text);
   const entries = bibliographyIndices(text);
   const cited = new Set();
   for (const m of body.matchAll(/\[(\d{1,3})\]/g)) cited.add(Number(m[1]));

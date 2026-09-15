@@ -1,0 +1,40 @@
+| Field | Value |
+|:---|:---|
+| Designation | MPN-S2-DECISIONS |
+| Title | What S2 puts to the author: five decisions, ten actions, and the assertions register text |
+| Source | MPN-S2, `08_PAPERS/S2-mathematics.md`, revision 4 |
+| Status | Settled by arbitration of the S2 review gate, 13 September 2026. Extracted from the paper so that the register can be updated from a document rather than from a paper section |
+| Decided by | Jim McKenney, on the five decisions. The ten actions need no decision |
+
+Five decisions and ten actions. The decisions are the author's; the actions need no decision and are assigned. Every entry names the section of S2 that establishes it, so nothing here has to be taken on trust.
+
+| # | Decision | Options | Cost of each | If left undecided | Section |
+|:--|:---|:---|:---|:---|:---|
+| D1 | Simplex or Borromean link | (a) keep the simplex; the link becomes a picture in the prose. (b) abandon the constraint; work in the cube with a three-way interaction term | (a) one sentence in S1 section 5, a note against A3, and a ruling on the Borromean stability index, which has four definitions and contributes zero on the only path it has. (b) a different theory: A3, A4 and the modal table all reopen, and no musical mapping exists for the cube | S1 keeps asserting two incompatible formalisations of the same three registers, in the section it says is most often misread | 4.5, 7.1 |
+| D2 | How the registers are elicited | (a) elicit two, derive the third. (b) elicit three, renormalise. (c) elicit three on unconstrained anchored scales and run the two-part test | (a) reliability is computed on two quantities and the third inherits their error. (b) the constraint is imposed after rating, so the correlation test reports Lemma 1. (c) the only design that can test A3; costs a third scale in the codebook | The annotation protocol cannot be written, and it is the programme's single blocking dependency | 3.1, 4.2 |
+| D3 | Mode selection at a tie or near-tie | (a) hysteresis. (b) dead band. (c) interpolate between the two modes' characteristic alterations | (a) and (b) cost decomposability, make $\Phi$ a function on $\mathcal{P} \times \mathcal{P}$, and neither resolves an exact tie or a first frame. (c) preserves decomposability and is the only one determinate on a tie; S3 must define an interpolation per modal pair | 17 per cent of realisable frames keep taking their mode from dictionary insertion order | 4.3, 4.4 |
+| D4 | Trauma's ratchet | (a) supply a detrending model. (b) move the indicators to entropy. (c) give trauma a resolution term | (a) real statistical work; on a monotone bounded quantity the trend is most of the signal. (b) free, and narrows the claim to symbolic disorganisation. (c) amends A1's definition of trauma, S1's ratchet statement, and every parameter monotone in it | No early-warning indicator may be computed, and the quantity currently computed reads high on every frame of every play | 7.3 |
+| D5 | Whether to pursue an evolution equation | (a) write one. (b) do not, retire the three items that block on it, and revisit decision 2 | (a) the largest theoretical commitment outstanding in the programme. (b) costs the stability potential, bifurcation analysis and any Lyapunov exponent | Three pieces of apparatus stay in the corpus described as available when they cannot be attached | 7.2, 7.6 |
+
+| # | Action needing no decision | Who | Size |
+|:--|:---|:---|:---|
+| T1 | Amend A1 in S1 section 4.1 and in the register: eight degrees of freedom in nine named coordinates, with the frame-level and character-level split of [23] | Jim | one line, two files |
+| T2 | Make the analyser decline rather than return $(0,0,0)$; give the four consumers a defined no-state path | S4 | analyser plus four call sites |
+| T3 | Match keywords on word boundaries, not substrings | S4 | one line |
+| T4 | Rule on presence-not-count: design choice or defect | Jim | an afternoon |
+| T5 | List the nineteen undetermined weighted combinations with the data each would need, and mark the three that carry the sister series' deployment papers | Jim, S3 | the largest unscoped item in this paper |
+| T6 | Correct or strike the synergy axiom at `01_Foundations.md:195` | Jim | one line |
+| T7 | Carry the section 7.1 naming table through the corpus: free energy, Reynolds, Lyapunov, tension, the stability index, fragmentation, intensity, and the four senses of $H$ | Jim | a search with a file list |
+| T8 | Strike S1 section 4.3's "roughly eight factors said to capture the large majority of variance", superseded by decision 1, and separate principal from independent component analysis | Jim | one sentence |
+| T9 | Carry section 3.2's interval-scale declaration into S1 section 4.1 and A1's formal content | Jim | one paragraph |
+| T10 | Correct the degenerate frame count from 104 to 107 in the commensurability audit's row 4 and in the two places the S1 constraint review builds on it | Jim | three lines |
+
+**What the assertions register [17] must now read.** Five entries change and the replacement text is given so that the register can be updated from this rather than from a reading of the prose.
+
+| Id | Replacement |
+|:---|:---|
+| A1 | *Claim:* the state has eight degrees of freedom carried in nine named coordinates, the ninth fixed by $r+s+i=1$; the coordinates are interval-scaled, with unit and origin fixed by the endpoint anchors of the elicitation instrument. *Formal content:* $\vec{p} \in [0,1]^6 \times \Delta^2$, $\dim = 8$. *Split, on cost grounds:* A1 asserts the five frame-level coordinates $(\tau, H, r, s, i)$, carrying four degrees of freedom, testable inside the annotation pass at no marginal cost; the four DISC coordinates become a separate character-level assertion with its own instrument and timetable [23]. *How it could be wrong:* a ninth independent degree of freedom is found, or the anchors prove not to support an interval scale. The old failure condition, that one coordinate is redundant, is now analytically satisfied and is withdrawn |
+| A3 | *Claim:* unchanged. *How it could be wrong:* unchanged. *Test:* replaced. The covariances of a constrained triple must sum to $-1/2$ of its variances, so a negative correlation among renormalised ratings is arithmetic rather than evidence. The test is two-part. First, on unconstrained ratings in the cube, whose correlation matrix is not singular, ask whether the three registers are negatively coupled at all against a null of independence. Second, renormalise the same ratings and compare the resulting correlations against the compositional baseline Lemma 1 forces, to see how much of the coupling survived the raw ratings. *Disposition:* hold as hypothesis; the simplex and the Borromean link are incompatible and decision D1 is open |
+| A4 | *Claim:* unchanged and still held. *Added:* the selector is discontinuous on the tripod of Lemma 2, and on the frame library 17 per cent of on-simplex states sit exactly on it. Whichever table is chosen, the tie behaviour must be specified; decision D3 |
+| A8 | *Claim:* unchanged. *Formal content:* the adopted pair is exactly orthogonal away from the clip and approximate at the floor, which binds on 21 of 232 frames; the single figure $r = +0.0571$ describes the clipped library and not the pair. *Added:* Theorem 1, so the superseded pair was bounded below $+0.72$ by its own weights |
+| A11 | *Claim:* totality, determinism and decomposability. *Disposition:* determinism is closed by MPN-PATCH-01 and the entry's "one to two days of work" is discharged. *Totality* stands for $\Phi$ itself; what fails is that the state estimator is not a map into $\mathcal{P}$, returning $(0,0,0)$ on 46 per cent of frames, and that four consumers each extend $\Phi$ over that larger domain differently. The repair is to the estimator, not to $\Phi$. Decomposability is at risk from decision D3. The composition claim is the product-of-parameters reading, not the across-frames reading, which fails on the leitmotif transformations |

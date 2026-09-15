@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700&display=swap');
+
+:root{
+  --ink:#141414; --body:#3a3a3a; --muted:#7a7a7a; --rule:#e2e2e2;
+  --orange:#ff6b00; --orange-dk:#d45800; --orange-tint:#fff4ec; --orange-bd:#ffd0ae;
+  --sans:'Inter',system-ui,-apple-system,'Helvetica Neue',sans-serif;
+  --display:'Outfit','Inter',system-ui,sans-serif;
+}
+@page{ size:A4; margin:13mm 12mm 11mm 12mm; }
+*{ box-sizing:border-box; }
+body{
+  font-family:var(--sans); font-size:9pt; line-height:1.46;
+  color:var(--body); background:#fff; margin:0;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact;
+}
+.mast{ border-bottom:2.5px solid var(--orange); padding-bottom:3mm; margin-bottom:3.5mm; }
+.mast h1{
+  font-family:var(--display); font-size:22pt; font-weight:700; line-height:1.04;
+  color:var(--ink); margin:0 0 1.2mm 0; letter-spacing:-.022em;
+}
+.mast .kind{
+  font-size:8pt; font-weight:600; text-transform:uppercase; letter-spacing:.17em;
+  color:var(--orange-dk); margin:0;
+}
+.lead{
+  font-size:9.8pt; line-height:1.47; color:var(--ink); font-weight:500;
+  background:var(--orange-tint); border-left:3px solid var(--orange);
+  padding:3.2mm 4mm; margin:0 0 3.2mm 0;
+}
+.lead strong{ font-weight:700; }
+h2{
+  font-family:var(--display); font-size:11pt; font-weight:600; color:var(--ink);
+  margin:4mm 0 1.8mm 0; padding-top:2.6mm; border-top:1px solid var(--rule);
+  letter-spacing:-.012em; break-after:avoid;
+}
+h2:first-of-type{ border-top:none; padding-top:0; margin-top:0; }
+h3{ font-size:9.4pt; font-weight:600; color:var(--orange-dk); margin:2.6mm 0 1.2mm; }
+p{ margin:0 0 2mm 0; }
+strong{ color:var(--ink); font-weight:600; }
+em{ font-style:italic; }
+ul{ margin:0 0 2mm 0; padding-left:0; list-style:none; }
+li{ position:relative; padding-left:4.4mm; margin-bottom:1.25mm; break-inside:avoid; }
+li::before{
+  content:''; position:absolute; left:.3mm; top:1.5mm;
+  width:1.6mm; height:1.6mm; background:var(--orange); border-radius:50%;
+}
+hr{ border:none; border-top:1px solid var(--rule); margin:3.5mm 0 2.5mm 0; }
+.fine{ font-size:7.4pt; line-height:1.38; color:var(--muted); margin-bottom:1.4mm; font-style:italic; }
+table{ width:100%; border-collapse:collapse; margin:0 0 2.4mm 0; font-size:8.4pt; }
+th{ text-align:left; color:var(--orange-dk); font-weight:600; border-bottom:1.5px solid var(--orange-bd); padding:1.4mm 2mm; }
+td{ padding:1.3mm 2mm; border-bottom:1px solid var(--rule); vertical-align:top; }

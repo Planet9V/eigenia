@@ -209,8 +209,33 @@ export default function JurisdictionsShowcasePage() {
                 />
               </div>
 
-          {/* Regulatory Regime Comparison Table */}
-          <div className="p-6 rounded-2xl bg-[#121417] border border-white/10 shadow-md space-y-4 text-white">
+              {/* EU CRA Conformity Hub Reciprocal Callout Banner */}
+              <div className="p-5 rounded-2xl bg-gradient-to-r from-[#161a23] via-[#1b2230] to-[#161a23] border border-dutchOrange/30 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-lg">
+                <div className="flex items-center gap-3.5">
+                  <div className="w-10 h-10 rounded-xl bg-dutchOrange/15 border border-dutchOrange/40 flex items-center justify-center text-dutchOrange shrink-0">
+                    <Shield className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-bold text-white">Looking for EU Cyber Resilience Act (CRA) Conformance Assessment?</span>
+                      <span className="px-2 py-0.5 rounded bg-dutchOrange/20 text-dutchOrange text-[10px] font-mono font-semibold">Regulation 2024/2847</span>
+                    </div>
+                    <p className="text-xs text-white/70 mt-0.5">
+                      Explore our independent vendor-agnostic CRA Conformity Hub: 18-tool comparison directory, statutory enforcement timelines, and ENISA Article 14 24h incident response playbooks.
+                    </p>
+                  </div>
+                </div>
+                <Link
+                  href="/cra-hub"
+                  className="px-4 py-2.5 rounded-xl bg-dutchOrange hover:bg-dutchOrange/90 text-white font-mono text-xs font-bold transition-all shrink-0 flex items-center gap-2 self-start sm:self-auto shadow-md cursor-pointer"
+                >
+                  <span>Explore CRA Hub</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+
+              {/* Regulatory Regime Comparison Table */}
+              <div className="p-6 rounded-2xl bg-[#121417] border border-white/10 shadow-md space-y-4 text-white">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-white/10">
               <div>
                 <h2 className="text-lg font-bold font-sans text-white">

@@ -1,0 +1,138 @@
+{
+  "name": "cra_conformance_app_research",
+  "title": "EU Cyber Resilience Act (CRA) Conformance Application & Competitive Intelligence Suite",
+  "version": "1.0.0",
+  "updated_at": "2026-09-15T08:58:00Z",
+  "metadata": {
+    "jurisdiction": "European Union",
+    "primary_regulation": "Regulation (EU) 2024/2847 (Cyber Resilience Act)",
+    "target_platform": "OXOT Conformance Platform",
+    "frameworks_applied": [
+      "wiki-architect",
+      "multi-agent-task-orchestrator",
+      "competitive-landscape",
+      "competitive-intel",
+      "competitive-analysis-process",
+      "market-research",
+      "analytics-product",
+      "valyu-best-practices",
+      "sequential-thinking"
+    ]
+  },
+  "items": [
+    {
+      "name": "onboarding",
+      "title": "Onboarding & Architectural Foundations",
+      "prompt": "Read the Principal-Level Architectural Guide and Zero-to-Hero learning path before exploring competitive dossiers.",
+      "children": [
+        {
+          "name": "principal_guide",
+          "title": "Principal-Level Guide: The Core Architectural Insight",
+          "prompt": "Examine the statutory system of record pattern in eigenia/research/CRA_conformance_app_research/06_WIKI_ONBOARDING_GUIDE.md:15 and compare TypeScript/Rust implementations of non-delegable statutory verification.",
+          "file_path": "eigenia/research/CRA_conformance_app_research/06_WIKI_ONBOARDING_GUIDE.md:15"
+        },
+        {
+          "name": "zero_to_hero",
+          "title": "Zero-to-Hero Learning Path & 40-Term Glossary",
+          "prompt": "Follow the 3-part pedagogical ramp from CRA legal fundamentals to multi-regulation harmonization in eigenia/research/CRA_conformance_app_research/06_WIKI_ONBOARDING_GUIDE.md:120.",
+          "file_path": "eigenia/research/CRA_conformance_app_research/06_WIKI_ONBOARDING_GUIDE.md:120"
+        }
+      ]
+    },
+    {
+      "name": "landscape_and_market",
+      "title": "Market Landscape & Economic Sizing",
+      "prompt": "Evaluate macro market forces, regulatory triggers, and TAM/SAM/SOM sizing for CRA compliance applications.",
+      "children": [
+        {
+          "name": "executive_summary",
+          "title": "Executive Summary & Four-Category Market Taxonomy",
+          "prompt": "Review the strategic group mapping and Porter's Five Forces analysis in eigenia/research/CRA_conformance_app_research/01_EXECUTIVE_SUMMARY_AND_LANDSCAPE.md:20.",
+          "file_path": "eigenia/research/CRA_conformance_app_research/01_EXECUTIVE_SUMMARY_AND_LANDSCAPE.md:20"
+        },
+        {
+          "name": "market_sizing",
+          "title": "TAM / SAM / SOM Triangulation (Top-Down vs. Bottoms-Up)",
+          "prompt": "Inspect the econometric model reconciling €16.59B top-down TAM against €5.76B bottoms-up TAM in eigenia/research/CRA_conformance_app_research/01_EXECUTIVE_SUMMARY_AND_LANDSCAPE.md:180.",
+          "file_path": "eigenia/research/CRA_conformance_app_research/01_EXECUTIVE_SUMMARY_AND_LANDSCAPE.md:180"
+        }
+      ]
+    },
+    {
+      "name": "competitive_intelligence",
+      "title": "Competitor Deep Dives & Capability Matrices",
+      "prompt": "In-depth profiling of 16+ market players across pure-play CRA SaaS, SBOM scanners, IT GRC, and TIC consultancies.",
+      "children": [
+        {
+          "name": "competitor_profiles",
+          "title": "Comprehensive Vendor Profiles & Weakness Clusters",
+          "prompt": "Examine profiles for Cybellum, Finite State, CRA Evidence, Lexoreg, Visure, OneTrust, and TÜV in eigenia/research/CRA_conformance_app_research/02_COMPETITOR_DEEP_DIVES.md:30.",
+          "file_path": "eigenia/research/CRA_conformance_app_research/02_COMPETITOR_DEEP_DIVES.md:30"
+        },
+        {
+          "name": "feature_gap_matrix",
+          "title": "20-Point Feature Gap Matrix & Kano Classification",
+          "prompt": "Review the statutory capability comparison matrix contrasting OXOT with scanners and GRC in eigenia/research/CRA_conformance_app_research/02_COMPETITOR_DEEP_DIVES.md:260.",
+          "file_path": "eigenia/research/CRA_conformance_app_research/02_COMPETITOR_DEEP_DIVES.md:260"
+        }
+      ]
+    },
+    {
+      "name": "oxot_swot_and_analytics",
+      "title": "OXOT Product Analytics & SWOT",
+      "prompt": "Empirical product instrumentation, PostHog event taxonomy, funnel optimization, and strategic SWOT.",
+      "children": [
+        {
+          "name": "swot_analysis",
+          "title": "Exhaustive OXOT SWOT Matrix",
+          "prompt": "Analyze OXOT's statutory defensibility, distribution vulnerabilities, and OT ecosystem opportunities in eigenia/research/CRA_conformance_app_research/03_OXOT_SWOT_AND_PRODUCT_ANALYTICS.md:25.",
+          "file_path": "eigenia/research/CRA_conformance_app_research/03_OXOT_SWOT_AND_PRODUCT_ANALYTICS.md:25"
+        },
+        {
+          "name": "product_telemetry",
+          "title": "North Star Metric & PostHog Event Taxonomy",
+          "prompt": "Implement the Active Conforming Product Dossiers (ACPD) North Star and event taxonomy in eigenia/research/CRA_conformance_app_research/03_OXOT_SWOT_AND_PRODUCT_ANALYTICS.md:140.",
+          "file_path": "eigenia/research/CRA_conformance_app_research/03_OXOT_SWOT_AND_PRODUCT_ANALYTICS.md:140"
+        }
+      ]
+    },
+    {
+      "name": "commercial_strategy",
+      "title": "Pricing, Packaging & GTM Strategy",
+      "prompt": "Commercial tiering, unit economics, sales battlecards, and strategic roadmap recommendations.",
+      "children": [
+        {
+          "name": "pricing_and_packaging",
+          "title": "Packaging Tiers & Price Elasticity Modeling",
+          "prompt": "Review Community (€0), SME Growth (€199/mo), OEM Pro (€899/mo), and Enterprise Island-Mode (€45k+/yr) in eigenia/research/CRA_conformance_app_research/04_PRICING_AND_PACKAGING_STRATEGY.md:20.",
+          "file_path": "eigenia/research/CRA_conformance_app_research/04_PRICING_AND_PACKAGING_STRATEGY.md:20"
+        },
+        {
+          "name": "battlecards_and_roadmap",
+          "title": "Sales Battlecards & 12-Month Executive Roadmap",
+          "prompt": "Deploy pre-call sales battlecards and four-quarter product milestones in eigenia/research/CRA_conformance_app_research/05_STRATEGIC_RECOMMENDATIONS_AND_ROADMAP.md:30.",
+          "file_path": "eigenia/research/CRA_conformance_app_research/05_STRATEGIC_RECOMMENDATIONS_AND_ROADMAP.md:30"
+        }
+      ]
+    },
+    {
+      "name": "evidence_and_qa",
+      "title": "Empirical Evidence & Quality Assurance",
+      "prompt": "Inspect empirical Valyu SDK search telemetry across 5 metrics and the avoid-ai-writing quality audit.",
+      "children": [
+        {
+          "name": "valyu_research_report",
+          "title": "Valyu SDK v2.10.0 Telemetry Report (5 Metrics)",
+          "prompt": "Review raw queries, snippets, and citations in eigenia/research/CRA_conformance_app_research/VALYU_RESEARCH_REPORT.md:10.",
+          "file_path": "eigenia/research/CRA_conformance_app_research/VALYU_RESEARCH_REPORT.md:10"
+        },
+        {
+          "name": "evidentiary_audit_qa",
+          "title": "Evidentiary Audit, Copy-Editing & AI-Writing Remediation",
+          "prompt": "Examine the 21-pattern AI writing audit, 7 copy-editing sweeps, and unsupported claims register in eigenia/research/CRA_conformance_app_research/EVIDENTIARY_AUDIT_AND_QA_SWEEP.md:15.",
+          "file_path": "eigenia/research/CRA_conformance_app_research/EVIDENTIARY_AUDIT_AND_QA_SWEEP.md:15"
+        }
+      ]
+    }
+  ]
+}
