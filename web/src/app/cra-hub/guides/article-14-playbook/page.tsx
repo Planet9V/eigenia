@@ -55,10 +55,10 @@ export default function Article14PlaybookPage() {
                 <Clock className="w-4 h-4" />
                 <span>Statutory Incident Response Playbook // Active Law</span>
               </div>
-              <h1 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-primary">
+              <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-primary">
                 Article 14 Early Warning Playbook: Notifying ENISA in 24 Hours
               </h1>
-              <p className="text-base sm:text-lg text-secondary font-light leading-relaxed">
+              <p className="text-sm sm:text-base text-secondary max-w-2xl leading-relaxed">
                 Step-by-step incident response procedures for product security leads to report actively exploited vulnerabilities to the ENISA Single Reporting Platform and national CSIRTs.
               </p>
             </div>
@@ -105,7 +105,7 @@ export default function Article14PlaybookPage() {
           <section className="space-y-6">
             <div>
               <span className="text-xs font-mono text-red-500 uppercase tracking-wider font-semibold">Incident Response State Machine</span>
-              <h2 className="text-2xl font-bold text-primary mt-1">
+              <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-primary mt-1">
                 Article 14 Incident Triage & Reporting Workflow
               </h2>
             </div>
@@ -115,7 +115,7 @@ export default function Article14PlaybookPage() {
 
           {/* Section: Data Fields */}
           <section className="space-y-4 text-sm sm:text-base">
-            <h2 className="text-2xl font-bold text-primary tracking-tight">
+            <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-primary mt-1">
               Six Mandatory Data Fields for the 24-Hour Early Warning
             </h2>
             <div className="space-y-2 font-mono text-xs">

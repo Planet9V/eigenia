@@ -100,7 +100,7 @@ export default function ToolsComparisonGuidePage() {
                 <FileText className="w-4 h-4" />
                 <span>Flagship Benchmark // 18 Platforms Evaluated</span>
               </div>
-              <h1 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-primary">
+              <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-primary">
                 The Complete Guide to EU CRA Compliance Tools and Services
               </h1>
               <div className="flex items-center gap-4 text-xs font-mono text-muted">
@@ -152,7 +152,7 @@ export default function ToolsComparisonGuidePage() {
 
           {/* Section 1 */}
           <section className="space-y-4 text-sm sm:text-base">
-            <h2 className="text-2xl font-bold text-primary tracking-tight">
+            <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-primary">
               Statutory Foundations: What Regulation (EU) 2024/2847 Requires
             </h2>
             <p>
@@ -165,7 +165,7 @@ export default function ToolsComparisonGuidePage() {
 
           {/* Section 2: Comparison Table */}
           <section className="space-y-6">
-            <h2 className="text-2xl font-bold text-primary tracking-tight">
+            <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-primary">
               Comprehensive 18-Tool Comparison Matrix
             </h2>
             <p className="text-sm">
@@ -276,7 +276,7 @@ export default function ToolsComparisonGuidePage() {
 
           {/* Section 3: Common Misconceptions */}
           <section className="space-y-4">
-            <h2 className="text-2xl font-bold text-primary tracking-tight">
+            <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-primary">
               Three Common Misconceptions
             </h2>
             <div className="space-y-4 text-xs font-mono">
@@ -305,7 +305,7 @@ export default function ToolsComparisonGuidePage() {
 
           {/* Section 4: FAQ */}
           <section className="space-y-4">
-            <h2 className="text-2xl font-bold text-primary tracking-tight">
+            <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-primary">
               Frequently Asked Questions
             </h2>
             <div className="space-y-4 text-sm">

@@ -210,10 +210,10 @@ export default function RequirementsExplorerPage() {
                   <Scale className="w-4 h-4" />
                   <span>Pillar 2 // Statutory Requirements Architecture</span>
                 </div>
-                <h1 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-primary">
+                <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-primary">
                   CRA Statutory <span className="text-dutchOrange">Clause Explorer</span>
                 </h1>
-                <p className="text-base sm:text-lg text-secondary font-light leading-relaxed max-w-2xl">
+                <p className="text-sm sm:text-base text-secondary max-w-2xl leading-relaxed">
                   Interactive clause-by-clause analysis of Regulation (EU) 2024/2847. 
                   Explore the essential cybersecurity requirements, vulnerability handling duties, and technical documentation mandates governing CE marking.
                 </p>
@@ -238,7 +238,7 @@ export default function RequirementsExplorerPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
             <div>
               <span className="text-xs font-mono text-dutchOrange uppercase tracking-wider font-semibold">Regulatory Structure Diagram</span>
-              <h2 className="text-2xl font-bold text-primary mt-1">
+              <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-primary mt-1">
                 Interconnection of Statutory Duties
               </h2>
               <p className="text-sm text-secondary mt-1">
@@ -256,7 +256,7 @@ export default function RequirementsExplorerPage() {
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
               <div>
                 <span className="font-mono text-xs text-dutchOrange uppercase tracking-wider font-semibold">Statutory Articles</span>
-                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-primary mt-1">
+                <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-primary mt-1">
                   Clause-by-Clause Technical Breakdown
                 </h2>
                 <p className="text-sm text-secondary mt-1">
@@ -331,7 +331,7 @@ export default function RequirementsExplorerPage() {
                       <span className="px-2.5 py-1 rounded bg-dutchOrange/10 border border-dutchOrange/30 text-dutchOrange font-mono text-xs font-bold">
                         {item.article}
                       </span>
-                      <h3 className="text-xl font-bold text-primary">
+                      <h3 className="text-base font-bold text-primary">
                         {item.title}
                       </h3>
                     </div>

@@ -37,10 +37,10 @@ export default function GuidesIndexPage() {
                   <FileText className="w-4 h-4" />
                   <span>Pillar 5 // Technical Guides & Operational Playbooks</span>
                 </div>
-                <h1 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-primary">
+                <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-primary">
                   CRA Technical <span className="text-dutchOrange">Guides & Playbooks</span>
                 </h1>
-                <p className="text-base sm:text-lg text-secondary font-light leading-relaxed max-w-2xl">
+                <p className="text-sm sm:text-base text-secondary max-w-2xl leading-relaxed">
                   Peer-reviewed technical publications, empirical comparisons, and operational playbooks authored by Eigenia Labs. 
                   Designed for engineering leaders, product security leads, and regulatory directors.
                 </p>
@@ -74,7 +74,7 @@ export default function GuidesIndexPage() {
                     <span className="text-xs font-mono text-muted">20 min read</span>
                   </div>
 
-                  <h2 className="text-xl font-bold text-primary hover:text-dutchOrange transition-colors">
+                  <h2 className="text-lg sm:text-xl font-bold tracking-tight text-primary hover:text-dutchOrange transition-colors">
                     <Link href="/cra-hub/guides/tools-comparison">
                       The Complete Guide to EU CRA Compliance Tools and Services (2026 Comparison)
                     </Link>
@@ -121,7 +121,7 @@ export default function GuidesIndexPage() {
                     <span className="text-xs font-mono text-muted">18 min read</span>
                   </div>
 
-                  <h2 className="text-xl font-bold text-primary hover:text-dutchOrange transition-colors">
+                  <h2 className="text-lg sm:text-xl font-bold tracking-tight text-primary hover:text-dutchOrange transition-colors">
                     <Link href="/cra-hub/guides/industrial-ot">
                       Industrial OT and Embedded Systems Under CRA: Navigating IEC 62443
                     </Link>
@@ -168,7 +168,7 @@ export default function GuidesIndexPage() {
                     <span className="text-xs font-mono text-muted">15 min read</span>
                   </div>
 
-                  <h2 className="text-xl font-bold text-primary hover:text-dutchOrange transition-colors">
+                  <h2 className="text-lg sm:text-xl font-bold tracking-tight text-primary hover:text-dutchOrange transition-colors">
                     <Link href="/cra-hub/guides/article-14-playbook">
                       Article 14 Early Warning Playbook: Notifying ENISA in 24 Hours
                     </Link>

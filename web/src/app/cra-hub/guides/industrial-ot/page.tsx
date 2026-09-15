@@ -66,10 +66,10 @@ export default function IndustrialOtGuidePage() {
                 <Cpu className="w-4 h-4" />
                 <span>Industrial OT & Embedded Systems Guide</span>
               </div>
-              <h1 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-primary">
+              <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-primary">
                 Industrial OT and Embedded Systems Under CRA
               </h1>
-              <p className="text-base sm:text-lg text-secondary font-light leading-relaxed">
+              <p className="text-sm sm:text-base text-secondary max-w-2xl leading-relaxed">
                 Navigating the January 20, 2027 Machinery Regulation (EU) 2023/1230 enforcement date, IEC 62443 harmonisation, and Class II Notified Body audit routes.
               </p>
             </div>
@@ -116,7 +116,7 @@ export default function IndustrialOtGuidePage() {
           <section className="space-y-6">
             <div>
               <span className="text-xs font-mono text-dutchOrange uppercase tracking-wider font-semibold">Technical Architecture Map</span>
-              <h2 className="text-2xl font-bold text-primary mt-1">
+              <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-primary mt-1">
                 Harmonizing IEC 62443 with CRA Annex I and Machinery Safety
               </h2>
             </div>
@@ -126,7 +126,7 @@ export default function IndustrialOtGuidePage() {
 
           {/* Section: Content */}
           <section className="space-y-4 text-sm sm:text-base">
-            <h2 className="text-2xl font-bold text-primary tracking-tight">
+            <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-primary mt-1">
               The Dual Regulatory Mandate for Industrial Equipment
             </h2>
             <p>

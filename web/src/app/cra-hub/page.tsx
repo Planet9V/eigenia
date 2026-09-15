@@ -273,10 +273,10 @@ export default function CraConformityHubPage() {
                   <ShieldCheck className="w-4 h-4" />
                   <span>Eigenia Labs Public Scientific Resource // Vendor-Agnostic</span>
                 </div>
-                <h1 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-primary">
+                <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-primary">
                   EU Cyber Resilience Act <span className="text-dutchOrange">Conformity Hub</span>
                 </h1>
-                <p className="text-base sm:text-lg text-secondary font-light leading-relaxed max-w-2xl">
+                <p className="text-sm sm:text-base text-secondary max-w-2xl leading-relaxed">
                   An independent knowledge and tooling engine for Regulation (EU) 2024/2847. 
                   Evaluating 18+ commercial and open-source platforms, statutory timelines, technical requirements, and econometric research without vendor commercial bias.
                 </p>
@@ -433,7 +433,7 @@ export default function CraConformityHubPage() {
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
               <div>
                 <span className="text-xs font-mono text-dutchOrange uppercase tracking-wider font-semibold">Interactive Statutory Architecture</span>
-                <h2 className="text-2xl sm:text-3xl font-bold text-primary mt-1">
+                <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-primary mt-1">
                   Statutory Conformity Assessment Flowchart
                 </h2>
                 <p className="text-sm text-secondary mt-1">
@@ -459,7 +459,7 @@ export default function CraConformityHubPage() {
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
               <div>
                 <span className="text-xs font-mono text-red-500 uppercase tracking-wider font-semibold">Active Law Protocol</span>
-                <h2 className="text-2xl sm:text-3xl font-bold text-primary mt-1">
+                <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-primary mt-1">
                   Article 14: 24h Early Warning & CSIRT Notification Sequence
                 </h2>
                 <p className="text-sm text-secondary mt-1">
@@ -491,7 +491,7 @@ export default function CraConformityHubPage() {
                   <Globe className="w-3.5 h-3.5" />
                   <span>Global Supply Chain Corridors // Articles 11 & 13 Extraterritorial Reach</span>
                 </div>
-                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white font-sans">
+                <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-white font-sans">
                   Non-EU Manufacturers & Bilateral Regulatory Corridors
                 </h2>
                 <p className="text-sm text-white/70 mt-1 max-w-3xl leading-relaxed">
@@ -523,7 +523,7 @@ export default function CraConformityHubPage() {
                     </span>
                   </div>
 
-                  <h3 className="text-xl sm:text-2xl font-bold text-white leading-snug font-sans">
+                  <h3 className="text-lg sm:text-xl font-bold text-white leading-snug font-sans">
                     Interactive Geospatial Intelligence: 249 Sovereign Jurisdictions
                   </h3>
 
@@ -646,7 +646,7 @@ export default function CraConformityHubPage() {
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
               <div>
                 <span className="font-mono text-xs text-dutchOrange uppercase tracking-wider font-semibold">Pillar 4 Preview</span>
-                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-primary mt-1">
+                <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-primary mt-1">
                   18 Evaluated CRA Compliance Tools & Services
                 </h2>
                 <p className="text-sm text-secondary mt-1">
@@ -693,7 +693,7 @@ export default function CraConformityHubPage() {
                         <span className="text-[10px] font-mono text-dutchOrange font-semibold uppercase tracking-wider block">
                           {tool.category}
                         </span>
-                        <h3 className="text-lg font-bold text-primary group-hover:text-dutchOrange transition-colors">
+                        <h3 className="text-base font-bold text-primary group-hover:text-dutchOrange transition-colors">
                           {tool.name}
                         </h3>
                       </div>
@@ -763,7 +763,7 @@ export default function CraConformityHubPage() {
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
               <div>
                 <span className="font-mono text-xs text-dutchOrange uppercase tracking-wider font-semibold">Pillar 5 Technical Playbooks</span>
-                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-primary mt-1">
+                <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-primary mt-1">
                   Peer-Reviewed Conformity Guides
                 </h2>
                 <p className="text-sm text-secondary mt-1">

@@ -172,16 +172,16 @@ export default function CollaboratePage() {
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12 space-y-6">
             <Breadcrumb items={[{ label: t("nav_collaborate"), href: "/collaborate" }]} />
 
-            <div className="max-w-4xl space-y-4">
-              <span className="font-mono text-[10px] sm:text-xs tracking-[0.2em] uppercase text-dutchOrange font-medium inline-block">
+            <div className="max-w-4xl space-y-3">
+              <span className="font-mono text-xs uppercase tracking-wider font-semibold text-dutchOrange bg-dutchOrange/10 px-3 py-1 rounded-full border border-dutchOrange/30 inline-block">
                 {t("collab_header_tag")}
               </span>
 
-              <h1 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-primary leading-tight">
+              <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-primary">
                 {t("collab_header_title")}
               </h1>
 
-              <p className="text-base sm:text-lg text-secondary font-light leading-relaxed max-w-3xl">
+              <p className="text-sm sm:text-base text-secondary max-w-3xl leading-relaxed">
                 {t("collab_header_desc")}
               </p>
             </div>
@@ -196,7 +196,7 @@ export default function CollaboratePage() {
             <span className="font-mono text-xs text-dutchOrange uppercase tracking-widest font-semibold block">
               {t("collab_trust_tag")}
             </span>
-            <h2 className="font-sans text-2xl sm:text-3xl font-semibold tracking-tight text-primary">
+            <h2 className="font-sans text-xl sm:text-2xl font-bold tracking-tight text-primary">
               {t("collab_trust_title")}
             </h2>
           </div>
@@ -222,10 +222,10 @@ export default function CollaboratePage() {
             <span className="font-mono text-xs text-dutchOrange uppercase tracking-widest font-semibold block">
               {t("collab_tracks_tag")}
             </span>
-            <h2 className="font-sans text-2xl sm:text-3xl font-semibold tracking-tight text-primary">
+            <h2 className="font-sans text-xl sm:text-2xl font-bold tracking-tight text-primary">
               {t("collab_tracks_title")}
             </h2>
-            <p className="text-sm text-secondary font-light leading-relaxed">{t("collab_tracks_desc")}</p>
+            <p className="text-sm text-secondary leading-relaxed">{t("collab_tracks_desc")}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -242,8 +242,8 @@ export default function CollaboratePage() {
                   <span className="font-mono text-[10px] tracking-[0.2em] text-dutchOrange uppercase font-medium block">
                     {pathway.tag}
                   </span>
-                  <h3 className="font-sans text-lg font-semibold text-primary">{pathway.title}</h3>
-                  <p className="text-xs text-secondary font-sans leading-relaxed font-light">{pathway.desc}</p>
+                  <h3 className="font-sans text-base font-bold text-primary leading-tight">{pathway.title}</h3>
+                  <p className="text-xs text-secondary font-sans leading-relaxed">{pathway.desc}</p>
                   <ul className="space-y-2 text-xs text-muted font-sans border-t border-hairline pt-3">
                     <li className="flex items-center gap-2">
                       <CheckCircle2 className="w-3.5 h-3.5 text-dutchOrange flex-shrink-0" /> {pathway.f1}
@@ -279,7 +279,7 @@ export default function CollaboratePage() {
                 <span className="font-mono text-[10px] sm:text-xs tracking-[0.2em] uppercase text-dutchOrange font-medium inline-block">
                   {t("collab_form_tag")}
                 </span>
-                <h2 className="font-sans text-xl sm:text-2xl lg:text-3xl font-semibold tracking-tight text-primary">
+                <h2 className="font-sans text-xl sm:text-2xl font-bold tracking-tight text-primary">
                   {t("collab_form_title")}
                 </h2>
                 <p className="text-sm text-secondary font-light leading-relaxed">{t("collab_form_desc")}</p>

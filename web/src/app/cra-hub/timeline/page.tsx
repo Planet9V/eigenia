@@ -112,10 +112,10 @@ export default function TimelineRadarPage() {
                   <Clock className="w-4 h-4" />
                   <span>Pillar 3 // Statutory Enforcement Radar</span>
                 </div>
-                <h1 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-primary">
+                <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-primary">
                   CRA Regulatory <span className="text-dutchOrange">Enforcement Timeline</span>
                 </h1>
-                <p className="text-base sm:text-lg text-secondary font-light leading-relaxed max-w-2xl">
+                <p className="text-sm sm:text-base text-secondary max-w-2xl leading-relaxed">
                   Chronological roadmap of statutory dates, transitional milestones, and multi-regulation collisions. 
                   Monitor critical obligations from the September 2026 ENISA reporting mandate to December 2027 full CE marking.
                 </p>
@@ -140,7 +140,7 @@ export default function TimelineRadarPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
             <div>
               <span className="text-xs font-mono text-dutchOrange uppercase tracking-wider font-semibold">Timeline Visualization</span>
-              <h2 className="text-2xl font-bold text-primary mt-1">
+              <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-primary mt-1">
                 Multi-Regulation Enforcement Trajectory
               </h2>
               <p className="text-sm text-secondary mt-1">
@@ -157,7 +157,7 @@ export default function TimelineRadarPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
             <div>
               <span className="font-mono text-xs text-dutchOrange uppercase tracking-wider font-semibold">Statutory Milestones</span>
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-primary mt-1">
+              <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-primary mt-1">
                 Operational Action Plans by Enforcement Date
               </h2>
               <p className="text-sm text-secondary mt-1">
@@ -198,7 +198,7 @@ export default function TimelineRadarPage() {
                   </div>
 
                   <div>
-                    <h3 className="text-xl font-bold text-primary">
+                    <h3 className="text-base font-bold text-primary">
                       {milestone.title}
                     </h3>
                     <p className="text-sm text-secondary leading-relaxed mt-2">
