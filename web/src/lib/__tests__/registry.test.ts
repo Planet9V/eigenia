@@ -70,7 +70,7 @@ describe("derived counts", () => {
       0
     );
     expect(getAllWikiDocuments().length).toBe(summed);
-    expect(summed).toBe(128);
+    expect(summed).toBe(130);
   });
 
   it("registers exactly 12 working groups with verified per-group counts", () => {
@@ -85,7 +85,7 @@ describe("derived counts", () => {
       "WG-06-SC": 6,
       "WG-07-TM": 11,
       "WG-08-MO": 4,
-      "WG-09-MPN": 11,
+      "WG-09-MPN": 13,
       "WG-10-AN": 9,
       "MP-MATH": 6,
       "GOV-RES": 1,
@@ -102,7 +102,7 @@ describe("derived counts", () => {
     const aliased = getWorkingGroupById("WG-09");
     expect(aliased).toBeDefined();
     expect(aliased?.id).toBe("WG-09-MPN");
-    expect(aliased?.documents.length).toBe(11);
+    expect(aliased?.documents.length).toBe(13);
   });
 
   it("resolves every working group by its own id", () => {

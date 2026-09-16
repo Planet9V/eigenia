@@ -10,9 +10,9 @@ import { getAllWikiDocuments } from "../wikiRegistry";
 describe("Papers Hub Kaizen Enhancements & Word Count Model", () => {
   const allDocs = getAllWikiDocuments("en");
 
-  it("indexes word counts for all 128 canonical treatises", () => {
-    expect(allDocs.length).toBe(128);
-    expect(Object.keys(TREATISE_WORD_COUNTS).length).toBe(128);
+  it("indexes word counts for all 130 canonical treatises", () => {
+    expect(allDocs.length).toBe(130);
+    expect(Object.keys(TREATISE_WORD_COUNTS).length).toBe(130);
 
     for (const doc of allDocs) {
       expect(TREATISE_WORD_COUNTS[doc.slug]).toBeDefined();
