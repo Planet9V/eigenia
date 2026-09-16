@@ -98,8 +98,8 @@ const dup = (arr) => [...new Set(arr.filter((v, i) => arr.indexOf(v) !== i))];
 const violations = [];
 
 // Invariant 1: Document count must match 122
-if (allDocs.length !== 128) {
-  violations.push(`INV-1: Expected exactly 128 documents, found ${allDocs.length}`);
+if (allDocs.length !== 130) {
+  violations.push(`INV-1: Expected exactly 130 documents, found ${allDocs.length}`);
 }
 
 // Invariant 2: Zero missing files on disk

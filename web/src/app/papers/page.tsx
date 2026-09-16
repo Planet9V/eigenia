@@ -546,7 +546,7 @@ function PapersHubContent() {
                       </div>
                     </th>
 
-                    {/* Sortable Read Time & Words */}
+                    {/* Sortable Read Time */}
                     <th
                       className="py-3.5 px-4 cursor-pointer hover:text-primary transition-colors whitespace-nowrap hidden sm:table-cell"
                       onClick={() => toggleSort("words")}
@@ -639,13 +639,10 @@ function PapersHubContent() {
                           </div>
                         </td>
 
-                        {/* Reading Time & Words Column */}
+                        {/* Reading Time Column */}
                         <td className="py-4 px-4 align-top whitespace-nowrap hidden sm:table-cell">
                           <div className="text-xs font-mono font-semibold text-primary">
                             {formatReadingTime(wordCount, language)}
-                          </div>
-                          <div className="text-[10px] font-mono text-muted mt-0.5">
-                            {wordCount.toLocaleString()} {t("papers_words")}
                           </div>
                         </td>
 
@@ -739,10 +736,7 @@ function PapersHubContent() {
                             {doc.id}
                           </span>
                         </div>
-                        <div
-                          className="flex items-center gap-1 text-muted text-xs font-mono"
-                          title={`${wordCount.toLocaleString()} ${t("papers_words")}`}
-                        >
+                        <div className="flex items-center gap-1 text-muted text-xs font-mono">
                           <Clock className="w-3 h-3" />
                           <span>{formatReadingTime(wordCount, language)}</span>
                         </div>

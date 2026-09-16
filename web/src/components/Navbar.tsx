@@ -87,6 +87,14 @@ export const Navbar: React.FC = () => {
                     </Link>
 
                     <Link
+                      href="/listening-pack"
+                      className="block p-2.5 rounded-xl bg-dutchOrange/10 border border-dutchOrange/30 hover:bg-dutchOrange/20 transition-colors"
+                    >
+                      <span className="text-dutchOrange font-bold block text-[11px]">MPN Listening Pack // Open for Review</span>
+                      <span className="text-primary block font-sans text-xs">Composers, music therapists and researchers: hear the stimuli and send your answers</span>
+                    </Link>
+
+                    <Link
                       href="/papers"
                       className="block p-2.5 rounded-xl bg-surface border border-hairline hover:bg-subtle transition-colors"
                     >
