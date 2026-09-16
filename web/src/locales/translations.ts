@@ -292,7 +292,6 @@ export const translations = {
     papers_kbd_shortcut_hint: "Press / or ⌘K",
     papers_col_read_time: "Read Time",
     papers_min_read: "min read",
-    papers_words: "words",
 
     // Listening pack return path (MPN)
     lp_nav: "Listening Pack Return",
@@ -629,7 +628,6 @@ export const translations = {
     papers_kbd_shortcut_hint: "Druk op / of ⌘K",
     papers_col_read_time: "Leestijd",
     papers_min_read: "min leestijd",
-    papers_words: "woorden",
 
     // Luisterpakket retourroute (MPN)
     lp_nav: "Luisterpakket Retour",

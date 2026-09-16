@@ -180,7 +180,7 @@ export default function WikiDocumentViewer({
 
             <div className="flex items-center gap-1.5 text-[11px]">
               <Clock className="h-3.5 w-3.5 text-muted" />
-              <span title={`${docData.wordCount.toLocaleString()} words`}>
+              <span>
                 {readingMinutes(docData.wordCount)} {t("wiki_reading_time")}
               </span>
             </div>
