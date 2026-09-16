@@ -1,0 +1,280 @@
+
+==============================================================================
+THE MACHINERY, CHECKED BEFORE IT IS USED
+==============================================================================
+  simplex grid: 20,301 points at a step of 1/200
+  [ok  ] margin area at delta 0.05 matches MPN-S2's kite form 2d - d^2   measured 0.0921, closed form 0.0975
+  [ok  ] margin area at delta 0.20 matches MPN-S2's kite form 2d - d^2   measured 0.3536, closed form 0.3600
+  [ok  ] outside the margin the interpolation is argmax exactly   18,432 of 18,432 states
+
+==============================================================================
+C1. THE FIVE REGISTER TRIPLES, FIXED NUMERICALLY
+==============================================================================
+  gradient   |     Real |  Symbolic | Imaginary | the reading
+  -----------|----------|-----------|-----------|------------------------------
+  Dependent  |   0.1500 |    0.2500 |    0.6000 | the other as image, the Imaginary leads
+  Follower   |   0.1500 |    0.4250 |    0.4250 | rule-taking without rule-setting: Imaginary and Symbolic exactly level
+  Partner    |   0.3333 |    0.3333 |    0.3333 | mutual regulation: the barycentre, all three level
+  Leader     |   0.1500 |    0.6000 |    0.2500 | the client sets the structure, the Symbolic leads
+  Resister   |   0.6000 |    0.2000 |    0.2000 | the shared structure is refused, the Real leads
+
+  [ok  ] Dependent lies on the simplex   sum 1.000000000000
+  [ok  ] Follower lies on the simplex   sum 1.000000000000
+  [ok  ] Partner lies on the simplex   sum 1.000000000000
+  [ok  ] Leader lies on the simplex   sum 1.000000000000
+  [ok  ] Resister lies on the simplex   sum 1.000000000000
+  [ok  ] Partner is exactly the barycentre
+  [ok  ] Dependent is Imaginary-led
+  [ok  ] Follower has the Imaginary and the Symbolic exactly level
+  [ok  ] Leader is Symbolic-led
+  [ok  ] Resister is Real-led
+  [ok  ] the four gradients that keep the shared frame hold the Real level   Real held at 0.15
+  [ok  ] Dependent and Leader are mirror images in the Imaginary and the Symbolic
+  [ok  ] the table is not monotone: it leaves the Imaginary-Symbolic edge at Resister
+
+==============================================================================
+C2. THE COLLAPSE CHECK
+==============================================================================
+  The blended scale each gradient renders, at delta = 0.05, on the low band
+  (Real Dorian, Symbolic Lydian, Imaginary Phrygian).
+
+  gradient   | the blended scale in semitones above the tonic
+  -----------|--------------------------------------------------------------
+  Dependent  | 0.0000, 1.0000, 3.0000, 5.0000, 7.0000, 8.0000, 10.0000
+  Follower   | 0.0000, 1.5000, 3.5000, 5.5000, 7.0000, 8.5000, 10.5000
+  Partner    | 0.0000, 1.6667, 3.3333, 5.3333, 7.0000, 8.6667, 10.3333
+  Leader     | 0.0000, 2.0000, 4.0000, 6.0000, 7.0000, 9.0000, 11.0000
+  Resister   | 0.0000, 2.0000, 3.0000, 5.0000, 7.0000, 9.0000, 10.0000
+
+  [ok  ] the five blended scales are pairwise distinct at delta = 0.05
+  Margin invariance. The blended scales are recomputed at every margin from
+  0.001 to 0.400 in steps of 0.001 and compared with the value at 0.001.
+  the first margin at which any of the five outputs changes: 0.276
+  MPN-S3 section 2.3 puts the candidate margins at 0.02 to 0.20.
+  [ok  ] the five outputs are the same at every margin MPN-S3 has under consideration   invariant below 0.276
+  [ok  ] the margin at which the Real enters Follower is the Real gap   Real gap 0.275
+
+  The count of distinct outputs, by band, by path and by convention.
+
+  band | path                      | distinct outputs of a possible five
+  -----|---------------------------|------------------------------------
+  low  | audio, exact in cents     | 5
+  low  | notation, half up        | 3
+  low  | notation, half to even   | 4
+  high | audio, exact in cents     | 5
+  high | notation, half up        | 3
+  high | notation, half to even   | 4
+
+  [ok  ] the audio path renders five distinct outputs on the low band
+  [ok  ] the notation path under round half up renders three on the low band
+  [ok  ] the notation path under round half to even renders four on the low band
+  [ok  ] the audio path renders five distinct outputs on the high band
+  [ok  ] the notation path under round half up renders three on the high band
+  [ok  ] the notation path under round half to even renders four on the high band
+  Which gradients share a notated scale, at delta = 0.05:
+
+  low band, half up:
+     Dependent                -> [0, 1, 3, 5, 7, 8, 10]  Phrygian
+     Follower and Leader      -> [0, 2, 4, 6, 7, 9, 11]  Lydian
+     Partner and Resister     -> [0, 2, 3, 5, 7, 9, 10]  Dorian
+
+  low band, half to even:
+     Dependent                -> [0, 1, 3, 5, 7, 8, 10]  Phrygian
+     Follower                 -> [0, 2, 4, 6, 7, 8, 10]  a scale outside the seven
+     Partner and Resister     -> [0, 2, 3, 5, 7, 9, 10]  Dorian
+     Leader                   -> [0, 2, 4, 6, 7, 9, 11]  Lydian
+
+  high band, half up:
+     Dependent                -> [0, 1, 3, 5, 6, 8, 10]  Locrian
+     Follower and Leader      -> [0, 2, 4, 5, 7, 9, 10]  Mixolydian
+     Partner and Resister     -> [0, 2, 3, 5, 7, 8, 10]  Aeolian
+
+  high band, half to even:
+     Dependent                -> [0, 1, 3, 5, 6, 8, 10]  Locrian
+     Follower                 -> [0, 2, 4, 5, 6, 8, 10]  a scale outside the seven
+     Partner and Resister     -> [0, 2, 3, 5, 7, 8, 10]  Aeolian
+     Leader                   -> [0, 2, 4, 5, 7, 9, 10]  Mixolydian
+
+  Whether the Partner and Resister meeting is a property of these triples
+  or of the live table. Every Real-led triple on the grid whose lead exceeds
+  the margin is enumerated, and its notated scale recorded.
+
+  low band: 6,080 Real-led states, 1 distinct notated scale(s): Dorian
+  [ok  ] every Real-led state notates to one scale on the low band
+  [ok  ] the barycentre notates to that same scale on the low band   Dorian
+  high band: 6,080 Real-led states, 1 distinct notated scale(s): Aeolian
+  [ok  ] every Real-led state notates to one scale on the high band
+  [ok  ] the barycentre notates to that same scale on the high band   Aeolian
+
+  So the Partner and Resister meeting on the notation path is a property of
+  the live pitch table and the barycentre, and holds for every admissible
+  Real-led placement of Resister. It is declared rather than moved.
+
+  What the Imaginary-Symbolic edge can notate. Follower is placed on that
+  edge; the edge is scanned at a step of 1/2000 and every notated scale
+  recorded, under each convention.
+
+  half up: 2 distinct notated scale(s) reachable on the edge
+     [0, 2, 4, 6, 7, 9, 11]  Lydian                       on 0.0000 to 0.5000
+     [0, 1, 3, 5, 7, 8, 10]  Phrygian                     on 0.5005 to 1.0000
+
+  half to even: 3 distinct notated scale(s) reachable on the edge
+     [0, 2, 4, 6, 7, 9, 11]  Lydian                       on 0.0000 to 0.4995
+     [0, 2, 4, 6, 7, 8, 10]  a scale outside the seven    on the single point t = 0.5000
+     [0, 1, 3, 5, 7, 8, 10]  Phrygian                     on 0.5005 to 1.0000
+
+  [ok  ] under round half to even the exact tie notates to a scale of its own   [0, 2, 4, 6, 7, 8, 10]
+  [ok  ] under round half up the exact tie notates to the Leader's scale   Lydian
+  [ok  ] the exact tie is the only placement on the edge that notates to its own scale   0 other placements
+
+  Whether the three counts depend on the particular numbers of C1. The
+  Real floor is swept from 0.05 to 0.30 and the leader's weight from 0.45
+  to 0.80, keeping the readings of C1 intact, and the three counts are
+  recomputed at every admissible pair.
+  pairs swept: 848; of those, pairs on which every named register leads by more than the margin: 825
+  count triples where every named register leads by more than the margin (audio, half up, half to even): [(5, 3, 4)]
+  count triples where a named register leads by zero: [(3, 2, 2)]
+  [ok  ] the three counts hold wherever every named register leads by more than the margin   [(5, 3, 4)]
+  [ok  ] a lead of zero is what puts three gradients on one audio output   [(3, 2, 2)]
+  THE LEAD RULE, which the sweep is what establishes: a gradient named for
+  a register is placed so that the register leads the other two by more
+  than the interpolation margin. Under that rule the three counts are the
+  same at every placement, so the collapse check below is a finding about
+  the live pitch table rather than about the numbers C1 chose.
+
+==============================================================================
+C3. THE ROUNDING CONVENTION, AND WHAT EACH ONE DECIDES
+==============================================================================
+  MPN-S3 section 2.3 states the general case at the Real against Symbolic
+  tie on the live low band, Dorian against Lydian. Recomputed here:
+    Dorian            [0, 2, 3, 5, 7, 9, 10]
+    Lydian            [0, 2, 4, 6, 7, 9, 11]
+    the blend         [0.0, 2.0, 3.5, 5.5, 7.0, 9.0, 10.5]
+    round half up     [0, 2, 4, 6, 7, 9, 11]  -> Lydian
+    round half to even [0, 2, 4, 6, 7, 9, 10]  -> a scale outside the seven
+  [ok  ] round half up at the Real-Symbolic tie returns one of the two inputs
+  [ok  ] round half to even at that tie returns a scale outside the seven
+
+  What each convention costs the therapist, counted over the five gradients:
+
+  convention        | distinct notated scales | gradients that keep a scale of their own
+  ------------------|-------------------------|----------------------------------------
+  half up           |            3            | Dependent
+  half to even      |            4            | Dependent, Follower, Leader
+
+  THE DECLARATION. The notation path rounds half to even. It is the
+  convention that keeps Follower a scale of its own, it is what a Python
+  implementation gets by writing round, and it is declared on the face of
+  the score.
+
+==============================================================================
+C4. THE DIVERGENCE BETWEEN THE SCORE AND THE AUDIO, IN CENTS
+==============================================================================
+  Under the declared convention, at delta = 0.05.
+
+  gradient   | low band, greatest divergence | high band, greatest divergence
+  -----------|-------------------------------|-------------------------------
+  Dependent  |                      0.00     |                      0.00
+  Follower   |                     50.00     |                     50.00
+  Partner    |                     33.33     |                     33.33
+  Leader     |                      0.00     |                      0.00
+  Resister   |                      0.00     |                      0.00
+
+  the greatest divergence over the five gradients and both bands: 50.00 cents
+  gradients on which the score and the audio agree exactly: Dependent, Leader, Resister
+  [ok  ] the greatest divergence is the quarter tone MPN-S3 gives as the worst case   50.00 cents
+  [ok  ] Follower is where the quarter tone is attained
+  [ok  ] Partner diverges by one third of a semitone   33.3333 cents
+  [ok  ] three of the five gradients render a printed scale and its audio alike   Dependent, Leader, Resister
+
+  Where the divergence sits, degree by degree, for the two gradients that
+  carry it. Low band.
+    Follower:
+      audio, semitones   0.0000,  1.5000,  3.5000,  5.5000,  7.0000,  8.5000, 10.5000
+      score, semitones        0,       2,       4,       6,       7,       8,      10
+      divergence, cents    0.00,   50.00,   50.00,   50.00,    0.00,   50.00,   50.00
+    Partner:
+      audio, semitones   0.0000,  1.6667,  3.3333,  5.3333,  7.0000,  8.6667, 10.3333
+      score, semitones        0,       2,       3,       5,       7,       9,      10
+      divergence, cents    0.00,   33.33,   33.33,   33.33,    0.00,   33.33,   33.33
+
+==============================================================================
+THE GRADIENT-TO-STATE MAP, FIXED ON A STATED CRITERION
+==============================================================================
+  the boundaries a rating on the unit interval can land on: [0.1, 0.2, 0.3, 0.35, 0.4, 0.5, 0.6, 0.65, 0.7, 0.8, 0.9]
+  (seven from the dynamics ladder, two from tempo, four from metre, one
+  from the trauma switch in the mode table; the set is their union)
+
+  [ok  ] 0.5 is a boundary of the dynamics ladder and of the metre lookup
+  [ok  ] no five-level map symmetric about the midpoint clears every boundary   its middle level is 0.5
+  the map that keeps every rating level furthest from every boundary:
+    level(g) = 0.075 + 0.200 * (g - 1), for g = 1 to 5
+    the five levels: 0.075, 0.275, 0.475, 0.675, 0.875
+    least clearance from any boundary: 0.0250 in state units
+
+  [ok  ] every rating level clears every boundary   0.0250
+  [ok  ] the map is strictly increasing
+  [ok  ] every level lies strictly inside the unit interval
+  over all 25 pairs of ratings, the least clearance of the density and
+  fragmentation ladders from a ladder boundary: 0.0050
+  [ok  ] no pair of ratings puts a composite ladder on a boundary   0.0050
+
+==============================================================================
+THE WORKED SESSION: FIVE RATINGS IN, MUSIC OUT
+==============================================================================
+  What the therapist set:
+    Relational stance    Partner
+    Musical variability  2
+    Arousal              3
+    Valence              2
+    Session intensity    4
+
+  The state that carries them:
+    trauma, from session intensity 4 of 5   tau = 0.675
+    entropy, from musical variability 2 of 5  H   = 0.275
+    the register triple, from Partner        (R, S, I) = (0.3333, 0.3333, 0.3333)
+    arousal and valence are carried to the session record
+
+  [ok  ] the LR alternation visits all 24 triads exactly once
+  What the instrument renders:
+    dynamic marking        f, the 6 of 8, velocity 92
+    tempo                  46 bpm, the strategic band
+    metre                  4/4
+    orchestration density  stage 3 of 5, from a density of 0.5550
+    fragmentation          stage 1 of 5, from 0.0000
+    the band of the table  high, because trauma is above 0.6
+    mode, printed          [0, 2, 3, 5, 7, 8, 10]  Aeolian
+    mode, sounded          0.0000, 1.6667, 3.3333, 5.0000, 6.6667, 8.3333, 10.0000
+    the two disagree by    33.33 cents at most
+    harmonic position      16 of 23 along the chain, Ab major
+    timbre, the two voices audible fraction 1.0000
+
+  The harmonic position is round(23 * f(state)) on the absolute form that
+  MPN-S3 section 2.5 establishes; the reading used here takes f as trauma,
+  and naming f is the next step recorded in this paper's further work.
+
+  [ok  ] the dynamic marking is one of the eight
+  [ok  ] the tempo is one of the 35 reachable integer tempi   46 bpm
+  [ok  ] both ladders land inside their five stages
+  [ok  ] the printed mode is one of the seven   Aeolian
+  [ok  ] the harmonic position is inside the chain
+  [ok  ] the two voices of the two-node case are fully audible through timbre
+  [ok  ] a pair differing by a constant on all four coordinates is deaf in timbre
+  [ok  ] the same five ratings render the same music on every run
+  The same session with the stance changed and nothing else, which is the
+  comparison a therapist makes:
+
+  stance     | printed mode          | sounded, first three degrees | divergence
+  -----------|-----------------------|------------------------------|-----------
+  Dependent  | Locrian               |  0.000,  1.000,  3.000         |   0.00c
+  Follower   | a scale outside the seven |  0.000,  1.500,  3.500         |  50.00c
+  Partner    | Aeolian               |  0.000,  1.667,  3.333         |  33.33c
+  Leader     | Mixolydian            |  0.000,  2.000,  4.000         |   0.00c
+  Resister   | Aeolian               |  0.000,  2.000,  3.000         |   0.00c
+
+
+==============================================================================
+INVARIANTS
+==============================================================================
+  assertions run: 55; failed: 0
+  every assertion passed

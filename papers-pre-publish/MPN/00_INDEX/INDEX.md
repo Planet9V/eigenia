@@ -105,3 +105,19 @@ The PRD specified one surface. This specifies the framework all of them sit on, 
 - `08_PAPERS/REVIEW-DESIGN-user.md` REVISE, 15 findings
 
 Section 11 rules on the open question the PRD left: the human-rated Autonomy-to-register mapping survives, and Partner takes no dead band. Section 10a carries the implementation order, which builds the shared spine and the security programme first and ships nothing with a musical output until Ψ is specified and listener-tested.
+
+## The author's five decisions of 15 September 2026
+
+`08_PAPERS/DECISION-LOG-2026-09-15.md` records five decisions, all the author's, answering arbitration decisions 9.1, 9.2 and 9.6 and the two questions those opened.
+
+**A.** Assertion B4 is amended. The between-stave clause is struck, so B4 is a per-stave channel capacity claim with no escape from its own budget. It is now easier to falsify, which is the point of it. Applied in `08_PAPERS/ASSERTIONS-REGISTER.md` and `08_PAPERS/S1-mckenney-lacan-theory.md`.
+
+**B.** A named per-person comparison is permitted on a stave, on every surface. A persona may be an actor, a character in a play, a speaker in a podcast or any persona a score carries, and a score carries several, added and removed as the material requires.
+
+**C.** Backchannel is a sixth Layer 1 measure, exercising the authority D64 reserved to the author. Two items that called a generator defective are withdrawn rather than completed, because the generator was right: MPN-S5's S5-8 and MPN-S6's EX-8, and S5-21 with them.
+
+**D.** A backchannel is lexical on class A and timing-derived on classes B and C. One measure with two definitions carries two settings, so Layer 1 is six measures and six settings, and an output must declare which definition produced the number.
+
+**E.** Expression is an N-persona surface. EX-R1 is restated: one interaction stave per persona, no state staves. The one-stave reading was an artefact of the design's two-speaker reference layout rather than a consequence of D70.
+
+`08_PAPERS/MPN-NOTE-06-persona-scaling.md` computes what decision B costs, with `05_DATA/03_generators/s9_persona_scaling.py` and its output at `05_DATA/03_generators/S9-PERSONA-SCALING-OUTPUT.txt`. The per-stave oversubscription rises from 2.7x at two personas to 3.7x at fourteen and then flattens, so scaling makes the legibility problem wider rather than worse. The pair count is quadratic and reaches 91 at fourteen. And a score can grow one persona at a time without ever re-voicing anyone already on the page, at a cost of at most 13.4 per cent of timbre separation and nothing at all at casts of 2, 5, 6 and 14.

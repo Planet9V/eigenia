@@ -1,4 +1,4 @@
-<!-- verified: 2026-09-14 f8297ac -->
+<!-- verified: 2026-09-16 585eb55 -->
 # Tasks
 
 _Last brought current: 2026-09-14 verified against main at `f8297ac`. The HTML comment on line 1 is machine-read by `web/scripts/audit-tasks-stamp.mjs` and `scripts/hooks/`; update it every time this file is brought current._
@@ -6,6 +6,12 @@ _Counts here are checked against `web/src/lib/wikiRegistry.ts`, not typed from m
 _Memory of record (decided 2026-09-11): this file and `memory/` at the repo root. `.taskmaster/`, `.remember/`, `.claude/memory.db`, `.swarm/` and the gateway's `memory_store` are tool caches, not sources. Rules: `memory/context/working-agreement.md`._
 
 ## Active
+
+- [x] **MPN series rewritten for public review and extended to eight papers (WG-09-MPN)**. On branch `mpn/s5-s6-gate-and-decisions`. The six published MPN papers read as internal working papers: internal metadata blocks naming their own revision and review history, 173 bare item codes a reader could not resolve, and no abstracts. All rewritten to the WG-03 house style with Executive Abstract, Abstract and numbered sections. S4, the implementation audit, is withdrawn from publication and held as an internal record, its sixteen citations repaired across the other papers.
+  - [x] **Publication rule applied.** A publication states what the theory does and proposes, never what the system does not do or contain. 468 statements of absence converted to their positive form across the five, 25 deleted with the paragraph repaired. Every figure, citation and finding preserved; all five grew.
+  - [x] **Three new application monographs.** `S7` music therapy (the therapist rates, the instrument renders; closes four open conditions on the register mapping by computation, new generator `s7_therapy_conditions.py`, 55 assertions passing). `S8` autism engagement (the two-audience question at a participant reader, resolved by a grounds rule and a symmetry rule). `S9` team score and the machine in the room (floor share is a closed quantity so concealment begins at two withheld voices; and a proposed coordinate for position in a social bond, with a falsifier and a negative control).
+  - [x] **Correction to `MPN-NOTE-06`.** The sixteen DISC corners give fifteen distinct timbre images, not sixteen; the append-only plateau runs to fifteen; and there is a 35.4 per cent cliff at sixteen. `s9_persona_scaling.py` extended so its own evidence reproduces.
+  - [ ] **Merge to `main` and deploy**, then send the listening pack invitations in `papers-pre-publish/MPN/07_OUTREACH/`.
 
 - [x] **Working Group Restructure & 122 Treatises Re-Parenting (Option A, WG-09-MPN)** — Merged PR #54 (`f8297ac`). Restructured working groups onto the Instrument-and-Outcome taxonomy scheme, inaugurated `WG-09-MPN` (McKenney-Lacanian Psychometric Notation, 5 treatises), retained `WG-08-MO` (Monte Carlo / Annealing, 4 treatises per Option A), re-parented `supply-chain-eu-cra-standards` to `WG-06-SC` (Option A), and re-parented 2 operator decision treatises to `WG-03-ML`. All 7 mathematical invariants verified (0 file moves, 0 URL changes, 0 lost treatises, 12 groups, 122 total treatises).
 - [ ] **Master Scientific Corpus Expansion (Unconstrained Roadmap)** - Phased promotion of candidate monographs across Hyperscale (8 chapters), TACAM (3 chapters), Multi-BOM CRA (5 chapters), Research Equations (7 chapters), and OT Workbooks (3 chapters). Mandatory gates: 5 rounds of sequential thinking per paper, Valyu research for gaps, J. McKenney primary author, 0 ASCII art, 0 broken LaTeX, IMRAD long-form prose, bilingual metadata, and strict MPN quarantine.

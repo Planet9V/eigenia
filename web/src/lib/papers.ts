@@ -537,10 +537,6 @@ export const PAPERS_REGISTRY: Record<string, { title: string; relativePath: stri
     title: "The Mapping: From Psychological State to Musical Material, Parameter by Parameter",
     relativePath: "references/WG-09-MPN-McKenney-Lacan-Notation/WG-09-MPN-S3-Mapping-State-To-Musical-Material.md",
   },
-  "mpn-s4-conductor-implementation-audit": {
-    title: "The Application: What the MPN Conductor Implements, What It Stubs, and What the Seven Score Files Actually Contain",
-    relativePath: "references/WG-09-MPN-McKenney-Lacan-Notation/WG-09-MPN-S4-Conductor-Implementation-Audit.md",
-  },
   "mpn-s5-dialogue-use-cases": {
     title: "Decomposing Dialogue: Four Use Cases for One Engine, and What Each of Them Needs from Psi",
     relativePath: "references/WG-09-MPN-McKenney-Lacan-Notation/WG-09-MPN-S5-Dialogue-Use-Cases.md",
@@ -548,6 +544,18 @@ export const PAPERS_REGISTRY: Record<string, { title: string; relativePath: stri
   "mpn-s6-expression-aid": {
     title: "The Expression Surface: What a Tool That Renders the Shape of a Conversation May Show, and What It Would Have to Get Right First",
     relativePath: "references/WG-09-MPN-McKenney-Lacan-Notation/WG-09-MPN-S6-Expression-Aid.md",
+  },
+  "mpn-s7-music-therapy": {
+    title: "The Therapist Rates, the Instrument Renders: A Music Therapy Surface for the McKenney-Lacan Calculus",
+    relativePath: "references/WG-09-MPN-McKenney-Lacan-Notation/WG-09-MPN-S7-Music-Therapy.md",
+  },
+  "mpn-s8-autism-engagement": {
+    title: "Inside the Exchange: What a Participant Reads on the Expression Surface",
+    relativePath: "references/WG-09-MPN-McKenney-Lacan-Notation/WG-09-MPN-S8-Autism-Engagement.md",
+  },
+  "mpn-s9-team-score": {
+    title: "The Team Score and the Machine in the Room: Two Audiences for One Live Surface, and a Coordinate for Position in a Social Bond",
+    relativePath: "references/WG-09-MPN-McKenney-Lacan-Notation/WG-09-MPN-S9-Team-Score.md",
   },
 };
 
